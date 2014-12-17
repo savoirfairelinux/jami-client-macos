@@ -14,9 +14,11 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    mylistview.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    mylistview.h
 
 FORMS    += mainwindow.ui
 
