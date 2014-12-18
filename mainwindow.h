@@ -15,6 +15,7 @@
 #include <callmodel.h>
 #include <contactmodel.h>
 #include <historymodel.h>
+#include <legacyhistorybackend.h>
 
 namespace Ui {
 class MainWindow;
@@ -33,19 +34,23 @@ protected:
     void mouseMoveEvent(QMouseEvent *);
 
 private:
-
+    void connectSlots();
 
 private slots:
+    void state_changed(Call* call, Call::State previousState);
+    void incoming_call(Call* call);
     void on_call_button_clicked();
-    void on_state_changed(Call* call, Call::State previousState);
     void on_hangup_button_clicked();
     void pollEvents();
+
+    void on_answer_button_clicked();
 
 private:
     Ui::MainWindow *ui;
     CallModel* callModel_{nullptr};
     Call* mainCall_{nullptr};
     Account* mainAccount_;
+    LegacyHistoryBackend* backend_;
     QString savedNumber_;
     QTimer pollTimer_;
     QPoint clickPos_{QPoint(0,0)};

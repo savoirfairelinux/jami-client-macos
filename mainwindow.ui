@@ -89,7 +89,7 @@
          </layout>
         </item>
         <item>
-         <widget class="MyListView" name="contact_list">
+         <widget class="QTreeView" name="contact_list">
           <property name="styleSheet">
            <string notr="true">background-color: rgba(255,255,255, 0.0);</string>
           </property>
@@ -101,9 +101,6 @@
           </property>
           <property name="lineWidth">
            <number>0</number>
-          </property>
-          <property name="flow">
-           <enum>QListView::TopToBottom</enum>
           </property>
          </widget>
         </item>
@@ -184,13 +181,6 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>MyListView</class>
-   <extends>QListView</extends>
-   <header>mylistview.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>
