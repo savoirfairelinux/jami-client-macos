@@ -14,9 +14,11 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    mysearchbar.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    mysearchbar.h
 
 FORMS    += mainwindow.ui
 
@@ -24,3 +26,6 @@ macx: LIBS += -L$$PWD/build/ -lqtsflphone
 
 INCLUDEPATH += $$PWD/../sflphone/kde/src/lib
 DEPENDPATH += $$PWD/../sflphone/kde/src/lib
+
+RESOURCES += \
+    data.qrc

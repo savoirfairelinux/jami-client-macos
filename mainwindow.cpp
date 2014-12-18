@@ -112,3 +112,4 @@ void MainWindow::on_answer_button_clicked()
         mainCall_->performAction(Call::Action::ACCEPT);
     }
 }
+
