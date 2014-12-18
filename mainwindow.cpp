@@ -15,12 +15,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
     mainAccount_ = AccountModel::currentAccount();
     callModel_ = CallModel::instance();
-    HistoryModel::instance()->addBackend(new LegacyHistoryBackend(this), LoadOptions::FORCE_ENABLED);
-    connectSlots();
+    HistoryModel::instance()->addBackend(new LegacyHistoryBackend(this),
+                                         LoadOptions::FORCE_ENABLED);
 
+    ContactModel::instance()->addBackend(TransitionalContactBackend::instance(),
+                                         LoadOptions::FORCE_ENABLED);
+
+    Contact* test = new Contact();
+    test->setNickName("George");
+    test->setFirstName("George-Amand");
+    test->setFamilyName("Tremblay");
+    //test->setPhoneNumbers(PhoneNumber());
+    ContactModel::instance()->addContact(test);
+
+
+    connectSlots();
+    ui->contact_list->setModel(ContactModel::instance());
     //ui->contact_list->setModel(CallModel::instance());
-    ui->contact_list->setModel(HistoryModel::instance());
-//    ui->contact_list->setModel(ContactModel::instance());
+    //ui->contact_list->setModel(HistoryModel::instance());
+    //ui->contact_list->setModel(ContactModel::instance());
 }
 
 MainWindow::~MainWindow()
@@ -89,7 +102,7 @@ void MainWindow::incoming_call(Call *call)
 void MainWindow::on_call_button_clicked()
 {
     mainCall_ = CallModel::instance()->dialingCall();
-    mainCall_->setDialNumber(ui->call_number->text());
+    mainCall_->setDialNumber(ui->search_bar->text());
     mainCall_->performAction(Call::Action::ACCEPT);
 }
 

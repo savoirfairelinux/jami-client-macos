@@ -13,9 +13,12 @@
 #include <accountmodel.h>
 #include <call.h>
 #include <callmodel.h>
+#include <commonbackendmanagerinterface.h>
+#include <contact.h>
 #include <contactmodel.h>
 #include <historymodel.h>
 #include <legacyhistorybackend.h>
+#include <transitionalcontactbackend.h>
 
 namespace Ui {
 class MainWindow;
@@ -52,7 +55,6 @@ private:
     Call* mainCall_{nullptr};
     Account* mainAccount_;
     LegacyHistoryBackend* backend_;
-    QString savedNumber_;
     QTimer pollTimer_;
     QPoint clickPos_{QPoint(0,0)};
 };

@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QLineEdit>
 #include <QDebug>
+#include <QCompleter>
+#include <QPropertyAnimation>
+#include <QMargins>
 
 class MySearchBar : public QLineEdit
 {
