@@ -38,6 +38,9 @@ protected:
 
 private:
     void connectSlots();
+    void showAnswerBar();
+    void hideAnswerBar();
+    void transformAnswerBar();
 
 private slots:
     void state_changed(Call* call, Call::State previousState);
@@ -48,6 +51,8 @@ private slots:
 
     void on_answer_button_clicked();
 
+
+    void on_decline_button_clicked();
 
 private:
     Ui::MainWindow *ui;
