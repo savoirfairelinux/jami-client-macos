@@ -1,0 +1,70 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+IF(POLICY CMP0022)
+  CMAKE_POLICY(SET CMP0022 NEW)
+ENDIF(POLICY CMP0022)
+
+PROJECT(RingClient)
+
+ADD_DEFINITIONS("-std=c++0x")
+
+FIND_PACKAGE(Qt5Core REQUIRED)
+FIND_PACKAGE(Qt5Gui REQUIRED)
+FIND_PACKAGE(Qt5Widgets REQUIRED)
+FIND_PACKAGE(LibRingClient REQUIRED)
+
+# Instruct CMake to run moc automatically when needed.
+SET(CMAKE_AUTOMOC ON)
+
+INCLUDE_DIRECTORIES(SYSTEM ${Qt5Core_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(SYSTEM ${Qt5Gui_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR})
+INCLUDE_DIRECTORIES(${LIB_RING_CLIENT_INCLUDE_DIR})
+
+MESSAGE("LibRingClient is here:" ${LIB_RING_CLIENT_INCLUDE_DIR})
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
+
+#Files to compile
+SET(ringclient_SRCS
+   main.cpp
+   mainwindow.cpp
+   mysearchbar.cpp)
+
+SET(ringclient_FORMS
+   mainwindow.ui)
+
+QT5_WRAP_UI(ringclient_FORMS_HEADERS ${ringclient_FORMS})
+
+SET(ringclient_HDRS
+   mainwindox.h
+   mysearchbar.h)
+
+MESSAGE("BINARY IS HERE:" ${LIB_RING_CLIENT_LIBRARY})
+
+
+# Icons
+
+# NOTE: Don't include the path in MACOSX_BUNDLE_ICON_FILE -- this is
+# the property added to Info.plist
+SET(MACOSX_BUNDLE_ICON_FILE appicon.icns)
+
+# And this part tells CMake where to find and install the file itself
+SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
+SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
+       MACOSX_PACKAGE_LOCATION "Resources")
+
+ADD_EXECUTABLE(RingClient MACOSX_BUNDLE
+   ${ringclient_SRCS}
+   ${ringclient_HEADERS_MOC}
+   ${ringclient_FORMS_HEADERS}
+   ${myApp_ICON})
+
+
+TARGET_LINK_LIBRARIES( RingClient
+   ${LIB_RING_CLIENT_LIBRARY}
+   ${QT_QTCORE_LIBRARY}
+   ${Qt5Widgets_LIBRARIES}
+   ${QT_QTGUI_LIBRARY}
+)
+

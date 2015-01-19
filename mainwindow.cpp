@@ -82,9 +82,6 @@ void MainWindow::connectSlots()
 
     QObject::connect(callModel_, SIGNAL(incomingCall(Call*)),
         this, SLOT(incoming_call(Call*)));
-
-    connect(&pollTimer_, SIGNAL(timeout()), this, SLOT(pollEvents()));
-    pollTimer_.start(1000);
 }
 
 void MainWindow::showAnswerBar()
@@ -183,6 +180,7 @@ void MainWindow::incoming_call(Call *call)
 void MainWindow::on_call_button_clicked()
 {
     mainCall_ = CallModel::instance()->dialingCall();
+    qDebug() << "ICI" << ui->search_bar->text();
     mainCall_->setDialNumber(ui->search_bar->text());
     mainCall_->performAction(Call::Action::ACCEPT);
 }
@@ -202,13 +200,6 @@ void MainWindow::on_answer_button_clicked()
     }
     transformAnswerBar();
 }
-
-void MainWindow::pollEvents()
-{
-    qDebug() << "Poll Events?";
-    AccountModel::currentAccount()->poll_events();
-}
-
 
 
 void MainWindow::on_decline_button_clicked()

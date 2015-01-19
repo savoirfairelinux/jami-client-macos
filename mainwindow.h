@@ -47,7 +47,6 @@ private slots:
     void incoming_call(Call* call);
     void on_call_button_clicked();
     void on_hangup_button_clicked();
-    void pollEvents();
 
     void on_answer_button_clicked();
 
@@ -60,7 +59,6 @@ private:
     Call* mainCall_{nullptr};
     Account* mainAccount_;
     LegacyHistoryBackend* backend_;
-    QTimer pollTimer_;
     QPoint clickPos_{QPoint(0,0)};
 };
 

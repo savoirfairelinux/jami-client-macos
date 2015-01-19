@@ -28,7 +28,7 @@
 *.app
 
 # Qt-es
-
+*.user
 /.qmake.cache
 /.qmake.stash
 *.pro.user
