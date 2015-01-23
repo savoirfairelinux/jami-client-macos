@@ -1,7 +1,6 @@
 #include "mainwindow.h"
+#include "minimalhistorybackend.h"
 #include "ui_mainwindow.h"
-
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,9 +18,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     mainAccount_ = AccountModel::currentAccount();
     callModel_ = CallModel::instance();
-    HistoryModel::instance()->addBackend(new LegacyHistoryBackend(this),
-                                         LoadOptions::FORCE_ENABLED);
-
     ContactModel::instance()->addBackend(TransitionalContactBackend::instance(),
                                          LoadOptions::FORCE_ENABLED);
 
@@ -35,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connectSlots();
     ui->contact_list->setModel(ContactModel::instance());
+
+    HistoryModel::instance()->addBackend(new MinimalHistoryBackend(this),
+                                             LoadOptions::FORCE_ENABLED);
     //ui->contact_list->setModel(CallModel::instance());
     //ui->contact_list->setModel(HistoryModel::instance());
     //ui->contact_list->setModel(ContactModel::instance());
@@ -169,6 +168,12 @@ void MainWindow::transformAnswerBar()
 void MainWindow::state_changed(Call *call, Call::State previousState)
 {
     qDebug() << "on state changed! " << previousState << endl;
+
+    if(call->state() == Call::State::CURRENT || call->state() == Call::State::RINGING)
+        transformAnswerBar();
+    else if(call->state() == Call::State::OVER) {
+        hideAnswerBar();
+    }
 }
 
 void MainWindow::incoming_call(Call *call)
@@ -183,6 +188,8 @@ void MainWindow::on_call_button_clicked()
     qDebug() << "ICI" << ui->search_bar->text();
     mainCall_->setDialNumber(ui->search_bar->text());
     mainCall_->performAction(Call::Action::ACCEPT);
+
+    showAnswerBar();
 }
 
 void MainWindow::on_hangup_button_clicked()

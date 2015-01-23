@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Ring</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow#MainWindow {
@@ -106,34 +106,12 @@ color: rgb(160, 160, 160);
           </item>
           <item>
            <widget class="QToolButton" name="call_button">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color:transparent;</string>
-            </property>
             <property name="text">
              <string/>
             </property>
             <property name="icon">
              <iconset resource="data.qrc">
-              <normaloff>:/data/dark/ic_action_call.png</normaloff>
-              <normalon>:/data/light/ic_action_call.png</normalon>
-              <disabledoff>:/data/dark/ic_action_call.png</disabledoff>
-              <disabledon>:/data/light/ic_action_call.png</disabledon>
-              <activeoff>:/data/dark/ic_action_call.png</activeoff>
-              <activeon>:/data/light/ic_action_call.png</activeon>
-              <selectedoff>:/data/dark/ic_action_call.png</selectedoff>
-              <selectedon>:/data/light/ic_action_call.png</selectedon>:/data/dark/ic_action_call.png</iconset>
+              <normaloff>:/data/dark/ic_action_call.png</normaloff>:/data/dark/ic_action_call.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -144,16 +122,7 @@ color: rgb(160, 160, 160);
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_2">
-            <property name="maximumSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color:transparent;</string>
-            </property>
+           <widget class="QToolButton" name="toolButton">
             <property name="text">
              <string>...</string>
             </property>
@@ -170,18 +139,9 @@ color: rgb(160, 160, 160);
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="toolButton_3">
-            <property name="maximumSize">
-             <size>
-              <width>24</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color:transparent;</string>
-            </property>
+           <widget class="QToolButton" name="toolButton_2">
             <property name="text">
-             <string>...</string>
+             <string/>
             </property>
             <property name="icon">
              <iconset resource="data.qrc">
@@ -198,37 +158,72 @@ color: rgb(160, 160, 160);
          </layout>
         </item>
         <item>
-         <widget class="QTreeView" name="contact_list">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="tabPosition">
+           <enum>QTabWidget::South</enum>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
+          <property name="tabShape">
+           <enum>QTabWidget::Rounded</enum>
           </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgba(255,255,255, 0.0);</string>
+          <property name="currentIndex">
+           <number>1</number>
           </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
+          <property name="tabsClosable">
+           <bool>false</bool>
           </property>
-          <property name="frameShadow">
-           <enum>QFrame::Plain</enum>
-          </property>
-          <property name="lineWidth">
-           <number>0</number>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
+          <widget class="QWidget" name="tab_contacts">
+           <attribute name="title">
+            <string>Contacts</string>
+           </attribute>
+           <widget class="QTreeView" name="contact_list">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>347</width>
+              <height>361</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(255,255,255, 0.0);</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <property name="lineWidth">
+             <number>0</number>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <attribute name="headerVisible">
+             <bool>false</bool>
+            </attribute>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="tab_history">
+           <attribute name="title">
+            <string>History</string>
+           </attribute>
+          </widget>
          </widget>
         </item>
        </layout>

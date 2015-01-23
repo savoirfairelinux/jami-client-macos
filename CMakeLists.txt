@@ -32,6 +32,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 SET(ringclient_SRCS
    main.cpp
    mainwindow.cpp
+   minimalhistorybackend.cpp
    mysearchbar.cpp)
 
 SET(ringclient_FORMS
@@ -41,6 +42,7 @@ QT5_WRAP_UI(ringclient_FORMS_HEADERS ${ringclient_FORMS})
 
 SET(ringclient_HDRS
    mainwindox.h
+   minimalhistorybackend.h
    mysearchbar.h)
 
 # Icons
@@ -54,11 +56,25 @@ SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION "Resources")
 
+SET(ring_ICONS ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_email.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_new_email.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
+SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
+       MACOSX_PACKAGE_LOCATION "Resources")
+
+qt5_add_resources(rcc_files ${CMAKE_CURRENT_SOURCE_DIR}/data.qrc)
+
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
    ${ringclient_SRCS}
    ${ringclient_HEADERS_MOC}
    ${ringclient_FORMS_HEADERS}
-   ${myApp_ICON})
+   ${myApp_ICON}
+   ${ring_ICONS}
+   ${rcc_files})
 
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${LIB_RING_CLIENT_LIBRARY}
@@ -66,6 +82,7 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${Qt5Widgets_LIBRARIES}
    ${QT_QTGUI_LIBRARY}
 )
+
 
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
