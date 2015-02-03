@@ -7,20 +7,15 @@ ENDIF(POLICY CMP0022)
 SET(PROJ_NAME Ring)
 SET(RING_VERSION 1.0)
 
+ADD_DEFINITIONS("-std=c++11")
+
 PROJECT(${PROJ_NAME})
 
-ADD_DEFINITIONS("-std=c++0x")
-
 FIND_PACKAGE(Qt5Core REQUIRED)
-FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
 
-# Instruct CMake to run moc automatically when needed.
-SET(CMAKE_AUTOMOC ON)
-
 INCLUDE_DIRECTORIES(SYSTEM ${Qt5Core_INCLUDE_DIRS})
-INCLUDE_DIRECTORIES(SYSTEM ${Qt5Gui_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${LIB_RING_CLIENT_INCLUDE_DIR})
@@ -30,20 +25,28 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 #Files to compile
 SET(ringclient_SRCS
-   main.cpp
-   mainwindow.cpp
-   minimalhistorybackend.cpp
-   mysearchbar.cpp)
+   main.mm
+   AppDelegate.mm
+   RingWindowController.mm
+   ConversationsViewController.mm
+   PreferencesWindowController.mm
+   QNSTreeController.mm
+   HistoryViewController.mm
+   MinimalHistoryBackend.cpp)
 
 SET(ringclient_FORMS
-   mainwindow.ui)
-
-QT5_WRAP_UI(ringclient_FORMS_HEADERS ${ringclient_FORMS})
+   MainMenu.xib
+   RingWindow.xib
+   PreferencesWindow.xib)
 
 SET(ringclient_HDRS
-   mainwindox.h
-   minimalhistorybackend.h
-   mysearchbar.h)
+   AppDelegate.h
+   RingWindowController.h
+   ConversationsViewController.h
+   PreferencesWindowController.h
+   HistoryViewController.h
+   QNSTreeController.h
+   MinimalHistoryBackend.h)
 
 # Icons
 
@@ -64,25 +67,29 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_new_email.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
-       MACOSX_PACKAGE_LOCATION "Resources")
+       MACOSX_PACKAGE_LOCATION Resources)
 
-qt5_add_resources(rcc_files ${CMAKE_CURRENT_SOURCE_DIR}/data.qrc)
+SET_SOURCE_FILES_PROPERTIES(${ringclient_FORMS} PROPERTIES
+       MACOSX_PACKAGE_LOCATION Resources)
 
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
    ${ringclient_SRCS}
-   ${ringclient_HEADERS_MOC}
-   ${ringclient_FORMS_HEADERS}
+   ${ringclient_HDRS}
+   ${ringclient_FORMS}
    ${myApp_ICON}
-   ${ring_ICONS}
-   ${rcc_files})
+   ${ring_ICONS})
+
+MESSAGE("Hello" ${Qt5Core_LIBRARIES})
 
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${LIB_RING_CLIENT_LIBRARY}
-   ${QT_QTCORE_LIBRARY}
+   ${Qt5Core_LIBRARIES}
    ${Qt5Widgets_LIBRARIES}
-   ${QT_QTGUI_LIBRARY}
 )
 
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AddressBook")
 
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in

@@ -24,33 +24,33 @@
 class LIB_EXPORT MinimalHistoryBackend : public AbstractHistoryBackend
 {
 public:
-   explicit MinimalHistoryBackend(QObject* parent = nullptr);
-   virtual ~MinimalHistoryBackend();
-
-   virtual bool load();
-   virtual bool reload();
-   virtual bool clear();
-   virtual bool save(const Call* call);
-   virtual bool batchSave(QList<Call*> calls);
-   virtual bool append(const Call* item);
-
-   virtual QString    name     () const;
-   virtual QVariant   icon     () const;
-   virtual bool       isEnabled() const;
-   virtual QByteArray id       () const;
-   virtual bool remove ( Call* c ) override;
-
-   virtual SupportedFeatures  supportedFeatures() const;
-
-   virtual QList<Call*> items() const override;
-
-   ///Edit 'item', the implementation may be a GUI or somehting else
-   virtual bool edit( Call* call);
-   ///Add a new item to the backend
-   virtual bool addNew( Call* call);
-
-   ///Add a new phone number to an existing item
-   virtual bool addPhoneNumber( Call* call , PhoneNumber* number );
+    explicit MinimalHistoryBackend(QObject* parent = nullptr);
+    virtual ~MinimalHistoryBackend();
+    
+    virtual bool load();
+    virtual bool reload();
+    virtual bool clear();
+    virtual bool save(const Call* call);
+    virtual bool batchSave(QList<Call*> calls);
+    virtual bool append(const Call* item);
+    
+    virtual QString    name     () const;
+    virtual QVariant   icon     () const;
+    virtual bool       isEnabled() const;
+    virtual QByteArray id       () const;
+    virtual bool remove ( Call* c ) override;
+    
+    virtual SupportedFeatures  supportedFeatures() const;
+    
+    virtual QList<Call*> items() const override;
+    
+    ///Edit 'item', the implementation may be a GUI or somehting else
+    virtual bool edit( Call* call);
+    ///Add a new item to the backend
+    virtual bool addNew( Call* call);
+    
+    ///Add a new phone number to an existing item
+    virtual bool addPhoneNumber( Call* call , PhoneNumber* number );
 };
 
 #endif

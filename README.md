@@ -1,6 +1,5 @@
 RingClient
 ==========
 
-Example Qt client for libringqt.
+This is the official Mac port of Ring.
 
-Check the Ring.pro and modify paths to point to your headers.
