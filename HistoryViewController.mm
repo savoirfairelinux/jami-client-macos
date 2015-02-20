@@ -7,7 +7,6 @@
 //
 
 #import "HistoryViewController.h"
-#import "MinimalHistoryBackend.h"
 
 #import <historymodel.h>
 
@@ -50,8 +49,8 @@
     NSInteger idx = [historyView columnWithIdentifier:COLUMNID_HISTORY];
     [[[[self.historyView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Name"];
 
-    HistoryModel::instance()->addBackend(new MinimalHistoryBackend(nil),
-                                         LoadOptions::FORCE_ENABLED);
+    //HistoryModel::instance()->addBackend(new MinimalHistoryBackend(nil),
+    //                                     LoadOptions::FORCE_ENABLED);
 
 }
 

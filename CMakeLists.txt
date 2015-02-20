@@ -29,21 +29,30 @@ SET(ringclient_SRCS
    AppDelegate.mm
    RingWindowController.mm
    ConversationsViewController.mm
-   PreferencesWindowController.mm
+   PreferencesViewController.mm
    QNSTreeController.mm
+   AudioPrefsVC.mm
+   VideoPrefsVC.mm
+   GeneralPrefsVC.mm
    HistoryViewController.mm
-   MinimalHistoryBackend.cpp)
+   MinimalHistoryBackend.mm)
 
 SET(ringclient_FORMS
    MainMenu.xib
    RingWindow.xib
-   PreferencesWindow.xib)
+   GeneralPrefs.xib
+   AudioPrefs.xib
+   VideoPrefs.xib
+   PreferencesScreen.xib)
 
 SET(ringclient_HDRS
    AppDelegate.h
    RingWindowController.h
    ConversationsViewController.h
-   PreferencesWindowController.h
+   PreferencesViewController.h
+   AudioPrefsVC.h
+   VideoPrefsVC.h
+   GeneralPrefsVC.h
    HistoryViewController.h
    QNSTreeController.h
    MinimalHistoryBackend.h)
@@ -65,6 +74,10 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_email.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_new_email.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
@@ -79,8 +92,6 @@ ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
    ${myApp_ICON}
    ${ring_ICONS})
 
-MESSAGE("Hello" ${Qt5Core_LIBRARIES})
-
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${LIB_RING_CLIENT_LIBRARY}
    ${Qt5Core_LIBRARIES}
@@ -89,6 +100,8 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Quartz")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AVFoundation")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AddressBook")
 
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
