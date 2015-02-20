@@ -8,15 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HistoryViewController.h"
+#import "PreferencesViewController.h"
 
 @interface RingWindowController : NSWindowController {
-    NSTextField *callUriTextField;
-
+    IBOutlet NSView *currentView;
 }
+@property (nonatomic, assign) NSViewController *myCurrentViewController;
+@property PreferencesViewController* preferencesViewController;
 
-@property (assign) IBOutlet NSTextField *callUriTextField;
-
-- (IBAction)placeCall:(NSButton *)sender;
-
+- (IBAction)openPreferences:(id)sender;
+- (IBAction)closePreferences:(NSToolbarItem *)sender;
 
 @end
