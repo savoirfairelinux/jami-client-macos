@@ -16,26 +16,19 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef PREFERENCESVIEWCONTROLLER_H
-#define PREFERENCESVIEWCONTROLLER_H
+#ifndef ACCVIDEOVC_H
+#define ACCVIDEOVC_H
 
 #import <Cocoa/Cocoa.h>
 
-@interface PreferencesViewController : NSViewController <NSToolbarDelegate>
+#include <account.h>
 
-- (void) close;
-@property (nonatomic, assign) NSViewController *currentVC;
-@property (nonatomic, assign) NSViewController *accountsPrefsVC;
-@property (nonatomic, assign) NSViewController *generalPrefsVC;
-@property (nonatomic, assign) NSViewController *audioPrefsVC;
-@property (nonatomic, assign) NSViewController *videoPrefsVC;
+@interface AccVideoVC : NSViewController <NSOutlineViewDelegate> {
 
-- (void)displayGeneral:(NSToolbarItem *)sender;
-- (void)displayAudio:(NSToolbarItem *)sender;
-- (void)displayAncrage:(NSToolbarItem *)sender;
-- (void)displayVideo:(NSToolbarItem *)sender;
-- (void)displayAccounts:(NSToolbarItem *)sender;
+}
+
+- (void)loadAccount:(Account *)account;
 
 @end
 
-#endif // PREFERENCESVIEWCONTROLLER_H
+#endif // ACCVIDEOVC_H

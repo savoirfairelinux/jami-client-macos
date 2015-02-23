@@ -16,44 +16,61 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#import "ConversationsViewController.h"
 
-#import <callmodel.h>
+#define COLUMNID_STATE   @"VideoStateColumn"
+#define COLUMNID_CODECS   @"VideoCodecsColumn"
+#define COLUMNID_FREQ     @"VideoFrequencyColumn"
+#define COLUMNID_BITRATE  @"VideoBitrateColumn"
 
-#define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
+#import "AccVideoVC.h"
 
-@interface ConversationsViewController ()
+#include <QtCore/QSortFilterProxyModel>
+
+#include <audio/codecmodel.h>
+#include <accountmodel.h>
+
+#import "QNSTreeController.h"
+
+@interface AccVideoVC ()
+
+@property Account* privateAccount;
+@property QNSTreeController *treeController;
+@property (assign) IBOutlet NSOutlineView *codecsView;
+@property (assign) IBOutlet NSView *videoPanelContainer;
+@property (assign) IBOutlet NSButton *toggleVideoButton;
 
 @end
 
-@implementation ConversationsViewController
-@synthesize conversationsView;
+@implementation AccVideoVC
 @synthesize treeController;
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT Conversations VC");
-    }
-    return self;
-}
-
+@synthesize codecsView;
+@synthesize privateAccount;
+@synthesize videoPanelContainer;
+@synthesize toggleVideoButton;
 
 - (void)awakeFromNib
 {
-    NSLog(@"awakeFromNib");
+    NSLog(@"INIT Video VC");
+}
 
-    treeController = [[QNSTreeController alloc] initWithQModel:CallModel::instance()];
+- (void)loadAccount:(Account *)account
+{
+    privateAccount = account;
 
+    treeController = [[QNSTreeController alloc] initWithQModel:privateAccount->codecModel()->videoCodecs()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
-    [self.conversationsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [self.conversationsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [self.conversationsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [videoPanelContainer setHidden:!privateAccount->isVideoEnabled()];
+    [toggleVideoButton setState:privateAccount->isVideoEnabled()?NSOnState:NSOffState];
+}
 
-    NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
-    [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
+- (IBAction)toggleVideoEnabled:(id)sender {
+    privateAccount->setVideoEnabled([sender state] == NSOnState);
+    [videoPanelContainer setHidden:!privateAccount->isVideoEnabled()];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -73,23 +90,8 @@
 {
     NSCell *returnCell = [tableColumn dataCell];
 
-
     if(item == nil)
         return returnCell;
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
-    {
-
-        NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
-        NSUInteger myArray[[idx length]];
-        [idx getIndexes:myArray];
-
-        NSLog(@"dataCellForTableColumn, indexPath: %lu", (unsigned long)myArray[0]);
-
-        QModelIndex qIdx = CallModel::instance()->index(myArray[0], 0);
-
-        QVariant test = CallModel::instance()->data(qIdx, Qt::DisplayRole);
-    }
-
     return returnCell;
 }
 
@@ -124,12 +126,32 @@
 // -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    if(!qIdx.isValid())
+        return;
+
+    if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
+        [cell setState:privateAccount->codecModel()->videoCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CODECS])
     {
-        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-        if(qIdx.isValid())
-            cell.title = CallModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        cell.title = privateAccount->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
+        [cell setState:privateAccount->codecModel()->videoCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_FREQ])
+    {
+        cell.title = privateAccount->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_BITRATE])
+    {
+        cell.title = privateAccount->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
     }
+}
+- (IBAction)toggleCodec:(NSOutlineView*)sender {
+    NSInteger row = [sender clickedRow];
+    NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
+    NSButtonCell *cell = [col dataCellForRow:row];
+    privateAccount->codecModel()->videoCodecs()->setData(
+                        privateAccount->codecModel()->videoCodecs()->index(row, 0, QModelIndex()),
+                                                         cell.state == NSOnState ? Qt::Unchecked : Qt::Checked,
+                                                         Qt::CheckStateRole);
 }
 
 // -------------------------------------------------------------------------------
@@ -138,8 +160,6 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
-    NSLog(@"outlineViewSelectionDidChange!!");
 }
-
 
 @end
