@@ -16,71 +16,80 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#import "VideoPrefsVC.h"
+#import "NSFileManager+DirUtils.h"
 
-#import <video/sourcesmodel.h>
+NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 
-@interface VideoPrefsVC ()
+@implementation NSFileManager (DirectoryLocations)
 
-@end
-
-@implementation VideoPrefsVC
-@synthesize videoDevicesButton;
-@synthesize channelsButton;
-@synthesize sizesButton;
-@synthesize ratesButton;
-
-- (void)loadView
+- (NSString *)findOrCreateDirectory:(NSSearchPathDirectory)searchPathDirectory
+	inDomain:(NSSearchPathDomainMask)domainMask
+	appendPathComponent:(NSString *)appendComponent
 {
-    [super loadView];
+	//
+	// Search for the path
+	//
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(
+		searchPathDirectory,
+		domainMask,
+		YES);
 
-    [self.videoDevicesButton addItemWithTitle:@"COUCOU"];
+    if ([paths count] == 0)
+	{
+		return nil;
+	}
+	
+	//
+	// Normally only need the first path returned
+	//
+	NSString *resolvedPath = [paths objectAtIndex:0];
 
+	//
+	// Append the extra path component
+	//
+	if (appendComponent)
+	{
+		resolvedPath = [resolvedPath
+			stringByAppendingPathComponent:appendComponent];
+	}
+	
+	//
+	// Create the path if it doesn't exist
+	//
+	NSError *error = nil;
+	BOOL success = [self
+		createDirectoryAtPath:resolvedPath
+		withIntermediateDirectories:YES
+		attributes:nil
+		error:&error];
+	if (!success) 
+	{
+		return nil;
+	}
+
+	return resolvedPath;
 }
 
-#pragma mark - NSMenuDelegate methods
-
-- (BOOL)menuHasKeyEquivalent:(NSMenu *)menu
-                    forEvent:(NSEvent *)event
-                      target:(id *)target
-                      action:(SEL *)action
+//
+// applicationSupportDirectory
+//
+// Returns the path to the applicationSupportDirectory (creating it if it doesn't
+// exist).
+//
+- (NSString *)applicationSupportDirectory
 {
-    NSLog(@"menuHasKeyEquivalent");
-    return YES;
-}
-
-- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
-{
-    NSLog(@"updateItem");
-    QModelIndex qIdx;
-
-    if([menu.title isEqualToString:@"devices"])
-    {
-        qIdx = Video::SourcesModel::instance()->index(index);
-        [item setTitle:Video::SourcesModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
-    }
-    return YES;
-}
-
-- (void)menu:(NSMenu *)menu willHighlightItem:(NSMenuItem *)item
-{
-    NSLog(@"willHighlightItem");
-}
-
-- (void)menuWillOpen:(NSMenu *)menu
-{
-    NSLog(@"menuWillOpen");
-}
-
-- (void)menuDidClose:(NSMenu *)menu
-{
-    NSLog(@"menuDidClose");
-}
-
-- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
-{
-    if([menu.title isEqualToString:@"devices"])
-        return Video::SourcesModel::instance()->rowCount();
+	NSString *executableName =
+		[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
+	NSString *result =
+		[self
+			findOrCreateDirectory:NSApplicationSupportDirectory
+			inDomain:NSUserDomainMask
+			appendPathComponent:executableName];
+	if (!result)
+	{
+		NSLog(@"Error accessing Application Support");
+	}
+	return result;
 }
 
 @end

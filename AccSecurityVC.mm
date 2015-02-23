@@ -16,71 +16,77 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#import "VideoPrefsVC.h"
 
-#import <video/sourcesmodel.h>
+#import "AccSecurityVC.h"
 
-@interface VideoPrefsVC ()
+@interface AccSecurityVC ()
+
+@property Account* privateAccount;
 
 @end
 
-@implementation VideoPrefsVC
-@synthesize videoDevicesButton;
-@synthesize channelsButton;
-@synthesize sizesButton;
-@synthesize ratesButton;
+@implementation AccSecurityVC
+@synthesize privateAccount;
 
-- (void)loadView
+- (void)awakeFromNib
 {
-    [super loadView];
+    NSLog(@"INIT Security VC");
+}
 
-    [self.videoDevicesButton addItemWithTitle:@"COUCOU"];
+- (void)loadAccount:(Account *)account
+{
+    privateAccount = account;
+}
+
+#pragma mark - NSPathControl delegate methods
+
+/*
+ Delegate method of NSPathControl to determine how the NSOpenPanel will look/behave.
+ */
+- (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
+{
+    NSLog(@"willDisplayOpenPanel");
+    [openPanel setAllowsMultipleSelection:NO];
+    [openPanel setCanChooseDirectories:NO];
+    [openPanel setCanChooseFiles:YES];
+    [openPanel setResolvesAliases:YES];
+    [openPanel setTitle:NSLocalizedString(@"Choose a file", @"Open panel title")];
+    [openPanel setPrompt:NSLocalizedString(@"Choose", @"Open panel prompt for 'Choose a file'")];
+    [openPanel setDelegate:self];
+}
+
+- (void)pathControl:(NSPathControl *)pathControl willPopUpMenu:(NSMenu *)menu
+{
 
 }
 
-#pragma mark - NSMenuDelegate methods
+#pragma mark - NSOpenSavePanelDelegate delegate methods
 
-- (BOOL)menuHasKeyEquivalent:(NSMenu *)menu
-                    forEvent:(NSEvent *)event
-                      target:(id *)target
-                      action:(SEL *)action
+- (void)panel:(id)sender willExpand:(BOOL)expanding
 {
-    NSLog(@"menuHasKeyEquivalent");
+    //NSLog(@"willExpand");
+}
+
+- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
+{
+    //NSLog(@"userEnteredFilename");
+}
+
+- (void)panelSelectionDidChange:(id)sender
+{
+    //NSLog(@"panelSelectionDidChange");
+}
+
+- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError
+{
+    NSLog(@"validateURL");
     return YES;
+
 }
 
-- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
+- (void)panel:(id)sender didChangeToDirectoryURL:(NSURL *)url
 {
-    NSLog(@"updateItem");
-    QModelIndex qIdx;
-
-    if([menu.title isEqualToString:@"devices"])
-    {
-        qIdx = Video::SourcesModel::instance()->index(index);
-        [item setTitle:Video::SourcesModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
-    }
-    return YES;
-}
-
-- (void)menu:(NSMenu *)menu willHighlightItem:(NSMenuItem *)item
-{
-    NSLog(@"willHighlightItem");
-}
-
-- (void)menuWillOpen:(NSMenu *)menu
-{
-    NSLog(@"menuWillOpen");
-}
-
-- (void)menuDidClose:(NSMenu *)menu
-{
-    NSLog(@"menuDidClose");
-}
-
-- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
-{
-    if([menu.title isEqualToString:@"devices"])
-        return Video::SourcesModel::instance()->rowCount();
+    //NSLog(@"didChangeToDirectoryURL");
 }
 
 @end
