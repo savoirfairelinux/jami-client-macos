@@ -23,16 +23,131 @@
                 <rect key="frame" x="0.0" y="0.0" width="1065" height="626"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                        <rect key="frame" x="427" y="69" width="309" height="447"/>
+                        <subviews>
+                            <scrollView focusRingType="none" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqQ-DB-Z0g">
+                                <rect key="frame" x="20" y="11" width="275" height="322"/>
+                                <clipView key="contentView" focusRingType="none" misplaced="YES" id="1so-Pz-QB2">
+                                    <rect key="frame" x="1" y="17" width="238" height="117"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="nuM-bu-a6l" indentationPerLevel="16" outlineTableColumn="VDO-Cu-h8f" id="zcl-pp-rGb">
+                                            <rect key="frame" x="0.0" y="0.0" width="273" height="19"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <size key="intercellSpacing" width="3" height="2"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                            <tableColumns>
+                                                <tableColumn identifier="ConversationsColumn" width="270" minWidth="40" maxWidth="1000" id="VDO-Cu-h8f">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="fca-40-NK1">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                </tableColumn>
+                                            </tableColumns>
+                                            <connections>
+                                                <outlet property="delegate" destination="txt-J3-pzW" id="6In-PG-OW4"/>
+                                            </connections>
+                                        </outlineView>
+                                    </subviews>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Fze-JQ-8rU">
+                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="e1E-df-1Rw">
+                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <tableHeaderView key="headerView" id="nuM-bu-a6l">
+                                    <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableHeaderView>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SIv-wg-z9p">
+                                <rect key="frame" x="14" y="379" width="64" height="32"/>
+                                <buttonCell key="cell" type="push" title="Call" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0gt-3R-vVa">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="placeCall:" target="txt-J3-pzW" id="Kqn-M7-Zqx"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TLn-7x-ekk">
+                                <rect key="frame" x="91" y="379" width="70" height="32"/>
+                                <buttonCell key="cell" type="push" title="Hold" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uAm-ag-EFO">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gU5-lZ-BvR">
+                                <rect key="frame" x="168" y="379" width="90" height="32"/>
+                                <buttonCell key="cell" type="push" title="Hangup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xpJ-nm-Bg6">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uL1-rr-hj0">
+                                <rect key="frame" x="20" y="415" width="250" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="sil-2N-5Wz">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iny-6e-BBx">
+                                <rect key="frame" x="91" y="338" width="89" height="32"/>
+                                <buttonCell key="cell" type="push" title="preview" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rwC-ls-8XK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="startPreview:" target="txt-J3-pzW" id="yds-UF-819"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blO-RM-n8H">
+                                <rect key="frame" x="415" y="453" width="141" height="32"/>
+                                <buttonCell key="cell" type="push" title="Notification test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Brr-GV-iPF">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showNotification:" target="-2" id="emT-tX-as7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </customView>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FKy-8c-6T2">
+                        <rect key="frame" x="844" y="488" width="141" height="32"/>
+                        <buttonCell key="cell" type="push" title="Notification test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jCv-09-JDz">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="showNotification:" target="-2" id="s6t-ml-bzu"/>
+                        </connections>
+                    </button>
                     <tabView focusRingType="none" fixedFrame="YES" type="bottomTabsBezelBorder" translatesAutoresizingMaskIntoConstraints="NO" id="xXW-iq-GcP">
                         <rect key="frame" x="13" y="14" width="384" height="427"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="History" identifier="1" id="Wi9-Zd-O1N">
                                 <view key="view" id="h2E-qI-upQ">
+                                    <rect key="frame" x="10" y="7" width="364" height="389"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9uI-D5-KRt">
-                                            <rect key="frame" x="-3" y="-395" width="370" height="398"/>
+                                            <rect key="frame" x="-3" y="-6" width="370" height="398"/>
                                             <clipView key="contentView" misplaced="YES" id="eME-fQ-3QX">
                                                 <rect key="frame" x="1" y="17" width="238" height="117"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,100 +250,6 @@
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                        <rect key="frame" x="427" y="69" width="309" height="447"/>
-                        <subviews>
-                            <scrollView focusRingType="none" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqQ-DB-Z0g">
-                                <rect key="frame" x="20" y="11" width="275" height="322"/>
-                                <clipView key="contentView" focusRingType="none" misplaced="YES" id="1so-Pz-QB2">
-                                    <rect key="frame" x="1" y="17" width="238" height="117"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="nuM-bu-a6l" indentationPerLevel="16" outlineTableColumn="VDO-Cu-h8f" id="zcl-pp-rGb">
-                                            <rect key="frame" x="0.0" y="0.0" width="273" height="19"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                            <tableColumns>
-                                                <tableColumn identifier="ConversationsColumn" width="270" minWidth="40" maxWidth="1000" id="VDO-Cu-h8f">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                    </tableHeaderCell>
-                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="fca-40-NK1">
-                                                        <font key="font" metaFont="system"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                </tableColumn>
-                                            </tableColumns>
-                                            <connections>
-                                                <outlet property="delegate" destination="txt-J3-pzW" id="6In-PG-OW4"/>
-                                            </connections>
-                                        </outlineView>
-                                    </subviews>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Fze-JQ-8rU">
-                                    <rect key="frame" x="1" y="119" width="223" height="15"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="e1E-df-1Rw">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <tableHeaderView key="headerView" id="nuM-bu-a6l">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableHeaderView>
-                            </scrollView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SIv-wg-z9p">
-                                <rect key="frame" x="14" y="379" width="64" height="32"/>
-                                <buttonCell key="cell" type="push" title="Call" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0gt-3R-vVa">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="placeCall:" target="txt-J3-pzW" id="Kqn-M7-Zqx"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TLn-7x-ekk">
-                                <rect key="frame" x="91" y="379" width="70" height="32"/>
-                                <buttonCell key="cell" type="push" title="Hold" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uAm-ag-EFO">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gU5-lZ-BvR">
-                                <rect key="frame" x="168" y="379" width="90" height="32"/>
-                                <buttonCell key="cell" type="push" title="Hangup" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xpJ-nm-Bg6">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uL1-rr-hj0">
-                                <rect key="frame" x="20" y="415" width="250" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="sil-2N-5Wz">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iny-6e-BBx">
-                                <rect key="frame" x="91" y="338" width="89" height="32"/>
-                                <buttonCell key="cell" type="push" title="preview" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rwC-ls-8XK">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="startPreview:" target="txt-J3-pzW" id="yds-UF-819"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                    </customView>
                 </subviews>
             </view>
             <connections>

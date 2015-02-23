@@ -36,6 +36,7 @@
 
 - (void) close;
 @property (nonatomic, assign) NSViewController *currentVC;
+@property (nonatomic, assign) NSViewController *accountsPrefsVC;
 @property (nonatomic, assign) NSViewController *generalPrefsVC;
 @property (nonatomic, assign) NSViewController *audioPrefsVC;
 @property (nonatomic, assign) NSViewController *videoPrefsVC;
@@ -44,6 +45,7 @@
 - (void)displayAudio:(NSToolbarItem *)sender;
 - (void)displayAncrage:(NSToolbarItem *)sender;
 - (void)displayVideo:(NSToolbarItem *)sender;
+- (void)displayAccounts:(NSToolbarItem *)sender;
 
 @end
 
