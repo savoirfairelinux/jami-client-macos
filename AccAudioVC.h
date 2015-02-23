@@ -27,18 +27,21 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef APPDELEGATE_H
-#define APPDELEGATE_H
+#ifndef ACCAUDIOVC_H
+#define ACCAUDIOVC_H
 
-#import <AppKit/NSApplication.h> // NSApplicationDelegate
+#import <Cocoa/Cocoa.h>
 
-#import "RingWindowController.h"
-#import "PreferencesWindowController.h"
+#include <account.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
+#import "QNSTreeController.h"
 
-@property RingWindowController* ringWindowController;
+@interface AccAudioVC : NSViewController <NSOutlineViewDelegate, NSPathControlDelegate> {
+
+}
+
+- (void)loadAccount:(Account *)account;
 
 @end
 
-#endif // APPDELEGATE_H
+#endif // ACCAUDIOVC_H

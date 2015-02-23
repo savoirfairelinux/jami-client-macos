@@ -27,18 +27,14 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef APPDELEGATE_H
-#define APPDELEGATE_H
+#import <Cocoa/Cocoa.h>
 
-#import <AppKit/NSApplication.h> // NSApplicationDelegate
+#include <account.h>
 
-#import "RingWindowController.h"
-#import "PreferencesWindowController.h"
+@interface AccAdvancedVC : NSViewController <NSTextFieldDelegate> {
+    
+}
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
-
-@property RingWindowController* ringWindowController;
+- (void)loadAccount:(Account *)account;
 
 @end
-
-#endif // APPDELEGATE_H
