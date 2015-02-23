@@ -24,10 +24,10 @@
 #include <QtCore/qcoreapplication.h>
 
 //Ring
-#include "call.h"
-#include "account.h"
-#include "phonenumber.h"
-#include "historymodel.h"
+#include <call.h>
+#include <account.h>
+#include <phonenumber.h>
+#include <historymodel.h>
 
 
 
