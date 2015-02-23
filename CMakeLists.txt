@@ -31,6 +31,7 @@ SET(ringclient_SRCS
    ConversationsViewController.mm
    PreferencesViewController.mm
    QNSTreeController.mm
+   QNSArrayController.mm
    AudioPrefsVC.mm
    VideoPrefsVC.mm
    GeneralPrefsVC.mm
@@ -55,6 +56,7 @@ SET(ringclient_HDRS
    GeneralPrefsVC.h
    HistoryViewController.h
    QNSTreeController.h
+   QNSArrayController.h
    MinimalHistoryBackend.h)
 
 # Icons
