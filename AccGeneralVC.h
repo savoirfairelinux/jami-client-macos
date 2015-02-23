@@ -16,26 +16,51 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef PREFERENCESVIEWCONTROLLER_H
-#define PREFERENCESVIEWCONTROLLER_H
+#ifndef ACCGENERALVC_H
+#define ACCGENERALVC_H
 
 #import <Cocoa/Cocoa.h>
 
-@interface PreferencesViewController : NSViewController <NSToolbarDelegate>
+#include <account.h>
 
-- (void) close;
-@property (nonatomic, assign) NSViewController *currentVC;
-@property (nonatomic, assign) NSViewController *accountsPrefsVC;
-@property (nonatomic, assign) NSViewController *generalPrefsVC;
-@property (nonatomic, assign) NSViewController *audioPrefsVC;
-@property (nonatomic, assign) NSViewController *videoPrefsVC;
+@interface AccGeneralVC : NSViewController <NSTextFieldDelegate> {
+    NSTextField *aliasTextField;
+    NSTextField *serverHostTextField;
+    NSTextField *usernameTextField;
+    NSSecureTextField *passwordTextField;
+    NSButton *upnpButton;
+    NSButton *autoAnswerButton;
+    NSButton *userAgentButton;
+    NSTextField *userAgentTextField;
+    NSView *boxingAccount;
+    NSView *boxingParameters;
+    NSTextField *typeLabel;
+}
 
-- (void)displayGeneral:(NSToolbarItem *)sender;
-- (void)displayAudio:(NSToolbarItem *)sender;
-- (void)displayAncrage:(NSToolbarItem *)sender;
-- (void)displayVideo:(NSToolbarItem *)sender;
-- (void)displayAccounts:(NSToolbarItem *)sender;
+@property (assign) IBOutlet NSView *boxingAccount;
+@property (assign) IBOutlet NSView *boxingParameters;
+
+@property (assign) IBOutlet NSTextField *aliasTextField;
+@property (assign) IBOutlet NSTextField *typeLabel;
+
+@property (assign) IBOutlet NSTextField *serverHostTextField;
+@property (assign) IBOutlet NSTextField *usernameTextField;
+@property (assign) IBOutlet NSSecureTextField *passwordTextField;
+
+@property (assign) IBOutlet NSButton *upnpButton;
+@property (assign) IBOutlet NSButton *autoAnswerButton;
+@property (assign) IBOutlet NSButton *userAgentButton;
+
+
+
+@property (assign) IBOutlet NSTextField *userAgentTextField;
+
+- (IBAction)toggleUpnp:(NSButton *)sender;
+- (IBAction)toggleAutoAnswer:(NSButton *)sender;
+- (IBAction)toggleCustomAgent:(NSButton *)sender;
+
+- (void)loadAccount:(Account *)account;
 
 @end
 
-#endif // PREFERENCESVIEWCONTROLLER_H
+#endif // ACCGENERALVC_H

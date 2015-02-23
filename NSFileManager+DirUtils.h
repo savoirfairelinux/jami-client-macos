@@ -16,26 +16,23 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef PREFERENCESVIEWCONTROLLER_H
-#define PREFERENCESVIEWCONTROLLER_H
+#ifndef NSFILEMANAGER+DIRUTILS_H
+#define NSFILEMANAGER+DIRUTILS_H
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-@interface PreferencesViewController : NSViewController <NSToolbarDelegate>
+//
+// DirectoryLocations is a set of global methods for finding the fixed location
+// directoriess.
+//
+@interface NSFileManager (DirUtils)
 
-- (void) close;
-@property (nonatomic, assign) NSViewController *currentVC;
-@property (nonatomic, assign) NSViewController *accountsPrefsVC;
-@property (nonatomic, assign) NSViewController *generalPrefsVC;
-@property (nonatomic, assign) NSViewController *audioPrefsVC;
-@property (nonatomic, assign) NSViewController *videoPrefsVC;
-
-- (void)displayGeneral:(NSToolbarItem *)sender;
-- (void)displayAudio:(NSToolbarItem *)sender;
-- (void)displayAncrage:(NSToolbarItem *)sender;
-- (void)displayVideo:(NSToolbarItem *)sender;
-- (void)displayAccounts:(NSToolbarItem *)sender;
+- (NSString *)findOrCreateDirectory:(NSSearchPathDirectory)searchPathDirectory
+	inDomain:(NSSearchPathDomainMask)domainMask
+	appendPathComponent:(NSString *)appendComponent
+	error:(NSError **)errorOut;
+- (NSString *)applicationSupportDirectory;
 
 @end
 
-#endif // PREFERENCESVIEWCONTROLLER_H
+#endif // NSFILEMANAGER+DIRUTILS_H
