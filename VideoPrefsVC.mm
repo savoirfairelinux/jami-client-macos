@@ -29,15 +29,69 @@
  */
 #import "VideoPrefsVC.h"
 
+#import <video/sourcesmodel.h>
+
 @interface VideoPrefsVC ()
 
 @end
 
 @implementation VideoPrefsVC
+@synthesize videoDevicesButton;
+@synthesize channelsButton;
+@synthesize sizesButton;
+@synthesize ratesButton;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+- (void)loadView
+{
+    [super loadView];
+
+    [self.videoDevicesButton addItemWithTitle:@"COUCOU"];
+
+}
+
+#pragma mark - NSMenuDelegate methods
+
+- (BOOL)menuHasKeyEquivalent:(NSMenu *)menu
+                    forEvent:(NSEvent *)event
+                      target:(id *)target
+                      action:(SEL *)action
+{
+    NSLog(@"menuHasKeyEquivalent");
+    return YES;
+}
+
+- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
+{
+    NSLog(@"updateItem");
+    QModelIndex qIdx;
+
+    if([menu.title isEqualToString:@"devices"])
+    {
+        qIdx = Video::SourcesModel::instance()->index(index);
+        [item setTitle:Video::SourcesModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+    }
+    return YES;
+}
+
+- (void)menu:(NSMenu *)menu willHighlightItem:(NSMenuItem *)item
+{
+    NSLog(@"willHighlightItem");
+}
+
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    NSLog(@"menuWillOpen");
+}
+
+- (void)menuDidClose:(NSMenu *)menu
+{
+    NSLog(@"menuDidClose");
+}
+
+- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
+{
+    if([menu.title isEqualToString:@"devices"])
+        return Video::SourcesModel::instance()->rowCount();
 }
 
 @end
