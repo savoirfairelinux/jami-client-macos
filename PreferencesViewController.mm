@@ -53,7 +53,6 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
 
 - (void) close
 {
-    NSLog(@"closingprefs");
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
     [CATransaction begin];
@@ -73,7 +72,6 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
 }
 
 - (void)displayGeneral:(NSToolbarItem *)sender {
-    NSLog(@"GEEENERALL");
     if (self.currentVC != nil) {
         [self.currentVC.view removeFromSuperview];
     }
@@ -128,12 +126,12 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
         [item setAction:@selector(displayAudio:)];
     }
 
-    if ([itemIdentifier isEqualToString: kAncragePrefsIdentifer]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kAncragePrefsIdentifer];
-        [item setImage: [NSImage imageNamed: @"ancrage"]];
-        [item setLabel: @"Ancrage"];
-        [item setAction:@selector(displayAncrage:)];
-    }
+//    if ([itemIdentifier isEqualToString: kAncragePrefsIdentifer]) {
+//        item = [[NSToolbarItem alloc] initWithItemIdentifier: kAncragePrefsIdentifer];
+//        [item setImage: [NSImage imageNamed: @"ancrage"]];
+//        [item setLabel: @"Ancrage"];
+//        [item setAction:@selector(displayAncrage:)];
+//    }
 
     if ([itemIdentifier isEqualToString: kDonePrefsIdentifer]) {
         item = [[NSToolbarItem alloc] initWithItemIdentifier: kDonePrefsIdentifer];
@@ -161,7 +159,7 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
             kGeneralPrefsIdentifier,
             kAudioPrefsIdentifer,
             kVideoPrefsIdentifer,
-            kAncragePrefsIdentifer,
+ //           kAncragePrefsIdentifer,
             NSToolbarFlexibleSpaceItemIdentifier,
             kDonePrefsIdentifer,
             nil];
@@ -172,7 +170,7 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
     return [NSArray arrayWithObjects:
             kGeneralPrefsIdentifier,
             kAudioPrefsIdentifer,
-            kAncragePrefsIdentifer,
+ //           kAncragePrefsIdentifer,
             kVideoPrefsIdentifer,
             nil];
 }
