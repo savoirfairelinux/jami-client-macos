@@ -27,18 +27,23 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef APPDELEGATE_H
-#define APPDELEGATE_H
+#ifndef NSFILEMANAGER+DIRUTILS_H
+#define NSFILEMANAGER+DIRUTILS_H
 
-#import <AppKit/NSApplication.h> // NSApplicationDelegate
+#import <Foundation/Foundation.h>
 
-#import "RingWindowController.h"
-#import "PreferencesWindowController.h"
+//
+// DirectoryLocations is a set of global methods for finding the fixed location
+// directoriess.
+//
+@interface NSFileManager (DirUtils)
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
-
-@property RingWindowController* ringWindowController;
+- (NSString *)findOrCreateDirectory:(NSSearchPathDirectory)searchPathDirectory
+	inDomain:(NSSearchPathDomainMask)domainMask
+	appendPathComponent:(NSString *)appendComponent
+	error:(NSError **)errorOut;
+- (NSString *)applicationSupportDirectory;
 
 @end
 
-#endif // APPDELEGATE_H
+#endif // NSFILEMANAGER+DIRUTILS_H

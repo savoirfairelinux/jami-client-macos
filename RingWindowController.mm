@@ -118,6 +118,15 @@
     
 }
 
+- (IBAction)showNotification:(id)sender{
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    notification.title = @"Hello, World!";
+    notification.informativeText = @"A notification";
+    notification.soundName = NSUserNotificationDefaultSoundName;
+
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
+
 - (IBAction) closePreferences:(NSToolbarItem *)sender {
     if(self.myCurrentViewController != nil)
     {
@@ -143,5 +152,10 @@
 - (void)displayVideo:(NSToolbarItem *)sender {
     [self.preferencesViewController displayVideo:sender];
 }
+
+- (void)displayAccounts:(NSToolbarItem *)sender {
+    [self.preferencesViewController displayAccounts:sender];
+}
+
 
 @end
