@@ -31,6 +31,13 @@ SET(ringclient_SRCS
    ConversationsViewController.mm
    PreferencesViewController.mm
    QNSTreeController.mm
+   AccGeneralVC.mm
+   AccAudioVC.mm
+   AccVideoVC.mm
+   AccAdvancedVC.mm
+   AccSecurityVC.mm
+   AccountsVC.mm
+   NSFileManager+DirUtils.mm
    AudioPrefsVC.mm
    VideoPrefsVC.mm
    GeneralPrefsVC.mm
@@ -41,6 +48,12 @@ SET(ringclient_FORMS
    MainMenu.xib
    RingWindow.xib
    GeneralPrefs.xib
+   Accounts.xib
+   AccGeneral.xib
+   AccAudio.xib
+   AccVideo.xib
+   AccAdvanced.xib
+   AccSecurity.xib
    AudioPrefs.xib
    VideoPrefs.xib
    PreferencesScreen.xib)
@@ -50,7 +63,14 @@ SET(ringclient_HDRS
    RingWindowController.h
    ConversationsViewController.h
    PreferencesViewController.h
+   NSFileManager+DirUtils.h
+   AccGeneralVC.h
+   AccVideoVC.h
+   AccAudioVC.h
+   AccAdvancedVC.h
+   AccSecurityVC.h
    AudioPrefsVC.h
+   AccountsVC.h
    VideoPrefsVC.h
    GeneralPrefsVC.h
    HistoryViewController.h
