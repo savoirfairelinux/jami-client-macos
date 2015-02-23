@@ -37,13 +37,6 @@
     [children addObject:child];
 }
 
-- (void) setName: (NSString*) newName
-{
-#ifdef REARRANGE_FROM_SETNAME
-    [treeController rearrangeObjects];
-#endif
-}
-
 @end
 
 
@@ -58,7 +51,16 @@
     topNodes = [[NSMutableArray alloc] init];
     [self connect];
 
+    [self populate];
+
     return [self initWithContent:topNodes];
+}
+
+-(void) populate
+{
+    for (int i =0 ; i < self->privateQModel->rowCount() ; ++i){
+        [topNodes insertObject:[[Node alloc] init] atIndex:i];
+    }
 }
 
 - (BOOL)isEditable

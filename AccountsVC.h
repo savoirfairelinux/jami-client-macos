@@ -16,71 +16,24 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#import "VideoPrefsVC.h"
+#ifndef ACCOUNTSVC_H
+#define ACCOUNTSVC_H
 
-#import <video/sourcesmodel.h>
+#import <Cocoa/Cocoa.h>
 
-@interface VideoPrefsVC ()
+#import "QNSTreeController.h"
+
+@interface AccountsVC : NSViewController <NSOutlineViewDelegate, NSTabViewDelegate> {
+    NSOutlineView *accountsListView;
+    NSSegmentedControl *accountsControls;
+}
+@property (assign) IBOutlet NSSegmentedControl *accountsControls;
+
+@property QNSTreeController *treeController;
+@property (assign) IBOutlet NSOutlineView *accountsListView;
+
+- (IBAction)segControlClicked:(NSSegmentedControl *)sender;
 
 @end
 
-@implementation VideoPrefsVC
-@synthesize videoDevicesButton;
-@synthesize channelsButton;
-@synthesize sizesButton;
-@synthesize ratesButton;
-
-- (void)loadView
-{
-    [super loadView];
-
-    [self.videoDevicesButton addItemWithTitle:@"COUCOU"];
-    
-}
-
-#pragma mark - NSMenuDelegate methods
-
-- (BOOL)menuHasKeyEquivalent:(NSMenu *)menu
-                    forEvent:(NSEvent *)event
-                      target:(id *)target
-                      action:(SEL *)action
-{
-    NSLog(@"menuHasKeyEquivalent");
-    return YES;
-}
-
-- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
-{
-    NSLog(@"updateItem");
-    QModelIndex qIdx;
-
-    if([menu.title isEqualToString:@"devices"])
-    {
-        qIdx = Video::SourcesModel::instance()->index(index);
-        [item setTitle:Video::SourcesModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
-    }
-    return YES;
-}
-
-- (void)menu:(NSMenu *)menu willHighlightItem:(NSMenuItem *)item
-{
-    NSLog(@"willHighlightItem");
-}
-
-- (void)menuWillOpen:(NSMenu *)menu
-{
-    NSLog(@"menuWillOpen");
-}
-
-- (void)menuDidClose:(NSMenu *)menu
-{
-    NSLog(@"menuDidClose");
-}
-
-- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
-{
-    if([menu.title isEqualToString:@"devices"])
-        return Video::SourcesModel::instance()->rowCount();
-}
-
-@end
+#endif // ACCOUNTSVC_H

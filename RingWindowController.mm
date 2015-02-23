@@ -107,6 +107,15 @@
     
 }
 
+- (IBAction)showNotification:(id)sender{
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    notification.title = @"Hello, World!";
+    notification.informativeText = @"A notification";
+    notification.soundName = NSUserNotificationDefaultSoundName;
+
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
+
 - (IBAction) closePreferences:(NSToolbarItem *)sender {
     if(self.myCurrentViewController != nil)
     {
