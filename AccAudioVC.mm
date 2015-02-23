@@ -16,44 +16,38 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#import "ConversationsViewController.h"
 
-#import <callmodel.h>
+#define COLUMNID_CODECS   @"AudioCodecsColumn"
+#define COLUMNID_FREQ     @"AudioFrequencyColumn"
+#define COLUMNID_BITRATE  @"AudioBitrateColumn"
 
-#define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
+#import "AccAudioVC.h"
 
-@interface ConversationsViewController ()
+#include <QSortFilterProxyModel>
+
+#include <audio/codecmodel.h>
+#include <accountmodel.h>
+
+@interface AccAudioVC () {
+}
 
 @end
 
-@implementation ConversationsViewController
-@synthesize conversationsView;
+@implementation AccAudioVC
 @synthesize treeController;
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT Conversations VC");
-    }
-    return self;
-}
-
+@synthesize codecsView;
 
 - (void)awakeFromNib
 {
-    NSLog(@"awakeFromNib");
-
-    treeController = [[QNSTreeController alloc] initWithQModel:CallModel::instance()];
+    NSLog(@"INIT Audio VC");
+    treeController = [[QNSTreeController alloc] initWithQModel:AccountModel::instance()->ip2ip()->codecModel()->audioCodecs()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
-    [self.conversationsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [self.conversationsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [self.conversationsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-
-    NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
-    [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
+    [self.codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [self.codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [self.codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -73,21 +67,13 @@
 {
     NSCell *returnCell = [tableColumn dataCell];
 
-
     if(item == nil)
         return returnCell;
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_CODECS])
     {
-
         NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
         NSUInteger myArray[[idx length]];
         [idx getIndexes:myArray];
-
-        NSLog(@"dataCellForTableColumn, indexPath: %lu", (unsigned long)myArray[0]);
-
-        QModelIndex qIdx = CallModel::instance()->index(myArray[0], 0);
-
-        QVariant test = CallModel::instance()->data(qIdx, Qt::DisplayRole);
     }
 
     return returnCell;
@@ -124,11 +110,21 @@
 // -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    if(!qIdx.isValid())
+        return;
+
+
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_CODECS])
     {
-        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-        if(qIdx.isValid())
-            cell.title = CallModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        cell.title = AccountModel::instance()->ip2ip()->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
+        [cell setState:AccountModel::instance()->ip2ip()->codecModel()->audioCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_FREQ])
+    {
+        cell.title = AccountModel::instance()->ip2ip()->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_BITRATE])
+    {
+        cell.title = AccountModel::instance()->ip2ip()->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
     }
 }
 
@@ -141,5 +137,21 @@
     NSLog(@"outlineViewSelectionDidChange!!");
 }
 
+- (IBAction)segControlClicked:(NSSegmentedControl *)sender {
+    int clickedSegment = [sender selectedSegment];
+    int clickedSegmentTag = [[sender cell] tagForSegment:clickedSegment];
+    NSLog(@"clickedSegmentTag %d", clickedSegmentTag);
+    switch (clickedSegmentTag) {
+        case 0:
+            // Add account
+            //CodecModel::instance()->add("Coucou");
+            break;
+        case 1:
+            // Remove account
+            break;
+        default:
+            break;
+    }
+}
 
 @end

@@ -46,6 +46,9 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_notifications" id="PuD-KZ-Zat"/>
+                    </connections>
                 </button>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgD-2y-4g5">
                     <rect key="frame" x="204" y="115" width="195" height="18"/>
@@ -54,17 +57,12 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rF1-Fa-8rV">
-                    <rect key="frame" x="83" y="63" width="121" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Instant Messaging:" id="afz-zn-9IW">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QmA-ZI-ZL5">
                     <rect key="frame" x="450" y="110" width="19" height="27"/>
-                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="30B-YQ-Opa"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" doubleValue="30" id="30B-YQ-Opa"/>
+                    <connections>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.history_limit" id="c2j-mK-kYa"/>
+                    </connections>
                 </stepper>
                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHZ-7Q-5iP">
                     <rect key="frame" x="405" y="113" width="40" height="22"/>
@@ -73,6 +71,9 @@
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.history_limit" id="O2j-lT-MbR"/>
+                    </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nah-Jm-ZYB">
                     <rect key="frame" x="472" y="117" width="33" height="17"/>
@@ -88,16 +89,13 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
-                </button>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LRd-Zc-tRd">
-                    <rect key="frame" x="204" y="62" width="182" height="18"/>
-                    <buttonCell key="cell" type="check" title="Enable instant messaging" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6UW-Db-jnY">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
+                    <connections>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.window_behaviour" id="ZSW-he-LAz"/>
+                    </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="374" y="349"/>
+            <point key="canvasLocation" x="128" y="137"/>
         </customView>
+        <userDefaultsController representsSharedInstance="YES" id="Sz0-vm-i3t"/>
     </objects>
 </document>

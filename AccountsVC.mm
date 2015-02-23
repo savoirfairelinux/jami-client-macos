@@ -16,44 +16,83 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#import "ConversationsViewController.h"
 
-#import <callmodel.h>
+#define COLUMNID_ACCOUNTS @"AccountsColumn"	// the single column name in our outline view
 
-#define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
+#import "AccountsVC.h"
 
-@interface ConversationsViewController ()
+#include <accountmodel.h>
+#include <account.h>
+
+@interface AccountsVC ()
 
 @end
 
-@implementation ConversationsViewController
-@synthesize conversationsView;
+@implementation AccountsVC
+@synthesize generalTabItem;
+@synthesize audioTabItem;
+@synthesize videoTabItem;
+@synthesize advancedTabItem;
+@synthesize accountsListView;
+@synthesize accountDetailsView;
+@synthesize accountsControls;
 @synthesize treeController;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT Conversations VC");
+        NSLog(@"INIT Accounts VC");
     }
     return self;
 }
 
-
 - (void)awakeFromNib
 {
-    NSLog(@"awakeFromNib");
-
-    treeController = [[QNSTreeController alloc] initWithQModel:CallModel::instance()];
-
+    treeController = [[QNSTreeController alloc] initWithQModel:AccountModel::instance()];
     [treeController setAvoidsEmptySelection:NO];
+    [treeController setAlwaysUsesMultipleValuesMarker:YES];
     [treeController setChildrenKeyPath:@"children"];
 
-    [self.conversationsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [self.conversationsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [self.conversationsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [accountsListView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [accountsListView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [accountsListView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 
-    NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
-    [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
+    self.generalVC = [[AccGeneralVC alloc] initWithNibName:@"AccGeneral" bundle:nil];
+    [[self.generalVC view] setFrame:[self.generalTabItem.view frame]];
+    [[self.generalVC view] setBounds:[self.generalTabItem.view bounds]];
+    [self.generalTabItem setView:self.generalVC.view];
+
+    self.audioVC = [[AccAudioVC alloc] initWithNibName:@"AccAudio" bundle:nil];
+    [[self.audioVC view] setFrame:[self.audioTabItem.view frame]];
+    [[self.audioVC view] setBounds:[self.audioTabItem.view bounds]];
+    [self.audioTabItem setView:self.audioVC.view];
+
+    self.videoVC = [[AccVideoVC alloc] initWithNibName:@"AccVideo" bundle:nil];
+    [[self.videoVC view] setFrame:[self.videoTabItem.view frame]];
+    [[self.videoVC view] setBounds:[self.videoTabItem.view bounds]];
+    [self.videoTabItem setView:self.videoVC.view];
+}
+
+- (IBAction)segControlClicked:(NSSegmentedControl *)sender {
+    int clickedSegment = [sender selectedSegment];
+    int clickedSegmentTag = [[sender cell] tagForSegment:clickedSegment];
+    NSLog(@"clickedSegmentTag %d", clickedSegmentTag);
+    switch (clickedSegmentTag) {
+        case 0:
+            // Add account
+            AccountModel::instance()->add("New Account");
+            break;
+        case 1:
+        {
+            // Remove account;
+            QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+            AccountModel::instance()->remove(QModelIndex(qIdx));
+            AccountModel::instance()->save();
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -73,21 +112,13 @@
 {
     NSCell *returnCell = [tableColumn dataCell];
 
-
     if(item == nil)
         return returnCell;
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_ACCOUNTS])
     {
-
         NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
         NSUInteger myArray[[idx length]];
         [idx getIndexes:myArray];
-
-        NSLog(@"dataCellForTableColumn, indexPath: %lu", (unsigned long)myArray[0]);
-
-        QModelIndex qIdx = CallModel::instance()->index(myArray[0], 0);
-
-        QVariant test = CallModel::instance()->data(qIdx, Qt::DisplayRole);
     }
 
     return returnCell;
@@ -124,11 +155,13 @@
 // -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_ACCOUNTS])
     {
         QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-        if(qIdx.isValid())
-            cell.title = CallModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        if(qIdx.isValid()) {
+            cell.title = AccountModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+            [cell setState:AccountModel::instance()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+        }
     }
 }
 
@@ -138,7 +171,43 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
-    NSLog(@"outlineViewSelectionDidChange!!");
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        NSLog(@"Selected account is %@", AccountModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString());
+
+        //Update details view
+        //[[NSNotificationCenter defaultCenter] postNotificatonName:@"reloadNotification"];
+        [self.generalVC loadAccount:AccountModel::instance()->getAccountByModelIndex(qIdx)];
+
+        [self.accountDetailsView setHidden:NO];
+    } else {
+        [self.accountDetailsView setHidden:YES];
+    }
+}
+
+#pragma mark - NSTabViewDelegate methods
+
+- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
+{
+    NSLog(@"tabViewDidChangeNumberOfTabViewItems!!");
+}
+
+- (BOOL)tabView:(NSTabView *)tabView
+shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    NSLog(@"shouldSelectTabViewItem!!");
+
+    return YES;
+}
+
+- (void)tabView:(NSTabView *)tabView willSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    NSLog(@"willSelectTabViewItem!!");
+}
+
+- (void)tabView:(NSTabView *)tabView didSelectTabViewItem:(NSTabViewItem *)tabViewItem
+{
+    NSLog(@"didSelectTabViewItem!!");
 }
 
 

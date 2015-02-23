@@ -16,26 +16,47 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef PREFERENCESVIEWCONTROLLER_H
-#define PREFERENCESVIEWCONTROLLER_H
+#ifndef ACCOUNTSVC_H
+#define ACCOUNTSVC_H
 
 #import <Cocoa/Cocoa.h>
 
-@interface PreferencesViewController : NSViewController <NSToolbarDelegate>
+#import "QNSTreeController.h"
+#import "AccGeneralVC.h"
+#import "AccAudioVC.h"
+#import "AccVideoVC.h"
+#import "AccAdvancedVC.h"
 
-- (void) close;
-@property (nonatomic, assign) NSViewController *currentVC;
-@property (nonatomic, assign) NSViewController *accountsPrefsVC;
-@property (nonatomic, assign) NSViewController *generalPrefsVC;
-@property (nonatomic, assign) NSViewController *audioPrefsVC;
-@property (nonatomic, assign) NSViewController *videoPrefsVC;
+@interface AccountsVC : NSViewController <NSOutlineViewDelegate, NSTabViewDelegate> {
+    NSOutlineView *accountsListView;
 
-- (void)displayGeneral:(NSToolbarItem *)sender;
-- (void)displayAudio:(NSToolbarItem *)sender;
-- (void)displayAncrage:(NSToolbarItem *)sender;
-- (void)displayVideo:(NSToolbarItem *)sender;
-- (void)displayAccounts:(NSToolbarItem *)sender;
+    NSSegmentedControl *accountsControls;
+
+    NSTabView *accountDetailsView;
+    NSTabViewItem *generalItem;
+    NSTabViewItem *audioTabItem;
+    NSTabViewItem *videoTabItem;
+    NSTabViewItem *advancedTabItem;
+}
+@property (assign) IBOutlet NSSegmentedControl *accountsControls;
+
+@property QNSTreeController *treeController;
+@property (assign) IBOutlet NSOutlineView *accountsListView;
+@property (assign) IBOutlet NSTabView *accountDetailsView;
+
+@property (assign) IBOutlet NSTabViewItem *generalTabItem;
+@property (assign) IBOutlet NSTabViewItem *audioTabItem;
+@property (assign) IBOutlet NSTabViewItem *videoTabItem;
+@property (assign) IBOutlet NSTabViewItem *advancedTabItem;
+
+@property AccGeneralVC* generalVC;
+@property AccAudioVC* audioVC;
+@property AccVideoVC* videoVC;
+@property AccAdvancedVC* advancedVC;
+
+
+- (IBAction)segControlClicked:(NSSegmentedControl *)sender;
 
 @end
 
-#endif // PREFERENCESVIEWCONTROLLER_H
+#endif // ACCOUNTSVC_H
