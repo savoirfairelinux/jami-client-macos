@@ -27,52 +27,53 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "HistoryViewController.h"
+#define COLUMNID_STATE   @"AudioStateColumn"
+#define COLUMNID_CODECS   @"AudioCodecsColumn"
+#define COLUMNID_FREQ     @"AudioFrequencyColumn"
+#define COLUMNID_BITRATE  @"AudioBitrateColumn"
 
-#import <historymodel.h>
+#import "AccAudioVC.h"
 
-#define COLUMNID_HISTORY			@"HistoryColumn"	// the single column name in our outline view
+#include <QSortFilterProxyModel>
 
+#include <audio/codecmodel.h>
+#include <accountmodel.h>
 
+@interface AccAudioVC ()
 
-@implementation HistoryViewController
+@property Account* privateAccount;
 
+@end
+
+@implementation AccAudioVC
 @synthesize treeController;
-
-
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-
-
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT HVC");
-
-    }
-    return self;
-}
-
-
+@synthesize codecsView;
+@synthesize privateAccount;
 
 - (void)awakeFromNib
 {
-    NSLog(@"awakeFromNib");
+    NSLog(@"INIT Audio VC");
+}
 
-    treeController = [[QNSTreeController alloc] initWithQModel:HistoryModel::instance()];
+- (void)loadAccount:(Account *)account
+{
+    privateAccount = account;
+    treeController = [[QNSTreeController alloc] initWithQModel:privateAccount->codecModel()->audioCodecs()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
-    [self.historyView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [self.historyView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [self.historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [self.codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [self.codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [self.codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+}
 
-    NSInteger idx = [historyView columnWithIdentifier:COLUMNID_HISTORY];
-    [[[[self.historyView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Name"];
+- (IBAction)moveUp:(id)sender {
+    
+}
 
-    //HistoryModel::instance()->addBackend(new MinimalHistoryBackend(nil),
-    //                                     LoadOptions::FORCE_ENABLED);
-
+- (IBAction)moveDown:(id)sender {
+    
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -92,22 +93,8 @@
 {
     NSCell *returnCell = [tableColumn dataCell];
 
-
     if(item == nil)
         return returnCell;
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_HISTORY])
-    {
-
-        NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
-        NSUInteger myArray[[idx length]];
-        [idx getIndexes:myArray];
-
-        //NSLog(@"dataCellForTableColumn, indexPath: %d", myArray[0]);
-
-        QModelIndex qIdx = HistoryModel::instance()->index(myArray[0], 0);
-
-        QVariant test = HistoryModel::instance()->data(qIdx, Qt::DisplayRole);
-    }
 
     return returnCell;
 }
@@ -143,12 +130,29 @@
 // -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_HISTORY])
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    if(!qIdx.isValid())
+        return;
+    if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
+        [cell setState:privateAccount->codecModel()->audioCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CODECS])
     {
-        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-        if(qIdx.isValid())
-            cell.title = HistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        cell.title = privateAccount->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_FREQ])
+    {
+        cell.title = privateAccount->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_BITRATE])
+    {
+        cell.title = privateAccount->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
     }
+}
+
+- (IBAction)toggleCodec:(NSOutlineView*)sender {
+    NSInteger row = [sender clickedRow];
+    NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
+    NSButtonCell *cell = [col dataCellForRow:row];
+    privateAccount->codecModel()->audioCodecs()->setData(
+                                                         privateAccount->codecModel()->audioCodecs()->index(row, 0, QModelIndex()), cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
 }
 
 // -------------------------------------------------------------------------------
@@ -157,7 +161,7 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
-    //NSLog(@"outlineViewSelectionDidChange!!");
+    NSLog(@"outlineViewSelectionDidChange!!");
 }
 
 @end
