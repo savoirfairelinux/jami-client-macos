@@ -16,25 +16,23 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef RING_VIDEOPREFSVC_H
-#define RING_VIDEOPREFSVC_H
+#ifndef NSFILEMANAGER+DIRUTILS_H
+#define NSFILEMANAGER+DIRUTILS_H
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-@interface VideoPrefsVC : NSViewController <NSMenuDelegate> {
+//
+// DirectoryLocations is a set of global methods for finding the fixed location
+// directoriess.
+//
+@interface NSFileManager (DirUtils)
 
-
-    NSPopUpButton *videoDevicesButton;
-    NSPopUpButton *channelsButton;
-    NSPopUpButton *sizesButton;
-    NSPopUpButton *ratesButton;
-}
-
-@property (assign) IBOutlet NSPopUpButton *videoDevicesButton;
-@property (assign) IBOutlet NSPopUpButton *channelsButton;
-@property (assign) IBOutlet NSPopUpButton *sizesButton;
-@property (assign) IBOutlet NSPopUpButton *ratesButton;
+- (NSString *)findOrCreateDirectory:(NSSearchPathDirectory)searchPathDirectory
+	inDomain:(NSSearchPathDomainMask)domainMask
+	appendPathComponent:(NSString *)appendComponent
+	error:(NSError **)errorOut;
+- (NSString *)applicationSupportDirectory;
 
 @end
 
-#endif // RING_VIDEOPREFSVC_H
+#endif // NSFILEMANAGER+DIRUTILS_H

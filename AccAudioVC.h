@@ -16,25 +16,24 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef RING_VIDEOPREFSVC_H
-#define RING_VIDEOPREFSVC_H
+#ifndef ACCAUDIOVC_H
+#define ACCAUDIOVC_H
 
 #import <Cocoa/Cocoa.h>
 
-@interface VideoPrefsVC : NSViewController <NSMenuDelegate> {
+#include <account.h>
 
+#import "QNSTreeController.h"
 
-    NSPopUpButton *videoDevicesButton;
-    NSPopUpButton *channelsButton;
-    NSPopUpButton *sizesButton;
-    NSPopUpButton *ratesButton;
+@interface AccAudioVC : NSViewController <NSOutlineViewDelegate, NSPathControlDelegate> {
+    NSOutlineView *codecsView;
 }
 
-@property (assign) IBOutlet NSPopUpButton *videoDevicesButton;
-@property (assign) IBOutlet NSPopUpButton *channelsButton;
-@property (assign) IBOutlet NSPopUpButton *sizesButton;
-@property (assign) IBOutlet NSPopUpButton *ratesButton;
+@property QNSTreeController *treeController;
+@property (assign) IBOutlet NSOutlineView *codecsView;
+
+- (void)loadAccount:(Account *)account;
 
 @end
 
-#endif // RING_VIDEOPREFSVC_H
+#endif // ACCAUDIOVC_H

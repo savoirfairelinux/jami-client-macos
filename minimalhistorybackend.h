@@ -66,10 +66,10 @@ class MinimalHistoryEditor : public CollectionEditor<Call>
 public:
    MinimalHistoryEditor(CollectionMediator<Call>* m) : CollectionEditor<Call>(m) {}
    virtual bool save       ( const Call* item ) override;
-   virtual bool append     ( const Call* item ) override;
-   virtual bool remove     ( Call*       item ) override;
+   virtual bool remove     ( const Call* item ) override;
    virtual bool edit       ( Call*       item ) override;
-   virtual bool addNew     ( Call*       item ) override;
+   virtual bool addNew     ( const Call* item ) override;
+   virtual bool addExisting( const Call* item) override;
 
 private:
    virtual QVector<Call*> items() const override;
@@ -79,8 +79,6 @@ private:
 template<typename T>
 MinimalHistoryBackend::MinimalHistoryBackend(CollectionMediator<T>* mediator) :
 CollectionInterface(new MinimalHistoryEditor(mediator)),m_pMediator(mediator)
-{
-//    setObjectName("MinimalHistoryBackend");
-}
+{}
 
 #endif

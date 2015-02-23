@@ -16,25 +16,80 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef RING_VIDEOPREFSVC_H
-#define RING_VIDEOPREFSVC_H
+#import "NSFileManager+DirUtils.h"
 
-#import <Cocoa/Cocoa.h>
+NSString * const DirectoryLocationDomain = @"DirectoryLocationDomain";
 
-@interface VideoPrefsVC : NSViewController <NSMenuDelegate> {
+@implementation NSFileManager (DirectoryLocations)
 
+- (NSString *)findOrCreateDirectory:(NSSearchPathDirectory)searchPathDirectory
+	inDomain:(NSSearchPathDomainMask)domainMask
+	appendPathComponent:(NSString *)appendComponent
+{
+	//
+	// Search for the path
+	//
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(
+		searchPathDirectory,
+		domainMask,
+		YES);
 
-    NSPopUpButton *videoDevicesButton;
-    NSPopUpButton *channelsButton;
-    NSPopUpButton *sizesButton;
-    NSPopUpButton *ratesButton;
+    if ([paths count] == 0)
+	{
+		return nil;
+	}
+	
+	//
+	// Normally only need the first path returned
+	//
+	NSString *resolvedPath = [paths objectAtIndex:0];
+
+	//
+	// Append the extra path component
+	//
+	if (appendComponent)
+	{
+		resolvedPath = [resolvedPath
+			stringByAppendingPathComponent:appendComponent];
+	}
+	
+	//
+	// Create the path if it doesn't exist
+	//
+	NSError *error = nil;
+	BOOL success = [self
+		createDirectoryAtPath:resolvedPath
+		withIntermediateDirectories:YES
+		attributes:nil
+		error:&error];
+	if (!success) 
+	{
+		return nil;
+	}
+
+	return resolvedPath;
 }
 
-@property (assign) IBOutlet NSPopUpButton *videoDevicesButton;
-@property (assign) IBOutlet NSPopUpButton *channelsButton;
-@property (assign) IBOutlet NSPopUpButton *sizesButton;
-@property (assign) IBOutlet NSPopUpButton *ratesButton;
+//
+// applicationSupportDirectory
+//
+// Returns the path to the applicationSupportDirectory (creating it if it doesn't
+// exist).
+//
+- (NSString *)applicationSupportDirectory
+{
+	NSString *executableName =
+		[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
+	NSString *result =
+		[self
+			findOrCreateDirectory:NSApplicationSupportDirectory
+			inDomain:NSUserDomainMask
+			appendPathComponent:executableName];
+	if (!result)
+	{
+		NSLog(@"Error accessing Application Support");
+	}
+	return result;
+}
 
 @end
-
-#endif // RING_VIDEOPREFSVC_H

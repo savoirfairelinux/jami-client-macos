@@ -16,25 +16,20 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef RING_VIDEOPREFSVC_H
-#define RING_VIDEOPREFSVC_H
+#ifndef ACCRINGVC_H
+#define ACCRINGVC_H
 
 #import <Cocoa/Cocoa.h>
 
-@interface VideoPrefsVC : NSViewController <NSMenuDelegate> {
+#include <account.h>
 
-
-    NSPopUpButton *videoDevicesButton;
-    NSPopUpButton *channelsButton;
-    NSPopUpButton *sizesButton;
-    NSPopUpButton *ratesButton;
+@interface AccRingVC : NSViewController <NSTextFieldDelegate> {
+    
+    NSTextField *boostrapField;
 }
 
-@property (assign) IBOutlet NSPopUpButton *videoDevicesButton;
-@property (assign) IBOutlet NSPopUpButton *channelsButton;
-@property (assign) IBOutlet NSPopUpButton *sizesButton;
-@property (assign) IBOutlet NSPopUpButton *ratesButton;
+- (void)loadAccount:(Account *)account;
 
 @end
 
-#endif // RING_VIDEOPREFSVC_H
+#endif // ACCRINGVC_H

@@ -145,18 +145,7 @@
 {
     if ([[tableColumn identifier] isEqualToString:COLUMNID_HISTORY])
     {
-        NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
-        NSUInteger myArray[[idx length]];
-        [idx getIndexes:myArray];
-        //NSLog(@"array:%@", idx);
-
-        QModelIndex qIdx;
-        if(idx.length == 2)
-            qIdx = HistoryModel::instance()->index(myArray[1], 0, HistoryModel::instance()->index(myArray[0], 0));
-        else
-            qIdx = HistoryModel::instance()->index(myArray[0], 0);
-
-
+        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
         if(qIdx.isValid())
             cell.title = HistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     }
