@@ -44,21 +44,6 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    [self connectSlots];
-}
-
-
-- (void) connectSlots
-{
-    CallModel* callModel_ = CallModel::instance();
-    QObject::connect(callModel_, &CallModel::callStateChanged, [](Call*, Call::State) {
-        NSLog(@"callStateChanged");
-    });
-    
-    QObject::connect(callModel_, &CallModel::incomingCall, [] (Call*) {
-        NSLog(@"incomingCall");
-    });
-    
 }
 
 - (IBAction)openPreferences:(id)sender
