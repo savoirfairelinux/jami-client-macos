@@ -35,6 +35,8 @@
 
 @interface ConversationsViewController : NSViewController <NSOutlineViewDelegate> {
     NSOutlineView *conversationsView;
+    NSView *currentCallView;
+    NSTextField *callBar;
 }
 
 @property QNSTreeController *treeController;
