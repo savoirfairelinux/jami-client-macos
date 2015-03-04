@@ -30,21 +30,31 @@
 #import "HistoryViewController.h"
 
 #import <historymodel.h>
+#import <callmodel.h>
+#import <call.h>
+#import <contactmethod.h>
 
-#define COLUMNID_HISTORY			@"HistoryColumn"	// the single column name in our outline view
+#import "MinimalHistoryBackend.h"
+#import "QNSTreeController.h"
+
+#define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
+#define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
+#define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
 
 
+@interface HistoryViewController()
+
+@property NSTreeController *treeController;
+@property (assign) IBOutlet NSOutlineView *historyView;
+
+@end
 
 @implementation HistoryViewController
-
 @synthesize treeController;
-
-
+@synthesize historyView;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-
-
     if (self = [super initWithCoder:aDecoder]) {
         NSLog(@"INIT HVC");
 
@@ -52,27 +62,39 @@
     return self;
 }
 
-
-
 - (void)awakeFromNib
 {
-    NSLog(@"awakeFromNib");
-
     treeController = [[QNSTreeController alloc] initWithQModel:HistoryModel::instance()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
-    [self.historyView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [self.historyView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [self.historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [historyView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [historyView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [historyView setTarget:self];
+    [historyView setDoubleAction:@selector(placeCall:)];
 
-    NSInteger idx = [historyView columnWithIdentifier:COLUMNID_HISTORY];
+    NSInteger idx = [historyView columnWithIdentifier:COLUMNID_DAY];
     [[[[self.historyView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Name"];
 
-    //HistoryModel::instance()->addBackend(new MinimalHistoryBackend(nil),
-    //                                     LoadOptions::FORCE_ENABLED);
+    HistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
 
+}
+
+- (void)placeCall:(id)sender
+{
+    if([[treeController selectedNodes] count] > 0) {
+        Call* c = CallModel::instance()->dialingCall();
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        QVariant var = HistoryModel::instance()->data(qIdx, (int)Call::Role::ContactMethod);
+        ContactMethod* m = qvariant_cast<ContactMethod*>(var);
+        if(m){
+            Call* c = CallModel::instance()->dialingCall();
+            c->setDialNumber(m);
+            c << Call::Action::ACCEPT;
+        }
+    }
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -91,24 +113,8 @@
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     NSCell *returnCell = [tableColumn dataCell];
-
-
     if(item == nil)
         return returnCell;
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_HISTORY])
-    {
-
-        NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
-        NSUInteger myArray[[idx length]];
-        [idx getIndexes:myArray];
-
-        //NSLog(@"dataCellForTableColumn, indexPath: %d", myArray[0]);
-
-        QModelIndex qIdx = HistoryModel::instance()->index(myArray[0], 0);
-
-        QVariant test = HistoryModel::instance()->data(qIdx, Qt::DisplayRole);
-    }
-
     return returnCell;
 }
 
@@ -143,11 +149,19 @@
 // -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_HISTORY])
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    if(!qIdx.isValid())
+        return;
+
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
     {
-        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-        if(qIdx.isValid())
-            cell.title = HistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        cell.title = HistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
+    {
+        cell.title = HistoryModel::instance()->data(qIdx, (int)Call::Role::Number).toString().toNSString();
+    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
+    {
+        cell.title = HistoryModel::instance()->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
     }
 }
 
