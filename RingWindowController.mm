@@ -37,28 +37,20 @@
 
 @interface RingWindowController ()
 
+@property NSSearchField* callField;
 
 @end
 
 @implementation RingWindowController
+@synthesize callField;
+static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
+static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
+static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
+
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    [self connectSlots];
-}
-
-
-- (void) connectSlots
-{
-    CallModel* callModel_ = CallModel::instance();
-    QObject::connect(callModel_, &CallModel::callStateChanged, [](Call*, Call::State) {
-        NSLog(@"callStateChanged");
-    });
-    
-    QObject::connect(callModel_, &CallModel::incomingCall, [] (Call*) {
-        NSLog(@"incomingCall");
-    });
-    
+    [self displayMainToolBar];
 }
 
 - (IBAction)openPreferences:(id)sender
@@ -122,9 +114,17 @@
     if(self.myCurrentViewController != nil)
     {
         [self.preferencesViewController close];
-        [self.window setToolbar:nil];
+        [self displayMainToolBar];
         self.preferencesViewController = nil;
     }
+}
+
+-(void) displayMainToolBar
+{
+    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"MainToolbar"];
+    [tb setDisplayMode:NSToolbarDisplayModeIconAndLabel];
+    [tb setDelegate: self];
+    [self.window setToolbar: tb];
 }
 
 // FIXME: This is sick, NSWindowController is catching my selectors
@@ -147,6 +147,84 @@
 - (void)displayAccounts:(NSToolbarItem *)sender {
     [self.preferencesViewController displayAccounts:sender];
 }
+
+
+#pragma NSToolbar Delegate
+
+-(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+    NSToolbarItem* item = nil;
+
+    if ([itemIdentifier isEqualToString: kSearchViewIdentifier]) {
+        item = [[NSToolbarItem alloc] initWithItemIdentifier: kSearchViewIdentifier];
+        callField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0,0,400,21)];
+        [[callField cell] setSearchButtonCell:nil];
+        [callField setToolTip:@"Call"];
+        //[callField setAlignment:NSCenterTextAlignment];
+
+        [item setView:callField];
+    }
+
+    if ([itemIdentifier isEqualToString: kCallButtonIdentifer]) {
+        item = [[NSToolbarItem alloc] initWithItemIdentifier: kCallButtonIdentifer];
+
+        NSButton *callButton = [[NSButton alloc] initWithFrame:NSMakeRect(0,0,80,30)];
+
+        [callButton setButtonType:NSMomentaryLightButton]; //Set what type button You want
+        [callButton setBezelStyle:NSRoundedBezelStyle]; //Set what style You want]
+        [callButton setBordered:YES];
+        [callButton setTitle:@"Call"];
+        [item setView:callButton];
+        [item setAction:@selector(placeCall:)];
+    }
+
+    if ([itemIdentifier isEqualToString: kPreferencesIdentifier]) {
+        item = [[NSToolbarItem alloc] initWithItemIdentifier: kPreferencesIdentifier];
+        [item setImage: [NSImage imageNamed: @"NSAdvanced"]];
+        [item setLabel: @"Settings"];
+        [item setAction:@selector(openPreferences:)];
+    }
+
+    return item;
+
+}
+
+
+- (IBAction)placeCall:(id)sender
+{
+    Call* c = CallModel::instance()->dialingCall();
+    c->setDialNumber(QString::fromNSString([callField stringValue]));
+    c << Call::Action::ACCEPT;
+}
+
+-(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:
+            NSToolbarSpaceItemIdentifier,
+            NSToolbarFlexibleSpaceItemIdentifier,
+            NSToolbarSpaceItemIdentifier,
+            NSToolbarSpaceItemIdentifier,
+            kSearchViewIdentifier,
+            kCallButtonIdentifer,
+            NSToolbarFlexibleSpaceItemIdentifier,
+            kPreferencesIdentifier,
+            nil];
+}
+
+-(NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
+{
+    return [NSArray arrayWithObjects:
+            kSearchViewIdentifier,
+            kCallButtonIdentifer,
+            kPreferencesIdentifier,
+            nil];
+}
+
+-(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+    return nil;
+}
+
 
 
 @end
