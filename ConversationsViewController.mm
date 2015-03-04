@@ -30,29 +30,39 @@
 #import "ConversationsViewController.h"
 
 #import <callmodel.h>
+#import <QtCore/qitemselectionmodel.h>
+
+#import "CurrentCallVC.h"
 
 #define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
 
 @interface ConversationsViewController ()
+
+@property CurrentCallVC* currentVC;
+@property (assign) IBOutlet NSView *currentCallView;
+@property (assign) IBOutlet NSTextField *callBar;
+@property QNSTreeController *treeController;
+@property (assign) IBOutlet NSOutlineView *conversationsView;
 
 @end
 
 @implementation ConversationsViewController
 @synthesize conversationsView;
 @synthesize treeController;
+@synthesize currentVC;
+@synthesize currentCallView;
+@synthesize callBar;
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT Conversations VC");
-    }
-    return self;
+- (IBAction)pushIN:(id)sender {
+    [self.currentVC animateIn];
 }
-
+- (IBAction)pushOUT:(id)sender {
+    [self.currentVC animateOut];
+}
 
 - (void)awakeFromNib
 {
-    NSLog(@"awakeFromNib");
+    NSLog(@"INIT Conversations VC");
 
     treeController = [[QNSTreeController alloc] initWithQModel:CallModel::instance()];
 
@@ -65,6 +75,31 @@
 
     NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
     [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
+
+    QObject::connect(CallModel::instance(),
+                     &QAbstractItemModel::dataChanged,
+                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
+                         NSLog(@"data changed for call tree %d, %d", topLeft.row(), bottomRight.row());
+
+                         [conversationsView reloadDataForRowIndexes:
+                          [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
+                        columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, conversationsView.tableColumns.count)]];
+                         
+                     });
+
+    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    [currentCallView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
+    [currentCallView addSubview:[self.currentVC view]];
+    [currentVC initFrame];
+}
+
+- (IBAction)placeCall:(id)sender {
+
+    Call* c = CallModel::instance()->dialingCall();
+    c->setDialNumber(QString::fromNSString([callBar stringValue]));
+    c << Call::Action::ACCEPT;
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -83,24 +118,8 @@
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     NSCell *returnCell = [tableColumn dataCell];
-
-
     if(item == nil)
         return returnCell;
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
-    {
-
-        NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
-        NSUInteger myArray[[idx length]];
-        [idx getIndexes:myArray];
-
-        NSLog(@"dataCellForTableColumn, indexPath: %lu", (unsigned long)myArray[0]);
-
-        QModelIndex qIdx = CallModel::instance()->index(myArray[0], 0);
-
-        QVariant test = CallModel::instance()->data(qIdx, Qt::DisplayRole);
-    }
-
     return returnCell;
 }
 
@@ -149,7 +168,13 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
-    NSLog(@"outlineViewSelectionDidChange!!");
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        //Update details view by changing selection
+        CallModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    } else {
+        CallModel::instance()->selectionModel()->clearCurrentIndex();
+    }
 }
 
 
