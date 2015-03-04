@@ -31,6 +31,8 @@
 
 #import <historymodel.h>
 
+#import "MinimalHistoryBackend.h"
+
 #define COLUMNID_HISTORY			@"HistoryColumn"	// the single column name in our outline view
 
 
@@ -70,8 +72,7 @@
     NSInteger idx = [historyView columnWithIdentifier:COLUMNID_HISTORY];
     [[[[self.historyView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Name"];
 
-    //HistoryModel::instance()->addBackend(new MinimalHistoryBackend(nil),
-    //                                     LoadOptions::FORCE_ENABLED);
+    HistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
 
 }
 
