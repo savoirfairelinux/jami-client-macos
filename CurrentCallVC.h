@@ -16,21 +16,22 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#ifndef CONVERSATIONSVC_H
-#define CONVERSATIONSVC_H
+#ifndef CURRENTCALLVC_H
+#define CURRENTCALLVC_H
 
 #import <Cocoa/Cocoa.h>
-#import "QNSTreeController.h"
 
-@interface ConversationsViewController : NSViewController <NSOutlineViewDelegate> {
-    NSOutlineView *conversationsView;
-    NSView *currentCallView;
-    NSTextField *callBar;
+class Call;
+
+@interface CurrentCallVC : NSViewController {
+
 }
 
-@property QNSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *conversationsView;
+- (void) initFrame;
+- (void) displayCall:(Call*) call;
+- (void) hideWithAnimation:(BOOL) shouldAnimate;
+
 
 @end
 
-#endif // CONVERSATIONSVC_H
+#endif // CURRENTCALLVC_H

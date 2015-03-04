@@ -60,10 +60,7 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
     animation.toValue = [NSValue valueWithPoint:self.view.frame.origin];
     animation.duration = 0.3f;
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
-
-
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
-    self.view.layer.position = frame.origin;
 }
 
 - (void) close
