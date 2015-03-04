@@ -27,16 +27,23 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef CONVERSATIONSVC_H
-#define CONVERSATIONSVC_H
+#ifndef CURRENTCALLVC_H
+#define CURRENTCALLVC_H
 
 #import <Cocoa/Cocoa.h>
-#import "QNSTreeController.h"
 
-@interface ConversationsViewController : NSViewController <NSOutlineViewDelegate> {
+class Call;
 
+@interface CurrentCallVC : NSViewController {
+
+    NSTextField *timeSpentLabel;
+    NSView *controlsPanel;
+    NSView *videoView;
+    NSView *previewView;
 }
+
+- (void) initFrame;
 
 @end
 
-#endif // CONVERSATIONSVC_H
+#endif // CURRENTCALLVC_H
