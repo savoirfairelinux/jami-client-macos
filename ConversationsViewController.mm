@@ -19,25 +19,48 @@
 #import "ConversationsViewController.h"
 
 #import <callmodel.h>
+#import <QtCore/qitemselectionmodel.h>
+
+#import "CurrentCallVC.h"
 
 #define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
 
 @interface ConversationsViewController ()
+
+@property CurrentCallVC* currentVC;
+@property (assign) IBOutlet NSView *currentCallView;
+@property (assign) IBOutlet NSTextField *callBar;
 
 @end
 
 @implementation ConversationsViewController
 @synthesize conversationsView;
 @synthesize treeController;
+@synthesize currentVC;
+@synthesize currentCallView;
+@synthesize callBar;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
         NSLog(@"INIT Conversations VC");
     }
+
+    [self connectSlots];
     return self;
 }
 
+- (void) connectSlots
+{
+    CallModel* callModel_ = CallModel::instance();
+    QObject::connect(callModel_, &CallModel::callStateChanged, [](Call*, Call::State) {
+        NSLog(@"callStateChanged");
+    });
+
+    QObject::connect(callModel_, &CallModel::incomingCall, [self] (Call* c) {
+        [currentVC displayCall:c];
+    });
+}
 
 - (void)awakeFromNib
 {
@@ -54,6 +77,19 @@
 
     NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
     [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
+
+
+    // NOW THE CURRENT CALL VIEW
+    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    [currentCallView addSubview:[self.currentVC view]];
+    [self.currentVC initFrame];
+}
+
+- (IBAction)placeCall:(id)sender {
+
+    Call* c = CallModel::instance()->dialingCall();
+    c->setDialNumber(QString::fromNSString([callBar stringValue]));
+    c << Call::Action::ACCEPT;
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -139,6 +175,17 @@
 {
     // ask the tree controller for the current selection
     NSLog(@"outlineViewSelectionDidChange!!");
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        //Update details view
+        Call* toDisplay = CallModel::instance()->getCall(qIdx);
+
+        CallModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+        [currentVC displayCall:toDisplay];
+    } else {
+        [currentVC hideWithAnimation:YES];
+        CallModel::instance()->selectionModel()->clearCurrentIndex();
+    }
 }
 
 

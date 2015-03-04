@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
+            <connections>
+                <outlet property="buttonsPanel" destination="whG-1i-6pg" id="oaa-FG-Eto"/>
+                <outlet property="coucou" destination="bg3-hB-nE8" id="BU2-jT-bfz"/>
+                <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
+                <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
+                <outlet property="personLabel" destination="bg3-hB-nE8" id="t6l-1B-JxI"/>
+                <outlet property="pickUpButton" destination="qgD-3D-nD5" id="mkD-IT-22E"/>
+                <outlet property="recordOnOffButton" destination="oRa-pS-HN2" id="N7C-wn-0le"/>
+                <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="VKn-lN-ijP"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="574" height="462"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kCB-7W-VSv">
+                    <rect key="frame" x="212" y="266" width="150" height="40"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="glW-s4-kXA"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bg3-hB-nE8">
+                    <rect key="frame" x="147" y="241" width="281" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Person name" id="osk-LS-0Qg">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whG-1i-6pg">
+                    <rect key="frame" x="20" y="42" width="534" height="96"/>
+                    <subviews>
+                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2">
+                            <rect key="frame" x="18" y="9" width="90" height="77"/>
+                            <buttonCell key="cell" type="bevel" title="Record" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="rhz-4Z-avV">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleRecording:" target="-2" id="gAc-ZJ-9PN"/>
+                            </connections>
+                        </button>
+                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi">
+                            <rect key="frame" x="426" y="9" width="90" height="77"/>
+                            <buttonCell key="cell" type="bevel" title="Hold" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="7w5-d1-mNe">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
+                            </connections>
+                        </button>
+                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5">
+                            <rect key="frame" x="143" y="9" width="90" height="77"/>
+                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_call" imagePosition="overlaps" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="CoO-HS-nEB">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="accept:" target="-2" id="maS-G8-eY7"/>
+                            </connections>
+                        </button>
+                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL">
+                            <rect key="frame" x="282" y="9" width="90" height="77"/>
+                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_cancel" imagePosition="overlaps" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="kR5-bV-2KY">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-FB-vig">
+                    <rect key="frame" x="268" y="190" width="36" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="State" id="ugy-uK-901">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="265" y="299"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="NSUser" width="32" height="32"/>
+        <image name="ic_action_call" width="48" height="48"/>
+        <image name="ic_action_cancel" width="48" height="48"/>
+    </resources>
+</document>

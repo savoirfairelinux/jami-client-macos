@@ -184,12 +184,18 @@
                                  if(topLeft.isValid())
                                      [self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
                                  else
-                                     NSLog(@"HAHAHA");
+                                     NSLog(@"Not supported");
                              } else {
-                                 Node* n = [[Node alloc] init];
-                                 [self setSelectsInsertedObjects:YES];
-                                 [self removeObjectAtArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
-                                 [self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
+
+                                 NSLog(@"NEED TO FIND A WAY TO UPDATE");
+                                 NSMutableIndexSet *mutableIndexSet = [[NSMutableIndexSet alloc] init];
+                                 [mutableIndexSet addIndex:row];
+                                 [self willChange:NSKeyValueChangeReplacement valuesAtIndexes:mutableIndexSet forKey:self.childrenKeyPath];
+                                 [self didChange:NSKeyValueChangeReplacement valuesAtIndexes:mutableIndexSet forKey:self.childrenKeyPath];
+
+                                 //[self setSelectsInsertedObjects:YES];
+                                 //[self removeObjectAtArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
+                                 //[self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
                              }
                          }
                      }
