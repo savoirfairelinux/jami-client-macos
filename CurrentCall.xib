@@ -7,13 +7,13 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
             <connections>
+                <outlet property="buttonPanel" destination="whG-1i-6pg" id="hj3-cL-nF4"/>
                 <outlet property="buttonsPanel" destination="whG-1i-6pg" id="oaa-FG-Eto"/>
                 <outlet property="coucou" destination="bg3-hB-nE8" id="BU2-jT-bfz"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
-                <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
+                <outlet property="incallControls" destination="p91-eV-vhb" id="QEM-A6-ZUm"/>
                 <outlet property="personLabel" destination="bg3-hB-nE8" id="t6l-1B-JxI"/>
                 <outlet property="pickUpButton" destination="qgD-3D-nD5" id="mkD-IT-22E"/>
-                <outlet property="recordOnOffButton" destination="oRa-pS-HN2" id="N7C-wn-0le"/>
                 <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="VKn-lN-ijP"/>
             </connections>
@@ -25,11 +25,11 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kCB-7W-VSv">
-                    <rect key="frame" x="212" y="266" width="150" height="40"/>
+                    <rect key="frame" x="210" y="343" width="150" height="40"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="glW-s4-kXA"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bg3-hB-nE8">
-                    <rect key="frame" x="147" y="241" width="281" height="17"/>
+                    <rect key="frame" x="145" y="318" width="281" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Person name" id="osk-LS-0Qg">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -37,30 +37,10 @@
                     </textFieldCell>
                 </textField>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whG-1i-6pg">
-                    <rect key="frame" x="20" y="42" width="534" height="96"/>
+                    <rect key="frame" x="155" y="159" width="261" height="96"/>
                     <subviews>
-                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2">
-                            <rect key="frame" x="18" y="9" width="90" height="77"/>
-                            <buttonCell key="cell" type="bevel" title="Record" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="rhz-4Z-avV">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="toggleRecording:" target="-2" id="gAc-ZJ-9PN"/>
-                            </connections>
-                        </button>
-                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi">
-                            <rect key="frame" x="426" y="9" width="90" height="77"/>
-                            <buttonCell key="cell" type="bevel" title="Hold" bezelStyle="regularSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="7w5-d1-mNe">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
-                            </connections>
-                        </button>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5">
-                            <rect key="frame" x="143" y="9" width="90" height="77"/>
+                            <rect key="frame" x="14" y="9" width="90" height="77"/>
                             <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_call" imagePosition="overlaps" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="CoO-HS-nEB">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -70,7 +50,7 @@
                             </connections>
                         </button>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL">
-                            <rect key="frame" x="282" y="9" width="90" height="77"/>
+                            <rect key="frame" x="153" y="9" width="90" height="77"/>
                             <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_cancel" imagePosition="overlaps" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="kR5-bV-2KY">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -82,15 +62,30 @@
                     </subviews>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-FB-vig">
-                    <rect key="frame" x="268" y="190" width="36" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="State" id="ugy-uK-901">
+                    <rect key="frame" x="213" y="271" width="149" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="State" id="ugy-uK-901">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p91-eV-vhb">
+                    <rect key="frame" x="123" y="114" width="329" height="20"/>
+                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectAny" id="fZs-Qj-6eA">
+                        <font key="font" metaFont="cellTitle"/>
+                        <segments>
+                            <segment label="Hang up" width="80"/>
+                            <segment label="Record" width="80" tag="1"/>
+                            <segment label="Hold" width="80"/>
+                            <segment label="Mute" width="80"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <action selector="inCallsButtonClicked:" target="-2" id="tzC-dY-8uh"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
-            <point key="canvasLocation" x="265" y="299"/>
+            <point key="canvasLocation" x="153" y="299"/>
         </customView>
     </objects>
     <resources>
