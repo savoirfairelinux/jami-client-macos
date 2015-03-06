@@ -31,8 +31,14 @@
 
 #import <callmodel.h>
 #import <QtCore/qitemselectionmodel.h>
+#import <video/previewmanager.h>
+#include <video/renderer.h>
+
 
 #import "CurrentCallVC.h"
+
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
 
@@ -41,7 +47,6 @@
 @property CurrentCallVC* currentVC;
 @property (assign) IBOutlet NSView *currentCallView;
 @property (assign) IBOutlet NSTextField *callBar;
-
 @end
 
 @implementation ConversationsViewController
@@ -63,12 +68,7 @@
 
 - (void) connectSlots
 {
-    CallModel* callModel_ = CallModel::instance();
-    QObject::connect(callModel_, &CallModel::callStateChanged, [](Call*, Call::State) {
-        NSLog(@"callStateChanged");
-    });
-
-    QObject::connect(callModel_, &CallModel::incomingCall, [self] (Call* c) {
+    QObject::connect(CallModel::instance(), &CallModel::incomingCall, [self] (Call* c) {
         [currentVC displayCall:c];
     });
 }
@@ -89,11 +89,15 @@
     NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
     [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
 
+    CALayer *viewLayer = [CALayer layer];
+    [currentCallView setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
 
     // NOW THE CURRENT CALL VIEW
     currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     [currentCallView addSubview:[self.currentVC view]];
+    currentCallView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     [self.currentVC initFrame];
+
 }
 
 - (IBAction)placeCall:(id)sender {
@@ -101,6 +105,65 @@
     Call* c = CallModel::instance()->dialingCall();
     c->setDialNumber(QString::fromNSString([callBar stringValue]));
     c << Call::Action::ACCEPT;
+}
+
+- (IBAction)startPreview:(id)sender {
+    Video::PreviewManager::instance()->startPreview();
+    Video::Renderer* rend = Video::PreviewManager::instance()->previewRenderer();
+    QObject::connect(rend,
+                     &Video::Renderer::frameUpdated,
+                     [=]() {
+
+                         const QByteArray& data = Video::PreviewManager::instance()->previewRenderer()->currentFrame();
+                         QSize res = Video::PreviewManager::instance()->previewRenderer()->size();
+
+                         NSLog(@"We have a frame! w: %d h: %d", res.width(), res.height());
+
+                         auto buf = reinterpret_cast<const unsigned char*>(data.data());
+                         NSLog(@"We have a frame! 0: %u 1: %u 2: %u 3: %u", buf[0], buf[1], buf[2], buf[3]);
+
+                         int bytes = res.height() * 4 * res.width();
+                         uint8_t *baseAddress = (uint8_t*) malloc(bytes);
+                         memcpy(baseAddress,buf,bytes);
+
+                         /*Create a CGImageRef from the CVImageBufferRef*/
+                         const CGFloat whitePoint[] = {0.3127, 0.3290, 0.3583};
+                         const CGFloat blackPoint[] = {0, 0, 0};
+                         const CGFloat gamma[] = {1, 1, 1};
+
+                         // 3*3 matrix, columns first (x,x,x,y,y,y,z,z,z)
+                         const CGFloat matrix[] = {  1.1301350511386112, 0.060066677968017186, 5.5941685031361255,
+                             1.7517093292648473, 4.590608577725039   , 0.05650675255693056,
+                             2.768830875289597 , 1.0                 , 0.0 };
+
+
+                         CGColorSpaceRef colorSpace = CGColorSpaceCreateCalibratedRGB(whitePoint, blackPoint, gamma, matrix);
+
+                         CGContextRef newContext = CGBitmapContextCreate(baseAddress,
+                                                                         res.width(),
+                                                                         res.height(),
+                                                                         8,
+                                                                         4*res.width(),
+                                                                         colorSpace,
+                                                                         kCGImageAlphaPremultipliedLast);
+
+
+                         CGImageRef newImage = CGBitmapContextCreateImage(newContext);
+
+                         /*We release some components*/
+                         CGContextRelease(newContext);
+                         CGColorSpaceRelease(colorSpace);
+
+                         //NSLog(@"content center x %f, y %f", videoLayer.contentsRect.origin.x, videoLayer.contentsRect.origin.y);
+                         //NSLog(@"content size: w %f, h %f", videoLayer.contentsRect.size.width, videoLayer.contentsRect.size.height);
+                         
+                         //videoLayer.contents = (__bridge id)newImage;
+                         free(baseAddress);
+                     });
+}
+
+- (IBAction)stopPreview:(id)sender {
+    Video::PreviewManager::instance()->stopPreview();
 }
 
 #pragma mark - NSOutlineViewDelegate methods
