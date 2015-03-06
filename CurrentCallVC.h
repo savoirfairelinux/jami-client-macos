@@ -25,6 +25,8 @@ class Call;
 
 @interface CurrentCallVC : NSViewController {
 
+    NSView *buttonPanel;
+    NSSegmentedControl *incallControls;
 }
 
 - (void) initFrame;
