@@ -19,9 +19,14 @@
 #import "ConversationsViewController.h"
 
 #import <callmodel.h>
+#import <video/manager.h>
 #import <QtCore/qitemselectionmodel.h>
+#include <video/renderer.h>
 
 #import "CurrentCallVC.h"
+
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 #define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
 
@@ -30,6 +35,7 @@
 @property CurrentCallVC* currentVC;
 @property (assign) IBOutlet NSView *currentCallView;
 @property (assign) IBOutlet NSTextField *callBar;
+@property CALayer *customPreviewLayer;
 
 @end
 
@@ -39,6 +45,7 @@
 @synthesize currentVC;
 @synthesize currentCallView;
 @synthesize callBar;
+@synthesize customPreviewLayer;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -52,12 +59,7 @@
 
 - (void) connectSlots
 {
-    CallModel* callModel_ = CallModel::instance();
-    QObject::connect(callModel_, &CallModel::callStateChanged, [](Call*, Call::State) {
-        NSLog(@"callStateChanged");
-    });
-
-    QObject::connect(callModel_, &CallModel::incomingCall, [self] (Call* c) {
+    QObject::connect(CallModel::instance(), &CallModel::incomingCall, [self] (Call* c) {
         [currentVC displayCall:c];
     });
 }
@@ -78,11 +80,24 @@
     NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
     [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
 
+    CALayer *viewLayer = [CALayer layer];
+    [currentCallView setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
 
     // NOW THE CURRENT CALL VIEW
     currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     [currentCallView addSubview:[self.currentVC view]];
+    currentCallView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     [self.currentVC initFrame];
+
+
+    // NOW THE VIDEO VIEW
+    customPreviewLayer = [CALayer layer];
+    customPreviewLayer.bounds = CGRectMake(0, 0, currentCallView.frame.size.height, currentCallView.frame.size.width);
+    customPreviewLayer.position = CGPointMake(currentCallView.frame.size.width/2., currentCallView.frame.size.height/2.);
+    //customPreviewLayer.affineTransform = CGAffineTransformMakeRotation(M_PI/2);
+    customPreviewLayer.backgroundColor = [NSColor redColor].CGColor;
+    [currentCallView.layer addSublayer:customPreviewLayer];
+
 }
 
 - (IBAction)placeCall:(id)sender {
@@ -90,6 +105,53 @@
     Call* c = CallModel::instance()->dialingCall();
     c->setDialNumber(QString::fromNSString([callBar stringValue]));
     c << Call::Action::ACCEPT;
+}
+- (IBAction)startPreview:(id)sender {
+    Video::Manager::instance()->startPreview();
+    Video::Renderer* rend = Video::Manager::instance()->previewRenderer();
+    QObject::connect(
+                     rend,
+                     &Video::Renderer::frameUpdated,
+                    [=]() {
+
+                        NSLog(@"We have a frame!");
+                        const QByteArray& data = Video::Manager::instance()->previewRenderer()->currentFrame();
+                        QSize res = Video::Manager::instance()->previewRenderer()->size();
+                        CVPixelBufferRef imageBuffer = NULL;
+                        CVPixelBufferCreateWithBytes(NULL,
+                                                     res.width(),
+                                                     res.height(),
+                                                     k32BGRAPixelFormat,
+                                                     (void*)data.constData(),
+                                                     4 * res.width(),
+                                                     NULL,
+                                                     0,
+                                                     NULL,
+                                                     &imageBuffer);
+
+
+                        CMVideoFormatDescriptionRef format = NULL;
+                        CMVideoFormatDescriptionCreateForImageBuffer(NULL, imageBuffer, &format);
+
+
+                        CMSampleTimingInfo timingInfo;
+                        timingInfo.presentationTimeStamp = CMTimeMake(1, 30);
+                        CMSampleBufferRef bufOut = NULL;
+                        CGContextRef context = CGBitmapContextCreate(NULL, res.width(), res.height(), 8, 0, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
+
+                        OSStatus result;
+                        result = CMSampleBufferCreateForImageBuffer (NULL, imageBuffer, YES, NULL, 0, format, &timingInfo, &bufOut);
+
+                        if([NSThread isMainThread])
+                            customPreviewLayer.contents = (__bridge id)bufOut;
+                        else
+                            dispatch_sync(dispatch_get_main_queue(), ^{
+                                customPreviewLayer.contents = (__bridge id)bufOut;
+                            });
+                });
+}
+- (IBAction)stopPreview:(id)sender {
+    Video::Manager::instance()->stopPreview();
 }
 
 #pragma mark - NSOutlineViewDelegate methods

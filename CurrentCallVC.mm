@@ -6,6 +6,11 @@
 //
 //
 
+#define SEGMENT_HANGUP_TAG 0
+#define SEGMENT_RECORD_TAG 1
+#define SEGMENT_HOLD_TAG 2
+#define SEGMENT_MUTE_TAG 3
+
 #import "CurrentCallVC.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -13,60 +18,74 @@
 #include <call.h>
 #include <callmodel.h>
 #include <useractionmodel.h>
-#import <qabstractitemmodel.h>
+#include <qabstractitemmodel.h>
 
 @interface CurrentCallVC ()
 
 @property Call* privateCall;
 @property (assign) IBOutlet NSTextField *personLabel;
-@property (assign) IBOutlet NSView *buttonsPanel;
 @property (assign) IBOutlet NSTextField *stateLabel;
-@property (assign) IBOutlet NSButton *holdOnOffButton;
-@property (assign) IBOutlet NSButton *hangUpButton;
-@property (assign) IBOutlet NSButton *recordOnOffButton;
-@property (assign) IBOutlet NSButton *pickUpButton;
+@property (assign) IBOutlet NSView *buttonPanel;
+@property (assign) IBOutlet NSSegmentedControl *incallControls;
 
-@property QHash<int, NSButton*> actionHash;
+@property QHash<int, int> actionHash;
 
 @end
 
 @implementation CurrentCallVC
 @synthesize privateCall;
 @synthesize personLabel;
-@synthesize buttonsPanel;
 @synthesize actionHash;
 @synthesize stateLabel;
-@synthesize holdOnOffButton;
-@synthesize hangUpButton;
-@synthesize recordOnOffButton;
-@synthesize pickUpButton;
-
-
+@synthesize buttonPanel;
+@synthesize incallControls;
 
 - (void) setupCall:(Call*) call
 {
     privateCall = call;
 
-    //DO UI POSITIONING HERE
+    for(int i = 0 ; i <= CallModel::instance()->userActionModel()->rowCount() ; i++) {
+        [self updateControlStateForQIndex:CallModel::instance()->userActionModel()->index(i,0)];
+    }
 
     [self updateState];
 }
 
-- (void) updateState
+- (void) updateControlStateForQIndex:(QModelIndex) idx
 {
-    NSLog(@"updateState, %d items ", CallModel::instance()->userActionModel()->rowCount());
-    for(int i = 0 ; i <= CallModel::instance()->userActionModel()->rowCount() ; i++) {
-        const QModelIndex& idx = CallModel::instance()->userActionModel()->index(i,0);
-        NSLog(@"updateState for item %d", (int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION)));
-        NSButton* a = actionHash[(int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION))];
-        if (a != nil) {
-            NSLog(@"updateState");
-            [a setTitle:idx.data(Qt::DisplayRole).toString().toNSString()];
-            [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
-            [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
+    int action = (int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
+    if (actionHash.contains(action)) {
+        [incallControls setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
+
+        if((idx.flags() & Qt::ItemIsUserCheckable))
+            [incallControls setSelected:(idx.data(Qt::CheckStateRole) == Qt::Checked) forSegment:actionHash[action]];
+        else {
+            [incallControls setSelected:NO forSegment:actionHash[action]];
         }
     }
+}
 
+- (void) updateState
+{
+    switch (privateCall->lifeCycleState()) {
+        case Call::LifeCycleState::INITIALIZATION:
+            [stateLabel setStringValue:@"Initializing"];
+            [incallControls setHidden:YES];
+            [buttonPanel setHidden:NO];
+            break;
+        case Call::LifeCycleState::PROGRESS:
+            [buttonPanel setHidden:YES];
+            [incallControls setHidden:NO];
+            [stateLabel setStringValue:@"Current"];
+            break;
+        case Call::LifeCycleState::FINISHED:
+            [buttonPanel setHidden:YES];
+            [incallControls setHidden:NO];
+            [stateLabel setStringValue:@"Finished"];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)awakeFromNib
@@ -77,7 +96,12 @@
     [self.view setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
     [self.view setLayer:viewLayer];
     self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawDuringViewResize;
-    self.view.layer.backgroundColor = [NSColor darkGrayColor].CGColor;
+    self.view.layer.backgroundColor = [NSColor whiteColor].CGColor;
+
+    [[incallControls cell] setTag:SEGMENT_HANGUP_TAG forSegment:0];
+    [[incallControls cell] setTag:SEGMENT_RECORD_TAG forSegment:1];
+    [[incallControls cell] setTag:SEGMENT_HOLD_TAG forSegment:2];
+    [[incallControls cell] setTag:SEGMENT_MUTE_TAG forSegment:3];
 
     QObject::connect(CallModel::instance()->userActionModel(),
                      &QAbstractItemModel::dataChanged,
@@ -85,22 +109,24 @@
                          NSLog(@"data changed");
                          const int first(topLeft.row()),last(bottomRight.row());
                          for(int i = first; i <= last;i++) {
-                             const QModelIndex& idx = CallModel::instance()->userActionModel()->index(i,0);
-                             NSButton* a = actionHash[(int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION))];
-                             if (a) {
-                                 [a setTitle:idx.data(Qt::DisplayRole).toString().toNSString()];
-                                 [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
-                                 [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
-                             }
+                             [self updateControlStateForQIndex:CallModel::instance()->userActionModel()->index(i,0)];
                          }
                      });
 
 
-    NSLog(@"Adding for item %d", (int)UserActionModel::Action::ACCEPT);
-    actionHash[ (int)UserActionModel::Action::ACCEPT          ] = pickUpButton;
-    actionHash[ (int)UserActionModel::Action::HOLD            ] = holdOnOffButton;
-    actionHash[ (int)UserActionModel::Action::RECORD          ] = recordOnOffButton;
-    actionHash[ (int)UserActionModel::Action::HANGUP          ] = hangUpButton;
+    CallModel* callModel_ = CallModel::instance();
+    QObject::connect(callModel_, &CallModel::callStateChanged, [self](Call* c, Call::State state) {
+        NSLog(@"callStateChanged");
+        if(c == privateCall)
+            [self updateState];
+    });
+
+    actionHash[ (int)UserActionModel::Action::HANGUP        ] = SEGMENT_HANGUP_TAG;
+    actionHash[ (int)UserActionModel::Action::RECORD        ] = SEGMENT_RECORD_TAG;
+    actionHash[ (int)UserActionModel::Action::HOLD          ] = SEGMENT_HOLD_TAG;
+    int segmentIdx = actionHash[(int)UserActionModel::Action::HANGUP];
+
+    //actionHash[ (int)UserActionModel::Action::MUTE          ] = SEGMENT_MUTE_TAG;
     //actionHash[ (int)UserActionModel::Action::MUTE_AUDIO      ] = action_mute_capture;
     //actionHash[ (int)UserActionModel::Action::SERVER_TRANSFER ] = action_transfer;
 
@@ -115,8 +141,6 @@
     self.view.layer.position = self.view.frame.origin;
     [self dumpFrame:self.view.frame WithName:@"START"];
     NSLog(@"layer position : %f %f", self.view.layer.position.x, self.view.layer.position.y);
-
-
 }
 
 - (void) displayCall:(Call*) call
@@ -169,19 +193,21 @@
         NSLog(@"COMPLETION IN");
         [self.view setFrame:self.view.superview.frame];
         self.view.layer.position = self.view.frame.origin;
-        [self dumpFrame:self.view.frame WithName:@"SELF.VIEW.FRAME"];
-        [self dumpFrame:self.view.layer.frame WithName:@"LAYER.FRAME"];
-        NSLog(@"layer position : %f %f", self.view.layer.position.x, self.view.layer.position.y);
+        //[self dumpFrame:self.view.frame WithName:@"SELF.VIEW.FRAME"];
+        //[self dumpFrame:self.view.layer.frame WithName:@"LAYER.FRAME"];
+        //NSLog(@"layer position : %f %f", self.view.layer.position.x, self.view.layer.position.y);
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
 
     [CATransaction commit];
+
+    QByteArray test;
 }
 
 -(void) animateOut
 {
     NSLog(@"animateOut");
-    CGRect frame = CGRectOffset(self.view.frame, -self.view.frame.size.width, 0);
+    CGRect frame = CGRectOffset(self.view.superview.frame, -self.view.frame.size.width, 0);
 
     [self dumpFrame:self.view.frame WithName:@"START"];
     [self dumpFrame:frame WithName:@"END"];
@@ -197,7 +223,6 @@
         NSLog(@"COMPLETION OUT");
         [self.view setFrame:frame];
         self.view.layer.position = self.view.frame.origin;
-
         if(privateCall != nil) {
             [self animateIn];
         }
@@ -211,6 +236,27 @@
     NSLog(@"frame %@ : %f %f %f %f",name ,frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
+- (IBAction)inCallsButtonClicked:(id)sender {
+    int clickedSegment = [sender selectedSegment];
+    int clickedSegmentTag = [[sender cell] tagForSegment:clickedSegment];
+    NSLog(@"clickedSegmentTag %d", clickedSegmentTag);
+    switch (clickedSegmentTag) {
+        case SEGMENT_HANGUP_TAG:
+            privateCall << Call::Action::REFUSE;
+            break;
+        case SEGMENT_RECORD_TAG:
+            privateCall << Call::Action::RECORD;
+            break;
+        case SEGMENT_HOLD_TAG:
+            privateCall << Call::Action::HOLD;
+            break;
+        case SEGMENT_MUTE_TAG:
+            break;
+        default:
+            break;
+    }
+
+}
 
 #pragma button methods
 - (IBAction)hangUp:(id)sender {
@@ -219,14 +265,6 @@
 
 - (IBAction)accept:(id)sender {
     privateCall << Call::Action::ACCEPT;
-}
-
-- (IBAction)toggleRecording:(id)sender {
-    privateCall << Call::Action::RECORD;
-}
-
-- (IBAction)toggleHold:(id)sender {
-    privateCall << Call::Action::HOLD;
 }
 
 @end
