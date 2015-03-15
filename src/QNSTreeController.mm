@@ -84,11 +84,31 @@
     NSUInteger myArray[[idx length]];
     [idx getIndexes:myArray];
     QModelIndex toReturn;
-    if(idx.length == 2)
-        toReturn = self->privateQModel->index(myArray[1], 0, self->privateQModel->index(myArray[0], 0));
-    else
-        toReturn = self->privateQModel->index(myArray[0], 0);
+
+    for (int i = 0; i < idx.length; ++i) {
+        toReturn = self->privateQModel->index(myArray[i], 0, toReturn);
+    }
+
     return toReturn;
+}
+
+- (void) insertChildAtQIndex:(QModelIndex) qIdx
+{
+    Node* child = [[Node alloc] init];
+
+    QModelIndex tmp = qIdx.parent();
+    NSMutableArray* allIndexes = [NSMutableArray array];
+    while (tmp.isValid()) {
+        [allIndexes insertObject:@(tmp.row()) atIndex:0];
+        tmp = tmp.parent();
+    }
+    [allIndexes insertObject:@(qIdx.row()) atIndex:allIndexes.count];
+
+    NSUInteger indexes[allIndexes.count];
+    for (int i = 0 ; i < allIndexes.count ; ++i) {
+        indexes[i] = [[allIndexes objectAtIndex:i] intValue];
+    }
+    [self insertObject:child atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndexes:indexes length:allIndexes.count]];
 }
 
 - (void)connect
@@ -102,9 +122,7 @@
                                  Node* n = [[Node alloc] init];
                                  [self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
                              } else {
-                                 Node* child = [[Node alloc] init];
-                                 NSUInteger indexes[] = { (NSUInteger)parent.row(), (NSUInteger)row};
-                                 [self insertObject:child atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndexes:indexes length:2]];
+                                 [self insertChildAtQIndex:self->privateQModel->index(row, 0, parent)];
                              }
                          }
                      }
