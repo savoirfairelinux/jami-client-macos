@@ -27,68 +27,97 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "HistoryViewController.h"
 
-#import <categorizedhistorymodel.h>
-#import <QSortFilterProxyModel>
+#import "PersonsVC.h"
+
+#import <personmodel.h>
 #import <callmodel.h>
-#import <call.h>
+#import <categorizedcontactmodel.h>
+#import <QSortFilterProxyModel>
+#import <person.h>
 #import <contactmethod.h>
+#import <QtMacExtras/qmacfunctions.h>
+#import <QPixmap>
 
-#import "backends/MinimalHistoryBackend.h"
+#import "backends/AddressBookBackend.h"
 #import "QNSTreeController.h"
+#import "delegates/ImageManipulationDelegate.h"
+#import "views/PersonCell.h"
 
-#define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
-#define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
-#define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
+#define COLUMNID_NAME @"NameColumn"
 
-@interface HistoryViewController()
+class ReachablePersonModel : public QSortFilterProxyModel
+{
+public:
+    ReachablePersonModel(QAbstractItemModel* parent) : QSortFilterProxyModel(parent)
+    {
+        setSourceModel(parent);
+    }
+    virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+    {
+        return sourceModel()->index(source_row,0,source_parent).flags() & Qt::ItemIsEnabled;
+    }
+};
+
+
+@interface PersonsVC ()
 
 @property NSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *historyView;
-@property QSortFilterProxyModel *historyProxyModel;
+@property (assign) IBOutlet NSOutlineView *personsView;
+@property QSortFilterProxyModel *contactProxyModel;
+
 @end
 
-@implementation HistoryViewController
+@implementation PersonsVC
 @synthesize treeController;
-@synthesize historyView;
-@synthesize historyProxyModel;
+@synthesize personsView;
+@synthesize contactProxyModel;
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+-(void) awakeFromNib
 {
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT HVC");
-
-    }
-    return self;
-}
-
-- (void)awakeFromNib
-{
-    historyProxyModel = new QSortFilterProxyModel(CategorizedHistoryModel::instance());
-    historyProxyModel->setSourceModel(CategorizedHistoryModel::instance());
-    historyProxyModel->setSortRole(static_cast<int>(Call::Role::Date));
-    historyProxyModel->sort(0,Qt::DescendingOrder);
-    treeController = [[QNSTreeController alloc] initWithQModel:historyProxyModel];
+    new ImageManipulationDelegate();
+    NSLog(@"INIT PersonsVC");
+    contactProxyModel = new ReachablePersonModel(CategorizedContactModel::instance());
+    contactProxyModel->setSortRole(static_cast<int>(Qt::DisplayRole));
+    contactProxyModel->sort(0,Qt::AscendingOrder);
+    treeController = [[QNSTreeController alloc] initWithQModel:contactProxyModel];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
-    [historyView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [historyView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-    [historyView setTarget:self];
-    [historyView setDoubleAction:@selector(placeHistoryCall:)];
+    [personsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [personsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [personsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [personsView setTarget:self];
+    [personsView setDoubleAction:@selector(callContact:)];
 
-    CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
+    CategorizedContactModel::instance()->setUnreachableHidden(YES);
+    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
+
 }
 
-- (void)placeHistoryCall:(id)sender
+- (IBAction)callContact:(id)sender
 {
     if([[treeController selectedNodes] count] > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
-        ContactMethod* m = qvariant_cast<ContactMethod*>(var);
+        ContactMethod* m = nil;
+        if(((NSTreeNode*)[treeController selectedNodes][0]).indexPath.length == 2) {
+            // Person
+            QVariant var = qIdx.data((int)Person::Role::Object);
+            if (var.isValid()) {
+                Person *c = var.value<Person*>();
+                if (c->phoneNumbers().size() == 1) {
+                    m = c->phoneNumbers().first();
+                }
+            }
+        } else if (((NSTreeNode*)[treeController selectedNodes][0]).indexPath.length == 3) {
+            //ContactMethod
+            QVariant var = qIdx.data(static_cast<int>(ContactMethod::Role::Object));
+            if (var.isValid()) {
+                m = var.value<ContactMethod *>();
+            }
+        }
+
         if(m){
             Call* c = CallModel::instance()->dialingCall();
             c->setDialNumber(m);
@@ -104,7 +133,15 @@
 // -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
-    return YES;
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    if(!qIdx.isValid())
+        return NO;
+
+    if(!qIdx.parent().isValid()) {
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 // -------------------------------------------------------------------------------
@@ -112,9 +149,18 @@
 // -------------------------------------------------------------------------------
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    NSCell *returnCell = [tableColumn dataCell];
-    if(item == nil)
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    PersonCell *returnCell = [tableColumn dataCell];
+    if(!qIdx.isValid())
         return returnCell;
+
+    if(!qIdx.parent().isValid()) {
+        [returnCell setDrawsBackground:YES];
+        [returnCell setBackgroundColor:[NSColor selectedControlColor]];
+    } else {
+        [returnCell setDrawsBackground:NO];
+    }
+
     return returnCell;
 }
 
@@ -153,15 +199,20 @@
     if(!qIdx.isValid())
         return;
 
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME])
     {
-        cell.title = historyProxyModel->data(qIdx, Qt::DisplayRole).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::Number).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
+        PersonCell *pCell = (PersonCell *)cell;
+        [pCell setPersonImage:nil];
+        if(!qIdx.parent().isValid()) {
+            pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
+        } else {
+            pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
+            if(((NSTreeNode*)item).indexPath.length == 2) {
+                Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
+                QVariant photo = ImageManipulationDelegate::instance()->contactPhoto(p, QSize(35,35));
+                [pCell setPersonImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+            }
+        }
     }
 }
 
@@ -170,8 +221,21 @@
 // -------------------------------------------------------------------------------
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-    // ask the tree controller for the current selection
-    //NSLog(@"outlineViewSelectionDidChange!!");
+
 }
+
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    if(!qIdx.isValid())
+        return 0.0f;
+
+    if(!qIdx.parent().isValid()) {
+        return 20.0;
+    } else {
+        return 45.0;
+    }
+}
+
 
 @end
