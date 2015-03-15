@@ -16,10 +16,12 @@ ADD_DEFINITIONS("-std=c++11")
 PROJECT(${PROJ_NAME})
 
 FIND_PACKAGE(Qt5Core REQUIRED)
+FIND_PACKAGE(Qt5MacExtras REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
 
 INCLUDE_DIRECTORIES(SYSTEM ${Qt5Core_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(SYSTEM ${Qt5MacExtras_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${LIB_RING_CLIENT_INCLUDE_DIR})
@@ -48,9 +50,14 @@ SET(ringclient_SRCS
    src/GeneralPrefsVC.mm
    src/RingWizardWC.mm
    src/HistoryViewController.mm
+   src/PersonsVC.mm
 
+   src/delegates/ImageManipulationDelegate.mm
+
+   src/views/PersonCell.mm
    src/views/CallView.mm
 
+   src/backends/AddressBookBackend.mm
    src/backends/MinimalHistoryBackend.mm)
 
 SET(ringclient_XIBS
@@ -89,9 +96,14 @@ SET(ringclient_HDRS
    src/HistoryViewController.h
    src/RingWizardWC.h
    src/QNSTreeController.h
+   src/PersonsVC.h
 
+   src/delegates/ImageManipulationDelegate.h
+
+   src/views/PersonCell.h
    src/views/CallView.h
 
+   src/backends/AddressBookBackend.h
    src/backends/MinimalHistoryBackend.h)
 
 # Icons
@@ -134,6 +146,7 @@ ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${LIB_RING_CLIENT_LIBRARY}
    ${Qt5Core_LIBRARIES}
+   ${Qt5MacExtras_LIBRARIES}
    ${Qt5Widgets_LIBRARIES}
 )
 
