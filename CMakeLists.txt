@@ -42,7 +42,9 @@ SET(ringclient_SRCS
    VideoPrefsVC.mm
    GeneralPrefsVC.mm
    HistoryViewController.mm
-   MinimalHistoryBackend.mm)
+   MinimalHistoryBackend.mm
+   PersonsVC.mm
+   AddressBookBackend.mm)
 
 SET(ringclient_FORMS
    MainMenu.xib
@@ -76,7 +78,9 @@ SET(ringclient_HDRS
    GeneralPrefsVC.h
    HistoryViewController.h
    QNSTreeController.h
-   MinimalHistoryBackend.h)
+   MinimalHistoryBackend.h
+   PersonsVC.h
+   AddressBookBackend.h)
 
 # Icons
 
