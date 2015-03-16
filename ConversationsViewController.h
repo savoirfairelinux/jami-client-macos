@@ -35,6 +35,7 @@
 
 @interface ConversationsViewController : NSViewController <NSOutlineViewDelegate> {
     NSOutlineView *conversationsView;
+    NSView *previewView;
 }
 
 @property QNSTreeController *treeController;

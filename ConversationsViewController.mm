@@ -29,42 +29,100 @@
  */
 #import "ConversationsViewController.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #import <callmodel.h>
+#include <cstdlib>
+
+#import <video/previewmanager.h>
+#include <video/renderer.h>
 
 #define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
 
 @interface ConversationsViewController ()
+@property (assign) IBOutlet NSView *previewView;
+@property CALayer *videoLayer;
+@property CGImageRef newImage;
 
 @end
 
 @implementation ConversationsViewController
+@synthesize previewView;
 @synthesize conversationsView;
 @synthesize treeController;
+@synthesize videoLayer;
+@synthesize newImage;
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT Conversations VC");
-    }
-    return self;
+
+- (IBAction)startPreview:(id)sender {
+    Video::PreviewManager::instance()->startPreview();
+    Video::Renderer* rend = Video::PreviewManager::instance()->previewRenderer();
+    QObject::connect(rend,
+                     &Video::Renderer::frameUpdated,
+                     [=]() {
+
+                         const QByteArray& data = Video::PreviewManager::instance()->previewRenderer()->currentFrame();
+                         QSize res = Video::PreviewManager::instance()->previewRenderer()->size();
+
+                         //NSLog(@"We have a frame! w: %d h: %d", res.width(), res.height());
+
+                         auto buf = reinterpret_cast<const unsigned char*>(data.data());
+                         //NSLog(@"First pix 0: %u 1: %u 2: %u 3: %u", buf[0], buf[1], buf[2], buf[3]);
+                         //NSLog(@"Second pix 0: %u 1: %u 2: %u 3: %u", buf[4], buf[5], buf[6], buf[7]);
+
+                         /*Create a CGImageRef from the CVImageBufferRef*/
+                         const CGFloat whitePoint[] = {0.3127, 0.3290, 1.0000};
+                         const CGFloat blackPoint[] = {0, 0, 0};
+                         const CGFloat gamma[] = {1, 1, 1};
+
+                         // 3*3 matrix, columns first (x,x,x,y,y,y,z,z,z)
+                         const CGFloat matrix[] = {0.4124564,  0.2126729,  0.0193339 ,
+                              0.3575761, 0.7151522 ,0.1191920 ,
+                              0.1804375, 0.0721750 ,  0.9503041};
+
+
+                         CGColorSpaceRef colorSpace = CGColorSpaceCreateCalibratedRGB(whitePoint, blackPoint, gamma, matrix);
+
+                         CGContextRef newContext = CGBitmapContextCreate((void *)buf,
+                                                                         res.width(),
+                                                                         res.height(),
+                                                                         8,
+                                                                         4*res.width(),
+                                                                         colorSpace,
+                                                                         kCGImageAlphaPremultipliedLast);
+
+
+                         newImage = CGBitmapContextCreateImage(newContext);
+
+                         /*We release some components*/
+                         CGContextRelease(newContext);
+                         CGColorSpaceRelease(colorSpace);
+
+                         //NSLog(@"content center x %f, y %f", videoLayer.contentsRect.origin.x, videoLayer.contentsRect.origin.y);
+                         //NSLog(@"content size: w %f, h %f", videoLayer.contentsRect.size.width, videoLayer.contentsRect.size.height);
+                         [CATransaction begin];
+                         videoLayer.contents = (__bridge id)newImage;
+                         [CATransaction commit];
+
+                         CFRelease(newImage);
+                     });
 }
-
+- (IBAction)stopPreview:(id)sender {
+    Video::PreviewManager::instance()->stopPreview();
+}
 
 - (void)awakeFromNib
 {
-    NSLog(@"awakeFromNib");
+    NSLog(@"awakeFromNib Conversation");
 
-    treeController = [[QNSTreeController alloc] initWithQModel:CallModel::instance()];
+    videoLayer = [CALayer layer];
+    [previewView setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
+    [previewView setLayer:videoLayer];
 
-    [treeController setAvoidsEmptySelection:NO];
-    [treeController setChildrenKeyPath:@"children"];
+    [videoLayer setFrame:previewView.frame];
+    videoLayer.bounds = CGRectMake(0, 0, previewView.frame.size.height, previewView.frame.size.width);
+    videoLayer.backgroundColor = [NSColor whiteColor].CGColor;
 
-    [self.conversationsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [self.conversationsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [self.conversationsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-
-    NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
-    [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
