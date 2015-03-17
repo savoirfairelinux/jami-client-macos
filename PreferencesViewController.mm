@@ -31,6 +31,9 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#include <accountmodel.h>
+
+#import "AccountsVC.h"
 #import "GeneralPrefsVC.h"
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
@@ -41,6 +44,7 @@
 
 @implementation PreferencesViewController
 
+static NSString* const kProfilePrefsIdentifier = @"ProfilesPrefsIdentifier";
 static NSString* const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
 static NSString* const kAudioPrefsIdentifer = @"AudioPrefsIdentifer";
 static NSString* const kAncragePrefsIdentifer = @"AncragePrefsIdentifer";
@@ -60,6 +64,8 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
     // the initialization method of a NSView subclass instead of here.
     self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawDuringViewResize;
 
+    [self.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
@@ -75,7 +81,9 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
 
 - (void) close
 {
-    NSLog(@"closingprefs");
+
+    AccountModel::instance()->save();
+
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
     [CATransaction begin];
@@ -95,7 +103,6 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
 }
 
 - (void)displayGeneral:(NSToolbarItem *)sender {
-    NSLog(@"GEEENERALL");
     if (self.currentVC != nil) {
         [self.currentVC.view removeFromSuperview];
     }
@@ -129,12 +136,30 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
     self.currentVC = self.videoPrefsVC;
 }
 
+- (void) displayAccounts:(NSToolbarItem *) sender {
+    if (self.currentVC != nil) {
+        [self.currentVC.view removeFromSuperview];
+    }
+    self.accountsPrefsVC = [[AccountsVC alloc] initWithNibName:@"Accounts" bundle:nil];
+    [self.view addSubview:self.accountsPrefsVC.view];
+    [self.accountsPrefsVC.view setFrame:[self.view bounds]];
+    self.currentVC = self.accountsPrefsVC;
+}
+
 
 #pragma NSToolbar Delegate
 
 -(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
     NSToolbarItem* item = nil;
+
+    if ([itemIdentifier isEqualToString: kProfilePrefsIdentifier]) {
+
+        item = [[NSToolbarItem alloc] initWithItemIdentifier: kProfilePrefsIdentifier];
+        [item setImage: [NSImage imageNamed: @"NSUserAccounts"]];
+        [item setLabel: @"Accounts"];
+        [item setAction:@selector(displayAccounts:)];
+    }
 
     if ([itemIdentifier isEqualToString: kGeneralPrefsIdentifier]) {
         item = [[NSToolbarItem alloc] initWithItemIdentifier: kGeneralPrefsIdentifier];
@@ -150,12 +175,12 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
         [item setAction:@selector(displayAudio:)];
     }
 
-    if ([itemIdentifier isEqualToString: kAncragePrefsIdentifer]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kAncragePrefsIdentifer];
-        [item setImage: [NSImage imageNamed: @"ancrage"]];
-        [item setLabel: @"Ancrage"];
-        [item setAction:@selector(displayAncrage:)];
-    }
+//    if ([itemIdentifier isEqualToString: kAncragePrefsIdentifer]) {
+//        item = [[NSToolbarItem alloc] initWithItemIdentifier: kAncragePrefsIdentifer];
+//        [item setImage: [NSImage imageNamed: @"ancrage"]];
+//        [item setLabel: @"Ancrage"];
+//        [item setAction:@selector(displayAncrage:)];
+//    }
 
     if ([itemIdentifier isEqualToString: kDonePrefsIdentifer]) {
         item = [[NSToolbarItem alloc] initWithItemIdentifier: kDonePrefsIdentifer];
@@ -180,10 +205,11 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
     return [NSArray arrayWithObjects:
             NSToolbarSpaceItemIdentifier,
             NSToolbarFlexibleSpaceItemIdentifier,
+            kProfilePrefsIdentifier,
             kGeneralPrefsIdentifier,
             kAudioPrefsIdentifer,
             kVideoPrefsIdentifer,
-            kAncragePrefsIdentifer,
+ //           kAncragePrefsIdentifer,
             NSToolbarFlexibleSpaceItemIdentifier,
             kDonePrefsIdentifer,
             nil];
@@ -192,9 +218,10 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
 -(NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
 {
     return [NSArray arrayWithObjects:
+            kProfilePrefsIdentifier,
             kGeneralPrefsIdentifier,
             kAudioPrefsIdentifer,
-            kAncragePrefsIdentifer,
+ //           kAncragePrefsIdentifer,
             kVideoPrefsIdentifer,
             nil];
 }
