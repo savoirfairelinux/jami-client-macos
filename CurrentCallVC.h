@@ -37,7 +37,9 @@ class Call;
 @interface CurrentCallVC : NSViewController {
 
     NSTextField *timeSpentLabel;
+    NSView *controlsPanel;
     NSView *videoView;
+    NSView *previewView;
 }
 
 - (void) initFrame;

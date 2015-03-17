@@ -39,6 +39,23 @@
 #import <QItemSelectionModel>
 #import <QItemSelection>
 
+#import <video/previewmanager.h>
+#include <video/renderer.h>
+
+/** FrameReceiver class - delegate for AVCaptureSession
+ */
+@interface RendererConnectionsHolder : NSObject
+
+@property QMetaObject::Connection frameUpdated;
+@property QMetaObject::Connection started;
+@property QMetaObject::Connection stopped;
+
+@end
+
+@implementation RendererConnectionsHolder
+
+@end
+
 @interface CurrentCallVC ()
 
 @property (assign) IBOutlet NSTextField *personLabel;
@@ -48,17 +65,22 @@
 @property (assign) IBOutlet NSButton *recordOnOffButton;
 @property (assign) IBOutlet NSButton *pickUpButton;
 @property (assign) IBOutlet NSTextField *timeSpentLabel;
+@property (assign) IBOutlet NSView *controlsPanel;
 
 @property QHash<int, NSButton*> actionHash;
 
 // Video
-@property CGImageRef newImage;
 @property (assign) IBOutlet NSView *videoView;
+@property CALayer* videoLayer;
+@property (assign) IBOutlet NSView *previewView;
+@property CALayer* previewLayer;
+
+@property RendererConnectionsHolder* previewHolder;
+@property RendererConnectionsHolder* videoHolder;
 
 @end
 
 @implementation CurrentCallVC
-@synthesize videoView;
 @synthesize personLabel;
 @synthesize actionHash;
 @synthesize stateLabel;
@@ -67,6 +89,17 @@
 @synthesize recordOnOffButton;
 @synthesize pickUpButton;
 @synthesize timeSpentLabel;
+@synthesize controlsPanel;
+@synthesize videoView;
+@synthesize videoLayer;
+@synthesize previewLayer;
+@synthesize previewView;
+
+@synthesize previewHolder;
+@synthesize videoHolder;
+
+
+
 
 - (void) updateActions
 {
@@ -121,8 +154,13 @@
     NSLog(@"INIT CurrentCall VC");
     [self.view setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
     [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
-    self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
+    //self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
+
+
+    [controlsPanel setWantsLayer:YES];
+    [controlsPanel setLayer:[CALayer layer]];
+    [controlsPanel.layer setZPosition:2.0];
+    [controlsPanel.layer setBackgroundColor:[NSColor whiteColor].CGColor];
 
     actionHash[ (int)UserActionModel::Action::ACCEPT          ] = pickUpButton;
     actionHash[ (int)UserActionModel::Action::HOLD            ] = holdOnOffButton;
@@ -131,10 +169,32 @@
     //actionHash[ (int)UserActionModel::Action::MUTE_AUDIO      ] = action_mute_capture;
     //actionHash[ (int)UserActionModel::Action::SERVER_TRANSFER ] = action_transfer;
 
+
+
+    videoLayer = [CALayer layer];
     [videoView setWantsLayer:YES];
-    [videoView setLayer:[CALayer layer]];
-    [videoView.layer setContentsRect:videoView.bounds];
+    [videoView setLayer:videoLayer];
     [videoView.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    [videoView.layer setFrame:videoView.frame];
+    [videoView.layer setContentsGravity:kCAGravityResizeAspect];
+    //[videoView.layer setBounds:CGRectMake(0, 0, videoView.frame.size.width, videoView.frame.size.height)];
+
+    previewLayer = [CALayer layer];
+    [previewView setWantsLayer:YES];
+    [previewView setLayer:previewLayer];
+    [previewLayer setBackgroundColor:[NSColor whiteColor].CGColor];
+    [previewLayer setContentsGravity:kCAGravityResizeAspect];
+    [previewLayer setFrame:previewView.frame];
+
+    [controlsPanel setWantsLayer:YES];
+    [controlsPanel setLayer:[CALayer layer]];
+    [controlsPanel.layer setBackgroundColor:[NSColor clearColor].CGColor];
+    [controlsPanel.layer setFrame:controlsPanel.frame];
+
+    [self dumpFrame:previewLayer.frame WithName:@"PREVIEW"];
+    [self dumpFrame:videoLayer.frame WithName:@"VIDEOLAYER"];
+
+
 
     [self connect];
 }
@@ -176,6 +236,14 @@
                                  qDebug() << (idx.flags() & Qt::ItemIsUserCheckable);
 
                              }
+
+                             if((int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION)) == (int)UserActionModel::Action::RECORD){
+                                 NSLog(@"Button RECORD has flags:");
+                                 qDebug() << (idx.flags() & Qt::ItemIsEnabled);
+                                 qDebug() << (idx.flags() & Qt::ItemIsSelectable);
+                                 qDebug() << (idx.flags() & Qt::ItemIsUserCheckable);
+
+                             }
                              if (a) {
                                  [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
                                  [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
@@ -189,6 +257,117 @@
                          NSLog(@"callStateChanged");
                          [self updateCall];
     });
+}
+
+-(void) connectVideoSignals
+{
+    QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
+    Call* call = CallModel::instance()->getCall(idx);
+
+    QObject::connect(call,
+                     &Call::videoStarted,
+                     [=](Video::Renderer* renderer) {
+                        NSLog(@"Video started!");
+                        [self connectVideoRenderer:renderer];
+                     });
+
+    if(call->videoRenderer())
+    {
+        NSLog(@"GONNA CONNECT TO FRAMES");
+        [self connectVideoRenderer:call->videoRenderer()];
+    }
+
+    [self connectPreviewRenderer];
+
+}
+
+-(void) connectPreviewRenderer
+{
+    previewHolder.started = QObject::connect(Video::PreviewManager::instance(),
+                     &Video::PreviewManager::previewStarted,
+                     [=](Video::Renderer* renderer) {
+                         NSLog(@"Preview started");
+                         QObject::disconnect(previewHolder.frameUpdated);
+                         previewHolder.frameUpdated = QObject::connect(renderer,
+                                                                       &Video::Renderer::frameUpdated,
+                                                                       [=]() {
+                                                                           [self renderer:Video::PreviewManager::instance()->previewRenderer()
+                                                                       renderFrameForView:previewView];
+                                                                       });
+                     });
+
+    previewHolder.stopped = QObject::connect(Video::PreviewManager::instance(),
+                     &Video::PreviewManager::previewStopped,
+                     [=](Video::Renderer* renderer) {
+                         NSLog(@"Preview stopped");
+                         QObject::disconnect(previewHolder.frameUpdated);
+                     });
+
+    previewHolder.frameUpdated = QObject::connect(Video::PreviewManager::instance()->previewRenderer(),
+                                                 &Video::Renderer::frameUpdated,
+                                                 [=]() {
+                                                     [self renderer:Video::PreviewManager::instance()->previewRenderer()
+                                                            renderFrameForView:previewView];
+                                                 });
+}
+
+-(void) connectVideoRenderer: (Video::Renderer*)renderer
+{
+    videoHolder.frameUpdated = QObject::connect(renderer,
+                     &Video::Renderer::frameUpdated,
+                     [=]() {
+                         [self renderer:renderer renderFrameForView:videoView];
+                     });
+
+    videoHolder.started = QObject::connect(renderer,
+                     &Video::Renderer::started,
+                     [=]() {
+                         NSLog(@"Renderer started");
+                         QObject::disconnect(videoHolder.frameUpdated);
+                         videoHolder.frameUpdated = QObject::connect(renderer,
+                                                                     &Video::Renderer::frameUpdated,
+                                                                     [=]() {
+                                                                         [self renderer:renderer renderFrameForView:videoView];
+                                                                     });
+                     });
+
+    videoHolder.stopped = QObject::connect(renderer,
+                     &Video::Renderer::stopped,
+                     [=]() {
+                         NSLog(@"Renderer stopped");
+                         QObject::disconnect(videoHolder.frameUpdated);
+                     });
+}
+
+
+-(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
+{
+    const QByteArray& data = renderer->currentFrame();
+    QSize res = renderer->size();
+
+    auto buf = reinterpret_cast<const unsigned char*>(data.data());
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef newContext = CGBitmapContextCreate((void *)buf,
+                                                    res.width(),
+                                                    res.height(),
+                                                    8,
+                                                    4*res.width(),
+                                                    colorSpace,
+                                                    kCGImageAlphaPremultipliedLast);
+
+
+    CGImageRef newImage = CGBitmapContextCreateImage(newContext);
+
+    /*We release some components*/
+    CGContextRelease(newContext);
+    CGColorSpaceRelease(colorSpace);
+
+    [CATransaction begin];
+    view.layer.contents = (__bridge id)newImage;
+    [CATransaction commit];
+
+    CFRelease(newImage);
 }
 
 - (void) initFrame
@@ -214,6 +393,8 @@
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
     [CATransaction setCompletionBlock:^{
         NSLog(@"COMPLETION IN");
+
+        [self connectVideoSignals];
 
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];

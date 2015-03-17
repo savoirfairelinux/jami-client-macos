@@ -79,6 +79,7 @@
                      });
 
     currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+
     [currentCallView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
