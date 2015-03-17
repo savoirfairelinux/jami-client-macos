@@ -39,6 +39,9 @@
 #import <QItemSelectionModel>
 #import <QItemSelection>
 
+#import <video/previewmanager.h>
+#include <video/renderer.h>
+
 @interface CurrentCallVC ()
 
 @property (assign) IBOutlet NSTextField *personLabel;
@@ -48,11 +51,11 @@
 @property (assign) IBOutlet NSButton *recordOnOffButton;
 @property (assign) IBOutlet NSButton *pickUpButton;
 @property (assign) IBOutlet NSTextField *timeSpentLabel;
+@property (assign) IBOutlet NSView *controlsPanel;
 
 @property QHash<int, NSButton*> actionHash;
 
 // Video
-@property CGImageRef newImage;
 @property (assign) IBOutlet NSView *videoView;
 
 @end
@@ -67,6 +70,7 @@
 @synthesize recordOnOffButton;
 @synthesize pickUpButton;
 @synthesize timeSpentLabel;
+@synthesize controlsPanel;
 
 - (void) updateActions
 {
@@ -121,8 +125,13 @@
     NSLog(@"INIT CurrentCall VC");
     [self.view setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
     [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
-    self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
+    //self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
+
+
+    [controlsPanel setWantsLayer:YES];
+    [controlsPanel setLayer:[CALayer layer]];
+    [controlsPanel.layer setZPosition:2.0];
+    [controlsPanel.layer setBackgroundColor:[NSColor whiteColor].CGColor];
 
     actionHash[ (int)UserActionModel::Action::ACCEPT          ] = pickUpButton;
     actionHash[ (int)UserActionModel::Action::HOLD            ] = holdOnOffButton;
@@ -131,10 +140,14 @@
     //actionHash[ (int)UserActionModel::Action::MUTE_AUDIO      ] = action_mute_capture;
     //actionHash[ (int)UserActionModel::Action::SERVER_TRANSFER ] = action_transfer;
 
+
+
     [videoView setWantsLayer:YES];
     [videoView setLayer:[CALayer layer]];
-    [videoView.layer setContentsRect:videoView.bounds];
     [videoView.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    [videoView.layer setFrame:videoView.frame];
+    [videoView.layer setContentsGravity:kCAGravityResizeAspect];
+    [videoView.layer setBounds:CGRectMake(0, 0, videoView.frame.size.height, videoView.frame.size.width)];
 
     [self connect];
 }
@@ -176,6 +189,14 @@
                                  qDebug() << (idx.flags() & Qt::ItemIsUserCheckable);
 
                              }
+
+                             if((int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION)) == (int)UserActionModel::Action::RECORD){
+                                 NSLog(@"Button RECORD has flags:");
+                                 qDebug() << (idx.flags() & Qt::ItemIsEnabled);
+                                 qDebug() << (idx.flags() & Qt::ItemIsSelectable);
+                                 qDebug() << (idx.flags() & Qt::ItemIsUserCheckable);
+
+                             }
                              if (a) {
                                  [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
                                  [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
@@ -189,6 +210,86 @@
                          NSLog(@"callStateChanged");
                          [self updateCall];
     });
+}
+
+-(void) connectVideoSignals
+{
+    QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
+    Call* call = CallModel::instance()->getCall(idx);
+
+    if(call->videoRenderer())
+    {
+        NSLog(@"GONNA CONNECT TO FRAMES");
+        [self connectToFrameUpdated:call->videoRenderer()];
+    } else {
+        NSLog(@"GONNA CONNECT TO WAITING");
+        [self connectToWaitingVideo];
+    }
+}
+
+-(void)connectToFrameUpdated:(Video::Renderer*) renderer
+{
+    QObject::connect(renderer,
+                     &Video::Renderer::frameUpdated,
+                     [=]() {
+                         NSLog(@"connectToFrameUpdated");
+                         [self renderFrameFor:renderer];
+                     });
+
+    QObject::connect(renderer,
+                     &Video::Renderer::started,
+                     [=]() {
+                         NSLog(@"Renderer started");
+                     });
+
+    QObject::connect(renderer,
+                     &Video::Renderer::stopped,
+                     [=]() {
+                         NSLog(@"Renderer stopped");
+                     });
+}
+
+-(void) renderFrameFor:(Video::Renderer*) renderer
+{
+    const QByteArray& data = renderer->currentFrame();
+    QSize res = renderer->size();
+
+    auto buf = reinterpret_cast<const unsigned char*>(data.data());
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef newContext = CGBitmapContextCreate((void *)buf,
+                                                    res.width(),
+                                                    res.height(),
+                                                    8,
+                                                    4*res.width(),
+                                                    colorSpace,
+                                                    kCGImageAlphaPremultipliedLast);
+
+
+    CGImageRef newImage = CGBitmapContextCreateImage(newContext);
+
+    /*We release some components*/
+    CGContextRelease(newContext);
+    CGColorSpaceRelease(colorSpace);
+
+    [CATransaction begin];
+    videoView.layer.contents = (__bridge id)newImage;
+    [CATransaction commit];
+
+    CFRelease(newImage);
+}
+
+-(void)connectToWaitingVideo
+{
+    QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
+    Call* call = CallModel::instance()->getCall(idx);
+    QObject::connect(call,
+                     &Call::videoStarted,
+                     [=](Video::Renderer* renderer) {
+                         NSLog(@"Video started!");
+                         [self connectToFrameUpdated:renderer];
+                     });
+
 }
 
 - (void) initFrame
@@ -214,6 +315,8 @@
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
     [CATransaction setCompletionBlock:^{
         NSLog(@"COMPLETION IN");
+
+        [self connectVideoSignals];
 
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];

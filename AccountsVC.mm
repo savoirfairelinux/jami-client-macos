@@ -311,7 +311,20 @@
     {
         cell.title = AccountModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     } else if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
-        //cell.title = AccountModel::instance()->data(qIdx, AccountStatusModel::).toString().toNSString();
+        Account::RegistrationState state = qvariant_cast<Account::RegistrationState>(AccountModel::instance()->data(qIdx, (int)Account::Role::RegistrationState));
+        switch (state) {
+            case Account::RegistrationState::READY:
+                [cell setTitle:@"READY"];
+                break;
+            case Account::RegistrationState::TRYING:
+                [cell setTitle:@"TRYING"];
+                break;
+            case Account::RegistrationState::UNREGISTERED:
+                [cell setTitle:@"UNREGISTERED"];
+                break;
+            default:
+                break;
+        }
     } else if([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE]) {
         [cell setState:AccountModel::instance()->data(qIdx, Qt::CheckStateRole).value<BOOL>()];
     }
