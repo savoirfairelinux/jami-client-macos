@@ -27,23 +27,19 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef QNSTREECONTROLLER_H
-#define QNSTREECONTROLLER_H
+#ifndef ACCSECURITYVC_H
+#define ACCSECURITYVC_H
 
 #import <Cocoa/Cocoa.h>
-#import <qabstractitemmodel.h>
 
-@interface QNSTreeController : NSTreeController {
+#include <account.h>
 
-QAbstractItemModel *privateQModel;
-NSMutableArray* topNodes;
+@interface AccSecurityVC : NSViewController<NSPathControlDelegate, NSOpenSavePanelDelegate> {
 
 }
 
-- (void*)connect;
-- (id) initWithQModel:(QAbstractItemModel*) model;
-- (QModelIndex) toQIdx:(NSTreeNode*) node;
+- (void)loadAccount:(Account *)account;
 
 @end
 
-#endif // QNSTREECONTROLLER_H
+#endif // ACCSECURITYVC_H

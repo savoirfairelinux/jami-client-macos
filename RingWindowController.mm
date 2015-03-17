@@ -144,4 +144,9 @@
     [self.preferencesViewController displayVideo:sender];
 }
 
+- (void)displayAccounts:(NSToolbarItem *)sender {
+    [self.preferencesViewController displayAccounts:sender];
+}
+
+
 @end
