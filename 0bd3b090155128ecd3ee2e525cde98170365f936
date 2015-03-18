@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a3291f1_be31570d",
+        "filename": "ConversationsViewController.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-03-18T22:44:52Z",
+      "side": 1,
+      "message": "to remove",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 25
+      },
+      "revId": "0bd3b090155128ecd3ee2e525cde98170365f936",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
