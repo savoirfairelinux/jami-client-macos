@@ -32,11 +32,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-#include <account.h>
+#import <account.h>
 
 #import "QNSTreeController.h"
 
-@interface AccAudioVC : NSViewController <NSOutlineViewDelegate, NSPathControlDelegate> {
+@interface AccAudioVC : NSViewController <NSOutlineViewDelegate> {
 
 }
 

@@ -19,8 +19,8 @@
 #ifndef MINIMALHISTORYBACKEND_H
 #define MINIMALHISTORYBACKEND_H
 
-#include <collectioninterface.h>
-#include <collectioneditor.h>
+#import <collectioninterface.h>
+#import <collectioneditor.h>
 
 class Call;
 

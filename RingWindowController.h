@@ -34,14 +34,9 @@
 #import "HistoryViewController.h"
 #import "PreferencesViewController.h"
 
-@interface RingWindowController : NSWindowController <NSToolbarDelegate>{
-    IBOutlet NSView *currentView;
-}
-@property (nonatomic, assign) NSViewController *myCurrentViewController;
-@property PreferencesViewController* preferencesViewController;
+@interface RingWindowController : NSWindowController <NSTextFieldDelegate, NSToolbarDelegate>{
 
-- (IBAction)openPreferences:(id)sender;
-- (IBAction)closePreferences:(NSToolbarItem *)sender;
+}
 
 @end
 
