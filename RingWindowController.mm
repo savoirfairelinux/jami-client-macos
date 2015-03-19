@@ -109,6 +109,15 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     
 }
 
+- (IBAction)showNotification:(id)sender{
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    notification.title = @"Hello, World!";
+    notification.informativeText = @"A notification";
+    notification.soundName = NSUserNotificationDefaultSoundName;
+
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
+
 - (IBAction) closePreferences:(NSToolbarItem *)sender {
     if(self.myCurrentViewController != nil)
     {
@@ -159,8 +168,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
         callField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0,0,400,21)];
         [[callField cell] setSearchButtonCell:nil];
         [callField setToolTip:@"Call"];
-        //[callField setAlignment:NSCenterTextAlignment];
-
         [item setView:callField];
     }
 

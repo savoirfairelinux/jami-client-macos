@@ -36,7 +36,7 @@
 
 #import "QNSTreeController.h"
 
-@interface AccAudioVC : NSViewController <NSOutlineViewDelegate, NSPathControlDelegate> {
+@interface AccAudioVC : NSViewController <NSOutlineViewDelegate> {
 
 }
 

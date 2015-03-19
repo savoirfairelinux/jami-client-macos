@@ -89,6 +89,33 @@
     NSButtonCell *cell = [col dataCellForRow:row];
     privateAccount->codecModel()->videoCodecs()->setData(privateAccount->codecModel()->videoCodecs()->index(row, 0, QModelIndex()),
         cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    privateAccount->saveCodecs();
+    privateAccount->codecModel()->save();
+}
+
+- (IBAction)moveUp:(id)sender {
+
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        if(!qIdx.isValid())
+            return;
+
+        QMimeData* mime = privateAccount->codecModel()->mimeData(QModelIndexList() << qIdx);
+        privateAccount->codecModel()->dropMimeData(mime, Qt::MoveAction, qIdx.row() - 1, 0, QModelIndex());
+        privateAccount->saveCodecs();
+    }
+}
+
+- (IBAction)moveDown:(id)sender {
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        if(!qIdx.isValid())
+            return;
+
+        QMimeData* mime = privateAccount->codecModel()->mimeData(QModelIndexList() << qIdx);
+        privateAccount->codecModel()->dropMimeData(mime, Qt::MoveAction, qIdx.row() + 1, 0, QModelIndex());
+        privateAccount->saveCodecs();
+    }
 }
 
 #pragma mark - NSOutlineViewDelegate methods
