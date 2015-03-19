@@ -239,7 +239,6 @@ CollectionInterface::SupportedFeatures MinimalHistoryBackend::supportedFeatures(
 
 bool MinimalHistoryBackend::clear()
 {
-    /* TODO: insert confirm dialog? */
     QFile::remove(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "history.ini");
     return true;
 }

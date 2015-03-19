@@ -40,9 +40,12 @@
 
 @interface PreferencesViewController ()
 
+@property NSButton* toggleAdvancedSettings;
+
 @end
 
 @implementation PreferencesViewController
+@synthesize toggleAdvancedSettings;
 
 static NSString* const kProfilePrefsIdentifier = @"ProfilesPrefsIdentifier";
 static NSString* const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
@@ -50,6 +53,7 @@ static NSString* const kAudioPrefsIdentifer = @"AudioPrefsIdentifer";
 static NSString* const kAncragePrefsIdentifer = @"AncragePrefsIdentifer";
 static NSString* const kVideoPrefsIdentifer = @"VideoPrefsIdentifer";
 static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
+static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
 
 -(void)loadView
 {
@@ -78,9 +82,14 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
 
 - (void) close
 {
+    // first save codecs for each account
+    for (int i = 0 ; i < AccountModel::instance()->rowCount(); ++i) {
+        QModelIndex qIdx = AccountModel::instance()->index(i);
+        AccountModel::instance()->getAccountByModelIndex(qIdx)->saveCodecs();
+    }
 
+    // then save accounts
     AccountModel::instance()->save();
-
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
     [CATransaction begin];
@@ -172,12 +181,16 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
         [item setAction:@selector(displayAudio:)];
     }
 
-//    if ([itemIdentifier isEqualToString: kAncragePrefsIdentifer]) {
-//        item = [[NSToolbarItem alloc] initWithItemIdentifier: kAncragePrefsIdentifer];
-//        [item setImage: [NSImage imageNamed: @"ancrage"]];
-//        [item setLabel: @"Ancrage"];
-//        [item setAction:@selector(displayAncrage:)];
-//    }
+    if ([itemIdentifier isEqualToString: kPowerSettingsIdentifer]) {
+        item = [[NSToolbarItem alloc] initWithItemIdentifier: kPowerSettingsIdentifer];
+        toggleAdvancedSettings = [[NSButton alloc] initWithFrame:NSMakeRect(0,0,20,20)];
+        [toggleAdvancedSettings setButtonType:NSSwitchButton];
+        [toggleAdvancedSettings setTitle:@""];
+        [toggleAdvancedSettings setState:[[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"]];
+        [item setLabel:@"Show Advanced"];
+        [item setView:toggleAdvancedSettings];
+        [item setAction:@selector(togglePowerSettings:)];
+    }
 
     if ([itemIdentifier isEqualToString: kDonePrefsIdentifer]) {
         item = [[NSToolbarItem alloc] initWithItemIdentifier: kDonePrefsIdentifer];
@@ -194,33 +207,45 @@ static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
     }
 
     return item;
-
 }
 
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-    return [NSArray arrayWithObjects:
-            NSToolbarSpaceItemIdentifier,
-            NSToolbarFlexibleSpaceItemIdentifier,
-            kProfilePrefsIdentifier,
-            kGeneralPrefsIdentifier,
-            kAudioPrefsIdentifer,
-            kVideoPrefsIdentifer,
- //           kAncragePrefsIdentifer,
-            NSToolbarFlexibleSpaceItemIdentifier,
-            kDonePrefsIdentifer,
-            nil];
+
+    NSMutableArray* items = [NSMutableArray arrayWithObjects:
+                      kPowerSettingsIdentifer,
+                      NSToolbarFlexibleSpaceItemIdentifier,
+                      kGeneralPrefsIdentifier,
+                      kAudioPrefsIdentifer,
+                      kVideoPrefsIdentifer,
+                      //           kAncragePrefsIdentifer,
+                      NSToolbarFlexibleSpaceItemIdentifier,
+                      kDonePrefsIdentifer,
+                      nil];
+
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"]) {
+        [items insertObject:NSToolbarSpaceItemIdentifier atIndex:5];
+        [items insertObject:kProfilePrefsIdentifier atIndex:2];
+    } else
+        [items insertObject:NSToolbarSpaceItemIdentifier atIndex:5];
+
+    return items;
 }
 
 -(NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
 {
-    return [NSArray arrayWithObjects:
-            kProfilePrefsIdentifier,
-            kGeneralPrefsIdentifier,
-            kAudioPrefsIdentifer,
- //           kAncragePrefsIdentifer,
-            kVideoPrefsIdentifer,
-            nil];
+    NSMutableArray* items = [NSMutableArray arrayWithObjects:
+                             kPowerSettingsIdentifer,
+                             kGeneralPrefsIdentifier,
+                             kAudioPrefsIdentifer,
+                             kVideoPrefsIdentifer,
+                             nil];
+
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"])
+        [items insertObject:kProfilePrefsIdentifier atIndex:1];
+    
+
+    return items;
 }
 
 -(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar

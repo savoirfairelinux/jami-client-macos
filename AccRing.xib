@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccRingVC">
             <connections>
                 <outlet property="aliasTextField" destination="D7f-4A-xXM" id="i9Y-jZ-iWM"/>
                 <outlet property="autoAnswerButton" destination="6uh-UC-6i9" id="6e1-1I-OY3"/>
-                <outlet property="boostrapField" destination="phb-wW-DQS" id="61p-oU-ZOv"/>
                 <outlet property="bootstrapField" destination="phb-wW-DQS" id="kcY-7z-bjM"/>
                 <outlet property="hashField" destination="c6M-WV-uVk" id="Jhb-0k-sBc"/>
                 <outlet property="typeLabel" destination="vov-vT-UPq" id="cy7-xb-0xG"/>

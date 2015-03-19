@@ -37,11 +37,15 @@
 @interface RingWindowController ()
 
 @property NSSearchField* callField;
+@property (nonatomic, assign) NSViewController *myCurrentViewController;
+@property PreferencesViewController* preferencesViewController;
+@property IBOutlet NSView *currentView;
 
 @end
 
 @implementation RingWindowController
 @synthesize callField;
+@synthesize currentView;
 static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
@@ -109,6 +113,15 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     
 }
 
+- (IBAction)showNotification:(id)sender{
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    notification.title = @"Hello, World!";
+    notification.informativeText = @"A notification";
+    notification.soundName = NSUserNotificationDefaultSoundName;
+
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
+
 - (IBAction) closePreferences:(NSToolbarItem *)sender {
     if(self.myCurrentViewController != nil)
     {
@@ -147,6 +160,39 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [self.preferencesViewController displayAccounts:sender];
 }
 
+- (IBAction)placeCall:(id)sender
+{
+    Call* c = CallModel::instance()->dialingCall();
+    c->setDialNumber(QString::fromNSString([callField stringValue]));
+    c << Call::Action::ACCEPT;
+}
+
+- (void)togglePowerSettings:(id)sender
+{
+    NSLog(@"Toggling power settings!");
+
+    BOOL advanced = [[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"];
+    [[NSUserDefaults standardUserDefaults] setBool:!advanced forKey:@"show_advanced"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+
+    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
+    [tb setDelegate: self.preferencesViewController];
+    [self.preferencesViewController displayGeneral:nil];
+    [self.window setToolbar:tb];
+}
+
+#pragma NSTextField Delegate
+
+- (void)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
+{
+    NSLog(@"Selector method is (%@)", NSStringFromSelector( commandSelector ) );
+    if (commandSelector == @selector(insertNewline:)) {
+        if([[callField stringValue] isNotEqualTo:@""])
+           [self placeCall:nil];
+
+    }
+}
 
 #pragma NSToolbar Delegate
 
@@ -158,9 +204,8 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
         item = [[NSToolbarItem alloc] initWithItemIdentifier: kSearchViewIdentifier];
         callField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0,0,400,21)];
         [[callField cell] setSearchButtonCell:nil];
+        [callField setDelegate:self];
         [callField setToolTip:@"Call"];
-        //[callField setAlignment:NSCenterTextAlignment];
-
         [item setView:callField];
     }
 
@@ -186,14 +231,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
     return item;
 
-}
-
-
-- (IBAction)placeCall:(id)sender
-{
-    Call* c = CallModel::instance()->dialingCall();
-    c->setDialNumber(QString::fromNSString([callField stringValue]));
-    c << Call::Action::ACCEPT;
 }
 
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar

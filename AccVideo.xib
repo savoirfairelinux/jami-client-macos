@@ -39,7 +39,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="bYO-LR-nVo" indentationPerLevel="16" outlineTableColumn="DSk-Vi-l91" id="H2b-i2-whr">
-                                        <rect key="frame" x="0.0" y="0.0" width="380" height="19"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="19"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -126,6 +126,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="moveDown:" target="-2" id="Eew-cq-oSJ"/>
+                            </connections>
                         </button>
                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8M7-MC-vJE">
                             <rect key="frame" x="-6" y="13" width="58" height="32"/>
@@ -133,6 +136,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="moveUp:" target="-2" id="y2e-P5-leK"/>
+                            </connections>
                         </button>
                     </subviews>
                 </customView>
