@@ -68,15 +68,31 @@
     [codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
     [codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-
 }
 
 - (IBAction)moveUp:(id)sender {
 
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        if(!qIdx.isValid())
+            return;
+
+        QMimeData* mime = privateAccount->codecModel()->audioCodecs()->mimeData(QModelIndexList() << qIdx);
+
+        privateAccount->codecModel()->audioCodecs()->dropMimeData(mime, Qt::MoveAction, qIdx.row() - 1, 0, QModelIndex());
+    }
 }
 
 - (IBAction)moveDown:(id)sender {
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        if(!qIdx.isValid())
+            return;
 
+        QMimeData* mime = privateAccount->codecModel()->audioCodecs()->mimeData(QModelIndexList() << qIdx);
+
+        privateAccount->codecModel()->audioCodecs()->dropMimeData(mime, Qt::MoveAction, qIdx.row() + 1, 0, QModelIndex());
+    }
 }
 
 - (IBAction)toggleCodec:(NSOutlineView*)sender {
@@ -84,8 +100,8 @@
     NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
     NSButtonCell *cell = [col dataCellForRow:row];
     QModelIndex qIdx = privateAccount->codecModel()->audioCodecs()->index(row, 0, QModelIndex());
-    privateAccount->codecModel()->audioCodecs()->setData(
-                                                         qIdx, cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    privateAccount->codecModel()->audioCodecs()->setData(qIdx, cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    privateAccount->saveCodecs();
 }
 
 #pragma mark - NSOutlineViewDelegate methods

@@ -183,7 +183,7 @@
     [previewView setWantsLayer:YES];
     [previewView setLayer:previewLayer];
     [previewLayer setBackgroundColor:[NSColor blackColor].CGColor];
-    [previewLayer setContentsGravity:kCAGravityResizeAspect];
+    [previewLayer setContentsGravity:kCAGravityResizeAspectFill];
     [previewLayer setFrame:previewView.frame];
 
     [controlsPanel setWantsLayer:YES];
