@@ -29,15 +29,16 @@
  */
 #import "GeneralPrefsVC.h"
 
+#import <historymodel.h>
+
 @interface GeneralPrefsVC ()
 
 @end
 
 @implementation GeneralPrefsVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+- (IBAction)clearHistory:(id)sender {
+    HistoryModel::instance()->clearAllCollections();
 }
 
 @end

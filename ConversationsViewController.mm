@@ -79,6 +79,7 @@
                      });
 
     currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+
     [currentCallView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
@@ -140,18 +141,7 @@
 {
     if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
     {
-        NSIndexPath* idx = ((NSTreeNode*)item).indexPath;
-        NSUInteger myArray[[idx length]];
-        [idx getIndexes:myArray];
-        NSLog(@"array:%@", idx);
-
-        QModelIndex qIdx;
-        if(idx.length == 2)
-            qIdx = CallModel::instance()->index(myArray[1], 0, CallModel::instance()->index(myArray[0], 0));
-        else
-            qIdx = CallModel::instance()->index(myArray[0], 0);
-
-
+        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
         if(qIdx.isValid())
             cell.title = CallModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     }
