@@ -125,9 +125,11 @@
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsMoved,
                      [=](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
-                         //NSLog(@"rows moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
+                         NSLog(@"rows moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
                          /* these rows should have been removed in the "rowsAboutToBeMoved" handler
                           * now insert them in the new location */
+
+                         //[self moveNode:<#(NSTreeNode *)#> toIndexPath:<#(NSIndexPath *)#>]
                          for( int row = sourceStart; row <= sourceEnd; row++) {
                              //TODO
                          }
@@ -143,16 +145,9 @@
                      );
 
     QObject::connect(self->privateQModel,
-                     &QAbstractItemModel::rowsAboutToBeRemoved,
-                     [=](const QModelIndex & parent, int first, int last) {
-                         NSLog(@"rows about to be removed");
-                     }
-                     );
-
-    QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsRemoved,
                      [=](const QModelIndex & parent, int first, int last) {
-                         NSLog(@"rows removed");
+                         //NSLog(@"rows removed");
                          for( int row = first; row <= last; row++) {
                              if(parent.isValid())
                              {
@@ -170,14 +165,14 @@
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::layoutChanged,
                      [=]() {
-                         NSLog(@"layout changed");
+                         //NSLog(@"layout changed");
                      }
                      );
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         NSLog(@"data changed");
+                         //NSLog(@"data changed");
                          for(int row = topLeft.row() ; row <= bottomRight.row() ; ++row)
                          {
                              QModelIndex tmpIdx = self->privateQModel->index(row, 0);

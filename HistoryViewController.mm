@@ -76,7 +76,6 @@
     [historyView setDoubleAction:@selector(placeCall:)];
 
     NSInteger idx = [historyView columnWithIdentifier:COLUMNID_DAY];
-    [[[[self.historyView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Name"];
 
     CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
 
@@ -155,10 +154,13 @@
 
     if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
     {
-        cell.title = CategorizedHistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        if(qIdx.parent().isValid())
+            cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::Number).toString().toNSString();
+        else
+            cell.title = CategorizedHistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
     {
-        cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::Number).toString().toNSString();
+       // cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::Number).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
     {
         cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();

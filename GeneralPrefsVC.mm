@@ -29,15 +29,16 @@
  */
 #import "GeneralPrefsVC.h"
 
+#import <categorizedhistorymodel.h>
+
 @interface GeneralPrefsVC ()
 
 @end
 
 @implementation GeneralPrefsVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+- (IBAction)clearHistory:(id)sender {
+    CategorizedHistoryModel::instance()->clearAllCollections();
 }
 
 @end
