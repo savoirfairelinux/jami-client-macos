@@ -84,8 +84,8 @@
     NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
     NSButtonCell *cell = [col dataCellForRow:row];
     QModelIndex qIdx = privateAccount->codecModel()->audioCodecs()->index(row, 0, QModelIndex());
-    privateAccount->codecModel()->audioCodecs()->setData(
-                                                         qIdx, cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    privateAccount->codecModel()->audioCodecs()->setData(qIdx, cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    privateAccount->saveCodecs();
 }
 
 #pragma mark - NSOutlineViewDelegate methods

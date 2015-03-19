@@ -89,6 +89,8 @@
     NSButtonCell *cell = [col dataCellForRow:row];
     privateAccount->codecModel()->videoCodecs()->setData(privateAccount->codecModel()->videoCodecs()->index(row, 0, QModelIndex()),
         cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    privateAccount->saveCodecs();
+    privateAccount->codecModel()->save();
 }
 
 #pragma mark - NSOutlineViewDelegate methods
