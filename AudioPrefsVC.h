@@ -32,7 +32,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AudioPrefsVC : NSViewController
+@interface AudioPrefsVC : NSViewController <NSMenuDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate> {
+
+}
 
 @end
 
