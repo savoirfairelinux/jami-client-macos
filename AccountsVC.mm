@@ -161,6 +161,26 @@ public:
     [self.ringTabItem setView:self.ringVC.view];
 }
 
+- (IBAction)moveUp:(id)sender {
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        if(!qIdx.isValid())
+            return;
+
+        AccountModel::instance()->moveUp(qIdx);
+    }
+}
+
+- (IBAction)moveDown:(id)sender {
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        if(!qIdx.isValid())
+            return;
+
+        AccountModel::instance()->moveDown(qIdx);
+    }
+}
+
 - (IBAction)removeAccount:(id)sender {
 
     if(treeController.selectedNodes.count > 0) {
