@@ -29,15 +29,152 @@
  */
 #import "VideoPrefsVC.h"
 
+#import <QuartzCore/QuartzCore.h>
+
+#import <video/sourcesmodel.h>
+#import <video/previewmanager.h>
+#import <video/renderer.h>
+#import <video/device.h>
+#import <video/devicemodel.h>
+
 @interface VideoPrefsVC ()
+
+@property (assign) IBOutlet NSView *previewView;
+@property (assign) IBOutlet NSPopUpButton *videoDevicesList;
+@property (assign) IBOutlet NSPopUpButton *sizesList;
+@property (assign) IBOutlet NSPopUpButton *ratesList;
 
 @end
 
 @implementation VideoPrefsVC
+@synthesize previewView;
+@synthesize videoDevicesList;
+@synthesize sizesList;
+@synthesize ratesList;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+QMetaObject::Connection frameUpdated;
+QMetaObject::Connection previewStarted;
+QMetaObject::Connection previewStopped;
+
+- (void)loadView
+{
+    [super loadView];
+
+    QModelIndex qOutputIdx = Video::SourcesModel::instance()->index(Video::SourcesModel::instance()->activeIndex());
+    [self.videoDevicesList addItemWithTitle:Video::SourcesModel::instance()->data(qOutputIdx, Qt::DisplayRole).toString().toNSString()];
+
+    [previewView setWantsLayer:YES];
+    [previewView setLayer:[CALayer layer]];
+    [previewView.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    [previewView.layer setContentsGravity:kCAGravityResizeAspect];
+    [previewView.layer setFrame:previewView.frame];
+    [previewView.layer setBounds:previewView.frame];
+
+    [self connectPreviewSignals];
+}
+
+- (IBAction)chooseDevice:(id)sender {
+
+}
+
+- (IBAction)chooseSize:(id)sender {
+
+}
+
+- (IBAction)chooseRate:(id)sender {
+
+}
+
+- (void) connectPreviewSignals
+{
+    previewStarted = QObject::connect(Video::PreviewManager::instance(),
+                                             &Video::PreviewManager::previewStarted,
+                                             [=](Video::Renderer* renderer) {
+                                                 NSLog(@"Preview started");
+                                                 QObject::disconnect(frameUpdated);
+                                                 frameUpdated = QObject::connect(renderer,
+                                                                                 &Video::Renderer::frameUpdated,
+                                                                                 [=]() {
+                                                                                     [self renderer:Video::PreviewManager::instance()->previewRenderer() renderFrameForView:previewView];
+                                                                                 });
+                                             });
+
+    previewStopped = QObject::connect(Video::PreviewManager::instance(),
+                                             &Video::PreviewManager::previewStopped,
+                                             [=](Video::Renderer* renderer) {
+                                                 NSLog(@"Preview stopped");
+                                                 QObject::disconnect(frameUpdated);
+                                                 [previewView.layer setContents:nil];
+                                             });
+
+    frameUpdated = QObject::connect(Video::PreviewManager::instance()->previewRenderer(),
+                                                  &Video::Renderer::frameUpdated,
+                                                  [=]() {
+                                                      [self renderer:Video::PreviewManager::instance()->previewRenderer()
+                                                  renderFrameForView:previewView];
+                                                  });
+}
+
+-(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
+{
+    const QByteArray& data = renderer->currentFrame();
+    QSize res = renderer->size();
+
+    auto buf = reinterpret_cast<const unsigned char*>(data.data());
+
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef newContext = CGBitmapContextCreate((void *)buf,
+                                                    res.width(),
+                                                    res.height(),
+                                                    8,
+                                                    4*res.width(),
+                                                    colorSpace,
+                                                    kCGImageAlphaPremultipliedLast);
+
+
+    CGImageRef newImage = CGBitmapContextCreateImage(newContext);
+
+    /*We release some components*/
+    CGContextRelease(newContext);
+    CGColorSpaceRelease(colorSpace);
+
+    [CATransaction begin];
+    view.layer.contents = (__bridge id)newImage;
+    [CATransaction commit];
+
+    CFRelease(newImage);
+}
+
+- (IBAction)togglePreview:(id)sender {
+    if([sender state] == NSOnState)
+        Video::PreviewManager::instance()->startPreview();
+    else
+        Video::PreviewManager::instance()->stopPreview();
+}
+
+- (void)viewWillDisappear
+{
+    Video::PreviewManager::instance()->stopPreview();
+}
+
+#pragma mark - NSMenuDelegate methods
+
+- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
+{
+    QModelIndex qIdx;
+
+    if([menu.title isEqualToString:@"devices"])
+    {
+        qIdx = Video::SourcesModel::instance()->index(index);
+        [item setTitle:Video::SourcesModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+    }
+    return YES;
+}
+
+- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
+{
+    if([menu.title isEqualToString:@"devices"])
+        return Video::SourcesModel::instance()->rowCount();
 }
 
 @end
