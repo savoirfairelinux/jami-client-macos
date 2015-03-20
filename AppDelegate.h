@@ -35,7 +35,7 @@
 #import "RingWindowController.h"
 #import "PreferencesWindowController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 
 @property RingWindowController* ringWindowController;
 

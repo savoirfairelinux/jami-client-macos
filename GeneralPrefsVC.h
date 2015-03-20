@@ -34,6 +34,7 @@
 
 @interface GeneralPrefsVC : NSViewController {
 
+    NSTextField *historyChangedLabel;
 }
 
 @end
