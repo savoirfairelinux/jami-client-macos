@@ -29,14 +29,43 @@
  */
 #import "AppDelegate.h"
 
+#import <callmodel.h>
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
+    [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
+
     self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
     [self.ringWindowController showWindow:nil];
+    [self connect];
+}
+
+- (void) connect
+{
+    QObject::connect(CallModel::instance(),
+                     &CallModel::incomingCall,
+                     [=](Call* call) {
+                         BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:@"window_behaviour"];
+                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:@"enable_notifications"];
+                         if(shouldComeToForeground)
+                             [NSApp activateIgnoringOtherApps:YES];
+
+                         if(shouldNotify) {
+                             [self showIncomingNotification:call];
+                         }
+                     });
+}
+
+- (void) showIncomingNotification:(Call*) call{
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    notification.title = @"Incoming call", call->peerName();
+    //notification.informativeText = @"A notification";
+    notification.soundName = NSUserNotificationDefaultSoundName;
+
+    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
 }
 
 @end
