@@ -1,109 +1,148 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AudioPrefsVC">
             <connections>
-                <outlet property="view" destination="c22-O7-iKe" id="WXt-aq-iUD"/>
+                <outlet property="alwaysRecordingButton" destination="kOg-hX-1Q5" id="n6R-hv-JLY"/>
+                <outlet property="inputDeviceList" destination="bK9-uH-jDb" id="zhZ-Cr-n6B"/>
+                <outlet property="muteDTMFButton" destination="Jyg-5H-Ygw" id="PDq-aH-ieL"/>
+                <outlet property="outputDeviceList" destination="9SA-9E-IzQ" id="YpE-Fz-J8P"/>
+                <outlet property="recordingsPathControl" destination="nyE-tZ-v4C" id="4cw-pY-c3Z"/>
+                <outlet property="view" destination="c22-O7-iKe" id="qz7-de-jg2"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="362" height="424"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ftI-JV-7cE">
-                    <rect key="frame" x="114" y="229" width="78" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Recordings:" id="9HH-Pa-4Aq">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y73-M5-wnx">
-                    <rect key="frame" x="139" y="179" width="53" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Output:" id="2gZ-Ab-XHf">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wn2-fz-UW2">
-                    <rect key="frame" x="151" y="128" width="42" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Input:" id="x1o-rT-jy6">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IDV-b5-br4">
-                    <rect key="frame" x="128" y="81" width="65" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Ringtone:" id="Gr8-kY-X9a">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-vn-Oim">
-                    <rect key="frame" x="100" y="34" width="92" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tone settings:" id="NvN-ip-svk">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="akC-1c-4RK">
-                    <rect key="frame" x="194" y="122" width="182" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="On8-vq-c0G">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>Item 1</string>
-                            <string>Item 2</string>
-                            <string>Item 3</string>
-                        </objectValues>
-                    </comboBoxCell>
-                </comboBox>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ni4-Q8-9bE">
-                    <rect key="frame" x="194" y="75" width="182" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="dSu-4c-qW0">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>Item 1</string>
-                            <string>Item 2</string>
-                            <string>Item 3</string>
-                        </objectValues>
-                    </comboBoxCell>
-                </comboBox>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jyg-5H-Ygw">
-                    <rect key="frame" x="196" y="33" width="94" height="18"/>
-                    <buttonCell key="cell" type="check" title="Mute DTMF" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pAA-Iv-EmI">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                </button>
-                <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxm-vJ-peN">
-                    <rect key="frame" x="194" y="173" width="182" height="26"/>
-                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="FDZ-VU-Kwv">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>Item 1</string>
-                            <string>Item 2</string>
-                            <string>Item 3</string>
-                        </objectValues>
-                    </comboBoxCell>
-                </comboBox>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="deY-JV-Rfe">
+                    <rect key="frame" x="20" y="20" width="322" height="384"/>
+                    <subviews>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ftI-JV-7cE">
+                            <rect key="frame" x="19" y="347" width="80" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Recordings" id="9HH-Pa-4Aq">
+                                <font key="font" metaFont="systemBold"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y73-M5-wnx">
+                            <rect key="frame" x="44" y="226" width="53" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Output:" id="2gZ-Ab-XHf">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="She-fN-vzD">
+                            <rect key="frame" x="46" y="322" width="49" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save in" id="ksV-r2-EVJ">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kOg-hX-1Q5">
+                            <rect key="frame" x="46" y="287" width="130" height="18"/>
+                            <buttonCell key="cell" type="check" title="Always recording" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="jeD-Nk-KHA">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleAlwaysRecording:" target="-2" id="sOq-tA-ZBV"/>
+                            </connections>
+                        </button>
+                        <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9SA-9E-IzQ" userLabel="Outputs">
+                            <rect key="frame" x="96" y="221" width="209" height="26"/>
+                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="4Fp-hR-KdJ">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" title="outputlist" id="eao-Bf-buc">
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="dXz-O7-2jP"/>
+                                    </connections>
+                                </menu>
+                            </popUpButtonCell>
+                            <connections>
+                                <action selector="chooseOutput:" target="-2" id="SIh-kG-rV5"/>
+                            </connections>
+                        </popUpButton>
+                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nyE-tZ-v4C">
+                            <rect key="frame" x="95" y="316" width="210" height="26"/>
+                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="SPB-Bz-vDM">
+                                <font key="font" metaFont="system"/>
+                                <url key="url" string="file://localhost/Applications/"/>
+                            </pathCell>
+                            <connections>
+                                <action selector="pathControlSingleClick:" target="-2" id="a8r-s5-lxq"/>
+                                <outlet property="delegate" destination="-2" id="JXx-Le-f5R"/>
+                            </connections>
+                        </pathControl>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMB-Zm-k0Z">
+                            <rect key="frame" x="20" y="253" width="99" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio devices" id="B0r-wh-wc3">
+                                <font key="font" metaFont="systemBold"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-vn-Oim">
+                            <rect key="frame" x="19" y="136" width="92" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tone settings:" id="NvN-ip-svk">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jyg-5H-Ygw">
+                            <rect key="frame" x="115" y="135" width="94" height="18"/>
+                            <buttonCell key="cell" type="check" title="Mute DTMF" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="pAA-Iv-EmI">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="toggleMuteDTMF:" target="-2" id="RNQ-D2-2m6"/>
+                            </connections>
+                        </button>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wn2-fz-UW2">
+                            <rect key="frame" x="56" y="185" width="42" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Input:" id="x1o-rT-jy6">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bK9-uH-jDb" userLabel="Inputs">
+                            <rect key="frame" x="99" y="180" width="206" height="26"/>
+                            <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="3mj-4K-xif">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" title="inputlist" id="szZ-RR-Ewo">
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="g3C-Tc-BTO"/>
+                                    </connections>
+                                </menu>
+                            </popUpButtonCell>
+                            <connections>
+                                <action selector="chooseInput:" target="-2" id="ADO-Qj-tAz"/>
+                            </connections>
+                        </popUpButton>
+                    </subviews>
+                </customView>
             </subviews>
-            <point key="canvasLocation" x="388" y="254"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="deY-JV-Rfe" secondAttribute="trailing" constant="20" id="EI7-CU-xOt"/>
+                <constraint firstAttribute="centerX" secondItem="deY-JV-Rfe" secondAttribute="centerX" id="LTH-TO-EQo"/>
+                <constraint firstItem="deY-JV-Rfe" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="Yfs-Gb-o1f"/>
+                <constraint firstAttribute="bottom" secondItem="deY-JV-Rfe" secondAttribute="bottom" constant="20" id="aKg-uU-3ut"/>
+                <constraint firstItem="deY-JV-Rfe" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="kYM-ud-zum"/>
+            </constraints>
+            <point key="canvasLocation" x="220" y="241"/>
         </customView>
     </objects>
 </document>

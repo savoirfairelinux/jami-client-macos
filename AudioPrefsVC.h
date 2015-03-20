@@ -32,7 +32,23 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AudioPrefsVC : NSViewController
+@interface AudioPrefsVC : NSViewController <NSMenuDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate> {
+
+    NSPopUpButton *outputDeviceList;
+    NSPopUpButton *inputDeviceList;
+    NSButton *alwaysRecordingButton;
+    NSButton *muteDTMFButton;
+    NSPathControl *recordingsPathControl;
+}
+
+@property (assign) IBOutlet NSPopUpButton *outputDeviceList;
+@property (assign) IBOutlet NSPopUpButton *inputDeviceList;
+@property (assign) IBOutlet NSButton *alwaysRecordingButton;
+@property (assign) IBOutlet NSButton *muteDTMFButton;
+
+- (IBAction)toggleMuteDTMF:(NSButton *)sender;
+
+- (IBAction)toggleAlwaysRecording:(NSButton *)sender;
 
 @end
 
