@@ -161,11 +161,20 @@ public:
     [self.ringTabItem setView:self.ringVC.view];
 }
 
+- (IBAction)moveUp:(id)sender {
+    AccountModel::instance()->moveUp();
+}
+
+- (IBAction)moveDown:(id)sender {
+    AccountModel::instance()->moveDown();
+}
+
 - (IBAction)removeAccount:(id)sender {
 
     if(treeController.selectedNodes.count > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         AccountModel::instance()->remove(qIdx);
+        AccountModel::instance()->save();
     }
 }
 - (IBAction)addAccount:(id)sender {
@@ -175,6 +184,7 @@ public:
                 AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
 
     Account* newAcc =AccountModel::instance()->add([newAccName UTF8String], qIdx);
+    AccountModel::instance()->save();
 }
 
 - (IBAction)protocolSelectedChanged:(id)sender {
@@ -336,6 +346,7 @@ public:
     if([[treeController selectedNodes] count] > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         //Update details view
+        AccountModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
         Account* acc = AccountModel::instance()->getAccountByModelIndex(qIdx);
 
             switch (acc->protocol()) {
@@ -359,6 +370,7 @@ public:
         [self.accountDetailsView setHidden:NO];
     } else {
         [self.accountDetailsView setHidden:YES];
+        AccountModel::instance()->selectionModel()->clearCurrentIndex();
     }
 }
 
