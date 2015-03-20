@@ -29,12 +29,16 @@
  */
 #import "GeneralPrefsVC.h"
 
+#import <categorizedhistorymodel.h>
+
 @interface GeneralPrefsVC ()
 
 @end
 
 @implementation GeneralPrefsVC
 
+- (IBAction)clearHistory:(id)sender {
+    CategorizedHistoryModel::instance()->clearAllCollections();
 }
 
 @end
