@@ -29,7 +29,6 @@
  */
 #import "RingWindowController.h"
 
-#import <historymodel.h>
 #import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
