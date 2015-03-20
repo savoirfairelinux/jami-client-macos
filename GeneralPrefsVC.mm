@@ -29,12 +29,35 @@
  */
 #import "GeneralPrefsVC.h"
 
+#import <categorizedhistorymodel.h>
+
 @interface GeneralPrefsVC ()
+@property (assign) IBOutlet NSTextField *historyChangedLabel;
 
 @end
 
 @implementation GeneralPrefsVC {
 
+}
+@synthesize historyChangedLabel;
+
+- (void)loadView
+{
+    [super loadView];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"history_limit" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (IBAction)clearHistory:(id)sender {
+    CategorizedHistoryModel::instance()->clearAllCollections();
+    [historyChangedLabel setHidden:NO];
+}
+
+// KVO handler
+-(void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject
+                       change:(NSDictionary *)aChange context:(void *)aContext
+{
+    NSLog(@"VALUE CHANGED");
+    [historyChangedLabel setHidden:NO];
 }
 
 @end

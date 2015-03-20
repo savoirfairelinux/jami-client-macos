@@ -18,12 +18,16 @@
  ***********************************************************************************/
 #import "minimalhistorybackend.h"
 
+#import <Cocoa/Cocoa.h>
+
 //Qt
 #import <QtCore/QFile>
 #import <QtCore/QDir>
+#import <QtCore/qlist.h>
 #import <QtCore/QHash>
 #import <QtWidgets/QApplication>
 #import <QtCore/QStandardPaths>
+#import <collectioneditor.h>
 
 //Ring
 #import <call.h>
@@ -38,6 +42,7 @@ public:
     MinimalHistoryEditor(CollectionMediator<Call>* m, MinimalHistoryBackend* parent);
     virtual bool save       ( const Call* item ) override;
     virtual bool remove     ( const Call* item ) override;
+    virtual bool batchRemove(const QList<Call*> contacts) override;
     virtual bool edit       ( Call*       item ) override;
     virtual bool addNew     ( const Call* item ) override;
     virtual bool addExisting( const Call* item ) override;
@@ -124,7 +129,13 @@ bool MinimalHistoryEditor::save(const Call* call)
 
 bool MinimalHistoryEditor::remove(const Call* item)
 {
+    mediator()->removeItem(item);
     return regenFile(item);
+}
+
+bool MinimalHistoryEditor::batchRemove(const QList<Call*> calls) {
+    QFile::remove(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "history.ini");
+    return YES;
 }
 
 bool MinimalHistoryEditor::edit( Call* item)
@@ -190,6 +201,9 @@ bool MinimalHistoryBackend::isEnabled() const
 
 bool MinimalHistoryBackend::load()
 {
+    // get history limit from our preferences set
+    NSInteger historyLimit = [[NSUserDefaults standardUserDefaults] integerForKey:@"history_limit"];
+
     QFile file(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') +"history.ini");
     if ( file.open(QIODevice::ReadOnly | QIODevice::Text) ) {
         QMap<QString,QString> hc;
@@ -202,10 +216,13 @@ bool MinimalHistoryBackend::load()
                 if (pastCall->peerName().isEmpty()) {
                     pastCall->setPeerName(QObject::tr("Unknown"));
                 }
-                pastCall->setRecordingPath(hc[ Call::HistoryMapFields::RECORDING_PATH ]);
-                pastCall->setCollection(this);
 
-                editor<Call>()->addExisting(pastCall);
+                if(daysSince(pastCall->startTimeStamp()) < historyLimit) {
+                    pastCall->setRecordingPath(hc[ Call::HistoryMapFields::RECORDING_PATH ]);
+                    pastCall->setCollection(this);
+
+                    editor<Call>()->addExisting(pastCall);
+                }
                 hc.clear();
             }
             // Add to the current set
@@ -220,6 +237,26 @@ bool MinimalHistoryBackend::load()
     else
         qWarning() << "History doesn't exist or is not readable";
     return false;
+}
+
+int MinimalHistoryBackend::daysSince(time_t timestamp)
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+
+    NSDate* fromDateTime = [NSDate dateWithTimeIntervalSince1970:timestamp];
+
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                 interval:NULL forDate:[NSDate date]];
+
+    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                               fromDate:fromDate toDate:toDate options:0];
+
+    return [difference day];
 }
 
 bool MinimalHistoryBackend::reload()
@@ -239,7 +276,11 @@ CollectionInterface::SupportedFeatures MinimalHistoryBackend::supportedFeatures(
 
 bool MinimalHistoryBackend::clear()
 {
-    QFile::remove(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + "history.ini");
+    editor<Call>()->batchRemove(items<Call>().toList());
+    QList<Call*> calls = items<Call>().toList();
+    for(int i = 0 ; i < calls.count() ; ++i) {
+        CategorizedHistoryModel::instance()->deleteItem(calls[i]);
+    }
     return true;
 }
 
