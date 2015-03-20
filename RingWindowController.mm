@@ -188,14 +188,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
 }
 
-
-- (IBAction)placeCall:(id)sender
-{
-    Call* c = CallModel::instance()->dialingCall();
-    c->setDialNumber(QString::fromNSString([callField stringValue]));
-    c << Call::Action::ACCEPT;
-}
-
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
     return [NSArray arrayWithObjects:
