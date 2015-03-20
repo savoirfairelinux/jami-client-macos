@@ -35,9 +35,6 @@
 
 @implementation GeneralPrefsVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
 }
 
 @end

@@ -35,14 +35,9 @@
 #import "RingWindowController.h"
 #import "PreferencesWindowController.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 
 @property RingWindowController* ringWindowController;
-@property PreferencesWindowController* preferencesWindowController;
-
-+ (void)restoreWindowWithIdentifier:(NSString *)identifier
-                                state:(NSCoder *)state
-                                completionHandler:(void (^)(NSWindow *, NSError *))completionHandler;
 
 @end
 
