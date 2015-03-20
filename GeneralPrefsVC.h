@@ -32,7 +32,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface GeneralPrefsVC : NSViewController
+@interface GeneralPrefsVC : NSViewController {
+
+}
 
 @end
 

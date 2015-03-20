@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="aliasTextField" destination="D7f-4A-xXM" id="i9Y-jZ-iWM"/>
                 <outlet property="autoAnswerButton" destination="6uh-UC-6i9" id="6e1-1I-OY3"/>
-                <outlet property="boostrapField" destination="phb-wW-DQS" id="61p-oU-ZOv"/>
                 <outlet property="bootstrapField" destination="phb-wW-DQS" id="kcY-7z-bjM"/>
                 <outlet property="hashField" destination="c6M-WV-uVk" id="Jhb-0k-sBc"/>
                 <outlet property="typeLabel" destination="vov-vT-UPq" id="cy7-xb-0xG"/>

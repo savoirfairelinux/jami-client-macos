@@ -76,7 +76,6 @@
     [historyView setDoubleAction:@selector(placeCall:)];
 
     NSInteger idx = [historyView columnWithIdentifier:COLUMNID_DAY];
-    [[[[self.historyView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Name"];
 
     CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
 
