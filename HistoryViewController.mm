@@ -29,7 +29,7 @@
  */
 #import "HistoryViewController.h"
 
-#import <historymodel.h>
+#import <categorizedhistorymodel.h>
 #import <callmodel.h>
 #import <call.h>
 #import <contactmethod.h>
@@ -64,7 +64,7 @@
 
 - (void)awakeFromNib
 {
-    treeController = [[QNSTreeController alloc] initWithQModel:HistoryModel::instance()];
+    treeController = [[QNSTreeController alloc] initWithQModel:CategorizedHistoryModel::instance()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
@@ -78,7 +78,7 @@
     NSInteger idx = [historyView columnWithIdentifier:COLUMNID_DAY];
     [[[[self.historyView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Name"];
 
-    HistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
+    CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
 
 }
 
@@ -87,7 +87,7 @@
     if([[treeController selectedNodes] count] > 0) {
         Call* c = CallModel::instance()->dialingCall();
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        QVariant var = HistoryModel::instance()->data(qIdx, (int)Call::Role::ContactMethod);
+        QVariant var = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::ContactMethod);
         ContactMethod* m = qvariant_cast<ContactMethod*>(var);
         if(m){
             Call* c = CallModel::instance()->dialingCall();
@@ -155,13 +155,13 @@
 
     if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
     {
-        cell.title = HistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        cell.title = CategorizedHistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
     {
-        cell.title = HistoryModel::instance()->data(qIdx, (int)Call::Role::Number).toString().toNSString();
+        cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::Number).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
     {
-        cell.title = HistoryModel::instance()->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
+        cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
     }
 }
 
