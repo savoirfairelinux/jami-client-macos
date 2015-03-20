@@ -41,6 +41,8 @@ public:
     virtual bool       isEnabled() const override;
     virtual QByteArray id       () const override;
     virtual SupportedFeatures  supportedFeatures() const override;
+    int daysSince(time_t timestamp);
+
 
 private:
     CollectionMediator<Call>*  m_pMediator;
