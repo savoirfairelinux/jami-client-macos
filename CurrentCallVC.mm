@@ -98,9 +98,6 @@
 @synthesize previewHolder;
 @synthesize videoHolder;
 
-
-
-
 - (void) updateActions
 {
     for(int i = 0 ; i <= CallModel::instance()->userActionModel()->rowCount() ; i++) {
@@ -168,8 +165,6 @@
     actionHash[ (int)UserActionModel::Action::HANGUP          ] = hangUpButton;
     //actionHash[ (int)UserActionModel::Action::MUTE_AUDIO      ] = action_mute_capture;
     //actionHash[ (int)UserActionModel::Action::SERVER_TRANSFER ] = action_transfer;
-
-
 
     videoLayer = [CALayer layer];
     [videoView setWantsLayer:YES];
