@@ -54,15 +54,13 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
 - (IBAction)openPreferences:(id)sender
 {
-
-    if(self.preferencesViewController != nil)
+    if(self.preferencesViewController != nil) {
+        [self closePreferences:nil];
         return;
+    }
     NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
 
-
-
     self.preferencesViewController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesScreen" bundle:nil];
-
     self.myCurrentViewController = self.preferencesViewController;
 
     NSLayoutConstraint* test = [NSLayoutConstraint constraintWithItem:self.preferencesViewController.view
@@ -147,6 +145,20 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [self.preferencesViewController displayAccounts:sender];
 }
 
+- (void)togglePowerSettings:(id)sender
+{
+    NSLog(@"Toggling power settings!");
+
+    BOOL advanced = [[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"];
+    [[NSUserDefaults standardUserDefaults] setBool:!advanced forKey:@"show_advanced"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+
+    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
+    [tb setDelegate: self.preferencesViewController];
+    [self.preferencesViewController displayGeneral:nil];
+    [self.window setToolbar:tb];
+}
 
 #pragma NSToolbar Delegate
 
