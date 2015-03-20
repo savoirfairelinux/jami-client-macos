@@ -36,9 +36,9 @@
 
 #import "AccGeneralVC.h"
 
-#include <accountmodel.h>
+#import <accountmodel.h>
 #import <protocolmodel.h>
-#include <qitemselectionmodel.h>
+#import <qitemselectionmodel.h>
 
 @interface AccGeneralVC ()
 

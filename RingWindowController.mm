@@ -32,7 +32,7 @@
 #import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
-#include <call.h>
+#import <call.h>
 
 @interface RingWindowController ()
 

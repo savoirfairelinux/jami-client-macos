@@ -16,21 +16,21 @@
  *   License along with this library; if not, write to the Free Software            *
  *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA *
  ***********************************************************************************/
-#include "minimalhistorybackend.h"
+#import "minimalhistorybackend.h"
 
 //Qt
-#include <QtCore/QFile>
-#include <QtCore/QDir>
-#include <QtCore/QHash>
-#include <QtWidgets/QApplication>
-#include <QtCore/QStandardPaths>
+#import <QtCore/QFile>
+#import <QtCore/QDir>
+#import <QtCore/QHash>
+#import <QtWidgets/QApplication>
+#import <QtCore/QStandardPaths>
 
 //Ring
-#include <call.h>
-#include <account.h>
-#include <person.h>
-#include <contactmethod.h>
-#include <categorizedhistorymodel.h>
+#import <call.h>
+#import <account.h>
+#import <person.h>
+#import <contactmethod.h>
+#import <categorizedhistorymodel.h>
 
 class MinimalHistoryEditor : public CollectionEditor<Call>
 {

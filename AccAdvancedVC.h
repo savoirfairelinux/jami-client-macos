@@ -29,7 +29,7 @@
  */
 #import <Cocoa/Cocoa.h>
 
-#include <account.h>
+#import <account.h>
 
 @interface AccAdvancedVC : NSViewController <NSTextFieldDelegate> {
 

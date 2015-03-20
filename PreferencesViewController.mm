@@ -31,7 +31,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#include <accountmodel.h>
+#import <accountmodel.h>
 
 #import "AccountsVC.h"
 #import "GeneralPrefsVC.h"

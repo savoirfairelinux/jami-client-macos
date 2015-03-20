@@ -34,10 +34,9 @@
 
 #import "AccAudioVC.h"
 
-#include <QSortFilterProxyModel>
-
-#include <audio/codecmodel.h>
-#include <accountmodel.h>
+#import <QSortFilterProxyModel>
+#import <audio/codecmodel.h>
+#import <accountmodel.h>
 
 @interface AccAudioVC ()
 

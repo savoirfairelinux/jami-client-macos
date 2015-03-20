@@ -35,10 +35,11 @@
 #import "AccountsVC.h"
 
 // LibRingClient
-#include <accountmodel.h>
-#include <protocolmodel.h>
-#include <QItemSelectionModel>
-#include <account.h>
+#import <QSortFilterProxyModel>
+#import <accountmodel.h>
+#import <protocolmodel.h>
+#import <QItemSelectionModel>
+#import <account.h>
 
 #import "QNSTreeController.h"
 #import "AccGeneralVC.h"

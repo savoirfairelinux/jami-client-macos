@@ -35,9 +35,8 @@
 #import "AccVideoVC.h"
 
 #include <QtCore/QSortFilterProxyModel>
-
-#include <audio/codecmodel.h>
-#include <accountmodel.h>
+#import <audio/codecmodel.h>
+#import <accountmodel.h>
 
 #import "QNSTreeController.h"
 

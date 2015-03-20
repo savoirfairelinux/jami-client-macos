@@ -32,7 +32,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#include <account.h>
+#import <account.h>
 
 #import "QNSTreeController.h"
 
