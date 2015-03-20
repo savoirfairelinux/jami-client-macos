@@ -49,6 +49,20 @@
 #import "AccSecurityVC.h"
 #import "AccRingVC.h"
 
+// We disabled IAX protocol for now, so don't show it to the user
+class ActiveProtocolModel : public QSortFilterProxyModel
+{
+public:
+    ActiveProtocolModel(QAbstractItemModel* parent) : QSortFilterProxyModel(parent)
+    {
+        setSourceModel(parent);
+    }
+    virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
+    {
+        return sourceModel()->index(source_row,0,source_parent).flags() & Qt::ItemIsEnabled;
+    }
+};
+
 @interface AccountsVC ()
 @property (assign) IBOutlet NSPopUpButton *protocolList;
 
@@ -61,6 +75,7 @@
 @property (retain) IBOutlet NSTabViewItem *ringTabItem;
 
 @property QNSTreeController *treeController;
+@property ActiveProtocolModel* proxyProtocolModel;
 @property (assign) IBOutlet NSOutlineView *accountsListView;
 @property (assign) IBOutlet NSTabView *accountDetailsView;
 
@@ -85,14 +100,7 @@
 @synthesize accountsListView;
 @synthesize accountDetailsView;
 @synthesize treeController;
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT Accounts VC");
-    }
-    return self;
-}
+@synthesize proxyProtocolModel;
 
 - (void)awakeFromNib
 {
@@ -117,6 +125,7 @@
 
                      });
 
+    self.proxyProtocolModel = new ActiveProtocolModel(AccountModel::instance()->protocolModel());
     QModelIndex qProtocolIdx = AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
     [self.protocolList addItemWithTitle:
                            AccountModel::instance()->protocolModel()->data(qProtocolIdx, Qt::DisplayRole).toString().toNSString()];
@@ -157,13 +166,12 @@
     if(treeController.selectedNodes.count > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         AccountModel::instance()->remove(qIdx);
-        AccountModel::instance()->save();
     }
 }
 - (IBAction)addAccount:(id)sender {
     QModelIndex qIdx =  AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
 
-    NSString* newAccName = [[NSString alloc] initWithFormat:@"New %@ account",
+    NSString* newAccName = [[NSString alloc] initWithFormat:@"%@ account",
                 AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
 
     Account* newAcc =AccountModel::instance()->add([newAccName UTF8String], qIdx);
@@ -172,8 +180,9 @@
 - (IBAction)protocolSelectedChanged:(id)sender {
 
     int index = [sender indexOfSelectedItem];
+    QModelIndex proxyIdx = proxyProtocolModel->index(index, 0);
     AccountModel::instance()->protocolModel()->selectionModel()->setCurrentIndex(
-                AccountModel::instance()->protocolModel()->index(index), QItemSelectionModel::ClearAndSelect);
+                proxyProtocolModel->mapToSource(proxyIdx), QItemSelectionModel::ClearAndSelect);
 
 }
 
@@ -357,7 +366,8 @@
 
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
 {
-    QModelIndex qIdx = AccountModel::instance()->protocolModel()->index(index);
+    QModelIndex proxyIdx = proxyProtocolModel->index(index, 0);
+    QModelIndex qIdx = AccountModel::instance()->protocolModel()->index(proxyProtocolModel->mapToSource(proxyIdx).row());
     [item setTitle:AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
 
     return YES;
@@ -365,7 +375,7 @@
 
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
-    return AccountModel::instance()->protocolModel()->rowCount();
+    return proxyProtocolModel->rowCount();
 }
 
 
