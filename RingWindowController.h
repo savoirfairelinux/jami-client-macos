@@ -34,7 +34,7 @@
 #import "HistoryViewController.h"
 #import "PreferencesViewController.h"
 
-@interface RingWindowController : NSWindowController <NSToolbarDelegate>{
+@interface RingWindowController : NSWindowController <NSToolbarDelegate, NSTextFieldDelegate>{
     IBOutlet NSView *currentView;
 }
 @property (nonatomic, assign) NSViewController *myCurrentViewController;

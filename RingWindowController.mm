@@ -168,8 +168,8 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
         callField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0,0,400,21)];
         [[callField cell] setSearchButtonCell:nil];
         [callField setToolTip:@"Call"];
-        //[callField setAlignment:NSCenterTextAlignment];
-
+        [callField setAlignment:NSCenterTextAlignment];
+        [callField setDelegate:self];
         [item setView:callField];
     }
 
@@ -194,7 +194,13 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     }
 
     return item;
+}
 
+- (IBAction)placeCall:(id)sender
+{
+    Call* c = CallModel::instance()->dialingCall();
+    c->setDialNumber(QString::fromNSString([callField stringValue]));
+    c << Call::Action::ACCEPT;
 }
 
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
@@ -225,6 +231,20 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     return nil;
 }
 
+#pragma NSTextField Delegate
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
+{
+    NSLog(@"Selector method is (%@)", NSStringFromSelector( commandSelector ) );
+    if (commandSelector == @selector(insertNewline:)) {
+        if([[callField stringValue] isNotEqualTo:@""]) {
+            [self placeCall:nil];
+            return YES;
+        }
+    }
+
+    return NO;
+}
 
 
 @end
