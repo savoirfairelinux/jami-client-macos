@@ -34,6 +34,8 @@
 #import <account.h>
 #import <call.h>
 
+#import "AppDelegate.h"
+
 @interface RingWindowController ()
 
 @property NSSearchField* callField;
@@ -46,9 +48,9 @@ static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
-
 - (void)windowDidLoad {
     [super windowDidLoad];
+    [self.window setReleasedWhenClosed:FALSE];
     [self displayMainToolBar];
 }
 
