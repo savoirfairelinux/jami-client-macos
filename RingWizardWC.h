@@ -27,19 +27,11 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef APPDELEGATE_H
-#define APPDELEGATE_H
 
-#import <AppKit/NSApplication.h> // NSApplicationDelegate
+#import <Cocoa/Cocoa.h>
 
-#import "RingWindowController.h"
-#import "PreferencesWindowController.h"
+@interface RingWizardWC : NSWindowController <NSWindowDelegate>{
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
-
-- (void) showWizard;
-- (void) showMainWindow;
+}
 
 @end
-
-#endif // APPDELEGATE_H
