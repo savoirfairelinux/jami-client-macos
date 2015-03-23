@@ -42,6 +42,7 @@ SET(ringclient_SRCS
    AudioPrefsVC.mm
    VideoPrefsVC.mm
    GeneralPrefsVC.mm
+   RingWizardWC.mm
    HistoryViewController.mm
    MinimalHistoryBackend.mm)
 
@@ -59,7 +60,8 @@ SET(ringclient_FORMS
    AccSecurity.xib
    AudioPrefs.xib
    VideoPrefs.xib
-   PreferencesScreen.xib)
+   PreferencesScreen.xib
+   RingWizard.xib)
 
 SET(ringclient_HDRS
    AppDelegate.h
@@ -78,6 +80,7 @@ SET(ringclient_HDRS
    VideoPrefsVC.h
    GeneralPrefsVC.h
    HistoryViewController.h
+   RingWizardWC.h
    QNSTreeController.h
    MinimalHistoryBackend.h)
 
