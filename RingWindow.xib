@@ -8,7 +8,6 @@
             <connections>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
-                <outlet property="windowView" destination="se5-gp-TjO" id="Enr-gP-asz"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -167,7 +166,7 @@
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
-                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                    <customView focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
                         <rect key="frame" x="323" y="0.0" width="725" height="626"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="626" id="5yo-rb-X1O"/>
@@ -206,4 +205,7 @@
             </connections>
         </viewController>
     </objects>
+    <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
+    </resources>
 </document>

@@ -31,15 +31,33 @@
 
 #import <callmodel.h>
 
+#import <accountmodel.h>
+#import <protocolmodel.h>
+#import <QItemSelectionModel>
+#import <account.h>
+
+#import "RingWizardWC.h"
+
+@interface AppDelegate()
+
+@property RingWindowController* ringWindowController;
+@property RingWizardWC* wizard;
+
+@end
+
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
+
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 
-    self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
-    [self.ringWindowController showWindow:nil];
+    if([self checkForRingAccount]) {
+        [self showMainWindow];
+    } else {
+        [self showWizard];
+    }
     [self connect];
 }
 
@@ -66,6 +84,52 @@
     notification.soundName = NSUserNotificationDefaultSoundName;
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
+
+/**
+ * click in MainMenu "Setup Ring"
+ */
+- (IBAction)showWizard:(id)sender {
+    [self showWizard];
+}
+
+- (void) showWizard
+{
+    NSLog(@"Showing wizard");
+    if(self.wizard == nil) {
+        self.wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
+    }
+    [self.wizard.window orderFront:self];
+}
+
+- (void) showMainWindow
+{
+    if(self.ringWindowController == nil)
+        self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
+
+    [self.ringWindowController.window makeKeyAndOrderFront:self];
+}
+
+- (BOOL) checkForRingAccount
+{
+    for (int i = 0 ; i < AccountModel::instance()->rowCount() ; ++i) {
+        QModelIndex idx = AccountModel::instance()->index(i);
+        Account* acc = AccountModel::instance()->getAccountByModelIndex(idx);
+        if(acc->protocol() == Account::Protocol::RING) {
+            return YES;
+        }
+    }
+    return FALSE;
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+{
+    if([self checkForRingAccount]) {
+        [self showMainWindow];
+    } else {
+        [self showWizard];
+    }
+    return YES;
 }
 
 @end
