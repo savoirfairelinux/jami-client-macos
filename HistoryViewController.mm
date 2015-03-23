@@ -30,6 +30,7 @@
 #import "HistoryViewController.h"
 
 #import <categorizedhistorymodel.h>
+#import <QSortFilterProxyModel>
 #import <callmodel.h>
 #import <call.h>
 #import <contactmethod.h>
@@ -46,12 +47,13 @@
 
 @property NSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *historyView;
-
+@property QSortFilterProxyModel *historyProxyModel;
 @end
 
 @implementation HistoryViewController
 @synthesize treeController;
 @synthesize historyView;
+@synthesize historyProxyModel;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -64,7 +66,11 @@
 
 - (void)awakeFromNib
 {
-    treeController = [[QNSTreeController alloc] initWithQModel:CategorizedHistoryModel::instance()];
+    historyProxyModel = new QSortFilterProxyModel(CategorizedHistoryModel::instance());
+    historyProxyModel->setSourceModel(CategorizedHistoryModel::instance());
+    historyProxyModel->setSortRole(static_cast<int>(Call::Role::Date));
+    historyProxyModel->sort(0,Qt::DescendingOrder);
+    treeController = [[QNSTreeController alloc] initWithQModel:historyProxyModel];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
@@ -86,7 +92,7 @@
     if([[treeController selectedNodes] count] > 0) {
         Call* c = CallModel::instance()->dialingCall();
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        QVariant var = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::ContactMethod);
+        QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
         ContactMethod* m = qvariant_cast<ContactMethod*>(var);
         if(m){
             Call* c = CallModel::instance()->dialingCall();
@@ -154,13 +160,13 @@
 
     if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
     {
-        cell.title = CategorizedHistoryModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        cell.title = historyProxyModel->data(qIdx, Qt::DisplayRole).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
     {
-        cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::Number).toString().toNSString();
+        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::Number).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
     {
-        cell.title = CategorizedHistoryModel::instance()->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
+        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
     }
 }
 
