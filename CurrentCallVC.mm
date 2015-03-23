@@ -98,14 +98,27 @@
 @synthesize previewHolder;
 @synthesize videoHolder;
 
-- (void) updateActions
+- (void) updateAllActions
 {
     for(int i = 0 ; i <= CallModel::instance()->userActionModel()->rowCount() ; i++) {
-        const QModelIndex& idx = CallModel::instance()->userActionModel()->index(i,0);
-        NSButton* a = actionHash[(int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION))];
-        if (a != nil) {
-            [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
-            [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
+        [self updateActionAtIndex:i];
+    }
+}
+
+- (void) updateActionAtIndex:(int) row
+{
+    const QModelIndex& idx = CallModel::instance()->userActionModel()->index(row,0);
+    UserActionModel::Action action = qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
+    NSButton* a = actionHash[(int) action];
+    if (a != nil) {
+        [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
+        [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
+
+        if(action == UserActionModel::Action::HOLD) {
+            [a setTitle:(a.state == NSOnState ? @"Hold off" : @"Hold")];
+        }
+        if(action == UserActionModel::Action::RECORD) {
+            [a setTitle:(a.state == NSOnState ? @"Record off" : @"Record")];
         }
     }
 }
@@ -178,7 +191,7 @@
     [previewView setWantsLayer:YES];
     [previewView setLayer:previewLayer];
     [previewLayer setBackgroundColor:[NSColor blackColor].CGColor];
-    [previewLayer setContentsGravity:kCAGravityResizeAspect];
+    [previewLayer setContentsGravity:kCAGravityResizeAspectFill];
     [previewLayer setFrame:previewView.frame];
 
     [controlsPanel setWantsLayer:YES];
@@ -200,7 +213,7 @@
                              return;
                          }
                          [self updateCall];
-                         [self updateActions];
+                         [self updateAllActions];
                          [self animateOut];
                      });
 
@@ -217,12 +230,7 @@
                          NSLog(@"useraction changed");
                          const int first(topLeft.row()),last(bottomRight.row());
                          for(int i = first; i <= last;i++) {
-                             const QModelIndex& idx = CallModel::instance()->userActionModel()->index(i,0);
-                             NSButton* a = actionHash[(int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION))];
-                             if (a) {
-                                 [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
-                                 [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
-                             }
+                             [self updateActionAtIndex:i];
                          }
                      });
 
@@ -378,8 +386,19 @@
     [CATransaction commit];
 }
 
+- (IBAction)fuuuuulScreen:(id)sender {
+    [self.view setFrame:[[NSScreen mainScreen] frame]];
+    //[self.view enterFullScreenMode:[NSScreen mainScreen]];
+}
+
 -(void) cleanUp
 {
+    QObject::disconnect(videoHolder.frameUpdated);
+    QObject::disconnect(videoHolder.started);
+    QObject::disconnect(videoHolder.stopped);
+    QObject::disconnect(previewHolder.frameUpdated);
+    QObject::disconnect(previewHolder.stopped);
+    QObject::disconnect(previewHolder.started);
     [videoView.layer setContents:nil];
     [previewView.layer setContents:nil];
 }
