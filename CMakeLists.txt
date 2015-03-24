@@ -86,11 +86,7 @@ SET(ringclient_HDRS
 
 # Icons
 
-# NOTE: Don't include the path in MACOSX_BUNDLE_ICON_FILE -- this is
-# the property added to Info.plist
-#SET(MACOSX_BUNDLE_ICON_FILE appicon.icns)
-
-# And this part tells CMake where to find and install the file itself
+# This part tells CMake where to find and install the file itself
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION "Resources")
@@ -106,12 +102,19 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
+
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
+
+# append '.xib' extension before linking xib files in executable
+FOREACH(xib ${ringclient_XIBS})
+  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ${xib}.xib)
+ENDFOREACH()
 
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
    ${ringclient_SRCS}
    ${ringclient_HDRS}
+   ${ringclient_XIBS_FOR_EXECUTABLE}
    ${myApp_ICON}
    ${ring_ICONS})
 
