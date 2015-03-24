@@ -35,8 +35,8 @@
     <key>NSHighResolutionCapable</key>
     <string>True</string>
     <key>NSMainNibFile</key>
-    <string>MainMenu</string>
+    <string>${MACOSX_BUNDLE_NSMAIN_NIB_FILE}</string>
     <key>NSPrincipalClass</key>
-    <string>NSApplication</string>
+    <string>${MACOSX_BUNDLE_NSPRINCIPAL_CLASS}</string>
 </dict>
 </plist>
