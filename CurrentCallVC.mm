@@ -77,6 +77,7 @@
 
 @property RendererConnectionsHolder* previewHolder;
 @property RendererConnectionsHolder* videoHolder;
+@property QMetaObject::Connection videoStarted;
 
 @end
 
@@ -98,14 +99,27 @@
 @synthesize previewHolder;
 @synthesize videoHolder;
 
-- (void) updateActions
+- (void) updateAllActions
 {
     for(int i = 0 ; i <= CallModel::instance()->userActionModel()->rowCount() ; i++) {
-        const QModelIndex& idx = CallModel::instance()->userActionModel()->index(i,0);
-        NSButton* a = actionHash[(int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION))];
-        if (a != nil) {
-            [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
-            [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
+        [self updateActionAtIndex:i];
+    }
+}
+
+- (void) updateActionAtIndex:(int) row
+{
+    const QModelIndex& idx = CallModel::instance()->userActionModel()->index(row,0);
+    UserActionModel::Action action = qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
+    NSButton* a = actionHash[(int) action];
+    if (a != nil) {
+        [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
+        [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
+
+        if(action == UserActionModel::Action::HOLD) {
+            [a setTitle:(a.state == NSOnState ? @"Hold off" : @"Hold")];
+        }
+        if(action == UserActionModel::Action::RECORD) {
+            [a setTitle:(a.state == NSOnState ? @"Record off" : @"Record")];
         }
     }
 }
@@ -149,22 +163,18 @@
 - (void)awakeFromNib
 {
     NSLog(@"INIT CurrentCall VC");
-    [self.view setWantsLayer:YES]; // view's backing store is using a Core Animation Layer
+    [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
-    //self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
-
 
     [controlsPanel setWantsLayer:YES];
     [controlsPanel setLayer:[CALayer layer]];
     [controlsPanel.layer setZPosition:2.0];
     [controlsPanel.layer setBackgroundColor:[NSColor whiteColor].CGColor];
 
-    actionHash[ (int)UserActionModel::Action::ACCEPT          ] = pickUpButton;
-    actionHash[ (int)UserActionModel::Action::HOLD            ] = holdOnOffButton;
-    actionHash[ (int)UserActionModel::Action::RECORD          ] = recordOnOffButton;
-    actionHash[ (int)UserActionModel::Action::HANGUP          ] = hangUpButton;
-    //actionHash[ (int)UserActionModel::Action::MUTE_AUDIO      ] = action_mute_capture;
-    //actionHash[ (int)UserActionModel::Action::SERVER_TRANSFER ] = action_transfer;
+    actionHash[ (int)UserActionModel::Action::ACCEPT] = pickUpButton;
+    actionHash[ (int)UserActionModel::Action::HOLD  ] = holdOnOffButton;
+    actionHash[ (int)UserActionModel::Action::RECORD] = recordOnOffButton;
+    actionHash[ (int)UserActionModel::Action::HANGUP] = hangUpButton;
 
     videoLayer = [CALayer layer];
     [videoView setWantsLayer:YES];
@@ -172,19 +182,21 @@
     [videoView.layer setBackgroundColor:[NSColor blackColor].CGColor];
     [videoView.layer setFrame:videoView.frame];
     [videoView.layer setContentsGravity:kCAGravityResizeAspect];
-    //[videoView.layer setBounds:CGRectMake(0, 0, videoView.frame.size.width, videoView.frame.size.height)];
 
     previewLayer = [CALayer layer];
     [previewView setWantsLayer:YES];
     [previewView setLayer:previewLayer];
     [previewLayer setBackgroundColor:[NSColor blackColor].CGColor];
-    [previewLayer setContentsGravity:kCAGravityResizeAspect];
+    [previewLayer setContentsGravity:kCAGravityResizeAspectFill];
     [previewLayer setFrame:previewView.frame];
 
     [controlsPanel setWantsLayer:YES];
     [controlsPanel setLayer:[CALayer layer]];
     [controlsPanel.layer setBackgroundColor:[NSColor clearColor].CGColor];
     [controlsPanel.layer setFrame:controlsPanel.frame];
+
+    previewHolder = [[RendererConnectionsHolder alloc] init];
+    videoHolder = [[RendererConnectionsHolder alloc] init];
 
     [self connect];
 }
@@ -200,7 +212,7 @@
                              return;
                          }
                          [self updateCall];
-                         [self updateActions];
+                         [self updateAllActions];
                          [self animateOut];
                      });
 
@@ -217,12 +229,7 @@
                          NSLog(@"useraction changed");
                          const int first(topLeft.row()),last(bottomRight.row());
                          for(int i = first; i <= last;i++) {
-                             const QModelIndex& idx = CallModel::instance()->userActionModel()->index(i,0);
-                             NSButton* a = actionHash[(int)qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION))];
-                             if (a) {
-                                 [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
-                                 [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
-                             }
+                             [self updateActionAtIndex:i];
                          }
                      });
 
@@ -238,12 +245,12 @@
 {
     QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
     Call* call = CallModel::instance()->getCall(idx);
-
     QObject::connect(call,
                      &Call::videoStarted,
                      [=](Video::Renderer* renderer) {
-                        NSLog(@"Video started!");
-                        [self connectVideoRenderer:renderer];
+                         NSLog(@"Video started!");
+                         QObject::disconnect(self.videoStarted);
+                         [self connectVideoRenderer:renderer];
                      });
 
     if(call->videoRenderer())
@@ -258,10 +265,12 @@
 
 -(void) connectPreviewRenderer
 {
+    QObject::disconnect(previewHolder.frameUpdated);
+    QObject::disconnect(previewHolder.stopped);
+    QObject::disconnect(previewHolder.started);
     previewHolder.started = QObject::connect(Video::PreviewManager::instance(),
                      &Video::PreviewManager::previewStarted,
                      [=](Video::Renderer* renderer) {
-                         NSLog(@"Preview started");
                          QObject::disconnect(previewHolder.frameUpdated);
                          previewHolder.frameUpdated = QObject::connect(renderer,
                                                                        &Video::Renderer::frameUpdated,
@@ -274,7 +283,6 @@
     previewHolder.stopped = QObject::connect(Video::PreviewManager::instance(),
                      &Video::PreviewManager::previewStopped,
                      [=](Video::Renderer* renderer) {
-                         NSLog(@"Preview stopped");
                          QObject::disconnect(previewHolder.frameUpdated);
                         [previewView.layer setContents:nil];
                      });
@@ -289,6 +297,9 @@
 
 -(void) connectVideoRenderer: (Video::Renderer*)renderer
 {
+    QObject::disconnect(videoHolder.frameUpdated);
+    QObject::disconnect(videoHolder.started);
+    QObject::disconnect(videoHolder.stopped);
     videoHolder.frameUpdated = QObject::connect(renderer,
                      &Video::Renderer::frameUpdated,
                      [=]() {
@@ -298,7 +309,6 @@
     videoHolder.started = QObject::connect(renderer,
                      &Video::Renderer::started,
                      [=]() {
-                         NSLog(@"Renderer started");
                          QObject::disconnect(videoHolder.frameUpdated);
                          videoHolder.frameUpdated = QObject::connect(renderer,
                                                                      &Video::Renderer::frameUpdated,
@@ -310,7 +320,6 @@
     videoHolder.stopped = QObject::connect(renderer,
                      &Video::Renderer::stopped,
                      [=]() {
-                         NSLog(@"Renderer stopped");
                          QObject::disconnect(videoHolder.frameUpdated);
                         [videoView.layer setContents:nil];
                      });
@@ -368,10 +377,7 @@
     [animation setDuration:0.2f];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
     [CATransaction setCompletionBlock:^{
-        NSLog(@"COMPLETION IN");
-
         [self connectVideoSignals];
-
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
 
@@ -380,6 +386,12 @@
 
 -(void) cleanUp
 {
+    QObject::disconnect(videoHolder.frameUpdated);
+    QObject::disconnect(videoHolder.started);
+    QObject::disconnect(videoHolder.stopped);
+    QObject::disconnect(previewHolder.frameUpdated);
+    QObject::disconnect(previewHolder.stopped);
+    QObject::disconnect(previewHolder.started);
     [videoView.layer setContents:nil];
     [previewView.layer setContents:nil];
 }
@@ -405,9 +417,8 @@
 
     [CATransaction setCompletionBlock:^{
         [self.view setHidden:YES];
-
+        // first make sure everything is disconnected
         [self cleanUp];
-
         if (CallModel::instance()->selectionModel()->currentIndex().isValid()) {
             [self animateIn];
         }

@@ -42,24 +42,26 @@ SET(ringclient_SRCS
    AudioPrefsVC.mm
    VideoPrefsVC.mm
    GeneralPrefsVC.mm
+   RingWizardWC.mm
    HistoryViewController.mm
    MinimalHistoryBackend.mm)
 
-SET(ringclient_FORMS
-   MainMenu.xib
-   RingWindow.xib
-   CurrentCall.xib
-   GeneralPrefs.xib
-   Accounts.xib
-   AccGeneral.xib
-   AccAudio.xib
-   AccVideo.xib
-   AccRing.xib
-   AccAdvanced.xib
-   AccSecurity.xib
-   AudioPrefs.xib
-   VideoPrefs.xib
-   PreferencesScreen.xib)
+SET(ringclient_XIBS
+   MainMenu
+   RingWindow
+   CurrentCall
+   GeneralPrefs
+   Accounts
+   AccGeneral
+   AccAudio
+   AccVideo
+   AccRing
+   AccAdvanced
+   AccSecurity
+   AudioPrefs
+   VideoPrefs
+   PreferencesScreen
+   RingWizard)
 
 SET(ringclient_HDRS
    AppDelegate.h
@@ -78,6 +80,7 @@ SET(ringclient_HDRS
    VideoPrefsVC.h
    GeneralPrefsVC.h
    HistoryViewController.h
+   RingWizardWC.h
    QNSTreeController.h
    MinimalHistoryBackend.h)
 
@@ -106,13 +109,9 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
-SET_SOURCE_FILES_PROPERTIES(${ringclient_FORMS} PROPERTIES
-       MACOSX_PACKAGE_LOCATION Resources)
-
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
    ${ringclient_SRCS}
    ${ringclient_HDRS}
-   ${ringclient_FORMS}
    ${myApp_ICON}
    ${ring_ICONS})
 
@@ -122,11 +121,15 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${Qt5Widgets_LIBRARIES}
 )
 
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Quartz")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AVFoundation")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AddressBook")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Quartz")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AVFoundation")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AddressBook")
+
+# These variables are specific to our plist and are NOT standard CMake variables
+set(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
+set(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
 
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
@@ -139,3 +142,25 @@ SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
         MACOSX_BUNDLE_ICON_FILE "appicon.icns"
     )
+
+# Make sure we can find the 'ibtool' program. If we can NOT find it we
+# skip generation of this project
+FIND_PROGRAM(IBTOOL ibtool HINTS "/usr/bin" "${OSX_DEVELOPER_ROOT}/usr/bin")
+IF(${IBTOOL} STREQUAL "IBTOOL-NOTFOUND")
+  MESSAGE(SEND_ERROR "ibtool can not be found and is needed to compile the .xib files. It should have been installed with
+                    the Apple developer tools. The default system paths were searched in addition to ${OSX_DEVELOPER_ROOT}/usr/bin")
+endif()
+
+# Make sure the 'Resources' Directory is correctly created before we build
+ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} PRE_BUILD
+                      COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources)
+
+# Compile the .xib files using the 'ibtool' program with the destination being the app package
+FOREACH(xib ${ringclient_XIBS})
+  ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} POST_BUILD
+                      COMMAND ${IBTOOL} --errors --warnings --notices --output-format human-readable-text
+                              --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/${xib}.nib
+                             ${CMAKE_CURRENT_SOURCE_DIR}/${xib}.xib
+                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/${xib}.xib")
+
+ENDFOREACH()

@@ -42,7 +42,6 @@
 #define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
 #define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
 
-
 @interface HistoryViewController()
 
 @property NSTreeController *treeController;
@@ -81,10 +80,7 @@
     [historyView setTarget:self];
     [historyView setDoubleAction:@selector(placeCall:)];
 
-    NSInteger idx = [historyView columnWithIdentifier:COLUMNID_DAY];
-
     CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
-
 }
 
 - (void)placeCall:(id)sender
