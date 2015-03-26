@@ -38,9 +38,10 @@
 #import <qabstractitemmodel.h>
 #import <QItemSelectionModel>
 #import <QItemSelection>
-
 #import <video/previewmanager.h>
 #import <video/renderer.h>
+
+#import "views/CallView.h"
 
 /** FrameReceiver class - delegate for AVCaptureSession
  */
@@ -70,7 +71,7 @@
 @property QHash<int, NSButton*> actionHash;
 
 // Video
-@property (assign) IBOutlet NSView *videoView;
+@property (assign) IBOutlet CallView *videoView;
 @property CALayer* videoLayer;
 @property (assign) IBOutlet NSView *previewView;
 @property CALayer* previewLayer;
@@ -141,27 +142,36 @@
             break;
         case Call::State::INITIALIZATION:
             [stateLabel setStringValue:@"Initializing"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::RINGING:
             [stateLabel setStringValue:@"Ringing"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::CURRENT:
             [stateLabel setStringValue:@"Current"];
+            [videoView setShouldAcceptInteractions:YES];
             break;
         case Call::State::HOLD:
             [stateLabel setStringValue:@"On Hold"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::BUSY:
             [stateLabel setStringValue:@"Busy"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::OVER:
             [stateLabel setStringValue:@"Finished"];
+            [videoView setShouldAcceptInteractions:NO];
+            if(videoView.isInFullScreenMode)
+                [videoView exitFullScreenModeWithOptions:nil];
             break;
         case Call::State::ABORTED:
             [stateLabel setStringValue:@"Aborted"];
             break;
         case Call::State::FAILURE:
             [stateLabel setStringValue:@"Failure"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::INCOMING:
             [stateLabel setStringValue:@"Incoming"];
