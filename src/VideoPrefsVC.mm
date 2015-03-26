@@ -112,6 +112,7 @@ QMetaObject::Connection previewStopped;
     int index = [sender indexOfSelectedItem];
     QModelIndex qIdx = Video::ConfigurationProxy::deviceModel()->index(index, 0);
     Video::ConfigurationProxy::deviceSelectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    Video::SourceModel::instance()->switchTo(qIdx);
 }
 
 - (IBAction)chooseSize:(id)sender {
