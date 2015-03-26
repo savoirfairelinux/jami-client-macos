@@ -39,6 +39,7 @@ SET(ringclient_SRCS
    AccSecurityVC.mm
    AccountsVC.mm
    CurrentCallVC.mm
+   CallView.mm
    AudioPrefsVC.mm
    VideoPrefsVC.mm
    GeneralPrefsVC.mm
@@ -67,6 +68,7 @@ SET(ringclient_HDRS
    AppDelegate.h
    RingWindowController.h
    CurrentCallVC.h
+   CallView.h
    ConversationsViewController.h
    PreferencesViewController.h
    AccGeneralVC.h
