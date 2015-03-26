@@ -70,8 +70,6 @@
     QObject::connect(CallModel::instance(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         NSLog(@"data changed for call tree %d, %d", topLeft.row(), bottomRight.row());
-
                          [conversationsView reloadDataForRowIndexes:
                           [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
                         columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, conversationsView.tableColumns.count)]];

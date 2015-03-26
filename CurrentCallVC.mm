@@ -219,7 +219,6 @@
     QObject::connect(CallModel::instance(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         NSLog(@"data changed!");
                          [self updateCall];
                      });
 
