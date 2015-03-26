@@ -48,7 +48,9 @@ SET(ringclient_SRCS
    src/GeneralPrefsVC.mm
    src/RingWizardWC.mm
    src/HistoryViewController.mm
-   
+
+   src/views/CallView.mm
+
    src/backends/MinimalHistoryBackend.mm)
 
 SET(ringclient_XIBS
@@ -87,7 +89,9 @@ SET(ringclient_HDRS
    src/HistoryViewController.h
    src/RingWizardWC.h
    src/QNSTreeController.h
-   
+
+   src/views/CallView.h
+ 
    src/backends/MinimalHistoryBackend.h)
 
 # Icons
