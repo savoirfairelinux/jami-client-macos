@@ -201,6 +201,11 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 - (IBAction)placeCall:(id)sender
 {
     Call* c = CallModel::instance()->dialingCall();
+
+    if(callField.stringValue.length == 40) {
+        c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:",[callField stringValue] ]));
+    }
+
     c->setDialNumber(QString::fromNSString([callField stringValue]));
     c << Call::Action::ACCEPT;
 }
@@ -237,7 +242,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
 {
-    NSLog(@"Selector method is (%@)", NSStringFromSelector( commandSelector ) );
     if (commandSelector == @selector(insertNewline:)) {
         if([[callField stringValue] isNotEqualTo:@""]) {
             [self placeCall:nil];

@@ -142,7 +142,7 @@
 // -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    return NO;
+    return YES;
 }
 
 // -------------------------------------------------------------------------------
