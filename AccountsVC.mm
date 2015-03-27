@@ -208,8 +208,8 @@ public:
     [configPanels insertTabViewItem:generalTabItem atIndex:0];
     [configPanels insertTabViewItem:audioTabItem atIndex:1];
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
-    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
-    [configPanels insertTabViewItem:securityTabItem atIndex:4];
+    //[configPanels insertTabViewItem:advancedTabItem atIndex:3];
+    //[configPanels insertTabViewItem:securityTabItem atIndex:4];
 
     [self.generalVC loadAccount:acc];
     [self.audioVC loadAccount:acc];
@@ -248,8 +248,8 @@ public:
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
     [configPanels insertTabViewItem:audioTabItem atIndex:1];
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
-    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
-    [configPanels insertTabViewItem:securityTabItem atIndex:4];
+    //[configPanels insertTabViewItem:advancedTabItem atIndex:3];
+    //[configPanels insertTabViewItem:securityTabItem atIndex:4];
 
     [self.ringVC loadAccount:acc];
     [self.audioVC loadAccount:acc];
