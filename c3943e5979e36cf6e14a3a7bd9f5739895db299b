@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a3291f1_78e89f7c",
+        "filename": "RingWindowController.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2015-03-28T19:19:02Z",
+      "side": 1,
+      "message": "* Should check for hex string (not just 40 chars)\n* Should be in libringclient\n* A ring URI may be of the form sips:{hash}@ring.invalid or sips:{hash}@ring.dht",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 207,
+        "endChar": 5
+      },
+      "revId": "c3943e5979e36cf6e14a3a7bd9f5739895db299b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
