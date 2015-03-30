@@ -5,7 +5,11 @@ IF(POLICY CMP0022)
 ENDIF(POLICY CMP0022)
 
 SET(PROJ_NAME Ring)
-SET(RING_VERSION 1.0)
+SET(RING_VERSION "0.1.0")
+SET(RING_VERSION_NAME "Samuel de Champlain")
+SET(BUNDLE_VERSION "Samuel de Champlain (0.1.0")
+
+SET(PROJ_COPYRIGHT " © 2015 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
 ADD_DEFINITIONS("-std=c++11")
 
@@ -86,11 +90,7 @@ SET(ringclient_HDRS
 
 # Icons
 
-# NOTE: Don't include the path in MACOSX_BUNDLE_ICON_FILE -- this is
-# the property added to Info.plist
-#SET(MACOSX_BUNDLE_ICON_FILE appicon.icns)
-
-# And this part tells CMake where to find and install the file itself
+# This part tells CMake where to find and install the file itself
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION "Resources")
@@ -106,13 +106,23 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
+
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
+SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
+       MACOSX_PACKAGE_LOCATION Resources)
+
+# append '.xib' extension before linking xib files in executable
+FOREACH(xib ${ringclient_XIBS})
+  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ${xib}.xib)
+ENDFOREACH()
 
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
    ${ringclient_SRCS}
    ${ringclient_HDRS}
+   ${ringclient_XIBS_FOR_EXECUTABLE}
    ${myApp_ICON}
+   Credits.rtf
    ${ring_ICONS})
 
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
@@ -134,10 +144,10 @@ set(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
         MACOSX_BUNDLE_GUI_IDENTIFIER "cx.ring"
-        MACOSX_BUNDLE_SHORT_VERSION_STRING ${RING_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${RING_VERSION_NAME}
         MACOSX_BUNDLE_LONG_VERSION_STRING "${PROJ_NAME} ${RING_VERSION} Nightly"
         MACOSX_BUNDLE_BUNDLE_VERSION ${RING_VERSION}
-        MACOSX_BUNDLE_COPYRIGHT "${PROJ_NAME}"
+        MACOSX_BUNDLE_COPYRIGHT "${PROJ_COPYRIGHT}"
         MACOSX_BUNDLE_INFO_STRING "Nightly build of ${PROJ_NAME} ${RING_VERSION} for testing and development"
         MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
         MACOSX_BUNDLE_ICON_FILE "appicon.icns"
@@ -164,3 +174,46 @@ FOREACH(xib ${ringclient_XIBS})
                       COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/${xib}.xib")
 
 ENDFOREACH()
+
+set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_INSTALL_PREFIX})
+
+SET(APPS "\${CMAKE_INSTALL_PREFIX}/${PROJ_NAME}.app")
+
+#--------------------------------------------------------------------------------
+# Install the QtTest application, on Apple, the bundle is at the root of the
+# install tree
+INSTALL(TARGETS ${PROJ_NAME} BUNDLE DESTINATION . COMPONENT Runtime)
+
+SET(QT_PLUGINS_DESTDIR ${PROJ_NAME}.app/Contents/Plugins/platforms)
+#--------------------------------------------------------------------------------
+# Install needed Qt plugins by copying directories from the qt installation
+LIST(APPEND QT_PLUGINS Qt5::QTgaPlugin Qt5::QTiffPlugin Qt5::QCocoaIntegrationPlugin)
+FOREACH(plugin ${QT_PLUGINS})
+  GET_TARGET_PROPERTY(_loc ${plugin} LOCATION)
+  INSTALL(FILES ${_loc} DESTINATION ${QT_PLUGINS_DESTDIR} COMPONENT Runtime)
+ENDFOREACH()
+
+# directories to look for dependencies
+SET(DIRS ${CMAKE_INSTALL_PREFIX}/lib ${QT_LIB_DIR})
+
+INSTALL(CODE "
+    file(GLOB_RECURSE QTPLUGINS
+      \"\${CMAKE_INSTALL_PREFIX}/${QT_PLUGINS_DESTDIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
+    include(BundleUtilities)
+    SET(BU_CHMOD_BUNDLE_ITEMS TRUE)
+    fixup_bundle(\"${APPS}\" \"\${QTPLUGINS}\" \"${DIRS}\")
+    " COMPONENT Runtime)
+
+#================================
+# Packaging
+#================================
+SET( CPACK_PACKAGE_DESCRIPTION_SUMMARY ${PROJ_NAME})
+SET( CPACK_PACKAGE_NAME ${PROJ_NAME} )
+SET( CPACK_PACKAGE_CONTACT "Alexandre Lision")
+SET( CPACK_PACKAGE_VENDOR "Savoir-faire Linux")
+SET( CPACK_PACKAGE_VERSION_MAJOR ${PROG_MAJOR_VERSION})
+SET( CPACK_PACKAGE_VERSION_MINOR ${PROG_MINOR_VERSION})
+SET( CPACK_PACKAGE_VERSION_PATCH ${PROG_PATCH_VERSION})
+SET(CPACK_BINARY_DRAGNDROP ON)
+SET( CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}")
+INCLUDE(CPack)
