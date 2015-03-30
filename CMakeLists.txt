@@ -29,26 +29,27 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 #Files to compile
 SET(ringclient_SRCS
-   main.mm
-   AppDelegate.mm
-   RingWindowController.mm
-   ConversationsViewController.mm
-   PreferencesViewController.mm
-   QNSTreeController.mm
-   AccGeneralVC.mm
-   AccAudioVC.mm
-   AccVideoVC.mm
-   AccRingVC.mm
-   AccAdvancedVC.mm
-   AccSecurityVC.mm
-   AccountsVC.mm
-   CurrentCallVC.mm
-   AudioPrefsVC.mm
-   VideoPrefsVC.mm
-   GeneralPrefsVC.mm
-   RingWizardWC.mm
-   HistoryViewController.mm
-   MinimalHistoryBackend.mm)
+   src/main.mm
+   src/AppDelegate.mm
+   src/RingWindowController.mm
+   src/ConversationsViewController.mm
+   src/PreferencesViewController.mm
+   src/QNSTreeController.mm
+   src/AccGeneralVC.mm
+   src/AccAudioVC.mm
+   src/AccVideoVC.mm
+   src/AccRingVC.mm
+   src/AccAdvancedVC.mm
+   src/AccSecurityVC.mm
+   src/AccountsVC.mm
+   src/CurrentCallVC.mm
+   src/AudioPrefsVC.mm
+   src/VideoPrefsVC.mm
+   src/GeneralPrefsVC.mm
+   src/RingWizardWC.mm
+   src/HistoryViewController.mm
+   
+   src/backends/MinimalHistoryBackend.mm)
 
 SET(ringclient_XIBS
    MainMenu
@@ -68,25 +69,26 @@ SET(ringclient_XIBS
    RingWizard)
 
 SET(ringclient_HDRS
-   AppDelegate.h
-   RingWindowController.h
-   CurrentCallVC.h
-   ConversationsViewController.h
-   PreferencesViewController.h
-   AccGeneralVC.h
-   AccVideoVC.h
-   AccAudioVC.h
-   AccRingVC.h
-   AccAdvancedVC.h
-   AccSecurityVC.h
-   AudioPrefsVC.h
-   AccountsVC.h
-   VideoPrefsVC.h
-   GeneralPrefsVC.h
-   HistoryViewController.h
-   RingWizardWC.h
-   QNSTreeController.h
-   MinimalHistoryBackend.h)
+   src/AppDelegate.h
+   src/RingWindowController.h
+   src/CurrentCallVC.h
+   src/ConversationsViewController.h
+   src/PreferencesViewController.h
+   src/AccGeneralVC.h
+   src/AccVideoVC.h
+   src/AccAudioVC.h
+   src/AccRingVC.h
+   src/AccAdvancedVC.h
+   src/AccSecurityVC.h
+   src/AudioPrefsVC.h
+   src/AccountsVC.h
+   src/VideoPrefsVC.h
+   src/GeneralPrefsVC.h
+   src/HistoryViewController.h
+   src/RingWizardWC.h
+   src/QNSTreeController.h
+   
+   src/backends/MinimalHistoryBackend.h)
 
 # Icons
 
@@ -114,7 +116,7 @@ SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
 
 # append '.xib' extension before linking xib files in executable
 FOREACH(xib ${ringclient_XIBS})
-  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ${xib}.xib)
+  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/${xib}.xib)
 ENDFOREACH()
 
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
@@ -170,8 +172,8 @@ FOREACH(xib ${ringclient_XIBS})
   ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} POST_BUILD
                       COMMAND ${IBTOOL} --errors --warnings --notices --output-format human-readable-text
                               --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/${xib}.nib
-                             ${CMAKE_CURRENT_SOURCE_DIR}/${xib}.xib
-                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/${xib}.xib")
+                             ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib
+                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib")
 
 ENDFOREACH()
 
