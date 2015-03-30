@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a3291f1_d82b1393",
+        "filename": "RingWindowController.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2015-03-30T14:37:52Z",
+      "side": 1,
+      "message": "NSCharacterSet *hexSet \u003d \n  [NSCharacterSet characterSetWithCharactersInString:@\"0123456789abcdefABCDEF\"];",
+      "range": {
+        "startLine": 206,
+        "startChar": 4,
+        "endLine": 206,
+        "endChar": 73
+      },
+      "revId": "d4c9e0c61a85ca107354299cc24e2f0aef35a715",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_b8184785",
+        "filename": "RingWindowController.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2015-03-30T14:37:52Z",
+      "side": 1,
+      "message": "hexSet",
+      "range": {
+        "startLine": 207,
+        "startChar": 75,
+        "endLine": 207,
+        "endChar": 83
+      },
+      "revId": "d4c9e0c61a85ca107354299cc24e2f0aef35a715",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
