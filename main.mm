@@ -29,9 +29,17 @@
  */
 #import <AppKit/NSApplication.h> // NSApplicationMain
 #import <qapplication.h>
+#import <QDebug>
+#import <QDir>
 
 int main(int argc, const char *argv[]) {
 
+    QDir dir(QString::fromUtf8(argv[0]));
+    dir.cdUp();
+    dir.cdUp();
+    dir.cd("Plugins");
+    QCoreApplication::addLibraryPath(dir.absolutePath());
+    qDebug() << "" << QCoreApplication::libraryPaths();
     //Qt event loop will override native event loop
     QApplication* app = new QApplication(argc, const_cast<char**>(argv));
     app->setAttribute(Qt::AA_MacPluginApplication);
