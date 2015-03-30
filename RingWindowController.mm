@@ -247,7 +247,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
 {
-    NSLog(@"Selector method is (%@)", NSStringFromSelector( commandSelector ) );
     if (commandSelector == @selector(insertNewline:)) {
         if([[callField stringValue] isNotEqualTo:@""]) {
             [self placeCall:nil];
