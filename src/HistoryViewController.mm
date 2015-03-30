@@ -35,7 +35,7 @@
 #import <call.h>
 #import <contactmethod.h>
 
-#import "MinimalHistoryBackend.h"
+#import "backends/MinimalHistoryBackend.h"
 #import "QNSTreeController.h"
 
 #define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
