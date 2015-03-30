@@ -206,7 +206,6 @@
     QObject::connect(CallModel::instance()->selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
-                         NSLog(@"selection changed!");
                          if(!current.isValid()) {
                              [self animateOut];
                              return;
@@ -219,14 +218,12 @@
     QObject::connect(CallModel::instance(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         NSLog(@"data changed!");
                          [self updateCall];
                      });
 
     QObject::connect(CallModel::instance()->userActionModel(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         NSLog(@"useraction changed");
                          const int first(topLeft.row()),last(bottomRight.row());
                          for(int i = first; i <= last;i++) {
                              [self updateActionAtIndex:i];
@@ -236,7 +233,6 @@
     QObject::connect(CallModel::instance(),
                      &CallModel::callStateChanged,
                      [self](Call* c, Call::State state) {
-                         NSLog(@"callStateChanged");
                          [self updateCall];
     });
 }
@@ -255,7 +251,6 @@
 
     if(call->videoRenderer())
     {
-        NSLog(@"GONNA CONNECT TO FRAMES");
         [self connectVideoRenderer:call->videoRenderer()];
     }
 
