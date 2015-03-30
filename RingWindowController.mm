@@ -201,7 +201,17 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 - (IBAction)placeCall:(id)sender
 {
     Call* c = CallModel::instance()->dialingCall();
-    c->setDialNumber(QString::fromNSString([callField stringValue]));
+
+    // check for a valid ring hash
+    NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
+    BOOL valid = [[[callField stringValue] stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
+
+    if(valid && callField.stringValue.length == 40) {
+        c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:%@",[callField stringValue]]));
+    } else {
+        c->setDialNumber(QString::fromNSString([callField stringValue]));
+    }
+
     c << Call::Action::ACCEPT;
 }
 
