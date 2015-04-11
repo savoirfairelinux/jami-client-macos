@@ -133,6 +133,12 @@
     Call::State state = CallModel::instance()->data(callIdx, (int)Call::Role::State).value<Call::State>();
 
     switch (state) {
+        case Call::State::DIALING:
+            [stateLabel setStringValue:@"Dialing"];
+            break;
+        case Call::State::NEW:
+            [stateLabel setStringValue:@"New"];
+            break;
         case Call::State::INITIALIZATION:
             [stateLabel setStringValue:@"Initializing"];
             break;
@@ -151,10 +157,17 @@
         case Call::State::OVER:
             [stateLabel setStringValue:@"Finished"];
             break;
+        case Call::State::ABORTED:
+            [stateLabel setStringValue:@"Aborted"];
+            break;
         case Call::State::FAILURE:
             [stateLabel setStringValue:@"Failure"];
             break;
+        case Call::State::INCOMING:
+            [stateLabel setStringValue:@"Incoming"];
+            break;
         default:
+            [stateLabel setStringValue:@""];
             break;
     }
 
