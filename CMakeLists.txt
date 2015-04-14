@@ -5,9 +5,9 @@ IF(POLICY CMP0022)
 ENDIF(POLICY CMP0022)
 
 SET(PROJ_NAME Ring)
-SET(RING_VERSION "0.1.0")
+SET(RING_VERSION "0.2.0")
 SET(RING_VERSION_NAME "Samuel de Champlain")
-SET(BUNDLE_VERSION "Samuel de Champlain (0.1.0")
+SET(BUNDLE_VERSION "Samuel de Champlain - beta")
 
 SET(PROJ_COPYRIGHT " © 2015 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
