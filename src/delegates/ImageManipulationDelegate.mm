@@ -46,11 +46,6 @@
 //Ring
 #import <person.h>
 #import <contactmethod.h>
-#import <presencestatusmodel.h>
-#import <securityvalidationmodel.h>
-#import <collectioninterface.h>
-#import <useractionmodel.h>
-#import <QStandardPaths>
 
 ImageManipulationDelegate::ImageManipulationDelegate() : PixmapManipulationDelegate()
 {
