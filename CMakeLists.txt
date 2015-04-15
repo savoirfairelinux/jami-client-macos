@@ -206,18 +206,37 @@ set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_INSTALL_PREFIX})
 
 SET(APPS "\${CMAKE_INSTALL_PREFIX}/${PROJ_NAME}.app")
 
-#--------------------------------------------------------------------------------
-# Install the QtTest application, on Apple, the bundle is at the root of the
-# install tree
 INSTALL(TARGETS ${PROJ_NAME} BUNDLE DESTINATION . COMPONENT Runtime)
 
-SET(QT_PLUGINS_DESTDIR ${PROJ_NAME}.app/Contents/Plugins/platforms)
+SET(QT_PLUGINS_DESTDIR ${PROJ_NAME}.app/Contents/Plugins)
 #--------------------------------------------------------------------------------
 # Install needed Qt plugins by copying directories from the qt installation
-LIST(APPEND QT_PLUGINS Qt5::QTgaPlugin Qt5::QTiffPlugin Qt5::QCocoaIntegrationPlugin)
-FOREACH(plugin ${QT_PLUGINS})
+
+
+#MESSAGE("GUI====")
+#foreach(plugin ${Qt5Gui_PLUGINS})
+#  message("Plugin ${plugin} is at location ${_loc}")
+#endforeach()
+
+LIST(APPEND QT_PLUGINS_IMAGEFORMAT  Qt5::QTgaPlugin
+                                    Qt5::QGifPlugin
+                                    Qt5::QICNSPlugin
+                                    Qt5::QICOPlugin
+                                    Qt5::QJpegPlugin
+                                    Qt5::QJp2Plugin
+                                    Qt5::QMngPlugin
+                                    Qt5::QTiffPlugin
+                                    Qt5::QDDSPlugin)
+
+# we need two plugin directories platform and imageformats
+GET_TARGET_PROPERTY(_loc Qt5::QCocoaIntegrationPlugin LOCATION)
+INSTALL(FILES ${_loc} DESTINATION ${QT_PLUGINS_DESTDIR}/platforms COMPONENT Runtime)
+LIST(APPEND QT_PLUGINS Qt5::QCocoaIntegrationPlugin)
+
+FOREACH(plugin ${QT_PLUGINS_IMAGEFORMAT})
   GET_TARGET_PROPERTY(_loc ${plugin} LOCATION)
-  INSTALL(FILES ${_loc} DESTINATION ${QT_PLUGINS_DESTDIR} COMPONENT Runtime)
+  INSTALL(FILES ${_loc} DESTINATION ${QT_PLUGINS_DESTDIR}/imageformats COMPONENT Runtime)
+  LIST(APPEND QT_PLUGINS ${plugin})
 ENDFOREACH()
 
 # directories to look for dependencies
