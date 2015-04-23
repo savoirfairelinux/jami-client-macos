@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-Faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,39 +27,21 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "GeneralPrefsVC.h"
 
-#import <categorizedhistorymodel.h>
+#import <Foundation/Foundation.h>
 
-#import "Constants.h"
+/**
+ * Defines a set of preferences constants
+ * WARNING: If you modify a KVO compliant value, make sure to change the string associated
+ * in the relative xib file in IB.
+ */
+namespace Preferences {
+    /* KVO compliant */
+    NSString * const HistoryLimit = @"history_limit";
+    /* KVO compliant */
+    NSString * const WindowBehaviour = @"window_behaviour";
+    /* KVO compliant */
+    NSString * const Notifications = @"enable_notifications";
 
-@interface GeneralPrefsVC ()
-@property (assign) IBOutlet NSTextField *historyChangedLabel;
-
-@end
-
-@implementation GeneralPrefsVC {
-
+    NSString * const ShowAdvanced = @"show_advanced";
 }
-@synthesize historyChangedLabel;
-
-- (void)loadView
-{
-    [super loadView];
-    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::HistoryLimit options:NSKeyValueObservingOptionNew context:NULL];
-}
-
-- (IBAction)clearHistory:(id)sender {
-    CategorizedHistoryModel::instance()->clearAllCollections();
-    [historyChangedLabel setHidden:NO];
-}
-
-// KVO handler
--(void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject
-                       change:(NSDictionary *)aChange context:(void *)aContext
-{
-    NSLog(@"VALUE CHANGED");
-    [historyChangedLabel setHidden:NO];
-}
-
-@end
