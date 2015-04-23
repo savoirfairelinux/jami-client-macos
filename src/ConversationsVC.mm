@@ -27,74 +27,61 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "HistoryViewController.h"
+#import "ConversationsVC.h"
 
-#import <categorizedhistorymodel.h>
-#import <QSortFilterProxyModel>
 #import <callmodel.h>
-#import <call.h>
-#import <contactmethod.h>
+#import <QtCore/qitemselectionmodel.h>
 
-#import "backends/MinimalHistoryBackend.h"
-#import "QNSTreeController.h"
+#import "CurrentCallVC.h"
 
-#define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
-#define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
-#define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
+#define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
 
-@interface HistoryViewController()
+@interface ConversationsVC ()
 
-@property NSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *historyView;
-@property QSortFilterProxyModel *historyProxyModel;
+@property CurrentCallVC* currentVC;
+@property (assign) IBOutlet NSView *currentCallView;
+@property QNSTreeController *treeController;
+@property (assign) IBOutlet NSOutlineView *conversationsView;
+
 @end
 
-@implementation HistoryViewController
+@implementation ConversationsVC
+@synthesize conversationsView;
 @synthesize treeController;
-@synthesize historyView;
-@synthesize historyProxyModel;
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT HVC");
-
-    }
-    return self;
-}
+@synthesize currentVC;
+@synthesize currentCallView;
 
 - (void)awakeFromNib
 {
-    historyProxyModel = new QSortFilterProxyModel(CategorizedHistoryModel::instance());
-    historyProxyModel->setSourceModel(CategorizedHistoryModel::instance());
-    historyProxyModel->setSortRole(static_cast<int>(Call::Role::Date));
-    historyProxyModel->sort(0,Qt::DescendingOrder);
-    treeController = [[QNSTreeController alloc] initWithQModel:historyProxyModel];
+    NSLog(@"INIT Conversations VC");
+
+    treeController = [[QNSTreeController alloc] initWithQModel:CallModel::instance()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
-    [historyView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [historyView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-    [historyView setTarget:self];
-    [historyView setDoubleAction:@selector(placeHistoryCall:)];
+    [self.conversationsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [self.conversationsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [self.conversationsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 
-    CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
-}
+    NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
+    [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
 
-- (void)placeHistoryCall:(id)sender
-{
-    if([[treeController selectedNodes] count] > 0) {
-        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
-        ContactMethod* m = qvariant_cast<ContactMethod*>(var);
-        if(m){
-            Call* c = CallModel::instance()->dialingCall();
-            c->setDialNumber(m);
-            c << Call::Action::ACCEPT;
-        }
-    }
+    QObject::connect(CallModel::instance(),
+                     &QAbstractItemModel::dataChanged,
+                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
+                         [conversationsView reloadDataForRowIndexes:
+                          [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
+                        columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, conversationsView.tableColumns.count)]];
+                         
+                     });
+
+    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    [currentCallView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
+    [currentCallView addSubview:[self.currentVC view]];
+    [currentVC initFrame];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -149,19 +136,11 @@
 // -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid())
-        return;
-
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
     {
-        cell.title = historyProxyModel->data(qIdx, Qt::DisplayRole).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::Number).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
+        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+        if(qIdx.isValid())
+            cell.title = CallModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     }
 }
 
@@ -171,7 +150,14 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
-    //NSLog(@"outlineViewSelectionDidChange!!");
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        //Update details view by changing selection
+        CallModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    } else {
+        CallModel::instance()->selectionModel()->clearCurrentIndex();
+    }
 }
+
 
 @end

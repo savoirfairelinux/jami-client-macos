@@ -31,14 +31,14 @@
 #define RINGWINDOWCONTROLLER_H
 
 #import <Cocoa/Cocoa.h>
-#import "HistoryViewController.h"
-#import "PreferencesViewController.h"
+#import "HistoryVC.h"
+#import "PreferencesVC.h"
 
 @interface RingWindowController : NSWindowController <NSToolbarDelegate, NSTextFieldDelegate>{
     IBOutlet NSView *currentView;
 }
 @property (nonatomic, assign) NSViewController *myCurrentViewController;
-@property PreferencesViewController* preferencesViewController;
+@property PreferencesVC* preferencesViewController;
 
 - (IBAction)openPreferences:(id)sender;
 - (IBAction)closePreferences:(NSToolbarItem *)sender;

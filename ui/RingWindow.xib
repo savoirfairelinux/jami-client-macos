@@ -254,13 +254,13 @@
             </connections>
             <point key="canvasLocation" x="529.5" y="361"/>
         </window>
-        <viewController id="jzj-dD-ryc" customClass="HistoryViewController">
+        <viewController id="jzj-dD-ryc" customClass="HistoryVC">
             <connections>
                 <outlet property="historyView" destination="rr8-UC-gGF" id="8NW-8O-X5L"/>
                 <outlet property="view" destination="9uI-D5-KRt" id="hCt-k1-UV2"/>
             </connections>
         </viewController>
-        <viewController id="txt-J3-pzW" customClass="ConversationsViewController">
+        <viewController id="txt-J3-pzW" customClass="ConversationsVC">
             <connections>
                 <outlet property="conversationsView" destination="zcl-pp-rGb" id="YXp-WN-UmC"/>
                 <outlet property="currentCallView" destination="tSW-YT-asL" id="r2r-Q3-clc"/>

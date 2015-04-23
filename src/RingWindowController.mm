@@ -62,7 +62,7 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     }
     NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
 
-    self.preferencesViewController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesScreen" bundle:nil];
+    self.preferencesViewController = [[PreferencesVC alloc] initWithNibName:@"PreferencesScreen" bundle:nil];
     self.myCurrentViewController = self.preferencesViewController;
 
     NSLayoutConstraint* test = [NSLayoutConstraint constraintWithItem:self.preferencesViewController.view
