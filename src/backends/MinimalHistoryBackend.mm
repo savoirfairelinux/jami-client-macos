@@ -36,6 +36,8 @@
 #import <contactmethod.h>
 #import <categorizedhistorymodel.h>
 
+#import "../Constants.h"
+
 class MinimalHistoryEditor : public CollectionEditor<Call>
 {
 public:
@@ -202,7 +204,7 @@ bool MinimalHistoryBackend::isEnabled() const
 bool MinimalHistoryBackend::load()
 {
     // get history limit from our preferences set
-    NSInteger historyLimit = [[NSUserDefaults standardUserDefaults] integerForKey:@"history_limit"];
+    NSInteger historyLimit = [[NSUserDefaults standardUserDefaults] integerForKey:Preferences::HistoryLimit];
 
     QFile file(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') +"history.ini");
     if ( file.open(QIODevice::ReadOnly | QIODevice::Text) ) {

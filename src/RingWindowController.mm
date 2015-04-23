@@ -35,6 +35,7 @@
 #import <call.h>
 
 #import "AppDelegate.h"
+#import "Constants.h"
 
 @interface RingWindowController ()
 
@@ -149,8 +150,8 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
 - (void)togglePowerSettings:(id)sender
 {
-    BOOL advanced = [[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"];
-    [[NSUserDefaults standardUserDefaults] setBool:!advanced forKey:@"show_advanced"];
+    BOOL advanced = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced];
+    [[NSUserDefaults standardUserDefaults] setBool:!advanced forKey:Preferences::ShowAdvanced];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];

@@ -38,6 +38,7 @@
 #import "GeneralPrefsVC.h"
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
+#import "Constants.h"
 
 @interface PreferencesVC ()
 
@@ -188,7 +189,7 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
         toggleAdvancedSettings = [[NSButton alloc] initWithFrame:NSMakeRect(0,0,20,20)];
         [toggleAdvancedSettings setButtonType:NSSwitchButton];
         [toggleAdvancedSettings setTitle:@""];
-        [toggleAdvancedSettings setState:[[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"]];
+        [toggleAdvancedSettings setState:[[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
         [item setLabel:@"Show Advanced"];
         [item setView:toggleAdvancedSettings];
         [item setAction:@selector(togglePowerSettings:)];
@@ -225,7 +226,7 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
                       kDonePrefsIdentifer,
                       nil];
 
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"]) {
+    if([[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]) {
         [items insertObject:NSToolbarSpaceItemIdentifier atIndex:5];
         [items insertObject:kProfilePrefsIdentifier atIndex:2];
     } else
@@ -243,7 +244,7 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
                              kVideoPrefsIdentifer,
                              nil];
 
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"])
+    if([[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced])
         [items insertObject:kProfilePrefsIdentifier atIndex:1];
 
 
