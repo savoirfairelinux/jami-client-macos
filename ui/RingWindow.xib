@@ -17,7 +17,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="1053" height="626"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <view key="contentView" autoresizesSubviews="NO" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="1053" height="626"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -169,7 +169,7 @@
                             </tabViewItem>
                             <tabViewItem label="Contacts" identifier="" id="Zbi-X6-DLT">
                                 <view key="view" id="sag-tS-7Jw">
-                                    <rect key="frame" x="10" y="7" width="289" height="405"/>
+                                    <rect key="frame" x="10" y="7" width="295" height="405"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView focusRingType="none" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="48" horizontalPageScroll="10" verticalLineScroll="48" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJv-ju-DFe">
@@ -254,13 +254,13 @@
             </connections>
             <point key="canvasLocation" x="529.5" y="361"/>
         </window>
-        <viewController id="jzj-dD-ryc" customClass="HistoryViewController">
+        <viewController id="jzj-dD-ryc" customClass="HistoryVC">
             <connections>
                 <outlet property="historyView" destination="rr8-UC-gGF" id="8NW-8O-X5L"/>
                 <outlet property="view" destination="9uI-D5-KRt" id="hCt-k1-UV2"/>
             </connections>
         </viewController>
-        <viewController id="txt-J3-pzW" customClass="ConversationsViewController">
+        <viewController id="txt-J3-pzW" customClass="ConversationsVC">
             <connections>
                 <outlet property="conversationsView" destination="zcl-pp-rGb" id="YXp-WN-UmC"/>
                 <outlet property="currentCallView" destination="tSW-YT-asL" id="r2r-Q3-clc"/>

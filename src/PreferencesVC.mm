@@ -27,7 +27,7 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "PreferencesViewController.h"
+#import "PreferencesVC.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -39,13 +39,13 @@
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
 
-@interface PreferencesViewController ()
+@interface PreferencesVC ()
 
 @property NSButton* toggleAdvancedSettings;
 
 @end
 
-@implementation PreferencesViewController
+@implementation PreferencesVC
 @synthesize toggleAdvancedSettings;
 
 static NSString* const kProfilePrefsIdentifier = @"ProfilesPrefsIdentifier";

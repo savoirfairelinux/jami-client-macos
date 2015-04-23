@@ -30,35 +30,63 @@ MESSAGE("LibRingClient is here:" ${LIB_RING_CLIENT_INCLUDE_DIR})
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 #Files to compile
-SET(ringclient_SRCS
-   src/main.mm
-   src/AppDelegate.mm
-   src/RingWindowController.mm
-   src/ConversationsViewController.mm
-   src/PreferencesViewController.mm
+SET(ringclient_CONTROLLERS
    src/QNSTreeController.mm
-   src/AccGeneralVC.mm
-   src/AccAudioVC.mm
-   src/AccVideoVC.mm
-   src/AccRingVC.mm
-   src/AccAdvancedVC.mm
-   src/AccSecurityVC.mm
-   src/AccountsVC.mm
+   src/QNSTreeController.h
    src/CurrentCallVC.mm
-   src/AudioPrefsVC.mm
-   src/VideoPrefsVC.mm
+   src/CurrentCallVC.h
    src/GeneralPrefsVC.mm
    src/RingWizardWC.mm
-   src/HistoryViewController.mm
+   src/RingWizardWC.h
+   src/RingWindowController.mm
+   src/RingWindowController.h
+   src/ConversationsVC.mm
+   src/ConversationsVC.h
+   src/PreferencesVC.mm
+   src/PreferencesVC.h
+   src/AccGeneralVC.mm
+   src/AccGeneralVC.h
+   src/AccVideoVC.mm
+   src/AccVideoVC.h
+   src/AccAudioVC.mm
+   src/AccAudioVC.h
+   src/AccRingVC.mm
+   src/AccRingVC.h
+   src/AccAdvancedVC.mm
+   src/AccAdvancedVC.h
+   src/AccSecurityVC.mm
+   src/AccSecurityVC.h
+   src/AudioPrefsVC.mm
+   src/AudioPrefsVC.h
+   src/AccountsVC.mm
+   src/AccountsVC.h
+   src/VideoPrefsVC.mm
+   src/VideoPrefsVC.h
+   src/GeneralPrefsVC.h
+   src/HistoryVC.mm
+   src/HistoryVC.h
    src/PersonsVC.mm
+   src/PersonsVC.h)
 
-   src/delegates/ImageManipulationDelegate.mm
-
-   src/views/PersonCell.mm
-   src/views/CallView.mm
-
+SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
-   src/backends/MinimalHistoryBackend.mm)
+   src/backends/MinimalHistoryBackend.mm
+   src/backends/AddressBookBackend.h
+   src/backends/MinimalHistoryBackend.h)
+
+SET(ringclient_VIEWS
+   src/views/CallView.mm
+   src/views/CallView.h
+   src/views/PersonCell.mm
+   src/views/PersonCell.h)
+
+SET(ringclient_OTHERS
+   src/main.mm
+   src/AppDelegate.mm
+   src/AppDelegate.h
+   src/delegates/ImageManipulationDelegate.mm
+   src/delegates/ImageManipulationDelegate.h)
+
 
 SET(ringclient_XIBS
    MainMenu
@@ -77,37 +105,7 @@ SET(ringclient_XIBS
    PreferencesScreen
    RingWizard)
 
-SET(ringclient_HDRS
-   src/AppDelegate.h
-   src/RingWindowController.h
-   src/CurrentCallVC.h
-   src/ConversationsViewController.h
-   src/PreferencesViewController.h
-   src/AccGeneralVC.h
-   src/AccVideoVC.h
-   src/AccAudioVC.h
-   src/AccRingVC.h
-   src/AccAdvancedVC.h
-   src/AccSecurityVC.h
-   src/AudioPrefsVC.h
-   src/AccountsVC.h
-   src/VideoPrefsVC.h
-   src/GeneralPrefsVC.h
-   src/HistoryViewController.h
-   src/RingWizardWC.h
-   src/QNSTreeController.h
-   src/PersonsVC.h
-
-   src/delegates/ImageManipulationDelegate.h
-
-   src/views/PersonCell.h
-   src/views/CallView.h
-
-   src/backends/AddressBookBackend.h
-   src/backends/MinimalHistoryBackend.h)
-
 # Icons
-
 # This part tells CMake where to find and install the file itself
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
@@ -136,12 +134,22 @@ FOREACH(xib ${ringclient_XIBS})
 ENDFOREACH()
 
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
-   ${ringclient_SRCS}
-   ${ringclient_HDRS}
+   ${ringclient_CONTROLLERS}
+   ${ringclient_BACKENDS}
+   ${ringclient_VIEWS}
+   ${ringclient_OTHERS}
    ${ringclient_XIBS_FOR_EXECUTABLE}
    ${myApp_ICON}
    Credits.rtf
    ${ring_ICONS})
+
+# Follow Xcode hierarchy principles
+SOURCE_GROUP("Controllers" FILES ${ringclient_CONTROLLERS})
+SOURCE_GROUP("Backends" FILES ${ringclient_BACKENDS})
+SOURCE_GROUP("CustomViews" FILES ${ringclient_VIEWS})
+SOURCE_GROUP("Classes" FILES ${ringclient_OTHERS})
+SOURCE_GROUP("Resources\\Interface Builder" FILES ${ringclient_XIBS_FOR_EXECUTABLE})
+
 
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${LIB_RING_CLIENT_LIBRARY}

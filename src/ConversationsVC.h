@@ -27,15 +27,16 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef HISTORYVIEWCONTROLLER_H
-#define HISTORYVIEWCONTROLLER_H
+#ifndef CONVERSATIONSVC_H
+#define CONVERSATIONSVC_H
 
 #import <Cocoa/Cocoa.h>
+#import "QNSTreeController.h"
 
-@interface HistoryViewController : NSViewController <NSOutlineViewDelegate> {
+@interface ConversationsVC : NSViewController <NSOutlineViewDelegate> {
 
 }
 
 @end
 
-#endif // HISTORYVIEWCONTROLLER_H
+#endif // CONVERSATIONSVC_H

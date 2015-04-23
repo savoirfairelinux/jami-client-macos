@@ -27,16 +27,26 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef CONVERSATIONSVC_H
-#define CONVERSATIONSVC_H
+#ifndef PREFERENCESVIEWCONTROLLER_H
+#define PREFERENCESVIEWCONTROLLER_H
 
 #import <Cocoa/Cocoa.h>
-#import "QNSTreeController.h"
 
-@interface ConversationsViewController : NSViewController <NSOutlineViewDelegate> {
+@interface PreferencesVC : NSViewController <NSToolbarDelegate>
 
-}
+- (void) close;
+@property (nonatomic, assign) NSViewController *currentVC;
+@property (nonatomic, assign) NSViewController *accountsPrefsVC;
+@property (nonatomic, assign) NSViewController *generalPrefsVC;
+@property (nonatomic, assign) NSViewController *audioPrefsVC;
+@property (nonatomic, assign) NSViewController *videoPrefsVC;
+
+- (void)displayGeneral:(NSToolbarItem *)sender;
+- (void)displayAudio:(NSToolbarItem *)sender;
+- (void)displayAncrage:(NSToolbarItem *)sender;
+- (void)displayVideo:(NSToolbarItem *)sender;
+- (void)displayAccounts:(NSToolbarItem *)sender;
 
 @end
 
-#endif // CONVERSATIONSVC_H
+#endif // PREFERENCESVIEWCONTROLLER_H
