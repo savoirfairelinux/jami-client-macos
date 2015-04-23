@@ -36,6 +36,7 @@
 #import <QItemSelectionModel>
 #import <account.h>
 
+#import "Constants.h"
 #import "RingWizardWC.h"
 
 @interface AppDelegate()
@@ -66,8 +67,8 @@
     QObject::connect(CallModel::instance(),
                      &CallModel::incomingCall,
                      [=](Call* call) {
-                         BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:@"window_behaviour"];
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:@"enable_notifications"];
+                         BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::WindowBehaviour];
+                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
                          if(shouldComeToForeground)
                              [NSApp activateIgnoringOtherApps:YES];
 
