@@ -109,6 +109,7 @@
     NSString* newAccName = @"My Ring";
     Account* newAcc = AccountModel::instance()->add([newAccName UTF8String], Account::Protocol::RING);
     newAcc->setAlias([[nickname stringValue] UTF8String]);
+    newAcc->setUpnpEnabled(YES); // Always active upnp
     newAcc << Account::EditAction::SAVE;
 }
 
