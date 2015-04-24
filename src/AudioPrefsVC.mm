@@ -73,6 +73,8 @@
     if([[Audio::Settings::instance()->recordPath().toNSURL() absoluteString] isEqualToString:@""]) {
         NSArray * pathComponentArray = [self pathComponentArray];
         [recordingsPathControl setPathComponentCells:pathComponentArray];
+    } else {
+        [recordingsPathControl setURL:Audio::Settings::instance()->recordPath().toNSURL()];
     }
 }
 

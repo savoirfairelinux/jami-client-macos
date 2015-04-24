@@ -113,12 +113,9 @@ public:
     [accountsListView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [accountsListView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 
-
     QObject::connect(AccountModel::instance(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         NSLog(@"data changed %d, %d", topLeft.row(), bottomRight.row());
-
                         [accountsListView reloadDataForRowIndexes:
                         [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
                         columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, accountsListView.tableColumns.count)]];
@@ -208,8 +205,8 @@ public:
     [configPanels insertTabViewItem:generalTabItem atIndex:0];
     [configPanels insertTabViewItem:audioTabItem atIndex:1];
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
-    //[configPanels insertTabViewItem:advancedTabItem atIndex:3];
-    //[configPanels insertTabViewItem:securityTabItem atIndex:4];
+    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
+    [configPanels insertTabViewItem:securityTabItem atIndex:4];
 
     [self.generalVC loadAccount:acc];
     [self.audioVC loadAccount:acc];
@@ -248,8 +245,8 @@ public:
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
     [configPanels insertTabViewItem:audioTabItem atIndex:1];
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
-    //[configPanels insertTabViewItem:advancedTabItem atIndex:3];
-    //[configPanels insertTabViewItem:securityTabItem atIndex:4];
+    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
+    [configPanels insertTabViewItem:securityTabItem atIndex:4];
 
     [self.ringVC loadAccount:acc];
     [self.audioVC loadAccount:acc];
@@ -270,6 +267,7 @@ public:
         Account* toToggle = AccountModel::instance()->getAccountByModelIndex(accIdx);
         NSButtonCell *cell = [col dataCellForRow:row];
         toToggle->setEnabled(cell.state == NSOnState ? NO : YES);
+        toToggle << Account::EditAction::SAVE;
     }
 }
 
@@ -288,7 +286,17 @@ public:
 // -------------------------------------------------------------------------------
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    NSCell *returnCell = [tableColumn dataCell];
+    NSCell *returnCell;
+
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    // Prevent user from enabling/disabling IP2IP account
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE] &&
+                            AccountModel::instance()->ip2ip()->index() == qIdx) {
+
+        returnCell = [[NSCell alloc] init];
+    } else {
+        returnCell = [tableColumn dataCell];
+    }
     return returnCell;
 }
 
@@ -331,25 +339,30 @@ public:
     {
         cell.title = AccountModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     } else if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
-        Account::RegistrationState state = qvariant_cast<Account::RegistrationState>(AccountModel::instance()->data(qIdx, (int)Account::Role::RegistrationState));
+        NSTextFieldCell* stateCell = cell;
+        Account::RegistrationState state = qvariant_cast<Account::RegistrationState>(qIdx.data((int)Account::Role::RegistrationState));
         switch (state) {
             case Account::RegistrationState::READY:
-                [cell setTitle:@"Ready"];
+                [stateCell setTextColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]];
+                [stateCell setTitle:@"Ready"];
                 break;
             case Account::RegistrationState::TRYING:
-                [cell setTitle:@"Trying..."];
+                [stateCell setTextColor:[NSColor redColor]];
+                [stateCell setTitle:@"Trying..."];
                 break;
             case Account::RegistrationState::UNREGISTERED:
-                [cell setTitle:@"Unregistered"];
+                [stateCell setTextColor:[NSColor blackColor]];
+                [stateCell setTitle:@"Unregistered"];
                 break;
             case Account::RegistrationState::ERROR:
-                [cell setTitle:@"Error"];
+                [stateCell setTextColor:[NSColor redColor]];
+                [stateCell setTitle:@"Error"];
                 break;
             default:
                 break;
         }
     } else if([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE]) {
-        [cell setState:AccountModel::instance()->data(qIdx, Qt::CheckStateRole).value<BOOL>()];
+        [cell setState:qIdx.data(Qt::CheckStateRole).value<BOOL>()];
     }
 }
 
@@ -396,7 +409,7 @@ public:
 {
     QModelIndex proxyIdx = proxyProtocolModel->index(index, 0);
     QModelIndex qIdx = AccountModel::instance()->protocolModel()->index(proxyProtocolModel->mapToSource(proxyIdx).row());
-    [item setTitle:AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+    [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
 
     return YES;
 }

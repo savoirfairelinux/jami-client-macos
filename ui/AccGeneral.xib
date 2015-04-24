@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccGeneralVC">
@@ -14,6 +13,7 @@
                 <outlet property="boxingParameters" destination="q3B-PO-gof" id="0IJ-nh-QcG"/>
                 <outlet property="passwordTextField" destination="z6E-MS-XO4" id="7fs-ya-IdO"/>
                 <outlet property="serverHostTextField" destination="VQ7-fk-qZo" id="QC9-bM-d21"/>
+                <outlet property="tryRegisterButton" destination="uwN-TR-ZYI" id="kYs-Tz-uIA"/>
                 <outlet property="typeLabel" destination="PlU-eH-IIN" id="UkJ-O6-zNs"/>
                 <outlet property="upnpButton" destination="Yzc-a2-DiF" id="lT2-iz-yAO"/>
                 <outlet property="userAgentButton" destination="P32-TS-Ny3" id="OUI-PW-iVC"/>
@@ -147,6 +147,26 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
+                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SEc-jZ-TUE">
+                            <rect key="frame" x="334" y="7" width="129" height="18"/>
+                            <buttonCell key="cell" type="check" title="Show password" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Ue3-ai-FBV">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="showPassword:" target="-2" id="5zI-is-yfV"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uwN-TR-ZYI">
+                            <rect key="frame" x="330" y="37" width="139" height="32"/>
+                            <buttonCell key="cell" type="push" title="Try Registration" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="85T-28-hS6">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="tryRegistration:" target="-2" id="NCn-xK-bkl"/>
+                            </connections>
+                        </button>
                     </subviews>
                 </customView>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7NY-Hh-Icd">

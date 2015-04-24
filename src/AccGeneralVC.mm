@@ -54,6 +54,8 @@
 @property (assign) IBOutlet NSTextField *serverHostTextField;
 @property (assign) IBOutlet NSTextField *usernameTextField;
 @property (assign) IBOutlet NSSecureTextField *passwordTextField;
+@property (assign) IBOutlet NSTextField *clearTextField;
+@property (assign) IBOutlet NSButton *tryRegisterButton;
 
 @property (assign) IBOutlet NSButton *upnpButton;
 @property (assign) IBOutlet NSButton *autoAnswerButton;
@@ -72,6 +74,7 @@
 @synthesize serverHostTextField;
 @synthesize usernameTextField;
 @synthesize passwordTextField;
+@synthesize clearTextField;
 @synthesize upnpButton;
 @synthesize autoAnswerButton;
 @synthesize userAgentButton;
@@ -146,6 +149,36 @@
     [userAgentTextField setEnabled:privateAccount->hasCustomUserAgent()];
     [self.autoAnswerButton setState:privateAccount->isAutoAnswer()];
     [self.userAgentTextField setStringValue:account->userAgent().toNSString()];
+}
+
+- (IBAction)tryRegistration:(id)sender {
+
+}
+
+- (IBAction)showPassword:(NSButton *)sender {
+    if (sender.state == NSOnState) {
+        clearTextField = [[NSTextField alloc] initWithFrame:passwordTextField.frame];
+        [clearTextField setTag:passwordTextField.tag];
+        [clearTextField setDelegate:self];
+        [clearTextField setBounds:passwordTextField.bounds];
+        [clearTextField setStringValue:passwordTextField.stringValue];
+        [clearTextField becomeFirstResponder];
+        [boxingParameters addSubview:clearTextField];
+        [passwordTextField setHidden:YES];
+    } else {
+        [passwordTextField setStringValue:clearTextField.stringValue];
+        [passwordTextField setHidden:NO];
+        [clearTextField removeFromSuperview];
+        clearTextField = nil;
+    }
+}
+
+/**
+ *  Debug purpose
+ */
+-(void) dumpFrame:(CGRect) frame WithName:(NSString*) name
+{
+    NSLog(@"frame %@ : %f %f %f %f \n\n",name ,frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
 #pragma mark - NSTextFieldDelegate methods
