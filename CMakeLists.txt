@@ -56,6 +56,8 @@ SET(ringclient_CONTROLLERS
    src/AccAdvancedVC.h
    src/AccSecurityVC.mm
    src/AccSecurityVC.h
+   src/CertificateWC.mm
+   src/CertificateWC.h
    src/AudioPrefsVC.mm
    src/AudioPrefsVC.h
    src/AccountsVC.mm
@@ -103,7 +105,8 @@ SET(ringclient_XIBS
    AudioPrefs
    VideoPrefs
    PreferencesScreen
-   RingWizard)
+   RingWizard
+   CertificateWindow)
 
 # Icons
 # This part tells CMake where to find and install the file itself
