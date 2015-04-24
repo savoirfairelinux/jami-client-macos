@@ -35,18 +35,21 @@
 
 @interface GeneralPrefsVC ()
 @property (assign) IBOutlet NSTextField *historyChangedLabel;
+@property (assign) IBOutlet NSView *advancedGeneralSettings;
 
 @end
 
-@implementation GeneralPrefsVC {
-
-}
+@implementation GeneralPrefsVC
 @synthesize historyChangedLabel;
+@synthesize advancedGeneralSettings;
 
 - (void)loadView
 {
     [super loadView];
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::HistoryLimit options:NSKeyValueObservingOptionNew context:NULL];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::ShowAdvanced options:NSKeyValueObservingOptionNew context:NULL];
+
+    [advancedGeneralSettings setHidden:![[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
 }
 
 - (IBAction)clearHistory:(id)sender {
@@ -58,8 +61,11 @@
 -(void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject
                        change:(NSDictionary *)aChange context:(void *)aContext
 {
-    NSLog(@"VALUE CHANGED");
-    [historyChangedLabel setHidden:NO];
+    if (aKeyPath == Preferences::HistoryLimit) {
+        [historyChangedLabel setHidden:NO];
+    } else if (aKeyPath == Preferences::ShowAdvanced) {
+        [advancedGeneralSettings setHidden:[[aChange objectForKey: NSKeyValueChangeNewKey] boolValue]];
+    }
 }
 
 @end

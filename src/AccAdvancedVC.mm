@@ -137,22 +137,6 @@
 
 #pragma mark - NSTextFieldDelegate methods
 
-- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
-{
-    NSLog(@"textShouldBeginEditing");
-    return YES;
-}
-
-- (void)control:(NSControl *)control didFailToValidatePartialString:(NSString *)string errorDescription:(NSString *)error
-{
-    NSLog(@"didFailToValidatePartialString");
-}
-
--(void)controlTextDidBeginEditing:(NSNotification *)obj
-{
-
-}
-
 -(void)controlTextDidChange:(NSNotification *)notif
 {
     NSTextField *textField = [notif object];
