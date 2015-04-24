@@ -34,13 +34,13 @@
 
 @interface PreferencesVC : NSViewController <NSToolbarDelegate>
 
-- (void) close;
 @property (nonatomic, assign) NSViewController *currentVC;
 @property (nonatomic, assign) NSViewController *accountsPrefsVC;
 @property (nonatomic, assign) NSViewController *generalPrefsVC;
 @property (nonatomic, assign) NSViewController *audioPrefsVC;
 @property (nonatomic, assign) NSViewController *videoPrefsVC;
 
+- (void) close;
 - (void)displayGeneral:(NSToolbarItem *)sender;
 - (void)displayAudio:(NSToolbarItem *)sender;
 - (void)displayAncrage:(NSToolbarItem *)sender;

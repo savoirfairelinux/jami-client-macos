@@ -229,9 +229,9 @@ bool AddressBookBackend::reload()
     return false;
 }
 
-CollectionInterface::SupportedFeatures AddressBookBackend::supportedFeatures() const
+FlagPack<AddressBookBackend::SupportedFeatures> AddressBookBackend::supportedFeatures() const
 {
-    return (CollectionInterface::SupportedFeatures) (
+    return (FlagPack<SupportedFeatures>) (
                                                      CollectionInterface::SupportedFeatures::NONE  |
                                                      CollectionInterface::SupportedFeatures::LOAD  |
                                                      CollectionInterface::SupportedFeatures::CLEAR |
