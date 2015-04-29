@@ -1,0 +1,42 @@
+osx:
+    type: osx
+    brew_deps:
+        - automake
+        - libtool
+        - gettext
+        - libtoolize
+        - yasm
+        - autoconf
+        - pkg-config
+        - qt5
+        - llvm --with-clang --with-asan
+    commands:
+        - echo "Deamon"
+        - git clone git@git.savoirfairelinux.com:ring-daemon.git
+        - cd ring-daemon
+        - cd contrib
+        - mkdir native
+        - cd native
+        - ../bootstrap
+        - make -j3
+        - cd ../../
+        - ./autogen.sh && configure --without-alsa --without-pulse --without-dbus --prefix=%(prefix_path)s
+        - make install -j
+        - cd ..
+        - echo "LRC"
+        - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
+        - git clone git@git.kde.org:libringclient
+        - cd libringclient
+        - mkdir build
+        - cd build
+        - cmake .. -DCMAKE_INSTALL_PREFIX=%(prefix_path) -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
+        - make install
+        - cd ..
+        - echo "Client"
+        - git clone git@git.savoirfairelinux.com:ring-client-macosx.git
+        - cd ring-client-macosx
+        - mkdir build && cd build
+        - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
+        - cmake ../ -DCMAKE_INSTALL_PREFIX=%(prefix_path)s
+        - make install -j
+        - cpack -G DragNDrop Ring
