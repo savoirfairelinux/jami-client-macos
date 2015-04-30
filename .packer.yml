@@ -24,7 +24,7 @@ osx:
         - cd ..
         - echo "LRC"
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
-        - git clone git@git.kde.org:libringclient
+        - git clone git://anongit.kde.org/libringclient.git libringclient
         - cd libringclient
         - mkdir build
         - cd build
