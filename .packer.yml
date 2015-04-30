@@ -28,7 +28,7 @@ osx:
         - cd libringclient
         - mkdir build
         - cd build
-        - cmake .. -DCMAKE_INSTALL_PREFIX=%(prefix_path) -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
+        - cmake .. -DCMAKE_INSTALL_PREFIX=%(prefix_path)s -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
         - make install
         - cd ..
         - echo "Client"
