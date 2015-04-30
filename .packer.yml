@@ -19,7 +19,7 @@ osx:
         - ../bootstrap
         - make -j3
         - cd ../../
-        - ./autogen.sh && configure --without-alsa --without-pulse --without-dbus --prefix=%(prefix_path)s
+        - ./autogen.sh && ./configure --without-alsa --without-pulse --without-dbus --prefix=%(prefix_path)s
         - make install -j
         - cd ..
         - echo "LRC"
