@@ -30,7 +30,7 @@
 #import "AppDelegate.h"
 
 #import <callmodel.h>
-
+#import <qapplication.h>
 #import <accountmodel.h>
 #import <protocolmodel.h>
 #import <QItemSelectionModel>
@@ -53,6 +53,9 @@
 
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
+
+    NSAppleEventManager* appleEventManager = [NSAppleEventManager sharedAppleEventManager];
+    [appleEventManager setEventHandler:self andSelector:@selector(handleQuitEvent:withReplyEvent:) forEventClass:kCoreEventClass andEventID:kAEQuitApplication];
 
     if([self checkForRingAccount]) {
         [self showMainWindow];
@@ -131,6 +134,18 @@
         [self showWizard];
     }
     return YES;
+}
+
+- (void)handleQuitEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
+{
+    delete CallModel::instance()->QObject::parent();
+    [[NSApplication sharedApplication] terminate:self];
+}
+
+-(void)applicationWillTerminate:(NSNotification *)notification
+{
+    delete CallModel::instance()->QObject::parent();
+    [[NSApplication sharedApplication] terminate:self];
 }
 
 @end
