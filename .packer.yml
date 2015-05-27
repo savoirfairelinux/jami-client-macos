@@ -24,8 +24,8 @@ osx:
         - cd ..
         - echo "LRC"
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
-        - git clone git://anongit.kde.org/libringclient.git libringclient
-        - cd libringclient
+        - git clone https://gerrit-ring.savoirfairelinux.com/ring-lrc.git ring-lrc
+        - cd ring-lrc
         - mkdir build
         - cd build
         - cmake .. -DCMAKE_INSTALL_PREFIX=%(prefix_path)s -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
