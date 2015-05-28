@@ -17,10 +17,11 @@ osx:
         - mkdir native
         - cd native
         - ../bootstrap
-        - make -j3
+        - make
         - cd ../../
-        - ./autogen.sh && ./configure --without-alsa --without-pulse --without-dbus --prefix=%(prefix_path)s
-        - make install -j
+        - ./autogen.sh
+        - ./configure --without-alsa --without-pulse --without-dbus --prefix=%(prefix_path)s
+        - make install
         - cd ..
         - echo "LRC"
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
@@ -37,5 +38,5 @@ osx:
         - mkdir build && cd build
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
         - cmake ../ -DCMAKE_INSTALL_PREFIX=%(prefix_path)s
-        - make install -j
+        - make install
         - cpack -G DragNDrop Ring
