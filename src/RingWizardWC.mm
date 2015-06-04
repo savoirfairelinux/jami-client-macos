@@ -102,6 +102,19 @@
     [self setCallback];
     [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
 
+    [self registerAutoStartup];
+}
+
+/**
+ * Enable launch at startup by default
+ */
+- (void) registerAutoStartup
+{
+    LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItemsRef == nil) return;
+    CFURLRef appUrl = (CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
+    if (itemRef) CFRelease(itemRef);
 }
 
 - (void) saveAccount
