@@ -72,9 +72,7 @@ SET(ringclient_CONTROLLERS
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
-   src/backends/MinimalHistoryBackend.mm
-   src/backends/AddressBookBackend.h
-   src/backends/MinimalHistoryBackend.h)
+   src/backends/AddressBookBackend.h)
 
 SET(ringclient_VIEWS
    src/views/CallView.mm
