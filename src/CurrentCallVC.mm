@@ -464,7 +464,7 @@
 }
 
 - (IBAction)toggleRecording:(id)sender {
-    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::RECORD;
+    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::RECORD_AUDIO;
 }
 
 - (IBAction)toggleHold:(id)sender {

@@ -34,8 +34,8 @@
 #import <callmodel.h>
 #import <call.h>
 #import <contactmethod.h>
+#import <localhistorycollection.h>
 
-#import "backends/MinimalHistoryBackend.h"
 #import "QNSTreeController.h"
 
 #define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
@@ -80,7 +80,7 @@
     [historyView setTarget:self];
     [historyView setDoubleAction:@selector(placeHistoryCall:)];
 
-    CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
+    CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 }
 
 - (void)placeHistoryCall:(id)sender
