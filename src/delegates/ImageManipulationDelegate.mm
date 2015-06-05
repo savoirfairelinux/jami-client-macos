@@ -137,13 +137,15 @@ QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool
 CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSize& size) {
     // create context, keeping original image properties
     CGColorSpaceRef colorspace = CGImageGetColorSpace(image);
+
+    NSLog(@"%ld, %ld", CGImageGetBitsPerComponent(image),CGImageGetBytesPerRow(image));
+
     CGContextRef context = CGBitmapContextCreate(NULL, size.width(), size.height(),
                                                  CGImageGetBitsPerComponent(image),
                                                  CGImageGetBytesPerRow(image),
                                                  colorspace,
                                                  CGImageGetAlphaInfo(image));
     CGColorSpaceRelease(colorspace);
-
 
     if(context == NULL)
         return nil;

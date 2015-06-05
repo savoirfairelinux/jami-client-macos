@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-Faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,19 +27,15 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef CURRENTCALLVC_H
-#define CURRENTCALLVC_H
-
 #import <Cocoa/Cocoa.h>
 
-class Call;
+@interface ChatVC : NSViewController <NSTextFieldDelegate>
 
-@interface CurrentCallVC : NSViewController <NSSplitViewDelegate> {
-
-}
-
-- (void) initFrame;
+/**
+ * Message contained in messageField TextField.
+ * This is a KVO method to bind the text with the send Button
+ * if message.length is > 0, button is enabled, otherwise disabled
+ */
+@property (retain) NSString* message;
 
 @end
-
-#endif // CURRENTCALLVC_H
