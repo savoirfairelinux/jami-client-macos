@@ -68,7 +68,9 @@ SET(ringclient_CONTROLLERS
    src/HistoryVC.mm
    src/HistoryVC.h
    src/PersonsVC.mm
-   src/PersonsVC.h)
+   src/PersonsVC.h
+   src/ChatVC.mm
+   src/ChatVC.h)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm

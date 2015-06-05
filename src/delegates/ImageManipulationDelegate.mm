@@ -144,7 +144,6 @@ CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSiz
                                                  CGImageGetAlphaInfo(image));
     CGColorSpaceRelease(colorspace);
 
-
     if(context == NULL)
         return nil;
 

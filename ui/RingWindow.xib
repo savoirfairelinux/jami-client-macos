@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWindowController">
             <connections>
+                <outlet property="callView" destination="tSW-YT-asL" id="NRy-rM-XW4"/>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -32,7 +33,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="293" height="19"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn identifier="ConversationsColumn" width="290" minWidth="40" maxWidth="1000" id="VDO-Cu-h8f">
@@ -92,7 +93,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="226" height="19"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="DayColumn" width="87.5703125" minWidth="40" maxWidth="1000" id="pTT-gU-NVa">
@@ -169,7 +170,7 @@
                             </tabViewItem>
                             <tabViewItem label="Contacts" identifier="" id="Zbi-X6-DLT">
                                 <view key="view" id="sag-tS-7Jw">
-                                    <rect key="frame" x="10" y="7" width="289" height="405"/>
+                                    <rect key="frame" x="10" y="7" width="295" height="405"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView focusRingType="none" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="48" horizontalPageScroll="10" verticalLineScroll="48" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJv-ju-DFe">
@@ -182,7 +183,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="293" height="48"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="NameColumn" width="289.7734375" minWidth="40" maxWidth="1000" id="8Ve-L0-o7V">
@@ -229,8 +230,8 @@
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
-                    <customView focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                        <rect key="frame" x="323" y="0.0" width="725" height="626"/>
+                    <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                        <rect key="frame" x="323" y="0.0" width="730" height="626"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="626" id="5yo-rb-X1O"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
@@ -263,8 +264,7 @@
         <viewController id="txt-J3-pzW" customClass="ConversationsVC">
             <connections>
                 <outlet property="conversationsView" destination="zcl-pp-rGb" id="YXp-WN-UmC"/>
-                <outlet property="currentCallView" destination="tSW-YT-asL" id="r2r-Q3-clc"/>
-                <outlet property="view" destination="tSW-YT-asL" id="fv5-ly-rk8"/>
+                <outlet property="view" destination="bqQ-DB-Z0g" id="nJI-EM-4z2"/>
             </connections>
         </viewController>
         <viewController id="9RF-6W-vEW" customClass="PersonsVC">
