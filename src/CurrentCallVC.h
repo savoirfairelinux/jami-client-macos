@@ -34,7 +34,7 @@
 
 class Call;
 
-@interface CurrentCallVC : NSViewController {
+@interface CurrentCallVC : NSViewController <NSSplitViewDelegate> {
 
 }
 

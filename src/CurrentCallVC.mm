@@ -59,21 +59,22 @@
 
 @interface CurrentCallVC ()
 
-@property (assign) IBOutlet NSTextField *personLabel;
-@property (assign) IBOutlet NSTextField *stateLabel;
-@property (assign) IBOutlet NSButton *holdOnOffButton;
-@property (assign) IBOutlet NSButton *hangUpButton;
-@property (assign) IBOutlet NSButton *recordOnOffButton;
-@property (assign) IBOutlet NSButton *pickUpButton;
-@property (assign) IBOutlet NSTextField *timeSpentLabel;
-@property (assign) IBOutlet NSView *controlsPanel;
+@property (unsafe_unretained) IBOutlet NSTextField *personLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *stateLabel;
+@property (unsafe_unretained) IBOutlet NSButton *holdOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton *hangUpButton;
+@property (unsafe_unretained) IBOutlet NSButton *recordOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton *pickUpButton;
+@property (unsafe_unretained) IBOutlet NSTextField *timeSpentLabel;
+@property (unsafe_unretained) IBOutlet NSView *controlsPanel;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
 
 @property QHash<int, NSButton*> actionHash;
 
 // Video
-@property (assign) IBOutlet CallView *videoView;
+@property (unsafe_unretained) IBOutlet CallView *videoView;
 @property CALayer* videoLayer;
-@property (assign) IBOutlet NSView *previewView;
+@property (unsafe_unretained) IBOutlet NSView *previewView;
 @property CALayer* previewLayer;
 
 @property RendererConnectionsHolder* previewHolder;
@@ -96,6 +97,7 @@
 @synthesize videoLayer;
 @synthesize previewLayer;
 @synthesize previewView;
+@synthesize splitView;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -222,6 +224,7 @@
     videoHolder = [[RendererConnectionsHolder alloc] init];
 
     [self connect];
+    [self collapseRightView];
 }
 
 - (void) connect
@@ -453,8 +456,40 @@
     NSLog(@"frame %@ : %f %f %f %f \n\n",name ,frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
+-(void)collapseRightView
+{
 
-#pragma button methods
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSRect leftFrame = [left frame];
+    //NSRect overallFrame = [splitView frame]; //???
+    [right setHidden:YES];
+    //[left setFrameSize:NSMakeSize(leftFrame.size.width,leftFrame.size.height)];
+    [splitView display];
+}
+
+-(void)uncollapseRightView
+{
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    [right setHidden:NO];
+
+    CGFloat dividerThickness = [splitView dividerThickness];
+
+    // get the different frames
+    NSRect leftFrame = [left frame];
+    NSRect rightFrame = [right frame];
+
+    leftFrame.size.width = (leftFrame.size.width - rightFrame.size.width - dividerThickness);
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    [left setFrameSize:leftFrame.size];
+    [right setFrame:rightFrame];
+    [splitView display];
+}
+
+
+#pragma mark - Button methods
+
 - (IBAction)hangUp:(id)sender {
     CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::REFUSE;
 }
@@ -471,4 +506,67 @@
     CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::HOLD;
 }
 
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview;
+{
+    NSView* rightView = [[splitView subviews] objectAtIndex:1];
+    NSLog(@"%@:%s returning %@",[self class], _cmd, ([subview isEqual:rightView])?@"YES":@"NO");
+    return ([subview isEqual:rightView]);
+}
+
+-(IBAction)toggleRightView:(id)sender;
+{
+    BOOL rightViewCollapsed = [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]];
+    NSLog(@"%@:%s toggleInspector isCollapsed: %@",[self class], _cmd, rightViewCollapsed?@"YES":@"NO");
+    if (rightViewCollapsed) {
+        [self uncollapseRightView];
+    } else {
+        [self collapseRightView];
+    }
+}
+
+#pragma mark - NSSplitViewDelegate
+
+/* Return YES if the subview should be collapsed because the user has double-clicked on an adjacent divider. If a split view has a delegate, and the delegate responds to this message, it will be sent once for the subview before a divider when the user double-clicks on that divider, and again for the subview after the divider, but only if the delegate returned YES when sent -splitView:canCollapseSubview: for the subview in question. When the delegate indicates that both subviews should be collapsed NSSplitView's behavior is undefined.
+ */
+- (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex;
+{
+    NSView* rightView = [[splitView subviews] objectAtIndex:1];
+    NSLog(@"%@:%s returning %@",[self class], _cmd, ([subview isEqual:rightView])?@"YES":@"NO");
+    return ([subview isEqual:rightView]);
+}
+
+//- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex;
+//{
+//    NSLog(@"%@:%s returning NO",[self class], _cmd);
+//    return YES;
+//}
+
+//- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)view;
+//{
+//    NSLog(@"%@:%s returning NO",[self class], _cmd);
+//    return NO;
+//}
+//
+
+/* From the header doc
+ * Delegates that respond to this message and return a number larger than the proposed minimum position effectively declare a minimum size for the subview above or to the left of the divider in question,
+ the minimum size being the difference between the proposed and returned minimum positions. This minimum size is only effective for the divider-dragging operation during which the
+ -splitView:constrainMinCoordinate:ofSubviewAt: message is sent. NSSplitView's behavior is undefined when a delegate responds to this message by returning a number smaller than the proposed minimum.
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMinimumPosition ofSubviewAt:(NSInteger)dividerIndex;
+{
+    NSLog(@"%@:%s proposedMinimum: %f",[self class], _cmd, proposedMinimumPosition);
+    return proposedMinimumPosition + 200;
+}
+*/
+/*  Delegates that respond to this message and return a number smaller than the proposed maximum position effectively declare a minimum size for the subview below or to the right of the divider in question,
+ the minimum size being the difference between the proposed and returned maximum positions. This minimum size is only effective for the divider-dragging operation during which the
+ -splitView:constrainMaxCoordinate:ofSubviewAt: message is sent. NSSplitView's behavior is undefined when a delegate responds to this message by returning a number larger than the proposed maximum.
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMaximumPosition ofSubviewAt:(NSInteger)dividerIndex;
+{
+    NSLog(@"%@:%s proposedMaximum: %f",[self class], _cmd, proposedMaximumPosition);
+    return proposedMaximumPosition - 100;
+}
+*/
 @end
