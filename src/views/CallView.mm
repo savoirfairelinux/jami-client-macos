@@ -186,15 +186,8 @@
     else if([theEvent clickCount] == 2)
     {
         [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
-        if(self.isInFullScreenMode)
-            [self exitFullScreenModeWithOptions:nil];
-        else {
-             NSApplicationPresentationOptions options = NSApplicationPresentationDefault + NSApplicationPresentationAutoHideDock +
-                                                        NSApplicationPresentationAutoHideMenuBar + NSApplicationPresentationAutoHideToolbar;
-            NSDictionary *opts = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:options], NSFullScreenModeApplicationPresentationOptions, nil];
-
-            [self enterFullScreenMode:[NSScreen mainScreen]  withOptions:opts];
-        }
+        if(self.fullScreenDelegate)
+            [self.fullScreenDelegate callShouldToggleFullScreen];
     }
 }
 
