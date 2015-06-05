@@ -36,15 +36,22 @@
 
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "CurrentCallVC.h"
 
 @interface RingWindowController ()
 
 @property NSSearchField* callField;
+@property CurrentCallVC* currentVC;
+@property (unsafe_unretained) IBOutlet NSView *callView;
+
 
 @end
 
 @implementation RingWindowController
 @synthesize callField;
+@synthesize currentVC;
+@synthesize callView;
+
 static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
@@ -53,6 +60,13 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [super windowDidLoad];
     [self.window setReleasedWhenClosed:FALSE];
     [self displayMainToolBar];
+
+    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
+    [callView addSubview:[self.currentVC view]];
+    [currentVC initFrame];
 }
 
 - (IBAction)openPreferences:(id)sender
