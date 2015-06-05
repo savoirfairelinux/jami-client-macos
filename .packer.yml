@@ -1,5 +1,9 @@
 osx:
     type: osx
+    info:
+        name: ring
+        version: nightly
+        release: 1
     brew_deps:
         - automake
         - libtool
@@ -30,7 +34,7 @@ osx:
         - cd build
         - cmake .. -DCMAKE_INSTALL_PREFIX=%(prefix_path)s -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
         - make install
-        - cd ..
+        - cd ../../
         - echo "Client"
         - git clone https://gerrit-ring.savoirfairelinux.com/ring-client-macosx ring-client-macosx
         - cd ring-client-macosx
@@ -39,3 +43,6 @@ osx:
         - cmake ../ -DCMAKE_INSTALL_PREFIX=%(prefix_path)s
         - make install -j
         - cpack -G DragNDrop Ring
+    transfert:
+        files:
+            - ring-client-macosx/build/Ring.dmg
