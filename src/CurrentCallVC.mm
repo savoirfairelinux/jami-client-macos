@@ -40,11 +40,10 @@
 #import <QItemSelection>
 #import <video/previewmanager.h>
 #import <video/renderer.h>
+#import <media/text.h>
 
 #import "views/CallView.h"
 
-/** FrameReceiver class - delegate for AVCaptureSession
- */
 @interface RendererConnectionsHolder : NSObject
 
 @property QMetaObject::Connection frameUpdated;
@@ -59,21 +58,23 @@
 
 @interface CurrentCallVC ()
 
-@property (assign) IBOutlet NSTextField *personLabel;
-@property (assign) IBOutlet NSTextField *stateLabel;
-@property (assign) IBOutlet NSButton *holdOnOffButton;
-@property (assign) IBOutlet NSButton *hangUpButton;
-@property (assign) IBOutlet NSButton *recordOnOffButton;
-@property (assign) IBOutlet NSButton *pickUpButton;
-@property (assign) IBOutlet NSTextField *timeSpentLabel;
-@property (assign) IBOutlet NSView *controlsPanel;
+@property (unsafe_unretained) IBOutlet NSTextField *personLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *stateLabel;
+@property (unsafe_unretained) IBOutlet NSButton *holdOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton *hangUpButton;
+@property (unsafe_unretained) IBOutlet NSButton *recordOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton *pickUpButton;
+@property (unsafe_unretained) IBOutlet NSTextField *timeSpentLabel;
+@property (unsafe_unretained) IBOutlet NSView *controlsPanel;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
+@property (unsafe_unretained) IBOutlet NSButton *chatButton;
 
 @property QHash<int, NSButton*> actionHash;
 
 // Video
-@property (assign) IBOutlet CallView *videoView;
+@property (unsafe_unretained) IBOutlet CallView *videoView;
 @property CALayer* videoLayer;
-@property (assign) IBOutlet NSView *previewView;
+@property (unsafe_unretained) IBOutlet NSView *previewView;
 @property CALayer* previewLayer;
 
 @property RendererConnectionsHolder* previewHolder;
@@ -90,12 +91,14 @@
 @synthesize hangUpButton;
 @synthesize recordOnOffButton;
 @synthesize pickUpButton;
+@synthesize chatButton;
 @synthesize timeSpentLabel;
 @synthesize controlsPanel;
 @synthesize videoView;
 @synthesize videoLayer;
 @synthesize previewLayer;
 @synthesize previewView;
+@synthesize splitView;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -128,10 +131,10 @@
 -(void) updateCall
 {
     QModelIndex callIdx = CallModel::instance()->selectionModel()->currentIndex();
-    [personLabel setStringValue:CallModel::instance()->data(callIdx, Qt::DisplayRole).toString().toNSString()];
-    [timeSpentLabel setStringValue:CallModel::instance()->data(callIdx, (int)Call::Role::Length).toString().toNSString()];
+    [personLabel setStringValue:callIdx.data(Qt::DisplayRole).toString().toNSString()];
+    [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
 
-    Call::State state = CallModel::instance()->data(callIdx, (int)Call::Role::State).value<Call::State>();
+    Call::State state = callIdx.data((int)Call::Role::State).value<Call::State>();
 
     switch (state) {
         case Call::State::DIALING:
@@ -221,6 +224,8 @@
     previewHolder = [[RendererConnectionsHolder alloc] init];
     videoHolder = [[RendererConnectionsHolder alloc] init];
 
+    [self.videoView setFullScreenDelegate:self];
+
     [self connect];
 }
 
@@ -233,6 +238,7 @@
                              [self animateOut];
                              return;
                          }
+                         [self collapseRightView];
                          [self updateCall];
                          [self updateAllActions];
                          [self animateOut];
@@ -264,7 +270,7 @@
 {
     QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
     Call* call = CallModel::instance()->getCall(idx);
-    QObject::connect(call,
+    self.videoStarted = QObject::connect(call,
                      &Call::videoStarted,
                      [=](Video::Renderer* renderer) {
                          NSLog(@"Video started!");
@@ -453,8 +459,40 @@
     NSLog(@"frame %@ : %f %f %f %f \n\n",name ,frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
+-(void)collapseRightView
+{
 
-#pragma button methods
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSRect leftFrame = [left frame];
+    //NSRect overallFrame = [splitView frame]; //???
+    [right setHidden:YES];
+    //[left setFrameSize:NSMakeSize(leftFrame.size.width,leftFrame.size.height)];
+    [splitView display];
+}
+
+-(void)uncollapseRightView
+{
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    [right setHidden:NO];
+
+    CGFloat dividerThickness = [splitView dividerThickness];
+
+    // get the different frames
+    NSRect leftFrame = [left frame];
+    NSRect rightFrame = [right frame];
+
+    leftFrame.size.width = (leftFrame.size.width - rightFrame.size.width - dividerThickness);
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    [left setFrameSize:leftFrame.size];
+    [right setFrame:rightFrame];
+    [splitView display];
+}
+
+
+#pragma mark - Button methods
+
 - (IBAction)hangUp:(id)sender {
     CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::REFUSE;
 }
@@ -469,6 +507,52 @@
 
 - (IBAction)toggleHold:(id)sender {
     CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::HOLD;
+}
+
+-(IBAction)toggleChat:(id)sender;
+{
+    BOOL rightViewCollapsed = [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]];
+    if (rightViewCollapsed) {
+        [self uncollapseRightView];
+        CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex())->addOutgoingMedia<Media::Text>();
+    } else {
+        [self collapseRightView];
+    }
+    [chatButton setState:rightViewCollapsed];
+}
+
+#pragma mark - NSSplitViewDelegate
+
+/* Return YES if the subview should be collapsed because the user has double-clicked on an adjacent divider. If a split view has a delegate, and the delegate responds to this message, it will be sent once for the subview before a divider when the user double-clicks on that divider, and again for the subview after the divider, but only if the delegate returned YES when sent -splitView:canCollapseSubview: for the subview in question. When the delegate indicates that both subviews should be collapsed NSSplitView's behavior is undefined.
+ */
+- (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex;
+{
+    NSView* rightView = [[splitView subviews] objectAtIndex:1];
+    return ([subview isEqual:rightView]);
+}
+
+
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview;
+{
+    NSView* rightView = [[splitView subviews] objectAtIndex:1];
+    return ([subview isEqual:rightView]);
+}
+
+
+# pragma mark - FullScreenDelegate
+
+- (void) callShouldToggleFullScreen
+{
+    if(self.splitView.isInFullScreenMode)
+        [self.splitView exitFullScreenModeWithOptions:nil];
+    else {
+        NSApplicationPresentationOptions options = NSApplicationPresentationDefault +NSApplicationPresentationAutoHideDock +
+        NSApplicationPresentationAutoHideMenuBar + NSApplicationPresentationAutoHideToolbar;
+        NSDictionary *opts = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:options],
+                              NSFullScreenModeApplicationPresentationOptions, nil];
+
+        [self.splitView enterFullScreenMode:[NSScreen mainScreen]  withOptions:opts];
+    }
 }
 
 @end
