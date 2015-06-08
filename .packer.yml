@@ -21,14 +21,11 @@ osx:
         - mkdir native
         - cd native
         - ../bootstrap
-        - echo "########################################################1"
         - make -j3
-        - echo "########################################################2"
         - cd ../../
-        - ./autogen.sh && ./configure --without-alsa --without-pulse --without-dbus --prefix=%(prefix_path)s
-        - echo "########################################################3"
-        - make install -j
-        - echo "########################################################4"
+        - ./autogen.sh
+        - ./configure --without-alsa --without-pulse --without-dbus --prefix=%(prefix_path)s
+        - make install -j1
         - cd ..
         - echo "LRC"
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
@@ -37,19 +34,16 @@ osx:
         - mkdir build
         - cd build
         - cmake .. -DCMAKE_INSTALL_PREFIX=%(prefix_path)s -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/local/opt/llvm/bin/clang -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm/bin/clang++
-        - echo "########################################################5"
-        - make install
-        - echo "########################################################6"
+        - make install -j1
         - cd ../../
         - echo "Client"
         - git clone https://gerrit-ring.savoirfairelinux.com/ring-client-macosx ring-client-macosx
         - cd ring-client-macosx
-        - mkdir build && cd build
+        - mkdir build
+        - cd build
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
         - cmake ../ -DCMAKE_INSTALL_PREFIX=%(prefix_path)s
-        - echo "########################################################7"
-        - make install -j
-        - echo "########################################################8"
+        - make install -j1
         - cpack -G DragNDrop Ring
     transfer:
         files:
