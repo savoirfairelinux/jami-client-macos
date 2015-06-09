@@ -138,11 +138,9 @@ CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSiz
     // create context, keeping original image properties
     CGColorSpaceRef colorspace = CGImageGetColorSpace(image);
 
-    NSLog(@"%ld, %ld", CGImageGetBitsPerComponent(image),CGImageGetBytesPerRow(image));
-
     CGContextRef context = CGBitmapContextCreate(NULL, size.width(), size.height(),
                                                  CGImageGetBitsPerComponent(image),
-                                                 CGImageGetBytesPerRow(image),
+                                                 size.width() * CGImageGetBitsPerComponent(image),
                                                  colorspace,
                                                  CGImageGetAlphaInfo(image));
     CGColorSpaceRelease(colorspace);
