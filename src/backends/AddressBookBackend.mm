@@ -38,6 +38,7 @@
 #import <QtWidgets/QApplication>
 #import <QtCore/QStandardPaths>
 #import <QTimer>
+#import <QPixmap>
 #import <QtGlobal>
 
 //Ring
@@ -202,14 +203,21 @@ void AddressBookBackend::asyncLoad(int startingPoint)
 
     for (int i = startingPoint; i < endPoint; ++i) {
 
-        Person* person = new Person(QByteArray::fromNSData(((ABPerson*)[everyone objectAtIndex:i]).vCardRepresentation),
+        ABPerson* abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
+
+        Person* person = new Person(QByteArray::fromNSData(abPerson.vCardRepresentation),
                                     Person::Encoding::vCard,
                                     this);
+
+        if(abPerson.imageData)
+            person->setPhoto(QVariant(QPixmap::fromImage(QImage::fromData(QByteArray::fromNSData((abPerson.imageData))))));
+
         if([person->formattedName().toNSString() isEqualToString:@""]   &&
            [person->secondName().toNSString() isEqualToString:@""]     &&
            [person->firstName().toNSString() isEqualToString:@""]) {
             continue;
         }
+
         person->setCollection(this);
 
         editor<Person>()->addExisting(person);
