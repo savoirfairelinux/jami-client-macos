@@ -29,6 +29,15 @@
  */
 #import <Cocoa/Cocoa.h>
 
+@protocol FullScreenDelegate;
+@protocol FullScreenDelegate
+
+@optional
+
+-(void) callShouldToggleFullScreen;
+
+@end
+
 @interface CallView : NSView <NSDraggingDestination, NSOpenSavePanelDelegate>
 {
     //highlight the drop zone
@@ -41,5 +50,10 @@
  * Sets weither this view allow first click interactions
  */
 @property BOOL shouldAcceptInteractions;
+
+/**
+ *  Delegate to inform about desire to move
+ */
+@property (nonatomic) id <FullScreenDelegate> fullScreenDelegate;
 
 @end
