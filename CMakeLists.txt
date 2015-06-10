@@ -5,7 +5,14 @@ IF(POLICY CMP0022)
 ENDIF(POLICY CMP0022)
 
 SET(PROJ_NAME Ring)
-SET(RING_VERSION "0.4.0")
+
+#To build nighlies we need to update RING_VERSION with an optionnal command line arg
+IF("${RING_VERSION}" STREQUAL "")
+   SET(RING_VERSION "0.4.0")
+ENDIF("${RING_VERSION}" STREQUAL "")
+
+MESSAGE("Building Ring version - " ${RING_VERSION})
+
 SET(RING_VERSION_NAME "Samuel de Champlain")
 SET(BUNDLE_VERSION "Samuel de Champlain - beta")
 
@@ -20,13 +27,39 @@ FIND_PACKAGE(Qt5MacExtras REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
 
+IF(NOT (${ENABLE_SPARKLE} MATCHES false))
+   MESSAGE("Sparkle auto-update enabled")
+   SET(ENABLE_SPARKLE 1 CACHE BOOLEAN "Enable Sparkle")
+   ADD_DEFINITIONS(-DENABLE_SPARKLE=true)
+
+   # find_library searches in /Library/Frameworks by default
+   # We add an hint to our custom location
+
+   FIND_LIBRARY(SPARKLE_FRAMEWORK
+                NAMES Sparkle
+                HINTS ${CMAKE_CURRENT_SOURCE_DIR}/sparkle)
+   MESSAGE("Sparkle is here:" ${SPARKLE_FRAMEWORK})
+find_path(SPARKLE_INCLUDE_DIR Sparkle.h HINTS ${SPARKLE_FRAMEWORK}/Headers)
+MESSAGE("INCLUDE " ${SPARKLE_INCLUDE_DIR})
+   # we need to copy the public key to check the updates
+   SET(PUBLIC_KEY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sparkle/dsa_pub.pem")
+   IF(EXISTS ${PUBLIC_KEY_PATH})
+      MESSAGE(STATUS "Looking for Public Key - found")
+      SET_SOURCE_FILES_PROPERTIES(${PUBLIC_KEY_PATH} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+      SET(PUBLIC_KEY ${PUBLIC_KEY_PATH})
+   ELSE(EXISTS ${PUBLIC_KEY_PATH})
+      MESSAGE(WARNING "Looking for Public Key - not found")
+      MESSAGE(WARNING "${PUBLIC_KEY_PATH} not found Sparkle Framework will NOT work and may event prevent application from launching. Please consider Disabling Sparkle Framwork, creating a pair of key for testing purposes")
+   ENDIF(EXISTS ${PUBLIC_KEY_PATH})
+ENDIF(NOT (${ENABLE_SPARKLE} MATCHES false))
+
 INCLUDE_DIRECTORIES(SYSTEM ${Qt5Core_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(SYSTEM ${Qt5MacExtras_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${LIB_RING_CLIENT_INCLUDE_DIR})
 
-MESSAGE("LibRingClient is here:" ${LIB_RING_CLIENT_INCLUDE_DIR})
+MESSAGE("LRC is here:" ${LIB_RING_CLIENT_INCLUDE_DIR})
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 #Files to compile
@@ -150,6 +183,8 @@ ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
    ${ringclient_XIBS_FOR_EXECUTABLE}
    ${myApp_ICON}
    Credits.rtf
+   ${PUBLIC_KEY}
+   ${SPARKLE_FRAMEWORK}
    ${ring_ICONS})
 
 # Follow Xcode hierarchy principles
@@ -159,6 +194,9 @@ SOURCE_GROUP("CustomViews" FILES ${ringclient_VIEWS})
 SOURCE_GROUP("Classes" FILES ${ringclient_OTHERS})
 SOURCE_GROUP("Resources\\Interface Builder" FILES ${ringclient_XIBS_FOR_EXECUTABLE})
 
+IF(ENABLE_SPARKLE)
+    SOURCE_GROUP("Frameworks" FILES ${SPARKLE_FRAMEWORK})
+ENDIF(ENABLE_SPARKLE)
 
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${LIB_RING_CLIENT_LIBRARY}
@@ -167,6 +205,10 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${Qt5Widgets_LIBRARIES}
 )
 
+IF(ENABLE_SPARKLE)
+   TARGET_LINK_LIBRARIES(${PROJ_NAME} ${SPARKLE_FRAMEWORK})
+ENDIF(ENABLE_SPARKLE)
+
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Quartz")
@@ -174,8 +216,8 @@ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AVFoundation")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AddressBook")
 
 # These variables are specific to our plist and are NOT standard CMake variables
-set(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
-set(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
+SET(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
+SET(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
 
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
@@ -197,10 +239,6 @@ IF(${IBTOOL} STREQUAL "IBTOOL-NOTFOUND")
                     the Apple developer tools. The default system paths were searched in addition to ${OSX_DEVELOPER_ROOT}/usr/bin")
 endif()
 
-# Make sure the 'Resources' Directory is correctly created before we build
-ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} PRE_BUILD
-                      COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources)
-
 # Compile the .xib files using the 'ibtool' program with the destination being the app package
 FOREACH(xib ${ringclient_XIBS})
   ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} POST_BUILD
@@ -211,7 +249,7 @@ FOREACH(xib ${ringclient_XIBS})
 
 ENDFOREACH()
 
-set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_INSTALL_PREFIX})
+SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_INSTALL_PREFIX})
 
 SET(APPS "\${CMAKE_INSTALL_PREFIX}/${PROJ_NAME}.app")
 
@@ -249,7 +287,7 @@ FOREACH(plugin ${QT_PLUGINS_IMAGEFORMAT})
 ENDFOREACH()
 
 # directories to look for dependencies
-SET(DIRS ${CMAKE_INSTALL_PREFIX}/lib ${QT_LIB_DIR})
+SET(DIRS ${CMAKE_INSTALL_PREFIX}/lib ${QT_LIB_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/sparkle)
 
 INSTALL(CODE "
     file(GLOB_RECURSE QTPLUGINS
