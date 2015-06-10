@@ -35,6 +35,8 @@
 #import "RingWindowController.h"
 #import "PreferencesWindowController.h"
 
+#import <Sparkle/Sparkle.h>
+
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 
 - (void) showWizard;
