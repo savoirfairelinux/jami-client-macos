@@ -36,6 +36,8 @@
 #import <QItemSelectionModel>
 #import <account.h>
 
+#import <Sparkle/Sparkle.h>
+
 #import "Constants.h"
 #import "RingWizardWC.h"
 
@@ -51,6 +53,9 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
+    SUUpdater *test = [SUUpdater sharedUpdater];
+
+    [test checkForUpdates:self];
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 
