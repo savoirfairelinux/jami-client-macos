@@ -36,10 +36,12 @@
 #import <QItemSelectionModel>
 #import <account.h>
 
+#import <Sparkle/Sparkle.h>
+
 #import "Constants.h"
 #import "RingWizardWC.h"
 
-@interface AppDelegate()
+@interface AppDelegate() <SUUpdaterDelegate>
 
 @property RingWindowController* ringWindowController;
 @property RingWizardWC* wizard;
@@ -51,6 +53,9 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
+    SUUpdater *test = [SUUpdater sharedUpdater];
+    [test setDelegate:self];
+    [test checkForUpdates:self];
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 
@@ -146,6 +151,29 @@
 {
     delete CallModel::instance()->QObject::parent();
     [[NSApplication sharedApplication] terminate:self];
+}
+
+#pragma mark -
+#pragma mark Sparkle delegate
+
+- (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update
+{
+    [NSApp activateIgnoringOtherApps:YES];
+}
+
+- (BOOL)updaterMayCheckForUpdates:(SUUpdater *)bundle
+{
+    return YES;
+}
+
+- (BOOL)updaterShouldRelaunchApplication:(SUUpdater *)updater
+{
+    return YES;
+}
+
+- (void)updater:(SUUpdater *)updater didAbortWithError:(NSError *)error
+{
+    NSLog(@"Error:%@", error.localizedDescription);
 }
 
 @end

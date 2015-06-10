@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
@@ -132,7 +132,7 @@
                     </connections>
                 </button>
                 <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VH6-yw-pgr">
-                    <rect key="frame" x="20" y="171" width="859" height="181"/>
+                    <rect key="frame" x="20" y="69" width="859" height="181"/>
                     <subviews>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kAy-G5-0gJ">
                             <rect key="frame" x="65" y="116" width="104" height="18"/>
@@ -290,9 +290,47 @@
                         </button>
                     </subviews>
                 </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diX-uH-Ce8">
+                    <rect key="frame" x="40" y="314" width="52" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Update" id="r4u-t3-gBc">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCd-PD-kd7">
+                    <rect key="frame" x="57" y="290" width="221" height="18"/>
+                    <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="T3a-yx-ZaW">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="VEJ-ic-3Ub" name="value" keyPath="automaticallyChecksForUpdates" id="WAn-I8-vsv"/>
+                    </connections>
+                </button>
+                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RYP-3d-PCa" userLabel="Update interval">
+                    <rect key="frame" x="291" y="286" width="100" height="26"/>
+                    <popUpButtonCell key="cell" type="push" title="Monthly" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2629800" imageScaling="proportionallyDown" inset="2" selectedItem="42E-UY-qlP" id="tTF-gp-Rti">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="GJ4-0X-PTn">
+                            <items>
+                                <menuItem title="Hourly" tag="3600" id="mbu-TH-bs8"/>
+                                <menuItem title="Daily" tag="86400" id="cB6-4m-9MU"/>
+                                <menuItem title="Weekly" tag="604800" id="AId-am-73Q"/>
+                                <menuItem title="Monthly" state="on" tag="2629800" id="42E-UY-qlP"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <binding destination="VEJ-ic-3Ub" name="enabled" keyPath="automaticallyChecksForUpdates" id="dYG-9H-fvc"/>
+                        <binding destination="VEJ-ic-3Ub" name="selectedTag" keyPath="updateCheckInterval" id="Uib-Pw-pbq"/>
+                    </connections>
+                </popUpButton>
             </subviews>
             <point key="canvasLocation" x="523.5" y="220.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="Sz0-vm-i3t"/>
+        <customObject id="VEJ-ic-3Ub" customClass="SUUpdater"/>
     </objects>
 </document>
