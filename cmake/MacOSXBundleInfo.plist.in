@@ -12,7 +12,11 @@
 	<string>${MACOSX_BUNDLE_ICON_FILE}</string>
 	<key>CFBundleIdentifier</key>
 	<string>${MACOSX_BUNDLE_GUI_IDENTIFIER}</string>
-	<key>CFBundleInfoDictionaryVersion</key>
+	<key>SUPublicDSAKeyFile</key>
+    <string>dsa_pub.pem</string>
+    <key>SUFeedURL</key>
+    <string>http://gpl.savoirfairelinux.net/ring-download/mac_osx/sparkle-ring.xml</string>
+    <key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
 	<string>${MACOSX_BUNDLE_LONG_VERSION_STRING}</string>
