@@ -25,7 +25,8 @@
 # Executables
 *.exe
 *.out
-*.app
+Ring.app
+Sparkle.framework
 
 # Qt-es
 *.user
