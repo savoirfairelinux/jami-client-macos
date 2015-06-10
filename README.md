@@ -29,6 +29,11 @@ You can also build it from the command line:
 5. make
 6. open Ring.app/
 
+If you want to create the final app (self-containing .dmg):
+
+5. make install
+6. cpack -G DragNDrop Ring
+
 
 Debugging
 ==================
