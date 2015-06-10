@@ -31,12 +31,19 @@
 
 #import <categorizedhistorymodel.h>
 
+#if ENABLE_SPARKLE
+#import <Sparkle/Sparkle.h>
+#endif
+
 #import "Constants.h"
 
 @interface GeneralPrefsVC ()
 @property (unsafe_unretained) IBOutlet NSTextField *historyChangedLabel;
 @property (unsafe_unretained) IBOutlet NSView *advancedGeneralSettings;
 @property (unsafe_unretained) IBOutlet NSButton *startUpButton;
+@property (unsafe_unretained) IBOutlet NSButton *toggleAutomaticUpdateCheck;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *checkIntervalPopUp;
+@property (unsafe_unretained) IBOutlet NSView *sparkleContainer;
 
 @end
 
@@ -44,6 +51,9 @@
 @synthesize historyChangedLabel;
 @synthesize advancedGeneralSettings;
 @synthesize startUpButton;
+@synthesize toggleAutomaticUpdateCheck;
+@synthesize checkIntervalPopUp;
+@synthesize sparkleContainer;
 
 - (void)loadView
 {
@@ -52,6 +62,17 @@
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::ShowAdvanced options:NSKeyValueObservingOptionNew context:NULL];
 
     [startUpButton setState:[self isLaunchAtStartup]];
+
+#if ENABLE_SPARKLE
+    [sparkleContainer setHidden:NO];
+    SUUpdater *updater = [SUUpdater sharedUpdater];
+    [toggleAutomaticUpdateCheck bind:@"value" toObject:updater withKeyPath:@"automaticallyChecksForUpdates" options:nil];
+
+    [checkIntervalPopUp bind:@"enabled" toObject:updater withKeyPath:@"automaticallyChecksForUpdates" options:nil];
+    [checkIntervalPopUp bind:@"selectedTag" toObject:updater withKeyPath:@"updateCheckInterval" options:nil];
+#else
+        [sparkleContainer setHidden:YES];
+#endif
 
     //[advancedGeneralSettings setHidden:![[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
 }
