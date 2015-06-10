@@ -29,6 +29,19 @@ You can also build it from the command line:
 5. make
 6. open Ring.app/
 
+If you want to create the final app (self-containing .dmg):
+
+5. make install
+6. cpack -G DragNDrop Ring
+
+Notes:
+
+By default the client version is specified in CMakeLists.txt but it can be
+overriden by specifying -DRING_VERSION=<num> in the cmake command line.
+
+Ring ships with the Sparkle framework to allow automatic app updates.
+This can be disabled for your custom build by specifying -DENABLE_SPARKLE=false
+in the cmake phase.
 
 Debugging
 ==================
