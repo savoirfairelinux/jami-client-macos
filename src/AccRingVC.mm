@@ -35,9 +35,10 @@
 
 #import "AccRingVC.h"
 
-@interface AccRingVC ()
+#import <accountmodel.h>
+#import <qitemselectionmodel.h>
 
-@property Account* privateAccount;
+@interface AccRingVC ()
 
 @property (assign) IBOutlet NSTextField *aliasTextField;
 @property (assign) IBOutlet NSTextField *typeLabel;
@@ -52,7 +53,6 @@
 @end
 
 @implementation AccRingVC
-@synthesize privateAccount;
 @synthesize typeLabel;
 @synthesize bootstrapField;
 @synthesize hashField;
@@ -68,14 +68,25 @@
     [aliasTextField setTag:ALIAS_TAG];
     [userAgentTextField setTag:USERAGENT_TAG];
     [bootstrapField setTag:HOSTNAME_TAG];
+
+    QObject::connect(AccountModel::instance()->selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+                         [self loadAccount];
+                     });
 }
 
-- (void)loadAccount:(Account *)account
+- (Account*) currentAccount
 {
-    if(privateAccount == account)
-        return;
+    auto accIdx = AccountModel::instance()->selectionModel()->currentIndex();
+    return AccountModel::instance()->getAccountByModelIndex(accIdx);
+}
 
-    privateAccount = account;
+- (void)loadAccount
+{
+    auto account = [self currentAccount];
 
     [self.aliasTextField setStringValue:account->alias().toNSString()];
 
@@ -94,33 +105,33 @@
             break;
     }
 
-    [upnpButton setState:privateAccount->isUpnpEnabled()];
-    [userAgentButton setState:privateAccount->hasCustomUserAgent()];
-    [userAgentTextField setEnabled:privateAccount->hasCustomUserAgent()];
+    [upnpButton setState:[self currentAccount]->isUpnpEnabled()];
+    [userAgentButton setState:[self currentAccount]->hasCustomUserAgent()];
+    [userAgentTextField setEnabled:[self currentAccount]->hasCustomUserAgent()];
 
-    [autoAnswerButton setState:privateAccount->isAutoAnswer()];
+    [autoAnswerButton setState:[self currentAccount]->isAutoAnswer()];
     [userAgentTextField setStringValue:account->userAgent().toNSString()];
 
     [bootstrapField setStringValue:account->hostname().toNSString()];
 
-    if([privateAccount->username().toNSString() isEqualToString:@""])
+    if([[self currentAccount]->username().toNSString() isEqualToString:@""])
         [hashField setStringValue:@"Reopen account to see your hash"];
     else
-        [hashField setStringValue:privateAccount->username().toNSString()];
+        [hashField setStringValue:[self currentAccount]->username().toNSString()];
 
 }
 
 - (IBAction)toggleUpnp:(NSButton *)sender {
-    privateAccount->setUpnpEnabled([sender state] == NSOnState);
+    [self currentAccount]->setUpnpEnabled([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAutoAnswer:(NSButton *)sender {
-    privateAccount->setAutoAnswer([sender state] == NSOnState);
+    [self currentAccount]->setAutoAnswer([sender state] == NSOnState);
 }
 
 - (IBAction)toggleCustomAgent:(NSButton *)sender {
     [self.userAgentTextField setEnabled:[sender state] == NSOnState];
-    privateAccount->setHasCustomUserAgent([sender state] == NSOnState);
+    [self currentAccount]->setHasCustomUserAgent([sender state] == NSOnState);
 }
 
 #pragma mark - NSTextFieldDelegate methods
@@ -136,16 +147,16 @@
 
     switch ([textField tag]) {
         case ALIAS_TAG:
-            privateAccount->setAlias([[textField stringValue] UTF8String]);
+            [self currentAccount]->setAlias([[textField stringValue] UTF8String]);
             break;
         case HOSTNAME_TAG:
-            privateAccount->setHostname([[textField stringValue] UTF8String]);
+            [self currentAccount]->setHostname([[textField stringValue] UTF8String]);
             break;
         case PASSWORD_TAG:
-            privateAccount->setPassword([[textField stringValue] UTF8String]);
+            [self currentAccount]->setPassword([[textField stringValue] UTF8String]);
             break;
         case USERAGENT_TAG:
-            privateAccount->setUserAgent([[textField stringValue] UTF8String]);
+            [self currentAccount]->setUserAgent([[textField stringValue] UTF8String]);
             break;
         default:
             break;
