@@ -34,8 +34,8 @@
 #import "Constants.h"
 
 @interface GeneralPrefsVC ()
-@property (assign) IBOutlet NSTextField *historyChangedLabel;
-@property (assign) IBOutlet NSView *advancedGeneralSettings;
+@property (unsafe_unretained) IBOutlet NSTextField *historyChangedLabel;
+@property (unsafe_unretained) IBOutlet NSView *advancedGeneralSettings;
 @property (unsafe_unretained) IBOutlet NSButton *startUpButton;
 
 @end
@@ -54,6 +54,12 @@
     [startUpButton setState:[self isLaunchAtStartup]];
 
     [advancedGeneralSettings setHidden:![[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
+}
+
+- (void) dealloc
+{
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:Preferences::HistoryLimit];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:Preferences::ShowAdvanced];
 }
 
 - (IBAction)clearHistory:(id)sender {
@@ -94,7 +100,7 @@
     if (loginItemsRef == nil) return;
     if (shouldBeToggled) {
         // Add the app to the LoginItems list.
-        CFURLRef appUrl = (CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
         LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
         if (itemRef) CFRelease(itemRef);
     }
@@ -109,21 +115,21 @@
 
 - (LSSharedFileListItemRef)itemRefInLoginItems {
     LSSharedFileListItemRef itemRef = nil;
-    NSURL *itemUrl = nil;
+    CFURLRef itemUrl = nil;
 
     // Get the app's URL.
-    NSURL *appUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    auto appUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     // Get the LoginItems list.
     LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
     if (loginItemsRef == nil) return nil;
     // Iterate over the LoginItems.
-    NSArray *loginItems = (NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, nil);
+    NSArray *loginItems = (__bridge_transfer NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, nil);
     for (int currentIndex = 0; currentIndex < [loginItems count]; currentIndex++) {
         // Get the current LoginItem and resolve its URL.
-        LSSharedFileListItemRef currentItemRef = (LSSharedFileListItemRef)[loginItems objectAtIndex:currentIndex];
-        if (LSSharedFileListItemResolve(currentItemRef, 0, (CFURLRef *) &itemUrl, NULL) == noErr) {
+        LSSharedFileListItemRef currentItemRef = (__bridge LSSharedFileListItemRef)[loginItems objectAtIndex:currentIndex];
+        if (LSSharedFileListItemResolve(currentItemRef, 0, &itemUrl, NULL) == noErr) {
             // Compare the URLs for the current LoginItem and the app.
-            if ([itemUrl isEqual:appUrl]) {
+            if ([(__bridge NSURL *)itemUrl isEqual:appUrl]) {
                 // Save the LoginItem reference.
                 itemRef = currentItemRef;
             }
@@ -132,7 +138,6 @@
     // Retain the LoginItem reference.
     if (itemRef != nil) CFRetain(itemRef);
     // Release the LoginItems lists.
-    [loginItems release];
     CFRelease(loginItemsRef);
 
     return itemRef;
