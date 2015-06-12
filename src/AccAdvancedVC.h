@@ -31,10 +31,6 @@
 
 #import <account.h>
 
-@interface AccAdvancedVC : NSViewController <NSTextFieldDelegate> {
-
-}
-
-- (void)loadAccount:(Account *)account;
+@interface AccAdvancedVC : NSViewController <NSTextFieldDelegate>
 
 @end
