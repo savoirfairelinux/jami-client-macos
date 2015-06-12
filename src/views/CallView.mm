@@ -73,7 +73,7 @@
     NSLog(@"Dragging entered");
 
     NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-    CFStringRef fileExtension = (CFStringRef) [fileURL.path pathExtension];
+    CFStringRef fileExtension = (__bridge CFStringRef) [fileURL.path pathExtension];
     CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
 
     // Check if the pasteboard contains image data and source/user wants it copied
@@ -141,7 +141,7 @@
     [self setNeedsDisplay: YES];
 
     NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-    CFStringRef fileExtension = (CFStringRef) [fileURL.path pathExtension];
+    CFStringRef fileExtension = (__bridge CFStringRef) [fileURL.path pathExtension];
     CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
 
     BOOL conforms = (UTTypeConformsTo(fileUTI, kUTTypeVideo)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie));

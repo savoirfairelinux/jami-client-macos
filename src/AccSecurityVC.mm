@@ -36,7 +36,6 @@
 #import <ciphermodel.h>
 #import <accountmodel.h>
 
-#import "QNSTreeController.h"
 #import "CertificateWC.h"
 
 // Tags for views
@@ -49,7 +48,7 @@
 
 @interface AccSecurityVC ()
 
-@property NSTreeController *treeController;
+@property QNSTreeController *treeController;
 @property (unsafe_unretained) IBOutlet NSOutlineView *cipherListView;
 @property (unsafe_unretained) IBOutlet NSButton *useTLS;
 @property (unsafe_unretained) IBOutlet NSView *tlsContainer;
@@ -122,11 +121,11 @@
     [self updateControlsWithTag:OUTGOING_TLS_SRV_NAME];
     [self updateControlsWithTag:TLS_NEGOTIATION_TAG];
 
-    QModelIndex qTlsMethodIdx = [self currentAccount]->tlsMethodModel()->selectionModel()->currentIndex();
+    QModelIndex qTlsMethodIdx = account->tlsMethodModel()->selectionModel()->currentIndex();
     [self.tlsMethodList removeAllItems];
     [self.tlsMethodList addItemWithTitle:qTlsMethodIdx.data(Qt::DisplayRole).toString().toNSString()];
 
-    treeController = [[QNSTreeController alloc] initWithQModel:[self currentAccount]->cipherModel()];
+    treeController = [[QNSTreeController alloc] initWithQModel:account->cipherModel()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setAlwaysUsesMultipleValuesMarker:YES];
     [treeController setChildrenKeyPath:@"children"];
@@ -142,76 +141,30 @@
     [srtpRTPFallback setState:[self currentAccount]->isSrtpRtpFallback()];
     [srtpRTPFallback setEnabled:useSRTP.state];
 
-    NSArray * pathComponentArray = [self pathComponentArray];
-
     if([self currentAccount]->tlsCaListCertificate() != nil) {
-            NSLog(@"CA ==> %@", [self currentAccount]->tlsCaListCertificate()->path().toNSURL());
-        [caListPathControl setURL:[self currentAccount]->tlsCaListCertificate()->path().toNSURL()];
+            NSLog(@"CA ==> %@", account->tlsCaListCertificate()->path().toNSURL());
+        [caListPathControl setURL:account->tlsCaListCertificate()->path().toNSURL()];
     } else {
         [caListPathControl setURL:nil];
     }
 
     if([self currentAccount]->tlsCertificate() != nil) {
-        NSLog(@" CERT ==> %@", [self currentAccount]->tlsCertificate()->path().toNSURL());
-        [certificatePathControl setURL:[self currentAccount]->tlsCertificate()->path().toNSURL()];
+        NSLog(@" CERT ==> %@", account->tlsCertificate()->path().toNSURL());
+        [certificatePathControl setURL:account->tlsCertificate()->path().toNSURL()];
     } else {
         [certificatePathControl setURL:nil];
     }
 
     if([self currentAccount]->tlsPrivateKeyCertificate() != nil) {
-        NSLog(@" PVK ==> %@", [self currentAccount]->tlsPrivateKeyCertificate()->path().toNSURL());
-        [pvkPathControl setURL:[self currentAccount]->tlsPrivateKeyCertificate()->path().toNSURL()];
+        NSLog(@" PVK ==> %@", account->tlsPrivateKeyCertificate()->path().toNSURL());
+        [pvkPathControl setURL:account->tlsPrivateKeyCertificate()->path().toNSURL()];
     } else {
         [pvkPathControl setURL:nil];
     }
 
-    [verifyCertAsServerButton setState:[self currentAccount]->isTlsVerifyServer()];
-    [verifyCertAsClientButton setState:[self currentAccount]->isTlsVerifyClient()];
-    [requireCertButton setState:[self currentAccount]->isTlsRequireClientCertificate()];
-}
-
-/*
- Assemble a set of custom cells to display into an array to pass to the path control.
- */
-- (NSArray *)pathComponentArray
-{
-    NSMutableArray *pathComponentArray = [[NSMutableArray alloc] init];
-
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-
-    NSURL* desktopURL = [fileManager URLForDirectory:NSDesktopDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    NSURL* documentsURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    NSURL* userURL = [fileManager URLForDirectory:NSUserDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-
-    NSPathComponentCell *componentCell;
-
-    // Use utility method to obtain a NSPathComponentCell based on icon, title and URL.
-    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Desktop" URL:desktopURL];
-    [pathComponentArray addObject:componentCell];
-
-    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Documents" URL:documentsURL];
-    [pathComponentArray addObject:componentCell];
-
-    componentCell = [self componentCellForType:kUserFolderIcon withTitle:NSUserName() URL:userURL];
-    [pathComponentArray addObject:componentCell];
-
-    return pathComponentArray;
-}
-
-/*
- This method is used by pathComponentArray to create a NSPathComponent cell based on icon, title and URL information.
- Each path component needs an icon, URL and title.
- */
-- (NSPathComponentCell *)componentCellForType:(OSType)withIconType withTitle:(NSString *)title URL:(NSURL *)url
-{
-    NSPathComponentCell *componentCell = [[NSPathComponentCell alloc] init];
-
-    NSImage *iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(withIconType)];
-    [componentCell setImage:iconImage];
-    [componentCell setURL:url];
-    [componentCell setTitle:title];
-
-    return componentCell;
+    [verifyCertAsServerButton setState:account->isTlsVerifyServer()];
+    [verifyCertAsClientButton setState:account->isTlsVerifyClient()];
+    [requireCertButton setState:account->isTlsRequireClientCertificate()];
 }
 
 - (IBAction)chooseTlsMethod:(id)sender {

@@ -180,8 +180,7 @@ public:
 
     NSString* newAccName = [[NSString alloc] initWithFormat:@"%@ account",
                 AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
-
-    Account* newAcc =AccountModel::instance()->add([newAccName UTF8String], qIdx);
+    AccountModel::instance()->add([newAccName UTF8String], qIdx);
     AccountModel::instance()->save();
 }
 
@@ -270,11 +269,10 @@ public:
     if ([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE] &&
                             AccountModel::instance()->ip2ip()->index() == qIdx) {
 
-        returnCell = [[NSCell alloc] init];
+        return [[NSCell alloc] init];
     } else {
-        returnCell = [tableColumn dataCell];
+        return [tableColumn dataCell];
     }
-    return returnCell;
 }
 
 // -------------------------------------------------------------------------------
