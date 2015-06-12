@@ -64,6 +64,10 @@
 @property (unsafe_unretained) IBOutlet NSButton *hangUpButton;
 @property (unsafe_unretained) IBOutlet NSButton *recordOnOffButton;
 @property (unsafe_unretained) IBOutlet NSButton *pickUpButton;
+@property (unsafe_unretained) IBOutlet NSButton *muteAudioButton;
+@property (unsafe_unretained) IBOutlet NSButton *muteVideoButton;
+
+
 @property (unsafe_unretained) IBOutlet NSTextField *timeSpentLabel;
 @property (unsafe_unretained) IBOutlet NSView *controlsPanel;
 @property (unsafe_unretained) IBOutlet NSSplitView *splitView;
@@ -84,21 +88,7 @@
 @end
 
 @implementation CurrentCallVC
-@synthesize personLabel;
-@synthesize actionHash;
-@synthesize stateLabel;
-@synthesize holdOnOffButton;
-@synthesize hangUpButton;
-@synthesize recordOnOffButton;
-@synthesize pickUpButton;
-@synthesize chatButton;
-@synthesize timeSpentLabel;
-@synthesize controlsPanel;
-@synthesize videoView;
-@synthesize videoLayer;
-@synthesize previewLayer;
-@synthesize previewView;
-@synthesize splitView;
+@synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, videoView, videoLayer, previewLayer, previewView, splitView;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -120,7 +110,9 @@
         [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
 
         if(action == UserActionModel::Action::HOLD) {
-            [a setTitle:(a.state == NSOnState ? @"Hold off" : @"Hold")];
+            NSString* imgName = (a.state == NSOnState ? @"ic_action_holdoff" : @"ic_action_hold");
+            [a setImage:[NSImage imageNamed:imgName]];
+
         }
         if(action == UserActionModel::Action::RECORD) {
             [a setTitle:(a.state == NSOnState ? @"Record off" : @"Record")];
@@ -201,6 +193,8 @@
     actionHash[ (int)UserActionModel::Action::HOLD  ] = holdOnOffButton;
     actionHash[ (int)UserActionModel::Action::RECORD] = recordOnOffButton;
     actionHash[ (int)UserActionModel::Action::HANGUP] = hangUpButton;
+    actionHash[ (int)UserActionModel::Action::MUTE_AUDIO] = muteAudioButton;
+    actionHash[ (int)UserActionModel::Action::MUTE_VIDEO] = muteVideoButton;
 
     videoLayer = [CALayer layer];
     [videoView setWantsLayer:YES];
@@ -516,6 +510,18 @@
         [self collapseRightView];
     }
     [chatButton setState:rightViewCollapsed];
+}
+
+- (IBAction)muteAudio:(id)sender
+{
+    UserActionModel* uam = CallModel::instance()->userActionModel();
+    uam << UserActionModel::Action::MUTE_AUDIO;
+}
+
+- (IBAction)muteVideo:(id)sender
+{
+    UserActionModel* uam = CallModel::instance()->userActionModel();
+    uam << UserActionModel::Action::MUTE_VIDEO;
 }
 
 #pragma mark - NSSplitViewDelegate

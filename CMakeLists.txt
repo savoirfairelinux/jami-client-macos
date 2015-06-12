@@ -117,8 +117,12 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
 SET(ring_ICONS ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_email.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_new_email.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hangup.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hold.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_holdoff.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_video.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_audio.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_chat.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
