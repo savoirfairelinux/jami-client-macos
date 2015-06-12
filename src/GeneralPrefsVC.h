@@ -32,10 +32,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface GeneralPrefsVC : NSViewController {
-
-    NSTextField *historyChangedLabel;
-}
+@interface GeneralPrefsVC : NSViewController
 
 @end
 

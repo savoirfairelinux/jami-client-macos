@@ -30,9 +30,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface RingWizardWC : NSWindowController <NSWindowDelegate>{
-
-    NSButton *goToAppButton;
-}
+@interface RingWizardWC : NSWindowController <NSWindowDelegate>
 
 @end

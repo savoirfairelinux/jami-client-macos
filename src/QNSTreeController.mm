@@ -55,7 +55,7 @@
 
 - (id) initWithQModel:(QAbstractItemModel*) model
 {
-    [super init];
+    self = [super init];
     self->privateQModel = model;
 
     topNodes = [[NSMutableArray alloc] init];

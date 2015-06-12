@@ -125,11 +125,14 @@ QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool
     QPainter painter(&pxm);
 
     // create the image somehow, load from file, draw into it...
-    CGImageSourceRef source;
+    auto sourceImgRef = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"NSUser"] TIFFRepresentation], NULL);
+    auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
+    auto finalImgRef =  resizeCGImage(imgRef, size);
+    painter.drawPixmap(3,3,QtMac::fromCGImageRef(finalImgRef));
 
-    source = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"NSUser"] TIFFRepresentation], NULL);
-    CGImageRef maskRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
-    painter.drawPixmap(3,3,QtMac::fromCGImageRef(resizeCGImage(maskRef, size)));
+    CFRelease(sourceImgRef);
+    CFRelease(imgRef);
+    CFRelease(finalImgRef);
 
     return pxm;
 }
@@ -143,8 +146,6 @@ CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSiz
                                                  size.width() * CGImageGetBitsPerComponent(image),
                                                  colorspace,
                                                  CGImageGetAlphaInfo(image));
-    CGColorSpaceRelease(colorspace);
-
 
     if(context == NULL)
         return nil;
