@@ -34,6 +34,7 @@
 #import <tlsmethodmodel.h>
 #import <qitemselectionmodel.h>
 #import <ciphermodel.h>
+#import <accountmodel.h>
 
 #import "QNSTreeController.h"
 #import "CertificateWC.h"
@@ -48,7 +49,6 @@
 
 @interface AccSecurityVC ()
 
-@property Account* privateAccount;
 @property NSTreeController *treeController;
 @property (unsafe_unretained) IBOutlet NSOutlineView *cipherListView;
 @property (unsafe_unretained) IBOutlet NSButton *useTLS;
@@ -73,7 +73,6 @@
 @end
 
 @implementation AccSecurityVC
-@synthesize privateAccount;
 @synthesize treeController;
 @synthesize cipherListView;
 @synthesize certificateWC;
@@ -100,21 +99,34 @@
     [tlsNegotiationTimeoutStepper setTag:TLS_NEGOTIATION_TAG];
     [tlsNegotiationTimeout setTag:TLS_NEGOTIATION_TAG];
 
+    QObject::connect(AccountModel::instance()->selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+                         [self loadAccount];
+                     });
 }
 
-- (void)loadAccount:(Account *)account
+- (Account*) currentAccount
 {
-    privateAccount = account;
+    auto accIdx = AccountModel::instance()->selectionModel()->currentIndex();
+    return AccountModel::instance()->getAccountByModelIndex(accIdx);
+}
+
+- (void)loadAccount
+{
+    auto account = [self currentAccount];
 
     [self updateControlsWithTag:PVK_PASSWORD_TAG];
     [self updateControlsWithTag:OUTGOING_TLS_SRV_NAME];
     [self updateControlsWithTag:TLS_NEGOTIATION_TAG];
 
-    QModelIndex qTlsMethodIdx = privateAccount->tlsMethodModel()->selectionModel()->currentIndex();
+    QModelIndex qTlsMethodIdx = [self currentAccount]->tlsMethodModel()->selectionModel()->currentIndex();
     [self.tlsMethodList removeAllItems];
     [self.tlsMethodList addItemWithTitle:qTlsMethodIdx.data(Qt::DisplayRole).toString().toNSString()];
 
-    treeController = [[QNSTreeController alloc] initWithQModel:privateAccount->cipherModel()];
+    treeController = [[QNSTreeController alloc] initWithQModel:[self currentAccount]->cipherModel()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setAlwaysUsesMultipleValuesMarker:YES];
     [treeController setChildrenKeyPath:@"children"];
@@ -123,39 +135,39 @@
     [cipherListView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [cipherListView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 
-    [useTLS setState:privateAccount->isTlsEnabled()];
-    [tlsContainer setHidden:!privateAccount->isTlsEnabled()];
+    [useTLS setState:[self currentAccount]->isTlsEnabled()];
+    [tlsContainer setHidden:![self currentAccount]->isTlsEnabled()];
 
-    [useSRTP setState:privateAccount->isSrtpEnabled()];
-    [srtpRTPFallback setState:privateAccount->isSrtpRtpFallback()];
+    [useSRTP setState:[self currentAccount]->isSrtpEnabled()];
+    [srtpRTPFallback setState:[self currentAccount]->isSrtpRtpFallback()];
     [srtpRTPFallback setEnabled:useSRTP.state];
 
     NSArray * pathComponentArray = [self pathComponentArray];
 
-    if(privateAccount->tlsCaListCertificate() != nil) {
-            NSLog(@"CA ==> %@", privateAccount->tlsCaListCertificate()->path().toNSURL());
-        [caListPathControl setURL:privateAccount->tlsCaListCertificate()->path().toNSURL()];
+    if([self currentAccount]->tlsCaListCertificate() != nil) {
+            NSLog(@"CA ==> %@", [self currentAccount]->tlsCaListCertificate()->path().toNSURL());
+        [caListPathControl setURL:[self currentAccount]->tlsCaListCertificate()->path().toNSURL()];
     } else {
         [caListPathControl setURL:nil];
     }
 
-    if(privateAccount->tlsCertificate() != nil) {
-        NSLog(@" CERT ==> %@", privateAccount->tlsCertificate()->path().toNSURL());
-        [certificatePathControl setURL:privateAccount->tlsCertificate()->path().toNSURL()];
+    if([self currentAccount]->tlsCertificate() != nil) {
+        NSLog(@" CERT ==> %@", [self currentAccount]->tlsCertificate()->path().toNSURL());
+        [certificatePathControl setURL:[self currentAccount]->tlsCertificate()->path().toNSURL()];
     } else {
         [certificatePathControl setURL:nil];
     }
 
-    if(privateAccount->tlsPrivateKeyCertificate() != nil) {
-        NSLog(@" PVK ==> %@", privateAccount->tlsPrivateKeyCertificate()->path().toNSURL());
-        [pvkPathControl setURL:privateAccount->tlsPrivateKeyCertificate()->path().toNSURL()];
+    if([self currentAccount]->tlsPrivateKeyCertificate() != nil) {
+        NSLog(@" PVK ==> %@", [self currentAccount]->tlsPrivateKeyCertificate()->path().toNSURL());
+        [pvkPathControl setURL:[self currentAccount]->tlsPrivateKeyCertificate()->path().toNSURL()];
     } else {
         [pvkPathControl setURL:nil];
     }
 
-    [verifyCertAsServerButton setState:privateAccount->isTlsVerifyServer()];
-    [verifyCertAsClientButton setState:privateAccount->isTlsVerifyClient()];
-    [requireCertButton setState:privateAccount->isTlsRequireClientCertificate()];
+    [verifyCertAsServerButton setState:[self currentAccount]->isTlsVerifyServer()];
+    [verifyCertAsClientButton setState:[self currentAccount]->isTlsVerifyClient()];
+    [requireCertButton setState:[self currentAccount]->isTlsRequireClientCertificate()];
 }
 
 /*
@@ -204,40 +216,40 @@
 
 - (IBAction)chooseTlsMethod:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = privateAccount->tlsMethodModel()->index(index, 0);
-    privateAccount->tlsMethodModel()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    QModelIndex qIdx = [self currentAccount]->tlsMethodModel()->index(index, 0);
+    [self currentAccount]->tlsMethodModel()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (IBAction)toggleUseTLS:(id)sender {
-    privateAccount->setTlsEnabled([sender state]);
+    [self currentAccount]->setTlsEnabled([sender state]);
     [tlsContainer setHidden:![sender state]];
 }
 
 - (IBAction)toggleUseSRTP:(id)sender {
-    privateAccount->setSrtpEnabled([sender state]);
+    [self currentAccount]->setSrtpEnabled([sender state]);
     [srtpRTPFallback setEnabled:[sender state]];
 }
 - (IBAction)toggleRTPFallback:(id)sender {
-    privateAccount->setSrtpRtpFallback([sender state]);
+    [self currentAccount]->setSrtpRtpFallback([sender state]);
 }
 
 - (IBAction)toggleVerifyCertAsClient:(id)sender {
-    privateAccount->setTlsVerifyClient([sender state]);
+    [self currentAccount]->setTlsVerifyClient([sender state]);
 }
 
 - (IBAction)toggleVerifyCertServer:(id)sender {
-    privateAccount->setTlsVerifyServer([sender state]);
+    [self currentAccount]->setTlsVerifyServer([sender state]);
 }
 
 - (IBAction)toggleRequireCert:(id)sender {
-    privateAccount->setTlsRequireClientCertificate([sender state]);
+    [self currentAccount]->setTlsRequireClientCertificate([sender state]);
 }
 
 - (IBAction)toggleCipher:(id)sender {
     NSInteger row = [sender clickedRow];
     NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
     NSButtonCell *cell = [col dataCellForRow:row];
-    privateAccount->cipherModel()->setData(privateAccount->cipherModel()->index(row, 0, QModelIndex()),
+    [self currentAccount]->cipherModel()->setData([self currentAccount]->cipherModel()->index(row, 0, QModelIndex()),
                                            cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
 }
 
@@ -245,14 +257,14 @@
 {
     switch (tag) {
         case PVK_PASSWORD_TAG:
-            [pvkPasswordField setStringValue:privateAccount->tlsPassword().toNSString()];
+            [pvkPasswordField setStringValue:[self currentAccount]->tlsPassword().toNSString()];
             break;
         case OUTGOING_TLS_SRV_NAME:
-            [outgoingTlsServerName setStringValue:privateAccount->tlsServerName().toNSString()];
+            [outgoingTlsServerName setStringValue:[self currentAccount]->tlsServerName().toNSString()];
             break;
         case TLS_NEGOTIATION_TAG:
-            [tlsNegotiationTimeout setIntegerValue:privateAccount->tlsNegotiationTimeoutSec()];
-            [tlsNegotiationTimeoutStepper setIntegerValue:privateAccount->tlsNegotiationTimeoutSec()];
+            [tlsNegotiationTimeout setIntegerValue:[self currentAccount]->tlsNegotiationTimeoutSec()];
+            [tlsNegotiationTimeoutStepper setIntegerValue:[self currentAccount]->tlsNegotiationTimeoutSec()];
             break;
         default:
             break;
@@ -276,13 +288,13 @@
 {
     switch ([sender tag]) {
         case PVK_PASSWORD_TAG:
-            privateAccount->setTlsPassword([[sender stringValue] UTF8String]);
+            [self currentAccount]->setTlsPassword([[sender stringValue] UTF8String]);
             break;
         case OUTGOING_TLS_SRV_NAME:
-            privateAccount->setTlsServerName([[sender stringValue] UTF8String]);
+            [self currentAccount]->setTlsServerName([[sender stringValue] UTF8String]);
             break;
         case TLS_NEGOTIATION_TAG:
-            privateAccount->setTlsNegotiationTimeoutSec([sender integerValue]);
+            [self currentAccount]->setTlsNegotiationTimeoutSec([sender integerValue]);
             break;
         default:
             break;
@@ -295,7 +307,7 @@
     NSURL* fileURL = [[sender clickedPathComponentCell] URL];
     NSLog(@"==> %@", fileURL);
     [self.caListPathControl setURL:fileURL];
-    privateAccount->setTlsCaListCertificate(QUrl::fromNSURL(fileURL).toString());
+    [self currentAccount]->setTlsCaListCertificate(QUrl::fromNSURL(fileURL).toString());
 }
 
 - (IBAction)certificatePathControlSingleClick:(id)sender {
@@ -303,30 +315,30 @@
     NSURL* fileURL = [[sender clickedPathComponentCell] URL];
         NSLog(@"==> %@", fileURL);
     [self.certificatePathControl setURL:fileURL];
-    privateAccount->setTlsCertificate(QUrl::fromNSURL(fileURL).toString());
+    [self currentAccount]->setTlsCertificate(QUrl::fromNSURL(fileURL).toString());
 }
 
 - (IBAction)pvkFilePathControlSingleClick:(id)sender {
     NSURL* fileURL = [[sender clickedPathComponentCell] URL];
         NSLog(@"==> %@", fileURL);
     [self.pvkPathControl setURL:fileURL];
-    privateAccount->setTlsPrivateKeyCertificate(QUrl::fromNSURL(fileURL).toString());
+    [self currentAccount]->setTlsPrivateKeyCertificate(QUrl::fromNSURL(fileURL).toString());
     
 
-   // qDebug() << "TEST" << privateAccount->tlsPrivateKeyCertificate()->hasPrivateKey();
+   // qDebug() << "TEST" << [self currentAccount]->tlsPrivateKeyCertificate()->hasPrivateKey();
 }
 
 - (IBAction)showCA:(id)sender
 {
     certificateWC = [[CertificateWC alloc] initWithWindowNibName:@"CertificateWindow"];
-    [certificateWC setCertificate:privateAccount->tlsCaListCertificate()];
+    [certificateWC setCertificate:[self currentAccount]->tlsCaListCertificate()];
     [self.view.window beginSheet:certificateWC.window completionHandler:nil];
 }
 
 - (IBAction)showEndpointCertificate:(id)sender
 {
     certificateWC = [[CertificateWC alloc] initWithWindowNibName:@"CertificateWindow"];
-    [certificateWC setCertificate:privateAccount->tlsCertificate()];
+    [certificateWC setCertificate:[self currentAccount]->tlsCertificate()];
     [self.view.window beginSheet:certificateWC.window completionHandler:nil];}
 
 /*
@@ -389,7 +401,7 @@
 
     if([menu.title isEqualToString:@"tlsmethodlist"])
     {
-        qIdx = privateAccount->tlsMethodModel()->index(index);
+        qIdx = [self currentAccount]->tlsMethodModel()->index(index);
         [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
     }
     return YES;
@@ -398,7 +410,7 @@
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
     if([menu.title isEqualToString:@"tlsmethodlist"])
-        return privateAccount->tlsMethodModel()->rowCount();
+        return [self currentAccount]->tlsMethodModel()->rowCount();
 }
 
 #pragma mark - NSOutlineViewDelegate methods

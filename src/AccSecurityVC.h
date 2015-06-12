@@ -34,11 +34,7 @@
 
 #import <account.h>
 
-@interface AccSecurityVC : NSViewController<NSMenuDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate> {
-
-}
-
-- (void)loadAccount:(Account *)account;
+@interface AccSecurityVC : NSViewController<NSMenuDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate>
 
 @end
 
