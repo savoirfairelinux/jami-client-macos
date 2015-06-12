@@ -94,11 +94,12 @@
                                        usingBlock:^(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop) {
                                            *stop = YES;
                                        }];
-
+        CFRelease(fileUTI);
         //accept data as a copy operation
         return NSDragOperationCopy;
     }
 
+    CFRelease(fileUTI);
     return NSDragOperationNone;
 }
 
@@ -143,8 +144,10 @@
     CFStringRef fileExtension = (CFStringRef) [fileURL.path pathExtension];
     CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
 
+    BOOL conforms = (UTTypeConformsTo(fileUTI, kUTTypeVideo)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie));
+    CFRelease(fileUTI);
     //check to see if we can accept the data
-    return (UTTypeConformsTo(fileUTI, kUTTypeVideo)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie));
+    return conforms;
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
