@@ -34,11 +34,7 @@
 
 #import <account.h>
 
-@interface AccVideoVC : NSViewController <NSOutlineViewDelegate> {
-
-}
-
-- (void)loadAccount:(Account *)account;
+@interface AccVideoVC : NSViewController <NSOutlineViewDelegate>
 
 @end
 
