@@ -33,6 +33,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import <account.h>
+#import "QNSTreeController.h"
 
 @interface AccSecurityVC : NSViewController<NSMenuDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate>
 
