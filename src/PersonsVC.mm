@@ -62,7 +62,7 @@ public:
 
 @interface PersonsVC ()
 
-@property NSTreeController *treeController;
+@property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *personsView;
 @property QSortFilterProxyModel *contactProxyModel;
 

@@ -11,7 +11,7 @@ SET(BUNDLE_VERSION "Samuel de Champlain - beta")
 
 SET(PROJ_COPYRIGHT " © 2015 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
-ADD_DEFINITIONS("-std=c++11")
+ADD_DEFINITIONS("-std=c++11 -fobjc-arc")
 
 PROJECT(${PROJ_NAME})
 
