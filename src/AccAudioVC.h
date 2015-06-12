@@ -36,11 +36,7 @@
 
 #import "QNSTreeController.h"
 
-@interface AccAudioVC : NSViewController <NSOutlineViewDelegate> {
-
-}
-
-- (void)loadAccount:(Account *)account;
+@interface AccAudioVC : NSViewController <NSOutlineViewDelegate>
 
 @end
 

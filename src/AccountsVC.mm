@@ -119,8 +119,9 @@ public:
                         [accountsListView reloadDataForRowIndexes:
                         [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
                         columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, accountsListView.tableColumns.count)]];
-
                      });
+
+    AccountModel::instance()->selectionModel()->clearCurrentIndex();
 
     self.proxyProtocolModel = new ActiveProtocolModel(AccountModel::instance()->protocolModel());
     QModelIndex qProtocolIdx = AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
@@ -193,10 +194,8 @@ public:
 
 }
 
-- (void) setupSIPPanelsForAccount:(Account*) acc
+- (void) setupSIPPanels
 {
-    NSTabViewItem* selected = [configPanels selectedTabViewItem];
-
     // Start by removing all tabs
     for(NSTabViewItem* item in configPanels.tabViewItems) {
         [configPanels removeTabViewItem:item];
@@ -207,18 +206,10 @@ public:
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
     [configPanels insertTabViewItem:advancedTabItem atIndex:3];
     [configPanels insertTabViewItem:securityTabItem atIndex:4];
-
-    [self.generalVC loadAccount:acc];
-    [self.audioVC loadAccount:acc];
-    [self.videoVC loadAccount:acc];
-    [self.advancedVC loadAccount:acc];
-    [self.securityVC loadAccount:acc];
 }
 
-- (void) setupIAXPanelsForAccount:(Account*) acc
+- (void) setupIAXPanels
 {
-    NSTabViewItem* selected = [configPanels selectedTabViewItem];
-
     // Start by removing all tabs
     for(NSTabViewItem* item in configPanels.tabViewItems) {
         [configPanels removeTabViewItem:item];
@@ -227,16 +218,10 @@ public:
     [configPanels insertTabViewItem:generalTabItem atIndex:0];
     [configPanels insertTabViewItem:audioTabItem atIndex:1];
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
-
-    [self.generalVC loadAccount:acc];
-    [self.audioVC loadAccount:acc];
-    [self.videoVC loadAccount:acc];
 }
 
-- (void) setupRINGPanelsForAccount:(Account*) acc
+- (void) setupRINGPanels
 {
-    NSTabViewItem* selected = [configPanels selectedTabViewItem];
-
     // Start by removing all tabs
     for(NSTabViewItem* item in configPanels.tabViewItems) {
         [configPanels removeTabViewItem:item];
@@ -245,14 +230,6 @@ public:
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
     [configPanels insertTabViewItem:audioTabItem atIndex:1];
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
-    //[configPanels insertTabViewItem:advancedTabItem atIndex:3];
-    //[configPanels insertTabViewItem:securityTabItem atIndex:4];
-
-    [self.ringVC loadAccount:acc];
-    [self.audioVC loadAccount:acc];
-    [self.videoVC loadAccount:acc];
-    [self.advancedVC loadAccount:acc];
-    [self.securityVC loadAccount:acc];
 }
 
 - (IBAction)toggleAccount:(NSOutlineView*)sender {
@@ -375,26 +352,25 @@ public:
     if([[treeController selectedNodes] count] > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         //Update details view
-        AccountModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
         Account* acc = AccountModel::instance()->getAccountByModelIndex(qIdx);
+        AccountModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 
             switch (acc->protocol()) {
             case Account::Protocol::SIP:
                 NSLog(@"SIP");
-                [self setupSIPPanelsForAccount:acc];
+                [self setupSIPPanels];
                 break;
             case Account::Protocol::IAX:
                 NSLog(@"IAX");
-                [self setupIAXPanelsForAccount:acc];
+                [self setupIAXPanels];
                 break;
             case Account::Protocol::RING:
-                [self setupRINGPanelsForAccount:acc];
+                [self setupRINGPanels];
                 NSLog(@"DRING");
                 break;
             default:
                 break;
         }
-
 
         [self.accountDetailsView setHidden:NO];
     } else {
