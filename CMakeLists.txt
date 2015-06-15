@@ -79,6 +79,8 @@ SET(ringclient_BACKENDS
 SET(ringclient_VIEWS
    src/views/CallView.mm
    src/views/CallView.h
+   src/views/ITProgressIndicator.mm
+   src/views/ITProgressIndicator.h
    src/views/PersonCell.mm
    src/views/PersonCell.h)
 
