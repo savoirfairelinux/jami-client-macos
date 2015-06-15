@@ -42,6 +42,7 @@
 #import <video/renderer.h>
 #import <media/text.h>
 
+#import "views/ITProgressIndicator.h"
 #import "views/CallView.h"
 
 @interface RendererConnectionsHolder : NSObject
@@ -67,6 +68,7 @@
 @property (unsafe_unretained) IBOutlet NSButton *muteAudioButton;
 @property (unsafe_unretained) IBOutlet NSButton *muteVideoButton;
 
+@property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
 @property (unsafe_unretained) IBOutlet NSTextField *timeSpentLabel;
 @property (unsafe_unretained) IBOutlet NSView *controlsPanel;
@@ -91,7 +93,7 @@
 @synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, videoView,
-            videoLayer, previewLayer, previewView, splitView;
+            videoLayer, previewLayer, previewView, splitView, loadingIndicator;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -130,52 +132,41 @@
     [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
 
     Call::State state = callIdx.data((int)Call::Role::State).value<Call::State>();
-
+    [loadingIndicator setHidden:YES];
+    [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
     switch (state) {
         case Call::State::DIALING:
-            [stateLabel setStringValue:@"Dialing"];
+            [loadingIndicator setHidden:NO];
             break;
         case Call::State::NEW:
-            [stateLabel setStringValue:@"New"];
             break;
         case Call::State::INITIALIZATION:
-            [stateLabel setStringValue:@"Initializing"];
             [videoView setShouldAcceptInteractions:NO];
+            [loadingIndicator setHidden:NO];
+            break;
+        case Call::State::CONNECTED:
+            [videoView setShouldAcceptInteractions:NO];
+            [loadingIndicator setHidden:NO];
             break;
         case Call::State::RINGING:
-            [stateLabel setStringValue:@"Ringing"];
             [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::CURRENT:
-            [stateLabel setStringValue:@"Current"];
             [videoView setShouldAcceptInteractions:YES];
             break;
         case Call::State::HOLD:
-            [stateLabel setStringValue:@"On Hold"];
             [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::BUSY:
-            [stateLabel setStringValue:@"Busy"];
             [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::OVER:
-            [stateLabel setStringValue:@"Finished"];
             [videoView setShouldAcceptInteractions:NO];
             if(videoView.isInFullScreenMode)
                 [videoView exitFullScreenModeWithOptions:nil];
             break;
-        case Call::State::ABORTED:
-            [stateLabel setStringValue:@"Aborted"];
-            break;
         case Call::State::FAILURE:
-            [stateLabel setStringValue:@"Failure"];
             [videoView setShouldAcceptInteractions:NO];
-            break;
-        case Call::State::INCOMING:
-            [stateLabel setStringValue:@"Incoming"];
-            break;
-        default:
-            [stateLabel setStringValue:@""];
             break;
     }
 
@@ -220,6 +211,12 @@
 
     previewHolder = [[RendererConnectionsHolder alloc] init];
     videoHolder = [[RendererConnectionsHolder alloc] init];
+
+    [loadingIndicator setColor:[NSColor whiteColor]];
+    [loadingIndicator setNumberOfLines:100];
+    [loadingIndicator setWidthOfLine:2];
+    [loadingIndicator setLengthOfLine:2];
+    [loadingIndicator setInnerMargin:30];
 
     [self.videoView setFullScreenDelegate:self];
 
