@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a5c5d37_530ca794",
+        "filename": "src/views/ITProgressIndicator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 23
+      },
+      "writtenOn": "2015-06-17T20:15:16Z",
+      "side": 1,
+      "message": "Need to add liscence... if you didn\u0027t modify the code, I think you need to put in the Apache 2.0... if you modified it, then you can release it under GPL v3... I think... maybe better ask someone who knows better.\n\nSee:\nhttps://tldrlegal.com/license/apache-license-2.0-%28apache-2.0%29\n\nhttps://en.wikipedia.org/?title\u003dApache_License#GPL_compatibility",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 2
+      },
+      "revId": "57afd827e446ffd21b0386be1f4d4559869e3cbd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
