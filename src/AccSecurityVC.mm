@@ -142,8 +142,6 @@
     [srtpRTPFallback setState:[self currentAccount]->isSrtpRtpFallback()];
     [srtpRTPFallback setEnabled:useSRTP.state];
 
-    NSArray * pathComponentArray = [self pathComponentArray];
-
     if([self currentAccount]->tlsCaListCertificate() != nil) {
         NSLog(@"CA ==> %@", account->tlsCaListCertificate()->path().toNSURL());
         [caListPathControl setURL:account->tlsCaListCertificate()->path().toNSURL()];
@@ -168,50 +166,6 @@
     [verifyCertAsServerButton setState:[self currentAccount]->isTlsVerifyServer()];
     [verifyCertAsClientButton setState:[self currentAccount]->isTlsVerifyClient()];
     [requireCertButton setState:[self currentAccount]->isTlsRequireClientCertificate()];
-}
-
-/*
- Assemble a set of custom cells to display into an array to pass to the path control.
- */
-- (NSArray *)pathComponentArray
-{
-    NSMutableArray *pathComponentArray = [[NSMutableArray alloc] init];
-
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-
-    NSURL* desktopURL = [fileManager URLForDirectory:NSDesktopDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    NSURL* documentsURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    NSURL* userURL = [fileManager URLForDirectory:NSUserDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-
-    NSPathComponentCell *componentCell;
-
-    // Use utility method to obtain a NSPathComponentCell based on icon, title and URL.
-    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Desktop" URL:desktopURL];
-    [pathComponentArray addObject:componentCell];
-
-    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Documents" URL:documentsURL];
-    [pathComponentArray addObject:componentCell];
-
-    componentCell = [self componentCellForType:kUserFolderIcon withTitle:NSUserName() URL:userURL];
-    [pathComponentArray addObject:componentCell];
-
-    return pathComponentArray;
-}
-
-/*
- This method is used by pathComponentArray to create a NSPathComponent cell based on icon, title and URL information.
- Each path component needs an icon, URL and title.
- */
-- (NSPathComponentCell *)componentCellForType:(OSType)withIconType withTitle:(NSString *)title URL:(NSURL *)url
-{
-    NSPathComponentCell *componentCell = [[NSPathComponentCell alloc] init];
-
-    NSImage *iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(withIconType)];
-    [componentCell setImage:iconImage];
-    [componentCell setURL:url];
-    [componentCell setTitle:title];
-
-    return componentCell;
 }
 
 - (IBAction)chooseTlsMethod:(id)sender {
