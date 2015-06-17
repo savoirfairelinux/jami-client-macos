@@ -49,7 +49,7 @@
 
 @interface AccSecurityVC ()
 
-@property NSTreeController *treeController;
+@property QNSTreeController *treeController;
 @property (unsafe_unretained) IBOutlet NSOutlineView *cipherListView;
 @property (unsafe_unretained) IBOutlet NSButton *useTLS;
 @property (unsafe_unretained) IBOutlet NSView *tlsContainer;
@@ -122,11 +122,11 @@
     [self updateControlsWithTag:OUTGOING_TLS_SRV_NAME];
     [self updateControlsWithTag:TLS_NEGOTIATION_TAG];
 
-    QModelIndex qTlsMethodIdx = [self currentAccount]->tlsMethodModel()->selectionModel()->currentIndex();
+    QModelIndex qTlsMethodIdx = account->tlsMethodModel()->selectionModel()->currentIndex();
     [self.tlsMethodList removeAllItems];
     [self.tlsMethodList addItemWithTitle:qTlsMethodIdx.data(Qt::DisplayRole).toString().toNSString()];
 
-    treeController = [[QNSTreeController alloc] initWithQModel:[self currentAccount]->cipherModel()];
+    treeController = [[QNSTreeController alloc] initWithQModel:account->cipherModel()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setAlwaysUsesMultipleValuesMarker:YES];
     [treeController setChildrenKeyPath:@"children"];
@@ -145,22 +145,22 @@
     NSArray * pathComponentArray = [self pathComponentArray];
 
     if([self currentAccount]->tlsCaListCertificate() != nil) {
-            NSLog(@"CA ==> %@", [self currentAccount]->tlsCaListCertificate()->path().toNSURL());
-        [caListPathControl setURL:[self currentAccount]->tlsCaListCertificate()->path().toNSURL()];
+        NSLog(@"CA ==> %@", account->tlsCaListCertificate()->path().toNSURL());
+        [caListPathControl setURL:account->tlsCaListCertificate()->path().toNSURL()];
     } else {
         [caListPathControl setURL:nil];
     }
 
     if([self currentAccount]->tlsCertificate() != nil) {
-        NSLog(@" CERT ==> %@", [self currentAccount]->tlsCertificate()->path().toNSURL());
-        [certificatePathControl setURL:[self currentAccount]->tlsCertificate()->path().toNSURL()];
+        NSLog(@" CERT ==> %@", account->tlsCertificate()->path().toNSURL());
+        [certificatePathControl setURL:account->tlsCertificate()->path().toNSURL()];
     } else {
         [certificatePathControl setURL:nil];
     }
 
     if([self currentAccount]->tlsPrivateKeyCertificate() != nil) {
-        NSLog(@" PVK ==> %@", [self currentAccount]->tlsPrivateKeyCertificate()->path().toNSURL());
-        [pvkPathControl setURL:[self currentAccount]->tlsPrivateKeyCertificate()->path().toNSURL()];
+        NSLog(@" PVK ==> %@", account->tlsPrivateKeyCertificate()->path().toNSURL());
+        [pvkPathControl setURL:account->tlsPrivateKeyCertificate()->path().toNSURL()];
     } else {
         [pvkPathControl setURL:nil];
     }

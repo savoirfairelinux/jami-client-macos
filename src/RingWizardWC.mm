@@ -38,11 +38,11 @@
 
 
 @interface RingWizardWC ()
-@property (assign) IBOutlet NSButton *goToAppButton;
-@property (assign) IBOutlet NSTextField *nickname;
-@property (assign) IBOutlet NSProgressIndicator *progressBar;
-@property (assign) IBOutlet NSTextField *indicationLabel;
-@property (assign) IBOutlet NSButton *createButton;
+@property (unsafe_unretained) IBOutlet NSButton *goToAppButton;
+@property (unsafe_unretained) IBOutlet NSTextField *nickname;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressBar;
+@property (unsafe_unretained) IBOutlet NSTextField *indicationLabel;
+@property (unsafe_unretained) IBOutlet NSButton *createButton;
 @end
 
 @implementation RingWizardWC
@@ -112,7 +112,7 @@
 {
     LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
     if (loginItemsRef == nil) return;
-    CFURLRef appUrl = (CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
     if (itemRef) CFRelease(itemRef);
 }

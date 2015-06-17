@@ -34,11 +34,11 @@
 
 @interface PreferencesVC : NSViewController <NSToolbarDelegate>
 
-@property (nonatomic, assign) NSViewController *currentVC;
-@property (nonatomic, assign) NSViewController *accountsPrefsVC;
-@property (nonatomic, assign) NSViewController *generalPrefsVC;
-@property (nonatomic, assign) NSViewController *audioPrefsVC;
-@property (nonatomic, assign) NSViewController *videoPrefsVC;
+@property (nonatomic, strong) NSViewController *currentVC;
+@property (nonatomic, strong) NSViewController *accountsPrefsVC;
+@property (nonatomic, strong) NSViewController *generalPrefsVC;
+@property (nonatomic, strong) NSViewController *audioPrefsVC;
+@property (nonatomic, strong) NSViewController *videoPrefsVC;
 
 - (void) close;
 - (void)displayGeneral:(NSToolbarItem *)sender;

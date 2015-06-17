@@ -178,10 +178,9 @@ public:
 - (IBAction)addAccount:(id)sender {
     QModelIndex qIdx =  AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
 
-    NSString* newAccName = [[NSString alloc] initWithFormat:@"%@ account",
+    auto newAccName = [[NSString alloc] initWithFormat:@"%@ account",
                 AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
-
-    Account* newAcc =AccountModel::instance()->add([newAccName UTF8String], qIdx);
+    AccountModel::instance()->add([newAccName UTF8String], qIdx);
     AccountModel::instance()->save();
 }
 
@@ -270,11 +269,10 @@ public:
     if ([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE] &&
                             AccountModel::instance()->ip2ip()->index() == qIdx) {
 
-        returnCell = [[NSCell alloc] init];
+        return [[NSCell alloc] init];
     } else {
-        returnCell = [tableColumn dataCell];
+        return [tableColumn dataCell];
     }
-    return returnCell;
 }
 
 // -------------------------------------------------------------------------------
@@ -350,9 +348,9 @@ public:
 {
     // ask the tree controller for the current selection
     if([[treeController selectedNodes] count] > 0) {
-        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         //Update details view
-        Account* acc = AccountModel::instance()->getAccountByModelIndex(qIdx);
+        auto acc = AccountModel::instance()->getAccountByModelIndex(qIdx);
         AccountModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 
             switch (acc->protocol()) {

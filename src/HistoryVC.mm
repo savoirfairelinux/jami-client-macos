@@ -44,7 +44,7 @@
 
 @interface HistoryVC()
 
-@property NSTreeController *treeController;
+@property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *historyView;
 @property QSortFilterProxyModel *historyProxyModel;
 @end

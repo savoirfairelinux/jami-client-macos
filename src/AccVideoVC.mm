@@ -78,15 +78,15 @@
 {
     auto account = [self currentAccount];
 
-    treeController = [[QNSTreeController alloc] initWithQModel:[self currentAccount]->codecModel()->videoCodecs()];
+    treeController = [[QNSTreeController alloc] initWithQModel:account->codecModel()->videoCodecs()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
     [codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
     [codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-    [videoPanelContainer setHidden:![self currentAccount]->isVideoEnabled()];
-    [toggleVideoButton setState:[self currentAccount]->isVideoEnabled()?NSOnState:NSOffState];
+    [videoPanelContainer setHidden:!account->isVideoEnabled()];
+    [toggleVideoButton setState:account->isVideoEnabled()?NSOnState:NSOffState];
 }
 
 - (IBAction)toggleVideoEnabled:(id)sender {
