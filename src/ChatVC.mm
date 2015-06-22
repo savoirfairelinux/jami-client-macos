@@ -77,6 +77,11 @@
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          [self setupChat];
                      });
+
+    // Override default style to add interline space
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle  alloc] init];
+    paragraphStyle.lineSpacing = 8;
+    [chatView setDefaultParagraphStyle:paragraphStyle];
 }
 
 - (void) setupChat
@@ -141,10 +146,23 @@
     if (!msgIdx.isValid())
         return;
 
-    QVariant message = msgIdx.data();
-    NSAttributedString* attr = [[NSAttributedString alloc] initWithString:
-                                [NSString stringWithFormat:@"%@\n",message.value<QString>().toNSString()]];
+    NSString* message = msgIdx.data(Qt::DisplayRole).value<QString>().toNSString();
+    NSString* author = msgIdx.data((int)Media::TextRecording::Role::AuthorDisplayname).value<QString>().toNSString();
+
+    NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:
+                                [NSString stringWithFormat:@"%@: %@\n",author, message]];
+
+    // put in bold type author name
+    [attr applyFontTraits:NSBoldFontMask range: NSMakeRange(0, [author length])];
+
     [[chatView textStorage] appendAttributedString:attr];
+
+    // reapply paragraph style on all the text
+    NSRange range = NSMakeRange(0,[chatView textStorage].length);
+    [[self.chatView textStorage] addAttribute:NSParagraphStyleAttributeName
+                                        value:chatView.defaultParagraphStyle
+                                        range:range];
+
     [chatView scrollRangeToVisible:NSMakeRange([[chatView string] length], 0)];
 
 }
