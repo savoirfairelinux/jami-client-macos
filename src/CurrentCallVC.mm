@@ -441,6 +441,8 @@
         }
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    [self.view.layer setPosition:frame.origin];
     [CATransaction commit];
 }
 

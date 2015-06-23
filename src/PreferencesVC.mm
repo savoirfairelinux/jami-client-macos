@@ -68,18 +68,21 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
 
     // Set the layer redraw policy. This would be better done in
     // the initialization method of a NSView subclass instead of here.
-    self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawDuringViewResize;
+    self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
 
     [self.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithPoint:frame.origin];
-    animation.toValue = [NSValue valueWithPoint:self.view.frame.origin];
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    animation.fromValue = @(frame.origin.y);
+    animation.toValue = @(self.view.frame.origin.y);
     animation.duration = 0.3f;
+
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
+    [CATransaction commit];
 }
 
 - (void) close
@@ -96,9 +99,9 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
     [CATransaction begin];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithPoint:self.view.frame.origin];
-    animation.toValue = [NSValue valueWithPoint:frame.origin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    animation.fromValue = @(self.view.frame.origin.y);
+    animation.toValue = @(frame.origin.y);
     animation.duration = 0.3f;
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
 
@@ -106,8 +109,10 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
         [self.view removeFromSuperview];
     }];
 
-
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    // set final layer position to prevent glitching back to original one
+    [self.view.layer setPosition:frame.origin];;
     [CATransaction commit];
 }
 
