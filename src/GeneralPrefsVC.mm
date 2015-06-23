@@ -53,7 +53,7 @@
 
     [startUpButton setState:[self isLaunchAtStartup]];
 
-    [advancedGeneralSettings setHidden:![[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
+    //[advancedGeneralSettings setHidden:![[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
 }
 
 - (void) dealloc
@@ -74,7 +74,7 @@
     if (aKeyPath == Preferences::HistoryLimit) {
         [historyChangedLabel setHidden:NO];
     } else if (aKeyPath == Preferences::ShowAdvanced) {
-        [advancedGeneralSettings setHidden:[[aChange objectForKey: NSKeyValueChangeNewKey] boolValue]];
+        //[advancedGeneralSettings setHidden:[[aChange objectForKey: NSKeyValueChangeNewKey] boolValue]];
     }
 }
 
