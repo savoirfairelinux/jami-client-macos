@@ -42,7 +42,7 @@ osx:
         - mkdir build
         - cd build
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
-        - cmake ../ -DCMAKE_INSTALL_PREFIX=%(prefix_path)s
+        - cmake ../ -DCMAKE_INSTALL_PREFIX=%(prefix_path)s -DRING_VERSION=$(date "+%%Y%%m%%d")
         - make install -j1
         - cpack -G DragNDrop Ring
     transfer:
