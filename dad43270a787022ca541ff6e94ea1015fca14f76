@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "9a5c5d37_b5c0632b",
+        "filename": ".gitignore",
+        "patchSetId": 16
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-06-29T16:22:51Z",
+      "side": 1,
+      "message": "This one can return to *.app",
+      "revId": "dad43270a787022ca541ff6e94ea1015fca14f76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a5c5d37_d5acf78e",
         "filename": ".gitignore",
         "patchSetId": 16
@@ -13,6 +30,30 @@
       "writtenOn": "2015-06-29T16:16:39Z",
       "side": 1,
       "message": "are these changes still needed?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "dad43270a787022ca541ff6e94ea1015fca14f76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a5c5d37_d5c3d736",
+        "filename": ".gitignore",
+        "patchSetId": 16
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-06-29T16:22:51Z",
+      "side": 1,
+      "message": "Yes, it will prevent versioning Sparkle.framework and force to build it",
+      "parentUuid": "9a5c5d37_d5acf78e",
       "range": {
         "startLine": 28,
         "startChar": 0,
