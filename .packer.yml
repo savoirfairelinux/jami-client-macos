@@ -39,6 +39,12 @@ osx:
         - echo "Client"
         - git clone https://gerrit-ring.savoirfairelinux.com/ring-client-macosx ring-client-macosx
         - cd ring-client-macosx
+        - git submodule update
+        - cd sparkle/Sparkle
+        - export BUILDDIR=$(pwd)
+        - make release
+        - mv Build/Products/Release/Sparkle.framework ../
+        - cd ../../
         - mkdir build
         - cd build
         - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
