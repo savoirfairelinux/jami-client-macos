@@ -30,15 +30,24 @@
 #import "AppDelegate.h"
 
 #import <callmodel.h>
-
+#import <qapplication.h>
 #import <accountmodel.h>
 #import <protocolmodel.h>
 #import <QItemSelectionModel>
 #import <account.h>
 
+#if ENABLE_SPARKLE
+#import <Sparkle/Sparkle.h>
+#endif
+
+#import "Constants.h"
 #import "RingWizardWC.h"
 
+#if ENABLE_SPARKLE
+@interface AppDelegate() <SUUpdaterDelegate>
+#else
 @interface AppDelegate()
+#endif
 
 @property RingWindowController* ringWindowController;
 @property RingWizardWC* wizard;
@@ -50,8 +59,10 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
-
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
+
+    NSAppleEventManager* appleEventManager = [NSAppleEventManager sharedAppleEventManager];
+    [appleEventManager setEventHandler:self andSelector:@selector(handleQuitEvent:withReplyEvent:) forEventClass:kCoreEventClass andEventID:kAEQuitApplication];
 
     if([self checkForRingAccount]) {
         [self showMainWindow];
@@ -66,8 +77,8 @@
     QObject::connect(CallModel::instance(),
                      &CallModel::incomingCall,
                      [=](Call* call) {
-                         BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:@"window_behaviour"];
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:@"enable_notifications"];
+                         BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::WindowBehaviour];
+                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
                          if(shouldComeToForeground)
                              [NSApp activateIgnoringOtherApps:YES];
 
@@ -132,4 +143,42 @@
     return YES;
 }
 
+- (void)handleQuitEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
+{
+    delete CallModel::instance()->QObject::parent();
+    [[NSApplication sharedApplication] terminate:self];
+}
+
+-(void)applicationWillTerminate:(NSNotification *)notification
+{
+    delete CallModel::instance()->QObject::parent();
+    [[NSApplication sharedApplication] terminate:self];
+}
+
+#if ENABLE_SPARKLE
+
+#pragma mark -
+#pragma mark Sparkle delegate
+
+- (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update
+{
+    [NSApp activateIgnoringOtherApps:YES];
+}
+
+- (BOOL)updaterMayCheckForUpdates:(SUUpdater *)bundle
+{
+    return YES;
+}
+
+- (BOOL)updaterShouldRelaunchApplication:(SUUpdater *)updater
+{
+    return YES;
+}
+
+- (void)updater:(SUUpdater *)updater didAbortWithError:(NSError *)error
+{
+    NSLog(@"Error:%@", error.localizedDescription);
+}
+
+#endif
 @end

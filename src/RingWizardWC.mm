@@ -38,11 +38,11 @@
 
 
 @interface RingWizardWC ()
-@property (assign) IBOutlet NSButton *goToAppButton;
-@property (assign) IBOutlet NSTextField *nickname;
-@property (assign) IBOutlet NSProgressIndicator *progressBar;
-@property (assign) IBOutlet NSTextField *indicationLabel;
-@property (assign) IBOutlet NSButton *createButton;
+@property (unsafe_unretained) IBOutlet NSButton *goToAppButton;
+@property (unsafe_unretained) IBOutlet NSTextField *nickname;
+@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressBar;
+@property (unsafe_unretained) IBOutlet NSTextField *indicationLabel;
+@property (unsafe_unretained) IBOutlet NSButton *createButton;
 @end
 
 @implementation RingWizardWC
@@ -102,6 +102,19 @@
     [self setCallback];
     [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
 
+    [self registerAutoStartup];
+}
+
+/**
+ * Enable launch at startup by default
+ */
+- (void) registerAutoStartup
+{
+    LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItemsRef == nil) return;
+    CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
+    if (itemRef) CFRelease(itemRef);
 }
 
 - (void) saveAccount
@@ -109,6 +122,7 @@
     NSString* newAccName = @"My Ring";
     Account* newAcc = AccountModel::instance()->add([newAccName UTF8String], Account::Protocol::RING);
     newAcc->setAlias([[nickname stringValue] UTF8String]);
+    newAcc->setUpnpEnabled(YES); // Always active upnp
     newAcc << Account::EditAction::SAVE;
 }
 

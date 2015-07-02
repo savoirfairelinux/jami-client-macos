@@ -32,15 +32,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PreferencesViewController : NSViewController <NSToolbarDelegate>
+@interface PreferencesVC : NSViewController <NSToolbarDelegate>
+
+@property (nonatomic, strong) NSViewController *currentVC;
+@property (nonatomic, strong) NSViewController *accountsPrefsVC;
+@property (nonatomic, strong) NSViewController *generalPrefsVC;
+@property (nonatomic, strong) NSViewController *audioPrefsVC;
+@property (nonatomic, strong) NSViewController *videoPrefsVC;
 
 - (void) close;
-@property (nonatomic, assign) NSViewController *currentVC;
-@property (nonatomic, assign) NSViewController *accountsPrefsVC;
-@property (nonatomic, assign) NSViewController *generalPrefsVC;
-@property (nonatomic, assign) NSViewController *audioPrefsVC;
-@property (nonatomic, assign) NSViewController *videoPrefsVC;
-
 - (void)displayGeneral:(NSToolbarItem *)sender;
 - (void)displayAudio:(NSToolbarItem *)sender;
 - (void)displayAncrage:(NSToolbarItem *)sender;

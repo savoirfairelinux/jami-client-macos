@@ -39,9 +39,11 @@
 
 #import "AccAdvancedVC.h"
 
+#import <accountmodel.h>
+#import <qitemselectionmodel.h>
+
 @interface AccAdvancedVC ()
 
-@property Account* privateAccount;
 @property (assign) IBOutlet NSTextField *registrationField;
 @property (assign) IBOutlet NSTextField *localPortField;
 @property (assign) IBOutlet NSButton *isUsingSTUN;
@@ -67,7 +69,6 @@
 @end
 
 @implementation AccAdvancedVC
-@synthesize privateAccount;
 @synthesize registrationField;
 @synthesize localPortField;
 @synthesize isUsingSTUN;
@@ -106,12 +107,27 @@
     [STUNserverURLField setTag:STUNURL_TAG];
     [publishedPortField setTag:PUBLICPORT_TAG];
     [publishedAddrField setTag:PUBLICADDR_TAG];
-    
+
+    QObject::connect(AccountModel::instance()->selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+                         [self loadAccount];
+                     });
+
 }
 
-- (void)loadAccount:(Account *)account
+- (Account*) currentAccount
 {
-    privateAccount = account;
+    auto accIdx = AccountModel::instance()->selectionModel()->currentIndex();
+    return AccountModel::instance()->getAccountByModelIndex(accIdx);
+}
+
+- (void)loadAccount
+{
+    auto account = [self currentAccount];
+
     [self updateControlsWithTag:REGISTRATION_TAG];
     [self updateControlsWithTag:LOCALPORT_TAG];
     [self updateControlsWithTag:MINAUDIO_TAG];
@@ -119,39 +135,23 @@
     [self updateControlsWithTag:MINVIDEO_TAG];
     [self updateControlsWithTag:MAXVIDEO_TAG];
 
-    [STUNserverURLField setStringValue:privateAccount->sipStunServer().toNSString()];
-    [isUsingSTUN setState:privateAccount->isSipStunEnabled()?NSOnState:NSOffState];
-    [STUNserverURLField setEnabled:privateAccount->isSipStunEnabled()];
+    [STUNserverURLField setStringValue:account->sipStunServer().toNSString()];
+    [isUsingSTUN setState:account->isSipStunEnabled()?NSOnState:NSOffState];
+    [STUNserverURLField setEnabled:account->isSipStunEnabled()];
 
-    if(privateAccount->isPublishedSameAsLocal())
+    if(account->isPublishedSameAsLocal())
         [publishAddrAndPortRadioGroup selectCellAtRow:0 column:0];
     else {
         [publishAddrAndPortRadioGroup selectCellAtRow:1 column:0];
     }
 
-    [publishedAddrField setStringValue:privateAccount->publishedAddress().toNSString()];
-    [publishedPortField setIntValue:privateAccount->publishedPort()];
-    [publishedAddrField setEnabled:!privateAccount->isPublishedSameAsLocal()];
-    [publishedPortField setEnabled:!privateAccount->isPublishedSameAsLocal()];
+    [publishedAddrField setStringValue:account->publishedAddress().toNSString()];
+    [publishedPortField setIntValue:account->publishedPort()];
+    [publishedAddrField setEnabled:!account->isPublishedSameAsLocal()];
+    [publishedPortField setEnabled:!account->isPublishedSameAsLocal()];
 }
 
 #pragma mark - NSTextFieldDelegate methods
-
-- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor
-{
-    NSLog(@"textShouldBeginEditing");
-    return YES;
-}
-
-- (void)control:(NSControl *)control didFailToValidatePartialString:(NSString *)string errorDescription:(NSString *)error
-{
-    NSLog(@"didFailToValidatePartialString");
-}
-
--(void)controlTextDidBeginEditing:(NSNotification *)obj
-{
-
-}
 
 -(void)controlTextDidChange:(NSNotification *)notif
 {
@@ -168,31 +168,31 @@
 {
     switch ([sender tag]) {
         case REGISTRATION_TAG:
-            privateAccount->setRegistrationExpire([sender integerValue]);
+            [self currentAccount]->setRegistrationExpire([sender integerValue]);
             break;
         case LOCALPORT_TAG:
-            privateAccount->setLocalPort([sender integerValue]);
+            [self currentAccount]->setLocalPort([sender integerValue]);
             break;
         case STUNURL_TAG:
-            privateAccount->setSipStunServer([[sender stringValue] UTF8String]);
+            [self currentAccount]->setSipStunServer([[sender stringValue] UTF8String]);
             break;
         case PUBLICADDR_TAG:
-            privateAccount->setPublishedAddress([[sender stringValue] UTF8String]);
+            [self currentAccount]->setPublishedAddress([[sender stringValue] UTF8String]);
             break;
         case PUBLICPORT_TAG:
-            privateAccount->setPublishedPort([sender integerValue]);
+            [self currentAccount]->setPublishedPort([sender integerValue]);
             break;
         case MINAUDIO_TAG:
-            privateAccount->setAudioPortMin([sender integerValue]);
+            [self currentAccount]->setAudioPortMin([sender integerValue]);
             break;
         case MAXAUDIO_TAG:
-            privateAccount->setAudioPortMax([sender integerValue]);
+            [self currentAccount]->setAudioPortMax([sender integerValue]);
             break;
         case MINVIDEO_TAG:
-            privateAccount->setVideoPortMin([sender integerValue]);
+            [self currentAccount]->setVideoPortMin([sender integerValue]);
             break;
         case MAXVIDEO_TAG:
-            privateAccount->setVideoPortMax([sender integerValue]);
+            [self currentAccount]->setVideoPortMax([sender integerValue]);
             break;
         default:
             break;
@@ -202,20 +202,20 @@
 
 - (IBAction)toggleSTUN:(NSButton *)sender
 {
-    privateAccount->setSipStunEnabled([sender state]==NSOnState);
-    [STUNserverURLField setEnabled:privateAccount->isSipStunEnabled()];
+    [self currentAccount]->setSipStunEnabled([sender state]==NSOnState);
+    [STUNserverURLField setEnabled:[self currentAccount]->isSipStunEnabled()];
 }
 
 - (IBAction)didSwitchPublishedAddress:(NSMatrix *)matrix
 {
     NSInteger row = [matrix selectedRow];
     if(row == 0) {
-        privateAccount->setPublishedSameAsLocal(YES);
+        [self currentAccount]->setPublishedSameAsLocal(YES);
     } else {
-        privateAccount->setPublishedSameAsLocal(NO);
+        [self currentAccount]->setPublishedSameAsLocal(NO);
     }
-    [publishedAddrField setEnabled:!privateAccount->isPublishedSameAsLocal()];
-    [publishedPortField setEnabled:!privateAccount->isPublishedSameAsLocal()];
+    [publishedAddrField setEnabled:![self currentAccount]->isPublishedSameAsLocal()];
+    [publishedPortField setEnabled:![self currentAccount]->isPublishedSameAsLocal()];
 
 }
 
@@ -223,28 +223,28 @@
 {
     switch (tag) {
         case REGISTRATION_TAG:
-            [registrationStepper setIntegerValue:privateAccount->registrationExpire()];
-            [registrationField setIntegerValue:privateAccount->registrationExpire()];
+            [registrationStepper setIntegerValue:[self currentAccount]->registrationExpire()];
+            [registrationField setIntegerValue:[self currentAccount]->registrationExpire()];
             break;
         case LOCALPORT_TAG:
-            [localPortStepper setIntegerValue:privateAccount->localPort()];
-            [localPortField setIntegerValue:privateAccount->localPort()];
+            [localPortStepper setIntegerValue:[self currentAccount]->localPort()];
+            [localPortField setIntegerValue:[self currentAccount]->localPort()];
             break;
         case MINAUDIO_TAG:
-            [minAudioPortStepper setIntegerValue:privateAccount->audioPortMin()];
-            [minAudioRTPRange setIntegerValue:privateAccount->audioPortMin()];
+            [minAudioPortStepper setIntegerValue:[self currentAccount]->audioPortMin()];
+            [minAudioRTPRange setIntegerValue:[self currentAccount]->audioPortMin()];
             break;
         case MAXAUDIO_TAG:
-            [maxAudioPortStepper setIntegerValue:privateAccount->audioPortMax()];
-            [maxAudioRTPRange setIntegerValue:privateAccount->audioPortMax()];
+            [maxAudioPortStepper setIntegerValue:[self currentAccount]->audioPortMax()];
+            [maxAudioRTPRange setIntegerValue:[self currentAccount]->audioPortMax()];
             break;
         case MINVIDEO_TAG:
-            [minVideoPortStepper setIntegerValue:privateAccount->videoPortMin()];
-            [minVideoRTPRange setIntegerValue:privateAccount->videoPortMin()];
+            [minVideoPortStepper setIntegerValue:[self currentAccount]->videoPortMin()];
+            [minVideoRTPRange setIntegerValue:[self currentAccount]->videoPortMin()];
             break;
         case MAXVIDEO_TAG:
-            [maxVideoPortStepper setIntegerValue:privateAccount->videoPortMax()];
-            [maxVideoRTPRange setIntegerValue:privateAccount->videoPortMax()];
+            [maxVideoPortStepper setIntegerValue:[self currentAccount]->videoPortMax()];
+            [maxVideoRTPRange setIntegerValue:[self currentAccount]->videoPortMax()];
             break;
         default:
             break;

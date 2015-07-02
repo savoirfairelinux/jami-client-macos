@@ -37,10 +37,10 @@
 #import <QSortFilterProxyModel>
 #import <audio/codecmodel.h>
 #import <accountmodel.h>
+#import <qitemselectionmodel.h>
 
 @interface AccAudioVC ()
 
-@property Account* privateAccount;
 @property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *codecsView;
 
@@ -49,17 +49,29 @@
 @implementation AccAudioVC
 @synthesize treeController;
 @synthesize codecsView;
-@synthesize privateAccount;
 
 - (void)awakeFromNib
 {
     NSLog(@"INIT Audio VC");
+    QObject::connect(AccountModel::instance()->selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+                         [self loadAccount];
+                     });
 }
 
-- (void)loadAccount:(Account *)account
+- (Account*) currentAccount
 {
-    privateAccount = account;
-    treeController = [[QNSTreeController alloc] initWithQModel:privateAccount->codecModel()->audioCodecs()];
+    auto accIdx = AccountModel::instance()->selectionModel()->currentIndex();
+    return AccountModel::instance()->getAccountByModelIndex(accIdx);
+}
+
+- (void)loadAccount
+{
+    auto account = [self currentAccount];
+    treeController = [[QNSTreeController alloc] initWithQModel:account->codecModel()->audioCodecs()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
@@ -75,8 +87,8 @@
         if(!qIdx.isValid())
             return;
 
-        QMimeData* mime = privateAccount->codecModel()->audioCodecs()->mimeData(QModelIndexList() << qIdx);
-        privateAccount->codecModel()->audioCodecs()->dropMimeData(mime, Qt::MoveAction, qIdx.row() - 1, 0, QModelIndex());
+        QMimeData* mime = [self currentAccount]->codecModel()->audioCodecs()->mimeData(QModelIndexList() << qIdx);
+        [self currentAccount]->codecModel()->audioCodecs()->dropMimeData(mime, Qt::MoveAction, qIdx.row() - 1, 0, QModelIndex());
     }
 }
 
@@ -86,8 +98,8 @@
         if(!qIdx.isValid())
             return;
 
-        QMimeData* mime = privateAccount->codecModel()->audioCodecs()->mimeData(QModelIndexList() << qIdx);
-        privateAccount->codecModel()->audioCodecs()->dropMimeData(mime, Qt::MoveAction, qIdx.row() + 1, 0, QModelIndex());
+        QMimeData* mime = [self currentAccount]->codecModel()->audioCodecs()->mimeData(QModelIndexList() << qIdx);
+        [self currentAccount]->codecModel()->audioCodecs()->dropMimeData(mime, Qt::MoveAction, qIdx.row() + 1, 0, QModelIndex());
     }
 }
 
@@ -95,8 +107,8 @@
     NSInteger row = [sender clickedRow];
     NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
     NSButtonCell *cell = [col dataCellForRow:row];
-    QModelIndex qIdx = privateAccount->codecModel()->audioCodecs()->index(row, 0, QModelIndex());
-    privateAccount->codecModel()->audioCodecs()->setData(qIdx, cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    QModelIndex qIdx = [self currentAccount]->codecModel()->audioCodecs()->index(row, 0, QModelIndex());
+    [self currentAccount]->codecModel()->audioCodecs()->setData(qIdx, cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -157,16 +169,16 @@
     if(!qIdx.isValid())
         return;
     if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
-        [cell setState:privateAccount->codecModel()->audioCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+        [cell setState:[self currentAccount]->codecModel()->audioCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CODECS])
     {
-        cell.title = privateAccount->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
+        cell.title = [self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_FREQ])
     {
-        cell.title = privateAccount->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
+        cell.title = [self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_BITRATE])
     {
-        cell.title = privateAccount->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
+        cell.title = [self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
     }
 }
 

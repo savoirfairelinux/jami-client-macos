@@ -5,51 +5,129 @@ IF(POLICY CMP0022)
 ENDIF(POLICY CMP0022)
 
 SET(PROJ_NAME Ring)
-SET(RING_VERSION "0.1.0")
+
+# To build nighlies we need to update RING_VERSION with an optional command line arg
+IF("${RING_VERSION}" STREQUAL "")
+   SET(RING_VERSION "0.4.0")
+ENDIF("${RING_VERSION}" STREQUAL "")
+
+MESSAGE("Building Ring version - " ${RING_VERSION})
+
 SET(RING_VERSION_NAME "Samuel de Champlain")
-SET(BUNDLE_VERSION "Samuel de Champlain (0.1.0")
+SET(BUNDLE_VERSION "Samuel de Champlain - beta")
 
 SET(PROJ_COPYRIGHT " © 2015 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
-ADD_DEFINITIONS("-std=c++11")
+ADD_DEFINITIONS("-std=c++11 -fobjc-arc")
 
 PROJECT(${PROJ_NAME})
 
 FIND_PACKAGE(Qt5Core REQUIRED)
+FIND_PACKAGE(Qt5MacExtras REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
 
+IF(NOT (${ENABLE_SPARKLE} MATCHES false))
+   MESSAGE("Sparkle auto-update enabled")
+
+   # find_library searches in /Library/Frameworks by default
+   # We add an hint to our custom location
+
+   FIND_LIBRARY(SPARKLE_FRAMEWORK
+                NAMES Sparkle
+                HINTS ${CMAKE_CURRENT_SOURCE_DIR}/sparkle)
+   IF(EXISTS ${SPARKLE_FRAMEWORK})
+      SET(ENABLE_SPARKLE 1 CACHE BOOLEAN "Enable Sparkle")
+      ADD_DEFINITIONS(-DENABLE_SPARKLE=1)
+      MESSAGE("Sparkle is here:" ${SPARKLE_FRAMEWORK})
+      FIND_PATH(SPARKLE_INCLUDE_DIR Sparkle.h HINTS ${SPARKLE_FRAMEWORK}/Headers)
+      MESSAGE("INCLUDE " ${SPARKLE_INCLUDE_DIR})
+      # we need to copy the public key to check the updates
+      SET(PUBLIC_KEY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sparkle/dsa_pub.pem")
+      IF(EXISTS ${PUBLIC_KEY_PATH})
+         MESSAGE(STATUS "Looking for Public Key - found")
+         SET_SOURCE_FILES_PROPERTIES(${PUBLIC_KEY_PATH} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+         SET(PUBLIC_KEY ${PUBLIC_KEY_PATH})
+      ELSE(EXISTS ${PUBLIC_KEY_PATH})
+         MESSAGE(WARNING "Looking for Public Key - not found")
+         MESSAGE(WARNING "${PUBLIC_KEY_PATH} not found Sparkle Framework will NOT work and may even prevent application from launching. Please consider disabling Sparkle Framework, creating a keypair for testing purposes")
+      ENDIF(EXISTS ${PUBLIC_KEY_PATH})
+   ELSE()
+      MESSAGE(FATAL_ERROR "Sparkle framework not found, build it (see README) or disable Sparkle (-DENABLE_SPARKLE=false)")
+   ENDIF(EXISTS ${SPARKLE_FRAMEWORK})
+ENDIF(NOT (${ENABLE_SPARKLE} MATCHES false))
+
 INCLUDE_DIRECTORIES(SYSTEM ${Qt5Core_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(SYSTEM ${Qt5MacExtras_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${LIB_RING_CLIENT_INCLUDE_DIR})
 
-MESSAGE("LibRingClient is here:" ${LIB_RING_CLIENT_INCLUDE_DIR})
+MESSAGE("LRC is here:" ${LIB_RING_CLIENT_INCLUDE_DIR})
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 #Files to compile
-SET(ringclient_SRCS
-   src/main.mm
-   src/AppDelegate.mm
-   src/RingWindowController.mm
-   src/ConversationsViewController.mm
-   src/PreferencesViewController.mm
+SET(ringclient_CONTROLLERS
    src/QNSTreeController.mm
-   src/AccGeneralVC.mm
-   src/AccAudioVC.mm
-   src/AccVideoVC.mm
-   src/AccRingVC.mm
-   src/AccAdvancedVC.mm
-   src/AccSecurityVC.mm
-   src/AccountsVC.mm
+   src/QNSTreeController.h
    src/CurrentCallVC.mm
-   src/AudioPrefsVC.mm
-   src/VideoPrefsVC.mm
+   src/CurrentCallVC.h
    src/GeneralPrefsVC.mm
    src/RingWizardWC.mm
-   src/HistoryViewController.mm
-   
-   src/backends/MinimalHistoryBackend.mm)
+   src/RingWizardWC.h
+   src/RingWindowController.mm
+   src/RingWindowController.h
+   src/ConversationsVC.mm
+   src/ConversationsVC.h
+   src/PreferencesVC.mm
+   src/PreferencesVC.h
+   src/AccGeneralVC.mm
+   src/AccGeneralVC.h
+   src/AccVideoVC.mm
+   src/AccVideoVC.h
+   src/AccAudioVC.mm
+   src/AccAudioVC.h
+   src/AccRingVC.mm
+   src/AccRingVC.h
+   src/AccAdvancedVC.mm
+   src/AccAdvancedVC.h
+   src/AccSecurityVC.mm
+   src/AccSecurityVC.h
+   src/CertificateWC.mm
+   src/CertificateWC.h
+   src/AudioPrefsVC.mm
+   src/AudioPrefsVC.h
+   src/AccountsVC.mm
+   src/AccountsVC.h
+   src/VideoPrefsVC.mm
+   src/VideoPrefsVC.h
+   src/GeneralPrefsVC.h
+   src/HistoryVC.mm
+   src/HistoryVC.h
+   src/PersonsVC.mm
+   src/PersonsVC.h
+   src/ChatVC.mm
+   src/ChatVC.h)
+
+SET(ringclient_BACKENDS
+   src/backends/AddressBookBackend.mm
+   src/backends/AddressBookBackend.h)
+
+SET(ringclient_VIEWS
+   src/views/CallView.mm
+   src/views/CallView.h
+   src/views/ITProgressIndicator.mm
+   src/views/ITProgressIndicator.h
+   src/views/PersonCell.mm
+   src/views/PersonCell.h)
+
+SET(ringclient_OTHERS
+   src/main.mm
+   src/AppDelegate.mm
+   src/AppDelegate.h
+   src/delegates/ImageManipulationDelegate.mm
+   src/delegates/ImageManipulationDelegate.h)
+
 
 SET(ringclient_XIBS
    MainMenu
@@ -66,32 +144,10 @@ SET(ringclient_XIBS
    AudioPrefs
    VideoPrefs
    PreferencesScreen
-   RingWizard)
-
-SET(ringclient_HDRS
-   src/AppDelegate.h
-   src/RingWindowController.h
-   src/CurrentCallVC.h
-   src/ConversationsViewController.h
-   src/PreferencesViewController.h
-   src/AccGeneralVC.h
-   src/AccVideoVC.h
-   src/AccAudioVC.h
-   src/AccRingVC.h
-   src/AccAdvancedVC.h
-   src/AccSecurityVC.h
-   src/AudioPrefsVC.h
-   src/AccountsVC.h
-   src/VideoPrefsVC.h
-   src/GeneralPrefsVC.h
-   src/HistoryViewController.h
-   src/RingWizardWC.h
-   src/QNSTreeController.h
-   
-   src/backends/MinimalHistoryBackend.h)
+   RingWizard
+   CertificateWindow)
 
 # Icons
-
 # This part tells CMake where to find and install the file itself
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
@@ -100,8 +156,12 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
 SET(ring_ICONS ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_email.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_new_email.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hangup.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hold.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_holdoff.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_video.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_audio.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_chat.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
@@ -119,19 +179,43 @@ FOREACH(xib ${ringclient_XIBS})
   SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/${xib}.xib)
 ENDFOREACH()
 
-ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE
-   ${ringclient_SRCS}
-   ${ringclient_HDRS}
+SET(TO_ADD 
+   ${ringclient_CONTROLLERS}
+   ${ringclient_BACKENDS}
+   ${ringclient_VIEWS}
+   ${ringclient_OTHERS}
    ${ringclient_XIBS_FOR_EXECUTABLE}
    ${myApp_ICON}
    Credits.rtf
    ${ring_ICONS})
 
+IF(ENABLE_SPARKLE)
+   SET( TO_ADD ${TO_ADD} ${PUBLIC_KEY} ${SPARKLE_FRAMEWORK})
+ENDIF(ENABLE_SPARKLE)
+
+ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE ${TO_ADD})
+
+# Follow Xcode hierarchy principles
+SOURCE_GROUP("Controllers" FILES ${ringclient_CONTROLLERS})
+SOURCE_GROUP("Backends" FILES ${ringclient_BACKENDS})
+SOURCE_GROUP("CustomViews" FILES ${ringclient_VIEWS})
+SOURCE_GROUP("Classes" FILES ${ringclient_OTHERS})
+SOURCE_GROUP("Resources\\Interface Builder" FILES ${ringclient_XIBS_FOR_EXECUTABLE})
+
+IF(ENABLE_SPARKLE)
+    SOURCE_GROUP("Frameworks" FILES ${SPARKLE_FRAMEWORK})
+ENDIF(ENABLE_SPARKLE)
+
 TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${LIB_RING_CLIENT_LIBRARY}
    ${Qt5Core_LIBRARIES}
+   ${Qt5MacExtras_LIBRARIES}
    ${Qt5Widgets_LIBRARIES}
 )
+
+IF(ENABLE_SPARKLE)
+   TARGET_LINK_LIBRARIES(${PROJ_NAME} ${SPARKLE_FRAMEWORK})
+ENDIF(ENABLE_SPARKLE)
 
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
@@ -140,15 +224,15 @@ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AVFoundation")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AddressBook")
 
 # These variables are specific to our plist and are NOT standard CMake variables
-set(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
-set(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
+SET(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
+SET(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
 
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
         MACOSX_BUNDLE_GUI_IDENTIFIER "cx.ring"
-        MACOSX_BUNDLE_SHORT_VERSION_STRING ${RING_VERSION_NAME}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${RING_VERSION}
         MACOSX_BUNDLE_LONG_VERSION_STRING "${PROJ_NAME} ${RING_VERSION} Nightly"
-        MACOSX_BUNDLE_BUNDLE_VERSION ${RING_VERSION}
+        MACOSX_BUNDLE_BUNDLE_VERSION ${RING_VERSION_NAME}
         MACOSX_BUNDLE_COPYRIGHT "${PROJ_COPYRIGHT}"
         MACOSX_BUNDLE_INFO_STRING "Nightly build of ${PROJ_NAME} ${RING_VERSION} for testing and development"
         MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
@@ -163,10 +247,6 @@ IF(${IBTOOL} STREQUAL "IBTOOL-NOTFOUND")
                     the Apple developer tools. The default system paths were searched in addition to ${OSX_DEVELOPER_ROOT}/usr/bin")
 endif()
 
-# Make sure the 'Resources' Directory is correctly created before we build
-ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} PRE_BUILD
-                      COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources)
-
 # Compile the .xib files using the 'ibtool' program with the destination being the app package
 FOREACH(xib ${ringclient_XIBS})
   ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} POST_BUILD
@@ -177,26 +257,45 @@ FOREACH(xib ${ringclient_XIBS})
 
 ENDFOREACH()
 
-set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_INSTALL_PREFIX})
+SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${CMAKE_INSTALL_PREFIX})
 
 SET(APPS "\${CMAKE_INSTALL_PREFIX}/${PROJ_NAME}.app")
 
-#--------------------------------------------------------------------------------
-# Install the QtTest application, on Apple, the bundle is at the root of the
-# install tree
 INSTALL(TARGETS ${PROJ_NAME} BUNDLE DESTINATION . COMPONENT Runtime)
 
-SET(QT_PLUGINS_DESTDIR ${PROJ_NAME}.app/Contents/Plugins/platforms)
+SET(QT_PLUGINS_DESTDIR ${PROJ_NAME}.app/Contents/Plugins)
 #--------------------------------------------------------------------------------
 # Install needed Qt plugins by copying directories from the qt installation
-LIST(APPEND QT_PLUGINS Qt5::QTgaPlugin Qt5::QTiffPlugin Qt5::QCocoaIntegrationPlugin)
-FOREACH(plugin ${QT_PLUGINS})
+
+
+#MESSAGE("GUI====")
+#foreach(plugin ${Qt5Gui_PLUGINS})
+#  message("Plugin ${plugin} is at location ${_loc}")
+#endforeach()
+
+LIST(APPEND QT_PLUGINS_IMAGEFORMAT  Qt5::QTgaPlugin
+                                    Qt5::QGifPlugin
+                                    Qt5::QICNSPlugin
+                                    Qt5::QICOPlugin
+                                    Qt5::QJpegPlugin
+                                    Qt5::QJp2Plugin
+                                    Qt5::QMngPlugin
+                                    Qt5::QTiffPlugin
+                                    Qt5::QDDSPlugin)
+
+# we need two plugin directories platform and imageformats
+GET_TARGET_PROPERTY(_loc Qt5::QCocoaIntegrationPlugin LOCATION)
+INSTALL(FILES ${_loc} DESTINATION ${QT_PLUGINS_DESTDIR}/platforms COMPONENT Runtime)
+LIST(APPEND QT_PLUGINS Qt5::QCocoaIntegrationPlugin)
+
+FOREACH(plugin ${QT_PLUGINS_IMAGEFORMAT})
   GET_TARGET_PROPERTY(_loc ${plugin} LOCATION)
-  INSTALL(FILES ${_loc} DESTINATION ${QT_PLUGINS_DESTDIR} COMPONENT Runtime)
+  INSTALL(FILES ${_loc} DESTINATION ${QT_PLUGINS_DESTDIR}/imageformats COMPONENT Runtime)
+  LIST(APPEND QT_PLUGINS ${plugin})
 ENDFOREACH()
 
 # directories to look for dependencies
-SET(DIRS ${CMAKE_INSTALL_PREFIX}/lib ${QT_LIB_DIR})
+SET(DIRS ${CMAKE_INSTALL_PREFIX}/lib ${QT_LIB_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/sparkle)
 
 INSTALL(CODE "
     file(GLOB_RECURSE QTPLUGINS

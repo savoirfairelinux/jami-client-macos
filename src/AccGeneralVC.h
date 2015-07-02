@@ -38,12 +38,6 @@
 
 }
 
-- (IBAction)toggleUpnp:(NSButton *)sender;
-- (IBAction)toggleAutoAnswer:(NSButton *)sender;
-- (IBAction)toggleCustomAgent:(NSButton *)sender;
-
-- (void)loadAccount:(Account *)account;
-
 @end
 
 #endif // ACCGENERALVC_H

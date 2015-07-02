@@ -35,15 +35,23 @@
 #import <call.h>
 
 #import "AppDelegate.h"
+#import "Constants.h"
+#import "CurrentCallVC.h"
 
 @interface RingWindowController ()
 
 @property NSSearchField* callField;
+@property CurrentCallVC* currentVC;
+@property (unsafe_unretained) IBOutlet NSView *callView;
+
 
 @end
 
 @implementation RingWindowController
 @synthesize callField;
+@synthesize currentVC;
+@synthesize callView;
+
 static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
@@ -52,6 +60,13 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [super windowDidLoad];
     [self.window setReleasedWhenClosed:FALSE];
     [self displayMainToolBar];
+
+    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
+    [callView addSubview:[self.currentVC view]];
+    [currentVC initFrame];
 }
 
 - (IBAction)openPreferences:(id)sender
@@ -62,7 +77,7 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     }
     NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
 
-    self.preferencesViewController = [[PreferencesViewController alloc] initWithNibName:@"PreferencesScreen" bundle:nil];
+    self.preferencesViewController = [[PreferencesVC alloc] initWithNibName:@"PreferencesScreen" bundle:nil];
     self.myCurrentViewController = self.preferencesViewController;
 
     NSLayoutConstraint* test = [NSLayoutConstraint constraintWithItem:self.preferencesViewController.view
@@ -149,8 +164,8 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
 - (void)togglePowerSettings:(id)sender
 {
-    BOOL advanced = [[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"];
-    [[NSUserDefaults standardUserDefaults] setBool:!advanced forKey:@"show_advanced"];
+    BOOL advanced = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced];
+    [[NSUserDefaults standardUserDefaults] setBool:!advanced forKey:Preferences::ShowAdvanced];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
@@ -201,7 +216,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 - (IBAction)placeCall:(id)sender
 {
     Call* c = CallModel::instance()->dialingCall();
-
     // check for a valid ring hash
     NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
     BOOL valid = [[[callField stringValue] stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];

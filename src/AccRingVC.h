@@ -34,12 +34,7 @@
 
 #import <account.h>
 
-@interface AccRingVC : NSViewController <NSTextFieldDelegate> {
-    
-    NSTextField *hashField;
-}
-
-- (void)loadAccount:(Account *)account;
+@interface AccRingVC : NSViewController <NSTextFieldDelegate>
 
 @end
 
