@@ -1,0 +1,27 @@
+From a27c45f8b3b6813d981120ba4976c6570a46d31a Mon Sep 17 00:00:00 2001
+From: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+Date: Thu, 2 Jul 2015 11:33:19 -0400
+Subject: [PATCH] builddir: use predefined BUILDDIR
+
+This commit allows user to control where Sparkle will be build
+---
+ Makefile | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 8dfd43b..d3867c1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,6 +1,8 @@
+ .PHONY: all localizable-strings release build test travis
+ 
+-BUILDDIR := $(shell mktemp -d "$(TMPDIR)/Sparkle.XXXXXX")
++ifndef BUILDDIR
++    BUILDDIR := $(shell mktemp -d "$(TMPDIR)/Sparkle.XXXXXX")
++endif
+ 
+ localizable-strings:
+ 	rm -f Sparkle/en.lproj/Sparkle.strings
+-- 
+2.4.2
+
