@@ -27,7 +27,7 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "PreferencesViewController.h"
+#import "PreferencesVC.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -38,14 +38,15 @@
 #import "GeneralPrefsVC.h"
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
+#import "Constants.h"
 
-@interface PreferencesViewController ()
+@interface PreferencesVC ()
 
 @property NSButton* toggleAdvancedSettings;
 
 @end
 
-@implementation PreferencesViewController
+@implementation PreferencesVC
 @synthesize toggleAdvancedSettings;
 
 static NSString* const kProfilePrefsIdentifier = @"ProfilesPrefsIdentifier";
@@ -67,18 +68,21 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
 
     // Set the layer redraw policy. This would be better done in
     // the initialization method of a NSView subclass instead of here.
-    self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawDuringViewResize;
+    self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
 
     [self.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithPoint:frame.origin];
-    animation.toValue = [NSValue valueWithPoint:self.view.frame.origin];
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    animation.fromValue = @(frame.origin.y);
+    animation.toValue = @(self.view.frame.origin.y);
     animation.duration = 0.3f;
+
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
+    [CATransaction commit];
 }
 
 - (void) close
@@ -95,9 +99,9 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
 
     [CATransaction begin];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.fromValue = [NSValue valueWithPoint:self.view.frame.origin];
-    animation.toValue = [NSValue valueWithPoint:frame.origin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    animation.fromValue = @(self.view.frame.origin.y);
+    animation.toValue = @(frame.origin.y);
     animation.duration = 0.3f;
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
 
@@ -105,8 +109,10 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
         [self.view removeFromSuperview];
     }];
 
-
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    // set final layer position to prevent glitching back to original one
+    [self.view.layer setPosition:frame.origin];;
     [CATransaction commit];
 }
 
@@ -188,7 +194,7 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
         toggleAdvancedSettings = [[NSButton alloc] initWithFrame:NSMakeRect(0,0,20,20)];
         [toggleAdvancedSettings setButtonType:NSSwitchButton];
         [toggleAdvancedSettings setTitle:@""];
-        [toggleAdvancedSettings setState:[[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"]];
+        [toggleAdvancedSettings setState:[[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
         [item setLabel:@"Show Advanced"];
         [item setView:toggleAdvancedSettings];
         [item setAction:@selector(togglePowerSettings:)];
@@ -225,7 +231,7 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
                       kDonePrefsIdentifer,
                       nil];
 
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"]) {
+    if([[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]) {
         [items insertObject:NSToolbarSpaceItemIdentifier atIndex:5];
         [items insertObject:kProfilePrefsIdentifier atIndex:2];
     } else
@@ -243,7 +249,7 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
                              kVideoPrefsIdentifer,
                              nil];
 
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"show_advanced"])
+    if([[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced])
         [items insertObject:kProfilePrefsIdentifier atIndex:1];
 
 

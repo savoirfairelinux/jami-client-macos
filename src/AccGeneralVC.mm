@@ -42,8 +42,6 @@
 
 @interface AccGeneralVC ()
 
-@property Account* privateAccount;
-
 @property (assign) IBOutlet NSView *boxingAccount;
 @property (assign) IBOutlet NSView *boxingParameters;
 @property (assign) IBOutlet NSView *boxingCommon;
@@ -54,6 +52,8 @@
 @property (assign) IBOutlet NSTextField *serverHostTextField;
 @property (assign) IBOutlet NSTextField *usernameTextField;
 @property (assign) IBOutlet NSSecureTextField *passwordTextField;
+@property (assign) IBOutlet NSTextField *clearTextField;
+@property (assign) IBOutlet NSButton *tryRegisterButton;
 
 @property (assign) IBOutlet NSButton *upnpButton;
 @property (assign) IBOutlet NSButton *autoAnswerButton;
@@ -72,11 +72,11 @@
 @synthesize serverHostTextField;
 @synthesize usernameTextField;
 @synthesize passwordTextField;
+@synthesize clearTextField;
 @synthesize upnpButton;
 @synthesize autoAnswerButton;
 @synthesize userAgentButton;
 @synthesize userAgentTextField;
-@synthesize privateAccount;
 
 - (void)awakeFromNib
 {
@@ -86,25 +86,38 @@
     [usernameTextField setTag:USERNAME_TAG];
     [passwordTextField setTag:PASSWORD_TAG];
     [userAgentTextField setTag:USERAGENT_TAG];
+
+    QObject::connect(AccountModel::instance()->selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+                         [self loadAccount];
+                     });
+}
+
+- (Account*) currentAccount
+{
+    auto accIdx = AccountModel::instance()->selectionModel()->currentIndex();
+    return AccountModel::instance()->getAccountByModelIndex(accIdx);
 }
 
 - (IBAction)toggleUpnp:(NSButton *)sender {
-    privateAccount->setUpnpEnabled([sender state] == NSOnState);
+    [self currentAccount]->setUpnpEnabled([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAutoAnswer:(NSButton *)sender {
-    privateAccount->setAutoAnswer([sender state] == NSOnState);
+    [self currentAccount]->setAutoAnswer([sender state] == NSOnState);
 }
 
 - (IBAction)toggleCustomAgent:(NSButton *)sender {
     [self.userAgentTextField setEnabled:[sender state] == NSOnState];
-    privateAccount->setHasCustomUserAgent([sender state] == NSOnState);
+    [self currentAccount]->setHasCustomUserAgent([sender state] == NSOnState);
 }
 
-- (void)loadAccount:(Account *)account
+- (void)loadAccount
 {
-
-    privateAccount = account;
+    auto account = [self currentAccount];
 
     if([account->alias().toNSString() isEqualToString:@"IP2IP"]) {
         [boxingAccount.subviews setValue:@YES forKeyPath:@"hidden"];
@@ -124,6 +137,7 @@
         [self.serverHostTextField setStringValue:account->hostname().toNSString()];
         [self.usernameTextField setStringValue:account->username().toNSString()];
         [self.passwordTextField setStringValue:account->password().toNSString()];
+        [self.clearTextField setStringValue:account->password().toNSString()];
     }
 
     switch (account->protocol()) {
@@ -141,11 +155,41 @@
             break;
     }
 
-    [upnpButton setState:privateAccount->isUpnpEnabled()];
-    [userAgentButton setState:privateAccount->hasCustomUserAgent()];
-    [userAgentTextField setEnabled:privateAccount->hasCustomUserAgent()];
-    [self.autoAnswerButton setState:privateAccount->isAutoAnswer()];
+    [upnpButton setState:[self currentAccount]->isUpnpEnabled()];
+    [userAgentButton setState:[self currentAccount]->hasCustomUserAgent()];
+    [userAgentTextField setEnabled:[self currentAccount]->hasCustomUserAgent()];
+    [self.autoAnswerButton setState:[self currentAccount]->isAutoAnswer()];
     [self.userAgentTextField setStringValue:account->userAgent().toNSString()];
+}
+
+- (IBAction)tryRegistration:(id)sender {
+    [self currentAccount] << Account::EditAction::SAVE;
+}
+
+- (IBAction)showPassword:(NSButton *)sender {
+    if (sender.state == NSOnState) {
+        clearTextField = [[NSTextField alloc] initWithFrame:passwordTextField.frame];
+        [clearTextField setTag:passwordTextField.tag];
+        [clearTextField setDelegate:self];
+        [clearTextField setBounds:passwordTextField.bounds];
+        [clearTextField setStringValue:passwordTextField.stringValue];
+        [clearTextField becomeFirstResponder];
+        [boxingParameters addSubview:clearTextField];
+        [passwordTextField setHidden:YES];
+    } else {
+        [passwordTextField setStringValue:clearTextField.stringValue];
+        [passwordTextField setHidden:NO];
+        [clearTextField removeFromSuperview];
+        clearTextField = nil;
+    }
+}
+
+/**
+ *  Debug purpose
+ */
+-(void) dumpFrame:(CGRect) frame WithName:(NSString*) name
+{
+    NSLog(@"frame %@ : %f %f %f %f \n\n",name ,frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
 #pragma mark - NSTextFieldDelegate methods
@@ -161,19 +205,19 @@
 
     switch ([textField tag]) {
         case ALIAS_TAG:
-            privateAccount->setAlias([[textField stringValue] UTF8String]);
+            [self currentAccount]->setAlias([[textField stringValue] UTF8String]);
             break;
         case HOSTNAME_TAG:
-            privateAccount->setHostname([[textField stringValue] UTF8String]);
+            [self currentAccount]->setHostname([[textField stringValue] UTF8String]);
             break;
         case USERNAME_TAG:
-            privateAccount->setUsername([[textField stringValue] UTF8String]);
+            [self currentAccount]->setUsername([[textField stringValue] UTF8String]);
             break;
         case PASSWORD_TAG:
-            privateAccount->setPassword([[textField stringValue] UTF8String]);
+            [self currentAccount]->setPassword([[textField stringValue] UTF8String]);
             break;
         case USERAGENT_TAG:
-            privateAccount->setUserAgent([[textField stringValue] UTF8String]);
+            [self currentAccount]->setUserAgent([[textField stringValue] UTF8String]);
             break;
         default:
             break;

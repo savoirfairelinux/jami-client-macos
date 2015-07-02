@@ -38,12 +38,13 @@
 #import <qabstractitemmodel.h>
 #import <QItemSelectionModel>
 #import <QItemSelection>
-
 #import <video/previewmanager.h>
 #import <video/renderer.h>
+#import <media/text.h>
 
-/** FrameReceiver class - delegate for AVCaptureSession
- */
+#import "views/ITProgressIndicator.h"
+#import "views/CallView.h"
+
 @interface RendererConnectionsHolder : NSObject
 
 @property QMetaObject::Connection frameUpdated;
@@ -58,21 +59,28 @@
 
 @interface CurrentCallVC ()
 
-@property (assign) IBOutlet NSTextField *personLabel;
-@property (assign) IBOutlet NSTextField *stateLabel;
-@property (assign) IBOutlet NSButton *holdOnOffButton;
-@property (assign) IBOutlet NSButton *hangUpButton;
-@property (assign) IBOutlet NSButton *recordOnOffButton;
-@property (assign) IBOutlet NSButton *pickUpButton;
-@property (assign) IBOutlet NSTextField *timeSpentLabel;
-@property (assign) IBOutlet NSView *controlsPanel;
+@property (unsafe_unretained) IBOutlet NSTextField *personLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *stateLabel;
+@property (unsafe_unretained) IBOutlet NSButton *holdOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton *hangUpButton;
+@property (unsafe_unretained) IBOutlet NSButton *recordOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton *pickUpButton;
+@property (unsafe_unretained) IBOutlet NSButton *muteAudioButton;
+@property (unsafe_unretained) IBOutlet NSButton *muteVideoButton;
+
+@property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
+
+@property (unsafe_unretained) IBOutlet NSTextField *timeSpentLabel;
+@property (unsafe_unretained) IBOutlet NSView *controlsPanel;
+@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
+@property (unsafe_unretained) IBOutlet NSButton *chatButton;
 
 @property QHash<int, NSButton*> actionHash;
 
 // Video
-@property (assign) IBOutlet NSView *videoView;
+@property (unsafe_unretained) IBOutlet CallView *videoView;
 @property CALayer* videoLayer;
-@property (assign) IBOutlet NSView *previewView;
+@property (unsafe_unretained) IBOutlet NSView *previewView;
 @property CALayer* previewLayer;
 
 @property RendererConnectionsHolder* previewHolder;
@@ -82,19 +90,10 @@
 @end
 
 @implementation CurrentCallVC
-@synthesize personLabel;
-@synthesize actionHash;
-@synthesize stateLabel;
-@synthesize holdOnOffButton;
-@synthesize hangUpButton;
-@synthesize recordOnOffButton;
-@synthesize pickUpButton;
-@synthesize timeSpentLabel;
-@synthesize controlsPanel;
-@synthesize videoView;
-@synthesize videoLayer;
-@synthesize previewLayer;
-@synthesize previewView;
+@synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton,
+            recordOnOffButton, pickUpButton, chatButton, timeSpentLabel,
+            muteVideoButton, muteAudioButton, controlsPanel, videoView,
+            videoLayer, previewLayer, previewView, splitView, loadingIndicator;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -116,7 +115,9 @@
         [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
 
         if(action == UserActionModel::Action::HOLD) {
-            [a setTitle:(a.state == NSOnState ? @"Hold off" : @"Hold")];
+            NSString* imgName = (a.state == NSOnState ? @"ic_action_holdoff" : @"ic_action_hold");
+            [a setImage:[NSImage imageNamed:imgName]];
+
         }
         if(action == UserActionModel::Action::RECORD) {
             [a setTitle:(a.state == NSOnState ? @"Record off" : @"Record")];
@@ -127,34 +128,45 @@
 -(void) updateCall
 {
     QModelIndex callIdx = CallModel::instance()->selectionModel()->currentIndex();
-    [personLabel setStringValue:CallModel::instance()->data(callIdx, Qt::DisplayRole).toString().toNSString()];
-    [timeSpentLabel setStringValue:CallModel::instance()->data(callIdx, (int)Call::Role::Length).toString().toNSString()];
+    [personLabel setStringValue:callIdx.data(Qt::DisplayRole).toString().toNSString()];
+    [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
 
-    Call::State state = CallModel::instance()->data(callIdx, (int)Call::Role::State).value<Call::State>();
-
+    Call::State state = callIdx.data((int)Call::Role::State).value<Call::State>();
+    [loadingIndicator setHidden:YES];
+    [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
     switch (state) {
+        case Call::State::DIALING:
+            [loadingIndicator setHidden:NO];
+            break;
+        case Call::State::NEW:
+            break;
         case Call::State::INITIALIZATION:
-            [stateLabel setStringValue:@"Initializing"];
+            [videoView setShouldAcceptInteractions:NO];
+            [loadingIndicator setHidden:NO];
+            break;
+        case Call::State::CONNECTED:
+            [videoView setShouldAcceptInteractions:NO];
+            [loadingIndicator setHidden:NO];
             break;
         case Call::State::RINGING:
-            [stateLabel setStringValue:@"Ringing"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::CURRENT:
-            [stateLabel setStringValue:@"Current"];
+            [videoView setShouldAcceptInteractions:YES];
             break;
         case Call::State::HOLD:
-            [stateLabel setStringValue:@"On Hold"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::BUSY:
-            [stateLabel setStringValue:@"Busy"];
+            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::OVER:
-            [stateLabel setStringValue:@"Finished"];
+            [videoView setShouldAcceptInteractions:NO];
+            if(videoView.isInFullScreenMode)
+                [videoView exitFullScreenModeWithOptions:nil];
             break;
         case Call::State::FAILURE:
-            [stateLabel setStringValue:@"Failure"];
-            break;
-        default:
+            [videoView setShouldAcceptInteractions:NO];
             break;
     }
 
@@ -175,6 +187,8 @@
     actionHash[ (int)UserActionModel::Action::HOLD  ] = holdOnOffButton;
     actionHash[ (int)UserActionModel::Action::RECORD] = recordOnOffButton;
     actionHash[ (int)UserActionModel::Action::HANGUP] = hangUpButton;
+    actionHash[ (int)UserActionModel::Action::MUTE_AUDIO] = muteAudioButton;
+    actionHash[ (int)UserActionModel::Action::MUTE_VIDEO] = muteVideoButton;
 
     videoLayer = [CALayer layer];
     [videoView setWantsLayer:YES];
@@ -198,6 +212,14 @@
     previewHolder = [[RendererConnectionsHolder alloc] init];
     videoHolder = [[RendererConnectionsHolder alloc] init];
 
+    [loadingIndicator setColor:[NSColor whiteColor]];
+    [loadingIndicator setNumberOfLines:100];
+    [loadingIndicator setWidthOfLine:2];
+    [loadingIndicator setLengthOfLine:2];
+    [loadingIndicator setInnerMargin:30];
+
+    [self.videoView setFullScreenDelegate:self];
+
     [self connect];
 }
 
@@ -210,6 +232,7 @@
                              [self animateOut];
                              return;
                          }
+                         [self collapseRightView];
                          [self updateCall];
                          [self updateAllActions];
                          [self animateOut];
@@ -241,11 +264,10 @@
 {
     QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
     Call* call = CallModel::instance()->getCall(idx);
-    QObject::connect(call,
+    self.videoStarted = QObject::connect(call,
                      &Call::videoStarted,
                      [=](Video::Renderer* renderer) {
                          NSLog(@"Video started!");
-                         QObject::disconnect(self.videoStarted);
                          [self connectVideoRenderer:renderer];
                      });
 
@@ -419,6 +441,8 @@
         }
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    [self.view.layer setPosition:frame.origin];
     [CATransaction commit];
 }
 
@@ -430,8 +454,37 @@
     NSLog(@"frame %@ : %f %f %f %f \n\n",name ,frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
+-(void)collapseRightView
+{
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSRect leftFrame = [left frame];
+    [right setHidden:YES];
+    [splitView display];
+}
 
-#pragma button methods
+-(void)uncollapseRightView
+{
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    [right setHidden:NO];
+
+    CGFloat dividerThickness = [splitView dividerThickness];
+
+    // get the different frames
+    NSRect leftFrame = [left frame];
+    NSRect rightFrame = [right frame];
+
+    leftFrame.size.width = (leftFrame.size.width - rightFrame.size.width - dividerThickness);
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    [left setFrameSize:leftFrame.size];
+    [right setFrame:rightFrame];
+    [splitView display];
+}
+
+
+#pragma mark - Button methods
+
 - (IBAction)hangUp:(id)sender {
     CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::REFUSE;
 }
@@ -441,11 +494,69 @@
 }
 
 - (IBAction)toggleRecording:(id)sender {
-    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::RECORD;
+    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::RECORD_AUDIO;
 }
 
 - (IBAction)toggleHold:(id)sender {
     CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::HOLD;
+}
+
+-(IBAction)toggleChat:(id)sender;
+{
+    BOOL rightViewCollapsed = [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]];
+    if (rightViewCollapsed) {
+        [self uncollapseRightView];
+        CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex())->addOutgoingMedia<Media::Text>();
+    } else {
+        [self collapseRightView];
+    }
+    [chatButton setState:rightViewCollapsed];
+}
+
+- (IBAction)muteAudio:(id)sender
+{
+    UserActionModel* uam = CallModel::instance()->userActionModel();
+    uam << UserActionModel::Action::MUTE_AUDIO;
+}
+
+- (IBAction)muteVideo:(id)sender
+{
+    UserActionModel* uam = CallModel::instance()->userActionModel();
+    uam << UserActionModel::Action::MUTE_VIDEO;
+}
+
+#pragma mark - NSSplitViewDelegate
+
+/* Return YES if the subview should be collapsed because the user has double-clicked on an adjacent divider. If a split view has a delegate, and the delegate responds to this message, it will be sent once for the subview before a divider when the user double-clicks on that divider, and again for the subview after the divider, but only if the delegate returned YES when sent -splitView:canCollapseSubview: for the subview in question. When the delegate indicates that both subviews should be collapsed NSSplitView's behavior is undefined.
+ */
+- (BOOL)splitView:(NSSplitView *)splitView shouldCollapseSubview:(NSView *)subview forDoubleClickOnDividerAtIndex:(NSInteger)dividerIndex;
+{
+    NSView* rightView = [[splitView subviews] objectAtIndex:1];
+    return ([subview isEqual:rightView]);
+}
+
+
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview;
+{
+    NSView* rightView = [[splitView subviews] objectAtIndex:1];
+    return ([subview isEqual:rightView]);
+}
+
+
+# pragma mark - FullScreenDelegate
+
+- (void) callShouldToggleFullScreen
+{
+    if(self.splitView.isInFullScreenMode)
+        [self.splitView exitFullScreenModeWithOptions:nil];
+    else {
+        NSApplicationPresentationOptions options = NSApplicationPresentationDefault +NSApplicationPresentationAutoHideDock +
+        NSApplicationPresentationAutoHideMenuBar + NSApplicationPresentationAutoHideToolbar;
+        NSDictionary *opts = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:options],
+                              NSFullScreenModeApplicationPresentationOptions, nil];
+
+        [self.splitView enterFullScreenMode:[NSScreen mainScreen]  withOptions:opts];
+    }
 }
 
 @end

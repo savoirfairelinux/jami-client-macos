@@ -32,9 +32,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "views/CallView.h"
+
 class Call;
 
-@interface CurrentCallVC : NSViewController {
+@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, FullScreenDelegate> {
 
 }
 

@@ -27,29 +27,29 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "HistoryViewController.h"
+#import "HistoryVC.h"
 
 #import <categorizedhistorymodel.h>
 #import <QSortFilterProxyModel>
 #import <callmodel.h>
 #import <call.h>
 #import <contactmethod.h>
+#import <localhistorycollection.h>
 
-#import "backends/MinimalHistoryBackend.h"
 #import "QNSTreeController.h"
 
 #define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
 #define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
 #define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
 
-@interface HistoryViewController()
+@interface HistoryVC()
 
-@property NSTreeController *treeController;
+@property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *historyView;
 @property QSortFilterProxyModel *historyProxyModel;
 @end
 
-@implementation HistoryViewController
+@implementation HistoryVC
 @synthesize treeController;
 @synthesize historyView;
 @synthesize historyProxyModel;
@@ -78,15 +78,14 @@
     [historyView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
     [historyView setTarget:self];
-    [historyView setDoubleAction:@selector(placeCall:)];
+    [historyView setDoubleAction:@selector(placeHistoryCall:)];
 
-    CategorizedHistoryModel::instance()->addCollection<MinimalHistoryBackend>(LoadOptions::FORCE_ENABLED);
+    CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 }
 
-- (void)placeCall:(id)sender
+- (void)placeHistoryCall:(id)sender
 {
     if([[treeController selectedNodes] count] > 0) {
-        Call* c = CallModel::instance()->dialingCall();
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
         ContactMethod* m = qvariant_cast<ContactMethod*>(var);

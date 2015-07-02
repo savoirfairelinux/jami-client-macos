@@ -27,15 +27,17 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef HISTORYVIEWCONTROLLER_H
-#define HISTORYVIEWCONTROLLER_H
 
 #import <Cocoa/Cocoa.h>
 
-@interface HistoryViewController : NSViewController <NSOutlineViewDelegate> {
+
+@interface PersonCell : NSTextFieldCell
+{
+	BOOL mIsEditingOrSelecting;
 
 }
+@property NSImage *personImage;
+@property NSString* primaryText;
+@property NSString* secondaryText;
 
 @end
-
-#endif // HISTORYVIEWCONTROLLER_H

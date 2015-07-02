@@ -27,30 +27,23 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "ConversationsViewController.h"
+#import "ConversationsVC.h"
 
 #import <callmodel.h>
 #import <QtCore/qitemselectionmodel.h>
 
-#import "CurrentCallVC.h"
-
 #define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
 
-@interface ConversationsViewController ()
+@interface ConversationsVC ()
 
-@property CurrentCallVC* currentVC;
-@property (assign) IBOutlet NSView *currentCallView;
 @property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *conversationsView;
 
 @end
 
-@implementation ConversationsViewController
+@implementation ConversationsVC
 @synthesize conversationsView;
 @synthesize treeController;
-@synthesize currentVC;
-@synthesize currentCallView;
-
 - (void)awakeFromNib
 {
     NSLog(@"INIT Conversations VC");
@@ -73,15 +66,7 @@
                          [conversationsView reloadDataForRowIndexes:
                           [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
                         columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, conversationsView.tableColumns.count)]];
-                         
                      });
-
-    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
-    [currentCallView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-
-    [currentCallView addSubview:[self.currentVC view]];
-    [currentVC initFrame];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
