@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
@@ -44,15 +44,16 @@
                             </textFieldCell>
                         </textField>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A98-ed-6iq">
-                            <rect key="frame" x="266" y="434" width="19" height="27"/>
+                            <rect key="frame" x="219" y="434" width="19" height="27"/>
                             <stepperCell key="cell" continuous="YES" alignment="left" maxValue="200" id="3kR-uk-WAl"/>
                             <connections>
                                 <action selector="valueDidChange:" target="-2" id="eL2-tT-Wdd"/>
                             </connections>
                         </stepper>
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vy9-CY-MrG">
-                            <rect key="frame" x="165" y="437" width="96" height="22"/>
+                            <rect key="frame" x="165" y="437" width="49" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="rtX-dk-eMQ">
+                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="99r-pE-lsZ"/>
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -105,7 +106,7 @@
                         </button>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e6E-9n-08s">
                             <rect key="frame" x="266" y="365" width="19" height="27"/>
-                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="99999" id="sr0-PX-dXX"/>
+                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="sr0-PX-dXX"/>
                             <connections>
                                 <action selector="valueDidChange:" target="-2" id="5GF-aO-SNO"/>
                             </connections>
@@ -113,6 +114,9 @@
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgP-vt-AeS">
                             <rect key="frame" x="165" y="368" width="96" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="x39-hY-AAQ">
+                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="7Cv-xY-6X5">
+                                    <real key="maximum" value="65534"/>
+                                </numberFormatter>
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -142,7 +146,7 @@
                         </textField>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnh-Mc-8kR">
                             <rect key="frame" x="198" y="153" width="19" height="27"/>
-                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="99999" id="IDZ-ip-UEs"/>
+                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="IDZ-ip-UEs"/>
                             <connections>
                                 <action selector="valueDidChange:" target="-2" id="Daw-BV-Edf"/>
                             </connections>
@@ -150,6 +154,9 @@
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b3n-gl-1th">
                             <rect key="frame" x="97" y="156" width="96" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fsG-bB-ubb">
+                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="oaP-iC-Alq">
+                                    <real key="maximum" value="65534"/>
+                                </numberFormatter>
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -168,7 +175,7 @@
                         </textField>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FI1-5p-EcC">
                             <rect key="frame" x="364" y="153" width="19" height="27"/>
-                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="99999" id="6DL-JU-9vo"/>
+                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="6DL-JU-9vo"/>
                             <connections>
                                 <action selector="valueDidChange:" target="-2" id="qZ3-R2-m60"/>
                             </connections>
@@ -176,6 +183,9 @@
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOf-0V-pyS">
                             <rect key="frame" x="263" y="156" width="96" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="rcL-uY-sov">
+                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="nBc-fC-RAm">
+                                    <real key="maximum" value="65534"/>
+                                </numberFormatter>
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -202,7 +212,7 @@
                         </textField>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caC-em-Z8T">
                             <rect key="frame" x="197" y="92" width="19" height="27"/>
-                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="99999" id="uSL-4H-pJJ"/>
+                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="uSL-4H-pJJ"/>
                             <connections>
                                 <action selector="valueDidChange:" target="-2" id="gab-7r-VfC"/>
                             </connections>
@@ -210,6 +220,9 @@
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khU-Ue-Hen">
                             <rect key="frame" x="96" y="95" width="96" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="J1A-gZ-lMv">
+                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="7Vg-kX-7gY">
+                                    <real key="maximum" value="65534"/>
+                                </numberFormatter>
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -228,7 +241,7 @@
                         </textField>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uac-nZ-Hcw">
                             <rect key="frame" x="363" y="92" width="19" height="27"/>
-                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="99999" id="heA-0J-Vqe"/>
+                            <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="heA-0J-Vqe"/>
                             <connections>
                                 <action selector="valueDidChange:" target="-2" id="uJU-9R-UJR"/>
                             </connections>
@@ -236,6 +249,9 @@
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IJS-5x-riX">
                             <rect key="frame" x="262" y="95" width="96" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="L2A-qa-yTI">
+                                <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="qXb-fv-xC6">
+                                    <real key="maximum" value="65534"/>
+                                </numberFormatter>
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -255,7 +271,7 @@
                         <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2yz-X7-dVm">
                             <rect key="frame" x="64" y="255" width="320" height="38"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            <size key="cellSize" width="216" height="18"/>
+                            <size key="cellSize" width="217" height="18"/>
                             <size key="intercellSpacing" width="4" height="2"/>
                             <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="fB0-X8-GXk">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -306,6 +322,14 @@
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Address" id="sTk-1C-1KO">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kpt-7R-pUj">
+                            <rect key="frame" x="240" y="440" width="55" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="seconds" id="xGw-j0-4ID">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>

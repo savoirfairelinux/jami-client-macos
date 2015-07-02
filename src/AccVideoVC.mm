@@ -37,12 +37,12 @@
 #include <QtCore/QSortFilterProxyModel>
 #import <audio/codecmodel.h>
 #import <accountmodel.h>
+#import <qitemselectionmodel.h>
 
 #import "QNSTreeController.h"
 
 @interface AccVideoVC ()
 
-@property Account* privateAccount;
 @property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *codecsView;
 @property (assign) IBOutlet NSView *videoPanelContainer;
@@ -53,40 +53,52 @@
 @implementation AccVideoVC
 @synthesize treeController;
 @synthesize codecsView;
-@synthesize privateAccount;
 @synthesize videoPanelContainer;
 @synthesize toggleVideoButton;
 
 - (void)awakeFromNib
 {
     NSLog(@"INIT Video VC");
+    QObject::connect(AccountModel::instance()->selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+                         [self loadAccount];
+                     });
 }
 
-- (void)loadAccount:(Account *)account
+- (Account*) currentAccount
 {
-    privateAccount = account;
+    auto accIdx = AccountModel::instance()->selectionModel()->currentIndex();
+    return AccountModel::instance()->getAccountByModelIndex(accIdx);
+}
 
-    treeController = [[QNSTreeController alloc] initWithQModel:privateAccount->codecModel()->videoCodecs()];
+- (void)loadAccount
+{
+    auto account = [self currentAccount];
+
+    treeController = [[QNSTreeController alloc] initWithQModel:account->codecModel()->videoCodecs()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
     [codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
     [codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-    [videoPanelContainer setHidden:!privateAccount->isVideoEnabled()];
-    [toggleVideoButton setState:privateAccount->isVideoEnabled()?NSOnState:NSOffState];
+    [videoPanelContainer setHidden:!account->isVideoEnabled()];
+    [toggleVideoButton setState:account->isVideoEnabled()?NSOnState:NSOffState];
 }
 
 - (IBAction)toggleVideoEnabled:(id)sender {
-    privateAccount->setVideoEnabled([sender state] == NSOnState);
-    [videoPanelContainer setHidden:!privateAccount->isVideoEnabled()];
+    [self currentAccount]->setVideoEnabled([sender state] == NSOnState);
+    [videoPanelContainer setHidden:![self currentAccount]->isVideoEnabled()];
 }
 
 - (IBAction)toggleCodec:(NSOutlineView*)sender {
     NSInteger row = [sender clickedRow];
     NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
     NSButtonCell *cell = [col dataCellForRow:row];
-    privateAccount->codecModel()->videoCodecs()->setData(privateAccount->codecModel()->videoCodecs()->index(row, 0, QModelIndex()),
+    [self currentAccount]->codecModel()->videoCodecs()->setData([self currentAccount]->codecModel()->videoCodecs()->index(row, 0, QModelIndex()),
         cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
 }
 
@@ -97,8 +109,8 @@
         if(!qIdx.isValid())
             return;
 
-        QMimeData* mime = privateAccount->codecModel()->mimeData(QModelIndexList() << qIdx);
-        privateAccount->codecModel()->dropMimeData(mime, Qt::MoveAction, qIdx.row() - 1, 0, QModelIndex());
+        QMimeData* mime = [self currentAccount]->codecModel()->mimeData(QModelIndexList() << qIdx);
+        [self currentAccount]->codecModel()->dropMimeData(mime, Qt::MoveAction, qIdx.row() - 1, 0, QModelIndex());
     }
 }
 
@@ -108,8 +120,8 @@
         if(!qIdx.isValid())
             return;
 
-        QMimeData* mime = privateAccount->codecModel()->mimeData(QModelIndexList() << qIdx);
-        privateAccount->codecModel()->dropMimeData(mime, Qt::MoveAction, qIdx.row() + 1, 0, QModelIndex());
+        QMimeData* mime = [self currentAccount]->codecModel()->mimeData(QModelIndexList() << qIdx);
+        [self currentAccount]->codecModel()->dropMimeData(mime, Qt::MoveAction, qIdx.row() + 1, 0, QModelIndex());
     }
 }
 
@@ -171,17 +183,17 @@
         return;
 
     if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
-        [cell setState:privateAccount->codecModel()->videoCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+        [cell setState:[self currentAccount]->codecModel()->videoCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CODECS])
     {
-        cell.title = privateAccount->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
-        [cell setState:privateAccount->codecModel()->videoCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+        cell.title = [self currentAccount]->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
+        [cell setState:[self currentAccount]->codecModel()->videoCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_FREQ])
     {
-        cell.title = privateAccount->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
+        cell.title = [self currentAccount]->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
     } else if ([[tableColumn identifier] isEqualToString:COLUMNID_BITRATE])
     {
-        cell.title = privateAccount->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
+        cell.title = [self currentAccount]->codecModel()->videoCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
     }
 }
 

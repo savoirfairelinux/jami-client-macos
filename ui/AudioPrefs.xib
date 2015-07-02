@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
@@ -72,17 +72,6 @@
                                 <action selector="chooseOutput:" target="-2" id="SIh-kG-rV5"/>
                             </connections>
                         </popUpButton>
-                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nyE-tZ-v4C">
-                            <rect key="frame" x="95" y="316" width="210" height="26"/>
-                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="SPB-Bz-vDM">
-                                <font key="font" metaFont="system"/>
-                                <url key="url" string="file://localhost/Applications/"/>
-                            </pathCell>
-                            <connections>
-                                <action selector="pathControlSingleClick:" target="-2" id="a8r-s5-lxq"/>
-                                <outlet property="delegate" destination="-2" id="JXx-Le-f5R"/>
-                            </connections>
-                        </pathControl>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMB-Zm-k0Z">
                             <rect key="frame" x="20" y="253" width="99" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Audio devices" id="B0r-wh-wc3">
@@ -132,6 +121,17 @@
                                 <action selector="chooseInput:" target="-2" id="ADO-Qj-tAz"/>
                             </connections>
                         </popUpButton>
+                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nyE-tZ-v4C">
+                            <rect key="frame" x="95" y="318" width="210" height="26"/>
+                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="SPB-Bz-vDM">
+                                <font key="font" metaFont="system"/>
+                                <url key="url" string="file://localhost/Applications/"/>
+                            </pathCell>
+                            <connections>
+                                <action selector="pathControlSingleClick:" target="-2" id="jyC-qZ-OzW"/>
+                                <outlet property="delegate" destination="-2" id="JXx-Le-f5R"/>
+                            </connections>
+                        </pathControl>
                     </subviews>
                 </customView>
             </subviews>

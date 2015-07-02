@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-Faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,16 +27,31 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef CONVERSATIONSVC_H
-#define CONVERSATIONSVC_H
+#ifndef IMAGEMANIPULATION_H
+#define IMAGEMANIPULATION_H
 
-#import <Cocoa/Cocoa.h>
-#import "QNSTreeController.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface ConversationsViewController : NSViewController <NSOutlineViewDelegate> {
+#import <delegates/pixmapmanipulationdelegate.h>
+#import <call.h>
 
-}
+class Person;
+class QPixmap;
 
-@end
+class ImageManipulationDelegate : public PixmapManipulationDelegate {
 
-#endif // CONVERSATIONSVC_H
+public:
+    ImageManipulationDelegate();
+    QVariant contactPhoto(Person* c, const QSize& size, bool displayPresence = true) override;
+    virtual QByteArray toByteArray(const QVariant& pxm) override;
+    virtual QVariant personPhoto(const QByteArray& data, const QString& type = "PNG") override;
+
+private:
+    //Helper
+    QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent);
+    CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
+
+
+};
+
+#endif // IMAGEMANIPULATION_H

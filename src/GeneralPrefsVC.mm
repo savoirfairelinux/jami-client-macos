@@ -31,20 +31,56 @@
 
 #import <categorizedhistorymodel.h>
 
+#if ENABLE_SPARKLE
+#import <Sparkle/Sparkle.h>
+#endif
+
+#import "Constants.h"
+
 @interface GeneralPrefsVC ()
-@property (assign) IBOutlet NSTextField *historyChangedLabel;
+@property (unsafe_unretained) IBOutlet NSTextField *historyChangedLabel;
+@property (unsafe_unretained) IBOutlet NSView *advancedGeneralSettings;
+@property (unsafe_unretained) IBOutlet NSButton *startUpButton;
+@property (unsafe_unretained) IBOutlet NSButton *toggleAutomaticUpdateCheck;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *checkIntervalPopUp;
+@property (unsafe_unretained) IBOutlet NSView *sparkleContainer;
 
 @end
 
-@implementation GeneralPrefsVC {
-
-}
+@implementation GeneralPrefsVC
 @synthesize historyChangedLabel;
+@synthesize advancedGeneralSettings;
+@synthesize startUpButton;
+@synthesize toggleAutomaticUpdateCheck;
+@synthesize checkIntervalPopUp;
+@synthesize sparkleContainer;
 
 - (void)loadView
 {
     [super loadView];
-    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"history_limit" options:NSKeyValueObservingOptionNew context:NULL];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::HistoryLimit options:NSKeyValueObservingOptionNew context:NULL];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::ShowAdvanced options:NSKeyValueObservingOptionNew context:NULL];
+
+    [startUpButton setState:[self isLaunchAtStartup]];
+
+#if ENABLE_SPARKLE
+    [sparkleContainer setHidden:NO];
+    SUUpdater *updater = [SUUpdater sharedUpdater];
+    [toggleAutomaticUpdateCheck bind:@"value" toObject:updater withKeyPath:@"automaticallyChecksForUpdates" options:nil];
+
+    [checkIntervalPopUp bind:@"enabled" toObject:updater withKeyPath:@"automaticallyChecksForUpdates" options:nil];
+    [checkIntervalPopUp bind:@"selectedTag" toObject:updater withKeyPath:@"updateCheckInterval" options:nil];
+#else
+    [sparkleContainer setHidden:YES];
+#endif
+
+    //[advancedGeneralSettings setHidden:![[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
+}
+
+- (void) dealloc
+{
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:Preferences::HistoryLimit];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:Preferences::ShowAdvanced];
 }
 
 - (IBAction)clearHistory:(id)sender {
@@ -56,8 +92,76 @@
 -(void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject
                        change:(NSDictionary *)aChange context:(void *)aContext
 {
-    NSLog(@"VALUE CHANGED");
-    [historyChangedLabel setHidden:NO];
+    if (aKeyPath == Preferences::HistoryLimit) {
+        [historyChangedLabel setHidden:NO];
+    } else if (aKeyPath == Preferences::ShowAdvanced) {
+        //[advancedGeneralSettings setHidden:[[aChange objectForKey: NSKeyValueChangeNewKey] boolValue]];
+    }
+}
+
+#pragma mark - Startup API
+
+// MIT license by Brian Dunagan
+- (BOOL)isLaunchAtStartup {
+    // See if the app is currently in LoginItems.
+    LSSharedFileListItemRef itemRef = [self itemRefInLoginItems];
+    // Store away that boolean.
+    BOOL isInList = itemRef != nil;
+    // Release the reference if it exists.
+    if (itemRef != nil) CFRelease(itemRef);
+
+    return isInList;
+}
+
+- (IBAction)toggleLaunchAtStartup:(id)sender {
+    // Toggle the state.
+    BOOL shouldBeToggled = ![self isLaunchAtStartup];
+    // Get the LoginItems list.
+    LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItemsRef == nil) return;
+    if (shouldBeToggled) {
+        // Add the app to the LoginItems list.
+        CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
+        if (itemRef) CFRelease(itemRef);
+    }
+    else {
+        // Remove the app from the LoginItems list.
+        LSSharedFileListItemRef itemRef = [self itemRefInLoginItems];
+        LSSharedFileListItemRemove(loginItemsRef,itemRef);
+        if (itemRef != nil) CFRelease(itemRef);
+    }
+    CFRelease(loginItemsRef);
+}
+
+- (LSSharedFileListItemRef)itemRefInLoginItems {
+    LSSharedFileListItemRef itemRef = nil;
+    CFURLRef itemUrl = nil;
+
+    // Get the app's URL.
+    auto appUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+    // Get the LoginItems list.
+    LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    if (loginItemsRef == nil) return nil;
+    // Iterate over the LoginItems.
+    NSArray *loginItems = (__bridge_transfer NSArray *)LSSharedFileListCopySnapshot(loginItemsRef, nil);
+    for (int currentIndex = 0; currentIndex < [loginItems count]; currentIndex++) {
+        // Get the current LoginItem and resolve its URL.
+        LSSharedFileListItemRef currentItemRef = (__bridge LSSharedFileListItemRef)[loginItems objectAtIndex:currentIndex];
+        if (LSSharedFileListItemResolve(currentItemRef, 0, &itemUrl, NULL) == noErr) {
+            // Compare the URLs for the current LoginItem and the app.
+            if ([(__bridge NSURL *)itemUrl isEqual:appUrl]) {
+                // Save the LoginItem reference.
+                itemRef = currentItemRef;
+            }
+        }
+    }
+    // Retain the LoginItem reference.
+    if (itemRef != nil) CFRetain(itemRef);
+    // Release the LoginItems lists.
+    CFRelease(loginItemsRef);
+
+    return itemRef;
 }
 
 @end
