@@ -78,10 +78,12 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
     animation.fromValue = @(frame.origin.y);
     animation.toValue = @(self.view.frame.origin.y);
-    animation.duration = 0.3f;
+    animation.duration = 0.7f;
 
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
+    [self.view.layer setPosition:self.view.frame.origin];
+
     [CATransaction commit];
 }
 
@@ -102,8 +104,8 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
     animation.fromValue = @(self.view.frame.origin.y);
     animation.toValue = @(frame.origin.y);
-    animation.duration = 0.3f;
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+    animation.duration = 0.7f;
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
 
     [CATransaction setCompletionBlock:^{
         [self.view removeFromSuperview];

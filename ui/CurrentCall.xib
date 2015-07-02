@@ -207,6 +207,16 @@
                                                 <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
                                             </connections>
                                         </button>
+                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mW2-rn-eEJ">
+                                            <rect key="frame" x="321" y="8" width="82" height="26"/>
+                                            <buttonCell key="cell" type="bevel" title="Transfer" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rBb-TA-Rrm">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="toggleTransferView:" target="-2" id="dgv-ZA-x23"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="qgD-3D-nD5" firstAttribute="top" secondItem="Eoi-B8-iL6" secondAttribute="top" constant="11" id="1lr-kB-A5h"/>

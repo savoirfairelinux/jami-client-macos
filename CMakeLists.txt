@@ -107,7 +107,9 @@ SET(ringclient_CONTROLLERS
    src/PersonsVC.mm
    src/PersonsVC.h
    src/ChatVC.mm
-   src/ChatVC.h)
+   src/ChatVC.h
+   src/TransferVC.mm
+   src/TransferVC.h)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
@@ -145,7 +147,8 @@ SET(ringclient_XIBS
    VideoPrefs
    PreferencesScreen
    RingWizard
-   CertificateWindow)
+   CertificateWindow
+   Transfer)
 
 # Icons
 # This part tells CMake where to find and install the file itself

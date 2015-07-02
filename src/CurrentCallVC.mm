@@ -44,20 +44,22 @@
 
 #import "views/ITProgressIndicator.h"
 #import "views/CallView.h"
+#import "TransferVC.h"
 
 @interface RendererConnectionsHolder : NSObject
 
 @property QMetaObject::Connection frameUpdated;
 @property QMetaObject::Connection started;
 @property QMetaObject::Connection stopped;
-
 @end
 
 @implementation RendererConnectionsHolder
 
 @end
 
-@interface CurrentCallVC ()
+@interface CurrentCallVC () <NSPopoverDelegate>
+
+@property (strong) NSPopover* transferPopoverVC;
 
 @property (unsafe_unretained) IBOutlet NSTextField *personLabel;
 @property (unsafe_unretained) IBOutlet NSTextField *stateLabel;
@@ -375,7 +377,7 @@
 - (void) initFrame
 {
     [self.view setFrame:self.view.superview.bounds];
-    [self.view setHidden:YES];
+    //[self.view setHidden:YES];
     self.view.layer.position = self.view.frame.origin;
 }
 
@@ -523,6 +525,32 @@
 {
     UserActionModel* uam = CallModel::instance()->userActionModel();
     uam << UserActionModel::Action::MUTE_VIDEO;
+}
+
+- (IBAction)toggleTransferView:(id)sender {
+    if (self.transferPopoverVC != nullptr) {
+        [self.transferPopoverVC performClose:self];
+        self.transferPopoverVC = NULL;
+    } else {
+        auto* transferVC = [[TransferVC alloc] initWithNibName:@"Transfer" bundle:nil];
+        self.transferPopoverVC = [[NSPopover alloc] init];
+        [self.transferPopoverVC setContentSize:transferVC.view.frame.size];
+        [self.transferPopoverVC setContentViewController:transferVC];
+        [self.transferPopoverVC setAnimates:YES];
+        [self.transferPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [self.transferPopoverVC setDelegate:self];
+        [self.transferPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+    }
+}
+
+#pragma mark - NSPopOverDelegate
+
+- (void)popoverDidClose:(NSNotification *)notification
+{
+    if (self.transferPopoverVC != nullptr) {
+        [self.transferPopoverVC performClose:self];
+        self.transferPopoverVC = NULL;
+    }
 }
 
 #pragma mark - NSSplitViewDelegate

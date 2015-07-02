@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,21 +27,37 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef RINGWINDOWCONTROLLER_H
-#define RINGWINDOWCONTROLLER_H
 
-#import <Cocoa/Cocoa.h>
-#import "HistoryVC.h"
-#import "PreferencesVC.h"
 
-@interface RingWindowController : NSWindowController <NSToolbarDelegate, NSTextFieldDelegate>{
-    IBOutlet NSView *currentView;
-}
-@property (nonatomic, assign) NSViewController *myCurrentViewController;
+#import "TransferVC.h"
 
-- (IBAction)openPreferences:(id)sender;
-- (IBAction)closePreferences:(NSToolbarItem *)sender;
+@interface TransferVC ()
+@property (unsafe_unretained) IBOutlet NSTextField *numberField;
 
 @end
 
-#endif // RINGWINDOWCONTROLLER_H
+@implementation TransferVC
+@synthesize numberField;
+
+- (void)awakeFromNib
+{
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // Do view setup here.
+}
+
+- (void) loadView
+{
+    [super loadView];
+
+    [self.view setWantsLayer:YES];
+    self.view.layer.backgroundColor = [NSColor windowBackgroundColor].CGColor;
+
+    [self.view.window makeFirstResponder:numberField];
+    [numberField selectText:self];
+}
+
+@end

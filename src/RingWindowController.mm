@@ -43,7 +43,7 @@
 @property NSSearchField* callField;
 @property CurrentCallVC* currentVC;
 @property (unsafe_unretained) IBOutlet NSView *callView;
-
+@property (strong) PreferencesVC* preferencesViewController;
 
 @end
 
