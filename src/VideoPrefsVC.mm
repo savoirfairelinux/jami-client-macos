@@ -189,11 +189,9 @@ QMetaObject::Connection previewStopped;
     CFRelease(newImage);
 }
 
-- (IBAction)togglePreview:(id)sender {
-    if([sender state] == NSOnState)
-        Video::PreviewManager::instance()->startPreview();
-    else
-        Video::PreviewManager::instance()->stopPreview();
+- (void) viewWillAppear
+{
+    Video::PreviewManager::instance()->startPreview();
 }
 
 - (void)viewWillDisappear
