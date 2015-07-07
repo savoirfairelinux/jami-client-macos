@@ -344,10 +344,10 @@
 
 -(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
 {
-    const QByteArray& data = renderer->currentFrame();
+    auto data = renderer->currentFrame();
     QSize res = renderer->size();
 
-    auto buf = reinterpret_cast<const unsigned char*>(data.data());
+    auto buf = reinterpret_cast<const unsigned char*>(data->data());
 
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef newContext = CGBitmapContextCreate((void *)buf,
