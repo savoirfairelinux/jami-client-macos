@@ -232,6 +232,14 @@
                              [self animateOut];
                              return;
                          }
+
+                         if (current.row() != previous.row()) {
+                             auto call = CallModel::instance()->getCall(current);
+                             if (call->state() == Call::State::HOLD) {
+                                 call << Call::Action::HOLD;
+                             }
+                         }
+
                          [self collapseRightView];
                          [self updateCall];
                          [self updateAllActions];
@@ -377,6 +385,7 @@
     [self.view setFrame:self.view.superview.bounds];
     [self.view setHidden:YES];
     self.view.layer.position = self.view.frame.origin;
+    [self collapseRightView];
 }
 
 # pragma private IN/OUT animations
