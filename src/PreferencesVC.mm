@@ -87,13 +87,6 @@ static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
 
 - (void) close
 {
-    // first save codecs for each account
-    for (int i = 0 ; i < AccountModel::instance()->rowCount(); ++i) {
-        QModelIndex qIdx = AccountModel::instance()->index(i);
-        AccountModel::instance()->getAccountByModelIndex(qIdx)->codecModel()->save();
-    }
-
-    // then save accounts
     AccountModel::instance()->save();
 
     CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
