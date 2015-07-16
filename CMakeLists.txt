@@ -106,6 +106,8 @@ SET(ringclient_CONTROLLERS
    src/HistoryVC.h
    src/PersonsVC.mm
    src/PersonsVC.h
+   src/BitrateVC.mm
+   src/BitrateVC.h
    src/ChatVC.mm
    src/ChatVC.h)
 
@@ -163,6 +165,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_chat.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_quality.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
