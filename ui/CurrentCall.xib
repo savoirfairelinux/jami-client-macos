@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D2134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="personLabel" destination="bg3-hB-nE8" id="t6l-1B-JxI"/>
                 <outlet property="pickUpButton" destination="qgD-3D-nD5" id="mkD-IT-22E"/>
                 <outlet property="previewView" destination="6y6-RH-qOp" id="1PY-sd-mh4"/>
+                <outlet property="qualityPopOver" destination="DRa-ai-N1h" id="Cb1-1p-7bO"/>
                 <outlet property="recordOnOffButton" destination="oRa-pS-HN2" id="N7C-wn-0le"/>
                 <outlet property="splitView" destination="GIJ-gB-FZo" id="PM0-az-Q8X"/>
                 <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
@@ -120,26 +121,12 @@
                                                 <constraint firstAttribute="height" constant="27" id="TbE-0y-0UT"/>
                                                 <constraint firstAttribute="width" constant="54" id="eIi-Jg-kdC"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_mute_audio" imagePosition="overlaps" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="7wg-Q4-mbD">
+                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_mute_audio" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="7wg-Q4-mbD">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="muteAudio:" target="-2" id="DBk-mG-FLj"/>
-                                            </connections>
-                                        </button>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video">
-                                            <rect key="frame" x="259" y="5" width="58" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="54" id="D26-l1-SRe"/>
-                                                <constraint firstAttribute="height" constant="27" id="qDd-Wq-7QG"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="sSe-V6-C7i">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
                                             </connections>
                                         </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept">
@@ -207,6 +194,43 @@
                                                 <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
                                             </connections>
                                         </button>
+                                        <button wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j52-5l-K3e" userLabel="Quality">
+                                            <rect key="frame" x="321" y="5" width="54" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="HMQ-8b-b48"/>
+                                                <constraint firstAttribute="height" constant="27" id="RHV-j9-SKc"/>
+                                            </constraints>
+                                            <backgroundFilters>
+                                                <ciFilter name="CIColorMonochrome">
+                                                    <configuration>
+                                                        <ciColor key="inputColor" red="1" green="0.53908979892730713" blue="0.15185309946537018" alpha="1"/>
+                                                        <null key="inputImage"/>
+                                                        <real key="inputIntensity" value="1"/>
+                                                    </configuration>
+                                                </ciFilter>
+                                            </backgroundFilters>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_quality" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" id="Vv0-lu-Pg9">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="displayQualityPopUp:" target="-2" id="EbO-ZD-Zsm"/>
+                                            </connections>
+                                        </button>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video">
+                                            <rect key="frame" x="259" y="5" width="58" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="54" id="D26-l1-SRe"/>
+                                                <constraint firstAttribute="height" constant="27" id="qDd-Wq-7QG"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="sSe-V6-C7i">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="qgD-3D-nD5" firstAttribute="top" secondItem="Eoi-B8-iL6" secondAttribute="top" constant="11" id="1lr-kB-A5h"/>
@@ -215,9 +239,11 @@
                                         <constraint firstAttribute="bottom" secondItem="fmp-x4-Pef" secondAttribute="bottom" constant="43" id="4qt-Sw-3oV"/>
                                         <constraint firstItem="LVS-yZ-98V" firstAttribute="top" secondItem="fmp-x4-Pef" secondAttribute="bottom" constant="8" id="6Tt-Zj-Gnf"/>
                                         <constraint firstAttribute="bottom" secondItem="LVS-yZ-98V" secondAttribute="bottom" constant="8" id="9xT-hf-H7Q"/>
+                                        <constraint firstItem="j52-5l-K3e" firstAttribute="top" secondItem="fmp-x4-Pef" secondAttribute="bottom" constant="8" id="FGP-OT-jtW"/>
                                         <constraint firstAttribute="bottom" secondItem="Kjq-iM-NBL" secondAttribute="bottom" constant="43" id="IPS-1V-PVm"/>
                                         <constraint firstItem="LVS-yZ-98V" firstAttribute="leading" secondItem="tQl-cT-0Lb" secondAttribute="trailing" constant="8" id="IUv-fA-Zva"/>
                                         <constraint firstAttribute="bottom" secondItem="qgD-3D-nD5" secondAttribute="bottom" constant="43" id="KYy-za-dDq"/>
+                                        <constraint firstItem="j52-5l-K3e" firstAttribute="leading" secondItem="LVS-yZ-98V" secondAttribute="trailing" constant="8" id="LmM-7T-m9j"/>
                                         <constraint firstItem="anb-Y8-JQi" firstAttribute="leading" secondItem="Kjq-iM-NBL" secondAttribute="trailing" constant="8" id="Mcj-US-rZq"/>
                                         <constraint firstAttribute="bottom" secondItem="anb-Y8-JQi" secondAttribute="bottom" constant="43" id="MwL-3I-lJv"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="385" id="TSJ-9A-brf"/>
@@ -359,6 +385,47 @@
                 <outlet property="view" destination="TdD-3L-553" id="HQf-B1-D8b"/>
             </connections>
         </viewController>
+        <customView id="Y38-Id-LGC">
+            <rect key="frame" x="0.0" y="4" width="56" height="161"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6lf-Ut-Xbr">
+                    <rect key="frame" x="13" y="134" width="31" height="27"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="+" id="b3D-0u-zMG">
+                        <font key="font" metaFont="system" size="22"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DRS-6A-7dl">
+                    <rect key="frame" x="13" y="0.0" width="31" height="27"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="-" id="gB4-S1-mny">
+                        <font key="font" metaFont="system" size="22"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CgZ-IK-49H">
+                    <rect key="frame" x="18" y="32" width="20" height="96"/>
+                    <sliderCell key="cell" alignment="left" minValue="200" maxValue="3000" doubleValue="200" tickMarkPosition="right" sliderType="linear" id="oGE-FH-3jK"/>
+                    <connections>
+                        <action selector="valueChanged:" target="7rr-Wk-Nn8" id="Lir-12-n5c"/>
+                    </connections>
+                </slider>
+            </subviews>
+            <point key="canvasLocation" x="637" y="-70.5"/>
+        </customView>
+        <viewController id="7rr-Wk-Nn8" customClass="BitrateVC">
+            <connections>
+                <outlet property="bitrateSlider" destination="CgZ-IK-49H" id="NoD-8v-Cc1"/>
+                <outlet property="view" destination="Y38-Id-LGC" id="0cj-pV-MgQ"/>
+            </connections>
+        </viewController>
+        <popover behavior="t" id="DRa-ai-N1h">
+            <connections>
+                <outlet property="contentViewController" destination="7rr-Wk-Nn8" id="43w-Ab-FTh"/>
+            </connections>
+        </popover>
     </objects>
     <resources>
         <image name="NSGoRightTemplate" width="9" height="12"/>
@@ -368,5 +435,6 @@
         <image name="ic_action_hold" width="72" height="72"/>
         <image name="ic_action_mute_audio" width="72" height="72"/>
         <image name="ic_action_mute_video" width="72" height="72"/>
+        <image name="ic_action_quality" width="72" height="72"/>
     </resources>
 </document>
