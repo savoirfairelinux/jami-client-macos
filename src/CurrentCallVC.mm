@@ -75,6 +75,8 @@
 @property (unsafe_unretained) IBOutlet NSSplitView *splitView;
 @property (unsafe_unretained) IBOutlet NSButton *chatButton;
 
+@property (strong) IBOutlet NSPopover *qualityPopOver;
+
 @property QHash<int, NSButton*> actionHash;
 
 // Video
@@ -530,6 +532,9 @@
 {
     UserActionModel* uam = CallModel::instance()->userActionModel();
     uam << UserActionModel::Action::MUTE_VIDEO;
+}
+- (IBAction)displayQualityPopUp:(id)sender {
+    [self.qualityPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
 }
 
 #pragma mark - NSSplitViewDelegate
