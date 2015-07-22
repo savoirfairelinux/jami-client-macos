@@ -92,8 +92,6 @@ public:
     [personsView setDoubleAction:@selector(callContact:)];
 
     CategorizedContactModel::instance()->setUnreachableHidden(YES);
-    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
-
 }
 
 - (IBAction)callContact:(id)sender

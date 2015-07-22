@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,16 +27,9 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef HISTORYVIEWCONTROLLER_H
-#define HISTORYVIEWCONTROLLER_H
 
 #import <Cocoa/Cocoa.h>
-#import "views/RingOutlineView.h"
 
-@interface HistoryVC : NSViewController <NSOutlineViewDelegate, ContextMenuDelegate> {
-
-}
+@interface PersonEditorVC : NSViewController
 
 @end
-
-#endif // HISTORYVIEWCONTROLLER_H

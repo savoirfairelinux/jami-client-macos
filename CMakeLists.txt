@@ -109,7 +109,9 @@ SET(ringclient_CONTROLLERS
    src/BitrateVC.mm
    src/BitrateVC.h
    src/ChatVC.mm
-   src/ChatVC.h)
+   src/ChatVC.h
+   src/PersonEditorVC.mm
+   src/PersonEditorVC.h)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
@@ -121,7 +123,9 @@ SET(ringclient_VIEWS
    src/views/ITProgressIndicator.mm
    src/views/ITProgressIndicator.h
    src/views/PersonCell.mm
-   src/views/PersonCell.h)
+   src/views/PersonCell.h
+   src/views/RingOutlineView.mm
+   src/views/RingOutlineView.h)
 
 SET(ringclient_OTHERS
    src/main.mm
@@ -147,7 +151,8 @@ SET(ringclient_XIBS
    VideoPrefs
    PreferencesScreen
    RingWizard
-   CertificateWindow)
+   CertificateWindow
+   PersonEditor)
 
 # Icons
 # This part tells CMake where to find and install the file itself

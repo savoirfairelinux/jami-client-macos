@@ -69,6 +69,8 @@
 -(void) populate
 {
     for (int i =0 ; i < self->privateQModel->rowCount() ; ++i){
+        QModelIndex tmp = self->privateQModel->index(self->privateQModel->rowCount(), 0);
+
         [topNodes insertObject:[[Node alloc] init] atIndex:i];
     }
 }
@@ -78,18 +80,22 @@
     return self->privateQModel->flags(self->privateQModel->index(0, 0)) | Qt::ItemIsEditable;
 }
 
-- (QModelIndex) toQIdx:(NSTreeNode*) node
+- (QModelIndex) indexPathtoQIdx:(NSIndexPath*) path
 {
-    NSIndexPath* idx = node.indexPath;
-    NSUInteger myArray[[idx length]];
-    [idx getIndexes:myArray];
+    NSUInteger myArray[[path length]];
+    [path getIndexes:myArray];
     QModelIndex toReturn;
 
-    for (int i = 0; i < idx.length; ++i) {
+    for (int i = 0; i < path.length; ++i) {
         toReturn = self->privateQModel->index(myArray[i], 0, toReturn);
     }
 
     return toReturn;
+}
+
+- (QModelIndex) toQIdx:(NSTreeNode*) node
+{
+    return [self indexPathtoQIdx:node.indexPath];
 }
 
 - (void) insertChildAtQIndex:(QModelIndex) qIdx
@@ -116,7 +122,7 @@
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsInserted,
                      [=](const QModelIndex & parent, int first, int last) {
-                         for( int row = first; row <= last; row++) {
+                         for( int row = first; row <= last; ++row) {
                              if(!parent.isValid()) {
                                  //Inserting topnode
                                  Node* n = [[Node alloc] init];
