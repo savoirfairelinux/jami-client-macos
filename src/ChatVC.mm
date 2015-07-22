@@ -175,7 +175,9 @@
     /* make sure there is text to send */
     NSString* text = self.message;
     if (text && text.length > 0) {
-        call->addOutgoingMedia<Media::Text>()->send(QString::fromNSString(text));
+        QMap<QString, QString> messages;
+        messages["text/plain"] = QString::fromNSString(text);
+        call->addOutgoingMedia<Media::Text>()->send(messages);
         // Empty the text after sending it
         [self.messageField setStringValue:@""];
         self.message = @"";
