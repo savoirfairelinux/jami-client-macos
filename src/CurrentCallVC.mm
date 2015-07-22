@@ -88,6 +88,8 @@
 @property RendererConnectionsHolder* previewHolder;
 @property RendererConnectionsHolder* videoHolder;
 @property QMetaObject::Connection videoStarted;
+@property QMetaObject::Connection messageConnection;
+@property QMetaObject::Connection mediaAddedConnection;
 
 @end
 
@@ -268,6 +270,18 @@
     });
 }
 
+- (void) monitorIncomingTextMessages:(Media::Text*) media
+{
+    /* connect to incoming chat messages to open the chat view */
+    QObject::disconnect(self.messageConnection);
+    self.messageConnection = QObject::connect(media,
+                                              &Media::Text::messageReceived,
+                                              [self] (const QMap<QString,QString>& m) {
+                                                  if([[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]])
+                                                      [self uncollapseRightView];
+                                              });
+}
+
 -(void) connectVideoSignals
 {
     QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
@@ -404,6 +418,23 @@
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
     [CATransaction setCompletionBlock:^{
         [self connectVideoSignals];
+        /* check if text media is already present */
+        if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
+            Media::Text *text = CallModel::instance()->selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
+            [self monitorIncomingTextMessages:text];
+        } else if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::OUT)) {
+            Media::Text *text = CallModel::instance()->selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::OUT);
+            [self monitorIncomingTextMessages:text];
+        } else {
+            /* monitor media for messaging text messaging */
+            self.mediaAddedConnection = QObject::connect(CallModel::instance()->selectedCall(),
+                                                         &Call::mediaAdded,
+                                                         [self] (Media::Media* media) {
+                                                             if (media->type() == Media::Media::Type::TEXT) {                                                                     [self monitorIncomingTextMessages:(Media::Text*)media];
+                                                                 QObject::disconnect(self.mediaAddedConnection);
+                                                             }
+                                                         });
+        }
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
 

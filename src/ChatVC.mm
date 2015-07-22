@@ -133,12 +133,10 @@
     mediaHolder.newMessage = QObject::connect(model,
                                               &QAbstractItemModel::rowsInserted,
                                               [self, model] (const QModelIndex &parent, int first, int last) {
-                                                        for (int row = first; row <= last; ++row) {
-                                                            QModelIndex idx = model->index(row, 0, parent);
-                                                            [self appendNewMessage:idx];
-                                                        }
-                                                    }
-                                                    );
+                                                  for (int row = first; row <= last; ++row) {
+                                                      [self appendNewMessage:model->index(row, 0, parent)];
+                                                  }
+                                              });
 }
 
 - (void) appendNewMessage:(const QModelIndex&) msgIdx
