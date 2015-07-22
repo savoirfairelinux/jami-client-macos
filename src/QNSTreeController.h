@@ -43,6 +43,7 @@ NSMutableArray* topNodes;
 - (void*)connect;
 - (id) initWithQModel:(QAbstractItemModel*) model;
 - (QModelIndex) toQIdx:(NSTreeNode*) node;
+- (QModelIndex) indexPathtoQIdx:(NSIndexPath*) path;
 
 @end
 

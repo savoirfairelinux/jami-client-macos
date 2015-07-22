@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,13 +27,12 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef ADDRESSBOOKBACKEND_H
-#define ADDRESSBOOKBACKEND_H
 
 #include <collectioninterface.h>
 #include <collectioneditor.h>
 
 class Person;
+@class ABPerson;
 
 template<typename T> class CollectionMediator;
 
@@ -53,10 +52,13 @@ public:
     virtual QByteArray id       () const override;
     virtual FlagPack<SupportedFeatures>  supportedFeatures() const override;
 
+    bool addNewPerson(Person *item);
+
 private:
     CollectionMediator<Person>*  m_pMediator;
+    ::id addressBookObserver;
+
+    Person* abPersonToPerson(ABPerson* ab);
 
     void asyncLoad(int startingPoint);
 };
-
-#endif // ADDRESSBOOKBACKEND_H
