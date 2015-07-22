@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,21 +27,28 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef QNSTREECONTROLLER_H
-#define QNSTREECONTROLLER_H
 
 #import <Cocoa/Cocoa.h>
-#import <qabstractitemmodel.h>
 
-@interface QNSTreeController : NSTreeController {
+@protocol ContactLinkedDelegate;
+@protocol ContactLinkedDelegate
 
-    QAbstractItemModel *privateQModel;
-}
+@optional
 
-- (id) initWithQModel:(QAbstractItemModel*) model;
-- (QModelIndex) toQIdx:(NSTreeNode*) node;
-- (QModelIndex) indexPathtoQIdx:(NSIndexPath*) path;
+-(void) contactLinked;
 
 @end
 
-#endif // QNSTREECONTROLLER_H
+class ContactMethod;
+
+@interface PersonLinkerVC : NSViewController <NSOutlineViewDelegate>
+
+@property ContactMethod* const methodToLink;
+
+/*
+ * Delegate to inform about completion of the linking process between
+ * a ContactMethod and a Person.
+ */
+@property (nonatomic) id <ContactLinkedDelegate> contactLinkedDelegate;
+
+@end

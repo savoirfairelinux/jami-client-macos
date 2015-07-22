@@ -30,7 +30,7 @@
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="nuM-bu-a6l" indentationPerLevel="16" outlineTableColumn="VDO-Cu-h8f" id="zcl-pp-rGb">
+                                <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="nuM-bu-a6l" indentationPerLevel="16" outlineTableColumn="VDO-Cu-h8f" id="zcl-pp-rGb" customClass="RingOutlineView">
                                     <rect key="frame" x="0.0" y="0.0" width="293" height="19"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -90,7 +90,7 @@
                                                 <rect key="frame" x="1" y="17" width="238" height="117"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="u2H-dj-Z3N" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="pTT-gU-NVa" id="rr8-UC-gGF">
+                                                    <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="u2H-dj-Z3N" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="pTT-gU-NVa" id="rr8-UC-gGF" customClass="RingOutlineView">
                                                         <rect key="frame" x="0.0" y="0.0" width="226" height="19"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -171,16 +171,16 @@
                             </tabViewItem>
                             <tabViewItem label="Contacts" identifier="" id="Zbi-X6-DLT">
                                 <view key="view" id="sag-tS-7Jw">
-                                    <rect key="frame" x="10" y="7" width="295" height="405"/>
+                                    <rect key="frame" x="10" y="7" width="289" height="405"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <scrollView focusRingType="none" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="48" horizontalPageScroll="10" verticalLineScroll="48" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJv-ju-DFe">
+                                        <scrollView focusRingType="none" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJv-ju-DFe">
                                             <rect key="frame" x="-3" y="5" width="295" height="403"/>
                                             <clipView key="contentView" focusRingType="none" misplaced="YES" id="S00-xr-jYM">
                                                 <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="46" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq">
+                                                    <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq">
                                                         <rect key="frame" x="0.0" y="0.0" width="293" height="48"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
