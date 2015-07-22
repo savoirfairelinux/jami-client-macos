@@ -34,10 +34,13 @@
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
+#import <personmodel.h>
 
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "CurrentCallVC.h"
+
+#import "backends/AddressBookBackend.h"
 
 @interface RingWindowController ()
 
@@ -67,6 +70,8 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
+
+    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
     [callView addSubview:[self.currentVC view]];
     [currentVC initFrame];
 

@@ -30,14 +30,18 @@
 
 #import "PersonsVC.h"
 
-#import <personmodel.h>
-#import <callmodel.h>
-#import <categorizedcontactmodel.h>
+
+//Qt
 #import <QSortFilterProxyModel>
-#import <person.h>
-#import <contactmethod.h>
 #import <QtMacExtras/qmacfunctions.h>
 #import <QPixmap>
+
+//LRC
+#import <person.h>
+#import <personmodel.h>
+#import <callmodel.h>
+#import <contactmethod.h>
+#import <categorizedcontactmodel.h>
 
 #import "backends/AddressBookBackend.h"
 #import "QNSTreeController.h"
@@ -92,8 +96,6 @@ public:
     [personsView setDoubleAction:@selector(callContact:)];
 
     CategorizedContactModel::instance()->setUnreachableHidden(YES);
-    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
-
 }
 
 - (IBAction)callContact:(id)sender
@@ -227,15 +229,11 @@ public:
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid())
-        return 0.0f;
-
     if(!qIdx.parent().isValid()) {
         return 20.0;
     } else {
         return 45.0;
     }
 }
-
 
 @end
