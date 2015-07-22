@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -29,6 +29,7 @@
  */
 #import "AddressBookBackend.h"
 
+//Cocoa
 #import <AddressBook/AddressBook.h>
 
 //Qt
@@ -147,16 +148,24 @@ bool AddressBookEditor::edit( Person* item)
     return false;
 }
 
-bool AddressBookEditor::addNew(const Person* Person)
+bool AddressBookEditor::addNew(const Person* item)
 {
-    QDir dir(QString('/'));
-    dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QString());
-
-    return false;
+    /* the const_cast is used here because the API of
+     * CollectionEditor::addNew takes a const item... but in this case the
+     * uid of the Person is determined by the backend, after it is saved
+     * and thus needs to be set by the backend
+     */
+    bool ret = m_pCollection->addNewPerson(const_cast<Person *>(item));
+    if (ret) {
+        items() << const_cast<Person*>(item);
+        mediator()->addItem(item);
+    }
+    return ret;
 }
 
 bool AddressBookEditor::addExisting(const Person* item)
 {
+    bool ret = m_pCollection->addNewPerson(const_cast<Person *>(item));
     m_lItems << const_cast<Person*>(item);
     mediator()->addItem(item);
     return true;
@@ -192,7 +201,7 @@ bool AddressBookBackend::load()
     QTimer::singleShot(100, [=] {
         asyncLoad(0);
     });
-     return false;
+    return false;
 }
 
 void AddressBookBackend::asyncLoad(int startingPoint)
@@ -208,7 +217,6 @@ void AddressBookBackend::asyncLoad(int startingPoint)
         Person* person = new Person(QByteArray::fromNSData(abPerson.vCardRepresentation),
                                     Person::Encoding::vCard,
                                     this);
-
         if(abPerson.imageData)
             person->setPhoto(QVariant(QPixmap::fromImage(QImage::fromData(QByteArray::fromNSData((abPerson.imageData))))));
 
@@ -231,20 +239,26 @@ void AddressBookBackend::asyncLoad(int startingPoint)
 
 }
 
-
 bool AddressBookBackend::reload()
 {
     return false;
 }
 
+bool AddressBookBackend::addNewPerson(Person *item)
+{
+    ABAddressBook *book = [ABAddressBook sharedAddressBook];
+    ABPerson* person = [[ABPerson alloc] initWithVCardRepresentation:item->toVCard().toNSData()];
+    [book addRecord:person];
+    return [book save];
+}
+
 FlagPack<AddressBookBackend::SupportedFeatures> AddressBookBackend::supportedFeatures() const
 {
-    return (FlagPack<SupportedFeatures>) (
-                                                     CollectionInterface::SupportedFeatures::NONE  |
-                                                     CollectionInterface::SupportedFeatures::LOAD  |
-                                                     CollectionInterface::SupportedFeatures::CLEAR |
-                                                     CollectionInterface::SupportedFeatures::REMOVE|
-                                                     CollectionInterface::SupportedFeatures::ADD   );
+    return (FlagPack<SupportedFeatures>) (CollectionInterface::SupportedFeatures::NONE  |
+                                          CollectionInterface::SupportedFeatures::LOAD  |
+                                          CollectionInterface::SupportedFeatures::CLEAR |
+                                          CollectionInterface::SupportedFeatures::REMOVE|
+                                          CollectionInterface::SupportedFeatures::ADD   );
 }
 
 bool AddressBookBackend::clear()
