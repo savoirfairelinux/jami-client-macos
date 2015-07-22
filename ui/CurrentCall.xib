@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
             <connections>
+                <outlet property="addContactButton" destination="Zss-6A-bSy" id="Px0-5v-NE7"/>
                 <outlet property="chatButton" destination="fmp-x4-Pef" id="ARt-dr-TRo"/>
                 <outlet property="controlsPanel" destination="Eoi-B8-iL6" id="4xn-3b-SNn"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
@@ -77,6 +78,25 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <button wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zss-6A-bSy" userLabel="Chat">
+                                            <rect key="frame" x="183" y="21" width="54" height="32"/>
+                                            <backgroundFilters>
+                                                <ciFilter name="CIColorMonochrome">
+                                                    <configuration>
+                                                        <ciColor key="inputColor" red="1" green="0.53908979892730713" blue="0.15185309946537018" alpha="1"/>
+                                                        <null key="inputImage"/>
+                                                        <real key="inputIntensity" value="1"/>
+                                                    </configuration>
+                                                </ciFilter>
+                                            </backgroundFilters>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_person_add" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" id="3Ea-x8-Ndg">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="addToContact:" target="-2" id="OI1-7U-4T7"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="bg3-hB-nE8" secondAttribute="leading" id="LXG-QI-oPf"/>
@@ -436,5 +456,6 @@
         <image name="ic_action_mute_audio" width="72" height="72"/>
         <image name="ic_action_mute_video" width="72" height="72"/>
         <image name="ic_action_quality" width="72" height="72"/>
+        <image name="ic_person_add" width="48" height="48"/>
     </resources>
 </document>

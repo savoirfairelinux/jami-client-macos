@@ -28,40 +28,27 @@
  *  as that of the covered work.
  */
 
-#include <collectioninterface.h>
-#include <collectioneditor.h>
+#import <Cocoa/Cocoa.h>
 
-class Person;
-@class ABPerson;
-@class NSMutableArray;
-@class NSNotification;
+@protocol ContactLinkedDelegate;
+@protocol ContactLinkedDelegate
 
-template<typename T> class CollectionMediator;
+@optional
 
-class AddressBookBackend : public CollectionInterface
-{
-public:
-    explicit AddressBookBackend(CollectionMediator<Person>* mediator);
-    virtual ~AddressBookBackend();
+-(void) contactLinked;
 
-    virtual bool load() override;
-    virtual bool reload() override;
-    virtual bool clear() override;
-    virtual QString    name     () const override;
-    virtual QString    category () const override;
-    virtual QVariant   icon     () const override;
-    virtual bool       isEnabled() const override;
-    virtual QByteArray id       () const override;
-    virtual FlagPack<SupportedFeatures>  supportedFeatures() const override;
+@end
 
-    bool addNewPerson(Person *item);
+class ContactMethod;
 
-private:
-    CollectionMediator<Person>*  m_pMediator;
-    NSMutableArray* observers;
+@interface PersonEditorVC : NSViewController <NSOutlineViewDelegate>
 
-    void handleNotification(NSNotification* ns);
-    Person* abPersonToPerson(ABPerson* ab);
+@property ContactMethod* const methodToLink;
 
-    void asyncLoad(int startingPoint);
-};
+/*
+ * Delegate to inform about completion of the linking process between
+ * a ContactMethod and a Person.
+ */
+@property (nonatomic) id <ContactLinkedDelegate> contactLinkedDelegate;
+
+@end
