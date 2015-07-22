@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,16 +27,42 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef HISTORYVIEWCONTROLLER_H
-#define HISTORYVIEWCONTROLLER_H
 
-#import <Cocoa/Cocoa.h>
-#import "views/RingOutlineView.h"
+#import "RingOutlineView.h"
 
-@interface HistoryVC : NSViewController <NSOutlineViewDelegate, ContextMenuDelegate> {
+@implementation RingOutlineView
 
+- (NSMenu*)menuForEvent:(NSEvent*)evt
+{
+    NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
+    int rowIdx = [self rowAtPoint:pt];
+    int colIdx = [self columnAtPoint:pt];
+    if (self.contextMenuDelegate && rowIdx >= 0 && colIdx >= 0) {
+        NSUInteger indexes[2] = {static_cast<NSUInteger>(rowIdx), static_cast<NSUInteger>(colIdx)};
+        NSIndexPath* path = [NSIndexPath indexPathWithIndexes:indexes length:2];
+        return [self.contextMenuDelegate contextualMenuForIndex:path];
+    }
+    return nil;
+}
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+    // Handle the Tab key
+    if ([[theEvent characters] characterAtIndex:0] == NSTabCharacter) {
+        if (([theEvent modifierFlags] & NSShiftKeyMask) != NSShiftKeyMask) {
+            [[self window] selectKeyViewFollowingView:self];
+        } else {
+            [[self window] selectKeyViewPrecedingView:self];
+        }
+    }
+    else if (([theEvent modifierFlags] & NSCommandKeyMask) == NSCommandKeyMask) {
+        if (self.shortcutsDelegate) {
+            if ([[theEvent characters] characterAtIndex:0] == 'a') {
+                [self.shortcutsDelegate onAddShortcut];
+            }
+        }
+    } else
+        [super keyDown:theEvent];
 }
 
 @end
-
-#endif // HISTORYVIEWCONTROLLER_H
