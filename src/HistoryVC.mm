@@ -33,20 +33,24 @@
 #import <QSortFilterProxyModel>
 #import <callmodel.h>
 #import <call.h>
+#import <person.h>
 #import <contactmethod.h>
 #import <localhistorycollection.h>
 
 #import "QNSTreeController.h"
+#import "PersonEditorVC.h"
 
 #define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
 #define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
 #define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
 
-@interface HistoryVC()
+@interface HistoryVC() <NSPopoverDelegate, KeyboardShortcutDelegate>
 
 @property QNSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *historyView;
+@property (assign) IBOutlet RingOutlineView *historyView;
 @property QSortFilterProxyModel *historyProxyModel;
+@property (strong) NSPopover* addToContactPopover;
+
 @end
 
 @implementation HistoryVC
@@ -58,7 +62,6 @@
 {
     if (self = [super initWithCoder:aDecoder]) {
         NSLog(@"INIT HVC");
-
     }
     return self;
 }
@@ -79,6 +82,8 @@
     [historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
     [historyView setTarget:self];
     [historyView setDoubleAction:@selector(placeHistoryCall:)];
+    [historyView setContextMenuDelegate:self];
+    [historyView setShortcutsDelegate:self];
 
     CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 }
@@ -87,6 +92,9 @@
 {
     if([[treeController selectedNodes] count] > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        if (!qIdx.parent().isValid()) {
+            return;
+        }
         QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
         ContactMethod* m = qvariant_cast<ContactMethod*>(var);
         if(m){
@@ -172,6 +180,89 @@
 {
     // ask the tree controller for the current selection
     //NSLog(@"outlineViewSelectionDidChange!!");
+}
+
+#pragma mark - ContextMenuDelegate
+
+- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path
+{
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        const auto& var = qIdx.data(static_cast<int>(Call::Role::Object));
+        if (qIdx.parent().isValid() && var.isValid()) {
+            if (auto call = var.value<Call *>()) {
+                auto contactmethod = call->peerContactMethod();
+                if (!contactmethod->contact() || contactmethod->contact()->formattedName().isEmpty()) {
+                    NSMenu *theMenu = [[NSMenu alloc]
+                                       initWithTitle:@""];
+                    [theMenu insertItemWithTitle:@"Add to contact"
+                                          action:@selector(addToContact)
+                                   keyEquivalent:@"a"
+                                         atIndex:0];
+                    return theMenu;
+                }
+            }
+        }
+    }
+    return nil;
+}
+
+- (void) addToContact
+{
+    ContactMethod* contactmethod;
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        const auto& var = qIdx.data(static_cast<int>(Call::Role::Object));
+        if (qIdx.parent().isValid() && var.isValid()) {
+            if (auto call = var.value<Call *>()) {
+                contactmethod = call->peerContactMethod();
+            }
+        }
+    }
+
+    if (self.addToContactPopover != nullptr) {
+        [self.addToContactPopover performClose:self];
+        self.addToContactPopover = NULL;
+    } else if (contactmethod) {
+        auto* editorVC = [[PersonEditorVC alloc] initWithNibName:@"PersonEditor" bundle:nil];
+        [editorVC setMethodToLink:contactmethod];
+        self.addToContactPopover = [[NSPopover alloc] init];
+        [self.addToContactPopover setContentSize:editorVC.view.frame.size];
+        [self.addToContactPopover setContentViewController:editorVC];
+        [self.addToContactPopover setAnimates:YES];
+        [self.addToContactPopover setBehavior:NSPopoverBehaviorTransient];
+        [self.addToContactPopover setDelegate:self];
+
+        [self.addToContactPopover showRelativeToRect:[historyView frameOfOutlineCellAtRow:[historyView selectedRow]] ofView:historyView preferredEdge:NSMaxXEdge];
+    }
+}
+
+#pragma mark - NSPopOverDelegate
+
+- (void)popoverDidClose:(NSNotification *)notification
+{
+    if (self.addToContactPopover != nullptr) {
+        [self.addToContactPopover performClose:self];
+        self.addToContactPopover = NULL;
+    }
+}
+
+#pragma mark - KeyboardShortcutDelegate
+
+- (void) onAddShortcut
+{
+    if([[treeController selectedNodes] count] > 0) {
+        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        const auto& var = qIdx.data(static_cast<int>(Call::Role::Object));
+        if (qIdx.parent().isValid() && var.isValid()) {
+            if (auto call = var.value<Call *>()) {
+                auto contactmethod = call->peerContactMethod();
+                if (!contactmethod->contact() || contactmethod->contact()->formattedName().isEmpty()) {
+                    [self addToContact];
+                }
+            }
+        }
+    }
 }
 
 @end

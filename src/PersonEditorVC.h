@@ -28,40 +28,12 @@
  *  as that of the covered work.
  */
 
-#include <collectioninterface.h>
-#include <collectioneditor.h>
+#import <Cocoa/Cocoa.h>
 
-class Person;
-@class ABPerson;
-@class NSMutableArray;
-@class NSNotification;
+#import <contactmethod.h>
 
-template<typename T> class CollectionMediator;
+@interface PersonEditorVC : NSViewController <NSOutlineViewDelegate>
 
-class AddressBookBackend : public CollectionInterface
-{
-public:
-    explicit AddressBookBackend(CollectionMediator<Person>* mediator);
-    virtual ~AddressBookBackend();
+@property ContactMethod* const methodToLink;
 
-    virtual bool load() override;
-    virtual bool reload() override;
-    virtual bool clear() override;
-    virtual QString    name     () const override;
-    virtual QString    category () const override;
-    virtual QVariant   icon     () const override;
-    virtual bool       isEnabled() const override;
-    virtual QByteArray id       () const override;
-    virtual FlagPack<SupportedFeatures>  supportedFeatures() const override;
-
-    bool addNewPerson(Person *item);
-
-private:
-    CollectionMediator<Person>*  m_pMediator;
-    NSMutableArray* observers;
-
-    void handleNotification(NSNotification* ns);
-    Person* abPersonToPerson(ABPerson* ab);
-
-    void asyncLoad(int startingPoint);
-};
+@end
