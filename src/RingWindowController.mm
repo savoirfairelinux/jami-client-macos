@@ -33,10 +33,13 @@
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
+#import <personmodel.h>
 
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "CurrentCallVC.h"
+
+#import "backends/AddressBookBackend.h"
 
 @interface RingWindowController ()
 
@@ -65,6 +68,8 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
+
+    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
     [callView addSubview:[self.currentVC view]];
     [currentVC initFrame];
 }
@@ -185,6 +190,7 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
         callField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0,0,400,21)];
         [[callField cell] setSearchButtonCell:nil];
         [callField setToolTip:@"Call"];
+        [callField setPlaceholderString:@"Enter a ringID"];
         [callField setAlignment:NSCenterTextAlignment];
         [callField setDelegate:self];
         [item setView:callField];
