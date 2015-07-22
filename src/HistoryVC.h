@@ -31,8 +31,9 @@
 #define HISTORYVIEWCONTROLLER_H
 
 #import <Cocoa/Cocoa.h>
+#import "views/RingOutlineView.h"
 
-@interface HistoryVC : NSViewController <NSOutlineViewDelegate> {
+@interface HistoryVC : NSViewController <NSOutlineViewDelegate, ContextMenuDelegate> {
 
 }
 

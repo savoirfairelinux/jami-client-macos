@@ -41,9 +41,11 @@
 #import <video/previewmanager.h>
 #import <video/renderer.h>
 #import <media/text.h>
+#import <person.h>
 
 #import "views/ITProgressIndicator.h"
 #import "views/CallView.h"
+#import "PersonEditorVC.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -57,7 +59,7 @@
 
 @end
 
-@interface CurrentCallVC ()
+@interface CurrentCallVC () <NSPopoverDelegate>
 
 @property (unsafe_unretained) IBOutlet NSTextField *personLabel;
 @property (unsafe_unretained) IBOutlet NSTextField *stateLabel;
@@ -67,6 +69,7 @@
 @property (unsafe_unretained) IBOutlet NSButton *pickUpButton;
 @property (unsafe_unretained) IBOutlet NSButton *muteAudioButton;
 @property (unsafe_unretained) IBOutlet NSButton *muteVideoButton;
+@property (unsafe_unretained) IBOutlet NSButton *addContactButton;
 
 @property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
@@ -76,6 +79,7 @@
 @property (unsafe_unretained) IBOutlet NSButton *chatButton;
 
 @property (strong) IBOutlet NSPopover *qualityPopOver;
+@property (strong) NSPopover* addToContactPopover;
 
 @property QHash<int, NSButton*> actionHash;
 
@@ -132,8 +136,18 @@
 -(void) updateCall
 {
     QModelIndex callIdx = CallModel::instance()->selectionModel()->currentIndex();
+    if (!callIdx.isValid()) {
+        return;
+    }
     [personLabel setStringValue:callIdx.data(Qt::DisplayRole).toString().toNSString()];
     [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
+
+
+    auto contactmethod = qvariant_cast<Call*>(callIdx.data(static_cast<int>(Call::Role::Object)))->peerContactMethod();
+
+    BOOL hide = (contactmethod->contact() && !contactmethod->contact()->formattedName().isEmpty());
+    [self.addContactButton setHidden:hide];
+
 
     Call::State state = callIdx.data((int)Call::Role::State).value<Call::State>();
     [loadingIndicator setHidden:YES];
@@ -525,6 +539,26 @@
 
 #pragma mark - Button methods
 
+- (IBAction)addToContact:(NSButton*) sender {
+    auto contactmethod = CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex())->peerContactMethod();
+
+    if (self.addToContactPopover != nullptr) {
+        [self.addToContactPopover performClose:self];
+        self.addToContactPopover = NULL;
+    } else if (contactmethod && (!contactmethod->contact() || contactmethod->contact()->formattedName().isEmpty())) {
+        auto* editorVC = [[PersonEditorVC alloc] initWithNibName:@"PersonEditor" bundle:nil];
+        [editorVC setMethodToLink:contactmethod];
+        self.addToContactPopover = [[NSPopover alloc] init];
+        [self.addToContactPopover setContentSize:editorVC.view.frame.size];
+        [self.addToContactPopover setContentViewController:editorVC];
+        [self.addToContactPopover setAnimates:YES];
+        [self.addToContactPopover setBehavior:NSPopoverBehaviorTransient];
+        [self.addToContactPopover setDelegate:self];
+
+        [self.addToContactPopover showRelativeToRect:sender.bounds ofView:sender preferredEdge:NSMaxXEdge];
+    }
+}
+
 - (IBAction)hangUp:(id)sender {
     CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::REFUSE;
 }
@@ -566,6 +600,16 @@
 }
 - (IBAction)displayQualityPopUp:(id)sender {
     [self.qualityPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+}
+
+#pragma mark - NSPopOverDelegate
+
+- (void)popoverDidClose:(NSNotification *)notification
+{
+    if (self.addToContactPopover != nullptr) {
+        [self.addToContactPopover performClose:self];
+        self.addToContactPopover = NULL;
+    }
 }
 
 #pragma mark - NSSplitViewDelegate
