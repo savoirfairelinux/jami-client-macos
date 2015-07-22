@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -29,6 +29,7 @@
  */
 #import "AddressBookBackend.h"
 
+//Cocoa
 #import <AddressBook/AddressBook.h>
 
 //Qt
@@ -46,6 +47,7 @@
 #import <account.h>
 #import <person.h>
 #import <contactmethod.h>
+#import <personmodel.h>
 
 /**
  *
@@ -105,40 +107,95 @@ CollectionEditor<Person>(m),m_pCollection(parent)
 AddressBookBackend::AddressBookBackend(CollectionMediator<Person>* mediator) :
 CollectionInterface(new AddressBookEditor(mediator,this)),m_pMediator(mediator)
 {
+    ::id addressBookObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kABDatabaseChangedNotification
+                                     object:nil
+                                     queue:[NSOperationQueue mainQueue]
+                                     usingBlock:^(NSNotification *note) {
+                                         handleNotification(note);
+                                     }];
 
+    ::id externalAddressBookObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kABDatabaseChangedExternallyNotification
+                                                                                  object:nil
+                                                                                   queue:[NSOperationQueue mainQueue]
+                                                                              usingBlock:^(NSNotification *note) {
+                                                                                  handleNotification(note);
+                                                                              }];
+
+    observers = [[NSArray alloc] initWithObjects:addressBookObserver, externalAddressBookObserver, nil];
+}
+
+void AddressBookBackend::handleNotification(NSNotification* ns)
+{
+    for (NSString* r in ns.userInfo[kABInsertedRecords]) {
+        ABRecord* inserted = [[ABAddressBook sharedAddressBook] recordForUniqueId:r];
+        if (inserted && [[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] containsString:@"ABPerson"]) {
+            editor<Person>()->addExisting(this->abPersonToPerson(inserted));
+        }
+    }
+
+    for (NSString* r in ns.userInfo[kABUpdatedRecords]) {
+        NSLog(@"Updated record : %@", r);
+        if ([[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] containsString:@"ABPerson"]) {
+            Person* toUpdate = PersonModel::instance()->getPersonByUid([r UTF8String]);
+            if (toUpdate) {
+                ABPerson* updated = [[ABAddressBook sharedAddressBook] recordForUniqueId:r];
+                toUpdate->updateFromVCard(QByteArray::fromNSData(updated.vCardRepresentation));
+            } else
+                editor<Person>()->addExisting(this->abPersonToPerson([[ABAddressBook sharedAddressBook] recordForUniqueId:r]));
+        }
+    }
+
+    for (NSString* r in ns.userInfo[kABDeletedRecords]) {
+        NSLog(@"Deleted person: %@", r);
+        removePerson(r);
+    }
 }
 
 AddressBookBackend::~AddressBookBackend()
 {
-
+    for (::id observer in this->observers)
+        [[NSNotificationCenter defaultCenter] removeObserver:observer];
 }
 
 void AddressBookEditor::savePerson(QTextStream& stream, const Person* Person)
 {
-
     qDebug() << "Saving Person!";
 }
 
 bool AddressBookEditor::regenFile(const Person* toIgnore)
 {
-    QDir dir(QString('/'));
-    dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QString());
-
-
     return false;
 }
 
-bool AddressBookEditor::save(const Person* Person)
+bool AddressBookEditor::save(const Person* person)
 {
-    //if (Person->collection()->editor<Person>() != this)
-    //    return addNew(Person);
+    // first get the existing person
+    ABPerson* toSave = [[ABAddressBook sharedAddressBook] recordForUniqueId:[[NSString alloc] initWithUTF8String:person->uid().data()]];
 
-    return regenFile(nullptr);
+    // create its new reprresentation
+    ABPerson* newVCard = [[ABPerson alloc] initWithVCardRepresentation:person->toVCard().toNSData()];
+
+    if (toSave) {
+        // i.e. *all* potential properties
+        for (NSString* property in [ABPerson properties]) {
+            // if the property doesn't exist in the address book, value will be nil
+            id value = [newVCard valueForProperty:property];
+            if (value && [property isNotEqualTo:kABUIDProperty]) {
+                NSError* error;
+                if (![toSave setValue:value forProperty:property error:&error] || error) {
+                    NSLog(@"Error saving property %@ for person %@ : %@", property, toSave, [error localizedDescription]);
+                    return false;
+                }
+            }
+        }
+    }
+    return [[ABAddressBook sharedAddressBook] save];
 }
 
 bool AddressBookEditor::remove(const Person* item)
 {
-    return regenFile(item);
+    mediator()->removeItem(item);
+    return false;
 }
 
 bool AddressBookEditor::edit( Person* item)
@@ -147,12 +204,15 @@ bool AddressBookEditor::edit( Person* item)
     return false;
 }
 
-bool AddressBookEditor::addNew(const Person* Person)
+bool AddressBookEditor::addNew(const Person* item)
 {
-    QDir dir(QString('/'));
-    dir.mkpath(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/') + QString());
-
-    return false;
+    /* the const_cast is used here because the API of
+     * CollectionEditor::addNew takes a const item... but in this case the
+     * uid of the Person is determined by the backend, after it is saved
+     * and thus needs to be set by the backend
+     */
+    bool ret = m_pCollection->addNewPerson(const_cast<Person *>(item));
+    return ret;
 }
 
 bool AddressBookEditor::addExisting(const Person* item)
@@ -167,12 +227,12 @@ QVector<Person*> AddressBookEditor::items() const
     return m_lItems;
 }
 
-QString AddressBookBackend::name () const
+QString AddressBookBackend::name() const
 {
     return QObject::tr("AddressBook backend");
 }
 
-QString AddressBookBackend::category () const
+QString AddressBookBackend::category() const
 {
     return QObject::tr("Persons");
 }
@@ -192,7 +252,7 @@ bool AddressBookBackend::load()
     QTimer::singleShot(100, [=] {
         asyncLoad(0);
     });
-     return false;
+    return false;
 }
 
 void AddressBookBackend::asyncLoad(int startingPoint)
@@ -205,18 +265,7 @@ void AddressBookBackend::asyncLoad(int startingPoint)
 
         ABPerson* abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
 
-        Person* person = new Person(QByteArray::fromNSData(abPerson.vCardRepresentation),
-                                    Person::Encoding::vCard,
-                                    this);
-
-        if(abPerson.imageData)
-            person->setPhoto(QVariant(QPixmap::fromImage(QImage::fromData(QByteArray::fromNSData((abPerson.imageData))))));
-
-        if([person->formattedName().toNSString() isEqualToString:@""]   &&
-           [person->secondName().toNSString() isEqualToString:@""]     &&
-           [person->firstName().toNSString() isEqualToString:@""]) {
-            continue;
-        }
+        Person* person = this->abPersonToPerson(abPerson);
 
         person->setCollection(this);
 
@@ -228,23 +277,51 @@ void AddressBookBackend::asyncLoad(int startingPoint)
             asyncLoad(endPoint);
         });
     }
-
 }
 
+Person* AddressBookBackend::abPersonToPerson(ABPerson* ab)
+{
+    Person* person = new Person(QByteArray::fromNSData(ab.vCardRepresentation),
+                                Person::Encoding::vCard,
+                                this);
+    if(ab.imageData)
+        person->setPhoto(QVariant(QPixmap::fromImage(QImage::fromData(QByteArray::fromNSData((ab.imageData))))));
+
+    person->setUid([[ab uniqueId] UTF8String]);
+    return person;
+}
 
 bool AddressBookBackend::reload()
 {
     return false;
 }
 
+bool AddressBookBackend::addNewPerson(Person *item)
+{
+    ABAddressBook *book = [ABAddressBook sharedAddressBook];
+    ABPerson* person = [[ABPerson alloc] initWithVCardRepresentation:item->toVCard().toNSData()];
+    [book addRecord:person];
+    return [book save];
+}
+
+bool AddressBookBackend::removePerson(NSString* uid)
+{
+    auto found = PersonModel::instance()->getPersonByUid([uid UTF8String]);
+    if (found) {
+        deactivate(found);
+        editor<Person>()->remove(found);
+        return true;
+    }
+    return false;
+}
+
 FlagPack<AddressBookBackend::SupportedFeatures> AddressBookBackend::supportedFeatures() const
 {
-    return (FlagPack<SupportedFeatures>) (
-                                                     CollectionInterface::SupportedFeatures::NONE  |
-                                                     CollectionInterface::SupportedFeatures::LOAD  |
-                                                     CollectionInterface::SupportedFeatures::CLEAR |
-                                                     CollectionInterface::SupportedFeatures::REMOVE|
-                                                     CollectionInterface::SupportedFeatures::ADD   );
+    return (FlagPack<SupportedFeatures>) (CollectionInterface::SupportedFeatures::NONE  |
+                                          CollectionInterface::SupportedFeatures::LOAD  |
+                                          CollectionInterface::SupportedFeatures::CLEAR |
+                                          CollectionInterface::SupportedFeatures::REMOVE|
+                                          CollectionInterface::SupportedFeatures::ADD   );
 }
 
 bool AddressBookBackend::clear()

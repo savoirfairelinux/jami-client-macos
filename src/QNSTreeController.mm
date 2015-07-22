@@ -29,6 +29,8 @@
  */
 #import "QNSTreeController.h"
 
+#import <QDebug>
+
 @interface Node : NSObject {
     NSMutableArray *children;
 }
@@ -43,9 +45,14 @@
     return self;
 }
 
-- (void) addChild:(Node*) child
+- (void) addChild:(Node*) child AtIndex:(NSUInteger) idx
 {
-    [children addObject:child];
+    [children insertObject:child atIndex:idx];
+}
+
+- (NSMutableArray*) getChildrenArray
+{
+    return children;
 }
 
 @end
@@ -58,18 +65,33 @@
     self = [super init];
     self->privateQModel = model;
 
-    topNodes = [[NSMutableArray alloc] init];
+    NSMutableArray* topNodes = [[NSMutableArray alloc] init];
     [self connect];
 
-    [self populate];
+    [self populate:topNodes];
 
     return [self initWithContent:topNodes];
 }
 
--(void) populate
+-(void) populate:(NSMutableArray*) nodes
 {
-    for (int i =0 ; i < self->privateQModel->rowCount() ; ++i){
-        [topNodes insertObject:[[Node alloc] init] atIndex:i];
+    for (int i = 0 ; i < self->privateQModel->rowCount() ; ++i) {
+        Node* n = [[Node alloc] init];
+        //qDebug() << "POUPL TOP:"<< self->privateQModel->index(i, 0) ;
+        [self populateChild:[n getChildrenArray] withParent:self->privateQModel->index(i, 0)];
+        [nodes insertObject:n atIndex:i];
+    }
+}
+
+- (void) populateChild:(NSMutableArray*) nodes withParent:(QModelIndex)qIdx
+{
+    if (!qIdx.isValid())
+        return;
+    for (int i = 0 ; i < self->privateQModel->rowCount(qIdx) ; ++i) {
+        Node* n = [[Node alloc] init];
+        //qDebug() << "POPUL CHILD:"<< self->privateQModel->index(i, 0, qIdx) ;
+        [self populateChild:[n getChildrenArray] withParent:self->privateQModel->index(i, 0, qIdx)];
+        [nodes insertObject:n atIndex:i];
     }
 }
 
@@ -78,21 +100,25 @@
     return self->privateQModel->flags(self->privateQModel->index(0, 0)) | Qt::ItemIsEditable;
 }
 
-- (QModelIndex) toQIdx:(NSTreeNode*) node
+- (QModelIndex) indexPathtoQIdx:(NSIndexPath*) path
 {
-    NSIndexPath* idx = node.indexPath;
-    NSUInteger myArray[[idx length]];
-    [idx getIndexes:myArray];
+    NSUInteger myArray[[path length]];
+    [path getIndexes:myArray];
     QModelIndex toReturn;
 
-    for (int i = 0; i < idx.length; ++i) {
+    for (int i = 0; i < path.length; ++i) {
         toReturn = self->privateQModel->index(myArray[i], 0, toReturn);
     }
 
     return toReturn;
 }
 
-- (void) insertChildAtQIndex:(QModelIndex) qIdx
+- (QModelIndex) toQIdx:(NSTreeNode*) node
+{
+    return [self indexPathtoQIdx:node.indexPath];
+}
+
+- (void) insertNodeAtQIndex:(QModelIndex) qIdx
 {
     Node* child = [[Node alloc] init];
 
@@ -111,22 +137,42 @@
     [self insertObject:child atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndexes:indexes length:allIndexes.count]];
 }
 
+- (void) removeNodeAtQIndex:(QModelIndex) qIdx
+{
+    QModelIndex tmp = qIdx.parent();
+    NSMutableArray* allIndexes = [NSMutableArray array];
+    while (tmp.isValid()) {
+        [allIndexes insertObject:@(tmp.row()) atIndex:0];
+        tmp = tmp.parent();
+    }
+    [allIndexes insertObject:@(qIdx.row()) atIndex:allIndexes.count];
+
+    NSUInteger indexes[allIndexes.count];
+    for (int i = 0 ; i < allIndexes.count ; ++i) {
+        indexes[i] = [[allIndexes objectAtIndex:i] intValue];
+    }
+
+    if ([self.arrangedObjects descendantNodeAtIndexPath:[[NSIndexPath alloc] initWithIndexes:indexes length:allIndexes.count]]) {
+        //NSLog(@"removeNodeAt index: %@", allIndexes);
+        [self removeObjectAtArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndexes:indexes length:allIndexes.count]];
+    }
+}
+
 - (void)connect
 {
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsInserted,
                      [=](const QModelIndex & parent, int first, int last) {
-                         for( int row = first; row <= last; row++) {
-                             if(!parent.isValid()) {
-                                 //Inserting topnode
-                                 Node* n = [[Node alloc] init];
-                                 [self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
-                             } else {
-                                 [self insertChildAtQIndex:self->privateQModel->index(row, 0, parent)];
-                             }
+                         for( int row = first; row <= last; ++row) {
+                             //qDebug() << "INSERTING:"<< self->privateQModel->index(row, 0, parent) ;
+                             if(!self->privateQModel->index(row, 0, parent).isValid())
+                                 continue;
+
+
+                            [self insertNodeAtQIndex:self->privateQModel->index(row, 0, parent)];
+
                          }
-                     }
-                     );
+                     });
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsAboutToBeMoved,
@@ -137,8 +183,7 @@
                          for( int row = sourceStart; row <= sourceEnd; row++) {
                              //TODO
                          }
-                     }
-                     );
+                     });
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsMoved,
@@ -149,45 +194,43 @@
                          for( int row = sourceStart; row <= sourceEnd; row++) {
                              //TODO
                          }
-                     }
-                     );
+                         [self rearrangeObjects];
+                     });
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsAboutToBeRemoved,
-                     [=](const QModelIndex & parent, int first, int last) {
-                         NSLog(@"rows about to be removed");
-                     }
-                     );
+                     [self](const QModelIndex & parent, int first, int last) {
+                         for( int row = first; row <= last; row++) {
+                             //qDebug() << "REMOVING:"<< self->privateQModel->index(row, 0, parent) ;
+                             if (!self->privateQModel->index(row, 0, parent).isValid())
+                                 continue;
+
+                             [self removeNodeAtQIndex:self->privateQModel->index(row, 0, parent)];
+                         }
+                     });
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsRemoved,
-                     [=](const QModelIndex & parent, int first, int last) {
-                         //NSLog(@"rows removed");
+                     [self](const QModelIndex& parent, int first, int last) {
                          for( int row = first; row <= last; row++) {
-                             if(parent.isValid())
-                             {
-                                 //Removing leaf
-                                 NSUInteger indexes[] = { (NSUInteger)parent.row(), (NSUInteger)row};
-                                 [self removeObjectAtArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndexes:indexes length:2]];
-                             } else
-                             {
-                                 [self removeObjectAtArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
-                             }
+                             //qDebug() << "REMOVED:"<< self->privateQModel->index(row, 0, parent) ;
+                             if (!self->privateQModel->index(row, 0, parent).isValid())
+                                 continue;
+
+                            [self removeNodeAtQIndex:self->privateQModel->index(row, 0, parent)];
                          }
-                     }
-                     );
+                     });
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::layoutChanged,
-                     [=]() {
-                         //NSLog(@"layout changed");
-                     }
-                     );
+                     [self]() {
+                         NSLog(@"layout changed");
+                         [self rearrangeObjects];
+                     });
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::dataChanged,
-                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         //NSLog(@"data changed");
+                     [self](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
                          for(int row = topLeft.row() ; row <= bottomRight.row() ; ++row)
                          {
                              QModelIndex tmpIdx = self->privateQModel->index(row, 0);
@@ -197,6 +240,7 @@
                                      [self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
                              }
                          }
+                         [self rearrangeObjects];
                      });
 }
 

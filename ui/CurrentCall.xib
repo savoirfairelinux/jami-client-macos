@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
             <connections>
+                <outlet property="addContactButton" destination="Zss-6A-bSy" id="Px0-5v-NE7"/>
                 <outlet property="chatButton" destination="fmp-x4-Pef" id="ARt-dr-TRo"/>
                 <outlet property="controlsPanel" destination="Eoi-B8-iL6" id="4xn-3b-SNn"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
@@ -42,7 +43,7 @@
                                     <rect key="frame" x="20" y="438" width="635" height="71"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-FB-vig">
-                                            <rect key="frame" x="18" y="42" width="37" height="17"/>
+                                            <rect key="frame" x="18" y="39" width="37" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="pft-oc-ZNh"/>
                                             </constraints>
@@ -67,7 +68,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bg3-hB-nE8">
-                                            <rect key="frame" x="18" y="17" width="85" height="17"/>
+                                            <rect key="frame" x="18" y="14" width="85" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="81" id="gT7-Wu-XtU"/>
                                             </constraints>
@@ -77,8 +78,28 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <button hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zss-6A-bSy" userLabel="Chat">
+                                            <rect key="frame" x="107" y="6" width="54" height="32"/>
+                                            <backgroundFilters>
+                                                <ciFilter name="CIColorMonochrome">
+                                                    <configuration>
+                                                        <ciColor key="inputColor" red="1" green="0.53908979892730713" blue="0.15185309946537018" alpha="1"/>
+                                                        <null key="inputImage"/>
+                                                        <real key="inputIntensity" value="1"/>
+                                                    </configuration>
+                                                </ciFilter>
+                                            </backgroundFilters>
+                                            <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="ic_person_add" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" id="3Ea-x8-Ndg">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="addToContact:" target="-2" id="OI1-7U-4T7"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Zss-6A-bSy" firstAttribute="leading" secondItem="bg3-hB-nE8" secondAttribute="trailing" constant="8" id="6V0-Gq-SMw"/>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="bg3-hB-nE8" secondAttribute="leading" id="LXG-QI-oPf"/>
                                         <constraint firstItem="cIU-M7-xpN" firstAttribute="top" secondItem="d0X-cW-Xgz" secondAttribute="top" constant="24" id="Qc7-qp-qSV"/>
                                         <constraint firstAttribute="trailing" secondItem="cIU-M7-xpN" secondAttribute="trailing" constant="20" id="RXf-xZ-4f9"/>
@@ -86,7 +107,7 @@
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="top" secondItem="bg3-hB-nE8" secondAttribute="bottom" constant="-42" id="Z06-5v-81Q"/>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="top" secondItem="bg3-hB-nE8" secondAttribute="bottom" constant="-42" id="gRn-E6-o6O"/>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="d0X-cW-Xgz" secondAttribute="leading" constant="20" id="i5C-8o-qKp"/>
-                                        <constraint firstAttribute="bottom" secondItem="kFD-FB-vig" secondAttribute="bottom" constant="42" id="l71-7V-oLx"/>
+                                        <constraint firstAttribute="bottom" secondItem="kFD-FB-vig" secondAttribute="bottom" constant="39" id="l71-7V-oLx"/>
                                         <constraint firstItem="bg3-hB-nE8" firstAttribute="leading" secondItem="d0X-cW-Xgz" secondAttribute="leading" constant="20" id="nV4-Vy-vqK"/>
                                         <constraint firstAttribute="centerY" secondItem="cIU-M7-xpN" secondAttribute="centerY" id="yvc-8B-cEu"/>
                                     </constraints>
@@ -436,5 +457,6 @@
         <image name="ic_action_mute_audio" width="72" height="72"/>
         <image name="ic_action_mute_video" width="72" height="72"/>
         <image name="ic_action_quality" width="72" height="72"/>
+        <image name="ic_person_add" width="48" height="48"/>
     </resources>
 </document>
