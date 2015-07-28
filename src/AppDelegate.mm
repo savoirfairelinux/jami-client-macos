@@ -127,6 +127,7 @@
         QModelIndex idx = AccountModel::instance()->index(i);
         Account* acc = AccountModel::instance()->getAccountByModelIndex(idx);
         if(acc->protocol() == Account::Protocol::RING) {
+            acc->setDisplayName(acc->alias());
             return YES;
         }
     }
