@@ -123,14 +123,16 @@
 
 - (BOOL) checkForRingAccount
 {
+    BOOL foundRingAcc = NO;
     for (int i = 0 ; i < AccountModel::instance()->rowCount() ; ++i) {
         QModelIndex idx = AccountModel::instance()->index(i);
         Account* acc = AccountModel::instance()->getAccountByModelIndex(idx);
         if(acc->protocol() == Account::Protocol::RING) {
-            return YES;
+            acc->setDisplayName(acc->alias());
+            foundRingAcc = YES;
         }
     }
-    return FALSE;
+    return foundRingAcc;
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
