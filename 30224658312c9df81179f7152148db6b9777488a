@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a5c5d37_b63cdf94",
+        "filename": "src/AppDelegate.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 23
+      },
+      "writtenOn": "2015-07-28T19:59:26Z",
+      "side": 1,
+      "message": "this will return as soon as it finds a RING account... thus it will only set the display name to the alias for the first RING account it finds, wich may not be the enabled one",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 23
+      },
+      "revId": "30224658312c9df81179f7152148db6b9777488a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
