@@ -148,6 +148,7 @@
     switch ([textField tag]) {
         case ALIAS_TAG:
             [self currentAccount]->setAlias([[textField stringValue] UTF8String]);
+            [self currentAccount]->setDisplayName([[textField stringValue] UTF8String]);
             break;
         case HOSTNAME_TAG:
             [self currentAccount]->setHostname([[textField stringValue] UTF8String]);

@@ -180,7 +180,8 @@ public:
 
     auto newAccName = [[NSString alloc] initWithFormat:@"%@ account",
                 AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
-    AccountModel::instance()->add([newAccName UTF8String], qIdx);
+    auto acc = AccountModel::instance()->add([newAccName UTF8String], qIdx);
+    acc->setDisplayName(acc->alias());
     AccountModel::instance()->save();
 }
 
