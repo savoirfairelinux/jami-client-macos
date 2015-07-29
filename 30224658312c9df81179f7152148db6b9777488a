@@ -22,6 +22,30 @@
       "revId": "30224658312c9df81179f7152148db6b9777488a",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a5c5d37_969f9b03",
+        "filename": "src/AppDelegate.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T18:11:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_b63cdf94",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 23
+      },
+      "revId": "30224658312c9df81179f7152148db6b9777488a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
