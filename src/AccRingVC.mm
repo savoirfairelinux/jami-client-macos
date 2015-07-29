@@ -49,6 +49,9 @@
 @property (assign) IBOutlet NSButton *autoAnswerButton;
 @property (assign) IBOutlet NSButton *userAgentButton;
 @property (assign) IBOutlet NSTextField *userAgentTextField;
+@property (unsafe_unretained) IBOutlet NSButton *allowUnknown;
+@property (unsafe_unretained) IBOutlet NSButton *allowHistory;
+@property (unsafe_unretained) IBOutlet NSButton *allowContacts;
 
 @end
 
@@ -61,6 +64,7 @@
 @synthesize autoAnswerButton;
 @synthesize userAgentButton;
 @synthesize userAgentTextField;
+@synthesize allowContacts, allowHistory, allowUnknown;
 
 - (void)awakeFromNib
 {
@@ -90,34 +94,28 @@
 
     [self.aliasTextField setStringValue:account->alias().toNSString()];
 
-    switch (account->protocol()) {
-        case Account::Protocol::SIP:
-            [typeLabel setStringValue:@"SIP"];
-            break;
-        case Account::Protocol::IAX:
-            [typeLabel setStringValue:@"IAX"];
-            break;
-        case Account::Protocol::RING:
-            [typeLabel setStringValue:@"RING"];
-            break;
+    [typeLabel setStringValue:@"RING"];
 
-        default:
-            break;
-    }
+    [allowUnknown setState:account->allowIncomingFromUnknown()];
+    [allowHistory setState:account->allowIncomingFromHistory()];
+    [allowContacts setState:account->allowIncomingFromContact()];
 
-    [upnpButton setState:[self currentAccount]->isUpnpEnabled()];
-    [userAgentButton setState:[self currentAccount]->hasCustomUserAgent()];
-    [userAgentTextField setEnabled:[self currentAccount]->hasCustomUserAgent()];
+    [allowHistory setEnabled:!account->allowIncomingFromUnknown()];
+    [allowContacts setEnabled:!account->allowIncomingFromUnknown()];
 
-    [autoAnswerButton setState:[self currentAccount]->isAutoAnswer()];
+    [upnpButton setState:account->isUpnpEnabled()];
+    [userAgentButton setState:account->hasCustomUserAgent()];
+    [userAgentTextField setEnabled:account->hasCustomUserAgent()];
+
+    [autoAnswerButton setState:account->isAutoAnswer()];
     [userAgentTextField setStringValue:account->userAgent().toNSString()];
 
     [bootstrapField setStringValue:account->hostname().toNSString()];
 
-    if([[self currentAccount]->username().toNSString() isEqualToString:@""])
+    if([account->username().toNSString() isEqualToString:@""])
         [hashField setStringValue:@"Reopen account to see your hash"];
     else
-        [hashField setStringValue:[self currentAccount]->username().toNSString()];
+        [hashField setStringValue:account->username().toNSString()];
 
 }
 
@@ -132,6 +130,18 @@
 - (IBAction)toggleCustomAgent:(NSButton *)sender {
     [self.userAgentTextField setEnabled:[sender state] == NSOnState];
     [self currentAccount]->setHasCustomUserAgent([sender state] == NSOnState);
+}
+
+- (IBAction)toggleAllowFromUnknown:(id)sender {
+    [self currentAccount]->setAllowIncomingFromUnknown([sender state] == NSOnState);
+    [allowHistory setEnabled:![sender state] == NSOnState];
+    [allowContacts setEnabled:![sender state] == NSOnState];
+}
+- (IBAction)toggleAllowFromHistory:(id)sender {
+    [self currentAccount]->setAllowIncomingFromHistory([sender state] == NSOnState);
+}
+- (IBAction)toggleAllowFromContacts:(id)sender {
+    [self currentAccount]->setAllowIncomingFromContact([sender state] == NSOnState);
 }
 
 #pragma mark - NSTextFieldDelegate methods
