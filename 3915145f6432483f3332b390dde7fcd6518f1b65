@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a5c5d37_96355b48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_96dd5b45",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a5c5d37_56e7e312",
         "filename": "src/CurrentCallVC.mm",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2015-07-28T22:31:31Z",
       "side": 1,
       "message": "see comment bellow",
+      "range": {
+        "startLine": 148,
+        "startChar": 46,
+        "endLine": 148,
+        "endChar": 97
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a5c5d37_d612b3b3",
+        "filename": "src/CurrentCallVC.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_56e7e312",
       "range": {
         "startLine": 148,
         "startChar": 46,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9a5c5d37_f645b7b3",
+        "filename": "src/CurrentCallVC.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_76e2e704",
+      "range": {
+        "startLine": 548,
+        "startChar": 34,
+        "endLine": 548,
+        "endChar": 113
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a5c5d37_36e46f0c",
         "filename": "src/HistoryVC.mm",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2015-07-28T22:31:31Z",
       "side": 1,
       "message": "again, a \u0027hasContact\u0027 method might be usefull to not repeat this code everywhere",
+      "range": {
+        "startLine": 195,
+        "startChar": 20,
+        "endLine": 195,
+        "endChar": 100
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a5c5d37_b6173fa3",
+        "filename": "src/HistoryVC.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_36e46f0c",
       "range": {
         "startLine": 195,
         "startChar": 20,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9a5c5d37_960c3b96",
+        "filename": "src/HistoryVC.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_16f16bcd",
+      "range": {
+        "startLine": 260,
+        "startChar": 20,
+        "endLine": 260,
+        "endChar": 100
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a5c5d37_f6edb7f0",
         "filename": "src/PersonEditorVC.mm",
         "patchSetId": 6
@@ -128,6 +248,30 @@
       "writtenOn": "2015-07-28T22:31:31Z",
       "side": 1,
       "message": "is the contactProxyModel deleted when the contact editor is destroyed? if not, then its a mem leak",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 74
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a5c5d37_7611c7ab",
+        "filename": "src/PersonEditorVC.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "I thought ARC was handling c++ pointers, but after checking that again it appears it does not.\n\nI\u0027ll have to fix a couple of files in another bug ticket.",
+      "parentUuid": "9a5c5d37_f6edb7f0",
       "range": {
         "startLine": 98,
         "startChar": 4,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "9a5c5d37_5626c317",
+        "filename": "src/PersonEditorVC.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_161a8b17",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 4
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a5c5d37_d6bab3e0",
         "filename": "src/backends/AddressBookBackend.mm",
         "patchSetId": 6
@@ -174,6 +342,30 @@
       "writtenOn": "2015-07-28T22:31:31Z",
       "side": 1,
       "message": "does this work? I also had to call deactivate() on the person before calling removeItem to make it it dissapear from personmodel and categorizedcontactmodel",
+      "range": {
+        "startLine": 200,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 24
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a5c5d37_36234f07",
+        "filename": "src/backends/AddressBookBackend.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_d6bab3e0",
       "range": {
         "startLine": 200,
         "startChar": 12,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "9a5c5d37_16204bf6",
+        "filename": "src/views/RingOutlineView.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_d6d3d336",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 4
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a5c5d37_b6d85f54",
         "filename": "src/views/RingOutlineView.mm",
         "patchSetId": 6
@@ -220,6 +436,30 @@
       "writtenOn": "2015-07-28T22:31:31Z",
       "side": 1,
       "message": "drawing code?",
+      "range": {
+        "startLine": 16,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 24
+      },
+      "revId": "3915145f6432483f3332b390dde7fcd6518f1b65",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a5c5d37_f61c97c3",
+        "filename": "src/views/RingOutlineView.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2015-07-29T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5c5d37_b6d85f54",
       "range": {
         "startLine": 16,
         "startChar": 4,
