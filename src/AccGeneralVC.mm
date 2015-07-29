@@ -52,8 +52,7 @@
 @property (assign) IBOutlet NSTextField *serverHostTextField;
 @property (assign) IBOutlet NSTextField *usernameTextField;
 @property (assign) IBOutlet NSSecureTextField *passwordTextField;
-@property (assign) IBOutlet NSTextField *clearTextField;
-@property (assign) IBOutlet NSButton *tryRegisterButton;
+@property (strong) NSTextField *clearTextField;
 
 @property (assign) IBOutlet NSButton *upnpButton;
 @property (assign) IBOutlet NSButton *autoAnswerButton;
