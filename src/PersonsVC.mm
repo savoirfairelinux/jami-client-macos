@@ -46,9 +46,13 @@
 #import "backends/AddressBookBackend.h"
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
-#import "views/PersonCell.h"
 
-#define COLUMNID_NAME @"NameColumn"
+// Tags for views
+#define IMAGE_TAG 100
+#define DISPLAYNAME_TAG 200
+#define DETAILS_TAG 300
+#define CALL_BUTTON_TAG 400
+#define TXT_BUTTON_TAG 500
 
 class ReachablePersonModel : public QSortFilterProxyModel
 {
@@ -64,18 +68,17 @@ public:
 };
 
 
-@interface PersonsVC ()
+@interface PersonsVC () {
 
-@property QNSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *personsView;
-@property QSortFilterProxyModel *contactProxyModel;
+    QNSTreeController *treeController;
+    __unsafe_unretained IBOutlet NSOutlineView *personsView;
+    QSortFilterProxyModel *contactProxyModel;
+
+}
 
 @end
 
 @implementation PersonsVC
-@synthesize treeController;
-@synthesize personsView;
-@synthesize contactProxyModel;
 
 -(void) awakeFromNib
 {
@@ -152,26 +155,6 @@ public:
 }
 
 // -------------------------------------------------------------------------------
-//	dataCellForTableColumn:tableColumn:item
-// -------------------------------------------------------------------------------
-- (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    PersonCell *returnCell = [tableColumn dataCell];
-    if(!qIdx.isValid())
-        return returnCell;
-
-    if(!qIdx.parent().isValid()) {
-        [returnCell setDrawsBackground:YES];
-        [returnCell setBackgroundColor:[NSColor selectedControlColor]];
-    } else {
-        [returnCell setDrawsBackground:NO];
-    }
-
-    return returnCell;
-}
-
-// -------------------------------------------------------------------------------
 //	textShouldEndEditing:fieldEditor
 // -------------------------------------------------------------------------------
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
@@ -197,30 +180,51 @@ public:
     return NO;
 }
 
-// -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
-- (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+/* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
+ */
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid())
-        return;
 
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME])
-    {
-        PersonCell *pCell = (PersonCell *)cell;
-        [pCell setPersonImage:nil];
-        if(!qIdx.parent().isValid()) {
-            pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
+    NSTableCellView *result;
+
+    if(!qIdx.parent().isValid()) {
+        result = [outlineView makeViewWithIdentifier:@"CategoryCell" owner:outlineView];
+        [result setWantsLayer:YES];
+        [result setLayer:[CALayer layer]];
+        [result.layer setBackgroundColor:[NSColor selectedControlColor].CGColor];
+    } else if(((NSTreeNode*)item).indexPath.length == 2) {
+        result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
+        NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
+        Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
+        if (p) {
+            QVariant photo = ImageManipulationDelegate::instance()->contactPhoto(p, QSize(35,35));
+            [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
         } else {
-            pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
-            if(((NSTreeNode*)item).indexPath.length == 2) {
-                Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-                QVariant photo = ImageManipulationDelegate::instance()->contactPhoto(p, QSize(35,35));
-                [pCell setPersonImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-            }
+            ImageManipulationDelegate* delegate = (ImageManipulationDelegate*) ImageManipulationDelegate::instance();
+            QVariant photo = delegate->defaultUserPixmap(QSize(35,35));
+            [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
         }
+        NSTextField* details = [result viewWithTag:DETAILS_TAG];
+        [details setStringValue:@""];
+    } else {
+        result = [outlineView makeViewWithIdentifier:@"ContactMethodCell" owner:outlineView];
     }
+
+    NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
+    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+
+    return result;
+}
+
+- (IBAction)callClickedAtRow:(id)sender {
+    NSInteger row = [personsView rowForView:sender];
+    [personsView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+    [self callContact:nil];
+}
+
+- (IBAction)messageClickerAtRow:(id)sender {
+    
 }
 
 // -------------------------------------------------------------------------------
@@ -234,11 +238,7 @@ public:
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.parent().isValid()) {
-        return 20.0;
-    } else {
-        return 45.0;
-    }
+    return (((NSTreeNode*)item).indexPath.length == 2) ? 60.0 : 20.0;
 }
 
 @end
