@@ -111,7 +111,9 @@ SET(ringclient_CONTROLLERS
    src/ChatVC.mm
    src/ChatVC.h
    src/PersonLinkerVC.mm
-   src/PersonLinkerVC.h)
+   src/PersonLinkerVC.h
+   src/SmartViewVC.mm
+   src/SmartViewVC.h)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
@@ -171,9 +173,14 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_chat.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_quality.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_received.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_missed.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_made.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_persons.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_history.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
