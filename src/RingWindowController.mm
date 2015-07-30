@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -29,6 +29,7 @@
  */
 #import "RingWindowController.h"
 
+//LRC
 #import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
@@ -43,6 +44,7 @@
 @property NSSearchField* callField;
 @property CurrentCallVC* currentVC;
 @property (unsafe_unretained) IBOutlet NSView *callView;
+@property (unsafe_unretained) IBOutlet NSTextField *ringIDLabel;
 
 
 @end
@@ -50,7 +52,7 @@
 @implementation RingWindowController
 @synthesize callField;
 @synthesize currentVC;
-@synthesize callView;
+@synthesize callView, ringIDLabel;
 
 static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
@@ -67,6 +69,42 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
     [callView addSubview:[self.currentVC view]];
     [currentVC initFrame];
+
+    // Update Ring ID label based on account model changes
+    QObject::connect(AccountModel::instance(),
+                     &AccountModel::dataChanged,
+                     [=] {
+                         [self updateRingID];
+                     });
+}
+
+/**
+ * Implement the necessary logic to choose which Ring ID to display.
+ * This tries to choose the "best" ID to show
+ */
+- (void) updateRingID
+{
+    Account* registered = nullptr;
+    Account* enabled = nullptr;
+    Account* finalChoice = nullptr;
+
+    [ringIDLabel setStringValue:@""];
+    auto ringList = AccountModel::instance()->getAccountsByProtocol(Account::Protocol::RING);
+    for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
+        Account* acc = ringList.value(i);
+        if (acc->isEnabled()) {
+            if(!enabled)
+                enabled = finalChoice = acc;
+            if (acc->registrationState() == Account::RegistrationState::READY) {
+                registered = enabled = finalChoice = acc;
+            }
+        } else {
+            if (!finalChoice)
+                finalChoice = acc;
+        }
+    }
+
+    [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"Your Ring ID : %@", finalChoice->username().toNSString()]];
 }
 
 - (IBAction)openPreferences:(id)sender
