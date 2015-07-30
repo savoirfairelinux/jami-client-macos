@@ -66,10 +66,9 @@
     self->privateQModel = model;
 
     NSMutableArray* nodes = [[NSMutableArray alloc] init];
-    [self connect];
-
     [self populate:nodes];
 
+    [self connect];
     return [self initWithContent:nodes];
 }
 
@@ -89,7 +88,6 @@
         return;
     for (int i = 0 ; i < self->privateQModel->rowCount(qIdx) ; ++i) {
         Node* n = [[Node alloc] init];
-        //qDebug() << "POPUL CHILD:"<< self->privateQModel->index(i, 0, qIdx) ;
         [self populateChild:[n children] withParent:self->privateQModel->index(i, 0, qIdx)];
         [nodes insertObject:n atIndex:i];
     }
@@ -182,12 +180,12 @@
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsMoved,
-                     [=](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
+                     [self](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
                          //NSLog(@"rows moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
                          /* these rows should have been removed in the "rowsAboutToBeMoved" handler
                           * now insert them in the new location */
                          for( int row = sourceStart; row <= sourceEnd; row++) {
-                             //TODO
+
                          }
                          [self rearrangeObjects];
                      });
