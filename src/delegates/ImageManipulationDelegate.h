@@ -45,12 +45,11 @@ public:
     QVariant contactPhoto(Person* c, const QSize& size, bool displayPresence = true) override;
     virtual QByteArray toByteArray(const QVariant& pxm) override;
     virtual QVariant personPhoto(const QByteArray& data, const QString& type = "PNG") override;
+    QPixmap defaultUserPixmap(const QSize& size, bool displayPresence = false, bool isPresent = false);
 
 private:
     //Helper
-    QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent);
     CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
-
 
 };
 

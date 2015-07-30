@@ -44,10 +44,10 @@
 
 @interface RingWindowController ()
 
-@property NSSearchField* callField;
 @property CurrentCallVC* currentVC;
 @property (unsafe_unretained) IBOutlet NSView *callView;
 @property (unsafe_unretained) IBOutlet NSTextField *ringIDLabel;
+@property (unsafe_unretained) IBOutlet NSSearchFieldCell *callField;
 
 
 @end
@@ -57,19 +57,13 @@
 @synthesize currentVC;
 @synthesize callView, ringIDLabel;
 
-static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
-static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
-static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
-
 - (void)windowDidLoad {
     [super windowDidLoad];
-    [self.window setReleasedWhenClosed:FALSE];
-    [self displayMainToolBar];
+    [self.window setMovableByWindowBackground:YES];
 
     currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-
 
     PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
     [callView addSubview:[self.currentVC view]];
@@ -171,18 +165,11 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     if(self.myCurrentViewController != nil)
     {
         [self.preferencesViewController close];
-        [self displayMainToolBar];
+        [self.window setToolbar:nil];
         self.preferencesViewController = nil;
     }
 }
 
--(void) displayMainToolBar
-{
-    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"MainToolbar"];
-    [tb setDisplayMode:NSToolbarDisplayModeIconAndLabel];
-    [tb setDelegate: self];
-    [self.window setToolbar: tb];
-}
 
 // FIXME: This is sick, NSWindowController is catching my selectors
 - (void)displayGeneral:(NSToolbarItem *)sender {
@@ -217,45 +204,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [self.window setToolbar:tb];
 }
 
-#pragma NSToolbar Delegate
-
--(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
-{
-    NSToolbarItem* item = nil;
-
-    if ([itemIdentifier isEqualToString: kSearchViewIdentifier]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kSearchViewIdentifier];
-        callField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0,0,400,21)];
-        [[callField cell] setSearchButtonCell:nil];
-        [callField setToolTip:@"Call"];
-        [callField setAlignment:NSCenterTextAlignment];
-        [callField setDelegate:self];
-        [item setView:callField];
-    }
-
-    if ([itemIdentifier isEqualToString: kCallButtonIdentifer]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kCallButtonIdentifer];
-
-        NSButton *callButton = [[NSButton alloc] initWithFrame:NSMakeRect(0,0,80,30)];
-
-        [callButton setButtonType:NSMomentaryLightButton]; //Set what type button You want
-        [callButton setBezelStyle:NSRoundedBezelStyle]; //Set what style You want]
-        [callButton setBordered:YES];
-        [callButton setTitle:@"Call"];
-        [item setView:callButton];
-        [item setAction:@selector(placeCall:)];
-    }
-
-    if ([itemIdentifier isEqualToString: kPreferencesIdentifier]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kPreferencesIdentifier];
-        [item setImage: [NSImage imageNamed: @"NSAdvanced"]];
-        [item setLabel: @"Settings"];
-        [item setAction:@selector(openPreferences:)];
-    }
-
-    return item;
-}
-
 - (IBAction)placeCall:(id)sender
 {
     Call* c = CallModel::instance()->dialingCall();
@@ -272,33 +220,6 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     c << Call::Action::ACCEPT;
 }
 
--(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
-{
-    return [NSArray arrayWithObjects:
-            NSToolbarSpaceItemIdentifier,
-            NSToolbarFlexibleSpaceItemIdentifier,
-            NSToolbarSpaceItemIdentifier,
-            NSToolbarSpaceItemIdentifier,
-            kSearchViewIdentifier,
-            kCallButtonIdentifer,
-            NSToolbarFlexibleSpaceItemIdentifier,
-            kPreferencesIdentifier,
-            nil];
-}
-
--(NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
-{
-    return [NSArray arrayWithObjects:
-            kSearchViewIdentifier,
-            kCallButtonIdentifer,
-            kPreferencesIdentifier,
-            nil];
-}
-
--(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
-{
-    return nil;
-}
 
 #pragma NSTextField Delegate
 

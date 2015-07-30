@@ -111,7 +111,9 @@ SET(ringclient_CONTROLLERS
    src/ChatVC.mm
    src/ChatVC.h
    src/PersonLinkerVC.mm
-   src/PersonLinkerVC.h)
+   src/PersonLinkerVC.h
+   src/SmartViewVC.mm
+   src/SmartViewVC.h)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
