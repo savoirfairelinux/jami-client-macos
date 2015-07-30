@@ -48,6 +48,8 @@
 @property (assign) IBOutlet NSPopUpButton *sizesList;
 @property (assign) IBOutlet NSPopUpButton *ratesList;
 
+@property BOOL shouldHandlePreview;
+
 @end
 
 @implementation VideoPrefsVC
@@ -97,6 +99,8 @@ QMetaObject::Connection previewStopped;
 
     }
 
+    // check if preview has to be started/stopped by this controller
+    self.shouldHandlePreview = !Video::PreviewManager::instance()->isPreviewing();
 
     [previewView setWantsLayer:YES];
     [previewView setLayer:[CALayer layer]];
@@ -191,12 +195,16 @@ QMetaObject::Connection previewStopped;
 
 - (void) viewWillAppear
 {
-    Video::PreviewManager::instance()->startPreview();
+    if (self.shouldHandlePreview) {
+        Video::PreviewManager::instance()->startPreview();
+    }
 }
 
 - (void)viewWillDisappear
 {
-    Video::PreviewManager::instance()->stopPreview();
+    if (self.shouldHandlePreview) {
+        Video::PreviewManager::instance()->stopPreview();
+    }
 }
 
 #pragma mark - NSMenuDelegate methods
