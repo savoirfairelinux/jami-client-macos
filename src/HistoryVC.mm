@@ -86,6 +86,14 @@
     [historyView setShortcutsDelegate:self];
 
     CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
+
+    QObject::connect(CallModel::instance(),
+                     &CategorizedHistoryModel::dataChanged,
+                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
+                         [historyView reloadDataForRowIndexes:
+                          [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
+                                                      columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, historyView.tableColumns.count)]];
+                     });
 }
 
 - (void)placeHistoryCall:(id)sender
