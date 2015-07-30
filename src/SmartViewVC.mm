@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,75 +27,55 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import "HistoryVC.h"
 
-#import <categorizedhistorymodel.h>
-#import <QSortFilterProxyModel>
+#import "SmartViewVC.h"
+
+//LRC
+#import <recentmodel.h>
 #import <callmodel.h>
 #import <call.h>
 #import <contactmethod.h>
-#import <localhistorycollection.h>
 
 #import "QNSTreeController.h"
 
-#define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
-#define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
-#define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
+#define COLUMNID_MAIN @"MainColumn"	// the single column name in our outline view
 
-@interface HistoryVC()
 
+@interface SmartViewVC () <NSOutlineViewDelegate>
+
+@property (unsafe_unretained) IBOutlet NSOutlineView *smartView;
+@property (unsafe_unretained) IBOutlet NSSearchField *searchField;
 @property QNSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *historyView;
-@property QSortFilterProxyModel *historyProxyModel;
+
 @end
 
-@implementation HistoryVC
+@implementation SmartViewVC
+@synthesize smartView;
 @synthesize treeController;
-@synthesize historyView;
-@synthesize historyProxyModel;
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        NSLog(@"INIT HVC");
-
-    }
-    return self;
-}
 
 - (void)awakeFromNib
 {
-    historyProxyModel = new QSortFilterProxyModel(CategorizedHistoryModel::instance());
-    historyProxyModel->setSourceModel(CategorizedHistoryModel::instance());
-    historyProxyModel->setSortRole(static_cast<int>(Call::Role::Date));
-    historyProxyModel->sort(0,Qt::DescendingOrder);
-    treeController = [[QNSTreeController alloc] initWithQModel:historyProxyModel];
+    NSLog(@"INIT SmartView VC");
+
+    treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
-    [historyView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [historyView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [historyView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-    [historyView setTarget:self];
-    [historyView setDoubleAction:@selector(placeHistoryCall:)];
-
-    CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
-
-    QObject::connect(CallModel::instance(),
-                     &CategorizedHistoryModel::dataChanged,
-                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         [historyView reloadDataForRowIndexes:
-                          [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
-                                                      columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, historyView.tableColumns.count)]];
-                     });
+    [smartView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+    [smartView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+    [smartView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [smartView setTarget:self];
+    [smartView setDoubleAction:@selector(placeCall:)];
+    NSInteger idx = [smartView columnWithIdentifier:COLUMNID_MAIN];
+    [[[[self.smartView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
 }
 
-- (void)placeHistoryCall:(id)sender
+- (void)placeCall:(id)sender
 {
     if([[treeController selectedNodes] count] > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
+        QVariant var = RecentModel::instance()->data(qIdx, (int)Call::Role::ContactMethod);
         ContactMethod* m = qvariant_cast<ContactMethod*>(var);
         if(m){
             Call* c = CallModel::instance()->dialingCall();
@@ -157,19 +137,11 @@
 // -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid())
-        return;
-
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_MAIN])
     {
-        cell.title = historyProxyModel->data(qIdx, Qt::DisplayRole).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::Number).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
+        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+        if(qIdx.isValid())
+            cell.title = RecentModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
     }
 }
 
@@ -179,7 +151,7 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
-    //NSLog(@"outlineViewSelectionDidChange!!");
 }
+
 
 @end

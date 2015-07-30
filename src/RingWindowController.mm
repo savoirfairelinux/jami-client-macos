@@ -59,7 +59,7 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 - (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setReleasedWhenClosed:FALSE];
-    [self displayMainToolBar];
+    //[self displayMainToolBar];
 
     currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -128,7 +128,7 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     if(self.myCurrentViewController != nil)
     {
         [self.preferencesViewController close];
-        [self displayMainToolBar];
+        //[self displayMainToolBar];
         self.preferencesViewController = nil;
     }
 }
