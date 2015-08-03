@@ -78,7 +78,7 @@
 
     // Check if the pasteboard contains image data and source/user wants it copied
     if ( [sender draggingSourceOperationMask] & NSDragOperationCopy &&
-        (UTTypeConformsTo(fileUTI, kUTTypeVideo)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie))) {
+        (UTTypeConformsTo(fileUTI, kUTTypeVideo)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie))) {
 
         //highlight our drop zone
         highlight=YES;
@@ -144,7 +144,7 @@
     CFStringRef fileExtension = (__bridge CFStringRef) [fileURL.path pathExtension];
     CFStringRef fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension, NULL);
 
-    BOOL conforms = (UTTypeConformsTo(fileUTI, kUTTypeVideo)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie));
+    BOOL conforms = (UTTypeConformsTo(fileUTI, kUTTypeVideo)) || (UTTypeConformsTo(fileUTI, kUTTypeMovie)) || UTTypeConformsTo(fileUTI, kUTTypeImage);
     CFRelease(fileUTI);
     //check to see if we can accept the data
     return conforms;
@@ -212,6 +212,7 @@
     NSMutableArray* fileTypes = [NSMutableArray array];
     [fileTypes addObject:(__bridge NSString *)kUTTypeVideo];
     [fileTypes addObject:(__bridge NSString *)kUTTypeMovie];
+    [fileTypes addObject:(__bridge NSString *)kUTTypeImage];
     [browsePanel setAllowedFileTypes:fileTypes];
 
     [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
