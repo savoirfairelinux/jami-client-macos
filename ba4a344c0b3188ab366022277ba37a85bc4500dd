@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a51691d_e6951e89",
+        "filename": "src/backends/AddressBookBackend.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2015-08-04T14:35:40Z",
+      "side": 1,
+      "message": "Maybe with should change that in LRC as everyone is doing it to bypass the const.",
+      "range": {
+        "startLine": 207,
+        "startChar": 31,
+        "endLine": 207,
+        "endChar": 49
+      },
+      "revId": "ba4a344c0b3188ab366022277ba37a85bc4500dd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
