@@ -98,6 +98,11 @@ public:
     CategorizedContactModel::instance()->setUnreachableHidden(YES);
 }
 
+- (void) dealloc
+{
+    delete contactProxyModel;
+}
+
 - (IBAction)callContact:(id)sender
 {
     if([[treeController selectedNodes] count] > 0) {

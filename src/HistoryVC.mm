@@ -88,6 +88,11 @@
     CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 }
 
+- (void) dealloc
+{
+    delete historyProxyModel;
+}
+
 - (void)placeHistoryCall:(id)sender
 {
     if([[treeController selectedNodes] count] > 0) {

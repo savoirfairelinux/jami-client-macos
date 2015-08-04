@@ -123,7 +123,7 @@ public:
 
     AccountModel::instance()->selectionModel()->clearCurrentIndex();
 
-    self.proxyProtocolModel = new ActiveProtocolModel(AccountModel::instance()->protocolModel());
+    proxyProtocolModel = new ActiveProtocolModel(AccountModel::instance()->protocolModel());
     QModelIndex qProtocolIdx = AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
     [self.protocolList addItemWithTitle:
                            AccountModel::instance()->protocolModel()->data(qProtocolIdx, Qt::DisplayRole).toString().toNSString()];
@@ -157,6 +157,11 @@ public:
     [[self.ringVC view] setFrame:[self.ringTabItem.view frame]];
     [[self.ringVC view] setBounds:[self.ringTabItem.view bounds]];
     [self.ringTabItem setView:self.ringVC.view];
+}
+
+- (void) dealloc
+{
+    delete proxyProtocolModel;
 }
 
 - (IBAction)moveUp:(id)sender {
