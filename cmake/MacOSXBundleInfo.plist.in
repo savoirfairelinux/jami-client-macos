@@ -42,5 +42,16 @@
     <string>${MACOSX_BUNDLE_NSMAIN_NIB_FILE}</string>
     <key>NSPrincipalClass</key>
     <string>${MACOSX_BUNDLE_NSPRINCIPAL_CLASS}</string>
+    <key>CFBundleURLTypes</key>
+        <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>Ring ID</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>ring</string>
+            </array>
+       </dict>
+       </array>
 </dict>
 </plist>
