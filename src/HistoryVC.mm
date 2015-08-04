@@ -224,7 +224,7 @@
         [self.addToContactPopover performClose:self];
         self.addToContactPopover = NULL;
     } else if (contactmethod) {
-        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonEditor" bundle:nil];
+        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
         [editorVC setMethodToLink:contactmethod];
         [editorVC setContactLinkedDelegate:self];
         self.addToContactPopover = [[NSPopover alloc] init];
