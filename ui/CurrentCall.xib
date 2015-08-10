@@ -11,6 +11,7 @@
                 <outlet property="chatVC" destination="LWe-df-dS6" id="SMR-T0-fYe"/>
                 <outlet property="controlsPanel" destination="Eoi-B8-iL6" id="4xn-3b-SNn"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
+                <outlet property="headerContainer" destination="d0X-cW-Xgz" id="7RM-kh-vCm"/>
                 <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
                 <outlet property="loadingIndicator" destination="JwW-2h-DyZ" id="EEb-50-oSJ"/>
                 <outlet property="muteAudioButton" destination="tQl-cT-0Lb" id="qV4-Ef-UTx"/>

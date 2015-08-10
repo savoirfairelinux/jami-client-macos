@@ -59,6 +59,17 @@
     {
         [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
     }
+
+    [self.window setAcceptsMouseMovedEvents:YES];
+
+    NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect | NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved);
+
+    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:frame
+                                                        options:options
+                                                          owner:self
+                                                       userInfo:nil];
+
+    [self addTrackingArea:area];
     return self;
 }
 
@@ -178,6 +189,21 @@
     [NSMenu popUpContextMenu:contextualMenu withEvent:theEvent forView:self];
 }
 
+- (void)mouseMoved:(NSEvent *)theEvent
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
+    [self performSelector:@selector(mouseIdle:) withObject:theEvent afterDelay:3];
+    if (self.callDelegate)
+        [self.callDelegate mouseIsMoving:YES];
+}
+
+- (void) mouseIdle:(NSEvent *)theEvent
+{
+    if (self.callDelegate)
+        [self.callDelegate mouseIsMoving:NO];
+}
+
+
 - (void)mouseUp:(NSEvent *)theEvent
 {
     if([theEvent clickCount] == 1 && shouldAcceptInteractions) {
@@ -189,8 +215,8 @@
     else if([theEvent clickCount] == 2)
     {
         [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
-        if(self.fullScreenDelegate)
-            [self.fullScreenDelegate callShouldToggleFullScreen];
+        if(self.callDelegate)
+            [self.callDelegate callShouldToggleFullScreen];
     }
 }
 
