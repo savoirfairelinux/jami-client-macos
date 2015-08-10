@@ -46,6 +46,7 @@
 #import "views/ITProgressIndicator.h"
 #import "views/CallView.h"
 #import "PersonLinkerVC.h"
+#import "ChatVC.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -80,6 +81,7 @@
 
 @property (strong) IBOutlet NSPopover *qualityPopOver;
 @property (strong) NSPopover* addToContactPopover;
+@property (strong) IBOutlet ChatVC *chatVC;
 
 @property QHash<int, NSButton*> actionHash;
 
@@ -531,6 +533,8 @@
     [left setFrameSize:leftFrame.size];
     [right setFrame:rightFrame];
     [splitView display];
+
+    [self.chatVC takeFocus];
 }
 
 

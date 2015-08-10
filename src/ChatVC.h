@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -37,5 +37,7 @@
  * if message.length is > 0, button is enabled, otherwise disabled
  */
 @property (retain) NSString* message;
+
+- (void) takeFocus;
 
 @end
