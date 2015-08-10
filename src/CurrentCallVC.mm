@@ -71,6 +71,7 @@
 @property (unsafe_unretained) IBOutlet NSButton *muteAudioButton;
 @property (unsafe_unretained) IBOutlet NSButton *muteVideoButton;
 @property (unsafe_unretained) IBOutlet NSButton *addContactButton;
+@property (unsafe_unretained) IBOutlet NSView *headerContainer;
 
 @property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
@@ -102,8 +103,7 @@
 @implementation CurrentCallVC
 @synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, timeSpentLabel,
-            muteVideoButton, muteAudioButton, controlsPanel, videoView,
-            videoLayer, previewLayer, previewView, splitView, loadingIndicator;
+            muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, videoLayer, previewLayer, previewView, splitView, loadingIndicator;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -179,8 +179,8 @@
             break;
         case Call::State::OVER:
             [videoView setShouldAcceptInteractions:NO];
-            if(videoView.isInFullScreenMode)
-                [videoView exitFullScreenModeWithOptions:nil];
+            if(self.splitView.isInFullScreenMode)
+                [self.splitView exitFullScreenModeWithOptions:nil];
             break;
         case Call::State::FAILURE:
             [videoView setShouldAcceptInteractions:NO];
@@ -235,7 +235,7 @@
     [loadingIndicator setLengthOfLine:2];
     [loadingIndicator setInnerMargin:30];
 
-    [self.videoView setFullScreenDelegate:self];
+    [self.videoView setCallDelegate:self];
 
     [self connect];
 }
@@ -430,6 +430,10 @@
     [animation setDuration:0.2f];
     [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
     [CATransaction setCompletionBlock:^{
+
+        // when call comes in we want to show the controls/header
+        [self mouseIsMoving:YES];
+
         [self connectVideoSignals];
         /* check if text media is already present */
         if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
@@ -642,7 +646,7 @@
 }
 
 
-# pragma mark - FullScreenDelegate
+# pragma mark - CallnDelegate
 
 - (void) callShouldToggleFullScreen
 {
@@ -656,6 +660,12 @@
 
         [self.splitView enterFullScreenMode:[NSScreen mainScreen]  withOptions:opts];
     }
+}
+
+-(void) mouseIsMoving:(BOOL) move
+{
+    [[controlsPanel animator] setAlphaValue:move]; // fade out
+    [[headerContainer animator] setAlphaValue:move];
 }
 
 @end
