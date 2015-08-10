@@ -171,7 +171,7 @@
                             </tabViewItem>
                             <tabViewItem label="Contacts" identifier="" id="Zbi-X6-DLT">
                                 <view key="view" id="sag-tS-7Jw">
-                                    <rect key="frame" x="10" y="7" width="289" height="405"/>
+                                    <rect key="frame" x="10" y="7" width="295" height="405"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView focusRingType="none" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJv-ju-DFe">
@@ -181,7 +181,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="293" height="48"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="293" height="42"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -231,6 +231,17 @@
                             </tabViewItem>
                         </tabViewItems>
                     </tabView>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID">
+                        <rect key="frame" x="321" y="0.0" width="714" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="TYe-h2-pPT"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="qCF-Zf-vZg">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                     <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
                         <rect key="frame" x="323" y="0.0" width="730" height="626"/>
                         <constraints>
@@ -238,30 +249,19 @@
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
                         </constraints>
                     </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd">
-                        <rect key="frame" x="321" y="20" width="714" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="26" id="935-yR-f9b"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" id="qCF-Zf-vZg">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="JN3-vO-zcd" firstAttribute="leading" secondItem="tSW-YT-asL" secondAttribute="leading" id="4Vu-Lf-w9F"/>
                     <constraint firstItem="xXW-iq-GcP" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="6mJ-d2-JIf"/>
                     <constraint firstItem="bqQ-DB-Z0g" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="FeC-4y-ScK"/>
+                    <constraint firstAttribute="trailing" secondItem="JN3-vO-zcd" secondAttribute="trailing" constant="20" symbolic="YES" id="KPv-O8-ffI"/>
                     <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="bqQ-DB-Z0g" secondAttribute="bottom" constant="8" id="KXj-CP-Fmh"/>
-                    <constraint firstAttribute="trailing" secondItem="JN3-vO-zcd" secondAttribute="trailing" constant="20" symbolic="YES" id="O3N-2P-8iN"/>
-                    <constraint firstItem="JN3-vO-zcd" firstAttribute="bottom" secondItem="xXW-iq-GcP" secondAttribute="bottom" id="OoQ-1f-3Nr"/>
                     <constraint firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="Xa4-hd-K1t"/>
                     <constraint firstItem="tSW-YT-asL" firstAttribute="leading" secondItem="bqQ-DB-Z0g" secondAttribute="trailing" constant="8" id="cW1-si-AGR"/>
                     <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="g0F-Wt-YT6"/>
                     <constraint firstAttribute="bottom" secondItem="xXW-iq-GcP" secondAttribute="bottom" constant="20" id="hQL-rc-Qaw"/>
                     <constraint firstItem="bqQ-DB-Z0g" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="jQg-C7-rD0"/>
+                    <constraint firstItem="JN3-vO-zcd" firstAttribute="leading" secondItem="tSW-YT-asL" secondAttribute="leading" id="rqu-Sb-asZ"/>
+                    <constraint firstItem="JN3-vO-zcd" firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="tIa-aw-5Gu"/>
                     <constraint firstItem="tSW-YT-asL" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="w5j-cX-qS9"/>
                 </constraints>
             </view>

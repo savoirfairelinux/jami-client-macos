@@ -72,7 +72,8 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
 
 
     PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
-    [callView addSubview:[self.currentVC view]];
+    [callView addSubview:[self.currentVC view] positioned:NSWindowAbove relativeTo:nil];
+
     [currentVC initFrame];
 
     // Update Ring ID label based on account model changes

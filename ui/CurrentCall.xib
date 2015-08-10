@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="addContactButton" destination="Zss-6A-bSy" id="Px0-5v-NE7"/>
                 <outlet property="chatButton" destination="fmp-x4-Pef" id="ARt-dr-TRo"/>
+                <outlet property="chatVC" destination="LWe-df-dS6" id="SMR-T0-fYe"/>
                 <outlet property="controlsPanel" destination="Eoi-B8-iL6" id="4xn-3b-SNn"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
                 <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
@@ -28,14 +29,14 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="1014" height="509"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIJ-gB-FZo">
+                <splitView wantsLayer="YES" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIJ-gB-FZo">
                     <rect key="frame" x="0.0" y="0.0" width="1014" height="509"/>
                     <subviews>
-                        <customView id="2wf-Py-l6B" customClass="CallView">
+                        <customView wantsLayer="YES" id="2wf-Py-l6B" customClass="CallView">
                             <rect key="frame" x="0.0" y="0.0" width="675" height="509"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
@@ -78,7 +79,7 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <button hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zss-6A-bSy" userLabel="Chat">
+                                        <button hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zss-6A-bSy" userLabel="AddToContact">
                                             <rect key="frame" x="107" y="6" width="54" height="32"/>
                                             <backgroundFilters>
                                                 <ciFilter name="CIColorMonochrome">
@@ -303,7 +304,7 @@
                                 <constraint firstItem="Eoi-B8-iL6" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="sHw-xg-QAo"/>
                             </constraints>
                         </customView>
-                        <customView id="TdD-3L-553">
+                        <customView wantsLayer="YES" id="TdD-3L-553">
                             <rect key="frame" x="676" y="0.0" width="338" height="509"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
@@ -321,7 +322,7 @@
                                         <binding destination="LWe-df-dS6" name="enabled" keyPath="self.message.length" id="ec2-s1-Hpt"/>
                                     </connections>
                                 </button>
-                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OBX-o0-u1k">
+                                <textField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OBX-o0-u1k">
                                     <rect key="frame" x="20" y="20" width="252" height="22"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" bezelStyle="round" id="QW9-Ty-ZEe">
                                         <font key="font" metaFont="system"/>
@@ -406,7 +407,7 @@
                 <outlet property="view" destination="TdD-3L-553" id="HQf-B1-D8b"/>
             </connections>
         </viewController>
-        <customView id="Y38-Id-LGC">
+        <customView wantsLayer="YES" id="Y38-Id-LGC">
             <rect key="frame" x="0.0" y="4" width="56" height="161"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>

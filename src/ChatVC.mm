@@ -84,6 +84,7 @@
     [chatView setDefaultParagraphStyle:paragraphStyle];
 }
 
+
 - (void) setupChat
 {
     QObject::disconnect(mediaHolder.newMediaAdded);
@@ -163,6 +164,11 @@
 
     [chatView scrollRangeToVisible:NSMakeRange([[chatView string] length], 0)];
 
+}
+
+- (void) takeFocus
+{
+    [self.view.window makeFirstResponder:self.messageField];
 }
 
 - (IBAction)sendMessage:(id)sender {
