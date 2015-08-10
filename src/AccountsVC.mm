@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -235,6 +235,8 @@ public:
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
     [configPanels insertTabViewItem:audioTabItem atIndex:1];
     [configPanels insertTabViewItem:videoTabItem atIndex:2];
+    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
+
 }
 
 - (IBAction)toggleAccount:(NSOutlineView*)sender {

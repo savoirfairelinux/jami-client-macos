@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -37,34 +37,46 @@
 #define MINVIDEO_TAG 7
 #define MAXVIDEO_TAG 8
 
+#define TURN_SERVER_TAG     9
+#define TURN_USERNAME_TAG   10
+#define TURN_PASSWORD_TAG   11
+#define TURN_REALM_TAG      12
+
 #import "AccAdvancedVC.h"
 
 #import <accountmodel.h>
 #import <qitemselectionmodel.h>
 
 @interface AccAdvancedVC ()
+@property (unsafe_unretained) IBOutlet NSView *registrationContainer;
+@property (unsafe_unretained) IBOutlet NSView *mainContainer;
 
-@property (assign) IBOutlet NSTextField *registrationField;
-@property (assign) IBOutlet NSTextField *localPortField;
-@property (assign) IBOutlet NSButton *isUsingSTUN;
+@property (unsafe_unretained) IBOutlet NSTextField *registrationField;
+@property (unsafe_unretained) IBOutlet NSTextField *localPortField;
+@property (unsafe_unretained) IBOutlet NSButton *isUsingSTUN;
 
-@property (assign) IBOutlet NSTextField *STUNserverURLField;
-@property (assign) IBOutlet NSTextField *minAudioRTPRange;
-@property (assign) IBOutlet NSTextField *maxAudioRTPRange;
-@property (assign) IBOutlet NSTextField *minVideoRTPRange;
-@property (assign) IBOutlet NSTextField *maxVideoRTPRange;
+@property (unsafe_unretained) IBOutlet NSTextField *STUNserverURLField;
+@property (unsafe_unretained) IBOutlet NSTextField *minAudioRTPRange;
+@property (unsafe_unretained) IBOutlet NSTextField *maxAudioRTPRange;
+@property (unsafe_unretained) IBOutlet NSTextField *minVideoRTPRange;
+@property (unsafe_unretained) IBOutlet NSTextField *maxVideoRTPRange;
 
+@property (unsafe_unretained) IBOutlet NSButton *isUsingTURN;
+@property (unsafe_unretained) IBOutlet NSTextField *turnServerURL;
+@property (unsafe_unretained) IBOutlet NSTextField *turnUsername;
+@property (unsafe_unretained) IBOutlet NSSecureTextField *turnPassword;
+@property (unsafe_unretained) IBOutlet NSTextField *turnRealm;
 
-@property (assign) IBOutlet NSStepper *registrationStepper;
-@property (assign) IBOutlet NSStepper *localPortStepper;
-@property (assign) IBOutlet NSStepper *minAudioPortStepper;
-@property (assign) IBOutlet NSStepper *maxAudioPortStepper;
-@property (assign) IBOutlet NSStepper *minVideoPortStepper;
-@property (assign) IBOutlet NSStepper *maxVideoPortStepper;
+@property (unsafe_unretained) IBOutlet NSStepper *registrationStepper;
+@property (unsafe_unretained) IBOutlet NSStepper *localPortStepper;
+@property (unsafe_unretained) IBOutlet NSStepper *minAudioPortStepper;
+@property (unsafe_unretained) IBOutlet NSStepper *maxAudioPortStepper;
+@property (unsafe_unretained) IBOutlet NSStepper *minVideoPortStepper;
+@property (unsafe_unretained) IBOutlet NSStepper *maxVideoPortStepper;
 
-@property (assign) IBOutlet NSMatrix *publishAddrAndPortRadioGroup;
-@property (assign) IBOutlet NSTextField *publishedAddrField;
-@property (assign) IBOutlet NSTextField *publishedPortField;
+@property (unsafe_unretained) IBOutlet NSMatrix *publishAddrAndPortRadioGroup;
+@property (unsafe_unretained) IBOutlet NSTextField *publishedAddrField;
+@property (unsafe_unretained) IBOutlet NSTextField *publishedPortField;
 
 @end
 
@@ -79,6 +91,7 @@
 @synthesize maxVideoRTPRange;
 @synthesize registrationStepper;
 @synthesize localPortStepper;
+@synthesize turnPassword, isUsingTURN, turnRealm, turnServerURL, turnUsername;
 @synthesize minAudioPortStepper;
 @synthesize maxAudioPortStepper;
 @synthesize minVideoPortStepper;
@@ -96,6 +109,11 @@
     [maxAudioPortStepper setTag:MAXAUDIO_TAG];
     [minVideoPortStepper setTag:MINVIDEO_TAG];
     [maxVideoPortStepper setTag:MAXVIDEO_TAG];
+
+    [turnServerURL setTag:TURN_SERVER_TAG];
+    [turnUsername setTag:TURN_USERNAME_TAG];
+    [turnPassword setTag:TURN_PASSWORD_TAG];
+    [turnRealm setTag:TURN_REALM_TAG];
 
     [registrationField setTag:REGISTRATION_TAG];
     [localPortField setTag:LOCALPORT_TAG];
@@ -139,6 +157,13 @@
     [isUsingSTUN setState:account->isSipStunEnabled()?NSOnState:NSOffState];
     [STUNserverURLField setEnabled:account->isSipStunEnabled()];
 
+    [isUsingTURN setState:account->isTurnEnabled()?NSOnState:NSOffState];
+    [self toggleTURN:isUsingTURN];
+    [turnServerURL setStringValue:account->turnServer().toNSString()];
+    [turnUsername setStringValue:account->turnServerUsername().toNSString()];
+    [turnPassword setStringValue:account->turnServerPassword().toNSString()];
+    [turnRealm setStringValue:account->turnServerRealm().toNSString()];
+
     if(account->isPublishedSameAsLocal())
         [publishAddrAndPortRadioGroup selectCellAtRow:0 column:0];
     else {
@@ -149,6 +174,12 @@
     [publishedPortField setIntValue:account->publishedPort()];
     [publishedAddrField setEnabled:!account->isPublishedSameAsLocal()];
     [publishedPortField setEnabled:!account->isPublishedSameAsLocal()];
+
+    if(account->protocol() == Account::Protocol::RING) {
+        [self.registrationContainer setHidden:YES];
+    } else {
+        [self.registrationContainer setHidden:NO];
+    }
 }
 
 #pragma mark - NSTextFieldDelegate methods
@@ -159,7 +190,7 @@
     NSRange test = [[textField currentEditor] selectedRange];
 
     [self valueDidChange:textField];
-    //FIXME: saving account lose focus because in NSTreeController we remove and reinsert row so View selction change
+    //FIXME: saving account lose focus because in NSTreeController we remove and reinsert row so View selection change
     [textField.window makeFirstResponder:textField];
     [[textField currentEditor] setSelectedRange:test];
 }
@@ -194,6 +225,18 @@
         case MAXVIDEO_TAG:
             [self currentAccount]->setVideoPortMax([sender integerValue]);
             break;
+        case TURN_SERVER_TAG:
+            [self currentAccount]->setTurnServer([[sender stringValue] UTF8String]);
+            break;
+        case TURN_USERNAME_TAG:
+            [self currentAccount]->setTurnServerUsername([[sender stringValue] UTF8String]);
+            break;
+        case TURN_PASSWORD_TAG:
+            [self currentAccount]->setTurnServerPassword([[sender stringValue] UTF8String]);
+            break;
+        case TURN_REALM_TAG:
+            [self currentAccount]->setTurnServerRealm([[sender stringValue] UTF8String]);
+            break;
         default:
             break;
     }
@@ -202,8 +245,16 @@
 
 - (IBAction)toggleSTUN:(NSButton *)sender
 {
-    [self currentAccount]->setSipStunEnabled([sender state]==NSOnState);
+    [self currentAccount]->setSipStunEnabled([sender state]);
     [STUNserverURLField setEnabled:[self currentAccount]->isSipStunEnabled()];
+}
+
+- (IBAction)toggleTURN:(id)sender {
+    [self currentAccount]->setTurnEnabled([sender state]);
+    [turnServerURL setEnabled:[sender state]];
+    [turnUsername setEnabled:[sender state]];
+    [turnPassword setEnabled:[sender state]];
+    [turnRealm setEnabled:[sender state]];
 }
 
 - (IBAction)didSwitchPublishedAddress:(NSMatrix *)matrix
