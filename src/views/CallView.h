@@ -29,12 +29,13 @@
  */
 #import <Cocoa/Cocoa.h>
 
-@protocol FullScreenDelegate;
-@protocol FullScreenDelegate
+@protocol CallDelegate;
+@protocol CallDelegate
 
 @optional
 
 -(void) callShouldToggleFullScreen;
+-(void) mouseIsMoving:(BOOL) move;
 
 @end
 
@@ -54,6 +55,6 @@
 /**
  *  Delegate to inform about desire to move
  */
-@property (nonatomic) id <FullScreenDelegate> fullScreenDelegate;
+@property (nonatomic) id <CallDelegate> callDelegate;
 
 @end
