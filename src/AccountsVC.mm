@@ -320,28 +320,28 @@ public:
 
     if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME])
     {
-        cell.title = AccountModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
+        cell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
     } else if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
         NSTextFieldCell* stateCell = cell;
-        Account::RegistrationState state = qvariant_cast<Account::RegistrationState>(qIdx.data((int)Account::Role::RegistrationState));
-        switch (state) {
+        auto account = AccountModel::instance()->getAccountByModelIndex(qIdx);
+        auto humanState = account->toHumanStateName();
+        [stateCell setTitle:humanState.toNSString()];
+
+        switch (account->registrationState()) {
             case Account::RegistrationState::READY:
                 [stateCell setTextColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]];
-                [stateCell setTitle:@"Ready"];
                 break;
             case Account::RegistrationState::TRYING:
                 [stateCell setTextColor:[NSColor redColor]];
-                [stateCell setTitle:@"Trying..."];
                 break;
             case Account::RegistrationState::UNREGISTERED:
                 [stateCell setTextColor:[NSColor blackColor]];
-                [stateCell setTitle:@"Unregistered"];
                 break;
             case Account::RegistrationState::ERROR:
                 [stateCell setTextColor:[NSColor redColor]];
-                [stateCell setTitle:@"Error"];
                 break;
             default:
+                [stateCell setTextColor:[NSColor blackColor]];
                 break;
         }
     } else if([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE]) {
