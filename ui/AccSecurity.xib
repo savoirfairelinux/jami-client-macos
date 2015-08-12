@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
@@ -10,9 +10,13 @@
                 <outlet property="certificatePathControl" destination="nm6-E0-NSH" id="fCd-di-v07"/>
                 <outlet property="cipherListView" destination="J53-ev-CMr" id="G0A-j6-uHa"/>
                 <outlet property="outgoingTlsServerName" destination="Zw6-Ys-Kie" id="JQC-aS-9eu"/>
+                <outlet property="pvkContainer" destination="x7E-hL-I22" id="nH2-8Y-eVl"/>
                 <outlet property="pvkPasswordField" destination="bZ4-7D-4l0" id="EEN-a1-4oT"/>
+                <outlet property="pvkPasswordValidation" destination="CA9-su-iR7" id="vue-8A-mQy"/>
                 <outlet property="pvkPathControl" destination="88W-qC-bQk" id="rWY-57-6pv"/>
                 <outlet property="requireCertButton" destination="oUu-x4-vV2" id="PNH-3v-phG"/>
+                <outlet property="showCAButton" destination="Bea-Hp-LP1" id="d2z-u1-G2A"/>
+                <outlet property="showUserCertButton" destination="aTq-AA-kGe" id="AKf-sq-H3U"/>
                 <outlet property="srtpRTPFallback" destination="uPY-dc-wnh" id="mqd-Uf-g1o"/>
                 <outlet property="tlsContainer" destination="Ubf-Oe-BbE" id="a5m-qR-9n2"/>
                 <outlet property="tlsMethodList" destination="OzX-Lm-vTo" id="t16-Ed-be0"/>
@@ -28,11 +32,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="694" height="628"/>
+            <rect key="frame" x="0.0" y="5" width="694" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KkG-2O-ExR">
-                    <rect key="frame" x="18" y="532" width="133" height="18"/>
+                    <rect key="frame" x="18" y="472" width="133" height="18"/>
                     <buttonCell key="cell" type="check" title="Use TLS transport" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="oTT-gO-fqM">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -42,10 +46,10 @@
                     </connections>
                 </button>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ubf-Oe-BbE">
-                    <rect key="frame" x="27" y="305" width="625" height="221"/>
+                    <rect key="frame" x="27" y="270" width="625" height="196"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JIN-cT-eC7">
-                            <rect key="frame" x="54" y="85" width="135" height="17"/>
+                            <rect key="frame" x="58" y="77" width="135" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TLS protocol method" id="uOE-XA-5gW">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -53,7 +57,7 @@
                             </textFieldCell>
                         </textField>
                         <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-lQ-lnP">
-                            <rect key="frame" x="193" y="177" width="200" height="26"/>
+                            <rect key="frame" x="197" y="169" width="200" height="26"/>
                             <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="onD-BW-yiQ">
                                 <font key="font" metaFont="system"/>
                             </pathCell>
@@ -63,7 +67,7 @@
                             </connections>
                         </pathControl>
                         <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nm6-E0-NSH">
-                            <rect key="frame" x="193" y="146" width="200" height="26"/>
+                            <rect key="frame" x="197" y="138" width="200" height="26"/>
                             <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="jgm-ZK-yDf">
                                 <font key="font" metaFont="system"/>
                             </pathCell>
@@ -72,34 +76,16 @@
                                 <outlet property="delegate" destination="-2" id="7dO-SK-pkt"/>
                             </connections>
                         </pathControl>
-                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="88W-qC-bQk">
-                            <rect key="frame" x="193" y="111" width="200" height="26"/>
-                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="peP-JR-p0s">
-                                <font key="font" metaFont="system"/>
-                            </pathCell>
-                            <connections>
-                                <action selector="pvkFilePathControlSingleClick:" target="-2" id="zsf-fI-Wms"/>
-                                <outlet property="delegate" destination="-2" id="Lg6-ti-eMl"/>
-                            </connections>
-                        </pathControl>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPj-Ol-4rt">
-                            <rect key="frame" x="92" y="150" width="101" height="17"/>
+                            <rect key="frame" x="96" y="142" width="101" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User Certificate" id="Jqz-P0-zAz">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Si-LL-vAi">
-                            <rect key="frame" x="121" y="117" width="72" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Private key" id="JHb-iu-ZwI">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
                         <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OzX-Lm-vTo">
-                            <rect key="frame" x="194" y="80" width="204" height="26"/>
+                            <rect key="frame" x="198" y="72" width="204" height="26"/>
                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="XAT-9Y-9e0">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
@@ -114,7 +100,7 @@
                             </connections>
                         </popUpButton>
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vei-qo-Elj">
-                            <rect key="frame" x="346" y="17" width="96" height="22"/>
+                            <rect key="frame" x="350" y="9" width="96" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="wIn-YV-Pbm">
                                 <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="Duh-um-Evj"/>
                                 <font key="font" metaFont="system"/>
@@ -126,7 +112,7 @@
                             </connections>
                         </textField>
                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zw6-Ys-Kie">
-                            <rect key="frame" x="346" y="46" width="244" height="22"/>
+                            <rect key="frame" x="350" y="38" width="244" height="22"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="CAB-Dc-UQr">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -137,7 +123,7 @@
                             </connections>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TnB-RJ-T6u">
-                            <rect key="frame" x="23" y="49" width="317" height="17"/>
+                            <rect key="frame" x="27" y="41" width="317" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Server name instance for outgoing TLS connection" id="UxS-et-whJ">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -145,7 +131,7 @@
                             </textFieldCell>
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Nq-Sf-LSO">
-                            <rect key="frame" x="211" y="20" width="129" height="17"/>
+                            <rect key="frame" x="215" y="12" width="129" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Negociation timeout" id="9Q3-1W-Lh3">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -153,7 +139,7 @@
                             </textFieldCell>
                         </textField>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bea-Hp-LP1">
-                            <rect key="frame" x="392" y="169" width="39" height="38"/>
+                            <rect key="frame" x="396" y="161" width="39" height="38"/>
                             <buttonCell key="cell" type="round" bezelStyle="circular" image="NSInfo" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="un1-35-2si">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="label"/>
@@ -163,7 +149,7 @@
                             </connections>
                         </button>
                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aTq-AA-kGe">
-                            <rect key="frame" x="392" y="138" width="39" height="38"/>
+                            <rect key="frame" x="396" y="130" width="39" height="38"/>
                             <buttonCell key="cell" type="round" bezelStyle="circular" image="NSInfo" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="lFn-d8-HkS">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="label"/>
@@ -173,38 +159,85 @@
                             </connections>
                         </button>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J7P-Gf-Pq8">
-                            <rect key="frame" x="38" y="181" width="155" height="17"/>
+                            <rect key="frame" x="42" y="173" width="155" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Certificate Authority list" id="vPF-Rp-aR6">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZ4-7D-4l0">
-                            <rect key="frame" x="398" y="112" width="192" height="22"/>
-                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password..." drawsBackground="YES" usesSingleLineMode="YES" id="7c2-kF-dcs">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <allowedInputSourceLocales>
-                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
-                                </allowedInputSourceLocales>
-                            </secureTextFieldCell>
-                            <connections>
-                                <outlet property="delegate" destination="-2" id="xf5-zS-Th0"/>
-                            </connections>
-                        </secureTextField>
                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HTb-Hz-UsO">
-                            <rect key="frame" x="447" y="14" width="19" height="27"/>
+                            <rect key="frame" x="451" y="6" width="19" height="27"/>
                             <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="NiO-pL-W7t"/>
                             <connections>
                                 <action selector="valueDidChange:" target="-2" id="SZI-r3-CRu"/>
                             </connections>
                         </stepper>
+                        <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7E-hL-I22">
+                            <rect key="frame" x="115" y="99" width="490" height="38"/>
+                            <subviews>
+                                <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="88W-qC-bQk">
+                                    <rect key="frame" x="82" y="6" width="200" height="26"/>
+                                    <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="peP-JR-p0s">
+                                        <font key="font" metaFont="system"/>
+                                    </pathCell>
+                                    <connections>
+                                        <action selector="pvkFilePathControlSingleClick:" target="-2" id="zsf-fI-Wms"/>
+                                        <outlet property="delegate" destination="-2" id="Lg6-ti-eMl"/>
+                                    </connections>
+                                </pathControl>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Si-LL-vAi">
+                                    <rect key="frame" x="10" y="12" width="72" height="17"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Private key" id="JHb-iu-ZwI">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <secureTextField hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZ4-7D-4l0">
+                                    <rect key="frame" x="287" y="7" width="156" height="22"/>
+                                    <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password..." drawsBackground="YES" usesSingleLineMode="YES" id="7c2-kF-dcs">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <allowedInputSourceLocales>
+                                            <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                        </allowedInputSourceLocales>
+                                    </secureTextFieldCell>
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="xf5-zS-Th0"/>
+                                    </connections>
+                                </secureTextField>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CA9-su-iR7">
+                                    <rect key="frame" x="451" y="3" width="30" height="30"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="lhg-Tn-cyY"/>
+                                </imageView>
+                            </subviews>
+                        </customView>
                     </subviews>
                 </customView>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPY-dc-wnh">
+                    <rect key="frame" x="38" y="504" width="149" height="18"/>
+                    <buttonCell key="cell" type="check" title="Fallback on RTP" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ig9-B1-7N3">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleRTPFallback:" target="-2" id="UOi-fW-eWB"/>
+                    </connections>
+                </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MDR-gI-NEM">
+                    <rect key="frame" x="18" y="532" width="85" height="18"/>
+                    <buttonCell key="cell" type="check" title="Use SRTP" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YtQ-hx-hih">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleUseSRTP:" target="-2" id="crs-ka-i2O"/>
+                    </connections>
+                </button>
                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hb0-lT-WfA">
-                    <rect key="frame" x="27" y="35" width="625" height="262"/>
+                    <rect key="frame" x="27" y="0.0" width="625" height="262"/>
                     <subviews>
                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3df-06-qZy">
                             <rect key="frame" x="44" y="178" width="160" height="18"/>
@@ -307,28 +340,8 @@
                         </button>
                     </subviews>
                 </customView>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPY-dc-wnh">
-                    <rect key="frame" x="38" y="564" width="149" height="18"/>
-                    <buttonCell key="cell" type="check" title="Fallback on RTP" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ig9-B1-7N3">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleRTPFallback:" target="-2" id="UOi-fW-eWB"/>
-                    </connections>
-                </button>
-                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MDR-gI-NEM">
-                    <rect key="frame" x="18" y="592" width="85" height="18"/>
-                    <buttonCell key="cell" type="check" title="Use SRTP" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YtQ-hx-hih">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleUseSRTP:" target="-2" id="crs-ka-i2O"/>
-                    </connections>
-                </button>
             </subviews>
-            <point key="canvasLocation" x="263" y="156"/>
+            <point key="canvasLocation" x="263" y="126"/>
         </customView>
     </objects>
     <resources>
