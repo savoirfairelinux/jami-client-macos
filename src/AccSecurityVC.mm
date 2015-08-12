@@ -47,49 +47,38 @@
 #define COLUMNID_NAME   @"CipherNameColumn"
 #define COLUMNID_STATE  @"CipherStateColumn"
 
-@interface AccSecurityVC ()
+@interface AccSecurityVC () {
+    __unsafe_unretained IBOutlet NSOutlineView *cipherListView;
+    __unsafe_unretained IBOutlet NSButton *useTLS;
+    __unsafe_unretained IBOutlet NSView *tlsContainer;
+
+    __unsafe_unretained IBOutlet NSView *pvkContainer;
+    __unsafe_unretained IBOutlet NSImageView *pvkPasswordValidation;
+
+    __unsafe_unretained IBOutlet NSSecureTextField *pvkPasswordField;
+    __unsafe_unretained IBOutlet NSTextField *outgoingTlsServerName;
+    __unsafe_unretained IBOutlet NSTextField *tlsNegotiationTimeout;
+    __unsafe_unretained IBOutlet NSStepper *tlsNegotiationTimeoutStepper;
+    __unsafe_unretained IBOutlet NSPathControl *caListPathControl;
+    __unsafe_unretained IBOutlet NSPathControl *certificatePathControl;
+    __unsafe_unretained IBOutlet NSPathControl *pvkPathControl;
+    __unsafe_unretained IBOutlet NSPopUpButton *tlsMethodList;
+    __unsafe_unretained IBOutlet NSButton *srtpRTPFallback;
+    __unsafe_unretained IBOutlet NSButton *useSRTP;
+
+    __unsafe_unretained IBOutlet NSButton *verifyCertAsClientButton;
+    __unsafe_unretained IBOutlet NSButton *verifyCertAsServerButton;
+    __unsafe_unretained IBOutlet NSButton *requireCertButton;
+}
 
 @property QNSTreeController *treeController;
-@property (unsafe_unretained) IBOutlet NSOutlineView *cipherListView;
-@property (unsafe_unretained) IBOutlet NSButton *useTLS;
-@property (unsafe_unretained) IBOutlet NSView *tlsContainer;
-@property (unsafe_unretained) IBOutlet NSSecureTextField *pvkPasswordField;
-@property (unsafe_unretained) IBOutlet NSTextField *outgoingTlsServerName;
-@property (unsafe_unretained) IBOutlet NSTextField *tlsNegotiationTimeout;
-@property (unsafe_unretained) IBOutlet NSStepper *tlsNegotiationTimeoutStepper;
-
 @property CertificateWC* certificateWC;
 
-@property (unsafe_unretained) IBOutlet NSPathControl *caListPathControl;
-@property (unsafe_unretained) IBOutlet NSPathControl *certificatePathControl;
-@property (unsafe_unretained) IBOutlet NSPathControl *pvkPathControl;
-@property (unsafe_unretained) IBOutlet NSPopUpButton *tlsMethodList;
-@property (unsafe_unretained) IBOutlet NSButton *srtpRTPFallback;
-@property (unsafe_unretained) IBOutlet NSButton *useSRTP;
-
-@property (unsafe_unretained) IBOutlet NSButton *verifyCertAsClientButton;
-@property (unsafe_unretained) IBOutlet NSButton *verifyCertAsServerButton;
-@property (unsafe_unretained) IBOutlet NSButton *requireCertButton;
 @end
 
 @implementation AccSecurityVC
 @synthesize treeController;
-@synthesize cipherListView;
 @synthesize certificateWC;
-@synthesize tlsContainer;
-@synthesize useTLS;
-@synthesize useSRTP;
-@synthesize srtpRTPFallback;
-@synthesize pvkPasswordField;
-@synthesize tlsNegotiationTimeout;
-@synthesize tlsNegotiationTimeoutStepper;
-@synthesize outgoingTlsServerName;
-@synthesize caListPathControl;
-@synthesize certificatePathControl;
-@synthesize pvkPathControl;
-@synthesize verifyCertAsClientButton;
-@synthesize verifyCertAsServerButton;
-@synthesize requireCertButton;
 
 - (void)awakeFromNib
 {
@@ -123,8 +112,8 @@
     [self updateControlsWithTag:TLS_NEGOTIATION_TAG];
 
     QModelIndex qTlsMethodIdx = account->tlsMethodModel()->selectionModel()->currentIndex();
-    [self.tlsMethodList removeAllItems];
-    [self.tlsMethodList addItemWithTitle:qTlsMethodIdx.data(Qt::DisplayRole).toString().toNSString()];
+    [tlsMethodList removeAllItems];
+    [tlsMethodList addItemWithTitle:qTlsMethodIdx.data(Qt::DisplayRole).toString().toNSString()];
 
     treeController = [[QNSTreeController alloc] initWithQModel:account->cipherModel()];
     [treeController setAvoidsEmptySelection:NO];
@@ -135,37 +124,44 @@
     [cipherListView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [cipherListView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 
-    [useTLS setState:[self currentAccount]->isTlsEnabled()];
-    [tlsContainer setHidden:![self currentAccount]->isTlsEnabled()];
+    [useTLS setState:account->isTlsEnabled()];
+    [tlsContainer setHidden:!account->isTlsEnabled()];
 
-    [useSRTP setState:[self currentAccount]->isSrtpEnabled()];
-    [srtpRTPFallback setState:[self currentAccount]->isSrtpRtpFallback()];
+    [useSRTP setState:account->isSrtpEnabled()];
+    [srtpRTPFallback setState:account->isSrtpRtpFallback()];
     [srtpRTPFallback setEnabled:useSRTP.state];
 
-    if([self currentAccount]->tlsCaListCertificate() != nil) {
-        NSLog(@"CA ==> %@", account->tlsCaListCertificate()->path().toNSURL());
+    if(account->tlsCaListCertificate() != nil) {
         [caListPathControl setURL:account->tlsCaListCertificate()->path().toNSURL()];
     } else {
         [caListPathControl setURL:nil];
     }
 
-    if([self currentAccount]->tlsCertificate() != nil) {
-        NSLog(@" CERT ==> %@", account->tlsCertificate()->path().toNSURL());
-        [certificatePathControl setURL:account->tlsCertificate()->path().toNSURL()];
+    auto tlsCert = account->tlsCertificate();
+
+    if(tlsCert != nil) {
+        [certificatePathControl setURL:tlsCert->path().toNSURL()];
+        if(tlsCert->requirePrivateKey()) {
+            [pvkContainer setHidden:NO];
+            if(tlsCert->privateKeyPath().isValid()) {
+                [pvkPathControl setURL:tlsCert->privateKeyPath().toNSURL()];
+                if (tlsCert->requirePrivateKeyPassword()) {
+                    [pvkPasswordField setHidden:NO];
+                } else
+                    [pvkPasswordField setHidden:YES];
+            } else {
+                [pvkPathControl setURL:nil];
+            }
+        } else {
+            [pvkContainer setHidden:YES];
+        }
     } else {
         [certificatePathControl setURL:nil];
     }
 
-    if([self currentAccount]->tlsPrivateKeyCertificate() != nil) {
-        NSLog(@" PVK ==> %@", account->tlsPrivateKeyCertificate()->path().toNSURL());
-        [pvkPathControl setURL:account->tlsPrivateKeyCertificate()->path().toNSURL()];
-    } else {
-        [pvkPathControl setURL:nil];
-    }
-
-    [verifyCertAsServerButton setState:[self currentAccount]->isTlsVerifyServer()];
-    [verifyCertAsClientButton setState:[self currentAccount]->isTlsVerifyClient()];
-    [requireCertButton setState:[self currentAccount]->isTlsRequireClientCertificate()];
+    [verifyCertAsServerButton setState:account->isTlsVerifyServer()];
+    [verifyCertAsClientButton setState:account->isTlsVerifyClient()];
+    [requireCertButton setState:account->isTlsRequireClientCertificate()];
 }
 
 - (IBAction)chooseTlsMethod:(id)sender {
@@ -210,8 +206,12 @@
 - (void) updateControlsWithTag:(NSInteger) tag
 {
     switch (tag) {
-        case PVK_PASSWORD_TAG:
-            [pvkPasswordField setStringValue:[self currentAccount]->tlsPassword().toNSString()];
+        case PVK_PASSWORD_TAG: {
+                [pvkPasswordField setStringValue:[self currentAccount]->tlsPassword().toNSString()];
+                BOOL passMatch = [self currentAccount]->tlsCertificate() &&
+            [self currentAccount]->tlsCertificate()->privateKeyMatch() == Certificate::CheckValues::PASSED;
+                [pvkPasswordValidation setImage:[NSImage imageNamed:passMatch?@"ic_action_accept":@"ic_action_cancel"]];
+            }
             break;
         case OUTGOING_TLS_SRV_NAME:
             [outgoingTlsServerName setStringValue:[self currentAccount]->tlsServerName().toNSString()];
@@ -257,26 +257,52 @@
 }
 
 #pragma mark - NSPathControl delegate methods
-- (IBAction)caListPathControlSingleClick:(id)sender {
-    NSURL* fileURL = [[sender clickedPathComponentCell] URL];
-    NSLog(@"==> %@", fileURL);
-    [self.caListPathControl setURL:fileURL];
-    [self currentAccount]->setTlsCaListCertificate(QUrl::fromNSURL(fileURL).toString());
+
+- (IBAction)caListPathControlSingleClick:(id)sender
+{
+    NSURL* fileURL;
+    if ([sender isKindOfClass:[NSMenuItem class]]) {
+        fileURL = nil;
+    } else {
+        fileURL = [[sender clickedPathComponentCell] URL];
+    }
+    [self->caListPathControl setURL:fileURL];
+    [self currentAccount]->setTlsCaListCertificate(QUrl::fromNSURL(fileURL));
 }
 
-- (IBAction)certificatePathControlSingleClick:(id)sender {
-    // Select that chosen component of the path.
-    NSURL* fileURL = [[sender clickedPathComponentCell] URL];
-        NSLog(@"==> %@", fileURL);
-    [self.certificatePathControl setURL:fileURL];
-    [self currentAccount]->setTlsCertificate(QUrl::fromNSURL(fileURL).toString());
+- (IBAction)certificatePathControlSingleClick:(id)sender
+{
+    NSURL* fileURL;
+    if ([sender isKindOfClass:[NSMenuItem class]]) {
+        fileURL = nil;
+    } else {
+        fileURL = [[sender clickedPathComponentCell] URL];
+    }
+    [self->certificatePathControl setURL:fileURL];
+    [self currentAccount]->setTlsCertificate(QUrl::fromNSURL(fileURL));
+
+    auto cert = [self currentAccount]->tlsCertificate();
+    if(cert->requirePrivateKey() && cert->isValid() == Certificate::CheckValues::PASSED) {
+        [pvkContainer setHidden:NO];
+    } else {
+        [pvkContainer setHidden:YES];
+    }
 }
 
-- (IBAction)pvkFilePathControlSingleClick:(id)sender {
-    NSURL* fileURL = [[sender clickedPathComponentCell] URL];
-        NSLog(@"==> %@", fileURL);
-    [self.pvkPathControl setURL:fileURL];
-    [self currentAccount]->setTlsPrivateKeyCertificate(QUrl::fromNSURL(fileURL).toString());
+- (IBAction)pvkFilePathControlSingleClick:(id)sender
+{
+    NSURL* fileURL;
+    if ([sender isKindOfClass:[NSMenuItem class]]) {
+        fileURL = nil;
+    } else {
+        fileURL = [[sender clickedPathComponentCell] URL];
+    }
+    [self currentAccount]->setTlsPrivateKey(QUrl::fromNSURL(fileURL));
+    if([self currentAccount]->tlsCertificate()->requirePrivateKeyPassword()) {
+        [pvkPasswordField setHidden:NO];
+    } else {
+        [pvkPasswordField setHidden:YES];
+    }
 }
 
 - (IBAction)showCA:(id)sender
@@ -303,9 +329,9 @@
     [openPanel setCanChooseFiles:YES];
     [openPanel setResolvesAliases:YES];
 
-    if(pathControl == self.caListPathControl) {
+    if(pathControl == caListPathControl) {
         [openPanel setTitle:NSLocalizedString(@"Choose a CA list", @"Open panel title")];
-    } else if (pathControl == self.certificatePathControl) {
+    } else if (pathControl == certificatePathControl) {
         [openPanel setTitle:NSLocalizedString(@"Choose a certificate", @"Open panel title")];
     } else {
         [openPanel setTitle:NSLocalizedString(@"Choose a private key file", @"Open panel title")];
@@ -317,7 +343,15 @@
 
 - (void)pathControl:(NSPathControl *)pathControl willPopUpMenu:(NSMenu *)menu
 {
-
+    NSMenuItem *item;
+    if(pathControl == caListPathControl) {
+        item = [menu addItemWithTitle:@"Remove value" action:@selector(caListPathControlSingleClick:) keyEquivalent:@""];
+    } else if (pathControl == certificatePathControl) {
+        item = [menu addItemWithTitle:@"Remove value" action:@selector(certificatePathControlSingleClick:) keyEquivalent:@""];
+    } else {
+        item = [menu addItemWithTitle:@"Remove value" action:@selector(pvkFilePathControlSingleClick:) keyEquivalent:@""];
+    }
+    [item setTarget:self]; // or whatever target you want
 }
 
 #pragma mark - NSOpenSavePanelDelegate delegate methods
