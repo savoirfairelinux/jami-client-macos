@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -29,48 +29,78 @@
  */
 #import "RingWizardWC.h"
 
+//Qt
+#import <QUrl>
+
+//LRC
 #import <accountmodel.h>
 #import <protocolmodel.h>
 #import <QItemSelectionModel>
 #import <account.h>
+#import <certificate.h>
 
 #import "AppDelegate.h"
 
+#define PVK_PASSWORD_TAG    0
+#define NICKNAME_TAG        1
 
-@interface RingWizardWC ()
-@property (unsafe_unretained) IBOutlet NSButton *goToAppButton;
-@property (unsafe_unretained) IBOutlet NSTextField *nickname;
-@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressBar;
-@property (unsafe_unretained) IBOutlet NSTextField *indicationLabel;
-@property (unsafe_unretained) IBOutlet NSButton *createButton;
+@interface RingWizardWC () {
+
+    __unsafe_unretained IBOutlet NSButton *goToAppButton;
+    __unsafe_unretained IBOutlet NSTextField *nickname;
+    __unsafe_unretained IBOutlet NSProgressIndicator *progressBar;
+    __unsafe_unretained IBOutlet NSTextField *indicationLabel;
+    __unsafe_unretained IBOutlet NSButton *createButton;
+    __unsafe_unretained IBOutlet NSButton *showCustomCertsButton;
+    IBOutlet NSView *securityContainer;
+
+    __unsafe_unretained IBOutlet NSSecureTextField *passwordField;
+    __unsafe_unretained IBOutlet NSView *pvkContainer;
+    __unsafe_unretained IBOutlet NSPathControl *certificatePathControl;
+    __unsafe_unretained IBOutlet NSPathControl *caListPathControl;
+    __unsafe_unretained IBOutlet NSPathControl *pvkPathControl;
+    BOOL isExpanded;
+}
+
+@property Account* accountToCreate;
 @end
 
 @implementation RingWizardWC
-@synthesize goToAppButton;
-@synthesize nickname;
-@synthesize progressBar;
-@synthesize indicationLabel;
-@synthesize createButton;
+@synthesize accountToCreate;
 
 - (void)windowDidLoad {
     [super windowDidLoad];
 
+    [passwordField setTag:PVK_PASSWORD_TAG];
+    [nickname setTag:NICKNAME_TAG];
+
+    isExpanded = false;
     [self.window makeKeyAndOrderFront:nil];
     [self.window setLevel:NSStatusWindowLevel];
     [self.window makeMainWindow];
-    [self checkForRingAccount];
+    if(![self checkForRingAccount]) {
+        accountToCreate = AccountModel::instance()->add("", Account::Protocol::RING);
+    } else {
+        [indicationLabel setStringValue:@"Ring is already ready to work"];
+        auto accList = AccountModel::instance()->getAccountsByProtocol(Account::Protocol::RING);
+        [self displayHash:accList[0]->username().toNSString()];
+        [showCustomCertsButton setHidden:YES];
+    }
+
+    [caListPathControl setDelegate:self];
+    [certificatePathControl setDelegate:self];
 }
 
-- (void) checkForRingAccount
+- (BOOL) checkForRingAccount
 {
     for (int i = 0 ; i < AccountModel::instance()->rowCount() ; ++i) {
         QModelIndex idx = AccountModel::instance()->index(i);
         Account* acc = AccountModel::instance()->getAccountByModelIndex(idx);
         if(acc->protocol() == Account::Protocol::RING) {
-            [indicationLabel setStringValue:@"Ring is already ready to work"];
-            [self displayHash:acc->username().toNSString()];
+            return YES;
         }
     }
+    return false;
 }
 
 - (void) displayHash:(NSString* ) hash
@@ -85,7 +115,6 @@
     NSSharingService* emailSharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
 
     [createButton setTitle:@"Share by mail"];
-    //[createButton setImage:emailSharingService.image];
     [createButton setAlternateImage:emailSharingService.alternateImage];
     [createButton setAction:@selector(shareByEmail)];
 }
@@ -100,6 +129,11 @@
     QModelIndex qIdx =  AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
 
     [self setCallback];
+    if (isExpanded) {
+        // retract panel
+        [self chooseOwnCertificates:nil];
+        [showCustomCertsButton setHidden:YES];
+    }
     [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
 
     [self registerAutoStartup];
@@ -119,13 +153,8 @@
 
 - (void) saveAccount
 {
-    NSString* newAccName = @"My Ring";
-    Account* newAcc = AccountModel::instance()->add([newAccName UTF8String], Account::Protocol::RING);
-    newAcc->setAlias([[nickname stringValue] UTF8String]);
-    newAcc->setDisplayName([[nickname stringValue] UTF8String]);
-
-    newAcc->setUpnpEnabled(YES); // Always active upnp
-    newAcc << Account::EditAction::SAVE;
+    accountToCreate->setUpnpEnabled(YES); // Always active upnp
+    accountToCreate << Account::EditAction::SAVE;
 }
 
 - (void) setCallback
@@ -139,6 +168,26 @@
                          [indicationLabel setStringValue:@"This is your number, share it with your friends!"];
                          [self displayHash:account->username().toNSString()];
                      });
+}
+
+- (IBAction)chooseOwnCertificates:(NSButton*)sender {
+    if (isExpanded) {
+        [securityContainer removeFromSuperview];
+        NSRect frame = [self.window frame];
+        frame.size = CGSizeMake(securityContainer.frame.size.width, frame.size.height - securityContainer.frame.size.height);
+        frame.origin.y = frame.origin.y + securityContainer.frame.size.height;
+        [self.window setFrame:frame display:YES animate:YES];
+        isExpanded = false;
+    } else {
+        NSRect frame = [self.window frame];
+        frame.size = CGSizeMake(securityContainer.frame.size.width, frame.size.height + securityContainer.frame.size.height);
+        frame.origin.y = frame.origin.y - securityContainer.frame.size.height;
+        [self.window setFrame:frame display:YES animate:YES];
+
+        [securityContainer setFrameOrigin:CGPointMake(0, 50)];
+        [self.window.contentView addSubview:securityContainer];
+        isExpanded = true;
+    }
 }
 
 - (IBAction)goToApp:(id)sender {
@@ -162,12 +211,143 @@
     [emailSharingService performWithItems:shareItems];
 }
 
+#pragma mark - NSPathControl delegate methods
+
+- (IBAction)caListPathControlSingleClick:(id)sender
+{
+    NSURL* fileURL;
+    if ([sender isKindOfClass:[NSMenuItem class]]) {
+        fileURL = nil;
+    } else {
+        fileURL = [[sender clickedPathComponentCell] URL];
+    }
+    [self->caListPathControl setURL:fileURL];
+    accountToCreate->setTlsCaListCertificate(QUrl::fromNSURL(fileURL));
+
+}
+
+- (IBAction)certificatePathControlSingleClick:(id)sender
+{
+    NSURL* fileURL;
+    if ([sender isKindOfClass:[NSMenuItem class]]) {
+        fileURL = nil;
+    } else {
+        fileURL = [[sender clickedPathComponentCell] URL];
+    }
+    [self->certificatePathControl setURL:fileURL];
+    accountToCreate->setTlsCertificate(QUrl::fromNSURL(fileURL));
+
+    auto cert = accountToCreate->tlsCertificate();
+
+    if (cert) {
+        [pvkContainer setHidden:!cert->requirePrivateKey()];
+    } else {
+        [pvkContainer setHidden:YES];
+    }
+
+}
+
+- (IBAction)pvkFilePathControlSingleClick:(id)sender
+{
+    NSURL* fileURL;
+    if ([sender isKindOfClass:[NSMenuItem class]]) {
+        fileURL = nil;
+    } else {
+        fileURL = [[sender clickedPathComponentCell] URL];
+    }
+    accountToCreate->setTlsPrivateKey(QUrl::fromNSURL(fileURL));
+    if(accountToCreate->tlsCertificate()->requirePrivateKeyPassword()) {
+        [passwordField setHidden:NO];
+    } else {
+        [passwordField setHidden:YES];
+    }
+}
+
+/*
+ Delegate method of NSPathControl to determine how the NSOpenPanel will look/behave.
+ */
+- (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
+{
+    NSLog(@"willDisplayOpenPanel");
+    [openPanel setAllowsMultipleSelection:NO];
+    [openPanel setCanChooseDirectories:NO];
+    [openPanel setCanChooseFiles:YES];
+    [openPanel setResolvesAliases:YES];
+
+    if(pathControl == caListPathControl) {
+        [openPanel setTitle:NSLocalizedString(@"Choose a CA list", @"Open panel title")];
+    } else if (pathControl == certificatePathControl) {
+        [openPanel setTitle:NSLocalizedString(@"Choose a certificate", @"Open panel title")];
+    } else {
+        [openPanel setTitle:NSLocalizedString(@"Choose a private key file", @"Open panel title")];
+    }
+
+    [openPanel setPrompt:NSLocalizedString(@"Choose", @"Open panel prompt for 'Choose a file'")];
+    [openPanel setDelegate:self];
+}
+
+- (void)pathControl:(NSPathControl *)pathControl willPopUpMenu:(NSMenu *)menu
+{
+    NSMenuItem *item;
+    if(pathControl == caListPathControl) {
+        item = [menu addItemWithTitle:@"Remove value" action:@selector(caListPathControlSingleClick:) keyEquivalent:@""];
+    } else if (pathControl == certificatePathControl) {
+        item = [menu addItemWithTitle:@"Remove value" action:@selector(certificatePathControlSingleClick:) keyEquivalent:@""];
+    } else {
+        item = [menu addItemWithTitle:@"Remove value" action:@selector(pvkFilePathControlSingleClick:) keyEquivalent:@""];
+    }
+    [item setTarget:self]; // or whatever target you want
+}
+
+#pragma mark - NSOpenSavePanelDelegate delegate methods
+
+- (void)panel:(id)sender willExpand:(BOOL)expanding
+{
+    //NSLog(@"willExpand");
+}
+
+- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
+{
+    //NSLog(@"userEnteredFilename");
+}
+
+- (void)panelSelectionDidChange:(id)sender
+{
+    //NSLog(@"panelSelectionDidChange");
+}
+
+- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError
+{
+    NSLog(@"validateURL");
+    return YES;
+}
+
+#pragma mark - NSTextFieldDelegate methods
+
+-(void)controlTextDidChange:(NSNotification *)notif
+{
+    NSTextField *textField = [notif object];
+    if (textField.tag == PVK_PASSWORD_TAG) {
+        accountToCreate->setTlsPassword([textField.stringValue UTF8String]);
+        return;
+    }
+
+    // else it is NICKNAME_TAG field
+    if ([textField.stringValue isEqualToString:@""]) {
+        [createButton setEnabled:NO];
+    } else {
+        [createButton setEnabled:YES];
+    }
+
+    accountToCreate->setAlias([textField.stringValue UTF8String]);
+    accountToCreate->setDisplayName([textField.stringValue UTF8String]);
+}
 
 # pragma NSWindowDelegate methods
 
 - (BOOL)windowShouldClose:(id)sender
 {
-   NSLog(@"windowShouldClose");
+    NSLog(@"windowShouldClose");
     return YES;
 }
 
@@ -189,12 +369,10 @@
 - (void)windowDidResignMain:(NSNotification *)notification
 {
     NSLog(@"windowDidResignMain");
-    [self.window close];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    //NSLog(@"windowWillClose");
     AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [appDelegate showMainWindow];
 }
