@@ -15,6 +15,8 @@
                 <outlet property="pvkPasswordValidation" destination="CA9-su-iR7" id="vue-8A-mQy"/>
                 <outlet property="pvkPathControl" destination="88W-qC-bQk" id="rWY-57-6pv"/>
                 <outlet property="requireCertButton" destination="oUu-x4-vV2" id="PNH-3v-phG"/>
+                <outlet property="showCAButton" destination="Bea-Hp-LP1" id="d2z-u1-G2A"/>
+                <outlet property="showUserCertButton" destination="aTq-AA-kGe" id="AKf-sq-H3U"/>
                 <outlet property="srtpRTPFallback" destination="uPY-dc-wnh" id="mqd-Uf-g1o"/>
                 <outlet property="tlsContainer" destination="Ubf-Oe-BbE" id="a5m-qR-9n2"/>
                 <outlet property="tlsMethodList" destination="OzX-Lm-vTo" id="t16-Ed-be0"/>
