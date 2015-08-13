@@ -134,7 +134,7 @@
     [srtpRTPFallback setEnabled:useSRTP.state];
 
     if(account->tlsCaListCertificate() != nil) {
-        [caListPathControl setURL:account->tlsCaListCertificate()->path().toNSURL()];
+        [caListPathControl setURL:[NSURL fileURLWithPath:account->tlsCaListCertificate()->path().toNSString()]];
     } else {
         [caListPathControl setURL:nil];
     }
@@ -142,11 +142,11 @@
     auto tlsCert = account->tlsCertificate();
 
     if(tlsCert != nil) {
-        [certificatePathControl setURL:tlsCert->path().toNSURL()];
+        [certificatePathControl setURL:[NSURL fileURLWithPath:tlsCert->path().toNSString()]];
         if(tlsCert->requirePrivateKey()) {
             [pvkContainer setHidden:NO];
-            if(tlsCert->privateKeyPath().isValid()) {
-                [pvkPathControl setURL:tlsCert->privateKeyPath().toNSURL()];
+            if(!account->tlsPrivateKey().isEmpty()) {
+                [pvkPathControl setURL:[NSURL fileURLWithPath:account->tlsPrivateKey().toNSString()]];
                 if (tlsCert->requirePrivateKeyPassword()) {
                     [pvkPasswordField setHidden:NO];
                 } else
@@ -274,7 +274,7 @@
         fileURL = [[sender clickedPathComponentCell] URL];
     }
     [self->caListPathControl setURL:fileURL];
-    [self currentAccount]->setTlsCaListCertificate(QUrl::fromNSURL(fileURL));
+    [self currentAccount]->setTlsCaListCertificate([[fileURL path] UTF8String]);
 
     if ([self currentAccount]->tlsCaListCertificate()->isValid() == Certificate::CheckValues::PASSED) {
         [showCAButton setHidden:NO];
@@ -291,7 +291,7 @@
         fileURL = [[sender clickedPathComponentCell] URL];
     }
     [self->certificatePathControl setURL:fileURL];
-    [self currentAccount]->setTlsCertificate(QUrl::fromNSURL(fileURL));
+    [self currentAccount]->setTlsCertificate([[fileURL path] UTF8String]);
 
     auto cert = [self currentAccount]->tlsCertificate();
 
@@ -313,7 +313,7 @@
     } else {
         fileURL = [[sender clickedPathComponentCell] URL];
     }
-    [self currentAccount]->setTlsPrivateKey(QUrl::fromNSURL(fileURL));
+    [self currentAccount]->setTlsPrivateKey([[fileURL path] UTF8String]);
     if([self currentAccount]->tlsCertificate()->requirePrivateKeyPassword()) {
         [pvkPasswordField setHidden:NO];
     } else {
