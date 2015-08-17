@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -30,6 +30,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface RingWizardWC : NSWindowController <NSWindowDelegate>
+@interface RingWizardWC : NSWindowController <NSWindowDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate>
 
 @end
