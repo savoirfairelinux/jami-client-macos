@@ -115,8 +115,11 @@
 
 - (void) showMainWindow
 {
-    if(self.ringWindowController == nil)
+    if(self.ringWindowController == nil) {
         self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
+    }
+
+    self.wizard = nil;
 
     [self.ringWindowController.window makeKeyAndOrderFront:self];
 }

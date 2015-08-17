@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardWC">
             <connections>
+                <outlet property="caListPathControl" destination="fnL-AL-k3N" id="5ad-Cb-mM5"/>
+                <outlet property="certificatePathControl" destination="1Hn-6F-5Pq" id="V5y-qn-MkJ"/>
                 <outlet property="createButton" destination="rC1-mU-Scu" id="JrT-qi-fF5"/>
                 <outlet property="goToAppButton" destination="hKA-b6-heE" id="voO-WW-sdE"/>
-                <outlet property="indicationLabel" destination="07z-dh-DdR" id="SIY-tg-tdZ"/>
+                <outlet property="indicationLabel" destination="PZB-UI-B3R" id="t79-DV-rKR"/>
                 <outlet property="nickname" destination="Phj-na-SP1" id="HYj-kV-lyE"/>
+                <outlet property="passwordField" destination="1nU-BV-LdG" id="1fI-Xa-L9w"/>
                 <outlet property="progressBar" destination="nRx-qJ-VIe" id="qJ2-ra-GkK"/>
+                <outlet property="pvkContainer" destination="he3-z9-OHD" id="rmf-aA-Lv6"/>
+                <outlet property="pvkPathControl" destination="Wk1-nk-8ES" id="Sb9-e1-mDQ"/>
+                <outlet property="securityContainer" destination="ftV-Pr-W0i" id="wUj-m3-EIE"/>
+                <outlet property="showCustomCertsButton" destination="aZl-bU-psB" id="RQ2-RR-ufD"/>
                 <outlet property="window" destination="4LP-GX-BkH" id="vNm-J0-gmv"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Ring" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="4LP-GX-BkH">
+        <window title="Ring" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" animationBehavior="default" id="4LP-GX-BkH">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="163" y="205" width="480" height="321"/>
+            <rect key="contentRect" x="599" y="440" width="480" height="173"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <view key="contentView" id="Wgr-xH-z0G">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="321"/>
+                <rect key="frame" x="0.0" y="5" width="480" height="173"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rAn-Kv-PgL">
-                        <rect key="frame" x="18" y="265" width="79" height="36"/>
-                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hello" id="uqu-uh-Wao">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rAn-Kv-PgL">
+                        <rect key="frame" x="18" y="117" width="231" height="36"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Ring" id="uqu-uh-Wao">
                             <font key="font" metaFont="system" size="30"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phj-na-SP1">
-                        <rect key="frame" x="161" y="149" width="159" height="22"/>
-                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="5Z7-Wi-530">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="rC1-mU-Scu">
@@ -46,7 +44,7 @@
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="68" id="3Oi-R8-jmQ"/>
                         </constraints>
-                        <buttonCell key="cell" type="bevel" title="OK" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wDw-Ut-RUm">
+                        <buttonCell key="cell" type="bevel" title="OK" bezelStyle="regularSquare" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wDw-Ut-RUm">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">
@@ -57,11 +55,14 @@ DQ
                             <action selector="createRingAccount:" target="-2" id="CBc-Mm-dzm"/>
                         </connections>
                     </button>
-                    <progressIndicator hidden="YES" ambiguous="YES" misplaced="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="nRx-qJ-VIe">
-                        <rect key="frame" x="192" y="150" width="96" height="20"/>
+                    <progressIndicator hidden="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="nRx-qJ-VIe">
+                        <rect key="frame" x="192" y="62" width="96" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="96" id="EN6-qO-gH1"/>
+                        </constraints>
                     </progressIndicator>
-                    <button hidden="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKA-b6-heE">
-                        <rect key="frame" x="288" y="17" width="98" height="29"/>
+                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKA-b6-heE">
+                        <rect key="frame" x="306" y="17" width="80" height="29"/>
                         <buttonCell key="cell" type="bevel" title="Continue" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kwr-LJ-K8C">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -70,34 +71,158 @@ DQ
                             <action selector="goToApp:" target="-2" id="o8v-93-fE5"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="07z-dh-DdR">
-                        <rect key="frame" x="170" y="179" width="140" height="17"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZB-UI-B3R">
+                        <rect key="frame" x="46" y="89" width="416" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="122" id="e4n-it-xKq"/>
+                            <constraint firstAttribute="height" constant="20" id="1T5-n3-xOf"/>
                         </constraints>
-                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tell me who you are" id="yph-hz-tyP">
+                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="First tell us who you are" id="meL-TZ-VQO">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button toolTip="Choose custom certificates" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aZl-bU-psB">
+                        <rect key="frame" x="322" y="50" width="39" height="38"/>
+                        <buttonCell key="cell" type="round" bezelStyle="circular" image="NSAddTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="b1Z-dE-vrA">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="chooseOwnCertificates:" target="-2" id="Tel-fO-O2f"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phj-na-SP1">
+                        <rect key="frame" x="161" y="59" width="159" height="22"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="5Z7-Wi-530">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="K7L-Rf-9i7"/>
+                        </connections>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="rC1-mU-Scu" secondAttribute="trailing" constant="20" id="02s-v0-sLn"/>
-                    <constraint firstItem="rAn-Kv-PgL" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" constant="20" id="CTX-YQ-cEW"/>
-                    <constraint firstAttribute="centerX" secondItem="nRx-qJ-VIe" secondAttribute="centerX" id="D7h-Vj-QkJ"/>
-                    <constraint firstAttribute="centerX" secondItem="Phj-na-SP1" secondAttribute="centerX" id="Djw-wQ-YZj"/>
+                    <constraint firstItem="nRx-qJ-VIe" firstAttribute="centerX" secondItem="Phj-na-SP1" secondAttribute="centerX" id="2X6-yE-3WK"/>
+                    <constraint firstItem="rAn-Kv-PgL" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" constant="20" id="4F3-Xi-OWO"/>
+                    <constraint firstItem="aZl-bU-psB" firstAttribute="centerY" secondItem="Phj-na-SP1" secondAttribute="centerY" id="CiD-0z-uVv"/>
+                    <constraint firstItem="aZl-bU-psB" firstAttribute="top" secondItem="PZB-UI-B3R" secondAttribute="bottom" constant="6" id="D54-WV-hOC"/>
+                    <constraint firstItem="rAn-Kv-PgL" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" constant="20" id="E8Q-rV-slT"/>
                     <constraint firstItem="rC1-mU-Scu" firstAttribute="leading" secondItem="hKA-b6-heE" secondAttribute="trailing" constant="8" id="RUS-zV-JtN"/>
                     <constraint firstAttribute="bottom" secondItem="hKA-b6-heE" secondAttribute="bottom" constant="20" id="TGf-Kl-MPP"/>
-                    <constraint firstItem="rAn-Kv-PgL" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" constant="20" id="Yhs-QQ-67T"/>
+                    <constraint firstItem="Phj-na-SP1" firstAttribute="centerY" secondItem="nRx-qJ-VIe" secondAttribute="centerY" constant="2" id="Y60-kb-MMV"/>
+                    <constraint firstItem="aZl-bU-psB" firstAttribute="leading" secondItem="Phj-na-SP1" secondAttribute="trailing" constant="8" id="cNp-lK-SAf"/>
                     <constraint firstAttribute="bottom" secondItem="rC1-mU-Scu" secondAttribute="bottom" constant="20" id="dbf-vQ-Wby"/>
-                    <constraint firstAttribute="centerX" secondItem="07z-dh-DdR" secondAttribute="centerX" id="sjA-hA-pg4"/>
+                    <constraint firstItem="PZB-UI-B3R" firstAttribute="top" secondItem="rAn-Kv-PgL" secondAttribute="bottom" constant="8" id="iBw-TJ-w8X"/>
+                    <constraint firstItem="PZB-UI-B3R" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" constant="48" id="jBv-tH-n9x"/>
+                    <constraint firstAttribute="trailing" secondItem="PZB-UI-B3R" secondAttribute="trailing" constant="20" id="jiS-fs-7gq"/>
+                    <constraint firstAttribute="centerX" secondItem="Phj-na-SP1" secondAttribute="centerX" id="pZ6-h5-hBt"/>
+                    <constraint firstItem="Phj-na-SP1" firstAttribute="top" secondItem="PZB-UI-B3R" secondAttribute="bottom" constant="8" id="ypd-9b-fEH"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="cKX-Z2-yDq"/>
             </connections>
-            <point key="canvasLocation" x="790" y="11.5"/>
+            <point key="canvasLocation" x="661" y="-59.5"/>
         </window>
+        <customView identifier="ChooseCerts" id="ftV-Pr-W0i">
+            <rect key="frame" x="0.0" y="0.0" width="531" height="139"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Hn-6F-5Pq">
+                    <rect key="frame" x="170" y="40" width="200" height="26"/>
+                    <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="kCA-gk-cMZ">
+                        <font key="font" metaFont="system"/>
+                    </pathCell>
+                    <connections>
+                        <action selector="certificatePathControlSingleClick:" target="-2" id="gLr-11-7u9"/>
+                    </connections>
+                </pathControl>
+                <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnL-AL-k3N">
+                    <rect key="frame" x="170" y="70" width="200" height="26"/>
+                    <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="GQX-gh-pkz">
+                        <font key="font" metaFont="system"/>
+                    </pathCell>
+                    <connections>
+                        <action selector="caListPathControlSingleClick:" target="-2" id="YSc-pJ-KRW"/>
+                    </connections>
+                </pathControl>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIN-Fl-8Li">
+                    <rect key="frame" x="67" y="46" width="100" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User Certificate" id="V1U-ew-Ge2">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9K-II-jmt">
+                    <rect key="frame" x="18" y="74" width="149" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Certificate Authority list" id="SpA-zX-ytE">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="he3-z9-OHD">
+                    <rect key="frame" x="88" y="0.0" width="443" height="38"/>
+                    <subviews>
+                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wk1-nk-8ES">
+                            <rect key="frame" x="82" y="6" width="200" height="26"/>
+                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="dkC-t2-qyc">
+                                <font key="font" metaFont="system"/>
+                            </pathCell>
+                            <connections>
+                                <action selector="pvkFilePathControlSingleClick:" target="-2" id="aTR-VH-hJK"/>
+                            </connections>
+                        </pathControl>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EG-qH-WOF">
+                            <rect key="frame" x="10" y="12" width="72" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Private key" id="poP-JD-MDa">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <secureTextField hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nU-BV-LdG">
+                            <rect key="frame" x="287" y="8" width="145" height="22"/>
+                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password..." drawsBackground="YES" usesSingleLineMode="YES" id="Hsc-U9-2RV">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <allowedInputSourceLocales>
+                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                </allowedInputSourceLocales>
+                            </secureTextFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="-2" id="XjT-FM-vvp"/>
+                            </connections>
+                        </secureTextField>
+                    </subviews>
+                </customView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21c-hJ-jTB">
+                    <rect key="frame" x="30" y="102" width="483" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose your own certificates" id="4ls-Yq-mDp">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K7H-z9-exz">
+                    <rect key="frame" x="18" y="122" width="199" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Advanced security (optionnal)" id="Gnn-K9-PTH">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <point key="canvasLocation" x="62.5" y="-1.5"/>
+        </customView>
     </objects>
+    <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+    </resources>
 </document>
