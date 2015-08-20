@@ -15,17 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- *
- *  Additional permission under GNU GPL version 3 section 7:
- *
- *  If you modify this program, or any covered work, by linking or
- *  combining it with the OpenSSL project's OpenSSL library (or a
- *  modified version of that library), containing parts covered by the
- *  terms of the OpenSSL or SSLeay licenses, Savoir-Faire Linux Inc.
- *  grants you additional permission to convey the resulting work.
- *  Corresponding Source for a non-source form of such a combination
- *  shall include the source code for the parts of OpenSSL used as well
- *  as that of the covered work.
  */
 #import "CurrentCallVC.h"
 
@@ -436,6 +425,9 @@
 
         [self connectVideoSignals];
         /* check if text media is already present */
+        qDebug() << CallModel::instance()->selectedCall();
+        if(!CallModel::instance()->selectedCall())
+            return;
         if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
             Media::Text *text = CallModel::instance()->selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
             [self monitorIncomingTextMessages:text];
