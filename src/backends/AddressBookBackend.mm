@@ -252,26 +252,25 @@ bool AddressBookBackend::load()
 
 void AddressBookBackend::asyncLoad(int startingPoint)
 {
-    ABAddressBook *book = [ABAddressBook sharedAddressBook];
-    NSArray *everyone = [book people];
-    int endPoint = qMin(startingPoint + 10, (int)everyone.count);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // do your background tasks here
+        ABAddressBook *book = [ABAddressBook sharedAddressBook];
+        NSArray *everyone = [book people];
+        int endPoint = qMin(startingPoint + 10, (int)everyone.count);
 
-    for (int i = startingPoint; i < endPoint; ++i) {
+        for (int i = startingPoint; i < endPoint; ++i) {
+            ABPerson* abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
+            Person* person = this->abPersonToPerson(abPerson);
+            person->setCollection(this);
+            editor<Person>()->addExisting(person);
+        }
 
-        ABPerson* abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
-
-        Person* person = this->abPersonToPerson(abPerson);
-
-        person->setCollection(this);
-
-        editor<Person>()->addExisting(person);
-    }
-
-    if(endPoint < everyone.count) {
-        QTimer::singleShot(100, [=] {
-            asyncLoad(endPoint);
-        });
-    }
+        if(endPoint < everyone.count) {
+            QTimer::singleShot(100, [=] {
+                asyncLoad(endPoint);
+            });
+        }
+    });
 }
 
 Person* AddressBookBackend::abPersonToPerson(ABPerson* ab)
