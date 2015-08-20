@@ -32,7 +32,7 @@
 #import <callmodel.h>
 #import <QtCore/qitemselectionmodel.h>
 
-#define COLUMNID_CONVERSATIONS @"ConversationsColumn"	// the single column name in our outline view
+#define DISPLAYNAME_TAG 200
 
 @interface ConversationsVC ()
 
@@ -56,9 +56,6 @@
     [self.conversationsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
     [self.conversationsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [self.conversationsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
-
-    NSInteger idx = [conversationsView columnWithIdentifier:COLUMNID_CONVERSATIONS];
-    [[[[self.conversationsView tableColumns] objectAtIndex:idx] headerCell] setStringValue:@"Conversations"];
 
     QObject::connect(CallModel::instance(),
                      &QAbstractItemModel::dataChanged,
@@ -116,17 +113,18 @@
     return NO;
 }
 
-// -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
-- (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+/* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
+ */
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_CONVERSATIONS])
-    {
-        QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-        if(qIdx.isValid())
-            cell.title = CallModel::instance()->data(qIdx, Qt::DisplayRole).toString().toNSString();
-    }
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+
+    NSTableCellView *result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
+    NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
+
+    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+
+    return result;
 }
 
 // -------------------------------------------------------------------------------
@@ -135,13 +133,14 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
-    if([[treeController selectedNodes] count] > 0) {
-        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        //Update details view by changing selection
-        CallModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
-    } else {
-        CallModel::instance()->selectionModel()->clearCurrentIndex();
-    }
+//    if([[treeController selectedNodes] count] > 0) {
+//        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+//        //Update details view by changing selection
+//        if (qIdx.row() != CallModel::instance()->selectionModel()->currentIndex().row())
+//            CallModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+//    } else {
+//        CallModel::instance()->selectionModel()->clearCurrentIndex();
+//    }
 }
 
 
