@@ -15,17 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- *
- *  Additional permission under GNU GPL version 3 section 7:
- *
- *  If you modify this program, or any covered work, by linking or
- *  combining it with the OpenSSL project's OpenSSL library (or a
- *  modified version of that library), containing parts covered by the
- *  terms of the OpenSSL or SSLeay licenses, Savoir-Faire Linux Inc.
- *  grants you additional permission to convey the resulting work.
- *  Corresponding Source for a non-source form of such a combination
- *  shall import the source code for the parts of OpenSSL used as well
- *  as that of the covered work.
  */
 #import "AddressBookBackend.h"
 
@@ -252,26 +241,25 @@ bool AddressBookBackend::load()
 
 void AddressBookBackend::asyncLoad(int startingPoint)
 {
-    ABAddressBook *book = [ABAddressBook sharedAddressBook];
-    NSArray *everyone = [book people];
-    int endPoint = qMin(startingPoint + 10, (int)everyone.count);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // do your background tasks here
+        ABAddressBook *book = [ABAddressBook sharedAddressBook];
+        NSArray *everyone = [book people];
+        int endPoint = qMin(startingPoint + 10, (int)everyone.count);
 
-    for (int i = startingPoint; i < endPoint; ++i) {
+        for (int i = startingPoint; i < endPoint; ++i) {
+            ABPerson* abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
+            Person* person = this->abPersonToPerson(abPerson);
+            person->setCollection(this);
+            editor<Person>()->addExisting(person);
+        }
 
-        ABPerson* abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
-
-        Person* person = this->abPersonToPerson(abPerson);
-
-        person->setCollection(this);
-
-        editor<Person>()->addExisting(person);
-    }
-
-    if(endPoint < everyone.count) {
-        QTimer::singleShot(100, [=] {
-            asyncLoad(endPoint);
-        });
-    }
+        if(endPoint < everyone.count) {
+            QTimer::singleShot(100, [=] {
+                asyncLoad(endPoint);
+            });
+        }
+    });
 }
 
 Person* AddressBookBackend::abPersonToPerson(ABPerson* ab)
