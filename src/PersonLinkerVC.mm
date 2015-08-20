@@ -42,12 +42,14 @@
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
-#import "views/PersonCell.h"
 
 #define FIRSTNAME_TAG   1
 #define LASTNAME_TAG    2
 
-#define COLUMNID_NAME @"NameColumn"
+// Tags for views
+#define IMAGE_TAG 100
+#define DISPLAYNAME_TAG 200
+#define DETAILS_TAG 300
 
 class OnlyPersonProxyModel : public QSortFilterProxyModel
 {
@@ -64,31 +66,24 @@ public:
     }
 };
 
-@interface PersonLinkerVC () <NSTextFieldDelegate, NSComboBoxDelegate, NSComboBoxDataSource>
+@interface PersonLinkerVC () <NSTextFieldDelegate, NSComboBoxDelegate, NSComboBoxDataSource> {
 
-@property QSortFilterProxyModel* contactProxyModel;
-@property QNSTreeController* treeController;
+    __unsafe_unretained IBOutlet NSTextField *contactMethodLabel;
+    __unsafe_unretained IBOutlet NSOutlineView *personsView;
+    __unsafe_unretained IBOutlet NSTextField *firstNameField;
+    __unsafe_unretained IBOutlet NSTextField *lastNameField;
+    __unsafe_unretained IBOutlet NSButton *createNewContactButton;
+    __unsafe_unretained IBOutlet NSComboBox *categoryComboBox;
+    __unsafe_unretained IBOutlet NSView *linkToExistingSubview;
 
-
-@property (unsafe_unretained) IBOutlet NSTextField *contactMethodLabel;
-@property (unsafe_unretained) IBOutlet NSOutlineView *personsView;
-@property (unsafe_unretained) IBOutlet NSTextField *firstNameField;
-@property (unsafe_unretained) IBOutlet NSTextField *lastNameField;
-@property (unsafe_unretained) IBOutlet NSButton *createNewContactButton;
-@property (unsafe_unretained) IBOutlet NSComboBox *categoryComboBox;
-@property (strong) IBOutlet NSView *createContactSubview;
-@property (unsafe_unretained) IBOutlet NSView *linkToExistingSubview;
-
+    QSortFilterProxyModel* contactProxyModel;
+    QNSTreeController* treeController;
+    IBOutlet NSView *createContactSubview;
+}
 
 @end
 
 @implementation PersonLinkerVC
-@synthesize treeController;
-@synthesize personsView;
-@synthesize contactProxyModel;
-@synthesize contactMethodLabel;
-@synthesize categoryComboBox, firstNameField, lastNameField;
-@synthesize createContactSubview, linkToExistingSubview, createNewContactButton;
 
 -(void) awakeFromNib
 {
@@ -195,24 +190,7 @@ public:
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid())
-        return NO;
-
-    if(qIdx.parent().isValid()) {
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
-// -------------------------------------------------------------------------------
-//	dataCellForTableColumn:tableColumn:item
-// -------------------------------------------------------------------------------
-- (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    PersonCell *returnCell = [tableColumn dataCell];
-    return returnCell;
+    return qIdx.isValid();
 }
 
 // -------------------------------------------------------------------------------
@@ -225,31 +203,34 @@ public:
     return NO;
 }
 
-// -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
-- (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
+/* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
+ */
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid()) {
-        [((PersonCell *)cell) setPersonImage:nil];
-        return;
+
+    NSTableCellView *result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
+    NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
+    NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
+
+    if (!qIdx.isValid()) {
+        [photoView setImage:nil];
+        [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+        return result;
     }
 
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME])
-    {
-        PersonCell *pCell = (PersonCell *)cell;
-        [pCell setPersonImage:nil];
-        if(!qIdx.parent().isValid()) {
-            pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
-                Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-                QVariant photo = ImageManipulationDelegate::instance()->contactPhoto(p, QSize(35,35));
-                [pCell setPersonImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-        } else {
-            pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
-
-        }
+    if (auto p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object))) {
+        QVariant photo = ImageManipulationDelegate::instance()->contactPhoto(p, QSize(35,35));
+        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    } else {
+        ImageManipulationDelegate* delegate = (ImageManipulationDelegate*) ImageManipulationDelegate::instance();
+        QVariant photo = delegate->defaultUserPixmap(QSize(35,35));
+        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
     }
+
+    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+
+    return result;
 }
 
 // -------------------------------------------------------------------------------
@@ -258,7 +239,7 @@ public:
 
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
-    return 45.0;
+    return 60.0;
 }
 
 #pragma mark - NSTextFieldDelegate
