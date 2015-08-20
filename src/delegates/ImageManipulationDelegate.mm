@@ -87,7 +87,7 @@ QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, b
 
     }
     else {
-        pxm = drawDefaultUserPixmap(size, false, false);
+        pxm = defaultUserPixmap(size, false, false);
     }
     
     return pxm;
@@ -118,7 +118,7 @@ QByteArray ImageManipulationDelegate::toByteArray(const QVariant& pxm)
     return bArray;
 }
 
-QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
+QPixmap ImageManipulationDelegate::defaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
 
     QPixmap pxm(size);
     pxm.fill(Qt::transparent);
