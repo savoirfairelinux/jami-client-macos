@@ -15,17 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- *
- *  Additional permission under GNU GPL version 3 section 7:
- *
- *  If you modify this program, or any covered work, by linking or
- *  combining it with the OpenSSL project's OpenSSL library (or a
- *  modified version of that library), containing parts covered by the
- *  terms of the OpenSSL or SSLeay licenses, Savoir-Faire Linux Inc.
- *  grants you additional permission to convey the resulting work.
- *  Corresponding Source for a non-source form of such a combination
- *  shall include the source code for the parts of OpenSSL used as well
- *  as that of the covered work.
  */
 #import "RingWindowController.h"
 
@@ -34,17 +23,16 @@
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
-#import <personmodel.h>
 
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "CurrentCallVC.h"
 
-#import "backends/AddressBookBackend.h"
+
+static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
 @interface RingWindowController ()
 
-@property NSSearchField* callField;
 @property CurrentCallVC* currentVC;
 @property (unsafe_unretained) IBOutlet NSView *callView;
 @property (unsafe_unretained) IBOutlet NSTextField *ringIDLabel;
@@ -53,25 +41,18 @@
 @end
 
 @implementation RingWindowController
-@synthesize callField;
 @synthesize currentVC;
 @synthesize callView, ringIDLabel;
 
-static NSString* const kSearchViewIdentifier = @"SearchViewIdentifier";
-static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
-static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
-
 - (void)windowDidLoad {
     [super windowDidLoad];
-    [self.window setReleasedWhenClosed:FALSE];
+    [self.window setMovableByWindowBackground:YES];
     [self displayMainToolBar];
 
     currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
-
-    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
     [callView addSubview:[self.currentVC view] positioned:NSWindowAbove relativeTo:nil];
 
     [currentVC initFrame];
@@ -82,6 +63,15 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
                      [=] {
                          [self updateRingID];
                      });
+
+}
+
+-(void) displayMainToolBar
+{
+    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"MainToolbar"];
+    [tb setDisplayMode:NSToolbarDisplayModeIconAndLabel];
+    [tb setDelegate: self];
+    [self.window setToolbar: tb];
 }
 
 /**
@@ -177,13 +167,47 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     }
 }
 
--(void) displayMainToolBar
+#pragma NSToolbar Delegate
+
+-(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
-    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"MainToolbar"];
-    [tb setDisplayMode:NSToolbarDisplayModeIconAndLabel];
-    [tb setDelegate: self];
-    [self.window setToolbar: tb];
+    NSToolbarItem* item = nil;
+
+    if ([itemIdentifier isEqualToString: kPreferencesIdentifier]) {
+        item = [[NSToolbarItem alloc] initWithItemIdentifier: kPreferencesIdentifier];
+        [item setImage: [NSImage imageNamed: @"NSAdvanced"]];
+        [item setLabel: @"Settings"];
+        [item setAction:@selector(openPreferences:)];
+    }
+
+    return item;
 }
+
+
+-(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:
+            NSToolbarSpaceItemIdentifier,
+            NSToolbarFlexibleSpaceItemIdentifier,
+            NSToolbarSpaceItemIdentifier,
+            NSToolbarSpaceItemIdentifier,
+            NSToolbarFlexibleSpaceItemIdentifier,
+            kPreferencesIdentifier,
+            nil];
+}
+
+-(NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
+{
+    return [NSArray arrayWithObjects:
+                 kPreferencesIdentifier,
+                 nil];
+}
+
+-(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+    return nil;
+}
+
 
 // FIXME: This is sick, NSWindowController is catching my selectors
 - (void)displayGeneral:(NSToolbarItem *)sender {
@@ -218,101 +242,11 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
     [self.window setToolbar:tb];
 }
 
-#pragma NSToolbar Delegate
 
--(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+
+- (void)controlTextDidChange:(NSNotification *)obj
 {
-    NSToolbarItem* item = nil;
 
-    if ([itemIdentifier isEqualToString: kSearchViewIdentifier]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kSearchViewIdentifier];
-        callField = [[NSSearchField alloc] initWithFrame:NSMakeRect(0,0,400,21)];
-        [[callField cell] setSearchButtonCell:nil];
-        [callField setToolTip:@"Call"];
-        [callField setAlignment:NSCenterTextAlignment];
-        [callField setDelegate:self];
-        [item setView:callField];
-    }
-
-    if ([itemIdentifier isEqualToString: kCallButtonIdentifer]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kCallButtonIdentifer];
-
-        NSButton *callButton = [[NSButton alloc] initWithFrame:NSMakeRect(0,0,80,30)];
-
-        [callButton setButtonType:NSMomentaryLightButton]; //Set what type button You want
-        [callButton setBezelStyle:NSRoundedBezelStyle]; //Set what style You want]
-        [callButton setBordered:YES];
-        [callButton setTitle:@"Call"];
-        [item setView:callButton];
-        [item setAction:@selector(placeCall:)];
-    }
-
-    if ([itemIdentifier isEqualToString: kPreferencesIdentifier]) {
-        item = [[NSToolbarItem alloc] initWithItemIdentifier: kPreferencesIdentifier];
-        [item setImage: [NSImage imageNamed: @"NSAdvanced"]];
-        [item setLabel: @"Settings"];
-        [item setAction:@selector(openPreferences:)];
-    }
-
-    return item;
-}
-
-- (IBAction)placeCall:(id)sender
-{
-    Call* c = CallModel::instance()->dialingCall();
-    // check for a valid ring hash
-    NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
-    BOOL valid = [[[callField stringValue] stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
-
-    if(valid && callField.stringValue.length == 40) {
-        c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:%@",[callField stringValue]]));
-    } else {
-        c->setDialNumber(QString::fromNSString([callField stringValue]));
-    }
-
-    c << Call::Action::ACCEPT;
-}
-
--(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
-{
-    return [NSArray arrayWithObjects:
-            NSToolbarSpaceItemIdentifier,
-            NSToolbarFlexibleSpaceItemIdentifier,
-            NSToolbarSpaceItemIdentifier,
-            NSToolbarSpaceItemIdentifier,
-            kSearchViewIdentifier,
-            kCallButtonIdentifer,
-            NSToolbarFlexibleSpaceItemIdentifier,
-            kPreferencesIdentifier,
-            nil];
-}
-
--(NSArray *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar
-{
-    return [NSArray arrayWithObjects:
-            kSearchViewIdentifier,
-            kCallButtonIdentifer,
-            kPreferencesIdentifier,
-            nil];
-}
-
--(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
-{
-    return nil;
-}
-
-#pragma NSTextField Delegate
-
-- (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
-{
-    if (commandSelector == @selector(insertNewline:)) {
-        if([[callField stringValue] isNotEqualTo:@""]) {
-            [self placeCall:nil];
-            return YES;
-        }
-    }
-
-    return NO;
 }
 
 
