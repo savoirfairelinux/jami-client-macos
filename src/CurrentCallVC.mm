@@ -436,6 +436,9 @@
 
         [self connectVideoSignals];
         /* check if text media is already present */
+        qDebug() << CallModel::instance()->selectedCall();
+        if(!CallModel::instance()->selectedCall())
+            return;
         if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
             Media::Text *text = CallModel::instance()->selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
             [self monitorIncomingTextMessages:text];
