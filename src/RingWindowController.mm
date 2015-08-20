@@ -110,7 +110,7 @@ static NSString* const kCallButtonIdentifer = @"CallButtonIdentifier";
         }
     }
 
-    [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"Your Ring ID : %@", finalChoice->username().toNSString()]];
+    [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
 }
 
 - (IBAction)openPreferences:(id)sender
