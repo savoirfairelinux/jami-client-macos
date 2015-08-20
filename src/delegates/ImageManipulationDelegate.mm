@@ -58,7 +58,7 @@ namespace Interfaces {
         const int radius = (size.height() > 35) ? 7 : 5;
 
         QPixmap pxm;
-        if (c->photo().isValid()) {
+        if (c && c->photo().isValid()) {
             QPixmap contactPhoto((qvariant_cast<QPixmap>(c->photo())).scaledToWidth(size.height()-6));
             pxm = QPixmap(size);
             pxm.fill(Qt::transparent);
@@ -219,6 +219,7 @@ namespace Interfaces {
         Q_UNUSED(cat)
         return QVariant();
     }
+
     QVariant
     ImageManipulationDelegate::userActionIcon(const UserActionElement& state) const
     {

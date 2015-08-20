@@ -65,4 +65,17 @@
         [super keyDown:theEvent];
 }
 
+- (NSRect)frameOfOutlineCellAtRow:(NSInteger)row {
+    return NSZeroRect;
+}
+
+- (NSRect)frameOfCellAtColumn:(NSInteger)column row:(NSInteger)row {
+    NSRect superFrame = [super frameOfCellAtColumn:column row:row];
+
+    if (column == 0) {
+        return NSMakeRect(0, superFrame.origin.y, [self bounds].size.width, superFrame.size.height);
+    }
+    return superFrame;
+}
+
 @end
