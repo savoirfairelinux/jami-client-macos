@@ -63,8 +63,7 @@ int main(int argc, const char *argv[]) {
     }
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
-
-
+    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
 
     return NSApplicationMain(argc, argv);
 }
