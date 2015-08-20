@@ -66,10 +66,9 @@
     self->privateQModel = model;
 
     NSMutableArray* nodes = [[NSMutableArray alloc] init];
-    [self connect];
-
     [self populate:nodes];
 
+    [self connect];
     return [self initWithContent:nodes];
 }
 
@@ -89,7 +88,6 @@
         return;
     for (int i = 0 ; i < self->privateQModel->rowCount(qIdx) ; ++i) {
         Node* n = [[Node alloc] init];
-        //qDebug() << "POPUL CHILD:"<< self->privateQModel->index(i, 0, qIdx) ;
         [self populateChild:[n children] withParent:self->privateQModel->index(i, 0, qIdx)];
         [nodes insertObject:n atIndex:i];
     }
@@ -172,7 +170,7 @@
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsAboutToBeMoved,
                      [=](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
-                        NSLog(@"rows about to be moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
+                        //NSLog(@"rows about to be moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
                         /* first remove the row from old location
                           * then insert them at the new location on the "rowsMoved signal */
                          for( int row = sourceStart; row <= sourceEnd; row++) {
@@ -182,14 +180,14 @@
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsMoved,
-                     [=](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
-                         //NSLog(@"rows moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
-                         /* these rows should have been removed in the "rowsAboutToBeMoved" handler
-                          * now insert them in the new location */
+                     [self](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
                          for( int row = sourceStart; row <= sourceEnd; row++) {
-                             //TODO
+                             NSIndexPath* srcPath = [self qIdxToNSIndexPath:self->privateQModel->index(sourceStart, 0, sourceParent)];
+                             NSIndexPath* destPath = [self qIdxToNSIndexPath:self->privateQModel->index(destinationRow, 0, destinationParent)];
+
+                             [self moveNode:[self.arrangedObjects descendantNodeAtIndexPath:srcPath] toIndexPath:destPath];
                          }
-                         [self rearrangeObjects];
+                         //[self rearrangeObjects];
                      });
 
     QObject::connect(self->privateQModel,

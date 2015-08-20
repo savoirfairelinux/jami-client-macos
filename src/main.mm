@@ -33,6 +33,8 @@
 #import <memory>
 #import <QDebug>
 #import <QDir>
+#import <personmodel.h>
+#import "backends/AddressBookBackend.h"
 
 #import "delegates/ImageManipulationDelegate.h"
 
@@ -49,8 +51,7 @@ int main(int argc, const char *argv[]) {
     app->setAttribute(Qt::AA_MacPluginApplication);
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
-
-
+    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
 
     return NSApplicationMain(argc, argv);
 }
