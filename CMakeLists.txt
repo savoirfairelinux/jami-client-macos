@@ -125,7 +125,9 @@ SET(ringclient_VIEWS
    src/views/PersonCell.mm
    src/views/PersonCell.h
    src/views/RingOutlineView.mm
-   src/views/RingOutlineView.h)
+   src/views/RingOutlineView.h
+   src/views/RingIDField.mm
+   src/views/RingIDField.h)
 
 SET(ringclient_OTHERS
    src/main.mm
@@ -160,7 +162,9 @@ SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION "Resources")
 
-SET(ring_ICONS ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
+SET(ring_ICONS
+${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hangup.png
