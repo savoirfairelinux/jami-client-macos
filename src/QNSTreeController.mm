@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -15,17 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- *
- *  Additional permission under GNU GPL version 3 section 7:
- *
- *  If you modify this program, or any covered work, by linking or
- *  combining it with the OpenSSL project's OpenSSL library (or a
- *  modified version of that library), containing parts covered by the
- *  terms of the OpenSSL or SSLeay licenses, Savoir-Faire Linux Inc.
- *  grants you additional permission to convey the resulting work.
- *  Corresponding Source for a non-source form of such a combination
- *  shall include the source code for the parts of OpenSSL used as well
- *  as that of the covered work.
  */
 #import "QNSTreeController.h"
 
@@ -66,10 +55,9 @@
     self->privateQModel = model;
 
     NSMutableArray* nodes = [[NSMutableArray alloc] init];
-    [self connect];
-
     [self populate:nodes];
 
+    [self connect];
     return [self initWithContent:nodes];
 }
 
@@ -89,7 +77,6 @@
         return;
     for (int i = 0 ; i < self->privateQModel->rowCount(qIdx) ; ++i) {
         Node* n = [[Node alloc] init];
-        //qDebug() << "POPUL CHILD:"<< self->privateQModel->index(i, 0, qIdx) ;
         [self populateChild:[n children] withParent:self->privateQModel->index(i, 0, qIdx)];
         [nodes insertObject:n atIndex:i];
     }
@@ -172,7 +159,7 @@
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsAboutToBeMoved,
                      [=](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
-                        NSLog(@"rows about to be moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
+                        //NSLog(@"rows about to be moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
                         /* first remove the row from old location
                           * then insert them at the new location on the "rowsMoved signal */
                          for( int row = sourceStart; row <= sourceEnd; row++) {
@@ -182,14 +169,13 @@
 
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsMoved,
-                     [=](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
-                         //NSLog(@"rows moved, start: %d, end: %d, moved to: %d", sourceStart, sourceEnd, destinationRow);
-                         /* these rows should have been removed in the "rowsAboutToBeMoved" handler
-                          * now insert them in the new location */
+                     [self](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
                          for( int row = sourceStart; row <= sourceEnd; row++) {
-                             //TODO
+                             NSIndexPath* srcPath = [self qIdxToNSIndexPath:self->privateQModel->index(sourceStart, 0, sourceParent)];
+                             NSIndexPath* destPath = [self qIdxToNSIndexPath:self->privateQModel->index(destinationRow, 0, destinationParent)];
+
+                             [self moveNode:[self.arrangedObjects descendantNodeAtIndexPath:srcPath] toIndexPath:destPath];
                          }
-                         [self rearrangeObjects];
                      });
 
     QObject::connect(self->privateQModel,
