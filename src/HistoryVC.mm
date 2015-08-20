@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -15,17 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- *
- *  Additional permission under GNU GPL version 3 section 7:
- *
- *  If you modify this program, or any covered work, by linking or
- *  combining it with the OpenSSL project's OpenSSL library (or a
- *  modified version of that library), containing parts covered by the
- *  terms of the OpenSSL or SSLeay licenses, Savoir-Faire Linux Inc.
- *  grants you additional permission to convey the resulting work.
- *  Corresponding Source for a non-source form of such a combination
- *  shall include the source code for the parts of OpenSSL used as well
- *  as that of the covered work.
  */
 #import "HistoryVC.h"
 
@@ -40,9 +29,10 @@
 #import "QNSTreeController.h"
 #import "PersonLinkerVC.h"
 
-#define COLUMNID_DAY			@"DayColumn"	// the single column name in our outline view
-#define COLUMNID_CONTACTMETHOD	@"ContactMethodColumn"	// the single column name in our outline view
-#define COLUMNID_DATE			@"DateColumn"	// the single column name in our outline view
+// Tags for views
+#define IMAGE_TAG 100
+#define DISPLAYNAME_TAG 200
+#define DETAILS_TAG 300
 
 @interface HistoryVC() <NSPopoverDelegate, KeyboardShortcutDelegate, ContactLinkedDelegate>
 
@@ -86,6 +76,14 @@
     [historyView setShortcutsDelegate:self];
 
     CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
+
+    QObject::connect(CallModel::instance(),
+                     &CategorizedHistoryModel::dataChanged,
+                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
+                         [historyView reloadDataForRowIndexes:
+                          [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
+                                                      columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, historyView.tableColumns.count)]];
+                     });
 }
 
 - (void) dealloc
@@ -96,8 +94,13 @@
 - (void)placeHistoryCall:(id)sender
 {
     if([[treeController selectedNodes] count] > 0) {
-        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        auto item = [treeController selectedNodes][0];
+        QModelIndex qIdx = [treeController toQIdx:item];
         if (!qIdx.parent().isValid()) {
+            if ([historyView isItemExpanded:item]) {
+                [[historyView animator] collapseItem:item];
+            } else
+                [[historyView animator] expandItem:item];
             return;
         }
         QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
@@ -118,17 +121,6 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     return YES;
-}
-
-// -------------------------------------------------------------------------------
-//	dataCellForTableColumn:tableColumn:item
-// -------------------------------------------------------------------------------
-- (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-    NSCell *returnCell = [tableColumn dataCell];
-    if(item == nil)
-        return returnCell;
-    return returnCell;
 }
 
 // -------------------------------------------------------------------------------
@@ -158,33 +150,79 @@
 }
 
 // -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
-- (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid())
-        return;
-
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_DAY])
-    {
-        cell.title = historyProxyModel->data(qIdx, Qt::DisplayRole).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CONTACTMETHOD])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::Number).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_DATE])
-    {
-        cell.title = historyProxyModel->data(qIdx, (int)Call::Role::FormattedDate).toString().toNSString();
-    }
-}
-
-// -------------------------------------------------------------------------------
 //	outlineViewSelectionDidChange:notification
 // -------------------------------------------------------------------------------
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
     //NSLog(@"outlineViewSelectionDidChange!!");
+}
+
+- (NSImage*) image:(NSImage*) img withTintedWithColor:(NSColor *)tint
+{
+    if (tint) {
+        [img lockFocus];
+        [tint set];
+        NSRect imageRect = {NSZeroPoint, [img size]};
+        NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop);
+        [img unlockFocus];
+    }
+    return img;
+}
+
+/* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
+ */
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+
+    NSTableCellView *result;
+    if(!qIdx.parent().isValid()) {
+        result = [outlineView makeViewWithIdentifier:@"CategoryCell" owner:outlineView];
+        [result.layer setBackgroundColor:[NSColor selectedControlColor].CGColor];
+    } else {
+        result = [outlineView makeViewWithIdentifier:@"HistoryCell" owner:outlineView];
+        NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
+
+        if (qvariant_cast<Call::Direction>(qIdx.data((int)Call::Role::Direction)) == Call::Direction::INCOMING) {
+           if (qvariant_cast<Boolean>(qIdx.data((int) Call::Role::Missed))) {
+               [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_missed"] withTintedWithColor:[NSColor redColor]]];
+            } else {
+                [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_received"]
+                            withTintedWithColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]]];
+            }
+        } else {
+            if (qvariant_cast<Boolean>(qIdx.data((int) Call::Role::Missed))) {
+                [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_missed"] withTintedWithColor:[NSColor redColor]]];
+            } else {
+                [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_made"]
+                            withTintedWithColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]]];
+            }
+        }
+
+        NSTextField* details = [result viewWithTag:DETAILS_TAG];
+        [details setStringValue:qIdx.data((int)Call::Role::FormattedDate).toString().toNSString()];
+    }
+
+    NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
+    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+
+    return result;
+}
+
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    if(!qIdx.parent().isValid()) {
+        return 35.0;
+    } else {
+        return 48.0;
+    }
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
+{
+    return [treeController toQIdx:((NSTreeNode*)item)].parent().isValid();
 }
 
 #pragma mark - ContextMenuDelegate
