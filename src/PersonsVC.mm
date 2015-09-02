@@ -216,7 +216,7 @@ public:
             pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
             if(((NSTreeNode*)item).indexPath.length == 2) {
                 Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-                QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(35,35));
+                QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(40,40));
                 [pCell setPersonImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
             }
         }
