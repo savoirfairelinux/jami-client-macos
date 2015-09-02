@@ -172,7 +172,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
         NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
         Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
 
-        QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(35,35));
+        QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(40,40));
         [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
         [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
 
@@ -194,7 +194,6 @@ NSInteger const CALL_BUTTON_TAG = 400;
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-
     HoverTableRowView* result = [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
     if(!qIdx.parent().isValid()) {
         [result setHighlightable:NO];

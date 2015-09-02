@@ -221,7 +221,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
     Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(35,35));
+    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(40,40));
     [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
     return result;
 }

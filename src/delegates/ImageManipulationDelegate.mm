@@ -44,16 +44,18 @@ namespace Interfaces {
     }
 
     QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
-        const int radius = (size.height() > 35) ? 7 : 5;
+        const int radius = size.height() / 2;
 
         QPixmap pxm;
         if (c && c->photo().isValid()) {
-            QPixmap contactPhoto((qvariant_cast<QPixmap>(c->photo())).scaledToWidth(size.height()-6));
+            QPixmap contactPhoto(qvariant_cast<QPixmap>(c->photo()).scaledToWidth(size.height(),
+                                                                                  Qt::TransformationMode::SmoothTransformation));
             pxm = QPixmap(size);
             pxm.fill(Qt::transparent);
             QPainter painter(&pxm);
 
             //Clear the pixmap
+            painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
             painter.setCompositionMode(QPainter::CompositionMode_Clear);
             painter.fillRect(0,0,size.width(),size.height(),QBrush(Qt::white));
             painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
@@ -62,20 +64,17 @@ namespace Interfaces {
             QRect pxRect = contactPhoto.rect();
             QBitmap mask(pxRect.size());
             QPainter customPainter(&mask);
-            customPainter.setRenderHint  (QPainter::Antialiasing, true      );
+            customPainter.setRenderHints (QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
             customPainter.fillRect       (pxRect                , Qt::white );
             customPainter.setBackground  (Qt::black                         );
             customPainter.setBrush       (Qt::black                         );
             customPainter.drawRoundedRect(pxRect,radius,radius);
-            contactPhoto.setMask(mask);
-            painter.drawPixmap(3,3,contactPhoto);
-            painter.setBrush(Qt::NoBrush);
-            painter.setPen(Qt::white);
-            painter.setRenderHint  (QPainter::Antialiasing, true   );
-            painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-            painter.drawRoundedRect(3,3,pxm.height()-6,pxm.height()-6,radius,radius);
-            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-
+            contactPhoto.setMask         (mask                              );
+            painter.drawPixmap           (0,0,contactPhoto                  );
+            painter.setBrush             (Qt::NoBrush                       );
+            painter.setPen               (Qt::black                         );
+            painter.setCompositionMode   (QPainter::CompositionMode_SourceIn);
+            painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
         }
         else {
             pxm = drawDefaultUserPixmap(size, false, false);
@@ -127,19 +126,39 @@ namespace Interfaces {
 
     QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
 
+        const int radius = size.height() / 2;
         QPixmap pxm(size);
         pxm.fill(Qt::transparent);
         QPainter painter(&pxm);
 
+        painter.setCompositionMode(QPainter::CompositionMode_Clear);
+        painter.fillRect(0,0,size.width(),size.height(),QBrush(Qt::white));
+        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+
+
         // create the image somehow, load from file, draw into it...
         auto sourceImgRef = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"NSUser"] TIFFRepresentation], NULL);
         auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
-        auto finalImgRef =  resizeCGImage(imgRef, size);
-        painter.drawPixmap(3,3,QtMac::fromCGImageRef(finalImgRef));
+        auto finalpxm =  QtMac::fromCGImageRef(resizeCGImage(imgRef, size));
+
+        QRect pxRect = finalpxm.rect();
+        QBitmap mask(pxRect.size());
+        QPainter customPainter(&mask);
+        customPainter.setRenderHint  (QPainter::Antialiasing, true      );
+        customPainter.fillRect       (pxRect                , Qt::white );
+        customPainter.setBackground  (Qt::black                         );
+        customPainter.setBrush       (Qt::black                         );
+        customPainter.drawRoundedRect(pxRect,radius,radius);
+        finalpxm.setMask(mask);
+        painter.setRenderHint  (QPainter::Antialiasing, true   );
+        painter.drawPixmap(0,0,finalpxm);
+        painter.setBrush(Qt::NoBrush);
+        painter.setPen(Qt::black);
+        painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+        painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
 
         CFRelease(sourceImgRef);
         CFRelease(imgRef);
-        CFRelease(finalImgRef);
 
         return pxm;
     }
