@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,31 +27,42 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef IMAGEMANIPULATION_H
-#define IMAGEMANIPULATION_H
 
 #import <QuartzCore/QuartzCore.h>
 
-#import <delegates/pixmapmanipulationdelegate.h>
+#import <interfaces/pixmapmanipulatori.h>
 #import <call.h>
 
 class Person;
 class QPixmap;
 
-class ImageManipulationDelegate : public PixmapManipulationDelegate {
+namespace Interfaces {
 
-public:
-    ImageManipulationDelegate();
-    QVariant contactPhoto(Person* c, const QSize& size, bool displayPresence = true) override;
-    virtual QByteArray toByteArray(const QVariant& pxm) override;
-    virtual QVariant personPhoto(const QByteArray& data, const QString& type = "PNG") override;
+    class ImageManipulationDelegate : public PixmapManipulatorI {
 
-private:
-    //Helper
-    QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent);
-    CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
+    public:
+        ImageManipulationDelegate();
+        QVariant contactPhoto(Person* c, const QSize& size, bool displayPresence = true) override;
+        virtual QByteArray toByteArray(const QVariant& pxm) override;
+        virtual QVariant personPhoto(const QByteArray& data, const QString& type = "PNG") override;
 
+        QVariant callPhoto(Call* c, const QSize& size, bool displayPresence = true) override;
+        QVariant callPhoto(const ContactMethod* n, const QSize& size, bool displayPresence = true) override;
 
-};
+        /* TODO: the following methods return an empty QVariant/QByteArray */
+        QVariant   numberCategoryIcon(const QVariant& p, const QSize& size, bool displayPresence = false, bool isPresent = false) override;
+        QVariant   securityIssueIcon(const QModelIndex& index) override;
+        QVariant   collectionIcon(const CollectionInterface* interface, PixmapManipulatorI::CollectionIconHint hint = PixmapManipulatorI::CollectionIconHint::NONE) const override;
+        QVariant   securityLevelIcon(const SecurityEvaluationModel::SecurityLevel level) const override;
+        QVariant   historySortingCategoryIcon(const CategorizedHistoryModel::SortedProxy::Categories cat) const override;
+        QVariant   contactSortingCategoryIcon(const CategorizedContactModel::SortedProxy::Categories cat) const override;
+        QVariant   userActionIcon(const UserActionElement& state) const override;
 
-#endif // IMAGEMANIPULATION_H
+    private:
+        //Helper
+        QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent);
+        CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
+    };
+    
+} // namespace Interfaces
+

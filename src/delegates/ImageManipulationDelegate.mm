@@ -47,114 +47,183 @@
 #import <person.h>
 #import <contactmethod.h>
 
-ImageManipulationDelegate::ImageManipulationDelegate() : PixmapManipulationDelegate()
-{
+namespace Interfaces {
 
-}
+    ImageManipulationDelegate::ImageManipulationDelegate()
+    {
 
-QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
-    const int radius = (size.height() > 35) ? 7 : 5;
+    }
 
-    QPixmap pxm;
-    if (c->photo().isValid()) {
-        QPixmap contactPhoto((qvariant_cast<QPixmap>(c->photo())).scaledToWidth(size.height()-6));
-        pxm = QPixmap(size);
+    QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
+        const int radius = (size.height() > 35) ? 7 : 5;
+
+        QPixmap pxm;
+        if (c->photo().isValid()) {
+            QPixmap contactPhoto((qvariant_cast<QPixmap>(c->photo())).scaledToWidth(size.height()-6));
+            pxm = QPixmap(size);
+            pxm.fill(Qt::transparent);
+            QPainter painter(&pxm);
+
+            //Clear the pixmap
+            painter.setCompositionMode(QPainter::CompositionMode_Clear);
+            painter.fillRect(0,0,size.width(),size.height(),QBrush(Qt::white));
+            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+
+            //Add corner radius to the Pixmap
+            QRect pxRect = contactPhoto.rect();
+            QBitmap mask(pxRect.size());
+            QPainter customPainter(&mask);
+            customPainter.setRenderHint  (QPainter::Antialiasing, true      );
+            customPainter.fillRect       (pxRect                , Qt::white );
+            customPainter.setBackground  (Qt::black                         );
+            customPainter.setBrush       (Qt::black                         );
+            customPainter.drawRoundedRect(pxRect,radius,radius);
+            contactPhoto.setMask(mask);
+            painter.drawPixmap(3,3,contactPhoto);
+            painter.setBrush(Qt::NoBrush);
+            painter.setPen(Qt::white);
+            painter.setRenderHint  (QPainter::Antialiasing, true   );
+            painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+            painter.drawRoundedRect(3,3,pxm.height()-6,pxm.height()-6,radius,radius);
+            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+
+        }
+        else {
+            pxm = drawDefaultUserPixmap(size, false, false);
+        }
+
+        return pxm;
+    }
+
+    QVariant
+    ImageManipulationDelegate::callPhoto(Call* c, const QSize& size, bool displayPresence)
+    {
+        return callPhoto(c->peerContactMethod(), size, displayPresence);
+    }
+
+    QVariant
+    ImageManipulationDelegate::callPhoto(const ContactMethod* n, const QSize& size, bool displayPresence)
+    {
+        if (n->contact()) {
+            return contactPhoto(n->contact(), size, displayPresence);
+        } else {
+            return drawDefaultUserPixmap(size, false, false);
+        }
+    }
+
+    QVariant ImageManipulationDelegate::personPhoto(const QByteArray& data, const QString& type)
+    {
+        QImage image;
+        //For now, ENCODING is only base64 and image type PNG or JPG
+        const bool ret = image.loadFromData(QByteArray::fromBase64(data),type.toLatin1());
+        if (!ret)
+            qDebug() << "vCard image loading failed";
+
+        return QPixmap::fromImage(image);
+    }
+
+    QByteArray ImageManipulationDelegate::toByteArray(const QVariant& pxm)
+    {
+        //Preparation of our QPixmap
+        QByteArray bArray;
+        QBuffer buffer(&bArray);
+        buffer.open(QIODevice::WriteOnly);
+
+        //PNG ?
+        (qvariant_cast<QPixmap>(pxm)).save(&buffer, "PNG");
+        buffer.close();
+
+        return bArray;
+    }
+
+    QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
+
+        QPixmap pxm(size);
         pxm.fill(Qt::transparent);
         QPainter painter(&pxm);
 
-        //Clear the pixmap
-        painter.setCompositionMode(QPainter::CompositionMode_Clear);
-        painter.fillRect(0,0,size.width(),size.height(),QBrush(Qt::white));
-        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        // create the image somehow, load from file, draw into it...
+        auto sourceImgRef = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"NSUser"] TIFFRepresentation], NULL);
+        auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
+        auto finalImgRef =  resizeCGImage(imgRef, size);
+        painter.drawPixmap(3,3,QtMac::fromCGImageRef(finalImgRef));
 
-        //Add corner radius to the Pixmap
-        QRect pxRect = contactPhoto.rect();
-        QBitmap mask(pxRect.size());
-        QPainter customPainter(&mask);
-        customPainter.setRenderHint  (QPainter::Antialiasing, true      );
-        customPainter.fillRect       (pxRect                , Qt::white );
-        customPainter.setBackground  (Qt::black                         );
-        customPainter.setBrush       (Qt::black                         );
-        customPainter.drawRoundedRect(pxRect,radius,radius);
-        contactPhoto.setMask(mask);
-        painter.drawPixmap(3,3,contactPhoto);
-        painter.setBrush(Qt::NoBrush);
-        painter.setPen(Qt::white);
-        painter.setRenderHint  (QPainter::Antialiasing, true   );
-        painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-        painter.drawRoundedRect(3,3,pxm.height()-6,pxm.height()-6,radius,radius);
-        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        CFRelease(sourceImgRef);
+        CFRelease(imgRef);
+        CFRelease(finalImgRef);
 
+        return pxm;
     }
-    else {
-        pxm = drawDefaultUserPixmap(size, false, false);
+
+    CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSize& size) {
+        // create context, keeping original image properties
+        CGColorSpaceRef colorspace = CGImageGetColorSpace(image);
+
+        CGContextRef context = CGBitmapContextCreate(NULL, size.width(), size.height(),
+                                                     CGImageGetBitsPerComponent(image),
+                                                     size.width() * CGImageGetBitsPerComponent(image),
+                                                     colorspace,
+                                                     CGImageGetAlphaInfo(image));
+
+        if(context == NULL)
+            return nil;
+
+        // draw image to context (resizing it)
+        CGContextDrawImage(context, CGRectMake(0, 0, size.width(), size.height()), image);
+        // extract resulting image from context
+        CGImageRef imgRef = CGBitmapContextCreateImage(context);
+        CGContextRelease(context);
+
+        return imgRef;
+    }
+
+    QVariant
+    ImageManipulationDelegate::numberCategoryIcon(const QVariant& p, const QSize& size, bool displayPresence, bool isPresent)
+    {
+        Q_UNUSED(p)
+        Q_UNUSED(size)
+        Q_UNUSED(displayPresence)
+        Q_UNUSED(isPresent)
+        return QVariant();
+    }
+
+    QVariant
+    ImageManipulationDelegate::securityIssueIcon(const QModelIndex& index)
+    {
+        Q_UNUSED(index)
+        return QVariant();
+    }
+
+    QVariant
+    ImageManipulationDelegate::collectionIcon(const CollectionInterface* interface, PixmapManipulatorI::CollectionIconHint hint) const
+    {
+        Q_UNUSED(interface)
+        Q_UNUSED(hint)
+        return QVariant();
+    }
+    QVariant
+    ImageManipulationDelegate::securityLevelIcon(const SecurityEvaluationModel::SecurityLevel level) const
+    {
+        Q_UNUSED(level)
+        return QVariant();
+    }
+    QVariant
+    ImageManipulationDelegate::historySortingCategoryIcon(const CategorizedHistoryModel::SortedProxy::Categories cat) const
+    {
+        Q_UNUSED(cat)
+        return QVariant();
+    }
+    QVariant
+    ImageManipulationDelegate::contactSortingCategoryIcon(const CategorizedContactModel::SortedProxy::Categories cat) const
+    {
+        Q_UNUSED(cat)
+        return QVariant();
+    }
+    QVariant
+    ImageManipulationDelegate::userActionIcon(const UserActionElement& state) const
+    {
+        Q_UNUSED(state)
+        return QVariant();
     }
     
-    return pxm;
-}
-
-QVariant ImageManipulationDelegate::personPhoto(const QByteArray& data, const QString& type)
-{
-    QImage image;
-    //For now, ENCODING is only base64 and image type PNG or JPG
-    const bool ret = image.loadFromData(QByteArray::fromBase64(data),type.toLatin1());
-    if (!ret)
-        qDebug() << "vCard image loading failed";
-
-    return QPixmap::fromImage(image);
-}
-
-QByteArray ImageManipulationDelegate::toByteArray(const QVariant& pxm)
-{
-    //Preparation of our QPixmap
-    QByteArray bArray;
-    QBuffer buffer(&bArray);
-    buffer.open(QIODevice::WriteOnly);
-
-    //PNG ?
-    (qvariant_cast<QPixmap>(pxm)).save(&buffer, "PNG");
-    buffer.close();
-
-    return bArray;
-}
-
-QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
-
-    QPixmap pxm(size);
-    pxm.fill(Qt::transparent);
-    QPainter painter(&pxm);
-
-    // create the image somehow, load from file, draw into it...
-    auto sourceImgRef = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"NSUser"] TIFFRepresentation], NULL);
-    auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
-    auto finalImgRef =  resizeCGImage(imgRef, size);
-    painter.drawPixmap(3,3,QtMac::fromCGImageRef(finalImgRef));
-
-    CFRelease(sourceImgRef);
-    CFRelease(imgRef);
-    CFRelease(finalImgRef);
-
-    return pxm;
-}
-
-CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSize& size) {
-    // create context, keeping original image properties
-    CGColorSpaceRef colorspace = CGImageGetColorSpace(image);
-
-    CGContextRef context = CGBitmapContextCreate(NULL, size.width(), size.height(),
-                                                 CGImageGetBitsPerComponent(image),
-                                                 size.width() * CGImageGetBitsPerComponent(image),
-                                                 colorspace,
-                                                 CGImageGetAlphaInfo(image));
-
-    if(context == NULL)
-        return nil;
-
-    // draw image to context (resizing it)
-    CGContextDrawImage(context, CGRectMake(0, 0, size.width(), size.height()), image);
-    // extract resulting image from context
-    CGImageRef imgRef = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
-
-    return imgRef;
-}
+} // namespace Interfaces

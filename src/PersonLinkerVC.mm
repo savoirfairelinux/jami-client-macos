@@ -39,6 +39,7 @@
 #import <personmodel.h>
 #import <contactmethod.h>
 #import <numbercategorymodel.h>
+#import <globalinstances.h>
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -243,7 +244,7 @@ public:
         if(!qIdx.parent().isValid()) {
             pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
                 Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-                QVariant photo = ImageManipulationDelegate::instance()->contactPhoto(p, QSize(35,35));
+                QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(35,35));
                 [pCell setPersonImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
         } else {
             pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();

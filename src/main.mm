@@ -29,8 +29,12 @@
  */
 #import <AppKit/NSApplication.h> // NSApplicationMain
 #import <qapplication.h>
+#import <globalinstances.h>
+#import <memory>
 #import <QDebug>
 #import <QDir>
+
+#import "delegates/ImageManipulationDelegate.h"
 
 int main(int argc, const char *argv[]) {
 
@@ -43,6 +47,9 @@ int main(int argc, const char *argv[]) {
     //Qt event loop will override native event loop
     QApplication* app = new QApplication(argc, const_cast<char**>(argv));
     app->setAttribute(Qt::AA_MacPluginApplication);
+
+    GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
+
 
 
     return NSApplicationMain(argc, argv);

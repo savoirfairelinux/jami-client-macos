@@ -42,6 +42,7 @@
 #import <callmodel.h>
 #import <contactmethod.h>
 #import <categorizedcontactmodel.h>
+#import <globalinstances.h>
 
 #import "backends/AddressBookBackend.h"
 #import "QNSTreeController.h"
@@ -79,7 +80,6 @@ public:
 
 -(void) awakeFromNib
 {
-    new ImageManipulationDelegate();
     NSLog(@"INIT PersonsVC");
     contactProxyModel = new ReachablePersonModel(CategorizedContactModel::instance());
     contactProxyModel->setSortRole(static_cast<int>(Qt::DisplayRole));
@@ -216,7 +216,7 @@ public:
             pCell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
             if(((NSTreeNode*)item).indexPath.length == 2) {
                 Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-                QVariant photo = ImageManipulationDelegate::instance()->contactPhoto(p, QSize(35,35));
+                QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(35,35));
                 [pCell setPersonImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
             }
         }
