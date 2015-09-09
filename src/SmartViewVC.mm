@@ -46,6 +46,8 @@
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "views/HoverTableRowView.h"
+#import "views/ContextualTableCellView.h"
 
 #define COLUMNID_MAIN @"MainColumn"	// the single column name in our outline view
 
@@ -213,6 +215,8 @@
         result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
+        [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
+
         [details setStringValue:qIdx.data((int)Person::Role::FormattedLastUsed).toString().toNSString()];
     } else {
         result = [outlineView makeViewWithIdentifier:@"CallCell" owner:outlineView];
@@ -220,10 +224,6 @@
 
         [details setStringValue:qIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
     }
-    BOOL ongoing = RecentModel::instance()->hasActiveCall(qIdx);
-
-    [[result viewWithTag:CALL_BUTTON_TAG] setHidden:ongoing];
-
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
     [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
@@ -247,12 +247,12 @@
 }
 
 /* View Based OutlineView: See the delegate method -tableView:rowViewForRow: in NSTableView.
-
+*/
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
-
+    return [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
 }
- */
+
 
 /* View Based OutlineView: This delegate method can be used to know when a new 'rowView' has been added to the table. At this point, you can choose to add in extra views, or modify any properties on 'rowView'.
  */
