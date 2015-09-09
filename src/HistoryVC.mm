@@ -39,6 +39,7 @@
 
 #import "QNSTreeController.h"
 #import "PersonLinkerVC.h"
+#import "views/HoverTableRowView.h"
 
 // Tags for views
 #define IMAGE_TAG 100
@@ -132,22 +133,7 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     return YES;
-}
-
-// -------------------------------------------------------------------------------
-//	textShouldEndEditing:fieldEditor
-// -------------------------------------------------------------------------------
-- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
-{
-    if ([[fieldEditor string] length] == 0)
-    {
-        // don't allow empty node names
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
+;
 }
 
 // -------------------------------------------------------------------------------
@@ -187,10 +173,10 @@
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
 
-    NSTableCellView *result;
+    NSTableCellView* result;
     if(!qIdx.parent().isValid()) {
         result = [outlineView makeViewWithIdentifier:@"CategoryCell" owner:outlineView];
-        [result.layer setBackgroundColor:[NSColor selectedControlColor].CGColor];
+
     } else {
         result = [outlineView makeViewWithIdentifier:@"HistoryCell" owner:outlineView];
         NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
@@ -231,9 +217,19 @@
     }
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
+/* View Based OutlineView: See the delegate method -tableView:rowViewForRow: in NSTableView.
+ */
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
-    return [treeController toQIdx:((NSTreeNode*)item)].parent().isValid();
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+
+    HoverTableRowView* result = [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
+    if(!qIdx.parent().isValid()) {
+        [result setHighlightable:NO];
+    } else
+        [result setHighlightable:YES];
+
+    return result;
 }
 
 #pragma mark - ContextMenuDelegate
