@@ -19,30 +19,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol ContextMenuDelegate;
-@protocol ContextMenuDelegate
+@interface NSColor (RingTheme)
 
-@required
++ (NSColor*) ringBlue;
++ (NSColor*) ringBlueWithAlpha:(CGFloat) a;
 
-- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path;
++ (NSColor*) ringDarkBlue;
 
-@end
++ (NSColor*) ringGreyHighlight;
 
-@protocol KeyboardShortcutDelegate;
-@protocol KeyboardShortcutDelegate
-
-@optional
-
-/**
- *  This shortcut has to respond to cmd (⌘) + a
- */
-- (void) onAddShortcut;
-
-@end
-
-@interface RingOutlineView : NSOutlineView
-
-@property (nonatomic,weak) id <ContextMenuDelegate>         contextMenuDelegate;
-@property (nonatomic,weak) id <KeyboardShortcutDelegate>    shortcutsDelegate;
 
 @end
