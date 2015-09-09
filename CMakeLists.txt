@@ -127,7 +127,13 @@ SET(ringclient_VIEWS
    src/views/RingOutlineView.mm
    src/views/RingOutlineView.h
    src/views/RingIDField.mm
-   src/views/RingIDField.h)
+   src/views/RingIDField.h
+   src/views/HoverTableRowView.mm
+   src/views/HoverTableRowView.h
+   src/views/NSColor+RingTheme.mm
+   src/views/NSColor+RingTheme.h
+   src/views/ContextualTableCellView.mm
+   src/views/ContextualTableCellView.h)
 
 SET(ringclient_OTHERS
    src/main.mm
