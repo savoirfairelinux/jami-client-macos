@@ -36,6 +36,7 @@
 #import "backends/AddressBookBackend.h"
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "views/HoverTableRowView.h"
 
 // Tags for views
 #define IMAGE_TAG 100
@@ -143,22 +144,6 @@ public:
 }
 
 // -------------------------------------------------------------------------------
-//	textShouldEndEditing:fieldEditor
-// -------------------------------------------------------------------------------
-- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
-{
-    if ([[fieldEditor string] length] == 0)
-    {
-        // don't allow empty node names
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
-}
-
-// -------------------------------------------------------------------------------
 //	shouldEditTableColumn:tableColumn:item
 //
 //	Decide to allow the edit of the given outline view "item".
@@ -197,6 +182,21 @@ public:
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
     [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+
+    return result;
+}
+
+/* View Based OutlineView: See the delegate method -tableView:rowViewForRow: in NSTableView.
+ */
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+
+    HoverTableRowView* result = [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
+    if(!qIdx.parent().isValid()) {
+        [result setHighlightable:NO];
+    } else
+        [result setHighlightable:YES];
 
     return result;
 }
