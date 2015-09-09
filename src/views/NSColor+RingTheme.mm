@@ -17,32 +17,28 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "NSColor+RingTheme.h"
 
-@protocol ContextMenuDelegate;
-@protocol ContextMenuDelegate
+@implementation NSColor (RingTheme)
 
-@required
++ (NSColor*) ringBlue
+{
+    return [NSColor colorWithCalibratedRed:43/255.0 green:180/255.0 blue:201/255.0 alpha:1.0];
+}
 
-- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path;
++ (NSColor*) ringBlueWithAlpha:(CGFloat) a
+{
+    return [NSColor colorWithCalibratedRed:43/255.0 green:180/255.0 blue:201/255.0 alpha:a];
+}
 
-@end
++ (NSColor*) ringDarkBlue
+{
+    return [NSColor colorWithCalibratedRed:0/255.0 green:59/255.0 blue:78/255.0 alpha:1.0];
+}
 
-@protocol KeyboardShortcutDelegate;
-@protocol KeyboardShortcutDelegate
-
-@optional
-
-/**
- *  This shortcut has to respond to cmd (⌘) + a
- */
-- (void) onAddShortcut;
-
-@end
-
-@interface RingOutlineView : NSOutlineView
-
-@property (nonatomic,weak) id <ContextMenuDelegate>         contextMenuDelegate;
-@property (nonatomic,weak) id <KeyboardShortcutDelegate>    shortcutsDelegate;
++ (NSColor*) ringGreyHighlight
+{
+    return [NSColor colorWithCalibratedRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0];
+}
 
 @end
