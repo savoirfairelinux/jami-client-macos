@@ -19,30 +19,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol ContextMenuDelegate;
-@protocol ContextMenuDelegate
-
-@required
-
-- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path;
-
-@end
-
-@protocol KeyboardShortcutDelegate;
-@protocol KeyboardShortcutDelegate
-
-@optional
+@interface ContextualTableCellView : NSTableCellView
 
 /**
- *  This shortcut has to respond to cmd (⌘) + a
+ * List of subviews to hide/show when mouse is tracked
  */
-- (void) onAddShortcut;
-
-@end
-
-@interface RingOutlineView : NSOutlineView
-
-@property (nonatomic,weak) id <ContextMenuDelegate>         contextMenuDelegate;
-@property (nonatomic,weak) id <KeyboardShortcutDelegate>    shortcutsDelegate;
+@property (nonatomic) NSMutableArray* contextualsControls;
 
 @end
