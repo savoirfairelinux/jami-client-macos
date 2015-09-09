@@ -15,20 +15,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- *
- *  Additional permission under GNU GPL version 3 section 7:
- *
- *  If you modify this program, or any covered work, by linking or
- *  combining it with the OpenSSL project's OpenSSL library (or a
- *  modified version of that library), containing parts covered by the
- *  terms of the OpenSSL or SSLeay licenses, Savoir-Faire Linux Inc.
- *  grants you additional permission to convey the resulting work.
- *  Corresponding Source for a non-source form of such a combination
- *  shall include the source code for the parts of OpenSSL used as well
- *  as that of the covered work.
  */
 
 #import "RingOutlineView.h"
+
+#import "HoverTableRowView.h" // For the grid drawing shared code
 
 @implementation RingOutlineView
 
@@ -63,6 +54,48 @@
         }
     } else
         [super keyDown:theEvent];
+}
+
+- (CGFloat)yPositionPastLastRow {
+    // Only draw the grid past the last visible row
+    NSInteger numberOfRows = self.numberOfRows;
+    CGFloat yStart = 0;
+    if (numberOfRows > 0) {
+        yStart = NSMaxY([self rectOfRow:numberOfRows - 1]);
+    }
+    return yStart;
+}
+
+- (void)drawGridInClipRect:(NSRect)clipRect {
+    // Only draw the grid past the last visible row
+    CGFloat yStart = [self yPositionPastLastRow];
+    // Draw the first separator one row past the last row
+    yStart += self.rowHeight;
+
+    // One thing to do is smarter clip testing to see if we actually need to draw!
+    NSRect boundsToDraw = self.bounds;
+    NSRect separatorRect = boundsToDraw;
+    separatorRect.size.height = 1;
+    while (yStart < NSMaxY(boundsToDraw)) {
+        separatorRect.origin.y = yStart;
+        DrawSeparatorInRect(separatorRect);
+        yStart += self.rowHeight;
+    }
+}
+
+- (void)setFrameSize:(NSSize)size {
+    [super setFrameSize:size];
+    // We need to invalidate more things when live-resizing since we fill with a gradient and stroke
+    if ([self inLiveResize]) {
+        CGFloat yStart = [self yPositionPastLastRow];
+        if (NSHeight(self.bounds) > yStart) {
+            // Redraw our horizontal grid lines
+            NSRect boundsPastY = self.bounds;
+            boundsPastY.size.height -= yStart;
+            boundsPastY.origin.y = yStart;
+            [self setNeedsDisplayInRect:boundsPastY];
+        }
+    }
 }
 
 @end
