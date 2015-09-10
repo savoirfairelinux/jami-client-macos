@@ -27,22 +27,13 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef RINGWINDOWCONTROLLER_H
-#define RINGWINDOWCONTROLLER_H
-
 #import <Cocoa/Cocoa.h>
 #import "HistoryVC.h"
-#import "PreferencesVC.h"
 
-@interface RingWindowController : NSWindowController <NSToolbarDelegate, NSTextFieldDelegate>{
+@interface RingWindowController : NSWindowController {
     IBOutlet NSView *currentView;
 }
-@property (nonatomic, assign) NSViewController *myCurrentViewController;
-@property PreferencesVC* preferencesViewController;
 
 - (IBAction)openPreferences:(id)sender;
-- (IBAction)closePreferences:(NSToolbarItem *)sender;
 
 @end
-
-#endif // RINGWINDOWCONTROLLER_H
