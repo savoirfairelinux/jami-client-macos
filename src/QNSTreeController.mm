@@ -171,7 +171,7 @@
                      &QAbstractItemModel::rowsMoved,
                      [self](const QModelIndex & sourceParent, int sourceStart, int sourceEnd, const QModelIndex & destinationParent, int destinationRow) {
                          for( int row = sourceStart; row <= sourceEnd; row++) {
-                             NSIndexPath* srcPath = [self qIdxToNSIndexPath:self->privateQModel->index(sourceStart, 0, sourceParent)];
+                             NSIndexPath* srcPath = [self qIdxToNSIndexPath:self->privateQModel->index(row, 0, sourceParent)];
                              NSIndexPath* destPath = [self qIdxToNSIndexPath:self->privateQModel->index(destinationRow, 0, destinationParent)];
 
                              [self moveNode:[self.arrangedObjects descendantNodeAtIndexPath:srcPath] toIndexPath:destPath];
