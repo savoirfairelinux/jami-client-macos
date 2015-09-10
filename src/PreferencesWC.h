@@ -17,12 +17,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <Cocoa/Cocoa.h>
-#import "HistoryVC.h"
 
-@interface RingWindowController : NSWindowController {
-    IBOutlet NSView *currentView;
-}
+@interface PreferencesWC : NSWindowController <NSWindowDelegate>
 
-- (IBAction)openPreferences:(id)sender;
+- (void)displayGeneral:(NSToolbarItem *)sender;
+- (void)displayAudio:(NSToolbarItem *)sender;
+- (void)displayVideo:(NSToolbarItem *)sender;
+- (void)displayAccounts:(NSToolbarItem *)sender;
 
 @end
