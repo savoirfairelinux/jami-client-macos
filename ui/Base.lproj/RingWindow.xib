@@ -24,7 +24,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="1053" height="658"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="YgH-CN-tkB" userLabel="Left Panel">
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YgH-CN-tkB" userLabel="Left Panel">
                         <rect key="frame" x="0.0" y="0.0" width="324" height="658"/>
                         <subviews>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PoQ-x4-ES3">
@@ -206,7 +206,7 @@
                                             <subviews>
                                                 <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="72" horizontalPageScroll="10" verticalLineScroll="72" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="9uI-D5-KRt">
                                                     <rect key="frame" x="0.0" y="-11" width="324" height="623"/>
-                                                    <clipView key="contentView" misplaced="YES" copiesOnScroll="NO" id="eME-fQ-3QX">
+                                                    <clipView key="contentView" misplaced="YES" drawsBackground="NO" copiesOnScroll="NO" id="eME-fQ-3QX">
                                                         <rect key="frame" x="1" y="17" width="238" height="117"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
@@ -625,7 +625,7 @@
                             <constraint firstAttribute="centerX" secondItem="JN3-vO-zcd" secondAttribute="centerX" id="xdj-mG-iqh"/>
                         </constraints>
                     </customView>
-                    <box horizontalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Pav-Bw-GgK">
+                    <box horizontalHuggingPriority="750" ambiguous="YES" misplaced="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Pav-Bw-GgK">
                         <rect key="frame" x="322" y="0.0" width="5" height="658"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -634,8 +634,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="YgH-CN-tkB" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="H99-2E-fs4"/>
+                    <constraint firstAttribute="bottom" secondItem="Pav-Bw-GgK" secondAttribute="bottom" id="QrG-jO-ix7"/>
                     <constraint firstAttribute="trailing" secondItem="Fzg-MB-mlx" secondAttribute="trailing" id="T3I-2c-Eto"/>
                     <constraint firstItem="Fzg-MB-mlx" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="trailing" constant="2" id="Xgw-Na-kgh"/>
+                    <constraint firstItem="Pav-Bw-GgK" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="hcV-ir-ZEc"/>
                     <constraint firstAttribute="bottom" secondItem="YgH-CN-tkB" secondAttribute="bottom" id="hkC-sf-sNA"/>
                     <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="hxe-yO-gZr"/>
                     <constraint firstAttribute="bottom" secondItem="Fzg-MB-mlx" secondAttribute="bottom" id="tQc-0j-ggO"/>
@@ -679,7 +681,6 @@
                 <outlet property="view" destination="YgH-CN-tkB" id="M12-Bx-OJr"/>
             </connections>
         </viewController>
-        <userDefaultsController representsSharedInstance="YES" id="oNC-mj-2sN"/>
     </objects>
     <resources>
         <image name="NSUser" width="32" height="32"/>
