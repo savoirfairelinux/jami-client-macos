@@ -27,26 +27,13 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#ifndef PREFERENCESVIEWCONTROLLER_H
-#define PREFERENCESVIEWCONTROLLER_H
-
 #import <Cocoa/Cocoa.h>
 
-@interface PreferencesVC : NSViewController <NSToolbarDelegate>
+@interface PreferencesWC : NSWindowController <NSWindowDelegate>
 
-@property (nonatomic, strong) NSViewController *currentVC;
-@property (nonatomic, strong) NSViewController *accountsPrefsVC;
-@property (nonatomic, strong) NSViewController *generalPrefsVC;
-@property (nonatomic, strong) NSViewController *audioPrefsVC;
-@property (nonatomic, strong) NSViewController *videoPrefsVC;
-
-- (void) close;
 - (void)displayGeneral:(NSToolbarItem *)sender;
 - (void)displayAudio:(NSToolbarItem *)sender;
-- (void)displayAncrage:(NSToolbarItem *)sender;
 - (void)displayVideo:(NSToolbarItem *)sender;
 - (void)displayAccounts:(NSToolbarItem *)sender;
 
 @end
-
-#endif // PREFERENCESVIEWCONTROLLER_H
