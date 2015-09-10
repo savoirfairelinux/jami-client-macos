@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -38,119 +38,83 @@
 #import "GeneralPrefsVC.h"
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
+#import "AccGeneralVC.h"
 #import "Constants.h"
 
 @interface PreferencesVC ()
 
 @property NSButton* toggleAdvancedSettings;
 
+@property (unsafe_unretained) IBOutlet NSTabView *tabView;
+@property (unsafe_unretained) IBOutlet NSTabViewItem *generalTabItem;
+@property (unsafe_unretained) IBOutlet NSTabViewItem *accountsTabItem;
+@property (unsafe_unretained) IBOutlet NSTabViewItem *audioTabItem;
+@property (unsafe_unretained) IBOutlet NSTabViewItem *videoTabItem;
+
+
 @end
 
 @implementation PreferencesVC
 @synthesize toggleAdvancedSettings;
 
+
 static NSString* const kProfilePrefsIdentifier = @"ProfilesPrefsIdentifier";
 static NSString* const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
 static NSString* const kAudioPrefsIdentifer = @"AudioPrefsIdentifer";
-static NSString* const kAncragePrefsIdentifer = @"AncragePrefsIdentifer";
 static NSString* const kVideoPrefsIdentifer = @"VideoPrefsIdentifer";
 static NSString* const kDonePrefsIdentifer = @"DonePrefsIdentifer";
 static NSString* const kPowerSettingsIdentifer = @"PowerSettingsIdentifer";
 
--(void)loadView
+- (void)awakeFromNib
 {
-    [super loadView];
 
-    [self displayGeneral:nil];
-
-    [self.view setWantsLayer:YES];
-    self.view.layer.backgroundColor = [NSColor windowBackgroundColor].CGColor;
-
-    // Set the layer redraw policy. This would be better done in
-    // the initialization method of a NSView subclass instead of here.
-    self.view.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
-
-    [self.view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-
-    CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
-
-    [CATransaction begin];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
-    animation.fromValue = @(frame.origin.y);
-    animation.toValue = @(self.view.frame.origin.y);
-    animation.duration = 0.3f;
-
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
-    [self.view.layer addAnimation:animation forKey:animation.keyPath];
-    [CATransaction commit];
 }
 
-- (void) close
+- (void)windowDidLoad
+{
+    [self.window.toolbar setSelectedItemIdentifier:kGeneralPrefsIdentifier];
+    [self displayGeneral:nil];
+}
+
+- (void)windowWillClose:(NSNotification *)notification
 {
     AccountModel::instance()->save();
-
-    CGRect frame = CGRectOffset(self.view.frame, 0, -self.view.frame.size.height);
-
-    [CATransaction begin];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.y"];
-    animation.fromValue = @(self.view.frame.origin.y);
-    animation.toValue = @(frame.origin.y);
-    animation.duration = 0.3f;
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
-
-    [CATransaction setCompletionBlock:^{
-        [self.view removeFromSuperview];
-    }];
-
-    [self.view.layer addAnimation:animation forKey:animation.keyPath];
-
-    // set final layer position to prevent glitching back to original one
-    [self.view.layer setPosition:frame.origin];;
-    [CATransaction commit];
 }
 
-- (void)displayGeneral:(NSToolbarItem *)sender {
-    if (self.currentVC != nil) {
-        [self.currentVC.view removeFromSuperview];
-    }
+- (IBAction)displayGeneral:(NSToolbarItem *)sender
+{
+    [self.tabView selectTabViewItemAtIndex:0];
     self.generalPrefsVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil];
-    [self.view addSubview:self.generalPrefsVC.view];
-    [self.generalPrefsVC.view setFrame:[self.view bounds]];
-    self.currentVC = self.generalPrefsVC;
+    [[self.generalPrefsVC view] setFrame:[self.generalTabItem.view frame]];
+    [[self.generalPrefsVC view] setBounds:[self.generalTabItem.view bounds]];
+    [self.generalTabItem setView:self.generalPrefsVC.view];
 }
 
-- (void)displayAudio:(NSToolbarItem *)sender {
-    if (self.currentVC != nil) {
-        [self.currentVC.view removeFromSuperview];
-    }
+- (IBAction)displayAudio:(NSToolbarItem *)sender
+{
+    [self.tabView selectTabViewItemAtIndex:1];
     self.audioPrefsVC = [[AudioPrefsVC alloc] initWithNibName:@"AudioPrefs" bundle:nil];
-    [self.view addSubview:self.audioPrefsVC.view];
-    [self.audioPrefsVC.view setFrame:[self.view bounds]];
-    self.currentVC = self.audioPrefsVC;
+    [[self.audioPrefsVC view] setFrame:[self.audioTabItem.view frame]];
+    [[self.audioPrefsVC view] setBounds:[self.audioTabItem.view bounds]];
+    [self.audioTabItem setView:self.audioPrefsVC.view];
 }
 
-- (void)displayAncrage:(NSToolbarItem *)sender {
-
-}
-
-- (void)displayVideo:(NSToolbarItem *)sender {
-    if (self.currentVC != nil) {
-        [self.currentVC.view removeFromSuperview];
-    }
+- (IBAction)displayVideo:(NSToolbarItem *)sender
+{
+    [self.tabView selectTabViewItemAtIndex:2];
     self.videoPrefsVC = [[VideoPrefsVC alloc] initWithNibName:@"VideoPrefs" bundle:nil];
-    [self.view addSubview:self.videoPrefsVC.view];
-    [self.videoPrefsVC.view setFrame:[self.view bounds]];
-    self.currentVC = self.videoPrefsVC;
+    [[self.videoPrefsVC view] setFrame:[self.videoTabItem.view frame]];
+    [[self.videoPrefsVC view] setBounds:[self.videoTabItem.view bounds]];
+    [self.videoTabItem setView:self.videoPrefsVC.view];
 }
 
-- (void) displayAccounts:(NSToolbarItem *) sender {
-    if (self.currentVC != nil) {
-        [self.currentVC.view removeFromSuperview];
-    }
+- (IBAction)displayAccounts:(NSToolbarItem *)sender
+{
+    [self.tabView selectTabViewItemAtIndex:3];
     self.accountsPrefsVC = [[AccountsVC alloc] initWithNibName:@"Accounts" bundle:nil];
-    [self.view addSubview:self.accountsPrefsVC.view];
-    [self.accountsPrefsVC.view setFrame:[self.view bounds]];
-    self.currentVC = self.accountsPrefsVC;
+    [[self.accountsPrefsVC view] setFrame:[self.accountsTabItem.view frame]];
+    [[self.accountsPrefsVC view] setBounds:[self.accountsTabItem.view bounds]];
+    [self.accountsTabItem setView:self.accountsPrefsVC.view];
 }
 
 

@@ -1,24 +1,109 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PreferencesViewController">
+        <customObject id="-2" userLabel="File's Owner" customClass="PreferencesVC">
             <connections>
-                <outlet property="view" destination="tP7-RI-Nc4" id="eQD-Q2-z2h"/>
+                <outlet property="accountsTabItem" destination="z9q-Ls-Ls3" id="L39-3J-bjd"/>
+                <outlet property="audioTabItem" destination="vWu-Gl-AQa" id="Dll-eL-j6b"/>
+                <outlet property="generalTabItem" destination="DBf-VD-q9d" id="kp6-eu-G5m"/>
+                <outlet property="tabView" destination="kdA-bR-R9R" id="DNG-Ap-Mmc"/>
+                <outlet property="videoTabItem" destination="LH2-KO-LLE" id="qjA-gy-dmb"/>
+                <outlet property="window" destination="C1T-wE-wxb" id="pvE-GV-60f"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView wantsLayer="YES" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tP7-RI-Nc4">
-            <rect key="frame" x="0.0" y="0.0" width="700" height="500"/>
-            <constraints>
-                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="500" id="GrH-eh-xjo"/>
-                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="700" id="hH2-R5-frs"/>
-            </constraints>
-            <point key="canvasLocation" x="412.5" y="157.5"/>
-        </customView>
+        <window title="Ring Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" animationBehavior="default" id="C1T-wE-wxb">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <rect key="contentRect" x="469" y="334" width="653" height="383"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <view key="contentView" id="33Y-I6-Ofh">
+                <rect key="frame" x="0.0" y="-1" width="653" height="383"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <tabView fixedFrame="YES" type="noTabsBezelBorder" translatesAutoresizingMaskIntoConstraints="NO" id="kdA-bR-R9R">
+                        <rect key="frame" x="-4" y="-4" width="661" height="389"/>
+                        <font key="font" metaFont="system"/>
+                        <tabViewItems>
+                            <tabViewItem label="General" identifier="2" id="DBf-VD-q9d">
+                                <view key="view" id="LEB-Hp-cQT">
+                                    <rect key="frame" x="10" y="7" width="641" height="369"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Audio" identifier="" id="vWu-Gl-AQa">
+                                <view key="view" id="UEq-Kq-rkn">
+                                    <rect key="frame" x="10" y="7" width="641" height="369"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Video" identifier="" id="LH2-KO-LLE">
+                                <view key="view" id="e9i-Cb-Qwk">
+                                    <rect key="frame" x="10" y="7" width="641" height="369"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Accounts" identifier="1" id="z9q-Ls-Ls3">
+                                <view key="view" id="Tbd-wg-JbK">
+                                    <rect key="frame" x="10" y="7" width="641" height="369"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                            </tabViewItem>
+                        </tabViewItems>
+                    </tabView>
+                </subviews>
+            </view>
+            <toolbar key="toolbar" implicitIdentifier="AC6F0BE7-01C8-4E05-898B-33D8FB2B542F" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="cBX-Cp-0Xw">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="0Vz-ff-LOS"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="a4I-8h-7Ld"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="KmD-NW-2Sc"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="6aq-4y-T31"/>
+                    <toolbarItem implicitItemIdentifier="A53BED01-97D4-496F-9806-EB216CF9D2D9" label="Video" paletteLabel="Video" tag="-1" image="video" selectable="YES" id="jLi-an-TR2">
+                        <connections>
+                            <action selector="displayVideo:" target="-2" id="UAi-6C-AQw"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="E53EE3E8-C5D3-49F8-A231-B8FC691E37CE" label="Audio" paletteLabel="Audio" tag="-1" image="audio" selectable="YES" id="iuJ-eu-b7f">
+                        <connections>
+                            <action selector="displayAudio:" target="-2" id="bbf-3M-NFB"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="EE8B14A6-94EE-47DC-8E40-437D3207D41B" explicitItemIdentifier="GeneralPrefsIdentifier" label="General" paletteLabel="General" tag="-1" image="general" selectable="YES" id="GQi-nL-0Ey">
+                        <connections>
+                            <action selector="displayGeneral:" target="-2" id="mCA-4c-06H"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="627205FE-1164-4992-8C29-54EB6409DF24" label="Advanced" paletteLabel="Advanced" tag="-1" image="NSAdvanced" id="Qza-fj-d45"/>
+                    <toolbarItem implicitItemIdentifier="29496C21-46DD-4A3D-903C-644AF346B69A" label="Accounts" paletteLabel="Accounts" tag="-1" image="NSUserAccounts" selectable="YES" id="bRw-gW-tRJ">
+                        <connections>
+                            <action selector="displayAccounts:" target="-2" id="qE9-O3-Jio"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aIF-RX-dpX"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="GQi-nL-0Ey"/>
+                    <toolbarItem reference="iuJ-eu-b7f"/>
+                    <toolbarItem reference="jLi-an-TR2"/>
+                    <toolbarItem reference="bRw-gW-tRJ"/>
+                    <toolbarItem reference="aIF-RX-dpX"/>
+                </defaultToolbarItems>
+            </toolbar>
+            <connections>
+                <outlet property="delegate" destination="-2" id="jqv-wK-sQz"/>
+            </connections>
+            <point key="canvasLocation" x="449.5" y="181.5"/>
+        </window>
     </objects>
+    <resources>
+        <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSUserAccounts" width="32" height="32"/>
+        <image name="audio" width="36" height="36"/>
+        <image name="general" width="36" height="36"/>
+        <image name="video" width="36" height="36"/>
+    </resources>
 </document>

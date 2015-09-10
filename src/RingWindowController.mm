@@ -116,66 +116,29 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
 - (IBAction)openPreferences:(id)sender
 {
-    if(self.preferencesViewController != nil) {
-        [self closePreferences:nil];
-        return;
-    }
-    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
+    self.preferencesWC = [[PreferencesVC alloc] initWithWindowNibName:@"PreferencesScreen"];
 
-    self.preferencesViewController = [[PreferencesVC alloc] initWithNibName:@"PreferencesScreen" bundle:nil];
-    self.myCurrentViewController = self.preferencesViewController;
-
-    NSLayoutConstraint* test = [NSLayoutConstraint constraintWithItem:self.preferencesViewController.view
-                                                            attribute:NSLayoutAttributeWidth
-                                                            relatedBy:NSLayoutRelationEqual
-                                                               toItem:currentView
-                                                            attribute:NSLayoutAttributeWidth
-                                                           multiplier:1.0f
-                                                             constant:0.0f];
-
-    NSLayoutConstraint* test2 = [NSLayoutConstraint constraintWithItem:self.preferencesViewController.view
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:currentView
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:1.0f
-                                                              constant:0.0f];
-
-    NSLayoutConstraint* test3 = [NSLayoutConstraint constraintWithItem:self.preferencesViewController.view
-                                                             attribute:NSLayoutAttributeCenterX
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:currentView
-                                                             attribute:NSLayoutAttributeCenterX
-                                                            multiplier:1.0f
-                                                              constant:0.0f];
+//    [self.preferencesWC.window setLevel:kCGMaximumWindowLevel];
+    [self.preferencesWC.window makeKeyAndOrderFront:self.preferencesWC.window];
+//    [self.preferencesWC.window orderFrontRegardless];
 
 
-    [currentView addSubview:[self.preferencesViewController view]];
+//    [self.myCurrentViewController.window orderFront:self];
+//    self.preferencesViewController = [[PreferencesVC alloc] initWithNibName:@"PreferencesScreen" bundle:nil];
+//    self.myCurrentViewController = self.preferencesViewController;
+//
+//    [currentView addSubview:[self.preferencesViewController view]];
+//
+//    [tb setDelegate: self.preferencesViewController];
+//    [self.window setToolbar: tb];
+//
+//    [self.window.toolbar setSelectedItemIdentifier:@"GeneralPrefsIdentifier"];
+//
+//
+//    // set the view controller's represented object to the number of subviews in that controller
+//    // (our NSTextField's value binding will reflect this value)
+//    [self.myCurrentViewController setRepresentedObject:[NSNumber numberWithUnsignedInteger:[[[self.myCurrentViewController view] subviews] count]]];
 
-    [tb setDelegate: self.preferencesViewController];
-    [self.window setToolbar: tb];
-
-    [self.window.toolbar setSelectedItemIdentifier:@"GeneralPrefsIdentifier"];
-
-    [currentView addConstraint:test];
-    [currentView addConstraint:test2];
-    [currentView addConstraint:test3];
-    // make sure we automatically resize the controller's view to the current window size
-    [[self.myCurrentViewController view] setFrame:[currentView bounds]];
-
-    // set the view controller's represented object to the number of subviews in that controller
-    // (our NSTextField's value binding will reflect this value)
-    [self.myCurrentViewController setRepresentedObject:[NSNumber numberWithUnsignedInteger:[[[self.myCurrentViewController view] subviews] count]]];
-    
-}
-
-- (IBAction) closePreferences:(NSToolbarItem *)sender {
-    if(self.myCurrentViewController != nil)
-    {
-        [self.preferencesViewController close];
-        [self displayMainToolBar];
-        self.preferencesViewController = nil;
-    }
 }
 
 #pragma NSToolbar Delegate
@@ -219,38 +182,13 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     return nil;
 }
 
-
-// FIXME: This is sick, NSWindowController is catching my selectors
-- (void)displayGeneral:(NSToolbarItem *)sender {
-    [self.preferencesViewController displayGeneral:sender];
-}
-
-- (void)displayAudio:(NSToolbarItem *)sender {
-    [self.preferencesViewController displayAudio:sender];
-}
-
-- (void)displayAncrage:(NSToolbarItem *)sender {
-    [self.preferencesViewController displayAncrage:sender];
-}
-
-- (void)displayVideo:(NSToolbarItem *)sender {
-    [self.preferencesViewController displayVideo:sender];
-}
-
-- (void)displayAccounts:(NSToolbarItem *)sender {
-    [self.preferencesViewController displayAccounts:sender];
-}
-
 - (void)togglePowerSettings:(id)sender
 {
     BOOL advanced = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced];
     [[NSUserDefaults standardUserDefaults] setBool:!advanced forKey:Preferences::ShowAdvanced];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    NSToolbar* tb = [[NSToolbar alloc] initWithIdentifier: @"PreferencesToolbar"];
-    [tb setDelegate: self.preferencesViewController];
-    [self.preferencesViewController displayGeneral:nil];
-    [self.window setToolbar:tb];
+    [self.preferencesWC displayGeneral:nil];
 }
 
 

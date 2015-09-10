@@ -32,7 +32,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PreferencesVC : NSViewController <NSToolbarDelegate>
+@interface PreferencesVC : NSWindowController <NSWindowDelegate>
 
 @property (nonatomic, strong) NSViewController *currentVC;
 @property (nonatomic, strong) NSViewController *accountsPrefsVC;

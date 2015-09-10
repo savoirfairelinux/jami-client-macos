@@ -37,8 +37,7 @@
 @interface RingWindowController : NSWindowController <NSToolbarDelegate, NSTextFieldDelegate>{
     IBOutlet NSView *currentView;
 }
-@property (nonatomic, assign) NSViewController *myCurrentViewController;
-@property PreferencesVC* preferencesViewController;
+@property (nonatomic, strong) PreferencesVC *preferencesWC;
 
 - (IBAction)openPreferences:(id)sender;
 - (IBAction)closePreferences:(NSToolbarItem *)sender;
