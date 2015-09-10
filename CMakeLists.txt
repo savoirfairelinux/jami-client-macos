@@ -82,8 +82,8 @@ SET(ringclient_CONTROLLERS
    src/RingWindowController.h
    src/ConversationsVC.mm
    src/ConversationsVC.h
-   src/PreferencesVC.mm
-   src/PreferencesVC.h
+   src/PreferencesWC.mm
+   src/PreferencesWC.h
    src/AccGeneralVC.mm
    src/AccGeneralVC.h
    src/AccVideoVC.mm
@@ -160,7 +160,7 @@ SET(ringclient_XIBS
    AccSecurity
    AudioPrefs
    VideoPrefs
-   PreferencesScreen
+   PreferencesWindow
    RingWizard
    CertificateWindow
    PersonLinker)
