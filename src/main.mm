@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,13 +27,22 @@
  *  shall include the source code for the parts of OpenSSL used as well
  *  as that of the covered work.
  */
-#import <AppKit/NSApplication.h> // NSApplicationMain
+
+#import <AppKit/NSApplication.h>
+
+//Qt
 #import <qapplication.h>
 #import <globalinstances.h>
-#import <memory>
 #import <QDebug>
 #import <QDir>
+#import <QTranslator>
+#import <QLocale>
 
+//LRC
+#import <personmodel.h>
+
+
+#import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
 
 int main(int argc, const char *argv[]) {
@@ -47,6 +56,11 @@ int main(int argc, const char *argv[]) {
     //Qt event loop will override native event loop
     QApplication* app = new QApplication(argc, const_cast<char**>(argv));
     app->setAttribute(Qt::AA_MacPluginApplication);
+
+    QTranslator translator;
+    if (translator.load(QLocale::system(), "lrc", "_", "/Users/alision/dev/ring-lrc/translations")) {
+        app->installTranslator(&translator);
+    }
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
 

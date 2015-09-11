@@ -1,0 +1,14 @@
+[main]
+host = https://www.transifex.com
+
+[ring.localizablestrings]
+file_filter = ui/<lang>.lproj/Localizable.strings
+source_file = ui/Base.lproj/Localizable.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxRingWindow]
+file_filter = ui/<lang>.lproj/RingWindow.strings
+source_file = ui/Base.lproj/RingWindow.strings
+source_lang = en
+type = STRINGS

@@ -15,6 +15,9 @@ MESSAGE("Building Ring version - " ${RING_VERSION})
 
 SET(RING_VERSION_NAME "Samuel de Champlain (${RING_VERSION})")
 
+# Defines supported languages
+SET(MAC_LANGS Base fr ru)
+
 MESSAGE(${RING_VERSION_NAME})
 SET(PROJ_COPYRIGHT " © 2015 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
@@ -187,17 +190,37 @@ SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
 SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
-# append '.xib' extension before linking xib files in executable
-FOREACH(xib ${ringclient_XIBS})
-  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/${xib}.xib)
+FOREACH(_LANG ${MAC_LANGS})
+    IF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ui/${_LANG}.lproj/Localizable.strings")
+        MESSAGE("ui/${_LANG}.lproj/Localizable.strings exists")
+        SET_SOURCE_FILES_PROPERTIES(ui/${_LANG}.lproj/Localizable.strings
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${_LANG}.lproj/)
+
+        SET(LOCALIZABLE_FILES ${LOCALIZABLE_FILES} ui/${_LANG}.lproj/Localizable.strings)
+    ENDIF()
+    FOREACH(xib ${ringclient_XIBS})
+       IF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ui/${_LANG}.lproj/${xib}.strings")
+            MESSAGE("ui/${_LANG}.lproj/${xib}.strings exists")
+            SET_SOURCE_FILES_PROPERTIES(ui/${_LANG}.lproj/${xib}.strings
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${_LANG}.lproj/)
+
+            SET(LOCALIZABLE_FILES ${LOCALIZABLE_FILES} ui/${_LANG}.lproj/${xib}.strings)
+        ENDIF()
+    ENDFOREACH()
 ENDFOREACH()
 
-SET(TO_ADD 
+# append '.xib' extension before linking xib files in executable
+FOREACH(xib ${ringclient_XIBS})
+  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/Base.lproj/${xib}.xib)
+ENDFOREACH()
+
+SET(TO_ADD
    ${ringclient_CONTROLLERS}
    ${ringclient_BACKENDS}
    ${ringclient_VIEWS}
    ${ringclient_OTHERS}
    ${ringclient_XIBS_FOR_EXECUTABLE}
+   ${LOCALIZABLE_FILES}
    ${myApp_ICON}
    Credits.rtf
    ${ring_ICONS})
@@ -213,7 +236,8 @@ SOURCE_GROUP("Controllers" FILES ${ringclient_CONTROLLERS})
 SOURCE_GROUP("Backends" FILES ${ringclient_BACKENDS})
 SOURCE_GROUP("CustomViews" FILES ${ringclient_VIEWS})
 SOURCE_GROUP("Classes" FILES ${ringclient_OTHERS})
-SOURCE_GROUP("Resources\\Interface Builder" FILES ${ringclient_XIBS_FOR_EXECUTABLE})
+SOURCE_GROUP("Resources\\Interface Builder" FILES
+                                    ${ringclient_XIBS_FOR_EXECUTABLE})
 
 IF(ENABLE_SPARKLE)
     SOURCE_GROUP("Frameworks" FILES ${SPARKLE_FRAMEWORK})
@@ -264,9 +288,9 @@ endif()
 FOREACH(xib ${ringclient_XIBS})
   ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} POST_BUILD
                       COMMAND ${IBTOOL} --errors --warnings --notices --output-format human-readable-text
-                              --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/${xib}.nib
-                             ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib
-                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib")
+                              --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/Base.lproj/${xib}.nib
+                             ${CMAKE_CURRENT_SOURCE_DIR}/ui/Base.lproj/${xib}.xib
+                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/ui/Base.lproj/${xib}.xib")
 
 ENDFOREACH()
 
