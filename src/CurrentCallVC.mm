@@ -121,7 +121,7 @@
     UserActionModel::Action action = qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
     NSButton* a = actionHash[(int) action];
     if (a != nil) {
-        [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
+        [a setHidden:!(idx.flags() & Qt::ItemIsEnabled)];
         [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
 
         if(action == UserActionModel::Action::HOLD) {
