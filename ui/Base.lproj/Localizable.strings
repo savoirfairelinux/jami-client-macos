@@ -19,11 +19,15 @@
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Choose CA";
 
-/* Open panel prompt for 'Choose a directory' */
+/* Contextual menu entry
+   Open panel prompt for 'Choose a directory' */
 "Choose file" = "Choose file";
 
 /* No comment provided by engineer. */
 "Just a moment..." = "Just a moment...";
+
+/* Contextual menu entry */
+"Remove value" = "Remove value";
 
 /* No comment provided by engineer. */
 "Reopen account to see your hash" = "Reopen account to see your hash";
