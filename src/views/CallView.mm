@@ -184,7 +184,10 @@
     }
 
     [contextualMenu addItem:[NSMenuItem separatorItem]];
-    [contextualMenu insertItemWithTitle:@"Choose file" action:@selector(chooseFile:) keyEquivalent:@"" atIndex:contextualMenu.itemArray.count];
+    [contextualMenu insertItemWithTitle:NSLocalizedString(@"Choose file", @"Contextual menu entry")
+                                 action:@selector(chooseFile:)
+                          keyEquivalent:@""
+                                atIndex:contextualMenu.itemArray.count];
 
     [NSMenu popUpContextMenu:contextualMenu withEvent:theEvent forView:self];
 }
