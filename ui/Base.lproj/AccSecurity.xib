@@ -273,7 +273,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="d0e-h3-O5f" indentationPerLevel="16" outlineTableColumn="n3A-3A-ad2" id="J53-ev-CMr">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="19"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="19"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>

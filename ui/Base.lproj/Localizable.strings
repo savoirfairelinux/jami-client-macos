@@ -1,4 +1,4 @@
-
+﻿/* Contextual menu action */
 "Add to contacts" = "Add to contacts";
 
 /* Open panel prompt for 'Choose a file' */
@@ -19,21 +19,25 @@
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Choose CA";
 
-/* Open panel prompt for 'Choose a directory' */
+/* Contextual menu entry
+   Open panel prompt for 'Choose a directory' */
 "Choose file" = "Choose file";
 
-/* No comment provided by engineer. */
+/* Indication for user */
 "Just a moment..." = "Just a moment...";
 
-/* No comment provided by engineer. */
+/* Contextual menu entry */
+"Remove value" = "Remove value";
+
+/* Show advice to user */
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
-/* No comment provided by engineer. */
+/* Display message to user */
 "Ring is already ready to work" = "Ring is already ready to work";
 
-/* No comment provided by engineer. */
+/* Share button */
 "Share by mail" = "Share by mail";
 
-/* No comment provided by engineer. */
+/* Indication to user */
 "This is your number, share it with your friends!" = "This is your number, share it with your friends!";
 

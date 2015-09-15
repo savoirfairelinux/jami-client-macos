@@ -1,4 +1,4 @@
-
+﻿
 /* Class = "NSTextFieldCell"; title = "This will be displayed to unknow peers"; ObjectID = "0Yt-xC-OWa"; */
 "0Yt-xC-OWa.title" = "This will be displayed to unknow peers";
 
@@ -26,14 +26,11 @@
 /* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
 "Wzq-V2-YLU.title" = "Alias";
 
-/* Class = "NSTextFieldCell"; title = "This is the hash you need to communicate to pass calls with a RING account"; ObjectID = "bca-Wv-Xul"; */
-"bca-Wv-Xul.title" = "This is the hash you need to communicate to pass calls with a RING account";
+/* Class = "NSTextFieldCell"; title = "This is your RingID. Copy and share it with your friends!"; ObjectID = "bca-Wv-Xul"; */
+"bca-Wv-Xul.title" = "This is your RingID. Copy and share it with your friends!";
 
-/* Class = "NSTextFieldCell"; title = "hash"; ObjectID = "cf0-xD-2WZ"; */
-"cf0-xD-2WZ.title" = "hash";
-
-/* Class = "NSTextFieldCell"; title = "Hash DHT"; ObjectID = "dPO-b1-o58"; */
-"dPO-b1-o58.title" = "Hash DHT";
+/* Class = "NSTextFieldCell"; title = "Ring Identifier"; ObjectID = "dPO-b1-o58"; */
+"dPO-b1-o58.title" = "Ring Identifier";
 
 /* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "ddk-1G-0jU"; */
 "ddk-1G-0jU.title" = "Use custom user-agent";
@@ -47,5 +44,5 @@
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
 "lHI-bz-ddQ.title" = "Upnp enabled";
 
-/* Class = "NSTextFieldCell"; title = "Type:"; ObjectID = "ubB-AZ-nAm"; */
-"ubB-AZ-nAm.title" = "Type:";
+/* Class = "NSTextFieldCell"; title = "Type"; ObjectID = "ubB-AZ-nAm"; */
+"ubB-AZ-nAm.title" = "Type";

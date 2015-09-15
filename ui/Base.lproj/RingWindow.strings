@@ -1,18 +1,39 @@
+﻿
+/* Class = "NSTabViewItem"; label = "SmartView"; ObjectID = "0MO-4e-8mo"; */
+"0MO-4e-8mo.label" = "SmartView";
 
 /* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "3Bh-xR-4Vn"; */
 "3Bh-xR-4Vn.title" = "Text";
 
+/* Class = "NSTextFieldCell"; title = "Display Name"; ObjectID = "5US-dD-gzB"; */
+"5US-dD-gzB.title" = "Display Name";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Ap7-26-S6b"; */
+"Ap7-26-S6b.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "details"; ObjectID = "BfK-c5-B1l"; */
+"BfK-c5-B1l.title" = "details";
+
 /* Class = "NSWindow"; title = "Ring"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Ring";
+
+/* Class = "NSTextFieldCell"; title = "Contact Method"; ObjectID = "FlQ-Th-nfO"; */
+"FlQ-Th-nfO.title" = "Contact Method";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GAa-pQ-t4g"; */
 "GAa-pQ-t4g.title" = "Text Cell";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "TeI-6b-R8a"; */
-"TeI-6b-R8a.title" = "Text Cell";
+/* Class = "NSBox"; title = "Box"; ObjectID = "Pav-Bw-GgK"; */
+"Pav-Bw-GgK.title" = "Box";
 
-/* Class = "NSTableColumn"; headerCell.title = "Conversations"; ObjectID = "VDO-Cu-h8f"; */
-"VDO-Cu-h8f.headerCell.title" = "Conversations";
+/* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "Q1F-xo-N3e"; */
+"Q1F-xo-N3e.title" = "Display Role";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Qeq-xb-jA4"; */
+"Qeq-xb-jA4.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "date"; ObjectID = "UKP-Et-CT0"; */
+"UKP-Et-CT0.title" = "date";
 
 /* Class = "NSTabViewItem"; label = "History"; ObjectID = "Wi9-Zd-O1N"; */
 "Wi9-Zd-O1N.label" = "History";
@@ -23,11 +44,29 @@
 /* Class = "NSTabViewItem"; label = "Contacts"; ObjectID = "Zbi-X6-DLT"; */
 "Zbi-X6-DLT.label" = "Contacts";
 
+/* Class = "NSTextFieldCell"; title = "Name"; ObjectID = "amz-mN-l2I"; */
+"amz-mN-l2I.title" = "Name";
+
+/* Class = "NSTextFieldCell"; title = "Category"; ObjectID = "d5o-nL-fRP"; */
+"d5o-nL-fRP.title" = "Category";
+
 /* Class = "NSTextFieldCell"; title = "Ring is a secure and distributed voice, video and chat communication platform that requires no centralized server and leaves the power of privacy in the hands of the user."; ObjectID = "eln-Vm-t0d"; */
 "eln-Vm-t0d.title" = "Ring is a secure and distributed voice, video and chat communication platform that requires no centralized server and leaves the power of privacy in the hands of the user.";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "fca-40-NK1"; */
-"fca-40-NK1.title" = "Text Cell";
+/* Class = "NSTextFieldCell"; title = "Category"; ObjectID = "gaf-Za-tuc"; */
+"gaf-Za-tuc.title" = "Category";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "hsi-nD-XUY"; */
-"hsi-nD-XUY.title" = "Text Cell";
+/* Class = "NSTextFieldCell"; title = "details"; ObjectID = "isD-c6-X5Q"; */
+"isD-c6-X5Q.title" = "details";
+
+/* Class = "NSTextFieldCell"; title = "Call name"; ObjectID = "j0J-Xd-uth"; */
+"j0J-Xd-uth.title" = "Call name";
+
+/* Class = "NSTextFieldCell"; title = "details"; ObjectID = "mK5-kV-YOO"; */
+"mK5-kV-YOO.title" = "details";
+
+/* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "uSw-g5-kte"; */
+"uSw-g5-kte.title" = "Display Role";
+
+/* Class = "NSSearchFieldCell"; placeholderString = "Name, ringID"; ObjectID = "vvE-nM-kSl"; */
+"vvE-nM-kSl.placeholderString" = "Name, ringID";
