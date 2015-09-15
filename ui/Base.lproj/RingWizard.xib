@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardWC">
@@ -129,11 +129,11 @@ DQ
             <point key="canvasLocation" x="661" y="-59.5"/>
         </window>
         <customView identifier="ChooseCerts" id="ftV-Pr-W0i">
-            <rect key="frame" x="0.0" y="0.0" width="531" height="139"/>
+            <rect key="frame" x="0.0" y="0.0" width="531" height="172"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Hn-6F-5Pq">
-                    <rect key="frame" x="170" y="40" width="200" height="26"/>
+                <pathControl verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Hn-6F-5Pq">
+                    <rect key="frame" x="242" y="75" width="200" height="26"/>
                     <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="kCA-gk-cMZ">
                         <font key="font" metaFont="system"/>
                     </pathCell>
@@ -141,8 +141,8 @@ DQ
                         <action selector="certificatePathControlSingleClick:" target="-2" id="gLr-11-7u9"/>
                     </connections>
                 </pathControl>
-                <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnL-AL-k3N">
-                    <rect key="frame" x="170" y="70" width="200" height="26"/>
+                <pathControl verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnL-AL-k3N">
+                    <rect key="frame" x="242" y="103" width="200" height="26"/>
                     <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="GQX-gh-pkz">
                         <font key="font" metaFont="system"/>
                     </pathCell>
@@ -150,27 +150,27 @@ DQ
                         <action selector="caListPathControlSingleClick:" target="-2" id="YSc-pJ-KRW"/>
                     </connections>
                 </pathControl>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIN-Fl-8Li">
-                    <rect key="frame" x="67" y="46" width="100" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User Certificate" id="V1U-ew-Ge2">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIN-Fl-8Li">
+                    <rect key="frame" x="18" y="81" width="221" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="User Certificate" id="V1U-ew-Ge2">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9K-II-jmt">
-                    <rect key="frame" x="18" y="74" width="149" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Certificate Authority list" id="SpA-zX-ytE">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9K-II-jmt">
+                    <rect key="frame" x="18" y="107" width="221" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Certificate Authority list" id="SpA-zX-ytE">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="he3-z9-OHD">
-                    <rect key="frame" x="88" y="0.0" width="443" height="38"/>
+                    <rect key="frame" x="20" y="0.0" width="511" height="71"/>
                     <subviews>
-                        <pathControl verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wk1-nk-8ES">
-                            <rect key="frame" x="82" y="6" width="200" height="26"/>
+                        <pathControl verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wk1-nk-8ES">
+                            <rect key="frame" x="223" y="41" width="200" height="26"/>
                             <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="dkC-t2-qyc">
                                 <font key="font" metaFont="system"/>
                             </pathCell>
@@ -178,16 +178,16 @@ DQ
                                 <action selector="pvkFilePathControlSingleClick:" target="-2" id="aTR-VH-hJK"/>
                             </connections>
                         </pathControl>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EG-qH-WOF">
-                            <rect key="frame" x="10" y="12" width="72" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Private key" id="poP-JD-MDa">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EG-qH-WOF">
+                            <rect key="frame" x="18" y="45" width="202" height="17"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Private key" id="poP-JD-MDa">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
                         <secureTextField hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nU-BV-LdG">
-                            <rect key="frame" x="287" y="8" width="145" height="22"/>
+                            <rect key="frame" x="226" y="9" width="145" height="22"/>
                             <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password..." drawsBackground="YES" usesSingleLineMode="YES" id="Hsc-U9-2RV">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -201,25 +201,32 @@ DQ
                             </connections>
                         </secureTextField>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="Wk1-nk-8ES" firstAttribute="leading" secondItem="4EG-qH-WOF" secondAttribute="trailing" constant="8" id="Mfo-AY-j64"/>
+                    </constraints>
                 </customView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21c-hJ-jTB">
-                    <rect key="frame" x="30" y="102" width="483" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose your own certificates" id="4ls-Yq-mDp">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K7H-z9-exz">
-                    <rect key="frame" x="18" y="122" width="199" height="17"/>
+                    <rect key="frame" x="18" y="155" width="199" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Advanced security (optionnal)" id="Gnn-K9-PTH">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21c-hJ-jTB">
+                    <rect key="frame" x="30" y="130" width="483" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose your own certificates" id="4ls-Yq-mDp">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
-            <point key="canvasLocation" x="62.5" y="-1.5"/>
+            <constraints>
+                <constraint firstItem="fnL-AL-k3N" firstAttribute="leading" secondItem="t9K-II-jmt" secondAttribute="trailing" constant="8" id="HuI-1u-ggc"/>
+                <constraint firstItem="1Hn-6F-5Pq" firstAttribute="leading" secondItem="oIN-Fl-8Li" secondAttribute="trailing" constant="8" id="Xqa-pG-Igc"/>
+            </constraints>
+            <point key="canvasLocation" x="62.5" y="15"/>
         </customView>
     </objects>
     <resources>
