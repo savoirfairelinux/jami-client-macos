@@ -201,6 +201,24 @@ FOREACH(_LANG ${MAC_LANGS})
                         "${CMAKE_INSTALL_PREFIX}/share/libringclient/translations/lrc_${_LANG}.qm")
     ENDIF()
 
+
+    IF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ui/${_LANG}.lproj/Localizable.strings")
+        SET_SOURCE_FILES_PROPERTIES(ui/${_LANG}.lproj/Localizable.strings
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${_LANG}.lproj/)
+
+        SET(LOCALIZED_${_LANG} ${LOCALIZED_${LANG}}
+                        ui/${_LANG}.lproj/Localizable.strings)
+    ENDIF()
+    FOREACH(xib ${ringclient_XIBS})
+       IF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ui/${_LANG}.lproj/${xib}.strings")
+            SET_SOURCE_FILES_PROPERTIES(ui/${_LANG}.lproj/${xib}.strings
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${_LANG}.lproj/)
+
+        SET(LOCALIZED_${_LANG} ${LOCALIZED_${_LANG}}
+                        ui/${_LANG}.lproj/${xib}.strings)
+        ENDIF()
+    ENDFOREACH()
+
     # Regroup those files under a .lproj folder
     SOURCE_GROUP("Resources\\${_LANG}.lproj" FILES
                                     ${LOCALIZED_${_LANG}})
@@ -210,7 +228,7 @@ ENDFOREACH()
 
 # append '.xib' extension before linking xib files in executable
 FOREACH(xib ${ringclient_XIBS})
-  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/${xib}.xib)
+  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/Base.lproj/${xib}.xib)
 ENDFOREACH()
 
 SET(TO_ADD
@@ -287,9 +305,9 @@ endif()
 FOREACH(xib ${ringclient_XIBS})
   ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} POST_BUILD
                       COMMAND ${IBTOOL} --errors --warnings --notices --output-format human-readable-text
-                              --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/${xib}.nib
-                             ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib
-                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib")
+                              --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/Base.lproj/${xib}.nib
+                             ${CMAKE_CURRENT_SOURCE_DIR}/ui/Base.lproj/${xib}.xib
+                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/ui/Base.lproj/${xib}.xib")
 
 ENDFOREACH()
 
