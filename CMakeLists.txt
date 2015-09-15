@@ -15,6 +15,9 @@ MESSAGE("Building Ring version - " ${RING_VERSION})
 
 SET(RING_VERSION_NAME "Samuel de Champlain (${RING_VERSION})")
 
+# Defines supported languages
+SET(MAC_LANGS Base fr)
+
 MESSAGE(${RING_VERSION_NAME})
 SET(PROJ_COPYRIGHT " © 2015 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
@@ -187,17 +190,36 @@ SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
 SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
+FOREACH(_LANG ${MAC_LANGS})
+
+    # Check for lrc translations
+    IF(EXISTS "${CMAKE_INSTALL_PREFIX}/share/libringclient/translations/lrc_${_LANG}.qm")
+        MESSAGE("${_LANG} QM strings exists")
+        SET_SOURCE_FILES_PROPERTIES(${CMAKE_INSTALL_PREFIX}/share/libringclient/translations/lrc_${_LANG}.qm
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/QtTranslations)
+        SET(LOCALIZED_${_LANG} ${LOCALIZED_${LANG}}
+                        "${CMAKE_INSTALL_PREFIX}/share/libringclient/translations/lrc_${_LANG}.qm")
+    ENDIF()
+
+    # Regroup those files under a .lproj folder
+    SOURCE_GROUP("Resources\\${_LANG}.lproj" FILES
+                                    ${LOCALIZED_${_LANG}})
+    # Add them to the list of files to package
+    SET(LOCALIZABLE_FILES ${LOCALIZABLE_FILES} ${LOCALIZED_${_LANG}})
+ENDFOREACH()
+
 # append '.xib' extension before linking xib files in executable
 FOREACH(xib ${ringclient_XIBS})
   SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/${xib}.xib)
 ENDFOREACH()
 
-SET(TO_ADD 
+SET(TO_ADD
    ${ringclient_CONTROLLERS}
    ${ringclient_BACKENDS}
    ${ringclient_VIEWS}
    ${ringclient_OTHERS}
    ${ringclient_XIBS_FOR_EXECUTABLE}
+   ${LOCALIZABLE_FILES}
    ${myApp_ICON}
    Credits.rtf
    ${ring_ICONS})
@@ -213,7 +235,8 @@ SOURCE_GROUP("Controllers" FILES ${ringclient_CONTROLLERS})
 SOURCE_GROUP("Backends" FILES ${ringclient_BACKENDS})
 SOURCE_GROUP("CustomViews" FILES ${ringclient_VIEWS})
 SOURCE_GROUP("Classes" FILES ${ringclient_OTHERS})
-SOURCE_GROUP("Resources\\Interface Builder" FILES ${ringclient_XIBS_FOR_EXECUTABLE})
+SOURCE_GROUP("Resources\\Interface Builder" FILES
+                                    ${ringclient_XIBS_FOR_EXECUTABLE})
 
 IF(ENABLE_SPARKLE)
     SOURCE_GROUP("Frameworks" FILES ${SPARKLE_FRAMEWORK})
