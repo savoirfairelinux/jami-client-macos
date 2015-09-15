@@ -85,9 +85,9 @@ source_file = ui/Base.lproj/PersonLinker.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxPreferencesScreen]
-file_filter = ui/<lang>.lproj/PreferencesScreen.strings
-source_file = ui/Base.lproj/PreferencesScreen.strings
+[ring.osxPreferencesWindow]
+file_filter = ui/<lang>.lproj/PreferencesWindow.strings
+source_file = ui/Base.lproj/PreferencesWindow.strings
 source_lang = en
 type = STRINGS
 
