@@ -64,13 +64,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" viewBased="YES" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="02n-X5-Zug" id="eKe-7i-c79">
-                                        <rect key="frame" x="0.0" y="0.0" width="306" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.0" colorSpace="deviceWhite"/>
                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                         <tableColumns>
-                                            <tableColumn identifier="NameColumn" width="300" minWidth="40" maxWidth="1000" id="02n-X5-Zug">
+                                            <tableColumn identifier="NameColumn" width="303" minWidth="40" maxWidth="1000" id="02n-X5-Zug">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
