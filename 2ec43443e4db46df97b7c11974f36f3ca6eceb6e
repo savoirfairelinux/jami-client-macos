@@ -1,0 +1,602 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a96c907_e1af402a",
+        "filename": "generate-string.sh",
+        "patchSetId": 16
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "to be removed: OpenSSL is not longer a dependency",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 31
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_a1a93826",
+        "filename": "src/AccRingVC.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 116,
+        "startChar": 86,
+        "endLine": 116,
+        "endChar": 91
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_c1a6c453",
+        "filename": "src/RingWizardWC.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 84,
+        "startChar": 90,
+        "endLine": 84,
+        "endChar": 95
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_6163301b",
+        "filename": "src/RingWizardWC.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 118,
+        "startChar": 63,
+        "endLine": 118,
+        "endChar": 66
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_8168bcf6",
+        "filename": "src/RingWizardWC.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 128,
+        "startChar": 73,
+        "endLine": 128,
+        "endChar": 78
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_216d2805",
+        "filename": "src/RingWizardWC.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 169,
+        "startChar": 126,
+        "endLine": 169,
+        "endChar": 131
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_4172b4e6",
+        "filename": "ui/Base.lproj/AccAdvanced.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_e17660d8",
+        "filename": "ui/Base.lproj/AccAudio.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_0174accd",
+        "filename": "ui/Base.lproj/AccGeneral.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_a180588c",
+        "filename": "ui/Base.lproj/AccRing.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_c17d64b3",
+        "filename": "ui/Base.lproj/AccSecurity.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_614a5085",
+        "filename": "ui/Base.lproj/AccVideo.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_814f5c92",
+        "filename": "ui/Base.lproj/Accounts.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_4149548a",
+        "filename": "ui/Base.lproj/AudioPrefs.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_e15d004a",
+        "filename": "ui/Base.lproj/CertificateWindow.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_015b4c55",
+        "filename": "ui/Base.lproj/CurrentCall.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_a157f825",
+        "filename": "ui/Base.lproj/GeneralPrefs.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_c1548423",
+        "filename": "ui/Base.lproj/Localizable.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_6131f00a",
+        "filename": "ui/Base.lproj/MainMenu.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_213be8ec",
+        "filename": "ui/Base.lproj/PersonLinker.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_41407456",
+        "filename": "ui/Base.lproj/PreferencesScreen.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_e12420c8",
+        "filename": "ui/Base.lproj/RingWindow.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_01226cb9",
+        "filename": "ui/Base.lproj/RingWizard.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_a12e18a4",
+        "filename": "ui/Base.lproj/VideoPrefs.strings",
+        "patchSetId": 16
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_41171452",
+        "filename": "update-translations.sh",
+        "patchSetId": 16
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "to remove",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 31
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_c12b2493",
+        "filename": "update-translations.sh",
+        "patchSetId": 16
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-15T21:08:36Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 49,
+        "startChar": 46,
+        "endLine": 49,
+        "endChar": 47
+      },
+      "revId": "2ec43443e4db46df97b7c11974f36f3ca6eceb6e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
