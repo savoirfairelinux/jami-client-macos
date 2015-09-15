@@ -187,17 +187,40 @@ SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
 SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
+
+# Check which translations are found for LRC
+SET(LRC_TRANSLATIONS_PATH ${CMAKE_INSTALL_PREFIX}/share/libringclient/translations)
+FILE(GLOB QM_LIST ${LRC_TRANSLATIONS_PATH}/*.qm)
+
+FOREACH(QM_FILE ${QM_LIST})
+    # Extract country code from filename
+    GET_FILENAME_COMPONENT(FILENAME ${QM_FILE} NAME_WE)
+    STRING(REGEX REPLACE "^lrc_" "" LANG ${FILENAME})
+
+    SET_SOURCE_FILES_PROPERTIES(${LRC_TRANSLATIONS_PATH}/lrc_${LANG}.qm
+                PROPERTIES MACOSX_PACKAGE_LOCATION Resources/QtTranslations)
+    SET(LOCALIZED_${LANG} ${LOCALIZED_${LANG}}
+                "${LRC_TRANSLATIONS_PATH}/lrc_${LANG}.qm")
+
+    # Regroup those files under a .lproj folder
+    SOURCE_GROUP("Resources\\${LANG}.lproj" FILES
+                                    ${LOCALIZED_${LANG}})
+    # Add them to the list of files to package
+    SET(LOCALIZABLE_FILES ${LOCALIZABLE_FILES} ${LOCALIZED_${LANG}})
+ENDFOREACH()
+
 # append '.xib' extension before linking xib files in executable
 FOREACH(xib ${ringclient_XIBS})
   SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/${xib}.xib)
 ENDFOREACH()
 
-SET(TO_ADD 
+SET(TO_ADD
    ${ringclient_CONTROLLERS}
    ${ringclient_BACKENDS}
    ${ringclient_VIEWS}
    ${ringclient_OTHERS}
    ${ringclient_XIBS_FOR_EXECUTABLE}
+   ${LOCALIZABLE_FILES}
    ${myApp_ICON}
    Credits.rtf
    ${ring_ICONS})
@@ -213,7 +236,8 @@ SOURCE_GROUP("Controllers" FILES ${ringclient_CONTROLLERS})
 SOURCE_GROUP("Backends" FILES ${ringclient_BACKENDS})
 SOURCE_GROUP("CustomViews" FILES ${ringclient_VIEWS})
 SOURCE_GROUP("Classes" FILES ${ringclient_OTHERS})
-SOURCE_GROUP("Resources\\Interface Builder" FILES ${ringclient_XIBS_FOR_EXECUTABLE})
+SOURCE_GROUP("Resources\\Interface Builder" FILES
+                                    ${ringclient_XIBS_FOR_EXECUTABLE})
 
 IF(ENABLE_SPARKLE)
     SOURCE_GROUP("Frameworks" FILES ${SPARKLE_FRAMEWORK})
