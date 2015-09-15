@@ -278,11 +278,14 @@ NSInteger const NICKNAME_TAG        = 1;
 {
     NSMenuItem *item;
     if(pathControl == caListPathControl) {
-        item = [menu addItemWithTitle:@"Remove value" action:@selector(caListPathControlSingleClick:) keyEquivalent:@""];
+        item = [menu addItemWithTitle:NSLocalizedString(@"Remove value", @"Contextual menu entry")
+                               action:@selector(caListPathControlSingleClick:) keyEquivalent:@""];
     } else if (pathControl == certificatePathControl) {
-        item = [menu addItemWithTitle:@"Remove value" action:@selector(certificatePathControlSingleClick:) keyEquivalent:@""];
+        item = [menu addItemWithTitle:NSLocalizedString(@"Remove value", @"Contextual menu entry")
+                               action:@selector(certificatePathControlSingleClick:) keyEquivalent:@""];
     } else {
-        item = [menu addItemWithTitle:@"Remove value" action:@selector(pvkFilePathControlSingleClick:) keyEquivalent:@""];
+        item = [menu addItemWithTitle:NSLocalizedString(@"Remove value", @"Contextual menu entry")
+                               action:@selector(pvkFilePathControlSingleClick:) keyEquivalent:@""];
     }
     [item setTarget:self]; // or whatever target you want
 }
