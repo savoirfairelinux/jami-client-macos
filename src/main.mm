@@ -38,6 +38,9 @@
 #import <QTranslator>
 #import <QLocale>
 
+//LRC
+#import <personmodel.h>
+
 #import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
 
