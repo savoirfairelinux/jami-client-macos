@@ -353,7 +353,7 @@
         [openPanel setTitle:NSLocalizedString(@"Choose a private key file", @"Open panel title")];
     }
 
-    [openPanel setPrompt:NSLocalizedString(@"Choose", @"Open panel prompt for 'Choose a file'")];
+    [openPanel setPrompt:NSLocalizedString(@"Choose CA", @"Open panel prompt for 'Choose a file'")];
     [openPanel setDelegate:self];
 }
 
