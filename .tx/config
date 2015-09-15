@@ -1,0 +1,110 @@
+[main]
+host = https://www.transifex.com
+
+[ring.localizablestrings]
+file_filter = ui/<lang>.lproj/Localizable.strings
+source_file = ui/Base.lproj/Localizable.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAccAdvanced]
+file_filter = ui/<lang>.lproj/AccAdvanced.strings
+source_file = ui/Base.lproj/AccAdvanced.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAccAudio]
+file_filter = ui/<lang>.lproj/AccAudio.strings
+source_file = ui/Base.lproj/AccAudio.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAccGeneral]
+file_filter = ui/<lang>.lproj/AccGeneral.strings
+source_file = ui/Base.lproj/AccGeneral.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAccounts]
+file_filter = ui/<lang>.lproj/Accounts.strings
+source_file = ui/Base.lproj/Accounts.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAccRing]
+file_filter = ui/<lang>.lproj/AccRing.strings
+source_file = ui/Base.lproj/AccRing.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAccSecurity]
+file_filter = ui/<lang>.lproj/AccSecurity.strings
+source_file = ui/Base.lproj/AccSecurity.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAccVideo]
+file_filter = ui/<lang>.lproj/AccVideo.strings
+source_file = ui/Base.lproj/AccVideo.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxAudioPrefs]
+file_filter = ui/<lang>.lproj/AudioPrefs.strings
+source_file = ui/Base.lproj/AudioPrefs.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxCertificateWindow]
+file_filter = ui/<lang>.lproj/CertificateWindow.strings
+source_file = ui/Base.lproj/CertificateWindow.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxCurrentCall]
+file_filter = ui/<lang>.lproj/CurrentCall.strings
+source_file = ui/Base.lproj/CurrentCall.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxGeneralPrefs]
+file_filter = ui/<lang>.lproj/GeneralPrefs.strings
+source_file = ui/Base.lproj/GeneralPrefs.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxMainMenu]
+file_filter = ui/<lang>.lproj/MainMenu.strings
+source_file = ui/Base.lproj/MainMenu.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxPersonLinker]
+file_filter = ui/<lang>.lproj/PersonLinker.strings
+source_file = ui/Base.lproj/PersonLinker.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxPreferencesScreen]
+file_filter = ui/<lang>.lproj/PreferencesScreen.strings
+source_file = ui/Base.lproj/PreferencesScreen.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxRingWindow]
+file_filter = ui/<lang>.lproj/RingWindow.strings
+source_file = ui/Base.lproj/RingWindow.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxRingWizard]
+file_filter = ui/<lang>.lproj/RingWizard.strings
+source_file = ui/Base.lproj/RingWizard.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxVideoPrefs]
+file_filter = ui/<lang>.lproj/VideoPrefs.strings
+source_file = ui/Base.lproj/VideoPrefs.strings
+source_lang = en
+type = STRINGS
