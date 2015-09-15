@@ -81,7 +81,8 @@
     if(![self checkForRingAccount]) {
         accountToCreate = AccountModel::instance()->add("", Account::Protocol::RING);
     } else {
-        [indicationLabel setStringValue:@"Ring is already ready to work"];
+        [indicationLabel setStringValue:NSLocalizedString(@"Ring is already ready to work",
+                                                          @"Display message to user")];
         auto accList = AccountModel::instance()->getAccountsByProtocol(Account::Protocol::RING);
         [self displayHash:accList[0]->username().toNSString()];
         [showCustomCertsButton setHidden:YES];
@@ -115,7 +116,8 @@
 
     NSSharingService* emailSharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
 
-    [createButton setTitle:@"Share by mail"];
+    [createButton setTitle:NSLocalizedString(@"Share by mail",
+                                             @"Share button")];
     [createButton setAlternateImage:emailSharingService.alternateImage];
     [createButton setAction:@selector(shareByEmail)];
 }
@@ -125,7 +127,8 @@
     [nickname setHidden:YES];
     [progressBar setHidden:NO];
     [createButton setEnabled:NO];
-    [indicationLabel setStringValue:@"Just a moment..."];
+    [indicationLabel setStringValue:NSLocalizedString(@"Just a moment...",
+                                                      @"Indication for user")];
 
     QModelIndex qIdx =  AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
 
@@ -166,7 +169,7 @@
                          NSLog(@"Account created!");
                          [progressBar setHidden:YES];
                          [createButton setEnabled:YES];
-                         [indicationLabel setStringValue:@"This is your number, share it with your friends!"];
+                         [indicationLabel setStringValue:NSLocalizedString(@"This is your number, share it with your friends!", @"Indication to user")];
                          [self displayHash:account->username().toNSString()];
                      });
 }
