@@ -201,6 +201,31 @@ FOREACH(QM_FILE ${QM_LIST})
                 PROPERTIES MACOSX_PACKAGE_LOCATION Resources/QtTranslations)
     SET(LOCALIZED_${LANG} ${LOCALIZED_${LANG}}
                 "${LRC_TRANSLATIONS_PATH}/lrc_${LANG}.qm")
+ENDFOREACH()
+
+# Check which translations are found for the client
+FILE(GLOB LPROJ_LIST ui/*.lproj)
+
+FOREACH(LPROJ ${LPROJ_LIST})
+    # Extract country code from <lang>.lproj folder name
+    GET_FILENAME_COMPONENT(LANG ${LPROJ} NAME_WE)
+    IF(EXISTS "${LPROJ}/Localizable.strings")
+        MESSAGE("Localizable:" ${LANG})
+        SET_SOURCE_FILES_PROPERTIES(${LPROJ}/Localizable.strings
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${LANG}.lproj/)
+
+        SET(LOCALIZED_${LANG} ${LOCALIZED_${LANG}}
+                        ${LPROJ}/Localizable.strings)
+    ENDIF()
+    FOREACH(xib ${ringclient_XIBS})
+       IF(EXISTS "${LPROJ}/${xib}.strings")
+            SET_SOURCE_FILES_PROPERTIES(${LPROJ}/${xib}.strings
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${LANG}.lproj/)
+
+        SET(LOCALIZED_${LANG} ${LOCALIZED_${LANG}}
+                        ${LPROJ}/${xib}.strings)
+        ENDIF()
+    ENDFOREACH()
 
     # Regroup those files under a .lproj folder
     SOURCE_GROUP("Resources\\${LANG}.lproj" FILES
@@ -211,7 +236,7 @@ ENDFOREACH()
 
 # append '.xib' extension before linking xib files in executable
 FOREACH(xib ${ringclient_XIBS})
-  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/${xib}.xib)
+  SET(ringclient_XIBS_FOR_EXECUTABLE ${ringclient_XIBS_FOR_EXECUTABLE} ui/Base.lproj/${xib}.xib)
 ENDFOREACH()
 
 SET(TO_ADD
@@ -288,9 +313,9 @@ endif()
 FOREACH(xib ${ringclient_XIBS})
   ADD_CUSTOM_COMMAND(TARGET ${PROJ_NAME} POST_BUILD
                       COMMAND ${IBTOOL} --errors --warnings --notices --output-format human-readable-text
-                              --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/${xib}.nib
-                             ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib
-                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/ui/${xib}.xib")
+                              --compile ${CMAKE_CURRENT_BINARY_DIR}/\${CONFIGURATION}/${PROJ_NAME}.app/Contents/Resources/Base.lproj/${xib}.nib
+                             ${CMAKE_CURRENT_SOURCE_DIR}/ui/Base.lproj/${xib}.xib
+                      COMMENT "Compiling ${CMAKE_CURRENT_SOURCE_DIR}/ui/Base.lproj/${xib}.xib")
 
 ENDFOREACH()
 

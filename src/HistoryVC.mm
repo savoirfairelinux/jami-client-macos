@@ -200,7 +200,7 @@
                 if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
                     NSMenu *theMenu = [[NSMenu alloc]
                                        initWithTitle:@""];
-                    [theMenu insertItemWithTitle:@"Add to contact"
+                    [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
                                           action:@selector(addToContact)
                                    keyEquivalent:@"a"
                                          atIndex:0];
