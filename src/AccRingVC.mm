@@ -113,7 +113,8 @@
     [bootstrapField setStringValue:account->hostname().toNSString()];
 
     if([account->username().toNSString() isEqualToString:@""])
-        [hashField setStringValue:@"Reopen account to see your hash"];
+        [hashField setStringValue:NSLocalizedString(@"Reopen account to see your hash",
+                                                    @"Show advice to user")];
     else
         [hashField setStringValue:account->username().toNSString()];
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
@@ -436,7 +436,7 @@
                     </connections>
                 </slider>
             </subviews>
-            <point key="canvasLocation" x="637" y="-70.5"/>
+            <point key="canvasLocation" x="772" y="-259.5"/>
         </customView>
         <viewController id="7rr-Wk-Nn8" customClass="BitrateVC">
             <connections>
@@ -449,9 +449,51 @@
                 <outlet property="contentViewController" destination="7rr-Wk-Nn8" id="43w-Ab-FTh"/>
             </connections>
         </popover>
+        <customView id="vW1-8R-ebu">
+            <rect key="frame" x="-1" y="0.0" width="719" height="497"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-W9-iSO">
+                    <rect key="frame" x="232" y="123" width="86" height="32"/>
+                    <buttonCell key="cell" type="push" title="Answer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KPG-pB-gPm">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hiA-1v-jOb">
+                    <rect key="frame" x="290" y="268" width="105" height="89"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="A33-8N-kr9"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lT0-mL-HHV">
+                    <rect key="frame" x="323" y="240" width="27" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="URI" id="Dqv-um-UUk">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZYE-KE-soE">
+                    <rect key="frame" x="276" y="189" width="143" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="wants to talk with you!" id="yZ6-1A-ZLT">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKf-ye-SIo">
+                    <rect key="frame" x="394" y="123" width="82" height="32"/>
+                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kxH-yM-TLd">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+            </subviews>
+            <point key="canvasLocation" x="469.5" y="143.5"/>
+        </customView>
     </objects>
     <resources>
         <image name="NSGoRightTemplate" width="9" height="12"/>
+        <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_call" width="72" height="72"/>
         <image name="ic_action_chat" width="72" height="72"/>
         <image name="ic_action_hangup" width="72" height="72"/>
