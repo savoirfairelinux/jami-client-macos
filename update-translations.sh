@@ -26,21 +26,21 @@
 tx pull -a --minimum-perc=75
 cd ui/
 
-# List languages pulled
-languages="$(ls -1)"
-
-for dir in "${languages[@]}"; do
+for dir in "$(find . -type d)"; do
     cd $dir
+    echo "$dir..."
     # in each country dir cleanup the files
     for file in `find . -name '*.strings'`; do
         # Convert file if encoding is utf-16le
         if [ `file -I $file | awk '{print $3;}'` = "charset=utf-16le" ]; then
+            echo "Converting $file..."
             iconv -f UTF-16LE -t UTF-8 $file > $file.8
         else
             mv $file $file.8
         fi
 
         # Empty first line
+        echo "Cleaning up $file"
         sed '1s/.*//' $file.8 > $file
         rm $file.8
     done
