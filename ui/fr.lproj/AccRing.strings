@@ -1,0 +1,48 @@
+
+/* Class = "NSTextFieldCell"; title = "This will be displayed to unknow peers"; ObjectID = "0Yt-xC-OWa"; */
+"0Yt-xC-OWa.title" = "Ceci sera affiché aux interlocuteurs inconnus";
+
+/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
+"1Sx-Et-CDM.title" = "Compte";
+
+/* Class = "NSTextFieldCell"; title = "Bootstrap server"; ObjectID = "B6b-iB-REZ"; */
+"B6b-iB-REZ.title" = "Adresse du nœud d’amorçage";
+
+/* Class = "NSTextFieldCell"; title = "TYPE"; ObjectID = "Bqr-Gq-OgA"; */
+"Bqr-Gq-OgA.title" = "TYPE";
+
+/* Class = "NSTextFieldCell"; title = "Permissions"; ObjectID = "EDd-FX-wcz"; */
+"EDd-FX-wcz.title" = "Permissions";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
+"HN3-i9-zmw.placeholderString" = "Nom ou pseudonyme";
+
+/* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
+"OeY-na-0YT.title" = "Répondre automatiquement";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
+"PaC-xE-SHA.title" = "Permettre les appels des correspondants enregistrés dans l'historique des appels";
+
+/* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
+"Wzq-V2-YLU.title" = "Nom d'emprunt";
+
+/* Class = "NSTextFieldCell"; title = "This is your RingID. Copy and share it with your friends!"; ObjectID = "bca-Wv-Xul"; */
+"bca-Wv-Xul.title" = "Voici votre RingID. Copiez-le et partagez-le avec vos amis!";
+
+/* Class = "NSTextFieldCell"; title = "Ring Identifier"; ObjectID = "dPO-b1-o58"; */
+"dPO-b1-o58.title" = "Identifiant Ring";
+
+/* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "ddk-1G-0jU"; */
+"ddk-1G-0jU.title" = "Utiliser un identifiant de version spécifique";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
+"fX7-9W-XFl.title" = "Autoriser la réception d'appels des interlocuteurs appartenant à votre liste de contacts";
+
+/* Class = "NSButtonCell"; title = "Allow calls from unknown peers"; ObjectID = "kmI-jb-aal"; */
+"kmI-jb-aal.title" = "Autoriser les appels de personnes inconnues";
+
+/* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
+"lHI-bz-ddQ.title" = "Activer UPnP";
+
+/* Class = "NSTextFieldCell"; title = "Type"; ObjectID = "ubB-AZ-nAm"; */
+"ubB-AZ-nAm.title" = "Type";
