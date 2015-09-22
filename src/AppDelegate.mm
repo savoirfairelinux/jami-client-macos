@@ -195,6 +195,7 @@
     [[NSApplication sharedApplication] terminate:self];
 }
 
+
 #if ENABLE_SPARKLE
 
 #pragma mark -
