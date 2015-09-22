@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_e3c3c688",
+        "filename": "ui/Base.lproj/PreferencesWindow.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2015-09-22T20:16:01Z",
+      "side": 1,
+      "message": "weird char",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "0eeed61ff3962b96687712291759dd429d24e967",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
