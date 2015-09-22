@@ -250,12 +250,6 @@
                          [self animateOut];
                      });
 
-    QObject::connect(CallModel::instance(),
-                     &QAbstractItemModel::dataChanged,
-                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         [self updateCall];
-                     });
-
     QObject::connect(CallModel::instance()->userActionModel(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
@@ -427,6 +421,12 @@
         /* check if text media is already present */
         if(!CallModel::instance()->selectedCall())
             return;
+
+        QObject::connect(CallModel::instance()->selectedCall(),
+                            &Call::changed,
+                            [=]() {
+                                [self updateCall];
+                            });
         if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
             Media::Text *text = CallModel::instance()->selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
             [self monitorIncomingTextMessages:text];

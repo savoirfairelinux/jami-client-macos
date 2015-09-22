@@ -54,6 +54,9 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
+    if (self.activeState)
+        return;
+
     for (NSView* item in self.contextualsControls) {
         [item setHidden:NO];
     }

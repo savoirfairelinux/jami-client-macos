@@ -118,7 +118,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
         c->setPeerContactMethod(m);
         c << Call::Action::ACCEPT;
 
-        [smartView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:1] byExtendingSelection:NO];
+        [smartView deselectAll:nil];
+        [smartView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:0] byExtendingSelection:NO];
     }
 }
 
@@ -180,9 +181,9 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
 
     // ask the tree controller for the current selection
-    if(auto selected = RecentModel::instance()->getActiveCall(qIdx.parent())) {
+    if (auto selected = RecentModel::instance()->getActiveCall(qIdx)) {
         CallModel::instance()->selectCall(selected);
-    } else if (auto selected = RecentModel::instance()->getActiveCall(qIdx)){
+    } else if (auto selected = RecentModel::instance()->getActiveCall(qIdx.parent())){
         CallModel::instance()->selectCall(selected);
     } else {
         CallModel::instance()->selectionModel()->clearCurrentIndex();
@@ -201,7 +202,14 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
         [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
 
-        [details setStringValue:qIdx.data((int)Person::Role::FormattedLastUsed).toString().toNSString()];
+        if (auto call = RecentModel::instance()->getActiveCall(qIdx)) {
+            [details setStringValue:call->roleData((int)Call::Role::HumanStateName).toString().toNSString()];
+            [((ContextualTableCellView*) result) setActiveState:YES];
+        } else {
+            [details setStringValue:qIdx.data((int)Person::Role::FormattedLastUsed).toString().toNSString()];
+            [((ContextualTableCellView*) result) setActiveState:NO];
+        }
+
     } else {
         result = [outlineView makeViewWithIdentifier:@"CallCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
