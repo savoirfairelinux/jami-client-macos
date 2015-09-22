@@ -15,6 +15,7 @@ For more information about the ring project, see the following:
 Requirements
 =============
 
+- cmake 3.3.0
 - Ring daemon
 - libRingClient (Qt5 version)
 - Qt5 Core
