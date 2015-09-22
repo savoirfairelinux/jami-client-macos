@@ -6,6 +6,7 @@ This is the official Mac port of Ring.
 Requirements
 =============
 
+- cmake 3.3.0
 - Ring daemon
 - libRingClient (Qt5 version)
 - Qt5 Core

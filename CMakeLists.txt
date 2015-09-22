@@ -26,6 +26,7 @@ FIND_PACKAGE(Qt5Core REQUIRED)
 FIND_PACKAGE(Qt5MacExtras REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
+FIND_PACKAGE(XCTest REQUIRED)
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -309,6 +310,18 @@ SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
         MACOSX_BUNDLE_ICON_FILE "appicon.icns"
     )
+
+# XCTest for Cocoa App Bundle
+
+xctest_add_bundle(RingTests ${PROJ_NAME}
+                    RingTests/CocoaExampleTests.mm)
+
+xctest_add_test(XCTest.RingTests RingTests)
+
+
+# -----------------------
+# Compilation
+# -----------------------
 
 # Make sure we can find the 'ibtool' program. If we can NOT find it we
 # skip generation of this project
