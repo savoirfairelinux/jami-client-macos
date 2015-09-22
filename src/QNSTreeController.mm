@@ -181,7 +181,7 @@
     QObject::connect(self->privateQModel,
                      &QAbstractItemModel::rowsAboutToBeRemoved,
                      [self](const QModelIndex & parent, int first, int last) {
-                         for( int row = first; row <= last; row++) {
+                         for( int row = last; row >= first; --row) {
                              //qDebug() << "REMOVING:"<< self->privateQModel->index(row, 0, parent) ;
                              if (!self->privateQModel->index(row, 0, parent).isValid())
                                  continue;

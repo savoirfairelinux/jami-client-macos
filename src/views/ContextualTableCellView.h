@@ -26,4 +26,9 @@
  */
 @property (nonatomic) NSMutableArray* contextualsControls;
 
+/**
+ * BOOL specifying if controls should be presented when mouse is hover
+ */
+@property (nonatomic) BOOL activeState;
+
 @end
