@@ -368,6 +368,7 @@
 
 -(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
 {
+    renderer->swapFrame();
     auto data = renderer->currentSmartFrame();
     QSize res = renderer->size();
 
