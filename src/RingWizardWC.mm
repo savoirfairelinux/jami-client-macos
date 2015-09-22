@@ -15,17 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
- *
- *  Additional permission under GNU GPL version 3 section 7:
- *
- *  If you modify this program, or any covered work, by linking or
- *  combining it with the OpenSSL project's OpenSSL library (or a
- *  modified version of that library), containing parts covered by the
- *  terms of the OpenSSL or SSLeay licenses, Savoir-Faire Linux Inc.
- *  grants you additional permission to convey the resulting work.
- *  Corresponding Source for a non-source form of such a combination
- *  shall include the source code for the parts of OpenSSL used as well
- *  as that of the covered work.
  */
 #import "RingWizardWC.h"
 
@@ -41,11 +30,7 @@
 
 #import "AppDelegate.h"
 
-#define PVK_PASSWORD_TAG    0
-#define NICKNAME_TAG        1
-
-@interface RingWizardWC () {
-
+@implementation RingWizardWC {
     __unsafe_unretained IBOutlet NSButton *goToAppButton;
     __unsafe_unretained IBOutlet NSTextField *nickname;
     __unsafe_unretained IBOutlet NSProgressIndicator *progressBar;
@@ -60,13 +45,11 @@
     __unsafe_unretained IBOutlet NSPathControl *caListPathControl;
     __unsafe_unretained IBOutlet NSPathControl *pvkPathControl;
     BOOL isExpanded;
+    Account* accountToCreate;
 }
 
-@property Account* accountToCreate;
-@end
-
-@implementation RingWizardWC
-@synthesize accountToCreate;
+NSInteger const PVK_PASSWORD_TAG    = 0;
+NSInteger const NICKNAME_TAG        = 1;
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -85,7 +68,6 @@
                                                           @"Display message to user")];
         auto accList = AccountModel::instance()->getAccountsByProtocol(Account::Protocol::RING);
         [self displayHash:accList[0]->username().toNSString()];
-        [showCustomCertsButton setHidden:YES];
     }
 
     [caListPathControl setDelegate:self];
@@ -112,6 +94,8 @@
     [nickname setEditable:NO];
     [nickname setHidden:NO];
 
+    [showCustomCertsButton setHidden:YES];
+
     [goToAppButton setHidden:NO];
 
     NSSharingService* emailSharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
@@ -119,6 +103,8 @@
     [createButton setTitle:NSLocalizedString(@"Share by mail",
                                              @"Share button")];
     [createButton setAlternateImage:emailSharingService.alternateImage];
+    [createButton setEnabled:YES];
+
     [createButton setAction:@selector(shareByEmail)];
 }
 
@@ -136,10 +122,10 @@
     if (isExpanded) {
         // retract panel
         [self chooseOwnCertificates:nil];
-        [showCustomCertsButton setHidden:YES];
     }
-    [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
+    [showCustomCertsButton setHidden:YES];
 
+    [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
     [self registerAutoStartup];
 }
 

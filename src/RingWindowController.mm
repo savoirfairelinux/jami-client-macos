@@ -57,13 +57,15 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
     [currentVC initFrame];
 
+    // Fresh run, we need to make sure RingID appears
+    [self updateRingID];
+
     // Update Ring ID label based on account model changes
     QObject::connect(AccountModel::instance(),
                      &AccountModel::dataChanged,
                      [=] {
                          [self updateRingID];
                      });
-
 }
 
 /**
