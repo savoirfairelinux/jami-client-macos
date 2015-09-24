@@ -24,7 +24,6 @@
 #import <call.h>
 #import <person.h>
 #import <contactmethod.h>
-#import <localhistorycollection.h>
 
 #import "QNSTreeController.h"
 #import "PersonLinkerVC.h"
@@ -66,8 +65,6 @@ NSInteger const DETAILS_TAG = 300;
     [historyView setDoubleAction:@selector(placeHistoryCall:)];
     [historyView setContextMenuDelegate:self];
     [historyView setShortcutsDelegate:self];
-
-    CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 
     QObject::connect(CallModel::instance(),
                      &CategorizedHistoryModel::dataChanged,
