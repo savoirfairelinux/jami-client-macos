@@ -29,6 +29,8 @@
 
 //LRC
 #import <personmodel.h>
+#import <categorizedhistorymodel.h>
+#import <localhistorycollection.h>
 
 #import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -50,6 +52,8 @@ int main(int argc, const char *argv[]) {
     if (translator.load(QLocale::system(), "lrc", "_", dir.absolutePath()+"/Resources/QtTranslations")) {
         app->installTranslator(&translator);
     }
+
+    CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
     PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
