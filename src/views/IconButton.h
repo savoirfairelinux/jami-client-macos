@@ -19,19 +19,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSColor (RingTheme)
 
-+ (NSColor*) ringBlue;
-+ (NSColor*) ringBlueWithAlpha:(CGFloat) a;
+@interface IconButton : NSButton
 
-+ (NSColor*) ringDarkBlue;
-
-+ (NSColor*) ringGreyHighlight;
-
-- (NSColor *)lightenColorByValue:(float)value;
-- (NSColor *)darkenColorByValue:(float)value;
-- (BOOL)isLightColor;
-
-+ (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint;
+@property (nonatomic) BOOL mouseDown;
 
 @end
