@@ -101,12 +101,13 @@
                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
                                                                                     </textField>
-                                                                                    <button hidden="YES" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="gTf-JZ-Zll" userLabel="Call Button">
-                                                                                        <rect key="frame" x="282" y="13" width="40" height="32"/>
+                                                                                    <button hidden="YES" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="gTf-JZ-Zll" userLabel="Call Button" customClass="IconButton">
+                                                                                        <rect key="frame" x="288" y="18" width="25" height="25"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="width" constant="28" id="p0N-dq-1Do"/>
+                                                                                            <constraint firstAttribute="width" constant="25" id="Rl9-Vn-KBH"/>
+                                                                                            <constraint firstAttribute="height" constant="25" id="Wlh-yZ-5MW"/>
                                                                                         </constraints>
-                                                                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_action_call" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CzS-gQ-e2I">
+                                                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="CzS-gQ-e2I">
                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                             <font key="font" metaFont="system"/>
                                                                                         </buttonCell>
@@ -116,9 +117,8 @@
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gTf-JZ-Zll" secondAttribute="trailing" constant="5" id="hD5-8g-CCJ"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="gTf-JZ-Zll" secondAttribute="bottom" constant="20" id="iVi-g6-XyZ"/>
-                                                                                    <constraint firstAttribute="trailing" secondItem="gTf-JZ-Zll" secondAttribute="trailing" constant="5" id="xJ7-L2-S5f"/>
+                                                                                    <constraint firstItem="gTf-JZ-Zll" firstAttribute="centerY" secondItem="Z6G-mQ-L3J" secondAttribute="centerY" constant="-0.5" id="NWc-3P-z2v"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="gTf-JZ-Zll" secondAttribute="trailing" constant="8" id="QCB-Ce-DCU"/>
                                                                                 </constraints>
                                                                                 <connections>
                                                                                     <outlet property="textField" destination="epa-Ih-aKF" id="ISN-G3-Hxj"/>
@@ -339,7 +339,7 @@
                                                                         </textFieldCell>
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
-                                                                            <tableCellView identifier="MainCell" id="b38-tQ-FEz">
+                                                                            <tableCellView identifier="PersonCell" id="b38-tQ-FEz" customClass="ContextualTableCellView">
                                                                                 <rect key="frame" x="1" y="1" width="321" height="60"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
@@ -359,19 +359,6 @@
                                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                         </textFieldCell>
                                                                                     </textField>
-                                                                                    <button verticalHuggingPriority="750" misplaced="YES" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="D2v-io-eAw" userLabel="Call Button">
-                                                                                        <rect key="frame" x="267" y="-1" width="40" height="32"/>
-                                                                                        <constraints>
-                                                                                            <constraint firstAttribute="width" constant="28" id="bdZ-tS-TTd"/>
-                                                                                        </constraints>
-                                                                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_action_call" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LSh-Ow-NcP">
-                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                                            <font key="font" metaFont="system"/>
-                                                                                        </buttonCell>
-                                                                                        <connections>
-                                                                                            <action selector="callClickedAtRow:" target="-1" id="3lv-9D-TpH"/>
-                                                                                        </connections>
-                                                                                    </button>
                                                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="akc-1J-SlS">
                                                                                         <rect key="frame" x="11" y="10" width="40" height="40"/>
                                                                                         <constraints>
@@ -380,12 +367,26 @@
                                                                                         </constraints>
                                                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="uT7-b3-sLX"/>
                                                                                     </imageView>
+                                                                                    <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="D2v-io-eAw" userLabel="Call Button" customClass="IconButton">
+                                                                                        <rect key="frame" x="273" y="15" width="30" height="30"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="30" id="GrO-uI-c46"/>
+                                                                                            <constraint firstAttribute="height" constant="30" id="InT-OX-mtQ"/>
+                                                                                        </constraints>
+                                                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="LSh-Ow-NcP">
+                                                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                            <font key="font" metaFont="system"/>
+                                                                                        </buttonCell>
+                                                                                        <connections>
+                                                                                            <action selector="callClickedAtRow:" target="-1" id="3lv-9D-TpH"/>
+                                                                                        </connections>
+                                                                                    </button>
                                                                                 </subviews>
                                                                                 <constraints>
+                                                                                    <constraint firstItem="D2v-io-eAw" firstAttribute="centerY" secondItem="b38-tQ-FEz" secondAttribute="centerY" id="164-he-Pvx"/>
                                                                                     <constraint firstItem="akc-1J-SlS" firstAttribute="leading" secondItem="b38-tQ-FEz" secondAttribute="leading" constant="11" id="5kx-HC-bBU"/>
                                                                                     <constraint firstItem="eGe-4R-pNq" firstAttribute="top" secondItem="b38-tQ-FEz" secondAttribute="top" constant="6" id="8Wv-Vg-yRP"/>
                                                                                     <constraint firstAttribute="trailing" secondItem="D2v-io-eAw" secondAttribute="trailing" constant="18" id="Bfw-dI-wa0"/>
-                                                                                    <constraint firstAttribute="bottom" secondItem="D2v-io-eAw" secondAttribute="bottom" constant="6" id="GeS-Oz-Wwv"/>
                                                                                     <constraint firstAttribute="bottom" secondItem="akc-1J-SlS" secondAttribute="bottom" constant="10" id="Kqx-IH-Vuf"/>
                                                                                     <constraint firstItem="eXn-EJ-bSE" firstAttribute="leading" secondItem="eGe-4R-pNq" secondAttribute="leading" id="bap-6e-vDW"/>
                                                                                     <constraint firstItem="akc-1J-SlS" firstAttribute="top" secondItem="b38-tQ-FEz" secondAttribute="top" constant="10" id="oTf-L2-iEw"/>
@@ -464,12 +465,9 @@
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-vB-N6F">
-                                <rect key="frame" x="255" y="614" width="40" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="28" id="cX3-9F-oek"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_persons" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="JbK-0S-rd1">
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-vB-N6F" customClass="IconButton">
+                                <rect key="frame" x="257" y="616" width="30" height="30"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_persons" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="JbK-0S-rd1">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -477,12 +475,9 @@
                                     <action selector="showContacts:" target="jrf-42-1l2" id="SBF-5u-2lU"/>
                                 </connections>
                             </button>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kNx-Cu-Fo6">
-                                <rect key="frame" x="285" y="614" width="40" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="28" id="0ER-vH-9QB"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_history" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="IYd-UZ-6MC">
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kNx-Cu-Fo6" customClass="IconButton">
+                                <rect key="frame" x="291" y="616" width="30" height="30"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_history" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="IYd-UZ-6MC">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -539,7 +534,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
                                 <rect key="frame" x="251" y="379" width="225" height="75"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
                             </imageView>
