@@ -464,19 +464,6 @@
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-vB-N6F">
-                                <rect key="frame" x="255" y="614" width="40" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="28" id="cX3-9F-oek"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_persons" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="JbK-0S-rd1">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="showContacts:" target="jrf-42-1l2" id="SBF-5u-2lU"/>
-                                </connections>
-                            </button>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kNx-Cu-Fo6">
                                 <rect key="frame" x="285" y="614" width="40" height="32"/>
                                 <constraints>
@@ -488,6 +475,16 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="showHistory:" target="jrf-42-1l2" id="8AY-hb-Hhj"/>
+                                </connections>
+                            </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-vB-N6F" customClass="IconButton">
+                                <rect key="frame" x="253" y="616" width="30" height="30"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_persons" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="JbK-0S-rd1">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showContacts:" target="jrf-42-1l2" id="SBF-5u-2lU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -539,7 +536,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
                                 <rect key="frame" x="251" y="379" width="225" height="75"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
                             </imageView>

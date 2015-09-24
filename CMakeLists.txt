@@ -131,7 +131,9 @@ SET(ringclient_VIEWS
    src/views/NSColor+RingTheme.mm
    src/views/NSColor+RingTheme.h
    src/views/ContextualTableCellView.mm
-   src/views/ContextualTableCellView.h)
+   src/views/ContextualTableCellView.h
+   src/views/IconButton.h
+   src/views/IconButton.mm)
 
 SET(ringclient_OTHERS
    src/main.mm
