@@ -131,7 +131,9 @@ SET(ringclient_VIEWS
    src/views/NSColor+RingTheme.mm
    src/views/NSColor+RingTheme.h
    src/views/ContextualTableCellView.mm
-   src/views/ContextualTableCellView.h)
+   src/views/ContextualTableCellView.h
+   src/views/IconButton.h
+   src/views/IconButton.mm)
 
 SET(ringclient_OTHERS
    src/main.mm
@@ -168,6 +170,7 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
 
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/background_tile.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
