@@ -19,20 +19,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSColor (RingTheme)
 
-+ (NSColor*) ringBlue;
-+ (NSColor*) ringBlueWithAlpha:(CGFloat) a;
+@interface IconButton : NSButton
 
-+ (NSColor*) ringDarkBlue;
+@property (nonatomic) BOOL mouseDown;
 
-+ (NSColor*) ringGreyHighlight;
-+ (NSColor*) ringDarkGrey;
-
-- (NSColor *)lightenColorByValue:(float)value;
-- (NSColor *)darkenColorByValue:(float)value;
-- (BOOL)isLightColor;
-
-+ (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint;
+/*
+ * This properties can be overriden in IB in User Defined Runtime Attributes
+ * By default this values will be initialized in awakeFromNib with:
+ * bgColor -> [NSColor ringBlue]
+ * cornerRadius to view frame width / 2 (circle)
+ */
+@property (nonatomic, strong) NSColor* bgColor;
+@property (nonatomic, strong) NSNumber* cornerRadius;
 
 @end

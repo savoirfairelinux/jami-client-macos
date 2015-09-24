@@ -41,4 +41,62 @@
     return [NSColor colorWithCalibratedRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:1.0];
 }
 
++ (NSColor*) ringDarkGrey
+{
+    return [NSColor colorWithCalibratedRed:41/255.0 green:41/255.0 blue:41/255.0 alpha:1.0];
+}
+
+- (NSColor *)lightenColorByValue:(float)value {
+    float red = [self redComponent];
+    red += value;
+
+    float green = [self greenComponent];
+    green += value;
+
+    float blue = [self blueComponent];
+    blue += value;
+
+    return [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1.0f];
+}
+
+- (NSColor *)darkenColorByValue:(float)value {
+    float red = [self redComponent];
+    red -= value;
+
+    float green = [self greenComponent];
+    green -= value;
+
+    float blue = [self blueComponent];
+    blue -= value;
+
+    return [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:1.0f];
+}
+
+- (BOOL)isLightColor {
+    NSInteger   totalComponents = [self numberOfComponents];
+    bool  isGreyscale     = totalComponents == 2 ? YES : NO;
+
+    CGFloat sum;
+
+    if (isGreyscale) {
+        sum = [self redComponent];
+    } else {
+        sum = ([self redComponent]+[self greenComponent]+[self blueComponent])/3.0;
+    }
+
+    return (sum > 0.8);
+}
+
++ (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint
+{
+    if (tint) {
+        [img lockFocus];
+        [tint set];
+        NSRect imageRect = {NSZeroPoint, [img size]};
+        NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop);
+        [img unlockFocus];
+    }
+    return img;
+}
+
 @end
