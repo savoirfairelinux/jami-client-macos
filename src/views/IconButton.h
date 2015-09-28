@@ -26,11 +26,33 @@
 
 /*
  * This properties can be overriden in IB in User Defined Runtime Attributes
- * By default this values will be initialized in awakeFromNib with:
- * bgColor -> [NSColor ringBlue]
- * cornerRadius to view frame width / 2 (circle)
+ * By default this values will be initialized in awakeFromNib
+ */
+
+
+/*
+ * Background color of the button
+ * default value : [NSColor ringBlue]
  */
 @property (nonatomic, strong) NSColor* bgColor;
+
+/*
+ * Background color of the button when highlighted
+ * default value : view frame width / 2 (circle)
+ */
+@property (nonatomic, strong) NSColor* highlightColor;
+
+/*
+ * Background color of the button when highlighted
+ * default value : view frame width / 2 (circle)
+ */
 @property (nonatomic, strong) NSNumber* cornerRadius;
+
+/*
+ * Padding
+ * default value : view frame width / 2 (circle)
+ */
+@property CGFloat imageInsets;
+
 
 @end
