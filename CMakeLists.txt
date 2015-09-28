@@ -182,6 +182,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_chat.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_quality.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_record.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_received.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_missed.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_made.png

@@ -61,6 +61,7 @@
 @property (unsafe_unretained) IBOutlet NSButton *muteVideoButton;
 @property (unsafe_unretained) IBOutlet NSButton *addContactButton;
 @property (unsafe_unretained) IBOutlet NSView *headerContainer;
+@property (unsafe_unretained) IBOutlet NSButton *qualityButton;
 
 @property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
@@ -109,18 +110,9 @@
     const QModelIndex& idx = CallModel::instance()->userActionModel()->index(row,0);
     UserActionModel::Action action = qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
     NSButton* a = actionHash[(int) action];
-    if (a != nil) {
-        [a setEnabled:(idx.flags() & Qt::ItemIsEnabled)];
+    if (a) {
+        [a setHidden:!(idx.flags() & Qt::ItemIsEnabled)];
         [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
-
-        if(action == UserActionModel::Action::HOLD) {
-            NSString* imgName = (a.state == NSOnState ? @"ic_action_holdoff" : @"ic_action_hold");
-            [a setImage:[NSImage imageNamed:imgName]];
-
-        }
-        if(action == UserActionModel::Action::RECORD) {
-            [a setTitle:(a.state == NSOnState ? @"Record off" : @"Record")];
-        }
     }
 }
 
@@ -138,7 +130,14 @@
     [self.addContactButton setHidden:!shouldShow];
 
     Call::State state = callIdx.data((int)Call::Role::State).value<Call::State>();
+
+    // Default values for this views
     [loadingIndicator setHidden:YES];
+    [self.qualityButton setHidden:YES];
+    [self.chatButton setHidden:YES];
+    [videoView setShouldAcceptInteractions:NO];
+
+
     [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
     switch (state) {
         case Call::State::DIALING:
@@ -147,32 +146,26 @@
         case Call::State::NEW:
             break;
         case Call::State::INITIALIZATION:
-            [videoView setShouldAcceptInteractions:NO];
             [loadingIndicator setHidden:NO];
             break;
         case Call::State::CONNECTED:
-            [videoView setShouldAcceptInteractions:NO];
             [loadingIndicator setHidden:NO];
             break;
         case Call::State::RINGING:
-            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::CURRENT:
             [videoView setShouldAcceptInteractions:YES];
+            [self.chatButton setHidden:NO];
+            [self.qualityButton setHidden:NO];
             break;
         case Call::State::HOLD:
-            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::BUSY:
-            [videoView setShouldAcceptInteractions:NO];
             break;
         case Call::State::OVER:
-            [videoView setShouldAcceptInteractions:NO];
+        case Call::State::FAILURE:
             if(self.splitView.isInFullScreenMode)
                 [self.splitView exitFullScreenModeWithOptions:nil];
-            break;
-        case Call::State::FAILURE:
-            [videoView setShouldAcceptInteractions:NO];
             break;
     }
 
@@ -224,6 +217,7 @@
     [loadingIndicator setLengthOfLine:2];
     [loadingIndicator setInnerMargin:30];
 
+    [self.qualityPopOver setDelegate:self];
     [self.videoView setCallDelegate:self];
 
     [self connect];
@@ -541,6 +535,8 @@
     if (self.addToContactPopover != nullptr) {
         [self.addToContactPopover performClose:self];
         self.addToContactPopover = NULL;
+        [self.addContactButton setState:NSOffState];
+
     } else if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
         auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
         [editorVC setMethodToLink:contactmethod];
@@ -596,10 +592,17 @@
     uam << UserActionModel::Action::MUTE_VIDEO;
 }
 - (IBAction)displayQualityPopUp:(id)sender {
+
     [self.qualityPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
 }
 
 #pragma mark - NSPopOverDelegate
+
+- (void)popoverWillClose:(NSNotification *)notification
+{
+    [self.qualityButton setState:NSOffState];
+    [self.addContactButton setState:NSOffState];
+}
 
 - (void)popoverDidClose:(NSNotification *)notification
 {
