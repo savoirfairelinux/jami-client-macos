@@ -21,7 +21,6 @@
 
 #import "NSColor+RingTheme.h"
 
-
 @implementation IconButton
 
 -(void) awakeFromNib {
@@ -32,6 +31,9 @@
     if (!self.cornerRadius) {
         self.cornerRadius = @(NSWidth(self.frame) / 2);
     }
+
+    if (self.imageInsets == 0)
+        self.imageInsets = 5.0f;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -42,8 +44,14 @@
     NSColor* backgroundStrokeColor5;
 
     if (self.mouseDown || self.state == NSOnState) {
-        backgroundColor6 = [self.bgColor darkenColorByValue:0.3];
-        backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.4];
+        if (self.highlightColor) {
+            backgroundColor6 = self.highlightColor;
+            backgroundStrokeColor5 = [self.highlightColor darkenColorByValue:0.1];
+        } else {
+            backgroundColor6 = [self.bgColor darkenColorByValue:0.3];
+            backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.4];
+        }
+
     } else {
         backgroundColor6 = self.bgColor;
         backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.1];
@@ -52,13 +60,10 @@
     //// Subframes
     NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5, NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 0.5, floor(NSWidth(dirtyRect) * 0.96667) - floor(NSWidth(dirtyRect) * 0.03333), floor(NSHeight(dirtyRect) * 0.96667) - floor(NSHeight(dirtyRect) * 0.03333));
 
-
     //// Group
     {
         //// Oval Drawing
-//        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithOvalInRect: NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5), NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5), floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5), floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5))];
-
-NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5), NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5), floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5), floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5)) xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
+        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5), NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5), floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5), floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5)) xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
 
         [backgroundColor6 setFill];
         [ovalPath fill];
@@ -72,7 +77,8 @@ NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(NSMi
         [path addClip];
 
         [self setImagePosition:NSImageOnly];
-        auto rect2 = NSInsetRect(dirtyRect, 5, 5);
+        auto rect2 = NSInsetRect(dirtyRect, self.imageInsets, self.imageInsets);
+
 
         [[NSColor image:self.image tintedWithColor:[NSColor whiteColor]]
                 drawInRect:rect2
@@ -81,7 +87,7 @@ NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(NSMi
                  fraction:1.0
                 respectFlipped:YES
                          hints:nil];
-        
+
         [NSGraphicsContext restoreGraphicsState];
     }
 }
