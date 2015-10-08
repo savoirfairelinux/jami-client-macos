@@ -214,17 +214,17 @@ QMetaObject::Connection previewStopped;
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
 {
     QModelIndex qIdx;
-    if([menu.title isEqualToString:@"devices"]) {
+    if(self.videoDevicesList.menu == menu) {
 
         qIdx = Video::ConfigurationProxy::deviceModel().index(index, 0);
         [item setTitle:Video::ConfigurationProxy::deviceModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
 
-    } else if([menu.title isEqualToString:@"sizes"]) {
+    } else if(self.sizesList.menu == menu) {
 
         qIdx = Video::ConfigurationProxy::resolutionModel().index(index, 0);
         [item setTitle:Video::ConfigurationProxy::resolutionModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
 
-    } else if([menu.title isEqualToString:@"rates"]) {
+    } else if(self.ratesList.menu == menu) {
 
         qIdx = Video::ConfigurationProxy::rateModel().index(index, 0);
         [item setTitle:Video::ConfigurationProxy::rateModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
@@ -235,13 +235,14 @@ QMetaObject::Connection previewStopped;
 
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
-    if([menu.title isEqualToString:@"devices"]) {
+    if(self.videoDevicesList.menu == menu) {
         return Video::ConfigurationProxy::deviceModel().rowCount();
-    } else if([menu.title isEqualToString:@"sizes"]) {
+    } else if(self.sizesList.menu == menu) {
         return Video::ConfigurationProxy::resolutionModel().rowCount();
-    } else if([menu.title isEqualToString:@"rates"]) {
+    } else if(self.ratesList.menu == menu) {
         return Video::ConfigurationProxy::rateModel().rowCount();
     }
+    return 0;
 }
 
 @end
