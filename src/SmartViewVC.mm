@@ -29,6 +29,7 @@
 #import <recentmodel.h>
 #import <callmodel.h>
 #import <call.h>
+#import <itemdataroles.h>
 #import <person.h>
 #import <contactmethod.h>
 #import <globalinstances.h>
@@ -66,7 +67,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     NSLog(@"INIT SmartView VC");
 
     isShowingContacts = false;
-    treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance()];
+    treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance()->peopleProxy()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
@@ -113,7 +114,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
     // Before calling check if we properly extracted a contact method and that
     // there is NOT already an ongoing call for this index (e.g: no children for this node)
-    if(m && !RecentModel::instance()->index(0, 0, qIdx).isValid()){
+    if(m && !RecentModel::instance()->peopleProxy()->index(0, 0, qIdx).isValid()){
         Call* c = CallModel::instance()->dialingCall();
         c->setPeerContactMethod(m);
         c << Call::Action::ACCEPT;
@@ -181,9 +182,9 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
 
     // ask the tree controller for the current selection
-    if (auto selected = RecentModel::instance()->getActiveCall(qIdx)) {
+    if (auto selected = RecentModel::instance()->getActiveCall(RecentModel::instance()->peopleProxy()->mapToSource(qIdx))) {
         CallModel::instance()->selectCall(selected);
-    } else if (auto selected = RecentModel::instance()->getActiveCall(qIdx.parent())){
+    } else if (auto selected = RecentModel::instance()->getActiveCall(RecentModel::instance()->peopleProxy()->mapToSource(qIdx.parent()))){
         CallModel::instance()->selectCall(selected);
     } else {
         CallModel::instance()->selectionModel()->clearCurrentIndex();
@@ -202,11 +203,11 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
         [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
 
-        if (auto call = RecentModel::instance()->getActiveCall(qIdx)) {
-            [details setStringValue:call->roleData((int)Call::Role::HumanStateName).toString().toNSString()];
+        if (auto call = RecentModel::instance()->getActiveCall(RecentModel::instance()->peopleProxy()->mapToSource(qIdx))) {
+            [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
             [((ContextualTableCellView*) result) setActiveState:YES];
         } else {
-            [details setStringValue:qIdx.data((int)Person::Role::FormattedLastUsed).toString().toNSString()];
+            [details setStringValue:qIdx.data((int)Ring::Role::FormattedLastUsed).toString().toNSString()];
             [((ContextualTableCellView*) result) setActiveState:NO];
         }
 
