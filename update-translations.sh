@@ -23,16 +23,23 @@
 
 # Get the translations from Transifex
 # TODO: add contraints on what we pull
+
+if [ "$(uname)" == "Darwin" ]; then
+    option="-I"
+else
+    option="-i"
+fi
+
 tx pull -a --minimum-perc=75
 cd ui/
 
-for dir in '$(find . -name "*.lproj" -type d)'; do
+for dir in `find . -name "*.lproj" -type d`; do
     cd $dir
     echo "$dir..."
     # in each country dir cleanup the files
     for file in `find . -name '*.strings'`; do
         # Convert file if encoding is utf-16le
-        if [ `file -I $file | awk '{print $3;}'` = "charset=utf-16le" ]; then
+        if [ `file $option $file | awk '{print $3;}'` = "charset=utf-16le" ]; then
             echo "Converting $file..."
             iconv -f UTF-16LE -t UTF-8 $file > $file.8
         else
