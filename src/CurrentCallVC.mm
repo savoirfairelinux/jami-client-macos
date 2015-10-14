@@ -356,13 +356,16 @@
 
 -(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
 {
-    auto data = renderer->currentFrame();
     QSize res = renderer->size();
 
-    auto buf = reinterpret_cast<const unsigned char*>(data.data());
+    auto frame_ptr = renderer->currentFrame();
+    auto frame_data = frame_ptr.ptr;
+    if (!frame_data)
+        return;
+
 
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef newContext = CGBitmapContextCreate((void *)buf,
+    CGContextRef newContext = CGBitmapContextCreate(frame_data,
                                                     res.width(),
                                                     res.height(),
                                                     8,
