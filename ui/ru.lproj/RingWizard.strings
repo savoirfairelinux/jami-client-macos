@@ -1,0 +1,36 @@
+
+/* Class = "NSWindow"; title = "Ring"; ObjectID = "4LP-GX-BkH"; */
+"4LP-GX-BkH.title" = "кольцо";
+
+/* Class = "NSTextFieldCell"; title = "Choose your own certificates"; ObjectID = "4ls-Yq-mDp"; */
+"4ls-Yq-mDp.title" = "Выберите ваши сертификаты";
+
+/* Class = "NSTextFieldCell"; title = "Advanced security (optionnal)"; ObjectID = "Gnn-K9-PTH"; */
+"Gnn-K9-PTH.title" = "Дополнительная безопасность (не обязательно)";
+
+/* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "Hsc-U9-2RV"; */
+"Hsc-U9-2RV.placeholderString" = "Пароль...";
+
+/* Class = "NSButtonCell"; title = "Continue"; ObjectID = "Kwr-LJ-K8C"; */
+"Kwr-LJ-K8C.title" = "Продолжить";
+
+/* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "SpA-zX-ytE"; */
+"SpA-zX-ytE.title" = "Список Авторизованных Сертификатов";
+
+/* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "V1U-ew-Ge2"; */
+"V1U-ew-Ge2.title" = "Пользовательский Сертификат";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Choose custom certificates"; ObjectID = "aZl-bU-psB"; */
+"aZl-bU-psB.ibShadowedToolTip" = "Выбрать произвольные сертификаты";
+
+/* Class = "NSTextFieldCell"; title = "First tell us who you are"; ObjectID = "meL-TZ-VQO"; */
+"meL-TZ-VQO.title" = "Сначала скажи нам кто ты";
+
+/* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "poP-JD-MDa"; */
+"poP-JD-MDa.title" = "Приватный ключ";
+
+/* Class = "NSTextFieldCell"; title = "Welcome to Ring"; ObjectID = "uqu-uh-Wao"; */
+"uqu-uh-Wao.title" = "Добро пожаловать в Ring";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "wDw-Ut-RUm"; */
+"wDw-Ut-RUm.title" = "Хорошо";

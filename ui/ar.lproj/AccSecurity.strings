@@ -1,0 +1,48 @@
+
+/* Class = "NSButtonCell"; title = "Require certificates for incoming TLS connections"; ObjectID = "1f9-X5-ykb"; */
+"1f9-X5-ykb.title" = "استلزم شهادة للإتصالات TLS الواردة";
+
+/* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
+"1xi-9G-zOX.title" = "تحقق من الشهادات كمستخدم";
+
+/* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
+"2e5-zS-ghg.title" = "إستعمل قائمة شيفرة  حسب الطلب";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "5LC-T6-hpk"; */
+"5LC-T6-hpk.title" = "خلية نص";
+
+/* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
+"7c2-kF-dcs.placeholderString" = "كلمة السر...";
+
+/* Class = "NSTextFieldCell"; title = "Negociation timeout"; ObjectID = "9Q3-1W-Lh3"; */
+"9Q3-1W-Lh3.title" = "إنقضاء فترة التفاوض";
+
+/* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
+"Ig9-B1-7N3.title" = "الاستعاضة إلى RTP";
+
+/* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
+"JHb-iu-ZwI.title" = "المفتاح الخاص";
+
+/* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "Jqz-P0-zAz"; */
+"Jqz-P0-zAz.title" = "شهادة المستخدم";
+
+/* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
+"UxS-et-whJ.title" = "اسم الخادم للاتصالات الصادرة TLS";
+
+/* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
+"YtQ-hx-hih.title" = "إستعمل SRTP";
+
+/* Class = "NSMenu"; title = "tlsmethodlist"; ObjectID = "hOG-SW-CBI"; */
+"hOG-SW-CBI.title" = "tlsmethodlist";
+
+/* Class = "NSButtonCell"; title = "Use TLS transport"; ObjectID = "oTT-gO-fqM"; */
+"oTT-gO-fqM.title" = "إستعمل النقل TLS";
+
+/* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "uOE-XA-5gW"; */
+"uOE-XA-5gW.title" = "أسلوب بروتوكول TLS";
+
+/* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
+"vPF-Rp-aR6.title" = "قائمة سلطات الشهادات";
+
+/* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
+"x2s-ov-cVQ.title" = "تحقق من الشهادات الواردة كخادم تطبيقات";
