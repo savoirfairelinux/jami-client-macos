@@ -36,6 +36,7 @@
 #import "views/CallView.h"
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
+#import "TransferVC.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -72,6 +73,7 @@
 
 @property (strong) IBOutlet NSPopover *qualityPopOver;
 @property (strong) NSPopover* addToContactPopover;
+@property (strong) NSPopover* transferPopoverVC;
 @property (strong) IBOutlet ChatVC *chatVC;
 
 @property QHash<int, NSButton*> actionHash;
@@ -597,6 +599,22 @@
 - (IBAction)displayQualityPopUp:(id)sender {
 
     [self.qualityPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+}
+
+- (IBAction)toggleTransferView:(id)sender {
+    if (self.transferPopoverVC != nullptr) {
+        [self.transferPopoverVC performClose:self];
+        self.transferPopoverVC = NULL;
+    } else {
+        auto* transferVC = [[TransferVC alloc] initWithNibName:@"Transfer" bundle:nil];
+        self.transferPopoverVC = [[NSPopover alloc] init];
+        [self.transferPopoverVC setContentSize:transferVC.view.frame.size];
+        [self.transferPopoverVC setContentViewController:transferVC];
+        [self.transferPopoverVC setAnimates:YES];
+        [self.transferPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [self.transferPopoverVC setDelegate:self];
+        [self.transferPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+    }
 }
 
 #pragma mark - NSPopOverDelegate

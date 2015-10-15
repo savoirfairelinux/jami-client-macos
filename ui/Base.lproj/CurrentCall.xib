@@ -118,25 +118,11 @@
                                         <constraint firstAttribute="centerY" secondItem="cIU-M7-xpN" secondAttribute="centerY" id="yvc-8B-cEu"/>
                                     </constraints>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview">
-                                    <rect key="frame" x="480" y="20" width="175" height="120"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="120" id="BvU-kV-0uD"/>
-                                        <constraint firstAttribute="width" constant="175" id="aEv-Tt-tSD"/>
-                                    </constraints>
-                                </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="JwW-2h-DyZ" customClass="ITProgressIndicator">
-                                    <rect key="frame" x="287" y="205" width="100" height="100"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="gpl-re-hHE"/>
-                                        <constraint firstAttribute="width" constant="100" id="nmo-HF-lhL"/>
-                                    </constraints>
-                                </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Eoi-B8-iL6" userLabel="Controls">
                                     <rect key="frame" x="20" y="20" width="452" height="67"/>
                                     <subviews>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="IconButton">
-                                            <rect key="frame" x="173" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="158" y="13" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7wg-Q4-mbD">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -156,8 +142,12 @@
                                                 <action selector="muteAudio:" target="-2" id="DBk-mG-FLj"/>
                                             </connections>
                                         </button>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
-                                            <rect key="frame" x="9" y="14" width="40" height="40"/>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
+                                            <rect key="frame" x="8" y="14" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="IFG-ni-9mc"/>
+                                                <constraint firstAttribute="width" constant="40" id="uoL-Wy-Ek2"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="left" transparent="YES" imageScaling="proportionallyDown" id="CoO-HS-nEB">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -175,7 +165,7 @@
                                             </connections>
                                         </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
-                                            <rect key="frame" x="340" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="286" y="13" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="rhz-4Z-avV">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -195,11 +185,11 @@
                                                 <action selector="toggleRecording:" target="-2" id="gAc-ZJ-9PN"/>
                                             </connections>
                                         </button>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
-                                            <rect key="frame" x="129" y="14" width="40" height="40"/>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
+                                            <rect key="frame" x="336" y="12" width="40" height="40"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_transfer" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="FOs-Wt-c2R">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
@@ -213,11 +203,11 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
+                                                <action selector="toggleTransferView:" target="-2" id="Gxt-lS-qZs"/>
                                             </connections>
                                         </button>
                                         <button wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
-                                            <rect key="frame" x="404" y="12" width="40" height="40"/>
+                                            <rect key="frame" x="392" y="12" width="40" height="40"/>
                                             <backgroundFilters>
                                                 <ciFilter name="CIColorMonochrome">
                                                     <configuration>
@@ -247,7 +237,7 @@
                                             </connections>
                                         </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
-                                            <rect key="frame" x="223" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="197" y="14" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -268,7 +258,7 @@
                                             </connections>
                                         </button>
                                         <button wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j52-5l-K3e" userLabel="Quality" customClass="IconButton">
-                                            <rect key="frame" x="282" y="12" width="40" height="40"/>
+                                            <rect key="frame" x="236" y="12" width="40" height="40"/>
                                             <backgroundFilters>
                                                 <ciFilter name="CIColorMonochrome">
                                                     <configuration>
@@ -297,8 +287,12 @@
                                                 <action selector="displayQualityPopUp:" target="-2" id="EbO-ZD-Zsm"/>
                                             </connections>
                                         </button>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
-                                            <rect key="frame" x="69" y="13" width="40" height="40"/>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="58" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="MYx-uE-Bej"/>
+                                                <constraint firstAttribute="height" constant="40" id="dmD-ga-Kwv"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -315,10 +309,49 @@
                                                 <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
                                             </connections>
                                         </button>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
+                                            <rect key="frame" x="119" y="14" width="40" height="40"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="qgD-3D-nD5" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="9NT-bT-9wJ"/>
+                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="FrX-Hd-30D"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="385" id="TSJ-9A-brf"/>
+                                        <constraint firstItem="qgD-3D-nD5" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="leading" constant="8" id="hhR-YV-cu5"/>
+                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="leading" secondItem="qgD-3D-nD5" secondAttribute="trailing" constant="10" id="j0v-YO-8kM"/>
                                         <constraint firstAttribute="height" constant="67" id="ynu-O5-MN8"/>
+                                    </constraints>
+                                </customView>
+                                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JwW-2h-DyZ" customClass="ITProgressIndicator">
+                                    <rect key="frame" x="287" y="204" width="100" height="100"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="gpl-re-hHE"/>
+                                        <constraint firstAttribute="width" constant="100" id="nmo-HF-lhL"/>
+                                    </constraints>
+                                </customView>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview">
+                                    <rect key="frame" x="480" y="20" width="175" height="120"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="120" id="BvU-kV-0uD"/>
+                                        <constraint firstAttribute="width" constant="175" id="aEv-Tt-tSD"/>
                                     </constraints>
                                 </customView>
                             </subviews>
@@ -340,7 +373,7 @@
                             <rect key="frame" x="676" y="0.0" width="338" height="509"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kW2-Cx-fNv">
+                                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kW2-Cx-fNv">
                                     <rect key="frame" x="274" y="13" width="50" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="38" id="0Qx-5g-ThL"/>
@@ -354,7 +387,7 @@
                                         <binding destination="LWe-df-dS6" name="enabled" keyPath="self.message.length" id="ec2-s1-Hpt"/>
                                     </connections>
                                 </button>
-                                <textField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OBX-o0-u1k">
+                                <textField wantsLayer="YES" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBX-o0-u1k">
                                     <rect key="frame" x="20" y="20" width="252" height="22"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" bezelStyle="round" id="QW9-Ty-ZEe">
                                         <font key="font" metaFont="system"/>
@@ -370,7 +403,7 @@
                                         <outlet property="delegate" destination="LWe-df-dS6" id="9by-zr-IW0"/>
                                     </connections>
                                 </textField>
-                                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="i3X-6S-mKF">
+                                <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="i3X-6S-mKF">
                                     <rect key="frame" x="0.0" y="50" width="338" height="459"/>
                                     <clipView key="contentView" id="Tbz-Bj-Y3K">
                                         <rect key="frame" x="0.0" y="0.0" width="338" height="459"/>
@@ -380,10 +413,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="459"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <size key="minSize" width="338" height="459"/>
+                                                <size key="minSize" width="326" height="459"/>
                                                 <size key="maxSize" width="463" height="10000000"/>
                                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <size key="minSize" width="338" height="459"/>
+                                                <size key="minSize" width="326" height="459"/>
                                                 <size key="maxSize" width="463" height="10000000"/>
                                             </textView>
                                         </subviews>
@@ -440,7 +473,7 @@
             </connections>
         </viewController>
         <customView wantsLayer="YES" id="Y38-Id-LGC">
-            <rect key="frame" x="0.0" y="4" width="56" height="161"/>
+            <rect key="frame" x="0.0" y="0.0" width="56" height="161"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6lf-Ut-Xbr">
@@ -481,7 +514,7 @@
             </connections>
         </popover>
         <customView id="vW1-8R-ebu">
-            <rect key="frame" x="-1" y="0.0" width="719" height="497"/>
+            <rect key="frame" x="0.0" y="0.0" width="719" height="497"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pze-W9-iSO">
@@ -533,6 +566,7 @@
         <image name="ic_action_mute_video" width="72" height="72"/>
         <image name="ic_action_quality" width="72" height="72"/>
         <image name="ic_action_record" width="54" height="54"/>
+        <image name="ic_action_transfer" width="72" height="72"/>
         <image name="ic_person_add" width="48" height="48"/>
     </resources>
 </document>
