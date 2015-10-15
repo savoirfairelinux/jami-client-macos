@@ -215,7 +215,6 @@
                                      [self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
                              }
                          }
-                         [self rearrangeObjects];
                      });
 }
 
