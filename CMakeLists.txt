@@ -111,7 +111,9 @@ SET(ringclient_CONTROLLERS
    src/PersonLinkerVC.mm
    src/PersonLinkerVC.h
    src/SmartViewVC.mm
-   src/SmartViewVC.h)
+   src/SmartViewVC.h
+   src/BrokerVC.mm
+   src/BrokerVC.h)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
@@ -160,7 +162,8 @@ SET(ringclient_XIBS
    PreferencesWindow
    RingWizard
    CertificateWindow
-   PersonLinker)
+   PersonLinker
+   Broker)
 
 # Icons
 # This part tells CMake where to find and install the file itself
@@ -186,6 +189,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_record.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_received.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_missed.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_made.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_transfer.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png
