@@ -209,13 +209,10 @@
                          for(int row = topLeft.row() ; row <= bottomRight.row() ; ++row)
                          {
                              QModelIndex tmpIdx = self->privateQModel->index(row, 0);
-                             if(tmpIdx.row() >= [self.arrangedObjects count]) {
-                                 Node* n = [[Node alloc] init];
-                                 if(tmpIdx.isValid())
-                                     [self insertObject:n atArrangedObjectIndexPath:[[NSIndexPath alloc] initWithIndex:row]];
-                             }
+                             //[self moveNode:[self.arrangedObjects
+                             //                descendantNodeAtIndexPath:[self qIdxToNSIndexPath:tmpIdx]]
+                             //   toIndexPath:[self qIdxToNSIndexPath:tmpIdx]];
                          }
-                         [self rearrangeObjects];
                      });
 }
 

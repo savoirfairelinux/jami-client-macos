@@ -78,6 +78,16 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     [smartView setTarget:self];
     [smartView setDoubleAction:@selector(placeCall:)];
 
+    QObject::connect(RecentModel::instance()->peopleProxy(),
+                     &QAbstractItemModel::dataChanged,
+                     [self](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
+                         for(int row = topLeft.row() ; row <= bottomRight.row() ; ++row)
+                         {
+                             [smartView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row]
+                                                  columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+                         }
+                     });
+
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
     [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
