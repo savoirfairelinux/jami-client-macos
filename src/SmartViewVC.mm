@@ -291,10 +291,13 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 
     c << Call::Action::ACCEPT;
+
+    [searchField setStringValue:@""];
+    RecentModel::instance()->peopleProxy()->
+    setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
 }
 
-
-#pragma NSTextField Delegate
+#pragma NSTextFieldDelegate
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
 {
@@ -306,6 +309,12 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 
     return NO;
+}
+
+- (void)controlTextDidChange:(NSNotification *) notification
+{
+    RecentModel::instance()->peopleProxy()->
+    setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
 }
 
 @end
