@@ -37,18 +37,21 @@
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
 #import "views/HoverTableRowView.h"
+#import "PersonLinkerVC.h"
+#import "views/RingOutlineView.h"
 #import "views/ContextualTableCellView.h"
 
-@interface SmartViewVC () <NSOutlineViewDelegate> {
+@interface SmartViewVC () <NSOutlineViewDelegate, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
     BOOL isShowingContacts;
     QNSTreeController *treeController;
+    NSPopover* addToContactPopover;
 
     //UI elements
-    __unsafe_unretained IBOutlet NSOutlineView *smartView;
-    __unsafe_unretained IBOutlet NSSearchField *searchField;
-    __unsafe_unretained IBOutlet NSButton *showContactsButton;
-    __unsafe_unretained IBOutlet NSButton *showHistoryButton;
-    __unsafe_unretained IBOutlet NSTabView *tabbar;
+    __unsafe_unretained IBOutlet RingOutlineView* smartView;
+    __unsafe_unretained IBOutlet NSSearchField* searchField;
+    __unsafe_unretained IBOutlet NSButton* showContactsButton;
+    __unsafe_unretained IBOutlet NSButton* showHistoryButton;
+    __unsafe_unretained IBOutlet NSTabView* tabbar;
 }
 
 @end
@@ -77,6 +80,9 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     [smartView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
     [smartView setTarget:self];
     [smartView setDoubleAction:@selector(placeCall:)];
+
+    [smartView setContextMenuDelegate:self];
+    [smartView setShortcutsDelegate:self];
 
     QObject::connect(RecentModel::instance().peopleProxy(),
                      &QAbstractItemModel::dataChanged,
@@ -297,6 +303,36 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
 }
 
+- (void) addToContact
+{
+    if ([treeController selectedNodes].count == 0)
+        return;
+
+    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
+    auto contactmethod = RecentModel::instance().getContactMethods(originIdx);
+    if (contactmethod.isEmpty())
+        return;
+
+    if (addToContactPopover != nullptr) {
+        [addToContactPopover performClose:self];
+        addToContactPopover = NULL;
+    } else if (contactmethod.first()) {
+        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
+        [editorVC setMethodToLink:contactmethod.first()];
+        [editorVC setContactLinkedDelegate:self];
+        addToContactPopover = [[NSPopover alloc] init];
+        [addToContactPopover setContentSize:editorVC.view.frame.size];
+        [addToContactPopover setContentViewController:editorVC];
+        [addToContactPopover setAnimates:YES];
+        [addToContactPopover setBehavior:NSPopoverBehaviorTransient];
+        [addToContactPopover setDelegate:self];
+
+        [addToContactPopover showRelativeToRect:[smartView frameOfCellAtColumn:0 row:[smartView selectedRow]]
+                                         ofView:smartView preferredEdge:NSMaxXEdge];
+    }
+}
+
 #pragma NSTextFieldDelegate
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
@@ -311,10 +347,69 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     return NO;
 }
 
+#pragma mark - NSPopOverDelegate
+
+- (void)popoverDidClose:(NSNotification *)notification
+{
+    if (addToContactPopover != nullptr) {
+        [addToContactPopover performClose:self];
+        addToContactPopover = NULL;
+    }
+}
+
 - (void)controlTextDidChange:(NSNotification *) notification
 {
     RecentModel::instance().peopleProxy()->
     setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
+}
+
+#pragma mark - ContactLinkedDelegate
+
+- (void)contactLinked
+{
+    if (addToContactPopover != nullptr) {
+        [addToContactPopover performClose:self];
+        addToContactPopover = NULL;
+    }
+}
+
+#pragma mark - KeyboardShortcutDelegate
+
+- (void) onAddShortcut
+{
+    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
+    auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
+    if (contactmethods.isEmpty())
+        return;
+
+    auto contactmethod = contactmethods.first();
+    if (contactmethod && (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder())) {
+        [self addToContact];
+    }
+}
+
+#pragma mark - ContextMenuDelegate
+
+- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path
+{
+    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
+    auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
+    if (contactmethods.isEmpty())
+        return nil;
+
+    auto cm = contactmethods.first();
+    if (!cm->contact() || cm->contact()->isPlaceHolder()) {
+        NSMenu *theMenu = [[NSMenu alloc]
+                           initWithTitle:@""];
+        [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
+                              action:@selector(addToContact)
+                       keyEquivalent:@"a"
+                             atIndex:0];
+        return theMenu;
+    }
+    return nil;
 }
 
 @end
