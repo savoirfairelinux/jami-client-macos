@@ -36,6 +36,7 @@
 #import "views/CallView.h"
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
+#import "BrokerVC.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -65,14 +66,16 @@
 
 @property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
-@property (unsafe_unretained) IBOutlet NSTextField *timeSpentLabel;
-@property (unsafe_unretained) IBOutlet NSView *controlsPanel;
-@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
-@property (unsafe_unretained) IBOutlet NSButton *chatButton;
+@property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
+@property (unsafe_unretained) IBOutlet NSView* controlsPanel;
+@property (unsafe_unretained) IBOutlet NSSplitView* splitView;
+@property (unsafe_unretained) IBOutlet NSButton* chatButton;
+@property (unsafe_unretained) IBOutlet NSButton* transferButton;
 
-@property (strong) IBOutlet NSPopover *qualityPopOver;
+@property (strong) IBOutlet NSPopover* qualityPopOver;
 @property (strong) NSPopover* addToContactPopover;
-@property (strong) IBOutlet ChatVC *chatVC;
+@property (strong) NSPopover* transferPopoverVC;
+@property (strong) IBOutlet ChatVC* chatVC;
 
 @property QHash<int, NSButton*> actionHash;
 
@@ -155,6 +158,10 @@
             break;
         case Call::State::CURRENT:
             [videoView setShouldAcceptInteractions:YES];
+
+            //BOOL activeControls = (_qualityButton.state | _transferButton.state | _addContactButton.state);
+            //TODO: check if a popover is open, controls should not fade out
+            // could be done in mouseIsMoving callback as well
             [self.chatButton setHidden:NO];
             [self.qualityButton setHidden:NO];
             break;
@@ -456,6 +463,10 @@
     QObject::disconnect(previewHolder.started);
     [videoView.layer setContents:nil];
     [previewView.layer setContents:nil];
+
+    [self.transferPopoverVC performClose:self];
+    [self.addToContactPopover performClose:self];
+    [self.qualityPopOver performClose:self];
 }
 
 -(void) animateOut
@@ -538,8 +549,6 @@
     if (self.addToContactPopover != nullptr) {
         [self.addToContactPopover performClose:self];
         self.addToContactPopover = NULL;
-        [self.addContactButton setState:NSOffState];
-
     } else if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
         auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
         [editorVC setMethodToLink:contactmethod];
@@ -553,6 +562,9 @@
 
         [self.addToContactPopover showRelativeToRect:sender.bounds ofView:sender preferredEdge:NSMaxXEdge];
     }
+
+    [videoView setShouldAcceptInteractions:NO];
+
 }
 
 - (IBAction)hangUp:(id)sender {
@@ -597,22 +609,38 @@
 - (IBAction)displayQualityPopUp:(id)sender {
 
     [self.qualityPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+    [videoView setShouldAcceptInteractions:NO];
+
+}
+
+- (IBAction)toggleTransferView:(id)sender {
+    if (self.transferPopoverVC != nullptr) {
+        [self.transferPopoverVC performClose:self];
+        self.transferPopoverVC = NULL;
+    } else {
+        auto* transferVC = [[BrokerVC alloc] initWithMode:BrokerMode::TRANSFER];
+        self.transferPopoverVC = [[NSPopover alloc] init];
+        [self.transferPopoverVC setContentSize:transferVC.view.frame.size];
+        [self.transferPopoverVC setContentViewController:transferVC];
+        [self.transferPopoverVC setAnimates:YES];
+        [self.transferPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [self.transferPopoverVC setDelegate:self];
+        [self.transferPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
 }
 
 #pragma mark - NSPopOverDelegate
 
 - (void)popoverWillClose:(NSNotification *)notification
 {
+    [videoView setShouldAcceptInteractions:YES];
     [self.qualityButton setState:NSOffState];
     [self.addContactButton setState:NSOffState];
 }
 
 - (void)popoverDidClose:(NSNotification *)notification
 {
-    if (self.addToContactPopover != nullptr) {
-        [self.addToContactPopover performClose:self];
-        self.addToContactPopover = NULL;
-    }
+    [self mouseIsMoving:NO];
 }
 
 #pragma mark - ContactLinkedDelegate

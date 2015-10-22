@@ -19,6 +19,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SmartViewVC : NSViewController <NSTextFieldDelegate>
+@interface BrokerVC : NSViewController
+
+enum class BrokerMode {
+    TRANSFER = 0,
+    CONFERENCE
+};
+
+- (instancetype)initWithMode:(BrokerMode) m;
 
 @end
