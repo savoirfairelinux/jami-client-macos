@@ -36,6 +36,7 @@
 #import "views/CallView.h"
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
+#import "BrokerVC.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -51,35 +52,38 @@
 
 @interface CurrentCallVC () <NSPopoverDelegate, ContactLinkedDelegate>
 
-@property (unsafe_unretained) IBOutlet NSTextField *personLabel;
-@property (unsafe_unretained) IBOutlet NSTextField *stateLabel;
-@property (unsafe_unretained) IBOutlet NSButton *holdOnOffButton;
-@property (unsafe_unretained) IBOutlet NSButton *hangUpButton;
-@property (unsafe_unretained) IBOutlet NSButton *recordOnOffButton;
-@property (unsafe_unretained) IBOutlet NSButton *pickUpButton;
-@property (unsafe_unretained) IBOutlet NSButton *muteAudioButton;
-@property (unsafe_unretained) IBOutlet NSButton *muteVideoButton;
-@property (unsafe_unretained) IBOutlet NSButton *addContactButton;
-@property (unsafe_unretained) IBOutlet NSView *headerContainer;
-@property (unsafe_unretained) IBOutlet NSButton *qualityButton;
+@property (unsafe_unretained) IBOutlet NSTextField* personLabel;
+@property (unsafe_unretained) IBOutlet NSTextField* stateLabel;
+@property (unsafe_unretained) IBOutlet NSButton* holdOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton* hangUpButton;
+@property (unsafe_unretained) IBOutlet NSButton* recordOnOffButton;
+@property (unsafe_unretained) IBOutlet NSButton* pickUpButton;
+@property (unsafe_unretained) IBOutlet NSButton* muteAudioButton;
+@property (unsafe_unretained) IBOutlet NSButton* muteVideoButton;
+@property (unsafe_unretained) IBOutlet NSButton* addContactButton;
+@property (unsafe_unretained) IBOutlet NSButton* qualityButton;
+@property (unsafe_unretained) IBOutlet NSButton* transferButton;
+@property (unsafe_unretained) IBOutlet NSView* headerContainer;
 
-@property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
+@property (unsafe_unretained) IBOutlet ITProgressIndicator* loadingIndicator;
 
-@property (unsafe_unretained) IBOutlet NSTextField *timeSpentLabel;
-@property (unsafe_unretained) IBOutlet NSView *controlsPanel;
-@property (unsafe_unretained) IBOutlet NSSplitView *splitView;
-@property (unsafe_unretained) IBOutlet NSButton *chatButton;
+@property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
+@property (unsafe_unretained) IBOutlet NSView* controlsPanel;
+@property (unsafe_unretained) IBOutlet NSSplitView* splitView;
+@property (unsafe_unretained) IBOutlet NSButton* chatButton;
 
-@property (strong) IBOutlet NSPopover *qualityPopOver;
+@property (strong) IBOutlet NSPopover* brokerPopOver;
+@property (strong) IBOutlet NSPopover* qualityPopOver;
 @property (strong) NSPopover* addToContactPopover;
-@property (strong) IBOutlet ChatVC *chatVC;
+
+@property (strong) IBOutlet ChatVC* chatVC;
 
 @property QHash<int, NSButton*> actionHash;
 
 // Video
-@property (unsafe_unretained) IBOutlet CallView *videoView;
+@property (unsafe_unretained) IBOutlet CallView* videoView;
 @property CALayer* videoLayer;
-@property (unsafe_unretained) IBOutlet NSView *previewView;
+@property (unsafe_unretained) IBOutlet NSView* previewView;
 @property CALayer* previewLayer;
 
 @property RendererConnectionsHolder* previewHolder;
@@ -92,8 +96,9 @@
 
 @implementation CurrentCallVC
 @synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton,
-            recordOnOffButton, pickUpButton, chatButton, timeSpentLabel,
-            muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, videoLayer, previewLayer, previewView, splitView, loadingIndicator;
+            recordOnOffButton, pickUpButton, chatButton, transferButton, timeSpentLabel,
+            muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView,
+            videoLayer, previewLayer, previewView, splitView, loadingIndicator;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -155,6 +160,10 @@
             break;
         case Call::State::CURRENT:
             [videoView setShouldAcceptInteractions:YES];
+
+            //BOOL activeControls = (_qualityButton.state | _transferButton.state | _addContactButton.state);
+            //TODO: check if a popover is open, controls should not fade out
+            // could be done in mouseIsMoving callback as well
             [self.chatButton setHidden:NO];
             [self.qualityButton setHidden:NO];
             break;
@@ -188,6 +197,7 @@
     actionHash[ (int)UserActionModel::Action::HANGUP] = hangUpButton;
     actionHash[ (int)UserActionModel::Action::MUTE_AUDIO] = muteAudioButton;
     actionHash[ (int)UserActionModel::Action::MUTE_VIDEO] = muteVideoButton;
+    actionHash[ (int)UserActionModel::Action::SERVER_TRANSFER] = transferButton;
 
     videoLayer = [CALayer layer];
     [videoView setWantsLayer:YES];
@@ -456,6 +466,13 @@
     QObject::disconnect(previewHolder.started);
     [videoView.layer setContents:nil];
     [previewView.layer setContents:nil];
+
+    [self.brokerPopOver performClose:self];
+    [self.addToContactPopover performClose:self];
+    [self.qualityPopOver performClose:self];
+
+    [chatButton setState:NSOffState];
+    [self collapseRightView];
 }
 
 -(void) animateOut
@@ -538,8 +555,6 @@
     if (self.addToContactPopover != nullptr) {
         [self.addToContactPopover performClose:self];
         self.addToContactPopover = NULL;
-        [self.addContactButton setState:NSOffState];
-
     } else if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
         auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
         [editorVC setMethodToLink:contactmethod];
@@ -553,6 +568,9 @@
 
         [self.addToContactPopover showRelativeToRect:sender.bounds ofView:sender preferredEdge:NSMaxXEdge];
     }
+
+    [videoView setCallDelegate:nil];
+
 }
 
 - (IBAction)hangUp:(id)sender {
@@ -597,22 +615,33 @@
 - (IBAction)displayQualityPopUp:(id)sender {
 
     [self.qualityPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
+    [videoView setCallDelegate:nil];
+}
+
+- (IBAction)toggleTransferView:(id)sender {
+    auto* transferVC = [[BrokerVC alloc] initWithMode:BrokerMode::TRANSFER];
+    [self.brokerPopOver setContentSize:transferVC.view.frame.size];
+    [self.brokerPopOver setContentViewController:transferVC];
+    [self.brokerPopOver setAnimates:YES];
+    [self.brokerPopOver setBehavior:NSPopoverBehaviorTransient];
+    [self.brokerPopOver setDelegate:self];
+    [self.brokerPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    [videoView setCallDelegate:nil];
 }
 
 #pragma mark - NSPopOverDelegate
 
 - (void)popoverWillClose:(NSNotification *)notification
 {
+    [videoView setShouldAcceptInteractions:YES];
     [self.qualityButton setState:NSOffState];
     [self.addContactButton setState:NSOffState];
+    [self.transferButton setState:NSOffState];
 }
 
 - (void)popoverDidClose:(NSNotification *)notification
 {
-    if (self.addToContactPopover != nullptr) {
-        [self.addToContactPopover performClose:self];
-        self.addToContactPopover = NULL;
-    }
+    [videoView setCallDelegate:self];
 }
 
 #pragma mark - ContactLinkedDelegate
