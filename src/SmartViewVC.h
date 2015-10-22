@@ -19,6 +19,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SmartViewVC : NSViewController
+@interface SmartViewVC : NSViewController <NSTextFieldDelegate>
 
 @end
