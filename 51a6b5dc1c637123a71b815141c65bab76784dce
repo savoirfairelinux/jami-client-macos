@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_81ee7e21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 23
+      },
+      "writtenOn": "2015-10-23T17:47:32Z",
+      "side": 1,
+      "message": "could you change this to \"Tuleap: #50\" as I moved this task there, so that the change can be tracked by Tuleap:\n\nhttps://tuleap.ring.cx/plugins/tracker/?aid\u003d50",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "51a6b5dc1c637123a71b815141c65bab76784dce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_61e9f219",
+        "filename": "src/QNSTreeController.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 23
+      },
+      "writtenOn": "2015-10-23T17:47:32Z",
+      "side": 1,
+      "message": "is there a reason to keep the connection to this signal then, since the handler does nothing?  Maybe comment out the whole connection, if you just want to keep it for reference?",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 24
+      },
+      "revId": "51a6b5dc1c637123a71b815141c65bab76784dce",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
