@@ -62,11 +62,11 @@ NSInteger const NICKNAME_TAG        = 1;
     [self.window setLevel:NSStatusWindowLevel];
     [self.window makeMainWindow];
     if(![self checkForRingAccount]) {
-        accountToCreate = AccountModel::instance()->add("", Account::Protocol::RING);
+        accountToCreate = AccountModel::instance().add("", Account::Protocol::RING);
     } else {
         [indicationLabel setStringValue:NSLocalizedString(@"Ring is already ready to work",
                                                           @"Display message to user")];
-        auto accList = AccountModel::instance()->getAccountsByProtocol(Account::Protocol::RING);
+        auto accList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
         [self displayHash:accList[0]->username().toNSString()];
     }
 
@@ -77,9 +77,9 @@ NSInteger const NICKNAME_TAG        = 1;
 
 - (BOOL) checkForRingAccount
 {
-    for (int i = 0 ; i < AccountModel::instance()->rowCount() ; ++i) {
-        QModelIndex idx = AccountModel::instance()->index(i);
-        Account* acc = AccountModel::instance()->getAccountByModelIndex(idx);
+    for (int i = 0 ; i < AccountModel::instance().rowCount() ; ++i) {
+        QModelIndex idx = AccountModel::instance().index(i);
+        Account* acc = AccountModel::instance().getAccountByModelIndex(idx);
         if(acc->protocol() == Account::Protocol::RING) {
             return YES;
         }
@@ -116,7 +116,7 @@ NSInteger const NICKNAME_TAG        = 1;
     [indicationLabel setStringValue:NSLocalizedString(@"Just a moment...",
                                                       @"Indication for user")];
 
-    QModelIndex qIdx =  AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
+    QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
 
     [self setCallback];
     if (isExpanded) {
@@ -149,7 +149,7 @@ NSInteger const NICKNAME_TAG        = 1;
 
 - (void) setCallback
 {
-    QObject::connect(AccountModel::instance(),
+    QObject::connect(&AccountModel::instance(),
                      &AccountModel::accountStateChanged,
                      [=](Account *account, const Account::RegistrationState state) {
                          NSLog(@"Account created!");

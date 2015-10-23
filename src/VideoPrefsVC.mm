@@ -66,20 +66,20 @@ QMetaObject::Connection previewStopped;
 {
     [super loadView];
 
-    Video::ConfigurationProxy::deviceModel()->rowCount();
-    Video::ConfigurationProxy::resolutionModel()->rowCount();
-    Video::ConfigurationProxy::rateModel()->rowCount();
+    Video::ConfigurationProxy::deviceModel().rowCount();
+    Video::ConfigurationProxy::resolutionModel().rowCount();
+    Video::ConfigurationProxy::rateModel().rowCount();
 
-    QModelIndex qDeviceIdx = Video::ConfigurationProxy::deviceSelectionModel()->currentIndex();
-    qDeviceIdx = Video::ConfigurationProxy::deviceSelectionModel()->currentIndex();
+    QModelIndex qDeviceIdx = Video::ConfigurationProxy::deviceSelectionModel().currentIndex();
+    qDeviceIdx = Video::ConfigurationProxy::deviceSelectionModel().currentIndex();
 
-    [videoDevicesList addItemWithTitle:Video::ConfigurationProxy::deviceModel()->data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
+    [videoDevicesList addItemWithTitle:Video::ConfigurationProxy::deviceModel().data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
 
-    QModelIndex qSizeIdx = Video::ConfigurationProxy::resolutionSelectionModel()->currentIndex();
-    [sizesList addItemWithTitle:Video::ConfigurationProxy::resolutionModel()->data(qSizeIdx, Qt::DisplayRole).toString().toNSString()];
+    QModelIndex qSizeIdx = Video::ConfigurationProxy::resolutionSelectionModel().currentIndex();
+    [sizesList addItemWithTitle:Video::ConfigurationProxy::resolutionModel().data(qSizeIdx, Qt::DisplayRole).toString().toNSString()];
 
-    if(qobject_cast<QAbstractProxyModel*>(Video::ConfigurationProxy::resolutionModel())) {
-        QObject::connect(qobject_cast<QAbstractProxyModel*>(Video::ConfigurationProxy::resolutionModel()),
+    if(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::resolutionModel())) {
+        QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::resolutionModel()),
                          &QAbstractProxyModel::modelReset,
                          [=]() {
                              NSLog(@"resolution Source model changed!!!");
@@ -87,11 +87,11 @@ QMetaObject::Connection previewStopped;
 
     }
 
-    QModelIndex qRate = Video::ConfigurationProxy::rateSelectionModel()->currentIndex();
-    [ratesList addItemWithTitle:Video::ConfigurationProxy::rateModel()->data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
+    QModelIndex qRate = Video::ConfigurationProxy::rateSelectionModel().currentIndex();
+    [ratesList addItemWithTitle:Video::ConfigurationProxy::rateModel().data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
 
-    if(qobject_cast<QAbstractProxyModel*>(Video::ConfigurationProxy::rateModel())) {
-        QObject::connect(qobject_cast<QAbstractProxyModel*>(Video::ConfigurationProxy::rateModel()),
+    if(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::rateModel())) {
+        QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::rateModel()),
                          &QAbstractProxyModel::modelReset,
                          [=]() {
                              NSLog(@"rates Source model changed!!!");
@@ -100,7 +100,7 @@ QMetaObject::Connection previewStopped;
     }
 
     // check if preview has to be started/stopped by this controller
-    self.shouldHandlePreview = !Video::PreviewManager::instance()->isPreviewing();
+    self.shouldHandlePreview = !Video::PreviewManager::instance().isPreviewing();
 
     [previewView setWantsLayer:YES];
     [previewView setLayer:[CALayer layer]];
@@ -114,20 +114,20 @@ QMetaObject::Connection previewStopped;
 
 - (IBAction)chooseDevice:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Video::ConfigurationProxy::deviceModel()->index(index, 0);
-    Video::ConfigurationProxy::deviceSelectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    QModelIndex qIdx = Video::ConfigurationProxy::deviceModel().index(index, 0);
+    Video::ConfigurationProxy::deviceSelectionModel().setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (IBAction)chooseSize:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Video::ConfigurationProxy::resolutionModel()->index(index, 0);
-    Video::ConfigurationProxy::resolutionSelectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    QModelIndex qIdx = Video::ConfigurationProxy::resolutionModel().index(index, 0);
+    Video::ConfigurationProxy::resolutionSelectionModel().setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (IBAction)chooseRate:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Video::ConfigurationProxy::rateModel()->index(index, 0);
-    Video::ConfigurationProxy::rateSelectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    QModelIndex qIdx = Video::ConfigurationProxy::rateModel().index(index, 0);
+    Video::ConfigurationProxy::rateSelectionModel().setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (void) connectPreviewSignals
@@ -135,7 +135,7 @@ QMetaObject::Connection previewStopped;
     QObject::disconnect(frameUpdated);
     QObject::disconnect(previewStopped);
     QObject::disconnect(previewStarted);
-    previewStarted = QObject::connect(Video::PreviewManager::instance(),
+    previewStarted = QObject::connect(&Video::PreviewManager::instance(),
                                              &Video::PreviewManager::previewStarted,
                                              [=](Video::Renderer* renderer) {
                                                  NSLog(@"Preview started");
@@ -143,11 +143,11 @@ QMetaObject::Connection previewStopped;
                                                  frameUpdated = QObject::connect(renderer,
                                                                                  &Video::Renderer::frameUpdated,
                                                                                  [=]() {
-                                                                                     [self renderer:Video::PreviewManager::instance()->previewRenderer() renderFrameForView:previewView];
+                                                                                     [self renderer:Video::PreviewManager::instance().previewRenderer() renderFrameForView:previewView];
                                                                                  });
                                              });
 
-    previewStopped = QObject::connect(Video::PreviewManager::instance(),
+    previewStopped = QObject::connect(&Video::PreviewManager::instance(),
                                              &Video::PreviewManager::previewStopped,
                                              [=](Video::Renderer* renderer) {
                                                  NSLog(@"Preview stopped");
@@ -155,10 +155,10 @@ QMetaObject::Connection previewStopped;
                                                  [previewView.layer setContents:nil];
                                              });
 
-    frameUpdated = QObject::connect(Video::PreviewManager::instance()->previewRenderer(),
+    frameUpdated = QObject::connect(Video::PreviewManager::instance().previewRenderer(),
                                                   &Video::Renderer::frameUpdated,
                                                   [=]() {
-                                                      [self renderer:Video::PreviewManager::instance()->previewRenderer()
+                                                      [self renderer:Video::PreviewManager::instance().previewRenderer()
                                                   renderFrameForView:previewView];
                                                   });
 }
@@ -198,14 +198,14 @@ QMetaObject::Connection previewStopped;
 - (void) viewWillAppear
 {
     if (self.shouldHandlePreview) {
-        Video::PreviewManager::instance()->startPreview();
+        Video::PreviewManager::instance().startPreview();
     }
 }
 
 - (void)viewWillDisappear
 {
     if (self.shouldHandlePreview) {
-        Video::PreviewManager::instance()->stopPreview();
+        Video::PreviewManager::instance().stopPreview();
     }
 }
 
@@ -216,18 +216,18 @@ QMetaObject::Connection previewStopped;
     QModelIndex qIdx;
     if([menu.title isEqualToString:@"devices"]) {
 
-        qIdx = Video::ConfigurationProxy::deviceModel()->index(index, 0);
-        [item setTitle:Video::ConfigurationProxy::deviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+        qIdx = Video::ConfigurationProxy::deviceModel().index(index, 0);
+        [item setTitle:Video::ConfigurationProxy::deviceModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
 
     } else if([menu.title isEqualToString:@"sizes"]) {
 
-        qIdx = Video::ConfigurationProxy::resolutionModel()->index(index, 0);
-        [item setTitle:Video::ConfigurationProxy::resolutionModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+        qIdx = Video::ConfigurationProxy::resolutionModel().index(index, 0);
+        [item setTitle:Video::ConfigurationProxy::resolutionModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
 
     } else if([menu.title isEqualToString:@"rates"]) {
 
-        qIdx = Video::ConfigurationProxy::rateModel()->index(index, 0);
-        [item setTitle:Video::ConfigurationProxy::rateModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+        qIdx = Video::ConfigurationProxy::rateModel().index(index, 0);
+        [item setTitle:Video::ConfigurationProxy::rateModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
 
     }
     return YES;
@@ -236,11 +236,11 @@ QMetaObject::Connection previewStopped;
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
     if([menu.title isEqualToString:@"devices"]) {
-        return Video::ConfigurationProxy::deviceModel()->rowCount();
+        return Video::ConfigurationProxy::deviceModel().rowCount();
     } else if([menu.title isEqualToString:@"sizes"]) {
-        return Video::ConfigurationProxy::resolutionModel()->rowCount();
+        return Video::ConfigurationProxy::resolutionModel().rowCount();
     } else if([menu.title isEqualToString:@"rates"]) {
-        return Video::ConfigurationProxy::rateModel()->rowCount();
+        return Video::ConfigurationProxy::rateModel().rowCount();
     }
 }
 

@@ -168,7 +168,7 @@
      --------------------------------------------------------*/
     if ( [sender draggingSource] != self ) {
         NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-        Video::SourceModel::instance()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
+        Video::SourceModel::instance().setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
     }
 
     return YES;
@@ -178,8 +178,8 @@
 
     contextualMenu = [[NSMenu alloc] initWithTitle:@"Switch camera"];
 
-    for(int i = 0 ; i < Video::DeviceModel::instance()->devices().size() ; ++i) {
-        Video::Device* device = Video::DeviceModel::instance()->devices()[i];
+    for(int i = 0 ; i < Video::DeviceModel::instance().devices().size() ; ++i) {
+        Video::Device* device = Video::DeviceModel::instance().devices()[i];
         [contextualMenu insertItemWithTitle:device->name().toNSString() action:@selector(switchInput:) keyEquivalent:@"" atIndex:i];
     }
 
@@ -226,7 +226,7 @@
 - (void) switchInput:(NSMenuItem*) sender
 {
     int index = [contextualMenu indexOfItem:sender];
-    Video::SourceModel::instance()->switchTo(Video::DeviceModel::instance()->devices()[index]);
+    Video::SourceModel::instance().switchTo(Video::DeviceModel::instance().devices()[index]);
 }
 
 - (void) chooseFile:(NSMenuItem*) sender
@@ -246,7 +246,7 @@
     [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
-            Video::SourceModel::instance()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
+            Video::SourceModel::instance().setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
         }
     }];
 

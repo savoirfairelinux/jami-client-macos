@@ -52,8 +52,8 @@ NSInteger const DETAILS_TAG = 300;
 - (void)awakeFromNib
 {
     NSLog(@"INIT HVC");
-    historyProxyModel = new QSortFilterProxyModel(CategorizedHistoryModel::instance());
-    historyProxyModel->setSourceModel(CategorizedHistoryModel::instance());
+    historyProxyModel = new QSortFilterProxyModel(&CategorizedHistoryModel::instance());
+    historyProxyModel->setSourceModel(&CategorizedHistoryModel::instance());
     historyProxyModel->setSortRole(static_cast<int>(Call::Role::Date));
     historyProxyModel->sort(0,Qt::DescendingOrder);
     treeController = [[QNSTreeController alloc] initWithQModel:historyProxyModel];
@@ -69,7 +69,7 @@ NSInteger const DETAILS_TAG = 300;
     [historyView setContextMenuDelegate:self];
     [historyView setShortcutsDelegate:self];
 
-    QObject::connect(CallModel::instance(),
+    QObject::connect(&CallModel::instance(),
                      &CategorizedHistoryModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
                          [historyView reloadDataForRowIndexes:
@@ -98,7 +98,7 @@ NSInteger const DETAILS_TAG = 300;
         QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
         ContactMethod* m = qvariant_cast<ContactMethod*>(var);
         if(m){
-            Call* c = CallModel::instance()->dialingCall();
+            Call* c = CallModel::instance().dialingCall();
             c->setPeerContactMethod(m);
             c << Call::Action::ACCEPT;
         }
