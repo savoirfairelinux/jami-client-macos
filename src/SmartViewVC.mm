@@ -333,6 +333,20 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 }
 
+- (void) copyNumberToPasteboard:(id) sender
+{
+    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+    [pasteBoard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    [pasteBoard setString:[sender representedObject] forType:NSStringPboardType];
+}
+
+- (void) callNumber:(id) sender
+{
+    Call* c = CallModel::instance().dialingCall();
+    c->setDialNumber(QString::fromNSString([sender representedObject]));
+    c << Call::Action::ACCEPT;
+}
+
 #pragma NSTextFieldDelegate
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
@@ -399,17 +413,50 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     if (contactmethods.isEmpty())
         return nil;
 
-    auto cm = contactmethods.first();
-    if (!cm->contact() || cm->contact()->isPlaceHolder()) {
-        NSMenu *theMenu = [[NSMenu alloc]
-                           initWithTitle:@""];
+    NSMenu *theMenu = [[NSMenu alloc]
+                       initWithTitle:@""];
+
+    if (contactmethods.size() == 1
+        && !contactmethods.first()->contact()
+        || contactmethods.first()->contact()->isPlaceHolder()) {
+
         [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
                               action:@selector(addToContact)
                        keyEquivalent:@"a"
-                             atIndex:0];
-        return theMenu;
+                             atIndex:theMenu.itemArray.count];
     }
-    return nil;
+
+    NSMenu* copySubmenu = [[NSMenu alloc] init];
+    NSMenu* callSubmenu = [[NSMenu alloc] init];
+
+    for(auto cm : contactmethods) {
+        NSMenuItem* tmpCopyItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
+                                                             action:@selector(copyNumberToPasteboard:)
+                                                      keyEquivalent:@""];
+
+        [tmpCopyItem setRepresentedObject:cm->uri().toNSString()];
+        [copySubmenu addItem:tmpCopyItem];
+
+        NSMenuItem* tmpCallItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
+                                                             action:@selector(callNumber:)
+                                                      keyEquivalent:@""];
+        [tmpCallItem setRepresentedObject:cm->uri().toNSString()];
+        [callSubmenu addItem:tmpCallItem];
+    }
+
+    NSMenuItem* copyItems = [[NSMenuItem alloc] init];
+    [copyItems setTitle:NSLocalizedString(@"Copy number", @"Contextual menu action")];
+    [copyItems setSubmenu:copySubmenu];
+
+    NSMenuItem* callItems = [[NSMenuItem alloc] init];
+    [callItems setTitle:NSLocalizedString(@"Call number", @"Contextual menu action")];
+    [callItems setSubmenu:callSubmenu];
+
+    [theMenu insertItem:copyItems atIndex:theMenu.itemArray.count];
+    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:theMenu.itemArray.count];
+    [theMenu insertItem:callItems atIndex:theMenu.itemArray.count];
+
+    return theMenu;
 }
 
 @end
