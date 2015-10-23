@@ -63,7 +63,7 @@
 
 - (void) connect
 {
-    QObject::connect(CallModel::instance(),
+    QObject::connect(&CallModel::instance(),
                      &CallModel::incomingCall,
                      [=](Call* call) {
                          BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::WindowBehaviour];
@@ -120,9 +120,9 @@
 - (BOOL) checkForRingAccount
 {
     BOOL foundRingAcc = NO;
-    for (int i = 0 ; i < AccountModel::instance()->rowCount() ; ++i) {
-        QModelIndex idx = AccountModel::instance()->index(i);
-        Account* acc = AccountModel::instance()->getAccountByModelIndex(idx);
+    for (int i = 0 ; i < AccountModel::instance().rowCount() ; ++i) {
+        QModelIndex idx = AccountModel::instance().index(i);
+        Account* acc = AccountModel::instance().getAccountByModelIndex(idx);
         if(acc->protocol() == Account::Protocol::RING) {
             if (acc->displayName().isEmpty())
                 acc->setDisplayName(acc->alias());
@@ -160,7 +160,7 @@
     BOOL valid = [[ringID stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
 
     if(valid && ringID.length == 40) {
-        Call* c = CallModel::instance()->dialingCall();
+        Call* c = CallModel::instance().dialingCall();
         c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:%@",ringID]));
         c << Call::Action::ACCEPT;
     } else {
@@ -185,13 +185,13 @@
 
 - (void)handleQuitEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
 {
-    delete CallModel::instance()->QObject::parent();
+    delete CallModel::instance().QObject::parent();
     [[NSApplication sharedApplication] terminate:self];
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification
 {
-    delete CallModel::instance()->QObject::parent();
+    delete CallModel::instance().QObject::parent();
     [[NSApplication sharedApplication] terminate:self];
 }
 

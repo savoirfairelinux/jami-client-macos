@@ -72,7 +72,7 @@
 
     mediaHolder = [[MediaConnectionsHolder alloc] init];
 
-    QObject::connect(CallModel::instance()->selectionModel(),
+    QObject::connect(CallModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          [self setupChat];
@@ -90,12 +90,12 @@
     QObject::disconnect(mediaHolder.newMediaAdded);
     QObject::disconnect(mediaHolder.newMessage);
 
-    QModelIndex callIdx = CallModel::instance()->selectionModel()->currentIndex();
+    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
 
     if (!callIdx.isValid())
         return;
 
-    Call* call = CallModel::instance()->getCall(callIdx);
+    Call* call = CallModel::instance().getCall(callIdx);
 
     /* check if text media is already present */
     if (call->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
@@ -173,8 +173,8 @@
 
 - (IBAction)sendMessage:(id)sender {
 
-    QModelIndex callIdx = CallModel::instance()->selectionModel()->currentIndex();
-    Call* call = CallModel::instance()->getCall(callIdx);
+    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
+    Call* call = CallModel::instance().getCall(callIdx);
 
     /* make sure there is text to send */
     NSString* text = self.message;

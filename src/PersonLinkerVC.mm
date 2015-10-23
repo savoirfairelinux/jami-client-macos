@@ -83,7 +83,7 @@ NSInteger const DETAILS_TAG = 300;
 
     [categoryComboBox selectItemAtIndex:0];
 
-    contactProxyModel = new OnlyPersonProxyModel(PersonModel::instance());
+    contactProxyModel = new OnlyPersonProxyModel(&PersonModel::instance());
     contactProxyModel->setSortRole(static_cast<int>(Qt::DisplayRole));
     contactProxyModel->sort(0,Qt::AscendingOrder);
     contactProxyModel->setFilterRole(Qt::DisplayRole);
@@ -104,9 +104,9 @@ NSInteger const DETAILS_TAG = 300;
 - (IBAction)addToContact:(id)sender
 {
     /* get the selected number category */
-    const auto& idx = NumberCategoryModel::instance()->index([categoryComboBox indexOfSelectedItem]);
+    const auto& idx = NumberCategoryModel::instance().index([categoryComboBox indexOfSelectedItem]);
     if (idx.isValid()) {
-        auto category = NumberCategoryModel::instance()->getCategory(idx.data().toString());
+        auto category = NumberCategoryModel::instance().getCategory(idx.data().toString());
         self.methodToLink->setCategory(category);
     }
 
@@ -151,9 +151,9 @@ NSInteger const DETAILS_TAG = 300;
 - (IBAction)createContact:(id)sender
 {
     /* get the selected number category */
-    const auto& idx = NumberCategoryModel::instance()->index([categoryComboBox indexOfSelectedItem]);
+    const auto& idx = NumberCategoryModel::instance().index([categoryComboBox indexOfSelectedItem]);
     if (idx.isValid()) {
-        auto category = NumberCategoryModel::instance()->getCategory(idx.data().toString());
+        auto category = NumberCategoryModel::instance().getCategory(idx.data().toString());
         self.methodToLink->setCategory(category);
     }
 
@@ -167,7 +167,7 @@ NSInteger const DETAILS_TAG = 300;
     numbers << self.methodToLink;
     p->setContactMethods(numbers);
     self.methodToLink->setPerson(p);
-    PersonModel::instance()->addNewPerson(p);
+    PersonModel::instance().addNewPerson(p);
     [self.contactLinkedDelegate contactLinked];
 }
 
@@ -257,12 +257,12 @@ NSInteger const DETAILS_TAG = 300;
 
 - (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox
 {
-    return NumberCategoryModel::instance()->rowCount();
+    return NumberCategoryModel::instance().rowCount();
 }
 
 - (id)comboBox:(NSComboBox *)aComboBox objectValueForItemAtIndex:(NSInteger)index
 {
-    return NumberCategoryModel::instance()->index(index).data().toString().toNSString();
+    return NumberCategoryModel::instance().index(index).data().toString().toNSString();
 }
 
 @end

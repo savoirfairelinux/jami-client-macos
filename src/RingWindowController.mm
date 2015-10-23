@@ -58,7 +58,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [self updateRingID];
 
     // Update Ring ID label based on account model changes
-    QObject::connect(AccountModel::instance(),
+    QObject::connect(&AccountModel::instance(),
                      &AccountModel::dataChanged,
                      [=] {
                          [self updateRingID];
@@ -76,7 +76,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     Account* finalChoice = nullptr;
 
     [ringIDLabel setStringValue:@""];
-    auto ringList = AccountModel::instance()->getAccountsByProtocol(Account::Protocol::RING);
+    auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
     for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
         Account* acc = ringList.value(i);
         if (acc->isEnabled()) {

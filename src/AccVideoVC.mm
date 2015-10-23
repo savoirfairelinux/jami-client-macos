@@ -59,7 +59,7 @@
 - (void)awakeFromNib
 {
     NSLog(@"INIT Video VC");
-    QObject::connect(AccountModel::instance()->selectionModel(),
+    QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          if(!current.isValid())
@@ -70,8 +70,8 @@
 
 - (Account*) currentAccount
 {
-    auto accIdx = AccountModel::instance()->selectionModel()->currentIndex();
-    return AccountModel::instance()->getAccountByModelIndex(accIdx);
+    auto accIdx = AccountModel::instance().selectionModel()->currentIndex();
+    return AccountModel::instance().getAccountByModelIndex(accIdx);
 }
 
 - (void)loadAccount
