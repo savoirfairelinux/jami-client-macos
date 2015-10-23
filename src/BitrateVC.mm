@@ -47,7 +47,7 @@
 - (void)viewWillAppear
 {
     // Get the first video codec of the selected call and use this value as default
-    auto selectedCall = CallModel::instance()->selectedCall();
+    auto selectedCall = CallModel::instance().selectedCall();
     if (selectedCall) {
         int bitrate = selectedCall->account()->codecModel()->videoCodecs()->index(0,0).data(static_cast<int>(CodecModel::Role::BITRATE)).toInt();
         [self.bitrateSlider setNumberOfTickMarks:4];
@@ -58,7 +58,7 @@
 
 - (IBAction)valueChanged:(id)sender
 {
-    if (const auto& codecModel = CallModel::instance()->selectedCall()->account()->codecModel()) {
+    if (const auto& codecModel = CallModel::instance().selectedCall()->account()->codecModel()) {
         const auto& videoCodecs = codecModel->videoCodecs();
         for (int i=0; i < videoCodecs->rowCount();i++) {
             const auto& idx = videoCodecs->index(i,0);

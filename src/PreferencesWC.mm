@@ -51,7 +51,7 @@ static NSString* const kVideoPrefsIdentifer = @"VideoPrefsIdentifer";
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    AccountModel::instance()->save();
+    AccountModel::instance().save();
 }
 
 - (IBAction)displayGeneral:(NSToolbarItem *)sender

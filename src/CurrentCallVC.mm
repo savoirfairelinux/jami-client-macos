@@ -100,14 +100,14 @@
 
 - (void) updateAllActions
 {
-    for(int i = 0 ; i <= CallModel::instance()->userActionModel()->rowCount() ; i++) {
+    for(int i = 0 ; i <= CallModel::instance().userActionModel()->rowCount() ; i++) {
         [self updateActionAtIndex:i];
     }
 }
 
 - (void) updateActionAtIndex:(int) row
 {
-    const QModelIndex& idx = CallModel::instance()->userActionModel()->index(row,0);
+    const QModelIndex& idx = CallModel::instance().userActionModel()->index(row,0);
     UserActionModel::Action action = qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
     NSButton* a = actionHash[(int) action];
     if (a) {
@@ -118,7 +118,7 @@
 
 -(void) updateCall
 {
-    QModelIndex callIdx = CallModel::instance()->selectionModel()->currentIndex();
+    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
     if (!callIdx.isValid()) {
         return;
     }
@@ -225,7 +225,7 @@
 
 - (void) connect
 {
-    QObject::connect(CallModel::instance()->selectionModel(),
+    QObject::connect(CallModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          if(!current.isValid()) {
@@ -233,7 +233,7 @@
                              return;
                          }
 
-                         auto call = CallModel::instance()->getCall(current);
+                         auto call = CallModel::instance().getCall(current);
                          if (call->state() == Call::State::HOLD) {
                              call << Call::Action::HOLD;
                          }
@@ -244,7 +244,7 @@
                          [self animateOut];
                      });
 
-    QObject::connect(CallModel::instance()->userActionModel(),
+    QObject::connect(CallModel::instance().userActionModel(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
                          const int first(topLeft.row()),last(bottomRight.row());
@@ -253,7 +253,7 @@
                          }
                      });
 
-    QObject::connect(CallModel::instance(),
+    QObject::connect(&CallModel::instance(),
                      &CallModel::callStateChanged,
                      [self](Call* c, Call::State state) {
                          [self updateCall];
@@ -274,8 +274,8 @@
 
 -(void) connectVideoSignals
 {
-    QModelIndex idx = CallModel::instance()->selectionModel()->currentIndex();
-    Call* call = CallModel::instance()->getCall(idx);
+    QModelIndex idx = CallModel::instance().selectionModel()->currentIndex();
+    Call* call = CallModel::instance().getCall(idx);
     self.videoStarted = QObject::connect(call,
                      &Call::videoStarted,
                      [=](Video::Renderer* renderer) {
@@ -297,29 +297,29 @@
     QObject::disconnect(previewHolder.frameUpdated);
     QObject::disconnect(previewHolder.stopped);
     QObject::disconnect(previewHolder.started);
-    previewHolder.started = QObject::connect(Video::PreviewManager::instance(),
+    previewHolder.started = QObject::connect(&Video::PreviewManager::instance(),
                      &Video::PreviewManager::previewStarted,
                      [=](Video::Renderer* renderer) {
                          QObject::disconnect(previewHolder.frameUpdated);
                          previewHolder.frameUpdated = QObject::connect(renderer,
                                                                        &Video::Renderer::frameUpdated,
                                                                        [=]() {
-                                                                           [self renderer:Video::PreviewManager::instance()->previewRenderer()
+                                                                           [self renderer:Video::PreviewManager::instance().previewRenderer()
                                                                        renderFrameForView:previewView];
                                                                        });
                      });
 
-    previewHolder.stopped = QObject::connect(Video::PreviewManager::instance(),
+    previewHolder.stopped = QObject::connect(&Video::PreviewManager::instance(),
                      &Video::PreviewManager::previewStopped,
                      [=](Video::Renderer* renderer) {
                          QObject::disconnect(previewHolder.frameUpdated);
                         [previewView.layer setContents:nil];
                      });
 
-    previewHolder.frameUpdated = QObject::connect(Video::PreviewManager::instance()->previewRenderer(),
+    previewHolder.frameUpdated = QObject::connect(Video::PreviewManager::instance().previewRenderer(),
                                                  &Video::Renderer::frameUpdated,
                                                  [=]() {
-                                                     [self renderer:Video::PreviewManager::instance()->previewRenderer()
+                                                     [self renderer:Video::PreviewManager::instance().previewRenderer()
                                                             renderFrameForView:previewView];
                                                  });
 }
@@ -416,23 +416,23 @@
 
         [self connectVideoSignals];
         /* check if text media is already present */
-        if(!CallModel::instance()->selectedCall())
+        if(!CallModel::instance().selectedCall())
             return;
 
-        QObject::connect(CallModel::instance()->selectedCall(),
+        QObject::connect(CallModel::instance().selectedCall(),
                             &Call::changed,
                             [=]() {
                                 [self updateCall];
                             });
-        if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
-            Media::Text *text = CallModel::instance()->selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
+        if (CallModel::instance().selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
+            Media::Text *text = CallModel::instance().selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
             [self monitorIncomingTextMessages:text];
-        } else if (CallModel::instance()->selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::OUT)) {
-            Media::Text *text = CallModel::instance()->selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::OUT);
+        } else if (CallModel::instance().selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::OUT)) {
+            Media::Text *text = CallModel::instance().selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::OUT);
             [self monitorIncomingTextMessages:text];
         } else {
             /* monitor media for messaging text messaging */
-            self.mediaAddedConnection = QObject::connect(CallModel::instance()->selectedCall(),
+            self.mediaAddedConnection = QObject::connect(CallModel::instance().selectedCall(),
                                                          &Call::mediaAdded,
                                                          [self] (Media::Media* media) {
                                                              if (media->type() == Media::Media::Type::TEXT) {                                                                     [self monitorIncomingTextMessages:(Media::Text*)media];
@@ -463,7 +463,7 @@
     NSLog(@"animateOut");
     if(self.view.frame.origin.x < 0) {
         NSLog(@"Already hidden");
-        if (CallModel::instance()->selectionModel()->currentIndex().isValid()) {
+        if (CallModel::instance().selectionModel()->currentIndex().isValid()) {
             [self animateIn];
         }
         return;
@@ -481,7 +481,7 @@
         [self.view setHidden:YES];
         // first make sure everything is disconnected
         [self cleanUp];
-        if (CallModel::instance()->selectionModel()->currentIndex().isValid()) {
+        if (CallModel::instance().selectionModel()->currentIndex().isValid()) {
             [self animateIn];
         }
     }];
@@ -533,7 +533,7 @@
 #pragma mark - Button methods
 
 - (IBAction)addToContact:(NSButton*) sender {
-    auto contactmethod = CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex())->peerContactMethod();
+    auto contactmethod = CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex())->peerContactMethod();
 
     if (self.addToContactPopover != nullptr) {
         [self.addToContactPopover performClose:self];
@@ -556,19 +556,19 @@
 }
 
 - (IBAction)hangUp:(id)sender {
-    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::REFUSE;
+    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::REFUSE;
 }
 
 - (IBAction)accept:(id)sender {
-    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::ACCEPT;
+    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::ACCEPT;
 }
 
 - (IBAction)toggleRecording:(id)sender {
-    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::RECORD_AUDIO;
+    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::RECORD_AUDIO;
 }
 
 - (IBAction)toggleHold:(id)sender {
-    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::HOLD;
+    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::HOLD;
 }
 
 -(IBAction)toggleChat:(id)sender;
@@ -576,7 +576,7 @@
     BOOL rightViewCollapsed = [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]];
     if (rightViewCollapsed) {
         [self uncollapseRightView];
-        CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex())->addOutgoingMedia<Media::Text>();
+        CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex())->addOutgoingMedia<Media::Text>();
     } else {
         [self collapseRightView];
     }
@@ -585,13 +585,13 @@
 
 - (IBAction)muteAudio:(id)sender
 {
-    UserActionModel* uam = CallModel::instance()->userActionModel();
+    UserActionModel* uam = CallModel::instance().userActionModel();
     uam << UserActionModel::Action::MUTE_AUDIO;
 }
 
 - (IBAction)muteVideo:(id)sender
 {
-    UserActionModel* uam = CallModel::instance()->userActionModel();
+    UserActionModel* uam = CallModel::instance().userActionModel();
     uam << UserActionModel::Action::MUTE_VIDEO;
 }
 - (IBAction)displayQualityPopUp:(id)sender {

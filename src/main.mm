@@ -61,16 +61,16 @@ int main(int argc, const char *argv[]) {
         }
     }
 
-    CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
+    CategorizedHistoryModel::instance().addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 
     /* make sure basic number categories exist, in case user has no contacts
      * from which these would be automatically created
      */
-    NumberCategoryModel::instance()->addCategory("work", QVariant());
-    NumberCategoryModel::instance()->addCategory("home", QVariant());
+    NumberCategoryModel::instance().addCategory("work", QVariant());
+    NumberCategoryModel::instance().addCategory("home", QVariant());
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
-    PersonModel::instance()->addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
+    PersonModel::instance().addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
 
     return NSApplicationMain(argc, argv);
 }

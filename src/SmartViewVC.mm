@@ -67,7 +67,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     NSLog(@"INIT SmartView VC");
 
     isShowingContacts = false;
-    treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance()->peopleProxy()];
+    treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance().peopleProxy()];
 
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
@@ -78,7 +78,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     [smartView setTarget:self];
     [smartView setDoubleAction:@selector(placeCall:)];
 
-    QObject::connect(RecentModel::instance()->peopleProxy(),
+    QObject::connect(RecentModel::instance().peopleProxy(),
                      &QAbstractItemModel::dataChanged,
                      [self](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
                          for(int row = topLeft.row() ; row <= bottomRight.row() ; ++row)
@@ -124,8 +124,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
     // Before calling check if we properly extracted a contact method and that
     // there is NOT already an ongoing call for this index (e.g: no children for this node)
-    if(m && !RecentModel::instance()->peopleProxy()->index(0, 0, qIdx).isValid()){
-        Call* c = CallModel::instance()->dialingCall();
+    if(m && !RecentModel::instance().peopleProxy()->index(0, 0, qIdx).isValid()){
+        Call* c = CallModel::instance().dialingCall();
         c->setPeerContactMethod(m);
         c << Call::Action::ACCEPT;
 
@@ -185,19 +185,19 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     if ([treeController selectedNodes].count <= 0) {
-        CallModel::instance()->selectionModel()->clearCurrentIndex();
+        CallModel::instance().selectionModel()->clearCurrentIndex();
         return;
     }
 
     QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
 
     // ask the tree controller for the current selection
-    if (auto selected = RecentModel::instance()->getActiveCall(RecentModel::instance()->peopleProxy()->mapToSource(qIdx))) {
-        CallModel::instance()->selectCall(selected);
-    } else if (auto selected = RecentModel::instance()->getActiveCall(RecentModel::instance()->peopleProxy()->mapToSource(qIdx.parent()))){
-        CallModel::instance()->selectCall(selected);
+    if (auto selected = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
+        CallModel::instance().selectCall(selected);
+    } else if (auto selected = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx.parent()))){
+        CallModel::instance().selectCall(selected);
     } else {
-        CallModel::instance()->selectionModel()->clearCurrentIndex();
+        CallModel::instance().selectionModel()->clearCurrentIndex();
     }
 }
 
@@ -213,7 +213,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
         [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
 
-        if (auto call = RecentModel::instance()->getActiveCall(RecentModel::instance()->peopleProxy()->mapToSource(qIdx))) {
+        if (auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
             [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
             [((ContextualTableCellView*) result) setActiveState:YES];
         } else {
@@ -246,7 +246,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 - (IBAction)hangUpClickedAtRow:(id)sender {
     NSInteger row = [smartView rowForView:sender];
     [smartView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-    CallModel::instance()->getCall(CallModel::instance()->selectionModel()->currentIndex()) << Call::Action::REFUSE;
+    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::REFUSE;
 }
 
 /* View Based OutlineView: See the delegate method -tableView:rowViewForRow: in NSTableView.
@@ -279,7 +279,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (void) placeCallFromSearchField
 {
-    Call* c = CallModel::instance()->dialingCall();
+    Call* c = CallModel::instance().dialingCall();
     // check for a valid ring hash
     NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
     BOOL valid = [[[searchField stringValue] stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
@@ -293,7 +293,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     c << Call::Action::ACCEPT;
 
     [searchField setStringValue:@""];
-    RecentModel::instance()->peopleProxy()->
+    RecentModel::instance().peopleProxy()->
     setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
 }
 
@@ -313,7 +313,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (void)controlTextDidChange:(NSNotification *) notification
 {
-    RecentModel::instance()->peopleProxy()->
+    RecentModel::instance().peopleProxy()->
     setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
 }
 
