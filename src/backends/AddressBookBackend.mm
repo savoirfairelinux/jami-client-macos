@@ -125,7 +125,7 @@ void AddressBookBackend::handleNotification(NSNotification* ns)
     for (NSString* r in ns.userInfo[kABUpdatedRecords]) {
         NSLog(@"Updated record : %@", r);
         if ([[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] containsString:@"ABPerson"]) {
-            Person* toUpdate = PersonModel::instance()->getPersonByUid([r UTF8String]);
+            Person* toUpdate = PersonModel::instance().getPersonByUid([r UTF8String]);
             if (toUpdate) {
                 ABPerson* updated = [[ABAddressBook sharedAddressBook] recordForUniqueId:r];
                 toUpdate->updateFromVCard(QByteArray::fromNSData(updated.vCardRepresentation));
@@ -289,7 +289,7 @@ bool AddressBookBackend::addNewPerson(Person *item)
 
 bool AddressBookBackend::removePerson(NSString* uid)
 {
-    auto found = PersonModel::instance()->getPersonByUid([uid UTF8String]);
+    auto found = PersonModel::instance().getPersonByUid([uid UTF8String]);
     if (found) {
         deactivate(found);
         editor<Person>()->remove(found);

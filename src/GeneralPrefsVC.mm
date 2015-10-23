@@ -84,7 +84,7 @@
 }
 
 - (IBAction)clearHistory:(id)sender {
-    CategorizedHistoryModel::instance()->clearAllCollections();
+    CategorizedHistoryModel::instance().clearAllCollections();
     [historyChangedLabel setHidden:NO];
 }
 

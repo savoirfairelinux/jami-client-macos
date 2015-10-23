@@ -104,7 +104,7 @@ public:
 
 - (void)awakeFromNib
 {
-    treeController = [[QNSTreeController alloc] initWithQModel:AccountModel::instance()];
+    treeController = [[QNSTreeController alloc] initWithQModel:&AccountModel::instance()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setAlwaysUsesMultipleValuesMarker:YES];
     [treeController setChildrenKeyPath:@"children"];
@@ -113,7 +113,7 @@ public:
     [accountsListView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [accountsListView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 
-    QObject::connect(AccountModel::instance(),
+    QObject::connect(&AccountModel::instance(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
                         [accountsListView reloadDataForRowIndexes:
@@ -121,12 +121,12 @@ public:
                         columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, accountsListView.tableColumns.count)]];
                      });
 
-    AccountModel::instance()->selectionModel()->clearCurrentIndex();
+    AccountModel::instance().selectionModel()->clearCurrentIndex();
 
-    proxyProtocolModel = new ActiveProtocolModel(AccountModel::instance()->protocolModel());
-    QModelIndex qProtocolIdx = AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
+    proxyProtocolModel = new ActiveProtocolModel(AccountModel::instance().protocolModel());
+    QModelIndex qProtocolIdx = AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
     [self.protocolList addItemWithTitle:
-                           AccountModel::instance()->protocolModel()->data(qProtocolIdx, Qt::DisplayRole).toString().toNSString()];
+                           AccountModel::instance().protocolModel()->data(qProtocolIdx, Qt::DisplayRole).toString().toNSString()];
 
     self.generalVC = [[AccGeneralVC alloc] initWithNibName:@"AccGeneral" bundle:nil];
     [[self.generalVC view] setFrame:[self.generalTabItem.view frame]];
@@ -165,36 +165,36 @@ public:
 }
 
 - (IBAction)moveUp:(id)sender {
-    AccountModel::instance()->moveUp();
+    AccountModel::instance().moveUp();
 }
 
 - (IBAction)moveDown:(id)sender {
-    AccountModel::instance()->moveDown();
+    AccountModel::instance().moveDown();
 }
 
 - (IBAction)removeAccount:(id)sender {
 
     if(treeController.selectedNodes.count > 0) {
         QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        AccountModel::instance()->remove(qIdx);
-        AccountModel::instance()->save();
+        AccountModel::instance().remove(qIdx);
+        AccountModel::instance().save();
     }
 }
 - (IBAction)addAccount:(id)sender {
-    QModelIndex qIdx =  AccountModel::instance()->protocolModel()->selectionModel()->currentIndex();
+    QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
 
     auto newAccName = [[NSString alloc] initWithFormat:@"%@ account",
-                AccountModel::instance()->protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
-    auto acc = AccountModel::instance()->add([newAccName UTF8String], qIdx);
+                AccountModel::instance().protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
+    auto acc = AccountModel::instance().add([newAccName UTF8String], qIdx);
     acc->setDisplayName(acc->alias());
-    AccountModel::instance()->save();
+    AccountModel::instance().save();
 }
 
 - (IBAction)protocolSelectedChanged:(id)sender {
 
     int index = [sender indexOfSelectedItem];
     QModelIndex proxyIdx = proxyProtocolModel->index(index, 0);
-    AccountModel::instance()->protocolModel()->selectionModel()->setCurrentIndex(
+    AccountModel::instance().protocolModel()->selectionModel()->setCurrentIndex(
                 proxyProtocolModel->mapToSource(proxyIdx), QItemSelectionModel::ClearAndSelect);
 
 }
@@ -247,8 +247,8 @@ public:
     NSTableColumn* col = [sender.tableColumns objectAtIndex:[sender clickedColumn]];
     if([col.identifier isEqualToString:COLUMNID_ENABLE]) {
         NSInteger row = [sender clickedRow];
-        QModelIndex accIdx = AccountModel::instance()->index(row);
-        Account* toToggle = AccountModel::instance()->getAccountByModelIndex(accIdx);
+        QModelIndex accIdx = AccountModel::instance().index(row);
+        Account* toToggle = AccountModel::instance().getAccountByModelIndex(accIdx);
         NSButtonCell *cell = [col dataCellForRow:row];
         toToggle->setEnabled(cell.state == NSOnState ? NO : YES);
         toToggle << Account::EditAction::SAVE;
@@ -275,7 +275,7 @@ public:
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
     // Prevent user from enabling/disabling IP2IP account
     if ([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE] &&
-                            AccountModel::instance()->ip2ip()->index() == qIdx) {
+                            AccountModel::instance().ip2ip()->index() == qIdx) {
 
         return [[NSCell alloc] init];
     } else {
@@ -323,7 +323,7 @@ public:
         cell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
     } else if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
         NSTextFieldCell* stateCell = cell;
-        auto account = AccountModel::instance()->getAccountByModelIndex(qIdx);
+        auto account = AccountModel::instance().getAccountByModelIndex(qIdx);
         auto humanState = account->toHumanStateName();
         [stateCell setTitle:humanState.toNSString()];
 
@@ -358,8 +358,8 @@ public:
     if([[treeController selectedNodes] count] > 0) {
         auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         //Update details view
-        auto acc = AccountModel::instance()->getAccountByModelIndex(qIdx);
-        AccountModel::instance()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+        auto acc = AccountModel::instance().getAccountByModelIndex(qIdx);
+        AccountModel::instance().selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 
             switch (acc->protocol()) {
             case Account::Protocol::SIP:
@@ -381,7 +381,7 @@ public:
         [self.accountDetailsView setHidden:NO];
     } else {
         [self.accountDetailsView setHidden:YES];
-        AccountModel::instance()->selectionModel()->clearCurrentIndex();
+        AccountModel::instance().selectionModel()->clearCurrentIndex();
     }
 }
 
@@ -390,7 +390,7 @@ public:
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
 {
     QModelIndex proxyIdx = proxyProtocolModel->index(index, 0);
-    QModelIndex qIdx = AccountModel::instance()->protocolModel()->index(proxyProtocolModel->mapToSource(proxyIdx).row());
+    QModelIndex qIdx = AccountModel::instance().protocolModel()->index(proxyProtocolModel->mapToSource(proxyIdx).row());
     [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
 
     return YES;

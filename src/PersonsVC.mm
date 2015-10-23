@@ -74,7 +74,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
 -(void) awakeFromNib
 {
     NSLog(@"INIT PersonsVC");
-    contactProxyModel = new ReachablePersonModel(CategorizedContactModel::instance());
+    contactProxyModel = new ReachablePersonModel(&CategorizedContactModel::instance());
     contactProxyModel->setSortRole(static_cast<int>(Qt::DisplayRole));
     contactProxyModel->sort(0,Qt::AscendingOrder);
     treeController = [[QNSTreeController alloc] initWithQModel:contactProxyModel];
@@ -88,7 +88,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
     [personsView setTarget:self];
     [personsView setDoubleAction:@selector(callContact:)];
 
-    CategorizedContactModel::instance()->setUnreachableHidden(YES);
+    CategorizedContactModel::instance().setUnreachableHidden(YES);
 }
 
 - (void) dealloc
@@ -119,7 +119,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
         }
 
         if(m){
-            Call* c = CallModel::instance()->dialingCall();
+            Call* c = CallModel::instance().dialingCall();
             c->setPeerContactMethod(m);
             c << Call::Action::ACCEPT;
         }

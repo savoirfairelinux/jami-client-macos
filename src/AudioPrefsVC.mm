@@ -57,55 +57,55 @@
 {
     [super loadView];
 
-    QModelIndex qInputIdx = Audio::Settings::instance()->inputDeviceModel()->selectionModel()->currentIndex();
-    QModelIndex qOutputIdx = Audio::Settings::instance()->outputDeviceModel()->selectionModel()->currentIndex();
+    QModelIndex qInputIdx = Audio::Settings::instance().inputDeviceModel()->selectionModel()->currentIndex();
+    QModelIndex qOutputIdx = Audio::Settings::instance().outputDeviceModel()->selectionModel()->currentIndex();
     
     [self.outputDeviceList addItemWithTitle:
-            Audio::Settings::instance()->outputDeviceModel()->data(qOutputIdx, Qt::DisplayRole).toString().toNSString()];
+            Audio::Settings::instance().outputDeviceModel()->data(qOutputIdx, Qt::DisplayRole).toString().toNSString()];
 
     [self.inputDeviceList addItemWithTitle:
-            Audio::Settings::instance()->inputDeviceModel()->data(qInputIdx, Qt::DisplayRole).toString().toNSString()];
+            Audio::Settings::instance().inputDeviceModel()->data(qInputIdx, Qt::DisplayRole).toString().toNSString()];
     [self.alwaysRecordingButton setState:
-            Media::RecordingModel::instance()->isAlwaysRecording() ? NSOnState:NSOffState];
+            Media::RecordingModel::instance().isAlwaysRecording() ? NSOnState:NSOffState];
 
     [self.muteDTMFButton setState:
-            Audio::Settings::instance()->areDTMFMuted()?NSOnState:NSOffState];
+            Audio::Settings::instance().areDTMFMuted()?NSOnState:NSOffState];
 
-    if([[Media::RecordingModel::instance()->recordPath().toNSURL() absoluteString] isEqualToString:@""]) {
+    if([[Media::RecordingModel::instance().recordPath().toNSURL() absoluteString] isEqualToString:@""]) {
         NSArray * pathComponentArray = [self pathComponentArray];
         [recordingsPathControl setPathComponentCells:pathComponentArray];
     } else {
-        [recordingsPathControl setURL:Media::RecordingModel::instance()->recordPath().toNSURL()];
+        [recordingsPathControl setURL:Media::RecordingModel::instance().recordPath().toNSURL()];
     }
 }
 
 - (IBAction)toggleMuteDTMF:(NSButton *)sender
 {
-    Audio::Settings::instance()->setDTMFMuted([sender state] == NSOnState);
+    Audio::Settings::instance().setDTMFMuted([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAlwaysRecording:(NSButton *)sender
 {
-    Media::RecordingModel::instance()->setAlwaysRecording([sender state] == NSOnState);
+    Media::RecordingModel::instance().setAlwaysRecording([sender state] == NSOnState);
 }
 
 - (IBAction)pathControlSingleClick:(id)sender {
     // Select that chosen component of the path.
     [self.recordingsPathControl setURL:[[self.recordingsPathControl clickedPathComponentCell] URL]];
-    Media::RecordingModel::instance()->setRecordPath(QUrl::fromNSURL(self.recordingsPathControl.URL));
+    Media::RecordingModel::instance().setRecordPath(QUrl::fromNSURL(self.recordingsPathControl.URL));
 }
 
 - (IBAction)chooseOutput:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Audio::Settings::instance()->outputDeviceModel()->index(index, 0);
-    Audio::Settings::instance()->outputDeviceModel()->selectionModel()->setCurrentIndex(
+    QModelIndex qIdx = Audio::Settings::instance().outputDeviceModel()->index(index, 0);
+    Audio::Settings::instance().outputDeviceModel()->selectionModel()->setCurrentIndex(
                                                     qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (IBAction)chooseInput:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Audio::Settings::instance()->inputDeviceModel()->index(index, 0);
-    Audio::Settings::instance()->inputDeviceModel()->selectionModel()->setCurrentIndex(
+    QModelIndex qIdx = Audio::Settings::instance().inputDeviceModel()->index(index, 0);
+    Audio::Settings::instance().inputDeviceModel()->selectionModel()->setCurrentIndex(
                                                     qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
@@ -191,12 +191,12 @@
 
     if([menu.title isEqualToString:@"inputlist"])
     {
-        qIdx = Audio::Settings::instance()->inputDeviceModel()->index(index);
-        [item setTitle:Audio::Settings::instance()->inputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+        qIdx = Audio::Settings::instance().inputDeviceModel()->index(index);
+        [item setTitle:Audio::Settings::instance().inputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
     } else
     {
-        qIdx = Audio::Settings::instance()->outputDeviceModel()->index(index);
-        [item setTitle:Audio::Settings::instance()->outputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
+        qIdx = Audio::Settings::instance().outputDeviceModel()->index(index);
+        [item setTitle:Audio::Settings::instance().outputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
     }
 
     return YES;
@@ -205,9 +205,9 @@
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
     if([menu.title isEqualToString:@"inputlist"])
-        return Audio::Settings::instance()->inputDeviceModel()->rowCount();
+        return Audio::Settings::instance().inputDeviceModel()->rowCount();
     else
-        return Audio::Settings::instance()->outputDeviceModel()->rowCount();
+        return Audio::Settings::instance().outputDeviceModel()->rowCount();
 }
 
 @end
