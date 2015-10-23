@@ -327,6 +327,13 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 }
 
+- (void) copyNumberToPasteboard:(id) sender
+{
+    NSPasteboard *pasteBoard = [NSPasteboard generalPasteboard];
+    [pasteBoard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    [pasteBoard setString:[sender representedObject] forType:NSStringPboardType];
+}
+
 #pragma NSTextFieldDelegate
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
@@ -397,17 +404,72 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path
 {
+    if([[treeController selectedNodes] count] <= 0)
+        return;
+
+    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@""];
+    //Contextual Menu of a ContactMethod offers to 'Add to contacts'
     auto cm = [self extractCM];
     if (cm && (!cm->contact() || cm->contact()->isPlaceHolder())) {
-        NSMenu *theMenu = [[NSMenu alloc]
-                           initWithTitle:@""];
         [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
                               action:@selector(addToContact)
                        keyEquivalent:@"a"
-                             atIndex:0];
+                             atIndex:theMenu.itemArray.count];
+
+        NSMenuItem *copyItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy number", @"Contextual menu action")
+                                                          action:@selector(copyNumberToPasteboard:)
+                                                   keyEquivalent:@"c"];
+        [copyItem setRepresentedObject:cm->uri().toNSString()];
+        [theMenu insertItem:copyItem atIndex:theMenu.itemArray.count];
         return theMenu;
     }
-    return nil;
+
+    QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+    const auto& var = qIdx.data(static_cast<int>(Ring::Role::Object));
+    if (var.isValid()) {
+        if (auto person = var.value<Person *>()) {
+            if (person->phoneNumbers().size() == 1) {
+                NSMenuItem *copyItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy number", @"Contextual menu action")
+                                                                  action:@selector(copyNumberToPasteboard:)
+                                                           keyEquivalent:@""];
+                [copyItem setRepresentedObject:person->phoneNumbers().first()->uri().toNSString()];
+                [theMenu insertItem:copyItem atIndex:theMenu.itemArray.count];
+
+            } else {
+                NSMenu *copySubmenu = [[NSMenu alloc] init];
+                NSMenu *callSubmenu = [[NSMenu alloc] init];
+
+                for(auto cm : person->phoneNumbers()) {
+                    NSMenuItem *tmpCopyItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
+                                                                      action:@selector(copyNumberToPasteboard:)
+                                                               keyEquivalent:@""];
+
+                    [tmpCopyItem setRepresentedObject:cm->uri().toNSString()];
+                    [copySubmenu addItem:tmpCopyItem];
+
+                    NSMenuItem *tmpCallItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
+                                                                         action:@selector(callNumber:)
+                                                                  keyEquivalent:@""];
+                    [tmpCallItem setRepresentedObject:cm->uri().toNSString()];
+                    [callSubmenu addItem:[tmpCallItem copy]];
+                }
+
+                NSMenuItem* copyItems = [[NSMenuItem alloc] init];
+                [copyItems setTitle:NSLocalizedString(@"Copy number", @"Contextual menu action")];
+                [copyItems setSubmenu:copySubmenu];
+
+                NSMenuItem* callItems = [[NSMenuItem alloc] init];
+                [callItems setTitle:NSLocalizedString(@"Call number", @"Contextual menu action")];
+                [copyItems setSubmenu:copySubmenu];
+
+                [theMenu insertItem:copyItems atIndex:theMenu.itemArray.count];
+                [theMenu insertItem:[NSMenuItem separatorItem] atIndex:theMenu.itemArray.count];
+                [theMenu insertItem:callItems atIndex:theMenu.itemArray.count];
+            }
+        }
+    }
+
+    return theMenu;
 }
 
 @end
