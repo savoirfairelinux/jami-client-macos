@@ -49,9 +49,16 @@ int main(int argc, const char *argv[]) {
     app->setAttribute(Qt::AA_MacPluginApplication);
 
     dir.cdUp();
-    QTranslator translator;
-    if (translator.load(QLocale::system(), "lrc", "_", dir.absolutePath()+"/Resources/QtTranslations")) {
-        app->installTranslator(&translator);
+
+    //We need to check if primary language is an English variant (en, en-CA etc...) before installing a translator
+    NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
+    if (![lang containsString:@"en"]) {
+        QTranslator translator;
+        if (translator.load(QLocale::system(), "lrc", "_", dir.absolutePath()+"/Resources/QtTranslations")) {
+            app->installTranslator(&translator);
+        } else {
+            NSLog(@"Couldn't load qt translator");
+        }
     }
 
     CategorizedHistoryModel::instance()->addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
