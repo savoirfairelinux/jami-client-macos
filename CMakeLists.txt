@@ -104,8 +104,6 @@ SET(ringclient_CONTROLLERS
    src/HistoryVC.h
    src/PersonsVC.mm
    src/PersonsVC.h
-   src/BitrateVC.mm
-   src/BitrateVC.h
    src/ChatVC.mm
    src/ChatVC.h
    src/PersonLinkerVC.mm
