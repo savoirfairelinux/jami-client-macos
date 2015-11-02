@@ -61,7 +61,6 @@
 @property (unsafe_unretained) IBOutlet NSButton* muteAudioButton;
 @property (unsafe_unretained) IBOutlet NSButton* muteVideoButton;
 @property (unsafe_unretained) IBOutlet NSButton* addContactButton;
-@property (unsafe_unretained) IBOutlet NSButton* qualityButton;
 @property (unsafe_unretained) IBOutlet NSButton* transferButton;
 @property (unsafe_unretained) IBOutlet NSView* headerContainer;
 
@@ -72,7 +71,6 @@
 @property (unsafe_unretained) IBOutlet NSSplitView* splitView;
 @property (unsafe_unretained) IBOutlet NSButton* chatButton;
 
-@property (strong) IBOutlet NSPopover* qualityPopOver;
 @property (strong) NSPopover* addToContactPopover;
 @property (strong) NSPopover* transferPopoverVC;
 @property (strong) IBOutlet ChatVC* chatVC;
@@ -137,7 +135,6 @@
 
     // Default values for this views
     [loadingIndicator setHidden:YES];
-    [self.qualityButton setHidden:YES];
     [self.chatButton setHidden:YES];
     [videoView setShouldAcceptInteractions:NO];
 
@@ -160,7 +157,6 @@
         case Call::State::CURRENT:
             [videoView setShouldAcceptInteractions:YES];
             [self.chatButton setHidden:NO];
-            [self.qualityButton setHidden:NO];
             break;
         case Call::State::HOLD:
             break;
@@ -222,7 +218,6 @@
     [loadingIndicator setLengthOfLine:2];
     [loadingIndicator setInnerMargin:30];
 
-    [self.qualityPopOver setDelegate:self];
     [self.videoView setCallDelegate:self];
 
     [self connect];
@@ -464,7 +459,7 @@
 
     [self.transferPopoverVC performClose:self];
     [self.addToContactPopover performClose:self];
-    [self.qualityPopOver performClose:self];
+
     [self.chatButton setState:NSOffState];
     [self collapseRightView];
 }
@@ -605,12 +600,6 @@
     UserActionModel* uam = CallModel::instance().userActionModel();
     uam << UserActionModel::Action::MUTE_VIDEO;
 }
-- (IBAction)displayQualityPopUp:(id)sender {
-
-    [self.qualityPopOver showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
-    [videoView setCallDelegate:nil];
-
-}
 
 - (IBAction)toggleTransferView:(id)sender {
     if (self.transferPopoverVC != nullptr) {
@@ -644,7 +633,6 @@
         self.addToContactPopover = NULL;
     }
 
-    [self.qualityButton setState:NSOffState];
     [self.addContactButton setState:NSOffState];
     [self.transferButton setState:NSOffState];
 }
