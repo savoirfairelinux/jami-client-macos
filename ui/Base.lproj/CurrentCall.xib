@@ -20,8 +20,6 @@
                 <outlet property="personLabel" destination="bg3-hB-nE8" id="t6l-1B-JxI"/>
                 <outlet property="pickUpButton" destination="qgD-3D-nD5" id="mkD-IT-22E"/>
                 <outlet property="previewView" destination="6y6-RH-qOp" id="1PY-sd-mh4"/>
-                <outlet property="qualityButton" destination="j52-5l-K3e" id="fHh-32-Q5k"/>
-                <outlet property="qualityPopOver" destination="DRa-ai-N1h" id="Cb1-1p-7bO"/>
                 <outlet property="recordOnOffButton" destination="oRa-pS-HN2" id="N7C-wn-0le"/>
                 <outlet property="splitView" destination="GIJ-gB-FZo" id="PM0-az-Q8X"/>
                 <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
@@ -167,7 +165,7 @@
                                             </connections>
                                         </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
-                                            <rect key="frame" x="286" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="247" y="13" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="rhz-4Z-avV">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -238,36 +236,6 @@
                                                 <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
                                             </connections>
                                         </button>
-                                        <button wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j52-5l-K3e" userLabel="Quality" customClass="IconButton">
-                                            <rect key="frame" x="236" y="12" width="40" height="40"/>
-                                            <backgroundFilters>
-                                                <ciFilter name="CIColorMonochrome">
-                                                    <configuration>
-                                                        <ciColor key="inputColor" red="1" green="0.53908979892730713" blue="0.15185309946537018" alpha="1"/>
-                                                        <null key="inputImage"/>
-                                                        <real key="inputIntensity" value="1"/>
-                                                    </configuration>
-                                                </ciFilter>
-                                            </backgroundFilters>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_quality" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" id="Vv0-lu-Pg9">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="displayQualityPopUp:" target="-2" id="EbO-ZD-Zsm"/>
-                                            </connections>
-                                        </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
                                             <rect key="frame" x="58" y="13" width="40" height="40"/>
                                             <constraints>
@@ -312,7 +280,7 @@
                                             </connections>
                                         </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
-                                            <rect key="frame" x="336" y="12" width="40" height="40"/>
+                                            <rect key="frame" x="297" y="12" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_transfer" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="FOs-Wt-c2R">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -474,47 +442,6 @@
                 <outlet property="view" destination="TdD-3L-553" id="HQf-B1-D8b"/>
             </connections>
         </viewController>
-        <customView wantsLayer="YES" id="Y38-Id-LGC">
-            <rect key="frame" x="0.0" y="0.0" width="56" height="161"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6lf-Ut-Xbr">
-                    <rect key="frame" x="13" y="134" width="31" height="27"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="+" id="b3D-0u-zMG">
-                        <font key="font" metaFont="system" size="22"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DRS-6A-7dl">
-                    <rect key="frame" x="13" y="0.0" width="31" height="27"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="-" id="gB4-S1-mny">
-                        <font key="font" metaFont="system" size="22"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CgZ-IK-49H">
-                    <rect key="frame" x="18" y="32" width="20" height="96"/>
-                    <sliderCell key="cell" alignment="left" minValue="200" maxValue="3000" doubleValue="200" tickMarkPosition="right" sliderType="linear" id="oGE-FH-3jK"/>
-                    <connections>
-                        <action selector="valueChanged:" target="7rr-Wk-Nn8" id="Lir-12-n5c"/>
-                    </connections>
-                </slider>
-            </subviews>
-            <point key="canvasLocation" x="772" y="-259.5"/>
-        </customView>
-        <viewController id="7rr-Wk-Nn8" customClass="BitrateVC">
-            <connections>
-                <outlet property="bitrateSlider" destination="CgZ-IK-49H" id="NoD-8v-Cc1"/>
-                <outlet property="view" destination="Y38-Id-LGC" id="0cj-pV-MgQ"/>
-            </connections>
-        </viewController>
-        <popover behavior="t" id="DRa-ai-N1h">
-            <connections>
-                <outlet property="contentViewController" destination="7rr-Wk-Nn8" id="43w-Ab-FTh"/>
-            </connections>
-        </popover>
         <customView id="vW1-8R-ebu">
             <rect key="frame" x="0.0" y="0.0" width="719" height="497"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -680,7 +607,6 @@
         <image name="ic_action_hold" width="72" height="72"/>
         <image name="ic_action_mute_audio" width="72" height="72"/>
         <image name="ic_action_mute_video" width="72" height="72"/>
-        <image name="ic_action_quality" width="72" height="72"/>
         <image name="ic_action_record" width="54" height="54"/>
         <image name="ic_action_transfer" width="72" height="72"/>
         <image name="ic_person_add" width="48" height="48"/>
