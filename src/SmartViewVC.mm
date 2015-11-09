@@ -79,6 +79,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     [smartView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [smartView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
     [smartView setTarget:self];
+    [smartView setAction:@selector(selectRow:)];
     [smartView setDoubleAction:@selector(placeCall:)];
 
     [smartView setContextMenuDelegate:self];
@@ -94,6 +95,24 @@ NSInteger const TXT_BUTTON_TAG  =   500;
                          }
                      });
 
+    QObject::connect(RecentModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+
+                         auto proxyIdx = RecentModel::instance().peopleProxy()->mapFromSource(current);
+                         if (proxyIdx.isValid()) {
+                             [treeController setSelectionQModelIndex:proxyIdx];
+
+                             [showContactsButton setState:NO];
+                             isShowingContacts = NO;
+                             [showHistoryButton setState:NO];
+                             [tabbar selectTabViewItemAtIndex:0];
+                             [smartView scrollRowToVisible:proxyIdx.row()];
+                         }
+                     });
+
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
     [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
@@ -101,6 +120,13 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     [searchField setWantsLayer:YES];
     [searchField setLayer:[CALayer layer]];
     [searchField.layer setBackgroundColor:[NSColor colorWithCalibratedRed:0.949 green:0.949 blue:0.949 alpha:0.9].CGColor];
+}
+
+-(void) selectRow:(id)sender
+{
+    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+    auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
+    RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (void)placeCall:(id)sender
@@ -131,12 +157,10 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     // Before calling check if we properly extracted a contact method and that
     // there is NOT already an ongoing call for this index (e.g: no children for this node)
     if(m && !RecentModel::instance().peopleProxy()->index(0, 0, qIdx).isValid()){
-        Call* c = CallModel::instance().dialingCall();
+        auto c = CallModel::instance().dialingCall();
         c->setPeerContactMethod(m);
         c << Call::Action::ACCEPT;
-
-        [smartView deselectAll:nil];
-        [smartView selectRowIndexes:[[NSIndexSet alloc] initWithIndex:0] byExtendingSelection:NO];
+        CallModel::instance().selectCall(c);
     }
 }
 
@@ -184,26 +208,14 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     return NO;
 }
 
-
 // -------------------------------------------------------------------------------
 //	outlineViewSelectionDidChange:notification
 // -------------------------------------------------------------------------------
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     if ([treeController selectedNodes].count <= 0) {
-        CallModel::instance().selectionModel()->clearCurrentIndex();
+        RecentModel::instance().selectionModel()->clearCurrentIndex();
         return;
-    }
-
-    QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-
-    // ask the tree controller for the current selection
-    if (auto selected = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
-        CallModel::instance().selectCall(selected);
-    } else if (auto selected = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx.parent()))){
-        CallModel::instance().selectCall(selected);
-    } else {
-        CallModel::instance().selectionModel()->clearCurrentIndex();
     }
 }
 
