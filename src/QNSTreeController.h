@@ -28,5 +28,6 @@
 - (id) initWithQModel:(QAbstractItemModel*) model;
 - (QModelIndex) toQIdx:(NSTreeNode*) node;
 - (QModelIndex) indexPathtoQIdx:(NSIndexPath*) path;
+- (void) setSelectionQModelIndex:(QModelIndex) qIdx;
 
 @end
