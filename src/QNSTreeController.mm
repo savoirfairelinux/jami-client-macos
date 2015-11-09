@@ -142,6 +142,12 @@
     }
 }
 
+- (void) setSelectionQModelIndex:(QModelIndex) qIdx
+{
+    NSIndexPath* path = [self qIdxToNSIndexPath:qIdx];
+    [self setSelectionIndexPath:path];
+}
+
 - (void)connect
 {
     QObject::connect(self->privateQModel,

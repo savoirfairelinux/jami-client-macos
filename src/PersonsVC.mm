@@ -122,6 +122,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
             Call* c = CallModel::instance().dialingCall();
             c->setPeerContactMethod(m);
             c << Call::Action::ACCEPT;
+            CallModel::instance().selectCall(c);
         }
     }
 }
