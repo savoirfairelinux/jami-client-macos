@@ -1,27 +1,48 @@
 
+/* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
+"9e8-ji-QId.ibShadowedToolTip" = "Join call";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
+"ChW-kg-Sja.ibShadowedToolTip" = "Transfer";
+
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
 "Dqv-um-UUk.title" = "URI";
-
-/* Class = "NSTextFieldCell"; title = "details"; ObjectID = "FHf-0w-WGz"; */
-"FHf-0w-WGz.title" = "details";
-
-/* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "FhU-gw-okq"; */
-"FhU-gw-okq.title" = "Display Role";
-
-/* Class = "NSSearchFieldCell"; placeholderString = "Search or enter number"; ObjectID = "GeP-AW-8mu"; */
-"GeP-AW-8mu.placeholderString" = "Search or enter number";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GjO-zY-hdp"; */
-"GjO-zY-hdp.title" = "Text Cell";
 
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
 "KPG-pB-gPm.title" = "Answer";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
+"Kjq-iM-NBL.ibShadowedToolTip" = "Hang up";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
+"LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
+"anb-Y8-JQi.ibShadowedToolTip" = "Hold";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
+"fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
+"kIZ-mf-moM.ibShadowedToolTip" = "Add participant";
+
 /* Class = "NSButtonCell"; title = "Button"; ObjectID = "kxH-yM-TLd"; */
 "kxH-yM-TLd.title" = "Button";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
+"mc3-HV-hek.ibShadowedToolTip" = "Hang up";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
+"oRa-pS-HN2.ibShadowedToolTip" = "Record";
+
 /* Class = "NSTextFieldCell"; title = "Person name"; ObjectID = "osk-LS-0Qg"; */
 "osk-LS-0Qg.title" = "Person name";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
+"qgD-3D-nD5.ibShadowedToolTip" = "Pick up";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
+"tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
 
 /* Class = "NSTextFieldCell"; title = "State"; ObjectID = "ugy-uK-901"; */
 "ugy-uK-901.title" = "State";
