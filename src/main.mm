@@ -19,6 +19,9 @@
 
 #import <AppKit/NSApplication.h>
 
+#import <Quartz/Quartz.h>
+#import <AVFoundation/AVFoundation.h>
+
 //Qt
 #import <qapplication.h>
 #import <globalinstances.h>
@@ -49,6 +52,10 @@ int main(int argc, const char *argv[]) {
     app->setAttribute(Qt::AA_MacPluginApplication);
 
     dir.cdUp();
+
+    uint32_t num_screens;
+    CGGetActiveDisplayList(0, nil, &num_screens);
+    NSLog(@"ACTIVE DISPLAYS: %d", num_screens);
 
     //We need to check if primary language is an English variant (en, en-CA etc...) before installing a translator
     NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];

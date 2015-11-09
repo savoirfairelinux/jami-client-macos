@@ -98,9 +98,10 @@ NSInteger const DETAILS_TAG = 300;
         QVariant var = historyProxyModel->data(qIdx, (int)Call::Role::ContactMethod);
         ContactMethod* m = qvariant_cast<ContactMethod*>(var);
         if(m){
-            Call* c = CallModel::instance().dialingCall();
+            auto c = CallModel::instance().dialingCall();
             c->setPeerContactMethod(m);
             c << Call::Action::ACCEPT;
+            CallModel::instance().selectCall(c);
         }
     }
 }
