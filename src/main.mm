@@ -19,6 +19,9 @@
 
 #import <AppKit/NSApplication.h>
 
+#import <Quartz/Quartz.h>
+#import <AVFoundation/AVFoundation.h>
+
 //Qt
 #import <qapplication.h>
 #import <globalinstances.h>
