@@ -23,6 +23,7 @@
 #import <QItemSelectionModel>
 #import <QtMacExtras/qmacfunctions.h>
 #import <QPixmap>
+#import <QMimeData>
 
 //LRC
 #import <recentmodel.h>
@@ -103,7 +104,13 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     [_smartView bind:@"sortDescriptors" toObject:_treeController withKeyPath:@"sortDescriptors" options:nil];
     [_smartView bind:@"selectionIndexPaths" toObject:_treeController withKeyPath:@"selectionIndexPaths" options:nil];
     [_smartView setTarget:self];
-    [_smartView setDoubleAction:@selector(placeTransfer:)];
+
+    if ([self mode] == BrokerMode::TRANSFER) {
+        [_smartView setDoubleAction:@selector(placeTransfer:)];
+    } else {
+        [_smartView setDoubleAction:@selector(addParticipant:)];
+    }
+
 }
 
 // -------------------------------------------------------------------------------
@@ -143,6 +150,60 @@ NSInteger const TXT_BUTTON_TAG  =   500;
         return;
     auto number = PhoneDirectoryModel::instance().getNumber(QString::fromNSString(uri));
     CallModel::instance().transfer(current, number);
+}
+
+// -------------------------------------------------------------------------------
+// place a call to the future participant on click on Person or ContactMethod
+// -------------------------------------------------------------------------------
+- (void)addParticipant:(id)sender
+{
+    auto current = CallModel::instance().selectedCall();
+
+    if (!current || [_treeController selectedNodes].count == 0)
+        return;
+
+    QModelIndex qIdx = [_treeController toQIdx:[_treeController selectedNodes][0]];
+    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(_recentFilterModel->mapToSource(qIdx));
+
+    auto participant = RecentModel::instance().getActiveCall(originIdx);
+    if (participant) { //join this call with the current one
+        QModelIndexList source_list;
+        source_list << CallModel::instance().getIndex(current);
+        auto idx_call_dest = CallModel::instance().getIndex(participant);
+        auto mimeData = CallModel::instance().mimeData(source_list);
+        auto action = Call::DropAction::Conference;
+        mimeData->setProperty("dropAction", action);
+
+        if (CallModel::instance().dropMimeData(mimeData, Qt::MoveAction, idx_call_dest.row(), idx_call_dest.column(), idx_call_dest.parent())) {
+            NSLog(@"OK");
+        } else {
+            NSLog(@"could not drop mime data");
+        }
+        return;
+    }
+
+    auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
+    if (contactmethods.size() > 0) { // Before calling check if we properly extracted at least one contact method
+        auto call = CallModel::instance().dialingCall(contactmethods.first());
+        call->setParentCall(current);
+        call << Call::Action::ACCEPT;
+        CallModel::instance().selectCall(call);
+    }
+}
+
+// -------------------------------------------------------------------------------
+// place a call to the future participant with entered URI
+// -------------------------------------------------------------------------------
+- (void) addParticipantFromUri:(NSString*) uri
+{
+    auto current = CallModel::instance().selectedCall();
+    if (!current)
+        return;
+    auto number = PhoneDirectoryModel::instance().getNumber(QString::fromNSString(uri));
+    auto dialing = CallModel::instance().dialingCall(number);
+    dialing->setParentCall(current);
+    dialing << Call::Action::ACCEPT;
+    CallModel::instance().selectCall(dialing);
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -216,7 +277,12 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 {
     if (commandSelector == @selector(insertNewline:)) {
         if([fieldEditor.textStorage.string isNotEqualTo:@""]) {
-            [self transferTo:fieldEditor.textStorage.string];
+
+            if ([self mode] == BrokerMode::TRANSFER) {
+                [self transferTo:fieldEditor.textStorage.string];
+            } else {
+                [self addParticipantFromUri:fieldEditor.textStorage.string];
+            }
             return YES;
         }
     }

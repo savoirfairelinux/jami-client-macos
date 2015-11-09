@@ -7,13 +7,16 @@
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
             <connections>
                 <outlet property="addContactButton" destination="Zss-6A-bSy" id="Px0-5v-NE7"/>
+                <outlet property="addParticipantButton" destination="kIZ-mf-moM" id="7jn-l5-umS"/>
                 <outlet property="chatButton" destination="fmp-x4-Pef" id="ARt-dr-TRo"/>
                 <outlet property="chatVC" destination="LWe-df-dS6" id="SMR-T0-fYe"/>
                 <outlet property="controlsPanel" destination="Eoi-B8-iL6" id="4xn-3b-SNn"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
                 <outlet property="headerContainer" destination="d0X-cW-Xgz" id="7RM-kh-vCm"/>
                 <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
+                <outlet property="joinPanel" destination="MNG-eU-B2N" id="oBn-ec-ebh"/>
                 <outlet property="loadingIndicator" destination="JwW-2h-DyZ" id="EEb-50-oSJ"/>
+                <outlet property="mergeCallsButton" destination="9e8-ji-QId" id="sb6-n5-E7k"/>
                 <outlet property="muteAudioButton" destination="tQl-cT-0Lb" id="qV4-Ef-UTx"/>
                 <outlet property="muteVideoButton" destination="LVS-yZ-98V" id="qQs-zP-wQ4"/>
                 <outlet property="personLabel" destination="bg3-hB-nE8" id="t6l-1B-JxI"/>
@@ -141,30 +144,8 @@
                                                 <action selector="muteAudio:" target="-2" id="DBk-mG-FLj"/>
                                             </connections>
                                         </button>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
-                                            <rect key="frame" x="8" y="14" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="IFG-ni-9mc"/>
-                                                <constraint firstAttribute="width" constant="40" id="uoL-Wy-Ek2"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="left" transparent="YES" imageScaling="proportionallyDown" id="CoO-HS-nEB">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.23529411764705882" green="0.6470588235294118" blue="0.16078431372549018" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="accept:" target="-2" id="maS-G8-eY7"/>
-                                            </connections>
-                                        </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
-                                            <rect key="frame" x="247" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="249" y="13" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="rhz-4Z-avV">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -185,7 +166,7 @@
                                             </connections>
                                         </button>
                                         <button wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
-                                            <rect key="frame" x="392" y="12" width="40" height="40"/>
+                                            <rect key="frame" x="392" y="13" width="40" height="40"/>
                                             <backgroundFilters>
                                                 <ciFilter name="CIColorMonochrome">
                                                     <configuration>
@@ -214,51 +195,8 @@
                                                 <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
                                             </connections>
                                         </button>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
-                                            <rect key="frame" x="197" y="14" width="40" height="40"/>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
-                                            </connections>
-                                        </button>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
-                                            <rect key="frame" x="58" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="MYx-uE-Bej"/>
-                                                <constraint firstAttribute="height" constant="40" id="dmD-ga-Kwv"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.94509803921568625" green="0.16078431372549018" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
-                                            </connections>
-                                        </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
-                                            <rect key="frame" x="119" y="14" width="40" height="40"/>
+                                            <rect key="frame" x="115" y="13" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -279,7 +217,7 @@
                                             </connections>
                                         </button>
                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
-                                            <rect key="frame" x="297" y="12" width="40" height="40"/>
+                                            <rect key="frame" x="294" y="13" width="40" height="40"/>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_transfer" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="FOs-Wt-c2R">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -299,13 +237,97 @@
                                                 <action selector="toggleTransferView:" target="-2" id="Gxt-lS-qZs"/>
                                             </connections>
                                         </button>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIZ-mf-moM" customClass="IconButton">
+                                            <rect key="frame" x="342" y="13" width="40" height="40"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="BOx-wf-CM5">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="toggleAddParticipantView:" target="-2" id="v6X-2r-6im"/>
+                                            </connections>
+                                        </button>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
+                                            <rect key="frame" x="203" y="13" width="40" height="40"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
+                                            </connections>
+                                        </button>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="64" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="MYx-uE-Bej"/>
+                                                <constraint firstAttribute="height" constant="40" id="dmD-ga-Kwv"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.94509803921568625" green="0.16078431372549018" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
+                                            </connections>
+                                        </button>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
+                                            <rect key="frame" x="11" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="IFG-ni-9mc"/>
+                                                <constraint firstAttribute="width" constant="40" id="uoL-Wy-Ek2"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="left" transparent="YES" imageScaling="proportionallyDown" id="CoO-HS-nEB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.23529411764705882" green="0.6470588235294118" blue="0.16078431372549018" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="accept:" target="-2" id="maS-G8-eY7"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="qgD-3D-nD5" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="9NT-bT-9wJ"/>
-                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="FrX-Hd-30D"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="385" id="TSJ-9A-brf"/>
                                         <constraint firstItem="qgD-3D-nD5" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="leading" constant="8" id="hhR-YV-cu5"/>
-                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="leading" secondItem="qgD-3D-nD5" secondAttribute="trailing" constant="10" id="j0v-YO-8kM"/>
                                         <constraint firstAttribute="height" constant="67" id="ynu-O5-MN8"/>
                                     </constraints>
                                 </customView>
@@ -323,11 +345,67 @@
                                         <constraint firstAttribute="width" constant="175" id="aEv-Tt-tSD"/>
                                     </constraints>
                                 </customView>
+                                <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MNG-eU-B2N">
+                                    <rect key="frame" x="258" y="95" width="158" height="66"/>
+                                    <subviews>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-ji-QId" userLabel="Mute Video" customClass="IconButton">
+                                            <rect key="frame" x="98" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="2GQ-Ki-ZmL"/>
+                                                <constraint firstAttribute="width" constant="40" id="Ax8-Wg-JeP"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_merge_calls" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7n2-FO-gcG">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="mergeCalls:" target="-2" id="GTH-sR-hNd"/>
+                                            </connections>
+                                        </button>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mc3-HV-hek" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="20" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="O83-pI-Vas"/>
+                                                <constraint firstAttribute="height" constant="40" id="tQE-0z-Q3y"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="qBC-R5-W49">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.94509803920000002" green="0.16078431369999999" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="hangUp:" target="-2" id="MMl-em-Nrb"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="mc3-HV-hek" firstAttribute="centerY" secondItem="MNG-eU-B2N" secondAttribute="centerY" id="m7g-Q2-BpP"/>
+                                    </constraints>
+                                </customView>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="JwW-2h-DyZ" secondAttribute="centerX" id="4eh-az-oI5"/>
                                 <constraint firstItem="6y6-RH-qOp" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="trailing" constant="8" id="7wV-uh-Xb7"/>
                                 <constraint firstAttribute="bottom" secondItem="Eoi-B8-iL6" secondAttribute="bottom" constant="20" id="9j2-HZ-hNX"/>
+                                <constraint firstItem="MNG-eU-B2N" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="DbU-cn-glx"/>
                                 <constraint firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" constant="20" id="G79-Jv-EYw"/>
                                 <constraint firstAttribute="bottom" secondItem="6y6-RH-qOp" secondAttribute="bottom" constant="20" id="HOt-7O-FU2"/>
                                 <constraint firstAttribute="trailing" secondItem="6y6-RH-qOp" secondAttribute="trailing" constant="20" id="KTx-SN-RUg"/>
@@ -335,6 +413,7 @@
                                 <constraint firstAttribute="centerY" secondItem="JwW-2h-DyZ" secondAttribute="centerY" id="Na1-o4-4Ds"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="675" id="ciq-ed-2FK"/>
                                 <constraint firstItem="d0X-cW-Xgz" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="efy-70-qsJ"/>
+                                <constraint firstItem="Eoi-B8-iL6" firstAttribute="top" secondItem="MNG-eU-B2N" secondAttribute="bottom" constant="8" id="jm6-9s-ojD"/>
                                 <constraint firstItem="Eoi-B8-iL6" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="sHw-xg-QAo"/>
                             </constraints>
                         </customView>
@@ -486,10 +565,12 @@
     <resources>
         <image name="NSGoRightTemplate" width="9" height="12"/>
         <image name="NSUser" width="32" height="32"/>
+        <image name="ic_action_add_participant" width="72" height="72"/>
         <image name="ic_action_call" width="72" height="72"/>
         <image name="ic_action_chat" width="72" height="72"/>
         <image name="ic_action_hangup" width="72" height="72"/>
         <image name="ic_action_hold" width="72" height="72"/>
+        <image name="ic_action_merge_calls" width="72" height="72"/>
         <image name="ic_action_mute_audio" width="72" height="72"/>
         <image name="ic_action_mute_video" width="72" height="72"/>
         <image name="ic_action_record" width="54" height="54"/>

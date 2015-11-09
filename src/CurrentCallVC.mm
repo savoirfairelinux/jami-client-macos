@@ -23,6 +23,7 @@
 #import <call.h>
 #import <callmodel.h>
 #import <useractionmodel.h>
+#import <QMimeData>
 #import <contactmethod.h>
 #import <qabstractitemmodel.h>
 #import <QItemSelectionModel>
@@ -52,8 +53,14 @@
 
 @interface CurrentCallVC () <NSPopoverDelegate, ContactLinkedDelegate>
 
+// Header info
+@property (unsafe_unretained) IBOutlet NSView* headerContainer;
 @property (unsafe_unretained) IBOutlet NSTextField* personLabel;
 @property (unsafe_unretained) IBOutlet NSTextField* stateLabel;
+@property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
+
+// Call Controls
+@property (unsafe_unretained) IBOutlet NSView* controlsPanel;
 @property (unsafe_unretained) IBOutlet NSButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet NSButton* hangUpButton;
 @property (unsafe_unretained) IBOutlet NSButton* recordOnOffButton;
@@ -62,17 +69,19 @@
 @property (unsafe_unretained) IBOutlet NSButton* muteVideoButton;
 @property (unsafe_unretained) IBOutlet NSButton* addContactButton;
 @property (unsafe_unretained) IBOutlet NSButton* transferButton;
-@property (unsafe_unretained) IBOutlet NSView* headerContainer;
+@property (unsafe_unretained) IBOutlet NSButton* addParticipantButton;
+@property (unsafe_unretained) IBOutlet NSButton* chatButton;
 
 @property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
-@property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
-@property (unsafe_unretained) IBOutlet NSView* controlsPanel;
+// Join call panel
+@property (unsafe_unretained) IBOutlet NSView* joinPanel;
+@property (unsafe_unretained) IBOutlet NSButton* mergeCallsButton;
+
 @property (unsafe_unretained) IBOutlet NSSplitView* splitView;
-@property (unsafe_unretained) IBOutlet NSButton* chatButton;
 
 @property (strong) NSPopover* addToContactPopover;
-@property (strong) NSPopover* transferPopoverVC;
+@property (strong) NSPopover* brokerPopoverVC;
 @property (strong) IBOutlet ChatVC* chatVC;
 
 @property QHash<int, NSButton*> actionHash;
@@ -93,7 +102,7 @@
 
 @implementation CurrentCallVC
 @synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton,
-            recordOnOffButton, pickUpButton, chatButton, transferButton, timeSpentLabel,
+            recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView,
             videoLayer, previewLayer, previewView, splitView, loadingIndicator;
 
@@ -124,6 +133,8 @@
     if (!callIdx.isValid()) {
         return;
     }
+    auto current = CallModel::instance().getCall(callIdx);
+
     [personLabel setStringValue:callIdx.data(Qt::DisplayRole).toString().toNSString()];
     [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
 
@@ -138,6 +149,8 @@
     [self.chatButton setHidden:YES];
     [videoView setShouldAcceptInteractions:NO];
 
+    [self.controlsPanel setHidden:current->hasParentCall()];
+    [self.joinPanel setHidden:!current->hasParentCall()];
 
     [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
     switch (state) {
@@ -176,11 +189,6 @@
     NSLog(@"INIT CurrentCall VC");
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
-
-    [controlsPanel setWantsLayer:YES];
-    [controlsPanel setLayer:[CALayer layer]];
-    [controlsPanel.layer setZPosition:2.0];
-    [controlsPanel.layer setBackgroundColor:[NSColor whiteColor].CGColor];
 
     actionHash[ (int)UserActionModel::Action::ACCEPT] = pickUpButton;
     actionHash[ (int)UserActionModel::Action::HOLD  ] = holdOnOffButton;
@@ -276,6 +284,7 @@
 {
     QModelIndex idx = CallModel::instance().selectionModel()->currentIndex();
     Call* call = CallModel::instance().getCall(idx);
+    QObject::disconnect(self.videoStarted);
     self.videoStarted = QObject::connect(call,
                      &Call::videoStarted,
                      [=](Video::Renderer* renderer) {
@@ -457,10 +466,11 @@
     [videoView.layer setContents:nil];
     [previewView.layer setContents:nil];
 
-    [self.transferPopoverVC performClose:self];
+    [_brokerPopoverVC performClose:self];
     [self.addToContactPopover performClose:self];
 
     [self.chatButton setState:NSOffState];
+    [self.mergeCallsButton setState:NSOffState];
     [self collapseRightView];
 }
 
@@ -602,30 +612,57 @@
 }
 
 - (IBAction)toggleTransferView:(id)sender {
-    if (self.transferPopoverVC != nullptr) {
-        [self.transferPopoverVC performClose:self];
-        self.transferPopoverVC = NULL;
+    if (_brokerPopoverVC != nullptr) {
+        [_brokerPopoverVC performClose:self];
+        _brokerPopoverVC = NULL;
         [self.transferButton setState:NSOffState];
     } else {
-        auto* transferVC = [[BrokerVC alloc] initWithMode:BrokerMode::TRANSFER];
-        self.transferPopoverVC = [[NSPopover alloc] init];
-        [self.transferPopoverVC setContentSize:transferVC.view.frame.size];
-        [self.transferPopoverVC setContentViewController:transferVC];
-        [self.transferPopoverVC setAnimates:YES];
-        [self.transferPopoverVC setBehavior:NSPopoverBehaviorTransient];
-        [self.transferPopoverVC setDelegate:self];
-        [self.transferPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+        auto* brokerVC = [[BrokerVC alloc] initWithMode:BrokerMode::TRANSFER];
+        _brokerPopoverVC = [[NSPopover alloc] init];
+        [_brokerPopoverVC setContentSize:brokerVC.view.frame.size];
+        [_brokerPopoverVC setContentViewController:brokerVC];
+        [_brokerPopoverVC setAnimates:YES];
+        [_brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [_brokerPopoverVC setDelegate:self];
+        [_brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
         [videoView setCallDelegate:nil];
     }
+}
+
+- (IBAction)toggleAddParticipantView:(id)sender {
+    if (_brokerPopoverVC != nullptr) {
+        [_brokerPopoverVC performClose:self];
+        _brokerPopoverVC = NULL;
+        [self.addParticipantButton setState:NSOffState];
+    } else {
+        auto* brokerVC = [[BrokerVC alloc] initWithMode:BrokerMode::CONFERENCE];
+        _brokerPopoverVC = [[NSPopover alloc] init];
+        [_brokerPopoverVC setContentSize:brokerVC.view.frame.size];
+        [_brokerPopoverVC setContentViewController:brokerVC];
+        [_brokerPopoverVC setAnimates:YES];
+        [_brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [_brokerPopoverVC setDelegate:self];
+        [_brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+        [videoView setCallDelegate:nil];
+    }
+}
+
+/**
+ *  Merge current call with its parent call
+ */
+- (IBAction)mergeCalls:(id)sender
+{
+    auto current = CallModel::instance().selectedCall();
+    current->joinToParent();
 }
 
 #pragma mark - NSPopOverDelegate
 
 - (void)popoverWillClose:(NSNotification *)notification
 {
-    if (self.transferPopoverVC != nullptr) {
-        [self.transferPopoverVC performClose:self];
-        self.transferPopoverVC = NULL;
+    if (_brokerPopoverVC != nullptr) {
+        [_brokerPopoverVC performClose:self];
+        _brokerPopoverVC = NULL;
     }
 
     if (self.addToContactPopover != nullptr) {
@@ -635,6 +672,7 @@
 
     [self.addContactButton setState:NSOffState];
     [self.transferButton setState:NSOffState];
+    [self.addParticipantButton setState:NSOffState];
 }
 
 - (void)popoverDidClose:(NSNotification *)notification
@@ -689,6 +727,7 @@
 -(void) mouseIsMoving:(BOOL) move
 {
     [[controlsPanel animator] setAlphaValue:move]; // fade out
+
     [[headerContainer animator] setAlphaValue:move];
 }
 
