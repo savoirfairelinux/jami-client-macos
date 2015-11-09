@@ -23,7 +23,7 @@
 
 enum class BrokerMode {
     TRANSFER = 0,
-    //CONFERENCE
+    CONFERENCE,
 };
 
 - (instancetype)initWithMode:(BrokerMode) m;
