@@ -99,17 +99,12 @@ QMetaObject::Connection previewStopped;
 
     }
 
-    // check if preview has to be started/stopped by this controller
-    self.shouldHandlePreview = !Video::PreviewManager::instance().isPreviewing();
-
     [previewView setWantsLayer:YES];
     [previewView setLayer:[CALayer layer]];
     [previewView.layer setBackgroundColor:[NSColor blackColor].CGColor];
     [previewView.layer setContentsGravity:kCAGravityResizeAspect];
     [previewView.layer setFrame:previewView.frame];
     [previewView.layer setBounds:previewView.frame];
-
-    [self connectPreviewSignals];
 }
 
 - (IBAction)chooseDevice:(id)sender {
@@ -135,32 +130,33 @@ QMetaObject::Connection previewStopped;
     QObject::disconnect(frameUpdated);
     QObject::disconnect(previewStopped);
     QObject::disconnect(previewStarted);
+
     previewStarted = QObject::connect(&Video::PreviewManager::instance(),
-                                             &Video::PreviewManager::previewStarted,
-                                             [=](Video::Renderer* renderer) {
-                                                 NSLog(@"Preview started");
-                                                 QObject::disconnect(frameUpdated);
-                                                 frameUpdated = QObject::connect(renderer,
-                                                                                 &Video::Renderer::frameUpdated,
-                                                                                 [=]() {
-                                                                                     [self renderer:Video::PreviewManager::instance().previewRenderer() renderFrameForView:previewView];
-                                                                                 });
-                                             });
+                                      &Video::PreviewManager::previewStarted,
+                                      [=](Video::Renderer* renderer) {
+                                          NSLog(@"Preview started");
+                                          QObject::disconnect(frameUpdated);
+                                          frameUpdated = QObject::connect(renderer,
+                                                                          &Video::Renderer::frameUpdated,
+                                                                          [=]() {
+                                                                              [self renderer:Video::PreviewManager::instance().previewRenderer() renderFrameForView:previewView];
+                                                                          });
+                                      });
 
     previewStopped = QObject::connect(&Video::PreviewManager::instance(),
-                                             &Video::PreviewManager::previewStopped,
-                                             [=](Video::Renderer* renderer) {
-                                                 NSLog(@"Preview stopped");
-                                                 QObject::disconnect(frameUpdated);
-                                                 [previewView.layer setContents:nil];
-                                             });
+                                      &Video::PreviewManager::previewStopped,
+                                      [=](Video::Renderer* renderer) {
+                                          NSLog(@"Preview stopped");
+                                          QObject::disconnect(frameUpdated);
+                                          [previewView.layer setContents:nil];
+                                      });
 
     frameUpdated = QObject::connect(Video::PreviewManager::instance().previewRenderer(),
-                                                  &Video::Renderer::frameUpdated,
-                                                  [=]() {
-                                                      [self renderer:Video::PreviewManager::instance().previewRenderer()
+                                    &Video::Renderer::frameUpdated,
+                                    [=]() {
+                                        [self renderer:Video::PreviewManager::instance().previewRenderer()
                                                   renderFrameForView:previewView];
-                                                  });
+                                    });
 }
 
 -(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
@@ -197,6 +193,10 @@ QMetaObject::Connection previewStopped;
 
 - (void) viewWillAppear
 {
+    // check if preview has to be started/stopped by this controller
+    self.shouldHandlePreview = !Video::PreviewManager::instance().previewRenderer()->isRendering();
+
+    [self connectPreviewSignals];
     if (self.shouldHandlePreview) {
         Video::PreviewManager::instance().startPreview();
     }
@@ -204,6 +204,9 @@ QMetaObject::Connection previewStopped;
 
 - (void)viewWillDisappear
 {
+    QObject::disconnect(frameUpdated);
+    QObject::disconnect(previewStopped);
+    QObject::disconnect(previewStarted);
     if (self.shouldHandlePreview) {
         Video::PreviewManager::instance().stopPreview();
     }
