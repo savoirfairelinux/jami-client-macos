@@ -206,6 +206,9 @@ QMetaObject::Connection previewStopped;
 {
     if (self.shouldHandlePreview) {
         Video::PreviewManager::instance().stopPreview();
+        QObject::disconnect(frameUpdated);
+        QObject::disconnect(previewStopped);
+        QObject::disconnect(previewStarted);
     }
 }
 
