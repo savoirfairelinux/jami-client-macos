@@ -135,28 +135,33 @@ QMetaObject::Connection previewStopped;
     QObject::disconnect(frameUpdated);
     QObject::disconnect(previewStopped);
     QObject::disconnect(previewStarted);
-    previewStarted = QObject::connect(&Video::PreviewManager::instance(),
-                                             &Video::PreviewManager::previewStarted,
-                                             [=](Video::Renderer* renderer) {
-                                                 NSLog(@"Preview started");
-                                                 QObject::disconnect(frameUpdated);
-                                                 frameUpdated = QObject::connect(renderer,
-                                                                                 &Video::Renderer::frameUpdated,
-                                                                                 [=]() {
-                                                                                     [self renderer:Video::PreviewManager::instance().previewRenderer() renderFrameForView:previewView];
-                                                                                 });
-                                             });
 
-    previewStopped = QObject::connect(&Video::PreviewManager::instance(),
-                                             &Video::PreviewManager::previewStopped,
-                                             [=](Video::Renderer* renderer) {
-                                                 NSLog(@"Preview stopped");
-                                                 QObject::disconnect(frameUpdated);
-                                                 [previewView.layer setContents:nil];
-                                             });
+    if (self.shouldHandlePreview) {
+        previewStarted = QObject::connect(&Video::PreviewManager::instance(),
+                                          &Video::PreviewManager::previewStarted,
+                                          [=](Video::Renderer* renderer) {
+                                              NSLog(@"Preview started");
+                                              QObject::disconnect(frameUpdated);
+                                              frameUpdated = QObject::connect(renderer,
+                                                                              &Video::Renderer::frameUpdated,
+                                                                              [=]() {
+                                                                                  [self renderer:Video::PreviewManager::instance().previewRenderer() renderFrameForView:previewView];
+                                                                              });
+                                          });
+
+        previewStopped = QObject::connect(&Video::PreviewManager::instance(),
+                                          &Video::PreviewManager::previewStopped,
+                                          [=](Video::Renderer* renderer) {
+                                              NSLog(@"Preview stopped");
+                                              QObject::disconnect(frameUpdated);
+                                              [previewView.layer setContents:nil];
+                                          });
+
+
+    }
 
     frameUpdated = QObject::connect(Video::PreviewManager::instance().previewRenderer(),
-                                                  &Video::Renderer::frameUpdated,
+                                    &Video::Renderer::frameUpdated,
                                                   [=]() {
                                                       [self renderer:Video::PreviewManager::instance().previewRenderer()
                                                   renderFrameForView:previewView];
@@ -204,6 +209,9 @@ QMetaObject::Connection previewStopped;
 
 - (void)viewWillDisappear
 {
+    QObject::disconnect(frameUpdated);
+    QObject::disconnect(previewStopped);
+    QObject::disconnect(previewStarted);
     if (self.shouldHandlePreview) {
         Video::PreviewManager::instance().stopPreview();
     }
