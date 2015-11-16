@@ -125,52 +125,23 @@ namespace Interfaces {
     }
 
     QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
-
-        const int radius = size.height() / 2;
-        QPixmap pxm(size);
-        pxm.fill(Qt::transparent);
-        QPainter painter(&pxm);
-
-        painter.setCompositionMode(QPainter::CompositionMode_Clear);
-        painter.fillRect(0,0,size.width(),size.height(),QBrush(Qt::white));
-        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-
         // create the image somehow, load from file, draw into it...
-        auto sourceImgRef = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"NSUser"] TIFFRepresentation], NULL);
+        auto sourceImgRef = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"default_user_icon"] TIFFRepresentation], NULL);
         auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
         auto finalpxm =  QtMac::fromCGImageRef(resizeCGImage(imgRef, size));
-
-        QRect pxRect = finalpxm.rect();
-        QBitmap mask(pxRect.size());
-        QPainter customPainter(&mask);
-        customPainter.setRenderHint  (QPainter::Antialiasing, true      );
-        customPainter.fillRect       (pxRect                , Qt::white );
-        customPainter.setBackground  (Qt::black                         );
-        customPainter.setBrush       (Qt::black                         );
-        customPainter.drawRoundedRect(pxRect,radius,radius);
-        finalpxm.setMask(mask);
-        painter.setRenderHint  (QPainter::Antialiasing, true   );
-        painter.drawPixmap(0,0,finalpxm);
-        painter.setBrush(Qt::NoBrush);
-        painter.setPen(Qt::black);
-        painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-        painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
-
         CFRelease(sourceImgRef);
         CFRelease(imgRef);
 
-        return pxm;
+        return finalpxm;
     }
 
     CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSize& size) {
         // create context, keeping original image properties
-        CGColorSpaceRef colorspace = CGImageGetColorSpace(image);
-
         CGContextRef context = CGBitmapContextCreate(NULL, size.width(), size.height(),
                                                      CGImageGetBitsPerComponent(image),
-                                                     size.width() * CGImageGetBitsPerComponent(image),
-                                                     colorspace,
-                                                     CGImageGetAlphaInfo(image));
+                                                     CGImageGetBytesPerRow(image),
+                                                     CGImageGetColorSpace(image),
+                                                     kCGImageAlphaPremultipliedLast);
 
         if(context == NULL)
             return nil;

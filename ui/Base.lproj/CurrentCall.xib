@@ -123,8 +123,12 @@
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Eoi-B8-iL6" userLabel="Controls">
                                     <rect key="frame" x="20" y="20" width="452" height="67"/>
                                     <subviews>
-                                        <button toolTip="Mute Audio" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="IconButton">
+                                        <button toolTip="Mute Audio" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="IconButton">
                                             <rect key="frame" x="158" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="VhT-NE-Ler"/>
+                                                <constraint firstAttribute="height" constant="40" id="WFp-nl-egQ"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7wg-Q4-mbD">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -144,8 +148,12 @@
                                                 <action selector="muteAudio:" target="-2" id="DBk-mG-FLj"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
+                                        <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
                                             <rect key="frame" x="249" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="5Yb-Ir-aNP"/>
+                                                <constraint firstAttribute="height" constant="40" id="f6U-Sc-LhF"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="rhz-4Z-avV">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -165,8 +173,12 @@
                                                 <action selector="toggleRecording:" target="-2" id="gAc-ZJ-9PN"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Toggle chat" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
+                                        <button toolTip="Toggle chat" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
                                             <rect key="frame" x="392" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="48U-1h-yAx"/>
+                                                <constraint firstAttribute="height" constant="40" id="EDO-9c-ndD"/>
+                                            </constraints>
                                             <backgroundFilters>
                                                 <ciFilter name="CIColorMonochrome">
                                                     <configuration>
@@ -195,8 +207,12 @@
                                                 <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
+                                        <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
                                             <rect key="frame" x="113" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="QlH-xq-7uO"/>
+                                                <constraint firstAttribute="height" constant="40" id="Xzt-L0-evm"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -216,8 +232,12 @@
                                                 <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
+                                        <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
                                             <rect key="frame" x="294" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="9zo-pq-mgF"/>
+                                                <constraint firstAttribute="width" constant="40" id="EVF-UM-brL"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_transfer" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="FOs-Wt-c2R">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -237,8 +257,12 @@
                                                 <action selector="toggleTransferView:" target="-2" id="Gxt-lS-qZs"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Add participant" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIZ-mf-moM" customClass="IconButton">
+                                        <button toolTip="Add participant" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIZ-mf-moM" customClass="IconButton">
                                             <rect key="frame" x="342" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="7qu-cd-B7J"/>
+                                                <constraint firstAttribute="width" constant="40" id="U4p-eV-iCZ"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="BOx-wf-CM5">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -302,8 +326,12 @@
                                                 <action selector="accept:" target="-2" id="maS-G8-eY7"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
+                                        <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
                                             <rect key="frame" x="204" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="Qiq-Nb-gHN"/>
+                                                <constraint firstAttribute="width" constant="40" id="k3u-dD-eLF"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
