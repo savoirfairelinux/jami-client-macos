@@ -190,6 +190,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_made.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_transfer.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_add_participant.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_merge_calls.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/default_user_icon.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png

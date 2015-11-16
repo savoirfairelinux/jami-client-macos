@@ -20,6 +20,8 @@
 
 //Qt
 #import <QSortFilterProxyModel>
+#import <QtMacExtras/qmacfunctions.h>
+#import <QPixmap>
 
 //LRC
 #import <categorizedhistorymodel.h>
@@ -27,10 +29,12 @@
 #import <call.h>
 #import <person.h>
 #import <contactmethod.h>
+#import <globalinstances.h>
 
 #import "QNSTreeController.h"
 #import "PersonLinkerVC.h"
 #import "views/HoverTableRowView.h"
+#import "delegates/ImageManipulationDelegate.h"
 
 @interface HistoryVC() <NSPopoverDelegate, KeyboardShortcutDelegate, ContactLinkedDelegate> {
 
@@ -45,9 +49,10 @@
 @implementation HistoryVC
 
 // Tags for Views
-NSInteger const IMAGE_TAG = 100;
+NSInteger const DIRECTION_TAG = 100;
 NSInteger const DISPLAYNAME_TAG = 200;
 NSInteger const DETAILS_TAG = 300;
+NSInteger const PHOTO_TAG = 400;
 
 - (void)awakeFromNib
 {
@@ -150,23 +155,29 @@ NSInteger const DETAILS_TAG = 300;
 
     } else {
         result = [outlineView makeViewWithIdentifier:@"HistoryCell" owner:outlineView];
-        NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
+        NSImageView* directionView = [result viewWithTag:DIRECTION_TAG];
 
         if (qvariant_cast<Call::Direction>(qIdx.data((int)Call::Role::Direction)) == Call::Direction::INCOMING) {
            if (qvariant_cast<Boolean>(qIdx.data((int) Call::Role::Missed))) {
-               [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_missed"] withTintedWithColor:[NSColor redColor]]];
+               [directionView setImage:[self image:[NSImage imageNamed:@"ic_call_missed"] withTintedWithColor:[NSColor redColor]]];
             } else {
-                [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_received"]
+                [directionView setImage:[self image:[NSImage imageNamed:@"ic_call_received"]
                             withTintedWithColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]]];
             }
         } else {
             if (qvariant_cast<Boolean>(qIdx.data((int) Call::Role::Missed))) {
-                [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_missed"] withTintedWithColor:[NSColor redColor]]];
+                [directionView setImage:[self image:[NSImage imageNamed:@"ic_call_missed"] withTintedWithColor:[NSColor redColor]]];
             } else {
-                [photoView setImage:[self image:[NSImage imageNamed:@"ic_call_made"]
+                [directionView setImage:[self image:[NSImage imageNamed:@"ic_call_made"]
                             withTintedWithColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]]];
             }
         }
+
+        auto call = qvariant_cast<Call*>(qIdx.data((int)Call::Role::Object));
+
+        NSImageView* photoView = [result viewWithTag:PHOTO_TAG];
+        QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(call, QSize(50,50));
+        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
 
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
         [details setStringValue:qIdx.data((int)Call::Role::FormattedDate).toString().toNSString()];
