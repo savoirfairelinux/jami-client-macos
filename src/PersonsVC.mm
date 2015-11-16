@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004-2015 Savoir-Faire Linux Inc.
+ *  Copyright (C) 2015 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -99,8 +99,16 @@ NSInteger const CALL_BUTTON_TAG = 400;
 - (IBAction)callContact:(id)sender
 {
     if([[treeController selectedNodes] count] > 0) {
-        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+        auto item = [treeController selectedNodes][0];
+        QModelIndex qIdx = [treeController toQIdx:item];
         ContactMethod* m = nil;
+        if (!qIdx.parent().isValid()) {
+            if ([personsView isItemExpanded:item]) {
+                [[personsView animator] collapseItem:item];
+            } else
+                [[personsView animator] expandItem:item];
+            return;
+        }
         if(((NSTreeNode*)[treeController selectedNodes][0]).indexPath.length == 2) {
             // Person
             QVariant var = qIdx.data((int)Person::Role::Object);
@@ -137,11 +145,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
     if(!qIdx.isValid())
         return NO;
 
-    if(!qIdx.parent().isValid()) {
-        return NO;
-    } else {
-        return YES;
-    }
+    return YES;
 }
 
 // -------------------------------------------------------------------------------
@@ -166,7 +170,6 @@ NSInteger const CALL_BUTTON_TAG = 400;
         result = [outlineView makeViewWithIdentifier:@"LetterCell" owner:outlineView];
         [result setWantsLayer:YES];
         [result setLayer:[CALayer layer]];
-        [result.layer setBackgroundColor:[NSColor selectedControlColor].CGColor];
     } else if(((NSTreeNode*)item).indexPath.length == 2) {
         result = [outlineView makeViewWithIdentifier:@"PersonCell" owner:outlineView];
         NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
