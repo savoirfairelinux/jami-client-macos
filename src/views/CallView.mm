@@ -36,6 +36,8 @@
 
 #import <video/configurationproxy.h>
 #import <video/sourcemodel.h>
+#import <media/video.h>
+#import <callmodel.h>
 #import <video/previewmanager.h>
 #import <video/renderer.h>
 #import <video/device.h>
@@ -168,7 +170,12 @@
      --------------------------------------------------------*/
     if ( [sender draggingSource] != self ) {
         NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-        Video::SourceModel::instance().setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
+        QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
+        if (!callIdx.isValid())
+            return;
+
+        if (auto current = CallModel::instance().getCall(callIdx))
+            current->getOutgoingVideoMedia()->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
     }
 
     return YES;
@@ -226,7 +233,12 @@
 - (void) switchInput:(NSMenuItem*) sender
 {
     int index = [contextualMenu indexOfItem:sender];
-    Video::SourceModel::instance().switchTo(Video::DeviceModel::instance().devices()[index]);
+    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
+    if (!callIdx.isValid())
+        return;
+
+    if (auto current = CallModel::instance().getCall(callIdx))
+        current->getOutgoingVideoMedia()->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
 }
 
 - (void) chooseFile:(NSMenuItem*) sender
@@ -246,7 +258,12 @@
     [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
-            Video::SourceModel::instance().setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
+            QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
+            if (!callIdx.isValid())
+                return;
+
+            if (auto current = CallModel::instance().getCall(callIdx))
+                current->getOutgoingVideoMedia()->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
         }
     }];
 
