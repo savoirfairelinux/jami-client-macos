@@ -25,6 +25,8 @@
 
 #import <video/configurationproxy.h>
 #import <video/sourcemodel.h>
+#import <media/video.h>
+#import <callmodel.h>
 #import <video/previewmanager.h>
 #import <video/renderer.h>
 #import <video/device.h>
@@ -161,10 +163,15 @@
      --------------------------------------------------------*/
     if ( [sender draggingSource] != self ) {
         NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-        Video::SourceModel::instance().setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
+        if (auto current = CallModel::instance().selectedCall()) {
+            if (auto outVideo = current->firstMedia<Media::Video>(Media::Media::Direction::OUT)) {
+                outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
+                return YES;
+            }
+        }
     }
 
-    return YES;
+    return NO;
 }
 
 - (void)showContextualMenu:(NSEvent *)theEvent {
@@ -219,7 +226,12 @@
 - (void) switchInput:(NSMenuItem*) sender
 {
     int index = [contextualMenu indexOfItem:sender];
-    Video::SourceModel::instance().switchTo(Video::DeviceModel::instance().devices()[index]);
+    if (auto current = CallModel::instance().selectedCall()) {
+        if (auto outVideo = current->firstMedia<Media::Video>(Media::Media::Direction::OUT)) {
+            outVideo->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
+            return YES;
+        }
+    }
 }
 
 - (void) chooseFile:(NSMenuItem*) sender
@@ -240,7 +252,11 @@
     [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
-            Video::SourceModel::instance().setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
+            if (auto current = CallModel::instance().selectedCall()) {
+                if (auto outVideo = current->firstMedia<Media::Video>(Media::Media::Direction::OUT)) {
+                    outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
+                }
+            }
         }
     }];
 
