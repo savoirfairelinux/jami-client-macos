@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_16d8601c",
+        "filename": "src/views/CallView.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 11
+      },
+      "writtenOn": "2015-12-11T21:59:43Z",
+      "side": 1,
+      "message": "please use firstMedia\u003cMedia::Video\u003e(Media::Direction::OUT), getOutgoingVideoMedia have issues (see the comments in that patch) and is redundant.",
+      "revId": "14e83cf644ed8d6e05342ad8f5090975bb307d6c",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
