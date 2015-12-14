@@ -1,18 +1,18 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Все на передний план";
+"5.title" = "Trazer tudo para frente";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
-"19.title" = "Окно";
+"19.title" = "Janela";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
-"23.title" = "Свернуть";
+"23.title" = "Minimizar";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
-"24.title" = "Окно";
+"24.title" = "Janela";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "Главное окно";
+"29.title" = "Menu principal";
 
 /* Class = "NSMenuItem"; title = "Ring"; ObjectID = "56"; */
 "56.title" = "Ring";
@@ -21,181 +21,181 @@
 "57.title" = "Ring";
 
 /* Class = "NSMenuItem"; title = "About Ring"; ObjectID = "58"; */
-"58.title" = "О программе";
+"58.title" = "Sobre o Ring";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Настройки ...";
+"129.title" = "Preferências...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
-"130.title" = "Услуги";
+"130.title" = "Serviços";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Услуги";
+"131.title" = "Serviços";
 
 /* Class = "NSMenuItem"; title = "Hide Ring"; ObjectID = "134"; */
-"134.title" = "Скрыть";
+"134.title" = "Esconder o Ring";
 
 /* Class = "NSMenuItem"; title = "Quit Ring"; ObjectID = "136"; */
-"136.title" = "Выйти";
+"136.title" = "Sair do Ring";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "Скрыть остальные";
+"145.title" = "Esconder Outros";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Посмотреть всё";
+"150.title" = "Mostrar tudo";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "Остановитъ разговор";
+"195.title" = "Parar a conversa";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "Hачать разговор";
+"196.title" = "Iniciar conversa";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
-"197.title" = "Копировать";
+"197.title" = "Copiar";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "Выбрать все";
+"198.title" = "Selecionar tudo";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
-"199.title" = "Вырезать";
+"199.title" = "Recortar";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
-"200.title" = "Проверка орфографии и грамматики";
+"200.title" = "Ortografia e Gramática";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
-"201.title" = "Проверить документ сейчас";
+"201.title" = "Checar o Documento Agora";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
-"202.title" = "Удалить";
+"202.title" = "Deletar";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
-"203.title" = "Вставить";
+"203.title" = "Colar";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Показать Правописание";
+"204.title" = "Mostrar Ortografia e Gramática";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Редактировать";
+"205.title" = "Editar";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
-"207.title" = "Вернуть";
+"207.title" = "Desfazer";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Найти далее";
+"208.title" = "Procurar próximo";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
-"209.title" = "Найти...";
+"209.title" = "Procurar...";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "210"; */
-"210.title" = "Перейти к выбранному";
+"210.title" = "Ir para a Seleção";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
-"211.title" = "Pечь";
+"211.title" = "Discurso";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "212"; */
-"212.title" = "Pечь";
+"212.title" = "Discurso";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
-"213.title" = "Найти в Предидем";
+"213.title" = "Procurar Anterior";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
-"215.title" = "повторить";
+"215.title" = "Refazer";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
-"216.title" = "Проверка орфографии и грамматики";
+"216.title" = "Ortografia e Gramática";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Редактировать";
+"217.title" = "Editar";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
-"218.title" = "Найти";
+"218.title" = "Procurar";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Проверка орфографии при вводе";
+"219.title" = "Checar Ortografia Enquanto Digita";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
-"220.title" = "Найти";
+"220.title" = "Procurar";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Используйте выделеное для поиска";
+"221.title" = "Usar seleção para buscar";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Увеличить";
+"239.title" = "Ampliar";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "Посмотреть";
+"295.title" = "Visualizar";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "Посмотреть";
+"296.title" = "Visualizar";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "Показать панель инструментов";
+"297.title" = "Mostrar barra de ferramentas";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "Настроить панель инструментов ...";
+"298.title" = "Personalizar barra de ferramentas";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Проверить орфографию";
+"346.title" = "Verificar gramática com ortografia";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "Замена";
+"348.title" = "Substituições";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "Замена";
+"349.title" = "Substituições";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
-"350.title" = "Интелектуально Копировать/Вставить";
+"350.title" = "Copiar/Colar Inteligente";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Умные цитаты";
+"351.title" = "Citações inteligentes";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
-"354.title" = "Умные ссылки";
+"354.title" = "Links inteligente";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
-"450.title" = "Преобразования";
+"450.title" = "Transformações";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "451"; */
-"451.title" = "Преобразования";
+"451.title" = "Transformações";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Переключить на верхний регистр";
+"452.title" = "Aplicar Maiúsculas";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Правильное написание Автоматически";
+"454.title" = "Corrigir ortografia automaticamente";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
-"457.title" = "Показать замены";
+"457.title" = "Mostrar substituições";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Интеллектуальные тире";
+"460.title" = "Traços inteligentes";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "замены текста";
+"462.title" = "Substituição de texto";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Переключить на нижний регистр";
+"465.title" = "Aplicar minúsculas";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
-"466.title" = "писать прописными буквами";
+"466.title" = "Letras Maiúsculas";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "Вставить в текущем стиле";
+"485.title" = "Colar e conferir estilo";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
-"490.title" = "Помощь";
+"490.title" = "Ajuda";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
-"491.title" = "Помощь";
+"491.title" = "Ajuda";
 
 /* Class = "NSMenuItem"; title = "Ring Help"; ObjectID = "492"; */
-"492.title" = "вызвать помощь";
+"492.title" = "Ajuda Ring";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
-"534.title" = "Найти и заменить...";
+"534.title" = "Procurar e substituir...";
 
 /* Class = "NSMenuItem"; title = "Setup Ring"; ObjectID = "589"; */
-"589.title" = "Настроить Ring";
+"589.title" = "Configurar Ring";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Найти обновления...";
+"593.title" = "Verificar atualizações";

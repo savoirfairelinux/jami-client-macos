@@ -30,6 +30,9 @@ else
     option="-i"
 fi
 
+# don't fail on unknown byte sequences
+export LC_CTYPE=C
+
 tx pull -af --minimum-perc=75
 cd ui/
 
