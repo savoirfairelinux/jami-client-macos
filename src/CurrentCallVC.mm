@@ -112,7 +112,7 @@
 
 - (void) updateAllActions
 {
-    for(int i = 0 ; i <= CallModel::instance().userActionModel()->rowCount() ; i++) {
+    for (int i = 0 ; i < CallModel::instance().userActionModel()->rowCount() ; i++) {
         [self updateActionAtIndex:i];
     }
 }
