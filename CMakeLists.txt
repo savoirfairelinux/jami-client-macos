@@ -139,6 +139,7 @@ SET(ringclient_OTHERS
    src/main.mm
    src/AppDelegate.mm
    src/AppDelegate.h
+   src/Constants.h
    src/delegates/ImageManipulationDelegate.mm
    src/delegates/ImageManipulationDelegate.h)
 
