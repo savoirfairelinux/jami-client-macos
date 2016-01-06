@@ -16,7 +16,7 @@ MESSAGE("Building Ring version - " ${RING_VERSION})
 SET(RING_VERSION_NAME "Samuel de Champlain (${RING_VERSION})")
 
 MESSAGE(${RING_VERSION_NAME})
-SET(PROJ_COPYRIGHT " © 2015 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
+SET(PROJ_COPYRIGHT " © 2015-2016 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
 ADD_DEFINITIONS("-std=c++11 -fobjc-arc")
 
@@ -139,6 +139,7 @@ SET(ringclient_OTHERS
    src/main.mm
    src/AppDelegate.mm
    src/AppDelegate.h
+   src/Constants.h
    src/delegates/ImageManipulationDelegate.mm
    src/delegates/ImageManipulationDelegate.h)
 

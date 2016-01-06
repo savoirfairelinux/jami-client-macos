@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+
+
 #import <Cocoa/Cocoa.h>
+
 #import "views/RingOutlineView.h"
 
 @interface HistoryVC : NSViewController <NSOutlineViewDelegate, ContextMenuDelegate>
