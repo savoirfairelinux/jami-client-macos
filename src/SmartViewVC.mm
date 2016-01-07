@@ -33,6 +33,7 @@
 #import <person.h>
 #import <contactmethod.h>
 #import <globalinstances.h>
+#import <phonedirectorymodel.h>
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -42,7 +43,7 @@
 #import "views/ContextualTableCellView.h"
 
 @interface SmartViewVC () <NSOutlineViewDelegate, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
-    BOOL isShowingContacts;
+
     QNSTreeController *treeController;
     NSPopover* addToContactPopover;
 
@@ -69,9 +70,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 {
     NSLog(@"INIT SmartView VC");
 
-    isShowingContacts = false;
     treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance().peopleProxy()];
-
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
@@ -105,9 +104,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
                          if (proxyIdx.isValid()) {
                              [treeController setSelectionQModelIndex:proxyIdx];
 
-                             [showContactsButton setState:NO];
-                             isShowingContacts = NO;
-                             [showHistoryButton setState:NO];
+                             [showContactsButton setHighlighted:NO];
+                             [showHistoryButton setHighlighted:NO];
                              [tabbar selectTabViewItemAtIndex:0];
                              [smartView scrollRowToVisible:proxyIdx.row()];
                          }
@@ -124,6 +122,10 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 -(void) selectRow:(id)sender
 {
+    if ([treeController selectedNodes].count == 0) {
+        RecentModel::instance().selectionModel()->clearCurrentIndex();
+        return;
+    }
     auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
     auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
     RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
@@ -164,53 +166,42 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 }
 
-- (IBAction)showHistory:(NSButton*)sender {
-    if (isShowingContacts) {
-        [showContactsButton setState:NO];
-        isShowingContacts = NO;
-        [tabbar selectTabViewItemAtIndex:1];
-    } else if ([sender state] == NSOffState) {
+- (IBAction)showHistory:(NSButton*)sender
+{
+    [showContactsButton setHighlighted:NO];
+    [showHistoryButton setHighlighted:![sender isHighlighted]];
+
+    if (![sender isHighlighted]) {
         [tabbar selectTabViewItemAtIndex:0];
     } else {
         [tabbar selectTabViewItemAtIndex:1];
     }
 }
 
-- (IBAction)showContacts:(NSButton*)sender {
-    if (isShowingContacts) {
-        [showContactsButton setState:NO];
+- (IBAction)showContacts:(NSButton*)sender
+{
+    [showContactsButton setHighlighted:![sender isHighlighted]];
+    [showHistoryButton setHighlighted:NO];
+
+    if (![sender isHighlighted]) {
         [tabbar selectTabViewItemAtIndex:0];
     } else {
-        [showHistoryButton setState:![sender state]];
         [tabbar selectTabViewItemAtIndex:2];
     }
-
-    isShowingContacts = [sender state];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
 
-// -------------------------------------------------------------------------------
-//	shouldSelectItem:item
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     return YES;
 }
 
-// -------------------------------------------------------------------------------
-//	shouldEditTableColumn:tableColumn:item
-//
-//	Decide to allow the edit of the given outline view "item".
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     return NO;
 }
 
-// -------------------------------------------------------------------------------
-//	outlineViewSelectionDidChange:notification
-// -------------------------------------------------------------------------------
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     if ([treeController selectedNodes].count <= 0) {
@@ -219,8 +210,6 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 }
 
-/* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
- */
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
@@ -229,7 +218,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
         result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-        [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
+        NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
+        [((ContextualTableCellView*) result) setContextualsControls:controls];
 
         if (auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
             [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
@@ -239,6 +229,13 @@ NSInteger const TXT_BUTTON_TAG  =   500;
             [((ContextualTableCellView*) result) setActiveState:NO];
         }
 
+        NSLog(@"COUNT %d", qIdx.data((int)Ring::Role::UnreadTextMessageCount).toInt());
+        NSTextField* unreadCount = [result viewWithTag:TXT_BUTTON_TAG];
+        int unread = qIdx.data((int)Ring::Role::UnreadTextMessageCount).toInt();
+        [unreadCount setHidden:(unread == 0)];
+        [unreadCount.layer setCornerRadius:5.0f];
+        [unreadCount setStringValue:qIdx.data((int)Ring::Role::UnreadTextMessageCount).toString().toNSString()];
+
     } else {
         result = [outlineView makeViewWithIdentifier:@"CallCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
@@ -247,12 +244,22 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+    [displayName setStringValue:qIdx.data((int)Ring::Role::Name).toString().toNSString()];
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
     Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
     QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(50,50));
     [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
     return result;
+}
+
+- (void)outlineView:(NSOutlineView *)outlineView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
+{
+    [outlineView scrollRowToVisible:0];
+}
+
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    return [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
 }
 
 - (IBAction)callClickedAtRow:(id)sender {
@@ -267,52 +274,18 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::REFUSE;
 }
 
-/* View Based OutlineView: See the delegate method -tableView:rowViewForRow: in NSTableView.
-*/
-- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
-{
-    return [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
-}
-
-
-/* View Based OutlineView: This delegate method can be used to know when a new 'rowView' has been added to the table. At this point, you can choose to add in extra views, or modify any properties on 'rowView'.
- */
-- (void)outlineView:(NSOutlineView *)outlineView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
-{
-
-}
-
-/* View Based OutlineView: This delegate method can be used to know when 'rowView' has been removed from the table. The removed 'rowView' may be reused by the table so any additionally inserted views should be removed at this point. A 'row' parameter is included. 'row' will be '-1' for rows that are being deleted from the table and no longer have a valid row, otherwise it will be the valid row that is being removed due to it being moved off screen.
- */
-- (void)outlineView:(NSOutlineView *)outlineView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
-{
-
-}
-
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
     return (((NSTreeNode*)item).indexPath.length == 1) ? 60.0 : 45.0;
 }
 
-- (void) placeCallFromSearchField
+- (void) startConversationFromSearchField
 {
-    Call* c = CallModel::instance().dialingCall();
-    // check for a valid ring hash
-    NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
-    BOOL valid = [[[searchField stringValue] stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
-
-    if(valid && searchField.stringValue.length == 40) {
-        c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:%@",[searchField stringValue]]));
-    } else {
-        c->setDialNumber(QString::fromNSString([searchField stringValue]));
-    }
-
-    c << Call::Action::ACCEPT;
-
-    [searchField setStringValue:@""];
-    RecentModel::instance().peopleProxy()->
-    setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
+    auto cm = PhoneDirectoryModel::instance().getNumber(QString::fromNSString([searchField stringValue]));
+    time_t currentTime;
+    ::time(&currentTime);
+    cm->setLastUsed(currentTime);
 }
 
 - (void) addToContact
@@ -365,7 +338,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 {
     if (commandSelector == @selector(insertNewline:)) {
         if([[searchField stringValue] isNotEqualTo:@""]) {
-            [self placeCallFromSearchField];
+            [self startConversationFromSearchField];
             return YES;
         }
     }
@@ -385,8 +358,10 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (void)controlTextDidChange:(NSNotification *) notification
 {
-    RecentModel::instance().peopleProxy()->
-    setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
+    RecentModel::instance().peopleProxy()->setFilterRole((int)Ring::Role::Name);
+    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
+//    RecentModel::instance().peopleProxy()->
+//    setFilterRegExp(QRegExp(QString::fromNSString([searchField stringValue]), Qt::CaseInsensitive, QRegExp::FixedString));
 }
 
 #pragma mark - ContactLinkedDelegate
