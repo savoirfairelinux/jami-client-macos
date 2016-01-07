@@ -229,7 +229,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
         result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-        [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
+        NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
+        [((ContextualTableCellView*) result) setContextualsControls:controls];
 
         if (auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
             [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
@@ -247,7 +248,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+    [displayName setStringValue:qIdx.data((int)Ring::Role::Name).toString().toNSString()];
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
     Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
     QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(50,50));

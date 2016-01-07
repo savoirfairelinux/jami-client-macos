@@ -111,7 +111,9 @@ SET(ringclient_CONTROLLERS
    src/SmartViewVC.mm
    src/SmartViewVC.h
    src/BrokerVC.mm
-   src/BrokerVC.h)
+   src/BrokerVC.h
+   src/OffCallVC.mm
+   src/OffCallVC.h)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
@@ -162,7 +164,8 @@ SET(ringclient_XIBS
    RingWizard
    CertificateWindow
    PersonLinker
-   Broker)
+   Broker
+   OffCall)
 
 # Icons
 # This part tells CMake where to find and install the file itself
@@ -174,6 +177,7 @@ SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background_tile.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_arrow_back.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hangup.png
@@ -193,6 +197,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_add_participant.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_merge_calls.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/default_user_icon.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_send.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_persons.png

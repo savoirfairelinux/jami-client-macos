@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -17,19 +17,19 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-
 #import <Cocoa/Cocoa.h>
 
-#import "views/CallView.h"
-
-class Call;
-
-@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {
-
-}
+@interface OffCallVC : NSViewController
 
 - (void) initFrame;
 -(void) animateIn;
--(void) animateOut;
+-(IBAction) animateOut:(id)sender;
+
+/**
+ * Message contained in messageField TextField.
+ * This is a KVO method to bind the text with the send Button
+ * if message.length is > 0, button is enabled, otherwise disabled
+ */
+@property (retain) NSString* message;
 
 @end

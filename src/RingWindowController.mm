@@ -17,16 +17,24 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import "RingWindowController.h"
+#import <QuartzCore/QuartzCore.h>
+
+
+//Qt
+#import <QItemSelectionModel>
+#import <QItemSelection>
 
 //LRC
 #import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
+#import <recentmodel.h>
 
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "CurrentCallVC.h"
+#import "OffCallVC.h"
 
 #import "PreferencesWC.h"
 #import "views/NSColor+RingTheme.h"
@@ -37,7 +45,8 @@
     __unsafe_unretained IBOutlet NSTextField *ringIDLabel;
 
     PreferencesWC *preferencesWC;
-    CurrentCallVC* currentVC;
+    CurrentCallVC* currentCallVC;
+    OffCallVC* offlineVC;
 }
 
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
@@ -46,22 +55,53 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
 
-    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    offlineVC = [[OffCallVC alloc] initWithNibName:@"OffCall" bundle:nil];
+
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
-    [callView addSubview:[currentVC view] positioned:NSWindowAbove relativeTo:nil];
+    [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
+    [callView addSubview:[offlineVC view] positioned:NSWindowAbove relativeTo:nil];
 
-    [currentVC initFrame];
+    [currentCallVC initFrame];
+    [offlineVC initFrame];
 
     // Fresh run, we need to make sure RingID appears
     [self updateRingID];
 
+    [self connect];
+}
+
+- (void) connect
+{
     // Update Ring ID label based on account model changes
     QObject::connect(&AccountModel::instance(),
                      &AccountModel::dataChanged,
                      [=] {
                          [self updateRingID];
+                     });
+
+    QObject::connect(RecentModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         auto call = RecentModel::instance().getActiveCall(current);
+                         if(!current.isValid()) {
+                             [offlineVC animateOut:self];
+                             [currentCallVC animateOut];
+                             return;
+                         }
+
+                         if (!call) {
+                             [currentCallVC animateOut];
+                             [offlineVC animateIn];
+                         } else {
+                             [currentCallVC animateIn];
+                             [offlineVC animateOut:self];
+                         }
+                             
+
                      });
 }
 
@@ -98,6 +138,57 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 {
     preferencesWC = [[PreferencesWC alloc] initWithWindowNibName:@"PreferencesWindow"];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
+}
+
+-(void) animateIn: (NSViewController*) controller
+{
+    NSLog(@"animateIn");
+    CGRect frame = CGRectOffset(controller.view.superview.bounds, -controller.view.superview.bounds.size.width, 0);
+    [controller.view setHidden:NO];
+
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setFromValue:[NSValue valueWithPoint:frame.origin]];
+    [animation setToValue:[NSValue valueWithPoint:controller.view.superview.bounds.origin]];
+    [animation setDuration:0.2f];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+    [CATransaction setCompletionBlock:^{
+
+    }];
+    [controller.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    [CATransaction commit];
+}
+
+-(void) cleanUp
+{
+
+}
+
+-(void) animateOut: (NSViewController*) controller
+{
+    NSLog(@"animateOut");
+    if(controller.view.frame.origin.x < 0) {
+        NSLog(@"Already hidden");
+        return;
+    }
+
+    CGRect frame = CGRectOffset(controller.view.frame, -controller.view.frame.size.width, 0);
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setFromValue:[NSValue valueWithPoint:controller.view.frame.origin]];
+    [animation setToValue:[NSValue valueWithPoint:frame.origin]];
+    [animation setDuration:0.2f];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+
+    [CATransaction setCompletionBlock:^{
+        [controller.view setHidden:YES];
+
+    }];
+    [controller.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    [controller.view.layer setPosition:frame.origin];
+    [CATransaction commit];
 }
 
 @end
