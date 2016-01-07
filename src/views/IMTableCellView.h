@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -19,21 +19,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSColor (RingTheme)
+@interface IMTableCellView : NSTableCellView
 
-+ (NSColor*) ringBlue;
-+ (NSColor*) ringBlueWithAlpha:(CGFloat) a;
+@property (nonatomic, strong) IBOutlet NSImageView* photoView;
+@property (nonatomic, strong) IBOutlet NSTextView* msgView;
 
-+ (NSColor*) ringDarkBlue;
-
-+ (NSColor*) ringGreyHighlight;
-+ (NSColor*) ringGreyLight;
-+ (NSColor*) ringDarkGrey;
-
-- (NSColor *)lightenColorByValue:(float)value;
-- (NSColor *)darkenColorByValue:(float)value;
-- (BOOL)isLightColor;
-
-+ (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint;
+- (void) setup;
+- (void) updateWidthConstraint:(CGFloat) newWidth;
 
 @end
