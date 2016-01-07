@@ -22,6 +22,8 @@
 #import <qapplication.h>
 #import <accountmodel.h>
 #import <protocolmodel.h>
+#import <media/recordingmodel.h>
+#import <media/textrecording.h>
 #import <QItemSelectionModel>
 #import <account.h>
 
@@ -79,13 +81,42 @@
                              [self showIncomingNotification:call];
                          }
                      });
+
+
+
+    QObject::connect(&Media::RecordingModel::instance(),
+                     &Media::RecordingModel::newTextMessage,
+                     [=](Media::TextRecording* t, ContactMethod* cm) {
+
+                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
+                         auto qIdx = t->instantTextMessagingModel()->index(t->instantTextMessagingModel()->rowCount()-1, 0);
+
+                         // Don't show a notification if we are sending the text OR window already has focus OR user disabled notifications
+                         if(qvariant_cast<Media::Media::Direction>(qIdx.data((int)Media::TextRecording::Role::Direction)) == Media::Media::Direction::OUT
+                            || self.ringWindowController.window.keyWindow || !shouldNotify)
+                             return;
+
+                         NSUserNotification* notification = [[NSUserNotification alloc] init];
+
+                         NSString* localizedTitle = NSLocalizedString(([NSString stringWithFormat:@"Message from %@",
+                                                                        qIdx.data((int)Media::TextRecording::Role::AuthorDisplayname).toString().toNSString()]),
+                                                                      @"Text message notification title");
+
+                         [notification setTitle:localizedTitle];
+                         [notification setSoundName:NSUserNotificationDefaultSoundName];
+                         [notification setSubtitle:qIdx.data().toString().toNSString()];
+
+                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+                     });
 }
 
 - (void) showIncomingNotification:(Call*) call{
     NSUserNotification *notification = [[NSUserNotification alloc] init];
-    notification.title = @"Incoming call", call->peerName();
-    //notification.informativeText = @"A notification";
-    notification.soundName = NSUserNotificationDefaultSoundName;
+    NSString* localizedTitle = NSLocalizedString(([NSString stringWithFormat:@"Incoming call from %@",
+                                                   call->peerName().toNSString()]),
+                                                 @"Call notification title");
+    [notification setTitle:localizedTitle];
+    [notification setSoundName:NSUserNotificationDefaultSoundName];
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
 }
@@ -99,7 +130,6 @@
 
 - (void) showWizard
 {
-    NSLog(@"Showing wizard");
     if(self.wizard == nil) {
         self.wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
     }
