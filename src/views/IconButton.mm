@@ -34,27 +34,33 @@
 
     if (self.imageInsets == 0)
         self.imageInsets = 5.0f;
+
+
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
 
-    NSColor* backgroundColor6;
-    NSColor* backgroundStrokeColor5;
+    NSColor* backgroundColor;
+    NSColor* backgroundStrokeColor;
+    NSColor* tintColor = [NSColor whiteColor];
 
-    if (self.mouseDown || self.state == NSOnState) {
+    if (self.mouseDown || self.isHighlighted) {
         if (self.highlightColor) {
-            backgroundColor6 = self.highlightColor;
-            backgroundStrokeColor5 = [self.highlightColor darkenColorByValue:0.1];
+            backgroundColor = self.highlightColor;
+            backgroundStrokeColor = [self.highlightColor darkenColorByValue:0.1];
         } else {
-            backgroundColor6 = [self.bgColor darkenColorByValue:0.3];
-            backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.4];
+            backgroundColor = [self.bgColor darkenColorByValue:0.3];
+            backgroundStrokeColor = [self.bgColor darkenColorByValue:0.4];
         }
-
+    } else if (!self.isEnabled) {
+        backgroundColor = [self.bgColor colorWithAlphaComponent:0.5];
+        backgroundStrokeColor = [self.bgColor colorWithAlphaComponent:0.5];
+        tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.5];
     } else {
-        backgroundColor6 = self.bgColor;
-        backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.1];
+        backgroundColor = self.bgColor;
+        backgroundStrokeColor = [self.bgColor darkenColorByValue:0.1];
     }
 
     //// Subframes
@@ -65,9 +71,9 @@
         //// Oval Drawing
         NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5), NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5), floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5), floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5)) xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
 
-        [backgroundColor6 setFill];
+        [backgroundColor setFill];
         [ovalPath fill];
-        [backgroundStrokeColor5 setStroke];
+        [backgroundStrokeColor setStroke];
         [ovalPath setLineWidth: 0.5];
         [ovalPath stroke];
 
@@ -79,14 +85,15 @@
         [self setImagePosition:NSImageOnly];
         auto rect2 = NSInsetRect(dirtyRect, self.imageInsets, self.imageInsets);
 
+        NSImage* iconImage = [NSColor image:self.image tintedWithColor:tintColor];
 
-        [[NSColor image:self.image tintedWithColor:[NSColor whiteColor]]
+        [iconImage
                 drawInRect:rect2
                  fromRect:NSZeroRect
                 operation:NSCompositeSourceOver
                  fraction:1.0
-                respectFlipped:YES
-                         hints:nil];
+           respectFlipped:YES
+                    hints:nil];
 
         [NSGraphicsContext restoreGraphicsState];
     }

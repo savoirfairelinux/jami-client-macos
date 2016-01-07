@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
@@ -48,7 +48,7 @@
                                     <rect key="frame" x="20" y="438" width="635" height="71"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-FB-vig">
-                                            <rect key="frame" x="18" y="39" width="37" height="17"/>
+                                            <rect key="frame" x="18" y="39" width="36" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="pft-oc-ZNh"/>
                                             </constraints>
@@ -123,7 +123,7 @@
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Eoi-B8-iL6" userLabel="Controls">
                                     <rect key="frame" x="20" y="20" width="452" height="67"/>
                                     <subviews>
-                                        <button toolTip="Mute Audio" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="IconButton">
+                                        <button toolTip="Mute Audio" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="IconButton">
                                             <rect key="frame" x="158" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="VhT-NE-Ler"/>
@@ -148,8 +148,8 @@
                                                 <action selector="muteAudio:" target="-2" id="DBk-mG-FLj"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
-                                            <rect key="frame" x="249" y="13" width="40" height="40"/>
+                                        <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
+                                            <rect key="frame" x="258" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="5Yb-Ir-aNP"/>
                                                 <constraint firstAttribute="height" constant="40" id="f6U-Sc-LhF"/>
@@ -173,8 +173,8 @@
                                                 <action selector="toggleRecording:" target="-2" id="gAc-ZJ-9PN"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Toggle chat" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
-                                            <rect key="frame" x="392" y="13" width="40" height="40"/>
+                                        <button toolTip="Toggle chat" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
+                                            <rect key="frame" x="408" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="48U-1h-yAx"/>
                                                 <constraint firstAttribute="height" constant="40" id="EDO-9c-ndD"/>
@@ -207,8 +207,8 @@
                                                 <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
-                                            <rect key="frame" x="113" y="13" width="40" height="40"/>
+                                        <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
+                                            <rect key="frame" x="108" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="QlH-xq-7uO"/>
                                                 <constraint firstAttribute="height" constant="40" id="Xzt-L0-evm"/>
@@ -232,8 +232,8 @@
                                                 <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
-                                            <rect key="frame" x="294" y="13" width="40" height="40"/>
+                                        <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
+                                            <rect key="frame" x="308" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="9zo-pq-mgF"/>
                                                 <constraint firstAttribute="width" constant="40" id="EVF-UM-brL"/>
@@ -257,33 +257,8 @@
                                                 <action selector="toggleTransferView:" target="-2" id="Gxt-lS-qZs"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Add participant" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIZ-mf-moM" customClass="IconButton">
-                                            <rect key="frame" x="342" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="7qu-cd-B7J"/>
-                                                <constraint firstAttribute="width" constant="40" id="U4p-eV-iCZ"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="BOx-wf-CM5">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="toggleAddParticipantView:" target="-2" id="v6X-2r-6im"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
-                                            <rect key="frame" x="64" y="13" width="40" height="40"/>
+                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="58" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="MYx-uE-Bej"/>
                                                 <constraint firstAttribute="height" constant="40" id="dmD-ga-Kwv"/>
@@ -304,8 +279,8 @@
                                                 <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Pick up" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
-                                            <rect key="frame" x="11" y="13" width="40" height="40"/>
+                                        <button toolTip="Pick up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
+                                            <rect key="frame" x="8" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="IFG-ni-9mc"/>
                                                 <constraint firstAttribute="width" constant="40" id="uoL-Wy-Ek2"/>
@@ -326,8 +301,8 @@
                                                 <action selector="accept:" target="-2" id="maS-G8-eY7"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
-                                            <rect key="frame" x="204" y="13" width="40" height="40"/>
+                                        <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
+                                            <rect key="frame" x="208" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="Qiq-Nb-gHN"/>
                                                 <constraint firstAttribute="width" constant="40" id="k3u-dD-eLF"/>
@@ -351,12 +326,53 @@
                                                 <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
                                             </connections>
                                         </button>
+                                        <button toolTip="Add participant" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kIZ-mf-moM" customClass="IconButton">
+                                            <rect key="frame" x="358" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="7qu-cd-B7J"/>
+                                                <constraint firstAttribute="width" constant="40" id="U4p-eV-iCZ"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="BOx-wf-CM5">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="toggleAddParticipantView:" target="-2" id="v6X-2r-6im"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="ChW-kg-Sja" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="006-Cv-8BS"/>
+                                        <constraint firstItem="LVS-yZ-98V" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="6vE-ZU-Hu1"/>
+                                        <constraint firstItem="tQl-cT-0Lb" firstAttribute="leading" secondItem="anb-Y8-JQi" secondAttribute="trailing" constant="10" id="7MF-DQ-Nb8"/>
+                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="leading" secondItem="qgD-3D-nD5" secondAttribute="trailing" constant="10" id="7dg-vy-iyO"/>
                                         <constraint firstItem="qgD-3D-nD5" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="9NT-bT-9wJ"/>
+                                        <constraint firstItem="anb-Y8-JQi" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="H6t-wo-Nap"/>
+                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="Qt4-Bh-Qef"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="385" id="TSJ-9A-brf"/>
+                                        <constraint firstItem="ChW-kg-Sja" firstAttribute="leading" secondItem="oRa-pS-HN2" secondAttribute="trailing" constant="10" id="edH-aj-21j"/>
+                                        <constraint firstItem="tQl-cT-0Lb" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="hgC-Ud-ytJ"/>
                                         <constraint firstItem="qgD-3D-nD5" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="leading" constant="8" id="hhR-YV-cu5"/>
+                                        <constraint firstItem="fmp-x4-Pef" firstAttribute="leading" secondItem="kIZ-mf-moM" secondAttribute="trailing" constant="10" id="jy9-gW-YmT"/>
+                                        <constraint firstItem="oRa-pS-HN2" firstAttribute="leading" secondItem="LVS-yZ-98V" secondAttribute="trailing" constant="10" id="k0b-zB-kn7"/>
+                                        <constraint firstItem="oRa-pS-HN2" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="oGK-mj-vWq"/>
+                                        <constraint firstItem="kIZ-mf-moM" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="rne-sf-Ccc"/>
+                                        <constraint firstItem="fmp-x4-Pef" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="s1T-el-Q6J"/>
+                                        <constraint firstItem="anb-Y8-JQi" firstAttribute="leading" secondItem="Kjq-iM-NBL" secondAttribute="trailing" constant="10" id="t5V-qu-Ssk"/>
+                                        <constraint firstItem="LVS-yZ-98V" firstAttribute="leading" secondItem="tQl-cT-0Lb" secondAttribute="trailing" constant="10" id="v4N-af-SoV"/>
                                         <constraint firstAttribute="height" constant="67" id="ynu-O5-MN8"/>
+                                        <constraint firstItem="kIZ-mf-moM" firstAttribute="leading" secondItem="ChW-kg-Sja" secondAttribute="trailing" constant="10" id="zP9-uu-hCy"/>
                                     </constraints>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="JwW-2h-DyZ" customClass="ITProgressIndicator">
@@ -373,11 +389,33 @@
                                         <constraint firstAttribute="width" constant="175" id="aEv-Tt-tSD"/>
                                     </constraints>
                                 </customView>
-                                <customView hidden="YES" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MNG-eU-B2N">
-                                    <rect key="frame" x="258" y="95" width="158" height="66"/>
+                                <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MNG-eU-B2N">
+                                    <rect key="frame" x="262" y="95" width="150" height="60"/>
                                     <subviews>
-                                        <button toolTip="Join call" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-ji-QId" userLabel="Mute Video" customClass="IconButton">
-                                            <rect key="frame" x="98" y="13" width="40" height="40"/>
+                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mc3-HV-hek" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="20" y="10" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="O83-pI-Vas"/>
+                                                <constraint firstAttribute="height" constant="40" id="tQE-0z-Q3y"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="qBC-R5-W49">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.94509803920000002" green="0.16078431369999999" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="hangUp:" target="-2" id="MMl-em-Nrb"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Join call" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9e8-ji-QId" userLabel="Mute Video" customClass="IconButton">
+                                            <rect key="frame" x="90" y="10" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="2GQ-Ki-ZmL"/>
                                                 <constraint firstAttribute="width" constant="40" id="Ax8-Wg-JeP"/>
@@ -401,31 +439,14 @@
                                                 <action selector="mergeCalls:" target="-2" id="GTH-sR-hNd"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mc3-HV-hek" userLabel="Hang Up" customClass="IconButton">
-                                            <rect key="frame" x="20" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="O83-pI-Vas"/>
-                                                <constraint firstAttribute="height" constant="40" id="tQE-0z-Q3y"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="qBC-R5-W49">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.94509803920000002" green="0.16078431369999999" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="hangUp:" target="-2" id="MMl-em-Nrb"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="width" constant="150" id="SXY-Jn-715"/>
+                                        <constraint firstItem="mc3-HV-hek" firstAttribute="leading" secondItem="MNG-eU-B2N" secondAttribute="leading" constant="20" id="YXb-EB-AW0"/>
+                                        <constraint firstAttribute="trailing" secondItem="9e8-ji-QId" secondAttribute="trailing" constant="20" id="eoW-Jz-mTc"/>
+                                        <constraint firstAttribute="height" constant="60" id="fGj-Ce-2f1"/>
                                         <constraint firstItem="mc3-HV-hek" firstAttribute="centerY" secondItem="MNG-eU-B2N" secondAttribute="centerY" id="m7g-Q2-BpP"/>
+                                        <constraint firstItem="9e8-ji-QId" firstAttribute="centerY" secondItem="MNG-eU-B2N" secondAttribute="centerY" id="nmt-le-y0u"/>
                                     </constraints>
                                 </customView>
                             </subviews>
@@ -489,10 +510,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="459"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <size key="minSize" width="338" height="459"/>
+                                                <size key="minSize" width="323" height="459"/>
                                                 <size key="maxSize" width="463" height="10000000"/>
                                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <size key="minSize" width="338" height="459"/>
+                                                <size key="minSize" width="323" height="459"/>
                                                 <size key="maxSize" width="463" height="10000000"/>
                                             </textView>
                                         </subviews>
@@ -503,7 +524,7 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="eno-qS-nJm">
-                                        <rect key="frame" x="322" y="0.0" width="16" height="459"/>
+                                        <rect key="frame" x="323" y="0.0" width="15" height="459"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                 </scrollView>

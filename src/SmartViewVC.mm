@@ -42,7 +42,7 @@
 #import "views/ContextualTableCellView.h"
 
 @interface SmartViewVC () <NSOutlineViewDelegate, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
-    BOOL isShowingContacts;
+
     QNSTreeController *treeController;
     NSPopover* addToContactPopover;
 
@@ -69,9 +69,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 {
     NSLog(@"INIT SmartView VC");
 
-    isShowingContacts = false;
     treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance().peopleProxy()];
-
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
 
@@ -105,9 +103,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
                          if (proxyIdx.isValid()) {
                              [treeController setSelectionQModelIndex:proxyIdx];
 
-                             [showContactsButton setState:NO];
-                             isShowingContacts = NO;
-                             [showHistoryButton setState:NO];
+                             [showContactsButton setHighlighted:NO];
+                             [showHistoryButton setHighlighted:NO];
                              [tabbar selectTabViewItemAtIndex:0];
                              [smartView scrollRowToVisible:proxyIdx.row()];
                          }
@@ -164,28 +161,28 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 }
 
-- (IBAction)showHistory:(NSButton*)sender {
-    if (isShowingContacts) {
-        [showContactsButton setState:NO];
-        isShowingContacts = NO;
-        [tabbar selectTabViewItemAtIndex:1];
-    } else if ([sender state] == NSOffState) {
+- (IBAction)showHistory:(NSButton*)sender
+{
+    [showContactsButton setHighlighted:NO];
+    [showHistoryButton setHighlighted:![sender isHighlighted]];
+
+    if (![sender isHighlighted]) {
         [tabbar selectTabViewItemAtIndex:0];
     } else {
         [tabbar selectTabViewItemAtIndex:1];
     }
 }
 
-- (IBAction)showContacts:(NSButton*)sender {
-    if (isShowingContacts) {
-        [showContactsButton setState:NO];
+- (IBAction)showContacts:(NSButton*)sender
+{
+    [showContactsButton setHighlighted:![sender isHighlighted]];
+    [showHistoryButton setHighlighted:NO];
+
+    if (![sender isHighlighted]) {
         [tabbar selectTabViewItemAtIndex:0];
     } else {
-        [showHistoryButton setState:![sender state]];
         [tabbar selectTabViewItemAtIndex:2];
     }
-
-    isShowingContacts = [sender state];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -229,7 +226,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
         result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-        [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
+        NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
+        [((ContextualTableCellView*) result) setContextualsControls:controls];
 
         if (auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
             [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
@@ -247,7 +245,7 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     }
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+    [displayName setStringValue:qIdx.data((int)Ring::Role::Name).toString().toNSString()];
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
     Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
     QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(50,50));
