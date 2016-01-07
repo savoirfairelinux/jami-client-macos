@@ -29,5 +29,7 @@ class Call;
 }
 
 - (void) initFrame;
+-(void) animateIn;
+-(void) animateOut;
 
 @end
