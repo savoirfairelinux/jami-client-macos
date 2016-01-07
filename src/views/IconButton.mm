@@ -34,27 +34,35 @@
 
     if (self.imageInsets == 0)
         self.imageInsets = 5.0f;
+
+
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
     [super drawRect:dirtyRect];
 
-    NSColor* backgroundColor6;
-    NSColor* backgroundStrokeColor5;
+    NSColor* backgroundColor;
+    NSColor* backgroundStrokeColor;
+    NSLog(@"DRAWING");
+
+    if (self.mouseDown)
+        NSLog(@"MOUSE DOWN");
+    if (self.state == NSOnState)
+        NSLog(@"ONSTATE");
 
     if (self.mouseDown || self.state == NSOnState) {
         if (self.highlightColor) {
-            backgroundColor6 = self.highlightColor;
-            backgroundStrokeColor5 = [self.highlightColor darkenColorByValue:0.1];
+            backgroundColor = self.highlightColor;
+            backgroundStrokeColor = [self.highlightColor darkenColorByValue:0.1];
         } else {
-            backgroundColor6 = [self.bgColor darkenColorByValue:0.3];
-            backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.4];
+            backgroundColor = [self.bgColor darkenColorByValue:0.3];
+            backgroundStrokeColor = [self.bgColor darkenColorByValue:0.4];
         }
 
     } else {
-        backgroundColor6 = self.bgColor;
-        backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.1];
+        backgroundColor = self.bgColor;
+        backgroundStrokeColor = [self.bgColor darkenColorByValue:0.1];
     }
 
     //// Subframes
@@ -65,9 +73,9 @@
         //// Oval Drawing
         NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5), NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5), floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5), floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5)) xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
 
-        [backgroundColor6 setFill];
+        [backgroundColor setFill];
         [ovalPath fill];
-        [backgroundStrokeColor5 setStroke];
+        [backgroundStrokeColor setStroke];
         [ovalPath setLineWidth: 0.5];
         [ovalPath stroke];
 
@@ -94,6 +102,8 @@
 
 -(void)mouseDown:(NSEvent *)theEvent
 {
+    NSLog(@"==> mouseDown");
+
     self.mouseDown = TRUE;
     [self setNeedsDisplay:YES];
 
@@ -101,6 +111,8 @@
 
     self.mouseDown = FALSE;
     [self setNeedsDisplay:YES];
+
+        NSLog(@" mouseDown ==>");
 }
 
 @end

@@ -229,7 +229,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
         result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-        [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
+        NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
+        [((ContextualTableCellView*) result) setContextualsControls:controls];
 
         if (auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
             [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
@@ -265,6 +266,11 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     NSInteger row = [smartView rowForView:sender];
     [smartView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
     CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::REFUSE;
+}
+
+- (IBAction)chatClickedAtRow:(id)sender {
+    NSInteger row = [smartView rowForView:sender];
+    [smartView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 }
 
 /* View Based OutlineView: See the delegate method -tableView:rowViewForRow: in NSTableView.

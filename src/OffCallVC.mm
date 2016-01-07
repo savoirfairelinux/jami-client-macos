@@ -1,0 +1,283 @@
+/*
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
+ */
+
+#import "OffCallVC.h"
+
+#import <QItemSelectionModel>
+#import <qstring.h>
+#import <QPixmap>
+#import <QtMacExtras/qmacfunctions.h>
+
+#import <media/media.h>
+#import <recentmodel.h>
+#import <person.h>
+#import <contactmethod.h>
+#import <media/text.h>
+#import <media/textrecording.h>
+#import <callmodel.h>
+#import <globalinstances.h>
+
+#import "views/IconButton.h"
+#import "views/NSColor+RingTheme.h"
+#import "QNSTreeController.h"
+#import "delegates/ImageManipulationDelegate.h"
+
+#import <QuartzCore/QuartzCore.h>
+
+@interface MediaConnectionsHolder2 : NSObject
+
+@property QMetaObject::Connection newMediaAdded;
+@property QMetaObject::Connection newMessage;
+
+@end
+
+@implementation MediaConnectionsHolder2
+
+@end
+
+@interface OffCallVC () <NSOutlineViewDelegate> {
+
+    __unsafe_unretained IBOutlet IconButton* backButton;
+    __unsafe_unretained IBOutlet NSTextField* messageField;
+    MediaConnectionsHolder2* mediaHolder;
+    QVector<ContactMethod*> contactMethods;
+
+    QNSTreeController *treeController;
+
+    __unsafe_unretained IBOutlet IconButton* sendButton;
+    __unsafe_unretained IBOutlet NSOutlineView* conversationView;
+    __unsafe_unretained IBOutlet NSPopUpButton* contactMethodsPopupButton;
+}
+@end
+
+@implementation OffCallVC
+
+// Tags for views
+NSInteger const IMAGE_TAG       =   100;
+NSInteger const MESSAGE_TAG     =   200;
+NSInteger const TIMESTAMP_TAG   =   300;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do view setup here.
+    [self.view setWantsLayer:YES];
+    [self.view setLayer:[CALayer layer]];
+    [self.view.layer setBackgroundColor:[NSColor ringDarkGrey].CGColor];
+
+    [self setupChat];
+
+}
+
+- (void) initFrame
+{
+    [self.view setFrame:self.view.superview.bounds];
+    [self.view setHidden:YES];
+    self.view.layer.position = self.view.frame.origin;
+}
+
+- (void) setupChat
+{
+    QObject::connect(RecentModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+
+                         contactMethods = RecentModel::instance().getContactMethods(current);
+                         if (contactMethods.isEmpty()) {
+                             return ;
+                         }
+
+                         [contactMethodsPopupButton removeAllItems];
+                         for (auto cm : contactMethods) {
+                             [contactMethodsPopupButton addItemWithTitle:cm->uri().toNSString()];
+                         }
+
+                         // Select first cm
+                         [contactMethodsPopupButton selectItemAtIndex:0];
+                         [self itemChanged:contactMethodsPopupButton];
+
+
+                     });
+
+    QObject::disconnect(mediaHolder.newMediaAdded);
+    QObject::disconnect(mediaHolder.newMessage);
+
+}
+
+- (IBAction)sendMessage:(id)sender {
+
+    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
+    Call* call = CallModel::instance().getCall(callIdx);
+
+    /* make sure there is text to send */
+    NSString* text = self.message;
+    if (text && text.length > 0) {
+        QMap<QString, QString> messages;
+        messages["text/plain"] = QString::fromNSString(text);
+        call->addOutgoingMedia<Media::Text>()->send(messages);
+        // Empty the text after sending it
+        //[self.messageField setStringValue:@""];
+        //self.message = @"";
+    }
+}
+
+
+# pragma private IN/OUT animations
+
+-(void) animateIn
+{
+    NSLog(@"animateIn");
+    CGRect frame = CGRectOffset(self.view.superview.bounds, -self.view.superview.bounds.size.width, 0);
+    [self.view setHidden:NO];
+
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setFromValue:[NSValue valueWithPoint:frame.origin]];
+    [animation setToValue:[NSValue valueWithPoint:self.view.superview.bounds.origin]];
+    [animation setDuration:0.2f];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+    [CATransaction setCompletionBlock:^{
+
+    }];
+    [self.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    [CATransaction commit];
+}
+
+-(void) cleanUp
+{
+    [backButton setState:NSOffState];
+    [backButton setState:NSOffState];
+
+}
+
+-(IBAction) animateOut:(id)sender
+{
+    NSLog(@"animateOut");
+    if(self.view.frame.origin.x < 0) {
+        NSLog(@"Already hidden");
+        return;
+    }
+
+    CGRect frame = CGRectOffset(self.view.frame, -self.view.frame.size.width, 0);
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setFromValue:[NSValue valueWithPoint:self.view.frame.origin]];
+    [animation setToValue:[NSValue valueWithPoint:frame.origin]];
+    [animation setDuration:0.2f];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+
+    [CATransaction setCompletionBlock:^{
+        [self.view setHidden:YES];
+        // first make sure everything is disconnected
+        [self cleanUp];
+    }];
+    [self.view.layer addAnimation:animation forKey:animation.keyPath];
+
+    [self.view.layer setPosition:frame.origin];
+    [CATransaction commit];
+}
+
+#pragma mark - NSOutlineViewDelegate methods
+
+// -------------------------------------------------------------------------------
+//	shouldSelectItem:item
+// -------------------------------------------------------------------------------
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
+{
+    return YES;
+}
+
+// -------------------------------------------------------------------------------
+//	shouldEditTableColumn:tableColumn:item
+//
+//	Decide to allow the edit of the given outline view "item".
+// -------------------------------------------------------------------------------
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+    return NO;
+}
+
+// -------------------------------------------------------------------------------
+//	outlineViewSelectionDidChange:notification
+// -------------------------------------------------------------------------------
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+
+}
+
+/* View Based OutlineView: See the delegate method -tableView:viewForTableColumn:row: in NSTableView.
+ */
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
+
+
+    auto dir = qvariant_cast<Media::Media::Direction>(qIdx.data((int)Media::TextRecording::Role::Direction));
+    NSTableCellView* result;
+
+    if (dir == Media::Media::Direction::IN) {
+        result = [outlineView makeViewWithIdentifier:@"LeftMessageView" owner:self];
+    } else {
+        result = [outlineView makeViewWithIdentifier:@"RightMessageView" owner:self];
+    }
+    // Get an existing cell with the MyView identifier if it exists
+
+
+    // result is now guaranteed to be valid, either as a reused cell
+    // or as a new cell, so set the stringValue of the cell to the
+    // nameArray value at row
+    NSTextField* messageText = [result viewWithTag:MESSAGE_TAG];
+    [messageText setStringValue:qIdx.data((int)Qt::DisplayRole).toString().toNSString()];
+    
+    NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
+    Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
+    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(50,50));
+    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    
+    return result;
+}
+
+#pragma mark - NSTextFieldDelegate
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
+{
+    if (commandSelector == @selector(insertNewline:) && self.message.length > 0) {
+        [self sendMessage:nil];
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - NSPopUpButton item selection
+
+- (IBAction)itemChanged:(id)sender {
+    NSInteger index = [(NSPopUpButton *)sender indexOfSelectedItem];
+
+    if (auto txtRecording = contactMethods.at(index)->textRecording()) {
+        treeController = [[QNSTreeController alloc] initWithQModel:txtRecording->instantMessagingModel()];
+        [treeController setAvoidsEmptySelection:NO];
+        [treeController setChildrenKeyPath:@"children"];
+        [conversationView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
+        [conversationView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
+        [conversationView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    }
+}
+
+
+@end

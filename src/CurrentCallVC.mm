@@ -245,7 +245,6 @@
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          auto call = RecentModel::instance().getActiveCall(current);
                          if(!current.isValid() || !call) {
-                             [self animateOut];
                              return;
                          }
 
@@ -258,7 +257,6 @@
                          [self collapseRightView];
                          [self updateCall];
                          [self updateAllActions];
-                         [self animateOut];
                      });
 
     QObject::connect(CallModel::instance().userActionModel(),
