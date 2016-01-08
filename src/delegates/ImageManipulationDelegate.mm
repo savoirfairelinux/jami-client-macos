@@ -205,4 +205,28 @@ namespace Interfaces {
         return QVariant();
     }
 
+    QVariant ImageManipulationDelegate::decorationRole(const QModelIndex& index)
+    {
+        Q_UNUSED(index)
+        return QVariant();
+    }
+
+    QVariant ImageManipulationDelegate::decorationRole(const Call* c)
+    {
+        Q_UNUSED(c)
+        return QVariant();
+    }
+
+    QVariant ImageManipulationDelegate::decorationRole(const ContactMethod* cm)
+    {
+        Q_UNUSED(cm)
+        return QVariant();
+    }
+
+    QVariant ImageManipulationDelegate::decorationRole(const Person* p)
+    {
+        Q_UNUSED(p)
+        return QVariant();
+    }
+
 } // namespace Interfaces
