@@ -138,6 +138,7 @@
 
     [personLabel setStringValue:callIdx.data(Qt::DisplayRole).toString().toNSString()];
     [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
+    [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
 
     auto contactmethod = qvariant_cast<Call*>(callIdx.data(static_cast<int>(Call::Role::Object)))->peerContactMethod();
     BOOL shouldShow = (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder());
@@ -152,7 +153,6 @@
     [self.controlsPanel setHidden:current->hasParentCall()];
     [self.joinPanel setHidden:!current->hasParentCall()];
 
-    [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
     switch (state) {
         case Call::State::DIALING:
             [loadingIndicator setHidden:NO];
@@ -273,7 +273,16 @@
     QObject::connect(&CallModel::instance(),
                      &CallModel::callStateChanged,
                      [self](Call* c, Call::State state) {
-                         [self updateCall];
+                         auto current = CallModel::instance().selectionModel()->currentIndex();
+                         if (!current.isValid())
+                             [self animateOut];
+                         else if (CallModel::instance().getIndex(c) == current) {
+                             if (c->state() == Call::State::OVER) {
+                                 [self animateOut];
+                             } else {
+                                 [self updateCall];
+                             }
+                         }
     });
 }
 
@@ -485,6 +494,11 @@
     [self.chatButton setState:NSOffState];
     [self.mergeCallsButton setState:NSOffState];
     [self collapseRightView];
+
+    [personLabel setStringValue:@""];
+    [timeSpentLabel setStringValue:@""];
+    [stateLabel setStringValue:@""];
+    [self.addContactButton setHidden:YES];
 }
 
 -(void) animateOut
