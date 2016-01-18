@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -19,21 +19,17 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSColor (RingTheme)
+@interface ConversationVC : NSViewController
 
-+ (NSColor*) ringBlue;
-+ (NSColor*) ringBlueWithAlpha:(CGFloat) a;
+-(void) initFrame;
+-(void) animateIn;
+-(IBAction) animateOut:(id)sender;
 
-+ (NSColor*) ringDarkBlue;
-
-+ (NSColor*) ringGreyHighlight;
-+ (NSColor*) ringGreyLight;
-+ (NSColor*) ringDarkGrey;
-
-- (NSColor *)lightenColorByValue:(float)value;
-- (NSColor *)darkenColorByValue:(float)value;
-- (BOOL)isLightColor;
-
-+ (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint;
+/**
+ * Message contained in messageField TextField.
+ * This is a KVO method to bind the text with the send Button
+ * if message.length is > 0, button is enabled, otherwise disabled
+ */
+@property (retain) NSString* message;
 
 @end
