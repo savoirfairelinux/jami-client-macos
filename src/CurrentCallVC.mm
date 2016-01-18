@@ -124,7 +124,7 @@
     NSButton* a = actionHash[(int) action];
     if (a) {
         [a setHidden:!(idx.flags() & Qt::ItemIsEnabled)];
-        [a setState:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? NSOnState : NSOffState];
+        [a setHighlighted:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? YES : NO];
     }
 }
 
@@ -245,7 +245,6 @@
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          auto call = RecentModel::instance().getActiveCall(current);
                          if(!current.isValid() || !call) {
-                             [self animateOut];
                              return;
                          }
 
@@ -258,7 +257,6 @@
                          [self collapseRightView];
                          [self updateCall];
                          [self updateAllActions];
-                         [self animateOut];
                      });
 
     QObject::connect(CallModel::instance().userActionModel(),
