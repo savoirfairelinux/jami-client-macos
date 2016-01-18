@@ -37,6 +37,7 @@
 #import "views/IMTableCellView.h"
 #import "views/NSColor+RingTheme.h"
 #import "QNSTreeController.h"
+#import "INDSequentialTextSelectionManager.h"
 #import "delegates/ImageManipulationDelegate.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -58,6 +59,8 @@
     __unsafe_unretained IBOutlet NSPopUpButton* contactMethodsPopupButton;
 }
 
+@property (nonatomic, strong, readonly) INDSequentialTextSelectionManager* selectionManager;
+
 @end
 
 @implementation ConversationVC
@@ -72,6 +75,7 @@
 
     [sendPanel setWantsLayer:YES];
     [sendPanel setLayer:[CALayer layer]];
+    _selectionManager = [[INDSequentialTextSelectionManager alloc] init];
 
     [self setupChat];
 
@@ -94,6 +98,8 @@
                          if (contactMethods.isEmpty()) {
                              return ;
                          }
+
+                         [self.selectionManager unregisterAllTextViews];
 
                          [contactMethodsPopupButton removeAllItems];
                          for (auto cm : contactMethods) {
@@ -241,6 +247,10 @@
 
 - (void)outlineView:(NSOutlineView *)outlineView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
 {
+    if (IMTableCellView* cellView = [outlineView viewAtColumn:0 row:row makeIfNecessary:NO]) {
+        [self.selectionManager registerTextView:cellView.msgView withUniqueIdentifier:@(row).stringValue];
+    }
+
     if (auto txtRecording = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem])->textRecording())
         txtRecording->setAllRead();
 }

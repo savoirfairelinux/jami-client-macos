@@ -144,6 +144,8 @@ SET(ringclient_OTHERS
    src/AppDelegate.mm
    src/AppDelegate.h
    src/Constants.h
+   src/INDSequentialTextSelectionManager.mm
+   src/INDSequentialTextSelectionManager.h
    src/delegates/ImageManipulationDelegate.mm
    src/delegates/ImageManipulationDelegate.h)
 
