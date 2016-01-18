@@ -17,16 +17,24 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import "RingWindowController.h"
+#import <QuartzCore/QuartzCore.h>
+
+
+//Qt
+#import <QItemSelectionModel>
+#import <QItemSelection>
 
 //LRC
 #import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
+#import <recentmodel.h>
 
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "CurrentCallVC.h"
+#import "ConversationVC.h"
 
 #import "PreferencesWC.h"
 #import "views/NSColor+RingTheme.h"
@@ -37,7 +45,8 @@
     __unsafe_unretained IBOutlet NSTextField *ringIDLabel;
 
     PreferencesWC *preferencesWC;
-    CurrentCallVC* currentVC;
+    CurrentCallVC* currentCallVC;
+    ConversationVC* offlineVC;
 }
 
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
@@ -46,22 +55,51 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
 
-    currentVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
+
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    [[currentVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
-    [callView addSubview:[currentVC view] positioned:NSWindowAbove relativeTo:nil];
+    [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
+    [callView addSubview:[offlineVC view] positioned:NSWindowAbove relativeTo:nil];
 
-    [currentVC initFrame];
+    [currentCallVC initFrame];
+    [offlineVC initFrame];
 
     // Fresh run, we need to make sure RingID appears
     [self updateRingID];
 
+    [self connect];
+}
+
+- (void) connect
+{
     // Update Ring ID label based on account model changes
     QObject::connect(&AccountModel::instance(),
                      &AccountModel::dataChanged,
                      [=] {
                          [self updateRingID];
+                     });
+
+    QObject::connect(RecentModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         auto call = RecentModel::instance().getActiveCall(current);
+                         if(!current.isValid()) {
+                             [offlineVC animateOut:self];
+                             [currentCallVC animateOut];
+                             return;
+                         }
+
+                         if (!call) {
+                             [currentCallVC animateOut];
+                             [offlineVC animateIn];
+                         } else {
+                             [currentCallVC animateIn];
+                             [offlineVC animateOut:self];
+                         }
                      });
 }
 

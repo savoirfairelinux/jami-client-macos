@@ -40,53 +40,63 @@
 {
     [super drawRect:dirtyRect];
 
-    NSColor* backgroundColor6;
-    NSColor* backgroundStrokeColor5;
+    NSColor* backgroundColor;
+    NSColor* backgroundStrokeColor;
+    NSColor* tintColor = [NSColor whiteColor];
 
-    if (self.mouseDown || self.state == NSOnState) {
+    if (self.mouseDown || self.isHighlighted) {
         if (self.highlightColor) {
-            backgroundColor6 = self.highlightColor;
-            backgroundStrokeColor5 = [self.highlightColor darkenColorByValue:0.1];
+            backgroundColor = self.highlightColor;
+            backgroundStrokeColor = [self.highlightColor darkenColorByValue:0.1];
         } else {
-            backgroundColor6 = [self.bgColor darkenColorByValue:0.3];
-            backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.4];
+            backgroundColor = [self.bgColor darkenColorByValue:0.3];
+            backgroundStrokeColor = [self.bgColor darkenColorByValue:0.4];
         }
-
+    } else if (!self.isEnabled) {
+        backgroundColor = [self.bgColor colorWithAlphaComponent:0.7];
+        backgroundStrokeColor = [self.bgColor colorWithAlphaComponent:0.7];
+        tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
     } else {
-        backgroundColor6 = self.bgColor;
-        backgroundStrokeColor5 = [self.bgColor darkenColorByValue:0.1];
+        backgroundColor = self.bgColor;
+        backgroundStrokeColor = [self.bgColor darkenColorByValue:0.1];
     }
 
     //// Subframes
-    NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5, NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 0.5, floor(NSWidth(dirtyRect) * 0.96667) - floor(NSWidth(dirtyRect) * 0.03333), floor(NSHeight(dirtyRect) * 0.96667) - floor(NSHeight(dirtyRect) * 0.03333));
+    NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5,
+                              NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 0.5,
+                              floor(NSWidth(dirtyRect) * 0.96667) - floor(NSWidth(dirtyRect) * 0.03333),
+                              floor(NSHeight(dirtyRect) * 0.96667) - floor(NSHeight(dirtyRect) * 0.03333));
 
     //// Group
     {
         //// Oval Drawing
-        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5), NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5), floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5), floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5)) xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
+        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:
+                                  NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5),
+                                             NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5),
+                                             floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5),
+                                             floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5))
+                                                                 xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
 
-        [backgroundColor6 setFill];
+        [backgroundColor setFill];
         [ovalPath fill];
-        [backgroundStrokeColor5 setStroke];
+        [backgroundStrokeColor setStroke];
         [ovalPath setLineWidth: 0.5];
         [ovalPath stroke];
 
         [NSGraphicsContext saveGraphicsState];
 
-        NSBezierPath *path = [NSBezierPath bezierPathWithRect:dirtyRect];
+        NSBezierPath* path = [NSBezierPath bezierPathWithRect:dirtyRect];
         [path addClip];
 
         [self setImagePosition:NSImageOnly];
-        auto rect2 = NSInsetRect(dirtyRect, self.imageInsets, self.imageInsets);
+        auto rect = NSInsetRect(dirtyRect, self.imageInsets, self.imageInsets);
 
-
-        [[NSColor image:self.image tintedWithColor:[NSColor whiteColor]]
-                drawInRect:rect2
+        [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
                  fromRect:NSZeroRect
                 operation:NSCompositeSourceOver
                  fraction:1.0
-                respectFlipped:YES
-                         hints:nil];
+           respectFlipped:YES
+                    hints:nil];
 
         [NSGraphicsContext restoreGraphicsState];
     }
