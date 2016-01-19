@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1a9dcd25_c0ba25e1",
+        "filename": "src/ConversationVC.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_c026a5ba",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 2
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a9dcd25_e02ba180",
         "filename": "src/ConversationVC.mm",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2016-01-19T17:29:15Z",
       "side": 1,
       "message": "You do the same thing twice",
+      "range": {
+        "startLine": 125,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 27
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_e0bf21cf",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_e02ba180",
       "range": {
         "startLine": 125,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1a9dcd25_80b41df3",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_80209d9c",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 24
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a9dcd25_603791e4",
         "filename": "src/ConversationVC.mm",
         "patchSetId": 10
@@ -82,6 +154,30 @@
       "writtenOn": "2016-01-19T17:29:15Z",
       "side": 1,
       "message": "Is it necessary to set it even if you don t do anything in it ?",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 156,
+        "endChar": 7
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_a0b919eb",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_603791e4",
       "range": {
         "startLine": 154,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "1a9dcd25_40ce1585",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_a02599ac",
+      "range": {
+        "startLine": 164,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 25
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a9dcd25_403a95ce",
         "filename": "src/ConversationVC.mm",
         "patchSetId": 10
@@ -128,6 +248,30 @@
       "writtenOn": "2016-01-19T17:29:15Z",
       "side": 1,
       "message": "Maybe delete that ?",
+      "range": {
+        "startLine": 166,
+        "startChar": 8,
+        "endLine": 166,
+        "endChar": 33
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_60cb1173",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_403a95ce",
       "range": {
         "startLine": 166,
         "startChar": 8,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "1a9dcd25_00c80d73",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Not implemented yet for me :(",
+      "parentUuid": "1a9dcd25_00348ddc",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 234,
+        "endChar": 88
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a9dcd25_203189ec",
         "filename": "src/CurrentCallVC.h",
         "patchSetId": 10
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "1a9dcd25_20c5095b",
+        "filename": "src/CurrentCallVC.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_203189ec",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 2
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a9dcd25_c04d4574",
         "filename": "src/views/IMTableCellView.mm",
         "patchSetId": 10
@@ -197,6 +389,30 @@
       "writtenOn": "2016-01-19T17:29:15Z",
       "side": 1,
       "message": "SPACEEEEEEEEEEEEEEEEEE",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 4
+      },
+      "revId": "fb250f27034ee3cc588edf7b459368bb310ff8eb",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_e0a641c1",
+        "filename": "src/views/IMTableCellView.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-01-19T19:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a9dcd25_c04d4574",
       "range": {
         "startLine": 51,
         "startChar": 0,
