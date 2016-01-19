@@ -83,6 +83,13 @@
                      });
 
 
+    QObject::connect(&Media::RecordingModel::instance(),
+                     &Media::RecordingModel::unreadMessagesCountChanged,
+                     [=](int unreadCount) {
+                         NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
+                         NSString* label = unreadCount ? [NSString stringWithFormat:@"%d", unreadCount]: @"";
+                         [tile setBadgeLabel:label];
+                     });
 
     QObject::connect(&Media::RecordingModel::instance(),
                      &Media::RecordingModel::newTextMessage,
