@@ -61,7 +61,9 @@ NSInteger const NICKNAME_TAG        = 1;
     [self.window makeKeyAndOrderFront:nil];
     [self.window setLevel:NSStatusWindowLevel];
     [self.window makeMainWindow];
-    if(![self checkForRingAccount]) {
+    AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+
+    if(![appDelegate checkForRingAccount]) {
         accountToCreate = AccountModel::instance().add("", Account::Protocol::RING);
     } else {
         [indicationLabel setStringValue:NSLocalizedString(@"Ring is already ready to work",
@@ -73,18 +75,6 @@ NSInteger const NICKNAME_TAG        = 1;
     [caListPathControl setDelegate:self];
     [certificatePathControl setDelegate:self];
     [pvkPathControl setDelegate:self];
-}
-
-- (BOOL) checkForRingAccount
-{
-    for (int i = 0 ; i < AccountModel::instance().rowCount() ; ++i) {
-        QModelIndex idx = AccountModel::instance().index(i);
-        Account* acc = AccountModel::instance().getAccountByModelIndex(idx);
-        if(acc->protocol() == Account::Protocol::RING) {
-            return YES;
-        }
-    }
-    return false;
 }
 
 - (void) displayHash:(NSString* ) hash
@@ -323,7 +313,9 @@ NSInteger const NICKNAME_TAG        = 1;
 - (void)windowWillClose:(NSNotification *)notification
 {
     AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    [appDelegate showMainWindow];
+    if ([appDelegate checkForRingAccount]) {
+        [appDelegate showMainWindow];
+    }
 }
 
 @end
