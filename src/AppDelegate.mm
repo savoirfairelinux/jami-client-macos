@@ -140,7 +140,7 @@
     if(self.wizard == nil) {
         self.wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
     }
-    [self.wizard.window orderFront:self];
+    [self.wizard.window makeKeyAndOrderFront:self];
 }
 
 - (void) showMainWindow
@@ -148,9 +148,6 @@
     if(self.ringWindowController == nil) {
         self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
     }
-
-    self.wizard = nil;
-
     [self.ringWindowController.window makeKeyAndOrderFront:self];
 }
 
@@ -160,7 +157,7 @@
     for (int i = 0 ; i < AccountModel::instance().rowCount() ; ++i) {
         QModelIndex idx = AccountModel::instance().index(i);
         Account* acc = AccountModel::instance().getAccountByModelIndex(idx);
-        if(acc->protocol() == Account::Protocol::RING) {
+        if(acc->protocol() == Account::Protocol::RING && !acc->isNew()) {
             if (acc->displayName().isEmpty())
                 acc->setDisplayName(acc->alias());
             foundRingAcc = YES;
@@ -222,20 +219,25 @@
 
 - (void)handleQuitEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
 {
-    delete CallModel::instance().QObject::parent();
-    [[NSApplication sharedApplication] terminate:self];
+    [self cleanExit];
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification
 {
+    [self cleanExit];
+}
+
+- (void) cleanExit
+{
+    [self.wizard close];
+    [self.ringWindowController close];
     delete CallModel::instance().QObject::parent();
     [[NSApplication sharedApplication] terminate:self];
 }
 
 #if ENABLE_SPARKLE
 
-#pragma mark -
-#pragma mark Sparkle delegate
+#pragma mark - Sparkle delegate
 
 - (void)updater:(SUUpdater *)updater willInstallUpdate:(SUAppcastItem *)update
 {
