@@ -160,7 +160,7 @@
     for (int i = 0 ; i < AccountModel::instance().rowCount() ; ++i) {
         QModelIndex idx = AccountModel::instance().index(i);
         Account* acc = AccountModel::instance().getAccountByModelIndex(idx);
-        if(acc->protocol() == Account::Protocol::RING) {
+        if(acc->protocol() == Account::Protocol::RING && !acc->isNew()) {
             if (acc->displayName().isEmpty())
                 acc->setDisplayName(acc->alias());
             foundRingAcc = YES;
