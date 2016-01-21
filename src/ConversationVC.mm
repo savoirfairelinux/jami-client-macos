@@ -44,7 +44,6 @@
 
 @interface ConversationVC () <NSOutlineViewDelegate> {
 
-    __unsafe_unretained IBOutlet IconButton* backButton;
     __unsafe_unretained IBOutlet NSTextField* messageField;
     QVector<ContactMethod*> contactMethods;
     NSMutableString* textSelection;
@@ -141,6 +140,11 @@
     }
 }
 
+- (IBAction)backPressed:(id)sender {
+    [conversationView setDelegate:nil];
+    RecentModel::instance().selectionModel()->clearCurrentIndex();
+}
+
 # pragma mark private IN/OUT animations
 
 -(void) animateIn
@@ -159,7 +163,7 @@
     [CATransaction commit];
 }
 
--(IBAction) animateOut:(id)sender
+-(void) animateOut
 {
     if(self.view.frame.origin.x < 0) {
         return;
