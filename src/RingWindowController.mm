@@ -88,7 +88,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          auto call = RecentModel::instance().getActiveCall(current);
                          if(!current.isValid()) {
-                             [offlineVC animateOut:self];
+                             [offlineVC animateOut];
                              [currentCallVC animateOut];
                              return;
                          }
@@ -98,7 +98,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                              [offlineVC animateIn];
                          } else {
                              [currentCallVC animateIn];
-                             [offlineVC animateOut:self];
+                             [offlineVC animateOut];
                          }
                      });
 }

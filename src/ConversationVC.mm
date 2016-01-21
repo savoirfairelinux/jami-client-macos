@@ -44,7 +44,6 @@
 
 @interface ConversationVC () <NSOutlineViewDelegate> {
 
-    __unsafe_unretained IBOutlet IconButton* backButton;
     __unsafe_unretained IBOutlet NSTextField* messageField;
     QVector<ContactMethod*> contactMethods;
     NSMutableString* textSelection;
@@ -141,6 +140,11 @@
     }
 }
 
+- (IBAction)backPressed:(id)sender {
+    [conversationView setDelegate:nil];
+    RecentModel::instance().selectionModel()->clearCurrentIndex();
+}
+
 # pragma mark private IN/OUT animations
 
 -(void) animateIn
@@ -159,7 +163,7 @@
     [CATransaction commit];
 }
 
--(IBAction) animateOut:(id)sender
+-(void) animateOut
 {
     if(self.view.frame.origin.x < 0) {
         return;
@@ -359,6 +363,7 @@
         treeController = [[QNSTreeController alloc] initWithQModel:txtRecording->instantMessagingModel()];
         [treeController setAvoidsEmptySelection:NO];
         [treeController setChildrenKeyPath:@"children"];
+        [conversationView setDelegate:self];
         [conversationView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
         [conversationView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
         [conversationView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
