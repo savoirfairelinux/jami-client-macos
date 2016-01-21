@@ -29,6 +29,7 @@
 
 //LRC
 #import <personmodel.h>
+#import <recentmodel.h>
 #import <categorizedhistorymodel.h>
 #import <localhistorycollection.h>
 #import <numbercategorymodel.h>
@@ -71,6 +72,7 @@ int main(int argc, const char *argv[]) {
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
     PersonModel::instance().addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
+    RecentModel::instance(); // Make sure RecentModel is initialized before showing UI
 
     return NSApplicationMain(argc, argv);
 }
