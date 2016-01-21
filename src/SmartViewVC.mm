@@ -98,8 +98,10 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     QObject::connect(RecentModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if(!current.isValid())
+                         if(!current.isValid()) {
+                             [smartView deselectAll:nil];
                              return;
+                         }
 
                          auto proxyIdx = RecentModel::instance().peopleProxy()->mapFromSource(current);
                          if (proxyIdx.isValid()) {

@@ -6,7 +6,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConversationVC">
             <connections>
-                <outlet property="backButton" destination="ooq-vs-Xt1" id="BKE-0Z-BFy"/>
                 <outlet property="contactMethodsPopupButton" destination="xdB-aI-PSs" id="BZW-FI-WpH"/>
                 <outlet property="conversationTitle" destination="ucx-6g-eJw" id="40T-pM-nix"/>
                 <outlet property="conversationView" destination="bOO-CW-S21" id="NkS-gm-3Qn"/>
@@ -160,7 +159,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="animateOut:" target="-2" id="t7C-zL-3sv"/>
+                        <action selector="backPressed:" target="-2" id="Vfg-Ve-O7w"/>
                     </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xdB-aI-PSs" userLabel="CMs Popup menu">

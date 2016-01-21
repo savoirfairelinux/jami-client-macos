@@ -266,7 +266,7 @@
                              [self animateOut];
                          else if (CallModel::instance().getIndex(c) == current) {
                              if (c->state() == Call::State::OVER) {
-                                 [self animateOut];
+                                 RecentModel::instance().selectionModel()->clearCurrentIndex();
                              } else {
                                  [self updateCall];
                              }
