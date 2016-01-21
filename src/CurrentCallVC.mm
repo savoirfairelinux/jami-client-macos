@@ -277,7 +277,7 @@
                              [self animateOut];
                          else if (CallModel::instance().getIndex(c) == current) {
                              if (c->state() == Call::State::OVER) {
-                                 [self animateOut];
+                                 RecentModel::instance().selectionModel()->clearCurrentIndex();
                              } else {
                                  [self updateCall];
                              }
@@ -516,9 +516,7 @@
 
 -(void) animateOut
 {
-    NSLog(@"animateOut");
     if(self.view.frame.origin.x < 0) {
-        NSLog(@"Already hidden");
         return;
     }
 
