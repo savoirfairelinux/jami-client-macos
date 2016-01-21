@@ -23,7 +23,7 @@
 
 -(void) initFrame;
 -(void) animateIn;
--(IBAction) animateOut:(id)sender;
+-(void) animateOut;
 
 /**
  * Message contained in messageField TextField.
