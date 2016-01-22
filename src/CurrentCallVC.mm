@@ -96,6 +96,7 @@
 @property RendererConnectionsHolder* previewHolder;
 @property RendererConnectionsHolder* videoHolder;
 @property QMetaObject::Connection videoStarted;
+@property QMetaObject::Connection selectedCallChanged;
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection mediaAddedConnection;
 
@@ -248,7 +249,7 @@
                              return;
                          }
 
-                         CallModel::instance().selectCall(call);
+                         [self changeCallSelection:call];
 
                          if (call->state() == Call::State::HOLD) {
                              call << Call::Action::HOLD;
@@ -281,7 +282,25 @@
                                  [self updateCall];
                              }
                          }
-    });
+                     });
+
+    QObject::connect(&CallModel::instance(),
+                     &CallModel::incomingCall,
+                     [self](Call* c) {
+                         [self changeCallSelection:c];
+                         [self animateIn];
+                     });
+}
+
+- (void) changeCallSelection:(Call* )c
+{
+    QObject::disconnect(self.selectedCallChanged);
+    CallModel::instance().selectCall(c);
+    self.selectedCallChanged = QObject::connect(CallModel::instance().selectedCall(),
+                                                &Call::changed,
+                                                [=]() {
+                                                    [self updateCall];
+                                                });
 }
 
 - (void) monitorIncomingTextMessages:(Media::Text*) media
@@ -424,7 +443,6 @@
 
 -(void) animateIn
 {
-    NSLog(@"animateIn");
     CGRect frame = CGRectOffset(self.view.superview.bounds, -self.view.superview.bounds.size.width, 0);
     [self.view setHidden:NO];
 
@@ -444,11 +462,8 @@
         if(!CallModel::instance().selectedCall())
             return;
 
-        QObject::connect(CallModel::instance().selectedCall(),
-                            &Call::changed,
-                            [=]() {
-                                [self updateCall];
-                            });
+        [self updateCall];
+
         if (CallModel::instance().selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
             Media::Text *text = CallModel::instance().selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
             [self monitorIncomingTextMessages:text];
