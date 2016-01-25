@@ -89,9 +89,7 @@
 
 // Video
 @property (unsafe_unretained) IBOutlet CallView *videoView;
-@property CALayer* videoLayer;
 @property (unsafe_unretained) IBOutlet NSView *previewView;
-@property CALayer* previewLayer;
 
 @property RendererConnectionsHolder* previewHolder;
 @property RendererConnectionsHolder* videoHolder;
@@ -106,7 +104,7 @@
 @synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView,
-            videoLayer, previewLayer, previewView, splitView, loadingIndicator;
+            previewView, splitView, loadingIndicator;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -149,20 +147,17 @@
 
     // Default values for this views
     [loadingIndicator setHidden:YES];
+
     [videoView setShouldAcceptInteractions:NO];
 
     [self.controlsPanel setHidden:current->hasParentCall()];
     [self.joinPanel setHidden:!current->hasParentCall()];
 
     switch (state) {
-        case Call::State::DIALING:
-            [loadingIndicator setHidden:NO];
-            break;
         case Call::State::NEW:
             break;
+        case Call::State::DIALING:
         case Call::State::INITIALIZATION:
-            [loadingIndicator setHidden:NO];
-            break;
         case Call::State::CONNECTED:
             [loadingIndicator setHidden:NO];
             break;
@@ -197,7 +192,6 @@
 {
     NSLog(@"INIT CurrentCall VC");
     [self.view setWantsLayer:YES];
-    [self.view setLayer:[CALayer layer]];
 
     actionHash[ (int)UserActionModel::Action::ACCEPT] = pickUpButton;
     actionHash[ (int)UserActionModel::Action::HOLD  ] = holdOnOffButton;
@@ -206,22 +200,17 @@
     actionHash[ (int)UserActionModel::Action::MUTE_AUDIO] = muteAudioButton;
     actionHash[ (int)UserActionModel::Action::MUTE_VIDEO] = muteVideoButton;
 
-    videoLayer = [CALayer layer];
     [videoView setWantsLayer:YES];
-    [videoView setLayer:videoLayer];
     [videoView.layer setBackgroundColor:[NSColor blackColor].CGColor];
     [videoView.layer setFrame:videoView.frame];
     [videoView.layer setContentsGravity:kCAGravityResizeAspect];
 
-    previewLayer = [CALayer layer];
     [previewView setWantsLayer:YES];
-    [previewView setLayer:previewLayer];
-    [previewLayer setBackgroundColor:[NSColor blackColor].CGColor];
-    [previewLayer setContentsGravity:kCAGravityResizeAspectFill];
-    [previewLayer setFrame:previewView.frame];
+    [previewView.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    [previewView.layer setContentsGravity:kCAGravityResizeAspectFill];
+    [previewView.layer setFrame:previewView.frame];
 
     [controlsPanel setWantsLayer:YES];
-    [controlsPanel setLayer:[CALayer layer]];
     [controlsPanel.layer setBackgroundColor:[NSColor clearColor].CGColor];
     [controlsPanel.layer setFrame:controlsPanel.frame];
 
@@ -451,7 +440,7 @@
     [animation setFromValue:[NSValue valueWithPoint:frame.origin]];
     [animation setToValue:[NSValue valueWithPoint:self.view.superview.bounds.origin]];
     [animation setDuration:0.2f];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
     [CATransaction setCompletionBlock:^{
 
         // when call comes in we want to show the controls/header
@@ -462,6 +451,7 @@
         if(!CallModel::instance().selectedCall())
             return;
 
+        [loadingIndicator setAnimates:YES];
         [self updateCall];
 
         if (CallModel::instance().selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
@@ -516,9 +506,7 @@
 
 -(void) animateOut
 {
-    NSLog(@"animateOut");
     if(self.view.frame.origin.x < 0) {
-        NSLog(@"Already hidden");
         return;
     }
 
@@ -528,7 +516,7 @@
     [animation setFromValue:[NSValue valueWithPoint:self.view.frame.origin]];
     [animation setToValue:[NSValue valueWithPoint:frame.origin]];
     [animation setDuration:0.2f];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.7 :0.9 :1 :1]];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
 
     [CATransaction setCompletionBlock:^{
         [self.view setHidden:YES];
