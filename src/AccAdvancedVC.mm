@@ -33,8 +33,14 @@
 
 #import "AccAdvancedVC.h"
 
-#import <accountmodel.h>
+///Qt
 #import <qitemselectionmodel.h>
+
+///LRC
+#import <accountmodel.h>
+#import <credentialmodel.h>
+#import <credential.h>
+
 
 @interface AccAdvancedVC ()
 @property (unsafe_unretained) IBOutlet NSView *registrationContainer;
@@ -149,9 +155,12 @@
     [isUsingTURN setState:account->isTurnEnabled()?NSOnState:NSOffState];
     [self toggleTURN:isUsingTURN];
     [turnServerURL setStringValue:account->turnServer().toNSString()];
-    [turnUsername setStringValue:account->turnServerUsername().toNSString()];
-    [turnPassword setStringValue:account->turnServerPassword().toNSString()];
-    [turnRealm setStringValue:account->turnServerRealm().toNSString()];
+
+    auto turnCreds = account->credentialModel()->primaryCredential(Credential::Type::TURN);
+
+    [turnUsername setStringValue:turnCreds->username().toNSString()];
+    [turnPassword setStringValue:turnCreds->password().toNSString()];
+    [turnRealm setStringValue:turnCreds->realm().toNSString()];
 
     if(account->isPublishedSameAsLocal())
         [publishAddrAndPortRadioGroup selectCellAtRow:0 column:0];
@@ -218,13 +227,13 @@
             [self currentAccount]->setTurnServer([[sender stringValue] UTF8String]);
             break;
         case TURN_USERNAME_TAG:
-            [self currentAccount]->setTurnServerUsername([[sender stringValue] UTF8String]);
+            [self currentAccount]->credentialModel()->primaryCredential(Credential::Type::TURN)->setUsername([[sender stringValue] UTF8String]);
             break;
         case TURN_PASSWORD_TAG:
-            [self currentAccount]->setTurnServerPassword([[sender stringValue] UTF8String]);
+            [self currentAccount]->credentialModel()->primaryCredential(Credential::Type::TURN)->setPassword([[sender stringValue] UTF8String]);
             break;
         case TURN_REALM_TAG:
-            [self currentAccount]->setTurnServerRealm([[sender stringValue] UTF8String]);
+            [self currentAccount]->credentialModel()->primaryCredential(Credential::Type::TURN)->setRealm([[sender stringValue] UTF8String]);
             break;
         default:
             break;
