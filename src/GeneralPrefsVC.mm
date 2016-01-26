@@ -27,31 +27,42 @@
 #import "Constants.h"
 
 @interface GeneralPrefsVC ()
-@property (unsafe_unretained) IBOutlet NSTextField *historyChangedLabel;
-@property (unsafe_unretained) IBOutlet NSView *advancedGeneralSettings;
-@property (unsafe_unretained) IBOutlet NSButton *startUpButton;
-@property (unsafe_unretained) IBOutlet NSButton *toggleAutomaticUpdateCheck;
-@property (unsafe_unretained) IBOutlet NSPopUpButton *checkIntervalPopUp;
-@property (unsafe_unretained) IBOutlet NSView *sparkleContainer;
+@property (unsafe_unretained) IBOutlet NSTextField* historyChangedLabel;
+@property (unsafe_unretained) IBOutlet NSButton* startUpButton;
+@property (unsafe_unretained) IBOutlet NSButton* toggleAutomaticUpdateCheck;
+@property (unsafe_unretained) IBOutlet NSPopUpButton* checkIntervalPopUp;
+@property (unsafe_unretained) IBOutlet NSView* sparkleContainer;
+@property (unsafe_unretained) IBOutlet NSTextField* historyTextField;
+@property (unsafe_unretained) IBOutlet NSStepper* historyStepper;
+@property (unsafe_unretained) IBOutlet NSButton* historySwitch;
 
 @end
 
 @implementation GeneralPrefsVC
 @synthesize historyChangedLabel;
-@synthesize advancedGeneralSettings;
 @synthesize startUpButton;
 @synthesize toggleAutomaticUpdateCheck;
 @synthesize checkIntervalPopUp;
 @synthesize sparkleContainer;
+@synthesize historyTextField;
+@synthesize historyStepper;
+@synthesize historySwitch;
 
 - (void)loadView
 {
     [super loadView];
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::HistoryLimit options:NSKeyValueObservingOptionNew context:NULL];
-    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:Preferences::ShowAdvanced options:NSKeyValueObservingOptionNew context:NULL];
 
     [startUpButton setState:[self isLaunchAtStartup]];
 
+    int historyLimit = CategorizedHistoryModel::instance().historyLimit();
+    [historyTextField setStringValue:[NSString stringWithFormat:@"%d", historyLimit]];
+    [historyStepper setIntValue:historyLimit];
+
+    BOOL limited = CategorizedHistoryModel::instance().isHistoryLimited();
+    [historySwitch setState:limited];
+    [historyStepper setEnabled:limited];
+    [historyTextField setEnabled:limited];
 #if ENABLE_SPARKLE
     [sparkleContainer setHidden:NO];
     SUUpdater *updater = [SUUpdater sharedUpdater];
@@ -63,13 +74,11 @@
     [sparkleContainer setHidden:YES];
 #endif
 
-    //[advancedGeneralSettings setHidden:![[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ShowAdvanced]];
 }
 
 - (void) dealloc
 {
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:Preferences::HistoryLimit];
-    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:Preferences::ShowAdvanced];
 }
 
 - (IBAction)clearHistory:(id)sender {
@@ -77,14 +86,23 @@
     [historyChangedLabel setHidden:NO];
 }
 
+- (IBAction)toggleHistory:(id)sender {
+    CategorizedHistoryModel::instance().setHistoryLimited([sender state]);
+    int historyLimit = CategorizedHistoryModel::instance().historyLimit();
+    [historyTextField setStringValue:[NSString stringWithFormat:@"%d", historyLimit]];
+    [historyStepper setIntValue:historyLimit];
+    [historyChangedLabel setHidden:NO];
+    [historyStepper setEnabled:[sender state]];
+    [historyTextField setEnabled:[sender state]];
+}
+
 // KVO handler
 -(void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject
                        change:(NSDictionary *)aChange context:(void *)aContext
 {
-    if (aKeyPath == Preferences::HistoryLimit) {
+    if ([aKeyPath isEqualToString:Preferences::HistoryLimit]) {
+        CategorizedHistoryModel::instance().setHistoryLimit([[aChange objectForKey: NSKeyValueChangeNewKey] integerValue]);
         [historyChangedLabel setHidden:NO];
-    } else if (aKeyPath == Preferences::ShowAdvanced) {
-        //[advancedGeneralSettings setHidden:[[aChange objectForKey: NSKeyValueChangeNewKey] boolValue]];
     }
 }
 
