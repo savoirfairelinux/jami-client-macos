@@ -33,6 +33,7 @@
 #import <categorizedhistorymodel.h>
 #import <localhistorycollection.h>
 #import <numbercategorymodel.h>
+#import <callmodel.h>
 
 #import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -62,6 +63,7 @@ int main(int argc, const char *argv[]) {
         }
     }
 
+    CallModel::instance();
     CategorizedHistoryModel::instance().addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 
     /* make sure basic number categories exist, in case user has no contacts
