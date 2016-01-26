@@ -31,6 +31,4 @@ namespace Preferences {
     NSString * const WindowBehaviour = @"window_behaviour";
     /* KVO compliant */
     NSString * const Notifications = @"enable_notifications";
-
-    NSString * const ShowAdvanced = @"show_advanced";
 }

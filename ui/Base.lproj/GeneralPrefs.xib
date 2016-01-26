@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPrefsVC">
             <connections>
                 <outlet property="checkIntervalPopUp" destination="RYP-3d-PCa" id="JNO-GR-CV8"/>
                 <outlet property="historyChangedLabel" destination="Gyi-ID-Z3v" id="aoO-Fh-UCQ"/>
+                <outlet property="historyStepper" destination="QmA-ZI-ZL5" id="dDV-1G-rZs"/>
+                <outlet property="historyTextField" destination="tHZ-7Q-5iP" id="keP-y2-7Pg"/>
                 <outlet property="sparkleContainer" destination="yVO-jk-ay3" id="zni-hI-88D"/>
                 <outlet property="startUpButton" destination="1Nr-L4-fcd" id="veu-Hi-c7L"/>
                 <outlet property="toggleAutomaticUpdateCheck" destination="MCd-PD-kd7" id="rSB-ac-Nm2"/>
@@ -111,14 +113,6 @@
                         <action selector="clearHistory:" target="-2" id="yN7-bB-7EY"/>
                     </connections>
                 </button>
-                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-ID-Z3v">
-                    <rect key="frame" x="361" y="144" width="167" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(Applied on application restart)" id="OTl-vx-S43">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j3T-5j-Fom">
                     <rect key="frame" x="38" y="303" width="94" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Interruptions" id="Rzy-Gh-3wQ">
@@ -192,9 +186,21 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-ID-Z3v">
+                    <rect key="frame" x="310" y="148" width="169" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="wfZ-X2-WX8"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(Applied on application restart)" id="OTl-vx-S43">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="Is4-pD-LOT" firstAttribute="leading" secondItem="lIm-zX-RIV" secondAttribute="trailing" constant="8" id="Apx-HB-LIX"/>
+                <constraint firstItem="Gyi-ID-Z3v" firstAttribute="leading" secondItem="nah-Jm-ZYB" secondAttribute="trailing" constant="8" id="EYY-WC-fCM"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="Is4-pD-LOT" secondAttribute="leading" id="Fdb-2p-ULe"/>
                 <constraint firstItem="nah-Jm-ZYB" firstAttribute="leading" secondItem="QmA-ZI-ZL5" secondAttribute="trailing" constant="8" id="JJi-0O-nUi"/>
                 <constraint firstItem="QmA-ZI-ZL5" firstAttribute="leading" secondItem="tHZ-7Q-5iP" secondAttribute="trailing" constant="8" id="YPs-UE-IFi"/>
