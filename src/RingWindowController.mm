@@ -101,6 +101,23 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                              [offlineVC animateOut];
                          }
                      });
+
+    QObject::connect(CallModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid()) {
+                             return;
+                         }
+
+                         if (previous.isValid()) {
+                             // We were already on a call
+                             [currentCallVC animateOut];
+                         } else {
+                             // Make sure Conversation view hides when selecting a valid call
+                             [currentCallVC animateIn];
+                             [offlineVC animateOut];
+                         }
+                     });
 }
 
 /**
