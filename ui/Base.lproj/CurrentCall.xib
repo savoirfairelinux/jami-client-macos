@@ -14,15 +14,20 @@
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
                 <outlet property="headerContainer" destination="d0X-cW-Xgz" id="7RM-kh-vCm"/>
                 <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
+                <outlet property="incomingDisplayName" destination="V2C-DZ-Ygi" id="g5l-my-5JW"/>
+                <outlet property="incomingPersonPhoto" destination="N3W-75-NuQ" id="7Gl-sn-6xL"/>
                 <outlet property="joinPanel" destination="MNG-eU-B2N" id="oBn-ec-ebh"/>
                 <outlet property="loadingIndicator" destination="JwW-2h-DyZ" id="EEb-50-oSJ"/>
                 <outlet property="mergeCallsButton" destination="9e8-ji-QId" id="sb6-n5-E7k"/>
                 <outlet property="muteAudioButton" destination="tQl-cT-0Lb" id="qV4-Ef-UTx"/>
                 <outlet property="muteVideoButton" destination="LVS-yZ-98V" id="qQs-zP-wQ4"/>
+                <outlet property="outgoingPanel" destination="se7-PJ-iwD" id="exA-Az-Blj"/>
                 <outlet property="personLabel" destination="bg3-hB-nE8" id="t6l-1B-JxI"/>
+                <outlet property="personPhoto" destination="X5k-sy-WtA" id="aMI-eo-QqK"/>
                 <outlet property="pickUpButton" destination="qgD-3D-nD5" id="mkD-IT-22E"/>
                 <outlet property="previewView" destination="6y6-RH-qOp" id="1PY-sd-mh4"/>
                 <outlet property="recordOnOffButton" destination="oRa-pS-HN2" id="N7C-wn-0le"/>
+                <outlet property="ringingPanel" destination="W4l-Be-bhM" id="aZ4-9D-wOd"/>
                 <outlet property="splitView" destination="GIJ-gB-FZo" id="PM0-az-Q8X"/>
                 <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
                 <outlet property="timeSpentLabel" destination="cIU-M7-xpN" id="9Rl-t3-gjY"/>
@@ -48,7 +53,7 @@
                                     <rect key="frame" x="20" y="438" width="635" height="71"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-FB-vig">
-                                            <rect key="frame" x="18" y="39" width="36" height="17"/>
+                                            <rect key="frame" x="76" y="39" width="36" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="pft-oc-ZNh"/>
                                             </constraints>
@@ -72,19 +77,8 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
                                             </userDefinedRuntimeAttributes>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bg3-hB-nE8">
-                                            <rect key="frame" x="18" y="14" width="85" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="81" id="gT7-Wu-XtU"/>
-                                            </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Person name" id="osk-LS-0Qg">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <button hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zss-6A-bSy" userLabel="AddToContact" customClass="IconButton">
-                                            <rect key="frame" x="109" y="9" width="30" height="30"/>
+                                            <rect key="frame" x="249" y="7" width="30" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="30" id="DdM-FT-7kb"/>
                                             </constraints>
@@ -105,18 +99,39 @@
                                                 <action selector="addToContact:" target="-2" id="OI1-7U-4T7"/>
                                             </connections>
                                         </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bg3-hB-nE8">
+                                            <rect key="frame" x="76" y="14" width="85" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="81" id="gT7-Wu-XtU"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Person name" id="osk-LS-0Qg">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X5k-sy-WtA">
+                                            <rect key="frame" x="20" y="10" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="2tx-rb-idH"/>
+                                                <constraint firstAttribute="height" constant="50" id="B5W-X8-r0z"/>
+                                            </constraints>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="dK5-Oj-aua"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Zss-6A-bSy" firstAttribute="leading" secondItem="bg3-hB-nE8" secondAttribute="trailing" constant="8" id="6V0-Gq-SMw"/>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="bg3-hB-nE8" secondAttribute="leading" id="LXG-QI-oPf"/>
                                         <constraint firstItem="cIU-M7-xpN" firstAttribute="top" secondItem="d0X-cW-Xgz" secondAttribute="top" constant="24" id="Qc7-qp-qSV"/>
                                         <constraint firstAttribute="trailing" secondItem="cIU-M7-xpN" secondAttribute="trailing" constant="20" id="RXf-xZ-4f9"/>
+                                        <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="X5k-sy-WtA" secondAttribute="trailing" constant="8" id="X4W-4Z-Czm"/>
+                                        <constraint firstItem="X5k-sy-WtA" firstAttribute="centerY" secondItem="d0X-cW-Xgz" secondAttribute="centerY" id="Xdf-qr-nzW"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="Xeq-Aa-f1W"/>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="top" secondItem="bg3-hB-nE8" secondAttribute="bottom" constant="-42" id="Z06-5v-81Q"/>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="top" secondItem="bg3-hB-nE8" secondAttribute="bottom" constant="-42" id="gRn-E6-o6O"/>
-                                        <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="d0X-cW-Xgz" secondAttribute="leading" constant="20" id="i5C-8o-qKp"/>
+                                        <constraint firstItem="X5k-sy-WtA" firstAttribute="leading" secondItem="d0X-cW-Xgz" secondAttribute="leading" constant="20" id="k2y-sc-P8r"/>
                                         <constraint firstAttribute="bottom" secondItem="kFD-FB-vig" secondAttribute="bottom" constant="39" id="l71-7V-oLx"/>
-                                        <constraint firstItem="bg3-hB-nE8" firstAttribute="leading" secondItem="d0X-cW-Xgz" secondAttribute="leading" constant="20" id="nV4-Vy-vqK"/>
+                                        <constraint firstItem="bg3-hB-nE8" firstAttribute="leading" secondItem="X5k-sy-WtA" secondAttribute="trailing" constant="8" id="vAl-vr-79t"/>
                                         <constraint firstAttribute="centerY" secondItem="cIU-M7-xpN" secondAttribute="centerY" id="yvc-8B-cEu"/>
                                     </constraints>
                                 </customView>
@@ -124,7 +139,7 @@
                                     <rect key="frame" x="20" y="20" width="452" height="67"/>
                                     <subviews>
                                         <button toolTip="Mute Audio" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="IconButton">
-                                            <rect key="frame" x="158" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="120" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="VhT-NE-Ler"/>
                                                 <constraint firstAttribute="height" constant="40" id="WFp-nl-egQ"/>
@@ -149,7 +164,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oRa-pS-HN2" customClass="IconButton">
-                                            <rect key="frame" x="258" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="220" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="5Yb-Ir-aNP"/>
                                                 <constraint firstAttribute="height" constant="40" id="f6U-Sc-LhF"/>
@@ -173,8 +188,130 @@
                                                 <action selector="toggleRecording:" target="-2" id="gAc-ZJ-9PN"/>
                                             </connections>
                                         </button>
+                                        <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
+                                            <rect key="frame" x="70" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="QlH-xq-7uO"/>
+                                                <constraint firstAttribute="height" constant="40" id="Xzt-L0-evm"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
+                                            <rect key="frame" x="270" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="9zo-pq-mgF"/>
+                                                <constraint firstAttribute="width" constant="40" id="EVF-UM-brL"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_transfer" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="FOs-Wt-c2R">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="toggleTransferView:" target="-2" id="Gxt-lS-qZs"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="20" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="MYx-uE-Bej"/>
+                                                <constraint firstAttribute="height" constant="40" id="dmD-ga-Kwv"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.94509803921568625" green="0.16078431372549018" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Add participant" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kIZ-mf-moM" customClass="IconButton">
+                                            <rect key="frame" x="320" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="7qu-cd-B7J"/>
+                                                <constraint firstAttribute="width" constant="40" id="U4p-eV-iCZ"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="BOx-wf-CM5">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="toggleAddParticipantView:" target="-2" id="v6X-2r-6im"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
+                                            <rect key="frame" x="170" y="13" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="Qiq-Nb-gHN"/>
+                                                <constraint firstAttribute="width" constant="40" id="k3u-dD-eLF"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
+                                            </connections>
+                                        </button>
                                         <button toolTip="Toggle chat" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
-                                            <rect key="frame" x="408" y="13" width="40" height="40"/>
+                                            <rect key="frame" x="370" y="13" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="48U-1h-yAx"/>
                                                 <constraint firstAttribute="height" constant="40" id="EDO-9c-ndD"/>
@@ -207,163 +344,17 @@
                                                 <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
-                                            <rect key="frame" x="108" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="QlH-xq-7uO"/>
-                                                <constraint firstAttribute="height" constant="40" id="Xzt-L0-evm"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ChW-kg-Sja" customClass="IconButton">
-                                            <rect key="frame" x="308" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="9zo-pq-mgF"/>
-                                                <constraint firstAttribute="width" constant="40" id="EVF-UM-brL"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_transfer" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="FOs-Wt-c2R">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="toggleTransferView:" target="-2" id="Gxt-lS-qZs"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
-                                            <rect key="frame" x="58" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="MYx-uE-Bej"/>
-                                                <constraint firstAttribute="height" constant="40" id="dmD-ga-Kwv"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.94509803921568625" green="0.16078431372549018" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Pick up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
-                                            <rect key="frame" x="8" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="IFG-ni-9mc"/>
-                                                <constraint firstAttribute="width" constant="40" id="uoL-Wy-Ek2"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="left" transparent="YES" imageScaling="proportionallyDown" id="CoO-HS-nEB">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.23529411764705882" green="0.6470588235294118" blue="0.16078431372549018" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="accept:" target="-2" id="maS-G8-eY7"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
-                                            <rect key="frame" x="208" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="Qiq-Nb-gHN"/>
-                                                <constraint firstAttribute="width" constant="40" id="k3u-dD-eLF"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_mute_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Add participant" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kIZ-mf-moM" customClass="IconButton">
-                                            <rect key="frame" x="358" y="13" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="7qu-cd-B7J"/>
-                                                <constraint firstAttribute="width" constant="40" id="U4p-eV-iCZ"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="BOx-wf-CM5">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="toggleAddParticipantView:" target="-2" id="v6X-2r-6im"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ChW-kg-Sja" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="006-Cv-8BS"/>
                                         <constraint firstItem="LVS-yZ-98V" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="6vE-ZU-Hu1"/>
                                         <constraint firstItem="tQl-cT-0Lb" firstAttribute="leading" secondItem="anb-Y8-JQi" secondAttribute="trailing" constant="10" id="7MF-DQ-Nb8"/>
-                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="leading" secondItem="qgD-3D-nD5" secondAttribute="trailing" constant="10" id="7dg-vy-iyO"/>
-                                        <constraint firstItem="qgD-3D-nD5" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="9NT-bT-9wJ"/>
                                         <constraint firstItem="anb-Y8-JQi" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="H6t-wo-Nap"/>
                                         <constraint firstItem="Kjq-iM-NBL" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="Qt4-Bh-Qef"/>
+                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="leading" constant="20" id="Rwo-8h-nvA"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="385" id="TSJ-9A-brf"/>
                                         <constraint firstItem="ChW-kg-Sja" firstAttribute="leading" secondItem="oRa-pS-HN2" secondAttribute="trailing" constant="10" id="edH-aj-21j"/>
                                         <constraint firstItem="tQl-cT-0Lb" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="hgC-Ud-ytJ"/>
-                                        <constraint firstItem="qgD-3D-nD5" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="leading" constant="8" id="hhR-YV-cu5"/>
                                         <constraint firstItem="fmp-x4-Pef" firstAttribute="leading" secondItem="kIZ-mf-moM" secondAttribute="trailing" constant="10" id="jy9-gW-YmT"/>
                                         <constraint firstItem="oRa-pS-HN2" firstAttribute="leading" secondItem="LVS-yZ-98V" secondAttribute="trailing" constant="10" id="k0b-zB-kn7"/>
                                         <constraint firstItem="oRa-pS-HN2" firstAttribute="centerY" secondItem="Eoi-B8-iL6" secondAttribute="centerY" id="oGK-mj-vWq"/>
@@ -376,7 +367,7 @@
                                     </constraints>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="JwW-2h-DyZ" customClass="ITProgressIndicator">
-                                    <rect key="frame" x="287" y="205" width="100" height="100"/>
+                                    <rect key="frame" x="287" y="204" width="100" height="100"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="gpl-re-hHE"/>
                                         <constraint firstAttribute="width" constant="100" id="nmo-HF-lhL"/>
@@ -389,8 +380,8 @@
                                         <constraint firstAttribute="width" constant="175" id="aEv-Tt-tSD"/>
                                     </constraints>
                                 </customView>
-                                <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MNG-eU-B2N">
-                                    <rect key="frame" x="262" y="95" width="150" height="60"/>
+                                <customView hidden="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MNG-eU-B2N">
+                                    <rect key="frame" x="505" y="343" width="150" height="60"/>
                                     <subviews>
                                         <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mc3-HV-hek" userLabel="Hang Up" customClass="IconButton">
                                             <rect key="frame" x="20" y="10" width="40" height="40"/>
@@ -449,12 +440,175 @@
                                         <constraint firstItem="9e8-ji-QId" firstAttribute="centerY" secondItem="MNG-eU-B2N" secondAttribute="centerY" id="nmt-le-y0u"/>
                                     </constraints>
                                 </customView>
+                                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="se7-PJ-iwD">
+                                    <rect key="frame" x="545" y="223" width="110" height="112"/>
+                                    <subviews>
+                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D0G-XT-lhI" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="20" y="32" width="70" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="FTZ-JO-UdI"/>
+                                                <constraint firstAttribute="width" constant="70" id="i20-DN-iit"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="3JO-aO-fnu">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.94509803920000002" green="0.16078431369999999" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="hangUp:" target="-2" id="6ew-Fv-wF7"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aav-3e-AnU">
+                                            <rect key="frame" x="32" y="7" width="46" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cancel" id="TlL-HO-5Ey">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="D0G-XT-lhI" firstAttribute="centerX" secondItem="se7-PJ-iwD" secondAttribute="centerX" id="Ety-3T-k5N"/>
+                                        <constraint firstItem="D0G-XT-lhI" firstAttribute="top" secondItem="se7-PJ-iwD" secondAttribute="top" constant="10" id="K7F-Z0-GFu"/>
+                                        <constraint firstItem="Aav-3e-AnU" firstAttribute="top" secondItem="D0G-XT-lhI" secondAttribute="bottom" constant="8" id="Kz0-3c-wmP"/>
+                                        <constraint firstItem="Aav-3e-AnU" firstAttribute="centerX" secondItem="se7-PJ-iwD" secondAttribute="centerX" id="Teh-iF-VrN"/>
+                                        <constraint firstAttribute="width" constant="110" id="eyg-Eq-bcF"/>
+                                        <constraint firstAttribute="height" constant="112" id="k2h-Lt-lIw"/>
+                                    </constraints>
+                                </customView>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="W4l-Be-bhM">
+                                    <rect key="frame" x="135" y="109" width="404" height="291"/>
+                                    <subviews>
+                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2cB-dz-KYg" userLabel="Hang Up" customClass="IconButton">
+                                            <rect key="frame" x="220" y="43" width="70" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="Avo-rM-awf"/>
+                                                <constraint firstAttribute="height" constant="70" id="z5h-9v-SNU"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sxM-Qb-qWD">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.94509803920000002" green="0.16078431369999999" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="hangUp:" target="-2" id="wVq-bI-wmY"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Cd-Vs-wtu">
+                                            <rect key="frame" x="234" y="18" width="43" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="39" id="6I1-DY-t1P"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Ignore" id="tjM-py-p4V">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="neP-Vf-7Tp">
+                                            <rect key="frame" x="126" y="18" width="49" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="NB4-kw-0Lb"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Answer" id="wRO-X4-7IU">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-D2-O1C">
+                                            <rect key="frame" x="139" y="121" width="127" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="123" id="hbP-yf-u6W"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="wants to talk to you!" id="X0W-vv-xua">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N3W-75-NuQ">
+                                            <rect key="frame" x="152" y="171" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="5mA-2k-NTP"/>
+                                                <constraint firstAttribute="width" constant="100" id="EjP-Yi-2YP"/>
+                                            </constraints>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="BgV-yI-0CU"/>
+                                        </imageView>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="V2C-DZ-Ygi">
+                                            <rect key="frame" x="127" y="146" width="150" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="4iv-3m-Ldv"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Incoming Display Name" id="EA3-Q5-Dyj">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button toolTip="Pick up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qgD-3D-nD5" userLabel="Accept" customClass="IconButton">
+                                            <rect key="frame" x="115" y="43" width="70" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="IFG-ni-9mc"/>
+                                                <constraint firstAttribute="width" constant="70" id="uoL-Wy-Ek2"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="left" transparent="YES" imageScaling="proportionallyDown" id="CoO-HS-nEB">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.23529411764705882" green="0.6470588235294118" blue="0.16078431372549018" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="accept:" target="-2" id="maS-G8-eY7"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="N3W-75-NuQ" firstAttribute="centerX" secondItem="W4l-Be-bhM" secondAttribute="centerX" id="ABJ-dP-zZT"/>
+                                        <constraint firstItem="qnn-D2-O1C" firstAttribute="top" secondItem="V2C-DZ-Ygi" secondAttribute="bottom" constant="8" id="ClJ-Gw-V9J"/>
+                                        <constraint firstItem="qgD-3D-nD5" firstAttribute="leading" secondItem="W4l-Be-bhM" secondAttribute="leading" constant="115" id="LYx-Yw-xfe"/>
+                                        <constraint firstItem="9Cd-Vs-wtu" firstAttribute="centerX" secondItem="2cB-dz-KYg" secondAttribute="centerX" id="NFr-oZ-cLw"/>
+                                        <constraint firstItem="2cB-dz-KYg" firstAttribute="top" secondItem="qnn-D2-O1C" secondAttribute="bottom" constant="8" id="RWw-Pn-eAO"/>
+                                        <constraint firstItem="qnn-D2-O1C" firstAttribute="centerX" secondItem="W4l-Be-bhM" secondAttribute="centerX" id="SFe-9R-EVd"/>
+                                        <constraint firstItem="9Cd-Vs-wtu" firstAttribute="top" secondItem="2cB-dz-KYg" secondAttribute="bottom" constant="8" id="Tmr-bc-0W9"/>
+                                        <constraint firstAttribute="trailing" secondItem="2cB-dz-KYg" secondAttribute="trailing" constant="114" id="Xxj-BS-gPZ"/>
+                                        <constraint firstItem="neP-Vf-7Tp" firstAttribute="top" secondItem="qgD-3D-nD5" secondAttribute="bottom" constant="8" id="agL-to-xl2"/>
+                                        <constraint firstItem="V2C-DZ-Ygi" firstAttribute="top" secondItem="N3W-75-NuQ" secondAttribute="bottom" constant="8" id="c2D-cL-ahg"/>
+                                        <constraint firstAttribute="width" constant="404" id="dzx-yF-Ffl"/>
+                                        <constraint firstItem="qgD-3D-nD5" firstAttribute="top" secondItem="qnn-D2-O1C" secondAttribute="bottom" constant="8" id="lCg-9I-qeP"/>
+                                        <constraint firstItem="V2C-DZ-Ygi" firstAttribute="centerX" secondItem="W4l-Be-bhM" secondAttribute="centerX" id="mGd-oj-2O4"/>
+                                        <constraint firstAttribute="height" constant="291" id="pWV-Tm-dtp"/>
+                                        <constraint firstItem="neP-Vf-7Tp" firstAttribute="centerX" secondItem="qgD-3D-nD5" secondAttribute="centerX" id="puk-xU-0dz"/>
+                                        <constraint firstItem="N3W-75-NuQ" firstAttribute="top" secondItem="W4l-Be-bhM" secondAttribute="top" constant="20" id="vse-xv-WYp"/>
+                                    </constraints>
+                                </customView>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="JwW-2h-DyZ" secondAttribute="centerX" id="4eh-az-oI5"/>
                                 <constraint firstItem="6y6-RH-qOp" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="trailing" constant="8" id="7wV-uh-Xb7"/>
                                 <constraint firstAttribute="bottom" secondItem="Eoi-B8-iL6" secondAttribute="bottom" constant="20" id="9j2-HZ-hNX"/>
                                 <constraint firstItem="MNG-eU-B2N" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="DbU-cn-glx"/>
+                                <constraint firstItem="W4l-Be-bhM" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="De3-8O-mXx"/>
                                 <constraint firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" constant="20" id="G79-Jv-EYw"/>
                                 <constraint firstAttribute="bottom" secondItem="6y6-RH-qOp" secondAttribute="bottom" constant="20" id="HOt-7O-FU2"/>
                                 <constraint firstAttribute="trailing" secondItem="6y6-RH-qOp" secondAttribute="trailing" constant="20" id="KTx-SN-RUg"/>
@@ -462,8 +616,11 @@
                                 <constraint firstAttribute="centerY" secondItem="JwW-2h-DyZ" secondAttribute="centerY" id="Na1-o4-4Ds"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="675" id="ciq-ed-2FK"/>
                                 <constraint firstItem="d0X-cW-Xgz" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="efy-70-qsJ"/>
+                                <constraint firstItem="se7-PJ-iwD" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="hts-ke-nkj"/>
                                 <constraint firstItem="Eoi-B8-iL6" firstAttribute="top" secondItem="MNG-eU-B2N" secondAttribute="bottom" constant="8" id="jm6-9s-ojD"/>
+                                <constraint firstItem="W4l-Be-bhM" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="lvd-la-SAZ"/>
                                 <constraint firstItem="Eoi-B8-iL6" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="sHw-xg-QAo"/>
+                                <constraint firstAttribute="bottom" secondItem="se7-PJ-iwD" secondAttribute="bottom" constant="20" id="tXh-Su-z4a"/>
                             </constraints>
                         </customView>
                         <customView wantsLayer="YES" id="TdD-3L-553">
