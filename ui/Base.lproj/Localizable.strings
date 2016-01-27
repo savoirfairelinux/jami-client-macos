@@ -1,6 +1,9 @@
 
 "Add to contacts" = "Add to contacts";
 
+/* Contextual menu action */
+"Call number" = "Call number";
+
 /* Open panel prompt for 'Choose a file' */
 "Choose" = "Choose";
 
@@ -11,7 +14,7 @@
 "Choose a certificate" = "Choose a certificate";
 
 /* Open panel title */
-"Choose a file" = "Choose a file";
+"Choose a directory" = "Choose a directory";
 
 /* Open panel title */
 "Choose a private key file" = "Choose a private key file";
@@ -19,12 +22,26 @@
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Choose CA";
 
-/* Contextual menu entry
-   Open panel prompt for 'Choose a directory' */
+/* Open panel prompt for 'Choose a directory' */
+"Choose directory" = "Choose directory";
+
+/* Contextual menu entry */
 "Choose file" = "Choose file";
+
+/* No comment provided by engineer. */
+"Copy" = "Copy";
+
+/* Contextual menu action */
+"Copy number" = "Copy number";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Incoming call from %@";
 
 /* Indication for user */
 "Just a moment..." = "Just a moment...";
+
+/* Message from {Name} */
+"Message from %@" = "Message from %@";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -35,8 +52,14 @@
 /* Display message to user */
 "Ring is already ready to work" = "Ring is already ready to work";
 
+/* No comment provided by engineer. */
+"Share" = "Share";
+
 /* Share button */
 "Share by mail" = "Share by mail";
+
+/* No comment provided by engineer. */
+"Text Actions" = "Text Actions";
 
 /* Indication to user */
 "This is your number, share it with your friends!" = "This is your number, share it with your friends!";

@@ -106,9 +106,7 @@
 
                          NSUserNotification* notification = [[NSUserNotification alloc] init];
 
-                         NSString* localizedTitle = NSLocalizedString(([NSString stringWithFormat:@"Message from %@",
-                                                                        qIdx.data((int)Media::TextRecording::Role::AuthorDisplayname).toString().toNSString()]),
-                                                                      @"Text message notification title");
+                         NSString* localizedTitle = [NSString stringWithFormat:NSLocalizedString(@"Message from %@", @"Message from {Name}"), qIdx.data((int)Media::TextRecording::Role::AuthorDisplayname).toString().toNSString()];
 
                          [notification setTitle:localizedTitle];
                          [notification setSoundName:NSUserNotificationDefaultSoundName];
@@ -120,9 +118,8 @@
 
 - (void) showIncomingNotification:(Call*) call{
     NSUserNotification *notification = [[NSUserNotification alloc] init];
-    NSString* localizedTitle = NSLocalizedString(([NSString stringWithFormat:@"Incoming call from %@",
-                                                   call->peerName().toNSString()]),
-                                                 @"Call notification title");
+    NSString* localizedTitle = [NSString stringWithFormat:
+                                NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"), call->peerName().toNSString()];
     [notification setTitle:localizedTitle];
     [notification setSoundName:NSUserNotificationDefaultSoundName];
 

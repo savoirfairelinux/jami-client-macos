@@ -108,3 +108,9 @@ file_filter = ui/<lang>.lproj/VideoPrefs.strings
 source_file = ui/Base.lproj/VideoPrefs.strings
 source_lang = en
 type = STRINGS
+
+[ring.osxConversation]
+file_filter = ui/<lang>.lproj/Conversation.strings
+source_file = ui/Base.lproj/Conversation.strings
+source_lang = en
+type = STRINGS

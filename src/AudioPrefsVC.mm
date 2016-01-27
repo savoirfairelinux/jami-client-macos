@@ -154,8 +154,8 @@
     [openPanel setCanChooseDirectories:YES];
     [openPanel setCanChooseFiles:NO];
     [openPanel setResolvesAliases:YES];
-    [openPanel setTitle:NSLocalizedString(@"Choose a file", @"Open panel title")];
-    [openPanel setPrompt:NSLocalizedString(@"Choose file", @"Open panel prompt for 'Choose a directory'")];
+    [openPanel setTitle:NSLocalizedString(@"Choose a directory", @"Open panel title")];
+    [openPanel setPrompt:NSLocalizedString(@"Choose directory", @"Open panel prompt for 'Choose a directory'")];
     [openPanel setDelegate:self];
 }
 
