@@ -20,22 +20,29 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+///Qt
+#import <QMimeData>
+#import <QtMacExtras/qmacfunctions.h>
+#import <QtCore/qabstractitemmodel.h>
+#import <QItemSelectionModel>
+#import <QItemSelection>
+#import <QPixmap>
+
+///LRC
 #import <call.h>
 #import <callmodel.h>
 #import <recentmodel.h>
 #import <useractionmodel.h>
-#import <QMimeData>
 #import <contactmethod.h>
-#import <qabstractitemmodel.h>
-#import <QItemSelectionModel>
-#import <QItemSelection>
 #import <video/previewmanager.h>
 #import <video/renderer.h>
 #import <media/text.h>
 #import <person.h>
+#import <globalinstances.h>
 
 #import "views/ITProgressIndicator.h"
 #import "views/CallView.h"
+#import "delegates/ImageManipulationDelegate.h"
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
 #import "BrokerVC.h"
@@ -59,6 +66,7 @@
 @property (unsafe_unretained) IBOutlet NSTextField* personLabel;
 @property (unsafe_unretained) IBOutlet NSTextField* stateLabel;
 @property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
+@property (unsafe_unretained) IBOutlet NSImageView* personPhoto;
 
 // Call Controls
 @property (unsafe_unretained) IBOutlet NSView* controlsPanel;
@@ -85,6 +93,15 @@
 @property (strong) NSPopover* brokerPopoverVC;
 @property (strong) IBOutlet ChatVC* chatVC;
 
+// Ringing call panel
+@property (unsafe_unretained) IBOutlet NSView* ringingPanel;
+@property (unsafe_unretained) IBOutlet NSImageView* incomingPersonPhoto;
+@property (unsafe_unretained) IBOutlet NSTextField* incomingDisplayName;
+
+// Outgoing call panel
+@property (unsafe_unretained) IBOutlet NSView* outgoingPanel;
+
+
 @property QHash<int, NSButton*> actionHash;
 
 // Video
@@ -101,10 +118,10 @@
 @end
 
 @implementation CurrentCallVC
-@synthesize personLabel, actionHash, stateLabel, holdOnOffButton, hangUpButton,
+@synthesize personLabel, personPhoto, actionHash, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
-            muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView,
-            previewView, splitView, loadingIndicator;
+            muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, incomingDisplayName, incomingPersonPhoto,
+            previewView, splitView, loadingIndicator, ringingPanel, joinPanel, outgoingPanel;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -127,32 +144,38 @@
     }
 }
 
--(void) updateCall
+-(void) updateCall:(BOOL) firstRun
 {
     QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
     if (!callIdx.isValid()) {
         return;
     }
-    auto current = CallModel::instance().getCall(callIdx);
+    auto current = CallModel::instance().selectedCall();
 
     [personLabel setStringValue:callIdx.data(Qt::DisplayRole).toString().toNSString()];
     [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
     [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
 
+    if (firstRun) {
+        QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(current, QSize(50,50));
+        [personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    }
+
     auto contactmethod = qvariant_cast<Call*>(callIdx.data(static_cast<int>(Call::Role::Object)))->peerContactMethod();
     BOOL shouldShow = (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder());
     [self.addContactButton setHidden:!shouldShow];
 
-    Call::State state = callIdx.data((int)Call::Role::State).value<Call::State>();
+
 
     // Default values for this views
     [loadingIndicator setHidden:YES];
-
     [videoView setShouldAcceptInteractions:NO];
+    [ringingPanel setHidden:YES];
+    [outgoingPanel setHidden:YES];
+    [controlsPanel setHidden:NO];
+    [headerContainer setHidden:NO];
 
-    [self.controlsPanel setHidden:current->hasParentCall()];
-    [self.joinPanel setHidden:!current->hasParentCall()];
-
+    auto state = callIdx.data((int)Call::Role::State).value<Call::State>();
     switch (state) {
         case Call::State::NEW:
             break;
@@ -160,20 +183,18 @@
         case Call::State::INITIALIZATION:
         case Call::State::CONNECTED:
             [loadingIndicator setHidden:NO];
-            break;
         case Call::State::RINGING:
+            [controlsPanel setHidden:YES];
+            [outgoingPanel setHidden:NO];
+            break;
+        case Call::State::INCOMING:
+            [self setupIncoming:current];
             break;
         case Call::State::CONFERENCE:
-            [videoView setShouldAcceptInteractions:YES];
-            [self.chatButton setHidden:NO];
-            [self.addParticipantButton setHidden:NO];
-            [self.transferButton setHidden:YES];
+            [self setupConference:current];
             break;
         case Call::State::CURRENT:
-            [videoView setShouldAcceptInteractions:YES];
-            [self.chatButton setHidden:NO];
-            [self.addParticipantButton setHidden:NO];
-            [self.transferButton setHidden:NO];
+            [self setupCurrent:current];
             break;
         case Call::State::HOLD:
             break;
@@ -181,12 +202,44 @@
             break;
         case Call::State::OVER:
         case Call::State::FAILURE:
+            [controlsPanel setHidden:YES];
+            [outgoingPanel setHidden:NO];
             if(self.splitView.isInFullScreenMode)
                 [self.splitView exitFullScreenModeWithOptions:nil];
             break;
     }
 
 }
+
+-(void) setupIncoming:(Call*) c
+{
+    [ringingPanel setHidden:NO];
+    [controlsPanel setHidden:YES];
+    [headerContainer setHidden:YES];
+    QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(c, QSize(100,100));
+    [incomingPersonPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    [incomingDisplayName setStringValue:c->formattedName().toNSString()];
+}
+
+-(void) setupCurrent:(Call*) c
+{
+    [joinPanel setHidden:!c->hasParentCall()];
+    [controlsPanel setHidden:c->hasParentCall()];
+    [videoView setShouldAcceptInteractions:YES];
+    [self.chatButton setHidden:NO];
+    [self.addParticipantButton setHidden:NO];
+    [self.transferButton setHidden:NO];
+}
+
+-(void) setupConference:(Call*) c
+{
+    [videoView setShouldAcceptInteractions:YES];
+    [self.chatButton setHidden:NO];
+    [joinPanel setHidden:YES];
+    [self.addParticipantButton setHidden:NO];
+    [self.transferButton setHidden:YES];
+}
+
 
 - (void)awakeFromNib
 {
@@ -245,7 +298,7 @@
                          }
 
                          [self collapseRightView];
-                         [self updateCall];
+                         [self updateCall:YES];
                          [self updateAllActions];
                      });
 
@@ -268,7 +321,7 @@
                              if (c->state() == Call::State::OVER) {
                                  RecentModel::instance().selectionModel()->clearCurrentIndex();
                              } else {
-                                 [self updateCall];
+                                 [self updateCall:NO];
                              }
                          }
                      });
@@ -277,7 +330,6 @@
                      &CallModel::incomingCall,
                      [self](Call* c) {
                          [self changeCallSelection:c];
-                         [self animateIn];
                      });
 }
 
@@ -288,7 +340,7 @@
     self.selectedCallChanged = QObject::connect(CallModel::instance().selectedCall(),
                                                 &Call::changed,
                                                 [=]() {
-                                                    [self updateCall];
+                                                    [self updateCall:NO];
                                                 });
 }
 
@@ -452,7 +504,7 @@
             return;
 
         [loadingIndicator setAnimates:YES];
-        [self updateCall];
+        [self updateCall:YES];
 
         if (CallModel::instance().selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
             Media::Text *text = CallModel::instance().selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
