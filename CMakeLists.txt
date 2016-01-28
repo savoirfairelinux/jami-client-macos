@@ -154,6 +154,8 @@ SET(ringclient_CONTROLLERS
    src/RingWizardLinkAccountVC.mm
    src/RingWizardNewAccountVC.mm
    src/RingWizardNewAccountVC.h
+   src/DialpadWC.mm
+   src/DialpadWC.h
 )
 
 SET(ringclient_BACKENDS
@@ -219,7 +221,9 @@ SET(ringclient_XIBS
    AccDevices
    RingWizardLinkAccount
    RingWizardNewAccount
-   RingWizardChoose)
+   RingWizardChoose
+   Dialpad
+)
 
 # Icons
 # This part tells CMake where to find and install the file itself
@@ -231,6 +235,8 @@ SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_blue.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background_tile.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_more.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_dialpad.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_arrow_back.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
@@ -251,7 +257,6 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_transfer.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_add_participant.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_merge_calls.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/default_user_icon.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ancrage.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_send.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png

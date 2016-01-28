@@ -96,7 +96,7 @@
         NSBezierPath* path = [NSBezierPath bezierPathWithRect:dirtyRect];
         [path addClip];
 
-        [self setImagePosition:NSImageOnly];
+        [self setImagePosition:NSImageOverlaps];
         auto rect = NSInsetRect(dirtyRect, self.imageInsets, self.imageInsets);
 
         [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
@@ -107,6 +107,23 @@
                     hints:nil];
 
         [NSGraphicsContext restoreGraphicsState];
+
+        NSRect rect2;
+        NSDictionary *att = nil;
+
+        NSMutableParagraphStyle *style =
+        [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setLineBreakMode:NSLineBreakByWordWrapping];
+        [style setAlignment:NSCenterTextAlignment];
+        att = [[NSDictionary alloc] initWithObjectsAndKeys:
+               style, NSParagraphStyleAttributeName,
+               [NSColor whiteColor],
+               NSForegroundColorAttributeName, nil];
+
+        rect.size = [[self title] sizeWithAttributes:att];
+        rect.origin.x = floor( NSMidX([self bounds]) - rect.size.width / 2 );
+        rect.origin.y = floor( NSMidY([self bounds]) - rect.size.height / 2 );
+        [[self title] drawInRect:rect withAttributes:att];
     }
 }
 

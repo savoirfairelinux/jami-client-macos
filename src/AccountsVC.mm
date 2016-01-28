@@ -407,6 +407,7 @@ NSInteger const TAG_TYPE        =   400;
     auto acc = AccountModel::instance().add([NSLocalizedString(@"New SIP account", @"User label") UTF8String]);
     acc->setDisplayName(acc->alias());
     acc->setProtocol(Account::Protocol::SIP);
+    acc->setDTMFType(DtmfType::OverSip);
     AccountModel::instance().save();
 }
 
