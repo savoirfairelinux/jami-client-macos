@@ -18,6 +18,9 @@
  */
 #import "RingWizardWC.h"
 
+//Cocoa
+#import <AddressBook/AddressBook.h>
+
 //Qt
 #import <QUrl>
 
