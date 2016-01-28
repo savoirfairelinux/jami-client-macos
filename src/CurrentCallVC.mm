@@ -46,6 +46,7 @@
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
 #import "BrokerVC.h"
+#import "AppDelegate.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -80,6 +81,7 @@
 @property (unsafe_unretained) IBOutlet NSButton* transferButton;
 @property (unsafe_unretained) IBOutlet NSButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet NSButton* chatButton;
+@property (unsafe_unretained) IBOutlet NSView* advancedPanel;
 
 @property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
@@ -120,7 +122,7 @@
 @implementation CurrentCallVC
 @synthesize personLabel, personPhoto, actionHash, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
-            muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, incomingDisplayName, incomingPersonPhoto,
+            muteVideoButton, muteAudioButton, controlsPanel, advancedPanel,headerContainer, videoView, incomingDisplayName, incomingPersonPhoto,
             previewView, splitView, loadingIndicator, ringingPanel, joinPanel, outgoingPanel;
 
 @synthesize previewHolder;
@@ -662,6 +664,16 @@
 
 - (IBAction)toggleHold:(id)sender {
     CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::HOLD;
+}
+
+- (IBAction)toggleAdvancedControls:(id)sender {
+    [sender setHighlighted:[sender state]];
+    [advancedPanel setHidden:![sender state]];
+}
+
+- (IBAction)showDialpad:(id)sender {
+    AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    [appDelegate showDialpad];
 }
 
 -(IBAction)toggleChat:(id)sender;
