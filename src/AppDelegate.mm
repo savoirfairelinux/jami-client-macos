@@ -33,6 +33,7 @@
 
 #import "Constants.h"
 #import "RingWizardWC.h"
+#import "DialpadWC.h"
 
 #if ENABLE_SPARKLE
 @interface AppDelegate() <SUUpdaterDelegate>
@@ -42,6 +43,7 @@
 
 @property RingWindowController* ringWindowController;
 @property RingWizardWC* wizard;
+@property DialpadWC* dialpad;
 
 @end
 
@@ -170,6 +172,15 @@
     }
     [self.ringWindowController.window makeKeyAndOrderFront:self];
 }
+
+- (void) showDialpad
+{
+    if(self.dialpad == nil) {
+        self.dialpad = [[DialpadWC alloc] initWithWindowNibName:@"Dialpad"];
+    }
+    [self.dialpad.window orderFront:self];
+}
+
 
 - (BOOL) checkForRingAccount
 {
