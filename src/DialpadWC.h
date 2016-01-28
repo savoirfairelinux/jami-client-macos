@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -17,16 +17,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <AppKit/NSApplication.h> // NSApplicationDelegate
+#import <Cocoa/Cocoa.h>
 
-#import "RingWindowController.h"
-#import "PreferencesWindowController.h"
-
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
-
-- (void) showWizard;
-- (void) showMainWindow;
-- (void) showDialpad;
-- (BOOL) checkForRingAccount;
+@interface DialpadWC : NSWindowController <NSWindowDelegate>
 
 @end
