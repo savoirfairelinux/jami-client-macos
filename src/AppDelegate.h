@@ -26,6 +26,7 @@
 
 - (void) showWizard;
 - (void) showMainWindow;
+- (void) showDialpad;
 - (BOOL) checkForRingAccount;
 
 @end

@@ -40,6 +40,7 @@
 #import <person.h>
 #import <globalinstances.h>
 
+#import "AppDelegate.h"
 #import "views/ITProgressIndicator.h"
 #import "views/CallView.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -74,6 +75,7 @@
 
 // Call Controls
 @property (unsafe_unretained) IBOutlet NSView* controlsPanel;
+
 @property QHash<int, IconButton*> actionHash;
 @property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
@@ -85,6 +87,9 @@
 @property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
+
+@property (unsafe_unretained) IBOutlet NSView* advancedPanel;
+@property (unsafe_unretained) IBOutlet IconButton* advancedButton;
 
 
 // Join call panel
@@ -120,7 +125,7 @@
 @implementation CurrentCallVC
 @synthesize personLabel, personPhoto, actionHash, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
-            muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, incomingDisplayName, incomingPersonPhoto,
+            muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView, incomingDisplayName, incomingPersonPhoto,
             previewView, splitView, loadingIndicator, ringingPanel, joinPanel, outgoingPanel;
 
 @synthesize previewHolder;
@@ -551,6 +556,9 @@
     [timeSpentLabel setStringValue:@""];
     [stateLabel setStringValue:@""];
     [self.addContactButton setHidden:YES];
+
+    [advancedButton setPressed:NO];
+    [advancedPanel setHidden:YES];
 }
 
 -(void) animateOut
@@ -661,6 +669,16 @@
     CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::HOLD;
 }
 
+- (IBAction)toggleAdvancedControls:(id)sender {
+    [advancedButton setPressed:!advancedButton.isPressed];
+    [advancedPanel setHidden:![advancedButton isPressed]];
+}
+
+- (IBAction)showDialpad:(id)sender {
+    AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    [appDelegate showDialpad];
+}
+
 -(IBAction)toggleChat:(id)sender;
 {
     BOOL rightViewCollapsed = [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]];
@@ -670,7 +688,7 @@
     } else {
         [self collapseRightView];
     }
-    [chatButton setState:rightViewCollapsed];
+    [chatButton setPressed:rightViewCollapsed];
 }
 
 - (IBAction)muteAudio:(id)sender
@@ -689,7 +707,7 @@
     if (_brokerPopoverVC != nullptr) {
         [_brokerPopoverVC performClose:self];
         _brokerPopoverVC = NULL;
-        [self.transferButton setState:NSOffState];
+        [self.transferButton setPressed:NO];
     } else {
         auto* brokerVC = [[BrokerVC alloc] initWithMode:BrokerMode::TRANSFER];
         _brokerPopoverVC = [[NSPopover alloc] init];
@@ -707,7 +725,7 @@
     if (_brokerPopoverVC != nullptr) {
         [_brokerPopoverVC performClose:self];
         _brokerPopoverVC = NULL;
-        [self.addParticipantButton setState:NSOffState];
+        [self.addParticipantButton setPressed:NO];
     } else {
         auto* brokerVC = [[BrokerVC alloc] initWithMode:BrokerMode::CONFERENCE];
         _brokerPopoverVC = [[NSPopover alloc] init];
@@ -744,8 +762,8 @@
         self.addToContactPopover = NULL;
     }
 
-    [self.addContactButton setState:NSOffState];
-    [self.transferButton setState:NSOffState];
+    [self.addContactButton setPressed:NO];
+    [self.transferButton setPressed:NO];
     [self.addParticipantButton setState:NSOffState];
 }
 

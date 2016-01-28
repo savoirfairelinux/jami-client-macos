@@ -35,6 +35,7 @@
 
 #import "Constants.h"
 #import "RingWizardWC.h"
+#import "DialpadWC.h"
 
 #if ENABLE_SPARKLE
 @interface AppDelegate() <SUUpdaterDelegate>
@@ -46,6 +47,7 @@
 @property RingWizardWC* wizard;
 @property (nonatomic, strong) dispatch_queue_t scNetworkQueue;
 @property (nonatomic, assign) SCNetworkReachabilityRef currentReachability;
+@property DialpadWC* dialpad;
 
 @end
 
@@ -220,6 +222,15 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     }
     [self.ringWindowController.window makeKeyAndOrderFront:self];
 }
+
+- (void) showDialpad
+{
+    if(self.dialpad == nil) {
+        self.dialpad = [[DialpadWC alloc] initWithWindowNibName:@"Dialpad"];
+    }
+    [self.dialpad.window orderFront:self];
+}
+
 
 - (BOOL) checkForRingAccount
 {

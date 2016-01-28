@@ -175,6 +175,7 @@ NSInteger const TAG_TYPE        =   400;
                                           AccountModel::instance().protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
     auto acc = AccountModel::instance().add([newAccName UTF8String], qIdx);
     acc->setDisplayName(acc->alias());
+    acc->setDTMFType(DtmfType::OverSip);
     AccountModel::instance().save();
 }
 
