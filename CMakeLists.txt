@@ -175,7 +175,7 @@ SET(ringclient_XIBS
 # This part tells CMake where to find and install the file itself
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
-       MACOSX_PACKAGE_LOCATION "Resources")
+       MACOSX_PACKAGE_LOCATION Resources)
 
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
@@ -215,6 +215,16 @@ SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
 SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
+# package all ringtones in share/ring/ringtones/
+FILE(GLOB RINGTONE_LIST ${CMAKE_INSTALL_PREFIX}/share/ring/ringtones/*)
+
+FOREACH(RINGTONE ${RINGTONE_LIST})
+    GET_FILENAME_COMPONENT(FILE_PATH ${RINGTONE} ABSOLUTE)
+    SET(ring_RINGTONES ${ring_RINGTONES} ${FILE_PATH})
+ENDFOREACH()
+
+SET_SOURCE_FILES_PROPERTIES(${ring_RINGTONES}
+                PROPERTIES MACOSX_PACKAGE_LOCATION Resources/ringtones)
 
 # Check which translations are found for LRC
 SET(LRC_TRANSLATIONS_PATH ${CMAKE_INSTALL_PREFIX}/share/libringclient/translations)
@@ -240,7 +250,7 @@ FOREACH(LPROJ ${LPROJ_LIST})
     IF(EXISTS "${LPROJ}/Localizable.strings")
         MESSAGE("Localizable:" ${LANG})
         SET_SOURCE_FILES_PROPERTIES(${LPROJ}/Localizable.strings
-                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${LANG}.lproj/)
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${LANG}.lproj)
 
         SET(LOCALIZED_${LANG} ${LOCALIZED_${LANG}}
                         ${LPROJ}/Localizable.strings)
@@ -248,9 +258,9 @@ FOREACH(LPROJ ${LPROJ_LIST})
     FOREACH(xib ${ringclient_XIBS})
        IF(EXISTS "${LPROJ}/${xib}.strings")
             SET_SOURCE_FILES_PROPERTIES(${LPROJ}/${xib}.strings
-                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${LANG}.lproj/)
+                        PROPERTIES MACOSX_PACKAGE_LOCATION Resources/${LANG}.lproj)
 
-        SET(LOCALIZED_${LANG} ${LOCALIZED_${LANG}}
+            SET(LOCALIZED_${LANG} ${LOCALIZED_${LANG}}
                         ${LPROJ}/${xib}.strings)
         ENDIF()
     ENDFOREACH()
@@ -276,7 +286,8 @@ SET(TO_ADD
    ${LOCALIZABLE_FILES}
    ${myApp_ICON}
    Credits.rtf
-   ${ring_ICONS})
+   ${ring_ICONS}
+   ${ring_RINGTONES})
 
 IF(ENABLE_SPARKLE)
    SET( TO_ADD ${TO_ADD} ${PUBLIC_KEY} ${SPARKLE_FRAMEWORK})
@@ -291,6 +302,7 @@ SOURCE_GROUP("CustomViews" FILES ${ringclient_VIEWS})
 SOURCE_GROUP("Classes" FILES ${ringclient_OTHERS})
 SOURCE_GROUP("Resources\\Interface Builder" FILES
                                     ${ringclient_XIBS_FOR_EXECUTABLE})
+SOURCE_GROUP("Resources\\ringtones" FILES ${ring_RINGTONES})
 
 IF(ENABLE_SPARKLE)
     SOURCE_GROUP("Frameworks" FILES ${SPARKLE_FRAMEWORK})
