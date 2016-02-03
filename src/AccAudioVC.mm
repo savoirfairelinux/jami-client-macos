@@ -23,21 +23,28 @@
 
 #import "AccAudioVC.h"
 
+///Qt
 #import <QSortFilterProxyModel>
+#import <qitemselectionmodel.h>
+
+///LRC
 #import <audio/codecmodel.h>
 #import <accountmodel.h>
-#import <qitemselectionmodel.h>
+#import <ringtonemodel.h>
 
 @interface AccAudioVC ()
 
-@property QNSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *codecsView;
+@property QNSTreeController* treeController;
+@property (assign) IBOutlet NSOutlineView* codecsView;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *ringtonePopUpButton;
+@property (unsafe_unretained) IBOutlet NSButton* enableRingtone;
 
 @end
 
 @implementation AccAudioVC
 @synthesize treeController;
 @synthesize codecsView;
+@synthesize ringtonePopUpButton, enableRingtone;
 
 - (void)awakeFromNib
 {
@@ -68,6 +75,23 @@
     [codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
     [codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+
+    QModelIndex qIdx = RingtoneModel::instance().selectionModel(account)->currentIndex();
+    [ringtonePopUpButton addItemWithTitle:RingtoneModel::instance().data(qIdx, Qt::DisplayRole).toString().toNSString()];
+
+    [enableRingtone setState:account->isRingtoneEnabled()];
+    [ringtonePopUpButton setEnabled:account->isRingtoneEnabled()];
+}
+
+- (IBAction)toggleRingtoneEnabled:(id)sender {
+    [self currentAccount]->setRingtoneEnabled([sender state]);
+    [ringtonePopUpButton setEnabled:[sender state]];
+}
+
+- (IBAction)chooseRingtone:(id)sender {
+    int index = [sender indexOfSelectedItem];
+    QModelIndex qIdx = RingtoneModel::instance().index(index, 0);
+    RingtoneModel::instance().selectionModel([self currentAccount])->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (IBAction)moveUp:(id)sender {
@@ -177,6 +201,25 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
 
+}
+
+#pragma mark - NSMenuDelegate methods
+
+- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
+{
+    QModelIndex qIdx;
+    qIdx = RingtoneModel::instance().index(index, 0);
+    [item setTitle:RingtoneModel::instance().data(qIdx, Qt::DisplayRole).toString().toNSString()];
+
+    if (qIdx == RingtoneModel::instance().selectionModel([self currentAccount])->currentIndex()) {
+        [ringtonePopUpButton selectItem:item];
+    }
+    return YES;
+}
+
+- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
+{
+    return RingtoneModel::instance().rowCount();
 }
 
 @end
