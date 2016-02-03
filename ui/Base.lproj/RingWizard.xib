@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardWC">
@@ -11,7 +11,7 @@
                 <outlet property="createButton" destination="rC1-mU-Scu" id="JrT-qi-fF5"/>
                 <outlet property="goToAppButton" destination="hKA-b6-heE" id="voO-WW-sdE"/>
                 <outlet property="indicationLabel" destination="PZB-UI-B3R" id="t79-DV-rKR"/>
-                <outlet property="nickname" destination="Phj-na-SP1" id="HYj-kV-lyE"/>
+                <outlet property="nicknameField" destination="Phj-na-SP1" id="e9d-3N-z9N"/>
                 <outlet property="passwordField" destination="1nU-BV-LdG" id="1fI-Xa-L9w"/>
                 <outlet property="progressBar" destination="nRx-qJ-VIe" id="qJ2-ra-GkK"/>
                 <outlet property="pvkContainer" destination="he3-z9-OHD" id="rmf-aA-Lv6"/>
@@ -31,7 +31,7 @@
                 <rect key="frame" x="0.0" y="5" width="480" height="173"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rAn-Kv-PgL">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rAn-Kv-PgL">
                         <rect key="frame" x="18" y="117" width="231" height="36"/>
                         <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Ring" id="uqu-uh-Wao">
                             <font key="font" metaFont="system" size="30"/>
@@ -61,7 +61,7 @@ DQ
                             <constraint firstAttribute="width" constant="96" id="EN6-qO-gH1"/>
                         </constraints>
                     </progressIndicator>
-                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKA-b6-heE">
+                    <button hidden="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKA-b6-heE">
                         <rect key="frame" x="306" y="17" width="80" height="29"/>
                         <buttonCell key="cell" type="bevel" title="Continue" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kwr-LJ-K8C">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
