@@ -31,19 +31,19 @@
 #import "AppDelegate.h"
 
 @implementation RingWizardWC {
-    __unsafe_unretained IBOutlet NSButton *goToAppButton;
-    __unsafe_unretained IBOutlet NSTextField *nickname;
-    __unsafe_unretained IBOutlet NSProgressIndicator *progressBar;
-    __unsafe_unretained IBOutlet NSTextField *indicationLabel;
-    __unsafe_unretained IBOutlet NSButton *createButton;
-    __unsafe_unretained IBOutlet NSButton *showCustomCertsButton;
+    __unsafe_unretained IBOutlet NSButton* goToAppButton;
+    __unsafe_unretained IBOutlet NSTextField* nicknameField;
+    __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
+    __unsafe_unretained IBOutlet NSTextField* indicationLabel;
+    __unsafe_unretained IBOutlet NSButton* createButton;
+    __unsafe_unretained IBOutlet NSButton* showCustomCertsButton;
     IBOutlet NSView *securityContainer;
 
-    __unsafe_unretained IBOutlet NSSecureTextField *passwordField;
-    __unsafe_unretained IBOutlet NSView *pvkContainer;
-    __unsafe_unretained IBOutlet NSPathControl *certificatePathControl;
-    __unsafe_unretained IBOutlet NSPathControl *caListPathControl;
-    __unsafe_unretained IBOutlet NSPathControl *pvkPathControl;
+    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
+    __unsafe_unretained IBOutlet NSView* pvkContainer;
+    __unsafe_unretained IBOutlet NSPathControl* certificatePathControl;
+    __unsafe_unretained IBOutlet NSPathControl* caListPathControl;
+    __unsafe_unretained IBOutlet NSPathControl* pvkPathControl;
     BOOL isExpanded;
     Account* accountToCreate;
 }
@@ -55,7 +55,7 @@ NSInteger const NICKNAME_TAG        = 1;
     [super windowDidLoad];
 
     [passwordField setTag:PVK_PASSWORD_TAG];
-    [nickname setTag:NICKNAME_TAG];
+    [nicknameField setTag:NICKNAME_TAG];
 
     isExpanded = false;
     [self.window makeKeyAndOrderFront:nil];
@@ -65,6 +65,8 @@ NSInteger const NICKNAME_TAG        = 1;
 
     if(![appDelegate checkForRingAccount]) {
         accountToCreate = AccountModel::instance().add("", Account::Protocol::RING);
+        [nicknameField setStringValue:NSUserName()];
+        [self toggleCreateButton:NSUserName()];
     } else {
         [indicationLabel setStringValue:NSLocalizedString(@"Ring is already ready to work",
                                                           @"Display message to user")];
@@ -79,10 +81,10 @@ NSInteger const NICKNAME_TAG        = 1;
 
 - (void) displayHash:(NSString* ) hash
 {
-    [nickname setFrameSize:NSMakeSize(400, nickname.frame.size.height)];
-    [nickname setStringValue:hash];
-    [nickname setEditable:NO];
-    [nickname setHidden:NO];
+    [nicknameField setFrameSize:NSMakeSize(400, nicknameField.frame.size.height)];
+    [nicknameField setStringValue:hash];
+    [nicknameField setEditable:NO];
+    [nicknameField setHidden:NO];
 
     [showCustomCertsButton setHidden:YES];
 
@@ -100,7 +102,7 @@ NSInteger const NICKNAME_TAG        = 1;
 
 - (IBAction)createRingAccount:(id)sender
 {
-    [nickname setHidden:YES];
+    [nicknameField setHidden:YES];
     [progressBar setHidden:NO];
     [createButton setEnabled:NO];
     [indicationLabel setStringValue:NSLocalizedString(@"Just a moment...",
@@ -173,6 +175,13 @@ NSInteger const NICKNAME_TAG        = 1;
     }
 }
 
+- (void) toggleCreateButton:(NSString*) alias
+{
+    [createButton setEnabled:![alias isEqualToString:@""]];
+    accountToCreate->setAlias([alias UTF8String]);
+    accountToCreate->setDisplayName([alias UTF8String]);
+}
+
 - (IBAction)goToApp:(id)sender
 {
     [self.window close];
@@ -182,7 +191,7 @@ NSInteger const NICKNAME_TAG        = 1;
 
 - (void) shareByEmail
 {
-    NSMutableArray *shareItems = [[NSMutableArray alloc] initWithObjects:[nickname stringValue], nil];
+    NSMutableArray *shareItems = [[NSMutableArray alloc] initWithObjects:[nicknameField stringValue], nil];
     NSSharingService* emailSharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
     [emailSharingService performWithItems:shareItems];
 }
@@ -291,21 +300,14 @@ NSInteger const NICKNAME_TAG        = 1;
 
 -(void)controlTextDidChange:(NSNotification *)notif
 {
-    NSTextField *textField = [notif object];
+    NSTextField* textField = [notif object];
     if (textField.tag == PVK_PASSWORD_TAG) {
         accountToCreate->setTlsPassword([textField.stringValue UTF8String]);
         return;
     }
 
     // else it is NICKNAME_TAG field
-    if ([textField.stringValue isEqualToString:@""]) {
-        [createButton setEnabled:NO];
-    } else {
-        [createButton setEnabled:YES];
-    }
-
-    accountToCreate->setAlias([textField.stringValue UTF8String]);
-    accountToCreate->setDisplayName([textField.stringValue UTF8String]);
+    [self toggleCreateButton:textField.stringValue];
 }
 
 # pragma NSWindowDelegate methods
