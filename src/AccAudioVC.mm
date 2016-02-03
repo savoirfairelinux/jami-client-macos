@@ -23,21 +23,30 @@
 
 #import "AccAudioVC.h"
 
+///Qt
 #import <QSortFilterProxyModel>
+#import <qitemselectionmodel.h>
+
+///LRC
 #import <audio/codecmodel.h>
 #import <accountmodel.h>
-#import <qitemselectionmodel.h>
+#import <ringtonemodel.h>
+#import <ringtone.h>
 
 @interface AccAudioVC ()
 
-@property QNSTreeController *treeController;
-@property (assign) IBOutlet NSOutlineView *codecsView;
+@property QNSTreeController* treeController;
+@property (assign) IBOutlet NSOutlineView* codecsView;
+@property (unsafe_unretained) IBOutlet NSPopUpButton* ringtonePopUpButton;
+@property (unsafe_unretained) IBOutlet NSButton* enableRingtone;
+@property (unsafe_unretained) IBOutlet NSButton* playRingtone;
 
 @end
 
 @implementation AccAudioVC
 @synthesize treeController;
 @synthesize codecsView;
+@synthesize ringtonePopUpButton, enableRingtone, playRingtone;
 
 - (void)awakeFromNib
 {
@@ -48,6 +57,21 @@
                          if(!current.isValid())
                              return;
                          [self loadAccount];
+                     });
+
+    QObject::connect(&RingtoneModel::instance(),
+                     &QAbstractItemModel::dataChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+
+                         NSString* label;
+                         if (!RingtoneModel::instance().isPlaying()) {
+                             label = NSLocalizedString(@"Play", @"Button label");
+                         } else {
+                             label = NSLocalizedString(@"Pause", @"Button label");
+                         }
+                         [playRingtone setTitle:label];
                      });
 }
 
@@ -68,6 +92,29 @@
     [codecsView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
     [codecsView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [codecsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+
+    QModelIndex qIdx = RingtoneModel::instance().selectionModel(account)->currentIndex();
+    [ringtonePopUpButton removeAllItems];
+    [ringtonePopUpButton addItemWithTitle:RingtoneModel::instance().data(qIdx, Qt::DisplayRole).toString().toNSString()];
+
+    [enableRingtone setState:account->isRingtoneEnabled()];
+    [ringtonePopUpButton setEnabled:account->isRingtoneEnabled()];
+}
+
+- (IBAction)startStopRingtone:(id)sender {
+    auto qIdx = RingtoneModel::instance().selectionModel([self currentAccount])->currentIndex();
+    RingtoneModel::instance().play(qIdx);
+}
+
+- (IBAction)toggleRingtoneEnabled:(id)sender {
+    [self currentAccount]->setRingtoneEnabled([sender state]);
+    [ringtonePopUpButton setEnabled:[sender state]];
+}
+
+- (IBAction)chooseRingtone:(id)sender {
+    int index = [sender indexOfSelectedItem];
+    QModelIndex qIdx = RingtoneModel::instance().index(index, 0);
+    RingtoneModel::instance().selectionModel([self currentAccount])->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (IBAction)moveUp:(id)sender {
@@ -171,12 +218,23 @@
     }
 }
 
-// -------------------------------------------------------------------------------
-//	outlineViewSelectionDidChange:notification
-// -------------------------------------------------------------------------------
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
+#pragma mark - NSMenuDelegate methods
 
+- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
+{
+    QModelIndex qIdx;
+    qIdx = RingtoneModel::instance().index(index, 0);
+    [item setTitle:RingtoneModel::instance().data(qIdx, Qt::DisplayRole).toString().toNSString()];
+
+    if (qIdx == RingtoneModel::instance().selectionModel([self currentAccount])->currentIndex()) {
+        [ringtonePopUpButton selectItem:item];
+    }
+    return YES;
+}
+
+- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
+{
+    return RingtoneModel::instance().rowCount();
 }
 
 @end
