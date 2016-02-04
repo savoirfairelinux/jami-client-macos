@@ -16,11 +16,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#define COLUMNID_STATE   @"AudioStateColumn"
-#define COLUMNID_CODECS   @"AudioCodecsColumn"
-#define COLUMNID_FREQ     @"AudioFrequencyColumn"
-#define COLUMNID_BITRATE  @"AudioBitrateColumn"
-
 #import "AccAudioVC.h"
 
 ///Qt
@@ -48,8 +43,13 @@
 @synthesize codecsView;
 @synthesize ringtonePopUpButton, enableRingtone, playRingtone;
 
-- (void)awakeFromNib
+NSInteger const TAG_CHECK       =   100;
+NSInteger const TAG_NAME        =   200;
+NSInteger const TAG_FREQUENCY   =   300;
+
+- (void) loadView
 {
+    [super loadView];
     NSLog(@"INIT Audio VC");
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
@@ -139,83 +139,34 @@
     }
 }
 
-- (IBAction)toggleCodec:(NSOutlineView*)sender {
-    NSInteger row = [sender clickedRow];
-    NSTableColumn *col = [sender tableColumnWithIdentifier:COLUMNID_STATE];
-    NSButtonCell *cell = [col dataCellForRow:row];
+- (IBAction)toggleCodec:(NSButton*)sender {
+    NSInteger row = [codecsView rowForView:sender];
     QModelIndex qIdx = [self currentAccount]->codecModel()->audioCodecs()->index(row, 0, QModelIndex());
-    [self currentAccount]->codecModel()->audioCodecs()->setData(qIdx, cell.state == NSOnState ? Qt::Unchecked : Qt::Checked, Qt::CheckStateRole);
+    [self currentAccount]->codecModel()->audioCodecs()->setData(qIdx, sender.state == NSOnState ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
 }
 
 #pragma mark - NSOutlineViewDelegate methods
 
-// -------------------------------------------------------------------------------
-//	shouldSelectItem:item
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     return YES;
 }
 
-// -------------------------------------------------------------------------------
-//	dataCellForTableColumn:tableColumn:item
-// -------------------------------------------------------------------------------
-- (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    NSCell *returnCell = [tableColumn dataCell];
+    NSTableView* result = [outlineView makeViewWithIdentifier:@"CodecView" owner:self];
 
-    if(item == nil)
-        return returnCell;
-
-    return returnCell;
-}
-
-// -------------------------------------------------------------------------------
-//	textShouldEndEditing:fieldEditor
-// -------------------------------------------------------------------------------
-- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
-{
-    if ([[fieldEditor string] length] == 0)
-    {
-        // don't allow empty node names
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
-}
-
-// -------------------------------------------------------------------------------
-//	shouldEditTableColumn:tableColumn:item
-//
-//	Decide to allow the edit of the given outline view "item".
-// -------------------------------------------------------------------------------
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-    return NO;
-}
-
-// -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
-- (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid())
-        return;
-    if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
-        [cell setState:[self currentAccount]->codecModel()->audioCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_CODECS])
-    {
-        cell.title = [self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_FREQ])
-    {
-        cell.title = [self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString();
-    } else if ([[tableColumn identifier] isEqualToString:COLUMNID_BITRATE])
-    {
-        cell.title = [self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::BITRATE).toString().toNSString();
-    }
+        return result;
+    NSTextField* name = [result viewWithTag:TAG_NAME];
+    NSTextField* frequency = [result viewWithTag:TAG_FREQUENCY];
+    NSButton* check = [result viewWithTag:TAG_CHECK];
+
+    [name setStringValue:[self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::NAME).toString().toNSString()];
+    [frequency setStringValue:[NSString stringWithFormat:@"%@ Hz", [self currentAccount]->codecModel()->audioCodecs()->data(qIdx, CodecModel::Role::SAMPLERATE).toString().toNSString()]];
+    [check setState:[self currentAccount]->codecModel()->audioCodecs()->data(qIdx, Qt::CheckStateRole).value<BOOL>()?NSOnState:NSOffState];
+    return result;
 }
 
 #pragma mark - NSMenuDelegate methods
