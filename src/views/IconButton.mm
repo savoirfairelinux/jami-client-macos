@@ -33,7 +33,7 @@
     }
 
     if (self.imageInsets == 0)
-        self.imageInsets = 5.0f;
+        self.imageInsets = 8.0f;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
