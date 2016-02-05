@@ -60,11 +60,12 @@
     [self.muteDTMFButton setState:
             Audio::Settings::instance().areDTMFMuted()?NSOnState:NSOffState];
 
-    if([[Media::RecordingModel::instance().recordPath().toNSURL() absoluteString] isEqualToString:@""]) {
-        NSArray * pathComponentArray = [self pathComponentArray];
+    if([Media::RecordingModel::instance().recordPath().toNSString() isEqualToString:@""]) {
+        NSArray* pathComponentArray = [self pathComponentArray];
         [recordingsPathControl setPathComponentCells:pathComponentArray];
     } else {
-        [recordingsPathControl setURL:Media::RecordingModel::instance().recordPath().toNSURL()];
+        [recordingsPathControl setURL:
+         [NSURL URLWithString:Media::RecordingModel::instance().recordPath().toNSString()]];
     }
 }
 
@@ -81,7 +82,7 @@
 - (IBAction)pathControlSingleClick:(id)sender {
     // Select that chosen component of the path.
     [self.recordingsPathControl setURL:[[self.recordingsPathControl clickedPathComponentCell] URL]];
-    Media::RecordingModel::instance().setRecordPath(QUrl::fromNSURL(self.recordingsPathControl.URL));
+    Media::RecordingModel::instance().setRecordPath(QString::fromNSString([self.recordingsPathControl.URL path]));
 }
 
 - (IBAction)chooseOutput:(id)sender {
