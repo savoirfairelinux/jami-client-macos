@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa6b99d7_8ebf8bd0",
+        "filename": "src/AccAudioVC.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-02-05T17:29:45Z",
+      "side": 1,
+      "message": "You should use \u003cQItemSelectionModel\u003e",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 30
+      },
+      "revId": "a499b2355c7ffc4b7d13d86066751f20bff6afbc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
