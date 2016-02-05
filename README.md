@@ -3,6 +3,11 @@ Ring Mac OSX
 
 This is the official Mac port of Ring.
 
+For more information about the ring project, see the following:
+- Main website: https://ring.cx/
+- Bug tracker: https://tuleap.ring.cx/projects/ring/
+- Repositories: https://gerrit-ring.savoirfairelinux.com
+
 Requirements
 =============
 
