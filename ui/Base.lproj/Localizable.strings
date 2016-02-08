@@ -28,6 +28,9 @@
 /* Contextual menu entry */
 "Choose file" = "Choose file";
 
+/* Continue button */
+"Continue" = "Continue";
+
 /* No comment provided by engineer. */
 "Copy" = "Copy";
 
@@ -43,6 +46,15 @@
 /* Message from {Name} */
 "Message from %@" = "Message from %@";
 
+/* Button label */
+"Pause" = "Pause";
+
+/* Button label */
+"Play" = "Play";
+
+/* Button Action */
+"Refuse" = "Refuse";
+
 /* Contextual menu entry */
 "Remove value" = "Remove value";
 
@@ -54,9 +66,6 @@
 
 /* No comment provided by engineer. */
 "Share" = "Share";
-
-/* Share button */
-"Share by mail" = "Share by mail";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
