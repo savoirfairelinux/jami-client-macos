@@ -29,9 +29,10 @@
 #import <certificate.h>
 
 #import "AppDelegate.h"
+#import "Constants.h"
+#import "views/NSColor+RingTheme.h"
 
 @implementation RingWizardWC {
-    __unsafe_unretained IBOutlet NSButton* goToAppButton;
     __unsafe_unretained IBOutlet NSTextField* nicknameField;
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
     __unsafe_unretained IBOutlet NSTextField* indicationLabel;
@@ -39,6 +40,7 @@
     __unsafe_unretained IBOutlet NSButton* showCustomCertsButton;
     IBOutlet NSView *securityContainer;
 
+    __unsafe_unretained IBOutlet NSButton* shareButton;
     __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
     __unsafe_unretained IBOutlet NSView* pvkContainer;
     __unsafe_unretained IBOutlet NSPathControl* certificatePathControl;
@@ -58,15 +60,14 @@ NSInteger const NICKNAME_TAG        = 1;
     [nicknameField setTag:NICKNAME_TAG];
 
     isExpanded = false;
-    [self.window makeKeyAndOrderFront:nil];
-    [self.window setLevel:NSStatusWindowLevel];
-    [self.window makeMainWindow];
-    AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
+
+    AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
 
     if(![appDelegate checkForRingAccount]) {
-        accountToCreate = AccountModel::instance().add("", Account::Protocol::RING);
+        accountToCreate = AccountModel::instance().add(QString::fromNSString(NSFullUserName()), Account::Protocol::RING);
         [nicknameField setStringValue:NSFullUserName()];
-        [self toggleCreateButton:NSFullUserName()];
+        [self controlTextDidChange:[NSNotification notificationWithName:@"PlaceHolder" object:nicknameField]];
     } else {
         [indicationLabel setStringValue:NSLocalizedString(@"Ring is already ready to work",
                                                           @"Display message to user")];
@@ -88,23 +89,29 @@ NSInteger const NICKNAME_TAG        = 1;
 
     [showCustomCertsButton setHidden:YES];
 
-    [goToAppButton setHidden:NO];
+    [shareButton setHidden:NO];
+    [shareButton sendActionOn:NSLeftMouseDownMask];
 
     NSSharingService* emailSharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
 
-    [createButton setTitle:NSLocalizedString(@"Share by mail",
-                                             @"Share button")];
-    [createButton setAlternateImage:emailSharingService.alternateImage];
-    [createButton setEnabled:YES];
+    [createButton setTitle:NSLocalizedString(@"Continue",
+                                             @"Continue button")];
+    [createButton setAction:@selector(goToApp:)];
+}
 
-    [createButton setAction:@selector(shareByEmail)];
+- (IBAction)shareRingID:(id)sender {
+    NSSharingServicePicker* sharingServicePicker = [[NSSharingServicePicker alloc] initWithItems:[NSArray arrayWithObject:[nicknameField stringValue]]];
+    [sharingServicePicker showRelativeToRect:[sender bounds]
+                                      ofView:sender
+                               preferredEdge:NSMinYEdge];
 }
 
 - (IBAction)createRingAccount:(id)sender
 {
     [nicknameField setHidden:YES];
     [progressBar setHidden:NO];
-    [createButton setEnabled:NO];
+    [createButton setHidden:YES];
+    [progressBar startAnimation:nil];
     [indicationLabel setStringValue:NSLocalizedString(@"Just a moment...",
                                                       @"Indication for user")];
 
@@ -118,19 +125,23 @@ NSInteger const NICKNAME_TAG        = 1;
     [showCustomCertsButton setHidden:YES];
 
     [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
-    [self registerAutoStartup];
+    [self registerDefaultPreferences];
 }
 
 /**
- * Enable launch at startup by default
+ * Set default values for preferences
  */
-- (void) registerAutoStartup
+- (void) registerDefaultPreferences
 {
+    // enable AutoStartup
     LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
     if (loginItemsRef == nil) return;
     CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
     LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
     if (itemRef) CFRelease(itemRef);
+
+    // enable Notifications
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::Notifications];
 }
 
 - (void) saveAccount
@@ -146,7 +157,7 @@ NSInteger const NICKNAME_TAG        = 1;
                      [=](Account *account, const Account::RegistrationState state) {
                          NSLog(@"Account created!");
                          [progressBar setHidden:YES];
-                         [createButton setEnabled:YES];
+                         [createButton setHidden:NO];
                          [indicationLabel setStringValue:NSLocalizedString(@"This is your number, share it with your friends!", @"Indication to user")];
                          [self displayHash:account->username().toNSString()];
                      });
@@ -175,25 +186,11 @@ NSInteger const NICKNAME_TAG        = 1;
     }
 }
 
-- (void) toggleCreateButton:(NSString*) alias
-{
-    [createButton setEnabled:![alias isEqualToString:@""]];
-    accountToCreate->setAlias([alias UTF8String]);
-    accountToCreate->setDisplayName([alias UTF8String]);
-}
-
 - (IBAction)goToApp:(id)sender
 {
     [self.window close];
-    AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [appDelegate showMainWindow];
-}
-
-- (void) shareByEmail
-{
-    NSMutableArray *shareItems = [[NSMutableArray alloc] initWithObjects:[nicknameField stringValue], nil];
-    NSSharingService* emailSharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
-    [emailSharingService performWithItems:shareItems];
 }
 
 #pragma mark - NSPathControl delegate methods
@@ -255,7 +252,6 @@ NSInteger const NICKNAME_TAG        = 1;
  */
 - (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
 {
-    NSLog(@"willDisplayOpenPanel");
     [openPanel setAllowsMultipleSelection:NO];
     [openPanel setCanChooseDirectories:NO];
     [openPanel setCanChooseFiles:YES];
@@ -307,14 +303,19 @@ NSInteger const NICKNAME_TAG        = 1;
     }
 
     // else it is NICKNAME_TAG field
-    [self toggleCreateButton:textField.stringValue];
+    NSString* alias = textField.stringValue;
+    if ([alias isEqualToString:@""]) {
+        alias = NSLocalizedString(@"Unknown", @"Name used when user leave field empty");
+    }
+    accountToCreate->setAlias([alias UTF8String]);
+    accountToCreate->setDisplayName([alias UTF8String]);
 }
 
 # pragma NSWindowDelegate methods
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     if ([appDelegate checkForRingAccount]) {
         [appDelegate showMainWindow];
     }
