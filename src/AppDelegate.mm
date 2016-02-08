@@ -117,13 +117,35 @@
 }
 
 - (void) showIncomingNotification:(Call*) call{
-    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    NSUserNotification* notification = [[NSUserNotification alloc] init];
     NSString* localizedTitle = [NSString stringWithFormat:
                                 NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"), call->peerName().toNSString()];
     [notification setTitle:localizedTitle];
     [notification setSoundName:NSUserNotificationDefaultSoundName];
 
+    // try to activate action button
+    @try {
+        [notification setValue:@YES forKey:@"_showsButtons"];
+    }
+    @catch (NSException *exception) {
+        // private API _showsButtons has changed...
+        NSLog(@"Action button not activable on notification");
+    }
+    [notification setActionButtonTitle:NSLocalizedString(@"Refuse", @"Button Action")];
+
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
+
+- (void) userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification
+{
+    if(notification.activationType == NSUserNotificationActivationTypeActionButtonClicked) {
+        CallModel::instance().selectedCall() << Call::Action::REFUSE;
+    } else {
+        [NSApp activateIgnoringOtherApps:YES];
+        if ([self.ringWindowController.window isMiniaturized]) {
+            [self.ringWindowController.window deminiaturize:self];
+        }
+    }
 }
 
 /**
