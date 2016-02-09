@@ -9,6 +9,7 @@
                 <outlet property="callView" destination="tSW-YT-asL" id="NRy-rM-XW4"/>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
+                <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="Dtg-mG-RBq"/>
             </connections>
         </customObject>
@@ -66,18 +67,45 @@
                                 <rect key="frame" x="251" y="379" width="225" height="75"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
                             </imageView>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge">
+                                <rect key="frame" x="572" y="224" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AXu-uA-KCC"/>
+                                    <constraint firstAttribute="width" constant="30" id="h6a-Lg-QRm"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSShareTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Z08-dU-5EN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
+                                </connections>
+                            </button>
+                            <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                                <rect key="frame" x="0.0" y="0.0" width="727" height="658"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="5yo-rb-X1O"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="f62-JV-dgr" secondAttribute="centerX" id="0hx-jq-Rdh"/>
+                            <constraint firstItem="Oac-o7-2Ge" firstAttribute="centerY" secondItem="JN3-vO-zcd" secondAttribute="centerY" id="DmH-TC-hZl"/>
                             <constraint firstAttribute="centerX" secondItem="VJ1-xk-v5e" secondAttribute="centerX" id="IcQ-Ld-A3j"/>
                             <constraint firstAttribute="centerY" secondItem="VJ1-xk-v5e" secondAttribute="centerY" id="J2C-dB-Q01"/>
+                            <constraint firstItem="Oac-o7-2Ge" firstAttribute="leading" secondItem="JN3-vO-zcd" secondAttribute="trailing" constant="8" id="Jfc-Gx-5Ey"/>
+                            <constraint firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="OW1-T7-eV8"/>
                             <constraint firstItem="VJ1-xk-v5e" firstAttribute="top" secondItem="f62-JV-dgr" secondAttribute="bottom" constant="8" id="PNC-n6-n33"/>
                             <constraint firstAttribute="centerY" secondItem="VJ1-xk-v5e" secondAttribute="centerY" id="Rst-Fd-Tpe"/>
+                            <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="Vm1-Ql-lxQ"/>
                             <constraint firstAttribute="centerX" secondItem="kFj-Sh-o5u" secondAttribute="centerX" id="Zjg-a3-qf3"/>
                             <constraint firstAttribute="centerX" secondItem="VJ1-xk-v5e" secondAttribute="centerX" id="a5y-o9-jjR"/>
                             <constraint firstItem="kFj-Sh-o5u" firstAttribute="top" secondItem="VJ1-xk-v5e" secondAttribute="bottom" constant="8" id="btp-Ro-DNa"/>
                             <constraint firstAttribute="centerX" secondItem="f62-JV-dgr" secondAttribute="centerX" id="iVv-51-Qnp"/>
+                            <constraint firstItem="tSW-YT-asL" firstAttribute="top" secondItem="Fzg-MB-mlx" secondAttribute="top" id="kVw-UP-9a7"/>
                             <constraint firstItem="JN3-vO-zcd" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="8" id="leT-Io-jce"/>
+                            <constraint firstItem="tSW-YT-asL" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="mCN-Pw-WJE"/>
                             <constraint firstAttribute="centerX" secondItem="kFj-Sh-o5u" secondAttribute="centerX" id="uly-BQ-ClC"/>
                             <constraint firstAttribute="centerX" secondItem="JN3-vO-zcd" secondAttribute="centerX" id="xdj-mG-iqh"/>
                         </constraints>
@@ -595,13 +623,6 @@
                             <constraint firstItem="PoQ-x4-ES3" firstAttribute="top" secondItem="YgH-CN-tkB" secondAttribute="top" constant="16" id="pW1-xU-j2q"/>
                         </constraints>
                     </customView>
-                    <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                        <rect key="frame" x="324" y="0.0" width="729" height="658"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="5yo-rb-X1O"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
-                        </constraints>
-                    </customView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="YgH-CN-tkB" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="H99-2E-fs4"/>
@@ -610,13 +631,9 @@
                     <constraint firstItem="Fzg-MB-mlx" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="trailing" constant="2" id="Xgw-Na-kgh"/>
                     <constraint firstItem="Pav-Bw-GgK" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="hcV-ir-ZEc"/>
                     <constraint firstAttribute="bottom" secondItem="YgH-CN-tkB" secondAttribute="bottom" id="hkC-sf-sNA"/>
-                    <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="hxe-yO-gZr"/>
                     <constraint firstAttribute="bottom" secondItem="Fzg-MB-mlx" secondAttribute="bottom" id="tQc-0j-ggO"/>
-                    <constraint firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="vz9-ln-Ysl"/>
                     <constraint firstItem="YgH-CN-tkB" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="w2k-lK-25U"/>
-                    <constraint firstItem="tSW-YT-asL" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="wxd-dG-Fqt"/>
                     <constraint firstItem="Fzg-MB-mlx" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="xvj-8r-P6I"/>
-                    <constraint firstItem="tSW-YT-asL" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="trailing" id="z3v-Gf-jfy"/>
                 </constraints>
             </view>
             <connections>
@@ -648,6 +665,7 @@
         </viewController>
     </objects>
     <resources>
+        <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_call" width="72" height="72"/>
         <image name="ic_action_cancel" width="48" height="48"/>

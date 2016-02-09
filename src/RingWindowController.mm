@@ -41,8 +41,9 @@
 
 @implementation RingWindowController {
 
-    __unsafe_unretained IBOutlet NSView *callView;
-    __unsafe_unretained IBOutlet NSTextField *ringIDLabel;
+    __unsafe_unretained IBOutlet NSView* callView;
+    __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
+    __unsafe_unretained IBOutlet NSButton* shareButton;
 
     PreferencesWC *preferencesWC;
     CurrentCallVC* currentCallVC;
@@ -70,6 +71,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
     // Fresh run, we need to make sure RingID appears
     [self updateRingID];
+    [shareButton sendActionOn:NSLeftMouseDownMask];
 
     [self connect];
 }
@@ -147,6 +149,13 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     }
 
     [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
+}
+
+- (IBAction)shareRingID:(id)sender {
+    NSSharingServicePicker* sharingServicePicker = [[NSSharingServicePicker alloc] initWithItems:[NSArray arrayWithObject:[ringIDLabel stringValue]]];
+    [sharingServicePicker showRelativeToRect:[sender bounds]
+                                      ofView:sender
+                               preferredEdge:NSMinYEdge];
 }
 
 - (IBAction)openPreferences:(id)sender
