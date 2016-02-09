@@ -32,10 +32,10 @@
 
 @interface VideoPrefsVC ()
 
-@property (assign) IBOutlet NSView *previewView;
-@property (assign) IBOutlet NSPopUpButton *videoDevicesList;
-@property (assign) IBOutlet NSPopUpButton *sizesList;
-@property (assign) IBOutlet NSPopUpButton *ratesList;
+@property (assign) IBOutlet NSView* previewView;
+@property (assign) IBOutlet NSPopUpButton* videoDevicesList;
+@property (assign) IBOutlet NSPopUpButton* sizesList;
+@property (assign) IBOutlet NSPopUpButton* ratesList;
 
 @property BOOL shouldHandlePreview;
 
@@ -55,38 +55,55 @@ QMetaObject::Connection previewStopped;
 {
     [super loadView];
 
+    // Make sure models are loaded
     Video::ConfigurationProxy::deviceModel().rowCount();
     Video::ConfigurationProxy::resolutionModel().rowCount();
     Video::ConfigurationProxy::rateModel().rowCount();
 
+    // Prepopulate values
     QModelIndex qDeviceIdx = Video::ConfigurationProxy::deviceSelectionModel().currentIndex();
-    qDeviceIdx = Video::ConfigurationProxy::deviceSelectionModel().currentIndex();
-
     [videoDevicesList addItemWithTitle:Video::ConfigurationProxy::deviceModel().data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
 
     QModelIndex qSizeIdx = Video::ConfigurationProxy::resolutionSelectionModel().currentIndex();
     [sizesList addItemWithTitle:Video::ConfigurationProxy::resolutionModel().data(qSizeIdx, Qt::DisplayRole).toString().toNSString()];
 
-    if(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::resolutionModel())) {
-        QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::resolutionModel()),
-                         &QAbstractProxyModel::modelReset,
-                         [=]() {
-                             NSLog(@"resolution Source model changed!!!");
-                         });
-
-    }
-
     QModelIndex qRate = Video::ConfigurationProxy::rateSelectionModel().currentIndex();
     [ratesList addItemWithTitle:Video::ConfigurationProxy::rateModel().data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
 
-    if(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::rateModel())) {
-        QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::rateModel()),
-                         &QAbstractProxyModel::modelReset,
-                         [=]() {
-                             NSLog(@"rates Source model changed!!!");
-                         });
+    // connect to model reset (device may have changed) and selection changed signals
+    QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::resolutionModel()),
+                     &QAbstractProxyModel::modelReset,
+                     [=]() {
+                         [sizesList removeAllItems];
+                     });
 
-    }
+    QObject::connect(&Video::ConfigurationProxy::resolutionSelectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if (!current.isValid()) {
+                             return;
+                         }
+                         [sizesList removeAllItems];
+                         [sizesList addItemWithTitle:Video::ConfigurationProxy::resolutionSelectionModel().currentIndex().data(Qt::DisplayRole).toString().toNSString()];
+
+                     });
+
+    QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::rateModel()),
+                     &QAbstractProxyModel::modelReset,
+                     [=]() {
+                         [ratesList removeAllItems];
+                     });
+
+    QObject::connect(&Video::ConfigurationProxy::rateSelectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if (!current.isValid()) {
+                             return;
+                         }
+                         [ratesList removeAllItems];
+                         [ratesList addItemWithTitle:Video::ConfigurationProxy::rateSelectionModel().currentIndex().data(Qt::DisplayRole).toString().toNSString()];
+
+                     });
 
     [previewView setWantsLayer:YES];
     [previewView setLayer:[CALayer layer]];
@@ -207,20 +224,24 @@ QMetaObject::Connection previewStopped;
 {
     QModelIndex qIdx;
     if(self.videoDevicesList.menu == menu) {
-
         qIdx = Video::ConfigurationProxy::deviceModel().index(index, 0);
         [item setTitle:Video::ConfigurationProxy::deviceModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
-
+        if (qIdx == Video::ConfigurationProxy::deviceSelectionModel().currentIndex()) {
+            [videoDevicesList selectItem:item];
+        }
     } else if(self.sizesList.menu == menu) {
-
         qIdx = Video::ConfigurationProxy::resolutionModel().index(index, 0);
         [item setTitle:Video::ConfigurationProxy::resolutionModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
+        if (qIdx == Video::ConfigurationProxy::resolutionSelectionModel().currentIndex()) {
+            [sizesList selectItem:item];
+        }
 
     } else if(self.ratesList.menu == menu) {
-
         qIdx = Video::ConfigurationProxy::rateModel().index(index, 0);
         [item setTitle:Video::ConfigurationProxy::rateModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
-
+        if (qIdx == Video::ConfigurationProxy::rateSelectionModel().currentIndex()) {
+            [ratesList selectItem:item];
+        }
     }
     return YES;
 }
