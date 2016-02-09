@@ -156,10 +156,9 @@ NSInteger const NICKNAME_TAG        = 1;
                      &AccountModel::accountStateChanged,
                      [=](Account *account, const Account::RegistrationState state) {
                          NSLog(@"Account created!");
-                         [progressBar setHidden:YES];
-                         [createButton setHidden:NO];
-                         [indicationLabel setStringValue:NSLocalizedString(@"This is your number, share it with your friends!", @"Indication to user")];
-                         [self displayHash:account->username().toNSString()];
+                         [self.window close];
+                         AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+                         [appDelegate showMainWindow];
                      });
 }
 
