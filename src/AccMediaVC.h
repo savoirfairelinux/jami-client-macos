@@ -21,6 +21,8 @@
 
 #import <account.h>
 
-@interface AccVideoVC : NSViewController <NSOutlineViewDelegate>
+#import "QNSTreeController.h"
+
+@interface AccMediaVC : NSViewController <NSOutlineViewDelegate>
 
 @end
