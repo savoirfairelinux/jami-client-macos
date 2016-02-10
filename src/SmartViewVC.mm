@@ -59,11 +59,12 @@
 @implementation SmartViewVC
 
 // Tags for views
-NSInteger const IMAGE_TAG       =   100;
-NSInteger const DISPLAYNAME_TAG =   200;
-NSInteger const DETAILS_TAG     =   300;
-NSInteger const CALL_BUTTON_TAG =   400;
-NSInteger const TXT_BUTTON_TAG  =   500;
+NSInteger const IMAGE_TAG           = 100;
+NSInteger const DISPLAYNAME_TAG     = 200;
+NSInteger const DETAILS_TAG         = 300;
+NSInteger const CALL_BUTTON_TAG     = 400;
+NSInteger const TXT_BUTTON_TAG      = 500;
+NSInteger const CANCEL_BUTTON_TAG   = 600;
 
 - (void)awakeFromNib
 {
@@ -227,6 +228,9 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
     } else {
         result = [outlineView makeViewWithIdentifier:@"CallCell" owner:outlineView];
+        NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CANCEL_BUTTON_TAG]];
+        [((ContextualTableCellView*) result) setContextualsControls:controls];
+        [((ContextualTableCellView*) result) setActiveState:NO];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
         [details setStringValue:qIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
@@ -259,14 +263,19 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (IBAction)hangUpClickedAtRow:(id)sender {
     NSInteger row = [smartView rowForView:sender];
-    [smartView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::REFUSE;
+    id callNode = [smartView itemAtRow:row];
+    auto callIdx = [treeController toQIdx:((NSTreeNode*)callNode)];
+
+    if (callIdx.isValid()) {
+        auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(callIdx));
+        call << Call::Action::REFUSE;
+    }
 }
 
 - (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    return (((NSTreeNode*)item).indexPath.length == 1) ? 60.0 : 45.0;
+    return (((NSTreeNode*)item).indexPath.length == 1) ? 60.0 : 50.0;
 }
 
 - (IBAction)placeCallFromSearchField:(id)sender
