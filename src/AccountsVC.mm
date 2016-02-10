@@ -32,8 +32,7 @@
 
 #import "QNSTreeController.h"
 #import "AccGeneralVC.h"
-#import "AccAudioVC.h"
-#import "AccVideoVC.h"
+#import "AccMediaVC.h"
 #import "AccAdvancedVC.h"
 #import "AccSecurityVC.h"
 #import "AccRingVC.h"
@@ -57,8 +56,7 @@ public:
 
 @property (assign) IBOutlet NSTabView *configPanels;
 @property (retain) IBOutlet NSTabViewItem *generalTabItem;
-@property (retain) IBOutlet NSTabViewItem *audioTabItem;
-@property (retain) IBOutlet NSTabViewItem *videoTabItem;
+@property (retain) IBOutlet NSTabViewItem *mediaTabItem;
 @property (retain) IBOutlet NSTabViewItem *advancedTabItem;
 @property (retain) IBOutlet NSTabViewItem *securityTabItem;
 @property (retain) IBOutlet NSTabViewItem *ringTabItem;
@@ -70,8 +68,7 @@ public:
 
 @property AccRingVC* ringVC;
 @property AccGeneralVC* generalVC;
-@property AccAudioVC* audioVC;
-@property AccVideoVC* videoVC;
+@property AccMediaVC* audioVC;
 @property AccAdvancedVC* advancedVC;
 @property AccSecurityVC* securityVC;
 
@@ -81,8 +78,7 @@ public:
 @synthesize protocolList;
 @synthesize configPanels;
 @synthesize generalTabItem;
-@synthesize audioTabItem;
-@synthesize videoTabItem;
+@synthesize mediaTabItem;
 @synthesize advancedTabItem;
 @synthesize securityTabItem;
 @synthesize ringTabItem;
@@ -122,15 +118,10 @@ public:
     [[self.generalVC view] setBounds:[self.generalTabItem.view bounds]];
     [self.generalTabItem setView:self.generalVC.view];
 
-    self.audioVC = [[AccAudioVC alloc] initWithNibName:@"AccAudio" bundle:nil];
-    [[self.audioVC view] setFrame:[self.audioTabItem.view frame]];
-    [[self.audioVC view] setBounds:[self.audioTabItem.view bounds]];
-    [self.audioTabItem setView:self.audioVC.view];
-
-    self.videoVC = [[AccVideoVC alloc] initWithNibName:@"AccVideo" bundle:nil];
-    [[self.videoVC view] setFrame:[self.videoTabItem.view frame]];
-    [[self.videoVC view] setBounds:[self.videoTabItem.view bounds]];
-    [self.videoTabItem setView:self.videoVC.view];
+    self.audioVC = [[AccMediaVC alloc] initWithNibName:@"AccMedia" bundle:nil];
+    [[self.audioVC view] setFrame:[self.mediaTabItem.view frame]];
+    [[self.audioVC view] setBounds:[self.mediaTabItem.view bounds]];
+    [self.mediaTabItem setView:self.audioVC.view];
 
     self.advancedVC = [[AccAdvancedVC alloc] initWithNibName:@"AccAdvanced" bundle:nil];
     [[self.advancedVC view] setFrame:[self.advancedTabItem.view frame]];
@@ -196,10 +187,9 @@ public:
     }
 
     [configPanels insertTabViewItem:generalTabItem atIndex:0];
-    [configPanels insertTabViewItem:audioTabItem atIndex:1];
-    [configPanels insertTabViewItem:videoTabItem atIndex:2];
-    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
-    [configPanels insertTabViewItem:securityTabItem atIndex:4];
+    [configPanels insertTabViewItem:mediaTabItem atIndex:1];
+    [configPanels insertTabViewItem:advancedTabItem atIndex:2];
+    [configPanels insertTabViewItem:securityTabItem atIndex:3];
 }
 
 - (void) setupIAXPanels
@@ -210,8 +200,7 @@ public:
     }
 
     [configPanels insertTabViewItem:generalTabItem atIndex:0];
-    [configPanels insertTabViewItem:audioTabItem atIndex:1];
-    [configPanels insertTabViewItem:videoTabItem atIndex:2];
+    [configPanels insertTabViewItem:mediaTabItem atIndex:1];
 }
 
 - (void) setupRINGPanels
@@ -222,9 +211,8 @@ public:
     }
 
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
-    [configPanels insertTabViewItem:audioTabItem atIndex:1];
-    [configPanels insertTabViewItem:videoTabItem atIndex:2];
-    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
+    [configPanels insertTabViewItem:mediaTabItem atIndex:1];
+    [configPanels insertTabViewItem:advancedTabItem atIndex:2];
 
 }
 

@@ -81,10 +81,8 @@ SET(ringclient_CONTROLLERS
    src/PreferencesWC.h
    src/AccGeneralVC.mm
    src/AccGeneralVC.h
-   src/AccVideoVC.mm
-   src/AccVideoVC.h
-   src/AccAudioVC.mm
-   src/AccAudioVC.h
+   src/AccMediaVC.mm
+   src/AccMediaVC.h
    src/AccRingVC.mm
    src/AccRingVC.h
    src/AccAdvancedVC.mm
@@ -157,8 +155,7 @@ SET(ringclient_XIBS
    GeneralPrefs
    Accounts
    AccGeneral
-   AccAudio
-   AccVideo
+   AccMedia
    AccRing
    AccAdvanced
    AccSecurity
