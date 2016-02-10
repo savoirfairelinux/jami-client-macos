@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccountsVC">
@@ -12,10 +12,10 @@
                 <outlet property="audioTabItem" destination="hiU-GG-6Eg" id="D2g-nf-MQS"/>
                 <outlet property="configPanels" destination="Jki-s4-F1W" id="nY4-dc-CQg"/>
                 <outlet property="generalTabItem" destination="tPR-Ac-N5Y" id="39S-pz-1Xs"/>
+                <outlet property="mediaTabItem" destination="hiU-GG-6Eg" id="RDU-QJ-Ne4"/>
                 <outlet property="protocolList" destination="rZv-qd-BGe" id="yU0-6C-Vt1"/>
                 <outlet property="ringTabItem" destination="1HC-kF-Jun" id="FJZ-2g-Y1i"/>
                 <outlet property="securityTabItem" destination="Vp5-yV-ScC" id="FDx-0T-3t9"/>
-                <outlet property="videoTabItem" destination="GIU-kn-D57" id="oH6-MT-bSN"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="eBn-rZ-84z"/>
             </connections>
         </customObject>
@@ -27,12 +27,12 @@
             <subviews>
                 <scrollView focusRingType="none" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USD-1t-wb3">
                     <rect key="frame" x="20" y="274" width="262" height="341"/>
-                    <clipView key="contentView" misplaced="YES" id="fqt-7S-Xp4">
-                        <rect key="frame" x="1" y="17" width="238" height="117"/>
+                    <clipView key="contentView" id="fqt-7S-Xp4">
+                        <rect key="frame" x="1" y="0.0" width="260" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="0lm-pU-hrg" indentationPerLevel="16" outlineTableColumn="Ppv-dQ-Azf" id="Dsf-ph-Qfe">
-                                <rect key="frame" x="0.0" y="0.0" width="318" height="19"/>
+                                <rect key="frame" x="0.0" y="0.0" width="260" height="317"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -89,7 +89,7 @@
                         <constraint firstAttribute="width" constant="262" id="L7g-ZA-zfy"/>
                     </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="2Jz-0X-Ltx">
-                        <rect key="frame" x="1" y="117.97246444225311" width="238" height="16"/>
+                        <rect key="frame" x="1" y="117" width="238" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="0TD-fd-ht6">
@@ -97,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <tableHeaderView key="headerView" id="0lm-pU-hrg">
-                        <rect key="frame" x="0.0" y="0.0" width="10000" height="17"/>
+                        <rect key="frame" x="0.0" y="0.0" width="260" height="23"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
@@ -164,33 +164,27 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
-                        <tabViewItem label="Audio" identifier="2" id="hiU-GG-6Eg">
+                        <tabViewItem label="Media" identifier="2" id="hiU-GG-6Eg" userLabel="Media Tab Item">
                             <view key="view" id="yYL-8c-xzR">
-                                <rect key="frame" x="10" y="33" width="578" height="565"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </view>
-                        </tabViewItem>
-                        <tabViewItem label="Video" identifier="" id="GIU-kn-D57">
-                            <view key="view" id="hD4-t0-Nbw">
-                                <rect key="frame" x="10" y="33" width="578" height="565"/>
+                                <rect key="frame" x="10" y="33" width="628" height="564"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Advanced" identifier="" id="RT7-u6-bhe">
                             <view key="view" id="Pp4-JG-r1v">
-                                <rect key="frame" x="10" y="33" width="578" height="565"/>
+                                <rect key="frame" x="10" y="33" width="628" height="564"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Security" identifier="" id="Vp5-yV-ScC">
                             <view key="view" id="p3d-5C-tAZ">
-                                <rect key="frame" x="10" y="33" width="578" height="565"/>
+                                <rect key="frame" x="10" y="33" width="628" height="564"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="Ring" identifier="" id="1HC-kF-Jun">
                             <view key="view" id="asB-J0-2bi">
-                                <rect key="frame" x="10" y="33" width="578" height="565"/>
+                                <rect key="frame" x="10" y="33" width="628" height="564"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
