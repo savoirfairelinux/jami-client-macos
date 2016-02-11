@@ -46,6 +46,11 @@
 @property (nonatomic, strong) NSNumber* cornerRadius;
 
 /*
+ * Define pressed state of the button
+ */
+@property (atomic, getter=isPressed) BOOL pressed;
+
+/*
  * Padding
  * default value : 5.0
  */

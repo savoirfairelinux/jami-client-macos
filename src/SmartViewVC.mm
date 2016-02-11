@@ -39,6 +39,7 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "views/HoverTableRowView.h"
 #import "PersonLinkerVC.h"
+#import "views/IconButton.h"
 #import "views/RingOutlineView.h"
 #import "views/ContextualTableCellView.h"
 
@@ -50,8 +51,8 @@
     //UI elements
     __unsafe_unretained IBOutlet RingOutlineView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
-    __unsafe_unretained IBOutlet NSButton* showContactsButton;
-    __unsafe_unretained IBOutlet NSButton* showHistoryButton;
+    __unsafe_unretained IBOutlet IconButton* showContactsButton;
+    __unsafe_unretained IBOutlet IconButton* showHistoryButton;
     __unsafe_unretained IBOutlet NSTabView* tabbar;
 }
 
@@ -107,8 +108,8 @@ NSInteger const TXT_BUTTON_TAG  =   500;
                          if (proxyIdx.isValid()) {
                              [treeController setSelectionQModelIndex:proxyIdx];
 
-                             [showContactsButton setHighlighted:NO];
-                             [showHistoryButton setHighlighted:NO];
+                             [showContactsButton setPressed:NO];
+                             [showHistoryButton setPressed:NO];
                              [tabbar selectTabViewItemAtIndex:0];
                              [smartView scrollRowToVisible:proxyIdx.row()];
                          }
@@ -171,10 +172,10 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (IBAction)showHistory:(NSButton*)sender
 {
-    [showContactsButton setHighlighted:NO];
-    [showHistoryButton setHighlighted:![sender isHighlighted]];
+    [showContactsButton setPressed:NO];
+    [showHistoryButton setPressed:![showHistoryButton isPressed]];
 
-    if (![sender isHighlighted]) {
+    if (![showHistoryButton isPressed]) {
         [tabbar selectTabViewItemAtIndex:0];
     } else {
         [tabbar selectTabViewItemAtIndex:1];
@@ -183,10 +184,10 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (IBAction)showContacts:(NSButton*)sender
 {
-    [showContactsButton setHighlighted:![sender isHighlighted]];
-    [showHistoryButton setHighlighted:NO];
+    [showContactsButton setPressed:![showContactsButton isPressed]];
+    [showHistoryButton setPressed:NO];
 
-    if (![sender isHighlighted]) {
+    if (![showContactsButton isPressed]) {
         [tabbar selectTabViewItemAtIndex:0];
     } else {
         [tabbar selectTabViewItemAtIndex:2];

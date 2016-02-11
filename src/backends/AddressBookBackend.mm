@@ -117,14 +117,14 @@ void AddressBookBackend::handleNotification(NSNotification* ns)
 {
     for (NSString* r in ns.userInfo[kABInsertedRecords]) {
         ABRecord* inserted = [[ABAddressBook sharedAddressBook] recordForUniqueId:r];
-        if (inserted && [[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] containsString:@"ABPerson"]) {
+        if (inserted && [[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] rangeOfString:@"ABPerson"].location != NSNotFound) {
             editor<Person>()->addExisting(this->abPersonToPerson(inserted));
         }
     }
 
     for (NSString* r in ns.userInfo[kABUpdatedRecords]) {
         NSLog(@"Updated record : %@", r);
-        if ([[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] containsString:@"ABPerson"]) {
+        if ([[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] rangeOfString:@"ABPerson"].location != NSNotFound) {
             Person* toUpdate = PersonModel::instance().getPersonByUid([r UTF8String]);
             if (toUpdate) {
                 ABPerson* updated = [[ABAddressBook sharedAddressBook] recordForUniqueId:r];

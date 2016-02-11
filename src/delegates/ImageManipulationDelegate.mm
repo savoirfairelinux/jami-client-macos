@@ -126,7 +126,7 @@ namespace Interfaces {
 
     QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
         // create the image somehow, load from file, draw into it...
-        auto sourceImgRef = CGImageSourceCreateWithData((CFDataRef)[[NSImage imageNamed:@"default_user_icon"] TIFFRepresentation], NULL);
+        auto sourceImgRef = CGImageSourceCreateWithData((__bridge CFDataRef)[[NSImage imageNamed:@"default_user_icon"] TIFFRepresentation], NULL);
         auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
         auto finalpxm =  QtMac::fromCGImageRef(resizeCGImage(imgRef, size));
         CFRelease(sourceImgRef);

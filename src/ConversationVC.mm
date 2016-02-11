@@ -64,8 +64,8 @@
 
 @implementation ConversationVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadView {
+    [super loadView];
     // Do view setup here.
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];

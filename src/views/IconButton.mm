@@ -34,6 +34,14 @@
 
     if (self.imageInsets == 0)
         self.imageInsets = 5.0f;
+
+    self.pressed = NO;
+}
+
+-(void) setPressed:(BOOL)newVal
+{
+    _pressed = newVal;
+    [self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -44,7 +52,7 @@
     NSColor* backgroundStrokeColor;
     NSColor* tintColor = [NSColor whiteColor];
 
-    if (self.mouseDown || self.isHighlighted) {
+    if (self.mouseDown || self.isPressed) {
         if (self.highlightColor) {
             backgroundColor = self.highlightColor;
             backgroundStrokeColor = [self.highlightColor darkenColorByValue:0.1];

@@ -101,7 +101,7 @@
 
                          // Don't show a notification if we are sending the text OR window already has focus OR user disabled notifications
                          if(qvariant_cast<Media::Media::Direction>(qIdx.data((int)Media::TextRecording::Role::Direction)) == Media::Media::Direction::OUT
-                            || self.ringWindowController.window.keyWindow || !shouldNotify)
+                            || self.ringWindowController.window.isMainWindow || !shouldNotify)
                              return;
 
                          NSUserNotification* notification = [[NSUserNotification alloc] init];

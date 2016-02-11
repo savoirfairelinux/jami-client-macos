@@ -54,7 +54,7 @@ int main(int argc, const char *argv[]) {
 
     //We need to check if primary language is an English variant (en, en-CA etc...) before installing a translator
     NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
-    if (![lang containsString:@"en"]) {
+    if (![lang rangeOfString:@"en"].location != NSNotFound) {
         QTranslator translator;
         if (translator.load(QLocale::system(), "lrc", "_", dir.absolutePath()+"/Resources/QtTranslations")) {
             app->installTranslator(&translator);
