@@ -314,14 +314,31 @@
 {
     certificateWC = [[CertificateWC alloc] initWithWindowNibName:@"CertificateWindow"];
     [certificateWC setCertificate:[self currentAccount]->tlsCaListCertificate()];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
     [self.view.window beginSheet:certificateWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: certificateWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
 }
 
 - (IBAction)showEndpointCertificate:(id)sender
 {
     certificateWC = [[CertificateWC alloc] initWithWindowNibName:@"CertificateWindow"];
     [certificateWC setCertificate:[self currentAccount]->tlsCertificate()];
-    [self.view.window beginSheet:certificateWC.window completionHandler:nil];}
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+     [self.view.window beginSheet:certificateWC.window completionHandler:nil];
+#else
+     [NSApp beginSheet: certificateWC.window
+        modalForWindow: self.view.window
+         modalDelegate: self
+        didEndSelector: nil
+           contextInfo: nil];
+#endif
+}
 
 /*
  Delegate method of NSPathControl to determine how the NSOpenPanel will look/behave.

@@ -46,6 +46,7 @@
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
 #import "BrokerVC.h"
+#import "views/IconButton.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -73,17 +74,17 @@
 
 // Call Controls
 @property (unsafe_unretained) IBOutlet NSView* controlsPanel;
-@property QHash<int, NSButton*> actionHash;
-@property (unsafe_unretained) IBOutlet NSButton* holdOnOffButton;
-@property (unsafe_unretained) IBOutlet NSButton* hangUpButton;
-@property (unsafe_unretained) IBOutlet NSButton* recordOnOffButton;
-@property (unsafe_unretained) IBOutlet NSButton* pickUpButton;
-@property (unsafe_unretained) IBOutlet NSButton* muteAudioButton;
-@property (unsafe_unretained) IBOutlet NSButton* muteVideoButton;
-@property (unsafe_unretained) IBOutlet NSButton* addContactButton;
-@property (unsafe_unretained) IBOutlet NSButton* transferButton;
-@property (unsafe_unretained) IBOutlet NSButton* addParticipantButton;
-@property (unsafe_unretained) IBOutlet NSButton* chatButton;
+@property QHash<int, IconButton*> actionHash;
+@property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
+@property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
+@property (unsafe_unretained) IBOutlet IconButton* recordOnOffButton;
+@property (unsafe_unretained) IBOutlet IconButton* pickUpButton;
+@property (unsafe_unretained) IBOutlet IconButton* muteAudioButton;
+@property (unsafe_unretained) IBOutlet IconButton* muteVideoButton;
+@property (unsafe_unretained) IBOutlet IconButton* addContactButton;
+@property (unsafe_unretained) IBOutlet IconButton* transferButton;
+@property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
+@property (unsafe_unretained) IBOutlet IconButton* chatButton;
 
 
 // Join call panel
@@ -136,10 +137,9 @@
 {
     const QModelIndex& idx = CallModel::instance().userActionModel()->index(row,0);
     UserActionModel::Action action = qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
-    NSButton* a = actionHash[(int) action];
-    if (a) {
+    if (auto a = actionHash[(int) action]) {
         [a setHidden:!(idx.flags() & Qt::ItemIsEnabled)];
-        [a setHighlighted:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? YES : NO];
+        [a setPressed:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? YES : NO];
     }
 }
 
@@ -543,7 +543,7 @@
     [self.addParticipantButton setHidden:YES];
     [self.transferButton setHidden:YES];
 
-    [self.chatButton setState:NSOffState];
+    [self.chatButton setPressed:NO];
     [self.mergeCallsButton setState:NSOffState];
     [self collapseRightView];
 

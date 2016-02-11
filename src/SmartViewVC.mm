@@ -39,6 +39,7 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "views/HoverTableRowView.h"
 #import "PersonLinkerVC.h"
+#import "views/IconButton.h"
 #import "views/RingOutlineView.h"
 #import "views/ContextualTableCellView.h"
 
