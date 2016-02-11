@@ -11,14 +11,12 @@ IF("${RING_VERSION}" STREQUAL "")
    SET(RING_VERSION "0.4.0")
 ENDIF("${RING_VERSION}" STREQUAL "")
 
-MESSAGE("Building Ring version - " ${RING_VERSION})
-
 SET(RING_VERSION_NAME "Samuel de Champlain (${RING_VERSION})")
 
-MESSAGE(${RING_VERSION_NAME})
+MESSAGE("Building Ring version - " ${RING_VERSION_NAME})
 SET(PROJ_COPYRIGHT " © 2015-2016 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
-ADD_DEFINITIONS("-std=c++11 -fobjc-arc")
+ADD_DEFINITIONS("-std=c++11 -stdlib=libc++ -fobjc-arc")
 
 PROJECT(${PROJ_NAME})
 
