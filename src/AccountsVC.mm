@@ -17,17 +17,17 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#define COLUMNID_ENABLE @"EnableColumn"
-#define COLUMNID_NAME @"NameColumn"
-#define COLUMNID_STATE @"StateColumn"
-
 #import "AccountsVC.h"
 
-// LibRingClient
+// Qt
+#import <QItemSelectionModel>
 #import <QSortFilterProxyModel>
+#import <QtCore/qdir.h>
+#import <QtCore/qstandardpaths.h>
+
+// LRC
 #import <accountmodel.h>
 #import <protocolmodel.h>
-#import <QItemSelectionModel>
 #import <account.h>
 
 #import "QNSTreeController.h"
@@ -87,6 +87,11 @@ public:
 @synthesize treeController;
 @synthesize proxyProtocolModel;
 
+NSInteger const TAG_CHECK       =   100;
+NSInteger const TAG_NAME        =   200;
+NSInteger const TAG_STATUS      =   300;
+NSInteger const TAG_TYPE        =   400;
+
 - (void)awakeFromNib
 {
     treeController = [[QNSTreeController alloc] initWithQModel:&AccountModel::instance()];
@@ -105,6 +110,19 @@ public:
                         [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
                         columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, accountsListView.tableColumns.count)]];
                      });
+
+    QObject::connect(AccountModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         [accountDetailsView setHidden:!current.isValid()];
+                         if(!current.isValid()) {
+                             [accountsListView deselectAll:nil];
+                             return;
+                         }
+
+                        [treeController setSelectionQModelIndex:current];
+                     });
+
 
     AccountModel::instance().selectionModel()->clearCurrentIndex();
 
@@ -216,119 +234,82 @@ public:
 
 }
 
-- (IBAction)toggleAccount:(NSOutlineView*)sender {
-
-    if([sender clickedColumn] < 0)
-        return;
-
-    NSTableColumn* col = [sender.tableColumns objectAtIndex:[sender clickedColumn]];
-    if([col.identifier isEqualToString:COLUMNID_ENABLE]) {
-        NSInteger row = [sender clickedRow];
-        QModelIndex accIdx = AccountModel::instance().index(row);
-        Account* toToggle = AccountModel::instance().getAccountByModelIndex(accIdx);
-        NSButtonCell *cell = [col dataCellForRow:row];
-        toToggle->setEnabled(cell.state == NSOnState ? NO : YES);
-        toToggle << Account::EditAction::SAVE;
-    }
+- (IBAction)toggleAccount:(NSButton*)sender {
+    NSInteger row = [accountsListView rowForView:sender];
+    auto accountToToggle = AccountModel::instance().getAccountByModelIndex(AccountModel::instance().index(row));
+    accountToToggle->setEnabled(sender.state);
+    accountToToggle << Account::EditAction::SAVE;
 }
 
 #pragma mark - NSOutlineViewDelegate methods
 
-// -------------------------------------------------------------------------------
-//	shouldSelectItem:item
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     return YES;
 }
 
-// -------------------------------------------------------------------------------
-//	dataCellForTableColumn:tableColumn:item
-// -------------------------------------------------------------------------------
-- (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 {
-    NSCell *returnCell;
-
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    // Prevent user from enabling/disabling IP2IP account
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE] &&
-                            AccountModel::instance().ip2ip()->index() == qIdx) {
-
-        return [[NSCell alloc] init];
-    } else {
-        return [tableColumn dataCell];
-    }
+    return [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
 }
 
-// -------------------------------------------------------------------------------
-//	textShouldEndEditing:fieldEditor
-// -------------------------------------------------------------------------------
-- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    if ([[fieldEditor string] length] == 0)
-    {
-        // don't allow empty node names
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
-}
+    NSTableView* result = [outlineView makeViewWithIdentifier:@"AccountView" owner:self];
 
-// -------------------------------------------------------------------------------
-//	shouldEditTableColumn:tableColumn:item
-//
-//	Decide to allow the edit of the given outline view "item".
-// -------------------------------------------------------------------------------
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-    return NO;
-}
-
-// -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
-- (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid())
         return;
 
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME])
-    {
-        cell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
-    } else if([[tableColumn identifier] isEqualToString:COLUMNID_STATE]) {
-        NSTextFieldCell* stateCell = cell;
-        auto account = AccountModel::instance().getAccountByModelIndex(qIdx);
-        auto humanState = account->toHumanStateName();
-        [stateCell setTitle:humanState.toNSString()];
+    NSTextField* nameLabel = [result viewWithTag:TAG_NAME];
+    NSTextField* stateLabel = [result viewWithTag:TAG_STATUS];
+    NSButton* checkButton = [result viewWithTag:TAG_CHECK];
+    NSTextField* typeLabel = [result viewWithTag:TAG_TYPE];
 
-        switch (account->registrationState()) {
-            case Account::RegistrationState::READY:
-                [stateCell setTextColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]];
-                break;
-            case Account::RegistrationState::TRYING:
-                [stateCell setTextColor:[NSColor redColor]];
-                break;
-            case Account::RegistrationState::UNREGISTERED:
-                [stateCell setTextColor:[NSColor blackColor]];
-                break;
-            case Account::RegistrationState::ERROR:
-                [stateCell setTextColor:[NSColor redColor]];
-                break;
-            default:
-                [stateCell setTextColor:[NSColor blackColor]];
-                break;
-        }
-    } else if([[tableColumn identifier] isEqualToString:COLUMNID_ENABLE]) {
-        [cell setState:qIdx.data(Qt::CheckStateRole).value<BOOL>()];
+    auto account = AccountModel::instance().getAccountByModelIndex(qIdx);
+    auto humanState = account->toHumanStateName();
+
+    [nameLabel setStringValue:account->alias().toNSString()];
+    [stateLabel setStringValue:humanState.toNSString()];
+    [checkButton setHidden:AccountModel::instance().ip2ip()->index() == qIdx];
+
+    switch (account->protocol()) {
+        case Account::Protocol::SIP:
+            [typeLabel setStringValue:@"SIP"];
+            break;
+        case Account::Protocol::IAX:
+            [typeLabel setStringValue:@"IAX"];
+            break;
+        case Account::Protocol::RING:
+            [typeLabel setStringValue:@"RING"];
+            break;
+        default:
+            break;
     }
+
+    switch (account->registrationState()) {
+        case Account::RegistrationState::READY:
+            [stateLabel setTextColor:[NSColor colorWithCalibratedRed:116/255.0 green:179/255.0 blue:93/255.0 alpha:1.0]];
+            break;
+        case Account::RegistrationState::TRYING:
+            [stateLabel setTextColor:[NSColor redColor]];
+            break;
+        case Account::RegistrationState::UNREGISTERED:
+            [stateLabel setTextColor:[NSColor blackColor]];
+            break;
+        case Account::RegistrationState::ERROR:
+            [stateLabel setTextColor:[NSColor redColor]];
+            break;
+        default:
+            [stateLabel setTextColor:[NSColor blackColor]];
+            break;
+    }
+
+    [checkButton setState:qIdx.data(Qt::CheckStateRole).value<BOOL>()];
+
+    return result;
 }
 
-// -------------------------------------------------------------------------------
-//	outlineViewSelectionDidChange:notification
-// -------------------------------------------------------------------------------
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
@@ -338,18 +319,15 @@ public:
         auto acc = AccountModel::instance().getAccountByModelIndex(qIdx);
         AccountModel::instance().selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 
-            switch (acc->protocol()) {
+        switch (acc->protocol()) {
             case Account::Protocol::SIP:
-                NSLog(@"SIP");
                 [self setupSIPPanels];
                 break;
             case Account::Protocol::IAX:
-                NSLog(@"IAX");
                 [self setupIAXPanels];
                 break;
             case Account::Protocol::RING:
                 [self setupRINGPanels];
-                NSLog(@"DRING");
                 break;
             default:
                 break;
@@ -357,7 +335,6 @@ public:
 
         [self.accountDetailsView setHidden:NO];
     } else {
-        [self.accountDetailsView setHidden:YES];
         AccountModel::instance().selectionModel()->clearCurrentIndex();
     }
 }
@@ -377,7 +354,5 @@ public:
 {
     return proxyProtocolModel->rowCount();
 }
-
-
 
 @end
