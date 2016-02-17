@@ -50,8 +50,6 @@
     //UI elements
     __unsafe_unretained IBOutlet RingOutlineView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
-    __unsafe_unretained IBOutlet NSButton* showContactsButton;
-    __unsafe_unretained IBOutlet NSButton* showHistoryButton;
     __unsafe_unretained IBOutlet NSTabView* tabbar;
 }
 
@@ -106,9 +104,6 @@ NSInteger const TXT_BUTTON_TAG  =   500;
                          auto proxyIdx = RecentModel::instance().peopleProxy()->mapFromSource(current);
                          if (proxyIdx.isValid()) {
                              [treeController setSelectionQModelIndex:proxyIdx];
-
-                             [showContactsButton setHighlighted:NO];
-                             [showHistoryButton setHighlighted:NO];
                              [tabbar selectTabViewItemAtIndex:0];
                              [smartView scrollRowToVisible:proxyIdx.row()];
                          }
@@ -171,26 +166,17 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 - (IBAction)showHistory:(NSButton*)sender
 {
-    [showContactsButton setHighlighted:NO];
-    [showHistoryButton setHighlighted:![sender isHighlighted]];
-
-    if (![sender isHighlighted]) {
-        [tabbar selectTabViewItemAtIndex:0];
-    } else {
-        [tabbar selectTabViewItemAtIndex:1];
-    }
+    [tabbar selectTabViewItemAtIndex:1];
 }
 
 - (IBAction)showContacts:(NSButton*)sender
 {
-    [showContactsButton setHighlighted:![sender isHighlighted]];
-    [showHistoryButton setHighlighted:NO];
+    [tabbar selectTabViewItemAtIndex:2];
+}
 
-    if (![sender isHighlighted]) {
-        [tabbar selectTabViewItemAtIndex:0];
-    } else {
-        [tabbar selectTabViewItemAtIndex:2];
-    }
+- (IBAction)showSmartlist:(NSButton*)sender
+{
+    [tabbar selectTabViewItemAtIndex:0];
 }
 
 #pragma mark - NSOutlineViewDelegate methods
@@ -288,6 +274,10 @@ NSInteger const TXT_BUTTON_TAG  =   500;
     time_t currentTime;
     ::time(&currentTime);
     cm->setLastUsed(currentTime);
+    [searchField setStringValue:@""];
+    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
+    auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(RecentModel::instance().peopleProxy()->index(0, 0));
+    RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (void) addToContact
