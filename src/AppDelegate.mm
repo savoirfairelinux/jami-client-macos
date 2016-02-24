@@ -33,6 +33,7 @@
 
 #import "Constants.h"
 #import "RingWizardWC.h"
+#import "FileExchangeWC.h"
 
 #if ENABLE_SPARKLE
 @interface AppDelegate() <SUUpdaterDelegate>
@@ -42,6 +43,7 @@
 
 @property RingWindowController* ringWindowController;
 @property RingWizardWC* wizard;
+@property FileExchangeWC* fileExchange;
 
 @end
 
@@ -169,6 +171,14 @@
         self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
     }
     [self.ringWindowController.window makeKeyAndOrderFront:self];
+}
+
+- (void) showFileExchange
+{
+    if(self.fileExchange == nil) {
+        self.fileExchange = [[FileExchangeWC alloc] initWithWindowNibName:@"FileExchange"];
+    }
+    [self.fileExchange.window makeKeyAndOrderFront:self];
 }
 
 - (BOOL) checkForRingAccount

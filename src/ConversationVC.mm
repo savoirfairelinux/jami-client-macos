@@ -19,11 +19,13 @@
 
 #import "ConversationVC.h"
 
+//Qt
 #import <QItemSelectionModel>
 #import <qstring.h>
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
 
+//LRC
 #import <media/media.h>
 #import <recentmodel.h>
 #import <person.h>
@@ -32,24 +34,28 @@
 #import <media/textrecording.h>
 #import <callmodel.h>
 #import <globalinstances.h>
+#import <filetransfermodel.h>
+#import <availableaccountmodel.h>
 
+//Ring
 #import "views/IconButton.h"
 #import "views/IMTableCellView.h"
 #import "views/NSColor+RingTheme.h"
 #import "QNSTreeController.h"
 #import "INDSequentialTextSelectionManager.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "AppDelegate.h"
 
 #import <QuartzCore/QuartzCore.h>
 
 @interface ConversationVC () <NSOutlineViewDelegate> {
 
-    __unsafe_unretained IBOutlet NSTextField* messageField;
     QVector<ContactMethod*> contactMethods;
     NSMutableString* textSelection;
 
     QNSTreeController* treeController;
 
+    __unsafe_unretained IBOutlet IconButton* attachmentButton;
     __unsafe_unretained IBOutlet NSView* sendPanel;
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
     __unsafe_unretained IBOutlet NSTextField* emptyConversationPlaceHolder;
@@ -115,7 +121,14 @@
                          NSString* localizedTitle = current.data((int)Ring::Role::Name).toString().toNSString();
                         [conversationTitle setStringValue:localizedTitle];
 
+
+
                      });
+}
+
+- (Account*) accountForCM:(ContactMethod*)cm
+{
+    return cm->account() ? cm->account() : AvailableAccountModel::currentDefaultAccount(cm);
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -128,6 +141,24 @@
         contactMethods.at([contactMethodsPopupButton indexOfSelectedItem])->sendOfflineTextMessage(messages);
         self.message = @"";
     }
+}
+- (IBAction)selectAttachment:(id)sender {
+    auto panel = [NSOpenPanel openPanel];
+    [panel setCanChooseFiles:YES];
+    [panel setCanChooseDirectories:NO];
+    [panel setAllowsMultipleSelection:NO];
+    [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            if (auto fileURL = [panel URLs][0]) {
+
+                auto cm = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem]);
+                auto account = [self accountForCM:cm];
+                FileTransferModel::instance().sendFile(account, cm->uri(), QString::fromNSString([fileURL path]));
+                AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+                [appDelegate showFileExchange];
+            }
+        }
+    }];
 }
 
 - (IBAction)placeCall:(id)sender
@@ -368,6 +399,8 @@
         [conversationView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
         [conversationView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
     }
+
+    [attachmentButton setHidden:[self accountForCM:contactMethods.at(index)]->protocol() != Account::Protocol::RING];
 
     [conversationView scrollToEndOfDocument:nil];
 }

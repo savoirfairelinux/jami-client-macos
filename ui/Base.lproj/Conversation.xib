@@ -6,11 +6,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConversationVC">
             <connections>
+                <outlet property="attachmentButton" destination="ZC6-xW-t7l" id="yVw-eF-oLL"/>
                 <outlet property="contactMethodsPopupButton" destination="xdB-aI-PSs" id="BZW-FI-WpH"/>
                 <outlet property="conversationTitle" destination="ucx-6g-eJw" id="40T-pM-nix"/>
                 <outlet property="conversationView" destination="bOO-CW-S21" id="NkS-gm-3Qn"/>
                 <outlet property="emptyConversationPlaceHolder" destination="Uqj-Xr-xl5" id="N1g-ao-lda"/>
-                <outlet property="messageField" destination="bsk-Gj-qQ2" id="JYN-bF-ttw"/>
                 <outlet property="sendButton" destination="UJf-cF-RAo" id="8PF-7G-w1d"/>
                 <outlet property="sendPanel" destination="Rth-di-Tls" id="vCd-kM-DLc"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -204,7 +204,7 @@
                             </connections>
                         </button>
                         <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
-                            <rect key="frame" x="68" y="5" width="622" height="40"/>
+                            <rect key="frame" x="68" y="5" width="572" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="vko-v6-6CX"/>
                             </constraints>
@@ -225,8 +225,22 @@
                                 <outlet property="delegate" destination="-2" id="2u2-D4-htz"/>
                             </connections>
                         </textField>
-                        <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="IconButton">
+                        <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZC6-xW-t7l" customClass="IconButton">
                             <rect key="frame" x="698" y="5" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="DZj-Ym-HnE"/>
+                                <constraint firstAttribute="height" constant="40" id="v0S-Vs-Ao5"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_attachment" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="HO4-1f-MR5">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="selectAttachment:" target="-2" id="NiD-6b-pfm"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="IconButton">
+                            <rect key="frame" x="648" y="5" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="TmF-ip-m4C"/>
                                 <constraint firstAttribute="height" constant="40" id="rbQ-lE-sAq"/>
@@ -287,5 +301,6 @@
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="ic_arrow_back" width="72" height="72"/>
+        <image name="ic_attachment" width="72" height="72"/>
     </resources>
 </document>
