@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="FileExchangeWC">
+            <connections>
+                <outlet property="transfersList" destination="1gT-BD-eC1" id="W1k-Rm-sEK"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="File transfers" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="350"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="350"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="72" horizontalPageScroll="10" verticalLineScroll="72" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="sbu-in-Svs">
+                        <rect key="frame" x="-1" y="0.0" width="482" height="350"/>
+                        <clipView key="contentView" id="tyH-hj-Mfn">
+                            <rect key="frame" x="0.0" y="0.0" width="482" height="350"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" outlineTableColumn="kLc-Ce-BfK" id="1gT-BD-eC1" customClass="RingOutlineView">
+                                    <rect key="frame" x="0.0" y="0.0" width="482" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn width="479" minWidth="40" maxWidth="1000" id="kLc-Ce-BfK">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="JbS-fG-BGD">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <prototypeCellViews>
+                                                <tableCellView identifier="TransferView" id="JHw-ZC-aRh" customClass="TransferCellView">
+                                                    <rect key="frame" x="1" y="1" width="479" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" tag="300" translatesAutoresizingMaskIntoConstraints="NO" id="ekm-AJ-gMm">
+                                                            <rect key="frame" x="9" y="3" width="351" height="17"/>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="djx-ld-7aZ">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CCh-My-5Lt">
+                                                            <rect key="frame" x="188" y="10" width="110" height="51"/>
+                                                            <subviews>
+                                                                <button toolTip="Pick up" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="hFE-Mf-iea" userLabel="Accept" customClass="IconButton">
+                                                                    <rect key="frame" x="20" y="10" width="30" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="OcT-zJ-q7m"/>
+                                                                        <constraint firstAttribute="width" constant="30" id="R9g-WZ-cyf"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_accept" imagePosition="overlaps" alignment="left" transparent="YES" imageScaling="proportionallyDown" id="1SP-g4-0Yg">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                                            <integer key="value" value="6"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                                            <color key="value" red="0.23529411759999999" green="0.64705882349999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </button>
+                                                                <button toolTip="Cancel" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" tag="500" translatesAutoresizingMaskIntoConstraints="NO" id="SrW-lI-f3D" userLabel="Cancel" customClass="IconButton">
+                                                                    <rect key="frame" x="60" y="10" width="30" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="30" id="Oqy-p1-SDg"/>
+                                                                        <constraint firstAttribute="height" constant="30" id="uZX-dz-BMa"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_cancel" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="afz-gw-uxs">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                                            <color key="value" red="0.94509803920000002" green="0.16078431369999999" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                                            <integer key="value" value="6"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="cancelClickedAtRow:" target="-1" id="1mQ-Pg-ZUE"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                        </customView>
+                                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBT-7i-mT5">
+                                                            <rect key="frame" x="11" y="20" width="465" height="30"/>
+                                                            <subviews>
+                                                                <button toolTip="Cancel" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" tag="500" translatesAutoresizingMaskIntoConstraints="NO" id="GL4-nf-su3" userLabel="Cancel" customClass="IconButton">
+                                                                    <rect key="frame" x="424" y="0.0" width="30" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="30" id="O9i-he-UVe"/>
+                                                                        <constraint firstAttribute="height" constant="30" id="dYL-0v-JwL"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_cancel" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="OPE-lc-P24">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                                            <color key="value" red="0.94509803920000002" green="0.16078431369999999" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                                            <integer key="value" value="6"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="cancelClickedAtRow:" target="-1" id="m2w-al-4hS"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <progressIndicator identifier="ProgressBar" wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Hnf-MC-tw9">
+                                                                    <rect key="frame" x="20" y="5" width="396" height="20"/>
+                                                                </progressIndicator>
+                                                            </subviews>
+                                                        </customView>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="KhY-O9-1Py">
+                                                            <rect key="frame" x="9" y="48" width="351" height="19"/>
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="File" id="XzO-io-dh8">
+                                                                <font key="font" metaFont="system" size="14"/>
+                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <connections>
+                                                        <outlet property="approvalContainer" destination="CCh-My-5Lt" id="ErZ-xm-obD"/>
+                                                        <outlet property="fileName" destination="KhY-O9-1Py" id="gsE-zq-FIC"/>
+                                                        <outlet property="progressBar" destination="Hnf-MC-tw9" id="PcB-DG-ELC"/>
+                                                        <outlet property="progressContainer" destination="OBT-7i-mT5" id="r5A-iV-M4J"/>
+                                                        <outlet property="status" destination="ekm-AJ-gMm" id="Msi-cQ-iOa"/>
+                                                    </connections>
+                                                </tableCellView>
+                                                <customView identifier="HoverRowView" id="en5-2G-ayx" customClass="HoverTableRowView">
+                                                    <rect key="frame" x="1" y="73" width="479" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </customView>
+                                            </prototypeCellViews>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="IBY-WA-Wj8"/>
+                                    </connections>
+                                </outlineView>
+                            </subviews>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="JJc-bf-qMW">
+                            <rect key="frame" x="1" y="119" width="223" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="QVs-aW-X7c">
+                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="sbu-in-Svs" secondAttribute="trailing" constant="-1" id="2hU-LC-va2"/>
+                    <constraint firstItem="sbu-in-Svs" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="-1" id="DyE-51-zI4"/>
+                    <constraint firstAttribute="bottom" secondItem="sbu-in-Svs" secondAttribute="bottom" id="N1X-IG-s8B"/>
+                    <constraint firstItem="sbu-in-Svs" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="kpA-bu-I80"/>
+                </constraints>
+            </view>
+            <toolbar key="toolbar" implicitIdentifier="F0DD70F2-3281-4D33-9D59-D701BDBAF99C" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="VlD-lB-axa">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="Tg8-Cf-uUx"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="M4h-jf-zrN"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="ecH-aU-b2X"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="LFa-NH-3YI"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="FZI-D4-Yer"/>
+                    <toolbarItem implicitItemIdentifier="EBF9862D-5CB3-4119-AB04-576E2CEF9CB0" label="History" paletteLabel="History" image="ic_history" id="uDW-Rg-wzs">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="30" height="30"/>
+                        <size key="maxSize" width="48" height="48"/>
+                        <button key="view" id="EgQ-WE-ZHh">
+                            <rect key="frame" x="0.0" y="14" width="48" height="48"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_history" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="S5l-PU-oCQ">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="108DA7C2-592A-42A6-8DA1-6B9BDB64BF53" label="Current" paletteLabel="Current" image="ic_download" id="vci-6j-yUl">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="30" height="30"/>
+                        <size key="maxSize" width="48" height="48"/>
+                        <button key="view" id="Fu1-MJ-pVI">
+                            <rect key="frame" x="0.0" y="14" width="48" height="48"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_download" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="dhu-95-0WE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="vci-6j-yUl"/>
+                    <toolbarItem reference="uDW-Rg-wzs"/>
+                </defaultToolbarItems>
+            </toolbar>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-103" y="187"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="ic_action_accept" width="72" height="72"/>
+        <image name="ic_action_cancel" width="72" height="72"/>
+        <image name="ic_download" width="72" height="72"/>
+        <image name="ic_history" width="72" height="72"/>
+    </resources>
+</document>

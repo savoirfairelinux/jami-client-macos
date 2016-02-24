@@ -30,6 +30,6 @@
  * This is a KVO method to bind the text with the send Button
  * if message.length is > 0, button is enabled, otherwise disabled
  */
-@property (retain) NSString* message;
+@property (strong) NSString* message;
 
 @end

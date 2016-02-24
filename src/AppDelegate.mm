@@ -26,6 +26,7 @@
 #import <media/textrecording.h>
 #import <QItemSelectionModel>
 #import <account.h>
+#import <filetransfermodel.h>
 
 #if ENABLE_SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -33,6 +34,7 @@
 
 #import "Constants.h"
 #import "RingWizardWC.h"
+#import "FileExchangeWC.h"
 
 #if ENABLE_SPARKLE
 @interface AppDelegate() <SUUpdaterDelegate>
@@ -42,6 +44,7 @@
 
 @property RingWindowController* ringWindowController;
 @property RingWizardWC* wizard;
+@property FileExchangeWC* fileExchange;
 
 @end
 
@@ -80,6 +83,12 @@
                          if(shouldNotify) {
                              [self showIncomingNotification:call];
                          }
+                     });
+
+    QObject::connect(&FileTransferModel::instance(),
+                     &FileTransferModel::incomingTransfer,
+                     [=]() {
+                         [self showFileExchange:self];
                      });
 
 
@@ -169,6 +178,14 @@
         self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
     }
     [self.ringWindowController.window makeKeyAndOrderFront:self];
+}
+
+- (IBAction) showFileExchange:(id) sender
+{
+    if(self.fileExchange == nil) {
+        self.fileExchange = [[FileExchangeWC alloc] initWithWindowNibName:@"FileExchange"];
+    }
+    [self.fileExchange.window makeKeyAndOrderFront:self];
 }
 
 - (BOOL) checkForRingAccount
