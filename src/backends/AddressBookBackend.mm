@@ -127,6 +127,9 @@ void AddressBookBackend::handleNotification(NSNotification* ns)
             Person* toUpdate = PersonModel::instance().getPersonByUid([r UTF8String]);
             if (toUpdate) {
                 ABPerson* updated = [[ABAddressBook sharedAddressBook] recordForUniqueId:r];
+                if(updated.imageData)
+                    toUpdate->setPhoto(QVariant(QPixmap::fromImage(QImage::fromData(QByteArray::fromNSData((updated.imageData))))));
+
                 toUpdate->updateFromVCard(QByteArray::fromNSData(updated.vCardRepresentation));
             } else
                 editor<Person>()->addExisting(this->abPersonToPerson([[ABAddressBook sharedAddressBook] recordForUniqueId:r]));
