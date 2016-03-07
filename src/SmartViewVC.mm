@@ -407,7 +407,7 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 
 - (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path
 {
-    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+    auto qIdx = [treeController indexPathtoQIdx:path];
     auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
     auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
     if (contactmethods.isEmpty())
