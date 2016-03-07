@@ -258,7 +258,7 @@ void AddressBookBackend::asyncLoad(int startingPoint)
         }
 
         if(endPoint < everyone.count) {
-            QTimer::singleShot(100, [=] {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 asyncLoad(endPoint);
             });
         }
