@@ -123,7 +123,6 @@ void AddressBookBackend::handleNotification(NSNotification* ns)
     }
 
     for (NSString* r in ns.userInfo[kABUpdatedRecords]) {
-        NSLog(@"Updated record : %@", r);
         if ([[[ABAddressBook sharedAddressBook] recordClassFromUniqueId:r] containsString:@"ABPerson"]) {
             Person* toUpdate = PersonModel::instance().getPersonByUid([r UTF8String]);
             if (toUpdate) {
@@ -135,7 +134,6 @@ void AddressBookBackend::handleNotification(NSNotification* ns)
     }
 
     for (NSString* r in ns.userInfo[kABDeletedRecords]) {
-        NSLog(@"Deleted person: %@", r);
         removePerson(r);
     }
 }
@@ -195,8 +193,7 @@ bool AddressBookEditor::edit( Person* item)
 
 bool AddressBookEditor::addNew( Person* item)
 {
-    bool ret = m_pCollection->addNewPerson(item);
-    return ret;
+    return m_pCollection->addNewPerson(item);
 }
 
 bool AddressBookEditor::addExisting(const Person* item)
@@ -243,8 +240,8 @@ void AddressBookBackend::asyncLoad(int startingPoint)
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // do your background tasks here
-        ABAddressBook *book = [ABAddressBook sharedAddressBook];
-        NSArray *everyone = [book people];
+        auto book = [ABAddressBook sharedAddressBook];
+        auto everyone = [book people];
         int endPoint = qMin(startingPoint + 10, (int)everyone.count);
 
         for (int i = startingPoint; i < endPoint; ++i) {
@@ -255,7 +252,7 @@ void AddressBookBackend::asyncLoad(int startingPoint)
         }
 
         if(endPoint < everyone.count) {
-            QTimer::singleShot(100, [=] {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 asyncLoad(endPoint);
             });
         }
@@ -264,7 +261,7 @@ void AddressBookBackend::asyncLoad(int startingPoint)
 
 Person* AddressBookBackend::abPersonToPerson(ABPerson* ab)
 {
-    Person* person = new Person(QByteArray::fromNSData(ab.vCardRepresentation),
+    auto person = new Person(QByteArray::fromNSData(ab.vCardRepresentation),
                                 Person::Encoding::vCard,
                                 this);
     if(ab.imageData)
