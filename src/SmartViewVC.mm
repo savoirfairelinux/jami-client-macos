@@ -397,9 +397,14 @@ NSInteger const TXT_BUTTON_TAG  =   500;
 
 #pragma mark - ContextMenuDelegate
 
-- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path
+- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) item
 {
-    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
+    auto qIdx = [treeController toQIdx:item];
+
+    if (!qIdx.isValid()) {
+        return nil;
+    }
+
     auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
     auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
     if (contactmethods.isEmpty())

@@ -24,7 +24,7 @@
 
 @required
 
-- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path;
+- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) path;
 
 @end
 
