@@ -27,11 +27,8 @@
 {
     NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
     int rowIdx = [self rowAtPoint:pt];
-    int colIdx = [self columnAtPoint:pt];
-    if (self.contextMenuDelegate && rowIdx >= 0 && colIdx >= 0) {
-        NSUInteger indexes[2] = {static_cast<NSUInteger>(rowIdx), static_cast<NSUInteger>(colIdx)};
-        NSIndexPath* path = [NSIndexPath indexPathWithIndexes:indexes length:2];
-        return [self.contextMenuDelegate contextualMenuForIndex:path];
+    if (self.contextMenuDelegate && rowIdx >= 0) {
+        return [self.contextMenuDelegate contextualMenuForIndex:[self itemAtRow:rowIdx]];
     }
     return nil;
 }

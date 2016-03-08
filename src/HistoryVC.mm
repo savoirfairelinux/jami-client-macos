@@ -216,23 +216,26 @@ NSInteger const PHOTO_TAG = 400;
 
 #pragma mark - ContextMenuDelegate
 
-- (NSMenu*) contextualMenuForIndex:(NSIndexPath*) path
+- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) item
 {
-    if([[treeController selectedNodes] count] > 0) {
-        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        const auto& var = qIdx.data(static_cast<int>(Call::Role::Object));
-        if (qIdx.parent().isValid() && var.isValid()) {
-            if (auto call = var.value<Call *>()) {
-                auto contactmethod = call->peerContactMethod();
-                if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
-                    NSMenu *theMenu = [[NSMenu alloc]
-                                       initWithTitle:@""];
-                    [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
-                                          action:@selector(addToContact)
-                                   keyEquivalent:@"a"
-                                         atIndex:0];
-                    return theMenu;
-                }
+
+    QModelIndex qIdx = [treeController toQIdx:item];
+    if (!qIdx.isValid()) {
+        return nil;
+    }
+
+    const auto& var = qIdx.data(static_cast<int>(Call::Role::Object));
+    if (qIdx.parent().isValid() && var.isValid()) {
+        if (auto call = var.value<Call *>()) {
+            auto contactmethod = call->peerContactMethod();
+            if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
+                NSMenu *theMenu = [[NSMenu alloc]
+                                   initWithTitle:@""];
+                [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
+                                      action:@selector(addToContact)
+                               keyEquivalent:@"a"
+                                     atIndex:0];
+                return theMenu;
             }
         }
     }
