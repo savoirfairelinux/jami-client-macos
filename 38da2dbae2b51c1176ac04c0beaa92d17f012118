@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba65a107_cca90f7d",
+        "filename": "src/backends/AddressBookBackend.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-03-08T15:41:35Z",
+      "side": 1,
+      "message": "QPixmap::loadFromData ?",
+      "range": {
+        "startLine": 131,
+        "startChar": 39,
+        "endLine": 131,
+        "endChar": 131
+      },
+      "revId": "38da2dbae2b51c1176ac04c0beaa92d17f012118",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
