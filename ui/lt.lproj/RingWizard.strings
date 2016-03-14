@@ -1,9 +1,9 @@
 
-/* Class = "NSWindow"; title = "Ring"; ObjectID = "4LP-GX-BkH"; */
-"4LP-GX-BkH.title" = "Ring";
-
 /* Class = "NSTextFieldCell"; title = "Choose your own certificates"; ObjectID = "4ls-Yq-mDp"; */
 "4ls-Yq-mDp.title" = "Choose your own certificates";
+
+/* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "5Z7-Wi-530"; */
+"5Z7-Wi-530.placeholderString" = "'Unknown' if empty...";
 
 /* Class = "NSTextFieldCell"; title = "Advanced security (optionnal)"; ObjectID = "Gnn-K9-PTH"; */
 "Gnn-K9-PTH.title" = "Advanced security (optionnal)";
@@ -11,20 +11,20 @@
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "Hsc-U9-2RV"; */
 "Hsc-U9-2RV.placeholderString" = "Slaptažodis...";
 
-/* Class = "NSButtonCell"; title = "Continue"; ObjectID = "Kwr-LJ-K8C"; */
-"Kwr-LJ-K8C.title" = "Tęsti";
+/* Class = "NSButtonCell"; title = "Share"; ObjectID = "Kwr-LJ-K8C"; */
+"Kwr-LJ-K8C.title" = "Share";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "SpA-zX-ytE"; */
 "SpA-zX-ytE.title" = "Certificate Authority list";
 
 /* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "V1U-ew-Ge2"; */
-"V1U-ew-Ge2.title" = "Naudotojo Liudijimas";
+"V1U-ew-Ge2.title" = "Naudotojo liudijimas";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Choose custom certificates"; ObjectID = "aZl-bU-psB"; */
 "aZl-bU-psB.ibShadowedToolTip" = "Choose custom certificates";
 
-/* Class = "NSTextFieldCell"; title = "First tell us who you are"; ObjectID = "meL-TZ-VQO"; */
-"meL-TZ-VQO.title" = "First tell us who you are";
+/* Class = "NSTextFieldCell"; title = "Choose your username"; ObjectID = "meL-TZ-VQO"; */
+"meL-TZ-VQO.title" = "Choose your username";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "poP-JD-MDa"; */
 "poP-JD-MDa.title" = "Privatus raktas";
@@ -32,5 +32,5 @@
 /* Class = "NSTextFieldCell"; title = "Welcome to Ring"; ObjectID = "uqu-uh-Wao"; */
 "uqu-uh-Wao.title" = "Sveiki atvykę į Ring";
 
-/* Class = "NSButtonCell"; title = "OK"; ObjectID = "wDw-Ut-RUm"; */
-"wDw-Ut-RUm.title" = "Gerai";
+/* Class = "NSButtonCell"; title = "Next"; ObjectID = "wDw-Ut-RUm"; */
+"wDw-Ut-RUm.title" = "Kitas";

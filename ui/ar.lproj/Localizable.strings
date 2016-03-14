@@ -1,6 +1,9 @@
 
 "Add to contacts" = "أضف إلى الاتصالات المعروفة";
 
+/* Contextual menu action */
+"Call number" = "Call number";
+
 /* Open panel prompt for 'Choose a file' */
 "Choose" = "إختار";
 
@@ -11,7 +14,7 @@
 "Choose a certificate" = "إختار شهادة";
 
 /* Open panel title */
-"Choose a file" = "إختار ملف";
+"Choose a directory" = "Choose a directory";
 
 /* Open panel title */
 "Choose a private key file" = "إختار ملف مفتاح خاص";
@@ -19,12 +22,38 @@
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "إختار هيئة شهادة CA";
 
-/* Contextual menu entry
-   Open panel prompt for 'Choose a directory' */
+/* Open panel prompt for 'Choose a directory' */
+"Choose directory" = "Choose directory";
+
+/* Contextual menu entry */
 "Choose file" = "إختار ملف";
+
+/* Continue button */
+"Continue" = "واصل...";
+
+/* No comment provided by engineer. */
+"Copy" = "إنسخ";
+
+/* Contextual menu action */
+"Copy number" = "نسخ الرقم";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Incoming call from %@";
 
 /* Indication for user */
 "Just a moment..." = "الرجاء الإنتظار لحظة...";
+
+/* Message from {Name} */
+"Message from %@" = "Message from %@";
+
+/* Button label */
+"Pause" = "Pause";
+
+/* Button label */
+"Play" = "Play";
+
+/* Button Action */
+"Refuse" = "أرفض";
 
 /* Contextual menu entry */
 "Remove value" = "حذف";
@@ -35,9 +64,12 @@
 /* Display message to user */
 "Ring is already ready to work" = "ring جاهز للعمل";
 
-/* Share button */
-"Share by mail" = "بث عبر البريد";
+/* No comment provided by engineer. */
+"Share" = "Share";
 
-/* Indication to user */
-"This is your number, share it with your friends!" = "هاذا رقمك، بثه لأصدقائك!";
+/* No comment provided by engineer. */
+"Text Actions" = "Text Actions";
+
+/* Name used when user leave field empty */
+"Unknown" = "مجهول";
 

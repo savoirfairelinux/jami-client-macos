@@ -5,9 +5,6 @@
 /* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "3Bh-xR-4Vn"; */
 "3Bh-xR-4Vn.title" = "نص";
 
-/* Class = "NSTextFieldCell"; title = "Display Name"; ObjectID = "5US-dD-gzB"; */
-"5US-dD-gzB.title" = "عرض الإسم";
-
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Ap7-26-S6b"; */
 "Ap7-26-S6b.title" = "خلية نص";
 
@@ -29,11 +26,8 @@
 /* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "Q1F-xo-N3e"; */
 "Q1F-xo-N3e.title" = "عرض الوظيفة";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Qeq-xb-jA4"; */
-"Qeq-xb-jA4.title" = "خلية نص";
-
-/* Class = "NSTextFieldCell"; title = "date"; ObjectID = "UKP-Et-CT0"; */
-"UKP-Et-CT0.title" = "تاريخ";
+/* Class = "NSTextFieldCell"; placeholderString = "date"; ObjectID = "UKP-Et-CT0"; */
+"UKP-Et-CT0.placeholderString" = "تاريخ";
 
 /* Class = "NSTabViewItem"; label = "History"; ObjectID = "Wi9-Zd-O1N"; */
 "Wi9-Zd-O1N.label" = "تاريخ";
@@ -44,8 +38,8 @@
 /* Class = "NSTabViewItem"; label = "Contacts"; ObjectID = "Zbi-X6-DLT"; */
 "Zbi-X6-DLT.label" = "الاتصالات";
 
-/* Class = "NSTextFieldCell"; title = "Name"; ObjectID = "amz-mN-l2I"; */
-"amz-mN-l2I.title" = "إسم";
+/* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "bgk-oz-u7n"; */
+"bgk-oz-u7n.placeholderString" = "الإسم";
 
 /* Class = "NSTextFieldCell"; title = "Category"; ObjectID = "d5o-nL-fRP"; */
 "d5o-nL-fRP.title" = "صنف";
@@ -64,6 +58,9 @@
 
 /* Class = "NSTextFieldCell"; title = "details"; ObjectID = "mK5-kV-YOO"; */
 "mK5-kV-YOO.title" = "التفاصيل";
+
+/* Class = "NSTextFieldCell"; title = "n"; ObjectID = "sGB-x7-gig"; */
+"sGB-x7-gig.title" = "n";
 
 /* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "uSw-g5-kte"; */
 "uSw-g5-kte.title" = "عرض الوظيفة";

@@ -1,6 +1,9 @@
 
 "Add to contacts" = "Добавить в контакты";
 
+/* Contextual menu action */
+"Call number" = "Позвонить по номеру";
+
 /* Open panel prompt for 'Choose a file' */
 "Choose" = "Выбрать";
 
@@ -11,7 +14,7 @@
 "Choose a certificate" = "Выбрать сертификат";
 
 /* Open panel title */
-"Choose a file" = "Выбрать файл";
+"Choose a directory" = "Выбор директории";
 
 /* Open panel title */
 "Choose a private key file" = "Выбрать файл первичного ключа";
@@ -19,12 +22,38 @@
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Выбрать CA";
 
-/* Contextual menu entry
-   Open panel prompt for 'Choose a directory' */
+/* Open panel prompt for 'Choose a directory' */
+"Choose directory" = "Выбор директории";
+
+/* Contextual menu entry */
 "Choose file" = "Выбрать файл";
+
+/* Continue button */
+"Continue" = "Продолжить";
+
+/* No comment provided by engineer. */
+"Copy" = "Копировать";
+
+/* Contextual menu action */
+"Copy number" = "Копировать номер";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Входящий вызов от %@";
 
 /* Indication for user */
 "Just a moment..." = "Один момент...";
+
+/* Message from {Name} */
+"Message from %@" = "Сообщение от %@";
+
+/* Button label */
+"Pause" = "Пауза";
+
+/* Button label */
+"Play" = "Играть";
+
+/* Button Action */
+"Refuse" = "Отклонить";
 
 /* Contextual menu entry */
 "Remove value" = "Удалить значение";
@@ -35,9 +64,12 @@
 /* Display message to user */
 "Ring is already ready to work" = "Ring уже готов к работе";
 
-/* Share button */
-"Share by mail" = "Поделиться через почту";
+/* No comment provided by engineer. */
+"Share" = "Поделиться";
 
-/* Indication to user */
-"This is your number, share it with your friends!" = "Это Ваш номер, поделитесь им с Вашеми друзьями!";
+/* No comment provided by engineer. */
+"Text Actions" = "Действия с текстом";
+
+/* Name used when user leave field empty */
+"Unknown" = "Неизвестно";
 

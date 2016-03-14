@@ -1,6 +1,9 @@
 
 "Add to contacts" = "Adicionar aos contatos";
 
+/* Contextual menu action */
+"Call number" = "Call number";
+
 /* Open panel prompt for 'Choose a file' */
 "Choose" = "Escolha";
 
@@ -11,7 +14,7 @@
 "Choose a certificate" = "Escolha um certificado";
 
 /* Open panel title */
-"Choose a file" = "Escolha um arquivo";
+"Choose a directory" = "Choose a directory";
 
 /* Open panel title */
 "Choose a private key file" = "Escolha um arquivo de chave privada";
@@ -19,12 +22,38 @@
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Escolha CA";
 
-/* Contextual menu entry
-   Open panel prompt for 'Choose a directory' */
+/* Open panel prompt for 'Choose a directory' */
+"Choose directory" = "Choose directory";
+
+/* Contextual menu entry */
 "Choose file" = "Escolha arquivo";
+
+/* Continue button */
+"Continue" = "Continuar";
+
+/* No comment provided by engineer. */
+"Copy" = "Copiar";
+
+/* Contextual menu action */
+"Copy number" = "Copiar número";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Incoming call from %@";
 
 /* Indication for user */
 "Just a moment..." = "Só um momento...";
+
+/* Message from {Name} */
+"Message from %@" = "Message from %@";
+
+/* Button label */
+"Pause" = "Pause";
+
+/* Button label */
+"Play" = "Play";
+
+/* Button Action */
+"Refuse" = "Recusar";
 
 /* Contextual menu entry */
 "Remove value" = "Remover valor";
@@ -35,9 +64,12 @@
 /* Display message to user */
 "Ring is already ready to work" = "A conexão já está pronta para trabalhar";
 
-/* Share button */
-"Share by mail" = "Compartilhar por email";
+/* No comment provided by engineer. */
+"Share" = "Share";
 
-/* Indication to user */
-"This is your number, share it with your friends!" = "Este é seu número, compartilhe-o com seus amigos!";
+/* No comment provided by engineer. */
+"Text Actions" = "Text Actions";
+
+/* Name used when user leave field empty */
+"Unknown" = "Desconhecido";
 

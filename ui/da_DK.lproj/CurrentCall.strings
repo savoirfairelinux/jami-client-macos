@@ -1,12 +1,21 @@
 
+/* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "2cB-dz-KYg"; */
+"2cB-dz-KYg.ibShadowedToolTip" = "Hang up";
+
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
 "9e8-ji-QId.ibShadowedToolTip" = "Join call";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
 "ChW-kg-Sja.ibShadowedToolTip" = "Overfør";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
+"D0G-XT-lhI.ibShadowedToolTip" = "Hang up";
+
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
 "Dqv-um-UUk.title" = "URI";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
+"EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
 
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
 "KPG-pB-gPm.title" = "Answer";
@@ -16,6 +25,12 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
 "LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
+
+/* Class = "NSTextFieldCell"; title = "Cancel"; ObjectID = "TlL-HO-5Ey"; */
+"TlL-HO-5Ey.title" = "Annuller";
+
+/* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
+"X0W-vv-xua.title" = "wants to talk to you!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
 "anb-Y8-JQi.ibShadowedToolTip" = "I kø";
@@ -44,8 +59,14 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
 "tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
 
+/* Class = "NSTextFieldCell"; title = "Ignore"; ObjectID = "tjM-py-p4V"; */
+"tjM-py-p4V.title" = "Ignore";
+
 /* Class = "NSTextFieldCell"; title = "State"; ObjectID = "ugy-uK-901"; */
 "ugy-uK-901.title" = "Stat";
+
+/* Class = "NSTextFieldCell"; title = "Answer"; ObjectID = "wRO-X4-7IU"; */
+"wRO-X4-7IU.title" = "Answer";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
 "yZ6-1A-ZLT.title" = "wants to talk with you!";

@@ -3,10 +3,10 @@
 "1f9-X5-ykb.title" = "Requerir certificados para conexiones TLS entrantes";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Verify certificates, as a client";
+"1xi-9G-zOX.title" = "Verificar certificados, como cliente";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
-"2e5-zS-ghg.title" = "Use custom cipher list";
+"2e5-zS-ghg.title" = "Usar lista de cifrado personalizada";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "5LC-T6-hpk"; */
 "5LC-T6-hpk.title" = "SMS a Teléfono Celular";
@@ -18,7 +18,7 @@
 "9Q3-1W-Lh3.title" = "Tiempo de espera de la Negociación";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
-"Ig9-B1-7N3.title" = "Fallback on RTP";
+"Ig9-B1-7N3.title" = "Respaldo en RTP";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
 "JHb-iu-ZwI.title" = "Clave privada";
@@ -33,7 +33,7 @@
 "YtQ-hx-hih.title" = "Usar SRTP";
 
 /* Class = "NSMenu"; title = "tlsmethodlist"; ObjectID = "hOG-SW-CBI"; */
-"hOG-SW-CBI.title" = "tlsmethodlist";
+"hOG-SW-CBI.title" = "Lista de métodos de TLS";
 
 /* Class = "NSButtonCell"; title = "Use TLS transport"; ObjectID = "oTT-gO-fqM"; */
 "oTT-gO-fqM.title" = "Usar transporte TLS";
@@ -45,4 +45,4 @@
 "vPF-Rp-aR6.title" = "Lista de Certificados de Autoridad (CA)";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
-"x2s-ov-cVQ.title" = "Verify incoming certificates, as a server";
+"x2s-ov-cVQ.title" = "Verificar certificados entrantes, como servidor";

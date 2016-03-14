@@ -1,0 +1,24 @@
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "FgV-iF-gGQ"; */
+"FgV-iF-gGQ.title" = "Текстовая ячейка";
+
+/* Class = "NSTextFieldCell"; title = "Title"; ObjectID = "HnC-1N-RmR"; */
+"HnC-1N-RmR.title" = "Обращение";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "Ilz-7v-2fr"; */
+"Ilz-7v-2fr.placeholderString" = "Отправить сообщение";
+
+/* Class = "BindingConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+"ZEx-5Y-rtp.ibShadowedIsNilPlaceholder" = "Отправить сообщение";
+
+/* Class = "BindingConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+"ZEx-5Y-rtp.ibShadowedMultipleValuesPlaceholder" = "Отправить сообщение";
+
+/* Class = "BindingConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+"ZEx-5Y-rtp.ibShadowedNoSelectionPlaceholder" = "Отправить сообщение";
+
+/* Class = "NSTextFieldCell"; title = "Start the conversation!"; ObjectID = "bsl-nv-Wqq"; */
+"bsl-nv-Wqq.title" = "Начать беседу";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "ooq-vs-Xt1"; */
+"ooq-vs-Xt1.ibShadowedToolTip" = "Запись";
