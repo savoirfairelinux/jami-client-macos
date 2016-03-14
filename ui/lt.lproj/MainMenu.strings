@@ -1,12 +1,12 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Bring All to Front";
+"5.title" = "Perkelti visus į priekį";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Langas";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
-"23.title" = "Sumažinti";
+"23.title" = "Suskleisti";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Langas";
@@ -36,7 +36,7 @@
 "134.title" = "Slėpti Ring";
 
 /* Class = "NSMenuItem"; title = "Quit Ring"; ObjectID = "136"; */
-"136.title" = "Baigti Ring";
+"136.title" = "Išeiti iš Ring";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Hide Others";
@@ -60,7 +60,7 @@
 "199.title" = "Iškirpti";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
-"200.title" = "Rašyba ir Gramatika";
+"200.title" = "Rašyba ir gramatika";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
 "201.title" = "Check Document Now";
@@ -72,7 +72,7 @@
 "203.title" = "Įdėti";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Rodyti Rašybą ir Gramatiką";
+"204.title" = "Rodyti rašybą ir gramatiką";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
 "205.title" = "Redaguoti";
@@ -81,7 +81,7 @@
 "207.title" = "Atšaukti";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Rasti Kitą";
+"208.title" = "Rasti kitą";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
 "209.title" = "Rasti...";
@@ -96,13 +96,13 @@
 "212.title" = "Speech";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
-"213.title" = "Rasti Ankstesnį";
+"213.title" = "Rasti ankstesnį";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
 "215.title" = "Grąžinti";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
-"216.title" = "Rašyba ir Gramatika";
+"216.title" = "Rašyba ir gramatika";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
 "217.title" = "Redaguoti";
@@ -111,7 +111,7 @@
 "218.title" = "Rasti";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Renkant Tekstą, Tikrinti Rašybą";
+"219.title" = "Renkant tekstą, tikrinti rašybą";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
 "220.title" = "Rasti";
@@ -129,13 +129,13 @@
 "296.title" = "View";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "Rodyti Įrankių Juostą";
+"297.title" = "Rodyti įrankių juostą";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "Tinkinti Įrankių Juostą...";
+"298.title" = "Tinkinti įrankių juostą...";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Tikrinti Gramatiką Ir Rašybą";
+"346.title" = "Tikrinti gramatiką ir rašybą";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
 "348.title" = "Substitutions";
@@ -162,7 +162,7 @@
 "452.title" = "Make Upper Case";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Automatiškai Taisyti Rašybą";
+"454.title" = "Automatiškai taisyti rašybą";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
 "457.title" = "Show Substitutions";
@@ -192,10 +192,10 @@
 "492.title" = "Ring Help";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
-"534.title" = "Rasti ir Pakeisti...";
+"534.title" = "Rasti ir pakeisti...";
 
 /* Class = "NSMenuItem"; title = "Setup Ring"; ObjectID = "589"; */
-"589.title" = "Ring Sąranka";
+"589.title" = "Ring sąranka";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Check for Update...";

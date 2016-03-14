@@ -1,9 +1,9 @@
 
-/* Class = "NSWindow"; title = "Ring"; ObjectID = "4LP-GX-BkH"; */
-"4LP-GX-BkH.title" = "RingRing";
-
 /* Class = "NSTextFieldCell"; title = "Choose your own certificates"; ObjectID = "4ls-Yq-mDp"; */
 "4ls-Yq-mDp.title" = "Ihre eigenen Zertifikate auswählen";
+
+/* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "5Z7-Wi-530"; */
+"5Z7-Wi-530.placeholderString" = "'Unbekannt' falls leer...";
 
 /* Class = "NSTextFieldCell"; title = "Advanced security (optionnal)"; ObjectID = "Gnn-K9-PTH"; */
 "Gnn-K9-PTH.title" = "Erweiterte Sicherheit (optional)";
@@ -11,8 +11,8 @@
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "Hsc-U9-2RV"; */
 "Hsc-U9-2RV.placeholderString" = "Passwort...";
 
-/* Class = "NSButtonCell"; title = "Continue"; ObjectID = "Kwr-LJ-K8C"; */
-"Kwr-LJ-K8C.title" = "Weiter";
+/* Class = "NSButtonCell"; title = "Share"; ObjectID = "Kwr-LJ-K8C"; */
+"Kwr-LJ-K8C.title" = "Teilen";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "SpA-zX-ytE"; */
 "SpA-zX-ytE.title" = "Zertifikatsautoritätsliste";
@@ -23,8 +23,8 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Choose custom certificates"; ObjectID = "aZl-bU-psB"; */
 "aZl-bU-psB.ibShadowedToolTip" = "Benutzerdefinierte Zertifikate auswählen";
 
-/* Class = "NSTextFieldCell"; title = "First tell us who you are"; ObjectID = "meL-TZ-VQO"; */
-"meL-TZ-VQO.title" = "Sagen sie uns zuerst wer sie sind";
+/* Class = "NSTextFieldCell"; title = "Choose your username"; ObjectID = "meL-TZ-VQO"; */
+"meL-TZ-VQO.title" = "Choose your username";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "poP-JD-MDa"; */
 "poP-JD-MDa.title" = "Privater Schlüssel";
@@ -32,5 +32,5 @@
 /* Class = "NSTextFieldCell"; title = "Welcome to Ring"; ObjectID = "uqu-uh-Wao"; */
 "uqu-uh-Wao.title" = "Willkommen zu Ring";
 
-/* Class = "NSButtonCell"; title = "OK"; ObjectID = "wDw-Ut-RUm"; */
-"wDw-Ut-RUm.title" = "OK";
+/* Class = "NSButtonCell"; title = "Next"; ObjectID = "wDw-Ut-RUm"; */
+"wDw-Ut-RUm.title" = "Weiter";

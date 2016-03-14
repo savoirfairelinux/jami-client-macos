@@ -1,0 +1,48 @@
+
+/* Class = "NSTextFieldCell"; title = "This will be displayed to unknow peers"; ObjectID = "0Yt-xC-OWa"; */
+"0Yt-xC-OWa.title" = "Отображать неизвестных пользователей";
+
+/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
+"1Sx-Et-CDM.title" = "Учетная запись";
+
+/* Class = "NSTextFieldCell"; title = "Bootstrap server"; ObjectID = "B6b-iB-REZ"; */
+"B6b-iB-REZ.title" = "Bootstrap server";
+
+/* Class = "NSTextFieldCell"; title = "TYPE"; ObjectID = "Bqr-Gq-OgA"; */
+"Bqr-Gq-OgA.title" = "TYPE";
+
+/* Class = "NSTextFieldCell"; title = "Permissions"; ObjectID = "EDd-FX-wcz"; */
+"EDd-FX-wcz.title" = "Permissions";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
+"HN3-i9-zmw.placeholderString" = "Name or nickname...";
+
+/* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
+"OeY-na-0YT.title" = "Автоответчик";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
+"PaC-xE-SHA.title" = "Разрешены вызовы от присутствующих в истории";
+
+/* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
+"Wzq-V2-YLU.title" = "Псевдоним";
+
+/* Class = "NSTextFieldCell"; title = "This is your RingID. Copy and share it with your friends!"; ObjectID = "bca-Wv-Xul"; */
+"bca-Wv-Xul.title" = "This is your RingID. Copy and share it with your friends!";
+
+/* Class = "NSTextFieldCell"; title = "Ring Identifier"; ObjectID = "dPO-b1-o58"; */
+"dPO-b1-o58.title" = "Ring Identifier";
+
+/* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "ddk-1G-0jU"; */
+"ddk-1G-0jU.title" = "Использовать кастомного агента";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
+"fX7-9W-XFl.title" = "Allow calls from peers in your contact list";
+
+/* Class = "NSButtonCell"; title = "Allow calls from unknown peers"; ObjectID = "kmI-jb-aal"; */
+"kmI-jb-aal.title" = "Разрешены вызовы от неизвестных";
+
+/* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
+"lHI-bz-ddQ.title" = "UPNP включен";
+
+/* Class = "NSTextFieldCell"; title = "Type"; ObjectID = "ubB-AZ-nAm"; */
+"ubB-AZ-nAm.title" = "Тип";
