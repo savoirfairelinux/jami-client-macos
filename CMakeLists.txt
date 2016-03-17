@@ -8,7 +8,7 @@ SET(PROJ_NAME Ring)
 
 # To build nighlies we need to update RING_VERSION with an optional command line arg
 IF("${RING_VERSION}" STREQUAL "")
-   SET(RING_VERSION "0.4.0")
+   SET(RING_VERSION "1.0.0")
 ENDIF("${RING_VERSION}" STREQUAL "")
 
 SET(RING_VERSION_NAME "Louis-Joseph Papineau")
