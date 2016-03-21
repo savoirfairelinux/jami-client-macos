@@ -21,7 +21,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import <accountmodel.h>
-#import <audio/codecmodel.h>
+#import <codecmodel.h>
 
 #import "AccountsVC.h"
 #import "GeneralPrefsVC.h"
