@@ -23,7 +23,7 @@
 #import <qitemselectionmodel.h>
 
 ///LRC
-#import <audio/codecmodel.h>
+#import <codecmodel.h>
 #import <accountmodel.h>
 #import <ringtonemodel.h>
 #import <ringtone.h>
