@@ -16,53 +16,42 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#define ALIAS_TAG 0
-#define HOSTNAME_TAG 1
-#define USERNAME_TAG 2
-#define PASSWORD_TAG 3
-#define USERAGENT_TAG 4
-
-
 #import "AccGeneralVC.h"
+
+//Qt
+#import <QMetaEnum>
 
 #import <accountmodel.h>
 #import <protocolmodel.h>
 #import <qitemselectionmodel.h>
 
-@interface AccGeneralVC ()
+@interface AccGeneralVC () {
 
-@property (assign) IBOutlet NSView *boxingParameters;
-@property (assign) IBOutlet NSView *boxingCommon;
+    __unsafe_unretained IBOutlet NSView *boxingParameters;
+    __unsafe_unretained IBOutlet NSView *boxingCommon;
 
-@property (assign) IBOutlet NSTextField *aliasTextField;
-@property (assign) IBOutlet NSTextField *typeLabel;
+    __unsafe_unretained IBOutlet NSTextField *aliasTextField;
+    __unsafe_unretained IBOutlet NSTextField *typeLabel;
 
-@property (assign) IBOutlet NSTextField *serverHostTextField;
-@property (assign) IBOutlet NSTextField *usernameTextField;
-@property (assign) IBOutlet NSSecureTextField *passwordTextField;
-@property (strong) NSTextField *clearTextField;
+    __unsafe_unretained IBOutlet NSTextField *serverHostTextField;
+    __unsafe_unretained IBOutlet NSTextField *usernameTextField;
+    __unsafe_unretained IBOutlet NSSecureTextField *passwordTextField;
+    NSTextField *clearTextField;
 
-@property (assign) IBOutlet NSButton *upnpButton;
-@property (assign) IBOutlet NSButton *autoAnswerButton;
-@property (assign) IBOutlet NSButton *userAgentButton;
-
-@property (assign) IBOutlet NSTextField *userAgentTextField;
-
+    __unsafe_unretained IBOutlet NSButton *upnpButton;
+    __unsafe_unretained IBOutlet NSButton *autoAnswerButton;
+    __unsafe_unretained IBOutlet NSButton *userAgentButton;
+    __unsafe_unretained IBOutlet NSTextField *userAgentTextField;
+}
 @end
 
 @implementation AccGeneralVC
-@synthesize typeLabel;
-@synthesize boxingParameters;
-@synthesize boxingCommon;
-@synthesize aliasTextField;
-@synthesize serverHostTextField;
-@synthesize usernameTextField;
-@synthesize passwordTextField;
-@synthesize clearTextField;
-@synthesize upnpButton;
-@synthesize autoAnswerButton;
-@synthesize userAgentButton;
-@synthesize userAgentTextField;
+
+NSInteger const ALIAS_TAG       = 0;
+NSInteger const HOSTNAME_TAG    = 1;
+NSInteger const USERNAME_TAG    = 2;
+NSInteger const PASSWORD_TAG    = 3;
+NSInteger const USERAGENT_TAG   = 4;
 
 - (void)awakeFromNib
 {
@@ -82,61 +71,44 @@
                      });
 }
 
-- (Account*) currentAccount
-{
-    auto accIdx = AccountModel::instance().selectionModel()->currentIndex();
-    return AccountModel::instance().getAccountByModelIndex(accIdx);
-}
-
 - (IBAction)toggleUpnp:(NSButton *)sender {
-    [self currentAccount]->setUpnpEnabled([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setUpnpEnabled([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAutoAnswer:(NSButton *)sender {
-    [self currentAccount]->setAutoAnswer([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setAutoAnswer([sender state] == NSOnState);
 }
 
 - (IBAction)toggleCustomAgent:(NSButton *)sender {
-    [self.userAgentTextField setEnabled:[sender state] == NSOnState];
-    [self currentAccount]->setHasCustomUserAgent([sender state] == NSOnState);
+    [userAgentTextField setEnabled:[sender state] == NSOnState];
+    AccountModel::instance().selectedAccount()->setHasCustomUserAgent([sender state] == NSOnState);
 }
 
 - (void)loadAccount
 {
-    auto account = [self currentAccount];
+    auto account = AccountModel::instance().selectedAccount();
 
     [boxingParameters.subviews setValue:@NO forKeyPath:@"hidden"];
 
-    [self.aliasTextField setStringValue:account->alias().toNSString()];
-    [self.serverHostTextField setStringValue:account->hostname().toNSString()];
-    [self.usernameTextField setStringValue:account->username().toNSString()];
-    [self.passwordTextField setStringValue:account->password().toNSString()];
-    [self.clearTextField setStringValue:account->password().toNSString()];
+    [aliasTextField setStringValue:account->alias().toNSString()];
+    [serverHostTextField setStringValue:account->hostname().toNSString()];
+    [usernameTextField setStringValue:account->username().toNSString()];
+    [passwordTextField setStringValue:account->password().toNSString()];
+    [clearTextField setStringValue:account->password().toNSString()];
 
-    switch (account->protocol()) {
-        case Account::Protocol::SIP:
-            [self.typeLabel setStringValue:@"SIP"];
-            break;
-        case Account::Protocol::IAX:
-            [self.typeLabel setStringValue:@"IAX"];
-            break;
-        case Account::Protocol::RING:
-            [self.typeLabel setStringValue:@"RING"];
-            break;
+    QMetaEnum metaEnum = QMetaEnum::fromType<Account::Protocol>();
+    qDebug() << metaEnum.valueToKey((int)account->protocol());
+    [typeLabel setStringValue:[NSString stringWithUTF8String:metaEnum.valueToKey((int)account->protocol())]];
 
-        default:
-            break;
-    }
-
-    [upnpButton setState:[self currentAccount]->isUpnpEnabled()];
-    [userAgentButton setState:[self currentAccount]->hasCustomUserAgent()];
-    [userAgentTextField setEnabled:[self currentAccount]->hasCustomUserAgent()];
-    [self.autoAnswerButton setState:[self currentAccount]->isAutoAnswer()];
-    [self.userAgentTextField setStringValue:account->userAgent().toNSString()];
+    [upnpButton setState:AccountModel::instance().selectedAccount()->isUpnpEnabled()];
+    [userAgentButton setState:AccountModel::instance().selectedAccount()->hasCustomUserAgent()];
+    [userAgentTextField setEnabled:AccountModel::instance().selectedAccount()->hasCustomUserAgent()];
+    [autoAnswerButton setState:AccountModel::instance().selectedAccount()->isAutoAnswer()];
+    [userAgentTextField setStringValue:account->userAgent().toNSString()];
 }
 
 - (IBAction)tryRegistration:(id)sender {
-    [self currentAccount] << Account::EditAction::SAVE;
+    AccountModel::instance().selectedAccount() << Account::EditAction::SAVE;
 }
 
 - (IBAction)showPassword:(NSButton *)sender {
@@ -178,20 +150,20 @@
 
     switch ([textField tag]) {
         case ALIAS_TAG:
-            [self currentAccount]->setAlias([[textField stringValue] UTF8String]);
-            [self currentAccount]->setDisplayName([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setAlias([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setDisplayName([[textField stringValue] UTF8String]);
             break;
         case HOSTNAME_TAG:
-            [self currentAccount]->setHostname([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setHostname([[textField stringValue] UTF8String]);
             break;
         case USERNAME_TAG:
-            [self currentAccount]->setUsername([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setUsername([[textField stringValue] UTF8String]);
             break;
         case PASSWORD_TAG:
-            [self currentAccount]->setPassword([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setPassword([[textField stringValue] UTF8String]);
             break;
         case USERAGENT_TAG:
-            [self currentAccount]->setUserAgent([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setUserAgent([[textField stringValue] UTF8String]);
             break;
         default:
             break;
