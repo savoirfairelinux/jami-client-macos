@@ -23,6 +23,7 @@
 #import <QItemSelectionModel>
 #import <QSortFilterProxyModel>
 #import <QtCore/qdir.h>
+#import <QtCore/qfile.h>
 #import <QtCore/qstandardpaths.h>
 
 // LRC
@@ -36,6 +37,7 @@
 #import "AccAdvancedVC.h"
 #import "AccSecurityVC.h"
 #import "AccRingVC.h"
+#import "PathPasswordWC.h"
 
 // We disabled IAX protocol for now, so don't show it to the user
 class ActiveProtocolModel : public QSortFilterProxyModel
@@ -51,7 +53,8 @@ public:
     }
 };
 
-@interface AccountsVC ()
+@interface AccountsVC () <PathPasswordDelegate>
+
 @property (assign) IBOutlet NSPopUpButton *protocolList;
 
 @property (assign) IBOutlet NSTabView *configPanels;
@@ -65,12 +68,14 @@ public:
 @property ActiveProtocolModel* proxyProtocolModel;
 @property (assign) IBOutlet NSOutlineView *accountsListView;
 @property (assign) IBOutlet NSTabView *accountDetailsView;
+@property (unsafe_unretained) IBOutlet NSButton* exportAccountButton;
 
 @property AccRingVC* ringVC;
 @property AccGeneralVC* generalVC;
 @property AccMediaVC* audioVC;
 @property AccAdvancedVC* advancedVC;
 @property AccSecurityVC* securityVC;
+@property PathPasswordWC* passwordWC;
 
 @end
 
@@ -86,11 +91,17 @@ public:
 @synthesize accountDetailsView;
 @synthesize treeController;
 @synthesize proxyProtocolModel;
+@synthesize passwordWC;
 
 NSInteger const TAG_CHECK       =   100;
 NSInteger const TAG_NAME        =   200;
 NSInteger const TAG_STATUS      =   300;
 NSInteger const TAG_TYPE        =   400;
+
+typedef NS_ENUM(NSUInteger, Action) {
+    ACTION_EXPORT = 0,
+    ACTION_IMPORT = 1,
+};
 
 - (void)awakeFromNib
 {
@@ -233,6 +244,35 @@ NSInteger const TAG_TYPE        =   400;
     [configPanels insertTabViewItem:advancedTabItem atIndex:2];
 
 }
+- (IBAction)exportAccount:(id)sender
+{
+    passwordWC = [[PathPasswordWC alloc] initWithDelegate:self actionCode:Action::ACTION_EXPORT];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: passwordWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+    [passwordWC setAllowFileSelection:NO];
+}
+
+- (IBAction)importAccount:(id)sender
+{
+    passwordWC = [[PathPasswordWC alloc] initWithDelegate:self actionCode:Action::ACTION_IMPORT];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: passwordWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+
+}
 
 - (IBAction)toggleAccount:(NSButton*)sender {
     NSInteger row = [accountsListView rowForView:sender];
@@ -312,6 +352,7 @@ NSInteger const TAG_TYPE        =   400;
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
     // ask the tree controller for the current selection
+    [self.exportAccountButton setEnabled:[[treeController selectedNodes] count] > 0];
     if([[treeController selectedNodes] count] > 0) {
         auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         //Update details view
@@ -336,6 +377,37 @@ NSInteger const TAG_TYPE        =   400;
     } else {
         AccountModel::instance().selectionModel()->clearCurrentIndex();
     }
+}
+
+-(void) didCompleteWithPath:(NSURL*) path Password:(NSString*) password ActionCode:(NSInteger)requestCode
+{
+    switch (requestCode) {
+        case Action::ACTION_EXPORT:
+            if(treeController.selectedNodes.count > 0) {
+                QStringList accounts;
+                for (id item : [treeController selectedNodes]) {
+                    QModelIndex accIdx = [treeController toQIdx:item];
+                    accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
+
+                }
+                auto finalURL = [path URLByAppendingPathComponent:@"accounts.ring"];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    AccountModel::instance().exportAccounts(accounts, finalURL.path.UTF8String, password.UTF8String);
+                    [[NSWorkspace sharedWorkspace] selectFile:finalURL.path inFileViewerRootedAtPath:@""];
+                });
+            }
+            break;
+        case Action::ACTION_IMPORT: {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                AccountModel::instance().importAccounts(path.path.UTF8String, password.UTF8String);
+            });
+        }
+            break;
+        default:
+            NSLog(@"Unrecognized action %d", requestCode);
+            break;
+    }
+    [passwordWC close];
 }
 
 #pragma mark - NSMenuDelegate methods
