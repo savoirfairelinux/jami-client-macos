@@ -23,6 +23,7 @@
 #import <QItemSelectionModel>
 #import <QSortFilterProxyModel>
 #import <QtCore/qdir.h>
+#import <QtCore/qfile.h>
 #import <QtCore/qstandardpaths.h>
 
 // LRC
@@ -233,6 +234,39 @@ NSInteger const TAG_TYPE        =   400;
     [configPanels insertTabViewItem:advancedTabItem atIndex:2];
 
 }
+- (IBAction)exportAccount:(id)sender
+{
+    if(treeController.selectedNodes.count > 0) {
+        QStringList accounts;
+        for (id item : [treeController selectedNodes]) {
+            QModelIndex accIdx = [treeController toQIdx:item];
+            accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
+
+        }
+        QDir dir(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+        AccountModel::instance().exportAccounts(accounts, dir.absolutePath()+"/accounts.ring", "");
+    }
+}
+
+- (IBAction)importAccount:(id)sender {
+
+    // Create and configure the panel.
+    NSOpenPanel* panel = [NSOpenPanel openPanel];
+    [panel setCanChooseDirectories:NO];
+    [panel setAllowsMultipleSelection:NO];
+
+    // Display the panel attached to the document's window.
+    [panel beginSheetModalForWindow:self.view.window completionHandler:^(NSInteger result){
+        if (result == NSFileHandlingPanelOKButton) {
+            NSArray* urls = [panel URLs];
+
+            if (urls.count > 0) {
+                AccountModel::instance().importAccounts(QString::fromNSString([urls[0] path]), "");
+            }
+        }
+    }];
+}
+
 
 - (IBAction)toggleAccount:(NSButton*)sender {
     NSInteger row = [accountsListView rowForView:sender];

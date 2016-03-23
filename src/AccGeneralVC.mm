@@ -111,7 +111,6 @@
         [boxingAccount.subviews setValue:@YES forKeyPath:@"hidden"];
         [boxingParameters.subviews setValue:@YES forKeyPath:@"hidden"];
 
-        NSLog(@"IP@IP");
         // Put visible items at top of the frame
         [boxingCommon setFrameOrigin:NSMakePoint(boxingAccount.frame.origin.x,
                                                 boxingAccount.frame.origin.y - 40)];
