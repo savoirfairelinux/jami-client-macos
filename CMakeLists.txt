@@ -96,6 +96,8 @@ SET(ringclient_CONTROLLERS
    src/AccSecurityVC.h
    src/CertificateWC.mm
    src/CertificateWC.h
+   src/PathPasswordWC.mm
+   src/PathPasswordWC.h
    src/AudioPrefsVC.mm
    src/AudioPrefsVC.h
    src/AccountsVC.mm
@@ -169,6 +171,7 @@ SET(ringclient_XIBS
    PreferencesWindow
    RingWizard
    CertificateWindow
+   PathPasswordWindow
    PersonLinker
    Broker
    Conversation)
