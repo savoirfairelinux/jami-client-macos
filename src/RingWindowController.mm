@@ -18,7 +18,7 @@
  */
 #import "RingWindowController.h"
 #import <QuartzCore/QuartzCore.h>
-
+#include <qrencode.h>
 
 //Qt
 #import <QItemSelectionModel>
@@ -37,15 +37,20 @@
 #import "ConversationVC.h"
 
 #import "PreferencesWC.h"
+#import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
 
 @implementation RingWindowController {
 
+    __unsafe_unretained IBOutlet NSLayoutConstraint* centerYQRCodeConstraint;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* centerYWelcomeContainerConstraint;
+    __unsafe_unretained IBOutlet NSView* welcomeContainer;
     __unsafe_unretained IBOutlet NSView* callView;
     __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
     __unsafe_unretained IBOutlet NSButton* shareButton;
+    __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
-    PreferencesWC *preferencesWC;
+    PreferencesWC* preferencesWC;
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
 }
@@ -154,9 +159,104 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
 - (IBAction)shareRingID:(id)sender {
     NSSharingServicePicker* sharingServicePicker = [[NSSharingServicePicker alloc] initWithItems:[NSArray arrayWithObject:[ringIDLabel stringValue]]];
+    [sharingServicePicker setDelegate:self];
     [sharingServicePicker showRelativeToRect:[sender bounds]
                                       ofView:sender
                                preferredEdge:NSMinYEdge];
+}
+
+- (IBAction)toggleQRCode:(id)sender {
+    // Toggle pressed state of QRCode button
+    [sender setPressed:![sender isPressed]];
+    if (![sender isPressed]) {
+        // Recenter welcome view
+        [self showQRCode:NO];
+        return;
+    }
+
+    auto qrCode = QRcode_encodeString(ringIDLabel.stringValue.UTF8String,
+                                      0,
+                                      QR_ECLEVEL_L, // Lowest level of error correction
+                                      QR_MODE_8, // 8-bit data mode
+                                      1);
+    if (!qrCode) {
+        return;
+    }
+
+    CGFloat size = qrcodeView.frame.size.width;
+
+    // create context
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef ctx = CGBitmapContextCreate(0, size, size, 8, size * 4, colorSpace, kCGImageAlphaPremultipliedLast);
+
+    CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(0, -size);
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(1, -1);
+    CGContextConcatCTM(ctx, CGAffineTransformConcat(translateTransform, scaleTransform));
+
+    // draw QR on this context
+    [self drawQRCode:qrCode context:ctx size:size];
+
+    // get image
+    auto qrCGImage = CGBitmapContextCreateImage(ctx);
+    auto qrImage = [[NSImage alloc] initWithCGImage:qrCGImage size:qrcodeView.frame.size];
+
+    // some releases
+    CGContextRelease(ctx);
+    CGImageRelease(qrCGImage);
+    CGColorSpaceRelease(colorSpace);
+    QRcode_free(qrCode);
+
+    [qrcodeView setImage:qrImage];
+    [self showQRCode:YES];
+}
+
+/**
+ * @param code the previously generated QRCode
+ * @param ctx current drawing context
+ * @param size the output size in which to draw
+ */
+- (void)drawQRCode:(QRcode *)code context:(CGContextRef)ctx size:(CGFloat)size {
+    unsigned char *data = 0;
+    int width;
+    data = code->data;
+    width = code->width;
+    int qr_margin = 3;
+    float zoom = ceil((double)size / (code->width + 2.0 * qr_margin));
+    CGRect rectDraw = CGRectMake(0, 0, zoom, zoom);
+
+    int ran;
+    for(int i = 0; i < width; ++i) {
+        for(int j = 0; j < width; ++j) {
+            if(*data & 1) {
+                CGContextSetFillColorWithColor(ctx, [NSColor ringDarkGrey].CGColor);
+                rectDraw.origin = CGPointMake((j + qr_margin) * zoom,(i + qr_margin) * zoom);
+                CGContextAddRect(ctx, rectDraw);
+                CGContextFillPath(ctx);
+            } else {
+                CGContextSetFillColorWithColor(ctx, [NSColor windowBackgroundColor].CGColor);
+                rectDraw.origin = CGPointMake((j + qr_margin) * zoom,(i + qr_margin) * zoom);
+                CGContextAddRect(ctx, rectDraw);
+                CGContextFillPath(ctx);
+            }
+            ++data;
+        }
+    }
+}
+
+/**
+ * Start the in/out animation displaying the QRCode
+ * @param show should the QRCode be animated in or out
+ */
+- (void) showQRCode:(BOOL) show
+{
+    static const NSInteger offset = 110;
+    [NSAnimationContext beginGrouping];
+    NSAnimationContext.currentContext.duration = 0.5;
+    [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
+    qrcodeView.animator.alphaValue = show ? 1.0 : 0.0;
+    [centerYQRCodeConstraint.animator setConstant: show ? offset : 0];
+    [centerYWelcomeContainerConstraint.animator setConstant:show ? -offset : 0];
+    [NSAnimationContext endGrouping];
 }
 
 - (IBAction)openPreferences:(id)sender
