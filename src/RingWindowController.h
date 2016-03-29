@@ -19,7 +19,7 @@
 #import <Cocoa/Cocoa.h>
 #import "HistoryVC.h"
 
-@interface RingWindowController : NSWindowController {
+@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate> {
     IBOutlet NSView *currentView;
 }
 

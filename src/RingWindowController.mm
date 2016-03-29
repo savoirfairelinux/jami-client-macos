@@ -18,7 +18,7 @@
  */
 #import "RingWindowController.h"
 #import <QuartzCore/QuartzCore.h>
-
+#include <qrencode.h>
 
 //Qt
 #import <QItemSelectionModel>
@@ -44,8 +44,9 @@
     __unsafe_unretained IBOutlet NSView* callView;
     __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
     __unsafe_unretained IBOutlet NSButton* shareButton;
+    __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
-    PreferencesWC *preferencesWC;
+    PreferencesWC* preferencesWC;
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
 }
@@ -153,9 +154,52 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
 - (IBAction)shareRingID:(id)sender {
     NSSharingServicePicker* sharingServicePicker = [[NSSharingServicePicker alloc] initWithItems:[NSArray arrayWithObject:[ringIDLabel stringValue]]];
+    [sharingServicePicker setDelegate:self];
     [sharingServicePicker showRelativeToRect:[sender bounds]
                                       ofView:sender
                                preferredEdge:NSMinYEdge];
+}
+
+- (NSArray *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker
+                            sharingServicesForItems:(NSArray *)items
+                            proposedSharingServices:(NSArray *)proposedServices {
+
+    // Find and the services you want
+    NSMutableArray *newProposedServices = [[NSMutableArray alloc] initWithArray:proposedServices];
+
+
+    NSSharingService* customService = [[NSSharingService alloc] initWithTitle:@"QRCode" image:[NSImage imageNamed:@"qrcode"] alternateImage:nil handler:^{
+        // Do whatever
+        NSLog(@"Showing QRCode");
+        [self toggleQRCode];
+    }];
+
+    [newProposedServices addObject:customService];
+    
+    return newProposedServices;
+}
+
+- (void) toggleQRCode
+{
+    auto img = [NSImage imageWithSize:qrcodeView.frame.size flipped:NO drawingHandler:^BOOL(NSRect dstRect) {
+        auto rcode = QRcode_encodeString(ringIDLabel.stringValue.UTF8String,
+                                         8,
+                                         QR_ECLEVEL_H, // Highest level of error correction
+                                         QR_MODE_8, // 8-bit data mode
+                                         1);
+        if (not rcode) {
+            qWarning() << "Failed to generate QR code: " << strerror(errno);
+            return NO;
+        }
+
+        QRcode_free(rcode);
+
+        return YES;
+    }];
+
+
+
+//    [qrcodeView setImage:];
 }
 
 - (IBAction)openPreferences:(id)sender

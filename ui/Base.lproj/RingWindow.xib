@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="callView" destination="tSW-YT-asL" id="NRy-rM-XW4"/>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
+                <outlet property="qrcodeView" destination="dZR-JL-MY4" id="6Jf-42-qwY"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="Dtg-mG-RBq"/>
@@ -81,13 +82,17 @@
                                     <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
                                 </connections>
                             </button>
-                            <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                                <rect key="frame" x="0.0" y="0.0" width="727" height="658"/>
+                            <customView focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                                <rect key="frame" x="20" y="180" width="727" height="658"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="5yo-rb-X1O"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
                                 </constraints>
                             </customView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
+                                <rect key="frame" x="264" y="20" width="200" height="198"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="mYG-HR-6oh"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="f62-JV-dgr" secondAttribute="centerX" id="0hx-jq-Rdh"/>

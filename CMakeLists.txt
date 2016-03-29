@@ -25,6 +25,25 @@ FIND_PACKAGE(Qt5MacExtras REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
 
+
+EXECUTE_PROCESS(COMMAND ${GIT_EXECUTABLE} submodule update --init 
+WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+INCLUDE(ExternalProject)
+ExternalProject_Add(libqrencode
+    GIT_SUBMODULES libqrencode
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/libqrencode
+    BINARY_DIR  ${CMAKE_SOURCE_DIR}/libqrencode
+    INSTALL_DIR ${CMAKE_SOURCE_DIR}/libqrencode
+    CONFIGURE_COMMAND "./autogen.sh"
+        COMMAND  ./configure --prefix=${CMAKE_CURRENT_SOURCE_DIR}/libqrencode --disable-shared --enable-static
+    BUILD_COMMAND make
+    INSTALL_COMMAND
+        make install)        
+
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/libqrencode/include)
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/libqrencode/lib)
+
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
 
@@ -39,7 +58,6 @@ IF(NOT (${ENABLE_SPARKLE} MATCHES false))
       ADD_DEFINITIONS(-DENABLE_SPARKLE=1)
       MESSAGE("Sparkle is here:" ${SPARKLE_FRAMEWORK})
       FIND_PATH(SPARKLE_INCLUDE_DIR Sparkle.h HINTS ${SPARKLE_FRAMEWORK}/Headers)
-      MESSAGE("INCLUDE " ${SPARKLE_INCLUDE_DIR})
       # we need to copy the public key to check the updates
       SET(PUBLIC_KEY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sparkle/dsa_pub.pem")
       IF(EXISTS ${PUBLIC_KEY_PATH})
@@ -211,6 +229,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_persons.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_history.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/qrcode.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
@@ -316,6 +335,7 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${Qt5Core_LIBRARIES}
    ${Qt5MacExtras_LIBRARIES}
    ${Qt5Widgets_LIBRARIES}
+   -lqrencode
 )
 
 IF(ENABLE_SPARKLE)
@@ -400,7 +420,10 @@ FOREACH(plugin ${QT_PLUGINS_IMAGEFORMAT})
 ENDFOREACH()
 
 # directories to look for dependencies
-SET(DIRS ${CMAKE_INSTALL_PREFIX}/lib ${QT_LIB_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/sparkle)
+SET(DIRS    ${CMAKE_INSTALL_PREFIX}/lib
+            ${QT_LIB_DIR}
+            {CMAKE_CURRENT_SOURCE_DIR}/sparkle
+            {CMAKE_CURRENT_SOURCE_DIR}/libqrencode/lib)
 
 INSTALL(CODE "
     file(GLOB_RECURSE QTPLUGINS
