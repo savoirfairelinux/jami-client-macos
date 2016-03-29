@@ -1,3 +1,6 @@
 [submodule "sparkle/Sparkle"]
 	path = sparkle/Sparkle
 	url = https://github.com/sparkle-project/Sparkle.git
+[submodule "qrencode"]
+	path = qrencode
+	url = https://github.com/fukuchi/libqrencode.git

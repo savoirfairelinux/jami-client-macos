@@ -19,6 +19,17 @@ Requirements
 Build instructions
 ==================
 
+Build QREncode lib (optional)
+----------------------------------
+Ring can ship with the Sparkle framework to allow automatic app updates.
+This can be disabled for your custom build by specifying -DENABLE_SPARKLE=false
+in the cmake phase.
+
+2. git submodule update
+3. cd qrencode/
+3. ./autogen.sh && ./configure --prefix=$(pwd)
+4. make
+
 Build Sparkle framework (optional)
 ----------------------------------
 Ring can ship with the Sparkle framework to allow automatic app updates.

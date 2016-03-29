@@ -25,6 +25,29 @@ FIND_PACKAGE(Qt5MacExtras REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
 
+
+IF(NOT (${ENABLE_QRENCODE} MATCHES false))
+   # find_library searches in /Library/Frameworks by default
+   # We add an hint to our custom location
+   FIND_LIBRARY(QRENCODE_LIB
+                NAMES qrencode
+                HINTS ${CMAKE_CURRENT_SOURCE_DIR}/qrencode/lib)
+   IF(EXISTS ${QRENCODE_LIB})
+      SET(ENABLE_QRENCODE 1 CACHE BOOLEAN "Enable QREncode")
+      ADD_DEFINITIONS(-DENABLE_QRENCODE=1)
+      MESSAGE("QREncode found here:" ${QRENCODE_LIB})
+      FIND_PATH(QRENCODE_INCLUDE_DIR
+                NAMES qrencode.h
+                HINTS ${CMAKE_CURRENT_SOURCE_DIR}/qrencode/include)
+      MESSAGE("INCLUDE " ${QRENCODE_INCLUDE_DIR})
+      # we need to copy the public key to check the updates
+   ELSE()
+      MESSAGE(WARNING "QREncode lib not found, disabling it... to build it see README")
+      SET(ENABLE_QRENCODE 0 CACHE BOOLEAN "Enable QREncode")
+   ENDIF(EXISTS ${QRENCODE_LIB})
+ENDIF(NOT (${ENABLE_QRENCODE} MATCHES false))
+
+
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
 
@@ -39,7 +62,6 @@ IF(NOT (${ENABLE_SPARKLE} MATCHES false))
       ADD_DEFINITIONS(-DENABLE_SPARKLE=1)
       MESSAGE("Sparkle is here:" ${SPARKLE_FRAMEWORK})
       FIND_PATH(SPARKLE_INCLUDE_DIR Sparkle.h HINTS ${SPARKLE_FRAMEWORK}/Headers)
-      MESSAGE("INCLUDE " ${SPARKLE_INCLUDE_DIR})
       # we need to copy the public key to check the updates
       SET(PUBLIC_KEY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/sparkle/dsa_pub.pem")
       IF(EXISTS ${PUBLIC_KEY_PATH})
@@ -211,6 +233,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_persons.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_history.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/qrcode.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
@@ -296,6 +319,10 @@ IF(ENABLE_SPARKLE)
    SET( TO_ADD ${TO_ADD} ${PUBLIC_KEY} ${SPARKLE_FRAMEWORK})
 ENDIF(ENABLE_SPARKLE)
 
+IF(ENABLE_QRENCODE)
+   SET( TO_ADD ${TO_ADD} ${QRENCODE_LIB})
+ENDIF(ENABLE_QRENCODE)
+
 ADD_EXECUTABLE(${PROJ_NAME} MACOSX_BUNDLE ${TO_ADD})
 
 # Follow Xcode hierarchy principles
@@ -321,6 +348,10 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
 IF(ENABLE_SPARKLE)
    TARGET_LINK_LIBRARIES(${PROJ_NAME} ${SPARKLE_FRAMEWORK})
 ENDIF(ENABLE_SPARKLE)
+
+IF(ENABLE_QRENCODE)
+   TARGET_LINK_LIBRARIES(${PROJ_NAME} ${QRENCODE_LIB})
+ENDIF(ENABLE_QRENCODE)
 
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Cocoa")
@@ -400,7 +431,10 @@ FOREACH(plugin ${QT_PLUGINS_IMAGEFORMAT})
 ENDFOREACH()
 
 # directories to look for dependencies
-SET(DIRS ${CMAKE_INSTALL_PREFIX}/lib ${QT_LIB_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/sparkle)
+SET(DIRS    ${CMAKE_INSTALL_PREFIX}/lib
+            ${QT_LIB_DIR}
+            {CMAKE_CURRENT_SOURCE_DIR}/sparkle
+            {CMAKE_CURRENT_SOURCE_DIR}/qrencode/lib)
 
 INSTALL(CODE "
     file(GLOB_RECURSE QTPLUGINS
