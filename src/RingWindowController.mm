@@ -153,9 +153,28 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
 - (IBAction)shareRingID:(id)sender {
     NSSharingServicePicker* sharingServicePicker = [[NSSharingServicePicker alloc] initWithItems:[NSArray arrayWithObject:[ringIDLabel stringValue]]];
+    [sharingServicePicker setDelegate:self];
     [sharingServicePicker showRelativeToRect:[sender bounds]
                                       ofView:sender
                                preferredEdge:NSMinYEdge];
+}
+
+- (NSArray *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker
+                            sharingServicesForItems:(NSArray *)items
+                            proposedSharingServices:(NSArray *)proposedServices {
+
+    // Find and the services you want
+    NSMutableArray *newProposedServices = [[NSMutableArray alloc] initWithArray:proposedServices];
+
+
+    NSSharingService* customService = [[NSSharingService alloc] initWithTitle:@"QRCode" image:[NSImage imageNamed:@"qrcode"] alternateImage:nil handler:^{
+        // Do whatever
+        NSLog(@"Showing QRCode");
+    }];
+
+    [newProposedServices addObject:customService];
+    
+    return newProposedServices;
 }
 
 - (IBAction)openPreferences:(id)sender
