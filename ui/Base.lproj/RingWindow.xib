@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="callView" destination="tSW-YT-asL" id="NRy-rM-XW4"/>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
+                <outlet property="qrcodeView" destination="dZR-JL-MY4" id="6Jf-42-qwY"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="Dtg-mG-RBq"/>
@@ -81,13 +82,21 @@
                                     <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
                                 </connections>
                             </button>
-                            <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                                <rect key="frame" x="0.0" y="0.0" width="727" height="658"/>
+                            <customView focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                                <rect key="frame" x="20" y="180" width="727" height="658"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="5yo-rb-X1O"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
                                 </constraints>
                             </customView>
+                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
+                                <rect key="frame" x="264" y="18" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="RCZ-Wt-iKD"/>
+                                    <constraint firstAttribute="height" constant="200" id="tSn-OT-Zn8"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="mYG-HR-6oh"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="f62-JV-dgr" secondAttribute="centerX" id="0hx-jq-Rdh"/>
@@ -97,11 +106,13 @@
                             <constraint firstItem="Oac-o7-2Ge" firstAttribute="leading" secondItem="JN3-vO-zcd" secondAttribute="trailing" constant="8" id="Jfc-Gx-5Ey"/>
                             <constraint firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="OW1-T7-eV8"/>
                             <constraint firstItem="VJ1-xk-v5e" firstAttribute="top" secondItem="f62-JV-dgr" secondAttribute="bottom" constant="8" id="PNC-n6-n33"/>
+                            <constraint firstItem="dZR-JL-MY4" firstAttribute="top" secondItem="JN3-vO-zcd" secondAttribute="bottom" constant="8" id="Rlm-og-ZwB"/>
                             <constraint firstAttribute="centerY" secondItem="VJ1-xk-v5e" secondAttribute="centerY" id="Rst-Fd-Tpe"/>
                             <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="Vm1-Ql-lxQ"/>
                             <constraint firstAttribute="centerX" secondItem="kFj-Sh-o5u" secondAttribute="centerX" id="Zjg-a3-qf3"/>
                             <constraint firstAttribute="centerX" secondItem="VJ1-xk-v5e" secondAttribute="centerX" id="a5y-o9-jjR"/>
                             <constraint firstItem="kFj-Sh-o5u" firstAttribute="top" secondItem="VJ1-xk-v5e" secondAttribute="bottom" constant="8" id="btp-Ro-DNa"/>
+                            <constraint firstItem="dZR-JL-MY4" firstAttribute="centerX" secondItem="Fzg-MB-mlx" secondAttribute="centerX" id="ejM-RR-NBl"/>
                             <constraint firstAttribute="centerX" secondItem="f62-JV-dgr" secondAttribute="centerX" id="iVv-51-Qnp"/>
                             <constraint firstItem="tSW-YT-asL" firstAttribute="top" secondItem="Fzg-MB-mlx" secondAttribute="top" id="kVw-UP-9a7"/>
                             <constraint firstItem="JN3-vO-zcd" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="8" id="leT-Io-jce"/>
