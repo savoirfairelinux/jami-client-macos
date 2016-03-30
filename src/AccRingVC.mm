@@ -16,21 +16,18 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#define ALIAS_TAG 0
-#define HOSTNAME_TAG 1
-#define USERNAME_TAG 2
-#define PASSWORD_TAG 3
-#define USERAGENT_TAG 4
-
 #import "AccRingVC.h"
+
+//Cocoa
+#import <Quartz/Quartz.h>
 
 #import <accountmodel.h>
 #import <qitemselectionmodel.h>
 
 @interface AccRingVC ()
 
+@property (unsafe_unretained) IBOutlet NSButton* photoView;
 @property (assign) IBOutlet NSTextField *aliasTextField;
-@property (assign) IBOutlet NSTextField *typeLabel;
 @property (assign) IBOutlet NSTextField *bootstrapField;
 @property (assign) IBOutlet NSTextField *hashField;
 
@@ -45,7 +42,7 @@
 @end
 
 @implementation AccRingVC
-@synthesize typeLabel;
+@synthesize photoView;
 @synthesize bootstrapField;
 @synthesize hashField;
 @synthesize aliasTextField;
@@ -54,6 +51,11 @@
 @synthesize userAgentButton;
 @synthesize userAgentTextField;
 @synthesize allowContacts, allowHistory, allowUnknown;
+
+// Tags for views
+NSInteger const ALIAS_TAG       =   0;
+NSInteger const HOSTNAME_TAG    =   1;
+NSInteger const USERAGENT_TAG   =   4;
 
 - (void)awakeFromNib
 {
@@ -69,21 +71,18 @@
                              return;
                          [self loadAccount];
                      });
-}
 
-- (Account*) currentAccount
-{
-    auto accIdx = AccountModel::instance().selectionModel()->currentIndex();
-    return AccountModel::instance().getAccountByModelIndex(accIdx);
+    [photoView setWantsLayer: YES];
+    photoView.layer.cornerRadius = photoView.frame.size.width / 2;
+    photoView.layer.masksToBounds = YES;
+    [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
 }
 
 - (void)loadAccount
 {
-    auto account = [self currentAccount];
+    auto account = AccountModel::instance().selectedAccount();
 
     [self.aliasTextField setStringValue:account->alias().toNSString()];
-
-    [typeLabel setStringValue:@"RING"];
 
     [allowUnknown setState:account->allowIncomingFromUnknown()];
     [allowHistory setState:account->allowIncomingFromHistory()];
@@ -109,29 +108,50 @@
 
 }
 
+- (IBAction) editPhoto:(id)sender {
+    IKPictureTaker* pictureTaker = [IKPictureTaker pictureTaker];
+    [pictureTaker beginPictureTakerSheetForWindow:self.view.window
+                                     withDelegate:self
+                                   didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)
+                                      contextInfo:nil];
+}
+
+- (void) pictureTakerDidEnd:(IKPictureTaker *) picker
+                 returnCode:(NSInteger) code
+                contextInfo:(void*) contextInfo
+{
+    auto outputImage = [picker outputImage];
+    if (outputImage == nil) {
+        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
+    } else
+        [photoView setImage:outputImage];
+}
+
 - (IBAction)toggleUpnp:(NSButton *)sender {
-    [self currentAccount]->setUpnpEnabled([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setUpnpEnabled([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAutoAnswer:(NSButton *)sender {
-    [self currentAccount]->setAutoAnswer([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setAutoAnswer([sender state] == NSOnState);
 }
 
 - (IBAction)toggleCustomAgent:(NSButton *)sender {
     [self.userAgentTextField setEnabled:[sender state] == NSOnState];
-    [self currentAccount]->setHasCustomUserAgent([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setHasCustomUserAgent([sender state] == NSOnState);
 }
 
-- (IBAction)toggleAllowFromUnknown:(id)sender {
-    [self currentAccount]->setAllowIncomingFromUnknown([sender state] == NSOnState);
+- (IBAction)toggleAllowFromUnknown:(NSButton*) sender {
+    AccountModel::instance().selectedAccount()->setAllowIncomingFromUnknown([sender state] == NSOnState);
     [allowHistory setEnabled:![sender state] == NSOnState];
     [allowContacts setEnabled:![sender state] == NSOnState];
 }
-- (IBAction)toggleAllowFromHistory:(id)sender {
-    [self currentAccount]->setAllowIncomingFromHistory([sender state] == NSOnState);
+
+- (IBAction)toggleAllowFromHistory:(NSButton*) sender {
+    AccountModel::instance().selectedAccount()->setAllowIncomingFromHistory([sender state] == NSOnState);
 }
-- (IBAction)toggleAllowFromContacts:(id)sender {
-    [self currentAccount]->setAllowIncomingFromContact([sender state] == NSOnState);
+
+- (IBAction)toggleAllowFromContacts:(NSButton*) sender {
+    AccountModel::instance().selectedAccount()->setAllowIncomingFromContact([sender state] == NSOnState);
 }
 
 #pragma mark - NSTextFieldDelegate methods
@@ -147,17 +167,14 @@
 
     switch ([textField tag]) {
         case ALIAS_TAG:
-            [self currentAccount]->setAlias([[textField stringValue] UTF8String]);
-            [self currentAccount]->setDisplayName([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setAlias([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setDisplayName([[textField stringValue] UTF8String]);
             break;
         case HOSTNAME_TAG:
-            [self currentAccount]->setHostname([[textField stringValue] UTF8String]);
-            break;
-        case PASSWORD_TAG:
-            [self currentAccount]->setPassword([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setHostname([[textField stringValue] UTF8String]);
             break;
         case USERAGENT_TAG:
-            [self currentAccount]->setUserAgent([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setUserAgent([[textField stringValue] UTF8String]);
             break;
         default:
             break;

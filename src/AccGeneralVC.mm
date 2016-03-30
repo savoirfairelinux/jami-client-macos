@@ -16,15 +16,13 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#define ALIAS_TAG 0
-#define HOSTNAME_TAG 1
-#define USERNAME_TAG 2
-#define PASSWORD_TAG 3
-#define USERAGENT_TAG 4
-
-
 #import "AccGeneralVC.h"
 
+//Cocoa
+#import <AddressBook/AddressBook.h>
+#import <Quartz/Quartz.h>
+
+//LRC
 #import <accountmodel.h>
 #import <protocolmodel.h>
 #import <qitemselectionmodel.h>
@@ -36,7 +34,7 @@
 @property (assign) IBOutlet NSView *boxingCommon;
 
 @property (assign) IBOutlet NSTextField *aliasTextField;
-@property (assign) IBOutlet NSTextField *typeLabel;
+@property (unsafe_unretained) IBOutlet NSButton* photoView;
 
 @property (assign) IBOutlet NSTextField *serverHostTextField;
 @property (assign) IBOutlet NSTextField *usernameTextField;
@@ -52,8 +50,8 @@
 @end
 
 @implementation AccGeneralVC
-@synthesize typeLabel;
 @synthesize boxingAccount;
+@synthesize photoView;
 @synthesize boxingParameters;
 @synthesize boxingCommon;
 @synthesize aliasTextField;
@@ -65,6 +63,13 @@
 @synthesize autoAnswerButton;
 @synthesize userAgentButton;
 @synthesize userAgentTextField;
+
+// Tags for views
+NSInteger const ALIAS_TAG       =   0;
+NSInteger const HOSTNAME_TAG    =   1;
+NSInteger const USERNAME_TAG    =   2;
+NSInteger const PASSWORD_TAG    =   3;
+NSInteger const USERAGENT_TAG   =   4;
 
 - (void)awakeFromNib
 {
@@ -82,30 +87,47 @@
                              return;
                          [self loadAccount];
                      });
-}
 
-- (Account*) currentAccount
-{
-    auto accIdx = AccountModel::instance().selectionModel()->currentIndex();
-    return AccountModel::instance().getAccountByModelIndex(accIdx);
+    [photoView setWantsLayer: YES];
+    photoView.layer.cornerRadius = photoView.frame.size.width / 2;
+    photoView.layer.masksToBounds = YES;
 }
 
 - (IBAction)toggleUpnp:(NSButton *)sender {
-    [self currentAccount]->setUpnpEnabled([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setUpnpEnabled([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAutoAnswer:(NSButton *)sender {
-    [self currentAccount]->setAutoAnswer([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setAutoAnswer([sender state] == NSOnState);
 }
 
 - (IBAction)toggleCustomAgent:(NSButton *)sender {
     [self.userAgentTextField setEnabled:[sender state] == NSOnState];
-    [self currentAccount]->setHasCustomUserAgent([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setHasCustomUserAgent([sender state] == NSOnState);
+}
+
+- (IBAction) editPhoto:(id)sender {
+    IKPictureTaker* pictureTaker = [IKPictureTaker pictureTaker];
+    [pictureTaker beginPictureTakerSheetForWindow:self.view.window
+                                     withDelegate:self
+                                   didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)
+                                      contextInfo:nil];
+}
+
+- (void) pictureTakerDidEnd:(IKPictureTaker *) picker
+                 returnCode:(NSInteger) code
+                contextInfo:(void*) contextInfo
+{
+    auto outputImage = [picker outputImage];
+    if (outputImage == nil) {
+        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
+    } else
+        [photoView setImage:outputImage];
 }
 
 - (void)loadAccount
 {
-    auto account = [self currentAccount];
+    auto account = AccountModel::instance().selectedAccount();
 
     if([account->alias().toNSString() isEqualToString:@"IP2IP"]) {
         [boxingAccount.subviews setValue:@YES forKeyPath:@"hidden"];
@@ -128,30 +150,15 @@
         [self.clearTextField setStringValue:account->password().toNSString()];
     }
 
-    switch (account->protocol()) {
-        case Account::Protocol::SIP:
-            [self.typeLabel setStringValue:@"SIP"];
-            break;
-        case Account::Protocol::IAX:
-            [self.typeLabel setStringValue:@"IAX"];
-            break;
-        case Account::Protocol::RING:
-            [self.typeLabel setStringValue:@"RING"];
-            break;
-
-        default:
-            break;
-    }
-
-    [upnpButton setState:[self currentAccount]->isUpnpEnabled()];
-    [userAgentButton setState:[self currentAccount]->hasCustomUserAgent()];
-    [userAgentTextField setEnabled:[self currentAccount]->hasCustomUserAgent()];
-    [self.autoAnswerButton setState:[self currentAccount]->isAutoAnswer()];
+    [upnpButton setState:account->isUpnpEnabled()];
+    [userAgentButton setState:account->hasCustomUserAgent()];
+    [userAgentTextField setEnabled:account->hasCustomUserAgent()];
+    [self.autoAnswerButton setState:account->isAutoAnswer()];
     [self.userAgentTextField setStringValue:account->userAgent().toNSString()];
 }
 
 - (IBAction)tryRegistration:(id)sender {
-    [self currentAccount] << Account::EditAction::SAVE;
+    AccountModel::instance().selectedAccount() << Account::EditAction::SAVE;
 }
 
 - (IBAction)showPassword:(NSButton *)sender {
@@ -190,23 +197,24 @@
 -(void)controlTextDidChange:(NSNotification *)notif
 {
     NSTextField *textField = [notif object];
+    auto account = AccountModel::instance().selectedAccount();
 
     switch ([textField tag]) {
         case ALIAS_TAG:
-            [self currentAccount]->setAlias([[textField stringValue] UTF8String]);
-            [self currentAccount]->setDisplayName([[textField stringValue] UTF8String]);
+            account->setAlias([[textField stringValue] UTF8String]);
+            account->setDisplayName([[textField stringValue] UTF8String]);
             break;
         case HOSTNAME_TAG:
-            [self currentAccount]->setHostname([[textField stringValue] UTF8String]);
+            account->setHostname([[textField stringValue] UTF8String]);
             break;
         case USERNAME_TAG:
-            [self currentAccount]->setUsername([[textField stringValue] UTF8String]);
+            account->setUsername([[textField stringValue] UTF8String]);
             break;
         case PASSWORD_TAG:
-            [self currentAccount]->setPassword([[textField stringValue] UTF8String]);
+            account->setPassword([[textField stringValue] UTF8String]);
             break;
         case USERAGENT_TAG:
-            [self currentAccount]->setUserAgent([[textField stringValue] UTF8String]);
+            account->setUserAgent([[textField stringValue] UTF8String]);
             break;
         default:
             break;
