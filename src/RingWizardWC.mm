@@ -18,6 +18,10 @@
  */
 #import "RingWizardWC.h"
 
+//Cocoa
+#import <AddressBook/AddressBook.h>
+#import <Quartz/Quartz.h>
+
 //Qt
 #import <QUrl>
 
@@ -33,6 +37,9 @@
 #import "views/NSColor+RingTheme.h"
 
 @implementation RingWizardWC {
+
+
+    __unsafe_unretained IBOutlet NSButton* photoView;
     __unsafe_unretained IBOutlet NSTextField* nicknameField;
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
     __unsafe_unretained IBOutlet NSTextField* indicationLabel;
@@ -66,6 +73,7 @@ NSInteger const NICKNAME_TAG        = 1;
 
     if(![appDelegate checkForRingAccount]) {
         accountToCreate = AccountModel::instance().add(QString::fromNSString(NSFullUserName()), Account::Protocol::RING);
+
         [nicknameField setStringValue:NSFullUserName()];
         [self controlTextDidChange:[NSNotification notificationWithName:@"PlaceHolder" object:nicknameField]];
     } else {
@@ -78,6 +86,16 @@ NSInteger const NICKNAME_TAG        = 1;
     [caListPathControl setDelegate:self];
     [certificatePathControl setDelegate:self];
     [pvkPathControl setDelegate:self];
+
+    NSData* imgData = [[[ABAddressBook sharedAddressBook] me] imageData];
+    if (imgData != nil) {
+        [photoView setImage:[[NSImage alloc] initWithData:imgData]];
+    } else
+        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
+
+    [photoView setWantsLayer: YES];
+    photoView.layer.cornerRadius = photoView.frame.size.width / 2;
+    photoView.layer.masksToBounds = YES;
 }
 
 - (void) displayHash:(NSString* ) hash
@@ -99,6 +117,25 @@ NSInteger const NICKNAME_TAG        = 1;
     [createButton setAction:@selector(goToApp:)];
 }
 
+- (IBAction) editPhoto:(id)sender {
+    IKPictureTaker* pictureTaker = [IKPictureTaker pictureTaker];
+    [pictureTaker beginPictureTakerSheetForWindow:self.window
+                                     withDelegate:self
+                                   didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)
+                                      contextInfo:nil];
+}
+
+- (void) pictureTakerDidEnd:(IKPictureTaker *) picker
+                 returnCode:(NSInteger) code
+                contextInfo:(void*) contextInfo
+{
+    auto outputImage = [picker outputImage];
+    if (outputImage == nil) {
+        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
+    } else
+        [photoView setImage:outputImage];
+}
+
 - (IBAction)shareRingID:(id)sender {
     NSSharingServicePicker* sharingServicePicker = [[NSSharingServicePicker alloc] initWithItems:[NSArray arrayWithObject:[nicknameField stringValue]]];
     [sharingServicePicker showRelativeToRect:[sender bounds]
@@ -111,6 +148,7 @@ NSInteger const NICKNAME_TAG        = 1;
     [nicknameField setHidden:YES];
     [progressBar setHidden:NO];
     [createButton setHidden:YES];
+    [photoView setHidden:YES];
     [progressBar startAnimation:nil];
     [indicationLabel setStringValue:NSLocalizedString(@"Just a moment...",
                                                       @"Indication for user")];
