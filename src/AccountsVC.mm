@@ -271,7 +271,6 @@ NSInteger const TAG_TYPE        =   400;
 
     [nameLabel setStringValue:account->alias().toNSString()];
     [stateLabel setStringValue:humanState.toNSString()];
-    [checkButton setHidden:AccountModel::instance().ip2ip()->index() == qIdx];
 
     switch (account->protocol()) {
         case Account::Protocol::SIP:

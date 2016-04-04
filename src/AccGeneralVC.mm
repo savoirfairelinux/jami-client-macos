@@ -31,7 +31,6 @@
 
 @interface AccGeneralVC ()
 
-@property (assign) IBOutlet NSView *boxingAccount;
 @property (assign) IBOutlet NSView *boxingParameters;
 @property (assign) IBOutlet NSView *boxingCommon;
 
@@ -53,7 +52,6 @@
 
 @implementation AccGeneralVC
 @synthesize typeLabel;
-@synthesize boxingAccount;
 @synthesize boxingParameters;
 @synthesize boxingCommon;
 @synthesize aliasTextField;
@@ -107,26 +105,13 @@
 {
     auto account = [self currentAccount];
 
-    if([account->alias().toNSString() isEqualToString:@"IP2IP"]) {
-        [boxingAccount.subviews setValue:@YES forKeyPath:@"hidden"];
-        [boxingParameters.subviews setValue:@YES forKeyPath:@"hidden"];
+    [boxingParameters.subviews setValue:@NO forKeyPath:@"hidden"];
 
-        NSLog(@"IP@IP");
-        // Put visible items at top of the frame
-        [boxingCommon setFrameOrigin:NSMakePoint(boxingAccount.frame.origin.x,
-                                                boxingAccount.frame.origin.y - 40)];
-        [boxingCommon setNeedsDisplay:YES];
-
-    } else {
-        [boxingAccount.subviews setValue:@NO forKeyPath:@"hidden"];
-        [boxingParameters.subviews setValue:@NO forKeyPath:@"hidden"];
-
-        [self.aliasTextField setStringValue:account->alias().toNSString()];
-        [self.serverHostTextField setStringValue:account->hostname().toNSString()];
-        [self.usernameTextField setStringValue:account->username().toNSString()];
-        [self.passwordTextField setStringValue:account->password().toNSString()];
-        [self.clearTextField setStringValue:account->password().toNSString()];
-    }
+    [self.aliasTextField setStringValue:account->alias().toNSString()];
+    [self.serverHostTextField setStringValue:account->hostname().toNSString()];
+    [self.usernameTextField setStringValue:account->username().toNSString()];
+    [self.passwordTextField setStringValue:account->password().toNSString()];
+    [self.clearTextField setStringValue:account->password().toNSString()];
 
     switch (account->protocol()) {
         case Account::Protocol::SIP:
