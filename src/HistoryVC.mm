@@ -176,7 +176,7 @@ NSInteger const PHOTO_TAG = 400;
         auto call = qvariant_cast<Call*>(qIdx.data((int)Call::Role::Object));
 
         NSImageView* photoView = [result viewWithTag:PHOTO_TAG];
-        QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(call, QSize(50,50));
+        QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(call, QSize(100,100));
         [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
 
         NSTextField* details = [result viewWithTag:DETAILS_TAG];

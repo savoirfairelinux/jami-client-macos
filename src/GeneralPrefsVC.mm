@@ -18,35 +18,42 @@
  */
 #import "GeneralPrefsVC.h"
 
+#import <Quartz/Quartz.h>
+
+//Qt
+#import <QSize>
+#import <QtMacExtras/qmacfunctions.h>
+#import <QPixmap>
+
+//LRC
 #import <categorizedhistorymodel.h>
+#import <profilemodel.h>
+#import <profile.h>
+#import <person.h>
+#import <globalinstances.h>
 
 #if ENABLE_SPARKLE
 #import <Sparkle/Sparkle.h>
 #endif
 
 #import "Constants.h"
+#import "delegates/ImageManipulationDelegate.h"
 
-@interface GeneralPrefsVC ()
-@property (unsafe_unretained) IBOutlet NSTextField* historyChangedLabel;
-@property (unsafe_unretained) IBOutlet NSButton* startUpButton;
-@property (unsafe_unretained) IBOutlet NSButton* toggleAutomaticUpdateCheck;
-@property (unsafe_unretained) IBOutlet NSPopUpButton* checkIntervalPopUp;
-@property (unsafe_unretained) IBOutlet NSView* sparkleContainer;
-@property (unsafe_unretained) IBOutlet NSTextField* historyTextField;
-@property (unsafe_unretained) IBOutlet NSStepper* historyStepper;
-@property (unsafe_unretained) IBOutlet NSButton* historySwitch;
-
+@interface GeneralPrefsVC () {
+    __unsafe_unretained IBOutlet NSTextField* historyChangedLabel;
+    __unsafe_unretained IBOutlet NSButton* startUpButton;
+    __unsafe_unretained IBOutlet NSButton* toggleAutomaticUpdateCheck;
+    __unsafe_unretained IBOutlet NSPopUpButton* checkIntervalPopUp;
+    __unsafe_unretained IBOutlet NSView* sparkleContainer;
+    __unsafe_unretained IBOutlet NSTextField* historyTextField;
+    __unsafe_unretained IBOutlet NSStepper* historyStepper;
+    __unsafe_unretained IBOutlet NSButton* historySwitch;
+    __unsafe_unretained IBOutlet NSButton* photoView;
+    __unsafe_unretained IBOutlet NSTextField* profileNameField;
+}
 @end
 
 @implementation GeneralPrefsVC
-@synthesize historyChangedLabel;
-@synthesize startUpButton;
-@synthesize toggleAutomaticUpdateCheck;
-@synthesize checkIntervalPopUp;
-@synthesize sparkleContainer;
-@synthesize historyTextField;
-@synthesize historyStepper;
-@synthesize historySwitch;
 
 - (void)loadView
 {
@@ -74,6 +81,16 @@
     [sparkleContainer setHidden:YES];
 #endif
 
+    [photoView setWantsLayer: YES];
+    photoView.layer.cornerRadius = photoView.frame.size.width / 2;
+    photoView.layer.masksToBounds = YES;
+
+    if (auto pro = ProfileModel::instance().selectedProfile()) {
+        auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
+        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        [profileNameField setStringValue:pro->person()->formattedName().toNSString()];
+    }
+
 }
 
 - (void) dealloc
@@ -86,7 +103,7 @@
     [historyChangedLabel setHidden:NO];
 }
 
-- (IBAction)toggleHistory:(id)sender {
+- (IBAction)toggleHistory:(NSButton*)sender {
     CategorizedHistoryModel::instance().setHistoryLimited([sender state]);
     int historyLimit = CategorizedHistoryModel::instance().historyLimit();
     [historyTextField setStringValue:[NSString stringWithFormat:@"%d", historyLimit]];
@@ -169,6 +186,43 @@
     CFRelease(loginItemsRef);
 
     return itemRef;
+}
+
+#pragma mark - Profile Photo edition
+
+- (IBAction) editPhoto:(id)sender {
+    auto pictureTaker = [IKPictureTaker pictureTaker];
+    [pictureTaker beginPictureTakerSheetForWindow:self.view.window
+                                     withDelegate:self
+                                   didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)
+                                      contextInfo:nil];
+}
+
+- (void) pictureTakerDidEnd:(IKPictureTaker *) picker
+                 returnCode:(NSInteger) code
+                contextInfo:(void*) contextInfo
+{
+    if (auto outputImage = [picker outputImage]) {
+        [photoView setImage:outputImage];
+    } else
+        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
+    if (auto pro = ProfileModel::instance().selectedProfile()) {
+        QPixmap p;
+        if (p.loadFromData(QByteArray::fromNSData([[photoView image] TIFFRepresentation]))) {
+            pro->person()->setPhoto(QVariant(p));
+        }
+        pro->save();
+    }
+}
+
+#pragma mark - NSTextFieldDelegate methods
+
+-(void)controlTextDidChange:(NSNotification *)notif
+{
+    if (auto pro = ProfileModel::instance().selectedProfile()) {
+        pro->person()->setFormattedName(profileNameField.stringValue.UTF8String);
+        pro->save();
+    }
 }
 
 @end
