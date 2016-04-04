@@ -20,14 +20,17 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+//LRC
 #import <accountmodel.h>
 #import <codecmodel.h>
+#import <profilemodel.h>
+#import <profile.h>
 
+//Ring
 #import "AccountsVC.h"
 #import "GeneralPrefsVC.h"
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
-#import "Constants.h"
 
 @implementation PreferencesWC {
 
@@ -36,10 +39,11 @@
 
 }
 
-static NSString* const kProfilePrefsIdentifier = @"AccountsPrefsIdentifier";
-static NSString* const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
-static NSString* const kAudioPrefsIdentifer = @"AudioPrefsIdentifer";
-static NSString* const kVideoPrefsIdentifer = @"VideoPrefsIdentifer";
+// Identifiers used in PreferencesWindow.xib for tabs
+static auto const kProfilePrefsIdentifier = @"AccountsPrefsIdentifier";
+static auto const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
+static auto const kAudioPrefsIdentifer    = @"AudioPrefsIdentifer";
+static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 
 - (void)windowDidLoad
 {
@@ -52,6 +56,7 @@ static NSString* const kVideoPrefsIdentifer = @"VideoPrefsIdentifer";
 - (void)windowWillClose:(NSNotification *)notification
 {
     AccountModel::instance().save();
+    ProfileModel::instance().selectedProfile()->save();
 }
 
 - (IBAction)displayGeneral:(NSToolbarItem *)sender
@@ -93,26 +98,39 @@ static NSString* const kVideoPrefsIdentifer = @"VideoPrefsIdentifer";
 
 - (void) resizeWindowWithFrame:(NSRect)fr
 {
-    NSToolbar *toolbar = [self.window toolbar];
-    CGFloat toolbarHeight = 0.0;
-    NSRect windowFrame;
-
-    if (toolbar && [toolbar isVisible]) {
-        windowFrame = [NSWindow contentRectForFrameRect:[self.window frame]
-                                                  styleMask:[self.window styleMask]];
-        toolbarHeight = NSHeight(windowFrame) - NSHeight([[self.window contentView] frame]);
-    }
-
     auto frame = [self.window frame];
     frame.origin.y += frame.size.height;
-    frame.origin.y -= NSHeight(fr) + toolbarHeight;
-    frame.size.height = NSHeight(fr) + toolbarHeight;
+    frame.origin.y -= NSHeight(fr) + [self toolBarHeight] + [self titleBarHeight];
+    frame.size.height = NSHeight(fr) + [self toolBarHeight];
     frame.size.width = NSWidth(fr);
-
     frame = [NSWindow frameRectForContentRect:frame
                                          styleMask:[self.window styleMask]];
 
     [self.window setFrame:frame display:YES animate:YES];
+}
+
+- (CGFloat) toolBarHeight
+{
+    NSRect windowFrame;
+    NSToolbar *toolbar = [self.window toolbar];
+    CGFloat tHeight = 0.0;
+    if (toolbar && [toolbar isVisible]) {
+
+        windowFrame = [NSWindow contentRectForFrameRect:[self.window frame]
+                                              styleMask:[self.window styleMask]];
+        tHeight = NSHeight(windowFrame) - NSHeight([[self.window contentView] frame]);
+    }
+    return tHeight;
+}
+
+- (float) titleBarHeight
+{
+    NSRect frame = NSMakeRect (0, 0, 100, 100);
+    NSRect contentRect;
+    contentRect = [NSWindow contentRectForFrameRect: frame
+                                          styleMask: NSTitledWindowMask];
+
+    return (frame.size.height - contentRect.size.height);
 }
 
 @end

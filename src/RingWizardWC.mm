@@ -39,6 +39,7 @@
 
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "views/NSImage+Extensions.h"
 #import "views/NSColor+RingTheme.h"
 
 @implementation RingWizardWC {
@@ -155,7 +156,8 @@ NSInteger const NICKNAME_TAG        = 1;
     if (auto profile = ProfileModel::instance().selectedProfile()) {
         profile->person()->setFormattedName([[nicknameField stringValue] UTF8String]);
         QPixmap p;
-        if (p.loadFromData(QByteArray::fromNSData([[photoView image] TIFFRepresentation]))) {
+        auto smallImg = [NSImage imageResize:[photoView image] newSize:{100,100}];
+        if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
             profile->person()->setPhoto(QVariant(p));
         }
         profile->save();

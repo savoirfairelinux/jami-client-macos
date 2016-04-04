@@ -137,6 +137,8 @@ SET(ringclient_VIEWS
    src/views/HoverTableRowView.h
    src/views/NSColor+RingTheme.mm
    src/views/NSColor+RingTheme.h
+   src/views/NSImage+Extensions.mm
+   src/views/NSImage+Extensions.h
    src/views/ContextualTableCellView.mm
    src/views/ContextualTableCellView.h
    src/views/IconButton.h
