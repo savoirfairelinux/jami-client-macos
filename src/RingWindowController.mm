@@ -89,6 +89,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          auto call = RecentModel::instance().getActiveCall(current);
+
                          if(!current.isValid()) {
                              [offlineVC animateOut];
                              [currentCallVC animateOut];
