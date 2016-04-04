@@ -141,7 +141,7 @@ namespace Interfaces {
         const bool ret = image.loadFromData(QByteArray::fromBase64(data),type.toLatin1());
         if (!ret) {
             qDebug() << "vCard image loading failed";
-            return drawDefaultUserPixmap({50,50}, false, false);
+            return drawDefaultUserPixmap({100,100}, false, false);
         }
 
         return QPixmap::fromImage(image);

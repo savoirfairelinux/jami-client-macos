@@ -156,7 +156,7 @@
     [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
 
     if (firstRun) {
-        QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(current, QSize(50,50));
+        QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(current, QSize(100,100));
         [personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
     }
 

@@ -233,7 +233,7 @@
     [result updateWidthConstraint:finalWidth];
 
     Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(50,50));
+    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(100,100));
     [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
 
     return result;
