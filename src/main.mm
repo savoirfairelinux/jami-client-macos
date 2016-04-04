@@ -32,8 +32,10 @@
 #import <recentmodel.h>
 #import <categorizedhistorymodel.h>
 #import <localhistorycollection.h>
+#import <localprofilecollection.h>
 #import <numbercategorymodel.h>
 #import <callmodel.h>
+#import <profilemodel.h>
 
 #import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -73,8 +75,11 @@ int main(int argc, const char *argv[]) {
     NumberCategoryModel::instance().addCategory("home", QVariant());
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
+
     PersonModel::instance().addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
     RecentModel::instance(); // Make sure RecentModel is initialized before showing UI
+
+    ProfileModel::instance().addCollection<LocalProfileCollection>(LoadOptions::FORCE_ENABLED);
 
     return NSApplicationMain(argc, argv);
 }
