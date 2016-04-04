@@ -33,6 +33,7 @@
 #import <categorizedhistorymodel.h>
 #import <localhistorycollection.h>
 #import <localprofilecollection.h>
+#import <peerprofilecollection.h>
 #import <numbercategorymodel.h>
 #import <callmodel.h>
 #import <profilemodel.h>
@@ -80,6 +81,7 @@ int main(int argc, const char *argv[]) {
     RecentModel::instance(); // Make sure RecentModel is initialized before showing UI
 
     ProfileModel::instance().addCollection<LocalProfileCollection>(LoadOptions::FORCE_ENABLED);
+    PersonModel::instance().addCollection<PeerProfileCollection>(LoadOptions::FORCE_ENABLED);
 
     return NSApplicationMain(argc, argv);
 }
