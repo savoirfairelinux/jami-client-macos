@@ -179,12 +179,10 @@
 {
     QModelIndex qIdx;
 
-    if([menu.title isEqualToString:@"inputlist"])
-    {
+    if (inputDeviceList.menu == menu) {
         qIdx = Audio::Settings::instance().inputDeviceModel()->index(index);
         [item setTitle:Audio::Settings::instance().inputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
-    } else
-    {
+    } else {
         qIdx = Audio::Settings::instance().outputDeviceModel()->index(index);
         [item setTitle:Audio::Settings::instance().outputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
     }
@@ -194,7 +192,7 @@
 
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
-    if([menu.title isEqualToString:@"inputlist"])
+    if (inputDeviceList.menu == menu)
         return Audio::Settings::instance().inputDeviceModel()->rowCount();
     else
         return Audio::Settings::instance().outputDeviceModel()->rowCount();

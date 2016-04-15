@@ -13,9 +13,9 @@ source_file = ui/Base.lproj/AccAdvanced.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccAudio]
-file_filter = ui/<lang>.lproj/AccAudio.strings
-source_file = ui/Base.lproj/AccAudio.strings
+[ring.osxAccMedia]
+file_filter = ui/<lang>.lproj/AccMedia.strings
+source_file = ui/Base.lproj/AccMedia.strings
 source_lang = en
 type = STRINGS
 
@@ -40,12 +40,6 @@ type = STRINGS
 [ring.osxAccSecurity]
 file_filter = ui/<lang>.lproj/AccSecurity.strings
 source_file = ui/Base.lproj/AccSecurity.strings
-source_lang = en
-type = STRINGS
-
-[ring.osxAccVideo]
-file_filter = ui/<lang>.lproj/AccVideo.strings
-source_file = ui/Base.lproj/AccVideo.strings
 source_lang = en
 type = STRINGS
 
