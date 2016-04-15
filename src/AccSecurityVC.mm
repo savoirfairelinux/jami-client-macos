@@ -28,11 +28,6 @@
 #import "QNSTreeController.h"
 #import "CertificateWC.h"
 
-// Tags for views
-#define PVK_PASSWORD_TAG 0
-#define OUTGOING_TLS_SRV_NAME 1
-#define TLS_NEGOTIATION_TAG 2
-
 #define COLUMNID_NAME   @"CipherNameColumn"
 #define COLUMNID_STATE  @"CipherStateColumn"
 
@@ -70,6 +65,11 @@
 @implementation AccSecurityVC
 @synthesize treeController;
 @synthesize certificateWC;
+
+// Tags for views
+NSInteger const PVK_PASSWORD_TAG      = 0;
+NSInteger const OUTGOING_TLS_SRV_NAME = 1;
+NSInteger const TLS_NEGOTIATION_TAG   = 2;
 
 - (void)awakeFromNib
 {
@@ -340,9 +340,8 @@
 #endif
 }
 
-/*
- Delegate method of NSPathControl to determine how the NSOpenPanel will look/behave.
- */
+#pragma mark - NSPathControlDelegate methods
+
 - (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
 {
     NSLog(@"willDisplayOpenPanel");
@@ -381,24 +380,8 @@
 
 #pragma mark - NSOpenSavePanelDelegate delegate methods
 
-- (void)panel:(id)sender willExpand:(BOOL)expanding
-{
-    //NSLog(@"willExpand");
-}
-
-- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
-{
-    //NSLog(@"userEnteredFilename");
-}
-
-- (void)panelSelectionDidChange:(id)sender
-{
-    //NSLog(@"panelSelectionDidChange");
-}
-
 - (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError
 {
-    NSLog(@"validateURL");
     return YES;
 }
 
@@ -406,90 +389,52 @@
 
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
 {
-    QModelIndex qIdx;
-
-    if([menu.title isEqualToString:@"tlsmethodlist"])
-    {
-        qIdx = [self currentAccount]->tlsMethodModel()->index(index);
-        [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
-    }
+    auto qIdx = [self currentAccount]->tlsMethodModel()->index(index);
+    [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
     return YES;
 }
 
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
-    if([menu.title isEqualToString:@"tlsmethodlist"])
-        return [self currentAccount]->tlsMethodModel()->rowCount();
+    return [self currentAccount]->tlsMethodModel()->rowCount();
 }
 
 #pragma mark - NSOutlineViewDelegate methods
 
-// -------------------------------------------------------------------------------
-//	shouldSelectItem:item
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     return YES;
 }
 
-// -------------------------------------------------------------------------------
-//	dataCellForTableColumn:tableColumn:item
-// -------------------------------------------------------------------------------
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     NSCell *returnCell = [tableColumn dataCell];
     return returnCell;
 }
 
-// -------------------------------------------------------------------------------
-//	textShouldEndEditing:fieldEditor
-// -------------------------------------------------------------------------------
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
 {
-    if ([[fieldEditor string] length] == 0)
-    {
+    if ([[fieldEditor string] length] == 0) {
         // don't allow empty node names
         return NO;
-    }
-    else
-    {
+    } else {
         return YES;
     }
 }
 
-// -------------------------------------------------------------------------------
-//	shouldEditTableColumn:tableColumn:item
-//
-//	Decide to allow the edit of the given outline view "item".
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     return NO;
 }
 
-// -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid())
         return;
 
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME])
-    {
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME]) {
         cell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
-    }
-}
-
-// -------------------------------------------------------------------------------
-//	outlineViewSelectionDidChange:notification
-// -------------------------------------------------------------------------------
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
-    // ask the tree controller for the current selection
-    if([[treeController selectedNodes] count] > 0) {
-
     }
 }
 
