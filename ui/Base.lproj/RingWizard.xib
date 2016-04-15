@@ -217,9 +217,12 @@ DQ
                         <constraint firstItem="Wk1-nk-8ES" firstAttribute="leading" secondItem="4EG-qH-WOF" secondAttribute="trailing" constant="8" id="Mfo-AY-j64"/>
                     </constraints>
                 </customView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K7H-z9-exz">
-                    <rect key="frame" x="18" y="155" width="199" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Advanced security (optionnal)" id="Gnn-K9-PTH">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K7H-z9-exz">
+                    <rect key="frame" x="18" y="155" width="191" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="187" id="Mjq-8r-RBl"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Advanced security (optional)" id="Gnn-K9-PTH">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -237,6 +240,7 @@ DQ
             <constraints>
                 <constraint firstItem="fnL-AL-k3N" firstAttribute="leading" secondItem="t9K-II-jmt" secondAttribute="trailing" constant="8" id="HuI-1u-ggc"/>
                 <constraint firstItem="1Hn-6F-5Pq" firstAttribute="leading" secondItem="oIN-Fl-8Li" secondAttribute="trailing" constant="8" id="Xqa-pG-Igc"/>
+                <constraint firstItem="K7H-z9-exz" firstAttribute="leading" secondItem="ftV-Pr-W0i" secondAttribute="leading" constant="20" id="sN3-wt-20B"/>
             </constraints>
             <point key="canvasLocation" x="62.5" y="15"/>
         </customView>
