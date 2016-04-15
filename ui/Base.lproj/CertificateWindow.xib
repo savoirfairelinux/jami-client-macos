@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CertificateWC">
@@ -23,15 +22,15 @@
                 <subviews>
                     <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oot-0X-jju">
                         <rect key="frame" x="20" y="54" width="561" height="135"/>
-                        <clipView key="contentView" misplaced="YES" id="rbk-gh-ueD">
-                            <rect key="frame" x="1" y="17" width="238" height="117"/>
+                        <clipView key="contentView" ambiguous="YES" id="rbk-gh-ueD">
+                            <rect key="frame" x="1" y="0.0" width="559" height="134"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="MKo-as-RdY" viewBased="YES" indentationPerLevel="16" outlineTableColumn="UEk-iW-QGt" id="GQE-up-gwL">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="559" height="111"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn width="116" minWidth="40" maxWidth="1000" id="UEk-iW-QGt">
@@ -104,15 +103,15 @@
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Gim-9c-e4f">
-                            <rect key="frame" x="1" y="119" width="223" height="15"/>
+                            <rect key="frame" x="1" y="7" width="0.0" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Gdk-7j-Chx">
-                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                            <rect key="frame" x="-15" y="23" width="16" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" id="MKo-as-RdY">
-                            <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
+                            <rect key="frame" x="0.0" y="0.0" width="559" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>

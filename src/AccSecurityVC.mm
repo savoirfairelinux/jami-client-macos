@@ -28,11 +28,6 @@
 #import "QNSTreeController.h"
 #import "CertificateWC.h"
 
-// Tags for views
-#define PVK_PASSWORD_TAG 0
-#define OUTGOING_TLS_SRV_NAME 1
-#define TLS_NEGOTIATION_TAG 2
-
 #define COLUMNID_NAME   @"CipherNameColumn"
 #define COLUMNID_STATE  @"CipherStateColumn"
 
@@ -71,13 +66,20 @@
 @synthesize treeController;
 @synthesize certificateWC;
 
+// Tags for views
+const enum TagViews {
+    PVK_PASSWORD            = 0,
+    OUTGOING_TLS_SRV_NAME   = 1,
+    TLS_NEGOTIATION         = 2
+};
+
 - (void)awakeFromNib
 {
     NSLog(@"INIT Security VC");
-    [pvkPasswordField setTag:PVK_PASSWORD_TAG];
-    [outgoingTlsServerName setTag:OUTGOING_TLS_SRV_NAME];
-    [tlsNegotiationTimeoutStepper setTag:TLS_NEGOTIATION_TAG];
-    [tlsNegotiationTimeout setTag:TLS_NEGOTIATION_TAG];
+    [pvkPasswordField setTag:TagViews::PVK_PASSWORD];
+    [outgoingTlsServerName setTag:TagViews::OUTGOING_TLS_SRV_NAME];
+    [tlsNegotiationTimeoutStepper setTag:TagViews::TLS_NEGOTIATION];
+    [tlsNegotiationTimeout setTag:TagViews::TLS_NEGOTIATION];
 
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
@@ -98,9 +100,9 @@
 {
     auto account = [self currentAccount];
 
-    [self updateControlsWithTag:PVK_PASSWORD_TAG];
+    [self updateControlsWithTag:TagViews::PVK_PASSWORD];
     [self updateControlsWithTag:OUTGOING_TLS_SRV_NAME];
-    [self updateControlsWithTag:TLS_NEGOTIATION_TAG];
+    [self updateControlsWithTag:TagViews::TLS_NEGOTIATION];
 
     QModelIndex qTlsMethodIdx = account->tlsMethodModel()->selectionModel()->currentIndex();
     [tlsMethodList removeAllItems];
@@ -202,17 +204,17 @@
 - (void) updateControlsWithTag:(NSInteger) tag
 {
     switch (tag) {
-        case PVK_PASSWORD_TAG: {
+        case TagViews::PVK_PASSWORD: {
                 [pvkPasswordField setStringValue:[self currentAccount]->tlsPassword().toNSString()];
                 BOOL passMatch = [self currentAccount]->tlsCertificate() &&
             [self currentAccount]->tlsCertificate()->privateKeyMatch() == Certificate::CheckValues::PASSED;
                 [pvkPasswordValidation setImage:[NSImage imageNamed:passMatch?@"ic_action_accept":@"ic_action_cancel"]];
             }
             break;
-        case OUTGOING_TLS_SRV_NAME:
+        case TagViews::OUTGOING_TLS_SRV_NAME:
             [outgoingTlsServerName setStringValue:[self currentAccount]->tlsServerName().toNSString()];
             break;
-        case TLS_NEGOTIATION_TAG:
+        case TagViews::TLS_NEGOTIATION:
             [tlsNegotiationTimeout setIntegerValue:[self currentAccount]->tlsNegotiationTimeoutSec()];
             [tlsNegotiationTimeoutStepper setIntegerValue:[self currentAccount]->tlsNegotiationTimeoutSec()];
             break;
@@ -237,13 +239,13 @@
 - (IBAction) valueDidChange: (id) sender
 {
     switch ([sender tag]) {
-        case PVK_PASSWORD_TAG:
+        case TagViews::PVK_PASSWORD:
             [self currentAccount]->setTlsPassword([[sender stringValue] UTF8String]);
             break;
-        case OUTGOING_TLS_SRV_NAME:
+        case TagViews::OUTGOING_TLS_SRV_NAME:
             [self currentAccount]->setTlsServerName([[sender stringValue] UTF8String]);
             break;
-        case TLS_NEGOTIATION_TAG:
+        case TagViews::TLS_NEGOTIATION:
             [self currentAccount]->setTlsNegotiationTimeoutSec([sender integerValue]);
             break;
         default:
@@ -340,9 +342,8 @@
 #endif
 }
 
-/*
- Delegate method of NSPathControl to determine how the NSOpenPanel will look/behave.
- */
+#pragma mark - NSPathControlDelegate methods
+
 - (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
 {
     NSLog(@"willDisplayOpenPanel");
@@ -381,24 +382,8 @@
 
 #pragma mark - NSOpenSavePanelDelegate delegate methods
 
-- (void)panel:(id)sender willExpand:(BOOL)expanding
-{
-    //NSLog(@"willExpand");
-}
-
-- (NSString *)panel:(id)sender userEnteredFilename:(NSString *)filename confirmed:(BOOL)okFlag
-{
-    //NSLog(@"userEnteredFilename");
-}
-
-- (void)panelSelectionDidChange:(id)sender
-{
-    //NSLog(@"panelSelectionDidChange");
-}
-
 - (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError
 {
-    NSLog(@"validateURL");
     return YES;
 }
 
@@ -406,90 +391,52 @@
 
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
 {
-    QModelIndex qIdx;
-
-    if([menu.title isEqualToString:@"tlsmethodlist"])
-    {
-        qIdx = [self currentAccount]->tlsMethodModel()->index(index);
-        [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
-    }
+    auto qIdx = [self currentAccount]->tlsMethodModel()->index(index);
+    [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
     return YES;
 }
 
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
-    if([menu.title isEqualToString:@"tlsmethodlist"])
-        return [self currentAccount]->tlsMethodModel()->rowCount();
+    return [self currentAccount]->tlsMethodModel()->rowCount();
 }
 
 #pragma mark - NSOutlineViewDelegate methods
 
-// -------------------------------------------------------------------------------
-//	shouldSelectItem:item
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
 {
     return YES;
 }
 
-// -------------------------------------------------------------------------------
-//	dataCellForTableColumn:tableColumn:item
-// -------------------------------------------------------------------------------
 - (NSCell *)outlineView:(NSOutlineView *)outlineView dataCellForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     NSCell *returnCell = [tableColumn dataCell];
     return returnCell;
 }
 
-// -------------------------------------------------------------------------------
-//	textShouldEndEditing:fieldEditor
-// -------------------------------------------------------------------------------
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
 {
-    if ([[fieldEditor string] length] == 0)
-    {
+    if ([[fieldEditor string] length] == 0) {
         // don't allow empty node names
         return NO;
-    }
-    else
-    {
+    } else {
         return YES;
     }
 }
 
-// -------------------------------------------------------------------------------
-//	shouldEditTableColumn:tableColumn:item
-//
-//	Decide to allow the edit of the given outline view "item".
-// -------------------------------------------------------------------------------
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     return NO;
 }
 
-// -------------------------------------------------------------------------------
-//	outlineView:willDisplayCell:forTableColumn:item
-// -------------------------------------------------------------------------------
 - (void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid())
         return;
 
-    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME])
-    {
+    if ([[tableColumn identifier] isEqualToString:COLUMNID_NAME]) {
         cell.title = qIdx.data(Qt::DisplayRole).toString().toNSString();
-    }
-}
-
-// -------------------------------------------------------------------------------
-//	outlineViewSelectionDidChange:notification
-// -------------------------------------------------------------------------------
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
-    // ask the tree controller for the current selection
-    if([[treeController selectedNodes] count] > 0) {
-
     }
 }
 

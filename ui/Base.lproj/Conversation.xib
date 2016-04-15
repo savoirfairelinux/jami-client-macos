@@ -255,7 +255,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="400" id="209-bx-oHM"/>
                     </constraints>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="HnC-1N-RmR">
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Title" id="HnC-1N-RmR">
                         <font key="font" metaFont="system" size="18"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
