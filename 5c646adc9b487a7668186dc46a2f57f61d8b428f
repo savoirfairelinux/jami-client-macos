@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba65a107_fee1079b",
+        "filename": "src/AccSecurityVC.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-04-15T17:06:06Z",
+      "side": 1,
+      "message": "Enum ?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "5c646adc9b487a7668186dc46a2f57f61d8b428f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
