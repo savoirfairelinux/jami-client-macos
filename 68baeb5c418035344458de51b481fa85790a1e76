@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba65a107_1e25dbc1",
+        "filename": "src/AccSecurityVC.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-04-15T18:58:04Z",
+      "side": 1,
+      "message": "you should use typedef NS_ENUM(NSInteger, TagViews) instead\n\nsee here:\nhttps://developer.apple.com/library/ios/releasenotes/ObjectiveC/ModernizationObjC/AdoptingModernObjective-C/AdoptingModernObjective-C.html#//apple_ref/doc/uid/TP40014150-CH1-SW6",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 21
+      },
+      "revId": "68baeb5c418035344458de51b481fa85790a1e76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
