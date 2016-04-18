@@ -173,22 +173,6 @@ typedef NS_ENUM(NSUInteger, Action) {
     delete proxyProtocolModel;
 }
 
-- (IBAction)moveUp:(id)sender {
-    AccountModel::instance().moveUp();
-}
-
-- (IBAction)moveDown:(id)sender {
-    AccountModel::instance().moveDown();
-}
-
-- (IBAction)removeAccount:(id)sender {
-
-    if(treeController.selectedNodes.count > 0) {
-        QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-        AccountModel::instance().remove(qIdx);
-        AccountModel::instance().save();
-    }
-}
 - (IBAction)addAccount:(id)sender {
     QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
 

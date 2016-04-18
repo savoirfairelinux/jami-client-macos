@@ -16,12 +16,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#define ALIAS_TAG 0
-#define HOSTNAME_TAG 1
-#define USERNAME_TAG 2
-#define PASSWORD_TAG 3
-#define USERAGENT_TAG 4
-
 #import "AccRingVC.h"
 
 #import <accountmodel.h>
@@ -55,12 +49,20 @@
 @synthesize userAgentTextField;
 @synthesize allowContacts, allowHistory, allowUnknown;
 
+typedef NS_ENUM(NSInteger, TagViews) {
+    ALIAS = 0,
+    HOSTNAME = 1,
+    USERNAME = 2,
+    PASSWORD = 3,
+    USERAGENT = 4,
+};
+
 - (void)awakeFromNib
 {
     NSLog(@"INIT Ring VC");
-    [aliasTextField setTag:ALIAS_TAG];
-    [userAgentTextField setTag:USERAGENT_TAG];
-    [bootstrapField setTag:HOSTNAME_TAG];
+    [aliasTextField setTag:TagViews::ALIAS];
+    [userAgentTextField setTag:TagViews::USERAGENT];
+    [bootstrapField setTag:TagViews::HOSTNAME];
 
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
@@ -71,15 +73,14 @@
                      });
 }
 
-- (Account*) currentAccount
-{
-    auto accIdx = AccountModel::instance().selectionModel()->currentIndex();
-    return AccountModel::instance().getAccountByModelIndex(accIdx);
+- (IBAction)removeAccount:(id)sender {
+    AccountModel::instance().remove(AccountModel::instance().selectedAccount());
+    AccountModel::instance().save();
 }
 
 - (void)loadAccount
 {
-    auto account = [self currentAccount];
+    auto account = AccountModel::instance().selectedAccount();
 
     [self.aliasTextField setStringValue:account->alias().toNSString()];
 
@@ -110,28 +111,28 @@
 }
 
 - (IBAction)toggleUpnp:(NSButton *)sender {
-    [self currentAccount]->setUpnpEnabled([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setUpnpEnabled([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAutoAnswer:(NSButton *)sender {
-    [self currentAccount]->setAutoAnswer([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setAutoAnswer([sender state] == NSOnState);
 }
 
 - (IBAction)toggleCustomAgent:(NSButton *)sender {
     [self.userAgentTextField setEnabled:[sender state] == NSOnState];
-    [self currentAccount]->setHasCustomUserAgent([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setHasCustomUserAgent([sender state] == NSOnState);
 }
 
 - (IBAction)toggleAllowFromUnknown:(id)sender {
-    [self currentAccount]->setAllowIncomingFromUnknown([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setAllowIncomingFromUnknown([sender state] == NSOnState);
     [allowHistory setEnabled:![sender state] == NSOnState];
     [allowContacts setEnabled:![sender state] == NSOnState];
 }
 - (IBAction)toggleAllowFromHistory:(id)sender {
-    [self currentAccount]->setAllowIncomingFromHistory([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setAllowIncomingFromHistory([sender state] == NSOnState);
 }
 - (IBAction)toggleAllowFromContacts:(id)sender {
-    [self currentAccount]->setAllowIncomingFromContact([sender state] == NSOnState);
+    AccountModel::instance().selectedAccount()->setAllowIncomingFromContact([sender state] == NSOnState);
 }
 
 #pragma mark - NSTextFieldDelegate methods
@@ -146,18 +147,18 @@
     NSTextField *textField = [notif object];
 
     switch ([textField tag]) {
-        case ALIAS_TAG:
-            [self currentAccount]->setAlias([[textField stringValue] UTF8String]);
-            [self currentAccount]->setDisplayName([[textField stringValue] UTF8String]);
+        case TagViews::ALIAS:
+            AccountModel::instance().selectedAccount()->setAlias([[textField stringValue] UTF8String]);
+            AccountModel::instance().selectedAccount()->setDisplayName([[textField stringValue] UTF8String]);
             break;
-        case HOSTNAME_TAG:
-            [self currentAccount]->setHostname([[textField stringValue] UTF8String]);
+        case TagViews::HOSTNAME:
+            AccountModel::instance().selectedAccount()->setHostname([[textField stringValue] UTF8String]);
             break;
-        case PASSWORD_TAG:
-            [self currentAccount]->setPassword([[textField stringValue] UTF8String]);
+        case TagViews::PASSWORD:
+            AccountModel::instance().selectedAccount()->setPassword([[textField stringValue] UTF8String]);
             break;
-        case USERAGENT_TAG:
-            [self currentAccount]->setUserAgent([[textField stringValue] UTF8String]);
+        case TagViews::USERAGENT:
+            AccountModel::instance().selectedAccount()->setUserAgent([[textField stringValue] UTF8String]);
             break;
         default:
             break;

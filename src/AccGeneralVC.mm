@@ -77,6 +77,11 @@ NSInteger const USERAGENT_TAG   = 4;
     AccountModel::instance().selectedAccount()->setHasCustomUserAgent([sender state] == NSOnState);
 }
 
+- (IBAction)removeAccount:(id)sender {
+    AccountModel::instance().remove(AccountModel::instance().selectedAccount());
+    AccountModel::instance().save();
+}
+
 - (void)loadAccount
 {
     auto account = AccountModel::instance().selectedAccount();

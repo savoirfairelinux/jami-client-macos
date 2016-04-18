@@ -213,10 +213,26 @@
                         </fragment>
                     </attributedString>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Ozb-Bq-opJ">
+                    <rect key="frame" x="579" y="414" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="1k4-J3-F2v"/>
+                        <constraint firstAttribute="height" constant="30" id="GrG-YX-xfO"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_delete" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="jda-Gm-dN1">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removeAccount:" target="-2" id="QAc-I1-OZP"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="Zpn-KI-Jfm" firstAttribute="leading" secondItem="reK-M8-Eie" secondAttribute="leading" id="0aK-Ci-93E"/>
                 <constraint firstAttribute="centerX" secondItem="c6M-WV-uVk" secondAttribute="centerX" id="4bm-Jh-lHq"/>
+                <constraint firstItem="Ozb-Bq-opJ" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="7uN-Mu-ngw"/>
+                <constraint firstAttribute="trailing" secondItem="Ozb-Bq-opJ" secondAttribute="trailing" constant="20" id="Mbz-PD-D32"/>
                 <constraint firstItem="D7f-4A-xXM" firstAttribute="leading" secondItem="idQ-yZ-XB3" secondAttribute="trailing" constant="8" id="UB7-B8-DZ4"/>
                 <constraint firstItem="idQ-yZ-XB3" firstAttribute="trailing" secondItem="PJq-0f-wMN" secondAttribute="trailing" id="bRe-Xq-vE7"/>
                 <constraint firstItem="fJM-4J-mvZ" firstAttribute="leading" secondItem="e6G-kW-opo" secondAttribute="trailing" constant="8" id="nAb-oD-B0a"/>
@@ -228,4 +244,7 @@
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="OEq-Ja-Vda"/>
     </objects>
+    <resources>
+        <image name="ic_delete" width="72" height="72"/>
+    </resources>
 </document>
