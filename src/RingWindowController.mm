@@ -38,6 +38,7 @@
 
 #import "PreferencesWC.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/BackgroundView.h"
 
 @implementation RingWindowController {
 
@@ -45,6 +46,7 @@
     __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
     __unsafe_unretained IBOutlet NSButton* shareButton;
 
+    __unsafe_unretained IBOutlet NSView *bgView;
     PreferencesWC *preferencesWC;
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
@@ -55,6 +57,14 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 - (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
+
+    [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
+
+    //CustomView* test = [[Back alloc] initWithFrame:bgView.frame];
+    //[self.window.contentView addSubview:test];
+    //[bgView setWantsLayer:YES];
+    //[bgView.layer setBackgroundColor:[NSColor colorWithPatternImage:tiledImage].CGColor];
+    //NSDrawThreePartImage(bgView.layer.frame, tiledImage, tiledImage, tiledImage, NO, NSCompositeSourceOver, 1.0, NO);
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
