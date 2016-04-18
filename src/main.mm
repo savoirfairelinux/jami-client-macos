@@ -73,7 +73,7 @@ int main(int argc, const char *argv[]) {
     NumberCategoryModel::instance().addCategory("home", QVariant());
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
-    PersonModel::instance().addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
+    //PersonModel::instance().addCollection<AddressBookBackend>(LoadOptions::FORCE_ENABLED);
     RecentModel::instance(); // Make sure RecentModel is initialized before showing UI
 
     return NSApplicationMain(argc, argv);

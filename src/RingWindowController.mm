@@ -38,6 +38,7 @@
 
 #import "PreferencesWC.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/BackgroundView.h"
 
 @implementation RingWindowController {
 
@@ -45,6 +46,8 @@
     __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
     __unsafe_unretained IBOutlet NSButton* shareButton;
 
+    __unsafe_unretained IBOutlet NSView* welcomeContainer;
+    __unsafe_unretained IBOutlet NSView* bgView;
     PreferencesWC *preferencesWC;
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
@@ -56,12 +59,17 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
 
+    [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
+
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
 
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
+    [offlineVC.view setWantsLayer:YES];
+    [offlineVC.view.layer setBackgroundColor:[NSColor colorWithRed:76.0/255 green:76.0/255 blue:76.0/255 alpha:0.5].CGColor];
 
     [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
     [callView addSubview:[offlineVC view] positioned:NSWindowAbove relativeTo:nil];
@@ -88,19 +96,22 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     QObject::connect(RecentModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
-                         auto call = RecentModel::instance().getActiveCall(current);
                          if(!current.isValid()) {
-                             [offlineVC animateOut];
-                             [currentCallVC animateOut];
+                             [welcomeContainer setHidden:NO];
+                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                 [offlineVC animateOut];
+                                 [currentCallVC animateOut];
+                             });
                              return;
                          }
 
-                         if (!call) {
-                             [currentCallVC animateOut];
-                             [offlineVC animateIn];
-                         } else {
+                         [welcomeContainer setHidden:YES];
+                         if (auto call = RecentModel::instance().getActiveCall(current)) {
                              [currentCallVC animateIn];
                              [offlineVC animateOut];
+                         } else {
+                             [currentCallVC animateOut];
+                             [offlineVC animateIn];
                          }
                      });
 
@@ -108,9 +119,11 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          if(!current.isValid()) {
+                             [welcomeContainer setHidden:NO];
                              return;
                          }
 
+                         [welcomeContainer setHidden:YES];
                          if (previous.isValid()) {
                              // We were already on a call
                              [currentCallVC animateOut];
