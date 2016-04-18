@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
@@ -13,7 +13,7 @@
                 <outlet property="qrcodeView" destination="dZR-JL-MY4" id="6Jf-42-qwY"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
-                <outlet property="welcomeContainer" destination="D6e-KX-8gC" id="2LZ-ve-h2X"/>
+                <outlet property="welcomeContainer" destination="D6e-KX-8gC" id="zV3-38-ClK"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="Dtg-mG-RBq"/>
             </connections>
         </customObject>
@@ -24,7 +24,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="1053" height="658"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" autoresizesSubviews="NO" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="1053" height="658"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -244,7 +244,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="324" height="690"/>
                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="eME-fQ-3QX">
                                                         <rect key="frame" x="0.0" y="0.0" width="324" height="690"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="3" outlineTableColumn="pTT-gU-NVa" id="rr8-UC-gGF" customClass="RingOutlineView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="690"/>
@@ -374,7 +374,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                     <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="S00-xr-jYM">
                                                         <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="10" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq" customClass="RingOutlineView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
@@ -579,6 +579,12 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-MB-mlx" userLabel="HomeView">
                         <rect key="frame" x="326" y="0.0" width="727" height="658"/>
                         <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="6bh-ow-nJO" customClass="BackgroundView">
+                                <rect key="frame" x="0.0" y="0.0" width="727" height="172"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="172" id="hCN-uz-Nmc"/>
+                                </constraints>
+                            </customView>
                             <customView focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
                                 <rect key="frame" x="662" y="25" width="727" height="658"/>
                                 <constraints>
@@ -586,20 +592,27 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
                                 </constraints>
                             </customView>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
+                                <rect key="frame" x="263" y="229" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="RCZ-Wt-iKD"/>
+                                    <constraint firstAttribute="height" constant="200" id="tSn-OT-Zn8"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="mYG-HR-6oh"/>
+                            </imageView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="D6e-KX-8gC">
                                 <rect key="frame" x="103" y="194" width="520" height="270"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
-                                        <rect key="frame" x="106" y="83" width="308" height="84"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="eln-Vm-t0d">
+                                        <rect key="frame" x="137" y="104" width="247" height="63"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Ring is free software for universal communication which respects the freedoms and privacy of its users." id="eln-Vm-t0d">
                                             <font key="font" size="15" name="HelveticaNeue"/>
-                                            <string key="title">Ring is a secure and distributed voice, video and chat communication platform that requires no centralized server and leaves the power of privacy in the hands of the user.</string>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
-                                        <rect key="frame" x="18" y="56" width="484" height="19"/>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
+                                        <rect key="frame" x="95" y="77" width="330" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="326" id="i1K-ok-BEb"/>
                                         </constraints>
@@ -610,7 +623,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
-                                        <rect key="frame" x="20" y="22" width="400" height="26"/>
+                                        <rect key="frame" x="20" y="43" width="400" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="TYe-h2-pPT"/>
                                             <constraint firstAttribute="width" constant="400" id="ywt-Ml-u9k"/>
@@ -630,7 +643,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
                                     </imageView>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge">
-                                        <rect key="frame" x="470" y="20" width="30" height="30"/>
+                                        <rect key="frame" x="470" y="41" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="AXu-uA-KCC"/>
                                             <constraint firstAttribute="width" constant="30" id="h6a-Lg-QRm"/>
@@ -644,7 +657,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="IconButton">
-                                        <rect key="frame" x="431" y="20" width="30" height="30"/>
+                                        <rect key="frame" x="431" y="41" width="30" height="30"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="qrcode" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vvm-Gy-Tbh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -678,26 +691,21 @@
                                     <constraint firstItem="VJ1-xk-v5e" firstAttribute="top" secondItem="f62-JV-dgr" secondAttribute="bottom" constant="8" id="zNb-f8-m6q"/>
                                 </constraints>
                             </customView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
-                                <rect key="frame" x="263" y="229" width="200" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="RCZ-Wt-iKD"/>
-                                    <constraint firstAttribute="height" constant="200" id="tSn-OT-Zn8"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="mYG-HR-6oh"/>
-                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="dZR-JL-MY4" firstAttribute="centerY" secondItem="Fzg-MB-mlx" secondAttribute="centerY" id="16A-gO-qJA"/>
                             <constraint firstItem="D6e-KX-8gC" firstAttribute="centerY" secondItem="Fzg-MB-mlx" secondAttribute="centerY" id="Duk-XW-qcv"/>
+                            <constraint firstAttribute="trailing" secondItem="6bh-ow-nJO" secondAttribute="trailing" id="Gvo-f0-tFP"/>
+                            <constraint firstAttribute="bottom" secondItem="6bh-ow-nJO" secondAttribute="bottom" id="Low-Vl-6Rc"/>
                             <constraint firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="OW1-T7-eV8"/>
                             <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="Vm1-Ql-lxQ"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dZR-JL-MY4" secondAttribute="bottom" constant="25" id="XdW-61-RbL"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dZR-JL-MY4" secondAttribute="bottom" constant="8" id="XdW-61-RbL"/>
                             <constraint firstItem="D6e-KX-8gC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Fzg-MB-mlx" secondAttribute="top" constant="20" id="cwV-ZJ-bld"/>
                             <constraint firstItem="dZR-JL-MY4" firstAttribute="centerX" secondItem="Fzg-MB-mlx" secondAttribute="centerX" id="ejM-RR-NBl"/>
                             <constraint firstItem="D6e-KX-8gC" firstAttribute="centerX" secondItem="Fzg-MB-mlx" secondAttribute="centerX" id="fjr-1a-hEA"/>
                             <constraint firstItem="tSW-YT-asL" firstAttribute="top" secondItem="Fzg-MB-mlx" secondAttribute="top" id="kVw-UP-9a7"/>
                             <constraint firstItem="tSW-YT-asL" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="mCN-Pw-WJE"/>
+                            <constraint firstItem="6bh-ow-nJO" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="w6e-6J-3XH"/>
                         </constraints>
                     </customView>
                 </subviews>
@@ -747,6 +755,6 @@
         <image name="ic_action_cancel" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="qrcode" width="72" height="72"/>
-        <image name="symbol_name" width="225" height="75"/>
+        <image name="symbol_name" width="442.5" height="162"/>
     </resources>
 </document>

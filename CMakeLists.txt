@@ -183,6 +183,8 @@ SET(ringclient_VIEWS
    src/views/ContextualTableCellView.h
    src/views/IconButton.h
    src/views/IconButton.mm
+   src/views/BackgroundView.h
+   src/views/BackgroundView.mm
    src/views/IMTableCellView.h
    src/views/IMTableCellView.mm)
 
@@ -236,6 +238,8 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
 
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/background-light.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/background-dark.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_blue.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background_tile.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_more.png

@@ -40,6 +40,7 @@
 #import "PreferencesWC.h"
 #import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/BackgroundView.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate>
 
@@ -58,6 +59,7 @@
     __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
     PreferencesWC* preferencesWC;
+
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
 }
@@ -68,6 +70,8 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 - (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
+
+    [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
