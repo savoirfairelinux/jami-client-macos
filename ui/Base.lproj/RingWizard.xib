@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardWC">
@@ -18,63 +19,52 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="4LP-GX-BkH">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" texturedBackground="YES"/>
             <rect key="contentRect" x="599" y="440" width="450" height="318"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="Wgr-xH-z0G">
                 <rect key="frame" x="0.0" y="0.0" width="450" height="318"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="9ok-Ga-Q8u" userLabel="header">
-                        <rect key="frame" x="0.0" y="258" width="450" height="60"/>
+                    <view ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T98-k1-e6X">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="258"/>
+                    </view>
+                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ok-Ga-Q8u" userLabel="header">
+                        <rect key="frame" x="0.0" y="266" width="450" height="76"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EpY-Kl-fNa">
-                                <rect key="frame" x="84" y="12" width="229" height="36"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Ring" id="2mM-yx-BfM">
-                                    <font key="font" metaFont="system" size="30"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P7h-tj-klA">
-                                <rect key="frame" x="319" y="7" width="45" height="46"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YAU-RP-skc">
+                                <rect key="frame" x="146" y="6" width="158" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="XMY-BN-Ymg"/>
-                                    <constraint firstAttribute="height" constant="46" id="i8K-g8-EfQ"/>
+                                    <constraint firstAttribute="width" constant="158" id="RNe-YJ-uG9"/>
+                                    <constraint firstAttribute="height" constant="48" id="a6C-ie-IUg"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_blue" id="XSN-TP-V1z"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="gnuring_white" id="Lu6-4k-jGa"/>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="P7h-tj-klA" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" id="82u-TT-jdV"/>
-                            <constraint firstAttribute="height" constant="60" id="bnc-Ui-EBV"/>
-                            <constraint firstItem="P7h-tj-klA" firstAttribute="leading" secondItem="EpY-Kl-fNa" secondAttribute="trailing" constant="8" symbolic="YES" id="ckf-Wb-pkP"/>
-                            <constraint firstItem="EpY-Kl-fNa" firstAttribute="centerX" secondItem="9ok-Ga-Q8u" secondAttribute="centerX" constant="-26.5" id="fkS-G9-SzY"/>
-                            <constraint firstItem="EpY-Kl-fNa" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" id="i1N-4g-yOy"/>
+                            <constraint firstItem="YAU-RP-skc" firstAttribute="centerX" secondItem="9ok-Ga-Q8u" secondAttribute="centerX" id="KL2-dj-Q1r"/>
+                            <constraint firstAttribute="height" constant="76" id="bnc-Ui-EBV"/>
+                            <constraint firstItem="YAU-RP-skc" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" constant="8" id="vwm-62-ngV"/>
                         </constraints>
                     </customView>
-                    <view translatesAutoresizingMaskIntoConstraints="NO" id="T98-k1-e6X">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="258"/>
-                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="9ok-Ga-Q8u" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" id="Swu-Wv-5zO"/>
                     <constraint firstItem="T98-k1-e6X" firstAttribute="leading" secondItem="9ok-Ga-Q8u" secondAttribute="leading" id="ZVp-x0-6tM"/>
                     <constraint firstAttribute="trailing" secondItem="9ok-Ga-Q8u" secondAttribute="trailing" id="dNA-c1-YAU"/>
                     <constraint firstItem="T98-k1-e6X" firstAttribute="trailing" secondItem="9ok-Ga-Q8u" secondAttribute="trailing" id="nO3-RU-q91"/>
                     <constraint firstAttribute="bottom" secondItem="T98-k1-e6X" secondAttribute="bottom" id="qCC-en-fqL"/>
-                    <constraint firstItem="T98-k1-e6X" firstAttribute="top" secondItem="9ok-Ga-Q8u" secondAttribute="bottom" id="sSS-2c-qrc"/>
+                    <constraint firstItem="T98-k1-e6X" firstAttribute="top" secondItem="9ok-Ga-Q8u" secondAttribute="bottom" constant="8" id="sSS-2c-qrc"/>
                     <constraint firstItem="9ok-Ga-Q8u" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" id="zPn-Ld-oZC"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="cKX-Z2-yDq"/>
             </connections>
-            <point key="canvasLocation" x="447.5" y="-489"/>
+            <point key="canvasLocation" x="447" y="-489"/>
         </window>
         <viewController nibName="RingWizardChoose" id="TGh-Qf-0hi" customClass="RingWizardChooseVC"/>
         <viewController nibName="RingWizardLinkAccount" id="Hlf-uv-gt6" customClass="RingWizardLinkAccountVC"/>
         <viewController nibName="RingWizardNewAccount" id="M2H-0Y-6UW" customClass="RingWizardNewAccountVC"/>
     </objects>
     <resources>
-        <image name="symbol_blue" width="161.6842041015625" height="161.6842041015625"/>
+        <image name="gnuring_white" width="442.5" height="167.25"/>
     </resources>
 </document>

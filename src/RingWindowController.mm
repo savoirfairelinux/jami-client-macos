@@ -40,6 +40,7 @@
 #import "PreferencesWC.h"
 #import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/BackgroundView.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate>
 
@@ -58,6 +59,7 @@
     __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
     PreferencesWC* preferencesWC;
+
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
 }
@@ -69,12 +71,17 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
 
+    [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
+
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
 
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
+    [offlineVC.view setWantsLayer:YES];
+    [offlineVC.view.layer setBackgroundColor:[NSColor colorWithRed:76.0/255 green:76.0/255 blue:76.0/255 alpha:0.5].CGColor];
 
     [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
     [callView addSubview:[offlineVC view] positioned:NSWindowAbove relativeTo:nil];
@@ -98,20 +105,22 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     QObject::connect(RecentModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
-                         auto call = RecentModel::instance().getActiveCall(current);
-
                          if(!current.isValid()) {
                              [offlineVC animateOut];
                              [currentCallVC animateOut];
+                             [self performSelector:@selector(welcomeFadeIn)
+                                        withObject:nil
+                                        afterDelay:0.3];
                              return;
                          }
 
-                         if (!call) {
-                             [currentCallVC animateOut];
-                             [offlineVC animateIn];
-                         } else {
+                         [self welcomeFadeOut];
+                         if (auto call = RecentModel::instance().getActiveCall(current)) {
                              [currentCallVC animateIn];
                              [offlineVC animateOut];
+                         } else {
+                             [currentCallVC animateOut];
+                             [offlineVC animateIn];
                          }
                      });
 
@@ -119,9 +128,15 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          if(!current.isValid()) {
+                             [self performSelector:@selector(welcomeFadeIn)
+                                        withObject:nil
+                                        afterDelay:0.3];
                              return;
                          }
 
+                         [self performSelector:@selector(welcomeFadeOut)
+                                    withObject:nil
+                                    afterDelay:0.3];
                          if (previous.isValid()) {
                              // We were already on a call
                              [currentCallVC animateOut];
@@ -131,6 +146,28 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                              [offlineVC animateOut];
                          }
                      });
+}
+
+- (void) welcomeFadeOut
+{
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = 0.2;
+        welcomeContainer.animator.alphaValue = 0.0;
+        welcomeContainer.animator.hidden = YES;
+    }
+                        completionHandler:^{
+                            welcomeContainer.hidden = YES;
+                        }];
+}
+
+- (void) welcomeFadeIn
+{
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = 0.2;
+        welcomeContainer.hidden = NO;
+        welcomeContainer.animator.alphaValue = 1.0;
+    }
+                        completionHandler:nil];
 }
 
 /**

@@ -256,11 +256,12 @@
     actionHash[ (int)UserActionModel::Action::MUTE_VIDEO] = muteVideoButton;
 
     [videoView setWantsLayer:YES];
-    [videoView.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    [videoView.layer setBackgroundColor:[NSColor colorWithRed:76.0/255 green:76.0/255 blue:76.0/255 alpha:0.5].CGColor];
     [videoView.layer setFrame:videoView.frame];
     [videoView.layer setContentsGravity:kCAGravityResizeAspect];
 
     [previewView setWantsLayer:YES];
+    [previewView setHidden:YES];
     [previewView.layer setBackgroundColor:[NSColor blackColor].CGColor];
     [previewView.layer setContentsGravity:kCAGravityResizeAspectFill];
     [previewView.layer setFrame:previewView.frame];
@@ -388,6 +389,7 @@
                      &Video::PreviewManager::previewStarted,
                      [=](Video::Renderer* renderer) {
                          QObject::disconnect(previewHolder.frameUpdated);
+                         [previewView setHidden:NO];
                          previewHolder.frameUpdated = QObject::connect(renderer,
                                                                        &Video::Renderer::frameUpdated,
                                                                        [=]() {
@@ -401,6 +403,7 @@
                      [=](Video::Renderer* renderer) {
                          QObject::disconnect(previewHolder.frameUpdated);
                         [previewView.layer setContents:nil];
+                         [previewView setHidden:YES];
                      });
 
     previewHolder.frameUpdated = QObject::connect(Video::PreviewManager::instance().previewRenderer(),
@@ -540,6 +543,7 @@
     QObject::disconnect(previewHolder.started);
     [videoView.layer setContents:nil];
     [previewView.layer setContents:nil];
+    [previewView setHidden:YES];
 
     [_brokerPopoverVC performClose:self];
     [self.addToContactPopover performClose:self];
