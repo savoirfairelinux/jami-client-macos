@@ -214,6 +214,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_persons.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_history.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_delete.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES

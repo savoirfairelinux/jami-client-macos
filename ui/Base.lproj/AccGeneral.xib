@@ -188,6 +188,16 @@
                         <action selector="toggleUpnp:" target="-2" id="pl8-QR-BBc"/>
                     </connections>
                 </button>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p00-of-ToC">
+                    <rect key="frame" x="532" y="273" width="30" height="30"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_delete" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="u1c-BX-hXL">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="removeAccount:" target="-2" id="uzp-ub-gsq"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="POs-9R-DUW" firstAttribute="leading" secondItem="3ZB-JI-U6Y" secondAttribute="trailing" constant="8" id="I7j-dS-1py"/>
@@ -200,4 +210,7 @@
             <point key="canvasLocation" x="13" y="8.5"/>
         </customView>
     </objects>
+    <resources>
+        <image name="ic_delete" width="72" height="72"/>
+    </resources>
 </document>
