@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWindowController">
             <connections>
+                <outlet property="bgView" destination="cjl-ms-hNY" id="zdl-Gx-gLK"/>
                 <outlet property="callView" destination="tSW-YT-asL" id="NRy-rM-XW4"/>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
+                <outlet property="welcomeContainer" destination="GBH-p0-YEE" id="Va0-tK-mQn"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="Dtg-mG-RBq"/>
             </connections>
         </customObject>
@@ -34,80 +36,86 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-MB-mlx" userLabel="HomeView">
                         <rect key="frame" x="326" y="0.0" width="727" height="658"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
-                                <rect key="frame" x="210" y="287" width="308" height="84"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="eln-Vm-t0d">
-                                    <font key="font" size="15" name="HelveticaNeue"/>
-                                    <string key="title">Ring is a secure and distributed voice, video and chat communication platform that requires no centralized server and leaves the power of privacy in the hands of the user.</string>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
-                                <rect key="frame" x="199" y="260" width="330" height="19"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="This is your RingID. Copy and share it with your friends!" id="Xb9-UT-M2F">
-                                    <font key="font" size="13" name="HelveticaNeue"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
-                                <rect key="frame" x="164" y="226" width="400" height="26"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="cjl-ms-hNY" customClass="BackgroundView">
+                                <rect key="frame" x="0.0" y="0.0" width="727" height="190"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="TYe-h2-pPT"/>
-                                    <constraint firstAttribute="width" constant="400" id="ywt-Ml-u9k"/>
+                                    <constraint firstAttribute="height" constant="190" id="04C-TD-uOj"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="qCF-Zf-vZg">
-                                    <font key="font" size="15" name="HelveticaNeue"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
-                                <rect key="frame" x="251" y="379" width="225" height="75"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
-                            </imageView>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge">
-                                <rect key="frame" x="572" y="224" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="AXu-uA-KCC"/>
-                                    <constraint firstAttribute="width" constant="30" id="h6a-Lg-QRm"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSShareTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Z08-dU-5EN">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
-                                </connections>
-                            </button>
-                            <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                                <rect key="frame" x="0.0" y="0.0" width="727" height="658"/>
+                            </customView>
+                            <customView focusRingType="none" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                                <rect key="frame" x="-7" y="-423" width="727" height="658"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="400" id="5yo-rb-X1O"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
                                 </constraints>
                             </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="GBH-p0-YEE">
+                                <rect key="frame" x="124" y="153" width="478" height="352"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
+                                        <rect key="frame" x="66" y="124" width="308" height="84"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="eln-Vm-t0d">
+                                            <font key="font" size="15" name="HelveticaNeue"/>
+                                            <string key="title">Ring is a secure and distributed voice, video and chat communication platform that requires no centralized server and leaves the power of privacy in the hands of the user.</string>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
+                                        <rect key="frame" x="55" y="97" width="330" height="19"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="This is your RingID. Copy and share it with your friends!" id="Xb9-UT-M2F">
+                                            <font key="font" size="13" name="HelveticaNeue"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
+                                        <rect key="frame" x="20" y="63" width="400" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="TYe-h2-pPT"/>
+                                            <constraint firstAttribute="width" constant="400" id="ywt-Ml-u9k"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="qCF-Zf-vZg">
+                                            <font key="font" size="15" name="HelveticaNeue"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
+                                        <rect key="frame" x="107" y="216" width="225" height="75"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
+                                    </imageView>
+                                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge">
+                                        <rect key="frame" x="428" y="61" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="AXu-uA-KCC"/>
+                                            <constraint firstAttribute="width" constant="30" id="h6a-Lg-QRm"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSShareTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Z08-dU-5EN">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="478" id="9Jj-1l-h6p"/>
+                                    <constraint firstAttribute="height" constant="352" id="ql5-DM-IXY"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="f62-JV-dgr" secondAttribute="centerX" id="0hx-jq-Rdh"/>
-                            <constraint firstItem="Oac-o7-2Ge" firstAttribute="centerY" secondItem="JN3-vO-zcd" secondAttribute="centerY" id="DmH-TC-hZl"/>
-                            <constraint firstAttribute="centerX" secondItem="VJ1-xk-v5e" secondAttribute="centerX" id="IcQ-Ld-A3j"/>
-                            <constraint firstAttribute="centerY" secondItem="VJ1-xk-v5e" secondAttribute="centerY" id="J2C-dB-Q01"/>
-                            <constraint firstItem="Oac-o7-2Ge" firstAttribute="leading" secondItem="JN3-vO-zcd" secondAttribute="trailing" constant="8" id="Jfc-Gx-5Ey"/>
+                            <constraint firstAttribute="bottom" secondItem="cjl-ms-hNY" secondAttribute="bottom" id="245-EH-Xt8"/>
+                            <constraint firstItem="cjl-ms-hNY" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="NOI-io-3zK"/>
                             <constraint firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="OW1-T7-eV8"/>
-                            <constraint firstItem="VJ1-xk-v5e" firstAttribute="top" secondItem="f62-JV-dgr" secondAttribute="bottom" constant="8" id="PNC-n6-n33"/>
-                            <constraint firstAttribute="centerY" secondItem="VJ1-xk-v5e" secondAttribute="centerY" id="Rst-Fd-Tpe"/>
                             <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="Vm1-Ql-lxQ"/>
-                            <constraint firstAttribute="centerX" secondItem="kFj-Sh-o5u" secondAttribute="centerX" id="Zjg-a3-qf3"/>
-                            <constraint firstAttribute="centerX" secondItem="VJ1-xk-v5e" secondAttribute="centerX" id="a5y-o9-jjR"/>
-                            <constraint firstItem="kFj-Sh-o5u" firstAttribute="top" secondItem="VJ1-xk-v5e" secondAttribute="bottom" constant="8" id="btp-Ro-DNa"/>
-                            <constraint firstAttribute="centerX" secondItem="f62-JV-dgr" secondAttribute="centerX" id="iVv-51-Qnp"/>
                             <constraint firstItem="tSW-YT-asL" firstAttribute="top" secondItem="Fzg-MB-mlx" secondAttribute="top" id="kVw-UP-9a7"/>
-                            <constraint firstItem="JN3-vO-zcd" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="8" id="leT-Io-jce"/>
                             <constraint firstItem="tSW-YT-asL" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="mCN-Pw-WJE"/>
-                            <constraint firstAttribute="centerX" secondItem="kFj-Sh-o5u" secondAttribute="centerX" id="uly-BQ-ClC"/>
-                            <constraint firstAttribute="centerX" secondItem="JN3-vO-zcd" secondAttribute="centerX" id="xdj-mG-iqh"/>
+                            <constraint firstItem="GBH-p0-YEE" firstAttribute="centerX" secondItem="Fzg-MB-mlx" secondAttribute="centerX" id="nI4-KZ-QzS"/>
+                            <constraint firstItem="GBH-p0-YEE" firstAttribute="centerY" secondItem="Fzg-MB-mlx" secondAttribute="centerY" id="xfR-gL-Fza"/>
+                            <constraint firstAttribute="trailing" secondItem="cjl-ms-hNY" secondAttribute="trailing" id="ywO-UL-eif"/>
                         </constraints>
                     </customView>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YgH-CN-tkB" userLabel="Left Panel">
