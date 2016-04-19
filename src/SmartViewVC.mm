@@ -203,8 +203,10 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    NSTableCellView *result;
+    QModelIndex proxyIdx = [treeController toQIdx:((NSTreeNode*)item)];
+    QModelIndex qIdx = RecentModel::instance().peopleProxy()->mapToSource(proxyIdx);
+
+    NSTableCellView* result;
     if (!qIdx.parent().isValid()) {
         result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
@@ -212,7 +214,7 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
         NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
         [((ContextualTableCellView*) result) setContextualsControls:controls];
 
-        if (auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(qIdx))) {
+        if (auto call = RecentModel::instance().getActiveCall(qIdx)) {
             [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
             [((ContextualTableCellView*) result) setActiveState:YES];
         } else {
