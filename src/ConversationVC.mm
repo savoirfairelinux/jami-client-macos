@@ -231,11 +231,7 @@
     result.msgView.layer.cornerRadius = 5.0f;
 
     [result updateWidthConstraint:finalWidth];
-
-    Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(50,50));
-    [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-
+    [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
     return result;
 }
 

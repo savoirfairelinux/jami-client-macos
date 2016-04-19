@@ -34,6 +34,8 @@
 
 //Ring
 #import <person.h>
+#import <profilemodel.h>
+#import <profile.h>
 #import <contactmethod.h>
 
 namespace Interfaces {
@@ -84,7 +86,7 @@ namespace Interfaces {
             painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
         }
         else {
-            pxm = drawDefaultUserPixmap(size, false, false);
+            pxm = drawDefaultUserPixmap(size);
         }
 
         return pxm;
@@ -130,7 +132,7 @@ namespace Interfaces {
         if (n->contact()) {
             return contactPhoto(n->contact(), size, displayPresence);
         } else {
-            return drawDefaultUserPixmap(size, false, false);
+            return drawDefaultUserPixmap(size);
         }
     }
 
@@ -139,8 +141,10 @@ namespace Interfaces {
         QImage image;
         //For now, ENCODING is only base64 and image type PNG or JPG
         const bool ret = image.loadFromData(QByteArray::fromBase64(data),type.toLatin1());
-        if (!ret)
+        if (!ret) {
             qDebug() << "vCard image loading failed";
+            return drawDefaultUserPixmap({80,80});
+        }
 
         return QPixmap::fromImage(image);
     }
@@ -248,20 +252,33 @@ namespace Interfaces {
 
     QVariant ImageManipulationDelegate::decorationRole(const Call* c)
     {
-        Q_UNUSED(c)
-        return QVariant();
+        if (c && c->peerContactMethod()
+            && c->peerContactMethod()->contact()) {
+               return contactPhoto(c->peerContactMethod()->contact(), {80,80});
+        } else
+            return drawDefaultUserPixmap({80,80});
     }
 
     QVariant ImageManipulationDelegate::decorationRole(const ContactMethod* cm)
     {
-        Q_UNUSED(cm)
-        return QVariant();
+        QImage photo;
+        if (cm && cm->contact() && cm->contact()->photo().isValid())
+            return contactPhoto(cm->contact(), {80,80});
+        else
+            return drawDefaultUserPixmap({80,80});
     }
 
     QVariant ImageManipulationDelegate::decorationRole(const Person* p)
     {
-        Q_UNUSED(p)
-        return QVariant();
+        return contactPhoto(const_cast<Person*>(p), {80,80});
+    }
+
+    QVariant ImageManipulationDelegate::decorationRole(const Account* acc)
+    {
+        Q_UNUSED(acc)
+        if (auto pro = ProfileModel::instance().selectedProfile())
+            return contactPhoto(pro->person(), {80,80});
+        return drawDefaultUserPixmap({80,80});
     }
 
 } // namespace Interfaces
