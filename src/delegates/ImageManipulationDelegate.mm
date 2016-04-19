@@ -48,8 +48,15 @@ namespace Interfaces {
 
         QPixmap pxm;
         if (c && c->photo().isValid()) {
-            QPixmap contactPhoto(qvariant_cast<QPixmap>(c->photo()).scaledToWidth(size.height(),
-                                                                                  Qt::TransformationMode::SmoothTransformation));
+            QPixmap contactPhoto(qvariant_cast<QPixmap>(c->photo()).scaled(size, Qt::KeepAspectRatioByExpanding,
+                                                                           Qt::SmoothTransformation));
+
+            QPixmap finalImg;
+            if (contactPhoto.size() != size) {
+                finalImg = crop(contactPhoto, size);
+            } else
+                finalImg = contactPhoto;
+
             pxm = QPixmap(size);
             pxm.fill(Qt::transparent);
             QPainter painter(&pxm);
@@ -61,16 +68,16 @@ namespace Interfaces {
             painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
 
             //Add corner radius to the Pixmap
-            QRect pxRect = contactPhoto.rect();
+            QRect pxRect = finalImg.rect();
             QBitmap mask(pxRect.size());
             QPainter customPainter(&mask);
             customPainter.setRenderHints (QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
             customPainter.fillRect       (pxRect                , Qt::white );
             customPainter.setBackground  (Qt::black                         );
             customPainter.setBrush       (Qt::black                         );
-            customPainter.drawRoundedRect(pxRect,radius,radius);
-            contactPhoto.setMask         (mask                              );
-            painter.drawPixmap           (0,0,contactPhoto                  );
+            customPainter.drawRoundedRect(pxRect,radius,radius              );
+            finalImg.setMask             (mask                              );
+            painter.drawPixmap           (0,0,finalImg                      );
             painter.setBrush             (Qt::NoBrush                       );
             painter.setPen               (Qt::black                         );
             painter.setCompositionMode   (QPainter::CompositionMode_SourceIn);
@@ -81,6 +88,36 @@ namespace Interfaces {
         }
 
         return pxm;
+    }
+
+    QPixmap
+    ImageManipulationDelegate::crop(QPixmap photo, QSize destSize)
+    {
+        auto scaledSize = photo.size();
+        auto croppingRect = Rect();
+
+        float leftDelta = 0;
+        float topDelta = 0;
+
+        if (destSize.height() == scaledSize.height()) {
+            leftDelta = (destSize.width() - scaledSize.width()) / 2;
+        } else {
+            topDelta = (destSize.height() - scaledSize.height()) / 2;
+        }
+
+        float xScale = (float)destSize.width()  / scaledSize.width();
+        float yScale = (float)destSize.height() / scaledSize.height();
+
+        QRectF realSizeRect(leftDelta, topDelta,
+                            scaledSize.width() - leftDelta, scaledSize.height() - topDelta);
+
+        realSizeRect.setLeft(leftDelta * xScale);
+        realSizeRect.setTop(topDelta * yScale);
+
+        realSizeRect.setWidth((scaledSize.width() - leftDelta) * xScale);
+        realSizeRect.setHeight((scaledSize.height() - topDelta) * yScale);
+
+        return photo.copy(realSizeRect.toRect());
     }
 
     QVariant
