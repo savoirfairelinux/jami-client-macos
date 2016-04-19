@@ -19,6 +19,10 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+//Qt
+#import <QSize>
+
+//Ring
 #import <interfaces/pixmapmanipulatori.h>
 #import <call.h>
 
@@ -50,16 +54,19 @@ namespace Interfaces {
         QVariant   decorationRole(const Call* c) override;
         QVariant   decorationRole(const ContactMethod* cm) override;
         QVariant   decorationRole(const Person* p) override;
+        QVariant   decorationRole(const Account* acc) override;
 
     private:
         //Helper
-        QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent);
+        QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence = false, bool isPresent = false);
         CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
 
         /**
          * Return a version of size destSize centered of the bigger photo
          */
         QPixmap crop(QPixmap& photo, const QSize& destSize);
+
+        const QSize decorationSize = {80,80};
     };
 
 } // namespace Interfaces

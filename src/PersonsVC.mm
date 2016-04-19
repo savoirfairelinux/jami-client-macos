@@ -176,8 +176,8 @@ NSInteger const CALL_BUTTON_TAG = 400;
         NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
         Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
 
-        QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(40,40));
-        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
+
         [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
 
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
