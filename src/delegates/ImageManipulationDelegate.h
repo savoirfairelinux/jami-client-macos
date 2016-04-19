@@ -55,6 +55,11 @@ namespace Interfaces {
         //Helper
         QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent);
         CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
+
+        /**
+         * Return a version of size destSize centered of the bigger photo
+         */
+        QPixmap crop(QPixmap& photo, const QSize& destSize);
     };
 
 } // namespace Interfaces
