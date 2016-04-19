@@ -242,9 +242,7 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
     [displayName setStringValue:qIdx.data((int)Ring::Role::Name).toString().toNSString()];
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
-    Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
-    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(100,100));
-    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
     return result;
 }
 
