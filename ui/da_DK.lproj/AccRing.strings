@@ -1,6 +1,6 @@
 
-/* Class = "NSTextFieldCell"; title = "This will be displayed to unknow peers"; ObjectID = "0Yt-xC-OWa"; */
-"0Yt-xC-OWa.title" = "This will be displayed to unknow peers";
+/* Class = "NSTextFieldCell"; title = "This will be displayed to unknown peers"; ObjectID = "0Yt-xC-OWa"; */
+"0Yt-xC-OWa.title" = "This will be displayed to unknown peers";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
 "1Sx-Et-CDM.title" = "Konto";
@@ -18,10 +18,10 @@
 "HN3-i9-zmw.placeholderString" = "Name or nickname...";
 
 /* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
-"OeY-na-0YT.title" = "Auto-answer calls";
+"OeY-na-0YT.title" = "Svar automatisk opkald";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
-"PaC-xE-SHA.title" = "Allow calls from peers in your call history";
+"PaC-xE-SHA.title" = "Tillad opkald fra parter i din opkaldshistorik";
 
 /* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
 "Wzq-V2-YLU.title" = "Alias";
@@ -39,7 +39,7 @@
 "fX7-9W-XFl.title" = "Allow calls from peers in your contact list";
 
 /* Class = "NSButtonCell"; title = "Allow calls from unknown peers"; ObjectID = "kmI-jb-aal"; */
-"kmI-jb-aal.title" = "Allow calls from unknown peers";
+"kmI-jb-aal.title" = "Tillad opkald fra ukendte parter";
 
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
 "lHI-bz-ddQ.title" = "Upnp enabled";

@@ -39,7 +39,7 @@
 "136.title" = "Quitter Ring";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "Cacher lest autres";
+"145.title" = "Cacher les autres";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
 "150.title" = "Tout montrer";
@@ -69,10 +69,10 @@
 "202.title" = "Supprimer";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
-"203.title" = "Passer";
+"203.title" = "Coller";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Montrer l'orthographe et grammaire";
+"204.title" = "Montrer l'outil \"orthographe et grammaire\"";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
 "205.title" = "Éditer";
@@ -81,7 +81,7 @@
 "207.title" = "Défaire";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Rechercher suivant";
+"208.title" = "Rechercher le suivant";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
 "209.title" = "Rechercher…";
@@ -199,3 +199,18 @@
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Vérifier les mises-à-jour…";
+
+/* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
+"12w-Fz-Scs.title" = "Montrer";
+
+/* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
+"1fJ-em-1ww.title" = "Montrer";
+
+/* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
+"GTY-d8-NBf.title" = "Show recent";
+
+/* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
+"GU3-tt-2de.title" = "Show contacts";
+
+/* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
+"Oco-m7-LtS.title" = "Voir l'historique des appels";

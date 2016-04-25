@@ -5,20 +5,20 @@
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "5Z7-Wi-530"; */
 "5Z7-Wi-530.placeholderString" = "'Unknown' if empty...";
 
-/* Class = "NSTextFieldCell"; title = "Advanced security (optionnal)"; ObjectID = "Gnn-K9-PTH"; */
-"Gnn-K9-PTH.title" = "Advanced security (optionnal)";
+/* Class = "NSTextFieldCell"; title = "Advanced security (optional)"; ObjectID = "Gnn-K9-PTH"; */
+"Gnn-K9-PTH.title" = "Advanced security (optional)";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "Hsc-U9-2RV"; */
-"Hsc-U9-2RV.placeholderString" = "Password...";
+"Hsc-U9-2RV.placeholderString" = "Parola...";
 
 /* Class = "NSButtonCell"; title = "Share"; ObjectID = "Kwr-LJ-K8C"; */
-"Kwr-LJ-K8C.title" = "Share";
+"Kwr-LJ-K8C.title" = "Paylaş";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "SpA-zX-ytE"; */
-"SpA-zX-ytE.title" = "Certificate Authority list";
+"SpA-zX-ytE.title" = "Sertifika Onay Kurumu listesi";
 
 /* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "V1U-ew-Ge2"; */
-"V1U-ew-Ge2.title" = "User Certificate";
+"V1U-ew-Ge2.title" = "Kullanıcı Sertifikası";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Choose custom certificates"; ObjectID = "aZl-bU-psB"; */
 "aZl-bU-psB.ibShadowedToolTip" = "Choose custom certificates";

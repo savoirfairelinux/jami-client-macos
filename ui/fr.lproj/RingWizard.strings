@@ -5,8 +5,8 @@
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "5Z7-Wi-530"; */
 "5Z7-Wi-530.placeholderString" = "'Inconnu' si non renseigné...";
 
-/* Class = "NSTextFieldCell"; title = "Advanced security (optionnal)"; ObjectID = "Gnn-K9-PTH"; */
-"Gnn-K9-PTH.title" = "Sécurité avancée (Optionnel)";
+/* Class = "NSTextFieldCell"; title = "Advanced security (optional)"; ObjectID = "Gnn-K9-PTH"; */
+"Gnn-K9-PTH.title" = "Sécurité avancée (optionnel)";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "Hsc-U9-2RV"; */
 "Hsc-U9-2RV.placeholderString" = "Mot de passe...";
@@ -24,7 +24,7 @@
 "aZl-bU-psB.ibShadowedToolTip" = "Utiliser des certificats spécifiques";
 
 /* Class = "NSTextFieldCell"; title = "Choose your username"; ObjectID = "meL-TZ-VQO"; */
-"meL-TZ-VQO.title" = "Choose your username";
+"meL-TZ-VQO.title" = "Choisissez un nom d'utilisateur";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "poP-JD-MDa"; */
 "poP-JD-MDa.title" = "Clé privée";

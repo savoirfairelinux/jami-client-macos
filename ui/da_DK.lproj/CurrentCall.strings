@@ -1,6 +1,6 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "2cB-dz-KYg"; */
-"2cB-dz-KYg.ibShadowedToolTip" = "Hang up";
+"2cB-dz-KYg.ibShadowedToolTip" = "Læg på";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
 "9e8-ji-QId.ibShadowedToolTip" = "Join call";
@@ -9,7 +9,7 @@
 "ChW-kg-Sja.ibShadowedToolTip" = "Overfør";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
-"D0G-XT-lhI.ibShadowedToolTip" = "Hang up";
+"D0G-XT-lhI.ibShadowedToolTip" = "Læg på";
 
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
 "Dqv-um-UUk.title" = "URI";
@@ -21,7 +21,7 @@
 "KPG-pB-gPm.title" = "Answer";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
-"Kjq-iM-NBL.ibShadowedToolTip" = "Hang up";
+"Kjq-iM-NBL.ibShadowedToolTip" = "Læg på";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
 "LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
@@ -45,13 +45,13 @@
 "kxH-yM-TLd.title" = "Button";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
-"mc3-HV-hek.ibShadowedToolTip" = "Hang up";
+"mc3-HV-hek.ibShadowedToolTip" = "Læg på";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
 "oRa-pS-HN2.ibShadowedToolTip" = "Optag";
 
-/* Class = "NSTextFieldCell"; title = "Person name"; ObjectID = "osk-LS-0Qg"; */
-"osk-LS-0Qg.title" = "Person name";
+/* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
+"osk-LS-0Qg.placeholderString" = "Person name";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
 "qgD-3D-nD5.ibShadowedToolTip" = "Pick up";
@@ -62,8 +62,8 @@
 /* Class = "NSTextFieldCell"; title = "Ignore"; ObjectID = "tjM-py-p4V"; */
 "tjM-py-p4V.title" = "Ignore";
 
-/* Class = "NSTextFieldCell"; title = "State"; ObjectID = "ugy-uK-901"; */
-"ugy-uK-901.title" = "Stat";
+/* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "ugy-uK-901"; */
+"ugy-uK-901.placeholderString" = "Tilstand";
 
 /* Class = "NSTextFieldCell"; title = "Answer"; ObjectID = "wRO-X4-7IU"; */
 "wRO-X4-7IU.title" = "Answer";
@@ -71,5 +71,5 @@
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
 "yZ6-1A-ZLT.title" = "wants to talk with you!";
 
-/* Class = "NSTextFieldCell"; title = "Time"; ObjectID = "zsO-T7-9yi"; */
-"zsO-T7-9yi.title" = "Tid";
+/* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
+"zsO-T7-9yi.placeholderString" = "Tid";

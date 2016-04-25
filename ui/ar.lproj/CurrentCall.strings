@@ -50,8 +50,8 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
 "oRa-pS-HN2.ibShadowedToolTip" = "تسجيل";
 
-/* Class = "NSTextFieldCell"; title = "Person name"; ObjectID = "osk-LS-0Qg"; */
-"osk-LS-0Qg.title" = "اسم الشخص";
+/* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
+"osk-LS-0Qg.placeholderString" = "اسم الشخص";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
 "qgD-3D-nD5.ibShadowedToolTip" = "التقط الهاتف";
@@ -62,8 +62,8 @@
 /* Class = "NSTextFieldCell"; title = "Ignore"; ObjectID = "tjM-py-p4V"; */
 "tjM-py-p4V.title" = "Ignore";
 
-/* Class = "NSTextFieldCell"; title = "State"; ObjectID = "ugy-uK-901"; */
-"ugy-uK-901.title" = "حالة";
+/* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "ugy-uK-901"; */
+"ugy-uK-901.placeholderString" = "حالة";
 
 /* Class = "NSTextFieldCell"; title = "Answer"; ObjectID = "wRO-X4-7IU"; */
 "wRO-X4-7IU.title" = "أجب";
@@ -71,5 +71,5 @@
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
 "yZ6-1A-ZLT.title" = "يريد أن يكلمك!";
 
-/* Class = "NSTextFieldCell"; title = "Time"; ObjectID = "zsO-T7-9yi"; */
-"zsO-T7-9yi.title" = "الوقت";
+/* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
+"zsO-T7-9yi.placeholderString" = "الوقت";

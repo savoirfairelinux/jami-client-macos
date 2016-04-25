@@ -8,14 +8,14 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Ap7-26-S6b"; */
 "Ap7-26-S6b.title" = "SMS a Teléfono Celular";
 
-/* Class = "NSTextFieldCell"; title = "details"; ObjectID = "BfK-c5-B1l"; */
-"BfK-c5-B1l.title" = "detalles";
+/* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "BfK-c5-B1l"; */
+"BfK-c5-B1l.placeholderString" = "detalles";
 
 /* Class = "NSWindow"; title = "Ring"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Ring";
 
-/* Class = "NSTextFieldCell"; title = "Contact Method"; ObjectID = "FlQ-Th-nfO"; */
-"FlQ-Th-nfO.title" = "Método de contacto";
+/* Class = "NSTextFieldCell"; placeholderString = "Contact Method"; ObjectID = "FlQ-Th-nfO"; */
+"FlQ-Th-nfO.placeholderString" = "Método de contacto";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GAa-pQ-t4g"; */
 "GAa-pQ-t4g.title" = "SMS a Teléfono Celular";
@@ -23,8 +23,8 @@
 /* Class = "NSBox"; title = "Box"; ObjectID = "Pav-Bw-GgK"; */
 "Pav-Bw-GgK.title" = "Box";
 
-/* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "Q1F-xo-N3e"; */
-"Q1F-xo-N3e.title" = "Display Role";
+/* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "Q1F-xo-N3e"; */
+"Q1F-xo-N3e.placeholderString" = "Display Role";
 
 /* Class = "NSTextFieldCell"; placeholderString = "date"; ObjectID = "UKP-Et-CT0"; */
 "UKP-Et-CT0.placeholderString" = "fecha";
@@ -41,29 +41,29 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "bgk-oz-u7n"; */
 "bgk-oz-u7n.placeholderString" = "Nombre";
 
-/* Class = "NSTextFieldCell"; title = "Category"; ObjectID = "d5o-nL-fRP"; */
-"d5o-nL-fRP.title" = "Categoría";
+/* Class = "NSTextFieldCell"; placeholderString = "Category"; ObjectID = "d5o-nL-fRP"; */
+"d5o-nL-fRP.placeholderString" = "Categoría";
 
 /* Class = "NSTextFieldCell"; title = "Ring is a secure and distributed voice, video and chat communication platform that requires no centralized server and leaves the power of privacy in the hands of the user."; ObjectID = "eln-Vm-t0d"; */
 "eln-Vm-t0d.title" = "Ring es un programa seguro y distribuido de voz, vídeo y chat que no requiere un servidor centralizado y deja el control de la privacidad en las manos del usuario.";
 
-/* Class = "NSTextFieldCell"; title = "Category"; ObjectID = "gaf-Za-tuc"; */
-"gaf-Za-tuc.title" = "Categoría";
+/* Class = "NSTextFieldCell"; placeholderString = "Category"; ObjectID = "gaf-Za-tuc"; */
+"gaf-Za-tuc.placeholderString" = "Categoría";
 
-/* Class = "NSTextFieldCell"; title = "details"; ObjectID = "isD-c6-X5Q"; */
-"isD-c6-X5Q.title" = "detalles";
+/* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "isD-c6-X5Q"; */
+"isD-c6-X5Q.placeholderString" = "detalles";
 
-/* Class = "NSTextFieldCell"; title = "Call name"; ObjectID = "j0J-Xd-uth"; */
-"j0J-Xd-uth.title" = "Nombre de llamada";
+/* Class = "NSTextFieldCell"; placeholderString = "Call name"; ObjectID = "j0J-Xd-uth"; */
+"j0J-Xd-uth.placeholderString" = "Nombre de llamada";
 
-/* Class = "NSTextFieldCell"; title = "details"; ObjectID = "mK5-kV-YOO"; */
-"mK5-kV-YOO.title" = "detalles";
+/* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "mK5-kV-YOO"; */
+"mK5-kV-YOO.placeholderString" = "detalles";
 
-/* Class = "NSTextFieldCell"; title = "n"; ObjectID = "sGB-x7-gig"; */
-"sGB-x7-gig.title" = "n";
+/* Class = "NSTextFieldCell"; placeholderString = "n"; ObjectID = "sGB-x7-gig"; */
+"sGB-x7-gig.placeholderString" = "n";
 
-/* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "uSw-g5-kte"; */
-"uSw-g5-kte.title" = "Display Role";
+/* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "uSw-g5-kte"; */
+"uSw-g5-kte.placeholderString" = "Display Role";
 
 /* Class = "NSSearchFieldCell"; placeholderString = "Name, ringID"; ObjectID = "vvE-nM-kSl"; */
 "vvE-nM-kSl.placeholderString" = "Nombre, ringID";

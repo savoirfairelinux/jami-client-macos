@@ -1,21 +1,21 @@
 
-/* Class = "NSTextFieldCell"; title = "This will be displayed to unknow peers"; ObjectID = "0Yt-xC-OWa"; */
-"0Yt-xC-OWa.title" = "This will be displayed to unknow peers";
+/* Class = "NSTextFieldCell"; title = "This will be displayed to unknown peers"; ObjectID = "0Yt-xC-OWa"; */
+"0Yt-xC-OWa.title" = "Bu bilinmeyen eşlere görünecek";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
-"1Sx-Et-CDM.title" = "Account";
+"1Sx-Et-CDM.title" = "Hesap";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap server"; ObjectID = "B6b-iB-REZ"; */
-"B6b-iB-REZ.title" = "Bootstrap server";
+"B6b-iB-REZ.title" = "Önyükleme sunucusu";
 
 /* Class = "NSTextFieldCell"; title = "TYPE"; ObjectID = "Bqr-Gq-OgA"; */
 "Bqr-Gq-OgA.title" = "TYPE";
 
 /* Class = "NSTextFieldCell"; title = "Permissions"; ObjectID = "EDd-FX-wcz"; */
-"EDd-FX-wcz.title" = "Permissions";
+"EDd-FX-wcz.title" = "İzinler";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
-"HN3-i9-zmw.placeholderString" = "Name or nickname...";
+"HN3-i9-zmw.placeholderString" = "İsim ya da takma isim...";
 
 /* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
 "OeY-na-0YT.title" = "Aramaları otomatik cevapla";
@@ -27,7 +27,7 @@
 "Wzq-V2-YLU.title" = "Takma ad";
 
 /* Class = "NSTextFieldCell"; title = "This is your RingID. Copy and share it with your friends!"; ObjectID = "bca-Wv-Xul"; */
-"bca-Wv-Xul.title" = "This is your RingID. Copy and share it with your friends!";
+"bca-Wv-Xul.title" = "Bu senin RingID'in. Kopyala ve arkadaşlarınla paylaş!";
 
 /* Class = "NSTextFieldCell"; title = "Ring Identifier"; ObjectID = "dPO-b1-o58"; */
 "dPO-b1-o58.title" = "Ring Identifier";
@@ -36,13 +36,13 @@
 "ddk-1G-0jU.title" = "Use custom user-agent";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
-"fX7-9W-XFl.title" = "Allow calls from peers in your contact list";
+"fX7-9W-XFl.title" = "Kişi listenizdeki eşlerden aramalara izin ver";
 
 /* Class = "NSButtonCell"; title = "Allow calls from unknown peers"; ObjectID = "kmI-jb-aal"; */
 "kmI-jb-aal.title" = "Bilinmeyen eşlerden aramalara izin ver";
 
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
-"lHI-bz-ddQ.title" = "Upnp enabled";
+"lHI-bz-ddQ.title" = "Upnp etkin";
 
 /* Class = "NSTextFieldCell"; title = "Type"; ObjectID = "ubB-AZ-nAm"; */
 "ubB-AZ-nAm.title" = "Tür";

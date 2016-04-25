@@ -18,7 +18,7 @@
 "K9I-vh-jeu.title" = "Interface réseau";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Positionner l'adresse et le port exposés";
+"OL5-DI-aCq.title" = "Indiquer l'adresse publiée et le port";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
 "OR2-la-DUE.placeholderString" = "Mot de passe...";
@@ -30,7 +30,7 @@
 "QS0-TJ-NQh.title" = "Utiliser TURN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
-"Qf3-E3-5U6.title" = "Adresse exposée";
+"Qf3-E3-5U6.title" = "Adresse publiée";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
 "XA8-Sy-CYG.title" = "Plage des ports RTP vidéo";
@@ -66,7 +66,7 @@
 "wl8-YK-M76.title" = "Port";
 
 /* Class = "NSTextFieldCell"; title = "seconds"; ObjectID = "xGw-j0-4ID"; */
-"xGw-j0-4ID.title" = "seconde";
+"xGw-j0-4ID.title" = "secondes";
 
 /* Class = "NSTextFieldCell"; title = "Registration"; ObjectID = "yB5-ET-gBL"; */
 "yB5-ET-gBL.title" = "Enregistrement";

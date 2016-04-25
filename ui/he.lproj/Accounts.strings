@@ -5,20 +5,14 @@
 /* Class = "NSButtonCell"; title = "Down"; ObjectID = "6Co-ei-tUA"; */
 "6Co-ei-tUA.title" = "מטה";
 
-/* Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "GB3-Dr-Fey"; */
-"GB3-Dr-Fey.headerCell.title" = "מצב";
-
-/* Class = "NSTabViewItem"; label = "Video"; ObjectID = "GIU-kn-D57"; */
-"GIU-kn-D57.label" = "וידאו";
-
 /* Class = "NSButtonCell"; title = "Up"; ObjectID = "HoA-BH-xam"; */
 "HoA-BH-xam.title" = "מעלה";
 
+/* Class = "NSTextFieldCell"; placeholderString = "Type"; ObjectID = "KoR-IH-uuI"; */
+"KoR-IH-uuI.placeholderString" = "טיפוס";
+
 /* Class = "NSTextFieldCell"; title = "Create Account"; ObjectID = "OZ9-qH-dYW"; */
 "OZ9-qH-dYW.title" = "צור חשבון";
-
-/* Class = "NSTableColumn"; headerCell.title = "Accounts"; ObjectID = "Ppv-dQ-Azf"; */
-"Ppv-dQ-Azf.headerCell.title" = "חשבונות";
 
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "RT7-u6-bhe"; */
 "RT7-u6-bhe.label" = "מתקדם";
@@ -26,17 +20,14 @@
 /* Class = "NSTabViewItem"; label = "Security"; ObjectID = "Vp5-yV-ScC"; */
 "Vp5-yV-ScC.label" = "אבטחה";
 
-/* Class = "NSTableColumn"; headerCell.title = "Enabled"; ObjectID = "Ybc-ak-pA6"; */
-"Ybc-ak-pA6.headerCell.title" = "מאופשר";
+/* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "ZDh-Jh-hfW"; */
+"ZDh-Jh-hfW.placeholderString" = "שם";
 
-/* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "hiU-GG-6Eg"; */
-"hiU-GG-6Eg.label" = "אודיו";
+/* Class = "NSTextFieldCell"; placeholderString = "Status"; ObjectID = "eEz-Lm-SOj"; */
+"eEz-Lm-SOj.placeholderString" = "מצב";
 
-/* Class = "NSTextFieldCell"; title = "State"; ObjectID = "ntA-Li-XNQ"; */
-"ntA-Li-XNQ.title" = "מצב";
-
-/* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "qIw-uf-vBM"; */
-"qIw-uf-vBM.title" = "טקסט";
+/* Class = "NSTabViewItem"; label = "Media"; ObjectID = "lxr-my-vH8"; */
+"lxr-my-vH8.label" = "מדיה";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "tPR-Ac-N5Y"; */
 "tPR-Ac-N5Y.label" = "כלליות";

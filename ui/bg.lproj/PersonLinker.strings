@@ -1,12 +1,12 @@
 
-/* Class = "NSTextFieldCell"; title = "Display Role"; ObjectID = "Jcn-cg-rbR"; */
-"Jcn-cg-rbR.title" = "Показване на ролята";
+/* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "Jcn-cg-rbR"; */
+"Jcn-cg-rbR.placeholderString" = "Показване на ролята";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "M4f-N4-msh"; */
-"M4f-N4-msh.title" = "Text Cell";
+"M4f-N4-msh.title" = "Текстова клетка";
 
-/* Class = "NSTextFieldCell"; title = "Contact Method"; ObjectID = "a9R-r5-K3w"; */
-"a9R-r5-K3w.title" = "Contact Method";
+/* Class = "NSTextFieldCell"; placeholderString = "Contact Method"; ObjectID = "a9R-r5-K3w"; */
+"a9R-r5-K3w.placeholderString" = "Contact Method";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Last name..."; ObjectID = "cGT-nu-sPa"; */
 "cGT-nu-sPa.placeholderString" = "Фамилия…";

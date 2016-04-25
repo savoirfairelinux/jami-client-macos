@@ -3,7 +3,7 @@
 "3Pb-Ec-zl5.title" = "Garder mon historique pendant";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "42E-UY-qlP"; */
-"42E-UY-qlP.title" = "Mensuel";
+"42E-UY-qlP.title" = "Chaque mois";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "AId-am-73Q"; */
 "AId-am-73Q.title" = "Chaque semaine";
@@ -24,10 +24,10 @@
 "Rzy-Gh-3wQ.title" = "Interruptions";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
-"T3a-yx-ZaW.title" = "Vérifiez automatiquement les mises à jours";
+"T3a-yx-ZaW.title" = "Vérifier automatiquement les mises à jour";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "cB6-4m-9MU"; */
-"cB6-4m-9MU.title" = "Tous les jours";
+"cB6-4m-9MU.title" = "Chaque jour";
 
 /* Class = "NSButtonCell"; title = "Clear History"; ObjectID = "cd5-9L-Bbb"; */
 "cd5-9L-Bbb.title" = "Vider l'historique";
@@ -48,7 +48,7 @@
 "uCL-ye-tsv.title" = "Activer les notifications";
 
 /* Class = "NSButtonCell"; title = "Bring Ring to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
-"uYI-hA-JHk.title" = "Mettre Ring en avant plan lors d'un appel entrant";
+"uYI-hA-JHk.title" = "Mettre Ring au premier plan lors d'un appel entrant";
 
 /* Class = "NSTextFieldCell"; title = "Desktop Notifications"; ObjectID = "xlz-zw-IJI"; */
 "xlz-zw-IJI.title" = "Notifications du bureau";

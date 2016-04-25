@@ -8,14 +8,14 @@
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
 "2e5-zS-ghg.title" = "Använd anpassad chifferlista";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.title" = "Textruta";
+/* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
+"5LC-T6-hpk.placeholderString" = "chiffercell";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
 "7c2-kF-dcs.placeholderString" = "Lösenord...";
 
-/* Class = "NSTextFieldCell"; title = "Negociation timeout"; ObjectID = "9Q3-1W-Lh3"; */
-"9Q3-1W-Lh3.title" = "Tidsgräns för förhandling";
+/* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
+"9Q3-1W-Lh3.title" = "Förhandlingens tidsgräns";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
 "Ig9-B1-7N3.title" = "Fall tillbaka på RTP";
@@ -31,9 +31,6 @@
 
 /* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
 "YtQ-hx-hih.title" = "Använd SRTP";
-
-/* Class = "NSMenu"; title = "tlsmethodlist"; ObjectID = "hOG-SW-CBI"; */
-"hOG-SW-CBI.title" = "tlsmethodlist";
 
 /* Class = "NSButtonCell"; title = "Use TLS transport"; ObjectID = "oTT-gO-fqM"; */
 "oTT-gO-fqM.title" = "Använd TLS-transport";

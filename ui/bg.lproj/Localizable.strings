@@ -20,7 +20,7 @@
 "Choose a private key file" = "Изберете файл с частен ключ";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "Изберете източника на сертификата";
 
 /* Open panel prompt for 'Choose a directory' */
 "Choose directory" = "Избиране на папка";
@@ -59,7 +59,7 @@
 "Remove value" = "Премахване на стойността";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
+"Reopen account to see your hash" = "Отворете акаунта отново, за да видите своя хеш";
 
 /* Display message to user */
 "Ring is already ready to work" = "Ring вече е готов за работа";

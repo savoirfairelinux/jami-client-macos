@@ -21,7 +21,7 @@
 "57.title" = "Ring";
 
 /* Class = "NSMenuItem"; title = "About Ring"; ObjectID = "58"; */
-"58.title" = "über Ring";
+"58.title" = "Über Ring";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
 "129.title" = "Einstellungen...";
@@ -30,7 +30,7 @@
 "130.title" = "Dienste";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "DiensteDienste";
+"131.title" = "Dienste";
 
 /* Class = "NSMenuItem"; title = "Hide Ring"; ObjectID = "134"; */
 "134.title" = "Ring verstecken";
@@ -39,7 +39,7 @@
 "136.title" = "Ring beenden";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "Andere verstekcen";
+"145.title" = "Andere verstecken";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
 "150.title" = "Alle anzeigen";
@@ -117,7 +117,7 @@
 "220.title" = "Finden";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Auswahl zum suchen verwenden";
+"221.title" = "Auswahl zum Suchen verwenden";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "Zoom";
@@ -147,7 +147,7 @@
 "350.title" = "Intelligentes Kopieren/Einfügen";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Intelligente Attribuierung";
+"351.title" = "Intelligente Anführungszeichen";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
 "354.title" = "Intelligente Links";
@@ -162,7 +162,7 @@
 "452.title" = "In Großschreibung umwandeln";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Zeichensetzung automatisch korrigieren";
+"454.title" = "Rechtschreibung automatisch korrigieren";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
 "457.title" = "Ersetzungen anzeigen";
@@ -199,3 +199,18 @@
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Auf Aktualisierungen prüfen";
+
+/* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
+"12w-Fz-Scs.title" = "Anzeigen";
+
+/* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
+"1fJ-em-1ww.title" = "Anzeigen";
+
+/* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
+"GTY-d8-NBf.title" = "Aktuellen Verlauf anzeigen";
+
+/* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
+"GU3-tt-2de.title" = "Kontakte anzeigen";
+
+/* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
+"Oco-m7-LtS.title" = "Anrufverlauf anzeihen";

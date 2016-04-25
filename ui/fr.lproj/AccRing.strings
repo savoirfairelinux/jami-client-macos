@@ -1,6 +1,6 @@
 
-/* Class = "NSTextFieldCell"; title = "This will be displayed to unknow peers"; ObjectID = "0Yt-xC-OWa"; */
-"0Yt-xC-OWa.title" = "Ceci sera affiché aux interlocuteurs inconnus";
+/* Class = "NSTextFieldCell"; title = "This will be displayed to unknown peers"; ObjectID = "0Yt-xC-OWa"; */
+"0Yt-xC-OWa.title" = "Ceci sera affiché aux pairs inconnus";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
 "1Sx-Et-CDM.title" = "Compte";
@@ -21,7 +21,7 @@
 "OeY-na-0YT.title" = "Répondre automatiquement";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
-"PaC-xE-SHA.title" = "Permettre les appels des correspondants enregistrés dans l'historique des appels";
+"PaC-xE-SHA.title" = "Autoriser les appels des correspondants présents dans votre historique d'appels";
 
 /* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
 "Wzq-V2-YLU.title" = "Nom d'emprunt";
@@ -36,10 +36,10 @@
 "ddk-1G-0jU.title" = "Utiliser un identifiant de version spécifique";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
-"fX7-9W-XFl.title" = "Autoriser la réception d'appels des interlocuteurs appartenant à votre liste de contacts";
+"fX7-9W-XFl.title" = "Autoriser les appels des correspondants présents dans votre liste de contacts";
 
 /* Class = "NSButtonCell"; title = "Allow calls from unknown peers"; ObjectID = "kmI-jb-aal"; */
-"kmI-jb-aal.title" = "Autoriser les appels de personnes inconnues";
+"kmI-jb-aal.title" = "Autoriser les appels en provenance de personnes inconnues";
 
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
 "lHI-bz-ddQ.title" = "Activer UPnP";
