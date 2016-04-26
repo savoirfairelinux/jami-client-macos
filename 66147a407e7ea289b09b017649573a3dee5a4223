@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba65a107_54afafe3",
+        "filename": "src/RingWizardWC.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-04-26T20:32:55Z",
+      "side": 1,
+      "message": "Seems this one is misplaced",
+      "range": {
+        "startLine": 120,
+        "startChar": 34,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "66147a407e7ea289b09b017649573a3dee5a4223",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
