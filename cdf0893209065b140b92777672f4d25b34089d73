@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba65a107_e7d5f743",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-04-29T12:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba65a107_071d8b66",
+      "range": {
+        "startLine": 28,
+        "startChar": 51,
+        "endLine": 28,
+        "endChar": 52
+      },
+      "revId": "cdf0893209065b140b92777672f4d25b34089d73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba65a107_271a0f6f",
         "filename": "CMakeLists.txt",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2016-04-28T21:26:59Z",
       "side": 1,
       "message": "Space",
+      "range": {
+        "startLine": 41,
+        "startChar": 21,
+        "endLine": 41,
+        "endChar": 29
+      },
+      "revId": "cdf0893209065b140b92777672f4d25b34089d73",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba65a107_c7d0f355",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-04-29T12:42:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba65a107_271a0f6f",
       "range": {
         "startLine": 41,
         "startChar": 21,
