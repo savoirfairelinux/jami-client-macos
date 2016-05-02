@@ -28,7 +28,7 @@ osx:
         - make install -j1
         - cd ..
         - echo "LRC"
-        - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
+        - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.5.0
         - git clone https://gerrit-ring.savoirfairelinux.com/ring-lrc.git ring-lrc
         - cd ring-lrc
         - mkdir build
@@ -48,7 +48,7 @@ osx:
         - cd ../../
         - mkdir build
         - cd build
-        - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.4.0
+        - export CMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.5.0
         - cmake ../ -DCMAKE_INSTALL_PREFIX=%(prefix_path)s -DRING_VERSION=$(date "+%%Y%%m%%d")
         - make install -j1
         - cpack -G DragNDrop Ring
