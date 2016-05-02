@@ -2,11 +2,11 @@
 
 # Take the package to add as argument ./sparkle-xml-updater.sh ring.dmg
 
-REPO_FOLDER=<dir>
-SPARKLE_FILE=<xml_filename>
-REPO_URL=<url>
-PACKAGE=$1
-DSA_KEY=<path_to_key_file>
+REPO_FOLDER=$1
+SPARKLE_FILE=$2
+REPO_URL=$3
+PACKAGE=$4
+DSA_KEY=$5
 
 if [ ! -f ${PACKAGE} -o ! -f ${DSA_KEY} ]; then
     echo "Can't find package or dsa key, aborting..."
@@ -15,6 +15,14 @@ fi
 
 if [ -f ${REPO_FOLDER}/${SPARKLE_FILE} ]; then
     ITEMS=$(sed -n "/<item>/,/<\/item>/p" ${REPO_FOLDER}/${SPARKLE_FILE}) 
+fi
+
+if [[ `uname` == 'Darwin' ]]; then
+    PACKAGE_SIZE=`stat -f%z ${PACKAGE}`
+    DATE_RFC2822=`date "+%a, %d %b %Y %T %z"`
+else
+    PACKAGE_SIZE=`stat -c %s ${PACKAGE}`
+    DATE_RFC2822=`date -R`
 fi
 
 cat << EOFILE > ${REPO_FOLDER}/${SPARKLE_FILE}
@@ -27,8 +35,8 @@ cat << EOFILE > ${REPO_FOLDER}/${SPARKLE_FILE}
         <language>en</language>
         <item>
             <title>Ring nightly $(date "+%Y/%m/%d %H:%M")</title>
-            <pubDate>$(date -R)</pubDate>
-            <enclosure url="${REPO_URL}/$(basename ${PACKAGE})" sparkle:version="$(date +%Y%m%d%H%M)" sparkle:shortVersionString="nightly-$(date "+%Y%m%d")" length="$(stat -c %s ${PACKAGE})" type="application/octet-stream" sparkle:dsaSignature="$(/opt/joulupukki/mac_keys/sign_update.sh ${PACKAGE} ${DSA_KEY})" />
+            <pubDate>$DATE_RFC2822</pubDate>
+            <enclosure url="${REPO_URL}/$(basename ${PACKAGE})" sparkle:version="$(date +%Y%m%d%H%M)" sparkle:shortVersionString="nightly-$(date "+%Y%m%d")" length="$PACKAGE_SIZE" type="application/octet-stream" sparkle:dsaSignature="$(./sign_update.sh ${PACKAGE} ${DSA_KEY})" />
             <sparkle:minimumSystemVersion>10.7</sparkle:minimumSystemVersion>
         </item>
 $(echo -e "${ITEMS}")
