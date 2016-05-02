@@ -6,5 +6,5 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 openssl=/usr/bin/openssl
-$openssl dgst -sha1 -binary < "$1" | $openssl dgst -dss1 -sign "$2" | base64 --wrap=0
+$openssl dgst -sha1 -binary < "$1" | $openssl dgst -dss1 -sign "$2" | base64
 
