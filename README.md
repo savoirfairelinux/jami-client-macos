@@ -61,6 +61,9 @@ Notes:
 By default the client version is specified in CMakeLists.txt but it can be
 overriden by specifying -DRING_VERSION=<num> in the cmake command line.
 
+You can specify a custom ringtone folder containing audio files (only)
+with -DRINGTONE_DIR option
+
 Debugging
 ==================
 
