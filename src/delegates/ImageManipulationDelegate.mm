@@ -41,10 +41,19 @@
 
 namespace Interfaces {
 
-    ImageManipulationDelegate::ImageManipulationDelegate() {}
+    ImageManipulationDelegate::ImageManipulationDelegate() {
+
+    }
 
     QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
         const int radius = size.height() / 2;
+
+        auto index = QStringLiteral("%1%2%3").arg(size.width())
+                                            .arg(size.height())
+                                            .arg(QString::fromUtf8(c->uid()));
+        if (m_hContactsPixmap.contains(index)) {
+            return m_hContactsPixmap.value(index);
+        }
 
         QPixmap pxm;
         if (c && c->photo().isValid()) {
@@ -86,6 +95,8 @@ namespace Interfaces {
         else {
             pxm = drawDefaultUserPixmap(size);
         }
+
+        m_hContactsPixmap.insert(index, pxm);
 
         return pxm;
     }
