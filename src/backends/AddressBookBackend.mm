@@ -252,10 +252,14 @@ void AddressBookBackend::asyncLoad(int startingPoint)
         int endPoint = qMin(startingPoint + 10, (int)everyone.count);
 
         for (int i = startingPoint; i < endPoint; ++i) {
-            ABPerson* abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
-            Person* person = this->abPersonToPerson(abPerson);
-            person->setCollection(this);
-            editor<Person>()->addExisting(person);
+            auto abPerson = ((ABPerson*)[everyone objectAtIndex:i]);
+            ABMultiValue* phonenumbers = [abPerson valueForProperty:kABPhoneProperty];
+
+            if (phonenumbers.count > 0) {
+                auto person = this->abPersonToPerson(abPerson);
+                person->setCollection(this);
+                editor<Person>()->addExisting(person);
+            }
         }
 
         if(endPoint < everyone.count) {
