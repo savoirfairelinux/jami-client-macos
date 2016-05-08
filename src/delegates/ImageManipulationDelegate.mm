@@ -46,6 +46,13 @@ namespace Interfaces {
     QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
         const int radius = size.height() / 2;
 
+        auto index = QStringLiteral("%1%2%3").arg(size.width())
+                                            .arg(size.height())
+                                            .arg(QString::fromUtf8(c->uid()));
+        if (m_hContactsPixmap.contains(index)) {
+            return m_hContactsPixmap.value(index);
+        }
+
         QPixmap pxm;
         if (c && c->photo().isValid()) {
             QPixmap contactPhoto(qvariant_cast<QPixmap>(c->photo()).scaled(size, Qt::KeepAspectRatioByExpanding,
@@ -86,6 +93,8 @@ namespace Interfaces {
         else {
             pxm = drawDefaultUserPixmap(size);
         }
+
+        m_hContactsPixmap.insert(index, pxm);
 
         return pxm;
     }
