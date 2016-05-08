@@ -63,6 +63,7 @@ namespace Interfaces {
         CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
 
         QHash<QString, QPixmap> m_hdefaultUserPixmap;
+        QHash<QString, QPixmap> m_hcontactsPixmap;
 
         /**
          * Return a version of size destSize centered of the bigger photo
