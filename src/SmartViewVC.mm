@@ -248,7 +248,8 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 
 - (void)outlineView:(NSOutlineView *)outlineView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
 {
-    [outlineView scrollRowToVisible:0];
+    if (row == 0)
+        [outlineView scrollRowToVisible:0];
 }
 
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
