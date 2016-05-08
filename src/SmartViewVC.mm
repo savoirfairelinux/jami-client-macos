@@ -111,6 +111,12 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
                          }
                      });
 
+    QObject::connect(RecentModel::instance().peopleProxy(),
+                     &QAbstractItemModel::rowsInserted,
+                     [=](const QModelIndex &parent, int first, int last) {
+                         [smartView scrollRowToVisible:0];
+                     });
+
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
     [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
@@ -244,11 +250,6 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 
     [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
     return result;
-}
-
-- (void)outlineView:(NSOutlineView *)outlineView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
-{
-    [outlineView scrollRowToVisible:0];
 }
 
 - (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
