@@ -26,6 +26,7 @@
 #import <QBuffer>
 #import <QtGui/QColor>
 #import <QtGui/QPainter>
+#import <QHash>
 #import <QtGui/QBitmap>
 #import <QtWidgets/QApplication>
 #import <QtGui/QImage>
@@ -40,10 +41,7 @@
 
 namespace Interfaces {
 
-    ImageManipulationDelegate::ImageManipulationDelegate()
-    {
-
-    }
+    ImageManipulationDelegate::ImageManipulationDelegate() {}
 
     QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
         const int radius = size.height() / 2;
@@ -164,12 +162,20 @@ namespace Interfaces {
     }
 
     QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
+
+        auto index = QStringLiteral("%1%2").arg(size.width()).arg(size.height());
+        if (m_hdefaultUserPixmap.contains(index)) {
+            return m_hdefaultUserPixmap.value(index);
+        }
+
         // create the image somehow, load from file, draw into it...
         auto sourceImgRef = CGImageSourceCreateWithData((__bridge CFDataRef)[[NSImage imageNamed:@"default_user_icon"] TIFFRepresentation], NULL);
         auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
         auto finalpxm =  QtMac::fromCGImageRef(resizeCGImage(imgRef, size));
         CFRelease(sourceImgRef);
         CFRelease(imgRef);
+
+        m_hdefaultUserPixmap.insert(index, finalpxm);
 
         return finalpxm;
     }
