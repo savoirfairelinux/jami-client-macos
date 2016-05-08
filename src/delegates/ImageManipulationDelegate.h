@@ -21,13 +21,14 @@
 
 //Qt
 #import <QSize>
+#import <QtGui/qpixmap.h>
 
 //Ring
 #import <interfaces/pixmapmanipulatori.h>
 #import <call.h>
 
 class Person;
-class QPixmap;
+class QString;
 
 namespace Interfaces {
 
@@ -60,6 +61,8 @@ namespace Interfaces {
         //Helper
         QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence = false, bool isPresent = false);
         CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
+
+        QHash<QString, QPixmap> m_hDefaultUserPixmap;
 
         /**
          * Return a version of size destSize centered of the bigger photo
