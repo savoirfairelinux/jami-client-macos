@@ -201,24 +201,8 @@ NSInteger const DETAILS_TAG = 300;
     NSTableCellView *result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-
-
-    if (!qIdx.isValid()) {
-        [photoView setImage:nil];
-        [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
-        return result;
-    }
-
-    if (auto p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object))) {
-        QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(p, QSize(35,35));
-        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-    } else {
-        QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(nil, QSize(35,35));
-        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-    }
-
+    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
     [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
-
     return result;
 }
 
