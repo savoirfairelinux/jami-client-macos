@@ -45,16 +45,17 @@ namespace Interfaces {
 
     QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
         const int radius = size.height() / 2;
-
-        auto index = QStringLiteral("%1%2%3").arg(size.width())
-                                            .arg(size.height())
-                                            .arg(QString::fromUtf8(c->uid()));
-        if (m_hContactsPixmap.contains(index)) {
-            return m_hContactsPixmap.value(index);
-        }
-
         QPixmap pxm;
         if (c && c->photo().isValid()) {
+            // Check cache
+            auto index = QStringLiteral("%1%2%3").arg(size.width())
+            .arg(size.height())
+            .arg(QString::fromUtf8(c->uid()));
+
+            if (m_hContactsPixmap.contains(index)) {
+                return m_hContactsPixmap.value(index).second;
+            }
+
             QPixmap contactPhoto(qvariant_cast<QPixmap>(c->photo()).scaled(size, Qt::KeepAspectRatioByExpanding,
                                                                            Qt::SmoothTransformation));
 
@@ -89,12 +90,28 @@ namespace Interfaces {
             painter.setPen               (Qt::black                         );
             painter.setCompositionMode   (QPainter::CompositionMode_SourceIn);
             painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
-        }
-        else {
-            pxm = drawDefaultUserPixmap(size);
-        }
 
-        m_hContactsPixmap.insert(index, pxm);
+            // Save in cache
+            QPair<QMetaObject::Connection, QPixmap> toInsert;
+            toInsert.first = QObject::connect(c,
+                                              &Person::changed,
+                                              [=]() {
+                                                  if (c) {
+                                                      auto index = QStringLiteral("%1%2%3").arg(size.width())
+                                                                                            .arg(size.height())
+                                                                                            .arg(QString::fromUtf8(c->uid()));
+                                                      if (m_hContactsPixmap.contains(index)) {
+                                                          QObject::disconnect(m_hContactsPixmap.value(index).first);
+                                                          m_hContactsPixmap.remove(index);
+                                                      }
+                                                  }
+                                              });
+            toInsert.second = pxm;
+            m_hContactsPixmap.insert(index, toInsert);
+
+        } else {
+            return drawDefaultUserPixmap(size);
+        }
 
         return pxm;
     }
