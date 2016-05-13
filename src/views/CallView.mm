@@ -23,6 +23,7 @@
 #import <QAbstractProxyModel>
 #import <QUrl>
 
+//LRC
 #import <video/configurationproxy.h>
 #import <video/sourcemodel.h>
 #import <media/video.h>
@@ -32,13 +33,20 @@
 #import <video/device.h>
 #import <video/devicemodel.h>
 
-@interface CallView ()
+//Ring
+#import "ScreenGrabView.h"
+
+
+@interface CallView () <ScreenGrabViewDelegate>
 
 @property NSMenu *contextualMenu;
 
 @end
 
 @implementation CallView
+{
+    NSMutableArray* shadeWindows;
+}
 @synthesize contextualMenu;
 @synthesize shouldAcceptInteractions;
 
@@ -176,7 +184,7 @@
 
 - (void)showContextualMenu:(NSEvent *)theEvent {
 
-    contextualMenu = [[NSMenu alloc] initWithTitle:@"Switch camera"];
+    contextualMenu = [[NSMenu alloc] initWithTitle:NSLocalizedString(@"Switch camera", @"Contextual menu title")];
 
     for(int i = 0 ; i < Video::DeviceModel::instance().devices().size() ; ++i) {
         Video::Device* device = Video::DeviceModel::instance().devices()[i];
@@ -186,6 +194,12 @@
     [contextualMenu addItem:[NSMenuItem separatorItem]];
     [contextualMenu insertItemWithTitle:NSLocalizedString(@"Choose file", @"Contextual menu entry")
                                  action:@selector(chooseFile:)
+                          keyEquivalent:@""
+                                atIndex:contextualMenu.itemArray.count];
+
+    [contextualMenu addItem:[NSMenuItem separatorItem]];
+    [contextualMenu insertItemWithTitle:NSLocalizedString(@"Share screen", @"Contextual menu entry")
+                                 action:@selector(shareScreen:)
                           keyEquivalent:@""
                                 atIndex:contextualMenu.itemArray.count];
 
@@ -206,18 +220,16 @@
         [self.callDelegate mouseIsMoving:NO];
 }
 
+- (void) rightMouseDown:(NSEvent*) theEvent
+{
+    if(shouldAcceptInteractions) {
+        [self performSelector:@selector(showContextualMenu:) withObject:theEvent];
+    }
+}
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    if([theEvent clickCount] == 1 && shouldAcceptInteractions) {
-        if(!contextualMenu)
-            [self performSelector:@selector(showContextualMenu:) withObject:theEvent afterDelay:[NSEvent doubleClickInterval]];
-        else
-            contextualMenu = nil;
-    }
-    else if([theEvent clickCount] == 2)
-    {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
+    if([theEvent clickCount] == 2) {
         if(self.callDelegate)
             [self.callDelegate callShouldToggleFullScreen];
     }
@@ -231,6 +243,70 @@
             outVideo->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
         }
     }
+}
+
+#pragma mark Crop Rect
+
+#define kShadyWindowLevel   (NSDockWindowLevel + 1000)
+
+- (void) shareScreen:(NSMenuItem*) sender
+{
+    if(!shadeWindows) {
+        shadeWindows = [NSMutableArray array];
+    }
+
+    for (auto screen in [NSScreen screens])
+    {
+        NSRect frame = [screen frame];
+        auto window = [[NSWindow alloc] initWithContentRect:frame
+                                                        styleMask:NSBorderlessWindowMask
+                                                          backing:NSBackingStoreBuffered
+                                                            defer:NO];
+        [window setBackgroundColor:[NSColor blackColor]];
+        [window setAlphaValue:.5];
+        [window setLevel:kShadyWindowLevel];
+        [window setReleasedWhenClosed:NO];
+
+        auto screenGrabber = [[ScreenGrabView alloc] initWithFrame:frame];
+        screenGrabber.delegate = self;
+        [window setContentView:screenGrabber];
+        [window makeKeyAndOrderFront:self];
+        [shadeWindows addObject:window];
+    }
+
+    [[NSCursor crosshairCursor] set];
+}
+
+- (void) grabber:(ScreenGrabView*)view didSelectRect:(NSRect)rect
+{
+    /* Map point into global coordinates. */
+    NSRect globalRect = rect;
+    NSRect windowRect = [[view window] frame];
+    globalRect = NSOffsetRect(globalRect, windowRect.origin.x, windowRect.origin.y);
+    globalRect.origin.y = CGDisplayPixelsHigh(CGMainDisplayID()) - globalRect.origin.y;
+    CGDirectDisplayID displayID = CGMainDisplayID();
+    uint32_t matchingDisplayCount = 0;
+    /* Get a list of online displays with bounds that include the specified point. */
+    CGError e = CGGetDisplaysWithPoint(NSPointToCGPoint(globalRect.origin), 1, &displayID, &matchingDisplayCount);
+    if ((e == kCGErrorSuccess) && (1 == matchingDisplayCount)) {
+        if (auto current = CallModel::instance().selectedCall()) {
+            if (auto outVideo = current->firstMedia<Media::Video>(Media::Media::Direction::OUT)) {
+                outVideo->sourceModel()->setDisplay(CGMainDisplayID(), QRect(rect.origin.x,
+                                                                             rect.origin.y,
+                                                                             NSWidth(rect),
+                                                                             NSHeight(rect)));
+            }
+        }
+
+    }
+
+    for (NSWindow* w in [NSApp windows]) {
+        if ([w level] == kShadyWindowLevel) {
+            [w close];
+        }
+    }
+    [[NSCursor currentCursor] pop];
+    [shadeWindows removeAllObjects];
 }
 
 - (void) chooseFile:(NSMenuItem*) sender

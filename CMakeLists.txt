@@ -145,6 +145,8 @@ SET(ringclient_BACKENDS
 SET(ringclient_VIEWS
    src/views/CallView.mm
    src/views/CallView.h
+   src/views/ScreenGrabView.mm
+   src/views/ScreenGrabView.h
    src/views/ITProgressIndicator.mm
    src/views/ITProgressIndicator.h
    src/views/RingOutlineView.mm
