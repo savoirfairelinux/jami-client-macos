@@ -3,13 +3,13 @@
 "4ls-Yq-mDp.title" = "Choose your own certificates";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "5Z7-Wi-530"; */
-"5Z7-Wi-530.placeholderString" = "'Unknown' if empty...";
+"5Z7-Wi-530.placeholderString" = "'Nepoznato' ako je prazno...";
 
-/* Class = "NSTextFieldCell"; title = "Advanced security (optionnal)"; ObjectID = "Gnn-K9-PTH"; */
-"Gnn-K9-PTH.title" = "Advanced security (optionnal)";
+/* Class = "NSTextFieldCell"; title = "Advanced security (optional)"; ObjectID = "Gnn-K9-PTH"; */
+"Gnn-K9-PTH.title" = "Advanced security (optional)";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "Hsc-U9-2RV"; */
-"Hsc-U9-2RV.placeholderString" = "Password...";
+"Hsc-U9-2RV.placeholderString" = "Lozinka...";
 
 /* Class = "NSButtonCell"; title = "Share"; ObjectID = "Kwr-LJ-K8C"; */
 "Kwr-LJ-K8C.title" = "Podijeli";
@@ -24,13 +24,13 @@
 "aZl-bU-psB.ibShadowedToolTip" = "Choose custom certificates";
 
 /* Class = "NSTextFieldCell"; title = "Choose your username"; ObjectID = "meL-TZ-VQO"; */
-"meL-TZ-VQO.title" = "Choose your username";
+"meL-TZ-VQO.title" = "Izaberite vaše korisničko ime";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "poP-JD-MDa"; */
-"poP-JD-MDa.title" = "Private key";
+"poP-JD-MDa.title" = "Privatni ključ";
 
 /* Class = "NSTextFieldCell"; title = "Welcome to Ring"; ObjectID = "uqu-uh-Wao"; */
-"uqu-uh-Wao.title" = "Welcome to Ring";
+"uqu-uh-Wao.title" = "Dobrodošli u Ring";
 
 /* Class = "NSButtonCell"; title = "Next"; ObjectID = "wDw-Ut-RUm"; */
-"wDw-Ut-RUm.title" = "Next";
+"wDw-Ut-RUm.title" = "Slijedeće";

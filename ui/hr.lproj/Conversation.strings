@@ -1,0 +1,24 @@
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "FgV-iF-gGQ"; */
+"FgV-iF-gGQ.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Title"; ObjectID = "HnC-1N-RmR"; */
+"HnC-1N-RmR.placeholderString" = "Naslov";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "Ilz-7v-2fr"; */
+"Ilz-7v-2fr.placeholderString" = "Pošalji poruku";
+
+/* Class = "BindingConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+"ZEx-5Y-rtp.ibShadowedIsNilPlaceholder" = "Pošalji poruku";
+
+/* Class = "BindingConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+"ZEx-5Y-rtp.ibShadowedMultipleValuesPlaceholder" = "Pošalji poruku";
+
+/* Class = "BindingConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+"ZEx-5Y-rtp.ibShadowedNoSelectionPlaceholder" = "Pošalji poruku";
+
+/* Class = "NSTextFieldCell"; title = "Start the conversation!"; ObjectID = "bsl-nv-Wqq"; */
+"bsl-nv-Wqq.title" = "Započnite razgovor!";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "ooq-vs-Xt1"; */
+"ooq-vs-Xt1.ibShadowedToolTip" = "Snimaj";

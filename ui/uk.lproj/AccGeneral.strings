@@ -1,39 +1,33 @@
 
-/* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "66H-HH-dbA"; */
-"66H-HH-dbA.title" = "UPnP влючено";
+/* Class = "NSButtonCell"; title = "Try Registration"; ObjectID = "21g-eQ-0Sc"; */
+"21g-eQ-0Sc.title" = "Спроба реєстрації";
 
-/* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "G7B-Zc-Ssi"; */
-"G7B-Zc-Ssi.title" = "Використовувати спеціальний user-agent";
+/* Class = "NSTextFieldCell"; title = "Server hostname"; ObjectID = "3uy-g0-eCm"; */
+"3uy-g0-eCm.title" = "Ім’я сервера";
 
-/* Class = "NSButtonCell"; title = "Show password"; ObjectID = "Ue3-ai-FBV"; */
-"Ue3-ai-FBV.title" = "Відобразити пароль";
+/* Class = "NSTextFieldCell"; title = "Username"; ObjectID = "4Nm-hw-379"; */
+"4Nm-hw-379.title" = "Ім’я";
 
-/* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "bMM-fn-lDE"; */
-"bMM-fn-lDE.title" = "Автоматично відповідати на дзвінки";
+/* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "KSm-ZB-4aj"; */
+"KSm-ZB-4aj.title" = "Використовувати спеціальний user-agent";
 
-/* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "c1H-HN-jVv"; */
-"c1H-HN-jVv.title" = "Додаткове ім’я";
+/* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Mxv-Rt-ON6"; */
+"Mxv-Rt-ON6.title" = "Додаткове ім’я";
 
-/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "iDL-4x-HD7"; */
-"iDL-4x-HD7.title" = "Аккаунт";
+/* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "N5h-tI-ZLz"; */
+"N5h-tI-ZLz.title" = "UPnP влючено";
 
-/* Class = "NSTextFieldCell"; title = "Username"; ObjectID = "iP9-Y8-f6g"; */
-"iP9-Y8-f6g.title" = "Ім’я";
+/* Class = "NSButtonCell"; title = "Show password"; ObjectID = "UXm-73-BNy"; */
+"UXm-73-BNy.title" = "Відобразити пароль";
 
-/* Class = "NSButtonCell"; title = "Try Registration"; ObjectID = "j6w-ZG-17T"; */
-"j6w-ZG-17T.title" = "Спроба реєстрації";
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "WCR-30-BX0"; */
+"WCR-30-BX0.title" = "Пароль:";
 
-/* Class = "NSTextFieldCell"; title = "Server hostname"; ObjectID = "jfA-bh-FEA"; */
-"jfA-bh-FEA.title" = "Ім’я сервера";
+/* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "YMy-QE-7A3"; */
+"YMy-QE-7A3.title" = "Автоматично відповідати на дзвінки";
 
-/* Class = "NSTextFieldCell"; title = "Type:"; ObjectID = "kBP-se-g6m"; */
-"kBP-se-g6m.title" = "Тип:";
+/* Class = "NSTextFieldCell"; title = "Parameters"; ObjectID = "mlN-YG-fLS"; */
+"mlN-YG-fLS.title" = "Параметри";
 
-/* Class = "NSTextFieldCell"; title = "TYPE"; ObjectID = "oqm-WC-cUn"; */
-"oqm-WC-cUn.title" = "ТИП";
-
-/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "rbi-vX-SIf"; */
-"rbi-vX-SIf.title" = "Пароль:";
-
-/* Class = "NSTextFieldCell"; title = "Parameters"; ObjectID = "yHO-fn-nw5"; */
-"yHO-fn-nw5.title" = "Параметри";
+/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "upU-sL-9i3"; */
+"upU-sL-9i3.title" = "Аккаунт";

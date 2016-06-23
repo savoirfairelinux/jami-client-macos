@@ -33,7 +33,7 @@ fi
 # don't fail on unknown byte sequences
 export LC_CTYPE=C
 
-tx pull -af --minimum-perc=30
+tx pull -af --minimum-perc=1
 cd ui/
 
 for dir in `find . -name "*.lproj" -type d`; do

@@ -1,5 +1,11 @@
 
-"Add to contacts" = "Add to contacts";
+"Add to contacts" = "Tilføj til kontakt";
+
+/* Error shown to the user */
+"An error occured during the export" = "An error occured during the export";
+
+/* Error shown to the user */
+"An error occured during the import" = "An error occured during the import";
 
 /* Contextual menu action */
 "Call number" = "Call number";
@@ -50,7 +56,7 @@
 "Pause" = "Pause";
 
 /* Button label */
-"Play" = "Play";
+"Play" = "Afspil";
 
 /* Button Action */
 "Refuse" = "Refuse";

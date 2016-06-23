@@ -1,12 +1,12 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "0eY-9x-bAr"; */
-"0eY-9x-bAr.placeholderString" = "Server url...";
+"0eY-9x-bAr.placeholderString" = "Url poslužitelja...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
 "6u9-cM-ep0.placeholderString" = "realm...";
 
 /* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
-"Atv-t7-5YJ.title" = "Same as local parameters";
+"Atv-t7-5YJ.title" = "Isto kao i lokalni parametri";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "FQ4-fp-Pxj"; */
 "FQ4-fp-Pxj.title" = "Minimalno";
@@ -15,16 +15,16 @@
 "Jho-hi-Mvg.title" = "Audio RTP port Range";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
-"K9I-vh-jeu.title" = "Network Interface";
+"K9I-vh-jeu.title" = "Mrežno sučelje";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
 "OL5-DI-aCq.title" = "Set published address and port";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
-"OR2-la-DUE.placeholderString" = "password...";
+"OR2-la-DUE.placeholderString" = "lozinka...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "username..."; ObjectID = "P7k-xH-2mr"; */
-"P7k-xH-2mr.placeholderString" = "username...";
+"P7k-xH-2mr.placeholderString" = "korisničko ime...";
 
 /* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
 "QS0-TJ-NQh.title" = "Using TURN";
@@ -45,7 +45,7 @@
 "fB0-X8-GXk.title" = "Radio";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
-"fCd-4d-sP0.title" = "Registration expire";
+"fCd-4d-sP0.title" = "Registracija istječe";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
 "gVd-Dw-1B4.title" = "Koristi STUN";
@@ -60,7 +60,7 @@
 "shs-Xm-qnY.title" = "Lokalni port";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
-"uzg-09-8vi.placeholderString" = "Server url...";
+"uzg-09-8vi.placeholderString" = "Url poslužitelja...";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "wl8-YK-M76"; */
 "wl8-YK-M76.title" = "Port";

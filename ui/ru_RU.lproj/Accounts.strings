@@ -2,17 +2,14 @@
 /* Class = "NSTabViewItem"; label = "Ring"; ObjectID = "1HC-kF-Jun"; */
 "1HC-kF-Jun.label" = "Звонок";
 
-/* Class = "NSButtonCell"; title = "Down"; ObjectID = "6Co-ei-tUA"; */
-"6Co-ei-tUA.title" = "Вниз";
-
-/* Class = "NSButtonCell"; title = "Up"; ObjectID = "HoA-BH-xam"; */
-"HoA-BH-xam.title" = "Вверх";
-
 /* Class = "NSTextFieldCell"; placeholderString = "Type"; ObjectID = "KoR-IH-uuI"; */
 "KoR-IH-uuI.placeholderString" = "Тип";
 
 /* Class = "NSTextFieldCell"; title = "Create Account"; ObjectID = "OZ9-qH-dYW"; */
 "OZ9-qH-dYW.title" = "Create Account";
+
+/* Class = "NSButtonCell"; title = "Export"; ObjectID = "OeK-Sf-pdc"; */
+"OeK-Sf-pdc.title" = "Export";
 
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "RT7-u6-bhe"; */
 "RT7-u6-bhe.label" = "Дополнительно";
@@ -31,3 +28,6 @@
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "tPR-Ac-N5Y"; */
 "tPR-Ac-N5Y.label" = "Основные";
+
+/* Class = "NSButtonCell"; title = "Import"; ObjectID = "zov-Bb-Fgp"; */
+"zov-Bb-Fgp.title" = "Import";

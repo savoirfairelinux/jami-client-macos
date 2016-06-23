@@ -1,6 +1,12 @@
 
 "Add to contacts" = "Dodaj u kontakte";
 
+/* Error shown to the user */
+"An error occured during the export" = "An error occured during the export";
+
+/* Error shown to the user */
+"An error occured during the import" = "An error occured during the import";
+
 /* Contextual menu action */
 "Call number" = "Pozovi broj";
 
@@ -29,7 +35,7 @@
 "Choose file" = "Izaberi datoteku";
 
 /* Continue button */
-"Continue" = "Continue";
+"Continue" = "Nastavi";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopiraj";
@@ -47,13 +53,13 @@
 "Message from %@" = "Poruka od %@";
 
 /* Button label */
-"Pause" = "Pause";
+"Pause" = "Pauza";
 
 /* Button label */
-"Play" = "Play";
+"Play" = "izvodi";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "Odbij";
 
 /* Contextual menu entry */
 "Remove value" = "Ukloni vrijednost";
@@ -71,5 +77,5 @@
 "Text Actions" = "Tekstualne akcije";
 
 /* Name used when user leave field empty */
-"Unknown" = "Unknown";
+"Unknown" = "Nepoznato";
 

@@ -1,6 +1,12 @@
 
 "Add to contacts" = "أضف إلى الاتصالات المعروفة";
 
+/* Error shown to the user */
+"An error occured during the export" = "An error occured during the export";
+
+/* Error shown to the user */
+"An error occured during the import" = "An error occured during the import";
+
 /* Contextual menu action */
 "Call number" = "Call number";
 
@@ -38,19 +44,19 @@
 "Copy number" = "نسخ الرقم";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "مكالمة قادمة من %@";
 
 /* Indication for user */
 "Just a moment..." = "الرجاء الإنتظار لحظة...";
 
 /* Message from {Name} */
-"Message from %@" = "Message from %@";
+"Message from %@" = "رسالة من %@";
 
 /* Button label */
-"Pause" = "Pause";
+"Pause" = "إيقاف مؤقت";
 
 /* Button label */
-"Play" = "Play";
+"Play" = "تشغيل";
 
 /* Button Action */
 "Refuse" = "أرفض";
@@ -65,7 +71,7 @@
 "Ring is already ready to work" = "ring جاهز للعمل";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "مشاركة";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
