@@ -38,20 +38,6 @@
 #import "AccRingVC.h"
 #import "PathPasswordWC.h"
 
-// We disabled IAX protocol for now, so don't show it to the user
-class ActiveProtocolModel : public QSortFilterProxyModel
-{
-public:
-    ActiveProtocolModel(QAbstractItemModel* parent) : QSortFilterProxyModel(parent)
-    {
-        setSourceModel(parent);
-    }
-    virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const
-    {
-        return sourceModel()->index(source_row,0,source_parent).flags() & Qt::ItemIsEnabled;
-    }
-};
-
 @interface AccountsVC () <PathPasswordDelegate>
 
 @property (assign) IBOutlet NSPopUpButton *protocolList;
@@ -64,7 +50,6 @@ public:
 @property (retain) IBOutlet NSTabViewItem *ringTabItem;
 
 @property QNSTreeController *treeController;
-@property ActiveProtocolModel* proxyProtocolModel;
 @property (assign) IBOutlet NSOutlineView *accountsListView;
 @property (assign) IBOutlet NSTabView *accountDetailsView;
 @property (unsafe_unretained) IBOutlet NSButton* exportAccountButton;
@@ -89,7 +74,6 @@ public:
 @synthesize accountsListView;
 @synthesize accountDetailsView;
 @synthesize treeController;
-@synthesize proxyProtocolModel;
 @synthesize passwordWC;
 
 NSInteger const TAG_CHECK       =   100;
@@ -136,10 +120,18 @@ typedef NS_ENUM(NSUInteger, Action) {
 
     AccountModel::instance().selectionModel()->clearCurrentIndex();
 
-    proxyProtocolModel = new ActiveProtocolModel(AccountModel::instance().protocolModel());
     QModelIndex qProtocolIdx = AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
     [self.protocolList addItemWithTitle:
                            AccountModel::instance().protocolModel()->data(qProtocolIdx, Qt::DisplayRole).toString().toNSString()];
+    QObject::connect(AccountModel::instance().protocolModel()->selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if (!current.isValid()) {
+                             return;
+                         }
+                         [protocolList removeAllItems];
+                         [protocolList addItemWithTitle:AccountModel::instance().protocolModel()->data(current, Qt::DisplayRole).toString().toNSString()];
+                     });
 
     self.generalVC = [[AccGeneralVC alloc] initWithNibName:@"AccGeneral" bundle:nil];
     [[self.generalVC view] setFrame:[self.generalTabItem.view frame]];
@@ -167,11 +159,6 @@ typedef NS_ENUM(NSUInteger, Action) {
     [self.ringTabItem setView:self.ringVC.view];
 }
 
-- (void) dealloc
-{
-    delete proxyProtocolModel;
-}
-
 - (IBAction)addAccount:(id)sender {
     QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
 
@@ -185,10 +172,8 @@ typedef NS_ENUM(NSUInteger, Action) {
 - (IBAction)protocolSelectedChanged:(id)sender {
 
     int index = [sender indexOfSelectedItem];
-    QModelIndex proxyIdx = proxyProtocolModel->index(index, 0);
-    AccountModel::instance().protocolModel()->selectionModel()->setCurrentIndex(
-                proxyProtocolModel->mapToSource(proxyIdx), QItemSelectionModel::ClearAndSelect);
-
+    auto qIdx = AccountModel::instance().protocolModel()->index(index, 0);
+    AccountModel::instance().protocolModel()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 }
 
 - (void) setupSIPPanels
@@ -202,17 +187,6 @@ typedef NS_ENUM(NSUInteger, Action) {
     [configPanels insertTabViewItem:mediaTabItem atIndex:1];
     [configPanels insertTabViewItem:advancedTabItem atIndex:2];
     [configPanels insertTabViewItem:securityTabItem atIndex:3];
-}
-
-- (void) setupIAXPanels
-{
-    // Start by removing all tabs
-    for(NSTabViewItem* item in configPanels.tabViewItems) {
-        [configPanels removeTabViewItem:item];
-    }
-
-    [configPanels insertTabViewItem:generalTabItem atIndex:0];
-    [configPanels insertTabViewItem:mediaTabItem atIndex:1];
 }
 
 - (void) setupRINGPanels
@@ -298,9 +272,6 @@ typedef NS_ENUM(NSUInteger, Action) {
         case Account::Protocol::SIP:
             [typeLabel setStringValue:@"SIP"];
             break;
-        case Account::Protocol::IAX:
-            [typeLabel setStringValue:@"IAX"];
-            break;
         case Account::Protocol::RING:
             [typeLabel setStringValue:@"RING"];
             break;
@@ -344,9 +315,6 @@ typedef NS_ENUM(NSUInteger, Action) {
         switch (acc->protocol()) {
             case Account::Protocol::SIP:
                 [self setupSIPPanels];
-                break;
-            case Account::Protocol::IAX:
-                [self setupIAXPanels];
                 break;
             case Account::Protocol::RING:
                 [self setupRINGPanels];
@@ -426,16 +394,17 @@ typedef NS_ENUM(NSUInteger, Action) {
 
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
 {
-    QModelIndex proxyIdx = proxyProtocolModel->index(index, 0);
-    QModelIndex qIdx = AccountModel::instance().protocolModel()->index(proxyProtocolModel->mapToSource(proxyIdx).row());
+    auto qIdx = AccountModel::instance().protocolModel()->index(index, 0);
     [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
-
+    if (qIdx == AccountModel::instance().protocolModel()->selectionModel()->currentIndex()) {
+        [protocolList selectItem:item];
+    }
     return YES;
 }
 
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
-    return proxyProtocolModel->rowCount();
+    return AccountModel::instance().protocolModel()->rowCount();
 }
 
 @end
