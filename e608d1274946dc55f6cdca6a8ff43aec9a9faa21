@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_1c7c1d72",
+        "filename": "src/SmartViewVC.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 32
+      },
+      "writtenOn": "2016-07-08T13:55:13Z",
+      "side": 1,
+      "message": "Q_UNUSED ?",
+      "range": {
+        "startLine": 116,
+        "startChar": 25,
+        "endLine": 116,
+        "endChar": 71
+      },
+      "revId": "e608d1274946dc55f6cdca6a8ff43aec9a9faa21",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
