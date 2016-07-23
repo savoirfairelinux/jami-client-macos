@@ -16,6 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+#import <SystemConfiguration/SystemConfiguration.h>
+
 #import "AppDelegate.h"
 
 #import <callmodel.h>
@@ -42,6 +44,8 @@
 
 @property RingWindowController* ringWindowController;
 @property RingWizardWC* wizard;
+@property (nonatomic, strong) dispatch_queue_t scNetworkQueue;
+@property (nonatomic, assign) SCNetworkReachabilityRef currentReachability;
 
 @end
 
@@ -61,6 +65,52 @@
         [self showWizard];
     }
     [self connect];
+
+    dispatch_queue_t queue = NULL;
+    queue = dispatch_queue_create("scNetworkReachability", DISPATCH_QUEUE_SERIAL);
+    [self setScNetworkQueue:queue];
+    [self beginObservingReachabilityStatus];
+}
+
+- (void) beginObservingReachabilityStatus
+{
+    SCNetworkReachabilityRef reachabilityRef = NULL;
+
+    void (^callbackBlock)(SCNetworkReachabilityFlags) = ^(SCNetworkReachabilityFlags flags) {
+        BOOL reachable = (flags & kSCNetworkReachabilityFlagsReachable) != 0;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            AccountModel::instance().slotConnectivityChanged();
+        }];
+    };
+
+    SCNetworkReachabilityContext context = {
+        .version = 0,
+        .info = (void *)CFBridgingRetain(callbackBlock),
+        .release = CFRelease
+    };
+
+    reachabilityRef = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, "test");
+    if (SCNetworkReachabilitySetCallback(reachabilityRef, ReachabilityCallback, &context)){
+        if (!SCNetworkReachabilitySetDispatchQueue(reachabilityRef, [self scNetworkQueue]) ){
+            // Remove our callback if we can't use the queue
+            SCNetworkReachabilitySetCallback(reachabilityRef, NULL, NULL);
+        }
+        [self setCurrentReachability:reachabilityRef];
+    }
+}
+
+- (void) endObsvervingReachabilityStatusForHost:(NSString *)__unused host
+{
+    // Un-set the dispatch queue
+    if (SCNetworkReachabilitySetDispatchQueue([self currentReachability], NULL) ){
+        SCNetworkReachabilitySetCallback([self currentReachability], NULL, NULL);
+    }
+}
+
+static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNetworkConnectionFlags flags, void* info)
+{
+    void (^callbackBlock)(SCNetworkReachabilityFlags) = (__bridge id)info;
+    callbackBlock(flags);
 }
 
 - (void) connect
