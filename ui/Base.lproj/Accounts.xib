@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccountsVC">
@@ -14,6 +14,7 @@
                 <outlet property="generalTabItem" destination="tPR-Ac-N5Y" id="39S-pz-1Xs"/>
                 <outlet property="mediaTabItem" destination="lxr-my-vH8" id="BhJ-cS-yVi"/>
                 <outlet property="protocolList" destination="rZv-qd-BGe" id="yU0-6C-Vt1"/>
+                <outlet property="ringDevicesTabItem" destination="cT1-A5-rbj" id="Sql-e4-mD8"/>
                 <outlet property="ringTabItem" destination="1HC-kF-Jun" id="FJZ-2g-Y1i"/>
                 <outlet property="securityTabItem" destination="Vp5-yV-ScC" id="FDx-0T-3t9"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="eBn-rZ-84z"/>
@@ -59,6 +60,12 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
+                        <tabViewItem label="Devices" identifier="" id="cT1-A5-rbj">
+                            <view key="view" id="Ey1-5D-Zou">
+                                <rect key="frame" x="10" y="33" width="576" height="565"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
                     </tabViewItems>
                     <connections>
                         <outlet property="delegate" destination="-2" id="hfK-WK-DJT"/>
@@ -71,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="55" rowSizeStyle="automatic" viewBased="YES" outlineTableColumn="eOe-f3-q88" id="jXv-6I-P9R" customClass="RingOutlineView">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
