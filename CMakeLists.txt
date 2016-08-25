@@ -139,8 +139,9 @@ SET(ringclient_CONTROLLERS
    src/ConversationVC.h
    src/AbstractLoadingWC.h
    src/AbstractLoadingWC.mm
+   src/AccDevicesVC.mm
+   src/AccDevicesVC.h
 )
->>>>>>> 98f8251... pathpasswordvc: refactoring/extract superclass
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
@@ -198,7 +199,8 @@ SET(ringclient_XIBS
    PathPasswordWindow
    PersonLinker
    Broker
-   Conversation)
+   Conversation
+   AccDevices)
 
 # Icons
 # This part tells CMake where to find and install the file itself
