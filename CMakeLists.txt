@@ -139,6 +139,8 @@ SET(ringclient_CONTROLLERS
    src/ConversationVC.h
    src/AbstractLoadingWC.h
    src/AbstractLoadingWC.mm
+   src/AccDevicesVC.mm
+   src/AccDevicesVC.h)
 )
 
 SET(ringclient_BACKENDS
@@ -197,7 +199,8 @@ SET(ringclient_XIBS
    PathPasswordWindow
    PersonLinker
    Broker
-   Conversation)
+   Conversation
+   AccDevices)
 
 # Icons
 # This part tells CMake where to find and install the file itself
