@@ -140,6 +140,10 @@ SET(ringclient_CONTROLLERS
    src/LoadingWCDelegate.h
    src/AbstractLoadingWC.h
    src/AbstractLoadingWC.mm
+   src/AccDevicesVC.mm
+   src/AccDevicesVC.h
+   src/ExportPasswordWC.mm
+   src/ExportPasswordWC.h
 )
 
 SET(ringclient_BACKENDS
@@ -196,9 +200,11 @@ SET(ringclient_XIBS
    RingWizard
    CertificateWindow
    PathPasswordWindow
+   ExportPasswordWindow
    PersonLinker
    Broker
-   Conversation)
+   Conversation
+   AccDevices)
 
 # Icons
 # This part tells CMake where to find and install the file itself
