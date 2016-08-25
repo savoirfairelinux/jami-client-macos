@@ -36,6 +36,7 @@
 #import "AccAdvancedVC.h"
 #import "AccSecurityVC.h"
 #import "AccRingVC.h"
+#import "AccDevicesVC.h"
 #import "PathPasswordWC.h"
 
 @interface AccountsVC () <PathPasswordDelegate>
@@ -48,6 +49,7 @@
 @property (retain) IBOutlet NSTabViewItem *advancedTabItem;
 @property (retain) IBOutlet NSTabViewItem *securityTabItem;
 @property (retain) IBOutlet NSTabViewItem *ringTabItem;
+@property (retain) IBOutlet NSTabViewItem *ringDevicesTabItem;
 
 @property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *accountsListView;
@@ -55,6 +57,7 @@
 @property (unsafe_unretained) IBOutlet NSButton* exportAccountButton;
 
 @property AccRingVC* ringVC;
+@property AccDevicesVC* devicesVC;
 @property AccGeneralVC* generalVC;
 @property AccMediaVC* audioVC;
 @property AccAdvancedVC* advancedVC;
@@ -71,6 +74,7 @@
 @synthesize advancedTabItem;
 @synthesize securityTabItem;
 @synthesize ringTabItem;
+@synthesize ringDevicesTabItem;
 @synthesize accountsListView;
 @synthesize accountDetailsView;
 @synthesize treeController;
@@ -153,6 +157,11 @@ NSInteger const TAG_TYPE        =   400;
     [[self.ringVC view] setFrame:[self.ringTabItem.view frame]];
     [[self.ringVC view] setBounds:[self.ringTabItem.view bounds]];
     [self.ringTabItem setView:self.ringVC.view];
+
+    self.devicesVC = [[AccDevicesVC alloc] initWithNibName:@"AccDevices" bundle:nil];
+    [[self.devicesVC view] setFrame:[self.ringDevicesTabItem.view frame]];
+    [[self.devicesVC view] setBounds:[self.ringDevicesTabItem.view bounds]];
+    [self.ringDevicesTabItem setView:self.devicesVC.view];
 }
 
 - (IBAction)addAccount:(id)sender {
@@ -193,8 +202,9 @@ NSInteger const TAG_TYPE        =   400;
     }
 
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
-    [configPanels insertTabViewItem:mediaTabItem atIndex:1];
-    [configPanels insertTabViewItem:advancedTabItem atIndex:2];
+    [configPanels insertTabViewItem:ringDevicesTabItem atIndex:1];
+    [configPanels insertTabViewItem:mediaTabItem atIndex:2];
+    [configPanels insertTabViewItem:advancedTabItem atIndex:3];
 }
 
 - (IBAction)exportAccount:(id)sender
