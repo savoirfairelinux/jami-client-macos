@@ -19,32 +19,33 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol PathPasswordDelegate <NSObject>
+
+#import <QtCore/qdir.h>
+
+#import "LoadingWCDelegate.h"
+#import "AbstractLoadingWC.h"
+
+typedef NS_ENUM(NSUInteger, Action) {
+    ACTION_EXPORT = 0,
+    ACTION_IMPORT = 1,
+};
+
+@protocol PathPasswordDelegate <LoadingWCDelegate>
 
 @optional
 
--(void) didCompleteWithPath:(NSURL*) path Password:(NSString*) password;
--(void) didCompleteWithPath:(NSURL*) path Password:(NSString*) password ActionCode:(NSInteger) requestCode;
+-(void) didCompleteExportWithPath:(NSURL*) path;
+-(void) didCompleteImport;
 
 @end
 
-@interface PathPasswordWC : NSWindowController
+@interface PathPasswordWC : AbstractLoadingWC
 
-/*
- * Delegate to inform about completion of the linking process between
- * a ContactMethod and a Person.
- */
-@property (nonatomic) id <PathPasswordDelegate> delegate;
 
-/*
- * caller specific code to identify ongoing action
+/**
+ * Allow the NSPathControl of this window to select files or not
  */
-@property (nonatomic) NSInteger actionCode;
-
-/*
- * Custom init
- */
-- (id)initWithDelegate:(id <PathPasswordDelegate>) del actionCode:(NSInteger) code;
+@property (nonatomic) BOOL allowFileSelection;
 
 /**
  * password string contained in passwordField.
@@ -54,20 +55,8 @@
 @property (retain) NSString* password;
 
 /**
- * Allow the NSPathControl of this window to select files or not
+ * Object uses to store account to exports
  */
-@property (nonatomic) BOOL allowFileSelection;
-
-/*
- * Show progress during action completion
- */
-- (void)showLoading;
-
-
-/*
- * Display error message to the user
- */
-- (void)showError:(NSString*) error;
-
+@property (assign) QStringList accounts;
 
 @end
