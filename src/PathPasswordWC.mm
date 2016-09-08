@@ -18,56 +18,46 @@
  */
 #import "PathPasswordWC.h"
 
+//LRC
+#import <accountmodel.h>
+
+//Ring
 #import "views/ITProgressIndicator.h"
 
 @interface PathPasswordWC() <NSTextFieldDelegate>{
-
-    __unsafe_unretained IBOutlet NSView* errorContainer;
-    __unsafe_unretained IBOutlet NSTextField* errorLabel;
-
-    __unsafe_unretained IBOutlet ITProgressIndicator* progressView;
-
-    __unsafe_unretained IBOutlet NSView* pathPasswordContainer;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
     __unsafe_unretained IBOutlet NSPathControl* path;
-
+    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
+    __unsafe_unretained IBOutlet NSTextField* errorField;
+    __unsafe_unretained IBOutlet ITProgressIndicator* progressIndicator;
 }
 
 @end
 
 @implementation PathPasswordWC {
     struct {
-        unsigned int didComplete:1;
-        unsigned int didCompleteWithActionCode:1;
+        unsigned int didCompleteExport:1;
+        unsigned int didCompleteImport:1;
     } delegateRespondsTo;
 }
+@synthesize accounts;
 
 - (id)initWithDelegate:(id <PathPasswordDelegate>) del actionCode:(NSInteger) code
 {
-    if ((self = [super initWithWindowNibName:@"PathPasswordWindow"]) != nil) {
-        [self setDelegate:del];
-        self.actionCode = code;
-    }
-    return self;
+    return [super initWithWindowNibName:@"PathPasswordWindow" delegate:del actionCode:code];
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
     [path setURL: [NSURL fileURLWithPath:NSHomeDirectory()]];
-    [progressView setNumberOfLines:30];
-    [progressView setWidthOfLine:2];
-    [progressView setLengthOfLine:5];
-    [progressView setInnerMargin:20];
-    [progressView setHidden:YES];
 }
 
 - (void)setDelegate:(id <PathPasswordDelegate>)aDelegate
 {
     if (self.delegate != aDelegate) {
-        _delegate = aDelegate;
-        delegateRespondsTo.didComplete = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:)];
-        delegateRespondsTo.didCompleteWithActionCode = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:ActionCode:)];
+        [super setDelegate: aDelegate];
+        delegateRespondsTo.didCompleteExport = [self.delegate respondsToSelector:@selector(didCompleteExportWithPath:)];
+        delegateRespondsTo.didCompleteImport = [self.delegate respondsToSelector:@selector(didCompleteWithImport)];
     }
 }
 
@@ -77,34 +67,83 @@
     [path setAllowedTypes:_allowFileSelection ? nil : [NSArray arrayWithObject:@"public.folder"]];
 }
 
-- (IBAction) cancelPressed:(id)sender
-{
-    [NSApp endSheet:self.window];
-    [self.window orderOut:self];
-}
 
 - (IBAction)completeAction:(id)sender
 {
-    if (delegateRespondsTo.didComplete)
-        [self.delegate didCompleteWithPath:path.URL Password:passwordField.stringValue];
-    else if (delegateRespondsTo.didCompleteWithActionCode)
-        [self.delegate didCompleteWithPath:path.URL Password:passwordField.stringValue ActionCode:self.actionCode];
+    [self didCompleteWithPath:path.URL Password:passwordField.stringValue ActionCode:self.actionCode];
 }
+
 
 - (void)showLoading
 {
-    [progressView setHidden:NO];
-    [pathPasswordContainer setHidden:YES];
-    [errorContainer setHidden:YES];
-    [progressView setAnimates:YES];
+    [progressIndicator setNumberOfLines:30];
+    [progressIndicator setWidthOfLine:2];
+    [progressIndicator setLengthOfLine:5];
+    [progressIndicator setInnerMargin:20];
+    [super showLoading];
 }
 
-- (void)showError:(NSString*) error
+-(void) didCompleteWithPath:(NSURL*) path Password:(NSString*) password ActionCode:(NSInteger)requestCode
 {
-    [progressView setHidden:YES];
-    [pathPasswordContainer setHidden:YES];
-    [errorContainer setHidden:NO];
-    [errorLabel setStringValue:error];
+    switch (requestCode) {
+        case Action::ACTION_EXPORT:
+        {
+            auto finalURL = [path URLByAppendingPathComponent:@"accounts.ring"];
+            [self showLoading];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                int result = AccountModel::instance().exportAccounts(accounts, finalURL.path.UTF8String, password.UTF8String);
+                switch (result) {
+                    case 0:
+                        if (delegateRespondsTo.didCompleteExport){
+                            [((id<PathPasswordDelegate>)self.delegate) didCompleteExportWithPath:finalURL];
+                        }
+                        [self close];
+                        break;
+                    default:{
+                        [errorField setStringValue:NSLocalizedString(@"An error occured during the export", @"Error shown to the user" )];
+                        [self showError] ;
+                    }break;
+                }
+            });
+        }
+            break;
+        case Action::ACTION_IMPORT: {
+            [self showLoading];
+            SEL sel = @selector(importAccountsWithPath:andPassword:);
+            NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:sel]];
+            [inv setSelector:sel];
+            [inv setTarget:self];
+            //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+            [inv setArgument:&path atIndex:2];
+            [inv setArgument:&password atIndex:3];
+
+            // Schedule import for next iteration of event loop in order to let us start the loading anim
+            [inv performSelector:@selector(invoke) withObject:nil afterDelay:0];
+
+        }
+            break;
+        default:
+            NSLog(@"Unrecognized action %d", requestCode);
+            break;
+    }
+}
+
+- (void) importAccountsWithPath:(NSURL*) path andPassword:(NSString*) password
+{
+    int result = AccountModel::instance().importAccounts(path.path.UTF8String, password.UTF8String);
+    switch (result) {
+        case 0:
+            if (delegateRespondsTo.didCompleteImport)
+                [((id<PathPasswordDelegate>)self.delegate) didCompleteImport];
+            [self close];
+            break;
+        default:
+        {
+            [errorField setStringValue:NSLocalizedString(@"An error occured during the import", @"Error shown to the user" )];
+            [self showError];
+        }
+            break;
+    }
 }
 
 @end
