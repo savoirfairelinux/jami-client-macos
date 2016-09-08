@@ -67,7 +67,6 @@ NSInteger const TAG_TYPE        =   400;
 - (IBAction)startExportOnRing:(id)sender
 {
     auto account = AccountModel::instance().selectedAccount();
-    AccountModel::instance().
 }
 
 #pragma mark - NSOutlineViewDelegate methods
