@@ -81,10 +81,6 @@ NSInteger const TAG_NAME        =   200;
 NSInteger const TAG_STATUS      =   300;
 NSInteger const TAG_TYPE        =   400;
 
-typedef NS_ENUM(NSUInteger, Action) {
-    ACTION_EXPORT = 0,
-    ACTION_IMPORT = 1,
-};
 
 - (void)awakeFromNib
 {
@@ -199,8 +195,9 @@ typedef NS_ENUM(NSUInteger, Action) {
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
     [configPanels insertTabViewItem:mediaTabItem atIndex:1];
     [configPanels insertTabViewItem:advancedTabItem atIndex:2];
-
 }
+
+
 - (IBAction)exportAccount:(id)sender
 {
     passwordWC = [[PathPasswordWC alloc] initWithDelegate:self actionCode:Action::ACTION_EXPORT];
@@ -214,6 +211,15 @@ typedef NS_ENUM(NSUInteger, Action) {
           contextInfo: nil];
 #endif
     [passwordWC setAllowFileSelection:NO];
+    if(treeController.selectedNodes.count > 0) {
+        QStringList accounts;
+        for (id item : [treeController selectedNodes]) {
+            QModelIndex accIdx = [treeController toQIdx:item];
+            accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
+        }
+        [passwordWC setAccounts:accounts];
+    }
+    [passwordWC showWindow:self];
 }
 
 - (IBAction)importAccount:(id)sender
@@ -228,6 +234,8 @@ typedef NS_ENUM(NSUInteger, Action) {
        didEndSelector: nil
           contextInfo: nil];
 #endif
+    [passwordWC setAllowFileSelection:NO];
+    [passwordWC showWindow:self];
 }
 
 - (IBAction)toggleAccount:(NSButton*)sender {
@@ -329,66 +337,6 @@ typedef NS_ENUM(NSUInteger, Action) {
     }
 }
 
--(void) didCompleteWithPath:(NSURL*) path Password:(NSString*) password ActionCode:(NSInteger)requestCode
-{
-    switch (requestCode) {
-        case Action::ACTION_EXPORT:
-            if(treeController.selectedNodes.count > 0) {
-                QStringList accounts;
-                for (id item : [treeController selectedNodes]) {
-                    QModelIndex accIdx = [treeController toQIdx:item];
-                    accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
-
-                }
-                auto finalURL = [path URLByAppendingPathComponent:@"accounts.ring"];
-                [passwordWC showLoading];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    int result = AccountModel::instance().exportAccounts(accounts, finalURL.path.UTF8String, password.UTF8String);
-                    switch (result) {
-                        case 0:
-                            [[NSWorkspace sharedWorkspace] selectFile:finalURL.path inFileViewerRootedAtPath:@""];
-                            [passwordWC close];
-                            break;
-                        default:
-                            [passwordWC showError:NSLocalizedString(@"An error occured during the export", @"Error shown to the user" )];
-                            break;
-                    }
-                });
-            }
-            break;
-        case Action::ACTION_IMPORT: {
-            [passwordWC showLoading];
-            SEL sel = @selector(importAccountsWithPath:andPassword:);
-            NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:sel]];
-            [inv setSelector:sel];
-            [inv setTarget:self];
-            //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
-            [inv setArgument:&path atIndex:2];
-            [inv setArgument:&password atIndex:3];
-
-            // Schedule import for next iteration of event loop in order to let us start the loading anim
-            [inv performSelector:@selector(invoke) withObject:nil afterDelay:0];
-
-        }
-            break;
-        default:
-            NSLog(@"Unrecognized action %d", requestCode);
-            break;
-    }
-}
-
-- (void) importAccountsWithPath:(NSURL*) path andPassword:(NSString*) password
-{
-    int result = AccountModel::instance().importAccounts(path.path.UTF8String, password.UTF8String);
-    switch (result) {
-        case 0:
-            [passwordWC close];
-            break;
-        default:
-            [passwordWC showError:NSLocalizedString(@"An error occured during the import", @"Error shown to the user" )];
-            break;
-    }
-}
 
 #pragma mark - NSMenuDelegate methods
 
@@ -405,6 +353,12 @@ typedef NS_ENUM(NSUInteger, Action) {
 - (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
 {
     return AccountModel::instance().protocolModel()->rowCount();
+}
+
+#pragma mark - PathPasswordDelegate methods
+-(void) didCompleteExportWithPath:(NSURL*) fileUrl
+{
+    [[NSWorkspace sharedWorkspace] selectFile:fileUrl.path inFileViewerRootedAtPath:@""];
 }
 
 @end
