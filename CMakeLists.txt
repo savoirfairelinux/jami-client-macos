@@ -136,7 +136,11 @@ SET(ringclient_CONTROLLERS
    src/BrokerVC.mm
    src/BrokerVC.h
    src/ConversationVC.mm
-   src/ConversationVC.h)
+   src/ConversationVC.h
+   src/AbstractLoadingWC.h
+   src/AbstractLoadingWC.mm
+)
+>>>>>>> 98f8251... pathpasswordvc: refactoring/extract superclass
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
