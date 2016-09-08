@@ -19,18 +19,8 @@
 #import "PathPasswordWC.h"
 
 #import "views/ITProgressIndicator.h"
-
 @interface PathPasswordWC() <NSTextFieldDelegate>{
-
-    __unsafe_unretained IBOutlet NSView* errorContainer;
-    __unsafe_unretained IBOutlet NSTextField* errorLabel;
-
-    __unsafe_unretained IBOutlet ITProgressIndicator* progressView;
-
-    __unsafe_unretained IBOutlet NSView* pathPasswordContainer;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
     __unsafe_unretained IBOutlet NSPathControl* path;
-
 }
 
 @end
@@ -44,28 +34,19 @@
 
 - (id)initWithDelegate:(id <PathPasswordDelegate>) del actionCode:(NSInteger) code
 {
-    if ((self = [super initWithWindowNibName:@"PathPasswordWindow"]) != nil) {
-        [self setDelegate:del];
-        self.actionCode = code;
-    }
-    return self;
+    return [super initWithWindowNibName:@"PathPasswordWindow" delegate:del actionCode:code];
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
     [path setURL: [NSURL fileURLWithPath:NSHomeDirectory()]];
-    [progressView setNumberOfLines:30];
-    [progressView setWidthOfLine:2];
-    [progressView setLengthOfLine:5];
-    [progressView setInnerMargin:20];
-    [progressView setHidden:YES];
 }
 
 - (void)setDelegate:(id <PathPasswordDelegate>)aDelegate
 {
     if (self.delegate != aDelegate) {
-        _delegate = aDelegate;
+        [super setDelegate: aDelegate];
         delegateRespondsTo.didComplete = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:)];
         delegateRespondsTo.didCompleteWithActionCode = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:ActionCode:)];
     }
@@ -77,34 +58,14 @@
     [path setAllowedTypes:_allowFileSelection ? nil : [NSArray arrayWithObject:@"public.folder"]];
 }
 
-- (IBAction) cancelPressed:(id)sender
-{
-    [NSApp endSheet:self.window];
-    [self.window orderOut:self];
-}
 
 - (IBAction)completeAction:(id)sender
 {
+    
     if (delegateRespondsTo.didComplete)
-        [self.delegate didCompleteWithPath:path.URL Password:passwordField.stringValue];
+        [((id<PathPasswordDelegate>)self.delegate) didCompleteWithPath:path.URL Password:passwordField.stringValue];
     else if (delegateRespondsTo.didCompleteWithActionCode)
-        [self.delegate didCompleteWithPath:path.URL Password:passwordField.stringValue ActionCode:self.actionCode];
-}
-
-- (void)showLoading
-{
-    [progressView setHidden:NO];
-    [pathPasswordContainer setHidden:YES];
-    [errorContainer setHidden:YES];
-    [progressView setAnimates:YES];
-}
-
-- (void)showError:(NSString*) error
-{
-    [progressView setHidden:YES];
-    [pathPasswordContainer setHidden:YES];
-    [errorContainer setHidden:NO];
-    [errorLabel setStringValue:error];
+        [((id<PathPasswordDelegate>)self.delegate) didCompleteWithPath:path.URL Password:passwordField.stringValue ActionCode:self.actionCode];
 }
 
 @end
