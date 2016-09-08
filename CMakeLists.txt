@@ -137,8 +137,9 @@ SET(ringclient_CONTROLLERS
    src/BrokerVC.h
    src/ConversationVC.mm
    src/ConversationVC.h
-   src/AccDevicesVC.mm
-   src/AccDevicesVC.h)
+   src/AbstractLoadingWC.h
+   src/AbstractLoadingWC.mm
+)
 
 SET(ringclient_BACKENDS
    src/backends/AddressBookBackend.mm
