@@ -81,13 +81,24 @@
     [progressView setAnimates:YES];
 }
 
+- (void)showAttributedError:(NSMutableAttributedString*) error
+{
+    [self showMessage:error];
+}
+
+
 - (void)showError:(NSString*) error
+{
+    [self showMessage:[[NSAttributedString alloc]initWithString:error]];
+}
+
+
+- (void)showMessage:(NSMutableAttributedString*) message
 {
     [progressView setHidden:YES];
     [pathPasswordContainer setHidden:YES];
     [errorContainer setHidden:NO];
-    [errorLabel setStringValue:error];
+    [errorLabel setAttributedStringValue:message];
 }
-
 
 @end
