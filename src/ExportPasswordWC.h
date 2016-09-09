@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -18,8 +18,27 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <account.h>
-@interface AccDevicesVC : NSViewController
 
-@property Account* account;
+#import <account.h>
+
+#import "LoadingWCDelegate.h"
+#import "AbstractLoadingWC.h"
+
+@protocol ExportPasswordDelegate <LoadingWCDelegate>
+
+@optional
+- (void)didCompleteWithPin:(NSString*) path Password:(NSString*) password;
+- (void)didStartWithPassword:(NSString*) password;
+
+@end
+
+@interface ExportPasswordWC : AbstractLoadingWC
+
+/**
+ * password string contained in passwordField.
+ * This is a KVO method to bind the text with the OK Button
+ * if password.length is > 0, button is enabled, otherwise disabled
+ */
+@property (retain) NSString* password;
+@property (assign) Account* account;
 @end
