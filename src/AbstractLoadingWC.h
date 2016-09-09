@@ -21,12 +21,12 @@
 #import "LoadingWCDelegate.h"
 #import "views/ITProgressIndicator.h"
 
-@interface AbstractLoadingWC :  NSWindowController
+@interface AbstractLoadingWC : NSWindowController
 {
 @protected
     __unsafe_unretained IBOutlet NSView* errorContainer;
 
-    __unsafe_unretained IBOutlet NSScrollView* progressView;
+    __unsafe_unretained IBOutlet NSView* progressView;
 
     __unsafe_unretained IBOutlet NSView* initialContainer;
     __unsafe_unretained IBOutlet NSView* finalContainer;
