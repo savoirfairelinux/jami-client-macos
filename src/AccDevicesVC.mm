@@ -28,23 +28,27 @@
 #import <account.h>
 
 #import "QNSTreeController.h"
-
-@interface AccDevicesVC ()
+#import "ExportPasswordWC.h"
+@interface AccDevicesVC () <ExportPasswordDelegate>
 
 @property QNSTreeController* devicesTreeController;
+@property ExportPasswordWC* passwordWC;
+
 
 @end
 
 @implementation AccDevicesVC
 
-NSInteger const TAG_NAME       =    100;
+@synthesize passwordWC;
+
+NSInteger const TAG_NAME        =   100;
 NSInteger const TAG_STATUS      =   300;
 NSInteger const TAG_TYPE        =   400;
 
 - (void)awakeFromNib
 {
     NSLog(@"INIT Devices VC");
-
+    
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
@@ -52,7 +56,7 @@ NSInteger const TAG_TYPE        =   400;
                              return;
                          [self loadAccount];
                      });
-
+    
 }
 
 
@@ -66,13 +70,33 @@ NSInteger const TAG_TYPE        =   400;
 
 - (IBAction)startExportOnRing:(id)sender
 {
-    auto account = AccountModel::instance().selectedAccount();
-    AccountModel::instance().
+    NSButton *btbAdd = (NSButton *) sender;
+    
+    self.account = AccountModel::instance().selectedAccount();
+    [self showPasswordPrompt];
 }
+#pragma mark - Export methods
+
+- (void)showPasswordPrompt
+{
+    auto account = AccountModel::instance().selectedAccount();
+    passwordWC = [[ExportPasswordWC alloc] initWithDelegate:self actionCode:1];
+    [passwordWC setAccount: account];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: passwordWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+}
+
 
 #pragma mark - NSOutlineViewDelegate methods
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
     return YES;
 }
@@ -85,20 +109,20 @@ NSInteger const TAG_TYPE        =   400;
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     NSTableView* result = [outlineView makeViewWithIdentifier:@"DeviceView" owner:self];
-
+    
     QModelIndex qIdx = [self.devicesTreeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid())
         return result;
-
+    
     NSTextField* nameLabel = [result viewWithTag:TAG_NAME];
     NSTextField* stateLabel = [result viewWithTag:TAG_STATUS];
-
+    
     auto account = AccountModel::instance().selectedAccount();
-
+    
     account->ringDeviceModel()->data(qIdx);
-    //[nameLabel setStringValue:account->alias().toNSString()];
+    [nameLabel setStringValue:account->alias().toNSString()];
     //[stateLabel setStringValue:humanState.toNSString()];
-
+    
     return result;
 }
 
