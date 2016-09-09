@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Loïc Siret <loic.siret@savoirfairelinux.com>
+ *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,35 +17,28 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
-#import "LoadingWCDelegate.h"
-@protocol LoadingWCProtocol <NSObject>
+#import <Cocoa/Cocoa.h>
 
+#import "LoadingVCProtocol.h"
+#import "LoadingVCDelegate.h"
+#import "AbstractLoadingCV.h"
 
-- (id)initWithDelegate:(id <LoadingWCDelegate>) del
-            actionCode:(NSInteger) code;
-- (IBAction)completeAction:(id)sender;
+@protocol ExportPasswordDelegate <LoadingVCDelegate>
 
 @optional
+-(void) didCompleteWithPin:(NSString*) path Password:(NSString*) password;
+-(void) didStartWithPassword:(NSString*) password;
 
-/*
- * Display an attributed error message to the user
- */
-- (void)showAttributedError:(NSMutableAttributedString*) error;
+@end
 
-/*
- * Display an error message to the user
- */
-- (void)showError:(NSString*) error;
-/*
- * Show progress during action completion
- */
-- (void)showLoading;
+@interface ExportPasswordWC : AbstractLoadingCV <LoadingVCProtocol>
 
-/*
- * Display a message to the user
+/**
+ * password string contained in passwordField.
+ * This is a KVO method to bind the text with the OK Button
+ * if password.length is > 0, button is enabled, otherwise disabled
  */
-- (void)showMessage:(NSMutableAttributedString*) message;
+@property (retain) NSString* password;
 
 
 @end

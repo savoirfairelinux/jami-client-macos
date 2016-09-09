@@ -47,8 +47,8 @@
 {
     if (self.delegate != aDelegate) {
         [super setDelegate: aDelegate];
-        delegateRespondsTo.didComplete = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:)];
-        delegateRespondsTo.didCompleteWithActionCode = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:ActionCode:)];
+        delegateRespondsTo.didComplete = [self.delegate respondsToSelector:@selector(didStartWithPassword:)];
+        delegateRespondsTo.didCompleteWithActionCode = [self.delegate respondsToSelector:@selector(didCompleteWithPin:Password::)];
     }
 }
 
@@ -61,7 +61,6 @@
 
 - (IBAction)completeAction:(id)sender
 {
-    
     if (delegateRespondsTo.didComplete)
         [((id<PathPasswordDelegate>)self.delegate) didCompleteWithPath:path.URL Password:passwordField.stringValue];
     else if (delegateRespondsTo.didCompleteWithActionCode)
