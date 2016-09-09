@@ -81,12 +81,12 @@
     [progressView setAnimates:YES];
 }
 
-- (void)showError:(NSString*) error
+- (void)showError:(NSString*) message
 {
     [progressView setHidden:YES];
     [initialContainer setHidden:YES];
     [errorContainer setHidden:NO];
-    [errorLabel setStringValue:error];
+    [errorLabel setStringValue:message];
 }
 
 - (void)showFinal
@@ -96,5 +96,4 @@
     [errorContainer setHidden:YES];
     [finalContainer setHidden:NO];
 }
-
 @end

@@ -27,17 +27,18 @@
 - (IBAction)completeAction:(id)sender;
 
 @optional
-- (void)showError:(NSString*) error;
 
+/*
+ * Display an error message to the user
+ */
+- (void)showError:(NSString*) error;
 /*
  * Show progress during action completion
  */
 - (void)showLoading;
-
 /*
- * Display error message to the user
+ * Show final state after action completion
  */
-- (void)showError:(NSString*) error;
-
+- (void)showFinal;
 
 @end
