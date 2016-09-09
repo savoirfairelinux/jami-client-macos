@@ -28,16 +28,21 @@
 #import <account.h>
 
 #import "QNSTreeController.h"
-
-@interface AccDevicesVC ()
+#import "ExportPasswordWC.h"
+@interface AccDevicesVC () <ExportPasswordDelegate>
 
 @property QNSTreeController* devicesTreeController;
+@property ExportPasswordWC* passwordWC;
+
 
 @end
 
 @implementation AccDevicesVC
 
-NSInteger const TAG_NAME       =    100;
+@synthesize passwordWC;
+@synthesize account;
+
+NSInteger const TAG_NAME        =   100;
 NSInteger const TAG_STATUS      =   300;
 NSInteger const TAG_TYPE        =   400;
 
@@ -66,13 +71,32 @@ NSInteger const TAG_TYPE        =   400;
 
 - (IBAction)startExportOnRing:(id)sender
 {
-    auto account = AccountModel::instance().selectedAccount();
-    AccountModel::instance().
+    NSButton *btbAdd = (NSButton *) sender;
+
+    self.account = AccountModel::instance().selectedAccount();
+    [self showPasswordPrompt];
 }
+#pragma mark - Export methods
+
+- (void)showPasswordPrompt
+{
+    passwordWC = [[ExportPasswordWC alloc] initWithDelegate:self actionCode:1];
+    [passwordWC setAccount: account];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: passwordWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+}
+
 
 #pragma mark - NSOutlineViewDelegate methods
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
     return YES;
 }
@@ -96,7 +120,7 @@ NSInteger const TAG_TYPE        =   400;
     auto account = AccountModel::instance().selectedAccount();
 
     account->ringDeviceModel()->data(qIdx);
-    //[nameLabel setStringValue:account->alias().toNSString()];
+    [nameLabel setStringValue:account->alias().toNSString()];
     //[stateLabel setStringValue:humanState.toNSString()];
 
     return result;

@@ -48,8 +48,8 @@
 {
     if (self.delegate != aDelegate) {
         [super setDelegate: aDelegate];
-        delegateRespondsTo.didComplete = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:)];
-        delegateRespondsTo.didCompleteWithActionCode = [self.delegate respondsToSelector:@selector(didCompleteWithPath:Password:ActionCode:)];
+        delegateRespondsTo.didComplete = [self.delegate respondsToSelector:@selector(didStartWithPassword:)];
+        delegateRespondsTo.didCompleteWithActionCode = [self.delegate respondsToSelector:@selector(didCompleteWithPin:Password::)];
     }
 }
 
