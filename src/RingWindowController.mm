@@ -31,14 +31,21 @@
 #import <call.h>
 #import <recentmodel.h>
 
+// Ring
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "CurrentCallVC.h"
+#import "MigrateRingAccountsWC.h"
 #import "ConversationVC.h"
-
 #import "PreferencesWC.h"
 #import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
+
+@interface RingWindowController () <MigrateRingAccountsDelegate>
+
+@property (retain) MigrateRingAccountsWC* migrateWC;
+
+@end
 
 @implementation RingWindowController {
 
@@ -142,6 +149,9 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
     for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
         Account* acc = ringList.value(i);
+        if (acc->needsMigration()) {
+            [self migrateRingAccount:acc];
+        }
         if (acc->isEnabled()) {
             if(!enabled)
                 enabled = finalChoice = acc;
@@ -263,6 +273,27 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 {
     preferencesWC = [[PreferencesWC alloc] initWithWindowNibName:@"PreferencesWindow"];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
+}
+
+#pragma mark - Ring account migration
+
+- (void) migrateRingAccount:(Account*) acc
+{
+    self.migrateWC = [[MigrateRingAccountsWC alloc] initWithDelegate:self actionCode:1];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.window beginSheet:self.migrateWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: self.migrateWC.window
+       modalForWindow: self.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+}
+
+-(void) migrationDidComplete
+{
+
 }
 
 @end
