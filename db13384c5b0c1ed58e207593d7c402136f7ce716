@@ -22,6 +22,52 @@
       "revId": "db13384c5b0c1ed58e207593d7c402136f7ce716",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_a8c104e6",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T22:13:04Z",
+      "side": 1,
+      "message": "Always connect before executing. You don\u0027t know how much time it will take and could miss the return value.\n\nAlso, keep a trace of the Connection (return value of the ::connect call). If you call ::connect multipl times you will end up hooking multiple times the same callbacks. Always call disconnect before connecting. You can find example of that in other places in the client.\n\nMore important, I think that all this logic should be in the ExportPasswordWC.\nIf seems weird to have this controller having all the logic og the export process. It should be contained in the ExportPasswordWC.\n- The AccDevicesVC should not start the export process\n- It should also not ask the ExportPasswordWC to display its loading state\n- It could be inform of the final PIN through its delegation. It is only necessary if you want to display the PIN in the AccDevice controller. And I am not sure it is a good thing.",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 100,
+        "endChar": 29
+      },
+      "revId": "db13384c5b0c1ed58e207593d7c402136f7ce716",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_48b6588c",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T22:13:04Z",
+      "side": 1,
+      "message": "See previous comment. This could be the ExportPasswordDelegate competion method if you want to display the pin here",
+      "range": {
+        "startLine": 109,
+        "startChar": 33,
+        "endLine": 109,
+        "endChar": 83
+      },
+      "revId": "db13384c5b0c1ed58e207593d7c402136f7ce716",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
