@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MigrateRingAccountsWC">
+            <connections>
+                <outlet property="errorContainer" destination="ty1-sj-tT6" id="eEy-Cr-yiw"/>
+                <outlet property="errorField" destination="G1N-th-ZtP" id="OZ1-F7-jN7"/>
+                <outlet property="finalContainer" destination="D9c-cc-43F" id="WCp-fn-u2t"/>
+                <outlet property="infoField" destination="Qx0-KE-jEl" id="ACx-L8-XrX"/>
+                <outlet property="initialContainer" destination="xUT-yB-g8Q" id="RY9-PG-fGI"/>
+                <outlet property="passwordConfirmField" destination="fb6-6f-oqD" id="zo7-JA-tSY"/>
+                <outlet property="passwordField" destination="vej-Z8-dOm" id="2t8-o5-iHa"/>
+                <outlet property="progressView" destination="Ovf-4O-7LZ" id="BgC-sc-6GS"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="bos-rN-Jgz"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="508" height="296"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <view key="contentView" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="0.0" width="508" height="296"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="xUT-yB-g8Q" userLabel="Migration Container">
+                        <rect key="frame" x="20" y="20" width="468" height="266"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YR8-e7-f8B">
+                                <rect key="frame" x="-2" y="249" width="472" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Account migration required" id="wmv-sA-Mlh">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Qx0-KE-jEl">
+                                <rect key="frame" x="-2" y="144" width="472" height="85"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" placeholderString="RingID" id="859-10-HEb">
+                                    <font key="font" metaFont="system"/>
+                                    <string key="title">The following account needs to be migrated to the new Ring account format:\n Alias : \nID:\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later.</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vej-Z8-dOm">
+                                <rect key="frame" x="105" y="105" width="243" height="22"/>
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Password..." drawsBackground="YES" usesSingleLineMode="YES" id="xqz-Uz-hqU">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
+                                </secureTextFieldCell>
+                                <connections>
+                                    <binding destination="-2" name="value" keyPath="self.password" id="WWB-sb-wyk">
+                                        <dictionary key="options">
+                                            <bool key="NSConditionallySetsEditable" value="NO"/>
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                    <outlet property="delegate" destination="-2" id="UEj-AI-SPU"/>
+                                </connections>
+                            </secureTextField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bZ5-at-jng">
+                                <rect key="frame" x="-2" y="65" width="83" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Confirmation" id="aOa-1q-AZe">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oXB-Be-LaB">
+                                <rect key="frame" x="387" y="-7" width="87" height="32"/>
+                                <buttonCell key="cell" type="push" title="Migrate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rW5-Il-5YD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="startMigration:" target="-2" id="MW5-vm-X5X"/>
+                                    <binding destination="-2" name="enabled" keyPath="self.validatePasswords" id="vyp-i8-Drw"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-Pl-Fz9">
+                                <rect key="frame" x="-2" y="108" width="63" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Password" id="vwh-K9-3O9">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fb6-6f-oqD" userLabel="Password confirmation">
+                                <rect key="frame" x="105" y="62" width="243" height="22"/>
+                                <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Confirm your new password..." drawsBackground="YES" usesSingleLineMode="YES" id="KuO-oT-zhY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <allowedInputSourceLocales>
+                                        <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                    </allowedInputSourceLocales>
+                                </secureTextFieldCell>
+                                <connections>
+                                    <binding destination="-2" name="value" keyPath="self.passwordConfirmation" id="mVZ-rM-3Px">
+                                        <dictionary key="options">
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                    <outlet property="delegate" destination="-2" id="4W6-t5-1uA"/>
+                                </connections>
+                            </secureTextField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Qx0-KE-jEl" secondAttribute="trailing" id="6At-Ny-s4i"/>
+                            <constraint firstItem="fb6-6f-oqD" firstAttribute="width" secondItem="vej-Z8-dOm" secondAttribute="width" id="6T4-XK-uNu"/>
+                            <constraint firstItem="YR8-e7-f8B" firstAttribute="top" secondItem="xUT-yB-g8Q" secondAttribute="top" id="75b-jc-goZ"/>
+                            <constraint firstAttribute="bottom" secondItem="oXB-Be-LaB" secondAttribute="bottom" id="78c-rz-zWu"/>
+                            <constraint firstItem="Qx0-KE-jEl" firstAttribute="leading" secondItem="xUT-yB-g8Q" secondAttribute="leading" id="96K-5h-fNe"/>
+                            <constraint firstItem="fb6-6f-oqD" firstAttribute="baseline" secondItem="bZ5-at-jng" secondAttribute="baseline" id="FcI-8l-Et0"/>
+                            <constraint firstItem="vej-Z8-dOm" firstAttribute="leading" secondItem="Bcr-Pl-Fz9" secondAttribute="trailing" constant="46" id="H6a-lV-9HO"/>
+                            <constraint firstItem="Bcr-Pl-Fz9" firstAttribute="baseline" secondItem="vej-Z8-dOm" secondAttribute="baseline" id="HWL-uz-9td"/>
+                            <constraint firstItem="vej-Z8-dOm" firstAttribute="top" secondItem="Qx0-KE-jEl" secondAttribute="bottom" constant="17" id="JRl-83-1RI"/>
+                            <constraint firstItem="vej-Z8-dOm" firstAttribute="width" secondItem="xUT-yB-g8Q" secondAttribute="height" multiplier="285:311" id="KWf-If-sdz"/>
+                            <constraint firstItem="bZ5-at-jng" firstAttribute="leading" secondItem="xUT-yB-g8Q" secondAttribute="leading" id="a8B-2s-qAO"/>
+                            <constraint firstItem="Qx0-KE-jEl" firstAttribute="top" secondItem="YR8-e7-f8B" secondAttribute="bottom" constant="20" id="bQT-cM-bWc"/>
+                            <constraint firstItem="bZ5-at-jng" firstAttribute="top" secondItem="Bcr-Pl-Fz9" secondAttribute="bottom" constant="26" id="hH4-Ug-Jki"/>
+                            <constraint firstAttribute="trailing" secondItem="YR8-e7-f8B" secondAttribute="trailing" id="kQs-lk-qMI"/>
+                            <constraint firstItem="vej-Z8-dOm" firstAttribute="leading" secondItem="xUT-yB-g8Q" secondAttribute="leading" constant="105" id="q8m-JB-plh"/>
+                            <constraint firstItem="vej-Z8-dOm" firstAttribute="leading" secondItem="fb6-6f-oqD" secondAttribute="leading" id="vN2-rY-7tJ"/>
+                            <constraint firstItem="YR8-e7-f8B" firstAttribute="leading" secondItem="xUT-yB-g8Q" secondAttribute="leading" id="xjG-Vn-8Kc"/>
+                            <constraint firstAttribute="trailing" secondItem="oXB-Be-LaB" secondAttribute="trailing" id="zBf-Ov-zq7"/>
+                        </constraints>
+                    </customView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ovf-4O-7LZ" customClass="ITProgressIndicator">
+                        <rect key="frame" x="219" y="113" width="70" height="70"/>
+                    </customView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ty1-sj-tT6">
+                        <rect key="frame" x="20" y="20" width="468" height="266"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RfX-YR-bbB">
+                                <rect key="frame" x="-2" y="249" width="472" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Account migration error" id="8K3-9Z-MKH">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="G1N-th-ZtP">
+                                <rect key="frame" x="-2" y="213" width="472" height="17"/>
+                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" placeholderString="error label" id="e7n-Ev-bK7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cxh-K7-1eh">
+                                <rect key="frame" x="415" y="-7" width="59" height="32"/>
+                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VN1-A3-RIh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onClickComplete:" target="-2" id="2EG-XF-KK9"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ocg-tS-V4f">
+                                <rect key="frame" x="-6" y="-7" width="158" height="32"/>
+                                <buttonCell key="cell" type="push" title="Delete this account" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ITE-yD-CTb">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeAccount:" target="-2" id="YxZ-Ld-ciH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="G1N-th-ZtP" secondAttribute="trailing" id="5R4-Fn-a0W"/>
+                            <constraint firstItem="G1N-th-ZtP" firstAttribute="top" secondItem="RfX-YR-bbB" secondAttribute="bottom" constant="19" id="7Py-Sf-rhN"/>
+                            <constraint firstAttribute="trailing" secondItem="RfX-YR-bbB" secondAttribute="trailing" id="HSv-ag-BSM"/>
+                            <constraint firstAttribute="trailing" secondItem="cxh-K7-1eh" secondAttribute="trailing" id="Y5m-0Q-V2G"/>
+                            <constraint firstAttribute="bottom" secondItem="cxh-K7-1eh" secondAttribute="bottom" id="Ygs-Cw-f5z"/>
+                            <constraint firstItem="Ocg-tS-V4f" firstAttribute="baseline" secondItem="cxh-K7-1eh" secondAttribute="baseline" id="bRj-Zl-Xeg"/>
+                            <constraint firstItem="RfX-YR-bbB" firstAttribute="leading" secondItem="ty1-sj-tT6" secondAttribute="leading" id="dkl-c9-iMz"/>
+                            <constraint firstItem="cxh-K7-1eh" firstAttribute="width" secondItem="ty1-sj-tT6" secondAttribute="height" multiplier="47:266" id="fQc-pG-Oh8"/>
+                            <constraint firstItem="Ocg-tS-V4f" firstAttribute="leading" secondItem="ty1-sj-tT6" secondAttribute="leading" id="qEX-46-QVl"/>
+                            <constraint firstItem="RfX-YR-bbB" firstAttribute="top" secondItem="ty1-sj-tT6" secondAttribute="top" id="qhq-Xf-xgq"/>
+                            <constraint firstItem="G1N-th-ZtP" firstAttribute="leading" secondItem="ty1-sj-tT6" secondAttribute="leading" id="wDt-LQ-Q7c"/>
+                        </constraints>
+                    </customView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D9c-cc-43F">
+                        <rect key="frame" x="20" y="20" width="468" height="266"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="suF-b1-Duk">
+                                <rect key="frame" x="-2" y="249" width="472" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Account migration completed" id="1ob-x1-u74">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jeD-0z-2Lj">
+                                <rect key="frame" x="415" y="-7" width="59" height="32"/>
+                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PT7-XI-WDR">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onClickComplete:" target="-2" id="Jwe-cD-rDX"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="wRp-RS-wdh">
+                                <rect key="frame" x="-2" y="212" width="472" height="17"/>
+                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Congratulations, your account has bbeen migrated with Success." placeholderString="" id="C2l-rz-Gqt">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="wRp-RS-wdh" firstAttribute="leading" secondItem="D9c-cc-43F" secondAttribute="leading" id="22v-TA-qYj"/>
+                            <constraint firstAttribute="trailing" secondItem="jeD-0z-2Lj" secondAttribute="trailing" id="L0f-VY-bZm"/>
+                            <constraint firstAttribute="bottom" secondItem="jeD-0z-2Lj" secondAttribute="bottom" id="LOM-OT-huO"/>
+                            <constraint firstItem="wRp-RS-wdh" firstAttribute="top" secondItem="suF-b1-Duk" secondAttribute="bottom" constant="20" id="Ms2-7d-ux7"/>
+                            <constraint firstItem="suF-b1-Duk" firstAttribute="top" secondItem="D9c-cc-43F" secondAttribute="top" id="NWV-rr-iyE"/>
+                            <constraint firstAttribute="trailing" secondItem="wRp-RS-wdh" secondAttribute="trailing" id="TVY-wv-dzW"/>
+                            <constraint firstItem="suF-b1-Duk" firstAttribute="leading" secondItem="D9c-cc-43F" secondAttribute="leading" id="XVh-QA-hIY"/>
+                            <constraint firstAttribute="trailing" secondItem="suF-b1-Duk" secondAttribute="trailing" id="yLT-MQ-i57"/>
+                        </constraints>
+                    </customView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xUT-yB-g8Q" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="1qc-WS-pWN"/>
+                    <constraint firstAttribute="trailing" secondItem="ty1-sj-tT6" secondAttribute="trailing" constant="20" id="44x-w8-5VH"/>
+                    <constraint firstAttribute="trailing" secondItem="D9c-cc-43F" secondAttribute="trailing" constant="20" id="7ik-2Z-GeU"/>
+                    <constraint firstItem="xUT-yB-g8Q" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="10" id="S2Y-12-IY1"/>
+                    <constraint firstItem="D9c-cc-43F" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="10" id="VLa-s1-YI3"/>
+                    <constraint firstItem="ty1-sj-tT6" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="bD3-zJ-ba1"/>
+                    <constraint firstItem="Ovf-4O-7LZ" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="113" id="eF1-QZ-Yez"/>
+                    <constraint firstItem="D9c-cc-43F" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="f0A-2H-xAe"/>
+                    <constraint firstItem="Ovf-4O-7LZ" firstAttribute="centerX" secondItem="EiT-Mj-1SZ" secondAttribute="centerX" id="fTg-Qq-oFd"/>
+                    <constraint firstAttribute="bottom" secondItem="D9c-cc-43F" secondAttribute="bottom" constant="20" id="glP-hH-xFO"/>
+                    <constraint firstItem="Ovf-4O-7LZ" firstAttribute="width" secondItem="EiT-Mj-1SZ" secondAttribute="height" multiplier="35:148" id="hQ4-rH-o41"/>
+                    <constraint firstAttribute="bottom" secondItem="xUT-yB-g8Q" secondAttribute="bottom" constant="20" id="lo1-Yf-zAT"/>
+                    <constraint firstAttribute="trailing" secondItem="xUT-yB-g8Q" secondAttribute="trailing" constant="20" id="mAW-UW-MB6"/>
+                    <constraint firstItem="ty1-sj-tT6" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="10" id="p6k-5L-CM6"/>
+                    <constraint firstItem="Ovf-4O-7LZ" firstAttribute="centerY" secondItem="EiT-Mj-1SZ" secondAttribute="centerY" id="uTt-sa-B5e"/>
+                    <constraint firstAttribute="bottom" secondItem="ty1-sj-tT6" secondAttribute="bottom" constant="20" id="xny-Om-PuU"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="3wn-SC-48D"/>
+            </connections>
+            <point key="canvasLocation" x="-1875" y="-234"/>
+        </window>
+        <userDefaultsController representsSharedInstance="YES" id="2A5-Q9-edp"/>
+    </objects>
+</document>

@@ -25,7 +25,7 @@
 - (id)initWithDelegate:(id <LoadingWCDelegate>) del
             actionCode:(NSInteger) code;
 - (IBAction)completeAction:(id)sender;
-
+- (IBAction)cancelPressed:(id)sender;
 @optional
 
 /*

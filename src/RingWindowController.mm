@@ -31,14 +31,21 @@
 #import <call.h>
 #import <recentmodel.h>
 
+// Ring
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "CurrentCallVC.h"
+#import "MigrateRingAccountsWC.h"
 #import "ConversationVC.h"
-
 #import "PreferencesWC.h"
 #import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
+
+@interface RingWindowController () <MigrateRingAccountsDelegate>
+
+@property (retain) MigrateRingAccountsWC* migrateWC;
+
+@end
 
 @implementation RingWindowController {
 
@@ -55,6 +62,7 @@
     ConversationVC* offlineVC;
 }
 
+QMetaObject::Connection accountUpdate;
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 
 - (void)windowDidLoad {
@@ -74,21 +82,18 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [currentCallVC initFrame];
     [offlineVC initFrame];
 
-    // Fresh run, we need to make sure RingID appears
-    [self updateRingID];
-    [shareButton sendActionOn:NSLeftMouseDownMask];
-
-    [self connect];
+    [self checkAccountsToMigrate];
 }
 
 - (void) connect
 {
     // Update Ring ID label based on account model changes
-    QObject::connect(&AccountModel::instance(),
-                     &AccountModel::dataChanged,
-                     [=] {
-                         [self updateRingID];
-                     });
+    QObject::disconnect(accountUpdate);
+    accountUpdate = QObject::connect(&AccountModel::instance(),
+                                     &AccountModel::dataChanged,
+                                     [=] {
+                                         [self updateRingID];
+                                     });
 
     QObject::connect(RecentModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
@@ -263,6 +268,48 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 {
     preferencesWC = [[PreferencesWC alloc] initWithWindowNibName:@"PreferencesWindow"];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
+}
+
+#pragma mark - Ring account migration
+
+- (void) migrateRingAccount:(Account*) acc
+{
+    self.migrateWC = [[MigrateRingAccountsWC alloc] initWithDelegate:self actionCode:1];
+    self.migrateWC.account = acc;
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.window beginSheet:self.migrateWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: self.migrateWC.window
+       modalForWindow: self.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+}
+
+- (void)checkAccountsToMigrate
+{
+    auto ringList = AccountModel::instance().accountsToMigrate();
+    if (ringList.length() > 0){
+        Account* acc = ringList.value(0);
+        [self migrateRingAccount:acc];
+    } else {
+        // Fresh run, we need to make sure RingID appears
+        [self updateRingID];
+        [shareButton sendActionOn:NSLeftMouseDownMask];
+        
+        [self connect];
+    }
+}
+
+- (void)migrationDidComplete
+{
+    [self checkAccountsToMigrate];
+}
+
+- (void)migrationDidCompleteWithError
+{
+    [self checkAccountsToMigrate];
 }
 
 @end
