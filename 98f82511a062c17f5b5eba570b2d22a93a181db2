@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad0f9df_0802903e",
+        "filename": "LoadingVCDelegate.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T14:58:39Z",
+      "side": 1,
+      "message": "Header should be GPLv3 licence, look at the other files",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 2
+      },
+      "revId": "98f82511a062c17f5b5eba570b2d22a93a181db2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_28ff5436",
+        "filename": "build-local/CMakeCache.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T14:58:39Z",
+      "side": 1,
+      "message": "This file is generated at build time, should not be versioned",
+      "revId": "98f82511a062c17f5b5eba570b2d22a93a181db2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_c8fb2846",
+        "filename": "src/AbstractLoadingWC.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T14:58:39Z",
+      "side": 1,
+      "message": "trailing spaces",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 4
+      },
+      "revId": "98f82511a062c17f5b5eba570b2d22a93a181db2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_e8f86c4b",
+        "filename": "src/AbstractLoadingWC.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T14:58:39Z",
+      "side": 1,
+      "message": "rename this one for a more \u0027abstract\u0027 name",
+      "range": {
+        "startLine": 32,
+        "startChar": 41,
+        "endLine": 32,
+        "endChar": 62
+      },
+      "revId": "98f82511a062c17f5b5eba570b2d22a93a181db2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_889520e6",
+        "filename": "src/AbstractLoadingWC.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T14:58:39Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 4
+      },
+      "revId": "98f82511a062c17f5b5eba570b2d22a93a181db2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_a89a6412",
+        "filename": "src/PathPasswordWC.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T14:58:39Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 4
+      },
+      "revId": "98f82511a062c17f5b5eba570b2d22a93a181db2",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
