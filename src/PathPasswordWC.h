@@ -19,7 +19,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol PathPasswordDelegate <NSObject>
+#import "LoadingWCProtocol.h"
+#import "LoadingWCDelegate.h"
+#import "AbstractLoadingWC.h"
+
+@protocol PathPasswordDelegate <LoadingWCDelegate>
 
 @optional
 
@@ -28,23 +32,13 @@
 
 @end
 
-@interface PathPasswordWC : NSWindowController
+@interface PathPasswordWC : AbstractLoadingWC <LoadingWCProtocol>
 
-/*
- * Delegate to inform about completion of the linking process between
- * a ContactMethod and a Person.
- */
-@property (nonatomic) id <PathPasswordDelegate> delegate;
 
-/*
- * caller specific code to identify ongoing action
+/**
+ * Allow the NSPathControl of this window to select files or not
  */
-@property (nonatomic) NSInteger actionCode;
-
-/*
- * Custom init
- */
-- (id)initWithDelegate:(id <PathPasswordDelegate>) del actionCode:(NSInteger) code;
+@property (nonatomic) BOOL allowFileSelection;
 
 /**
  * password string contained in passwordField.
@@ -52,22 +46,6 @@
  * if password.length is > 0, button is enabled, otherwise disabled
  */
 @property (retain) NSString* password;
-
-/**
- * Allow the NSPathControl of this window to select files or not
- */
-@property (nonatomic) BOOL allowFileSelection;
-
-/*
- * Show progress during action completion
- */
-- (void)showLoading;
-
-
-/*
- * Display error message to the user
- */
-- (void)showError:(NSString*) error;
 
 
 @end
