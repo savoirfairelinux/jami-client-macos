@@ -143,6 +143,8 @@ SET(ringclient_CONTROLLERS
    src/AccDevicesVC.h
    src/ExportPasswordWC.mm
    src/ExportPasswordWC.h
+   src/MigrateRingAccountsWC.mm
+   src/MigrateRingAccountsWC.h
 )
 
 SET(ringclient_BACKENDS
@@ -200,6 +202,7 @@ SET(ringclient_XIBS
    CertificateWindow
    PathPasswordWindow
    ExportPasswordWindow
+   MigrateRingAccountsWindow
    PersonLinker
    Broker
    Conversation
