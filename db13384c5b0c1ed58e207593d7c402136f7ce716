@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad0f9df_e88f0ccb",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-09-11T22:04:51Z",
+      "side": 1,
+      "message": "this method is useless, you can directly hook the IBAction to the showPasswordPromt",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 1
+      },
+      "revId": "db13384c5b0c1ed58e207593d7c402136f7ce716",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
