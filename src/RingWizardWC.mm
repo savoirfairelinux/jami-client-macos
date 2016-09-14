@@ -44,35 +44,22 @@
 
 @implementation RingWizardWC {
 
-
     __unsafe_unretained IBOutlet NSButton* photoView;
     __unsafe_unretained IBOutlet NSTextField* nicknameField;
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
     __unsafe_unretained IBOutlet NSTextField* indicationLabel;
     __unsafe_unretained IBOutlet NSButton* createButton;
-    __unsafe_unretained IBOutlet NSButton* showCustomCertsButton;
-    IBOutlet NSView *securityContainer;
 
-    __unsafe_unretained IBOutlet NSButton* shareButton;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
-    __unsafe_unretained IBOutlet NSView* pvkContainer;
-    __unsafe_unretained IBOutlet NSPathControl* certificatePathControl;
-    __unsafe_unretained IBOutlet NSPathControl* caListPathControl;
-    __unsafe_unretained IBOutlet NSPathControl* pvkPathControl;
-    BOOL isExpanded;
     Account* accountToCreate;
 }
 
-NSInteger const PVK_PASSWORD_TAG    = 0;
 NSInteger const NICKNAME_TAG        = 1;
 
 - (void)windowDidLoad {
     [super windowDidLoad];
 
-    [passwordField setTag:PVK_PASSWORD_TAG];
     [nicknameField setTag:NICKNAME_TAG];
 
-    isExpanded = false;
     [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
 
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
@@ -84,10 +71,6 @@ NSInteger const NICKNAME_TAG        = 1;
         [self controlTextDidChange:[NSNotification notificationWithName:@"PlaceHolder" object:nicknameField]];
     }
 
-    [caListPathControl setDelegate:self];
-    [certificatePathControl setDelegate:self];
-    [pvkPathControl setDelegate:self];
-
     NSData* imgData = [[[ABAddressBook sharedAddressBook] me] imageData];
     if (imgData != nil) {
         [photoView setImage:[[NSImage alloc] initWithData:imgData]];
@@ -97,25 +80,6 @@ NSInteger const NICKNAME_TAG        = 1;
     [photoView setWantsLayer: YES];
     photoView.layer.cornerRadius = photoView.frame.size.width / 2;
     photoView.layer.masksToBounds = YES;
-}
-
-- (void) displayHash:(NSString* ) hash
-{
-    [nicknameField setFrameSize:NSMakeSize(400, nicknameField.frame.size.height)];
-    [nicknameField setStringValue:hash];
-    [nicknameField setEditable:NO];
-    [nicknameField setHidden:NO];
-
-    [showCustomCertsButton setHidden:YES];
-
-    [shareButton setHidden:NO];
-    [shareButton sendActionOn:NSLeftMouseDownMask];
-
-    NSSharingService* emailSharingService = [NSSharingService sharingServiceNamed:NSSharingServiceNameComposeEmail];
-
-    [createButton setTitle:NSLocalizedString(@"Continue",
-                                             @"Continue button")];
-    [createButton setAction:@selector(goToApp:)];
 }
 
 - (IBAction) editPhoto:(id)sender
@@ -167,11 +131,6 @@ NSInteger const NICKNAME_TAG        = 1;
     QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
 
     [self setCallback];
-    if (isExpanded) {
-        // retract panel
-        [self chooseOwnCertificates:nil];
-    }
-    [showCustomCertsButton setHidden:YES];
 
     [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
     [self registerDefaultPreferences];
@@ -210,124 +169,11 @@ NSInteger const NICKNAME_TAG        = 1;
                      });
 }
 
-- (IBAction)chooseOwnCertificates:(NSButton*)sender
-{
-    if (isExpanded) {
-        [securityContainer removeFromSuperview];
-        NSRect frame = [self.window frame];
-        frame.size = CGSizeMake(securityContainer.frame.size.width, frame.size.height - securityContainer.frame.size.height);
-        frame.origin.y = frame.origin.y + securityContainer.frame.size.height;
-        [self.window setFrame:frame display:YES animate:YES];
-        isExpanded = false;
-        [sender setImage:[NSImage imageNamed:@"NSAddTemplate"]];
-    } else {
-        NSRect frame = [self.window frame];
-        frame.size = CGSizeMake(securityContainer.frame.size.width, frame.size.height + securityContainer.frame.size.height);
-        frame.origin.y = frame.origin.y - securityContainer.frame.size.height;
-        [self.window setFrame:frame display:YES animate:YES];
-
-        [securityContainer setFrameOrigin:CGPointMake(0, 50)];
-        [self.window.contentView addSubview:securityContainer];
-        isExpanded = true;
-        [sender setImage:[NSImage imageNamed:@"NSRemoveTemplate"]];
-    }
-}
-
 - (IBAction)goToApp:(id)sender
 {
     [self.window close];
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [appDelegate showMainWindow];
-}
-
-#pragma mark - NSPathControl delegate methods
-
-- (IBAction)caListPathControlSingleClick:(id)sender
-{
-    NSURL* fileURL;
-    if ([sender isKindOfClass:[NSMenuItem class]]) {
-        fileURL = nil;
-    } else {
-        fileURL = [[sender clickedPathComponentCell] URL];
-    }
-    [self->caListPathControl setURL:fileURL];
-    accountToCreate->setTlsCaListCertificate([[fileURL path] UTF8String]);
-
-}
-
-- (IBAction)certificatePathControlSingleClick:(id)sender
-{
-    NSURL* fileURL;
-    if ([sender isKindOfClass:[NSMenuItem class]]) {
-        fileURL = nil;
-    } else {
-        fileURL = [[sender clickedPathComponentCell] URL];
-    }
-    [self->certificatePathControl setURL:fileURL];
-    accountToCreate->setTlsCertificate([[fileURL path] UTF8String]);
-
-    if (auto cert = accountToCreate->tlsCertificate()) {
-        [pvkContainer setHidden:!cert->requirePrivateKey()];
-    } else {
-        [pvkContainer setHidden:YES];
-    }
-
-}
-
-- (IBAction)pvkFilePathControlSingleClick:(id)sender
-{
-    NSURL* fileURL;
-    if ([sender isKindOfClass:[NSMenuItem class]]) {
-        fileURL = nil;
-    } else {
-        fileURL = [[sender clickedPathComponentCell] URL];
-    }
-    [self->pvkPathControl setURL:fileURL];
-    accountToCreate->setTlsPrivateKey([[fileURL path] UTF8String]);
-
-    if(accountToCreate->tlsCertificate()->requirePrivateKeyPassword()) {
-        [passwordField setHidden:NO];
-    } else {
-        [passwordField setHidden:YES];
-    }
-}
-
-/*
- Delegate method of NSPathControl to determine how the NSOpenPanel will look/behave.
- */
-- (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
-{
-    [openPanel setAllowsMultipleSelection:NO];
-    [openPanel setCanChooseDirectories:NO];
-    [openPanel setCanChooseFiles:YES];
-    [openPanel setResolvesAliases:YES];
-
-    if(pathControl == caListPathControl) {
-        [openPanel setTitle:NSLocalizedString(@"Choose a CA list", @"Open panel title")];
-    } else if (pathControl == certificatePathControl) {
-        [openPanel setTitle:NSLocalizedString(@"Choose a certificate", @"Open panel title")];
-    } else {
-        [openPanel setTitle:NSLocalizedString(@"Choose a private key file", @"Open panel title")];
-    }
-
-    [openPanel setPrompt:NSLocalizedString(@"Choose", @"Open panel prompt for 'Choose a file'")];
-    [openPanel setDelegate:self];
-}
-
-- (void)pathControl:(NSPathControl *)pathControl willPopUpMenu:(NSMenu *)menu
-{
-    NSMenuItem *item;
-    if(pathControl == caListPathControl) {
-        item = [menu addItemWithTitle:NSLocalizedString(@"Remove value", @"Contextual menu entry")
-                               action:@selector(caListPathControlSingleClick:) keyEquivalent:@""];
-    } else if (pathControl == certificatePathControl) {
-        item = [menu addItemWithTitle:NSLocalizedString(@"Remove value", @"Contextual menu entry")
-                               action:@selector(certificatePathControlSingleClick:) keyEquivalent:@""];
-    } else {
-        item = [menu addItemWithTitle:NSLocalizedString(@"Remove value", @"Contextual menu entry")
-                               action:@selector(pvkFilePathControlSingleClick:) keyEquivalent:@""];
-    }
-    [item setTarget:self]; // or whatever target you want
 }
 
 #pragma mark - NSOpenSavePanelDelegate delegate methods
@@ -342,11 +188,6 @@ NSInteger const NICKNAME_TAG        = 1;
 -(void)controlTextDidChange:(NSNotification *)notif
 {
     NSTextField* textField = [notif object];
-    if (textField.tag == PVK_PASSWORD_TAG) {
-        accountToCreate->setTlsPassword([textField.stringValue UTF8String]);
-        return;
-    }
-
     // else it is NICKNAME_TAG field
     NSString* alias = textField.stringValue;
     if ([alias isEqualToString:@""]) {

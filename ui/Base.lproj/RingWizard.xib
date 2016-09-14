@@ -1,24 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A313a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardWC">
             <connections>
-                <outlet property="caListPathControl" destination="fnL-AL-k3N" id="5ad-Cb-mM5"/>
-                <outlet property="certificatePathControl" destination="1Hn-6F-5Pq" id="V5y-qn-MkJ"/>
                 <outlet property="createButton" destination="rC1-mU-Scu" id="JrT-qi-fF5"/>
                 <outlet property="indicationLabel" destination="PZB-UI-B3R" id="t79-DV-rKR"/>
                 <outlet property="nicknameField" destination="Phj-na-SP1" id="e9d-3N-z9N"/>
-                <outlet property="passwordField" destination="1nU-BV-LdG" id="1fI-Xa-L9w"/>
                 <outlet property="photoView" destination="j82-Gu-ek3" id="elk-di-sz5"/>
                 <outlet property="progressBar" destination="nRx-qJ-VIe" id="qJ2-ra-GkK"/>
-                <outlet property="pvkContainer" destination="he3-z9-OHD" id="rmf-aA-Lv6"/>
-                <outlet property="pvkPathControl" destination="Wk1-nk-8ES" id="Sb9-e1-mDQ"/>
-                <outlet property="securityContainer" destination="ftV-Pr-W0i" id="wUj-m3-EIE"/>
-                <outlet property="shareButton" destination="hKA-b6-heE" id="Asx-al-WgA"/>
-                <outlet property="showCustomCertsButton" destination="aZl-bU-psB" id="RQ2-RR-ufD"/>
                 <outlet property="window" destination="4LP-GX-BkH" id="vNm-J0-gmv"/>
             </connections>
         </customObject>
@@ -27,7 +19,7 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" showsToolbarButton="NO" animationBehavior="default" id="4LP-GX-BkH">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" texturedBackground="YES"/>
             <rect key="contentRect" x="599" y="440" width="541" height="230"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="Wgr-xH-z0G">
                 <rect key="frame" x="0.0" y="0.0" width="541" height="230"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -40,26 +32,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hKA-b6-heE">
-                        <rect key="frame" x="388" y="17" width="59" height="29"/>
-                        <buttonCell key="cell" type="bevel" title="Share" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Kwr-LJ-K8C">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="shareRingID:" target="-2" id="gQ7-b3-r6R"/>
-                        </connections>
-                    </button>
-                    <button toolTip="Choose custom certificates" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aZl-bU-psB">
-                        <rect key="frame" x="372" y="43" width="39" height="38"/>
-                        <buttonCell key="cell" type="round" bezelStyle="circular" image="NSAddTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="b1Z-dE-vrA">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="chooseOwnCertificates:" target="-2" id="Tel-fO-O2f"/>
-                        </connections>
-                    </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="rC1-mU-Scu">
                         <rect key="frame" x="451" y="17" width="72" height="29"/>
                         <constraints>
@@ -84,7 +56,7 @@ DQ
                         </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_blue" id="UZZ-KL-7Bo"/>
                     </imageView>
-                    <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phj-na-SP1">
+                    <textField verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phj-na-SP1">
                         <rect key="frame" x="169" y="52" width="200" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="LZg-nv-YRi"/>
@@ -98,7 +70,7 @@ DQ
                             <outlet property="delegate" destination="-2" id="K7L-Rf-9i7"/>
                         </connections>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZB-UI-B3R">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZB-UI-B3R">
                         <rect key="frame" x="97" y="82" width="344" height="17"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="340" id="NMy-6k-0aA"/>
@@ -136,133 +108,25 @@ DQ
                     <constraint firstItem="Phj-na-SP1" firstAttribute="centerX" secondItem="Wgr-xH-z0G" secondAttribute="centerX" constant="-1.5" id="AGC-ga-ZNS"/>
                     <constraint firstItem="j82-Gu-ek3" firstAttribute="top" secondItem="rAn-Kv-PgL" secondAttribute="bottom" constant="8" id="Hg6-1X-5p2"/>
                     <constraint firstItem="PZB-UI-B3R" firstAttribute="centerX" secondItem="Wgr-xH-z0G" secondAttribute="centerX" constant="-1.5" id="LQU-R8-GHo"/>
-                    <constraint firstItem="aZl-bU-psB" firstAttribute="leading" secondItem="Phj-na-SP1" secondAttribute="trailing" constant="9" id="PCb-NY-cPw"/>
                     <constraint firstItem="5sr-Hf-NCo" firstAttribute="leading" secondItem="rAn-Kv-PgL" secondAttribute="trailing" constant="8" id="RGk-1T-khu"/>
-                    <constraint firstItem="rC1-mU-Scu" firstAttribute="leading" secondItem="hKA-b6-heE" secondAttribute="trailing" constant="8" id="RUS-zV-JtN"/>
                     <constraint firstItem="rAn-Kv-PgL" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" constant="3" id="RdR-vl-146"/>
                     <constraint firstItem="j82-Gu-ek3" firstAttribute="centerX" secondItem="Wgr-xH-z0G" secondAttribute="centerX" constant="-1.5" id="Rqt-O8-CYB"/>
-                    <constraint firstAttribute="bottom" secondItem="hKA-b6-heE" secondAttribute="bottom" constant="20" id="TGf-Kl-MPP"/>
-                    <constraint firstItem="aZl-bU-psB" firstAttribute="centerY" secondItem="Phj-na-SP1" secondAttribute="centerY" constant="-2" id="YbA-a2-VNl"/>
                     <constraint firstAttribute="bottom" secondItem="rC1-mU-Scu" secondAttribute="bottom" constant="20" id="dbf-vQ-Wby"/>
                     <constraint firstItem="Phj-na-SP1" firstAttribute="top" secondItem="PZB-UI-B3R" secondAttribute="bottom" constant="8" id="dnt-aZ-NN3"/>
                     <constraint firstItem="nRx-qJ-VIe" firstAttribute="centerY" secondItem="Wgr-xH-z0G" secondAttribute="centerY" constant="-8" id="fMz-zP-sqF"/>
                     <constraint firstItem="5sr-Hf-NCo" firstAttribute="centerY" secondItem="rAn-Kv-PgL" secondAttribute="centerY" id="gZH-uP-MDP"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5sr-Hf-NCo" secondAttribute="trailing" constant="8" id="heg-Vm-b50"/>
+                    <constraint firstItem="PZB-UI-B3R" firstAttribute="top" secondItem="j82-Gu-ek3" secondAttribute="bottom" constant="14" id="u09-2a-X9l"/>
                     <constraint firstItem="rAn-Kv-PgL" firstAttribute="centerX" secondItem="Wgr-xH-z0G" secondAttribute="centerX" id="zQB-dF-MQ4"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="cKX-Z2-yDq"/>
             </connections>
-            <point key="canvasLocation" x="619.5" y="-107"/>
+            <point key="canvasLocation" x="629" y="-217"/>
         </window>
-        <customView identifier="ChooseCerts" id="ftV-Pr-W0i">
-            <rect key="frame" x="0.0" y="0.0" width="531" height="172"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <pathControl verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Hn-6F-5Pq">
-                    <rect key="frame" x="242" y="75" width="200" height="26"/>
-                    <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="kCA-gk-cMZ">
-                        <font key="font" metaFont="system"/>
-                    </pathCell>
-                    <connections>
-                        <action selector="certificatePathControlSingleClick:" target="-2" id="gLr-11-7u9"/>
-                    </connections>
-                </pathControl>
-                <pathControl verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnL-AL-k3N">
-                    <rect key="frame" x="242" y="103" width="200" height="26"/>
-                    <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="GQX-gh-pkz">
-                        <font key="font" metaFont="system"/>
-                    </pathCell>
-                    <connections>
-                        <action selector="caListPathControlSingleClick:" target="-2" id="YSc-pJ-KRW"/>
-                    </connections>
-                </pathControl>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIN-Fl-8Li">
-                    <rect key="frame" x="18" y="81" width="221" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="User Certificate" id="V1U-ew-Ge2">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9K-II-jmt">
-                    <rect key="frame" x="18" y="107" width="221" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Certificate Authority list" id="SpA-zX-ytE">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <customView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="he3-z9-OHD">
-                    <rect key="frame" x="20" y="0.0" width="511" height="71"/>
-                    <subviews>
-                        <pathControl verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wk1-nk-8ES">
-                            <rect key="frame" x="223" y="41" width="200" height="26"/>
-                            <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="dkC-t2-qyc">
-                                <font key="font" metaFont="system"/>
-                            </pathCell>
-                            <connections>
-                                <action selector="pvkFilePathControlSingleClick:" target="-2" id="aTR-VH-hJK"/>
-                            </connections>
-                        </pathControl>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4EG-qH-WOF">
-                            <rect key="frame" x="18" y="45" width="202" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Private key" id="poP-JD-MDa">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                        </textField>
-                        <secureTextField hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1nU-BV-LdG">
-                            <rect key="frame" x="226" y="9" width="145" height="22"/>
-                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Password..." drawsBackground="YES" usesSingleLineMode="YES" id="Hsc-U9-2RV">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <allowedInputSourceLocales>
-                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
-                                </allowedInputSourceLocales>
-                            </secureTextFieldCell>
-                            <connections>
-                                <outlet property="delegate" destination="-2" id="XjT-FM-vvp"/>
-                            </connections>
-                        </secureTextField>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="Wk1-nk-8ES" firstAttribute="leading" secondItem="4EG-qH-WOF" secondAttribute="trailing" constant="8" id="Mfo-AY-j64"/>
-                    </constraints>
-                </customView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K7H-z9-exz">
-                    <rect key="frame" x="18" y="155" width="191" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="187" id="Mjq-8r-RBl"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Advanced security (optional)" id="Gnn-K9-PTH">
-                        <font key="font" metaFont="systemBold"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21c-hJ-jTB">
-                    <rect key="frame" x="30" y="130" width="483" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose your own certificates" id="4ls-Yq-mDp">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstItem="fnL-AL-k3N" firstAttribute="leading" secondItem="t9K-II-jmt" secondAttribute="trailing" constant="8" id="HuI-1u-ggc"/>
-                <constraint firstItem="1Hn-6F-5Pq" firstAttribute="leading" secondItem="oIN-Fl-8Li" secondAttribute="trailing" constant="8" id="Xqa-pG-Igc"/>
-                <constraint firstItem="K7H-z9-exz" firstAttribute="leading" secondItem="ftV-Pr-W0i" secondAttribute="leading" constant="20" id="sN3-wt-20B"/>
-            </constraints>
-            <point key="canvasLocation" x="62.5" y="15"/>
-        </customView>
     </objects>
     <resources>
-        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="symbol_blue" width="92.160003662109375" height="85.919998168945312"/>
     </resources>
 </document>
