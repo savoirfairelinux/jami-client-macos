@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConversationVC">
@@ -22,17 +23,17 @@
             <rect key="frame" x="0.0" y="0.0" width="798" height="586"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJD-f8-Xqd">
-                    <rect key="frame" x="20" y="58" width="758" height="475"/>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="EJD-f8-Xqd">
+                    <rect key="frame" x="0.0" y="58" width="798" height="475"/>
                     <subviews>
-                        <scrollView ambiguous="YES" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="Ez2-Rf-DZN">
-                            <rect key="frame" x="29" y="0.0" width="700" height="475"/>
+                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="Ez2-Rf-DZN">
+                            <rect key="frame" x="49" y="0.0" width="700" height="475"/>
                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="ofC-Bs-tHR">
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="475"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="hwp-Th-i2d" id="bOO-CW-S21">
-                                        <rect key="frame" x="0.0" y="0.0" width="700" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="700" height="475"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -116,7 +117,6 @@
                                         </connections>
                                     </outlineView>
                                 </subviews>
-                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </clipView>
                             <constraints>
                                 <constraint firstAttribute="width" constant="700" id="hVv-sa-XIA"/>
@@ -186,25 +186,11 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-di-Tls">
-                    <rect key="frame" x="20" y="0.0" width="758" height="50"/>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Rth-di-Tls">
+                    <rect key="frame" x="0.0" y="0.0" width="798" height="50"/>
                     <subviews>
-                        <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-d7-Erh" userLabel="Call Button" customClass="IconButton">
-                            <rect key="frame" x="20" y="5" width="40" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="4jd-jn-RY1"/>
-                                <constraint firstAttribute="height" constant="40" id="DMa-Lq-2Tk"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XOS-rh-WfH">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="placeCall:" target="-2" id="2h9-fM-gof"/>
-                            </connections>
-                        </button>
-                        <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
-                            <rect key="frame" x="68" y="5" width="622" height="40"/>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
+                            <rect key="frame" x="68" y="5" width="662" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="vko-v6-6CX"/>
                             </constraints>
@@ -225,8 +211,8 @@
                                 <outlet property="delegate" destination="-2" id="2u2-D4-htz"/>
                             </connections>
                         </textField>
-                        <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="IconButton">
-                            <rect key="frame" x="698" y="5" width="40" height="40"/>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="IconButton">
+                            <rect key="frame" x="738" y="5" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="TmF-ip-m4C"/>
                                 <constraint firstAttribute="height" constant="40" id="rbQ-lE-sAq"/>
@@ -240,12 +226,30 @@
                                 <binding destination="-2" name="enabled" keyPath="self.message.length" id="ZmZ-2N-CPX"/>
                             </connections>
                         </button>
+                        <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-d7-Erh" userLabel="Call Button" customClass="IconButton">
+                            <rect key="frame" x="20" y="5" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="4jd-jn-RY1"/>
+                                <constraint firstAttribute="height" constant="40" id="DMa-Lq-2Tk"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XOS-rh-WfH">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="placeCall:" target="-2" id="2h9-fM-gof"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="cFH-d7-Erh" firstAttribute="top" secondItem="Rth-di-Tls" secondAttribute="top" constant="5" id="2zJ-2h-dLg"/>
                         <constraint firstAttribute="height" constant="50" id="8Xk-CO-d9I"/>
+                        <constraint firstItem="UJf-cF-RAo" firstAttribute="leading" secondItem="bsk-Gj-qQ2" secondAttribute="trailing" constant="8" id="ADK-NR-ZMJ"/>
                         <constraint firstItem="UJf-cF-RAo" firstAttribute="centerY" secondItem="Rth-di-Tls" secondAttribute="centerY" id="IEk-Ts-gBA"/>
+                        <constraint firstAttribute="bottom" secondItem="bsk-Gj-qQ2" secondAttribute="bottom" constant="5" id="NYK-6e-w8C"/>
                         <constraint firstItem="cFH-d7-Erh" firstAttribute="leading" secondItem="Rth-di-Tls" secondAttribute="leading" constant="20" id="TFr-St-w0Q"/>
+                        <constraint firstAttribute="trailing" secondItem="UJf-cF-RAo" secondAttribute="trailing" constant="20" id="XqO-dy-4yf"/>
+                        <constraint firstItem="bsk-Gj-qQ2" firstAttribute="top" secondItem="Rth-di-Tls" secondAttribute="top" constant="5" id="bpr-MK-LFn"/>
                         <constraint firstItem="bsk-Gj-qQ2" firstAttribute="leading" secondItem="cFH-d7-Erh" secondAttribute="trailing" constant="8" id="cMh-IX-Iur"/>
                         <constraint firstAttribute="bottom" secondItem="cFH-d7-Erh" secondAttribute="bottom" constant="5" id="xpg-xe-2dT"/>
                     </constraints>
@@ -270,11 +274,14 @@
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="EJD-f8-Xqd" secondAttribute="leading" id="Ijp-QX-Dkw"/>
                 <constraint firstItem="ucx-6g-eJw" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Pd6-AZ-mue"/>
                 <constraint firstItem="Uqj-Xr-xl5" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Tzd-wA-uMM"/>
+                <constraint firstItem="xdB-aI-PSs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ucx-6g-eJw" secondAttribute="trailing" constant="5" id="U7E-ud-cgV"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="bvr-Gv-Sgb"/>
                 <constraint firstItem="ooq-vs-Xt1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="cQe-IU-Fcd"/>
                 <constraint firstItem="ooq-vs-Xt1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="12" id="gkR-53-qs5"/>
+                <constraint firstAttribute="trailing" secondItem="Rth-di-Tls" secondAttribute="trailing" id="iT0-rG-86d"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="top" secondItem="ooq-vs-Xt1" secondAttribute="bottom" constant="1" id="mJI-DZ-n2l"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="trailing" secondItem="EJD-f8-Xqd" secondAttribute="trailing" id="mga-Tu-Ikb"/>
+                <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="qz7-sE-9Ml"/>
                 <constraint firstItem="Uqj-Xr-xl5" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="tmm-4H-81S"/>
                 <constraint firstItem="xdB-aI-PSs" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="21" id="yBE-OM-E6U"/>
                 <constraint firstAttribute="bottom" secondItem="EJD-f8-Xqd" secondAttribute="bottom" constant="58" id="zTa-in-4Jj"/>
