@@ -137,7 +137,6 @@ NSInteger const DETAILS_TAG = 300;
 
 - (IBAction)presentNewContactForm:(id)sender {
     [createContactSubview setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    //[createContactSubview setBounds:linkToExistingSubview.bounds];
     [createContactSubview setFrame:linkToExistingSubview.frame];
     [linkToExistingSubview setHidden:YES];
     [self.view addSubview:createContactSubview];
