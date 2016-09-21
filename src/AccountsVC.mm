@@ -38,6 +38,7 @@
 #import "AccRingVC.h"
 #import "AccDevicesVC.h"
 #import "PathPasswordWC.h"
+#import "RingWizardWC.h"
 
 @interface AccountsVC () <PathPasswordDelegate>
 
@@ -63,6 +64,7 @@
 @property AccAdvancedVC* advancedVC;
 @property AccSecurityVC* securityVC;
 @property PathPasswordWC* passwordWC;
+@property RingWizardWC* wizard;
 
 @end
 
@@ -79,6 +81,7 @@
 @synthesize accountDetailsView;
 @synthesize treeController;
 @synthesize passwordWC;
+@synthesize wizard;
 
 NSInteger const TAG_CHECK       =   100;
 NSInteger const TAG_NAME        =   200;
@@ -164,18 +167,52 @@ NSInteger const TAG_TYPE        =   400;
     [self.ringDevicesTabItem setView:self.devicesVC.view];
 }
 
-- (IBAction)addAccount:(id)sender {
+- (void)createSIPAccount
+{
     QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
 
     auto newAccName = [[NSString alloc] initWithFormat:@"%@ account",
-                AccountModel::instance().protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
+                                          AccountModel::instance().protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
     auto acc = AccountModel::instance().add([newAccName UTF8String], qIdx);
     acc->setDisplayName(acc->alias());
     AccountModel::instance().save();
 }
 
-- (IBAction)protocolSelectedChanged:(id)sender {
+- (void)createRingAccount
+{
+    wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
+    [wizard showChooseWithCancelButton: YES];
+    // [wizard.window makeKeyAndOrderFront:self];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:wizard.window completionHandler:nil];
+#else
+    [NSApp beginSheet: wizard.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+    [wizard showWindow:self];
+}
 
+- (IBAction)addAccount:(id)sender
+{
+    QModelIndex qProtocolIdx = AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
+    auto protocol = qvariant_cast<Account::Protocol> (AccountModel::instance().protocolModel()->data( qProtocolIdx, Qt::UserRole));
+    switch (protocol){
+        case Account::Protocol::SIP:{
+            [self createSIPAccount];
+            break;
+        }
+        case Account::Protocol::RING:{
+            [self createRingAccount];
+            break;
+        }
+    }
+}
+
+- (IBAction)protocolSelectedChanged:(id)sender
+{
     int index = [sender indexOfSelectedItem];
     auto qIdx = AccountModel::instance().protocolModel()->index(index, 0);
     AccountModel::instance().protocolModel()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
@@ -187,7 +224,6 @@ NSInteger const TAG_TYPE        =   400;
     for(NSTabViewItem* item in configPanels.tabViewItems) {
         [configPanels removeTabViewItem:item];
     }
-
     [configPanels insertTabViewItem:generalTabItem atIndex:0];
     [configPanels insertTabViewItem:mediaTabItem atIndex:1];
     [configPanels insertTabViewItem:advancedTabItem atIndex:2];
