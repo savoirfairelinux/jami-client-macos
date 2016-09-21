@@ -1,6 +1,6 @@
 /*
  *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Loïc Siret <loic.siret@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,15 +18,16 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "RingWizardChooseVC.h"
-#import "RingWizardNewAccountVC.h"
-#import "RingWizardLinkAccountVC.h"
-@interface RingWizardWC : NSWindowController <NSWindowDelegate, NSPathControlDelegate,
-    NSOpenSavePanelDelegate, RingWizardChooseDelegate, RingWizardNewDelegate,
-    RingWizardLinkDelegate>
 
+@protocol RingWizardNewDelegate <NSObject>
+- (void)didCreateAccountWithSuccess:(BOOL)success;
+@end
 
-- (void)showChooseWithCancelButton:(BOOL)showCancel;
-- (void)showNewAccountVC;
-- (void)showLinkAccountVC;
+@interface RingWizardNewAccountVC : NSViewController
+
+@property (nonatomic, weak)NSWindowController <RingWizardNewDelegate>* delegate;
+
+@property (nonatomic, weak)NSString* alias;
+@property (nonatomic, weak)NSString* password;
+- (void)show;
 @end
