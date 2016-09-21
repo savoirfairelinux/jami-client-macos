@@ -146,6 +146,12 @@ SET(ringclient_CONTROLLERS
    src/ExportPasswordWC.h
    src/MigrateRingAccountsWC.mm
    src/MigrateRingAccountsWC.h
+   src/RingWizardChooseVC.h
+   src/RingWizardChooseVC.mm
+   src/RingWizardLinkAccountVC.h
+   src/RingWizardLinkAccountVC.mm
+   src/RingWizardNewAccountVC.mm
+   src/RingWizardNewAccountVC.h
 )
 
 SET(ringclient_BACKENDS
@@ -207,7 +213,10 @@ SET(ringclient_XIBS
    PersonLinker
    Broker
    Conversation
-   AccDevices)
+   AccDevices
+   RingWizardLinkAccount
+   RingWizardNewAccount
+   RingWizardChoose)
 
 # Icons
 # This part tells CMake where to find and install the file itself
