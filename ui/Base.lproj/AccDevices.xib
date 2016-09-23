@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccDevicesVC">
             <connections>
+                <outlet property="deviceDetailsView" destination="20b-Ji-RbX" id="A3A-w9-0m5"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -45,7 +46,7 @@
                                                 <rect key="frame" x="1" y="1" width="533" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" misplaced="YES" tag="300" translatesAutoresizingMaskIntoConstraints="NO" id="mif-hy-cnh" userLabel="Status label">
+                                                    <textField verticalHuggingPriority="750" tag="300" translatesAutoresizingMaskIntoConstraints="NO" id="mif-hy-cnh" userLabel="Status label">
                                                         <rect key="frame" x="38" y="6" width="460" height="14"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Status" id="mAD-1Z-aYB">
                                                             <font key="font" metaFont="smallSystem"/>
@@ -53,7 +54,7 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <textField verticalHuggingPriority="750" misplaced="YES" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="UbS-VO-lii" userLabel="Name label">
+                                                    <textField verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="UbS-VO-lii" userLabel="Name label">
                                                         <rect key="frame" x="38" y="26" width="208" height="21"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Name" id="w62-Jz-2tu">
                                                             <font key="font" metaFont="system" size="17"/>
@@ -71,12 +72,16 @@
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstItem="UbS-VO-lii" firstAttribute="top" secondItem="V2l-Lf-B1r" secondAttribute="top" constant="3" id="1UM-xz-ZNR"/>
                                                     <constraint firstItem="Lrg-fL-Hwi" firstAttribute="leading" secondItem="mif-hy-cnh" secondAttribute="trailing" constant="8" id="3ht-kr-whj"/>
+                                                    <constraint firstItem="mif-hy-cnh" firstAttribute="leading" secondItem="V2l-Lf-B1r" secondAttribute="leading" constant="40" id="CQT-Fu-bgB"/>
                                                     <constraint firstAttribute="bottom" secondItem="Lrg-fL-Hwi" secondAttribute="bottom" constant="6" id="HSz-AD-GGE"/>
-                                                    <constraint firstAttribute="trailing" secondItem="UbS-VO-lii" secondAttribute="trailing" constant="3" id="YkQ-XF-ydv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UbS-VO-lii" secondAttribute="trailing" constant="289" id="YkQ-XF-ydv"/>
                                                     <constraint firstItem="UbS-VO-lii" firstAttribute="top" secondItem="V2l-Lf-B1r" secondAttribute="top" constant="3" id="hCv-J7-Ivx"/>
+                                                    <constraint firstItem="mif-hy-cnh" firstAttribute="top" secondItem="UbS-VO-lii" secondAttribute="bottom" constant="6" id="lKI-61-ssq"/>
                                                     <constraint firstAttribute="trailing" secondItem="Lrg-fL-Hwi" secondAttribute="trailing" constant="3" id="org-ho-hUG"/>
                                                     <constraint firstItem="mif-hy-cnh" firstAttribute="top" secondItem="UbS-VO-lii" secondAttribute="bottom" constant="6" id="vWW-7c-2Hk"/>
+                                                    <constraint firstItem="UbS-VO-lii" firstAttribute="leading" secondItem="V2l-Lf-B1r" secondAttribute="leading" constant="40" id="yh9-rt-7e7"/>
                                                 </constraints>
                                             </tableCellView>
                                             <customView identifier="HoverRowView" id="lBd-rL-ixN" customClass="HoverTableRowView">
@@ -86,6 +91,9 @@
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <outlet property="delegate" destination="-2" id="Q8m-cE-QXK"/>
+                                </connections>
                             </outlineView>
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
