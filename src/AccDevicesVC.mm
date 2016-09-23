@@ -34,6 +34,7 @@
 @property QNSTreeController* devicesTreeController;
 @property ExportPasswordWC* passwordWC;
 
+@property (unsafe_unretained) IBOutlet NSOutlineView* deviceDetailsView;
 
 @end
 
@@ -44,11 +45,12 @@
 NSInteger const TAG_NAME        =   100;
 NSInteger const TAG_STATUS      =   300;
 NSInteger const TAG_TYPE        =   400;
+NSInteger const TAG_DEVICE_IDS  =   200;
 
 - (void)awakeFromNib
 {
     NSLog(@"INIT Devices VC");
-    
+
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
@@ -56,7 +58,6 @@ NSInteger const TAG_TYPE        =   400;
                              return;
                          [self loadAccount];
                      });
-    
 }
 
 
@@ -66,12 +67,16 @@ NSInteger const TAG_TYPE        =   400;
     self.devicesTreeController = [[QNSTreeController alloc] initWithQModel:(QAbstractItemModel*)account->ringDeviceModel()];
     [self.devicesTreeController setAvoidsEmptySelection:NO];
     [self.devicesTreeController setChildrenKeyPath:@"children"];
+
+    [self.deviceDetailsView bind:@"content" toObject:self.devicesTreeController withKeyPath:@"arrangedObjects" options:nil];
+    [self.deviceDetailsView bind:@"sortDescriptors" toObject:self.devicesTreeController withKeyPath:@"sortDescriptors" options:nil];
+    [self.deviceDetailsView bind:@"selectionIndexPaths" toObject:self.devicesTreeController withKeyPath:@"selectionIndexPaths" options:nil];
 }
 
 - (IBAction)startExportOnRing:(id)sender
 {
     NSButton *btbAdd = (NSButton *) sender;
-    
+
     self.account = AccountModel::instance().selectedAccount();
     [self showPasswordPrompt];
 }
@@ -109,20 +114,23 @@ NSInteger const TAG_TYPE        =   400;
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
     NSTableView* result = [outlineView makeViewWithIdentifier:@"DeviceView" owner:self];
-    
+
     QModelIndex qIdx = [self.devicesTreeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid())
         return result;
-    
+
     NSTextField* nameLabel = [result viewWithTag:TAG_NAME];
     NSTextField* stateLabel = [result viewWithTag:TAG_STATUS];
-    
+
+    NSTextField* deviceIDLabel = [result viewWithTag:TAG_DEVICE_IDS];
+
     auto account = AccountModel::instance().selectedAccount();
-    
-    account->ringDeviceModel()->data(qIdx);
+
+    NSString *string = account->ringDeviceModel()->data(qIdx,Qt::DisplayRole).toString().toNSString();
+
     [nameLabel setStringValue:account->alias().toNSString()];
-    //[stateLabel setStringValue:humanState.toNSString()];
-    
+    [stateLabel setStringValue:string];
+
     return result;
 }
 
