@@ -7,20 +7,24 @@
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardNewAccountVC">
             <connections>
                 <outlet property="cancelButton" destination="NHb-Jx-MH0" id="Oiw-Wj-sDz"/>
+                <outlet property="cbSignupRing" destination="GRJ-td-8rl" id="YJd-8u-CRB"/>
                 <outlet property="createButton" destination="FAG-OH-C4R" id="K53-rB-djD"/>
                 <outlet property="indicationLabel" destination="jeO-GS-TdY" id="bJt-3L-pVw"/>
+                <outlet property="indicatorLookupResult" destination="A3p-VK-xzv" id="vak-Xj-qCj"/>
+                <outlet property="lbLookupResult" destination="rcl-UE-z9C" id="FMc-Bi-S4O"/>
                 <outlet property="nicknameField" destination="LVv-bg-Ols" id="bZw-Jf-AVI"/>
                 <outlet property="passwordField" destination="ie2-fK-FsB" id="0Q7-CU-mcB"/>
                 <outlet property="passwordLabel" destination="hwE-M9-zUH" id="L1G-ic-4aE"/>
                 <outlet property="photoView" destination="vby-AD-tor" id="uoF-rR-eSf"/>
                 <outlet property="progressBar" destination="Rex-BP-OLJ" id="veJ-Zi-oje"/>
+                <outlet property="vLookupResult" destination="fHj-Jy-g54" id="2WA-fj-Gkt"/>
                 <outlet property="view" destination="gKX-gX-nko" id="j3t-FQ-JdK"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <view id="gKX-gX-nko">
-            <rect key="frame" x="0.0" y="0.0" width="413" height="271"/>
+            <rect key="frame" x="0.0" y="0.0" width="413" height="299"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="FAG-OH-C4R">
@@ -40,27 +44,60 @@ DQ
                         <binding destination="-2" name="enabled" keyPath="self.password.length" id="at6-TM-rdD"/>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVv-bg-Ols">
-                    <rect key="frame" x="105" y="109" width="200" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="Fb8-ez-8VT"/>
-                    </constraints>
-                    <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="'Unknown' if empty..." drawsBackground="YES" id="bdC-Uc-Qhs">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="-2" name="value" keyPath="self.alias" id="l47-ed-TC5">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                <bool key="NSValidatesImmediately" value="YES"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </textField>
+                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kga-oC-ekQ">
+                    <rect key="frame" x="107" y="152" width="286" height="22"/>
+                    <subviews>
+                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LVv-bg-Ols">
+                            <rect key="frame" x="0.0" y="0.0" width="200" height="22"/>
+                            <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="'Unknown' if empty..." drawsBackground="YES" id="bdC-Uc-Qhs">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                            <connections>
+                                <binding destination="-2" name="value" keyPath="self.alias" id="l47-ed-TC5">
+                                    <dictionary key="options">
+                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        <bool key="NSValidatesImmediately" value="YES"/>
+                                    </dictionary>
+                                </binding>
+                                <outlet property="delegate" destination="-2" id="LOE-0r-8kT"/>
+                            </connections>
+                        </textField>
+                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fHj-Jy-g54">
+                            <rect key="frame" x="199" y="-37" width="87" height="96"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2q-V0-KM9">
+                                    <rect key="frame" x="7" y="40" width="16" height="16"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="1Bn-ZB-vPi"/>
+                                </imageView>
+                                <progressIndicator hidden="YES" wantsLayer="YES" ambiguous="YES" misplaced="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="A3p-VK-xzv">
+                                    <rect key="frame" x="7" y="40" width="16" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="96" id="g7D-mC-0bc"/>
+                                    </constraints>
+                                </progressIndicator>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rcl-UE-z9C">
+                                    <rect key="frame" x="28" y="42" width="61" height="11"/>
+                                    <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="ZU6-iP-rCj">
+                                        <font key="font" metaFont="miniSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <connections>
+                                <binding destination="-2" name="hidden" keyPath="self.withBlockchain" id="dQB-Bb-CeA">
+                                    <dictionary key="options">
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </customView>
+                    </subviews>
+                </customView>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jeO-GS-TdY">
-                    <rect key="frame" x="33" y="139" width="344" height="17"/>
+                    <rect key="frame" x="35" y="182" width="344" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="340" id="G1m-Eo-HaC"/>
                     </constraints>
@@ -71,7 +108,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwE-M9-zUH">
-                    <rect key="frame" x="33" y="84" width="344" height="17"/>
+                    <rect key="frame" x="35" y="127" width="344" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="340" id="nga-zR-QQ3"/>
                     </constraints>
@@ -82,7 +119,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <button focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="vby-AD-tor">
-                    <rect key="frame" x="170" y="170" width="70" height="70"/>
+                    <rect key="frame" x="172" y="213" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="ELE-xo-8Tx"/>
                         <constraint firstAttribute="height" constant="70" id="SD5-rB-QBD"/>
@@ -96,7 +133,7 @@ DQ
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ie2-fK-FsB" customClass="NSSecureTextField">
-                    <rect key="frame" x="105" y="54" width="200" height="22"/>
+                    <rect key="frame" x="107" y="97" width="200" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="RoG-9m-EB3"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="nTg-zI-DZQ"/>
@@ -114,8 +151,8 @@ DQ
                         </binding>
                     </connections>
                 </textField>
-                <progressIndicator hidden="YES" wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Rex-BP-OLJ">
-                    <rect key="frame" x="157" y="189" width="96" height="32"/>
+                <progressIndicator hidden="YES" wantsLayer="YES" misplaced="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Rex-BP-OLJ">
+                    <rect key="frame" x="158" y="203" width="96" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="96" id="XxY-TP-vvJ"/>
                     </constraints>
@@ -136,29 +173,47 @@ DQ
                         <action selector="cancel:" target="-2" id="oao-V9-D0B"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="GRJ-td-8rl">
+                    <rect key="frame" x="129" y="67" width="154" height="18"/>
+                    <string key="toolTip">Register your username on the Ring. This will reserve the username so that only you can use it. Your friends will be able to call you with your username instead of using your RingID.</string>
+                    <buttonCell key="cell" type="check" title="sign up on blockchain" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="GW4-d5-jtf">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleSignupRing:" target="-2" id="91c-Gh-LmW"/>
+                        <binding destination="-2" name="value" keyPath="self.signUpBlockchainState" id="Vvx-3m-Kr0">
+                            <dictionary key="options">
+                                <bool key="NSValidatesImmediately" value="YES"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ie2-fK-FsB" firstAttribute="top" secondItem="hwE-M9-zUH" secondAttribute="bottom" constant="8" id="0bb-do-p68"/>
-                <constraint firstAttribute="bottom" secondItem="FAG-OH-C4R" secondAttribute="bottom" constant="20" id="9AP-f8-vdO"/>
+                <constraint firstItem="Rex-BP-OLJ" firstAttribute="top" secondItem="gKX-gX-nko" secondAttribute="top" constant="6" id="3PS-aU-0JG"/>
+                <constraint firstItem="GRJ-td-8rl" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" id="5ql-v6-dQg"/>
                 <constraint firstItem="hwE-M9-zUH" firstAttribute="width" secondItem="jeO-GS-TdY" secondAttribute="width" id="ATx-Vh-8TD"/>
+                <constraint firstItem="vby-AD-tor" firstAttribute="top" secondItem="gKX-gX-nko" secondAttribute="top" constant="16" id="Adr-FB-Gia"/>
+                <constraint firstItem="GRJ-td-8rl" firstAttribute="top" secondItem="ie2-fK-FsB" secondAttribute="bottom" constant="14" id="BqJ-ba-2gy"/>
                 <constraint firstItem="NHb-Jx-MH0" firstAttribute="baseline" secondItem="FAG-OH-C4R" secondAttribute="baseline" id="Eer-Or-NY2"/>
-                <constraint firstItem="jeO-GS-TdY" firstAttribute="leading" secondItem="hwE-M9-zUH" secondAttribute="leading" id="MJZ-Ca-C8L"/>
-                <constraint firstItem="Rex-BP-OLJ" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" constant="-1.5" id="Mei-kS-10O"/>
-                <constraint firstItem="LVv-bg-Ols" firstAttribute="top" secondItem="jeO-GS-TdY" secondAttribute="bottom" constant="8" id="OPZ-qE-hzB"/>
-                <constraint firstItem="Rex-BP-OLJ" firstAttribute="top" secondItem="vby-AD-tor" secondAttribute="bottom" constant="-51" id="Omm-Ws-9MB"/>
+                <constraint firstItem="Kga-oC-ekQ" firstAttribute="top" secondItem="jeO-GS-TdY" secondAttribute="bottom" constant="8" symbolic="YES" id="GgW-kV-CU4"/>
+                <constraint firstAttribute="bottom" secondItem="Kga-oC-ekQ" secondAttribute="bottom" constant="152" id="MCR-bt-EaV"/>
+                <constraint firstItem="Rex-BP-OLJ" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" id="Mei-kS-10O"/>
                 <constraint firstItem="jeO-GS-TdY" firstAttribute="top" secondItem="vby-AD-tor" secondAttribute="bottom" constant="14" id="OtF-HF-h4Z"/>
+                <constraint firstItem="hwE-M9-zUH" firstAttribute="leading" secondItem="jeO-GS-TdY" secondAttribute="leading" id="Ywx-fB-IA1"/>
                 <constraint firstAttribute="bottom" secondItem="FAG-OH-C4R" secondAttribute="bottom" constant="20" id="d9B-0y-SuL"/>
-                <constraint firstItem="vby-AD-tor" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" constant="-1.5" id="dsP-lR-LDH"/>
+                <constraint firstItem="vby-AD-tor" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" id="dsP-lR-LDH"/>
                 <constraint firstItem="FAG-OH-C4R" firstAttribute="leading" secondItem="NHb-Jx-MH0" secondAttribute="trailing" constant="10" id="gGA-Nk-tbe"/>
-                <constraint firstItem="hwE-M9-zUH" firstAttribute="top" secondItem="LVv-bg-Ols" secondAttribute="bottom" constant="8" id="ioi-p9-2Rl"/>
                 <constraint firstAttribute="trailing" secondItem="FAG-OH-C4R" secondAttribute="trailing" constant="20" id="k6C-fx-ggJ"/>
-                <constraint firstItem="ie2-fK-FsB" firstAttribute="leading" secondItem="LVv-bg-Ols" secondAttribute="leading" id="nwb-Sw-S0z"/>
-                <constraint firstItem="LVv-bg-Ols" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" constant="-1.5" id="o0M-KE-kXR"/>
-                <constraint firstItem="ie2-fK-FsB" firstAttribute="trailing" secondItem="LVv-bg-Ols" secondAttribute="trailing" id="rbn-k3-y8J"/>
-                <constraint firstItem="Rex-BP-OLJ" firstAttribute="centerY" secondItem="gKX-gX-nko" secondAttribute="centerY" constant="-69.5" id="uRl-fe-Zvj"/>
-                <constraint firstItem="jeO-GS-TdY" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" constant="-1.5" id="yFD-WZ-i8T"/>
+                <constraint firstAttribute="trailing" secondItem="Kga-oC-ekQ" secondAttribute="trailing" constant="42" id="kng-tV-od0"/>
+                <constraint firstItem="ie2-fK-FsB" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" id="tvU-4t-91l"/>
+                <constraint firstItem="ie2-fK-FsB" firstAttribute="leading" secondItem="Kga-oC-ekQ" secondAttribute="leading" id="wPj-qA-d8V"/>
+                <constraint firstItem="jeO-GS-TdY" firstAttribute="centerX" secondItem="gKX-gX-nko" secondAttribute="centerX" id="yFD-WZ-i8T"/>
+                <constraint firstItem="hwE-M9-zUH" firstAttribute="top" secondItem="Kga-oC-ekQ" secondAttribute="bottom" constant="8" symbolic="YES" id="z4A-vu-muR"/>
             </constraints>
-            <point key="canvasLocation" x="473.5" y="228.5"/>
+            <point key="canvasLocation" x="473.5" y="242.5"/>
         </view>
         <userDefaultsController representsSharedInstance="YES" id="JOT-gS-qe2"/>
     </objects>
