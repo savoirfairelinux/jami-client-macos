@@ -29,5 +29,8 @@
 
 @property (nonatomic, weak)NSString* alias;
 @property (nonatomic, weak)NSString* password;
+@property (readonly)BOOL userNameAvailableORNotBlockchain;
+@property (readonly)BOOL withBlockchain;
+@property (assign)NSInteger signUpBlockchainState;
 - (void)show;
 @end
