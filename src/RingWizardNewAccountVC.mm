@@ -64,9 +64,23 @@
     __unsafe_unretained IBOutlet NSButton* cancelButton;
 
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
+    
+    __unsafe_unretained IBOutlet NSButton* cbSignupRing;
+    __unsafe_unretained IBOutlet NSImageView* ivLookupResult;
+    __unsafe_unretained IBOutlet NSTextField* lbLookupResult;
+    __unsafe_unretained IBOutlet NSProgressIndicator* indicatorLookupResult;
+    __unsafe_unretained IBOutlet NSView* vLookupResult;
+
+    __unsafe_unretained IBOutlet NSPopover* helpContainer;
+
     Account* accountToCreate;
     NSTimer* errorTimer;
     QMetaObject::Connection stateChanged;
+    QMetaObject::Connection registrationEnded;
+    QMetaObject::Connection registeredNameFound;
+    
+    BOOL lookupQueued;
+    NSString* usernameWaitingForLookupResult;
 }
 
 NSInteger const NICKNAME_TAG                    = 1;
@@ -83,6 +97,11 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
         *error = [NSError errorWithDomain:@"Input" code:code userInfo:errorDetail];
     }
     return NO;
+}
+
+- (IBAction)showHelp:(id)sender
+{
+    [helpContainer showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
 - (void)show
@@ -142,7 +161,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 #pragma mark - Input validation
 - (BOOL)isPasswordValid
 {
-    return self.password.length < 6;
+    return self.password.length >= 6;
 }
 
 - (BOOL)isRepeatPasswordValid
@@ -264,8 +283,42 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                                                  case Account::RegistrationState::UNREGISTERED:{
                                                                      accountToCreate<< Account::EditAction::RELOAD;
                                                                      QObject::disconnect(stateChanged);
-                                                                     [self.delegate didCreateAccountWithSuccess:YES];
-                                                                     break;
+
+                                                                     //try to register username
+                                                                     if (self.signUpBlockchainState == NSOnState){
+                                                                         registrationEnded = QObject::connect(
+                                                                                            account,
+                                                                                            &Account::nameRegistrationEnded,
+                                                                                            [=] (NameDirectory::RegisterNameStatus status,  const QString& name)
+                                                                                            {
+                                                                                                QObject::disconnect(registrationEnded);
+                                                                                                switch(status)
+                                                                                                {
+                                                                                                    case NameDirectory::RegisterNameStatus::WRONG_PASSWORD:
+                                                                                                    case NameDirectory::RegisterNameStatus::ALREADY_TAKEN:
+                                                                                                    case NameDirectory::RegisterNameStatus::NETWORK_ERROR:
+                                                                                                    {
+                                                                                                        [self couldNotRegisterUsername];
+                                                                                                    }
+                                                                                                    case NameDirectory::RegisterNameStatus::SUCCESS:
+                                                                                                    {
+                                                                                                        break;
+                                                                                                    }
+                                                                                                }
+
+                                                                                                [self.delegate didCreateAccountWithSuccess:YES];
+                                                                                            }
+                                                                                        );
+                                                                         self.isUserNameAvailable = account->registerName(QString::fromNSString(self.password), QString::fromNSString(self.alias));
+                                                                         if (!self.isUserNameAvailable){
+                                                                             NSLog(@"Could not initialize registerName operation");
+                                                                             QObject::disconnect(registrationEnded);
+                                                                             [self.delegate didCreateAccountWithSuccess:YES];
+                                                                         }
+                                                                     } else {
+                                                                         [self.delegate didCreateAccountWithSuccess:YES];
+                                                                     }
+                                                                    break;
                                                                  }
                                                                  case Account::RegistrationState::ERROR:
                                                                      QObject::disconnect(stateChanged);
@@ -290,14 +343,128 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [self.delegate didCreateAccountWithSuccess:NO];
 }
 
-#pragma mark - NSOpenSavePanelDelegate delegate methods
+#pragma mark - UserNameRegistration delegate methods
+- (IBAction)toggleSignupRing:(id)sender
+{
+    if (self.withBlockchain){
+        [self lookupUserName];
+    }
+}
 
+- (void)couldNotRegisterUsername
+{
+    // Do nothing
+}
+
+- (BOOL)withBlockchain
+{
+    return self.signUpBlockchainState == NSOnState;
+}
+
+
+- (BOOL)userNameAvailableORNotBlockchain
+{
+    return !self.withBlockchain || (self.alias.length > 0 && self.isUserNameAvailable);
+}
+
+- (void)showLookUpAvailable:(BOOL)available andText:(NSString *)message
+{
+    [ivLookupResult setImage:[NSImage imageNamed:(available?@"ic_action_accept":@"ic_action_cancel")]] ;
+    [ivLookupResult setHidden:NO];
+    [ivLookupResult setToolTip:message];
+    [lbLookupResult setStringValue:message];
+}
+
+
+- (void)onUsernameAvailabilityChangedWithNewAvailability:(BOOL)newAvailability
+{
+    self.isUserNameAvailable = newAvailability;
+}
+
+- (void)hideLookupSpinner
+{
+    [indicatorLookupResult setHidden:YES];
+}
+- (void)showLookupSpinner
+{
+    [ivLookupResult setHidden:YES];
+    [indicatorLookupResult setHidden:NO];
+    [indicatorLookupResult startAnimation:nil];
+}
+
+- (BOOL)lookupUserName
+{
+    [self showLookupSpinner];
+    QObject::disconnect(registeredNameFound);
+    registeredNameFound = QObject::connect(
+                                           &NameDirectory::instance(),
+                                           &NameDirectory::registeredNameFound,
+                                           [=] ( const QString& accountId, NameDirectory::LookupStatus status,  const QString& address, const QString& name) {
+                                               NSLog(@"Name lookup ended");
+                                               lookupQueued = NO;
+                                               //If this is the username we are waiting for, we can disconnect.
+                                               if (name.compare(QString::fromNSString(usernameWaitingForLookupResult)) == 0)
+                                               {
+                                                 QObject::disconnect(registeredNameFound);
+                                               }
+                                               else
+                                               {
+                                                   //Keep waiting...
+                                                   return;
+                                               }
+
+                                               //We may now stop the spinner
+                                               [self hideLookupSpinner];
+
+                                               BOOL isAvailable = NO;
+                                               NSString* message;
+                                               switch(status)
+                                               {
+                                                   case NameDirectory::LookupStatus::SUCCESS:
+                                                   {
+                                                       message = NSLocalizedString(@"The entered username is not available", @"Text shown to user when his username is already registered");
+                                                       isAvailable = NO;
+                                                       break;
+                                                   }
+                                                   case NameDirectory::LookupStatus::NOT_FOUND:
+                                                   {
+                                                       message = NSLocalizedString(@"The entered username is available", @"Text shown to user when his username is available to be registered");
+                                                       isAvailable = YES;
+                                                       break;
+                                                   }
+                                                   case NameDirectory::LookupStatus::INVALID_NAME:
+                                                   {
+                                                       message = NSLocalizedString(@"The entered username is invalid. It must have at leat 3 characters and contains only Alphanumeric.", @"Text shown to user when his username is invalid to be registered");
+                                                       isAvailable = NO;
+                                                       break;
+                                                   }
+                                                   case NameDirectory::LookupStatus::ERROR:
+                                                   default:
+                                                   {
+                                                       message = NSLocalizedString(@"Failed to perform lookup", @"Text shown to user when an error occur at registration");
+                                                       isAvailable = NO;
+                                                       break;
+                                                   }
+                                               }
+                                               [self showLookUpAvailable:isAvailable andText: message];
+                                               [self onUsernameAvailabilityChangedWithNewAvailability:isAvailable];
+
+                                           }
+                                           );
+    
+    //Start the lookup in a second so that the UI dosen't seem to freeze
+    BOOL result = NameDirectory::instance().lookupName(QString(), QString(), QString::fromNSString(usernameWaitingForLookupResult));
+
+}
+
+
+#pragma mark - NSOpenSavePanelDelegate delegate methods
 - (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError
 {
     return YES;
 }
 
--(void)controlTextDidChange:(NSNotification *)notif
+- (void)controlTextDidChange:(NSNotification *)notif
 {
     NSTextField* textField = [notif object];
     // else it is NICKNAME_TAG field
@@ -305,7 +472,26 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     if ([alias isEqualToString:@""]) {
         alias = NSLocalizedString(@"Unknown", @"Name used when user leave field empty");
     }
-    self.alias = alias;
+    [self setAlias: alias];
+    if (self.withBlockchain && !lookupQueued){
+        usernameWaitingForLookupResult = alias;
+        lookupQueued = YES;
+        [self lookupUserName];
+    }
+}
+
+
++ (NSSet *)keyPathsForValuesAffectingUserNameAvailableORNotBlockchain
+{
+    return [NSSet setWithObjects:   NSStringFromSelector(@selector(signUpBlockchainState)),
+                                    NSStringFromSelector(@selector(isUserNameAvailable)),
+                                    nil];
+}
+
++ (NSSet *)keyPathsForValuesAffectingWithBlockchain
+{
+    return [NSSet setWithObjects:   NSStringFromSelector(@selector(signUpBlockchainState)),
+                                    nil];
 }
 
 + (NSSet *)keyPathsForValuesAffectingIsPasswordValid
@@ -317,5 +503,4 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 {
     return [NSSet setWithObjects:@"password", @"repeatPassword", nil];
 }
-
 @end
