@@ -28,11 +28,15 @@
 
 @property (nonatomic, weak)NSWindowController <RingWizardNewDelegate>* delegate;
 
-@property (nonatomic, weak)NSString* alias;
+@property (nonatomic, weak)NSString* registeredName;
 @property (nonatomic, weak)NSString* password;
 @property (nonatomic, weak)NSString* repeatPassword;
 @property (readonly)BOOL isRepeatPasswordValid;
 @property (readonly)BOOL isPasswordValid;
+@property (assign)BOOL isUserNameAvailable;
 
+@property (readonly)BOOL userNameAvailableORNotBlockchain;
+@property (readonly)BOOL withBlockchain;
+@property (assign)NSInteger signUpBlockchainState;
 - (void)show;
 @end
