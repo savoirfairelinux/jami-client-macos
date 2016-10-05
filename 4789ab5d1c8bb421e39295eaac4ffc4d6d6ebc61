@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_37402056",
+        "filename": "ui/Base.lproj/MigrateRingAccountsWindow.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-05T17:53:48Z",
+      "side": 1,
+      "message": "with",
+      "revId": "4789ab5d1c8bb421e39295eaac4ffc4d6d6ebc61",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_d72434c8",
+        "filename": "ui/Base.lproj/MigrateRingAccountsWindow.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-05T17:53:48Z",
+      "side": 1,
+      "message": "you are",
+      "range": {
+        "startLine": 8,
+        "startChar": 329,
+        "endLine": 8,
+        "endChar": 333
+      },
+      "revId": "4789ab5d1c8bb421e39295eaac4ffc4d6d6ebc61",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_f72138b5",
+        "filename": "ui/Base.lproj/MigrateRingAccountsWindow.strings",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-05T17:53:48Z",
+      "side": 1,
+      "message": "been",
+      "range": {
+        "startLine": 14,
+        "startChar": 73,
+        "endLine": 14,
+        "endChar": 78
+      },
+      "revId": "4789ab5d1c8bb421e39295eaac4ffc4d6d6ebc61",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
