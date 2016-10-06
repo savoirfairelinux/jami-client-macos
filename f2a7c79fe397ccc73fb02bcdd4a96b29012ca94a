@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_1a442173",
+        "filename": "src/MigrateRingAccountsWC.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-06T15:41:17Z",
+      "side": 1,
+      "message": "you still have the incorrect string here.",
+      "range": {
+        "startLine": 87,
+        "startChar": 102,
+        "endLine": 87,
+        "endChar": 128
+      },
+      "revId": "f2a7c79fe397ccc73fb02bcdd4a96b29012ca94a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
