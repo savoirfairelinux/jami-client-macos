@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_eb4aad26",
+        "filename": "src/AbstractLoadingWC.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-07T20:32:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_40edd88a",
+      "revId": "5b1595c23dca2e53e10a37e3796f773b1467c45a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_20e8d47b",
         "filename": "src/AccDevicesVC.h",
         "patchSetId": 14
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_cbba490a",
+        "filename": "src/AccDevicesVC.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-07T20:32:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_20e8d47b",
+      "revId": "5b1595c23dca2e53e10a37e3796f773b1467c45a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_60eedc8d",
         "filename": "src/AccDevicesVC.mm",
         "patchSetId": 14
@@ -47,6 +83,30 @@
       "writtenOn": "2016-10-07T20:30:55Z",
       "side": 1,
       "message": "should be TAG_DEVICEID, there is no status in this screen",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 62
+      },
+      "revId": "5b1595c23dca2e53e10a37e3796f773b1467c45a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_6b379db1",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-07T20:32:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_60eedc8d",
       "range": {
         "startLine": 123,
         "startChar": 0,
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_8b3c4195",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-07T20:32:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_c0e1c89b",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 69
+      },
+      "revId": "5b1595c23dca2e53e10a37e3796f773b1467c45a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_e0764cd8",
         "filename": "src/ExportPasswordWC.h",
         "patchSetId": 14
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_2b41950b",
+        "filename": "src/ExportPasswordWC.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-07T20:32:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_e0764cd8",
+      "revId": "5b1595c23dca2e53e10a37e3796f773b1467c45a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_801d0076",
         "filename": "src/ExportPasswordWC.mm",
         "patchSetId": 14
@@ -110,6 +212,30 @@
       "writtenOn": "2016-10-07T20:30:55Z",
       "side": 1,
       "message": "hereIsThePin no?",
+      "range": {
+        "startLine": 135,
+        "startChar": 11,
+        "endLine": 135,
+        "endChar": 24
+      },
+      "revId": "5b1595c23dca2e53e10a37e3796f773b1467c45a",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_4b465925",
+        "filename": "src/ExportPasswordWC.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-07T20:32:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_801d0076",
       "range": {
         "startLine": 135,
         "startChar": 11,
