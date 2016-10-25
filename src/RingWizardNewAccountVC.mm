@@ -131,6 +131,10 @@ NSInteger const NICKNAME_TAG        = 1;
         auto smallImg = [NSImage imageResize:[photoView image] newSize:{100,100}];
         if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
             profile->person()->setPhoto(QVariant(p));
+        } else {
+            auto defaultAvatar = [NSImage imageResize:[NSImage imageNamed:@"default_user_icon"] newSize:{100,100}];
+            p.loadFromData(QByteArray::fromNSData([defaultAvatar TIFFRepresentation]));
+            profile->person()->setPhoto(QVariant(p));
         }
         profile->save();
     }

@@ -38,6 +38,7 @@
 #import <person.h>
 
 #import "Constants.h"
+#import "views/NSImage+Extensions.h"
 
 @interface RingWizardLinkAccountVC ()
 
@@ -87,6 +88,10 @@
     [self showLoading];
     if (auto profile = ProfileModel::instance().selectedProfile()) {
         profile->person()->setFormattedName([NSFullUserName() UTF8String]);
+        auto defaultAvatar = [NSImage imageResize:[NSImage imageNamed:@"default_user_icon"] newSize:{100,100}];
+        QPixmap pixMap;
+        pixMap.loadFromData(QByteArray::fromNSData([defaultAvatar TIFFRepresentation]));
+        profile->person()->setPhoto(QVariant(pixMap));
         profile->save();
     }
     accountToCreate = AccountModel::instance().add(QString::fromNSString(NSFullUserName()), Account::Protocol::RING);
