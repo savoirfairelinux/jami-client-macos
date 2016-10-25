@@ -167,57 +167,6 @@ NSInteger const TAG_TYPE        =   400;
     [self.ringDevicesTabItem setView:self.devicesVC.view];
 }
 
-- (void)createSIPAccount
-{
-    QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
-
-    auto newAccName = [[NSString alloc] initWithFormat:@"%@ account",
-                                          AccountModel::instance().protocolModel()->data(qIdx, Qt::DisplayRole).toString().toNSString(), nil];
-    auto acc = AccountModel::instance().add([newAccName UTF8String], qIdx);
-    acc->setDisplayName(acc->alias());
-    AccountModel::instance().save();
-}
-
-- (void)createRingAccount
-{
-    wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
-    [wizard showChooseWithCancelButton: YES];
-    // [wizard.window makeKeyAndOrderFront:self];
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
-    [self.view.window beginSheet:wizard.window completionHandler:nil];
-#else
-    [NSApp beginSheet: wizard.window
-       modalForWindow: self.view.window
-        modalDelegate: self
-       didEndSelector: nil
-          contextInfo: nil];
-#endif
-    [wizard showWindow:self];
-}
-
-- (IBAction)addAccount:(id)sender
-{
-    QModelIndex qProtocolIdx = AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
-    auto protocol = qvariant_cast<Account::Protocol> (AccountModel::instance().protocolModel()->data( qProtocolIdx, Qt::UserRole));
-    switch (protocol){
-        case Account::Protocol::SIP:{
-            [self createSIPAccount];
-            break;
-        }
-        case Account::Protocol::RING:{
-            [self createRingAccount];
-            break;
-        }
-    }
-}
-
-- (IBAction)protocolSelectedChanged:(id)sender
-{
-    int index = [sender indexOfSelectedItem];
-    auto qIdx = AccountModel::instance().protocolModel()->index(index, 0);
-    AccountModel::instance().protocolModel()->selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
-}
-
 - (void) setupSIPPanels
 {
     // Start by removing all tabs
@@ -241,46 +190,6 @@ NSInteger const TAG_TYPE        =   400;
     [configPanels insertTabViewItem:ringDevicesTabItem atIndex:1];
     [configPanels insertTabViewItem:mediaTabItem atIndex:2];
     [configPanels insertTabViewItem:advancedTabItem atIndex:3];
-}
-
-- (IBAction)exportAccount:(id)sender
-{
-    passwordWC = [[PathPasswordWC alloc] initWithDelegate:self actionCode:Action::ACTION_EXPORT];
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
-    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
-#else
-    [NSApp beginSheet: passwordWC.window
-       modalForWindow: self.view.window
-        modalDelegate: self
-       didEndSelector: nil
-          contextInfo: nil];
-#endif
-    [passwordWC setAllowFileSelection:NO];
-    if(treeController.selectedNodes.count > 0) {
-        QStringList accounts;
-        for (id item : [treeController selectedNodes]) {
-            QModelIndex accIdx = [treeController toQIdx:item];
-            accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
-        }
-        [passwordWC setAccounts:accounts];
-    }
-    [passwordWC showWindow:self];
-}
-
-- (IBAction)importAccount:(id)sender
-{
-    passwordWC = [[PathPasswordWC alloc] initWithDelegate:self actionCode:Action::ACTION_IMPORT];
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
-    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
-#else
-    [NSApp beginSheet: passwordWC.window
-       modalForWindow: self.view.window
-        modalDelegate: self
-       didEndSelector: nil
-          contextInfo: nil];
-#endif
-    [passwordWC setAllowFileSelection:YES];
-    [passwordWC showWindow:self];
 }
 
 - (IBAction)toggleAccount:(NSButton*)sender {
@@ -382,22 +291,128 @@ NSInteger const TAG_TYPE        =   400;
     }
 }
 
+#pragma mark - Delete account
 
-#pragma mark - NSMenuDelegate methods
-
-- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
-{
-    auto qIdx = AccountModel::instance().protocolModel()->index(index, 0);
-    [item setTitle:qIdx.data(Qt::DisplayRole).toString().toNSString()];
-    if (qIdx == AccountModel::instance().protocolModel()->selectionModel()->currentIndex()) {
-        [protocolList selectItem:item];
-    }
-    return YES;
+- (IBAction)removeAccount:(id)sender {
+    AccountModel::instance().remove(AccountModel::instance().selectedAccount());
+    AccountModel::instance().save();
 }
 
-- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
+#pragma mark - Advanced menu methods
+
+- (IBAction)advancedActionsClicked:(NSButton *)sender
 {
-    return AccountModel::instance().protocolModel()->rowCount();
+    NSMenu* menu = [[NSMenu alloc] init];
+    [menu insertItemWithTitle:NSLocalizedString(@"Backup account", @"Contextual menu entry")
+                       action:@selector(backupAccount:)
+                keyEquivalent:@""
+                      atIndex:0];
+    [menu insertItemWithTitle:NSLocalizedString(@"Restore account", @"Contextual menu entry")
+                       action:@selector(restoreAccount:)
+                keyEquivalent:@""
+                      atIndex:0];
+
+    [NSMenu popUpContextMenu:menu withEvent:[self forgedEventForButton:sender] forView:(NSButton *)sender];
+}
+
+- (void) backupAccount:(NSMenuItem*) sender
+{
+    passwordWC = [[PathPasswordWC alloc] initWithDelegate:self actionCode:Action::ACTION_EXPORT];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: passwordWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+    [passwordWC setAllowFileSelection:NO];
+    if(treeController.selectedNodes.count > 0) {
+        QStringList accounts;
+        for (id item : [treeController selectedNodes]) {
+            QModelIndex accIdx = [treeController toQIdx:item];
+            accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
+        }
+        [passwordWC setAccounts:accounts];
+    }
+    [passwordWC showWindow:self];
+}
+
+- (void) restoreAccount:(NSMenuItem*) sender
+{
+    passwordWC = [[PathPasswordWC alloc] initWithDelegate:self actionCode:Action::ACTION_IMPORT];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: passwordWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+    [passwordWC setAllowFileSelection:YES];
+    [passwordWC showWindow:self];
+}
+
+- (NSEvent*) forgedEventForButton:(NSButton*) button
+{
+    NSRect frame = [button frame];
+    NSPoint menuOrigin = [[button superview]
+                          convertPoint:NSMakePoint(frame.origin.x, frame.origin.y)
+                          toView:nil];
+    return [NSEvent mouseEventWithType:NSLeftMouseDown
+                              location:menuOrigin
+                         modifierFlags:NSLeftMouseDownMask // 0x100
+                             timestamp:0
+                          windowNumber:[[button window] windowNumber]
+                               context:[[button window] graphicsContext]
+                           eventNumber:0
+                            clickCount:1
+                              pressure:1];
+}
+
+
+#pragma mark - Account creation methods
+
+- (IBAction)addAccountClicked:(NSButton *)sender
+{
+    NSMenu* menu = [[NSMenu alloc] init];
+    [menu insertItemWithTitle:NSLocalizedString(@"Create RING Account", @"Contextual menu entry")
+                       action:@selector(createRingAccount:)
+                keyEquivalent:@""
+                      atIndex:0];
+    [menu insertItemWithTitle:NSLocalizedString(@"Create SIP Account", @"Contextual menu entry")
+                       action:@selector(createSIPAccount:)
+                keyEquivalent:@""
+                      atIndex:0];
+
+    [NSMenu popUpContextMenu:menu withEvent:[self forgedEventForButton:sender] forView:(NSButton *)sender];
+}
+
+- (void)createSIPAccount:(NSMenuItem*) sender
+{
+    auto acc = AccountModel::instance().add([NSLocalizedString(@"New SIP account", @"User label") UTF8String]);
+    acc->setDisplayName(acc->alias());
+    acc->setProtocol(Account::Protocol::SIP);
+    AccountModel::instance().save();
+}
+
+- (void)createRingAccount:(NSMenuItem*) sender
+{
+    wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
+    [wizard showChooseWithCancelButton: YES];
+    // [wizard.window makeKeyAndOrderFront:self];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:wizard.window completionHandler:nil];
+#else
+    [NSApp beginSheet: wizard.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+    [wizard showWindow:self];
 }
 
 #pragma mark - PathPasswordDelegate methods

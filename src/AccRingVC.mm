@@ -24,7 +24,6 @@
 @interface AccRingVC ()
 
 @property (assign) IBOutlet NSTextField *aliasTextField;
-@property (assign) IBOutlet NSTextField *typeLabel;
 @property (assign) IBOutlet NSTextField *bootstrapField;
 @property (assign) IBOutlet NSTextField *hashField;
 
@@ -39,7 +38,6 @@
 @end
 
 @implementation AccRingVC
-@synthesize typeLabel;
 @synthesize bootstrapField;
 @synthesize hashField;
 @synthesize aliasTextField;
@@ -71,18 +69,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
                      });
 }
 
-- (IBAction)removeAccount:(id)sender {
-    AccountModel::instance().remove(AccountModel::instance().selectedAccount());
-    AccountModel::instance().save();
-}
-
 - (void)loadAccount
 {
     auto account = AccountModel::instance().selectedAccount();
 
     [self.aliasTextField setStringValue:account->alias().toNSString()];
-
-    [typeLabel setStringValue:@"RING"];
 
     [allowUnknown setState:account->allowIncomingFromUnknown()];
     [allowHistory setState:account->allowIncomingFromHistory()];
