@@ -86,11 +86,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
     AccountModel::instance().selectedAccount()->setHasCustomUserAgent([sender state] == NSOnState);
 }
 
-- (IBAction)removeAccount:(id)sender {
-    AccountModel::instance().remove(AccountModel::instance().selectedAccount());
-    AccountModel::instance().save();
-}
-
 - (void)loadAccount
 {
     auto account = AccountModel::instance().selectedAccount();

@@ -19,28 +19,22 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 #import <QtCore/qdir.h>
 
 #import "LoadingWCDelegate.h"
 #import "AbstractLoadingWC.h"
 
-typedef NS_ENUM(NSUInteger, Action) {
-    ACTION_EXPORT = 0,
-    ACTION_IMPORT = 1,
-};
-
-@protocol PathPasswordDelegate <LoadingWCDelegate>
+@protocol BackupAccountDelegate <LoadingWCDelegate>
 
 @optional
 
 -(void) didCompleteExportWithPath:(NSURL*) path;
--(void) didCompleteImport;
 
 @end
 
-@interface PathPasswordWC : AbstractLoadingWC
+@interface BackupAccountWC : AbstractLoadingWC
 
+- (id)initWithDelegate:(id <LoadingWCDelegate>) del;
 
 /**
  * Allow the NSPathControl of this window to select files or not
@@ -58,5 +52,21 @@ typedef NS_ENUM(NSUInteger, Action) {
  * Object uses to store account to exports
  */
 @property (assign) QStringList accounts;
+
+/**
+ * passwordConfirmation string contained in passwordConfirmationField.
+ */
+@property (retain) NSString* passwordConfirmation;
+
+/**
+ * computed properties calculated by password string contained in
+ * passwordField and passwordCOnfirmation string contained
+ * inpasswordConfirmationField
+ * This is a KVO method to bind the text with the OK Button
+ * if password.length is > 0 AND passwordConfirmation.length > 0
+ * AND password isEqualsToString passwordCOnfirmationbutton is enabled,
+ * otherwise disabled
+ */
+@property (readonly) BOOL validatePasswords;
 
 @end
