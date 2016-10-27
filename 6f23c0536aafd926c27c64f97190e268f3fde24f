@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_852bc42f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-27T18:10:43Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_c531cca3",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-27T18:10:43Z",
+      "side": 1,
+      "message": "trailing spaces",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 4
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_a52cc84b",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-27T18:10:43Z",
+      "side": 1,
+      "message": "no new line for {",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 5
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_451ddc0e",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-27T18:10:43Z",
+      "side": 1,
+      "message": "This is weird considering the name of the method.  Either rename the method to isPasswordInvalid, or change the test. Or maybe we only accept small passwords ? :)",
+      "range": {
+        "startLine": 145,
+        "startChar": 11,
+        "endLine": 145,
+        "endChar": 35
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_050034a9",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-27T18:10:43Z",
+      "side": 1,
+      "message": "match",
+      "range": {
+        "startLine": 158,
+        "startChar": 75,
+        "endLine": 158,
+        "endChar": 77
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_e5197023",
+        "filename": "ui/Base.lproj/AccAdvanced.xib",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-27T18:10:43Z",
+      "side": 1,
+      "message": "This file has not been touched, only opened in a different xcode. Remove it from your patch",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 85
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_0517d4ee",
+        "filename": "ui/Base.lproj/RingWindow.xib",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-10-27T18:10:43Z",
+      "side": 1,
+      "message": "Does this change is necessary?",
+      "range": {
+        "startLine": 27,
+        "startChar": 57,
+        "endLine": 27,
+        "endChar": 76
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
