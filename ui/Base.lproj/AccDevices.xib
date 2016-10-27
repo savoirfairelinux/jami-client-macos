@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
@@ -12,19 +12,18 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="576" height="389"/>
+        <customView misplaced="YES" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="576" height="409"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cn2-3f-RfE">
-                    <rect key="frame" x="20" y="20" width="536" height="219"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <clipView key="contentView" ambiguous="YES" id="5RD-uP-uce">
+                <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cn2-3f-RfE">
+                    <rect key="frame" x="20" y="134" width="536" height="219"/>
+                    <clipView key="contentView" id="5RD-uP-uce">
                         <rect key="frame" x="0.0" y="0.0" width="536" height="219"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="55" rowSizeStyle="automatic" viewBased="YES" outlineTableColumn="Sv0-5z-dC2" id="20b-Ji-RbX" customClass="RingOutlineView">
-                                <rect key="frame" x="0.0" y="0.0" width="536" height="219"/>
+                                <rect key="frame" x="1" y="0.0" width="536" height="219"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -55,9 +54,9 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <textField verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="UbS-VO-lii" userLabel="Name label">
+                                                    <textField verticalHuggingPriority="750" tag="100" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UbS-VO-lii" userLabel="Name label">
                                                         <rect key="frame" x="38" y="26" width="208" height="21"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="Name" id="w62-Jz-2tu">
+                                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" placeholderString="Name" id="w62-Jz-2tu">
                                                             <font key="font" metaFont="system" size="17"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -88,27 +87,40 @@
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="xKj-nZ-7Mx">
-                        <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
+                        <rect key="frame" x="-8" y="-15" width="0.0" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="eiD-YY-HVN">
-                        <rect key="frame" x="-16" y="0.0" width="16" height="0.0"/>
+                        <rect key="frame" x="-15" y="-8" width="15" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K8a-3i-BoE">
-                    <rect key="frame" x="18" y="310" width="540" height="54"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Use the same Ring account on multiple devices." id="kMd-iv-UAy">
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K8a-3i-BoE">
+                    <rect key="frame" x="18" y="361" width="540" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="naw-cT-zM2"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Use the same Ring account on multiple devices. Below is the list of devices linked to this Ring account" id="kMd-iv-UAy">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbO-OT-jpc">
-                    <rect key="frame" x="220" y="274" width="136" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Add new device" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uDY-qB-G0I">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qbe-Z5-0NO">
+                    <rect key="frame" x="18" y="52" width="540" height="79"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="79" id="t9o-hB-b8b"/>
+                    </constraints>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="Kzk-fW-9c3">
+                        <font key="font" metaFont="system"/>
+                        <string key="title">To use this account on other devices, you must first expose it on Ring.  This will generate a PIN code that you must enter on the new device to setup the account.  The PIN is valid for 10 minutes.</string>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hbO-OT-jpc">
+                    <rect key="frame" x="155" y="16" width="266" height="32"/>
+                    <buttonCell key="cell" type="push" title="Link another device to this account" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uDY-qB-G0I">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -117,7 +129,21 @@
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="377" y="270.5"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="K8a-3i-BoE" secondAttribute="trailing" constant="20" symbolic="YES" id="04L-Oh-TeA"/>
+                <constraint firstItem="K8a-3i-BoE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="14" id="0o1-PJ-Ud6"/>
+                <constraint firstItem="Cn2-3f-RfE" firstAttribute="leading" secondItem="qbe-Z5-0NO" secondAttribute="leading" id="ICB-cT-5Xz"/>
+                <constraint firstItem="K8a-3i-BoE" firstAttribute="leading" secondItem="Cn2-3f-RfE" secondAttribute="leading" id="Jiu-i8-QaL"/>
+                <constraint firstItem="K8a-3i-BoE" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="KBt-HF-lOD"/>
+                <constraint firstItem="qbe-Z5-0NO" firstAttribute="centerX" secondItem="hbO-OT-jpc" secondAttribute="centerX" id="PdW-6C-uTd"/>
+                <constraint firstItem="K8a-3i-BoE" firstAttribute="trailing" secondItem="Cn2-3f-RfE" secondAttribute="trailing" id="ZKY-Mr-igx"/>
+                <constraint firstItem="Cn2-3f-RfE" firstAttribute="trailing" secondItem="qbe-Z5-0NO" secondAttribute="trailing" id="dFR-Lf-JS7"/>
+                <constraint firstItem="qbe-Z5-0NO" firstAttribute="top" secondItem="Cn2-3f-RfE" secondAttribute="bottom" constant="3" id="iee-xp-cxF"/>
+                <constraint firstItem="Cn2-3f-RfE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="56" id="lSL-4E-Z6R"/>
+                <constraint firstItem="hbO-OT-jpc" firstAttribute="top" secondItem="qbe-Z5-0NO" secondAttribute="bottom" constant="8" symbolic="YES" id="lZ8-Oh-xzM"/>
+                <constraint firstAttribute="bottom" secondItem="hbO-OT-jpc" secondAttribute="bottom" constant="23" id="qC8-Vx-X0k"/>
+            </constraints>
+            <point key="canvasLocation" x="377" y="280.5"/>
         </customView>
     </objects>
 </document>

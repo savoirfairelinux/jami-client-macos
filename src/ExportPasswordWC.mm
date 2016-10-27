@@ -100,8 +100,8 @@ QMetaObject::Connection accountConnection;
                                                      }
                                                          break;
                                                      case Account::ExportOnRingStatus::WRONG_PASSWORD:{
-                                                         NSLog(@"Export ended with Wrong Password");
-                                                         [self showError:NSLocalizedString(@"Export ended with Wrong Password", @"Error shown to the user" )];
+                                                         NSLog(@"Export ended with wrong password");
+                                                         [self showError:NSLocalizedString(@"The password you entered does not unlock this account", @"Error shown to the user" )];
                                                      }
                                                          break;
                                                      case Account::ExportOnRingStatus::NETWORK_ERROR:{
@@ -121,18 +121,23 @@ QMetaObject::Connection accountConnection;
 }
 
 //TODO: Move String formatting to a dedicated Utility Classes
-- (NSAttributedString *)formatPinMessage:(NSString*) pin
+- (NSAttributedString*) formatPinMessage:(NSString*) pin
 {
-    NSMutableAttributedString* hereIsThePin = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Your generated pin:","Title shown to user to concat with Pin")];
-    NSMutableAttributedString* thePin = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@\n", pin]];
+    NSMutableAttributedString* thePin = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@\n", pin]];
     [thePin beginEditing];
     NSRange range = NSMakeRange(0, [thePin length]);
-    [thePin addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica-Bold" size:12.0] range:range];
-    [hereIsThePin appendAttributedString:thePin];
-    NSMutableAttributedString* infos = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This pin and the account password should be entered on your new device within 5 minutes. On most client, this is done from \"Existing Ring account\" menu. You may generate a new pin at any moment.","Infos on how to use the pin")];
-    [hereIsThePin appendAttributedString:infos];
+    [thePin addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica-Bold" size:20.0] range:range];
 
-    return hereIsThePin;
+    NSMutableParagraphStyle* mutParaStyle=[[NSMutableParagraphStyle alloc] init];
+    [mutParaStyle setAlignment:NSCenterTextAlignment];
+    
+    [thePin addAttributes:[NSDictionary dictionaryWithObject:mutParaStyle forKey:NSParagraphStyleAttributeName] range:range];
+
+    NSMutableAttributedString* infos = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.","Title shown to user to concat with Pin")];
+    [thePin appendAttributedString:infos];
+    [thePin endEditing];
+
+    return thePin;
 }
 
 @end
