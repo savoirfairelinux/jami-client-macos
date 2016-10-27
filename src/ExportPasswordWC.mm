@@ -123,13 +123,13 @@ QMetaObject::Connection accountConnection;
 //TODO: Move String formatting to a dedicated Utility Classes
 - (NSAttributedString *)formatPinMessage:(NSString*) pin
 {
-    NSMutableAttributedString* hereIsThePin = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Your generated pin:","Title shown to user to concat with Pin")];
-    NSMutableAttributedString* thePin = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@\n", pin]];
+    NSMutableAttributedString* hereIsThePin = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Your pin is :","Title shown to user to concat with Pin")];
+    NSMutableAttributedString* thePin = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@\n", pin]];
     [thePin beginEditing];
     NSRange range = NSMakeRange(0, [thePin length]);
-    [thePin addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica-Bold" size:12.0] range:range];
+    [thePin addAttribute:NSFontAttributeName value:[NSFont fontWithName:@"Helvetica-Bold" size:20.0] range:range];
     [hereIsThePin appendAttributedString:thePin];
-    NSMutableAttributedString* infos = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This pin and the account password should be entered on your new device within 5 minutes. On most client, this is done from \"Existing Ring account\" menu. You may generate a new pin at any moment.","Infos on how to use the pin")];
+    NSMutableAttributedString* infos = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"To complete the processs, you need to open Ring on the new device. Create a new account with \"Link this device to an account\". Your pin is valid for 10 minutes.","Title shown to user to concat with Pin")];
     [hereIsThePin appendAttributedString:infos];
 
     return hereIsThePin;
