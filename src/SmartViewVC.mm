@@ -70,7 +70,6 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 {
     NSLog(@"INIT SmartView VC");
 
-    RecentModel::instance().peopleProxy()->setFilterRole((int)Ring::Role::Name);
     treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance().peopleProxy()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];
@@ -373,7 +372,6 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 
 - (void)controlTextDidChange:(NSNotification *) notification
 {
-    BOOL empty = [[searchField stringValue] isEqualTo:@""];
     RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
 }
 
