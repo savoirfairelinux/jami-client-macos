@@ -41,26 +41,26 @@
     IBOutlet RingWizardNewAccountVC* newAccountWC;
     IBOutlet RingWizardLinkAccountVC* linkAccountWC;
     IBOutlet RingWizardChooseVC* chooseActiontWC;
-    float initialHeight;
-    float currentHeight;
     BOOL isCancelable;
+}
+
+- (instancetype)initWithWindowNibName:(NSString *)windowNibName{
+    self = [super initWithWindowNibName:windowNibName];
+
+    chooseActiontWC = [[RingWizardChooseVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
+    linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil];
+    newAccountWC = [[RingWizardNewAccountVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
+    return self;
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-
-    [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
-    chooseActiontWC = [[RingWizardChooseVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
     [chooseActiontWC setDelegate:self];
-    linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil];
     [linkAccountWC setDelegate:self];
-    newAccountWC = [[RingWizardNewAccountVC alloc] initWithNibName:@"RingWizardNewAccount" bundle:nil];
     [newAccountWC setDelegate:self];
-    initialHeight = self.window.frame.size.height;
-    currentHeight = self.window.frame.size.height;
-    isCancelable = NO;
-    [self showView:chooseActiontWC.view];
+    [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
+    [self showChooseWithCancelButton:isCancelable];
 }
 
 - (void)removeSubviews
@@ -71,33 +71,31 @@
     }
 }
 
-#define minHeight 135
-- (void)showView: (NSView*) view
+#define headerHeight 60
+#define minHeight 141
+#define defaultMargin 20
+- (void)showView:(NSView*)view
 {
     [self removeSubviews];
     NSRect frame = [self.container frame];
-    frame.size.height = MAX(minHeight, view.bounds.size.height);
+    float sizeFrame = MAX(minHeight, view.bounds.size.height);
+    frame.size.height = sizeFrame;
     [view setFrame:frame];
+
     [self.container setFrame:frame];
-    float size = 0;
-    NSView *container = self.window.contentView;
-    for (NSView *child in container.subviews){
-        size += child.frame.size.height;
-    }
-    if (currentHeight != size){
-        currentHeight = size;
-        NSRect frameWindows = self.window.frame;
-        frameWindows.size.height = currentHeight;
-        [self.window setFrame:frameWindows display:YES animate:YES];
-    }
+    float size = headerHeight + sizeFrame + defaultMargin;
+    NSRect frameWindows = self.window.frame;
+    frameWindows.size.height = size;
+    [self.window setFrame:frameWindows display:YES animate:YES];
+
     [self.container addSubview:view];
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel
 {
-    [self showView: chooseActiontWC.view];
     [chooseActiontWC showCancelButton:showCancel];
     isCancelable = showCancel;
+    [self showView:chooseActiontWC.view];
 }
 
 - (void)showNewAccountVC
