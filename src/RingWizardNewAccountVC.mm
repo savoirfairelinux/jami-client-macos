@@ -49,21 +49,41 @@
 
 @implementation RingWizardNewAccountVC
 {
+    __unsafe_unretained IBOutlet NSView* loadingView;
+    __unsafe_unretained IBOutlet NSView* creationView;
+    
     __unsafe_unretained IBOutlet NSButton* photoView;
     __unsafe_unretained IBOutlet NSTextField* nicknameField;
     __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
-    __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
-    __unsafe_unretained IBOutlet NSTextField* indicationLabel;
+    __unsafe_unretained IBOutlet NSSecureTextField* passwordRepeatField;
     __unsafe_unretained IBOutlet NSTextField* passwordLabel;
+    __unsafe_unretained IBOutlet NSTextField* passwordRepeatLabel;
+    __unsafe_unretained IBOutlet NSImageView* passwordCheck;
+    __unsafe_unretained IBOutlet NSImageView* passwordRepeatCheck;
     __unsafe_unretained IBOutlet NSButton* createButton;
     __unsafe_unretained IBOutlet NSButton* cancelButton;
+
+    __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
     Account* accountToCreate;
     NSTimer* errorTimer;
     QMetaObject::Connection stateChanged;
 }
 
-NSInteger const NICKNAME_TAG        = 1;
+NSInteger const NICKNAME_TAG                    = 1;
 
+//ERROR CODE for textfields validations
+NSInteger const ERROR_PASSWORD_TOO_SHORT        = -1;
+NSInteger const ERROR_REPEAT_MISMATCH           = -2;
+
+
+- (BOOL)produceError:(NSError**)error withCode:(NSInteger)code andMessage:(NSString*)message
+{
+    if (error != NULL){
+        NSDictionary *errorDetail = @{NSLocalizedDescriptionKey: message};
+        *error = [NSError errorWithDomain:@"Input" code:code userInfo:errorDetail];
+    }
+    return NO;
+}
 
 - (void)show
 {
@@ -81,11 +101,26 @@ NSInteger const NICKNAME_TAG        = 1;
     [photoView setWantsLayer: YES];
     photoView.layer.cornerRadius = photoView.frame.size.width / 2;
     photoView.layer.masksToBounds = YES;
+
+    [self display:creationView];
+}
+
+- (void)removeSubviews
+{
+    while ([self.view.subviews count] > 0)
+    {
+        [[self.view.subviews firstObject] removeFromSuperview];
+    }
+}
+
+- (void)display:(NSView *)view
+{
+    [self.delegate showView:view];
 }
 
 - (IBAction)editPhoto:(id)sender
 {
-   auto pictureTaker = [IKPictureTaker pictureTaker];
+    auto pictureTaker = [IKPictureTaker pictureTaker];
 
     [pictureTaker beginPictureTakerSheetForWindow:[self.delegate window]
                                      withDelegate:self
@@ -104,18 +139,68 @@ NSInteger const NICKNAME_TAG        = 1;
         [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
 }
 
+#pragma mark - Input validation
+- (BOOL)isPasswordValid
+{
+    return self.password.length < 6;
+}
+
+- (BOOL)isRepeatPasswordValid
+{
+    return [self.password isEqualToString:self.repeatPassword];
+}
+
+- (BOOL)validateRepeatPassword:(NSError **)error
+{
+    if (!self.isRepeatPasswordValid){
+        return [self produceError:error
+                         withCode:ERROR_REPEAT_MISMATCH
+                       andMessage:NSLocalizedString(@"Passwords don't matches ",
+                                                     @"Indication for user")];
+    }
+    return YES;
+}
+
+- (BOOL)validatePassword:(NSError **)error
+{
+    if (!self.isRepeatPasswordValid){
+        return [self produceError:error
+                         withCode:ERROR_PASSWORD_TOO_SHORT
+                       andMessage:NSLocalizedString(@"Password is too short",
+                                                     @"Indication for user")];
+    }
+    return YES;
+}
+
+- (BOOL)validateUserInputPassword:(NSError **)error
+{
+    return [self validatePassword:error] && [self validateRepeatPassword:error];
+}
+
 - (IBAction)createRingAccount:(id)sender
 {
-    [nicknameField setHidden:YES];
-    [progressBar setHidden:NO];
-    [createButton setHidden:YES];
-    [photoView setHidden:YES];
-    [passwordField setHidden:YES];
-    [passwordLabel setHidden:YES];
-    [cancelButton setHidden:YES];
+    NSError *error = nil;
+    if (![self validateUserInputPassword:&error]){
+        //display an alert, obviously it would be more useful than this
+        NSAlert* alert = [NSAlert alertWithMessageText:NSLocalizedString(@"An error occured",
+                                                                         @"Indication for user")
+                                         defaultButton:NSLocalizedString(@"Revise Input",
+                                                                         @"Button title")
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"%@",error];
+
+        [alert beginSheetModalForWindow:passwordField.window
+                          modalDelegate:nil
+                         didEndSelector:NULL
+                            contextInfo:NULL];
+
+        return;
+    }
+
+    [self display:loadingView];
     [progressBar startAnimation:nil];
-    [indicationLabel setStringValue:NSLocalizedString(@"Just a moment...",
-                                                      @"Indication for user")];
+
 
     if ([self.alias isEqualToString:@""]) {
         self.alias = NSLocalizedString(@"Unknown", @"Name used when user leave field empty");
@@ -135,7 +220,7 @@ NSInteger const NICKNAME_TAG        = 1;
         profile->save();
     }
 
-    QModelIndex qIdx =  AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
+    QModelIndex qIdx = AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
 
     [self setCallback];
 
@@ -223,6 +308,16 @@ NSInteger const NICKNAME_TAG        = 1;
         alias = NSLocalizedString(@"Unknown", @"Name used when user leave field empty");
     }
     self.alias = alias;
+}
+
++ (NSSet *)keyPathsForValuesAffectingIsPasswordValid
+{
+    return [NSSet setWithObjects:@"password", nil];
+}
+
++ (NSSet *)keyPathsForValuesAffectingIsRepeatPasswordValid
+{
+    return [NSSet setWithObjects:@"password", @"repeatPassword", nil];
 }
 
 @end

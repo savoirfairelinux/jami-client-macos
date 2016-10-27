@@ -21,6 +21,7 @@
 
 @protocol RingWizardNewDelegate <NSObject>
 - (void)didCreateAccountWithSuccess:(BOOL)success;
+- (void)showView:(NSView*)view;
 @end
 
 @interface RingWizardNewAccountVC : NSViewController
@@ -29,5 +30,9 @@
 
 @property (nonatomic, weak)NSString* alias;
 @property (nonatomic, weak)NSString* password;
+@property (nonatomic, weak)NSString* repeatPassword;
+@property (readonly)BOOL isRepeatPasswordValid;
+@property (readonly)BOOL isPasswordValid;
+
 - (void)show;
 @end

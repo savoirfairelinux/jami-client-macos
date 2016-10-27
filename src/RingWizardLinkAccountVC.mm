@@ -55,6 +55,7 @@
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
 
     __unsafe_unretained IBOutlet NSView* errorContainer;
+    __unsafe_unretained IBOutlet NSPopover* helpContainer;
 
     Account* accountToCreate;
     NSTimer* errorTimer;
@@ -80,6 +81,12 @@
     [loadingContainer setHidden:NO];
     [progressBar startAnimation:nil];
     [errorContainer setHidden:YES];
+}
+
+
+- (IBAction)showHelp:(id)sender
+{
+    [helpContainer showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
 - (IBAction)importRingAccount:(id)sender
