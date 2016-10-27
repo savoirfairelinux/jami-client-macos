@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWindowController">
@@ -24,7 +24,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="1053" height="658"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" autoresizesSubviews="NO" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="1053" height="658"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -51,7 +51,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="3NN-k0-vDM" id="tcL-dy-Q3h" customClass="RingOutlineView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="609"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="0.0" colorSpace="deviceWhite"/>
@@ -77,7 +77,6 @@
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="epa-Ih-aKF">
                                                                                         <rect key="frame" x="57" y="31" width="225" height="23"/>
-                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="Display Role" id="uSw-g5-kte">
                                                                                             <font key="font" size="16" name="HelveticaNeue-Light"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -94,7 +93,6 @@
                                                                                     </imageView>
                                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" tag="300" translatesAutoresizingMaskIntoConstraints="NO" id="epi-ZP-as5">
                                                                                         <rect key="frame" x="57" y="10" width="177" height="20"/>
-                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="details" id="BfK-c5-B1l">
                                                                                             <font key="font" size="13" name="HelveticaNeue-Light"/>
                                                                                             <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
@@ -247,7 +245,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="3" outlineTableColumn="pTT-gU-NVa" id="rr8-UC-gGF" customClass="RingOutlineView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="690"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -276,7 +274,6 @@
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="9c4-YB-v5K">
                                                                                         <rect key="frame" x="8" y="5" width="304.5" height="23"/>
-                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="Category" id="gaf-Za-tuc">
                                                                                             <font key="font" size="16" name="HelveticaNeue-Light"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -377,7 +374,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="10" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq" customClass="RingOutlineView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -469,7 +466,6 @@
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="ILI-pW-VaK">
                                                                                         <rect key="frame" x="7" y="-1" width="304.5" height="23"/>
-                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="Category" id="d5o-nL-fRP">
                                                                                             <font key="font" size="16" name="HelveticaNeue-Light"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -487,7 +483,6 @@
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="Gys-Du-oeQ">
                                                                                         <rect key="frame" x="7" y="1" width="304.5" height="25"/>
-                                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="Contact Method" id="FlQ-Th-nfO">
                                                                                             <font key="font" size="14" name="HelveticaNeue-Light"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
