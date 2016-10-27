@@ -25,7 +25,6 @@
     NSOpenSavePanelDelegate, RingWizardChooseDelegate, RingWizardNewDelegate,
     RingWizardLinkDelegate>
 
-
 - (void)showChooseWithCancelButton:(BOOL)showCancel;
 - (void)showNewAccountVC;
 - (void)showLinkAccountVC;
