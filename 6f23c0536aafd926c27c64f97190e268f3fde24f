@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_88bbd971",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2016-10-28T19:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_852bc42f",
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_c531cca3",
         "filename": "src/RingWizardNewAccountVC.mm",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2016-10-27T18:10:43Z",
       "side": 1,
       "message": "trailing spaces",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 4
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_28b0ad8a",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2016-10-28T19:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_c531cca3",
       "range": {
         "startLine": 54,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_e8a94525",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2016-10-28T19:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_a52cc84b",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 5
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_451ddc0e",
         "filename": "src/RingWizardNewAccountVC.mm",
         "patchSetId": 4
@@ -76,6 +142,30 @@
       "writtenOn": "2016-10-27T18:10:43Z",
       "side": 1,
       "message": "This is weird considering the name of the method.  Either rename the method to isPasswordInvalid, or change the test. Or maybe we only accept small passwords ? :)",
+      "range": {
+        "startLine": 145,
+        "startChar": 11,
+        "endLine": 145,
+        "endChar": 35
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_08a7e950",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2016-10-28T19:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_451ddc0e",
       "range": {
         "startLine": 145,
         "startChar": 11,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_a8633d19",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2016-10-28T19:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_050034a9",
+      "range": {
+        "startLine": 158,
+        "startChar": 75,
+        "endLine": 158,
+        "endChar": 77
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_e5197023",
         "filename": "ui/Base.lproj/AccAdvanced.xib",
         "patchSetId": 4
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_c86801f8",
+        "filename": "ui/Base.lproj/AccAdvanced.xib",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2016-10-28T19:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_e5197023",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 85
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_0517d4ee",
         "filename": "ui/Base.lproj/RingWindow.xib",
         "patchSetId": 4
@@ -145,6 +283,30 @@
       "writtenOn": "2016-10-27T18:10:43Z",
       "side": 1,
       "message": "Does this change is necessary?",
+      "range": {
+        "startLine": 27,
+        "startChar": 57,
+        "endLine": 27,
+        "endChar": 76
+      },
+      "revId": "6f23c0536aafd926c27c64f97190e268f3fde24f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_8872f9e3",
+        "filename": "ui/Base.lproj/RingWindow.xib",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 120
+      },
+      "writtenOn": "2016-10-28T19:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_0517d4ee",
       "range": {
         "startLine": 27,
         "startChar": 57,
