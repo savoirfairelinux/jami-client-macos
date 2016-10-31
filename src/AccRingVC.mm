@@ -25,6 +25,7 @@
 
 @property (assign) IBOutlet NSTextField *aliasTextField;
 @property (assign) IBOutlet NSTextField *bootstrapField;
+@property (assign) IBOutlet NSTextField *blockchainField;
 @property (assign) IBOutlet NSTextField *hashField;
 
 @property (assign) IBOutlet NSButton *upnpButton;
@@ -41,6 +42,7 @@
 @synthesize bootstrapField;
 @synthesize hashField;
 @synthesize aliasTextField;
+@synthesize blockchainField;
 @synthesize upnpButton;
 @synthesize autoAnswerButton;
 @synthesize userAgentButton;
@@ -51,6 +53,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     ALIAS = 0,
     HOSTNAME,
     USERAGENT,
+    BLOCKCHAIN,
 };
 
 - (void)awakeFromNib
@@ -59,6 +62,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [aliasTextField setTag:TagViews::ALIAS];
     [userAgentTextField setTag:TagViews::USERAGENT];
     [bootstrapField setTag:TagViews::HOSTNAME];
+    [blockchainField setTag:TagViews::BLOCKCHAIN];
 
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
@@ -90,6 +94,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [userAgentTextField setStringValue:account->userAgent().toNSString()];
 
     [bootstrapField setStringValue:account->hostname().toNSString()];
+    [blockchainField setStringValue:account->nameServiceURL().toNSString()];
 
     if([account->username().toNSString() isEqualToString:@""])
         [hashField setStringValue:NSLocalizedString(@"Reopen account to see your hash",
@@ -145,6 +150,9 @@ typedef NS_ENUM(NSInteger, TagViews) {
             break;
         case TagViews::USERAGENT:
             AccountModel::instance().selectedAccount()->setUserAgent([[textField stringValue] UTF8String]);
+            break;
+        case TagViews::BLOCKCHAIN:
+            AccountModel::instance().selectedAccount()->setNameServiceURL([[textField stringValue] UTF8String]);
             break;
         default:
             break;
