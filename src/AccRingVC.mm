@@ -21,26 +21,34 @@
 #import <accountmodel.h>
 #import <qitemselectionmodel.h>
 
-@interface AccRingVC ()
+#import "RegisterNameWC.h"
 
-@property (assign) IBOutlet NSTextField *aliasTextField;
-@property (assign) IBOutlet NSTextField *bootstrapField;
-@property (assign) IBOutlet NSTextField *hashField;
+@interface AccRingVC () <RegisterNameDelegate>
 
-@property (assign) IBOutlet NSButton *upnpButton;
-@property (assign) IBOutlet NSButton *autoAnswerButton;
-@property (assign) IBOutlet NSButton *userAgentButton;
-@property (assign) IBOutlet NSTextField *userAgentTextField;
+@property (unsafe_unretained) IBOutlet NSTextField *aliasTextField;
+@property (unsafe_unretained) IBOutlet NSTextField *bootstrapField;
+@property (unsafe_unretained) IBOutlet NSTextField *blockchainField;
+@property (unsafe_unretained) IBOutlet NSTextField *ringIDField;
+@property (unsafe_unretained) IBOutlet NSButton *registerBlockchainNameButton;
+@property (unsafe_unretained) IBOutlet NSTextField *registeredNameField;
+
+@property (unsafe_unretained) IBOutlet NSButton *upnpButton;
+@property (unsafe_unretained) IBOutlet NSButton *autoAnswerButton;
+@property (unsafe_unretained) IBOutlet NSButton *userAgentButton;
+@property (unsafe_unretained) IBOutlet NSTextField *userAgentTextField;
 @property (unsafe_unretained) IBOutlet NSButton *allowUnknown;
 @property (unsafe_unretained) IBOutlet NSButton *allowHistory;
 @property (unsafe_unretained) IBOutlet NSButton *allowContacts;
+
+@property AbstractLoadingWC* accountModal;
 
 @end
 
 @implementation AccRingVC
 @synthesize bootstrapField;
-@synthesize hashField;
+@synthesize ringIDField;
 @synthesize aliasTextField;
+@synthesize blockchainField;
 @synthesize upnpButton;
 @synthesize autoAnswerButton;
 @synthesize userAgentButton;
@@ -51,6 +59,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     ALIAS = 0,
     HOSTNAME,
     USERAGENT,
+    BLOCKCHAIN,
 };
 
 - (void)awakeFromNib
@@ -59,6 +68,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [aliasTextField setTag:TagViews::ALIAS];
     [userAgentTextField setTag:TagViews::USERAGENT];
     [bootstrapField setTag:TagViews::HOSTNAME];
+    [blockchainField setTag:TagViews::BLOCKCHAIN];
 
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
@@ -90,13 +100,38 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [userAgentTextField setStringValue:account->userAgent().toNSString()];
 
     [bootstrapField setStringValue:account->hostname().toNSString()];
+    [blockchainField setStringValue:account->nameServiceURL().toNSString()];
 
-    if([account->username().toNSString() isEqualToString:@""])
-        [hashField setStringValue:NSLocalizedString(@"Reopen account to see your hash",
+    if([account->username().toNSString() isEqualToString:@""]) {
+        [ringIDField setStringValue:NSLocalizedString(@"Reopen account to see your hash",
                                                     @"Show advice to user")];
-    else
-        [hashField setStringValue:account->username().toNSString()];
+    } else {
+        [ringIDField setStringValue:account->username().toNSString()];
+    }
 
+    [self refreshRegisteredName:account];
+}
+
+- (void) refreshRegisteredName:(Account*) account
+{
+    [self.registerBlockchainNameButton setHidden:!account->registeredName().isEmpty()];
+    [self.registeredNameField setStringValue:account->registeredName().toNSString()];
+}
+
+- (IBAction)startNameRegistration:(id)sender
+{
+    auto registerWC = [[RegisterNameWC alloc] initWithDelegate:self];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:registerWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: registerWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+    //[registerWC showWindow:self];
+    self.accountModal = registerWC;
 }
 
 - (IBAction)toggleUpnp:(NSButton *)sender {
@@ -146,9 +181,18 @@ typedef NS_ENUM(NSInteger, TagViews) {
         case TagViews::USERAGENT:
             AccountModel::instance().selectedAccount()->setUserAgent([[textField stringValue] UTF8String]);
             break;
+        case TagViews::BLOCKCHAIN:
+            AccountModel::instance().selectedAccount()->setNameServiceURL([[textField stringValue] UTF8String]);
+            break;
         default:
             break;
     }
+}
+
+- (void) didRegisterNameWithSuccess
+{
+    [self.accountModal close];
+    [self refreshRegisteredName:AccountModel::instance().selectedAccount()];
 }
 
 @end
