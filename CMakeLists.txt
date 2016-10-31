@@ -156,6 +156,8 @@ SET(ringclient_CONTROLLERS
    src/RingWizardNewAccountVC.h
    src/DialpadWC.mm
    src/DialpadWC.h
+   src/RegisterNameWC.mm
+   src/RegisterNameWC.h
 )
 
 SET(ringclient_BACKENDS
@@ -223,6 +225,7 @@ SET(ringclient_XIBS
    RingWizardNewAccount
    RingWizardChoose
    Dialpad
+   RegisterNameWindow
 )
 
 # Icons
