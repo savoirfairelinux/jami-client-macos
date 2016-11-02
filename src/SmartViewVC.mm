@@ -29,7 +29,11 @@
 #import <recentmodel.h>
 #import <callmodel.h>
 #import <call.h>
+#import <uri.h>
 #import <itemdataroles.h>
+#import <namedirectory.h>
+#import <accountmodel.h>
+#import <account.h>
 #import <person.h>
 #import <contactmethod.h>
 #import <globalinstances.h>
@@ -52,6 +56,9 @@
     __unsafe_unretained IBOutlet RingOutlineView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
     __unsafe_unretained IBOutlet NSTabView* tabbar;
+
+    /* Pending ring usernames lookup for the search entry */
+    QMetaObject::Connection usernameLookupConnection;
 }
 
 @end
@@ -287,7 +294,12 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     if ([searchField stringValue].length == 0) {
         return;
     }
-    auto cm = PhoneDirectoryModel::instance().getNumber(QString::fromNSString([searchField stringValue]));
+    [self processSearchFieldInputAndStartCall:YES];
+}
+
+- (void) startCallFromURI:(const URI&) uri
+{
+    auto cm = PhoneDirectoryModel::instance().getNumber(uri);
     auto c = CallModel::instance().dialingCall();
     [searchField setStringValue:@""];
     RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
@@ -296,9 +308,9 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     CallModel::instance().selectCall(c);
 }
 
-- (void) startConversationFromSearchField
+- (void) startConversationFromURI:(const URI&) uri
 {
-    auto cm = PhoneDirectoryModel::instance().getNumber(QString::fromNSString([searchField stringValue]));
+    auto cm = PhoneDirectoryModel::instance().getNumber(uri);
     time_t currentTime;
     ::time(&currentTime);
     cm->setLastUsed(currentTime);
@@ -306,6 +318,118 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
     auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(RecentModel::instance().peopleProxy()->index(0, 0));
     RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
+}
+
+- (void) displayErrorModalWithTitle:(NSString*) title WithMessage:(NSString*) message
+{
+    NSAlert* alert = [NSAlert alertWithMessageText:title
+                                     defaultButton:@"Ok"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:message];
+
+    [alert beginSheetModalForWindow:self.view.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+}
+
+- (void) processSearchFieldInputAndStartCall:(BOOL) shouldCall
+{
+    auto ringAccountList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
+    auto sipAccountList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::SIP);
+    BOOL hasValidRingAccount = NO;
+    BOOL hasValidSIPAccount = NO;
+
+    NSString* noValidAccountTitle = NSLocalizedString(@"No valid account available",
+                                                      @"Alert dialog title");
+    NSString* noValidAccountMessage = NSLocalizedString(@"Make sure you have at least one valid account",
+                                                        @"Alert dialo message");
+
+    Q_FOREACH(auto account, ringAccountList) {
+        if (account->isEnabled() && account->registrationState() == Account::RegistrationState::READY) {
+            hasValidRingAccount = YES;
+        }
+    }
+
+    Q_FOREACH(auto account, sipAccountList) {
+        if (account->isEnabled() && account->registrationState() == Account::RegistrationState::READY) {
+            hasValidSIPAccount = YES;
+        }
+    }
+
+    const auto* numberEntered = [searchField stringValue];
+    URI uri = URI(numberEntered.UTF8String);
+
+    if (hasValidRingAccount) {
+        if (uri.protocolHint() == URI::ProtocolHint::RING) {
+            // If it is a RingID start the conversation or the call
+            if (shouldCall) {
+                [self startCallFromURI:uri];
+            } else {
+                [self startConversationFromURI:uri];
+            }
+        } else {
+            // If it's not a ringID and the user has a valid Ring account do a search on the blockchain
+            // If the user wants to make SIP calls, he can unregister his ring account
+            QString usernameToLookup = uri.userinfo();
+            QObject::disconnect(usernameLookupConnection);
+            usernameLookupConnection = QObject::connect(&NameDirectory::instance(),
+                                                        &NameDirectory::registeredNameFound,
+                                                        [self, usernameToLookup, hasValidSIPAccount, shouldCall] (const Account* account, NameDirectory::LookupStatus status, const QString& address, const QString& name) {
+                                                            if (usernameToLookup.compare(name) != 0) {
+                                                                //That is not our lookup.
+                                                                return;
+                                                            }
+
+                                                            switch(status) {
+                                                                case NameDirectory::LookupStatus::SUCCESS: {
+                                                                    URI uri = URI("ring:" + address);
+                                                                    if (shouldCall) {
+                                                                        [self startCallFromURI:uri];
+                                                                    } else {
+                                                                        [self startConversationFromURI:uri];
+                                                                    }
+                                                                    break;
+                                                                }
+                                                                case NameDirectory::LookupStatus::INVALID_NAME:
+                                                                case NameDirectory::LookupStatus::ERROR:
+                                                                case NameDirectory::LookupStatus::NOT_FOUND: {
+                                                                    // The lookup on the blockchain has failed for this user
+                                                                    // Check if the user has a valid sip account to use instead
+                                                                    if (hasValidSIPAccount) {
+                                                                        if (shouldCall) {
+                                                                            [self startCallFromURI:usernameToLookup];
+                                                                        } else {
+                                                                            [self startConversationFromURI:usernameToLookup];
+                                                                        }
+                                                                    } else {
+                                                                        [self displayErrorModalWithTitle:NSLocalizedString(@"Entered name not found",
+                                                                                                                           @"Alert dialog title")
+                                                                                             WithMessage:NSLocalizedString(@"The username you entered do not match a RingID on the network",
+                                                                                                                           @"Alert dialog title")];
+                                                                    }
+                                                                    break;
+                                                                }
+                                                            }
+                                                            RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
+                                                        }
+                                                        );
+            
+            NameDirectory::instance().lookupName(nullptr, QString(), usernameToLookup);
+        }
+    } else if (hasValidSIPAccount) {
+        if (uri.protocolHint() == URI::ProtocolHint::RING) {
+            // If it is a RingID and no valid account is available, present error
+            [self displayErrorModalWithTitle:noValidAccountTitle
+                                 WithMessage:noValidAccountMessage];
+        }
+        if (shouldCall) {
+            [self startCallFromURI:uri];
+        } else {
+            [self startConversationFromURI:uri];
+        }
+    } else {
+        [self displayErrorModalWithTitle:noValidAccountTitle
+                             WithMessage:noValidAccountMessage];
+    }
 }
 
 - (void) addToContact
@@ -363,7 +487,7 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 {
     if (commandSelector == @selector(insertNewline:)) {
         if([[searchField stringValue] isNotEqualTo:@""]) {
-            [self startConversationFromSearchField];
+            [self processSearchFieldInputAndStartCall:NO];
             return YES;
         }
     }
