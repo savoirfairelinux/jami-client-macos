@@ -184,7 +184,8 @@ SET(ringclient_VIEWS
    src/views/IconButton.h
    src/views/IconButton.mm
    src/views/IMTableCellView.h
-   src/views/IMTableCellView.mm)
+   src/views/IMTableCellView.mm
+)
 
 SET(ringclient_OTHERS
    src/main.mm
