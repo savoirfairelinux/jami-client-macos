@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bada0100_b03098e9",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-11-02T17:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_c8ba3ce1",
+      "revId": "adc400f71d87aa38f8207a0d5a33ea9250595487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_e8bf00cf",
         "filename": "src/RingWizardNewAccountVC.mm",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2016-11-02T17:33:43Z",
       "side": 1,
       "message": "{} indentation",
+      "revId": "adc400f71d87aa38f8207a0d5a33ea9250595487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bada0100_504dac71",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-11-02T17:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_e8bf00cf",
       "revId": "adc400f71d87aa38f8207a0d5a33ea9250595487",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "bada0100_10572404",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-11-02T17:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_08c84473",
+      "revId": "adc400f71d87aa38f8207a0d5a33ea9250595487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_28c5085b",
         "filename": "src/RingWizardNewAccountVC.mm",
         "patchSetId": 7
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "bada0100_70523015",
+        "filename": "src/RingWizardNewAccountVC.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-11-02T17:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_28c5085b",
+      "revId": "adc400f71d87aa38f8207a0d5a33ea9250595487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_4895ec3e",
         "filename": "ui/Base.lproj/RingWizardNewAccount.strings",
         "patchSetId": 7
@@ -81,6 +153,24 @@
       "writtenOn": "2016-11-02T17:33:43Z",
       "side": 1,
       "message": "a unique ?",
+      "revId": "adc400f71d87aa38f8207a0d5a33ea9250595487",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bada0100_305ca825",
+        "filename": "ui/Base.lproj/RingWizardNewAccount.strings",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-11-02T17:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dad5f5cf_4895ec3e",
       "revId": "adc400f71d87aa38f8207a0d5a33ea9250595487",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
