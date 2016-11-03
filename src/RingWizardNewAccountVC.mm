@@ -277,10 +277,6 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (void)setCallback
 {
-    errorTimer = [NSTimer scheduledTimerWithTimeInterval:30
-                                                  target:self
-                                                selector:@selector(didCreateFailed) userInfo:nil
-                                                 repeats:NO];
     stateChanged = QObject::connect(&AccountModel::instance(),
                                     &AccountModel::accountStateChanged,
                                     [=](Account *account, const Account::RegistrationState state) {
@@ -313,6 +309,11 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (void) startNameRegistration:(Account*) account
 {
+    // Dismiss this screen if after 30 seconds the name is still not registered
+    errorTimer = [NSTimer scheduledTimerWithTimeInterval:30
+                                                  target:self
+                                                selector:@selector(nameRegistrationTimeout) userInfo:nil
+                                                 repeats:NO];
     registrationEnded = QObject::connect(account,
                                          &Account::nameRegistrationEnded,
                                          [=] (NameDirectory::RegisterNameStatus status,  const QString& name) {
@@ -340,9 +341,11 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     }
 }
 
-- (void)didCreateFailed
+- (void)nameRegistrationTimeout
 {
-    [self.delegate didCreateAccountWithSuccess:NO];
+    // This callback is used when registration takes more than 30 seconds
+    // It skips the wizard and brings the main window
+    [self.delegate didCreateAccountWithSuccess:YES];
 }
 
 - (IBAction)cancel:(id)sender
