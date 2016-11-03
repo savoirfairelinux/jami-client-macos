@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardChooseVC">
@@ -16,16 +16,6 @@
             <rect key="frame" x="0.0" y="0.0" width="525" height="138"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
-                    <rect key="frame" x="160" y="96" width="205" height="29"/>
-                    <buttonCell key="cell" type="bevel" title="New Ring account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="createRingAccount:" target="-2" id="Mij-SG-JWQ"/>
-                    </connections>
-                </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="UXp-us-Mbl">
                     <rect key="frame" x="435" y="17" width="72" height="29"/>
                     <constraints>
@@ -44,8 +34,18 @@
                         </binding>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
+                    <rect key="frame" x="160" y="81" width="205" height="29"/>
+                    <buttonCell key="cell" type="bevel" title="Create Ring account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="createRingAccount:" target="-2" id="Mij-SG-JWQ"/>
+                    </connections>
+                </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-ql-oGP">
-                    <rect key="frame" x="160" y="64" width="205" height="29"/>
+                    <rect key="frame" x="160" y="49" width="205" height="29"/>
                     <buttonCell key="cell" type="bevel" title="Link this device to an account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Z9K-mD-ucr">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -63,7 +63,7 @@
                 <constraint firstAttribute="trailing" secondItem="UXp-us-Mbl" secondAttribute="trailing" constant="20" id="aKC-JI-SVx"/>
                 <constraint firstItem="pcF-lX-ex4" firstAttribute="centerX" secondItem="uHQ-s7-X3y" secondAttribute="centerX" id="iq8-Px-R61"/>
                 <constraint firstItem="pcF-lX-ex4" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="n6m-l1-sty"/>
-                <constraint firstItem="pcF-lX-ex4" firstAttribute="top" secondItem="uHQ-s7-X3y" secondAttribute="top" constant="15" id="v64-PJ-sTS"/>
+                <constraint firstItem="pcF-lX-ex4" firstAttribute="top" secondItem="uHQ-s7-X3y" secondAttribute="top" constant="30" id="v64-PJ-sTS"/>
             </constraints>
             <point key="canvasLocation" x="-14.5" y="49"/>
         </view>
