@@ -301,8 +301,6 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 {
     auto cm = PhoneDirectoryModel::instance().getNumber(uri);
     auto c = CallModel::instance().dialingCall();
-    [searchField setStringValue:@""];
-    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
     c->setPeerContactMethod(cm);
     c << Call::Action::ACCEPT;
     CallModel::instance().selectCall(c);
@@ -314,8 +312,6 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     time_t currentTime;
     ::time(&currentTime);
     cm->setLastUsed(currentTime);
-    [searchField setStringValue:@""];
-    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
     auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(RecentModel::instance().peopleProxy()->index(0, 0));
     RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
 }
@@ -357,6 +353,7 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 
     const auto* numberEntered = [searchField stringValue];
     URI uri = URI(numberEntered.UTF8String);
+    [self clearSearchField];
 
     if (hasValidRingAccount) {
         if (uri.protocolHint() == URI::ProtocolHint::RING) {
@@ -409,10 +406,8 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
                                                                     break;
                                                                 }
                                                             }
-                                                            RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
-                                                        }
-                                                        );
-            
+                                                        });
+
             NameDirectory::instance().lookupName(nullptr, QString(), usernameToLookup);
         }
     } else if (hasValidSIPAccount) {
@@ -420,6 +415,7 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
             // If it is a RingID and no valid account is available, present error
             [self displayErrorModalWithTitle:noValidAccountTitle
                                  WithMessage:noValidAccountMessage];
+            return;
         }
         if (shouldCall) {
             [self startCallFromURI:uri];
@@ -430,6 +426,12 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
         [self displayErrorModalWithTitle:noValidAccountTitle
                              WithMessage:noValidAccountMessage];
     }
+}
+
+- (void) clearSearchField
+{
+    [searchField setStringValue:@""];
+    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
 }
 
 - (void) addToContact
