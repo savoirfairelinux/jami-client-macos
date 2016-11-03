@@ -301,8 +301,6 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 {
     auto cm = PhoneDirectoryModel::instance().getNumber(uri);
     auto c = CallModel::instance().dialingCall();
-    [searchField setStringValue:@""];
-    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
     c->setPeerContactMethod(cm);
     c << Call::Action::ACCEPT;
     CallModel::instance().selectCall(c);
@@ -314,8 +312,6 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     time_t currentTime;
     ::time(&currentTime);
     cm->setLastUsed(currentTime);
-    [searchField setStringValue:@""];
-    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
     auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(RecentModel::instance().peopleProxy()->index(0, 0));
     RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
 }
@@ -409,10 +405,9 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
                                                                     break;
                                                                 }
                                                             }
-                                                            RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
-                                                        }
-                                                        );
-            
+                                                            [self clearSearchField];
+                                                        });
+
             NameDirectory::instance().lookupName(nullptr, QString(), usernameToLookup);
         }
     } else if (hasValidSIPAccount) {
@@ -426,10 +421,18 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
         } else {
             [self startConversationFromURI:uri];
         }
+        [self clearSearchField];
     } else {
         [self displayErrorModalWithTitle:noValidAccountTitle
                              WithMessage:noValidAccountMessage];
+        [self clearSearchField];
     }
+}
+
+- (void) clearSearchField
+{
+    [searchField setStringValue:@""];
+    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
 }
 
 - (void) addToContact
