@@ -11,7 +11,7 @@ IF("${RING_VERSION}" STREQUAL "")
    SET(RING_VERSION "1.0.0")
 ENDIF("${RING_VERSION}" STREQUAL "")
 
-SET(RING_VERSION_NAME "Louis-Joseph Papineau")
+SET(RING_VERSION_NAME "Gaston Miron")
 
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
 SET(PROJ_COPYRIGHT " © 2015-2016 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
