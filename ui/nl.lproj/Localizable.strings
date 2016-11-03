@@ -1,20 +1,23 @@
 
+"A network error occured during the export" = "Er is een netwerkfout opgetreden tijdens het exporteren";
+
+/* Contextual menu action */
 "Add to contacts" = "Aan contacten toevoegen";
 
-/* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+/* Text shown to the user */
+"Alias : " = "Alias:";
 
 /* Error shown to the user */
-"An error occured during the import" = "An error occured during the import";
+"An error occured during the export" = "Er is een fout opgetreden tijdens het exporteren";
+
+/* Contextual menu entry */
+"Backup account" = "Reservekopie van account maken";
 
 /* Contextual menu action */
 "Call number" = "Nummer bellen";
 
-/* Open panel prompt for 'Choose a file' */
-"Choose" = "Kiezen";
-
 /* Open panel title */
-"Choose a CA list" = "Kies een CA lijst";
+"Choose a CA list" = "Kies een CA-lijst";
 
 /* Open panel title */
 "Choose a certificate" = "Kies een certificaat";
@@ -34,23 +37,56 @@
 /* Contextual menu entry */
 "Choose file" = "Kies bestand";
 
-/* Continue button */
-"Continue" = "Verder";
-
 /* No comment provided by engineer. */
 "Copy" = "Kopiëren";
 
 /* Contextual menu action */
+"Copy name" = "Naam kopiëren";
+
+/* Contextual menu action */
 "Copy number" = "Nummer kopiëren";
 
-/* Incoming call from {Name} */
-"Incoming call from %@" = "Binnenkomende oproep van %@";
+/* Contextual menu entry */
+"Create RING Account" = "Ring-account aanmaken";
 
-/* Indication for user */
-"Just a moment..." = "Even geduld aub...";
+/* Contextual menu entry */
+"Create SIP Account" = "SIP-account aanmaken";
+
+/* Alert dialog title */
+"Entered name not found" = "Ingevoerde naam niet gevonden";
+
+/* Error message shown to user when it is impossible to migrate account */
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migreren van account mislukt. Je kan opnieuw proberen door op Oké te klikken of je account verwijderen.";
+
+/* Text shown to user when an error occur at registration */
+"Failed to perform lookup" = "Opzoeken mislukt";
+
+/* Text shown to the user */
+"ID : " = "ID:";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Inkomende oproep van %@";
+
+/* Alert dialo message */
+"Make sure you have at least one valid account" = "Zorg dat je minstens een geldige account hebt";
 
 /* Message from {Name} */
 "Message from %@" = "Bericht van %@";
+
+/* User label */
+"New SIP account" = "Nieuwe SIP-account";
+
+/* Alert dialog title */
+"No valid account available" = "Geen geldige account beschikbaar";
+
+/* Text show to the user when password didn't match */
+"Password and confirmation mismatch." = "Wachtwoord en bevestiging komen niet overeen.";
+
+/* Indication for user */
+"Password is too short" = "Wachtwoord is te kort";
+
+/* Indication for user */
+"Passwords don't match" = "Wachtwoorden komen niet overeen";
 
 /* Button label */
 "Pause" = "Pauze";
@@ -67,15 +103,45 @@
 /* Show advice to user */
 "Reopen account to see your hash" = "Account heropenen om uw hash te bekijken";
 
-/* Display message to user */
-"Ring is already ready to work" = "Ring is reeds klaar voor gebruik";
+/* Contextual menu entry */
+"Restore account" = "Account herstellen";
+
+/* Button title */
+"Revise Input" = "Invoer herzien";
 
 /* No comment provided by engineer. */
 "Share" = "Delen";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Tekst Handelingen";
+"Text Actions" = "Teksthandelingen";
+
+/* Text shown to user when his username is available to be registered */
+"The entered username is available" = "De ingevoerde gebruikersnaam is beschikbaar";
+
+/* Text shown to user when his username is invalid to be registered */
+"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "De ingevoerde gebruikersnaam is ongeldig. De gebruikersnaam moet minstens 3 tekens lang zijn, en mag enkel kleine alfanumerieke tekens bevatten.";
+
+/* Text shown to user when his username is already registered */
+"The entered username is not available" = "De ingevoerde gebruikersnaam is niet beschikbaar";
+
+/* Text shown to the user */
+"The following account needs to be migrated to the new Ring account format:" = "De volgende account moet gemigreerd worden naar het nieuwe Ring-accountformaat:";
+
+/* Error shown to the user */
+"The password you entered does not unlock this account" = "Het wachtwoord dat je hebt ingevoerd ontgrendelt deze account niet";
+
+/* Alert dialog title */
+"The username you entered do not match a RingID on the network" = "De gebruikersnaam die je hebt ingevoerd komt niet overeen met een Ring-ID op het netwerk";
+
+/* Title shown to user to concat with Pin */
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Om het proces te voltooien open je Ring op het nieuwe apparaat en kies je de optie \"Dit apparaat aan een account koppelen\". Je PIN-code is 10 minuten geldig.";
+
+/* Text shown to the user */
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Om door te gaan met de migratie moet je een wachtwoord voor je account kiezen. Dit wachtwoord zal gebruikt worden om je hoofdsleutel te versleutelen. Het wachtwoord wordt vereist om nieuwe apparaten aan je Ring-account toe te voegen. Als je nog niet klaar bent om een wachtwoord te kiezen kan je Ring sluiten en de migratie later verderzetten.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Onbekend";
+
+/* Error shown to user */
+"You have to migrate your account before exporting" = "Je moet je account migreren vooraleer je deze kan exporteren";
 

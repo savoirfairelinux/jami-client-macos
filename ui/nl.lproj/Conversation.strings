@@ -8,17 +8,17 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "Ilz-7v-2fr"; */
 "Ilz-7v-2fr.placeholderString" = "Een bericht versturen";
 
-/* Class = "BindingConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
 "ZEx-5Y-rtp.ibShadowedIsNilPlaceholder" = "Een bericht versturen";
 
-/* Class = "BindingConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
 "ZEx-5Y-rtp.ibShadowedMultipleValuesPlaceholder" = "Een bericht versturen";
 
-/* Class = "BindingConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
 "ZEx-5Y-rtp.ibShadowedNoSelectionPlaceholder" = "Een bericht versturen";
 
 /* Class = "NSTextFieldCell"; title = "Start the conversation!"; ObjectID = "bsl-nv-Wqq"; */
-"bsl-nv-Wqq.title" = "De conversatie beginnen!";
+"bsl-nv-Wqq.title" = "Begin het gesprek!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "ooq-vs-Xt1"; */
 "ooq-vs-Xt1.ibShadowedToolTip" = "Opnemen";

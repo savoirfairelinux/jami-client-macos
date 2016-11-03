@@ -3,13 +3,7 @@
 "1HC-kF-Jun.label" = "Ring";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Type"; ObjectID = "KoR-IH-uuI"; */
-"KoR-IH-uuI.placeholderString" = "Type";
-
-/* Class = "NSTextFieldCell"; title = "Create Account"; ObjectID = "OZ9-qH-dYW"; */
-"OZ9-qH-dYW.title" = "Create Account";
-
-/* Class = "NSButtonCell"; title = "Export"; ObjectID = "OeK-Sf-pdc"; */
-"OeK-Sf-pdc.title" = "Export";
+"KoR-IH-uuI.placeholderString" = "型";
 
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "RT7-u6-bhe"; */
 "RT7-u6-bhe.label" = "進階";
@@ -20,14 +14,14 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "ZDh-Jh-hfW"; */
 "ZDh-Jh-hfW.placeholderString" = "姓名";
 
+/* Class = "NSTabViewItem"; label = "Devices"; ObjectID = "cT1-A5-rbj"; */
+"cT1-A5-rbj.label" = "Devices";
+
 /* Class = "NSTextFieldCell"; placeholderString = "Status"; ObjectID = "eEz-Lm-SOj"; */
 "eEz-Lm-SOj.placeholderString" = "狀態";
 
 /* Class = "NSTabViewItem"; label = "Media"; ObjectID = "lxr-my-vH8"; */
-"lxr-my-vH8.label" = "Media";
+"lxr-my-vH8.label" = "媒體";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "tPR-Ac-N5Y"; */
 "tPR-Ac-N5Y.label" = "通用";
-
-/* Class = "NSButtonCell"; title = "Import"; ObjectID = "zov-Bb-Fgp"; */
-"zov-Bb-Fgp.title" = "Import";

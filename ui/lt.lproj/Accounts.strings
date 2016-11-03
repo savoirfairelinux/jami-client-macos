@@ -5,12 +5,6 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Type"; ObjectID = "KoR-IH-uuI"; */
 "KoR-IH-uuI.placeholderString" = "Tipas";
 
-/* Class = "NSTextFieldCell"; title = "Create Account"; ObjectID = "OZ9-qH-dYW"; */
-"OZ9-qH-dYW.title" = "Sukurti paskyrą";
-
-/* Class = "NSButtonCell"; title = "Export"; ObjectID = "OeK-Sf-pdc"; */
-"OeK-Sf-pdc.title" = "Eksportuoti";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "RT7-u6-bhe"; */
 "RT7-u6-bhe.label" = "Išplėstiniai";
 
@@ -20,6 +14,9 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "ZDh-Jh-hfW"; */
 "ZDh-Jh-hfW.placeholderString" = "Vardas";
 
+/* Class = "NSTabViewItem"; label = "Devices"; ObjectID = "cT1-A5-rbj"; */
+"cT1-A5-rbj.label" = "Devices";
+
 /* Class = "NSTextFieldCell"; placeholderString = "Status"; ObjectID = "eEz-Lm-SOj"; */
 "eEz-Lm-SOj.placeholderString" = "Būsena";
 
@@ -28,6 +25,3 @@
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "tPR-Ac-N5Y"; */
 "tPR-Ac-N5Y.label" = "Bendra";
-
-/* Class = "NSButtonCell"; title = "Import"; ObjectID = "zov-Bb-Fgp"; */
-"zov-Bb-Fgp.title" = "Importuoti";
