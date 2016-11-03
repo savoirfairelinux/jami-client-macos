@@ -108,3 +108,45 @@ file_filter = ui/<lang>.lproj/Conversation.strings
 source_file = ui/Base.lproj/Conversation.strings
 source_lang = en
 type = STRINGS
+
+[ring.osxBackupAccountWindow]
+file_filter = ui/<lang>.lproj/BackupAccountWindow.strings
+source_file = ui/Base.lproj/BackupAccountWindow.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxExportPasswordWindow]
+file_filter = ui/<lang>.lproj/ExportPasswordWindow.strings
+source_file = ui/Base.lproj/ExportPasswordWindow.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxRingWizardNewAccount]
+file_filter = ui/<lang>.lproj/RingWizardNewAccount.strings
+source_file = ui/Base.lproj/RingWizardNewAccount.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxRingWizardLinkAccount]
+file_filter = ui/<lang>.lproj/RingWizardLinkAccount.strings
+source_file = ui/Base.lproj/RingWizardLinkAccount.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxRingWizardChoose]
+file_filter = ui/<lang>.lproj/RingWizardChoose.strings
+source_file = ui/Base.lproj/RingWizardChoose.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxRegisterNameWindow]
+file_filter = ui/<lang>.lproj/RegisterNameWindow.strings
+source_file = ui/Base.lproj/RegisterNameWindow.strings
+source_lang = en
+type = STRINGS
+
+[ring.osxMigrateRingAccountsWindow]
+file_filter = ui/<lang>.lproj/MigrateRingAccountsWindow.strings
+source_file = ui/Base.lproj/MigrateRingAccountsWindow.strings
+source_lang = en
+type = STRINGS
