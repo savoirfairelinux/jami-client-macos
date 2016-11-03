@@ -12,13 +12,13 @@
 "FQ4-fp-Pxj.title" = "Asgari";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Ses RTP Delik Aralığı";
+"Jho-hi-Mvg.title" = "Ses RTP port Aralığı";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
 "K9I-vh-jeu.title" = "Ağ Arayüzü";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Yayınlanan yeri ve deliği belirle:";
+"OL5-DI-aCq.title" = "Yayınlanan yeri ve portu belirle:";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
 "OR2-la-DUE.placeholderString" = "parola...";
@@ -33,7 +33,7 @@
 "Qf3-E3-5U6.title" = "Yayınlanan Adres";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Görüntü RTP Delik Aralığı";
+"XA8-Sy-CYG.title" = "Görüntü RTP port Aralığı";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "Asgari";
@@ -57,7 +57,7 @@
 "sTk-1C-1KO.title" = "Adres";
 
 /* Class = "NSTextFieldCell"; title = "Local port"; ObjectID = "shs-Xm-qnY"; */
-"shs-Xm-qnY.title" = "Yerel delik";
+"shs-Xm-qnY.title" = "Yerel port";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
 "uzg-09-8vi.placeholderString" = "Sunucu adresi...";

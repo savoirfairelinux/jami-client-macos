@@ -9,13 +9,13 @@
 "2e5-zS-ghg.title" = "Use lista de cifra personalizada ";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "cipher cell";
+"5LC-T6-hpk.placeholderString" = "  Tempo limite de negociação";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
 "7c2-kF-dcs.placeholderString" = "Senha...";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
-"9Q3-1W-Lh3.title" = "Negotiation timeout";
+"9Q3-1W-Lh3.title" = " Tempo limite de negociação  ";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
 "Ig9-B1-7N3.title" = "Reserva em RTP";

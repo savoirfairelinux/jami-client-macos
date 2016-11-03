@@ -15,7 +15,10 @@
 "Dqv-um-UUk.title" = "URI";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
-"EA3-Q5-Dyj.placeholderString" = "Binnenkomende Oproepnaam";
+"EA3-Q5-Dyj.placeholderString" = "Inkomende oproepnaam";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
+"G0w-c3-9pJ.ibShadowedToolTip" = "Opnemen";
 
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
 "KPG-pB-gPm.title" = "Beantwoorden";
@@ -29,6 +32,9 @@
 /* Class = "NSTextFieldCell"; title = "Cancel"; ObjectID = "TlL-HO-5Ey"; */
 "TlL-HO-5Ey.title" = "Annuleren";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "VVL-A4-r7n"; */
+"VVL-A4-r7n.ibShadowedToolTip" = "Opnemen";
+
 /* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
 "X0W-vv-xua.title" = "wil met u spreken!";
 
@@ -36,10 +42,10 @@
 "anb-Y8-JQi.ibShadowedToolTip" = "In wacht zetten";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Chat in/uitschakelen";
+"fmp-x4-Pef.ibShadowedToolTip" = "Chat in-/uitschakelen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
-"kIZ-mf-moM.ibShadowedToolTip" = "Deelnemen toevoegen";
+"kIZ-mf-moM.ibShadowedToolTip" = "Deelnemer toevoegen";
 
 /* Class = "NSButtonCell"; title = "Button"; ObjectID = "kxH-yM-TLd"; */
 "kxH-yM-TLd.title" = "Knop";
@@ -69,7 +75,7 @@
 "wRO-X4-7IU.title" = "Beantwoorden";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
-"yZ6-1A-ZLT.title" = "wil met uw praten!";
+"yZ6-1A-ZLT.title" = "wil met u spreken!";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
 "zsO-T7-9yi.placeholderString" = "Tijd";

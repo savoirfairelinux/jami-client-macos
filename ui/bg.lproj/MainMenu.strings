@@ -1,6 +1,6 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Bring All to Front";
+"5.title" = "Извеждане на всичко на преден план";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Прозорец";
@@ -117,7 +117,7 @@
 "220.title" = "Търсене";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Use Selection for Find";
+"221.title" = "Търсене на избраното";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "Мащабиране";
@@ -138,10 +138,10 @@
 "346.title" = "Проверка на граматиката заедно с правописа";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "Substitutions";
+"348.title" = "Заменки";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "Substitutions";
+"349.title" = "Заменки";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
 "350.title" = "Умно копиране/поставяне";
@@ -159,13 +159,13 @@
 "451.title" = "Преобразувания";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Make Upper Case";
+"452.title" = "Превръщане в главни букви";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
 "454.title" = "Автоматична поправка на правописа";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
-"457.title" = "Show Substitutions";
+"457.title" = "Показване на заменките";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
 "460.title" = "Умни тирета";
@@ -174,7 +174,7 @@
 "462.title" = "Замяна на текст";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Make Lower Case";
+"465.title" = "Превръщане в малки букви";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
 "466.title" = "Capitalize";
@@ -194,23 +194,20 @@
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Търсене и замяна…";
 
-/* Class = "NSMenuItem"; title = "Setup Ring"; ObjectID = "589"; */
-"589.title" = "Установка на Ring";
-
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Проверка за обновление…";
 
 /* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "Show";
+"12w-Fz-Scs.title" = "Показване";
 
 /* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "Show";
+"1fJ-em-1ww.title" = "Показване";
 
 /* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Show recent";
+"GTY-d8-NBf.title" = "Показване на скорошните";
 
 /* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "Show contacts";
+"GU3-tt-2de.title" = "Показване на контактите";
 
 /* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "Show call history";
+"Oco-m7-LtS.title" = "Показване на историята";

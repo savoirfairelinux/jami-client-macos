@@ -1,4 +1,7 @@
 
+/* Class = "NSButtonCell"; title = "RTP"; ObjectID = "0D8-im-2uM"; */
+"0D8-im-2uM.title" = "RTP";
+
 /* Class = "NSButtonCell"; title = "Try Registration"; ObjectID = "21g-eQ-0Sc"; */
 "21g-eQ-0Sc.title" = "Изпробване на регистрацията";
 
@@ -9,13 +12,16 @@
 "4Nm-hw-379.title" = "Потребителско име";
 
 /* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "KSm-ZB-4aj"; */
-"KSm-ZB-4aj.title" = "Use custom user-agent";
+"KSm-ZB-4aj.title" = "Използване на персонализиран клиентски идентификатор";
 
 /* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Mxv-Rt-ON6"; */
 "Mxv-Rt-ON6.title" = "Псевдоним";
 
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "N5h-tI-ZLz"; */
 "N5h-tI-ZLz.title" = "Upnp enabled";
+
+/* Class = "NSTextFieldCell"; title = "DTMF tone type"; ObjectID = "Rg8-qR-h1X"; */
+"Rg8-qR-h1X.title" = "Вид на тоналното набиране:";
 
 /* Class = "NSButtonCell"; title = "Show password"; ObjectID = "UXm-73-BNy"; */
 "UXm-73-BNy.title" = "Показване на паролата";
@@ -25,6 +31,9 @@
 
 /* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "YMy-QE-7A3"; */
 "YMy-QE-7A3.title" = "Авт. отговор на обажданията";
+
+/* Class = "NSButtonCell"; title = "SIP"; ObjectID = "jch-Qt-hTO"; */
+"jch-Qt-hTO.title" = "SIP";
 
 /* Class = "NSTextFieldCell"; title = "Parameters"; ObjectID = "mlN-YG-fLS"; */
 "mlN-YG-fLS.title" = "Параметри";

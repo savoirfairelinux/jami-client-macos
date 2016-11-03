@@ -6,7 +6,7 @@
 "6u9-cM-ep0.placeholderString" = "realm...";
 
 /* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
-"Atv-t7-5YJ.title" = "Kiel lokaj parametroj";
+"Atv-t7-5YJ.title" = "Same kiel lokaj parametroj";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "FQ4-fp-Pxj"; */
 "FQ4-fp-Pxj.title" = "Min";
@@ -18,22 +18,22 @@
 "K9I-vh-jeu.title" = "Reta interfaco";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Set published address and port";
+"OL5-DI-aCq.title" = "Agordi publikotajn adreson kaj pordon";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
-"OR2-la-DUE.placeholderString" = "password...";
+"OR2-la-DUE.placeholderString" = "pasvorto...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "username..."; ObjectID = "P7k-xH-2mr"; */
-"P7k-xH-2mr.placeholderString" = "username...";
+"P7k-xH-2mr.placeholderString" = "uzantnomo...";
 
 /* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
-"QS0-TJ-NQh.title" = "Using TURN";
+"QS0-TJ-NQh.title" = "Uzanta TURN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
-"Qf3-E3-5U6.title" = "Published Address";
+"Qf3-E3-5U6.title" = "Publikota Adreso";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Video RTP port Range";
+"XA8-Sy-CYG.title" = "Porda Amplekso de Videa RTP";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "Min";
@@ -45,10 +45,10 @@
 "fB0-X8-GXk.title" = "Radio";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
-"fCd-4d-sP0.title" = "Registration expire";
+"fCd-4d-sP0.title" = "Registriĝa elspiro";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
-"gVd-Dw-1B4.title" = "Using STUN";
+"gVd-Dw-1B4.title" = "Uzanta STUN";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "oa2-Pe-6Uw"; */
 "oa2-Pe-6Uw.title" = "Maks";
@@ -57,7 +57,7 @@
 "sTk-1C-1KO.title" = "Adreso";
 
 /* Class = "NSTextFieldCell"; title = "Local port"; ObjectID = "shs-Xm-qnY"; */
-"shs-Xm-qnY.title" = "Local port";
+"shs-Xm-qnY.title" = "Loka pordo";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
 "uzg-09-8vi.placeholderString" = "Servila URL...";

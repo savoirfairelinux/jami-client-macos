@@ -1,6 +1,6 @@
 
 /* Class = "NSTabViewItem"; label = "SmartView"; ObjectID = "0MO-4e-8mo"; */
-"0MO-4e-8mo.label" = "SmartView";
+"0MO-4e-8mo.label" = "AkıllıGörünüm";
 
 /* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "3Bh-xR-4Vn"; */
 "3Bh-xR-4Vn.title" = "İleti";
@@ -15,16 +15,16 @@
 "F0z-JX-Cv5.title" = "Ring";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Contact Method"; ObjectID = "FlQ-Th-nfO"; */
-"FlQ-Th-nfO.placeholderString" = "Contact Method";
+"FlQ-Th-nfO.placeholderString" = "İletişim Yöntemi";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GAa-pQ-t4g"; */
 "GAa-pQ-t4g.title" = "İleti Hücresi";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "Pav-Bw-GgK"; */
-"Pav-Bw-GgK.title" = "Kutu";
+/* Class = "NSBox"; title = "Title"; ObjectID = "Pav-Bw-GgK"; */
+"Pav-Bw-GgK.title" = "Başlık";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "Q1F-xo-N3e"; */
-"Q1F-xo-N3e.placeholderString" = "Display Role";
+"Q1F-xo-N3e.placeholderString" = "görüntü rolü";
 
 /* Class = "NSTextFieldCell"; placeholderString = "date"; ObjectID = "UKP-Et-CT0"; */
 "UKP-Et-CT0.placeholderString" = "tarih";
@@ -42,19 +42,19 @@
 "bgk-oz-u7n.placeholderString" = "Ad";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Category"; ObjectID = "d5o-nL-fRP"; */
-"d5o-nL-fRP.placeholderString" = "Category";
+"d5o-nL-fRP.placeholderString" = "kategori";
 
 /* Class = "NSTextFieldCell"; title = "Ring is a secure and distributed voice, video and chat communication platform that requires no centralized server and leaves the power of privacy in the hands of the user."; ObjectID = "eln-Vm-t0d"; */
 "eln-Vm-t0d.title" = "Ring merkezi sunucuya ihtiyaç duymayan, gizliliğin gücünü kullanıcının ellerine bırakan, güvenli ve dağıtık; sesli, görüntülü ve yazılı iletişim düzlemidir.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Category"; ObjectID = "gaf-Za-tuc"; */
-"gaf-Za-tuc.placeholderString" = "Category";
+"gaf-Za-tuc.placeholderString" = "kategori";
 
 /* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "isD-c6-X5Q"; */
 "isD-c6-X5Q.placeholderString" = "ayrıntılar";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Call name"; ObjectID = "j0J-Xd-uth"; */
-"j0J-Xd-uth.placeholderString" = "Call name";
+"j0J-Xd-uth.placeholderString" = "arama ismi";
 
 /* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "mK5-kV-YOO"; */
 "mK5-kV-YOO.placeholderString" = "ayrıntılar";
@@ -63,7 +63,7 @@
 "sGB-x7-gig.placeholderString" = "n";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "uSw-g5-kte"; */
-"uSw-g5-kte.placeholderString" = "Display Role";
+"uSw-g5-kte.placeholderString" = "görüntü rolü";
 
 /* Class = "NSSearchFieldCell"; placeholderString = "Name, ringID"; ObjectID = "vvE-nM-kSl"; */
-"vvE-nM-kSl.placeholderString" = "Name, ringID";
+"vvE-nM-kSl.placeholderString" = "İsim, RingKimliği";
