@@ -3,13 +3,13 @@
 "1f9-X5-ykb.title" = "Gelen TLS bağlantıları için sertifika iste";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Verify certificates, as a client";
+"1xi-9G-zOX.title" = "Sertifikaları doğrula, istemci olarak";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
-"2e5-zS-ghg.title" = "Use custom cipher list";
+"2e5-zS-ghg.title" = "Özel şifre listesi kullan";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "cipher cell";
+"5LC-T6-hpk.placeholderString" = "Şifreleyici hücreler";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
 "7c2-kF-dcs.placeholderString" = "Parola...";
@@ -18,7 +18,7 @@
 "9Q3-1W-Lh3.title" = "Müzakere zaman aşımı";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
-"Ig9-B1-7N3.title" = "Fallback on RTP";
+"Ig9-B1-7N3.title" = "RTP'ye Geri Dön";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
 "JHb-iu-ZwI.title" = "Özel anahtar";
@@ -27,7 +27,7 @@
 "Jqz-P0-zAz.title" = "Kullanıcı Sertifikası";
 
 /* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
-"UxS-et-whJ.title" = "Server name instance for outgoing TLS connection";
+"UxS-et-whJ.title" = "Giden TLS bağlantısı için sunucu adı örneği";
 
 /* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
 "YtQ-hx-hih.title" = "SRTP kullan";
@@ -42,4 +42,4 @@
 "vPF-Rp-aR6.title" = "Sertifika Onay Kurumu listesi";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
-"x2s-ov-cVQ.title" = "Verify incoming certificates, as a server";
+"x2s-ov-cVQ.title" = "Gelen sertifikaları doğrula, sunucu olarak";

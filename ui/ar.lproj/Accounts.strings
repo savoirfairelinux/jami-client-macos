@@ -5,12 +5,6 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Type"; ObjectID = "KoR-IH-uuI"; */
 "KoR-IH-uuI.placeholderString" = "النوع";
 
-/* Class = "NSTextFieldCell"; title = "Create Account"; ObjectID = "OZ9-qH-dYW"; */
-"OZ9-qH-dYW.title" = "أحدث حساب";
-
-/* Class = "NSButtonCell"; title = "Export"; ObjectID = "OeK-Sf-pdc"; */
-"OeK-Sf-pdc.title" = "تصدير";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "RT7-u6-bhe"; */
 "RT7-u6-bhe.label" = "إعدادات متقدمة";
 
@@ -20,6 +14,9 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "ZDh-Jh-hfW"; */
 "ZDh-Jh-hfW.placeholderString" = "الإسم";
 
+/* Class = "NSTabViewItem"; label = "Devices"; ObjectID = "cT1-A5-rbj"; */
+"cT1-A5-rbj.label" = "Devices";
+
 /* Class = "NSTextFieldCell"; placeholderString = "Status"; ObjectID = "eEz-Lm-SOj"; */
 "eEz-Lm-SOj.placeholderString" = "الحالة";
 
@@ -28,6 +25,3 @@
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "tPR-Ac-N5Y"; */
 "tPR-Ac-N5Y.label" = "عام";
-
-/* Class = "NSButtonCell"; title = "Import"; ObjectID = "zov-Bb-Fgp"; */
-"zov-Bb-Fgp.title" = "استيراد";

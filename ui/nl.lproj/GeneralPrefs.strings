@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Keep my history for"; ObjectID = "3Pb-Ec-zl5"; */
-"3Pb-Ec-zl5.title" = "geschiedenis bewaren voor";
+"3Pb-Ec-zl5.title" = "Geschiedenis bewaren voor";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "42E-UY-qlP"; */
 "42E-UY-qlP.title" = "Maandelijks";
@@ -8,23 +8,26 @@
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "AId-am-73Q"; */
 "AId-am-73Q.title" = "Wekelijks";
 
-/* Class = "NSTextFieldCell"; title = "History"; ObjectID = "DSD-yl-noX"; */
-"DSD-yl-noX.title" = "Geschiedenis";
-
 /* Class = "NSTextFieldCell"; title = "30"; ObjectID = "JvS-c4-OeT"; */
 "JvS-c4-OeT.title" = "30";
 
+/* Class = "NSTextField"; ibShadowedToolTip = "Profile"; ObjectID = "MV1-AC-qE7"; */
+"MV1-AC-qE7.ibShadowedToolTip" = "Profiel";
+
 /* Class = "NSButtonCell"; title = "Launch on Startup"; ObjectID = "O2C-xR-mHF"; */
-"O2C-xR-mHF.title" = "Automatisch Starten";
+"O2C-xR-mHF.title" = "Automatisch starten";
 
 /* Class = "NSTextFieldCell"; title = "(Applied on application restart)"; ObjectID = "OTl-vx-S43"; */
-"OTl-vx-S43.title" = "(actief nadat applicatie herstart is)";
+"OTl-vx-S43.title" = "(Actief nadat applicatie herstart is)";
 
-/* Class = "NSTextFieldCell"; title = "Interruptions"; ObjectID = "Rzy-Gh-3wQ"; */
-"Rzy-Gh-3wQ.title" = "Onderbrekingen";
+/* Class = "NSTextFieldCell"; title = "Behaviours"; ObjectID = "Rzy-Gh-3wQ"; */
+"Rzy-Gh-3wQ.title" = "Behaviours";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
 "T3a-yx-ZaW.title" = "Automatisch op updates controleren";
+
+/* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "Thg-oC-5Qw"; */
+"Thg-oC-5Qw.title" = "Profiel";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "cB6-4m-9MU"; */
 "cB6-4m-9MU.title" = "Dagelijks";
@@ -41,14 +44,11 @@
 /* Class = "NSTextFieldCell"; title = "Update"; ObjectID = "r4u-t3-gBc"; */
 "r4u-t3-gBc.title" = "Update";
 
-/* Class = "NSTextFieldCell"; title = "Window behaviour"; ObjectID = "sog-Ok-Y0N"; */
-"sog-Ok-Y0N.title" = "Gedrag venster";
-
-/* Class = "NSButtonCell"; title = "Enable Notifications"; ObjectID = "uCL-ye-tsv"; */
-"uCL-ye-tsv.title" = "Notificaties inschakelen";
+/* Class = "NSButtonCell"; title = "Enable Desktop Notifications"; ObjectID = "uCL-ye-tsv"; */
+"uCL-ye-tsv.title" = "Enable Desktop Notifications";
 
 /* Class = "NSButtonCell"; title = "Bring Ring to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
-"uYI-hA-JHk.title" = "Ring naar voorgrond brengen bij binnenkomende oproepen";
+"uYI-hA-JHk.title" = "Ring naar voorgrond brengen bij inkomende oproepen";
 
-/* Class = "NSTextFieldCell"; title = "Desktop Notifications"; ObjectID = "xlz-zw-IJI"; */
-"xlz-zw-IJI.title" = "Bureaublad notificaties";
+/* Class = "NSTextFieldCell"; title = "This is shared with your contacts "; ObjectID = "vbU-2S-O58"; */
+"vbU-2S-O58.title" = "This is shared with your contacts ";

@@ -24,7 +24,7 @@
 "dwG-Ro-bIS.placeholderString" = "Частота";
 
 /* Class = "NSTextFieldCell"; title = "details"; ObjectID = "dwG-Ro-bIS"; */
-"dwG-Ro-bIS.title" = "details";
+"dwG-Ro-bIS.title" = "Детали";
 
 /* Class = "NSTextFieldCell"; title = "Audio"; ObjectID = "gzX-Wc-S6g"; */
 "gzX-Wc-S6g.title" = "Звук";
@@ -39,7 +39,7 @@
 "pvl-9U-X4l.placeholderString" = "Имя";
 
 /* Class = "NSTextFieldCell"; title = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)"; ObjectID = "rRr-la-G9L"; */
-"rRr-la-G9L.title" = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)";
+"rRr-la-G9L.title" = "Кодеки используются при установлении связи с кем-то. Их можно активировать и сортировать (первый включенный в списке будет предпочтительным)";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "rU5-XQ-Ixc"; */
 "rU5-XQ-Ixc.placeholderString" = "Имя";

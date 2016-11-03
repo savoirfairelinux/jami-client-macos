@@ -12,7 +12,7 @@
 "24.title" = "Pencere";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
+"29.title" = "Ana Menü";
 
 /* Class = "NSMenuItem"; title = "Ring"; ObjectID = "56"; */
 "56.title" = "Ring";
@@ -45,10 +45,10 @@
 "150.title" = "Tümünü Göster";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "Stop Speaking";
+"195.title" = "Konuşmayı Durdur";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "Start Speaking";
+"196.title" = "Konuşmayı Başlat";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
 "197.title" = "Kopyala";
@@ -60,7 +60,7 @@
 "199.title" = "Kes";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
-"200.title" = "Spelling and Grammar";
+"200.title" = "Yazım ve Dil Bilgisi";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
 "201.title" = "Belgeyi Şimdi Denetle";
@@ -72,7 +72,7 @@
 "203.title" = "Yapıştır";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Show Spelling and Grammar";
+"204.title" = "Yazım ve Dil Bilgisini göster";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
 "205.title" = "Düzenle";
@@ -90,10 +90,10 @@
 "210.title" = "Seçime Git";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
-"211.title" = "Speech";
+"211.title" = "Konuşma";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "212"; */
-"212.title" = "Speech";
+"212.title" = "Konuşma";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
 "213.title" = "Öncekini Bul";
@@ -102,7 +102,7 @@
 "215.title" = "Geri Al";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
-"216.title" = "Spelling and Grammar";
+"216.title" = "Yazım ve Dil Bilgisi";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
 "217.title" = "Düzenle";
@@ -111,22 +111,22 @@
 "218.title" = "Bul";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Check Spelling While Typing";
+"219.title" = "Yazarken Yazım Denetimi Yap";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
 "220.title" = "Bul";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Use Selection for Find";
+"221.title" = "Bulmak için seçimi kullan";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Zoom";
+"239.title" = "Yakınlaştırma";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "View";
+"295.title" = "Görünüm";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "View";
+"296.title" = "Görünüm";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
 "297.title" = "Araç Çubuğunu Göster";
@@ -135,13 +135,13 @@
 "298.title" = "Araç Çubuğunu Özelleştir...";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Check Grammar With Spelling";
+"346.title" = "Dil Bilgisini Yazım Denetimi ile Denetle";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "Substitutions";
+"348.title" = "Yerine koyma";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "Substitutions";
+"349.title" = "Yerine koyma";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
 "350.title" = "Akıllı Kopyala/Yapıştır";
@@ -153,31 +153,31 @@
 "354.title" = "Akıllı Bağlantılar";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
-"450.title" = "Transformations";
+"450.title" = "Dönüştürmeler";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "451"; */
-"451.title" = "Transformations";
+"451.title" = "Dönüştürmeler";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Make Upper Case";
+"452.title" = "Büyük Harf Yap";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Correct Spelling Automatically";
+"454.title" = "Yazım hatalarını otomatik olarak düzelt";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
-"457.title" = "Show Substitutions";
+"457.title" = "İkame edilenleri göster";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Smart Dashes";
+"460.title" = "Akıllı Çizgiler";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "Text Replacement";
+"462.title" = "Metni Yenisiyle Değiştirme";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Make Lower Case";
+"465.title" = "Küçük Harf Yap";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
-"466.title" = "Capitalize";
+"466.title" = "Sermaye sağlamak";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
 "485.title" = "Yapıştır ve Biçimi Koru";
@@ -189,13 +189,10 @@
 "491.title" = "Yardım";
 
 /* Class = "NSMenuItem"; title = "Ring Help"; ObjectID = "492"; */
-"492.title" = "Ring Help";
+"492.title" = "Ring Yardım";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Bul ve Değiştir...";
-
-/* Class = "NSMenuItem"; title = "Setup Ring"; ObjectID = "589"; */
-"589.title" = "Setup Ring";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Güncellemeleri denetle";
@@ -207,7 +204,7 @@
 "1fJ-em-1ww.title" = "Göster";
 
 /* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Show recent";
+"GTY-d8-NBf.title" = "Son kullanılanı göster";
 
 /* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
 "GU3-tt-2de.title" = "Kişileri göster";

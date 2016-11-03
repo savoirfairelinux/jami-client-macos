@@ -5,29 +5,23 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Type"; ObjectID = "KoR-IH-uuI"; */
 "KoR-IH-uuI.placeholderString" = "Τύπος";
 
-/* Class = "NSTextFieldCell"; title = "Create Account"; ObjectID = "OZ9-qH-dYW"; */
-"OZ9-qH-dYW.title" = "Create Account";
-
-/* Class = "NSButtonCell"; title = "Export"; ObjectID = "OeK-Sf-pdc"; */
-"OeK-Sf-pdc.title" = "Export";
-
 /* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "RT7-u6-bhe"; */
-"RT7-u6-bhe.label" = "Advanced";
+"RT7-u6-bhe.label" = "Για προχωρημένους";
 
 /* Class = "NSTabViewItem"; label = "Security"; ObjectID = "Vp5-yV-ScC"; */
-"Vp5-yV-ScC.label" = "Security";
+"Vp5-yV-ScC.label" = "Ασφάλεια";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "ZDh-Jh-hfW"; */
 "ZDh-Jh-hfW.placeholderString" = "Όνομα";
 
+/* Class = "NSTabViewItem"; label = "Devices"; ObjectID = "cT1-A5-rbj"; */
+"cT1-A5-rbj.label" = "Devices";
+
 /* Class = "NSTextFieldCell"; placeholderString = "Status"; ObjectID = "eEz-Lm-SOj"; */
-"eEz-Lm-SOj.placeholderString" = "Status";
+"eEz-Lm-SOj.placeholderString" = "Κατάσταση";
 
 /* Class = "NSTabViewItem"; label = "Media"; ObjectID = "lxr-my-vH8"; */
-"lxr-my-vH8.label" = "Media";
+"lxr-my-vH8.label" = "Μέσα";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "tPR-Ac-N5Y"; */
-"tPR-Ac-N5Y.label" = "General";
-
-/* Class = "NSButtonCell"; title = "Import"; ObjectID = "zov-Bb-Fgp"; */
-"zov-Bb-Fgp.title" = "Import";
+"tPR-Ac-N5Y.label" = "Γενικά";

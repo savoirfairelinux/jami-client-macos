@@ -75,7 +75,7 @@
 "204.title" = "Rodyti rašybą ir gramatiką";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Redaguoti";
+"205.title" = "Taisa";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
 "207.title" = "Atšaukti";
@@ -105,7 +105,7 @@
 "216.title" = "Rašyba ir gramatika";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Redaguoti";
+"217.title" = "Taisa";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
 "218.title" = "Rasti";
@@ -123,10 +123,10 @@
 "239.title" = "Zoom";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "View";
+"295.title" = "Rodinys";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "View";
+"296.title" = "Rodinys";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
 "297.title" = "Rodyti įrankių juostą";
@@ -194,23 +194,20 @@
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Rasti ir pakeisti...";
 
-/* Class = "NSMenuItem"; title = "Setup Ring"; ObjectID = "589"; */
-"589.title" = "Ring sąranka";
-
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Check for Update...";
+"593.title" = "Tikrinti ar yra atnaujinimų...";
 
 /* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "Show";
+"12w-Fz-Scs.title" = "Rodyti";
 
 /* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "Show";
+"1fJ-em-1ww.title" = "Rodyti";
 
 /* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
 "GTY-d8-NBf.title" = "Show recent";
 
 /* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "Show contacts";
+"GU3-tt-2de.title" = "Rodyti kontaktus";
 
 /* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "Show call history";
+"Oco-m7-LtS.title" = "Rodyti skambučių istoriją";

@@ -21,7 +21,7 @@
 "57.title" = "Bellen";
 
 /* Class = "NSMenuItem"; title = "About Ring"; ObjectID = "58"; */
-"58.title" = "About Ring";
+"58.title" = "Over Ring";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
 "129.title" = "Preferences…";
@@ -66,7 +66,7 @@
 "201.title" = "Check Document Now";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
-"202.title" = "Delete";
+"202.title" = "Verwijderen";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
 "203.title" = "Paste";
@@ -193,9 +193,6 @@
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Find and Replace…";
-
-/* Class = "NSMenuItem"; title = "Setup Ring"; ObjectID = "589"; */
-"589.title" = "Setup Ring";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Check for Update...";

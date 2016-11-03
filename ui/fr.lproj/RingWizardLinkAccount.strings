@@ -1,0 +1,27 @@
+
+/* Class = "NSTextFieldCell"; title = "Enter your pin"; ObjectID = "3ik-rY-Gig"; */
+"3ik-rY-Gig.title" = "Entrer votre code pin";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "4ev-TK-8Yt"; */
+"4ev-TK-8Yt.title" = "Annuler";
+
+/* Class = "NSButtonCell"; title = "Next"; ObjectID = "8b8-bt-eAj"; */
+"8b8-bt-eAj.title" = "Suivant";
+
+/* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
+"DyG-SJ-U1Q.title" = "Une erreur est survenue, vérifier votre mot de passe and code pin";
+
+/* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "M4C-GY-B6t"; */
+"M4C-GY-B6t.title" = "Veuillez patienter...";
+
+/* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "U2K-fu-INc"; */
+"U2K-fu-INc.title" = "Entrer le mot de passe de votre compte Ring";
+
+/* Class = "NSTextFieldCell"; title = "To link this device to another account, you first need to obtain a pin code.  To generate the pin code, go to the account management setting of a previous device, choose the Ring Account to use and select \"Link another device to this account\".  You will get the necessary pin to complete this form. The Pin is only valid for 10 minutes."; ObjectID = "dJ0-Rk-Rqr"; */
+"dJ0-Rk-Rqr.title" = "Pour lier cet appareil à un compte, vous devez obtenir un code pin.\nPour générer ce code, allez dans les paramètres du compte Ring à utiliser sur un appareil déjà lié et sélectionner \"Lier un autre appareil avec ce compte\".\nVous obtiendrez le code pin nécessaire.\nThe code pin est valide pendant 10 minutes.";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "t12-O0-kcf"; */
+"t12-O0-kcf.title" = "Annuler";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "uhy-DE-TKw"; */
+"uhy-DE-TKw.title" = "Annuler";
