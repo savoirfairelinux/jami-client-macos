@@ -1,6 +1,9 @@
 
+/* Class = "NSButtonCell"; title = "RTP"; ObjectID = "0D8-im-2uM"; */
+"0D8-im-2uM.title" = "RTP";
+
 /* Class = "NSButtonCell"; title = "Try Registration"; ObjectID = "21g-eQ-0Sc"; */
-"21g-eQ-0Sc.title" = "Try Registration";
+"21g-eQ-0Sc.title" = "Kaydetmeyi deneyin.";
 
 /* Class = "NSTextFieldCell"; title = "Server hostname"; ObjectID = "3uy-g0-eCm"; */
 "3uy-g0-eCm.title" = "Sunucu adı";
@@ -9,13 +12,16 @@
 "4Nm-hw-379.title" = "Kullanıcı adı";
 
 /* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "KSm-ZB-4aj"; */
-"KSm-ZB-4aj.title" = "Use custom user-agent";
+"KSm-ZB-4aj.title" = "Ayarlanmış kullanıcı temsilcisini kullanın.";
 
 /* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Mxv-Rt-ON6"; */
 "Mxv-Rt-ON6.title" = "Takma ad";
 
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "N5h-tI-ZLz"; */
 "N5h-tI-ZLz.title" = "Upnp etkin";
+
+/* Class = "NSTextFieldCell"; title = "DTMF tone type"; ObjectID = "Rg8-qR-h1X"; */
+"Rg8-qR-h1X.title" = "DTMF ton türü";
 
 /* Class = "NSButtonCell"; title = "Show password"; ObjectID = "UXm-73-BNy"; */
 "UXm-73-BNy.title" = "Parolayı göster";
@@ -25,6 +31,9 @@
 
 /* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "YMy-QE-7A3"; */
 "YMy-QE-7A3.title" = "Aramaları kendiliğinden cevapla";
+
+/* Class = "NSButtonCell"; title = "SIP"; ObjectID = "jch-Qt-hTO"; */
+"jch-Qt-hTO.title" = "SIP";
 
 /* Class = "NSTextFieldCell"; title = "Parameters"; ObjectID = "mlN-YG-fLS"; */
 "mlN-YG-fLS.title" = "Değişkenler";

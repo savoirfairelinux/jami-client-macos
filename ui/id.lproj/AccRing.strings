@@ -1,18 +1,18 @@
 
-/* Class = "NSTextFieldCell"; title = "This will be displayed to unknown peers"; ObjectID = "0Yt-xC-OWa"; */
-"0Yt-xC-OWa.title" = "This will be displayed to unknown peers";
-
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
 "1Sx-Et-CDM.title" = "Akun";
+
+/* Class = "NSTextFieldCell"; title = "RingID"; ObjectID = "8WI-fC-Due"; */
+"8WI-fC-Due.title" = "RingID";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap server"; ObjectID = "B6b-iB-REZ"; */
 "B6b-iB-REZ.title" = "Bootstrap server";
 
-/* Class = "NSTextFieldCell"; title = "TYPE"; ObjectID = "Bqr-Gq-OgA"; */
-"Bqr-Gq-OgA.title" = "TYPE";
-
 /* Class = "NSTextFieldCell"; title = "Permissions"; ObjectID = "EDd-FX-wcz"; */
 "EDd-FX-wcz.title" = "Permissions";
+
+/* Class = "NSButtonCell"; title = "Register name"; ObjectID = "G8M-go-xvD"; */
+"G8M-go-xvD.title" = "Register name";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
 "HN3-i9-zmw.placeholderString" = "Name or nickname...";
@@ -26,14 +26,11 @@
 /* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
 "Wzq-V2-YLU.title" = "Alias";
 
-/* Class = "NSTextFieldCell"; title = "This is your RingID. Copy and share it with your friends!"; ObjectID = "bca-Wv-Xul"; */
-"bca-Wv-Xul.title" = "This is your RingID. Copy and share it with your friends!";
-
-/* Class = "NSTextFieldCell"; title = "Ring Identifier"; ObjectID = "dPO-b1-o58"; */
-"dPO-b1-o58.title" = "Ring Identifier";
-
 /* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "ddk-1G-0jU"; */
 "ddk-1G-0jU.title" = "Use custom user-agent";
+
+/* Class = "NSTextFieldCell"; title = "Blockchain server"; ObjectID = "fSU-Pc-Y5a"; */
+"fSU-Pc-Y5a.title" = "Blockchain server";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
 "fX7-9W-XFl.title" = "Allow calls from peers in your contact list";
@@ -44,5 +41,5 @@
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
 "lHI-bz-ddQ.title" = "Upnp enabled";
 
-/* Class = "NSTextFieldCell"; title = "Type"; ObjectID = "ubB-AZ-nAm"; */
-"ubB-AZ-nAm.title" = "Type";
+/* Class = "NSTextFieldCell"; title = "Registered Name"; ObjectID = "sBB-y7-xhL"; */
+"sBB-y7-xhL.title" = "Registered Name";

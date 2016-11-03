@@ -12,28 +12,28 @@
 "FQ4-fp-Pxj.title" = "Мин";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Audio RTP port Range";
+"Jho-hi-Mvg.title" = "Звуковой RTP диапазон портов";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
-"K9I-vh-jeu.title" = "Network Interface";
+"K9I-vh-jeu.title" = "Сетевой интерфейс";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Set published address and port";
+"OL5-DI-aCq.title" = "Установить публичный адрес и порт";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
-"OR2-la-DUE.placeholderString" = "password...";
+"OR2-la-DUE.placeholderString" = "пароль...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "username..."; ObjectID = "P7k-xH-2mr"; */
-"P7k-xH-2mr.placeholderString" = "username...";
+"P7k-xH-2mr.placeholderString" = "имя пользователя...";
 
 /* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
-"QS0-TJ-NQh.title" = "Using TURN";
+"QS0-TJ-NQh.title" = "Используется STUN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
-"Qf3-E3-5U6.title" = "Published Address";
+"Qf3-E3-5U6.title" = "Публичный адрес";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Video RTP port Range";
+"XA8-Sy-CYG.title" = "Видео RTP диапазон портов";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "Мин";
@@ -42,13 +42,13 @@
 "dbq-qU-93x.title" = "Макс";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "fB0-X8-GXk"; */
-"fB0-X8-GXk.title" = "Radio";
+"fB0-X8-GXk.title" = "Радио";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
-"fCd-4d-sP0.title" = "Registration expire";
+"fCd-4d-sP0.title" = "Регистрация истекает";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
-"gVd-Dw-1B4.title" = "Using STUN";
+"gVd-Dw-1B4.title" = "Используется STUN";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "oa2-Pe-6Uw"; */
 "oa2-Pe-6Uw.title" = "Макс";
@@ -57,7 +57,7 @@
 "sTk-1C-1KO.title" = "Адрес";
 
 /* Class = "NSTextFieldCell"; title = "Local port"; ObjectID = "shs-Xm-qnY"; */
-"shs-Xm-qnY.title" = "Local port";
+"shs-Xm-qnY.title" = "Локальный порт";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
 "uzg-09-8vi.placeholderString" = "URL сервера...";
@@ -66,7 +66,7 @@
 "wl8-YK-M76.title" = "Порт";
 
 /* Class = "NSTextFieldCell"; title = "seconds"; ObjectID = "xGw-j0-4ID"; */
-"xGw-j0-4ID.title" = "seconds";
+"xGw-j0-4ID.title" = "секунд";
 
 /* Class = "NSTextFieldCell"; title = "Registration"; ObjectID = "yB5-ET-gBL"; */
-"yB5-ET-gBL.title" = "Registration";
+"yB5-ET-gBL.title" = "Регистрация";

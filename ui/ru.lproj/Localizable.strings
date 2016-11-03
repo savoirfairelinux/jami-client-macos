@@ -1,17 +1,20 @@
 
+"A network error occured during the export" = "A network error occured during the export";
+
+/* Contextual menu action */
 "Add to contacts" = "Добавить в контакты";
+
+/* Text shown to the user */
+"Alias : " = "Alias : ";
 
 /* Error shown to the user */
 "An error occured during the export" = "An error occured during the export";
 
-/* Error shown to the user */
-"An error occured during the import" = "An error occured during the import";
+/* Contextual menu entry */
+"Backup account" = "Backup account";
 
 /* Contextual menu action */
 "Call number" = "Позвонить по номеру";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose" = "Выбрать";
 
 /* Open panel title */
 "Choose a CA list" = "Выбрать список CA";
@@ -34,23 +37,56 @@
 /* Contextual menu entry */
 "Choose file" = "Выбрать файл";
 
-/* Continue button */
-"Continue" = "Продолжить";
-
 /* No comment provided by engineer. */
 "Copy" = "Копировать";
 
 /* Contextual menu action */
+"Copy name" = "Copy name";
+
+/* Contextual menu action */
 "Copy number" = "Копировать номер";
+
+/* Contextual menu entry */
+"Create RING Account" = "Create RING Account";
+
+/* Contextual menu entry */
+"Create SIP Account" = "Create SIP Account";
+
+/* Alert dialog title */
+"Entered name not found" = "Entered name not found";
+
+/* Error message shown to user when it is impossible to migrate account */
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+
+/* Text shown to user when an error occur at registration */
+"Failed to perform lookup" = "Failed to perform lookup";
+
+/* Text shown to the user */
+"ID : " = "ID : ";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Входящий вызов от %@";
 
-/* Indication for user */
-"Just a moment..." = "Один момент...";
+/* Alert dialo message */
+"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
 
 /* Message from {Name} */
 "Message from %@" = "Сообщение от %@";
+
+/* User label */
+"New SIP account" = "New SIP account";
+
+/* Alert dialog title */
+"No valid account available" = "No valid account available";
+
+/* Text show to the user when password didn't match */
+"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+
+/* Indication for user */
+"Password is too short" = "Password is too short";
+
+/* Indication for user */
+"Passwords don't match" = "Passwords don't match";
 
 /* Button label */
 "Pause" = "Пауза";
@@ -67,8 +103,11 @@
 /* Show advice to user */
 "Reopen account to see your hash" = "Переоткрыть учетную запись для просмотра вашего хеша";
 
-/* Display message to user */
-"Ring is already ready to work" = "Ring уже готов к работе";
+/* Contextual menu entry */
+"Restore account" = "Restore account";
+
+/* Button title */
+"Revise Input" = "Revise Input";
 
 /* No comment provided by engineer. */
 "Share" = "Поделиться";
@@ -76,6 +115,33 @@
 /* No comment provided by engineer. */
 "Text Actions" = "Действия с текстом";
 
+/* Text shown to user when his username is available to be registered */
+"The entered username is available" = "The entered username is available";
+
+/* Text shown to user when his username is invalid to be registered */
+"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
+
+/* Text shown to user when his username is already registered */
+"The entered username is not available" = "The entered username is not available";
+
+/* Text shown to the user */
+"The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
+
+/* Error shown to the user */
+"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+
+/* Alert dialog title */
+"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+
+/* Title shown to user to concat with Pin */
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+
+/* Text shown to the user */
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
+
 /* Name used when user leave field empty */
 "Unknown" = "Неизвестно";
+
+/* Error shown to user */
+"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
 

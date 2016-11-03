@@ -1,0 +1,36 @@
+
+/* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Ring network. Other people can use it to call you."; ObjectID = "0qE-Sz-hdc"; */
+"0qE-Sz-hdc.title" = "Genom att aktivera det här, registrerar du ett unikt namn på Ring-nätverket. Andra mäniskor kan använda det för att kontakta dig.";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
+"1TO-Ov-S8j.placeholderString" = "Obligatoriskt*";
+
+/* Class = "NSButtonCell"; title = "Register name publicly (experimental)"; ObjectID = "AG5-GR-bii"; */
+"AG5-GR-bii.title" = "Register name publicly (experimental)";
+
+/* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
+"B6x-jj-48R.title" = "Välj ditt lösenord";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
+"BCg-5V-Ek4.placeholderString" = "Obligatoriskt*";
+
+/* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
+"YIN-YL-JBs.title" = "Ett ögonblick...";
+
+/* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
+"fEY-eO-HwI.title" = "Upprepa ditt lösenord";
+
+/* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
+"gEy-ak-Cgq.placeholderString" = "'Okänd' om tom...";
+
+/* Class = "NSTextFieldCell"; title = "Choose your username"; ObjectID = "tzf-88-Yn5"; */
+"tzf-88-Yn5.title" = "Välj användarnamn";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
+"v7f-52-GJA.title" = "Avbryt";
+
+/* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
+"zUH-kc-cik.title" = "Ditt lösenord måste vara minst 6 tecken långt. Det kommer att användas för att kryptera din kontodata och för att koppla nya enheter till ditt konto.";
+
+/* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
+"zfA-n9-V4X.title" = "Skapa";

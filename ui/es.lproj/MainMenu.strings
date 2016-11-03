@@ -12,7 +12,7 @@
 "24.title" = "Ventana";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
+"29.title" = "UnMenúPrincipal";
 
 /* Class = "NSMenuItem"; title = "Ring"; ObjectID = "56"; */
 "56.title" = "Ring";
@@ -117,7 +117,7 @@
 "220.title" = "Buscar";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Use Selection for Find";
+"221.title" = "Usar selección para encontrar";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "Zoom";
@@ -168,10 +168,10 @@
 "457.title" = "Mostrar las sustituciones";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Smart Dashes";
+"460.title" = "Guiones inteligentes";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "Text Replacement";
+"462.title" = "Reemplazo de texto";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
 "465.title" = "Transformar a minúsculas";
@@ -180,7 +180,7 @@
 "466.title" = "Cambiar a Mayúsculas";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "Paste and Match Style";
+"485.title" = "Pegar e igualar estilo";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
 "490.title" = "Ayuda";
@@ -194,20 +194,17 @@
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Buscar y Reemplazar...";
 
-/* Class = "NSMenuItem"; title = "Setup Ring"; ObjectID = "589"; */
-"589.title" = "Configurar Ring";
-
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Buscar Actualizaciones...";
 
 /* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "Show";
+"12w-Fz-Scs.title" = "Mostrar";
 
 /* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "Show";
+"1fJ-em-1ww.title" = "Mostrar";
 
 /* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Show recent";
+"GTY-d8-NBf.title" = "Mostrar reciente";
 
 /* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
 "GU3-tt-2de.title" = "Mostrar contactos";

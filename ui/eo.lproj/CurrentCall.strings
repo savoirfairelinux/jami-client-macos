@@ -1,27 +1,30 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "2cB-dz-KYg"; */
-"2cB-dz-KYg.ibShadowedToolTip" = "Hang up";
+"2cB-dz-KYg.ibShadowedToolTip" = "Fini vokon";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
-"9e8-ji-QId.ibShadowedToolTip" = "Join call";
+"9e8-ji-QId.ibShadowedToolTip" = "Aliĝi vokon";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
-"ChW-kg-Sja.ibShadowedToolTip" = "Transmeto";
+"ChW-kg-Sja.ibShadowedToolTip" = "Transigo";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
-"D0G-XT-lhI.ibShadowedToolTip" = "Hang up";
+"D0G-XT-lhI.ibShadowedToolTip" = "Fini vokon";
 
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
 "Dqv-um-UUk.title" = "URI";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
-"EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
+"EA3-Q5-Dyj.placeholderString" = "Envena Vidiga Nomo";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
+"G0w-c3-9pJ.ibShadowedToolTip" = "Registri";
 
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
 "KPG-pB-gPm.title" = "Respondi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
-"Kjq-iM-NBL.ibShadowedToolTip" = "Hang up";
+"Kjq-iM-NBL.ibShadowedToolTip" = "Fini vokon";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
 "LVS-yZ-98V.ibShadowedToolTip" = "Silentigi videon";
@@ -29,38 +32,41 @@
 /* Class = "NSTextFieldCell"; title = "Cancel"; ObjectID = "TlL-HO-5Ey"; */
 "TlL-HO-5Ey.title" = "Rezigni";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "VVL-A4-r7n"; */
+"VVL-A4-r7n.ibShadowedToolTip" = "Registri";
+
 /* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
-"X0W-vv-xua.title" = "wants to talk to you!";
+"X0W-vv-xua.title" = "volas paroli kun vi!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
 "anb-Y8-JQi.ibShadowedToolTip" = "Deteni";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
+"fmp-x4-Pef.ibShadowedToolTip" = "Ŝalti babilon";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
-"kIZ-mf-moM.ibShadowedToolTip" = "Add participant";
+"kIZ-mf-moM.ibShadowedToolTip" = "Aldoni partoprenanton";
 
 /* Class = "NSButtonCell"; title = "Button"; ObjectID = "kxH-yM-TLd"; */
 "kxH-yM-TLd.title" = "Butono";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
-"mc3-HV-hek.ibShadowedToolTip" = "Hang up";
+"mc3-HV-hek.ibShadowedToolTip" = "Fini vokon";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
 "oRa-pS-HN2.ibShadowedToolTip" = "Registri";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
-"osk-LS-0Qg.placeholderString" = "Person name";
+"osk-LS-0Qg.placeholderString" = "Nomo de persono";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Pick up";
+"qgD-3D-nD5.ibShadowedToolTip" = "Akcepti la vokon";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
 "tQl-cT-0Lb.ibShadowedToolTip" = "Silentigi aŭdion";
 
 /* Class = "NSTextFieldCell"; title = "Ignore"; ObjectID = "tjM-py-p4V"; */
-"tjM-py-p4V.title" = "Ignore";
+"tjM-py-p4V.title" = "Malatenti";
 
 /* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "ugy-uK-901"; */
 "ugy-uK-901.placeholderString" = "Stato";

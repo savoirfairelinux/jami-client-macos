@@ -1,4 +1,7 @@
 
+/* Class = "NSButtonCell"; title = "RTP"; ObjectID = "0D8-im-2uM"; */
+"0D8-im-2uM.title" = "RTP";
+
 /* Class = "NSButtonCell"; title = "Try Registration"; ObjectID = "21g-eQ-0Sc"; */
 "21g-eQ-0Sc.title" = "Try Registration";
 
@@ -17,6 +20,9 @@
 /* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "N5h-tI-ZLz"; */
 "N5h-tI-ZLz.title" = "Upnp enabled";
 
+/* Class = "NSTextFieldCell"; title = "DTMF tone type"; ObjectID = "Rg8-qR-h1X"; */
+"Rg8-qR-h1X.title" = "DTMF tone type";
+
 /* Class = "NSButtonCell"; title = "Show password"; ObjectID = "UXm-73-BNy"; */
 "UXm-73-BNy.title" = "顯示密碼";
 
@@ -26,8 +32,11 @@
 /* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "YMy-QE-7A3"; */
 "YMy-QE-7A3.title" = "來電自動應答";
 
+/* Class = "NSButtonCell"; title = "SIP"; ObjectID = "jch-Qt-hTO"; */
+"jch-Qt-hTO.title" = "SIP";
+
 /* Class = "NSTextFieldCell"; title = "Parameters"; ObjectID = "mlN-YG-fLS"; */
-"mlN-YG-fLS.title" = "Parameters";
+"mlN-YG-fLS.title" = "參數";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "upU-sL-9i3"; */
-"upU-sL-9i3.title" = "Account";
+"upU-sL-9i3.title" = "帳號";

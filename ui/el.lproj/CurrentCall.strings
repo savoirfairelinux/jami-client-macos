@@ -1,6 +1,6 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "2cB-dz-KYg"; */
-"2cB-dz-KYg.ibShadowedToolTip" = "Hang up";
+"2cB-dz-KYg.ibShadowedToolTip" = "Κλείσιμο";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
 "9e8-ji-QId.ibShadowedToolTip" = "Join call";
@@ -9,7 +9,7 @@
 "ChW-kg-Sja.ibShadowedToolTip" = "Μεταφορά";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
-"D0G-XT-lhI.ibShadowedToolTip" = "Hang up";
+"D0G-XT-lhI.ibShadowedToolTip" = "Κλείσιμο";
 
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
 "Dqv-um-UUk.title" = "URI";
@@ -17,17 +17,23 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
 "EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
+"G0w-c3-9pJ.ibShadowedToolTip" = "Εγγραφή";
+
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
 "KPG-pB-gPm.title" = "Answer";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
-"Kjq-iM-NBL.ibShadowedToolTip" = "Hang up";
+"Kjq-iM-NBL.ibShadowedToolTip" = "Κλείσιμο";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
 "LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
 
 /* Class = "NSTextFieldCell"; title = "Cancel"; ObjectID = "TlL-HO-5Ey"; */
-"TlL-HO-5Ey.title" = "Cancel";
+"TlL-HO-5Ey.title" = "Ακύρωση";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "VVL-A4-r7n"; */
+"VVL-A4-r7n.ibShadowedToolTip" = "Εγγραφή";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
 "X0W-vv-xua.title" = "wants to talk to you!";
@@ -45,10 +51,10 @@
 "kxH-yM-TLd.title" = "Button";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
-"mc3-HV-hek.ibShadowedToolTip" = "Hang up";
+"mc3-HV-hek.ibShadowedToolTip" = "Κλείσιμο";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
-"oRa-pS-HN2.ibShadowedToolTip" = "Record";
+"oRa-pS-HN2.ibShadowedToolTip" = "Εγγραφή";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
 "osk-LS-0Qg.placeholderString" = "Person name";

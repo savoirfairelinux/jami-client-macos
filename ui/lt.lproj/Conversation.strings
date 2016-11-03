@@ -3,18 +3,18 @@
 "FgV-iF-gGQ.title" = "Teksto langelis";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Title"; ObjectID = "HnC-1N-RmR"; */
-"HnC-1N-RmR.placeholderString" = "Title";
+"HnC-1N-RmR.placeholderString" = "Antraštė";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "Ilz-7v-2fr"; */
 "Ilz-7v-2fr.placeholderString" = "Siųsti žinutę";
 
-/* Class = "BindingConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
 "ZEx-5Y-rtp.ibShadowedIsNilPlaceholder" = "Siųsti žinutę";
 
-/* Class = "BindingConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
 "ZEx-5Y-rtp.ibShadowedMultipleValuesPlaceholder" = "Siųsti žinutę";
 
-/* Class = "BindingConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
 "ZEx-5Y-rtp.ibShadowedNoSelectionPlaceholder" = "Siųsti žinutę";
 
 /* Class = "NSTextFieldCell"; title = "Start the conversation!"; ObjectID = "bsl-nv-Wqq"; */

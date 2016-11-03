@@ -1,36 +1,3 @@
 
-/* Class = "NSTextFieldCell"; title = "Choose your own certificates"; ObjectID = "4ls-Yq-mDp"; */
-"4ls-Yq-mDp.title" = "Kies uw eigen certificaten";
-
-/* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "5Z7-Wi-530"; */
-"5Z7-Wi-530.placeholderString" = "'Onbekend' wanneer leeg...";
-
-/* Class = "NSTextFieldCell"; title = "Advanced security (optional)"; ObjectID = "Gnn-K9-PTH"; */
-"Gnn-K9-PTH.title" = "Geavanceerde beveiliging (optioneel)";
-
-/* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "Hsc-U9-2RV"; */
-"Hsc-U9-2RV.placeholderString" = "Wachtwoord...";
-
-/* Class = "NSButtonCell"; title = "Share"; ObjectID = "Kwr-LJ-K8C"; */
-"Kwr-LJ-K8C.title" = "Delen";
-
-/* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "SpA-zX-ytE"; */
-"SpA-zX-ytE.title" = "Lijst van certificeringsinstanties";
-
-/* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "V1U-ew-Ge2"; */
-"V1U-ew-Ge2.title" = "Gebruikerscertificaat";
-
-/* Class = "NSButton"; ibShadowedToolTip = "Choose custom certificates"; ObjectID = "aZl-bU-psB"; */
-"aZl-bU-psB.ibShadowedToolTip" = "Kies aangepaste certificaten";
-
-/* Class = "NSTextFieldCell"; title = "Choose your username"; ObjectID = "meL-TZ-VQO"; */
-"meL-TZ-VQO.title" = "Kies uw gebruikersnaam";
-
-/* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "poP-JD-MDa"; */
-"poP-JD-MDa.title" = "Geheime sleutel";
-
-/* Class = "NSTextFieldCell"; title = "Welcome to Ring"; ObjectID = "uqu-uh-Wao"; */
-"uqu-uh-Wao.title" = "Welkom bij Ring";
-
-/* Class = "NSButtonCell"; title = "Next"; ObjectID = "wDw-Ut-RUm"; */
-"wDw-Ut-RUm.title" = "Volgende";
+/* Class = "NSTextFieldCell"; title = "Welcome to Ring"; ObjectID = "2mM-yx-BfM"; */
+"2mM-yx-BfM.title" = "Welkom bij Ring";
