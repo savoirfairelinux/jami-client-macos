@@ -6,7 +6,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardNewAccountVC">
             <connections>
-                <outlet property="cbSignupRing" destination="b0r-ri-6ZA" id="mgz-Je-D0N"/>
                 <outlet property="creationView" destination="gKX-gX-nko" id="NrN-dl-Z6R"/>
                 <outlet property="displayNameField" destination="99y-na-GTj" id="5q8-Rc-7Hv"/>
                 <outlet property="helpBlockchainContainer" destination="ViR-CC-taB" id="JfQ-Sn-nC2"/>
@@ -262,7 +261,7 @@ Gw
                                 <constraint firstAttribute="height" constant="20" id="Ukr-7U-1Lh"/>
                                 <constraint firstAttribute="width" constant="20" id="XOS-nb-g7U"/>
                             </constraints>
-                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_action_accept" id="70V-q1-CFT"/>
+                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="70V-q1-CFT"/>
                         </imageView>
                     </subviews>
                     <constraints>
