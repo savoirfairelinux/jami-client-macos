@@ -62,7 +62,6 @@
 
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
 
-    __unsafe_unretained IBOutlet NSButton* cbSignupRing;
     __unsafe_unretained IBOutlet NSImageView* ivLookupResult;
     __unsafe_unretained IBOutlet NSProgressIndicator* indicatorLookupResult;
 
@@ -123,6 +122,8 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [photoView setWantsLayer: YES];
     photoView.layer.cornerRadius = photoView.frame.size.width / 2;
     photoView.layer.masksToBounds = YES;
+    self.signUpBlockchainState = YES;
+    [self toggleSignupRing:nil];
 
     [self display:creationView];
 }
@@ -156,8 +157,9 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 {
     if (auto outputImage = [picker outputImage]) {
         [photoView setImage:outputImage];
-    } else
+    } else {
         [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
+    }
 }
 
 #pragma mark - Input validation
