@@ -179,7 +179,7 @@ DQ
                             <constraints>
                                 <constraint firstAttribute="width" constant="194" id="dTT-oe-Tym"/>
                             </constraints>
-                            <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Enter your pin" id="3ik-rY-Gig">
+                            <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Enter the generated PIN" id="3ik-rY-Gig">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -211,12 +211,12 @@ DQ
                                 </connections>
                             </buttonCell>
                         </button>
-                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-mP-zJd">
-                            <rect key="frame" x="62" y="95" width="227" height="19"/>
+                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-mP-zJd">
+                            <rect key="frame" x="76" y="97" width="204" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="3tj-c0-BEv"/>
                             </constraints>
-                            <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Enter your Ring account password" id="U2K-fu-INc">
+                            <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Enter your account password" id="U2K-fu-INc">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -280,7 +280,7 @@ DQ
                     </constraints>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="dJ0-Rk-Rqr">
                         <font key="font" metaFont="system"/>
-                        <mutableString key="title">To link this device to another account, you first need to obtain a pin code.  To generate the pin code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account".  You will get the necessary pin to complete this form. The Pin is only valid for 10 minutes.</mutableString>
+                        <string key="title">To link this device to another account, you first need to obtain a pin code.  To generate the pin code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account".  You will get the necessary pin to complete this form. The Pin is only valid for 10 minutes.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
