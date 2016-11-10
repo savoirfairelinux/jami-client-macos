@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
@@ -280,7 +281,7 @@ DQ
                     </constraints>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="dJ0-Rk-Rqr">
                         <font key="font" metaFont="system"/>
-                        <mutableString key="title">To link this device to another account, you first need to obtain a pin code.  To generate the pin code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account".  You will get the necessary pin to complete this form. The Pin is only valid for 10 minutes.</mutableString>
+                        <string key="title">To link this device to another account, you first need to obtain a pin code.  To generate the pin code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account".  You will get the necessary pin to complete this form. The Pin is only valid for 10 minutes.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
