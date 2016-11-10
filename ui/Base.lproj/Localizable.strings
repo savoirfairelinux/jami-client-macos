@@ -61,9 +61,6 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Failed to perform lookup";
 
-/* Text shown to the user */
-"ID : " = "ID : ";
-
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Incoming call from %@";
 
@@ -109,6 +106,9 @@
 /* Button title */
 "Revise Input" = "Revise Input";
 
+/* Text shown to the user */
+"RingID : " = "RingID : ";
+
 /* No comment provided by engineer. */
 "Share" = "Share";
 
@@ -117,6 +117,9 @@
 
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "The entered username is available";
+
+/* Text shown to user when his username is invalid to be registered */
+"The entered username is invalid. It must have at least 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contains only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
