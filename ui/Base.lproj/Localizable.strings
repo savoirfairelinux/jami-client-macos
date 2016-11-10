@@ -61,9 +61,6 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Failed to perform lookup";
 
-/* Text shown to the user */
-"ID : " = "ID : ";
-
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Incoming call from %@";
 
@@ -108,6 +105,9 @@
 
 /* Button title */
 "Revise Input" = "Revise Input";
+
+/* Text shown to the user */
+"RingID : " = "RingID : ";
 
 /* No comment provided by engineer. */
 "Share" = "Share";
