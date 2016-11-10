@@ -149,7 +149,7 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
                                                    }
                                                    case NameDirectory::LookupStatus::INVALID_NAME:
                                                    {
-                                                       message = NSLocalizedString(@"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.",
+                                                       message = NSLocalizedString(@"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.",
                                                                                    @"Text shown to user when his username is invalid to be registered");
                                                        isAvailable = NO;
                                                        break;
