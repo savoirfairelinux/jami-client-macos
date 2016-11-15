@@ -46,26 +46,39 @@
 
 @implementation RingWizardLinkAccountVC {
     __unsafe_unretained IBOutlet NSView* initialContainer;
-    __unsafe_unretained IBOutlet NSTextField* pinField;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
-    __unsafe_unretained IBOutlet NSTextField* pinLabel;
-    __unsafe_unretained IBOutlet NSTextField* passwordLabel;
-    __unsafe_unretained IBOutlet NSButton* createButton;
+    __unsafe_unretained IBOutlet NSView* firstStepContainer;
 
     __unsafe_unretained IBOutlet NSView* loadingContainer;
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
 
     __unsafe_unretained IBOutlet NSView* errorContainer;
-    __unsafe_unretained IBOutlet NSPopover* helpContainer;
 
     Account* accountToCreate;
     NSTimer* errorTimer;
     QMetaObject::Connection stateChanged;
 }
 
+- (IBAction)goToStepTwo:(id)sender
+{
+    [self disconnectCallback];
+    [firstStepContainer setHidden:YES];
+    [initialContainer setHidden:NO];
+    [loadingContainer setHidden:YES];
+    [errorContainer setHidden:YES];
+}
+
+- (IBAction)goToStepOne:(id)sender
+{
+    [firstStepContainer setHidden:NO];
+    [initialContainer setHidden:YES];
+    [loadingContainer setHidden:YES];
+    [errorContainer setHidden:YES];
+}
+
 - (void)show
 {
-    [initialContainer setHidden:NO];
+    [firstStepContainer setHidden:NO];
+    [initialContainer setHidden:YES];
     [loadingContainer setHidden:YES];
     [errorContainer setHidden:YES];
 }
@@ -82,12 +95,6 @@
     [loadingContainer setHidden:NO];
     [progressBar startAnimation:nil];
     [errorContainer setHidden:YES];
-}
-
-
-- (IBAction)showHelp:(id)sender
-{
-    [helpContainer showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
 - (IBAction)importRingAccount:(id)sender
@@ -118,6 +125,7 @@
 
 - (IBAction)back:(id)sender
 {
+    [self deleteAccount];
     [self show];
 }
 
@@ -141,6 +149,20 @@
 {
     accountToCreate->setUpnpEnabled(YES); // Always active upnp
     accountToCreate << Account::EditAction::SAVE;
+}
+
+- (void)deleteAccount
+{
+    if(auto account = AccountModel::instance().getById(accountToCreate->id())) {
+        AccountModel::instance().remove(accountToCreate);
+        AccountModel::instance().save();
+    }
+}
+
+- (void)disconnectCallback
+{
+    [errorTimer invalidate];
+    QObject::disconnect(stateChanged);
 }
 
 - (void)setCallback
@@ -176,7 +198,6 @@
                                         }
                                     });
 }
-
 
 - (void)didLinkFailed
 {
