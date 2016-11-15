@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5ac10518_cddca977",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-11-15T19:31:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ac10518_ed6405e7",
+      "range": {
+        "startLine": 10,
+        "startChar": 33,
+        "endLine": 10,
+        "endChar": 36
+      },
+      "revId": "a487e5e80cf6dab4bfc2518e2601963e75516d18",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ac10518_8d61c1d5",
         "filename": "src/RingWizardLinkAccountVC.mm",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-11-15T18:39:33Z",
       "side": 1,
       "message": "Could be renamed to become goToStepTwo to match the established convention.",
+      "range": {
+        "startLine": 67,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 21
+      },
+      "revId": "a487e5e80cf6dab4bfc2518e2601963e75516d18",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac10518_8de6a143",
+        "filename": "src/RingWizardLinkAccountVC.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2016-11-15T19:31:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ac10518_8d61c1d5",
       "range": {
         "startLine": 67,
         "startChar": 12,
