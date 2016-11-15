@@ -24,31 +24,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="9ok-Ga-Q8u" userLabel="header">
-                        <rect key="frame" x="0.0" y="258" width="450" height="60"/>
+                        <rect key="frame" x="0.0" y="238" width="450" height="80"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EpY-Kl-fNa">
-                                <rect key="frame" x="84" y="12" width="229" height="36"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Ring" id="2mM-yx-BfM">
-                                    <font key="font" metaFont="system" size="30"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P7h-tj-klA">
-                                <rect key="frame" x="319" y="7" width="45" height="46"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lxh-SF-i59">
+                                <rect key="frame" x="140" y="0.0" width="171" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="XMY-BN-Ymg"/>
-                                    <constraint firstAttribute="height" constant="46" id="i8K-g8-EfQ"/>
+                                    <constraint firstAttribute="width" constant="171" id="7V4-CT-Lcv"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_blue" id="XSN-TP-V1z"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="beta2_white" id="Atm-vc-Uhd"/>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="P7h-tj-klA" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" id="82u-TT-jdV"/>
-                            <constraint firstAttribute="height" constant="60" id="bnc-Ui-EBV"/>
-                            <constraint firstItem="P7h-tj-klA" firstAttribute="leading" secondItem="EpY-Kl-fNa" secondAttribute="trailing" constant="8" symbolic="YES" id="ckf-Wb-pkP"/>
-                            <constraint firstItem="EpY-Kl-fNa" firstAttribute="centerX" secondItem="9ok-Ga-Q8u" secondAttribute="centerX" constant="-26.5" id="fkS-G9-SzY"/>
-                            <constraint firstItem="EpY-Kl-fNa" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" id="i1N-4g-yOy"/>
+                            <constraint firstAttribute="bottom" secondItem="lxh-SF-i59" secondAttribute="bottom" id="7kQ-DH-VvN"/>
+                            <constraint firstAttribute="height" constant="80" id="QNp-Q4-aVg"/>
+                            <constraint firstItem="lxh-SF-i59" firstAttribute="centerX" secondItem="9ok-Ga-Q8u" secondAttribute="centerX" id="S0p-wo-lsW"/>
+                            <constraint firstItem="lxh-SF-i59" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" id="UWy-4L-QdR"/>
+                            <constraint firstItem="lxh-SF-i59" firstAttribute="top" secondItem="9ok-Ga-Q8u" secondAttribute="top" id="go9-Xg-sm2"/>
                         </constraints>
                     </customView>
                     <view translatesAutoresizingMaskIntoConstraints="NO" id="T98-k1-e6X">
@@ -56,25 +47,26 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="9ok-Ga-Q8u" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" id="Swu-Wv-5zO"/>
-                    <constraint firstItem="T98-k1-e6X" firstAttribute="leading" secondItem="9ok-Ga-Q8u" secondAttribute="leading" id="ZVp-x0-6tM"/>
-                    <constraint firstAttribute="trailing" secondItem="9ok-Ga-Q8u" secondAttribute="trailing" id="dNA-c1-YAU"/>
-                    <constraint firstItem="T98-k1-e6X" firstAttribute="trailing" secondItem="9ok-Ga-Q8u" secondAttribute="trailing" id="nO3-RU-q91"/>
-                    <constraint firstAttribute="bottom" secondItem="T98-k1-e6X" secondAttribute="bottom" id="qCC-en-fqL"/>
-                    <constraint firstItem="T98-k1-e6X" firstAttribute="top" secondItem="9ok-Ga-Q8u" secondAttribute="bottom" id="sSS-2c-qrc"/>
+                    <constraint firstAttribute="trailing" secondItem="9ok-Ga-Q8u" secondAttribute="trailing" id="51E-el-1k8"/>
+                    <constraint firstAttribute="bottom" secondItem="T98-k1-e6X" secondAttribute="bottom" id="Bze-kw-daU"/>
+                    <constraint firstItem="9ok-Ga-Q8u" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" id="ONf-Di-udQ"/>
+                    <constraint firstAttribute="trailing" secondItem="T98-k1-e6X" secondAttribute="trailing" id="PCj-P6-sfZ"/>
+                    <constraint firstItem="T98-k1-e6X" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" id="RyI-Lc-GnS"/>
+                    <constraint firstItem="T98-k1-e6X" firstAttribute="top" secondItem="9ok-Ga-Q8u" secondAttribute="bottom" constant="-20" id="ZT8-ty-8Wd"/>
+                    <constraint firstItem="T98-k1-e6X" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" id="hBm-OI-3QW"/>
                     <constraint firstItem="9ok-Ga-Q8u" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" id="zPn-Ld-oZC"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="cKX-Z2-yDq"/>
             </connections>
-            <point key="canvasLocation" x="447.5" y="-489"/>
+            <point key="canvasLocation" x="447" y="-489"/>
         </window>
         <viewController nibName="RingWizardChoose" id="TGh-Qf-0hi" customClass="RingWizardChooseVC"/>
         <viewController nibName="RingWizardLinkAccount" id="Hlf-uv-gt6" customClass="RingWizardLinkAccountVC"/>
         <viewController nibName="RingWizardNewAccount" id="M2H-0Y-6UW" customClass="RingWizardNewAccountVC"/>
     </objects>
     <resources>
-        <image name="symbol_blue" width="161.6842041015625" height="161.6842041015625"/>
+        <image name="beta2_white" width="442.5" height="162"/>
     </resources>
 </document>
