@@ -26,6 +26,11 @@
     return [NSColor colorWithCalibratedRed:43/255.0 green:180/255.0 blue:201/255.0 alpha:1.0];
 }
 
++ (NSColor*) ringBlueLight
+{
+    return [NSColor colorWithCalibratedRed:0/255.0 green:191/255.0 blue:211/255.0 alpha:1.0];
+}
+
 + (NSColor*) ringBlueWithAlpha:(CGFloat) a
 {
     return [NSColor colorWithCalibratedRed:43/255.0 green:180/255.0 blue:201/255.0 alpha:a];

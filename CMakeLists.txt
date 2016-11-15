@@ -238,6 +238,7 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
 
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/gnuring_white.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background-light.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background-dark.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_blue.png

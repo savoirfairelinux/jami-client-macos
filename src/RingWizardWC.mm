@@ -59,7 +59,8 @@
     [chooseActiontWC setDelegate:self];
     [linkAccountWC setDelegate:self];
     [newAccountWC setDelegate:self];
-    [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
+    [self.window setBackgroundColor:[NSColor ringBlueLight]];
+    [self.window setTitlebarAppearsTransparent:YES];
     [self showChooseWithCancelButton:isCancelable];
 }
 
