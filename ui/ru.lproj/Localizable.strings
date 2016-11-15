@@ -1,17 +1,17 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Во время экспорта произошла ошибка сети";
 
 /* Contextual menu action */
 "Add to contacts" = "Добавить в контакты";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Псевдоним:";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "Во время экспорта произошла ошибка";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Создать резервную копию аккаунта";
 
 /* Contextual menu action */
 "Call number" = "Позвонить по номеру";
@@ -26,7 +26,7 @@
 "Choose a directory" = "Выбор директории";
 
 /* Open panel title */
-"Choose a private key file" = "Выбрать файл первичного ключа";
+"Choose a private key file" = "Выбрать файл закрытого ключа";
 
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Выбрать CA";
@@ -41,52 +41,52 @@
 "Copy" = "Копировать";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Копировать имя";
 
 /* Contextual menu action */
 "Copy number" = "Копировать номер";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Создать аккаунт Ring";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Создать SIP аккаунт";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "Указанное имя не найдено";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Не удалось перенести ваш аккаунт. Вы можете либо попробовать снова, нажав ОК, либо удалить ваш аккаунт.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Не удалось осуществить поиск";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"ID : " = "ID:";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Входящий вызов от %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "Убедитесь, что у вас есть хотя бы один действительный аккаунт";
 
 /* Message from {Name} */
 "Message from %@" = "Сообщение от %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Новый SIP аккаунт";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "Нет пригодных аккаунтов";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Пароль и подтверждение не совпадают.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Пароль слишком короткий";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Пароли не совпадают";
 
 /* Button label */
 "Pause" = "Пауза";
@@ -101,13 +101,13 @@
 "Remove value" = "Удалить значение";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Переоткрыть учетную запись для просмотра вашего хеша";
+"Reopen account to see your hash" = "Откройте аккаунт повторно для просмотра вашего хеша";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Восстановить аккаунт";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Проверить ввод";
 
 /* No comment provided by engineer. */
 "Share" = "Поделиться";
@@ -116,32 +116,32 @@
 "Text Actions" = "Действия с текстом";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Указанное имя пользователя доступно";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "Введённое имя пользователя недопустимо. Оно должно содержать не менее 3 символов и состоять из букв и цифр в нижнем регистре.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Указанное имя пользователя недоступно";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
+"The following account needs to be migrated to the new Ring account format:" = "Следующий аккаунт требуется преобразовать в новый формат аккаунта Ring:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Введённый пароль не подходит к этому аккаунту";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "Введённое имя пользователя не совпадает с RingID в сети";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Для завершения процесса вам нужно открыть Ring на новом устройстве и выбрать \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Чтобы продолжить перенос, вам нужно выбрать пароль для вашего аккаунта. Этот пароль будет использован для шифрования вашего основного ключа. Он потребуется для добавления новых устройств к вашему аккаунту Ring. Если вы не готовы выбрать пароль, можете закрыть Ring и продолжить перенос позднее.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Неизвестно";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Вам нужно перенести аккаунт перед экспортом";
 

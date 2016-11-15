@@ -18,7 +18,7 @@
 "K9I-vh-jeu.title" = "Сетевой интерфейс";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Установить опубликованный адрес и порт";
+"OL5-DI-aCq.title" = "Установить публикуемый адрес и порт";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
 "OR2-la-DUE.placeholderString" = "пароль...";
@@ -30,7 +30,7 @@
 "QS0-TJ-NQh.title" = "Использовать TURN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
-"Qf3-E3-5U6.title" = "Опубликованный адрес";
+"Qf3-E3-5U6.title" = "Публикуемый адрес";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
 "XA8-Sy-CYG.title" = "Диапазон портов RTP видео";

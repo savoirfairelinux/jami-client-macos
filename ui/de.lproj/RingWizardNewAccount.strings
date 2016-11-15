@@ -3,22 +3,22 @@
 "0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Ring network. Other people can use it to call you.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Obligatorisch*";
 
 /* Class = "NSButtonCell"; title = "Register name publicly (experimental)"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register name publicly (experimental)";
+"AG5-GR-bii.title" = "Benutzername öffentlich registrieren (experimentell)";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Choose your password";
+"B6x-jj-48R.title" = "Wählen Sie Ihr Passwort aus";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
-"BCg-5V-Ek4.placeholderString" = "Mandatory*";
+"BCg-5V-Ek4.placeholderString" = "Obligatorisch*";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
 "YIN-YL-JBs.title" = "Nur einen Moment...";
 
 /* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
-"fEY-eO-HwI.title" = "Repeat your password";
+"fEY-eO-HwI.title" = "Wiederholen Sie Ihr Passwort";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
 "gEy-ak-Cgq.placeholderString" = "'Unbekannt' falls leer...";

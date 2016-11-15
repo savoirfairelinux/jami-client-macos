@@ -9,7 +9,7 @@
 "AG5-GR-bii.title" = "Register name publicly (experimental)";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Choose your password";
+"B6x-jj-48R.title" = "Επιλέξτε το συνθηματικό σας";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
 "BCg-5V-Ek4.placeholderString" = "Mandatory*";
@@ -33,4 +33,4 @@
 "zUH-kc-cik.title" = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
-"zfA-n9-V4X.title" = "Create";
+"zfA-n9-V4X.title" = "Δημιουργία";

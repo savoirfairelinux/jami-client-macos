@@ -1,15 +1,15 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "2cB-dz-KYg"; */
-"2cB-dz-KYg.ibShadowedToolTip" = "Hang up";
+"2cB-dz-KYg.ibShadowedToolTip" = "Chiudi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
 "9e8-ji-QId.ibShadowedToolTip" = "Join call";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
-"ChW-kg-Sja.ibShadowedToolTip" = "Transfer";
+"ChW-kg-Sja.ibShadowedToolTip" = "Trasferisci";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
-"D0G-XT-lhI.ibShadowedToolTip" = "Hang up";
+"D0G-XT-lhI.ibShadowedToolTip" = "Chiudi";
 
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
 "Dqv-um-UUk.title" = "URI";
@@ -21,10 +21,10 @@
 "G0w-c3-9pJ.ibShadowedToolTip" = "Record";
 
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
-"KPG-pB-gPm.title" = "Answer";
+"KPG-pB-gPm.title" = "Rispondi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
-"Kjq-iM-NBL.ibShadowedToolTip" = "Hang up";
+"Kjq-iM-NBL.ibShadowedToolTip" = "Chiudi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
 "LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
@@ -39,7 +39,7 @@
 "X0W-vv-xua.title" = "wants to talk to you!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
-"anb-Y8-JQi.ibShadowedToolTip" = "Hold";
+"anb-Y8-JQi.ibShadowedToolTip" = "Pausa";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
 "fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
@@ -51,7 +51,7 @@
 "kxH-yM-TLd.title" = "Button";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
-"mc3-HV-hek.ibShadowedToolTip" = "Hang up";
+"mc3-HV-hek.ibShadowedToolTip" = "Chiudi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
 "oRa-pS-HN2.ibShadowedToolTip" = "Record";
@@ -72,7 +72,7 @@
 "ugy-uK-901.placeholderString" = "State";
 
 /* Class = "NSTextFieldCell"; title = "Answer"; ObjectID = "wRO-X4-7IU"; */
-"wRO-X4-7IU.title" = "Answer";
+"wRO-X4-7IU.title" = "Rispondi";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
 "yZ6-1A-ZLT.title" = "wants to talk with you!";

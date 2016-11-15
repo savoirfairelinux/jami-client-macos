@@ -3,7 +3,7 @@
 "1Sx-Et-CDM.title" = "Hesap";
 
 /* Class = "NSTextFieldCell"; title = "RingID"; ObjectID = "8WI-fC-Due"; */
-"8WI-fC-Due.title" = "RingID";
+"8WI-fC-Due.title" = "Ring Kimliği";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap server"; ObjectID = "B6b-iB-REZ"; */
 "B6b-iB-REZ.title" = "Önyükleme sunucusu";
@@ -12,7 +12,7 @@
 "EDd-FX-wcz.title" = "İzinler";
 
 /* Class = "NSButtonCell"; title = "Register name"; ObjectID = "G8M-go-xvD"; */
-"G8M-go-xvD.title" = "Register name";
+"G8M-go-xvD.title" = "Adı kaydet";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
 "HN3-i9-zmw.placeholderString" = "İsim ya da takma isim...";
@@ -30,7 +30,7 @@
 "ddk-1G-0jU.title" = "Ayarlanmış kullanıcı temsilcisini kullanın.";
 
 /* Class = "NSTextFieldCell"; title = "Blockchain server"; ObjectID = "fSU-Pc-Y5a"; */
-"fSU-Pc-Y5a.title" = "Blockchain server";
+"fSU-Pc-Y5a.title" = "Blockchain sunucusu";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
 "fX7-9W-XFl.title" = "Kişi listenizdeki eşlerden aramalara izin ver";
@@ -42,4 +42,4 @@
 "lHI-bz-ddQ.title" = "Upnp etkin";
 
 /* Class = "NSTextFieldCell"; title = "Registered Name"; ObjectID = "sBB-y7-xhL"; */
-"sBB-y7-xhL.title" = "Registered Name";
+"sBB-y7-xhL.title" = "Kayıtlı Ad";
