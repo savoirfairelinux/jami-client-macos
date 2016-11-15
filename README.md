@@ -8,6 +8,10 @@ For more information about the ring project, see the following:
 - Bug tracker: https://tuleap.ring.cx/projects/ring/
 - Repositories: https://gerrit-ring.savoirfairelinux.com
 
+| App | CI | Packaging
+| :-: | :-: | :-:
+| [![Download from ring.cx](https://img.shields.io/badge/download-cx&#1748;ring-blue.svg)](https://ring.cx/en/download/mac-osx) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-client-macosx)](https://test.savoirfairelinux.com/job/ring-client-macosx/) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-packaging-client-macosx)](https://test.savoirfairelinux.com/job/ring-packaging-client-macosx/)
+
 Requirements
 =============
 
