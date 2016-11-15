@@ -15,16 +15,16 @@
 "7c2-kF-dcs.placeholderString" = "Пароль...";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
-"9Q3-1W-Lh3.title" = "Negotiation timeout";
+"9Q3-1W-Lh3.title" = "Истёк срок ожидания согласования";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
 "Ig9-B1-7N3.title" = "Откат на RTP";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
-"JHb-iu-ZwI.title" = "Приватный ключ";
+"JHb-iu-ZwI.title" = "Закрытый ключ";
 
 /* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "Jqz-P0-zAz"; */
-"Jqz-P0-zAz.title" = "Пользовательский Сертификат";
+"Jqz-P0-zAz.title" = "Пользовательский сертификат";
 
 /* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
 "UxS-et-whJ.title" = "Имя сервера для исходящих TLS соединений";
@@ -39,7 +39,7 @@
 "uOE-XA-5gW.title" = "Метод протокола TSL";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
-"vPF-Rp-aR6.title" = "Список Авторизованных Сертификатов";
+"vPF-Rp-aR6.title" = "Список удостоверяющих центров";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
 "x2s-ov-cVQ.title" = "Проверять сертификаты как сервер";

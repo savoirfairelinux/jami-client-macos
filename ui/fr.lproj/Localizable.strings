@@ -61,9 +61,6 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Échec de la recherche blockchain";
 
-/* Text shown to the user */
-"ID : " = "Identifiant :";
-
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Appel entrant de %@";
 
@@ -109,6 +106,9 @@
 /* Button title */
 "Revise Input" = "Modifier l'entrée";
 
+/* Text shown to the user */
+"RingID : " = "RingID : ";
+
 /* No comment provided by engineer. */
 "Share" = "Partager";
 
@@ -119,7 +119,7 @@
 "The entered username is available" = "Le nom choisi est disponible";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "Le nom entré est invalide. Il doit comprendre au moins 3 caractères et uniquemement des caractères alphanumériques en minuscules. ";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Le nom choisi n'est pas disponible";

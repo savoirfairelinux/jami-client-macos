@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Eksportavimo metu, įvyko klaida";
 
 /* Contextual menu action */
 "Add to contacts" = "Pridėti prie kontaktų";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Slapyvardis : ";
 
 /* Error shown to the user */
 "An error occured during the export" = "Eksportavimo metu, įvyko klaida";
@@ -47,22 +47,19 @@
 "Copy number" = "Kopijuoti numerį";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Sukurti RING paskyrą";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Sukurti SIP paskyrą";
 
 /* Alert dialog title */
 "Entered name not found" = "Entered name not found";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Nepavyko perkelti jūsų paskyros. Jūs galite bandyti vėl, spusteldami Gerai arba galite ištrinti savo paskyrą.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
-
-/* Text shown to the user */
-"ID : " = "ID : ";
+"Failed to perform lookup" = "Nepavyko atlikti informacijos paiešką";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Gaunamasis skambutis nuo %@";
@@ -74,19 +71,19 @@
 "Message from %@" = "Žinutė nuo %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Nauja SIP paskyra";
 
 /* Alert dialog title */
 "No valid account available" = "No valid account available";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Slaptažodis ir jo patvirtinimas nesutampa.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Slaptažodis per trumpas";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Slaptažodžiai nesutampa";
 
 /* Button label */
 "Pause" = "Pristabdyti";
@@ -98,16 +95,19 @@
 "Refuse" = "Atmesti";
 
 /* Contextual menu entry */
-"Remove value" = "Remove value";
+"Remove value" = "Šalinti reikšmę";
 
 /* Show advice to user */
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Atkurti paskyrą";
 
 /* Button title */
 "Revise Input" = "Revise Input";
+
+/* Text shown to the user */
+"RingID : " = "RingID : ";
 
 /* No comment provided by engineer. */
 "Share" = "Share";
@@ -116,19 +116,19 @@
 "Text Actions" = "Teksto veiksmai";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Įrašytas naudotojo vardas yra prieinamas";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Įrašytas naudotojo vardas yra neprieinamas";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
+"The following account needs to be migrated to the new Ring account format:" = "Ši paskyra turi būti perkelta į naująjį Ring paskyros formatą:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 
 /* Alert dialog title */
 "The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
@@ -137,11 +137,11 @@
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Norėdami tęsti perkėlimą, privalote pasirinkti savo paskyrai slaptažodį. Šis slaptažodis bus naudojamas jūsų pagrindiniam raktui užšifruoti. Taip pat jis bus reikalingas pridedant naujus įrenginius į jūsų Ring paskyrą. Jeigu jūs nesate pasiruošę pasirinkti slaptažodį, tuomet galite užverti Ring ir pratęsti perkėlimą vėliau.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Nežinomas";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Prieš eksportuodami, turite perkelti savo paskyrą";
 
