@@ -1,17 +1,17 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Ein Netzwerkfehler ist während des Exports aufgetreten";
 
 /* Contextual menu action */
 "Add to contacts" = "Kontakte hinzufügen";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Aliasname : ";
 
 /* Error shown to the user */
 "An error occured during the export" = "Ein Fehler ist während des Exports aufgetreten";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Konto sichern";
 
 /* Contextual menu action */
 "Call number" = "Nummer wählen";
@@ -41,19 +41,19 @@
 "Copy" = "Kopieren";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Name kopieren";
 
 /* Contextual menu action */
 "Copy number" = "Nummer kopieren";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "RING-Konto erstellen";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "SIP-Konto erstellen";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "Eingegebener Name wurde nicht gefunden";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -74,19 +74,19 @@
 "Message from %@" = "Nachricht von %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Neues SIP-Konto";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "Kein gültiges Konto verfügbar";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Passwort und Bestätigung stimmen nicht überein.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Passwort ist zu kurz";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Passwörter stimmen nicht überein";
 
 /* Button label */
 "Pause" = "Pause";
@@ -104,7 +104,7 @@
 "Reopen account to see your hash" = "Konto erneut öffnen, um den Hashwert zu sehen";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Konto wiederherstellen";
 
 /* Button title */
 "Revise Input" = "Revise Input";
@@ -116,13 +116,13 @@
 "Text Actions" = "Textuelles Vorgehen";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Der angegebene Benutzername ist verfügbar";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Der angegebene Benutzername ist nicht verfügbar";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";

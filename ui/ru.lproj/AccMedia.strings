@@ -6,7 +6,7 @@
 "CO7-VF-04Q.title" = "Вверх";
 
 /* Class = "NSButtonCell"; title = "Enable ringtones"; ObjectID = "KkI-i1-mfY"; */
-"KkI-i1-mfY.title" = "Включить звуки";
+"KkI-i1-mfY.title" = "Включить звонок";
 
 /* Class = "NSButtonCell"; title = "Up"; ObjectID = "MbZ-7X-K5I"; */
 "MbZ-7X-K5I.title" = "Вверх";
@@ -15,7 +15,7 @@
 "OSC-eG-2kt.title" = "Видео";
 
 /* Class = "NSTextFieldCell"; title = "Ringtones"; ObjectID = "aMg-uJ-Krx"; */
-"aMg-uJ-Krx.title" = "Звуки";
+"aMg-uJ-Krx.title" = "Звонки ";
 
 /* Class = "NSTextFieldCell"; title = "Codecs"; ObjectID = "biN-bX-qM1"; */
 "biN-bX-qM1.title" = "Кодеки";
@@ -33,13 +33,13 @@
 "gza-RF-yKF.title" = "Вниз";
 
 /* Class = "NSButtonCell"; title = "Play"; ObjectID = "hHf-uc-NlW"; */
-"hHf-uc-NlW.title" = "Играть";
+"hHf-uc-NlW.title" = "Проигрывать";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "pvl-9U-X4l"; */
 "pvl-9U-X4l.placeholderString" = "Имя";
 
 /* Class = "NSTextFieldCell"; title = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)"; ObjectID = "rRr-la-G9L"; */
-"rRr-la-G9L.title" = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)";
+"rRr-la-G9L.title" = "Кодеки используются при общении с кем-либо. Их можно активировать и сортировать (в порядке предпочтения)";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "rU5-XQ-Ixc"; */
 "rU5-XQ-Ixc.placeholderString" = "Имя";

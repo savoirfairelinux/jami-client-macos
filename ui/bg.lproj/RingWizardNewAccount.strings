@@ -1,27 +1,27 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Ring network. Other people can use it to call you."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Ring network. Other people can use it to call you.";
+"0qE-Sz-hdc.title" = "Ако поставите отметка тук, ще регистрирате уникално потребителско име в мрежата на Ring. Останалите ще могат да го използват, за да Ви позвънят.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Задължително*";
 
 /* Class = "NSButtonCell"; title = "Register name publicly (experimental)"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register name publicly (experimental)";
+"AG5-GR-bii.title" = "Публично регистриране на име (експериментално)";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Choose your password";
+"B6x-jj-48R.title" = "Въведете парола";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
-"BCg-5V-Ek4.placeholderString" = "Mandatory*";
+"BCg-5V-Ek4.placeholderString" = "Задължително*";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
 "YIN-YL-JBs.title" = "Един момент…";
 
 /* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
-"fEY-eO-HwI.title" = "Repeat your password";
+"fEY-eO-HwI.title" = "Повторете паролата";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
-"gEy-ak-Cgq.placeholderString" = "'Unknown' if empty...";
+"gEy-ak-Cgq.placeholderString" = "„Неизвестно“, ако е празно";
 
 /* Class = "NSTextFieldCell"; title = "Choose your username"; ObjectID = "tzf-88-Yn5"; */
 "tzf-88-Yn5.title" = "Изберете потребителско име";
@@ -30,7 +30,7 @@
 "v7f-52-GJA.title" = "Отказ";
 
 /* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
-"zUH-kc-cik.title" = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.";
+"zUH-kc-cik.title" = "Паролата трябва да бъде поне 6 знака. Тя ще бъде използвана за шифроване на данните на акаунта Ви, както и за свързване на нови устройства към акаунта.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
 "zfA-n9-V4X.title" = "Създаване";
