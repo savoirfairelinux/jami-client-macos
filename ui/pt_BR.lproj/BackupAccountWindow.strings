@@ -1,6 +1,6 @@
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm..."; ObjectID = "5Qf-em-tN4"; */
-"5Qf-em-tN4.placeholderString" = "Confirm...";
+"5Qf-em-tN4.placeholderString" = "Confirmar...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "5cX-yS-4Sl"; */
 "5cX-yS-4Sl.ibShadowedIsNilPlaceholder" = "Senha...";
@@ -15,10 +15,10 @@
 "5cX-yS-4Sl.ibShadowedNotApplicablePlaceholder" = "Senha...";
 
 /* Class = "NSTextFieldCell"; title = "Where"; ObjectID = "9h8-GU-av4"; */
-"9h8-GU-av4.title" = "Where";
+"9h8-GU-av4.title" = "Aonde";
 
 /* Class = "NSTextFieldCell"; title = "Choose where to backup your account. It needs to be password protected."; ObjectID = "KYZ-TW-44Y"; */
-"KYZ-TW-44Y.title" = "Choose where to backup your account. It needs to be password protected.";
+"KYZ-TW-44Y.title" = "Escolha aonde será feita a cópia de segurança da sua conta. Deve ser protegido por senha.";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Janela";
@@ -42,7 +42,7 @@
 "ccf-Bx-Qq8.ibShadowedNotApplicablePlaceholder" = "Senha...";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during the backup"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.title" = "An error occured during the backup";
+"e7n-Ev-bK7.title" = "Ocorreu um erro durante a cópia de segurança";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "rW5-Il-5YD"; */
 "rW5-Il-5YD.title" = "OK";

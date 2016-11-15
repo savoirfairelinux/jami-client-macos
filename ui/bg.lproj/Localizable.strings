@@ -86,7 +86,7 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Паролите не съвпадат.";
 
 /* Button label */
 "Pause" = "Пауза";
@@ -116,13 +116,13 @@
 "Text Actions" = "Текстови действия";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Въведеното потребителско име е свободно";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Въведеното потребителско име не е свободно";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";

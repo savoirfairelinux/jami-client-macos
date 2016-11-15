@@ -59,7 +59,7 @@
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Ne eblas serĉi";
 
 /* Text shown to the user */
 "ID : " = "ID : ";
@@ -116,13 +116,13 @@
 "Text Actions" = "Tekstaj Agoj";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "La enigita uzantnomo estas havebla";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "La enigita uzantnomo estas nehavebla";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "La sekvanta konto bezonas migrigon en la novan formaton de Ring kontoj:";

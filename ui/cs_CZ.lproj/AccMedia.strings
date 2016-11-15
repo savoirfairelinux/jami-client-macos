@@ -6,13 +6,13 @@
 "CO7-VF-04Q.title" = "Nahoru";
 
 /* Class = "NSButtonCell"; title = "Enable ringtones"; ObjectID = "KkI-i1-mfY"; */
-"KkI-i1-mfY.title" = "Enable ringtones";
+"KkI-i1-mfY.title" = "Povolit vyzváněcí tóny";
 
 /* Class = "NSButtonCell"; title = "Up"; ObjectID = "MbZ-7X-K5I"; */
 "MbZ-7X-K5I.title" = "Nahoru";
 
 /* Class = "NSButtonCell"; title = "Video"; ObjectID = "OSC-eG-2kt"; */
-"OSC-eG-2kt.title" = "Obraz";
+"OSC-eG-2kt.title" = "Video";
 
 /* Class = "NSTextFieldCell"; title = "Ringtones"; ObjectID = "aMg-uJ-Krx"; */
 "aMg-uJ-Krx.title" = "Vyzvánění";
@@ -21,10 +21,10 @@
 "biN-bX-qM1.title" = "Kodeky";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Frequency"; ObjectID = "dwG-Ro-bIS"; */
-"dwG-Ro-bIS.placeholderString" = "Frequency";
+"dwG-Ro-bIS.placeholderString" = "Frekvence";
 
 /* Class = "NSTextFieldCell"; title = "details"; ObjectID = "dwG-Ro-bIS"; */
-"dwG-Ro-bIS.title" = "details";
+"dwG-Ro-bIS.title" = "Podrobnosti";
 
 /* Class = "NSTextFieldCell"; title = "Audio"; ObjectID = "gzX-Wc-S6g"; */
 "gzX-Wc-S6g.title" = "Zvuk";
@@ -39,7 +39,7 @@
 "pvl-9U-X4l.placeholderString" = "Jméno";
 
 /* Class = "NSTextFieldCell"; title = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)"; ObjectID = "rRr-la-G9L"; */
-"rRr-la-G9L.title" = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)";
+"rRr-la-G9L.title" = "Kodeky se používají, když se s někým zahajuje komunikace. Můžete je zapínat a měnit pořadí (nejdříve povolit v možnostech seznamu)";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "rU5-XQ-Ixc"; */
 "rU5-XQ-Ixc.placeholderString" = "Jméno";

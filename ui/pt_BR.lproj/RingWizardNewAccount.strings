@@ -1,24 +1,24 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Ring network. Other people can use it to call you."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Ring network. Other people can use it to call you.";
+"0qE-Sz-hdc.title" = "Selecionando esta opção, você irá criar um usuário único na rede Ring.\nOutras pessoas poderão utilizá-lo para ligar para você.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Obrigatório*";
 
 /* Class = "NSButtonCell"; title = "Register name publicly (experimental)"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register name publicly (experimental)";
+"AG5-GR-bii.title" = "Registrar nome publicamente (experimental)";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Choose your password";
+"B6x-jj-48R.title" = "Escolha sua senha";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
-"BCg-5V-Ek4.placeholderString" = "Mandatory*";
+"BCg-5V-Ek4.placeholderString" = "Obrigatório*";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
 "YIN-YL-JBs.title" = "Só um momento...";
 
 /* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
-"fEY-eO-HwI.title" = "Repeat your password";
+"fEY-eO-HwI.title" = "Repita sua senha";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
 "gEy-ak-Cgq.placeholderString" = "'Desconhecido' se vazio...";
@@ -30,7 +30,7 @@
 "v7f-52-GJA.title" = "Cancelar";
 
 /* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
-"zUH-kc-cik.title" = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.";
+"zUH-kc-cik.title" = "Sua senha deve ter pelo menos 6 caracteres. Ela será utilizada para criptografar os dados da sua conta e vincular novos dispositivos a sua conta.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
 "zfA-n9-V4X.title" = "Criar";
