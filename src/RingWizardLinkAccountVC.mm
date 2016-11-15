@@ -46,6 +46,7 @@
 
 @implementation RingWizardLinkAccountVC {
     __unsafe_unretained IBOutlet NSView* initialContainer;
+    __unsafe_unretained IBOutlet NSView* firstStepContainer;
     __unsafe_unretained IBOutlet NSTextField* pinField;
     __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
     __unsafe_unretained IBOutlet NSTextField* pinLabel;
@@ -63,9 +64,27 @@
     QMetaObject::Connection stateChanged;
 }
 
+- (IBAction)goToStepTwo:(id)sender
+{
+    [self disconnectCallback];
+    [firstStepContainer setHidden:YES];
+    [initialContainer setHidden:NO];
+    [loadingContainer setHidden:YES];
+    [errorContainer setHidden:YES];
+}
+
+- (IBAction)goToStepOne:(id)sender
+{
+    [firstStepContainer setHidden:NO];
+    [initialContainer setHidden:YES];
+    [loadingContainer setHidden:YES];
+    [errorContainer setHidden:YES];
+}
+
 - (void)show
 {
-    [initialContainer setHidden:NO];
+    [firstStepContainer setHidden:NO];
+    [initialContainer setHidden:YES];
     [loadingContainer setHidden:YES];
     [errorContainer setHidden:YES];
 }
@@ -83,7 +102,6 @@
     [progressBar startAnimation:nil];
     [errorContainer setHidden:YES];
 }
-
 
 - (IBAction)showHelp:(id)sender
 {
@@ -141,6 +159,12 @@
 {
     accountToCreate->setUpnpEnabled(YES); // Always active upnp
     accountToCreate << Account::EditAction::SAVE;
+}
+
+- (void)disconnectCallback
+{
+    [errorTimer invalidate];
+    QObject::disconnect(stateChanged);
 }
 
 - (void)setCallback
