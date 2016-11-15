@@ -46,6 +46,7 @@
 
 @implementation RingWizardLinkAccountVC {
     __unsafe_unretained IBOutlet NSView* initialContainer;
+    __unsafe_unretained IBOutlet NSView* firstStepContainer;
     __unsafe_unretained IBOutlet NSTextField* pinField;
     __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
     __unsafe_unretained IBOutlet NSTextField* pinLabel;
@@ -63,9 +64,16 @@
     QMetaObject::Connection stateChanged;
 }
 
+- (IBAction)goToStep2:(id)sender
+{
+    [firstStepContainer setHidden:YES];
+    [initialContainer setHidden:NO];
+}
+
 - (void)show
 {
-    [initialContainer setHidden:NO];
+    [firstStepContainer setHidden:NO];
+    [initialContainer setHidden:YES];
     [loadingContainer setHidden:YES];
     [errorContainer setHidden:YES];
 }
@@ -109,6 +117,11 @@
 
     [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
     [self registerDefaultPreferences];
+}
+
+- (IBAction)goToStepOne:(id)sender {
+    [firstStepContainer setHidden:NO];
+    [initialContainer setHidden:YES];
 }
 
 - (IBAction)dismissViewWithError:(id)sender
