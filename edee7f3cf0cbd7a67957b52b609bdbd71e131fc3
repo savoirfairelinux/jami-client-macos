@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac10518_4d74399c",
+        "filename": "ui/Base.lproj/Localizable.strings",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-11-15T17:31:42Z",
+      "side": 1,
+      "message": "Contain",
+      "range": {
+        "startLine": 122,
+        "startChar": 80,
+        "endLine": 122,
+        "endChar": 81
+      },
+      "revId": "edee7f3cf0cbd7a67957b52b609bdbd71e131fc3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac10518_6d79f592",
+        "filename": "ui/Base.lproj/Localizable.strings",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-11-15T17:31:42Z",
+      "side": 1,
+      "message": "Contain",
+      "range": {
+        "startLine": 122,
+        "startChar": 198,
+        "endLine": 122,
+        "endChar": 206
+      },
+      "revId": "edee7f3cf0cbd7a67957b52b609bdbd71e131fc3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac10518_ad47dd4a",
+        "filename": "ui/Base.lproj/Localizable.strings",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 96
+      },
+      "writtenOn": "2016-11-15T17:31:42Z",
+      "side": 1,
+      "message": "This line and its comment should be removed.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 246
+      },
+      "revId": "edee7f3cf0cbd7a67957b52b609bdbd71e131fc3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
