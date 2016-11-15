@@ -1,0 +1,45 @@
+
+/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
+"1Sx-Et-CDM.title" = "アカウント";
+
+/* Class = "NSTextFieldCell"; title = "RingID"; ObjectID = "8WI-fC-Due"; */
+"8WI-fC-Due.title" = "RingID";
+
+/* Class = "NSTextFieldCell"; title = "Bootstrap server"; ObjectID = "B6b-iB-REZ"; */
+"B6b-iB-REZ.title" = "ブートストラップサーバー";
+
+/* Class = "NSTextFieldCell"; title = "Permissions"; ObjectID = "EDd-FX-wcz"; */
+"EDd-FX-wcz.title" = "許可設定";
+
+/* Class = "NSButtonCell"; title = "Register name"; ObjectID = "G8M-go-xvD"; */
+"G8M-go-xvD.title" = "登録名";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
+"HN3-i9-zmw.placeholderString" = "名前またはニックネーム...";
+
+/* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
+"OeY-na-0YT.title" = "自動応答発信";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
+"PaC-xE-SHA.title" = "発信履歴内のピアからの着信を許可";
+
+/* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
+"Wzq-V2-YLU.title" = "別名";
+
+/* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "ddk-1G-0jU"; */
+"ddk-1G-0jU.title" = "カスタムユーザーエージェントを使用";
+
+/* Class = "NSTextFieldCell"; title = "Blockchain server"; ObjectID = "fSU-Pc-Y5a"; */
+"fSU-Pc-Y5a.title" = "ブロックチェーンサーバー";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
+"fX7-9W-XFl.title" = "連絡先リスト内の相手からの着信を許可";
+
+/* Class = "NSButtonCell"; title = "Allow calls from unknown peers"; ObjectID = "kmI-jb-aal"; */
+"kmI-jb-aal.title" = "未知の相手からの着信を許可";
+
+/* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
+"lHI-bz-ddQ.title" = "UPnP有効";
+
+/* Class = "NSTextFieldCell"; title = "Registered Name"; ObjectID = "sBB-y7-xhL"; */
+"sBB-y7-xhL.title" = "登録された名前";

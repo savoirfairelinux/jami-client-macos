@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 
 /* Contextual menu action */
 "Add to contacts" = "Kişilere ekle";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Takma Ad :";
 
 /* Error shown to the user */
 "An error occured during the export" = "Dışa aktarma esnasında bir hata oluştu";
@@ -41,28 +41,25 @@
 "Copy" = "Kopyala";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Adı kopyala";
 
 /* Contextual menu action */
 "Copy number" = "Numarayı kopyala";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Ring Hesabı Oluştur";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "SİP Hesabı Oluştur";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "Girilen ad bulunamadı";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Hesabınız taşınırken hata oluştu. Tekrar tamamı tıklayabilir veya hesabınızı silebilirsiniz.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
-
-/* Text shown to the user */
-"ID : " = "ID : ";
+"Failed to perform lookup" = "Bakma başarısız";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "%@'den gelen arama";
@@ -74,16 +71,16 @@
 "Message from %@" = "%@'den ileti";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Yeni SİP hesabı";
 
 /* Alert dialog title */
 "No valid account available" = "No valid account available";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Parola ve doğrulama uyuşmuyor";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Parola çok kısa";
 
 /* Indication for user */
 "Passwords don't match" = "Parolalar uyuşmuyor";
@@ -104,10 +101,13 @@
 "Reopen account to see your hash" = "Karıştırdığınız yerlere bakıp hesabı yeniden açın";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Hesabı geri yükle";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Girdiyi Gözden Geçirin";
+
+/* Text shown to the user */
+"RingID : " = "RingID : ";
 
 /* No comment provided by engineer. */
 "Share" = "Paylaş";
@@ -116,19 +116,19 @@
 "Text Actions" = "Metin Eylemleri";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Girilen kullanıcı adı uygun";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Girilen kullanıcı adı uygun değil";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "Aşağıdaki hesabın yeni Ring hesabı biçimine göç ettirilmesi gerekir:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Girdiğiniz parola bu hesabı açmaz";
 
 /* Alert dialog title */
 "The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
@@ -143,5 +143,5 @@
 "Unknown" = "Bilinmeyen";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Hesabı dışa aktarmadan önce taşımanız gerekir.";
 

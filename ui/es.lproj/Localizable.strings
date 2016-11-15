@@ -1,17 +1,17 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Ocurrió un error durante la exportación";
 
 /* Contextual menu action */
 "Add to contacts" = "Agregar a contactos";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Alias:";
 
 /* Error shown to the user */
-"An error occured during the export" = "Ocurrión un error durante la exportación";
+"An error occured during the export" = "Ocurrió un error durante la exportación";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Cuenta de respaldo";
 
 /* Contextual menu action */
 "Call number" = "Llamar";
@@ -41,52 +41,49 @@
 "Copy" = "Copiar";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Copiar nombre";
 
 /* Contextual menu action */
 "Copy number" = "Copiar Número";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Crear una cuenta Ring";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Crear cuenta SIP";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "El nombre ingresado no ha sido encontrado";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Se produjo un error al migrar la cuenta. Presiona OK para reintentarlo o elimina tu cuenta.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
-
-/* Text shown to the user */
-"ID : " = "ID : ";
+"Failed to perform lookup" = "No se pudo llevar a cabo la búsqueda";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Llamada entrante de %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "Asegúrate de tener al menos una cuenta válida";
 
 /* Message from {Name} */
 "Message from %@" = "Mensaje de %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Nueva cuenta SIP";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "No hay una cuenta válida disponible";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "La contraseña y la confirmación no coinciden";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "La contraseña es demasiado corta";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Las contraseñas no coinciden";
 
 /* Button label */
 "Pause" = "Pausar";
@@ -104,10 +101,13 @@
 "Reopen account to see your hash" = "Reabra su cuenta para ver si hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Restablecer cuenta";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Revisar entrada";
+
+/* Text shown to the user */
+"RingID : " = "RingID : ";
 
 /* No comment provided by engineer. */
 "Share" = "Compartir";
@@ -116,32 +116,32 @@
 "Text Actions" = "Acciones del Texto";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "El nombre de usuario tecleado está disponible";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters." = "The entered username is invalid. It must have at leat 3 characters and contains only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "El nombre de usuario tecleado no está disponible";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
+"The following account needs to be migrated to the new Ring account format:" = "La siguiente cuenta debe migrar al nuevo formato de cuenta Ring:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "La contraseña ingresada no puede desbloquear esta cuenta";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "El nombre de usuario ingresado no coincide con un RingID en la red";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Para completar el proceso, necesitas abrir Ring en el nuevo dispositivo y escoger la opción \"Conectar un dispositivo a esta cuenta\". El PIN es válido por 10 minutos.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Para comenzar la migración debes escoger una contraseña para tu cuenta. Esta contraseña cifrará tu clave principal y será necesaria para añadir dispositivos a tu cuenta Ring. Si no estás listo para escoger una contraseña puedes cerrar el programa y retomarlo más adelante.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Desconocido";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Debes migrar tu cuenta antes de exportar";
 
