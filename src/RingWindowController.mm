@@ -150,20 +150,26 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [ringIDLabel setStringValue:@""];
     auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
     for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
-        Account* acc = ringList.value(i);
-        if (acc->isEnabled()) {
-            if(!enabled)
-                enabled = finalChoice = acc;
-            if (acc->registrationState() == Account::RegistrationState::READY) {
-                registered = enabled = finalChoice = acc;
+        auto account = ringList.value(i);
+        if (account->isEnabled()) {
+            if(!enabled) {
+                enabled = finalChoice = account;
+            }
+            if (account->registrationState() == Account::RegistrationState::READY) {
+                registered = enabled = finalChoice = account;
             }
         } else {
-            if (!finalChoice)
-                finalChoice = acc;
+            if (!finalChoice) {
+                finalChoice = account;
+            }
         }
     }
-
-    [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
+    auto name = finalChoice->registeredName();
+    if (!name.isNull() && !name.isEmpty()) {
+        [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", name.toNSString()]];
+    } else {
+        [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
+    }
 }
 
 - (IBAction)shareRingID:(id)sender {
