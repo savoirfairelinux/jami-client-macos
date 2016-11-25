@@ -150,20 +150,30 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     [ringIDLabel setStringValue:@""];
     auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
     for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
-        Account* acc = ringList.value(i);
-        if (acc->isEnabled()) {
-            if(!enabled)
-                enabled = finalChoice = acc;
-            if (acc->registrationState() == Account::RegistrationState::READY) {
-                registered = enabled = finalChoice = acc;
+        auto account = ringList.value(i);
+        if (account->isEnabled()) {
+            if(!enabled) {
+                enabled = finalChoice = account;
+            }
+            if (account->registrationState() == Account::RegistrationState::READY) {
+                registered = enabled = finalChoice = account;
             }
         } else {
-            if (!finalChoice)
-                finalChoice = acc;
+            if (!finalChoice) {
+                finalChoice = account;
+            }
         }
     }
+    auto name = finalChoice->registeredName();
+    if (!name.isNull() && !name.isEmpty()) {
+        [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", name.toNSString()]];
+    } else {
+        [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
+    }
 
-    [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
+    if (qrcodeView.alphaValue == 1) {
+        [self drawQRCode];
+    }
 }
 
 - (IBAction)shareRingID:(id)sender {
@@ -183,6 +193,16 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
         return;
     }
 
+    [self drawQRCode];
+
+    [self showQRCode:YES];
+}
+
+/**
+ * Draw the QRCode in the qrCodeView
+ */
+- (void)drawQRCode
+{
     auto qrCode = QRcode_encodeString(ringIDLabel.stringValue.UTF8String,
                                       0,
                                       QR_ECLEVEL_L, // Lowest level of error correction
@@ -191,6 +211,12 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     if (!qrCode) {
         return;
     }
+
+    unsigned char *data = 0;
+    int width;
+    data = qrCode->data;
+    width = qrCode->width;
+    int qr_margin = 3;
 
     CGFloat size = qrcodeView.frame.size.width;
 
@@ -202,35 +228,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     CGAffineTransform scaleTransform = CGAffineTransformMakeScale(1, -1);
     CGContextConcatCTM(ctx, CGAffineTransformConcat(translateTransform, scaleTransform));
 
-    // draw QR on this context
-    [self drawQRCode:qrCode context:ctx size:size];
-
-    // get image
-    auto qrCGImage = CGBitmapContextCreateImage(ctx);
-    auto qrImage = [[NSImage alloc] initWithCGImage:qrCGImage size:qrcodeView.frame.size];
-
-    // some releases
-    CGContextRelease(ctx);
-    CGImageRelease(qrCGImage);
-    CGColorSpaceRelease(colorSpace);
-    QRcode_free(qrCode);
-
-    [qrcodeView setImage:qrImage];
-    [self showQRCode:YES];
-}
-
-/**
- * @param code the previously generated QRCode
- * @param ctx current drawing context
- * @param size the output size in which to draw
- */
-- (void)drawQRCode:(QRcode *)code context:(CGContextRef)ctx size:(CGFloat)size {
-    unsigned char *data = 0;
-    int width;
-    data = code->data;
-    width = code->width;
-    int qr_margin = 3;
-    float zoom = ceil((double)size / (code->width + 2.0 * qr_margin));
+    float zoom = ceil((double)size / (qrCode->width + 2.0 * qr_margin));
     CGRect rectDraw = CGRectMake(0, 0, zoom, zoom);
 
     int ran;
@@ -250,6 +248,18 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
             ++data;
         }
     }
+
+    // get image
+    auto qrCGImage = CGBitmapContextCreateImage(ctx);
+    auto qrImage = [[NSImage alloc] initWithCGImage:qrCGImage size:qrcodeView.frame.size];
+
+    // some releases
+    CGContextRelease(ctx);
+    CGImageRelease(qrCGImage);
+    CGColorSpaceRelease(colorSpace);
+    QRcode_free(qrCode);
+
+    [qrcodeView setImage:qrImage];
 }
 
 /**
