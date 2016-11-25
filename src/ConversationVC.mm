@@ -49,6 +49,8 @@
     NSMutableString* textSelection;
 
     QNSTreeController* treeController;
+    QMetaObject::Connection contactMethodChanged;
+    ContactMethod* selectedContactMethod;
 
     __unsafe_unretained IBOutlet NSView* sendPanel;
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
@@ -111,10 +113,6 @@
                          // Select first cm
                          [contactMethodsPopupButton selectItemAtIndex:0];
                          [self itemChanged:contactMethodsPopupButton];
-
-                         NSString* localizedTitle = current.data((int)Ring::Role::Name).toString().toNSString();
-                        [conversationTitle setStringValue:localizedTitle];
-
                      });
 }
 
@@ -355,7 +353,16 @@
 - (IBAction)itemChanged:(id)sender {
     NSInteger index = [(NSPopUpButton *)sender indexOfSelectedItem];
 
-    if (auto txtRecording = contactMethods.at(index)->textRecording()) {
+    selectedContactMethod = contactMethods.at(index);
+    [conversationTitle setStringValue:selectedContactMethod->primaryName().toNSString()];
+    QObject::disconnect(contactMethodChanged);
+    contactMethodChanged = QObject::connect(selectedContactMethod,
+                                            &ContactMethod::changed,
+                                            [self] {
+                                                [conversationTitle setStringValue:selectedContactMethod->primaryName().toNSString()];
+                                            });
+
+    if (auto txtRecording = selectedContactMethod->textRecording()) {
         treeController = [[QNSTreeController alloc] initWithQModel:txtRecording->instantMessagingModel()];
         [treeController setAvoidsEmptySelection:NO];
         [treeController setChildrenKeyPath:@"children"];
