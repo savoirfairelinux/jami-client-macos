@@ -229,6 +229,8 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
                                                      break;
                                                  case NameDirectory::RegisterNameStatus::SUCCESS:
                                                      [self.delegate didRegisterNameWithSuccess];
+                                                     // Artificial refresh of the model to update the welcome view
+                                                     Q_EMIT AccountModel::instance().dataChanged(QModelIndex(), QModelIndex());
                                                      break;
                                              }
                                          });
