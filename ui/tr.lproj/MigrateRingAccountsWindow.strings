@@ -6,19 +6,19 @@
 "859-10-HEb.placeholderString" = "Ring Kimliği";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later.";
+"859-10-HEb.title" = "Belirtilen hesabın yeni Ring hesap biçimine göç etmesi gerekiyor:\\nTakma ad: \\nKimlik: \\nGöçü sürdürmek için, hesabınız için bir parola seçmelisiniz. Bu parola ana anahtarınızı şifrelemek için kullanılacak. Bu, yeni aygıtları Ring hesabınıza eklerken gerekecek. Eğer parola seçmek için hazır değilseniz, Ring'i kapatabilir ve göçü daha sonra sürdürebilirsiniz.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
 "8K3-9Z-MKH.title" = "Hesap taşıma hatası";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Congratulations, your account has been migrated with Success.";
+"C2l-rz-Gqt.title" = "Tebrikler, hesabınız başarıyla göç edildi.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
 "ITE-yD-CTb.title" = "Bu hesabi sil";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
-"KuO-oT-zhY.placeholderString" = "Confirm your new password...";
+"KuO-oT-zhY.placeholderString" = "Yeni parolanızı onaylayın...";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "TAMAM";

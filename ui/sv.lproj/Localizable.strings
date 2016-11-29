@@ -107,7 +107,7 @@
 "Revise Input" = "Revidera indata";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "Ring-ID : ";
 
 /* No comment provided by engineer. */
 "Share" = "Dela";
@@ -119,7 +119,7 @@
 "The entered username is available" = "Angivet användarnamn är tillgängligt";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Användarnamnet är ogiltigt. Det måste ha minst 3 tecken och får endast innehålla små bokstäver.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Lösenordet är inte tillgängligt";
