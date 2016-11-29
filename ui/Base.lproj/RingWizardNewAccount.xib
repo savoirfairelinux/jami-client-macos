@@ -428,6 +428,10 @@ Gw
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="wsh-QZ-fXj">
                     <rect key="frame" x="18" y="20" width="314" height="68"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="310" id="8nS-nH-hgT"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="68" id="AYh-54-eMm"/>
+                    </constraints>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="0qE-Sz-hdc">
                         <font key="font" metaFont="system"/>
                         <string key="title">By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long.</string>
@@ -437,14 +441,11 @@ Gw
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="centerY" secondItem="5d2-w4-t7n" secondAttribute="centerY" id="2LG-iF-irA"/>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="leading" secondItem="5d2-w4-t7n" secondAttribute="leading" constant="20" id="5yp-xd-EQK"/>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="centerX" secondItem="5d2-w4-t7n" secondAttribute="centerX" id="Lde-tI-97A"/>
-                <constraint firstAttribute="bottom" secondItem="wsh-QZ-fXj" secondAttribute="bottom" constant="20" id="Vhw-8E-PGE"/>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="top" secondItem="5d2-w4-t7n" secondAttribute="top" constant="20" id="aFs-IQ-VBH"/>
-                <constraint firstAttribute="trailing" secondItem="wsh-QZ-fXj" secondAttribute="trailing" constant="20" id="omo-Yd-iK5"/>
+                <constraint firstAttribute="bottom" secondItem="wsh-QZ-fXj" secondAttribute="bottom" constant="20" id="UE2-fz-Z9c"/>
+                <constraint firstItem="wsh-QZ-fXj" firstAttribute="top" secondItem="5d2-w4-t7n" secondAttribute="top" constant="20" id="Vuc-0h-5Jx"/>
+                <constraint firstItem="wsh-QZ-fXj" firstAttribute="leading" secondItem="5d2-w4-t7n" secondAttribute="leading" constant="20" symbolic="YES" id="faR-s8-nnw"/>
             </constraints>
-            <point key="canvasLocation" x="-605" y="823"/>
+            <point key="canvasLocation" x="-651" y="818"/>
         </customView>
         <customView id="Cdg-Wr-oF6">
             <rect key="frame" x="0.0" y="0.0" width="348" height="91"/>
@@ -452,6 +453,10 @@ Gw
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="eOp-Af-ygv">
                     <rect key="frame" x="18" y="20" width="312" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="308" id="NLc-XU-dGJ"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="51" id="eko-DU-8HN"/>
+                    </constraints>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="zUH-kc-cik">
                         <font key="font" metaFont="system"/>
                         <string key="title">Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.</string>
@@ -461,12 +466,8 @@ Gw
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="centerX" secondItem="Cdg-Wr-oF6" secondAttribute="centerX" id="2Fi-dX-tcs"/>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="leading" secondItem="Cdg-Wr-oF6" secondAttribute="leading" constant="20" id="QZx-Wk-O5K"/>
-                <constraint firstAttribute="bottom" secondItem="eOp-Af-ygv" secondAttribute="bottom" constant="20" id="X4g-gk-nc2"/>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="top" secondItem="Cdg-Wr-oF6" secondAttribute="top" constant="20" id="c7E-ah-vgm"/>
-                <constraint firstAttribute="trailing" secondItem="eOp-Af-ygv" secondAttribute="trailing" constant="20" id="eop-dQ-IiC"/>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="centerY" secondItem="Cdg-Wr-oF6" secondAttribute="centerY" id="r2Q-MH-hTe"/>
+                <constraint firstItem="eOp-Af-ygv" firstAttribute="top" secondItem="Cdg-Wr-oF6" secondAttribute="top" constant="20" id="9xv-Fr-K0v"/>
+                <constraint firstItem="eOp-Af-ygv" firstAttribute="leading" secondItem="Cdg-Wr-oF6" secondAttribute="leading" constant="20" symbolic="YES" id="dQk-Nx-aXT"/>
             </constraints>
             <point key="canvasLocation" x="-606" y="657.5"/>
         </customView>

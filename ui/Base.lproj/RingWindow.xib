@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
     </dependencies>
     <objects>
@@ -609,16 +608,8 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="D6e-KX-8gC">
                                 <rect key="frame" x="103" y="194" width="520" height="270"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
-                                        <rect key="frame" x="137" y="104" width="247" height="63"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Ring is free software for universal communication which respects the freedoms and privacy of its users." id="eln-Vm-t0d">
-                                            <font key="font" size="15" name="HelveticaNeue"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
-                                        <rect key="frame" x="95" y="77" width="330" height="19"/>
+                                        <rect key="frame" x="95" y="98" width="330" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="326" id="i1K-ok-BEb"/>
                                         </constraints>
@@ -629,7 +620,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
-                                        <rect key="frame" x="20" y="43" width="400" height="26"/>
+                                        <rect key="frame" x="20" y="64" width="400" height="26"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="26" id="TYe-h2-pPT"/>
                                             <constraint firstAttribute="width" constant="400" id="ywt-Ml-u9k"/>
@@ -649,7 +640,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
                                     </imageView>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge">
-                                        <rect key="frame" x="470" y="41" width="30" height="30"/>
+                                        <rect key="frame" x="470" y="62" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="AXu-uA-KCC"/>
                                             <constraint firstAttribute="width" constant="30" id="h6a-Lg-QRm"/>
@@ -663,7 +654,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="IconButton">
-                                        <rect key="frame" x="431" y="41" width="30" height="30"/>
+                                        <rect key="frame" x="431" y="62" width="30" height="30"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="qrcode" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vvm-Gy-Tbh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -677,6 +668,14 @@
                                             <action selector="toggleQRCode:" target="-2" id="jZa-65-o5C"/>
                                         </connections>
                                     </button>
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
+                                        <rect key="frame" x="24" y="125" width="473" height="42"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Ring is free software for universal communication which respects the freedoms and privacy of its users." id="eln-Vm-t0d">
+                                            <font key="font" size="15" name="HelveticaNeue"/>
+                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="f62-JV-dgr" firstAttribute="top" secondItem="D6e-KX-8gC" secondAttribute="top" constant="20" id="0b6-u8-yQg"/>
