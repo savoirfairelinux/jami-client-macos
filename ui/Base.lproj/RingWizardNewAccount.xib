@@ -423,13 +423,17 @@ Gw
             <point key="canvasLocation" x="199" y="581"/>
         </customView>
         <customView id="5d2-w4-t7n">
-            <rect key="frame" x="0.0" y="0.0" width="350" height="108"/>
+            <rect key="frame" x="0.0" y="0.0" width="350" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="wsh-QZ-fXj">
-                    <rect key="frame" x="18" y="20" width="314" height="68"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="0qE-Sz-hdc">
-                        <font key="font" metaFont="system"/>
+                    <rect key="frame" x="18" y="20" width="314" height="59"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="59" id="XRy-g1-xvh"/>
+                        <constraint firstAttribute="width" constant="310" id="kiE-3q-jrv"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="justified" id="0qE-Sz-hdc">
+                        <font key="font" metaFont="smallSystem"/>
                         <string key="title">By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -437,23 +441,23 @@ Gw
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="centerY" secondItem="5d2-w4-t7n" secondAttribute="centerY" id="2LG-iF-irA"/>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="leading" secondItem="5d2-w4-t7n" secondAttribute="leading" constant="20" id="5yp-xd-EQK"/>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="centerX" secondItem="5d2-w4-t7n" secondAttribute="centerX" id="Lde-tI-97A"/>
-                <constraint firstAttribute="bottom" secondItem="wsh-QZ-fXj" secondAttribute="bottom" constant="20" id="Vhw-8E-PGE"/>
-                <constraint firstItem="wsh-QZ-fXj" firstAttribute="top" secondItem="5d2-w4-t7n" secondAttribute="top" constant="20" id="aFs-IQ-VBH"/>
-                <constraint firstAttribute="trailing" secondItem="wsh-QZ-fXj" secondAttribute="trailing" constant="20" id="omo-Yd-iK5"/>
+                <constraint firstItem="wsh-QZ-fXj" firstAttribute="leading" secondItem="5d2-w4-t7n" secondAttribute="leading" constant="20" symbolic="YES" id="Ua0-mg-IBy"/>
+                <constraint firstItem="wsh-QZ-fXj" firstAttribute="top" secondItem="5d2-w4-t7n" secondAttribute="top" constant="20" symbolic="YES" id="tno-jg-mwQ"/>
             </constraints>
-            <point key="canvasLocation" x="-605" y="823"/>
+            <point key="canvasLocation" x="-651" y="781.5"/>
         </customView>
         <customView id="Cdg-Wr-oF6">
-            <rect key="frame" x="0.0" y="0.0" width="348" height="91"/>
+            <rect key="frame" x="0.0" y="0.0" width="348" height="102"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="eOp-Af-ygv">
-                    <rect key="frame" x="18" y="20" width="312" height="51"/>
-                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" id="zUH-kc-cik">
-                        <font key="font" metaFont="system"/>
+                    <rect key="frame" x="18" y="20" width="312" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="62" id="5mA-Bq-bMF"/>
+                        <constraint firstAttribute="width" constant="308" id="fAL-sO-RRi"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="zUH-kc-cik">
+                        <font key="font" metaFont="smallSystem"/>
                         <string key="title">Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -461,14 +465,10 @@ Gw
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="centerX" secondItem="Cdg-Wr-oF6" secondAttribute="centerX" id="2Fi-dX-tcs"/>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="leading" secondItem="Cdg-Wr-oF6" secondAttribute="leading" constant="20" id="QZx-Wk-O5K"/>
-                <constraint firstAttribute="bottom" secondItem="eOp-Af-ygv" secondAttribute="bottom" constant="20" id="X4g-gk-nc2"/>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="top" secondItem="Cdg-Wr-oF6" secondAttribute="top" constant="20" id="c7E-ah-vgm"/>
-                <constraint firstAttribute="trailing" secondItem="eOp-Af-ygv" secondAttribute="trailing" constant="20" id="eop-dQ-IiC"/>
-                <constraint firstItem="eOp-Af-ygv" firstAttribute="centerY" secondItem="Cdg-Wr-oF6" secondAttribute="centerY" id="r2Q-MH-hTe"/>
+                <constraint firstItem="eOp-Af-ygv" firstAttribute="top" secondItem="Cdg-Wr-oF6" secondAttribute="top" constant="20" symbolic="YES" id="1Gm-Cd-4hu"/>
+                <constraint firstItem="eOp-Af-ygv" firstAttribute="leading" secondItem="Cdg-Wr-oF6" secondAttribute="leading" constant="20" symbolic="YES" id="dRD-x6-zge"/>
             </constraints>
-            <point key="canvasLocation" x="-606" y="657.5"/>
+            <point key="canvasLocation" x="-606" y="599"/>
         </customView>
     </objects>
     <resources>
