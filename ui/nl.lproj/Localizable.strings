@@ -107,7 +107,7 @@
 "Revise Input" = "Invoer herzien";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "Ring-ID:";
 
 /* No comment provided by engineer. */
 "Share" = "Delen";
@@ -119,7 +119,7 @@
 "The entered username is available" = "De ingevoerde gebruikersnaam is beschikbaar";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "De ingevoerde gebruikersnaam is ongeldig. De gebruikersnaam moet minstens 3 tekens lang zijn, en mag enkel kleine alfanumerieke tekens bevatten.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "De ingevoerde gebruikersnaam is niet beschikbaar";
