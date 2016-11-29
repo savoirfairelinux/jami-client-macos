@@ -119,7 +119,7 @@
 "The entered username is available" = "Zadané uživatelské jméno je dostupné";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Zadané uživatelské jméno je neplatné. Musí obsahovat alespoň 3 znaky a skládat se pouze z malých písmen a číslic.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Zadané uživatelské jméno není dostupné";

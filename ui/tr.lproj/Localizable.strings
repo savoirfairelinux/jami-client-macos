@@ -11,7 +11,7 @@
 "An error occured during the export" = "Dışa aktarma esnasında bir hata oluştu";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Hesabı yedekle";
 
 /* Contextual menu action */
 "Call number" = "Telefon numarası";
@@ -65,7 +65,7 @@
 "Incoming call from %@" = "%@'den gelen arama";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "En az bir geçerli hesabınız olduğundan emin olun";
 
 /* Message from {Name} */
 "Message from %@" = "%@'den ileti";
@@ -74,7 +74,7 @@
 "New SIP account" = "Yeni SİP hesabı";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "Geçerli hesap yok";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Parola ve doğrulama uyuşmuyor";
@@ -107,7 +107,7 @@
 "Revise Input" = "Girdiyi Gözden Geçirin";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "Ring Kimliği :";
 
 /* No comment provided by engineer. */
 "Share" = "Paylaş";
@@ -119,7 +119,7 @@
 "The entered username is available" = "Girilen kullanıcı adı uygun";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Girilen kullanıcı adı geçersiz. En az 3 karakterli olmalı ve yalnızca abece sayısal karakterler içermelidir.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Girilen kullanıcı adı uygun değil";
@@ -131,13 +131,13 @@
 "The password you entered does not unlock this account" = "Girdiğiniz parola bu hesabı açmaz";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "Girdiğiniz kullanıcı adı ağ üzerindeki bir Ring Kimliğiyle uyuşmadı";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Süreci bitirmek için, yeni aygıtta Ring'i açmanız ve \"Bu aygıtı bir hesaba bağla\" seçeneğini seçmeniz gerekiyor. Pin'iniz 10 dakika için geçerlidir.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Göçü sürdürmek için, hesabınız için bir parola seçmelisiniz. Bu parola ana anahtarınızı şifrelemek için kullanılacak. Bu, yeni aygıtları Ring hesabınıza eklerken gerekecek. Eğer parola seçmek için hazır değilseniz, Ring'i kapatabilir ve göçü daha sonra sürdürebilirsiniz.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Bilinmeyen";
