@@ -459,8 +459,6 @@ LIST(APPEND QT_PLUGINS_IMAGEFORMAT  Qt5::QTgaPlugin
                                     Qt5::QICNSPlugin
                                     Qt5::QICOPlugin
                                     Qt5::QJpegPlugin
-                                    Qt5::QJp2Plugin
-                                    Qt5::QMngPlugin
                                     Qt5::QTiffPlugin
                                     Qt5::QDDSPlugin)
 
