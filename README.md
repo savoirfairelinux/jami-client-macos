@@ -10,7 +10,7 @@ For more information about the ring project, see the following:
 
 | App | CI | Packaging
 | :-: | :-: | :-:
-| [![Download from ring.cx](https://img.shields.io/badge/download-cx&#1748;ring-blue.svg)](https://ring.cx/en/download/mac-osx) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-client-macosx)](https://test.savoirfairelinux.com/job/ring-client-macosx/) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-packaging-client-macosx)](https://test.savoirfairelinux.com/job/ring-packaging-client-macosx/)
+| [![Download from ring.cx](https://img.shields.io/badge/download-cx.ring-blue.svg)](https://ring.cx/en/download/mac-osx) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-client-macosx)](https://test.savoirfairelinux.com/job/ring-client-macosx/) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-packaging-client-macosx)](https://test.savoirfairelinux.com/job/ring-packaging-client-macosx/)
 
 Requirements
 =============
@@ -42,16 +42,16 @@ Build Client
 
 1. mkdir build && cd build
 
-2. export CMAKE_PREFIX_PATH=<dir_to_qt5>
+2. export CMAKE_PREFIX_PATH=\<dir_to_qt5\>
 
 Now generate an Xcode project with CMake:
-3. cmake ../ -DCMAKE_INSTALL_PREFIX=<libringclient_install_path> -G Xcode
+3. cmake ../ -DCMAKE_INSTALL_PREFIX=\<libringclient_install_path\> -G Xcode
 4. open Ring.xcodeproj/
 5. Build and run it from Xcode. You can also generate the final Ring.app bundle.
 
 You can also build it from the command line:
 
-3. cmake ../ -DCMAKE_INSTALL_PREFIX=<libringclient_install_path>
+3. cmake ../ -DCMAKE_INSTALL_PREFIX=\<libringclient_install_path\>
 4. make
 5. open Ring.app/
 
@@ -63,7 +63,7 @@ If you want to create the final app (self-containing .dmg):
 Notes:
 
 By default the client version is specified in CMakeLists.txt but it can be
-overriden by specifying -DRING_VERSION=<num> in the cmake command line.
+overriden by specifying -DRING_VERSION=\<num\> in the cmake command line.
 
 You can specify a custom ringtone folder containing audio files (only)
 with -DRINGTONE_DIR option
