@@ -145,3 +145,15 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
 
+/* Text shown to user when revice revoked with success */
+"Device is now revoked" = "Device is now revoked";
+
+/* Text shown to user when password is wrong */
+"Wrong password" = "Wrong password";
+
+/* Text shown to user when could not revoke device */
+"Can't revoke device" = "Can't revoke device";
+
+/* Text shown to user when could not find device to revoke*/
+"Unknown device" = "Unknown device";
+
