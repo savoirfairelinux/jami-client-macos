@@ -158,6 +158,8 @@ SET(ringclient_CONTROLLERS
    src/DialpadWC.h
    src/RegisterNameWC.mm
    src/RegisterNameWC.h
+   src/ConfirmDeviceRevocationVC.mm
+   src/ConfirmDeviceRevocationVC.h
 )
 
 SET(ringclient_BACKENDS
@@ -228,6 +230,7 @@ SET(ringclient_XIBS
    RingWizardChoose
    Dialpad
    RegisterNameWindow
+   ConfirmDeviceRevocation
 )
 
 # Icons
