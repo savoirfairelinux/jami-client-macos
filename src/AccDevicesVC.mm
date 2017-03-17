@@ -29,11 +29,13 @@
 
 #import "QNSTreeController.h"
 #import "ExportPasswordWC.h"
+#import "ConfirmDeviceRevocationVC.h"
 
-@interface AccDevicesVC () <ExportPasswordDelegate>
+@interface AccDevicesVC () <ExportPasswordDelegate, ConfirmDeviceRevocationdDelegate>
 
 @property QNSTreeController* devicesTreeController;
 @property ExportPasswordWC* passwordWC;
+@property ConfirmDeviceRevocationVC* revocationVC;
 
 @property (unsafe_unretained) IBOutlet NSOutlineView* deviceDetailsView;
 
@@ -41,10 +43,11 @@
 
 @implementation AccDevicesVC
 
-@synthesize passwordWC;
+@synthesize passwordWC, revocationVC;
 
-NSInteger const TAG_NAME        =   100;
-NSInteger const TAG_DEVICE_IDS  =   200;
+NSInteger const TAG_NAME           =   100;
+NSInteger const TAG_DEVICE_IDS     =   200;
+NSInteger const TAG_REVOKE_DEVICE  =   300;
 
 - (void)awakeFromNib
 {
@@ -79,6 +82,28 @@ NSInteger const TAG_DEVICE_IDS  =   200;
     self.account = AccountModel::instance().selectedAccount();
     [self showPasswordPrompt];
 }
+
+- (IBAction)revokeDeviceClickedAtRow:(id)sender {
+    auto account = AccountModel::instance().selectedAccount();
+    NSInteger row = [self.deviceDetailsView rowForView:sender];
+    id item = [self.deviceDetailsView itemAtRow:row];
+    QModelIndex qIdx = [self.devicesTreeController toQIdx:((NSTreeNode*)item)];
+    NSString* deviceID = account->ringDeviceModel()->data(qIdx,Qt::DisplayRole).toString().toNSString();
+    revocationVC = [[ConfirmDeviceRevocationVC alloc] initWithDelegate:self actionCode:1];
+    [revocationVC setAccount: account];
+    [revocationVC setDeviceID:deviceID];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:revocationVC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: revocationVC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+
+}
+
 #pragma mark - Export methods
 
 - (void)showPasswordPrompt
@@ -120,11 +145,13 @@ NSInteger const TAG_DEVICE_IDS  =   200;
 
     NSTextField* nameLabel = [result viewWithTag:TAG_NAME];
     NSTextField* deviceIDLabel = [result viewWithTag:TAG_DEVICE_IDS];
+    NSButton* revokeDevice = [result viewWithTag:TAG_REVOKE_DEVICE];
 
     auto account = AccountModel::instance().selectedAccount();
 
     NSString* string = account->ringDeviceModel()->data(qIdx,Qt::DisplayRole).toString().toNSString();
-
+    Boolean isCurrentDevice = [string isEqualToString:account->deviceId().toNSString()];
+    [revokeDevice setHidden:isCurrentDevice];
     [nameLabel setStringValue:account->alias().toNSString()];
     [deviceIDLabel setStringValue:string];
 

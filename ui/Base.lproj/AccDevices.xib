@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccDevicesVC">
@@ -62,11 +63,26 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
+                                                    <button autoresizesSubviews="NO" verticalHuggingPriority="750" tag="300" translatesAutoresizingMaskIntoConstraints="NO" id="NM7-2k-Vy7">
+                                                        <rect key="frame" x="470" y="15" width="58" height="19"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="58" id="yqg-QT-7EW"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="roundRect" title="Revoke" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="M6Q-FG-rwV">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="revokeDeviceClickedAtRow:" target="-2" id="ffm-J7-4Yl"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="UbS-VO-lii" firstAttribute="top" secondItem="V2l-Lf-B1r" secondAttribute="top" constant="3" id="1UM-xz-ZNR"/>
+                                                    <constraint firstAttribute="trailing" secondItem="NM7-2k-Vy7" secondAttribute="trailing" constant="5" id="5aS-Ln-10r"/>
                                                     <constraint firstItem="mif-hy-cnh" firstAttribute="leading" secondItem="V2l-Lf-B1r" secondAttribute="leading" constant="40" id="CQT-Fu-bgB"/>
                                                     <constraint firstAttribute="trailing" secondItem="UbS-VO-lii" secondAttribute="trailing" constant="289" id="YkQ-XF-ydv"/>
+                                                    <constraint firstItem="NM7-2k-Vy7" firstAttribute="centerY" secondItem="V2l-Lf-B1r" secondAttribute="centerY" id="bLd-hw-uYs"/>
                                                     <constraint firstItem="UbS-VO-lii" firstAttribute="top" secondItem="V2l-Lf-B1r" secondAttribute="top" constant="3" id="hCv-J7-Ivx"/>
                                                     <constraint firstItem="mif-hy-cnh" firstAttribute="top" secondItem="UbS-VO-lii" secondAttribute="bottom" constant="6" id="lKI-61-ssq"/>
                                                     <constraint firstItem="mif-hy-cnh" firstAttribute="top" secondItem="UbS-VO-lii" secondAttribute="bottom" constant="6" id="vWW-7c-2Hk"/>
