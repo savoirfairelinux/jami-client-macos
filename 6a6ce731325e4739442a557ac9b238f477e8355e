@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bab3e1c7_3d81e34a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-18T07:57:38Z",
+      "side": 1,
+      "message": "You have extra spaces here",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "6a6ce731325e4739442a557ac9b238f477e8355e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bab3e1c7_dd952789",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-18T07:57:38Z",
+      "side": 1,
+      "message": "You don\u0027t need a line between tuleap id and change id",
+      "revId": "6a6ce731325e4739442a557ac9b238f477e8355e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bab3e1c7_9d8faf75",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-18T07:57:38Z",
+      "side": 1,
+      "message": "extra spaces",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 4
+      },
+      "revId": "6a6ce731325e4739442a557ac9b238f477e8355e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bab3e1c7_fd926b9e",
+        "filename": "src/ConfirmDeviceRevocationVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-18T07:57:38Z",
+      "side": 1,
+      "message": "Headers should include licence and copyright",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 2
+      },
+      "revId": "6a6ce731325e4739442a557ac9b238f477e8355e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bab3e1c7_bd8cf380",
+        "filename": "src/ConfirmDeviceRevocationVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-18T07:57:38Z",
+      "side": 1,
+      "message": "It won\u0027t work very well with that :)",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 91
+      },
+      "revId": "6a6ce731325e4739442a557ac9b238f477e8355e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
