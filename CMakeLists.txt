@@ -459,8 +459,7 @@ LIST(APPEND QT_PLUGINS_IMAGEFORMAT  Qt5::QTgaPlugin
                                     Qt5::QICNSPlugin
                                     Qt5::QICOPlugin
                                     Qt5::QJpegPlugin
-                                    Qt5::QTiffPlugin
-                                    Qt5::QDDSPlugin)
+                                    Qt5::QTiffPlugin)
 
 # we need two plugin directories platform and imageformats
 GET_TARGET_PROPERTY(_loc Qt5::QCocoaIntegrationPlugin LOCATION)
