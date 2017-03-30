@@ -96,7 +96,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     accountUpdate = QObject::connect(&AccountModel::instance(),
                                      &AccountModel::dataChanged,
                                      [=] {
-                                         [self updateRingID];
+                                         [self updateRingIDAndDisplyQRCode:NO];
                                      });
 
     QObject::connect(RecentModel::instance().selectionModel(),
@@ -141,7 +141,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
  * Implement the necessary logic to choose which Ring ID to display.
  * This tries to choose the "best" ID to show
  */
-- (void) updateRingID
+- (void) updateRingIDAndDisplyQRCode:(Boolean) shouldDisplayCode
 {
     Account* registered = nullptr;
     Account* enabled = nullptr;
@@ -171,8 +171,8 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
         [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
     }
 
-    if (qrcodeView.alphaValue == 1) {
-        [self drawQRCode];
+    if (qrcodeView.alphaValue == 1 || shouldDisplayCode) {
+        [self drawQRCodeWithRingID:finalChoice->username().toNSString()];
     }
 }
 
@@ -193,7 +193,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
         return;
     }
 
-    [self drawQRCode];
+    [self updateRingIDAndDisplyQRCode:YES];
 
     [self showQRCode:YES];
 }
@@ -201,9 +201,11 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 /**
  * Draw the QRCode in the qrCodeView
  */
-- (void)drawQRCode
+
+//- (void)drawQRCode
+- (void)drawQRCodeWithRingID:(NSString *) ringID
 {
-    auto qrCode = QRcode_encodeString(ringIDLabel.stringValue.UTF8String,
+    auto qrCode = QRcode_encodeString(ringID.UTF8String,
                                       0,
                                       QR_ECLEVEL_L, // Lowest level of error correction
                                       QR_MODE_8, // 8-bit data mode
@@ -309,7 +311,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
         [self migrateRingAccount:acc];
     } else {
         // Fresh run, we need to make sure RingID appears
-        [self updateRingID];
+        [self updateRingIDAndDisplyQRCode:NO];
         [shareButton sendActionOn:NSLeftMouseDownMask];
 
         [self connect];
