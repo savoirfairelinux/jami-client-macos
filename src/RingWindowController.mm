@@ -164,12 +164,7 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
             }
         }
     }
-    auto name = finalChoice->registeredName();
-    if (!name.isNull() && !name.isEmpty()) {
-        [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", name.toNSString()]];
-    } else {
         [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
-    }
 
     if (qrcodeView.alphaValue == 1) {
         [self drawQRCode];
