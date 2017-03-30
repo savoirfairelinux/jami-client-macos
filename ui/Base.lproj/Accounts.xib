@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccountsVC">
@@ -12,6 +13,7 @@
                 <outlet property="configPanels" destination="Jki-s4-F1W" id="nY4-dc-CQg"/>
                 <outlet property="generalTabItem" destination="tPR-Ac-N5Y" id="39S-pz-1Xs"/>
                 <outlet property="mediaTabItem" destination="lxr-my-vH8" id="BhJ-cS-yVi"/>
+                <outlet property="ringContactsTabItem" destination="cFc-lB-Jr8" id="bAO-5d-Rce"/>
                 <outlet property="ringDevicesTabItem" destination="cT1-A5-rbj" id="Sql-e4-mD8"/>
                 <outlet property="ringTabItem" destination="1HC-kF-Jun" id="FJZ-2g-Y1i"/>
                 <outlet property="securityTabItem" destination="Vp5-yV-ScC" id="FDx-0T-3t9"/>
@@ -30,6 +32,12 @@
                     <tabViewItems>
                         <tabViewItem label="General" identifier="1" id="tPR-Ac-N5Y">
                             <view key="view" id="8c3-Js-oxO">
+                                <rect key="frame" x="10" y="33" width="576" height="442"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Contacts" identifier="1" id="cFc-lB-Jr8" userLabel="Contacts Tab Item">
+                            <view key="view" id="NlS-fP-SPd">
                                 <rect key="frame" x="10" y="33" width="576" height="442"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>

@@ -158,6 +158,8 @@ SET(ringclient_CONTROLLERS
    src/DialpadWC.h
    src/RegisterNameWC.mm
    src/RegisterNameWC.h
+   src/AccContactsVC.mm
+   src/AccContactsVC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -208,6 +210,7 @@ SET(ringclient_XIBS
    AccGeneral
    AccMedia
    AccRing
+   AccContacts
    AccAdvanced
    AccSecurity
    AudioPrefs

@@ -40,6 +40,7 @@
 #import "BackupAccountWC.h"
 #import "RestoreAccountWC.h"
 #import "RingWizardWC.h"
+#import "AccContactsVC.h"
 
 @interface AccountsVC () <BackupAccountDelegate, RestoreAccountDelegate>
 
@@ -52,6 +53,7 @@
 @property (retain) IBOutlet NSTabViewItem *securityTabItem;
 @property (retain) IBOutlet NSTabViewItem *ringTabItem;
 @property (retain) IBOutlet NSTabViewItem *ringDevicesTabItem;
+@property (retain) IBOutlet NSTabViewItem *ringContactsTabItem;
 
 @property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *accountsListView;
@@ -63,6 +65,7 @@
 @property AccGeneralVC* generalVC;
 @property AccMediaVC* audioVC;
 @property AccAdvancedVC* advancedVC;
+@property AccContactsVC* contactsVC;
 @property AccSecurityVC* securityVC;
 @property AbstractLoadingWC* accountModal;
 @property RingWizardWC* wizard;
@@ -77,6 +80,7 @@
 @synthesize advancedTabItem;
 @synthesize securityTabItem;
 @synthesize ringTabItem;
+@synthesize ringContactsTabItem;
 @synthesize ringDevicesTabItem;
 @synthesize accountsListView;
 @synthesize accountDetailsView;
@@ -157,6 +161,12 @@ NSInteger const TAG_TYPE        =   400;
     [[self.securityVC view] setBounds:[self.securityTabItem.view bounds]];
     [self.securityTabItem setView:self.securityVC.view];
 
+    self.contactsVC = [[AccContactsVC alloc] initWithNibName:@"AccContacts" bundle:nil];
+    [[self.contactsVC view] setFrame:[self.ringContactsTabItem.view frame]];
+    [[self.contactsVC view] setBounds:[self.ringContactsTabItem.view bounds]];
+    [self.ringContactsTabItem setView:self.contactsVC.view];
+
+
     self.ringVC = [[AccRingVC alloc] initWithNibName:@"AccRing" bundle:nil];
     [[self.ringVC view] setFrame:[self.ringTabItem.view frame]];
     [[self.ringVC view] setBounds:[self.ringTabItem.view bounds]];
@@ -188,6 +198,7 @@ NSInteger const TAG_TYPE        =   400;
     }
 
     [configPanels insertTabViewItem:ringTabItem atIndex:0];
+    [configPanels insertTabViewItem:ringContactsTabItem atIndex:1];
     [configPanels insertTabViewItem:ringDevicesTabItem atIndex:1];
     [configPanels insertTabViewItem:mediaTabItem atIndex:2];
     [configPanels insertTabViewItem:advancedTabItem atIndex:3];
