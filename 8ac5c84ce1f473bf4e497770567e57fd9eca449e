@@ -22,6 +22,30 @@
       "revId": "8ac5c84ce1f473bf4e497770567e57fd9eca449e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_80366a02",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-03-30T20:53:16Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7aade967_809aea12",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 172,
+        "endChar": 5
+      },
+      "revId": "8ac5c84ce1f473bf4e497770567e57fd9eca449e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
