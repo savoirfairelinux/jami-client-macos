@@ -21,4 +21,10 @@
 
 @interface SmartViewVC : NSViewController <NSTextFieldDelegate>
 
+- (void)showHistory;
+
+- (void)showContacts;
+
+- (void)showSmartlist;
+
 @end

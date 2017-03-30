@@ -181,17 +181,17 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     }
 }
 
-- (IBAction)showHistory:(NSButton*)sender
+- (void)showHistory
 {
     [tabbar selectTabViewItemAtIndex:1];
 }
 
-- (IBAction)showContacts:(NSButton*)sender
+- (void)showContacts
 {
     [tabbar selectTabViewItemAtIndex:2];
 }
 
-- (IBAction)showSmartlist:(NSButton*)sender
+- (void)showSmartlist
 {
     [tabbar selectTabViewItemAtIndex:0];
 }
