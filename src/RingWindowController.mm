@@ -42,8 +42,9 @@
 #import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/BackgroundView.h"
+#import "ChooseAccountVC.h"
 
-@interface RingWindowController () <MigrateRingAccountsDelegate>
+@interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
 @property (retain) MigrateRingAccountsWC* migrateWC;
 
@@ -64,20 +65,23 @@
 
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
+
+    ChooseAccountVC* chooseAccountVC;
 }
 
-QMetaObject::Connection accountUpdate;
 static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
+NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItemIdentifier";
 
 - (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
 
     [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
+    self.window.titleVisibility = NSWindowTitleHidden;
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
-
+    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -94,13 +98,6 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 - (void) connect
 {
     // Update Ring ID label based on account model changes
-    QObject::disconnect(accountUpdate);
-    accountUpdate = QObject::connect(&AccountModel::instance(),
-                                     &AccountModel::dataChanged,
-                                     [=] {
-                                         [self updateRingID];
-                                     });
-
     QObject::connect(RecentModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
@@ -137,6 +134,14 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
                              [offlineVC animateOut];
                          }
                      });
+    QObject::connect(AccountModel::instance().userSelectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         if(!current.isValid())
+                             return;
+                         [self updateRingID];
+                     });
+
 }
 
 /**
@@ -150,23 +155,26 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
     Account* finalChoice = nullptr;
 
     [ringIDLabel setStringValue:@""];
-    auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
-    for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
-        auto account = ringList.value(i);
-        if (account->isEnabled()) {
-            if(!enabled) {
-                enabled = finalChoice = account;
-            }
-            if (account->registrationState() == Account::RegistrationState::READY) {
-                registered = enabled = finalChoice = account;
-            }
-        } else {
-            if (!finalChoice) {
-                finalChoice = account;
+    finalChoice = AccountModel::instance().userChosenAccount();
+
+    if(finalChoice == nil) {
+        auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
+        for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
+            auto account = ringList.value(i);
+            if (account->isEnabled()) {
+                if(!enabled) {
+                    enabled = finalChoice = account;
+                }
+                if (account->registrationState() == Account::RegistrationState::READY) {
+                    registered = enabled = finalChoice = account;
+                }
+            } else {
+                if (!finalChoice) {
+                    finalChoice = account;
+                }
             }
         }
     }
-
     auto name = finalChoice->registeredName();
     NSString* uriToDisplay = nullptr;
     if (!name.isNull() && !name.isEmpty()) {
@@ -319,10 +327,13 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
         [self migrateRingAccount:acc];
     } else {
         // Fresh run, we need to make sure RingID appears
-        [self updateRingID];
         [shareButton sendActionOn:NSLeftMouseDownMask];
 
         [self connect];
+        // display accounts to select
+        NSToolbar *toolbar = self.window.toolbar;
+        toolbar.delegate = self;
+        [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
     }
 }
 
@@ -334,6 +345,17 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 - (void)migrationDidCompleteWithError
 {
     [self checkAccountsToMigrate];
+}
+
+#pragma mark - NSToolbarDelegate
+- (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag{
+    if(!(itemIdentifier == kChangeAccountToolBarItemIdentifier)) {
+        return nil;
+    }
+    NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kChangeAccountToolBarItemIdentifier];
+    CGRect frame = chooseAccountVC.view.frame;
+    toolbarItem.view = chooseAccountVC.view;
+    return toolbarItem;
 }
 
 @end
