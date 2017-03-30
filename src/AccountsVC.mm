@@ -273,7 +273,8 @@ NSInteger const TAG_TYPE        =   400;
         auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
         //Update details view
         auto acc = AccountModel::instance().getAccountByModelIndex(qIdx);
-        AccountModel::instance().selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+         AccountModel::instance().setSelectedAccount(acc);
+       // AccountModel::instance().selectionModel()->setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
 
         switch (acc->protocol()) {
             case Account::Protocol::SIP:

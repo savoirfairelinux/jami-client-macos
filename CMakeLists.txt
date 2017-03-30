@@ -158,6 +158,8 @@ SET(ringclient_CONTROLLERS
    src/DialpadWC.h
    src/RegisterNameWC.mm
    src/RegisterNameWC.h
+   src/AccountChangingVC.h
+   src/AccountChangingVC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -186,7 +188,9 @@ SET(ringclient_VIEWS
    src/views/BackgroundView.h
    src/views/BackgroundView.mm
    src/views/IMTableCellView.h
-   src/views/IMTableCellView.mm)
+   src/views/IMTableCellView.mm
+   src/views/AccountMenuItemView.h
+   src/views/AccountMenuItemView.mm)
 
 SET(ringclient_OTHERS
    src/main.mm
@@ -228,6 +232,8 @@ SET(ringclient_XIBS
    RingWizardChoose
    Dialpad
    RegisterNameWindow
+   AccountChanging
+   AccountMenuItemView
 )
 
 # Icons
