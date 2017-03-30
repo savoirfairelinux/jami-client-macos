@@ -38,6 +38,7 @@
 #import "MigrateRingAccountsWC.h"
 #import "ConversationVC.h"
 #import "PreferencesWC.h"
+#import "SmartViewVC.h"
 #import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/BackgroundView.h"
@@ -59,6 +60,7 @@
     __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
     PreferencesWC* preferencesWC;
+    IBOutlet SmartViewVC* smartViewVC;
 
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
@@ -282,6 +284,21 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 {
     preferencesWC = [[PreferencesWC alloc] initWithWindowNibName:@"PreferencesWindow"];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
+}
+
+- (IBAction)showHistory:(NSButton*)sender
+{
+    [smartViewVC showHistory];
+}
+
+- (IBAction)showContacts:(NSButton*)sender
+{
+    [smartViewVC showContacts];
+}
+
+- (IBAction)showSmartlist:(NSButton*)sender
+{
+    [smartViewVC showSmartlist];
 }
 
 #pragma mark - Ring account migration
