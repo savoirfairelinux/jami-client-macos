@@ -164,16 +164,17 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
             }
         }
     }
+
     auto name = finalChoice->registeredName();
+    NSString* uriToDisplay = nullptr;
     if (!name.isNull() && !name.isEmpty()) {
-        [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", name.toNSString()]];
+        uriToDisplay = name.toNSString();
     } else {
-        [ringIDLabel setStringValue:[[NSString alloc] initWithFormat:@"%@", finalChoice->username().toNSString()]];
+        uriToDisplay = finalChoice->username().toNSString();
     }
 
-    if (qrcodeView.alphaValue == 1) {
-        [self drawQRCode];
-    }
+    [ringIDLabel setStringValue:uriToDisplay];
+    [self drawQRCode:finalChoice->username().toNSString()];
 }
 
 - (IBAction)shareRingID:(id)sender {
@@ -187,23 +188,15 @@ static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
 - (IBAction)toggleQRCode:(id)sender {
     // Toggle pressed state of QRCode button
     [sender setPressed:![sender isPressed]];
-    if (![sender isPressed]) {
-        // Recenter welcome view
-        [self showQRCode:NO];
-        return;
-    }
-
-    [self drawQRCode];
-
-    [self showQRCode:YES];
+    [self showQRCode:[sender isPressed]];
 }
 
 /**
  * Draw the QRCode in the qrCodeView
  */
-- (void)drawQRCode
+- (void)drawQRCode:(NSString*) uriToDraw
 {
-    auto qrCode = QRcode_encodeString(ringIDLabel.stringValue.UTF8String,
+    auto qrCode = QRcode_encodeString(uriToDraw.UTF8String,
                                       0,
                                       QR_ECLEVEL_L, // Lowest level of error correction
                                       QR_MODE_8, // 8-bit data mode
