@@ -35,6 +35,7 @@
 #import <interfaces/pixmapmanipulatori.h>
 //RING
 #import "views/AccountMenuItemView.h"
+#import "PendingContactRequestVC.h"
 
 @interface ChooseAccountVC () <NSMenuDelegate>
 
