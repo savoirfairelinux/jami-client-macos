@@ -160,6 +160,10 @@ SET(ringclient_CONTROLLERS
    src/RegisterNameWC.h
    src/ChooseAccountVC.h
    src/ChooseAccountVC.mm
+   src/ContactRequestsListVC.h
+   src/ContactRequestsListVC.mm
+   src/ContactRequestVC.h
+   src/ContactRequestVC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -234,6 +238,8 @@ SET(ringclient_XIBS
    RegisterNameWindow
    ChooseAccount
    AccountMenuItemView
+   PendingContactRequest
+   ContactRequest
 )
 
 # Icons
@@ -279,7 +285,8 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_delete.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/qrcode.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png)
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/pending_contact_request.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)

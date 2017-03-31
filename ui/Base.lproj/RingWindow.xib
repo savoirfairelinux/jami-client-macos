@@ -383,19 +383,18 @@
                                     </tabViewItem>
                                     <tabViewItem label="Contacts" identifier="" id="Zbi-X6-DLT" userLabel="Persons">
                                         <view key="view" id="sag-tS-7Jw">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="72" horizontalPageScroll="10" verticalLineScroll="72" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="rJv-ju-DFe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                     <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="S00-xr-jYM">
 
                                                         <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="10" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq" customClass="RingOutlineView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -760,6 +759,8 @@
             <toolbar key="toolbar" implicitIdentifier="DAC02128-D11F-490C-B61E-D9ECEB1294A5" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="bUe-5b-kMc">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="3XV-3Z-Voi"/>
+                    <toolbarItem implicitItemIdentifier="9154E5A0-E0C8-40FF-8F66-3BB3741EA1D2" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="symbol_blue" id="XSp-w5-Fes"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Wlp-6j-TKD"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="3XV-3Z-Voi"/>
@@ -800,5 +801,7 @@
         <image name="ic_action_video" width="72" height="72"/>
         <image name="qrcode" width="72" height="72"/>
         <image name="symbol_name" width="442.5" height="162"/>
+        <image name="symbol_blue" width="161.6842041015625" height="161.6842041015625"/>
+
     </resources>
 </document>
