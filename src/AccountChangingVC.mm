@@ -37,6 +37,7 @@
 #import "delegates/ImageManipulationDelegate.h"
 
 #import "views/AccountMenuItemView.h"
+#import "PendingContactRequestVC.h"
 
 @interface AccountChangingVC () <NSMenuDelegate>
 
@@ -51,6 +52,7 @@ Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 QMetaObject::Connection accountUpdate;
+
 @synthesize accounts;
 
 - (void)viewDidLoad {
