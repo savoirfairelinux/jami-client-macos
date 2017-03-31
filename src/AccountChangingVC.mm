@@ -36,8 +36,9 @@
 #import "delegates/ImageManipulationDelegate.h"
 
 #import "views/AccountMenuItemView.h"
+#import "PendingContactRequestVC.h"
 
-@interface AccountChangingVC () <NSMenuDelegate>
+@interface AccountChangingVC () <NSMenuDelegate,NSPopoverDelegate>
 
 @end
 
@@ -50,6 +51,7 @@ Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 QMetaObject::Connection accountUpdate;
+NSPopover* addToContactPopover;
 @synthesize accounts;
 
 - (void)viewDidLoad {
@@ -213,6 +215,21 @@ QMetaObject::Connection accountUpdate;
     [self.delegate updateRingIDWithAccount:account];
 
 }
+
+- (IBAction)opencontactRequest:(NSButton*)sender {
+   PendingContactRequestVC* contactRequestVC = [[PendingContactRequestVC alloc] initWithNibName:@"PendingContactRequest" bundle:nil];
+    contactRequestVC.account = [self selectedAccount];
+    addToContactPopover = [[NSPopover alloc] init];
+    [addToContactPopover setContentSize:contactRequestVC.view.frame.size];
+    [addToContactPopover setContentViewController:contactRequestVC];
+    [addToContactPopover setAnimates:YES];
+    [addToContactPopover setBehavior:NSPopoverBehaviorTransient];
+    [addToContactPopover setDelegate:self];
+
+    [addToContactPopover showRelativeToRect:sender.frame
+                                     ofView:self.view preferredEdge:NSMinYEdge];
+}
+
 
 #pragma mark - NSMenuDelegate
 - (void)menuWillOpen:(NSMenu *)menu {

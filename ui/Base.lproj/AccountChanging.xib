@@ -16,17 +16,31 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="289" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box boxType="custom" borderType="none" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Cvs-Qn-771">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="289" height="30"/>
                     <view key="contentView" id="HA7-fk-gse">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
+                        <rect key="frame" x="0.0" y="0.0" width="289" height="30"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZ4-re-2cq">
+                                <rect key="frame" x="-1" y="-1" width="81" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="9j4-Xq-xt3"/>
+                                    <constraint firstAttribute="width" constant="69" id="JUm-97-AeF"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gFh-yP-jgP">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="opencontactRequest:" target="-2" id="v4i-s2-o4n"/>
+                                </connections>
+                            </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JSg-rZ-Xia">
-                                <rect key="frame" x="5" y="0.0" width="30" height="30"/>
+                                <rect key="frame" x="94" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="V0B-Kr-2Kw"/>
                                     <constraint firstAttribute="width" constant="30" id="b29-LU-Chc"/>
@@ -34,7 +48,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="riX-D8-veh"/>
                             </imageView>
                             <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="sMr-ym-Q7q">
-                                <rect key="frame" x="38" y="6" width="159" height="19"/>
+                                <rect key="frame" x="127" y="6" width="159" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="155" id="RHk-BK-YeF"/>
                                 </constraints>
@@ -59,9 +73,12 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="sMr-ym-Q7q" secondAttribute="trailing" constant="5" id="BD9-ZS-cZa"/>
                             <constraint firstItem="sMr-ym-Q7q" firstAttribute="leading" secondItem="JSg-rZ-Xia" secondAttribute="trailing" constant="5" id="L9t-7Q-Cw2"/>
+                            <constraint firstItem="fZ4-re-2cq" firstAttribute="top" secondItem="HA7-fk-gse" secondAttribute="top" constant="3" id="OhW-U0-FdO"/>
                             <constraint firstItem="JSg-rZ-Xia" firstAttribute="top" secondItem="HA7-fk-gse" secondAttribute="top" id="Rw2-Sd-7Hz"/>
                             <constraint firstItem="sMr-ym-Q7q" firstAttribute="centerY" secondItem="JSg-rZ-Xia" secondAttribute="centerY" id="S2w-ph-Hue"/>
+                            <constraint firstItem="fZ4-re-2cq" firstAttribute="leading" secondItem="HA7-fk-gse" secondAttribute="leading" constant="5" id="T77-u6-yeh"/>
                             <constraint firstAttribute="bottom" secondItem="JSg-rZ-Xia" secondAttribute="bottom" id="VyP-Jt-INt"/>
+                            <constraint firstItem="JSg-rZ-Xia" firstAttribute="leading" secondItem="fZ4-re-2cq" secondAttribute="trailing" constant="20" id="Y2w-cT-hD8"/>
                         </constraints>
                     </view>
                 </box>

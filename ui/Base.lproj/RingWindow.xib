@@ -242,17 +242,17 @@
                                     </tabViewItem>
                                     <tabViewItem label="History" identifier="1" id="Wi9-Zd-O1N">
                                         <view key="view" id="h2E-qI-upQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="72" horizontalPageScroll="10" verticalLineScroll="72" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="9uI-D5-KRt">
-                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="eME-fQ-3QX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="3" outlineTableColumn="pTT-gU-NVa" id="rr8-UC-gGF" customClass="RingOutlineView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -376,17 +376,17 @@
                                     </tabViewItem>
                                     <tabViewItem label="Contacts" identifier="" id="Zbi-X6-DLT" userLabel="Persons">
                                         <view key="view" id="sag-tS-7Jw">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="72" horizontalPageScroll="10" verticalLineScroll="72" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="rJv-ju-DFe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                     <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="S00-xr-jYM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="10" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq" customClass="RingOutlineView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="552"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>

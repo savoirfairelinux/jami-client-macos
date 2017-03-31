@@ -160,6 +160,8 @@ SET(ringclient_CONTROLLERS
    src/RegisterNameWC.h
    src/AccountChangingVC.h
    src/AccountChangingVC.mm
+   src/PendingContactRequestVC.h
+   src/PendingContactRequestVC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -234,6 +236,7 @@ SET(ringclient_XIBS
    RegisterNameWindow
    AccountChanging
    AccountMenuItemView
+   PendingContactRequest
 )
 
 # Icons
