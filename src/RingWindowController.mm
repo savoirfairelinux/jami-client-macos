@@ -43,8 +43,9 @@
 #import "views/NSColor+RingTheme.h"
 #import "views/BackgroundView.h"
 #import "ChooseAccountVC.h"
+#import "PendingContactRequestVC.h"
 
-@interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
+@interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate, NSPopoverDelegate>
 
 @property (retain) MigrateRingAccountsWC* migrateWC;
 
@@ -67,10 +68,12 @@
     ConversationVC* offlineVC;
 
     ChooseAccountVC* chooseAccountVC;
+    NSPopover* pendingContactRequestPopover;
 }
 
-static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
-NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItemIdentifier";
+static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
+NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
+static auto const kTrustRequestMenuItemIdentifier    = @"TrustRequestMenuItemIdentifier";
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -199,6 +202,18 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
     // Toggle pressed state of QRCode button
     [sender setPressed:![sender isPressed]];
     [self showQRCode:[sender isPressed]];
+}
+
+- (IBAction)displayTrustRequests:(NSView*)sender
+{
+    PendingContactRequestVC* contactRequestVC = [[PendingContactRequestVC alloc] initWithNibName:@"PendingContactRequest" bundle:nil];
+    pendingContactRequestPopover = [[NSPopover alloc] init];
+    [pendingContactRequestPopover setContentSize:contactRequestVC.view.frame.size];
+    [pendingContactRequestPopover setContentViewController:contactRequestVC];
+    [pendingContactRequestPopover setAnimates:YES];
+    [pendingContactRequestPopover setBehavior:NSPopoverBehaviorTransient];
+    [pendingContactRequestPopover setDelegate:self];
+    [pendingContactRequestPopover showRelativeToRect: sender.frame ofView:sender preferredEdge:NSMaxYEdge];
 }
 
 /**
