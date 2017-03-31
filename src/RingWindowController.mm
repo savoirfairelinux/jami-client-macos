@@ -45,6 +45,7 @@
 #import "views/NSColor+RingTheme.h"
 #import "views/BackgroundView.h"
 #import "ChooseAccountVC.h"
+#import "ContactRequestVC.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -67,12 +68,14 @@
 
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
-
+    // toolbar menu items
     ChooseAccountVC* chooseAccountVC;
+    ContactRequestVC* contactRequestVC;
 }
 
-static NSString* const kPreferencesIdentifier = @"PreferencesIdentifier";
-NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItemIdentifier";
+static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
+NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
+NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIdentifier";
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -83,7 +86,9 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
+    // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil];
+    contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -319,6 +324,7 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
         NSToolbar *toolbar = self.window.toolbar;
         toolbar.delegate = self;
         [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
+        [toolbar insertItemWithItemIdentifier:kTrustRequestMenuItemIdentifier atIndex:2];
     }
 }
 
@@ -333,14 +339,19 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
 }
 
 #pragma mark - NSToolbarDelegate
-- (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag{
-    if(!(itemIdentifier == kChangeAccountToolBarItemIdentifier)) {
-        return nil;
+- (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+    if(itemIdentifier == kChangeAccountToolBarItemIdentifier) {
+        NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kChangeAccountToolBarItemIdentifier];
+        toolbarItem.view = chooseAccountVC.view;
+        return toolbarItem;
     }
-    NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kChangeAccountToolBarItemIdentifier];
-    CGRect frame = chooseAccountVC.view.frame;
-    toolbarItem.view = chooseAccountVC.view;
-    return toolbarItem;
+    if(itemIdentifier == kTrustRequestMenuItemIdentifier) {
+        NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kTrustRequestMenuItemIdentifier];
+        toolbarItem.view = contactRequestVC.view;
+        return toolbarItem;
+    }
+    return nil;
 }
 
 @end
