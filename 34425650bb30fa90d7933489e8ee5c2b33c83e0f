@@ -1,0 +1,320 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_6d37a6b1",
+        "filename": "src/AccountChangingVC.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "Rename this class ? ChooseAccountVC maybe ?",
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_edc39688",
+        "filename": "src/AccountChangingVC.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "Remove this header as well\n\nIf you need a class you can use the annotation @class to make a forward declaration and add the header file only in the cpp. This will make compilation faster\n\nIn this case, since you will remove the account list, don\u0027t do that just remove the header",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_4dcf4ab1",
+        "filename": "src/AccountChangingVC.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "Don\u0027t use a property for that. Accounts are in the Account model in LRC",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_ad9efe61",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_cd9b3a71",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "We should link to the interface declaration instead if its implementation.\nReplace with #import \u003cinterfaces/pixmapmanipulatori.h\u003e",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_2dca0ea2",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "Can be removed",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_8d3c6295",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "- Disable it instead of hiding it. User should be aware of it even he has only one account\n\n- Also this is not the good place to do that. What happens if I create an account? Visibility is never updated. I have to restart Ring to see this menu.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 50
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_adbd9e04",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "Reverse this condition to make it easier to read:\n\nif (!account-\u003eisEnabled()) {\n   return;\n}",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 34
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_6d880623",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "What happens if there is no registered name? We should see the RingID",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 91
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_cdba5a0a",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "on the same line as \u0027if\u0027",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 5
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_2d820e01",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "Put on previous line",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 5
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_8d8d4234",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "Review indentation here",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 5
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_0d48722c",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "to be removed",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 8
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_ad54beca",
+        "filename": "src/views/AccountMenuItemView.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-02T15:54:15Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 22,
+        "startChar": 39,
+        "endLine": 22,
+        "endChar": 40
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
