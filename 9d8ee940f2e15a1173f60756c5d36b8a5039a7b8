@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_10dac978",
+        "filename": "src/ConfirmDeviceRevocationVC.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:47:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_80a66ac0",
+      "range": {
+        "startLine": 2,
+        "startChar": 18,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "9d8ee940f2e15a1173f60756c5d36b8a5039a7b8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_60a1eea8",
         "filename": "src/ConfirmDeviceRevocationVC.mm",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-03-30T17:47:45Z",
       "side": 1,
       "message": "too many lines here",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 0
+      },
+      "revId": "9d8ee940f2e15a1173f60756c5d36b8a5039a7b8",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_b0e65543",
+        "filename": "src/ConfirmDeviceRevocationVC.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:47:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_60a1eea8",
       "range": {
         "startLine": 95,
         "startChar": 0,
