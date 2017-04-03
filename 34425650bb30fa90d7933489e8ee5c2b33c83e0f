@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7aade967_ad059e15",
+        "filename": "src/AccountChangingVC.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_6d37a6b1",
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_edc39688",
         "filename": "src/AccountChangingVC.h",
         "patchSetId": 5
@@ -30,6 +48,30 @@
       "writtenOn": "2017-04-02T15:54:15Z",
       "side": 1,
       "message": "Remove this header as well\n\nIf you need a class you can use the annotation @class to make a forward declaration and add the header file only in the cpp. This will make compilation faster\n\nIn this case, since you will remove the account list, don\u0027t do that just remove the header",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_90047916",
+        "filename": "src/AccountChangingVC.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_edc39688",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_f0128d57",
+        "filename": "src/AccountChangingVC.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done. I don\u0027t use property now, but I still need accountants as instance variable, because I filter unregistered accounts, and then use them for populate pupUpButtonMenu",
+      "parentUuid": "7aade967_4dcf4ab1",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_ad9efe61",
         "filename": "src/AccountChangingVC.mm",
         "patchSetId": 5
@@ -76,6 +142,30 @@
       "writtenOn": "2017-04-02T15:54:15Z",
       "side": 1,
       "message": "not used",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_902b1982",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_ad9efe61",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_3020259b",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_cd9b3a71",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_2dca0ea2",
         "filename": "src/AccountChangingVC.mm",
         "patchSetId": 5
@@ -122,6 +236,30 @@
       "writtenOn": "2017-04-02T15:54:15Z",
       "side": 1,
       "message": "Can be removed",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 1
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_5025a1a9",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_2dca0ea2",
       "range": {
         "startLine": 56,
         "startChar": 0,
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_9079d995",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "view is hidden when accounts.length \u003d 0",
+      "parentUuid": "7aade967_8d3c6295",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 50
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_adbd9e04",
         "filename": "src/AccountChangingVC.mm",
         "patchSetId": 5
@@ -168,6 +330,30 @@
       "writtenOn": "2017-04-02T15:54:15Z",
       "side": 1,
       "message": "Reverse this condition to make it easier to read:\n\nif (!account-\u003eisEnabled()) {\n   return;\n}",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 34
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_b033b5f5",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "I use continue, since I need continue loop\n if (!account-\u003eisEnabled()) {\n   continue;\n}",
+      "parentUuid": "7aade967_adbd9e04",
       "range": {
         "startLine": 99,
         "startChar": 8,
@@ -203,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_103e49b9",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_6d880623",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 91
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_cdba5a0a",
         "filename": "src/AccountChangingVC.mm",
         "patchSetId": 5
@@ -214,6 +424,30 @@
       "writtenOn": "2017-04-02T15:54:15Z",
       "side": 1,
       "message": "on the same line as \u0027if\u0027",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 5
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_f0404d37",
+        "filename": "src/AccountChangingVC.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_cdba5a0a",
       "range": {
         "startLine": 132,
         "startChar": 4,
@@ -249,6 +483,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_306ee5ca",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_2d820e01",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 5
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_8d8d4234",
         "filename": "src/RingWindowController.mm",
         "patchSetId": 5
@@ -260,6 +518,30 @@
       "writtenOn": "2017-04-02T15:54:15Z",
       "side": 1,
       "message": "Review indentation here",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 5
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_507361b1",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_8d8d4234",
       "range": {
         "startLine": 177,
         "startChar": 0,
@@ -295,6 +577,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_1065e9e0",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_0d48722c",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 8
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_ad54beca",
         "filename": "src/views/AccountMenuItemView.h",
         "patchSetId": 5
@@ -306,6 +612,30 @@
       "writtenOn": "2017-04-02T15:54:15Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 22,
+        "startChar": 39,
+        "endLine": 22,
+        "endChar": 40
+      },
+      "revId": "34425650bb30fa90d7933489e8ee5c2b33c83e0f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_b06175d5",
+        "filename": "src/views/AccountMenuItemView.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-03T21:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_ad54beca",
       "range": {
         "startLine": 22,
         "startChar": 39,
