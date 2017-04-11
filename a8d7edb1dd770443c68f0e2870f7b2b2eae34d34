@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_06236f06",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_66a103a9",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_e6cdf387",
         "filename": "src/ChooseAccountVC.mm",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-06T19:39:27Z",
       "side": 1,
       "message": "This code block can be externalized in a dedicated method",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 107,
+        "endChar": 9
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_463ac737",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_e6cdf387",
       "range": {
         "startLine": 103,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_e63e5329",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_a6c7fb63",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 5
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_c6c47761",
         "filename": "src/ChooseAccountVC.mm",
         "patchSetId": 10
@@ -82,6 +154,30 @@
       "writtenOn": "2017-04-06T19:39:27Z",
       "side": 1,
       "message": "Because you use it many times",
+      "range": {
+        "startLine": 136,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 5
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_063ccf2e",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_c6c47761",
       "range": {
         "startLine": 136,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_e625f30a",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Because menu contains of accounts and separation lines, so it have two times more items than list of accounts",
+      "parentUuid": "7aade967_e6941346",
+      "range": {
+        "startLine": 253,
+        "startChar": 31,
+        "endLine": 253,
+        "endChar": 51
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_868d1f34",
         "filename": "src/ChooseAccountVC.mm",
         "patchSetId": 10
@@ -128,6 +248,30 @@
       "writtenOn": "2017-04-06T19:39:27Z",
       "side": 1,
       "message": "Remove these lines. You will be notified by LRC with the currentChanged signal.",
+      "range": {
+        "startLine": 255,
+        "startChar": 4,
+        "endLine": 256,
+        "endChar": 84
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_461167ab",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_868d1f34",
       "range": {
         "startLine": 255,
         "startChar": 4,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_260c6b94",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_26ab0b8b",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 24
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_46b087f4",
         "filename": "src/ChooseAccountVC.mm",
         "patchSetId": 10
@@ -174,6 +342,30 @@
       "writtenOn": "2017-04-06T19:39:27Z",
       "side": 1,
       "message": "you can even merge the first one with the negative of this condition\nif (!selectedMenuItem || selectedMenuItem \u003d\u003d item) {\n    return;\n}",
+      "range": {
+        "startLine": 274,
+        "startChar": 8,
+        "endLine": 274,
+        "endChar": 38
+      },
+      "revId": "a8d7edb1dd770443c68f0e2870f7b2b2eae34d34",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_86175fa3",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-11T20:13:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_46b087f4",
       "range": {
         "startLine": 274,
         "startChar": 8,
