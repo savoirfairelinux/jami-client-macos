@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7aade967_1cff4236",
+        "filename": "data/dark/contact_request.png",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-12T14:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_bcdaae15",
+      "revId": "0710eca6ac491c43e2b300bedc811c31887cf7bd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_dcd76aec",
         "filename": "src/ChooseAccountVC.mm",
         "patchSetId": 6
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_3ce8fe7b",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-12T14:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_dcd76aec",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 35
+      },
+      "revId": "0710eca6ac491c43e2b300bedc811c31887cf7bd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_bcf14e97",
         "filename": "src/views/HighlightableImageButton.h",
         "patchSetId": 6
@@ -53,6 +95,24 @@
       "writtenOn": "2017-04-11T21:34:41Z",
       "side": 1,
       "message": "This is duplicated from the IconButton, consider amending the IconButton class to fit your needs.",
+      "revId": "0710eca6ac491c43e2b300bedc811c31887cf7bd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_fc01063a",
+        "filename": "src/views/HighlightableImageButton.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-12T14:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_bcf14e97",
       "revId": "0710eca6ac491c43e2b300bedc811c31887cf7bd",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
