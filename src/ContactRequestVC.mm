@@ -17,6 +17,13 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+//Qt
+#import <QItemSelectionModel>
+//LRC
+#import <account.h>
+#import <pendingContactRequestModel.h>
+#import <availableAccountModel.h>
+
 #import "ContactRequestVC.h"
 #import "ContactRequestsListVC.h"
 
@@ -29,6 +36,41 @@
 
 @implementation ContactRequestVC
 
+QMetaObject::Connection requestAded;
+QMetaObject::Connection requestRemoved;
+
+- (void)awakeFromNib
+{
+    Account* chosenAccount = [self chosenAccount];
+    self.hideRequestNumberLabel = YES;
+    if(chosenAccount) {
+        self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+    }
+    QObject::connect(AvailableAccountModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [self](const QModelIndex& idx){
+                         Account* chosenAccount = [self chosenAccount];
+                         if(chosenAccount) {
+                             QObject::disconnect(requestAded);
+                             requestAded = QObject::connect(chosenAccount->pendingContactRequestModel(),
+                                                            &QAbstractItemModel::rowsInserted,
+                                                            [=]() {
+                                                                self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+                                                            }
+                                                            );
+                             QObject::disconnect(requestRemoved);
+                             requestRemoved = QObject::connect(chosenAccount->pendingContactRequestModel(),
+                                                               &QAbstractItemModel::rowsRemoved,
+                                                               [=]() {
+                                                                   self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+                                                               }
+
+                                                               );
+                             self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+                         }
+                     });
+}
+
 - (IBAction)displayTrustRequests:(NSView*)sender
 {
     ContactRequestsListVC* contactRequestVC = [[ContactRequestsListVC alloc] initWithNibName:@"ContactRequestList" bundle:nil];
@@ -39,6 +81,19 @@
     [pendingContactRequestPopover setBehavior:NSPopoverBehaviorTransient];
     [pendingContactRequestPopover setDelegate:self];
     [pendingContactRequestPopover showRelativeToRect: sender.frame ofView:sender preferredEdge:NSMaxYEdge];
+}
+
+-(void)setNumberOfRequests:(NSInteger)numberOfRequests
+{
+    _numberOfRequests = numberOfRequests;
+    self.hideRequestNumberLabel = (_numberOfRequests == 0);
+}
+
+-(Account* ) chosenAccount
+{
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    return account;
 }
 
 @end
