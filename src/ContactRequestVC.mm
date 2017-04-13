@@ -1,4 +1,3 @@
-//
 /*
  *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
@@ -20,6 +19,11 @@
 
 #import "ContactRequestVC.h"
 #import "ContactRequestsListVC.h"
+//LRC
+#import <accountmodel.h>
+#import <account.h>
+#import <recentmodel.h>
+#import <PendingContactRequestModel.h>
 
 @interface ContactRequestVC ()<NSPopoverDelegate> {
 
@@ -29,6 +33,41 @@
 @end
 
 @implementation ContactRequestVC
+
+QMetaObject::Connection requestAded;
+QMetaObject::Connection requestRemoved;
+
+- (void)awakeFromNib
+{
+    Account* chosenAccount = AccountModel::instance().userChosenAccount();
+    if(chosenAccount) {
+        self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+    }
+
+    QObject::connect(AccountModel::instance().userSelectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [=](const QModelIndex &current, const QModelIndex &previous) {
+                         Account* chosenAccount = AccountModel::instance().userChosenAccount();
+                         if(chosenAccount) {
+                             QObject::disconnect(requestAded);
+                             requestAded = QObject::connect(chosenAccount->pendingContactRequestModel(),
+                                                            &QAbstractItemModel::rowsInserted,
+                                                            [=]() {
+                                                                self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+                                                            }
+                                                            );
+                             QObject::disconnect(requestRemoved);
+                             requestRemoved = QObject::connect(chosenAccount->pendingContactRequestModel(),
+                                                               &QAbstractItemModel::rowsRemoved,
+                                                               [=]() {
+                                                                   self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+                                                               }
+
+                                                               );
+                             self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+                         }
+                     });
+}
 
 - (IBAction)displayTrustRequests:(NSView*)sender
 {
@@ -40,6 +79,12 @@
     [pendingContactRequestPopover setBehavior:NSPopoverBehaviorTransient];
     [pendingContactRequestPopover setDelegate:self];
     [pendingContactRequestPopover showRelativeToRect: sender.frame ofView:sender preferredEdge:NSMaxYEdge];
+}
+
+-(void)setNumberOfRequests:(NSInteger)numberOfRequests
+{
+    _numberOfRequests = numberOfRequests;
+    self.hideRequestNumberLabel = (numberOfRequests == 0);
 }
 
 @end
