@@ -21,4 +21,7 @@
 
 @interface ContactRequestVC : NSViewController
 
+@property (nonatomic) NSInteger numberOfRequests;
+@property (nonatomic) Boolean hideRequestNumberLabel;
+
 @end
