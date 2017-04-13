@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
+        <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="box content view" minToolsVersion="7.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ContactRequestVC">
@@ -37,12 +36,43 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
                                         <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="displayTrustRequests:" target="-2" id="1w7-RM-guW"/>
+                                    <action selector="displayTrustRequests:" target="-2" id="Y6K-WF-TKP"/>
                                 </connections>
                             </button>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ev-Nf-m83">
+                                <rect key="frame" x="20" y="0.0" width="10" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="Pjb-m4-ofR"/>
+                                    <constraint firstAttribute="width" constant="10" id="dh0-pu-W7P"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" alignment="center" title="Label" drawsBackground="YES" id="uQG-AX-95f">
+                                    <font key="font" metaFont="miniSystem"/>
+                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.92779582739999999" green="0.31288352619999998" blue="0.32615127900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textFieldCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <binding destination="-2" name="hidden" keyPath="self.hideRequestNumberLabel" id="oIj-0b-DCZ"/>
+                                    <binding destination="-2" name="value" keyPath="self.numberOfRequests" id="9CY-nE-yRp"/>
+                                </connections>
+                            </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="7ev-Nf-m83" secondAttribute="bottom" id="apl-6e-hqr"/>
+                            <constraint firstAttribute="trailing" secondItem="7ev-Nf-m83" secondAttribute="trailing" id="buf-Wv-SuL"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="EbY-83-hwO"/>
@@ -59,7 +89,6 @@
                 <constraint firstAttribute="bottom" secondItem="NHa-9l-NZV" secondAttribute="bottom" id="RKy-qQ-ZIg"/>
             </constraints>
         </customView>
-        <userDefaultsController representsSharedInstance="YES" id="7fN-pd-fr0"/>
     </objects>
     <resources>
         <image name="pending_contact_request" width="48" height="48"/>
