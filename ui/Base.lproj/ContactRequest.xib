@@ -36,12 +36,59 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
                                         <integer key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="displayTrustRequests:" target="-2" id="1w7-RM-guW"/>
+                                    <action selector="displayTrustRequests:" target="-2" id="Y6K-WF-TKP"/>
                                 </connections>
                             </button>
+                            <box boxType="custom" borderType="none" cornerRadius="6" translatesAutoresizingMaskIntoConstraints="NO" id="S5E-6h-z5k">
+                                <rect key="frame" x="16" y="0.0" width="14" height="14"/>
+                                <view key="contentView" id="Hj6-XZ-uZV">
+                                    <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ev-Nf-m83">
+                                            <rect key="frame" x="-1" y="1" width="16" height="12"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="12" id="Pjb-m4-ofR"/>
+                                                <constraint firstAttribute="width" constant="12" id="dh0-pu-W7P"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" continuous="YES" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="uQG-AX-95f">
+                                                <font key="font" metaFont="system" size="8"/>
+                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" red="0.92779582739999999" green="0.31288352619999998" blue="0.32615127900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </textFieldCell>
+                                            <connections>
+                                                <binding destination="-2" name="hidden" keyPath="self.hideRequestNumberLabel" id="oIj-0b-DCZ"/>
+                                                <binding destination="-2" name="value" keyPath="self.numberOfRequests" id="9CY-nE-yRp"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="7ev-Nf-m83" secondAttribute="trailing" constant="1" id="Jdd-X0-q5r"/>
+                                        <constraint firstItem="7ev-Nf-m83" firstAttribute="top" secondItem="Hj6-XZ-uZV" secondAttribute="top" constant="1" id="bhI-cn-oi3"/>
+                                        <constraint firstAttribute="bottom" secondItem="7ev-Nf-m83" secondAttribute="bottom" constant="1" id="cqL-1T-y5N"/>
+                                        <constraint firstItem="7ev-Nf-m83" firstAttribute="leading" secondItem="Hj6-XZ-uZV" secondAttribute="leading" constant="1" id="dEW-EC-Qld"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="14" id="aus-mP-ERM"/>
+                                    <constraint firstAttribute="height" constant="14" id="dc6-OV-Hfg"/>
+                                </constraints>
+                                <color key="fillColor" red="0.92779582739999999" green="0.31288352619999998" blue="0.32615127900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <binding destination="-2" name="hidden" keyPath="self.hideRequestNumberLabel" id="Mzp-1H-gEU"/>
+                                </connections>
+                            </box>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="S5E-6h-z5k" firstAttribute="top" secondItem="WAQ-vX-IeC" secondAttribute="bottom" constant="-14" id="n6b-mh-bhA"/>
+                            <constraint firstItem="S5E-6h-z5k" firstAttribute="leading" secondItem="WAQ-vX-IeC" secondAttribute="trailing" constant="-14" id="oxh-PL-QNw"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="EbY-83-hwO"/>
@@ -58,7 +105,7 @@
                 <constraint firstAttribute="bottom" secondItem="NHa-9l-NZV" secondAttribute="bottom" id="RKy-qQ-ZIg"/>
             </constraints>
         </customView>
-        <userDefaultsController representsSharedInstance="YES" id="7fN-pd-fr0"/>
+        <userDefaultsController representsSharedInstance="YES" id="AG2-b0-O4G"/>
     </objects>
     <resources>
         <image name="pending_contact_request" width="48" height="48"/>
