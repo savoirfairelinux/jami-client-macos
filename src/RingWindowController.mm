@@ -108,15 +108,18 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
                          if(!current.isValid()) {
                              [offlineVC animateOut];
                              [currentCallVC animateOut];
+                             [chooseAccountVC enable];
                              return;
                          }
 
                          if (!call) {
                              [currentCallVC animateOut];
                              [offlineVC animateIn];
+                             [chooseAccountVC enable];
                          } else {
                              [currentCallVC animateIn];
                              [offlineVC animateOut];
+                             [chooseAccountVC disable];
                          }
                      });
 
@@ -130,16 +133,19 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
                          if (previous.isValid()) {
                              // We were already on a call
                              [currentCallVC animateOut];
+                             [chooseAccountVC enable];
                          } else {
                              // Make sure Conversation view hides when selecting a valid call
                              [currentCallVC animateIn];
                              [offlineVC animateOut];
+                             [chooseAccountVC disable];
                          }
                      });
     QObject::connect(AvailableAccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [self](const QModelIndex& idx){
                          [self updateRingID];
+                         [offlineVC animateOut];
                      });
 }
 
