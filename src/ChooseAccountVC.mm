@@ -33,6 +33,8 @@
 #import <account.h>
 #import <QItemSelectionModel.h>
 #import <interfaces/pixmapmanipulatori.h>
+#import <AvailableAccountModel.h>
+
 //RING
 #import "views/AccountMenuItemView.h"
 
@@ -41,8 +43,10 @@
 @end
 
 @implementation ChooseAccountVC {
+
     __unsafe_unretained IBOutlet NSImageView*   profileImage;
     __unsafe_unretained IBOutlet NSPopUpButton* accountSelectionButton;
+
 }
 Boolean menuIsOpen;
 Boolean menuNeedsUpdate;
@@ -60,7 +64,6 @@ QMetaObject::Connection accountUpdate;
         auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
         [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
     }
-
     accountsMenu = [[NSMenu alloc] initWithTitle:@""];
     [accountsMenu setDelegate:self];
     accountSelectionButton.menu = accountsMenu;
@@ -68,20 +71,33 @@ QMetaObject::Connection accountUpdate;
 
     QObject::disconnect(accountUpdate);
     accountUpdate = QObject::connect(&AccountModel::instance(),
-                                     &AccountModel::dataChanged,
-                                     [=] {
-                                          [self update];
-                                     });
+                     &AccountModel::dataChanged,
+                     [=] {
+                         [self update];
+                     });
+    QObject::connect(AvailableAccountModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [self](const QModelIndex& idx){
+                         [self update];
+                     });
+    QObject::connect(&AvailableAccountModel::instance(),
+                     &QAbstractItemModel::rowsRemoved,
+                     [self]{
+                         [self update];
+                     });
 }
 
 -(void) updateMenu {
     [accountsMenu removeAllItems];
-    QList<Account*> allAccounts = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
-    NSLog(@"numberOfaccounts: %d", allAccounts.count());
+    for (int i = 0; i < AvailableAccountModel::instance().rowCount(); i++) {
 
-    for (auto account : allAccounts) {
+        QModelIndex index = AvailableAccountModel::instance().selectionModel()->model()->index(i, 0);
+        Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
         NSMenuItem* menuBarItem = [[NSMenuItem alloc]
-                                   initWithTitle:[self itemTitleForAccount:account] action:NULL keyEquivalent:@""];
+                                   initWithTitle:[self itemTitleForAccount:account]
+                                   action:NULL
+                                   keyEquivalent:@""];
+
         menuBarItem.attributedTitle = [self attributedItemTitleForAccount:account];
         AccountMenuItemView *itemView = [[AccountMenuItemView alloc] initWithFrame:CGRectZero];
         [itemView.accountLabel setStringValue:account->alias().toNSString()];
@@ -93,7 +109,6 @@ QMetaObject::Connection accountUpdate;
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
         [accountsMenu addItem:[NSMenuItem separatorItem]];
-
     }
 }
 
@@ -139,68 +154,34 @@ QMetaObject::Connection accountUpdate;
     return result;
 }
 
--(Account *)selectedAccount {
-    Account* finalChoice = nullptr;
-    finalChoice = AccountModel::instance().userChosenAccount();
-
-    if(finalChoice == nil) {
-        Account* registered = nullptr;
-        Account* enabled = nullptr;
-        auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
-        for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
-            auto account = ringList.value(i);
-            if (account->isEnabled()) {
-                if(!enabled) {
-                    enabled = finalChoice = account;
-                }
-                if (account->registrationState() == Account::RegistrationState::READY) {
-                    registered = enabled = finalChoice = account;
-                }
-            } else {
-                if (!finalChoice) {
-                    finalChoice = account;
-                }
-            }
-        }
-    }
-    return finalChoice;
-}
-
-
 -(void) update {
     if(menuIsOpen) {
         return;
     }
     [self updateMenu];
-    [self chooseAccount];
+    [self setPopUpButtonSelection];
 }
 
--(void) chooseAccount {
+-(void) setPopUpButtonSelection {
     if(accountsMenu.itemArray.count == 0) {
         [self.view setHidden:YES];
         return;
     }
-    Account* selectedAccount = [self selectedAccount];
-    NSString *itemTitle = [self itemTitleForAccount:selectedAccount];
-    if([accountSelectionButton itemWithTitle:itemTitle]){
-        [accountSelectionButton selectItemWithTitle:itemTitle];
-        // check if chosen account is the same as selected in popup button. If yes we don.t need setUserChosenAccount
-        Account* choosenaccount = AccountModel::instance().userChosenAccount();
-        if (choosenaccount && [itemTitle isEqualToString:[self itemTitleForAccount:choosenaccount]]){
-            return;
-        }
-        AccountModel::instance().setUserChosenAccount(selectedAccount);
+    [self.view setHidden:NO];
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    if(account == nil){
+        return;
     }
+    [accountSelectionButton selectItemWithTitle:[self itemTitleForAccount:account]];
 }
 
 #pragma mark - NSPopUpButton item selection
 
 - (IBAction)itemChanged:(id)sender {
-    NSInteger index = [(NSPopUpButton *)sender indexOfSelectedItem];
-     QList<Account*> allAccounts = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
-    // menu contains accounts and separation lines, so divide it by 2 to get account index
-    Account *selectedAccount = allAccounts.at(index/2);
-    AccountModel::instance().setUserChosenAccount(selectedAccount);
+    NSInteger row = [(NSPopUpButton *)sender indexOfSelectedItem] / 2;
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->model()->index(row, 0);
+    AvailableAccountModel::instance().selectionModel()->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
 }
 
 #pragma mark - NSMenuDelegate
