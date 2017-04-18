@@ -166,8 +166,10 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
     finalChoice = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
     if(finalChoice == nil || (finalChoice->protocol() != Account::Protocol::RING)) {
+        self.hideRingID = YES;
         return;
     }
+    self.hideRingID = NO;
     auto name = finalChoice->registeredName();
     NSString* uriToDisplay = nullptr;
     if (!name.isNull() && !name.isEmpty()) {
@@ -175,7 +177,6 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     } else {
         uriToDisplay = finalChoice->username().toNSString();
     }
-
     [ringIDLabel setStringValue:uriToDisplay];
     [self drawQRCode:finalChoice->username().toNSString()];
 }
@@ -323,6 +324,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
         [shareButton sendActionOn:NSLeftMouseDownMask];
 
         [self connect];
+        [self updateRingID];
         // display accounts to select
         NSToolbar *toolbar = self.window.toolbar;
         toolbar.delegate = self;
