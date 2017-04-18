@@ -103,7 +103,16 @@ QMetaObject::Connection accountUpdate;
         [itemView.accountLabel setStringValue:account->alias().toNSString()];
         NSString* userNameString = [self nameForAccount: account];
         [itemView.userNameLabel setStringValue:userNameString];
-        [itemView.accountTypeLabel setStringValue:@"Ring"];
+        switch (account->protocol()) {
+            case Account::Protocol::SIP:
+                [itemView.accountTypeLabel setStringValue:@"SIP"];
+                break;
+            case Account::Protocol::RING:
+                [itemView.accountTypeLabel setStringValue:@"RING"];
+                break;
+            default:
+                break;
+        }
         auto humanState = account->toHumanStateName();
         [itemView.accountStatus setStringValue:humanState.toNSString()];
         [menuBarItem setView:itemView];
@@ -125,15 +134,19 @@ QMetaObject::Connection accountUpdate;
 
 -(NSString*) itemTitleForAccount:(Account*) account {
     NSString* alias = account->alias().toNSString();
-    alias = [NSString stringWithFormat: @"%@\n", alias];
     NSString* userNameString = [self nameForAccount: account];
+    if([userNameString length] > 0) {
+        alias = [NSString stringWithFormat: @"%@\n", alias];
+    }
     return [alias stringByAppendingString:userNameString];
 }
 
 - (NSAttributedString*) attributedItemTitleForAccount:(Account*) account {
     NSString* alias = account->alias().toNSString();
-    alias = [NSString stringWithFormat: @"%@\n", alias];
     NSString* userNameString = [self nameForAccount: account];
+    if([userNameString length] > 0){
+        alias = [NSString stringWithFormat: @"%@\n", alias];
+    }
     NSFont *fontAlias = [NSFont userFontOfSize:14.0];
     NSFont *fontUserName = [NSFont userFontOfSize:11.0];
     NSColor *colorAlias = [NSColor labelColor];
