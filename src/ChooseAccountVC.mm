@@ -206,4 +206,11 @@ QMetaObject::Connection accountUpdate;
     selectedMenuItem = nil;
 }
 
+-(void) enable {
+    [accountSelectionButton setEnabled:YES];
+}
+-(void) disable {
+    [accountSelectionButton setEnabled:NO];
+}
+
 @end

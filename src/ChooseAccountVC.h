@@ -21,4 +21,7 @@
 
 @interface ChooseAccountVC : NSViewController
 
+-(void) enable;
+-(void) disable;
+
 @end
