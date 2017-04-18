@@ -38,6 +38,7 @@
 #import <contactmethod.h>
 #import <globalinstances.h>
 #import <phonedirectorymodel.h>
+#import <AvailableAccountModel.h>
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -124,6 +125,11 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
                          Q_UNUSED(first)
                          Q_UNUSED(last)
                          [smartView scrollRowToVisible:0];
+                     });
+    QObject::connect(AvailableAccountModel::instance().selectionModel(),
+                     &QItemSelectionModel::currentChanged,
+                     [self](const QModelIndex& idx){
+                         RecentModel::instance().peopleProxy()->setFilterRegExp("");
                      });
 
     [self.view setWantsLayer:YES];
