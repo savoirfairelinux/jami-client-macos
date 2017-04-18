@@ -28,6 +28,8 @@
 #import <media/textrecording.h>
 #import <QItemSelectionModel>
 #import <account.h>
+#import <AvailableAccountModel.h>
+
 
 #if ENABLE_SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -120,6 +122,14 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     QObject::connect(&CallModel::instance(),
                      &CallModel::incomingCall,
                      [=](Call* call) {
+                         // on incoming call set selected account match call destination account
+                         if (call->account()) {
+                             QModelIndex index = call->account()->index();
+                             index = AvailableAccountModel::instance().mapFromSource(index);
+
+                             AvailableAccountModel::instance().selectionModel()->setCurrentIndex(index,
+                                                                                                 QItemSelectionModel::ClearAndSelect);
+                         }
                          BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::WindowBehaviour];
                          BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
                          if (shouldComeToForeground) {
