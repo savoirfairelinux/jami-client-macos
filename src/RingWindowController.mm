@@ -30,6 +30,8 @@
 #import <account.h>
 #import <call.h>
 #import <recentmodel.h>
+#import <AvailableAccountModel.h>
+
 
 // Ring
 #import "AppDelegate.h"
@@ -134,14 +136,14 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
                              [offlineVC animateOut];
                          }
                      });
-    QObject::connect(AccountModel::instance().userSelectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if(!current.isValid())
-                             return;
+
+    QObject::connect(
+                     &AvailableAccountModel::instance(),
+                     &AvailableAccountModel::currentDefaultAccountChanged,
+                     [self] (Account* a)
+                     {
                          [self updateRingID];
                      });
-
 }
 
 /**
@@ -150,30 +152,13 @@ NSString* const kChangeAccountToolBarItemIdentifier = @"ChangeAccountToolBarItem
  */
 - (void) updateRingID
 {
-    Account* registered = nullptr;
-    Account* enabled = nullptr;
     Account* finalChoice = nullptr;
 
     [ringIDLabel setStringValue:@""];
-    finalChoice = AccountModel::instance().userChosenAccount();
-
-    if(finalChoice == nil) {
-        auto ringList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
-        for (int i = 0 ; i < ringList.size() && !registered ; ++i) {
-            auto account = ringList.value(i);
-            if (account->isEnabled()) {
-                if(!enabled) {
-                    enabled = finalChoice = account;
-                }
-                if (account->registrationState() == Account::RegistrationState::READY) {
-                    registered = enabled = finalChoice = account;
-                }
-            } else {
-                if (!finalChoice) {
-                    finalChoice = account;
-                }
-            }
-        }
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    finalChoice = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    if(finalChoice == nil || (finalChoice->protocol() != Account::Protocol::RING)) {
+        return;
     }
     auto name = finalChoice->registeredName();
     NSString* uriToDisplay = nullptr;
