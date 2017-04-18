@@ -23,6 +23,8 @@
     IBOutlet NSView *currentView;
 }
 
+@property (nonatomic) BOOL hideRingID;
+
 - (IBAction)openPreferences:(id)sender;
 
 @end
