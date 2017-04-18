@@ -23,6 +23,15 @@
     IBOutlet NSView *currentView;
 }
 
+/**
+ * KVO to show or hide some UI elements in RingWindow:
+ * - Share button
+ * - QRCode
+ * - RingID field
+ * - Explanatory label
+ */
+@property (nonatomic) BOOL hideRingID;
+
 - (IBAction)openPreferences:(id)sender;
 
 @end

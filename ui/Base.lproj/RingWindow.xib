@@ -250,7 +250,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="eME-fQ-3QX">
                                                         <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="3" outlineTableColumn="pTT-gU-NVa" id="rr8-UC-gGF" customClass="RingOutlineView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
@@ -641,6 +641,9 @@
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="EPK-C2-VsC"/>
+                                        </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
                                         <rect key="frame" x="20" y="64" width="400" height="26"/>
@@ -653,6 +656,9 @@
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="nmu-Lf-o2m"/>
+                                        </connections>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
                                         <rect key="frame" x="147" y="175" width="225" height="75"/>
@@ -674,6 +680,7 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="WnF-cs-9yr"/>
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="IconButton">
@@ -689,6 +696,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="toggleQRCode:" target="-2" id="jZa-65-o5C"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="4zb-wx-Nna"/>
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
