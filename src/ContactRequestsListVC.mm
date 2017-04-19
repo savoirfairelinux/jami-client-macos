@@ -78,7 +78,8 @@ NSInteger const TAG_RINGID      =   200;
 
 - (IBAction)blockContactRequest:(NSView*)sender
 {
-
+    NSInteger row = [self.contactRequestView rowForView:sender];
+    [self performAction:BLOCK forequestAtRow:row];
 }
 
 -(void) performAction:(ContactAction)action forequestAtRow:(NSInteger)row {
@@ -98,6 +99,7 @@ NSInteger const TAG_RINGID      =   200;
             p->discard();
             break;
         case BLOCK:
+            p->block();
             break;
         default:
             break;

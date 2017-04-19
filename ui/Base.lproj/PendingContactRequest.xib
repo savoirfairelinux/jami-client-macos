@@ -5,7 +5,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PendingContactRequestVC">
+        <customObject id="-2" userLabel="File's Owner" customClass="ContactRequestsListVC">
             <connections>
                 <outlet property="contactRequestView" destination="u9m-Hp-VFu" id="y1I-3h-JSG"/>
                 <outlet property="noRequestsLabel" destination="xfN-ob-jNY" id="d2D-nH-otL"/>
@@ -104,6 +104,9 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="cellTitle"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="blockContactRequest:" target="-2" id="IuD-Ax-jCx"/>
+                                                        </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pzN-en-gvs">
                                                         <rect key="frame" x="230" y="8" width="54" height="19"/>
