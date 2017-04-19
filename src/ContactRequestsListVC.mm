@@ -21,9 +21,10 @@
 #import "QNSTreeController.h"
 #import "PendingContactRequestModel.h"
 #import "Account.h"
-#import "AccountModel.h"
 #import "ContactRequest.h"
-#import "views/HoverTableRowView.h"
+#import <AvailableAccountModel.h>
+//Qt
+#import <QItemSelectionModel>
 
 @interface ContactRequestsListVC ()
 
@@ -50,7 +51,7 @@ NSInteger const TAG_RINGID      =   200;
 
 - (void)awakeFromNib
 {
-    Account* chosenAccount = AccountModel::instance().userChosenAccount();
+    Account* chosenAccount = [self chosenAccount];
     requestsTreeController = [[QNSTreeController alloc] initWithQModel:chosenAccount->pendingContactRequestModel()];
     [requestsTreeController setAvoidsEmptySelection:NO];
     [requestsTreeController setAlwaysUsesMultipleValuesMarker:YES];
@@ -118,7 +119,7 @@ NSInteger const TAG_RINGID      =   200;
     QModelIndex qIdx = [self.requestsTreeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid())
         return result;
-    Account* chosenAccount = AccountModel::instance().userChosenAccount();
+    Account* chosenAccount = [self chosenAccount];
     NSTextField* nameLabel = [result viewWithTag:TAG_NAME];
     NSTextField* ringIDLabel = [result viewWithTag:TAG_RINGID];
 
@@ -129,6 +130,13 @@ NSInteger const TAG_RINGID      =   200;
     [nameLabel setStringValue:string];
     [ringIDLabel setStringValue:string];
     return result;
+}
+
+-(Account* ) chosenAccount
+{
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    return account;
 }
 
 @end

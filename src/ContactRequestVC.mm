@@ -20,10 +20,11 @@
 #import "ContactRequestVC.h"
 #import "ContactRequestsListVC.h"
 //LRC
-#import <accountmodel.h>
 #import <account.h>
-#import <recentmodel.h>
 #import <PendingContactRequestModel.h>
+#import <AvailableAccountModel.h>
+//Qt
+#import <QItemSelectionModel>
 
 @interface ContactRequestVC ()<NSPopoverDelegate> {
 
@@ -39,15 +40,15 @@ QMetaObject::Connection requestRemoved;
 
 - (void)awakeFromNib
 {
-    Account* chosenAccount = AccountModel::instance().userChosenAccount();
+    Account* chosenAccount = [self chosenAccount];
     if(chosenAccount) {
         self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
     }
 
-    QObject::connect(AccountModel::instance().userSelectionModel(),
+    QObject::connect(AvailableAccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         Account* chosenAccount = AccountModel::instance().userChosenAccount();
+                     [self](const QModelIndex& idx){
+                         Account* chosenAccount = [self chosenAccount];
                          if(chosenAccount) {
                              QObject::disconnect(requestAded);
                              requestAded = QObject::connect(chosenAccount->pendingContactRequestModel(),
@@ -85,6 +86,13 @@ QMetaObject::Connection requestRemoved;
 {
     _numberOfRequests = numberOfRequests;
     self.hideRequestNumberLabel = (numberOfRequests == 0);
+}
+
+-(Account* ) chosenAccount
+{
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    return account;
 }
 
 @end
