@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ContactRequestVC">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+            <subviews>
+                <box boxType="custom" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="NHa-9l-NZV">
+                    <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                    <view key="contentView" id="OAa-jh-6SU">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button toolTip="Contact Request" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WAQ-vX-IeC" customClass="IconButton">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="MQQ-4M-yMd"/>
+                                    <constraint firstAttribute="height" constant="30" id="tDS-ze-T5K"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="pending_contact_request" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="A6C-kV-bIT">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="displayTrustRequests:" target="-2" id="1w7-RM-guW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="EbY-83-hwO"/>
+                        <constraint firstItem="WAQ-vX-IeC" firstAttribute="leading" secondItem="NHa-9l-NZV" secondAttribute="leading" id="jfo-1y-hcK"/>
+                        <constraint firstAttribute="width" constant="30" id="n5A-s7-tQB"/>
+                        <constraint firstItem="WAQ-vX-IeC" firstAttribute="top" secondItem="NHa-9l-NZV" secondAttribute="top" id="pOE-ry-D5Z"/>
+                    </constraints>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstItem="NHa-9l-NZV" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="1EN-Bz-FzB"/>
+                <constraint firstItem="NHa-9l-NZV" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="9qA-vg-9C7"/>
+                <constraint firstAttribute="trailing" secondItem="NHa-9l-NZV" secondAttribute="trailing" id="OqG-aX-O5u"/>
+                <constraint firstAttribute="bottom" secondItem="NHa-9l-NZV" secondAttribute="bottom" id="RKy-qQ-ZIg"/>
+            </constraints>
+        </customView>
+        <userDefaultsController representsSharedInstance="YES" id="7fN-pd-fr0"/>
+    </objects>
+    <resources>
+        <image name="pending_contact_request" width="48" height="48"/>
+    </resources>
+</document>
