@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_88b685db",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "- Use \u003c\u003e for LRC imports\n- Respect headers order like in other files",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_a8bb41c3",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "Remove comments",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_48e72de5",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "Missing Upper case",
+      "range": {
+        "startLine": 76,
+        "startChar": 33,
+        "endLine": 76,
+        "endChar": 34
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_68b549cc",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "Do not present the block button if it is not implemented",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 1
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_88dd2517",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "- use auto\n- use a proper variable name",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 21
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_e8c0592c",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "{}",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 22
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_c8c31d37",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "This is not a good variable name",
+      "range": {
+        "startLine": 128,
+        "startChar": 14,
+        "endLine": 128,
+        "endChar": 20
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_a8e261d3",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "Use return directly",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 139,
+        "endChar": 19
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_e8a9397c",
+        "filename": "ui/Base.lproj/ContactRequest.xib",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "Watch out",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 63
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_c8ac7d8f",
+        "filename": "ui/Base.lproj/PendingContactRequest.xib",
+        "patchSetId": 13
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "Watch out",
+      "range": {
+        "startLine": 5,
+        "startChar": 26,
+        "endLine": 5,
+        "endChar": 63
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_08a3759f",
+        "filename": "ui/Base.lproj/PersonLinker.xib",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-24T13:36:49Z",
+      "side": 1,
+      "message": "Not wanted change",
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
