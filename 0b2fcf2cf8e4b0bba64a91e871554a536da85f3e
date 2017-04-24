@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_8879a5fe",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_88b685db",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_a8bb41c3",
         "filename": "src/ContactRequestsListVC.mm",
         "patchSetId": 13
@@ -36,6 +60,30 @@
       "writtenOn": "2017-04-24T13:36:49Z",
       "side": 1,
       "message": "Remove comments",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_a87ee1e2",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_a8bb41c3",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_6888e9e7",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_48e72de5",
+      "range": {
+        "startLine": 76,
+        "startChar": 33,
+        "endLine": 76,
+        "endChar": 34
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_68b549cc",
         "filename": "src/ContactRequestsListVC.mm",
         "patchSetId": 13
@@ -82,6 +154,30 @@
       "writtenOn": "2017-04-24T13:36:49Z",
       "side": 1,
       "message": "Do not present the block button if it is not implemented",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 1
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_086db532",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_68b549cc",
       "range": {
         "startLine": 79,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_286af11a",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_88dd2517",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 21
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_e8c0592c",
         "filename": "src/ContactRequestsListVC.mm",
         "patchSetId": 13
@@ -128,6 +248,30 @@
       "writtenOn": "2017-04-24T13:36:49Z",
       "side": 1,
       "message": "{}",
+      "range": {
+        "startLine": 120,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 22
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_c876bd06",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_e8c0592c",
       "range": {
         "startLine": 120,
         "startChar": 4,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_e8737913",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_c8c31d37",
+      "range": {
+        "startLine": 128,
+        "startChar": 14,
+        "endLine": 128,
+        "endChar": 20
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_a8e261d3",
         "filename": "src/ContactRequestsListVC.mm",
         "patchSetId": 13
@@ -174,6 +342,30 @@
       "writtenOn": "2017-04-24T13:36:49Z",
       "side": 1,
       "message": "Use return directly",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 139,
+        "endChar": 19
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_8860c536",
+        "filename": "src/ContactRequestsListVC.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_a8e261d3",
       "range": {
         "startLine": 138,
         "startChar": 4,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_a8658146",
+        "filename": "ui/Base.lproj/ContactRequest.xib",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_e8a9397c",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 63
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_c8ac7d8f",
         "filename": "ui/Base.lproj/PendingContactRequest.xib",
         "patchSetId": 13
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "7aade967_485acd84",
+        "filename": "ui/Base.lproj/PendingContactRequest.xib",
+        "patchSetId": 13
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_c8ac7d8f",
+      "range": {
+        "startLine": 5,
+        "startChar": 26,
+        "endLine": 5,
+        "endChar": 63
+      },
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7aade967_08a3759f",
         "filename": "ui/Base.lproj/PersonLinker.xib",
         "patchSetId": 13
@@ -243,6 +483,24 @@
       "writtenOn": "2017-04-24T13:36:49Z",
       "side": 1,
       "message": "Not wanted change",
+      "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_0802953e",
+        "filename": "ui/Base.lproj/PersonLinker.xib",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-04-24T16:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aade967_08a3759f",
       "revId": "0b2fcf2cf8e4b0bba64a91e871554a536da85f3e",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
