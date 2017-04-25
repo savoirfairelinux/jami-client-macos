@@ -167,6 +167,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
 
     NSTableCellView *result;
 
+    NSString* displayNameString = qIdx.data(Qt::DisplayRole).toString().toNSString();
     if(!qIdx.parent().isValid()) {
         result = [outlineView makeViewWithIdentifier:@"LetterCell" owner:outlineView];
         [result setWantsLayer:YES];
@@ -176,6 +177,18 @@ NSInteger const CALL_BUTTON_TAG = 400;
         NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
         Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
 
+        if(displayNameString.length == 0 && p) {
+            QVector<ContactMethod*> contactMethods = p->phoneNumbers();
+            if(contactMethods.count() > 0) {
+                ContactMethod* method = contactMethods[0];
+                for(int i = 0; i < contactMethods.count(); i++) {
+                    if (contactMethods[i]->lastUsed() > method->lastUsed()) {
+                        method = contactMethods[i];
+                    }
+                }
+                displayNameString = method->getBestId().toNSString();
+            }
+        }
         [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
 
         [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
@@ -188,7 +201,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
     }
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-    [displayName setStringValue:qIdx.data(Qt::DisplayRole).toString().toNSString()];
+    [displayName setStringValue:displayNameString];
 
     return result;
 }
