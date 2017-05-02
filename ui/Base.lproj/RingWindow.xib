@@ -78,7 +78,7 @@
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="epa-Ih-aKF">
-                                                                                        <rect key="frame" x="57" y="31" width="225" height="23"/>
+                                                                                        <rect key="frame" x="57" y="31" width="89" height="23"/>
                                                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="Display Role" id="uSw-g5-kte">
                                                                                             <font key="font" size="16" name="HelveticaNeue-Light"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -128,9 +128,19 @@
                                                                                             <action selector="callClickedAtRow:" target="-1" id="zew-Rw-kFH"/>
                                                                                         </connections>
                                                                                     </button>
+                                                                                    <textField verticalHuggingPriority="750" tag="700" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZ6-1S-zx2">
+                                                                                        <rect key="frame" x="147" y="32" width="138" height="21"/>
+                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" title="ringID" id="zp2-mv-NHW">
+                                                                                            <font key="font" size="14" name="HelveticaNeue-Light"/>
+                                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                        </textFieldCell>
+                                                                                    </textField>
                                                                                 </subviews>
                                                                                 <constraints>
                                                                                     <constraint firstItem="MYe-rn-qOP" firstAttribute="trailing" secondItem="sHH-wj-oHs" secondAttribute="trailing" id="1nI-oe-P2F"/>
+                                                                                    <constraint firstItem="bZ6-1S-zx2" firstAttribute="leading" secondItem="epa-Ih-aKF" secondAttribute="trailing" constant="5" id="4rt-nn-zK6"/>
+                                                                                    <constraint firstItem="bZ6-1S-zx2" firstAttribute="baseline" secondItem="epa-Ih-aKF" secondAttribute="baseline" id="CBk-k6-mZY"/>
                                                                                     <constraint firstItem="sHH-wj-oHs" firstAttribute="leading" secondItem="Z6G-mQ-L3J" secondAttribute="leading" constant="3" id="CGt-hN-ulS"/>
                                                                                     <constraint firstItem="epa-Ih-aKF" firstAttribute="top" secondItem="sHH-wj-oHs" secondAttribute="top" id="Jzr-F8-Ysa"/>
                                                                                     <constraint firstItem="sHH-wj-oHs" firstAttribute="top" secondItem="Z6G-mQ-L3J" secondAttribute="top" constant="6" id="KMX-Ru-AEa"/>
@@ -140,7 +150,7 @@
                                                                                     <constraint firstItem="DAd-lc-L62" firstAttribute="centerY" secondItem="Z6G-mQ-L3J" secondAttribute="centerY" id="amg-Ei-hAd"/>
                                                                                     <constraint firstItem="DAd-lc-L62" firstAttribute="leading" secondItem="epi-ZP-as5" secondAttribute="trailing" constant="56" id="bds-RX-Cy1"/>
                                                                                     <constraint firstItem="epi-ZP-as5" firstAttribute="top" secondItem="epa-Ih-aKF" secondAttribute="bottom" constant="1" id="fRe-jg-u4e"/>
-                                                                                    <constraint firstItem="DAd-lc-L62" firstAttribute="leading" secondItem="epa-Ih-aKF" secondAttribute="trailing" constant="8" symbolic="YES" id="osc-ms-Cf7"/>
+                                                                                    <constraint firstItem="DAd-lc-L62" firstAttribute="leading" secondItem="bZ6-1S-zx2" secondAttribute="trailing" constant="5" id="nBC-JZ-zqv"/>
                                                                                     <constraint firstItem="epa-Ih-aKF" firstAttribute="leading" secondItem="epi-ZP-as5" secondAttribute="leading" id="qhg-du-Idh"/>
                                                                                     <constraint firstItem="epa-Ih-aKF" firstAttribute="leading" secondItem="sHH-wj-oHs" secondAttribute="trailing" constant="8" symbolic="YES" id="sdS-XG-xRu"/>
                                                                                 </constraints>

@@ -73,6 +73,7 @@ NSInteger const DETAILS_TAG         = 300;
 NSInteger const CALL_BUTTON_TAG     = 400;
 NSInteger const TXT_BUTTON_TAG      = 500;
 NSInteger const CANCEL_BUTTON_TAG   = 600;
+NSInteger const RING_ID_LABEL       = 700;
 
 - (void)awakeFromNib
 {
@@ -262,19 +263,16 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
     NSString* displayNameString = qIdx.data((int)Ring::Role::Name).toString().toNSString();
-    if(displayNameString.length == 0) {
-        QVector<ContactMethod*> contactMethods = RecentModel::instance().getContactMethods(qIdx);
-        if(contactMethods.count() > 0) {
-            ContactMethod* method = contactMethods[0];
-            for(int i = 0; i < contactMethods.count(); i++) {
-                if (contactMethods[i]->lastUsed() > method->lastUsed()) {
-                    method = contactMethods[i];
-                }
-            }
-            displayNameString = method->getBestId().toNSString();
-        }
+    NSString* displayIDString = qIdx.data((int)Person::Role::IdOfLastCMUsed).toString().toNSString();
+    if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
+        [displayName setStringValue:displayIDString];
     }
-    [displayName setStringValue:displayNameString];
+    else {
+        NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
+        [displayName setStringValue:displayNameString];
+        displayIDString = [NSString stringWithFormat:@"%@%@%@",@"(", displayIDString, @")"];
+        [displayRingID setStringValue:displayIDString];
+    }
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
 
     [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
