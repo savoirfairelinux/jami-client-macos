@@ -178,16 +178,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
         Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
 
         if(displayNameString.length == 0 && p) {
-            QVector<ContactMethod*> contactMethods = p->phoneNumbers();
-            if(contactMethods.count() > 0) {
-                ContactMethod* method = contactMethods[0];
-                for(int i = 0; i < contactMethods.count(); i++) {
-                    if (contactMethods[i]->lastUsed() > method->lastUsed()) {
-                        method = contactMethods[i];
-                    }
-                }
-                displayNameString = method->getBestId().toNSString();
-            }
+            displayNameString = qIdx.data((int)Person::Role::IdOfLastCMUsed).toString().toNSString();
         }
         [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
 
