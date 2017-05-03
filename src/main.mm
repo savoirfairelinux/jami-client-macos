@@ -40,6 +40,7 @@
 
 #import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "AccountSelectionManager.h"
 
 int main(int argc, const char *argv[]) {
 
@@ -66,6 +67,8 @@ int main(int argc, const char *argv[]) {
         }
     }
 
+    AccountSelectionManager* manager = [[AccountSelectionManager alloc] init];
+    manager.selectChosenAccount;
     CallModel::instance();
     CategorizedHistoryModel::instance().addCollection<LocalHistoryCollection>(LoadOptions::FORCE_ENABLED);
 
