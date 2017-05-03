@@ -278,6 +278,7 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
 
     [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
+    static dispatch_once_t choseAccountToken = 0;
     return result;
 }
 
