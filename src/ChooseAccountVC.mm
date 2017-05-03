@@ -37,6 +37,7 @@
 
 //RING
 #import "views/AccountMenuItemView.h"
+#import "AccountSelectionManager.h"
 
 @interface ChooseAccountVC () <NSMenuDelegate>
 
@@ -53,12 +54,15 @@ Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 QMetaObject::Connection accountUpdate;
+AccountSelectionManager* accountManager;
 
 - (void)awakeFromNib
 {
     [profileImage setWantsLayer: YES];
     profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
     profileImage.layer.masksToBounds = YES;
+    [accountSelectionButton setHidden:YES];
+    accountManager = [[AccountSelectionManager alloc] init];
 
     if (auto pro = ProfileModel::instance().selectedProfile()) {
         auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
@@ -85,6 +89,7 @@ QMetaObject::Connection accountUpdate;
                      [self]{
                          [self update];
                      });
+    [self displaySavedSelectedAccount];
 }
 
 -(void) updateMenu {
@@ -193,8 +198,7 @@ QMetaObject::Connection accountUpdate;
 
 - (IBAction)itemChanged:(id)sender {
     NSInteger row = [(NSPopUpButton *)sender indexOfSelectedItem] / 2;
-    QModelIndex index = AvailableAccountModel::instance().selectionModel()->model()->index(row, 0);
-    AvailableAccountModel::instance().selectionModel()->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
+    [accountManager saveAccountWithIndex:row];
 }
 
 #pragma mark - NSMenuDelegate
@@ -224,6 +228,15 @@ QMetaObject::Connection accountUpdate;
 }
 -(void) disable {
     [accountSelectionButton setEnabled:NO];
+}
+
+-(void)displaySavedSelectedAccount
+{
+
+    Account* account = accountManager.getSavedAccount;
+    if(account &&  [accountSelectionButton itemWithTitle:[self itemTitleForAccount:account]])
+        [accountSelectionButton selectItemWithTitle:[self itemTitleForAccount:account]];
+       [accountSelectionButton setHidden:NO];
 }
 
 @end

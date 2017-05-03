@@ -47,6 +47,7 @@
 #import "views/IconButton.h"
 #import "views/RingOutlineView.h"
 #import "views/ContextualTableCellView.h"
+#import "AccountSelectionManager.h"
 
 @interface SmartViewVC () <NSOutlineViewDelegate, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
 
@@ -278,6 +279,11 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
 
     [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
+    static dispatch_once_t choseAccountToken = 0;
+    dispatch_once(&choseAccountToken, ^{
+        AccountSelectionManager* manager = [[AccountSelectionManager alloc] init];
+        manager.reselectSavedAccount;
+    });
     return result;
 }
 

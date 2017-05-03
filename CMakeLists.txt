@@ -205,6 +205,8 @@ SET(ringclient_OTHERS
    src/INDSequentialTextSelectionManager.h
    src/delegates/ImageManipulationDelegate.mm
    src/delegates/ImageManipulationDelegate.h)
+   src/AccountSelectionManager.h
+   src/AccountSelectionManager.mm
 
 
 SET(ringclient_XIBS
