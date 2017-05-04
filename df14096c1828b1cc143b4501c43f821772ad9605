@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aaae553_eefe3338",
+        "filename": "src/AccountSelectionManager.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-04T18:42:05Z",
+      "side": 1,
+      "message": "check again here if index is valid, just in case",
+      "range": {
+        "startLine": 33,
+        "startChar": 27,
+        "endLine": 33,
+        "endChar": 32
+      },
+      "revId": "df14096c1828b1cc143b4501c43f821772ad9605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_8efbff46",
+        "filename": "src/AccountSelectionManager.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-04T18:42:05Z",
+      "side": 1,
+      "message": "typo?",
+      "range": {
+        "startLine": 57,
+        "startChar": 24,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "df14096c1828b1cc143b4501c43f821772ad9605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_4e9507e3",
+        "filename": "src/AccountSelectionManager.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-04T18:42:05Z",
+      "side": 1,
+      "message": "In your commit message you specify only that it selects a Ring account, not a SIP one",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 5
+      },
+      "revId": "df14096c1828b1cc143b4501c43f821772ad9605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_aef83b4a",
+        "filename": "src/AccountSelectionManager.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-04T18:42:05Z",
+      "side": 1,
+      "message": "missing {}",
+      "revId": "df14096c1828b1cc143b4501c43f821772ad9605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_ce01f73a",
+        "filename": "src/SmartViewVC.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-04T18:42:05Z",
+      "side": 1,
+      "message": "unneeded",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 49
+      },
+      "revId": "df14096c1828b1cc143b4501c43f821772ad9605",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
