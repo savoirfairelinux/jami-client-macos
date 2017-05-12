@@ -39,6 +39,11 @@
 #import "QNSTreeController.h"
 #import "INDSequentialTextSelectionManager.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "SendContactRequestWC.h"
+#import "PhoneDirectoryModel.h"
+#import "account.h"
+#import "AvailableAccountModel.h"
+
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -51,6 +56,7 @@
     QNSTreeController* treeController;
     QMetaObject::Connection contactMethodChanged;
     ContactMethod* selectedContactMethod;
+    SendContactRequestWC* sendRequestWC;
 
     __unsafe_unretained IBOutlet NSView* sendPanel;
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
@@ -141,6 +147,15 @@
 - (IBAction)backPressed:(id)sender {
     [conversationView setDelegate:nil];
     RecentModel::instance().selectionModel()->clearCurrentIndex();
+}
+
+- (IBAction)openSendContactRequestWindow:(id)sender
+{
+    if(auto cm = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem])) {
+        sendRequestWC = [[SendContactRequestWC alloc] initWithWindowNibName:@"SendContactRequest"];
+        sendRequestWC.contactMethod = cm;
+        [sendRequestWC.window makeKeyAndOrderFront:sendRequestWC.window];
+    }
 }
 
 # pragma mark private IN/OUT animations
