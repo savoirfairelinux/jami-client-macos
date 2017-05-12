@@ -181,7 +181,7 @@ namespace Interfaces {
         buffer.open(QIODevice::WriteOnly);
 
         //PNG ?
-        (qvariant_cast<QPixmap>(pxm)).save(&buffer, "PNG");
+        (qvariant_cast<QPixmap>(pxm)).scaled({100,100}).save(&buffer, "PNG");
         buffer.close();
 
         return bArray;
