@@ -19,15 +19,22 @@
 
 //Qt
 #import <QItemSelectionModel>
+#import <QSize>
+#import <QtMacExtras/qmacfunctions.h>
+#import <QPixmap>
 
 //LRC
 #import <account.h>
 #import <availableAccountModel.h>
 #import <contactRequest.h>
 #import <pendingContactRequestModel.h>
+#import <globalinstances.h>
+#import <contactmethod.h>
 
 #import "ContactRequestsListVC.h"
 #import "QNSTreeController.h"
+#import <interfaces/pixmapmanipulatori.h>
+#import "views/ContactRequestCellView.h"
 
 @interface ContactRequestsListVC ()
 
@@ -50,6 +57,10 @@ typedef NS_ENUM(NSInteger, ContactAction) {
 
 NSInteger const TAG_NAME        =   100;
 NSInteger const TAG_RINGID      =   200;
+NSInteger const TAG_PHOTO       =   300;
+
+NSString* defaultMsg = @"Hello, I would like invite you";
+
 
 - (void)awakeFromNib
 {
@@ -62,6 +73,7 @@ NSInteger const TAG_RINGID      =   200;
     [contactRequestView bind:@"content" toObject:requestsTreeController withKeyPath:@"arrangedObjects" options:nil];
     [contactRequestView bind:@"sortDescriptors" toObject:requestsTreeController withKeyPath:@"sortDescriptors" options:nil];
     [contactRequestView bind:@"selectionIndexPaths" toObject:requestsTreeController withKeyPath:@"selectionIndexPaths" options:nil];
+    contactRequestView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
     [noRequestsLabel setHidden:[contactRequestView numberOfRows]>0];
 
 }
@@ -118,20 +130,47 @@ NSInteger const TAG_RINGID      =   200;
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    NSTableView* result = [outlineView makeViewWithIdentifier:@"ContactRequestView" owner:self];
+    ContactRequestCellView* result;
+    result = [outlineView makeViewWithIdentifier:@"ContactRequestView" owner:self];
 
     QModelIndex qIdx = [self.requestsTreeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid()) {
         return result;
     }
-    Account* chosenAccount = [self chosenAccount];
+
+    [result setup];
     NSTextField* nameLabel = [result viewWithTag:TAG_NAME];
     NSTextField* ringIDLabel = [result viewWithTag:TAG_RINGID];
+    NSImageView* photoView = [result viewWithTag:TAG_PHOTO];
 
-    NSString* ringID = chosenAccount->pendingContactRequestModel()->data(qIdx,Qt::DisplayRole).toString().toNSString();
+    NSString* localizedTitle = [NSString stringWithFormat:
+                                NSLocalizedString(@"Hi %@. Please add me to your contact list.", @"Default contact request msg"), [self nameForAccount:[self chosenAccount]]];
+    [result.msgView setString:localizedTitle];
 
-    [nameLabel setStringValue:ringID];
-    [ringIDLabel setStringValue:ringID];
+    ContactRequest* contactRequest = qvariant_cast<ContactRequest*>(qIdx.data((int)Ring::Role::Object));
+    Person* person = contactRequest->peer();
+    if(!person) {
+        Account* chosenAccount = [self chosenAccount];
+        NSString* ringID = chosenAccount->pendingContactRequestModel()->data(qIdx,Qt::DisplayRole).toString().toNSString();
+        [nameLabel setStringValue:ringID];
+        return result;
+    }
+
+    QVariant photo = GlobalInstances::pixmapManipulator().contactPhoto(person, {100,100});
+    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+
+    NSString* idString  = person->phoneNumbers()[0]->getBestId().toNSString();
+    if(person->formattedName() != nil && person->formattedName().length()>0) {
+        NSString* name = person->formattedName().toNSString();
+        [nameLabel setStringValue:name];
+        if(![person->formattedName().toNSString() isEqualToString:idString]){
+            NSString* formattedID = [NSString stringWithFormat:@"%@%@%@",@"(",idString, @")"];
+            [ringIDLabel setStringValue:formattedID];
+        }
+        return result;
+    }
+    [nameLabel setStringValue:idString];
+
     return result;
 }
 
@@ -139,6 +178,17 @@ NSInteger const TAG_RINGID      =   200;
 {
     QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
     return index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+}
+
+-(NSString*) nameForAccount:(Account*) account {
+    auto name = account->registeredName();
+    NSString* userNameString = nullptr;
+    if (!name.isNull() && !name.isEmpty()) {
+        userNameString = name.toNSString();
+    } else {
+        userNameString = account->username().toNSString();
+    }
+    return userNameString;
 }
 
 @end
