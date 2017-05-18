@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "0eY-9x-bAr"; */
-"0eY-9x-bAr.placeholderString" = "Адрес сервера...";
+"0eY-9x-bAr.placeholderString" = "URL сервера...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
 "6u9-cM-ep0.placeholderString" = "область...";
@@ -12,7 +12,7 @@
 "FQ4-fp-Pxj.title" = "Минимум";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Диапазон портов RTP звука";
+"Jho-hi-Mvg.title" = "Диапазон портов RTP Звука";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
 "K9I-vh-jeu.title" = "Сетевой интерфейс";
@@ -33,7 +33,7 @@
 "Qf3-E3-5U6.title" = "Публикуемый адрес";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Диапазон портов RTP видео";
+"XA8-Sy-CYG.title" = "Диапазон портов RTP Видео";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "Минимум";
@@ -60,7 +60,7 @@
 "shs-Xm-qnY.title" = "Локальный порт";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
-"uzg-09-8vi.placeholderString" = "Адрес сервера...";
+"uzg-09-8vi.placeholderString" = "URL сервера...";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "wl8-YK-M76"; */
 "wl8-YK-M76.title" = "Порт";

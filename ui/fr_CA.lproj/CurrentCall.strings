@@ -1,15 +1,15 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "2cB-dz-KYg"; */
-"2cB-dz-KYg.ibShadowedToolTip" = "Hang up";
+"2cB-dz-KYg.ibShadowedToolTip" = "Raccrocher";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
-"9e8-ji-QId.ibShadowedToolTip" = "Join call";
+"9e8-ji-QId.ibShadowedToolTip" = "Rejoindre l'appel";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
-"ChW-kg-Sja.ibShadowedToolTip" = "Transfer";
+"ChW-kg-Sja.ibShadowedToolTip" = "Transfert";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
-"D0G-XT-lhI.ibShadowedToolTip" = "Hang up";
+"D0G-XT-lhI.ibShadowedToolTip" = "Raccrocher";
 
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
 "Dqv-um-UUk.title" = "URI";
@@ -18,25 +18,25 @@
 "EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
-"G0w-c3-9pJ.ibShadowedToolTip" = "Record";
+"G0w-c3-9pJ.ibShadowedToolTip" = "Enregistrement";
 
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
-"KPG-pB-gPm.title" = "Answer";
+"KPG-pB-gPm.title" = "Réponse";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
-"Kjq-iM-NBL.ibShadowedToolTip" = "Hang up";
+"Kjq-iM-NBL.ibShadowedToolTip" = "Raccrocher";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
-"LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
+"LVS-yZ-98V.ibShadowedToolTip" = "Couper le son de la vidéo";
 
 /* Class = "NSTextFieldCell"; title = "Cancel"; ObjectID = "TlL-HO-5Ey"; */
-"TlL-HO-5Ey.title" = "Cancel";
+"TlL-HO-5Ey.title" = "Annuler";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "VVL-A4-r7n"; */
-"VVL-A4-r7n.ibShadowedToolTip" = "Record";
+"VVL-A4-r7n.ibShadowedToolTip" = "Enregistrement";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
-"X0W-vv-xua.title" = "wants to talk to you!";
+"X0W-vv-xua.title" = "veut te parler!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
 "anb-Y8-JQi.ibShadowedToolTip" = "tenir";
@@ -45,16 +45,16 @@
 "fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
-"kIZ-mf-moM.ibShadowedToolTip" = "Add participant";
+"kIZ-mf-moM.ibShadowedToolTip" = "Ajouter un participant";
 
 /* Class = "NSButtonCell"; title = "Button"; ObjectID = "kxH-yM-TLd"; */
-"kxH-yM-TLd.title" = "Button";
+"kxH-yM-TLd.title" = "Bouton";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
-"mc3-HV-hek.ibShadowedToolTip" = "Hang up";
+"mc3-HV-hek.ibShadowedToolTip" = "Raccrocher";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
-"oRa-pS-HN2.ibShadowedToolTip" = "Record";
+"oRa-pS-HN2.ibShadowedToolTip" = "Enregistrement";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
 "osk-LS-0Qg.placeholderString" = "Person name";
@@ -66,16 +66,16 @@
 "tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
 
 /* Class = "NSTextFieldCell"; title = "Ignore"; ObjectID = "tjM-py-p4V"; */
-"tjM-py-p4V.title" = "Ignore";
+"tjM-py-p4V.title" = "Ignorer";
 
 /* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "ugy-uK-901"; */
-"ugy-uK-901.placeholderString" = "State";
+"ugy-uK-901.placeholderString" = "État";
 
 /* Class = "NSTextFieldCell"; title = "Answer"; ObjectID = "wRO-X4-7IU"; */
-"wRO-X4-7IU.title" = "Answer";
+"wRO-X4-7IU.title" = "Réponse";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
 "yZ6-1A-ZLT.title" = "wants to talk with you!";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
-"zsO-T7-9yi.placeholderString" = "Time";
+"zsO-T7-9yi.placeholderString" = "Heure";

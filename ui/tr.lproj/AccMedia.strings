@@ -36,10 +36,10 @@
 "hHf-uc-NlW.title" = "Oynat";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "pvl-9U-X4l"; */
-"pvl-9U-X4l.placeholderString" = "Ad";
+"pvl-9U-X4l.placeholderString" = "isim";
 
 /* Class = "NSTextFieldCell"; title = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)"; ObjectID = "rRr-la-G9L"; */
-"rRr-la-G9L.title" = "Kodekler biriyle iletişim kurulurken kullanıldı. Kodekler aktif kullanılabilir ve yeniden düzenlenilebilir. ()";
+"rRr-la-G9L.title" = "İlgili codec'ler başka bir kullanıcı ile iletişim için kullanıldı. Dilerseniz codec'leri aktif olarak kullanılabilir veya yeniden düzenleyebilirsiniz. (listede bulunanlar önceliklidir)";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "rU5-XQ-Ixc"; */
 "rU5-XQ-Ixc.placeholderString" = "Ad";

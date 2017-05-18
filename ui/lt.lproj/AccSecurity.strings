@@ -3,13 +3,13 @@
 "1f9-X5-ykb.title" = "Reikalauti liudijimų gaunamiems TLS ryšiams";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Verify certificates, as a client";
+"1xi-9G-zOX.title" = "Tikrinti liudijimus kaip klientas";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
 "2e5-zS-ghg.title" = "Naudoti tinkintą šifrų sąrašą";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "cipher cell";
+"5LC-T6-hpk.placeholderString" = "šifro langelis";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
 "7c2-kF-dcs.placeholderString" = "Slaptažodis...";
@@ -39,7 +39,7 @@
 "uOE-XA-5gW.title" = "TLS protokolo metodas";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
-"vPF-Rp-aR6.title" = "Certificate Authority list";
+"vPF-Rp-aR6.title" = "Liudijimų įstaigų sąrašas";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
-"x2s-ov-cVQ.title" = "Verify incoming certificates, as a server";
+"x2s-ov-cVQ.title" = "Tikrinti gaunamus liudijimus kaip serveris";

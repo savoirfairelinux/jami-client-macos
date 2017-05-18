@@ -9,7 +9,7 @@
 "2e5-zS-ghg.title" = "Использовать пользовательский список шифров";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "cipher cell";
+"5LC-T6-hpk.placeholderString" = "шифр ячейки";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
 "7c2-kF-dcs.placeholderString" = "Пароль...";
@@ -24,7 +24,7 @@
 "JHb-iu-ZwI.title" = "Закрытый ключ";
 
 /* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "Jqz-P0-zAz"; */
-"Jqz-P0-zAz.title" = "Пользовательский сертификат";
+"Jqz-P0-zAz.title" = "Пользовательский Cертификат";
 
 /* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
 "UxS-et-whJ.title" = "Имя сервера для исходящих TLS соединений";
@@ -39,7 +39,7 @@
 "uOE-XA-5gW.title" = "Метод протокола TSL";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
-"vPF-Rp-aR6.title" = "Список удостоверяющих центров";
+"vPF-Rp-aR6.title" = "Список Удостоверяющих Центров";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
 "x2s-ov-cVQ.title" = "Проверять сертификаты как сервер";

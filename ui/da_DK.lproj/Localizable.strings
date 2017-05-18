@@ -5,13 +5,13 @@
 "Add to contacts" = "Tilføj til kontakt";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Alias:";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "Der opstod en fejl under eksport";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Sikkerhedskopiér konto";
 
 /* Contextual menu action */
 "Call number" = "Call number";
@@ -20,40 +20,40 @@
 "Choose a CA list" = "Choose a CA list";
 
 /* Open panel title */
-"Choose a certificate" = "Choose a certificate";
+"Choose a certificate" = "Vælg et certifikat";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "Vælg en mappe";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "Vælg en privat nøglefil";
 
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Choose CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "Vælg mappe";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Vælg fil";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopiér";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Kopiér navn";
 
 /* Contextual menu action */
 "Copy number" = "Kopier nummer";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Opret RING-konto";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Opret SIP-konto";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "Det indtastede navn blev ikke fundet";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -62,25 +62,25 @@
 "Failed to perform lookup" = "Søgning mislykkedes";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "Indkommende opkald fra %@";
 
 /* Alert dialo message */
 "Make sure you have at least one valid account" = "Make sure you have at least one valid account";
 
 /* Message from {Name} */
-"Message from %@" = "Message from %@";
+"Message from %@" = "Besked fra %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Ny SIP-konto";
 
 /* Alert dialog title */
 "No valid account available" = "No valid account available";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Kodeord og bekræftelse er ikke ens.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Kodeordet er for kort";
 
 /* Indication for user */
 "Passwords don't match" = "Kodeord stemmer ikke overens";
@@ -92,10 +92,10 @@
 "Play" = "Afspil";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "Afvis";
 
 /* Contextual menu entry */
-"Remove value" = "Remove value";
+"Remove value" = "Fjern værdi";
 
 /* Show advice to user */
 "Reopen account to see your hash" = "Reopen account to see your hash";
@@ -107,13 +107,13 @@
 "Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "RingID:";
 
 /* No comment provided by engineer. */
 "Share" = "Del";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "Teksthandlinger";
 
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Det indtastede brugernavn er tilgængeligt";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

@@ -2,7 +2,7 @@
 "A network error occured during the export" = "A network error occured during the export";
 
 /* Contextual menu action */
-"Add to contacts" = "Add to contacts";
+"Add to contacts" = "Tambah sebagai kontak";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
@@ -44,7 +44,7 @@
 "Copy name" = "Copy name";
 
 /* Contextual menu action */
-"Copy number" = "Copy number";
+"Copy number" = "Salin nomor";
 
 /* Contextual menu entry */
 "Create RING Account" = "Create RING Account";
@@ -92,7 +92,7 @@
 "Play" = "Play";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "Tolak";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

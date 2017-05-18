@@ -2,13 +2,13 @@
 "A network error occured during the export" = "Ein Netzwerkfehler ist während des Exports aufgetreten";
 
 /* Contextual menu action */
-"Add to contacts" = "Kontakte hinzufügen";
+"Add to contacts" = "Zu Kontakten hinzufügen";
 
 /* Text shown to the user */
 "Alias : " = "Aliasname : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "Ein Fehler ist während des Exports aufgetreten";
+"An error occured during the export" = "Während des Exports ist ein Fehler aufgetreten";
 
 /* Contextual menu entry */
 "Backup account" = "Konto sichern";
@@ -56,7 +56,7 @@
 "Entered name not found" = "Eingegebener Name wurde nicht gefunden";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Die Kontomigration ist fehlgeschlagen. Sie können OK klicken für einen weiteren Versuch oder Sie können das Konto löschen.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Fehler beim Nachschlagen";
@@ -65,7 +65,7 @@
 "Incoming call from %@" = "Eingehender Anruf von %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "Stellen Sie sicher, dass Sie mindestens ein gültiges Benutzerkonto haben.";
 
 /* Message from {Name} */
 "Message from %@" = "Nachricht von %@";
@@ -104,44 +104,50 @@
 "Restore account" = "Konto wiederherstellen";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Eingabe korrigieren";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "Ring-ID :";
 
 /* No comment provided by engineer. */
 "Share" = "Teilen";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Textuelles Vorgehen";
+"Text Actions" = "Text-Aktionen";
 
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Der angegebene Benutzername ist verfügbar";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Der eingegebene Name ist ungültig. Er muss mindestens 3 Zeichen lang sein und darf nur alphanumerische Kleinbuchstaben enthalten.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Der angegebene Benutzername ist nicht verfügbar";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "Diese Konten müssen in das neue Ring-Kontenformat migriert werden:";
+"The following account needs to be migrated to the new Ring account format:" = "Diese Konten müssen in das neue Ring-Kontoformat migriert werden:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Das eingegebene Kennwort entsperrt dieses Konto nicht.";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "Der eingegebene Benutzername entspricht keiner Ring-ID auf diesem Netzwerk.";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Um den Prozess abzuschließen, öffnen Sie Ring auf dem neuen Gerät. Erstellen Sie ein Konto mit \"Dieses Gerät mit einem Konto verknüpfen\". Ihre PIN ist 10 Minuten gültig.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Um die Migration fortzusetzen müssen Sie ein Kontopasswort festlegen. Dieses Passwort wird verwendet, um den Hauptschlüssel zu sichern. Es wird benötigt, um neue Geräte zu Ihrem Ring-Konto hinzuzufügen. Wenn Sie momentan kein Passwort festlegen möchten, können Sie Ring beenden und die Migration später fortsetzen.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Für die Migration müssen Sie ein Kontopasswort festlegen. Damit wird Ihr Hauptschlüssel verschlüsselt, mit welchem Sie neue Geräte zu Ihrem Ring-Konto hinzuzufügen können. Wenn Sie momentan kein Passwort festlegen möchten, können Sie Ring beenden und die Migration später fortsetzen.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Unbekannt";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Sie müssen Ihr Konto vor dem Export migrieren.";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

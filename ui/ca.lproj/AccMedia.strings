@@ -6,7 +6,7 @@
 "CO7-VF-04Q.title" = "Amunt";
 
 /* Class = "NSButtonCell"; title = "Enable ringtones"; ObjectID = "KkI-i1-mfY"; */
-"KkI-i1-mfY.title" = "Enable ringtones";
+"KkI-i1-mfY.title" = "Habilita el to de trucada";
 
 /* Class = "NSButtonCell"; title = "Up"; ObjectID = "MbZ-7X-K5I"; */
 "MbZ-7X-K5I.title" = "Amunt";
@@ -15,16 +15,16 @@
 "OSC-eG-2kt.title" = "Vídeo";
 
 /* Class = "NSTextFieldCell"; title = "Ringtones"; ObjectID = "aMg-uJ-Krx"; */
-"aMg-uJ-Krx.title" = "Ringtones";
+"aMg-uJ-Krx.title" = "To de trucada";
 
 /* Class = "NSTextFieldCell"; title = "Codecs"; ObjectID = "biN-bX-qM1"; */
-"biN-bX-qM1.title" = "Codecs";
+"biN-bX-qM1.title" = "Còdecs";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Frequency"; ObjectID = "dwG-Ro-bIS"; */
-"dwG-Ro-bIS.placeholderString" = "Frequency";
+"dwG-Ro-bIS.placeholderString" = "Freqüència";
 
 /* Class = "NSTextFieldCell"; title = "details"; ObjectID = "dwG-Ro-bIS"; */
-"dwG-Ro-bIS.title" = "details";
+"dwG-Ro-bIS.title" = "detalls";
 
 /* Class = "NSTextFieldCell"; title = "Audio"; ObjectID = "gzX-Wc-S6g"; */
 "gzX-Wc-S6g.title" = "Àudio";
@@ -33,13 +33,13 @@
 "gza-RF-yKF.title" = "Avall";
 
 /* Class = "NSButtonCell"; title = "Play"; ObjectID = "hHf-uc-NlW"; */
-"hHf-uc-NlW.title" = "Play";
+"hHf-uc-NlW.title" = "Reproduir";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "pvl-9U-X4l"; */
 "pvl-9U-X4l.placeholderString" = "Nom";
 
 /* Class = "NSTextFieldCell"; title = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)"; ObjectID = "rRr-la-G9L"; */
-"rRr-la-G9L.title" = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)";
+"rRr-la-G9L.title" = "Els còdecs es fan servir quan s'estableix la comunicació amb algú. Es poden activar i reordenar (el primer activat serà el preferit).";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "rU5-XQ-Ixc"; */
 "rU5-XQ-Ixc.placeholderString" = "Nom";

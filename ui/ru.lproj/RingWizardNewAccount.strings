@@ -1,12 +1,12 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long.";
+"0qE-Sz-hdc.title" = "Отмечая это, вы зарегистрируете уникальное имя в сети Ring. Другие пользователи смогут использовать его вместо RingID, чтобы связаться с вами.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Обязательно*";
 
 /* Class = "NSButtonCell"; title = "Register public username (experimental)"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register public username (experimental)";
+"AG5-GR-bii.title" = "Зарегистрировать публичное имя (экспериментальная функция)";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
 "B6x-jj-48R.title" = "Выберите ваш пароль";
@@ -24,13 +24,13 @@
 "gEy-ak-Cgq.placeholderString" = "'Неизвестно', если пусто…";
 
 /* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
-"gki-BR-jc3.title" = "Create your profile";
+"gki-BR-jc3.title" = "Создайте свой профиль";
 
 /* Class = "NSTextFieldCell"; title = "Create your account"; ObjectID = "qQl-Xn-c88"; */
-"qQl-Xn-c88.title" = "Create your account";
+"qQl-Xn-c88.title" = "Создайте свой аккаунт";
 
 /* Class = "NSTextFieldCell"; title = "Enter your full name"; ObjectID = "tzf-88-Yn5"; */
-"tzf-88-Yn5.title" = "Enter your full name";
+"tzf-88-Yn5.title" = "Введите ваше полное имя";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
 "v7f-52-GJA.title" = "Отмена";

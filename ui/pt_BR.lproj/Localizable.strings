@@ -107,7 +107,7 @@
 "Revise Input" = "Revisar dados";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "ID Ring";
 
 /* No comment provided by engineer. */
 "Share" = "Compartilhar";
@@ -119,7 +119,7 @@
 "The entered username is available" = "O nome de usuário entrado está disponível";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "O usuário introduzido é inválido. Ele deve ter ao menos 3 caracteres e conter apenas minúsculas e números.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "O nome de usuário entrado não está disponível.";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Você deve migrar sua conta antes de exportar";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

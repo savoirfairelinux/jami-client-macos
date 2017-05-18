@@ -71,7 +71,7 @@
 "Message from %@" = "%@'den ileti";
 
 /* User label */
-"New SIP account" = "Yeni SİP hesabı";
+"New SIP account" = "Yeni SIP hesabı";
 
 /* Alert dialog title */
 "No valid account available" = "Geçerli hesap yok";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Hesabı dışa aktarmadan önce taşımanız gerekir.";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

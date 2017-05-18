@@ -27,13 +27,13 @@
 "Q1F-xo-N3e.placeholderString" = "Anzeigerole";
 
 /* Class = "NSTextFieldCell"; placeholderString = "date"; ObjectID = "UKP-Et-CT0"; */
-"UKP-Et-CT0.placeholderString" = "atum";
+"UKP-Et-CT0.placeholderString" = "Datum";
 
 /* Class = "NSTabViewItem"; label = "History"; ObjectID = "Wi9-Zd-O1N"; */
 "Wi9-Zd-O1N.label" = "Verlauf";
 
 /* Class = "NSTextFieldCell"; title = "This is your RingID. Copy and share it with your friends!"; ObjectID = "Xb9-UT-M2F"; */
-"Xb9-UT-M2F.title" = "Dies is ihre Ring ID. Teilen sie sie mit ihren Freunden!";
+"Xb9-UT-M2F.title" = "Dies is ihre Ring-ID. Teilen sie sie mit ihren Freunden!";
 
 /* Class = "NSTabViewItem"; label = "Contacts"; ObjectID = "Zbi-X6-DLT"; */
 "Zbi-X6-DLT.label" = "Kontakte";
@@ -66,4 +66,4 @@
 "uSw-g5-kte.placeholderString" = "Anzeigerole";
 
 /* Class = "NSSearchFieldCell"; placeholderString = "Name, ringID"; ObjectID = "vvE-nM-kSl"; */
-"vvE-nM-kSl.placeholderString" = "Name, Ring ID";
+"vvE-nM-kSl.placeholderString" = "Name, Ring-ID";

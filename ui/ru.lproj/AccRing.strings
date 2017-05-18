@@ -15,13 +15,13 @@
 "G8M-go-xvD.title" = "Зарегистрировать имя";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
-"HN3-i9-zmw.placeholderString" = "Имя или прозвище...";
+"HN3-i9-zmw.placeholderString" = "Имя или псевдоним...";
 
 /* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
 "OeY-na-0YT.title" = "Автоотвеченные звонки";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
-"PaC-xE-SHA.title" = "Разрешить вызовы от участников в Вашей истории звонков";
+"PaC-xE-SHA.title" = "Разрешить вызовы от участников в Вашем журнале звонков";
 
 /* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
 "Wzq-V2-YLU.title" = "Псевдоним";
@@ -42,4 +42,4 @@
 "lHI-bz-ddQ.title" = "UPNP включён";
 
 /* Class = "NSTextFieldCell"; title = "Registered Name"; ObjectID = "sBB-y7-xhL"; */
-"sBB-y7-xhL.title" = "Зарегистрированное имя";
+"sBB-y7-xhL.title" = "Зарегистрированное Имя";

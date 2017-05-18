@@ -1,0 +1,45 @@
+
+/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "1Sx-Et-CDM"; */
+"1Sx-Et-CDM.title" = "帐户";
+
+/* Class = "NSTextFieldCell"; title = "RingID"; ObjectID = "8WI-fC-Due"; */
+"8WI-fC-Due.title" = "RingID";
+
+/* Class = "NSTextFieldCell"; title = "Bootstrap server"; ObjectID = "B6b-iB-REZ"; */
+"B6b-iB-REZ.title" = "初始服务器";
+
+/* Class = "NSTextFieldCell"; title = "Permissions"; ObjectID = "EDd-FX-wcz"; */
+"EDd-FX-wcz.title" = "权限";
+
+/* Class = "NSButtonCell"; title = "Register name"; ObjectID = "G8M-go-xvD"; */
+"G8M-go-xvD.title" = "注册名称";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
+"HN3-i9-zmw.placeholderString" = "名称或昵称…";
+
+/* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
+"OeY-na-0YT.title" = "自动应答";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
+"PaC-xE-SHA.title" = "允许历史记录再次来电";
+
+/* Class = "NSTextFieldCell"; title = "Alias"; ObjectID = "Wzq-V2-YLU"; */
+"Wzq-V2-YLU.title" = "别名";
+
+/* Class = "NSButtonCell"; title = "Use custom user-agent"; ObjectID = "ddk-1G-0jU"; */
+"ddk-1G-0jU.title" = "使用自定义用户代理";
+
+/* Class = "NSTextFieldCell"; title = "Blockchain server"; ObjectID = "fSU-Pc-Y5a"; */
+"fSU-Pc-Y5a.title" = "区块链服务器";
+
+/* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
+"fX7-9W-XFl.title" = "允许通讯录中的联系人来电";
+
+/* Class = "NSButtonCell"; title = "Allow calls from unknown peers"; ObjectID = "kmI-jb-aal"; */
+"kmI-jb-aal.title" = "允许未知来电";
+
+/* Class = "NSButtonCell"; title = "Upnp enabled"; ObjectID = "lHI-bz-ddQ"; */
+"lHI-bz-ddQ.title" = "UPnP已启用";
+
+/* Class = "NSTextFieldCell"; title = "Registered Name"; ObjectID = "sBB-y7-xhL"; */
+"sBB-y7-xhL.title" = "已注册名称";

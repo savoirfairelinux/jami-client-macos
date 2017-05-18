@@ -1,68 +1,68 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Un problème de réseau est survenu pendant l'export";
 
 /* Contextual menu action */
-"Add to contacts" = "Add to contacts";
+"Add to contacts" = "Ajouter dans les contacts";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Alias";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "Une erreur est survenue pendant l'export";
 
 /* Contextual menu entry */
 "Backup account" = "Backup account";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "Appeler un numéro";
 
 /* Open panel title */
-"Choose a CA list" = "Choose a CA list";
+"Choose a CA list" = "Choisir une liste d'autorité de certification";
 
 /* Open panel title */
-"Choose a certificate" = "Choose a certificate";
+"Choose a certificate" = "Choisir un certificat";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "Choisir un répertoire";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "Choisir une clé privée";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "Choisir une autorité de certification";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "Choisir un répertoire";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Choisir un fichier";
 
 /* No comment provided by engineer. */
-"Copy" = "Copy";
+"Copy" = "Copier";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Copier le nom";
 
 /* Contextual menu action */
-"Copy number" = "Copy number";
+"Copy number" = "Copier le numéro de téléphone";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Créer un compte Ring";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Créer un compte SIP";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "Le nom saisi n'a pas été trouvé";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Échec lors de la migration de votre compte. Vous pouvez réessayer en cliquant sur OK ou bien supprimer votre compte";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Failed to perform lookup";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "Appel entrant de %@";
 
 /* Alert dialo message */
 "Make sure you have at least one valid account" = "Make sure you have at least one valid account";
@@ -80,10 +80,10 @@
 "Password and confirmation mismatch." = "Password and confirmation mismatch.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Le mot de passe est trop court";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Les mots de passe saisis sont différents";
 
 /* Button label */
 "Pause" = "Pause";
@@ -92,7 +92,7 @@
 "Play" = "Play";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "Refuser";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -101,13 +101,13 @@
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Restaurer un compte";
 
 /* Button title */
 "Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "identifiant Ring";
 
 /* No comment provided by engineer. */
 "Share" = "Share";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

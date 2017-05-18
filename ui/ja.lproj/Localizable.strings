@@ -1,17 +1,17 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "エクスポート中にネットワークエラーが発生しました";
 
 /* Contextual menu action */
-"Add to contacts" = "Add to contacts";
+"Add to contacts" = "連絡先に追加";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "別名:";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "エクスポート中にエラーが発生しました";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "アカウントをバックアップ";
 
 /* Contextual menu action */
 "Call number" = "Call number";
@@ -38,22 +38,22 @@
 "Choose file" = "Choose file";
 
 /* No comment provided by engineer. */
-"Copy" = "Copy";
+"Copy" = "コピー";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "名前をコピー";
 
 /* Contextual menu action */
-"Copy number" = "Copy number";
+"Copy number" = "番号をコピー";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "RINGアカウントを作成";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "SIPアカウントを作成";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "入力された名前が見つかりませんでした";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -77,10 +77,10 @@
 "No valid account available" = "No valid account available";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "確認のパスワードと一致しません。";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "パスワードが短すぎます";
 
 /* Indication for user */
 "Passwords don't match" = "パスワードが一致しません";
@@ -92,7 +92,7 @@
 "Play" = "再生";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "拒否";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -110,7 +110,7 @@
 "RingID : " = "RingID : ";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "共有";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

@@ -12,7 +12,7 @@
 "24.title" = "Ikkuna";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
+"29.title" = "Päävalikko";
 
 /* Class = "NSMenuItem"; title = "Ring"; ObjectID = "56"; */
 "56.title" = "Ring";
@@ -135,7 +135,7 @@
 "298.title" = "Muokkaa työkalupalkkia";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Check Grammar With Spelling";
+"346.title" = "Tarkista oikeinkirjoitus";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
 "348.title" = "Substitutions";
@@ -147,7 +147,7 @@
 "350.title" = "Älykäs kopiointi ja liittäminen";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Smart Quotes";
+"351.title" = "Älylainaukset";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
 "354.title" = "Älykkäät linkit";
@@ -159,22 +159,22 @@
 "451.title" = "Transformations";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Make Upper Case";
+"452.title" = "Muuta Isoiksi kirjaimiksi";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
 "454.title" = "Korjaa oikeinkirjoitus automaattisesti";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
-"457.title" = "Show Substitutions";
+"457.title" = "Näytä vastikkeet";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Smart Dashes";
+"460.title" = "Automaattiset väliviivat";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "Text Replacement";
+"462.title" = "Tekstin korvaaminen";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Make Lower Case";
+"465.title" = "Muuta pikkukirjaimiksi";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
 "466.title" = "Capitalize";
@@ -192,22 +192,22 @@
 "492.title" = "Ring Help";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
-"534.title" = "Find and Replace…";
+"534.title" = "Etsi ja Korvaa";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Check for Update...";
+"593.title" = "Tarkista päivitykset...";
 
 /* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "Show";
+"12w-Fz-Scs.title" = "Näytä";
 
 /* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "Show";
+"1fJ-em-1ww.title" = "Näytä";
 
 /* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Show recent";
+"GTY-d8-NBf.title" = "Näytä viimeisin";
 
 /* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "Show contacts";
+"GU3-tt-2de.title" = "Näytä yhteystiedot";
 
 /* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "Show call history";
+"Oco-m7-LtS.title" = "Näytä soittohistoria";

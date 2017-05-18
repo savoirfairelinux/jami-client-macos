@@ -1,33 +1,33 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "0eY-9x-bAr"; */
-"0eY-9x-bAr.placeholderString" = "Server url...";
+"0eY-9x-bAr.placeholderString" = "آدرس سرور...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
 "6u9-cM-ep0.placeholderString" = "realm...";
 
 /* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
-"Atv-t7-5YJ.title" = "Same as local parameters";
+"Atv-t7-5YJ.title" = "همانند پارامتر‌های محلی";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "FQ4-fp-Pxj"; */
-"FQ4-fp-Pxj.title" = "Min";
+"FQ4-fp-Pxj.title" = "کمینه";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
 "Jho-hi-Mvg.title" = "Audio RTP port Range";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
-"K9I-vh-jeu.title" = "Network Interface";
+"K9I-vh-jeu.title" = "رابط شبکه";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
 "OL5-DI-aCq.title" = "Set published address and port";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
-"OR2-la-DUE.placeholderString" = "password...";
+"OR2-la-DUE.placeholderString" = "گذرواژه...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "username..."; ObjectID = "P7k-xH-2mr"; */
-"P7k-xH-2mr.placeholderString" = "username...";
+"P7k-xH-2mr.placeholderString" = "نام کاربری...";
 
 /* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
-"QS0-TJ-NQh.title" = "Using TURN";
+"QS0-TJ-NQh.title" = "استفاده از STUN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
 "Qf3-E3-5U6.title" = "نشانی منتشر شده";
@@ -36,37 +36,37 @@
 "XA8-Sy-CYG.title" = "Video RTP port Range";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
-"a6W-wm-OmC.title" = "Min";
+"a6W-wm-OmC.title" = "کمینه";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "dbq-qU-93x"; */
-"dbq-qU-93x.title" = "Max";
+"dbq-qU-93x.title" = "بیشینه";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "fB0-X8-GXk"; */
-"fB0-X8-GXk.title" = "Radio";
+"fB0-X8-GXk.title" = "رادیو";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
 "fCd-4d-sP0.title" = "Registration expire";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
-"gVd-Dw-1B4.title" = "Using STUN";
+"gVd-Dw-1B4.title" = "استفاده از STUN";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "oa2-Pe-6Uw"; */
-"oa2-Pe-6Uw.title" = "Max";
+"oa2-Pe-6Uw.title" = "بیشینه";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "sTk-1C-1KO"; */
-"sTk-1C-1KO.title" = "Address";
+"sTk-1C-1KO.title" = "نشانی";
 
 /* Class = "NSTextFieldCell"; title = "Local port"; ObjectID = "shs-Xm-qnY"; */
-"shs-Xm-qnY.title" = "Local port";
+"shs-Xm-qnY.title" = "درگاه محلی";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
-"uzg-09-8vi.placeholderString" = "Server url...";
+"uzg-09-8vi.placeholderString" = "آدرس سرور...";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "wl8-YK-M76"; */
 "wl8-YK-M76.title" = "درگاه";
 
 /* Class = "NSTextFieldCell"; title = "seconds"; ObjectID = "xGw-j0-4ID"; */
-"xGw-j0-4ID.title" = "seconds";
+"xGw-j0-4ID.title" = "ثانیه";
 
 /* Class = "NSTextFieldCell"; title = "Registration"; ObjectID = "yB5-ET-gBL"; */
-"yB5-ET-gBL.title" = "Registration";
+"yB5-ET-gBL.title" = "ثبت نام";

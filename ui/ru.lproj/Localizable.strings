@@ -23,7 +23,7 @@
 "Choose a certificate" = "Выбрать сертификат";
 
 /* Open panel title */
-"Choose a directory" = "Выбор директории";
+"Choose a directory" = "Выбрать директорию";
 
 /* Open panel title */
 "Choose a private key file" = "Выбрать файл закрытого ключа";
@@ -32,7 +32,7 @@
 "Choose CA" = "Выбрать CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Выбор директории";
+"Choose directory" = "Выбрать директорию";
 
 /* Contextual menu entry */
 "Choose file" = "Выбрать файл";
@@ -47,16 +47,16 @@
 "Copy number" = "Копировать номер";
 
 /* Contextual menu entry */
-"Create RING Account" = "Создать аккаунт Ring";
+"Create RING Account" = "Создать Аккаунт Ring";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Создать SIP аккаунт";
+"Create SIP Account" = "Создать SIP Аккаунт";
 
 /* Alert dialog title */
 "Entered name not found" = "Указанное имя не найдено";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Не удалось перенести ваш аккаунт. Вы можете либо попробовать снова, нажав ОК, либо удалить ваш аккаунт.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Не удалось перенести ваш аккаунт. Вы можете либо попробовать снова, нажав Оk, либо удалить ваш аккаунт.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Не удалось осуществить поиск";
@@ -65,7 +65,7 @@
 "Incoming call from %@" = "Входящий вызов от %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Убедитесь, что у вас есть хотя бы один действительный аккаунт";
+"Make sure you have at least one valid account" = "Убедитесь, что у вас есть хотя бы один действующий аккаунт";
 
 /* Message from {Name} */
 "Message from %@" = "Сообщение от %@";
@@ -74,7 +74,7 @@
 "New SIP account" = "Новый SIP аккаунт";
 
 /* Alert dialog title */
-"No valid account available" = "Нет пригодных аккаунтов";
+"No valid account available" = "Нет действующих аккаунтов";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Пароль и подтверждение не совпадают.";
@@ -104,22 +104,22 @@
 "Restore account" = "Восстановить аккаунт";
 
 /* Button title */
-"Revise Input" = "Проверить ввод";
+"Revise Input" = "Проверить Ввод";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "RingID: ";
 
 /* No comment provided by engineer. */
 "Share" = "Поделиться";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Действия с текстом";
+"Text Actions" = "Действия с Текстом";
 
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Указанное имя пользователя доступно";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Введённое имя пользователя недопустимо. Оно должно содержать не менее 3 символов и состоять из букв и цифр в нижнем регистре.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Указанное имя пользователя недоступно";
@@ -128,7 +128,7 @@
 "The following account needs to be migrated to the new Ring account format:" = "Следующий аккаунт требуется преобразовать в новый формат аккаунта Ring:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "Введённый пароль не подходит к этому аккаунту";
+"The password you entered does not unlock this account" = "Введённый пароль не разблокирует этот аккаунт";
 
 /* Alert dialog title */
 "The username you entered do not match a RingID on the network" = "Введённое имя пользователя не совпадает с RingID в сети";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Вам нужно перенести аккаунт перед экспортом";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

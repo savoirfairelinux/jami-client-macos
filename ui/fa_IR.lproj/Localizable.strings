@@ -11,79 +11,79 @@
 "An error occured during the export" = "An error occured during the export";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "حساب کاربری پشتیبان";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "شماره تماس";
 
 /* Open panel title */
 "Choose a CA list" = "Choose a CA list";
 
 /* Open panel title */
-"Choose a certificate" = "Choose a certificate";
+"Choose a certificate" = "یک گواهی انتخاب کنید";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "یک پوشه انتخاب کنید";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "یک فایل کلید خصوصی انتخاب کنید";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "انتخاب CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "انتخاب پوشه";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "انتخاب فایل";
 
 /* No comment provided by engineer. */
-"Copy" = "Copy";
+"Copy" = "کپی";
 
 /* Contextual menu action */
 "Copy name" = "Copy name";
 
 /* Contextual menu action */
-"Copy number" = "Copy number";
+"Copy number" = "رونوشت از شماره";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "ساخت حساب رینگ";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "ساخت حساب کاربری سیپ";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "نام وارد شده پیدا نشد";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "انتقال حساب ناموفق بود. می‌توانید با فشردن دکمه خب دوباره سعی نمایید یا حساب کاربری خود را حذف کنید.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Failed to perform lookup";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "تماس دریافتی از %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "مطمئن شوید حداقل یک حساب کاربری معتبر دارید";
 
 /* Message from {Name} */
-"Message from %@" = "Message from %@";
+"Message from %@" = "پیام از طرف %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "حساب کاربری سیپ تازه";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "حساب معتبری موجود نیست";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "گذرواژه و تاییدیه‌اش همتا نیستند.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "گذرواژه خیلی کوتاه است";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "گذرواژه‌ها یکسان نیستند";
 
 /* Button label */
 "Pause" = "Pause";
@@ -92,7 +92,7 @@
 "Play" = "ش";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "رد";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -101,37 +101,37 @@
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "بازگردانی حساب کاربری";
 
 /* Button title */
 "Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "آی‌دی رینگ :";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "هم‌رسانی";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "نام کاربری وارد شده دردسترس است";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "نام‌کاربری وارد شده معتبر نیست. باید حداقل شامل ۳ کاراکتر و فقط حروف کوچک الفبای انگلیسی باشد.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "نام کاربری وارد شده در دسترس نیست";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
+"The following account needs to be migrated to the new Ring account format:" = "لازم است گه حساب کاربری زیر به فرمت جدید حساب‌های کاربری رینگ منتقل شود:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "نام کاربری‌ای که وارد کردید با هیچ آی‌دی رینگی روی شبکه همسان نیست";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -140,8 +140,14 @@
 "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
 
 /* Name used when user leave field empty */
-"Unknown" = "Unknown";
+"Unknown" = "ناشناخته";
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 

@@ -3,10 +3,10 @@
 "3Pb-Ec-zl5.title" = "Хранить мою историю в течение";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "42E-UY-qlP"; */
-"42E-UY-qlP.title" = "ежемесячно";
+"42E-UY-qlP.title" = "Ежемесячно";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "AId-am-73Q"; */
-"AId-am-73Q.title" = "еженедельно";
+"AId-am-73Q.title" = "Еженедельно";
 
 /* Class = "NSTextFieldCell"; title = "30"; ObjectID = "JvS-c4-OeT"; */
 "JvS-c4-OeT.title" = "30";
@@ -15,13 +15,13 @@
 "MV1-AC-qE7.ibShadowedToolTip" = "Профиль";
 
 /* Class = "NSButtonCell"; title = "Launch on Startup"; ObjectID = "O2C-xR-mHF"; */
-"O2C-xR-mHF.title" = "Запускать при старте системы";
+"O2C-xR-mHF.title" = "Запускать при Старте Системы";
 
 /* Class = "NSTextFieldCell"; title = "(Applied on application restart)"; ObjectID = "OTl-vx-S43"; */
 "OTl-vx-S43.title" = "(Применяется при перезапуске приложения)";
 
 /* Class = "NSTextFieldCell"; title = "Behaviours"; ObjectID = "Rzy-Gh-3wQ"; */
-"Rzy-Gh-3wQ.title" = "Behaviours";
+"Rzy-Gh-3wQ.title" = "Поведения";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
 "T3a-yx-ZaW.title" = "Автоматически проверять наличие обновлений";
@@ -33,7 +33,7 @@
 "cB6-4m-9MU.title" = "Ежедневно";
 
 /* Class = "NSButtonCell"; title = "Clear History"; ObjectID = "cd5-9L-Bbb"; */
-"cd5-9L-Bbb.title" = "Удалить историю сообщений";
+"cd5-9L-Bbb.title" = "Очистить Историю";
 
 /* Class = "NSTextFieldCell"; title = "days"; ObjectID = "e5K-l0-Nfw"; */
 "e5K-l0-Nfw.title" = "дней";
@@ -45,7 +45,7 @@
 "r4u-t3-gBc.title" = "Обновить";
 
 /* Class = "NSButtonCell"; title = "Enable Desktop Notifications"; ObjectID = "uCL-ye-tsv"; */
-"uCL-ye-tsv.title" = "Включить уведомления на рабочем столе";
+"uCL-ye-tsv.title" = "Включить Уведомления на Рабочем Столе";
 
 /* Class = "NSButtonCell"; title = "Bring Ring to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
 "uYI-hA-JHk.title" = "Выводить Ring на передний план при входящих звонках";

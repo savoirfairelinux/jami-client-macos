@@ -1,15 +1,15 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Pakollinen*";
 
 /* Class = "NSTextFieldCell"; title = "Other users can use it instead of your RingID"; ObjectID = "9gi-0u-67t"; */
-"9gi-0u-67t.title" = "Other users can use it instead of your RingID";
+"9gi-0u-67t.title" = "Muut voivat käyttää sitä RingID:n sijaan";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
-"Aeh-tK-RjX.title" = "An error occured during your username registration";
+"Aeh-tK-RjX.title" = "Käyttäjänimen rekisteröinnissä tapahtui virhe";
 
 /* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Enter your Ring account password";
+"B6x-jj-48R.title" = "Syötä Ring- käyttäjätunnuksen salasana";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
 "JWw-7m-ywL.title" = "Ikkuna";
@@ -18,7 +18,7 @@
 "YIN-YL-JBs.title" = "Hetkinen...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
-"bdC-Uc-Qhs.placeholderString" = "Username...";
+"bdC-Uc-Qhs.placeholderString" = "Käyttäjänimi...";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "cbA-c2-LlV"; */
 "cbA-c2-LlV.title" = "Peru";
@@ -27,10 +27,10 @@
 "eoS-s7-b3w.title" = "Peru";
 
 /* Class = "NSButtonCell"; title = "Ok"; ObjectID = "fOn-FV-2x8"; */
-"fOn-FV-2x8.title" = "Ok";
+"fOn-FV-2x8.title" = "Vahvista";
 
 /* Class = "NSButtonCell"; title = "Register"; ObjectID = "lT3-Bh-MnL"; */
 "lT3-Bh-MnL.title" = "Rekistöröi";
 
 /* Class = "NSTextFieldCell"; title = "Register username on the blockchain"; ObjectID = "tje-EZ-ZPI"; */
-"tje-EZ-ZPI.title" = "Register username on the blockchain";
+"tje-EZ-ZPI.title" = "Rekisteröi käyttäjänimi tietokantaan";

@@ -3,13 +3,13 @@
 "5.title" = "Bring All to Front";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
-"19.title" = "Window";
+"19.title" = "پنجره";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
-"23.title" = "Minimize";
+"23.title" = "کمینه کردن";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
-"24.title" = "Window";
+"24.title" = "پنجره";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
 "29.title" = "AMainMenu";
@@ -24,64 +24,64 @@
 "58.title" = "درباره‌ی رینگ";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Preferences…";
+"129.title" = "تنظیمات...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
-"130.title" = "Services";
+"130.title" = "خدمات";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Services";
+"131.title" = "خدمات";
 
 /* Class = "NSMenuItem"; title = "Hide Ring"; ObjectID = "134"; */
-"134.title" = "Hide Ring";
+"134.title" = "رینگ را مخفی کن";
 
 /* Class = "NSMenuItem"; title = "Quit Ring"; ObjectID = "136"; */
-"136.title" = "Quit Ring";
+"136.title" = "خروج از رینگ";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "Hide Others";
+"145.title" = "بقیه را مخفی کن";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Show All";
+"150.title" = "نمایش همه";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "Stop Speaking";
+"195.title" = "توقف صحبت";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "Start Speaking";
+"196.title" = "آغاز صحبت";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
-"197.title" = "Copy";
+"197.title" = "کپی";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "Select All";
+"198.title" = "گزینش همه";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
-"199.title" = "Cut";
+"199.title" = "برش";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
-"200.title" = "Spelling and Grammar";
+"200.title" = "نگارش و دستور زبان";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
-"201.title" = "Check Document Now";
+"201.title" = "هم‌اکنون سند را بررسی کن";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
 "202.title" = "حذف";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
-"203.title" = "Paste";
+"203.title" = "چسباندن";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Show Spelling and Grammar";
+"204.title" = "نمایش نگارش و دستور زبان";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Edit";
+"205.title" = "ویرایش";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
 "207.title" = "Undo";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Find Next";
+"208.title" = "یافتن بعدی";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
 "209.title" = "Find…";
@@ -96,22 +96,22 @@
 "212.title" = "Speech";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
-"213.title" = "Find Previous";
+"213.title" = "یافتن قبلی";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
 "215.title" = "Redo";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
-"216.title" = "Spelling and Grammar";
+"216.title" = "نگارش و دستور زبان";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Edit";
+"217.title" = "ویرایش";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
 "218.title" = "Find";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Check Spelling While Typing";
+"219.title" = "در هنگام تایپ غلط گیری کن";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
 "220.title" = "Find";
@@ -120,7 +120,7 @@
 "221.title" = "Use Selection for Find";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Zoom";
+"239.title" = "بزگ‌نمایی";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
 "295.title" = "View";
@@ -144,7 +144,7 @@
 "349.title" = "Substitutions";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
-"350.title" = "Smart Copy/Paste";
+"350.title" = "کپی/چسباندن هوشمند";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
 "351.title" = "Smart Quotes";
@@ -183,25 +183,25 @@
 "485.title" = "Paste and Match Style";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
-"490.title" = "Help";
+"490.title" = "راهنما";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
-"491.title" = "Help";
+"491.title" = "راهنما";
 
 /* Class = "NSMenuItem"; title = "Ring Help"; ObjectID = "492"; */
-"492.title" = "Ring Help";
+"492.title" = "راهنمای رینگ";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
-"534.title" = "Find and Replace…";
+"534.title" = "یافتن و جایگزینی...";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Check for Update...";
+"593.title" = "بررسی بروزرسانی...";
 
 /* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "Show";
+"12w-Fz-Scs.title" = "نمایش";
 
 /* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "Show";
+"1fJ-em-1ww.title" = "نمایش";
 
 /* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
 "GTY-d8-NBf.title" = "Show recent";

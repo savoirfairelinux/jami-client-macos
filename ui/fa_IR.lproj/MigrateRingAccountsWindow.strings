@@ -1,39 +1,39 @@
 
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
-"1ob-x1-u74.title" = "Account migration completed";
+"1ob-x1-u74.title" = "انتقال حساب کاربری کامل شد";
 
 /* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "RingID";
+"859-10-HEb.placeholderString" = "آی‌دی رینگ";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
 "859-10-HEb.title" = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Account migration error";
+"8K3-9Z-MKH.title" = "خطای انتقال حساب کاربری";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Congratulations, your account has been migrated with Success.";
+"C2l-rz-Gqt.title" = "شادباش، حساب کاربری شما با موفقیت منتقل شد.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
-"ITE-yD-CTb.title" = "Delete this account";
+"ITE-yD-CTb.title" = "این حساب را حذف کن";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
-"KuO-oT-zhY.placeholderString" = "Confirm your new password...";
+"KuO-oT-zhY.placeholderString" = "گذرواژه تازه خود را تایید کنید...";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
-"PT7-XI-WDR.title" = "OK";
+"PT7-XI-WDR.title" = "خب";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Window";
+"QvC-M9-y7g.title" = "پنجره";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "VN1-A3-RIh"; */
-"VN1-A3-RIh.title" = "OK";
+"VN1-A3-RIh.title" = "خب";
 
 /* Class = "NSTextFieldCell"; title = "Confirmation"; ObjectID = "aOa-1q-AZe"; */
-"aOa-1q-AZe.title" = "Confirmation";
+"aOa-1q-AZe.title" = "تاییدیه";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.placeholderString" = "error label";
+"e7n-Ev-bK7.placeholderString" = "برچسب خطا";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
 "rW5-Il-5YD.title" = "Migrate";
@@ -45,4 +45,4 @@
 "wmv-sA-Mlh.title" = "Account migration required";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "xqz-Uz-hqU"; */
-"xqz-Uz-hqU.placeholderString" = "Password...";
+"xqz-Uz-hqU.placeholderString" = "گذرواژه...";

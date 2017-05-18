@@ -56,7 +56,7 @@
 "Entered name not found" = "El nombre ingresado no ha sido encontrado";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Se produjo un error al migrar la cuenta. Presiona OK para reintentarlo o elimina tu cuenta.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Se produjo un error al migrar la cuenta. Presiona Aceptar para reintentarlo o elimina tu cuenta.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "No se pudo llevar a cabo la búsqueda";
@@ -98,7 +98,7 @@
 "Remove value" = "Remover dato";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Reabra su cuenta para ver si hash";
+"Reopen account to see your hash" = "Reabre la cuenta para ver el hash";
 
 /* Contextual menu entry */
 "Restore account" = "Restablecer cuenta";
@@ -107,7 +107,7 @@
 "Revise Input" = "Revisar entrada";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "RingID:";
 
 /* No comment provided by engineer. */
 "Share" = "Compartir";
@@ -119,7 +119,7 @@
 "The entered username is available" = "El nombre de usuario tecleado está disponible";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "El identificador de usuario indicado es inválido. Debe contener al menos 3 caracteres alfanuméricos en minúscula.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "El nombre de usuario tecleado no está disponible";
@@ -144,4 +144,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Debes migrar tu cuenta antes de exportar";
+
+/* Error shown to user */
+"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+
+/* Error shown to user */
+"Could not find contact to send request" = "Could not find contact to send request";
 
