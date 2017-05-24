@@ -198,7 +198,9 @@ SET(ringclient_VIEWS
    src/views/AccountMenuItemView.h
    src/views/AccountMenuItemView.mm
    src/views/ContactRequestCellView.h
-   src/views/ContactRequestCellView.mm)
+   src/views/ContactRequestCellView.mm
+   src/views/RoundedTextField.h
+   src/views/RoundedTextField.mm)
 
 SET(ringclient_OTHERS
    src/main.mm

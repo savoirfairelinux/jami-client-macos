@@ -74,6 +74,7 @@ NSInteger const CALL_BUTTON_TAG     = 400;
 NSInteger const TXT_BUTTON_TAG      = 500;
 NSInteger const CANCEL_BUTTON_TAG   = 600;
 NSInteger const RING_ID_LABEL       = 700;
+NSInteger const PRESENCE_TAG        = 800;
 
 - (void)awakeFromNib
 {
@@ -276,6 +277,13 @@ NSInteger const RING_ID_LABEL       = 700;
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
 
     [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
+
+    NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
+    if (qIdx.data(static_cast<int>(Ring::Role::IsPresent)).value<bool>()) {
+        [presenceView setHidden:NO];
+    } else {
+        [presenceView setHidden:YES];
+    }
     return result;
 }
 
