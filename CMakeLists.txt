@@ -166,6 +166,8 @@ SET(ringclient_CONTROLLERS
    src/ContactRequestVC.mm
    src/SendContactRequestWC.h
    src/SendContactRequestWC.mm
+   src/AccBannedContactsVC.h
+   src/AccBannedContactsVC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -249,6 +251,7 @@ SET(ringclient_XIBS
    ContactRequestList
    ContactRequest
    SendContactRequest
+   AccBannedContacts
 )
 
 # Icons
