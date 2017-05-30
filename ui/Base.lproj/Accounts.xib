@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccountsVC">
@@ -9,6 +10,7 @@
                 <outlet property="accountDetailsView" destination="Jki-s4-F1W" id="8zf-XP-bql"/>
                 <outlet property="accountsListView" destination="jXv-6I-P9R" id="MzW-0C-PN1"/>
                 <outlet property="advancedTabItem" destination="RT7-u6-bhe" id="eAT-ce-MyD"/>
+                <outlet property="bannedListTabItem" destination="b7Z-2X-diH" id="Gvp-uP-Vgw"/>
                 <outlet property="configPanels" destination="Jki-s4-F1W" id="nY4-dc-CQg"/>
                 <outlet property="generalTabItem" destination="tPR-Ac-N5Y" id="39S-pz-1Xs"/>
                 <outlet property="mediaTabItem" destination="lxr-my-vH8" id="BhJ-cS-yVi"/>
@@ -60,6 +62,12 @@
                         </tabViewItem>
                         <tabViewItem label="Devices" identifier="" id="cT1-A5-rbj">
                             <view key="view" id="Ey1-5D-Zou">
+                                <rect key="frame" x="10" y="33" width="576" height="442"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Banned" identifier="" id="b7Z-2X-diH">
+                            <view key="view" id="tHP-tb-Jl4">
                                 <rect key="frame" x="10" y="33" width="576" height="442"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
