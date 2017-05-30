@@ -40,6 +40,7 @@
 #import "BackupAccountWC.h"
 #import "RestoreAccountWC.h"
 #import "RingWizardWC.h"
+#import "AccBannedContactsVC.h"
 
 @interface AccountsVC () <BackupAccountDelegate, RestoreAccountDelegate>
 
@@ -52,6 +53,7 @@
 @property (retain) IBOutlet NSTabViewItem *securityTabItem;
 @property (retain) IBOutlet NSTabViewItem *ringTabItem;
 @property (retain) IBOutlet NSTabViewItem *ringDevicesTabItem;
+@property (retain) IBOutlet NSTabViewItem *bannedListTabItem;
 
 @property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *accountsListView;
@@ -63,6 +65,7 @@
 @property AccGeneralVC* generalVC;
 @property AccMediaVC* audioVC;
 @property AccAdvancedVC* advancedVC;
+@property AccBannedContactsVC* bannedContactsVC;
 @property AccSecurityVC* securityVC;
 @property AbstractLoadingWC* accountModal;
 @property RingWizardWC* wizard;
@@ -83,6 +86,7 @@
 @synthesize treeController;
 @synthesize accountModal;
 @synthesize wizard;
+@synthesize bannedListTabItem;
 
 NSInteger const TAG_CHECK       =   100;
 NSInteger const TAG_NAME        =   200;
@@ -166,6 +170,11 @@ NSInteger const TAG_TYPE        =   400;
     [[self.devicesVC view] setFrame:[self.ringDevicesTabItem.view frame]];
     [[self.devicesVC view] setBounds:[self.ringDevicesTabItem.view bounds]];
     [self.ringDevicesTabItem setView:self.devicesVC.view];
+
+    self.bannedContactsVC = [[AccBannedContactsVC alloc] initWithNibName:@"AccBannedContacts" bundle:nil];
+    [[self.bannedContactsVC view] setFrame:[self.bannedListTabItem.view frame]];
+    [[self.bannedContactsVC view] setBounds:[self.bannedListTabItem.view bounds]];
+    [self.bannedListTabItem setView:self.bannedContactsVC.view];
 }
 
 - (void) setupSIPPanels
@@ -191,6 +200,7 @@ NSInteger const TAG_TYPE        =   400;
     [configPanels insertTabViewItem:ringDevicesTabItem atIndex:1];
     [configPanels insertTabViewItem:mediaTabItem atIndex:2];
     [configPanels insertTabViewItem:advancedTabItem atIndex:3];
+    [configPanels insertTabViewItem:bannedListTabItem atIndex:4];
 }
 
 - (IBAction)toggleAccount:(NSButton*)sender {
