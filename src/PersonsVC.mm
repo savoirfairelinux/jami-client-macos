@@ -183,6 +183,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
         [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
 
         [((ContextualTableCellView*) result) setContextualsControls:[NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]]];
+         [((ContextualTableCellView*) result) setShouldBlurParentView:NO];
 
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
         if (p && p->phoneNumbers().size() > 0)
