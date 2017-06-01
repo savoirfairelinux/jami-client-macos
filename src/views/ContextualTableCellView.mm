@@ -19,6 +19,10 @@
 
 #import "ContextualTableCellView.h"
 
+@interface NSView (extension)
+@property NSVisualEffectView* vibrantView;
+@end;
+
 @interface ContextualTableCellView()
 
 @property NSTrackingArea *trackingArea;
@@ -49,6 +53,8 @@
 {
     for (NSView* item in self.contextualsControls) {
         [item setHidden:YES];
+        if(self.shouldBlurParentView && [item respondsToSelector:@selector(vibrantView)] && item.vibrantView)
+            [item.vibrantView setHidden:YES];
     }
 }
 
@@ -59,6 +65,30 @@
 
     for (NSView* item in self.contextualsControls) {
         [item setHidden:NO];
+        if(!self.shouldBlurParentView)
+        {
+            break;
+        }
+        if([item respondsToSelector:@selector(vibrantView)] && !item.vibrantView) {
+            NSRect frame = CGRectMake(item.frame.origin.x - 20 , item.frame.origin.y - 50, item.frame.size.width + 53, item.frame.size.height + 100);
+            NSVisualEffectView *vibrantView = [[NSVisualEffectView alloc]
+                                               initWithFrame:frame];
+            vibrantView.appearance = [NSAppearance
+                                      appearanceNamed:NSAppearanceNameVibrantLight];
+            vibrantView.material = NSVisualEffectMaterialAppearanceBased;
+            vibrantView.blendingMode = NSVisualEffectBlendingModeWithinWindow;
+            [vibrantView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+            vibrantView.alphaValue = 0.7;
+            if([item respondsToSelector:@selector(setVibrantView:)]) {
+                item.vibrantView = vibrantView;
+            }
+            [self addSubview: item.vibrantView];
+            [self addSubview:item];
+
+        }
+        if([item respondsToSelector:@selector(vibrantView)] && item.vibrantView) {
+            [item.vibrantView setHidden:NO];
+        }
     }
 }
 
@@ -66,6 +96,9 @@
 {
     for (NSView* item in self.contextualsControls) {
         [item setHidden:YES];
+        if(self.shouldBlurParentView && [item respondsToSelector:@selector(vibrantView)] && item.vibrantView) {
+            [item.vibrantView setHidden:YES];
+        }
     }
 }
 

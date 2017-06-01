@@ -237,6 +237,7 @@ NSInteger const PRESENCE_TAG        = 800;
 
         NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
         [((ContextualTableCellView*) result) setContextualsControls:controls];
+        [((ContextualTableCellView*) result) setShouldBlurParentView:YES];
 
         if (auto call = RecentModel::instance().getActiveCall(qIdx)) {
             [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
@@ -249,13 +250,13 @@ NSInteger const PRESENCE_TAG        = 800;
         NSTextField* unreadCount = [result viewWithTag:TXT_BUTTON_TAG];
         int unread = qIdx.data((int)Ring::Role::UnreadTextMessageCount).toInt();
         [unreadCount setHidden:(unread == 0)];
-        [unreadCount.layer setCornerRadius:5.0f];
         [unreadCount setStringValue:qIdx.data((int)Ring::Role::UnreadTextMessageCount).toString().toNSString()];
 
     } else {
         result = [outlineView makeViewWithIdentifier:@"CallCell" owner:outlineView];
         NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CANCEL_BUTTON_TAG]];
         [((ContextualTableCellView*) result) setContextualsControls:controls];
+        [((ContextualTableCellView*) result) setShouldBlurParentView:YES];
         [((ContextualTableCellView*) result) setActiveState:NO];
         NSTextField* details = [result viewWithTag:DETAILS_TAG];
 

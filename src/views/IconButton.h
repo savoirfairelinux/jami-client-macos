@@ -56,5 +56,11 @@
  */
 @property CGFloat imageInsets;
 
+/*
+ * Add bluer effect behind button
+ */
+
+@property NSVisualEffectView* vibrantView;
+
 
 @end

@@ -30,5 +30,9 @@
  * BOOL specifying if controls should be presented when mouse is hover
  */
 @property (nonatomic) BOOL activeState;
+/**
+ * BOOL specifying if background behind controls should be blured
+ */
+@property (nonatomic) BOOL shouldBlurParentView;
 
 @end
