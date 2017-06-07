@@ -29,13 +29,23 @@
 - (void) setup
 {
     if ([self.identifier isEqualToString:@"RightMessageView"]) {
-        [self.msgView setBackgroundColor:[NSColor ringBlue]];
+        self.msgBackground.pointerDirection = RIGHT;
+        self.msgBackground.bgColor = [NSColor ringBlue];
+
     }
+    else {
+        self.msgBackground.pointerDirection = LEFT;
+        self.msgBackground.bgColor = [NSColor whiteColor];
+    }
+    [self.msgView setBackgroundColor:[NSColor clearColor]];
     [self.msgView setString:@""];
     [self.msgView setAutoresizingMask:NSViewWidthSizable];
+     [self.msgView setAutoresizingMask:NSViewHeightSizable];
+    [self.msgBackground setAutoresizingMask:NSViewWidthSizable];
+    [self.msgBackground setAutoresizingMask:NSViewHeightSizable];
     [self.msgView setEnabledTextCheckingTypes:NSTextCheckingTypeLink];
     [self.msgView setAutomaticLinkDetectionEnabled:YES];
-}
+   }
 
 - (void) updateWidthConstraint:(CGFloat) newWidth
 {
