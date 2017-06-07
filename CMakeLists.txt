@@ -168,6 +168,8 @@ SET(ringclient_CONTROLLERS
    src/SendContactRequestWC.mm
    src/AccBannedContactsVC.h
    src/AccBannedContactsVC.mm
+   src/MessagesVC.h
+   src/MessagesVC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -202,7 +204,10 @@ SET(ringclient_VIEWS
    src/views/ContactRequestCellView.h
    src/views/ContactRequestCellView.mm
    src/views/RoundedTextField.h
-   src/views/RoundedTextField.mm)
+   src/views/RoundedTextField.mm
+   src/views/MessageBubbleView.h
+   src/views/MessageBubbleView.mm
+)
 
 SET(ringclient_OTHERS
    src/main.mm

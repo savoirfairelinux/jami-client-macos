@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,15 +18,16 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "MessageBubbleView.h"
 
-@interface IMTableCellView : NSTableCellView
+@protocol MessagesVCDelegate
 
-@property (nonatomic, strong) IBOutlet NSImageView* photoView;
-@property (nonatomic, strong) IBOutlet NSTextView* msgView;
-@property (nonatomic, strong) IBOutlet MessageBubbleView* msgBackground;
+-(void)newMessageAdded;
 
-- (void) setup;
-- (void) updateWidthConstraint:(CGFloat) newWidth;
+@end
+
+@interface MessagesVC : NSViewController
+
+-(void)setUpViewWithModel: (QAbstractItemModel*) model;
+@property (retain, nonatomic) id <MessagesVCDelegate> delegate;
 
 @end
