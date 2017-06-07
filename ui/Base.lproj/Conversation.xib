@@ -10,9 +10,9 @@
             <connections>
                 <outlet property="contactMethodsPopupButton" destination="xdB-aI-PSs" id="BZW-FI-WpH"/>
                 <outlet property="conversationTitle" destination="ucx-6g-eJw" id="40T-pM-nix"/>
-                <outlet property="conversationView" destination="bOO-CW-S21" id="NkS-gm-3Qn"/>
                 <outlet property="emptyConversationPlaceHolder" destination="Uqj-Xr-xl5" id="N1g-ao-lda"/>
                 <outlet property="messageField" destination="bsk-Gj-qQ2" id="JYN-bF-ttw"/>
+                <outlet property="messagesViewVC" destination="iH6-17-JsM" id="uxH-Ra-lSr"/>
                 <outlet property="sendButton" destination="UJf-cF-RAo" id="8PF-7G-w1d"/>
                 <outlet property="sendPanel" destination="Rth-di-Tls" id="vCd-kM-DLc"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -58,26 +58,37 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="Uy5-qA-IO7">
-                                                                <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="15" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="Fyz-zn-84R"/>
                                                                     <constraint firstAttribute="width" constant="40" id="Ybg-RM-bK9"/>
                                                                 </constraints>
                                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ro7-HT-yYC"/>
                                                             </imageView>
-                                                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-up-big" customClass="NSTextView">
-                                                                <rect key="frame" x="58" y="10" width="636" height="40"/>
+                                                            <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VYf-4a-zyd" customClass="MessageBubbleView">
+                                                                <rect key="frame" x="55" y="10" width="605" height="40"/>
+                                                                <subviews>
+                                                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70Z-up-big" customClass="NSTextView">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="605" height="40"/>
+                                                                    </customView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="70Z-up-big" secondAttribute="trailing" id="EsS-Iy-hGM"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="70Z-up-big" secondAttribute="bottom" id="IYL-SU-tEA"/>
+                                                                    <constraint firstItem="70Z-up-big" firstAttribute="top" secondItem="VYf-4a-zyd" secondAttribute="top" id="jqQ-81-SYd"/>
+                                                                    <constraint firstItem="70Z-up-big" firstAttribute="leading" secondItem="VYf-4a-zyd" secondAttribute="leading" id="pr1-76-hIi"/>
+                                                                </constraints>
                                                             </customView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="Uy5-qA-IO7" firstAttribute="leading" secondItem="tMT-xX-A4E" secondAttribute="leading" constant="10" id="45F-kb-ZCT"/>
-                                                            <constraint firstItem="Uy5-qA-IO7" firstAttribute="centerY" secondItem="tMT-xX-A4E" secondAttribute="centerY" id="H6d-ui-21t"/>
-                                                            <constraint firstAttribute="bottom" secondItem="70Z-up-big" secondAttribute="bottom" constant="10" id="IJh-C3-fXl"/>
-                                                            <constraint firstItem="70Z-up-big" firstAttribute="leading" secondItem="Uy5-qA-IO7" secondAttribute="trailing" constant="8" id="J6J-GD-CIV"/>
-                                                            <constraint firstItem="70Z-up-big" firstAttribute="top" secondItem="tMT-xX-A4E" secondAttribute="top" constant="10" id="ds8-em-4VS"/>
-                                                            <constraint firstItem="Uy5-qA-IO7" firstAttribute="leading" secondItem="tMT-xX-A4E" secondAttribute="leading" constant="10" id="l2G-DP-d9s"/>
+                                                            <constraint firstItem="Uy5-qA-IO7" firstAttribute="leading" secondItem="tMT-xX-A4E" secondAttribute="leading" id="45F-kb-ZCT"/>
+                                                            <constraint firstAttribute="bottom" secondItem="VYf-4a-zyd" secondAttribute="bottom" constant="5" id="4Jz-IX-8s6"/>
+                                                            <constraint firstItem="VYf-4a-zyd" firstAttribute="top" secondItem="tMT-xX-A4E" secondAttribute="top" constant="5" id="HMF-Dk-IeK"/>
+                                                            <constraint firstItem="VYf-4a-zyd" firstAttribute="leading" secondItem="Uy5-qA-IO7" secondAttribute="trailing" constant="2" id="PlF-GX-T6E"/>
+                                                            <constraint firstItem="Uy5-qA-IO7" firstAttribute="top" secondItem="tMT-xX-A4E" secondAttribute="top" constant="5" id="ufU-t0-cbx"/>
                                                         </constraints>
                                                         <connections>
+                                                            <outlet property="msgBackground" destination="VYf-4a-zyd" id="ocX-FS-gSN"/>
                                                             <outlet property="msgView" destination="70Z-up-big" id="4DD-c6-QQX"/>
                                                             <outlet property="photoView" destination="Uy5-qA-IO7" id="jaJ-4h-2Qs"/>
                                                         </connections>
@@ -87,25 +98,37 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="HA2-42-bNS">
-                                                                <rect key="frame" x="647" y="10" width="40" height="40"/>
+                                                                <rect key="frame" x="657" y="15" width="40" height="40"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="40" id="659-GG-n6s"/>
                                                                     <constraint firstAttribute="height" constant="40" id="Wco-GQ-lKP"/>
                                                                 </constraints>
                                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="FYc-av-dNW"/>
                                                             </imageView>
-                                                            <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gob-L5-RgR" customClass="NSTextView">
-                                                                <rect key="frame" x="3" y="10" width="636" height="40"/>
+                                                            <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfu-lT-vTc" customClass="MessageBubbleView">
+                                                                <rect key="frame" x="5" y="10" width="637" height="40"/>
+                                                                <subviews>
+                                                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gob-L5-RgR" customClass="NSTextView">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="637" height="40"/>
+                                                                    </customView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="gob-L5-RgR" secondAttribute="bottom" id="3w5-QY-yhR"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="gob-L5-RgR" secondAttribute="trailing" id="IB6-Za-sb1"/>
+                                                                    <constraint firstItem="gob-L5-RgR" firstAttribute="leading" secondItem="Sfu-lT-vTc" secondAttribute="leading" id="htJ-gy-wR1"/>
+                                                                    <constraint firstItem="gob-L5-RgR" firstAttribute="top" secondItem="Sfu-lT-vTc" secondAttribute="top" id="slK-P7-XoB"/>
+                                                                </constraints>
                                                             </customView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="gob-L5-RgR" firstAttribute="top" secondItem="Kuf-56-7Og" secondAttribute="top" constant="10" id="ELt-yl-4mV"/>
-                                                            <constraint firstItem="HA2-42-bNS" firstAttribute="leading" secondItem="gob-L5-RgR" secondAttribute="trailing" constant="8" id="IBi-A9-Ae5"/>
-                                                            <constraint firstAttribute="bottom" secondItem="gob-L5-RgR" secondAttribute="bottom" constant="10" id="PVF-rt-2Zk"/>
-                                                            <constraint firstItem="HA2-42-bNS" firstAttribute="top" secondItem="Kuf-56-7Og" secondAttribute="top" constant="10" id="pOA-ZJ-lX1"/>
-                                                            <constraint firstAttribute="trailing" secondItem="HA2-42-bNS" secondAttribute="trailing" constant="10" id="tev-NB-s0E"/>
+                                                            <constraint firstItem="HA2-42-bNS" firstAttribute="leading" secondItem="Sfu-lT-vTc" secondAttribute="trailing" constant="2" id="Cdl-wc-CyM"/>
+                                                            <constraint firstItem="HA2-42-bNS" firstAttribute="top" secondItem="Kuf-56-7Og" secondAttribute="top" constant="5" id="pOA-ZJ-lX1"/>
+                                                            <constraint firstItem="Sfu-lT-vTc" firstAttribute="top" secondItem="Kuf-56-7Og" secondAttribute="top" constant="5" id="qxj-49-fiY"/>
+                                                            <constraint firstAttribute="trailing" secondItem="HA2-42-bNS" secondAttribute="trailing" id="tev-NB-s0E"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Sfu-lT-vTc" secondAttribute="bottom" constant="5" id="yPW-zU-W4e"/>
                                                         </constraints>
                                                         <connections>
+                                                            <outlet property="msgBackground" destination="Sfu-lT-vTc" id="7bK-eM-vle"/>
                                                             <outlet property="msgView" destination="gob-L5-RgR" id="jaX-qj-YQA"/>
                                                             <outlet property="photoView" destination="HA2-42-bNS" id="sCn-k7-x60"/>
                                                         </connections>
@@ -114,7 +137,7 @@
                                             </tableColumn>
                                         </tableColumns>
                                         <connections>
-                                            <outlet property="delegate" destination="-2" id="mTL-3o-p2O"/>
+                                            <outlet property="delegate" destination="iH6-17-JsM" id="Zgx-7J-egB"/>
                                         </connections>
                                     </outlineView>
                                 </subviews>
@@ -305,6 +328,11 @@ Gw
             <point key="canvasLocation" x="514" y="354"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="Zjc-KB-CJZ"/>
+        <viewController id="iH6-17-JsM" customClass="MessagesVC">
+            <connections>
+                <outlet property="conversationView" destination="bOO-CW-S21" id="Vzg-3J-K2b"/>
+            </connections>
+        </viewController>
     </objects>
     <resources>
         <image name="ic_action_send" width="72" height="72"/>

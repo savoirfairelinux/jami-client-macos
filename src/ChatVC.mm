@@ -27,6 +27,8 @@
 #import <media/textrecording.h>
 #import <callmodel.h>
 
+#import "MessagesVC.h"
+
 @interface MediaConnectionsHolder : NSObject
 
 @property QMetaObject::Connection newMediaAdded;
@@ -36,20 +38,26 @@
 
 @implementation MediaConnectionsHolder
 
+
 @end
 
-@interface ChatVC ()
+@interface ChatVC () <MessagesVCDelegate>
+{
+ IBOutlet MessagesVC* messagesViewVC;
+}
 
-@property (unsafe_unretained) IBOutlet NSTextView *chatView;
 @property (unsafe_unretained) IBOutlet NSTextField *messageField;
 @property (unsafe_unretained) IBOutlet NSButton *sendButton;
+
 
 @property MediaConnectionsHolder* mediaHolder;
 
 @end
 
 @implementation ChatVC
-@synthesize messageField,chatView,sendButton, mediaHolder;
+
+
+@synthesize messageField,sendButton, mediaHolder;
 
 - (void)awakeFromNib
 {
@@ -57,7 +65,7 @@
 
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor blackColor].CGColor];
+    [self.view.layer setBackgroundColor:[NSColor controlColor].CGColor];
 
     mediaHolder = [[MediaConnectionsHolder alloc] init];
 
@@ -66,11 +74,7 @@
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          [self setupChat];
                      });
-
-    // Override default style to add interline space
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle  alloc] init];
-    paragraphStyle.lineSpacing = 8;
-    [chatView setDefaultParagraphStyle:paragraphStyle];
+    messagesViewVC.delegate = self;
 }
 
 
@@ -101,58 +105,34 @@
                                                          if (media->type() == Media::Media::Type::TEXT) {
                                                              QObject::disconnect(mediaHolder.newMediaAdded);
                                                              [self parseChatModel:((Media::Text*)media)->recording()->instantMessagingModel()];
-
                                                          }
                                                      });
     }
 }
 
-- (void) parseChatModel:(QAbstractItemModel *)model
-{
-    QObject::disconnect(mediaHolder.newMessage);
-    [self.messageField setStringValue:@""];
-    self.message = @"";
-    [self.chatView.textStorage.mutableString setString:@""];
+#pragma mark - MessagesVC delegate
 
-    /* put all the messages in the im model into the text view */
-    for (int row = 0; row < model->rowCount(); ++row) {
-        [self appendNewMessage:model->index(row, 0)];
+-(void) newMessageAdded {
+
+    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
+    if (!callIdx.isValid())
+        return;
+    Call* call = CallModel::instance().getCall(callIdx);
+    if (call->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
+        Media::Text *text = call->firstMedia<Media::Text>(Media::Media::Direction::IN);
+        auto textRecording = text->recording();
+        textRecording->setAllRead();
+    } else if (call->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::OUT)) {
+        Media::Text *text = call->firstMedia<Media::Text>(Media::Media::Direction::OUT);
+        auto textRecording = text->recording();
+        textRecording->setAllRead();
     }
-
-    /* append new messages */
-    mediaHolder.newMessage = QObject::connect(model,
-                                              &QAbstractItemModel::rowsInserted,
-                                              [self, model] (const QModelIndex &parent, int first, int last) {
-                                                  for (int row = first; row <= last; ++row) {
-                                                      [self appendNewMessage:model->index(row, 0, parent)];
-                                                  }
-                                              });
 }
 
-- (void) appendNewMessage:(const QModelIndex&) msgIdx
+- (void) parseChatModel:(QAbstractItemModel *)model
+
 {
-    if (!msgIdx.isValid())
-        return;
-
-    NSString* message = msgIdx.data(Qt::DisplayRole).value<QString>().toNSString();
-    NSString* author = msgIdx.data((int)Media::TextRecording::Role::AuthorDisplayname).value<QString>().toNSString();
-
-    NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:
-                                [NSString stringWithFormat:@"%@: %@\n",author, message]];
-
-    // put in bold type author name
-    [attr applyFontTraits:NSBoldFontMask range: NSMakeRange(0, [author length])];
-
-    [[chatView textStorage] appendAttributedString:attr];
-
-    // reapply paragraph style on all the text
-    NSRange range = NSMakeRange(0,[chatView textStorage].length);
-    [[self.chatView textStorage] addAttribute:NSParagraphStyleAttributeName
-                                        value:chatView.defaultParagraphStyle
-                                        range:range];
-
-    [chatView scrollRangeToVisible:NSMakeRange([[chatView string] length], 0)];
-
+    [messagesViewVC setUpViewWithModel:model];
 }
 
 - (void) takeFocus
