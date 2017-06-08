@@ -48,6 +48,7 @@
 #import "ChatVC.h"
 #import "BrokerVC.h"
 #import "views/IconButton.h"
+#import "views/CallLayer.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -255,11 +256,6 @@
     actionHash[ (int)UserActionModel::Action::MUTE_AUDIO] = muteAudioButton;
     actionHash[ (int)UserActionModel::Action::MUTE_VIDEO] = muteVideoButton;
 
-    [videoView setWantsLayer:YES];
-    [videoView.layer setBackgroundColor:[NSColor blackColor].CGColor];
-    [videoView.layer setFrame:videoView.frame];
-    [videoView.layer setContentsGravity:kCAGravityResizeAspect];
-
     [previewView setWantsLayer:YES];
     [previewView.layer setBackgroundColor:[NSColor blackColor].CGColor];
     [previewView.layer setContentsGravity:kCAGravityResizeAspectFill];
@@ -392,7 +388,7 @@
                                                                        &Video::Renderer::frameUpdated,
                                                                        [=]() {
                                                                            [self renderer:Video::PreviewManager::instance().previewRenderer()
-                                                                       renderFrameForView:previewView];
+                                                                       renderFrameForPreviewView:previewView];
                                                                        });
                      });
 
@@ -407,7 +403,7 @@
                                                  &Video::Renderer::frameUpdated,
                                                  [=]() {
                                                      [self renderer:Video::PreviewManager::instance().previewRenderer()
-                                                            renderFrameForView:previewView];
+                                                            renderFrameForPreviewView:previewView];
                                                  });
 }
 
@@ -419,7 +415,7 @@
     videoHolder.frameUpdated = QObject::connect(renderer,
                      &Video::Renderer::frameUpdated,
                      [=]() {
-                         [self renderer:renderer renderFrameForView:videoView];
+                         [self renderer:renderer renderFrameForDistantView:videoView];
                      });
 
     videoHolder.started = QObject::connect(renderer,
@@ -429,7 +425,7 @@
                          videoHolder.frameUpdated = QObject::connect(renderer,
                                                                      &Video::Renderer::frameUpdated,
                                                                      [=]() {
-                                                                         [self renderer:renderer renderFrameForView:videoView];
+                                                                         [self renderer:renderer renderFrameForDistantView:videoView];
                                                                      });
                      });
 
@@ -437,11 +433,11 @@
                      &Video::Renderer::stopped,
                      [=]() {
                          QObject::disconnect(videoHolder.frameUpdated);
-                        [videoView.layer setContents:nil];
+                         [(CallLayer*)videoView.layer setVideoRunning:NO];
                      });
 }
 
--(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
+-(void) renderer: (Video::Renderer*)renderer renderFrameForPreviewView:(NSView*) view
 {
     QSize res = renderer->size();
 
@@ -449,7 +445,6 @@
     auto frame_data = frame_ptr.ptr;
     if (!frame_data)
         return;
-
 
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef newContext = CGBitmapContextCreate(frame_data,
@@ -472,6 +467,20 @@
     [CATransaction commit];
 
     CFRelease(newImage);
+}
+
+-(void) renderer: (Video::Renderer*)renderer renderFrameForDistantView:(CallView*) view
+{
+    QSize res = renderer->size();
+
+    auto frame_ptr = renderer->currentFrame();
+    if (!frame_ptr.ptr)
+        return;
+
+    CallLayer* callLayer = (CallLayer*) view.layer;
+
+    [callLayer setCurrentFrame:std::move(frame_ptr) ofSize:res];
+    [callLayer setVideoRunning:YES];
 }
 
 - (void) initFrame
@@ -538,7 +547,6 @@
     QObject::disconnect(previewHolder.frameUpdated);
     QObject::disconnect(previewHolder.stopped);
     QObject::disconnect(previewHolder.started);
-    [videoView.layer setContents:nil];
     [previewView.layer setContents:nil];
 
     [_brokerPopoverVC performClose:self];
