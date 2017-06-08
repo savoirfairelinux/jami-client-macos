@@ -18,6 +18,7 @@
  */
 
 #import "CallView.h"
+#import "CallLayer.h"
 
 #import <QItemSelectionModel>
 #import <QAbstractProxyModel>
@@ -49,6 +50,7 @@
     if (self)
     {
         [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+        [self setWantsLayer:YES];
     }
 
     [self.window setAcceptsMouseMovedEvents:YES];
@@ -62,6 +64,11 @@
 
     [self addTrackingArea:area];
     return self;
+}
+
+- (CALayer *)makeBackingLayer
+{
+    return (CALayer*) [[CallLayer alloc] init];
 }
 
 
