@@ -24,6 +24,7 @@ FIND_PACKAGE(Qt5Core REQUIRED)
 FIND_PACKAGE(Qt5MacExtras REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(LibRingClient REQUIRED)
+FIND_PACKAGE(OpenGL REQUIRED)
 
 EXECUTE_PROCESS(COMMAND git submodule update --init
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
@@ -79,6 +80,7 @@ INCLUDE_DIRECTORIES(SYSTEM ${Qt5MacExtras_INCLUDE_DIRS})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES(${LIB_RING_CLIENT_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
 
 SET(CMAKE_MACOSX_RPATH ON)
 SET(CMAKE_SKIP_BUILD_RPATH FALSE)
@@ -177,6 +179,8 @@ SET(ringclient_BACKENDS
 SET(ringclient_VIEWS
    src/views/CallView.mm
    src/views/CallView.h
+   src/views/CallLayer.mm
+   src/views/CallLayer.h
    src/views/ITProgressIndicator.mm
    src/views/ITProgressIndicator.h
    src/views/RingOutlineView.mm
@@ -415,6 +419,7 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    ${Qt5Core_LIBRARIES}
    ${Qt5MacExtras_LIBRARIES}
    ${Qt5Widgets_LIBRARIES}
+   ${OPENGL_LIBRARIES}
    -lqrencode
 )
 
