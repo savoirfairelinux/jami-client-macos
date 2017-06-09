@@ -326,7 +326,10 @@ NSInteger const PRESENCE_TAG        = 800;
 
 - (void) startCallFromURI:(const URI&) uri
 {
-    auto cm = PhoneDirectoryModel::instance().getNumber(uri);
+    auto cm = PhoneDirectoryModel::instance().getNumber(uri, [self chosenAccount]);
+    if(!cm->account() && [self chosenAccount]) {
+        cm->setAccount([self chosenAccount]);
+    }
     auto c = CallModel::instance().dialingCall();
     c->setPeerContactMethod(cm);
     c << Call::Action::ACCEPT;
@@ -335,7 +338,10 @@ NSInteger const PRESENCE_TAG        = 800;
 
 - (void) startConversationFromURI:(const URI&) uri
 {
-    auto cm = PhoneDirectoryModel::instance().getNumber(uri);
+    auto cm = PhoneDirectoryModel::instance().getNumber(uri, [self chosenAccount]);
+    if(!cm->account() && [self chosenAccount]) {
+        cm->setAccount([self chosenAccount]);
+    }
     time_t currentTime;
     ::time(&currentTime);
     cm->setLastUsed(currentTime);
@@ -356,33 +362,16 @@ NSInteger const PRESENCE_TAG        = 800;
 
 - (void) processSearchFieldInputAndStartCall:(BOOL) shouldCall
 {
-    auto ringAccountList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::RING);
-    auto sipAccountList = AccountModel::instance().getAccountsByProtocol(Account::Protocol::SIP);
-    BOOL hasValidRingAccount = NO;
-    BOOL hasValidSIPAccount = NO;
-
     NSString* noValidAccountTitle = NSLocalizedString(@"No valid account available",
                                                       @"Alert dialog title");
     NSString* noValidAccountMessage = NSLocalizedString(@"Make sure you have at least one valid account",
                                                         @"Alert dialo message");
 
-    Q_FOREACH(auto account, ringAccountList) {
-        if (account->isEnabled() && account->registrationState() == Account::RegistrationState::READY) {
-            hasValidRingAccount = YES;
-        }
-    }
-
-    Q_FOREACH(auto account, sipAccountList) {
-        if (account->isEnabled() && account->registrationState() == Account::RegistrationState::READY) {
-            hasValidSIPAccount = YES;
-        }
-    }
-
     const auto* numberEntered = [searchField stringValue];
     URI uri = URI(numberEntered.UTF8String);
     [self clearSearchField];
 
-    if (hasValidRingAccount) {
+    if ([self chosenAccount] && [self chosenAccount]->protocol() == Account::Protocol::RING) {
         if (uri.protocolHint() == URI::ProtocolHint::RING) {
             // If it is a RingID start the conversation or the call
             if (shouldCall) {
@@ -391,18 +380,16 @@ NSInteger const PRESENCE_TAG        = 800;
                 [self startConversationFromURI:uri];
             }
         } else {
-            // If it's not a ringID and the user has a valid Ring account do a search on the blockchain
-            // If the user wants to make SIP calls, he can unregister his ring account
+            // If it's not a ringID and the user choosen account is a Ring account do a search on the blockchain
             QString usernameToLookup = uri.userinfo();
             QObject::disconnect(usernameLookupConnection);
             usernameLookupConnection = QObject::connect(&NameDirectory::instance(),
                                                         &NameDirectory::registeredNameFound,
-                                                        [self, usernameToLookup, hasValidSIPAccount, shouldCall] (const Account* account, NameDirectory::LookupStatus status, const QString& address, const QString& name) {
+                                                        [self,usernameToLookup,shouldCall] (const Account* account, NameDirectory::LookupStatus status, const QString& address, const QString& name) {
                                                             if (usernameToLookup.compare(name) != 0) {
                                                                 //That is not our lookup.
                                                                 return;
                                                             }
-
                                                             switch(status) {
                                                                 case NameDirectory::LookupStatus::SUCCESS: {
                                                                     URI uri = URI("ring:" + address);
@@ -416,28 +403,18 @@ NSInteger const PRESENCE_TAG        = 800;
                                                                 case NameDirectory::LookupStatus::INVALID_NAME:
                                                                 case NameDirectory::LookupStatus::ERROR:
                                                                 case NameDirectory::LookupStatus::NOT_FOUND: {
-                                                                    // The lookup on the blockchain has failed for this user
-                                                                    // Check if the user has a valid sip account to use instead
-                                                                    if (hasValidSIPAccount) {
-                                                                        if (shouldCall) {
-                                                                            [self startCallFromURI:usernameToLookup];
-                                                                        } else {
-                                                                            [self startConversationFromURI:usernameToLookup];
-                                                                        }
-                                                                    } else {
-                                                                        [self displayErrorModalWithTitle:NSLocalizedString(@"Entered name not found",
-                                                                                                                           @"Alert dialog title")
-                                                                                             WithMessage:NSLocalizedString(@"The username you entered do not match a RingID on the network",
-                                                                                                                           @"Alert dialog title")];
-                                                                    }
-                                                                    break;
+                                                                    [self displayErrorModalWithTitle:NSLocalizedString(@"Entered name not found",
+                                                                                                                       @"Alert dialog title")
+                                                                                         WithMessage:NSLocalizedString(@"The username you entered do not match a RingID on the network",
+                                                                                                                       @"Alert dialog title")];
                                                                 }
+                                                                    break;
                                                             }
                                                         });
 
-            NameDirectory::instance().lookupName(nullptr, QString(), usernameToLookup);
+            NameDirectory::instance().lookupName([self chosenAccount], QString(), usernameToLookup);
         }
-    } else if (hasValidSIPAccount) {
+    } else if ([self chosenAccount] && [self chosenAccount]->protocol() == Account::Protocol::SIP) {
         if (uri.protocolHint() == URI::ProtocolHint::RING) {
             // If it is a RingID and no valid account is available, present error
             [self displayErrorModalWithTitle:noValidAccountTitle
@@ -453,6 +430,15 @@ NSInteger const PRESENCE_TAG        = 800;
         [self displayErrorModalWithTitle:noValidAccountTitle
                              WithMessage:noValidAccountMessage];
     }
+}
+
+-(Account* ) chosenAccount
+{
+    auto idx = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    if (idx.isValid()) {
+        return idx.data(static_cast<int>(Ring::Role::Object)).value<Account*>();
+    }
+    return nullptr;
 }
 
 - (void) clearSearchField
