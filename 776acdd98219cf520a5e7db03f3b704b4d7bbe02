@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1aa4ed85_23878a11",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-06-12T15:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_432c064b",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 39
+      },
+      "revId": "776acdd98219cf520a5e7db03f3b704b4d7bbe02",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_a3fffaa9",
         "filename": "src/views/IMTableCellView.h",
         "patchSetId": 4
@@ -36,6 +60,24 @@
       "writtenOn": "2017-06-12T14:41:27Z",
       "side": 1,
       "message": "Unneeded line feed",
+      "revId": "776acdd98219cf520a5e7db03f3b704b4d7bbe02",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_03ab6e8a",
+        "filename": "src/views/IMTableCellView.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-06-12T15:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_a3fffaa9",
       "revId": "776acdd98219cf520a5e7db03f3b704b4d7bbe02",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
