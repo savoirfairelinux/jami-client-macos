@@ -36,6 +36,7 @@
 @property (assign) IBOutlet NSPopUpButton* videoDevicesList;
 @property (assign) IBOutlet NSPopUpButton* sizesList;
 @property (assign) IBOutlet NSPopUpButton* ratesList;
+@property (assign) IBOutlet NSButton *enableHardwareAccelerationButton;
 
 @property BOOL shouldHandlePreview;
 
@@ -111,6 +112,9 @@ QMetaObject::Connection previewStopped;
     [previewView.layer setContentsGravity:kCAGravityResizeAspect];
     [previewView.layer setFrame:previewView.frame];
     [previewView.layer setBounds:previewView.frame];
+
+    [self.enableHardwareAccelerationButton setState:Video::ConfigurationProxy::getDecodingAccelerated()];
+
 }
 
 - (IBAction)chooseDevice:(id)sender {
@@ -129,6 +133,11 @@ QMetaObject::Connection previewStopped;
     int index = [sender indexOfSelectedItem];
     QModelIndex qIdx = Video::ConfigurationProxy::rateModel().index(index, 0);
     Video::ConfigurationProxy::rateSelectionModel().setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+}
+
+- (IBAction)toggleHardwareAcceleration:(NSButton *)sender {
+    bool enabled = [sender state]==NSOnState;
+    Video::ConfigurationProxy::setDecodingAccelerated(enabled);
 }
 
 - (void) connectPreviewSignals
