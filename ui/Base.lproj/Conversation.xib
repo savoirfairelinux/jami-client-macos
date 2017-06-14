@@ -15,6 +15,8 @@
                 <outlet property="messagesViewVC" destination="iH6-17-JsM" id="uxH-Ra-lSr"/>
                 <outlet property="sendButton" destination="UJf-cF-RAo" id="8PF-7G-w1d"/>
                 <outlet property="sendPanel" destination="Rth-di-Tls" id="vCd-kM-DLc"/>
+                <outlet property="sentContactRequestButton" destination="isI-We-3h9" id="Kal-Wn-gWo"/>
+                <outlet property="sentContactRequestWidth" destination="J5j-bs-Mgk" id="EQx-Gj-4vx"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -291,6 +293,9 @@
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="isI-We-3h9">
                     <rect key="frame" x="711" y="537" width="73" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="250" id="J5j-bs-Mgk"/>
+                    </constraints>
                     <buttonCell key="cell" type="push" title="Invite" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9su-fU-MPG">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
