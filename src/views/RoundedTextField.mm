@@ -43,8 +43,17 @@
     NSColor* backgroundColor = self.bgColor;
     NSColor* borderColor = self.borderColor;
 
-    NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect: dirtyRect xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
+    NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5,
+                              NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 0.5,
+                              floor(NSWidth(dirtyRect) * 0.96667) - floor(NSWidth(dirtyRect) * 0.03333),
+                              floor(NSHeight(dirtyRect) * 0.96667) - floor(NSHeight(dirtyRect) * 0.03333));
 
+    NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:
+                              NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5),
+                                         NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5),
+                                         floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5),
+                                         floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5))
+                                                             xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
     [backgroundColor setFill];
     [ovalPath fill];
     [borderColor setStroke];

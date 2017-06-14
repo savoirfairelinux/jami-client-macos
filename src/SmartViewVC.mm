@@ -272,7 +272,6 @@ NSInteger const PRESENCE_TAG        = 800;
     else {
         NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
         [displayName setStringValue:displayNameString];
-        displayIDString = [NSString stringWithFormat:@"%@%@%@",@"(", displayIDString, @")"];
         [displayRingID setStringValue:displayIDString];
     }
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
