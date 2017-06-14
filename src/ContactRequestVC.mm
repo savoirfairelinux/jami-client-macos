@@ -45,27 +45,22 @@ QMetaObject::Connection requestRemoved;
     QObject::connect(&AvailableAccountModel::instance(),
                      &QAbstractItemModel::rowsRemoved,
                      [self]{
-                         [self.view setHidden:AvailableAccountModel::instance().rowCount() == 0];
+                         [self hideIfNeeded];
                      });
 
     QObject::connect(&AvailableAccountModel::instance(),
                      &QAbstractItemModel::dataChanged,
                      [self]{
-                         [self.view setHidden:AvailableAccountModel::instance().rowCount() == 0];
+                         [self hideIfNeeded];
+
                      });
     QObject::connect(AvailableAccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [self](const QModelIndex& idx){
-                         Account* chosenAccount = [self chosenAccount];
-                         if(chosenAccount) {
-                             [self connectAccountContactRequests];
-                         }
+                         [self setupWithSelectedAccount];
                      });
-    Account* chosenAccount = [self chosenAccount];
     self.hideRequestNumberLabel = YES;
-    if(chosenAccount) {
-        [self connectAccountContactRequests];
-    }
+    [self setupWithSelectedAccount];
 }
 
 - (IBAction)displayTrustRequests:(NSView*)sender
@@ -82,7 +77,7 @@ QMetaObject::Connection requestRemoved;
 }
 
 - (void)popoverDidClose:(NSNotification *)notification {
-    // when popover is closed remove ContactRequestsListVC to let it be allocated
+    // when popover is closed remove ContactRequestsListVC to let it be deallocated
     [pendingContactRequestPopover setContentViewController:nil];
 }
 
@@ -95,22 +90,33 @@ QMetaObject::Connection requestRemoved;
 -(Account* ) chosenAccount
 {
     QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    if(!index.isValid()) {
+        return nullptr;
+    }
     Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
     return account;
 }
 
--(void) connectAccountContactRequests
+-(void) setupWithSelectedAccount
 {
     Account* chosenAccount = [self chosenAccount];
+    if(!chosenAccount) {
+        return;
+    }
+    [self.view setHidden:chosenAccount->protocol() != Account::Protocol::RING];
+    if(chosenAccount->protocol() != Account::Protocol::RING) {
+        return;
+    }
+
     self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
 
     QObject::disconnect(requestAdded);
     requestAdded = QObject::connect(chosenAccount->pendingContactRequestModel(),
-                                   &QAbstractItemModel::rowsInserted,
-                                   [=]() {
-                                       self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
-                                   }
-                                   );
+                                    &QAbstractItemModel::rowsInserted,
+                                    [=]() {
+                                        self.numberOfRequests = chosenAccount->pendingContactRequestModel()->rowCount();
+                                    }
+                                    );
     QObject::disconnect(requestRemoved);
     requestRemoved = QObject::connect(chosenAccount->pendingContactRequestModel(),
                                       &QAbstractItemModel::rowsRemoved,
@@ -119,6 +125,19 @@ QMetaObject::Connection requestRemoved;
                                       }
 
                                       );
+}
+
+-(void)hideIfNeeded
+{
+    if(AvailableAccountModel::instance().rowCount() == 0) {
+        [self.view setHidden:YES];
+        return;
+    }
+    Account* chosenAccount = [self chosenAccount];
+    if(!chosenAccount) {
+        return;
+    }
+    [self.view setHidden:chosenAccount->protocol() != Account::Protocol::RING];
 }
 
 @end

@@ -63,6 +63,8 @@
     __unsafe_unretained IBOutlet NSTextField* emptyConversationPlaceHolder;
     __unsafe_unretained IBOutlet IconButton* sendButton;
     __unsafe_unretained IBOutlet NSPopUpButton* contactMethodsPopupButton;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
+    __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
 }
 
@@ -86,6 +88,16 @@
 
 }
 
+-(Account* ) chosenAccount
+{
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    if(!index.isValid()) {
+        return nullptr;
+    }
+    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    return account;
+}
+
 - (void) initFrame
 {
     [self.view setFrame:self.view.superview.bounds];
@@ -98,6 +110,12 @@
     QObject::connect(RecentModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
+
+                         if([self chosenAccount]) {
+                             Boolean hideSendTrustRequestButton = [self chosenAccount]->protocol() != Account::Protocol::RING;
+                             [sentContactRequestButton setHidden:hideSendTrustRequestButton];
+                             sentContactRequestWidth.priority = hideSendTrustRequestButton ? 999: 250;
+                         }
 
                          contactMethods = RecentModel::instance().getContactMethods(current);
                          if (contactMethods.isEmpty()) {
