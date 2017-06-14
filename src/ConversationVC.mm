@@ -63,6 +63,8 @@
     __unsafe_unretained IBOutlet NSTextField* emptyConversationPlaceHolder;
     __unsafe_unretained IBOutlet IconButton* sendButton;
     __unsafe_unretained IBOutlet NSPopUpButton* contactMethodsPopupButton;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
+    __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
 }
 
@@ -84,6 +86,16 @@
 
     [self setupChat];
 
+}
+
+-(Account* ) chosenAccount
+{
+    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
+    if(!index.isValid()) {
+        return nullptr;
+    }
+    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    return account;
 }
 
 - (void) initFrame
@@ -195,7 +207,6 @@
     [CATransaction commit];
 }
 
-
 #pragma mark - NSTextFieldDelegate
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
@@ -213,6 +224,25 @@
     NSInteger index = [(NSPopUpButton *)sender indexOfSelectedItem];
 
     selectedContactMethod = contactMethods.at(index);
+
+    /*to send contact request we need to meet two condition:
+     1)contact method has RING protocol
+     2)accound is used to send request is also RING*/
+
+    Boolean hideSendTrustRequestButton = NO;
+    if(selectedContactMethod->protocolHint() != URI::ProtocolHint::RING) {
+        hideSendTrustRequestButton = YES;
+    }
+    else if(selectedContactMethod->account()) {
+       hideSendTrustRequestButton = selectedContactMethod->account()->protocol() != Account::Protocol::RING;
+    }
+    else if([self chosenAccount]) {
+        Boolean hideSendTrustRequestButton = [self chosenAccount]->protocol() != Account::Protocol::RING;
+    }
+
+    [sentContactRequestButton setHidden:hideSendTrustRequestButton];
+    sentContactRequestWidth.priority = hideSendTrustRequestButton ? 999: 250;
+
     [conversationTitle setStringValue:selectedContactMethod->primaryName().toNSString()];
     QObject::disconnect(contactMethodChanged);
     contactMethodChanged = QObject::connect(selectedContactMethod,
