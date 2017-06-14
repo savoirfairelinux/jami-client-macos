@@ -201,8 +201,6 @@ SET(ringclient_VIEWS
    src/views/IMTableCellView.mm
    src/views/AccountMenuItemView.h
    src/views/AccountMenuItemView.mm
-   src/views/ContactRequestCellView.h
-   src/views/ContactRequestCellView.mm
    src/views/RoundedTextField.h
    src/views/RoundedTextField.mm
    src/views/MessageBubbleView.h

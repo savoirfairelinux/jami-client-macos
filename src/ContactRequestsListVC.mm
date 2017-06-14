@@ -34,7 +34,6 @@
 #import "ContactRequestsListVC.h"
 #import "QNSTreeController.h"
 #import <interfaces/pixmapmanipulatori.h>
-#import "views/ContactRequestCellView.h"
 
 @interface ContactRequestsListVC ()
 
@@ -59,7 +58,6 @@ NSInteger const TAG_NAME        =   100;
 NSInteger const TAG_RINGID      =   200;
 NSInteger const TAG_PHOTO       =   300;
 
-NSString* defaultMsg = @"Hello, I would like invite you";
 
 
 - (void)awakeFromNib
@@ -130,22 +128,16 @@ NSString* defaultMsg = @"Hello, I would like invite you";
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    ContactRequestCellView* result;
-    result = [outlineView makeViewWithIdentifier:@"ContactRequestView" owner:self];
+    NSTableCellView* result = [outlineView makeViewWithIdentifier:@"ContactRequestView" owner:self];
 
     QModelIndex qIdx = [self.requestsTreeController toQIdx:((NSTreeNode*)item)];
     if(!qIdx.isValid()) {
         return result;
     }
 
-    [result setup];
     NSTextField* nameLabel = [result viewWithTag:TAG_NAME];
     NSTextField* ringIDLabel = [result viewWithTag:TAG_RINGID];
     NSImageView* photoView = [result viewWithTag:TAG_PHOTO];
-
-    NSString* localizedTitle = [NSString stringWithFormat:
-                                NSLocalizedString(@"Hi %@. Please add me to your contact list.", @"Default contact request msg"), [self nameForAccount:[self chosenAccount]]];
-    [result.msgView setString:localizedTitle];
 
     ContactRequest* contactRequest = qvariant_cast<ContactRequest*>(qIdx.data((int)Ring::Role::Object));
     Person* person = contactRequest->peer();
@@ -178,17 +170,6 @@ NSString* defaultMsg = @"Hello, I would like invite you";
 {
     QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
     return index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
-}
-
--(NSString*) nameForAccount:(Account*) account {
-    auto name = account->registeredName();
-    NSString* userNameString = nullptr;
-    if (!name.isNull() && !name.isEmpty()) {
-        userNameString = name.toNSString();
-    } else {
-        userNameString = account->username().toNSString();
-    }
-    return userNameString;
 }
 
 @end
