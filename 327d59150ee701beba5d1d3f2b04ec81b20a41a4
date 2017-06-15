@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa4ed85_a9e35932",
+        "filename": "src/ContactRequestVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 123
+      },
+      "writtenOn": "2017-06-15T20:24:21Z",
+      "side": 1,
+      "message": "The check should be done against the ContactMethod protocol, not the currentAccount. It is sometime possible to select a SIP contact when the currentAccount is set to a RING account. Moreover, a contact with both SIP and RING contact method is possible and the button should be displayed only with RING contact method being selected. This line is not the only one having this problem",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 62
+      },
+      "revId": "327d59150ee701beba5d1d3f2b04ec81b20a41a4",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
