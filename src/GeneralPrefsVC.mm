@@ -31,6 +31,7 @@
 #import <profile.h>
 #import <person.h>
 #import <globalinstances.h>
+#import <media/recordingmodel.h>
 
 #if ENABLE_SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -101,6 +102,7 @@
 
 - (IBAction)clearHistory:(id)sender {
     CategorizedHistoryModel::instance().clearAllCollections();
+    Media::RecordingModel::instance().clearAllCollections();
     [historyChangedLabel setHidden:NO];
 }
 
