@@ -37,6 +37,7 @@
 #import <numbercategorymodel.h>
 #import <callmodel.h>
 #import <profilemodel.h>
+#import <media/recordingmodel.h>
 
 #import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -85,6 +86,7 @@ int main(int argc, const char *argv[]) {
 
     ProfileModel::instance().addCollection<LocalProfileCollection>(LoadOptions::FORCE_ENABLED);
     PersonModel::instance().addCollection<PeerProfileCollection>(LoadOptions::FORCE_ENABLED);
+    Media::RecordingModel::instance();
 
     return NSApplicationMain(argc, argv);
 }
