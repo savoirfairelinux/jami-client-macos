@@ -1,5 +1,5 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Der opstod en netværksfejl under eksporteringen";
 
 /* Contextual menu action */
 "Add to contacts" = "Tilføj til kontakt";
@@ -14,10 +14,10 @@
 "Backup account" = "Sikkerhedskopiér konto";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "Ring til nummeret";
 
 /* Open panel title */
-"Choose a CA list" = "Choose a CA list";
+"Choose a CA list" = "Vælg en CA-liste";
 
 /* Open panel title */
 "Choose a certificate" = "Vælg et certifikat";
@@ -29,7 +29,7 @@
 "Choose a private key file" = "Vælg en privat nøglefil";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "Vælg et CA";
 
 /* Open panel prompt for 'Choose a directory' */
 "Choose directory" = "Vælg mappe";
@@ -56,7 +56,7 @@
 "Entered name not found" = "Det indtastede navn blev ikke fundet";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Kunne ikke migrere din konto. Du kan prøve igen ved at trykke Ok eller slette din konto.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Søgning mislykkedes";
@@ -65,7 +65,7 @@
 "Incoming call from %@" = "Indkommende opkald fra %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "Vær sikker på at du har mindst en gyldig konto.";
 
 /* Message from {Name} */
 "Message from %@" = "Besked fra %@";
@@ -74,7 +74,7 @@
 "New SIP account" = "Ny SIP-konto";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "Ingen gyldig konto tilgængelig";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Kodeord og bekræftelse er ikke ens.";
@@ -98,13 +98,13 @@
 "Remove value" = "Fjern værdi";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
+"Reopen account to see your hash" = "Genåben konto for at se din hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Gendan konto";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Revider Input";
 
 /* Text shown to the user */
 "RingID : " = "RingID:";
@@ -119,7 +119,7 @@
 "The entered username is available" = "Det indtastede brugernavn er tilgængeligt";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Det indtastede brugernavn er ikke gyldigt. Det skal mindst bestå af 3 tegn og kun indeholde alfanumeriske tegn, i små bogstaver.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Det indtastede brugernavn er ikke tilgængeligt";
@@ -128,13 +128,13 @@
 "The following account needs to be migrated to the new Ring account format:" = "De følgende konti skal migreres til det nye Ring-konto-format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Det kodeord du har indtastet låser ikke op for denne konto";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "Det brugernavn du har indtastet er ikke tilknyttet et RingID på netværket";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "For at færdiggøre processen, skal du åbne Ring på den nye enhed og vælge funktionen \"Tilknyt denne enhed til en konto\". Din PIN er gyldig i 10 minutter.";
 
 /* Text shown to the user */
 "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "For at fortsætte med migreringen, skal du vælge et kodeord til kontoen. Dette kodeord bruges til at kryptere din hovednøgle. Den skal bruges ved tilnytning af nye enheder til din Ring-konto. Hvis du ikke er klar til at vælge et kodeord, kan du lukke Ring og fortsætte med migreringen senere.";
@@ -143,13 +143,13 @@
 "Unknown" = "Ukendt";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Du skal migrere din konto før du kan eksportere";
 
 /* Error shown to user */
-"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
+"An error happened, contact request has not been sent" = "Der opstod en fejl, kontakt-anmodningen blev ikke sendt";
 
 /* Error shown to user */
-"Could not find contact to send request" = "Could not find contact to send request";
+"Could not find contact to send request" = "Kunne ikke finde kontakten at sende anmodningen til";
 
 /* Default contact request msg*/
-"Hi %@. Please add me to your contact list." = "Hi %@. Please add me to your contact list.";
+"Hi %@. Please add me to your contact list." = "Hej %@. Venligst tilføj mig til din kontaktliste.";
