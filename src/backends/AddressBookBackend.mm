@@ -206,6 +206,9 @@ bool AddressBookEditor::addNew( Person* item)
 bool AddressBookEditor::addExisting(const Person* item)
 {
     m_lItems << const_cast<Person*>(item);
+    if(auto existingPerson =  PersonModel::instance().getPersonByUid(item->uid())) {
+        return false;
+    }
     mediator()->addItem(item);
     return true;
 }
@@ -268,6 +271,9 @@ void AddressBookBackend::asyncLoad(int startingPoint)
 
 Person* AddressBookBackend::abPersonToPerson(ABPerson* ab)
 {
+    if(auto existingPerson = PersonModel::instance().getPersonByUid([[ab uniqueId] UTF8String])) {
+        return existingPerson;
+    }
     auto person = new Person(QByteArray::fromNSData(ab.vCardRepresentation),
                                 Person::Encoding::vCard,
                                 this);

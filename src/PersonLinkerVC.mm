@@ -32,6 +32,7 @@
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "backends/AddressBookBackend.h"
 
 class OnlyPersonProxyModel : public QSortFilterProxyModel
 {
@@ -167,7 +168,19 @@ NSInteger const DETAILS_TAG = 300;
     numbers << self.methodToLink;
     p->setContactMethods(numbers);
     self.methodToLink->setPerson(p);
-    PersonModel::instance().addNewPerson(p);
+
+    // if MAC contacts is available use it to avoid possible dublications if contact added to multiple collections
+    auto personCollections = PersonModel::instance().collections();
+    CollectionInterface *macBookBackend = nil;
+    for (int i = 0; i<personCollections.count(); i++ ) {
+        auto personCollection = personCollections.at(i);
+        if(dynamic_cast<AddressBookBackend*>(personCollection))
+            macBookBackend = personCollection;
+    }
+    if(! macBookBackend || !PersonModel::instance().addNewPerson(p, macBookBackend)) {
+        PersonModel::instance().addNewPerson(p);
+    }
+
     [self.contactLinkedDelegate contactLinked];
 }
 
