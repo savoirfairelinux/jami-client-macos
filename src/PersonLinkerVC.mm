@@ -32,6 +32,7 @@
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "backends/AddressBookBackend.h"
 
 class OnlyPersonProxyModel : public QSortFilterProxyModel
 {
