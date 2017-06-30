@@ -206,6 +206,9 @@ bool AddressBookEditor::addNew( Person* item)
 bool AddressBookEditor::addExisting(const Person* item)
 {
     m_lItems << const_cast<Person*>(item);
+    if(auto existingPerson =  PersonModel::instance().getPersonByUid(item->uid())) {
+        return false;
+    }
     mediator()->addItem(item);
     return true;
 }
@@ -268,17 +271,21 @@ void AddressBookBackend::asyncLoad(int startingPoint)
 
 Person* AddressBookBackend::abPersonToPerson(ABPerson* ab)
 {
+    if(auto existingPerson = PersonModel::instance().getPersonByUid([[ab uniqueId] UTF8String])) {
+        return existingPerson;
+    }
+
     auto person = new Person(QByteArray::fromNSData(ab.vCardRepresentation),
-                                Person::Encoding::vCard,
-                                this);
+                             Person::Encoding::vCard,
+                             this);
     if(ab.imageData) {
         QPixmap p;
         if (p.loadFromData(QByteArray::fromNSData(ab.imageData))) {
             person->setPhoto(QVariant(p));
         }
     }
-
     person->setUid([[ab uniqueId] UTF8String]);
+
     return person;
 }
 
@@ -291,6 +298,7 @@ bool AddressBookBackend::addNewPerson(Person *item)
 {
     ABAddressBook *book = [ABAddressBook sharedAddressBook];
     ABPerson* person = [[ABPerson alloc] initWithVCardRepresentation:item->toVCard().toNSData()];
+    item->setUid([[person uniqueId] UTF8String]);
     [book addRecord:person];
     return [book save];
 }
