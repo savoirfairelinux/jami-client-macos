@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3841fe_438ff823",
+        "filename": "src/PersonLinkerVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-30T21:30:47Z",
+      "side": 1,
+      "message": "you can use a for each loop instead:\n\nfor (auto collection in personCollections) {\n...\n}",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 56
+      },
+      "revId": "021d5326547df34975faf19cf99a202f32e25aa3",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
