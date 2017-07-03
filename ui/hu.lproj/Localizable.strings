@@ -83,7 +83,7 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "A jelszavak nem egyeznek";
 
 /* Button label */
 "Pause" = "Megállítás";
@@ -116,13 +116,13 @@
 "Text Actions" = "Text Actions";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "A beírt felhasználónév érhető";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "A megadott felhasználónév nem érhető";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
