@@ -212,7 +212,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
     return result;
 }
 
-- (IBAction)callClickedAtRow:(id)sender {
+- (void)startCallForRow:(id)sender {
     NSInteger row = [personsView rowForView:sender];
     [personsView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
     [self callContact:nil];
