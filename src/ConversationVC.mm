@@ -254,6 +254,7 @@
     if (auto txtRecording = selectedContactMethod->textRecording()) {
         messagesViewVC.delegate = self;
         [messagesViewVC setUpViewWithModel:txtRecording->instantMessagingModel()];
+        [self.view.window makeFirstResponder:messageField];
     }
 }
 
