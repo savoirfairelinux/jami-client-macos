@@ -31,8 +31,6 @@
     __unsafe_unretained IBOutlet NSSecureTextField *passwordTextField;
     NSTextField *clearTextField;
 
-    __unsafe_unretained IBOutlet NSButton *dtmfRTPButton;
-    __unsafe_unretained IBOutlet NSButton *dtmfSIPButton;
     __unsafe_unretained IBOutlet NSButton *upnpButton;
     __unsafe_unretained IBOutlet NSButton *autoAnswerButton;
     __unsafe_unretained IBOutlet NSButton *userAgentButton;
@@ -61,8 +59,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [usernameTextField setTag:TagViews::USERNAME];
     [passwordTextField setTag:TagViews::PASSWORD];
     [userAgentTextField setTag:TagViews::USERAGENT];
-    [dtmfRTPButton setTag:DTMF_RTP];
-    [dtmfSIPButton setTag:DTMF_SIP];
 
     QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
@@ -101,8 +97,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [userAgentTextField setEnabled:AccountModel::instance().selectedAccount()->hasCustomUserAgent()];
     [autoAnswerButton setState:AccountModel::instance().selectedAccount()->isAutoAnswer()];
     [userAgentTextField setStringValue:account->userAgent().toNSString()];
-
-    (account->DTMFType() == DtmfType::OverRtp) ? [dtmfRTPButton setState:NSOnState] : [dtmfSIPButton setState:NSOnState];
 }
 
 - (IBAction)tryRegistration:(id)sender {
@@ -164,18 +158,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
             AccountModel::instance().selectedAccount()->setUserAgent([[textField stringValue] UTF8String]);
             break;
         default:
-            break;
-    }
-}
-
-- (IBAction)toggleDTMFType:(id)sender
-{
-    switch ([sender tag]) {
-        case TagViews::DTMF_RTP:
-            AccountModel::instance().selectedAccount()->setDTMFType(DtmfType::OverRtp);
-            break;
-        case TagViews::DTMF_SIP:
-            AccountModel::instance().selectedAccount()->setDTMFType(DtmfType::OverSip);
             break;
     }
 }
