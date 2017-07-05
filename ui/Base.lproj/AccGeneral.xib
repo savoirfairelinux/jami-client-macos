@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccGeneralVC">
             <connections>
                 <outlet property="aliasTextField" destination="Ilk-QS-8PT" id="cGv-as-uy7"/>
                 <outlet property="autoAnswerButton" destination="T5L-Hx-tAq" id="ybf-2A-4RV"/>
-                <outlet property="dtmfRTPButton" destination="ATi-aw-lOp" id="jNF-jm-Twl"/>
-                <outlet property="dtmfSIPButton" destination="TiO-iR-TOU" id="hqu-4l-miw"/>
                 <outlet property="passwordTextField" destination="POs-9R-DUW" id="WQ2-Dn-Yek"/>
                 <outlet property="serverHostTextField" destination="VuA-jX-Kqu" id="LQt-Ti-eBW"/>
                 <outlet property="upnpButton" destination="Rsc-fc-lz8" id="571-Uv-EiD"/>
@@ -214,46 +213,13 @@
                         <action selector="toggleUpnp:" target="-2" id="pl8-QR-BBc"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="TiO-iR-TOU">
-                    <rect key="frame" x="154" y="19" width="42" height="18"/>
-                    <buttonCell key="cell" type="radio" title="SIP" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="jch-Qt-hTO">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleDTMFType:" target="-2" id="tKb-Id-onp"/>
-                    </connections>
-                </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5JS-d0-0CC">
-                    <rect key="frame" x="30" y="33" width="121" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="117" id="QY2-iW-z5a"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DTMF tone type" id="Rg8-qR-h1X">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="ATi-aw-lOp">
-                    <rect key="frame" x="154" y="41" width="47" height="18"/>
-                    <buttonCell key="cell" type="radio" title="RTP" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0D8-im-2uM">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleDTMFType:" target="-2" id="Lim-17-Ac7"/>
-                    </connections>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="Btb-K1-phc" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="58" id="02j-p1-vc3"/>
                 <constraint firstItem="7wz-eU-lJh" firstAttribute="baseline" secondItem="Ilk-QS-8PT" secondAttribute="baseline" id="0tS-nT-Ad3"/>
-                <constraint firstItem="TiO-iR-TOU" firstAttribute="top" secondItem="ATi-aw-lOp" secondAttribute="bottom" constant="6" symbolic="YES" id="1sm-9b-Drn"/>
                 <constraint firstItem="Ilk-QS-8PT" firstAttribute="trailing" secondItem="VuA-jX-Kqu" secondAttribute="trailing" id="6by-7J-BZq"/>
                 <constraint firstItem="T5L-Hx-tAq" firstAttribute="leading" secondItem="a4o-bf-KQu" secondAttribute="leading" id="86R-RY-X82"/>
                 <constraint firstItem="Rsc-fc-lz8" firstAttribute="leading" secondItem="T5L-Hx-tAq" secondAttribute="leading" id="AEZ-dA-ag4"/>
-                <constraint firstItem="a4o-bf-KQu" firstAttribute="leading" secondItem="5JS-d0-0CC" secondAttribute="leading" id="DcM-RL-fnb"/>
                 <constraint firstItem="Rsc-fc-lz8" firstAttribute="top" secondItem="POs-9R-DUW" secondAttribute="bottom" constant="18" id="GSg-HW-W8s"/>
                 <constraint firstItem="T5L-Hx-tAq" firstAttribute="top" secondItem="Rsc-fc-lz8" secondAttribute="bottom" constant="16" id="H5c-Bw-EuR"/>
                 <constraint firstItem="POs-9R-DUW" firstAttribute="leading" secondItem="3ZB-JI-U6Y" secondAttribute="trailing" constant="8" id="I7j-dS-1py"/>
@@ -267,7 +233,6 @@
                 <constraint firstItem="Ilk-QS-8PT" firstAttribute="leading" secondItem="VuA-jX-Kqu" secondAttribute="leading" id="ScZ-ku-Qt6"/>
                 <constraint firstItem="Btb-K1-phc" firstAttribute="top" secondItem="1IP-mF-EDC" secondAttribute="bottom" constant="8" symbolic="YES" id="TAM-s6-qAk"/>
                 <constraint firstItem="Btb-K1-phc" firstAttribute="baseline" secondItem="VuA-jX-Kqu" secondAttribute="baseline" id="a4x-68-V3a"/>
-                <constraint firstItem="5JS-d0-0CC" firstAttribute="top" secondItem="a4o-bf-KQu" secondAttribute="bottom" constant="31" id="akw-zG-Z4G"/>
                 <constraint firstItem="VuA-jX-Kqu" firstAttribute="leading" secondItem="Btb-K1-phc" secondAttribute="trailing" constant="8" id="dlB-OY-I2d"/>
                 <constraint firstItem="x2R-Ot-MbT" firstAttribute="leading" secondItem="0Ej-Lr-p20" secondAttribute="trailing" constant="8" symbolic="YES" id="exl-et-srf"/>
                 <constraint firstItem="0Ej-Lr-p20" firstAttribute="leading" secondItem="VuA-jX-Kqu" secondAttribute="leading" id="fSc-SN-jcG"/>
@@ -276,20 +241,16 @@
                 <constraint firstItem="a4o-bf-KQu" firstAttribute="top" secondItem="T5L-Hx-tAq" secondAttribute="bottom" constant="17" id="g8X-uT-844"/>
                 <constraint firstItem="h5v-jy-4zX" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="gQs-pR-Wa3"/>
                 <constraint firstItem="Ilk-QS-8PT" firstAttribute="leading" secondItem="7wz-eU-lJh" secondAttribute="trailing" constant="8" symbolic="YES" id="gXl-g0-zFa"/>
-                <constraint firstItem="TiO-iR-TOU" firstAttribute="top" secondItem="ATi-aw-lOp" secondAttribute="bottom" constant="6" id="jWm-jt-2fo"/>
                 <constraint firstItem="y8K-Hi-TMC" firstAttribute="leading" secondItem="a4o-bf-KQu" secondAttribute="trailing" constant="8" id="joX-fO-ZF6"/>
                 <constraint firstItem="h5v-jy-4zX" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="jvd-5E-ELU"/>
-                <constraint firstItem="ATi-aw-lOp" firstAttribute="leading" secondItem="5JS-d0-0CC" secondAttribute="trailing" constant="6" symbolic="YES" id="kqB-ur-VHO"/>
                 <constraint firstItem="VuA-jX-Kqu" firstAttribute="trailing" secondItem="0Ej-Lr-p20" secondAttribute="trailing" id="kvC-h2-4aI"/>
                 <constraint firstItem="POs-9R-DUW" firstAttribute="leading" secondItem="VuA-jX-Kqu" secondAttribute="leading" id="pMK-S0-Fo4"/>
-                <constraint firstItem="ATi-aw-lOp" firstAttribute="leading" secondItem="TiO-iR-TOU" secondAttribute="leading" id="pom-Sy-lYb"/>
                 <constraint firstItem="Otd-nX-zTh" firstAttribute="leading" secondItem="POs-9R-DUW" secondAttribute="trailing" constant="8" symbolic="YES" id="u5z-hY-991"/>
                 <constraint firstItem="Otd-nX-zTh" firstAttribute="trailing" secondItem="Rsc-fc-lz8" secondAttribute="trailing" id="uS1-sG-02m"/>
                 <constraint firstItem="h5v-jy-4zX" firstAttribute="leading" secondItem="1IP-mF-EDC" secondAttribute="leading" id="vaP-I3-Bar"/>
                 <constraint firstItem="0Ej-Lr-p20" firstAttribute="top" secondItem="x2R-Ot-MbT" secondAttribute="top" id="yff-K0-lVz"/>
                 <constraint firstItem="3ZB-JI-U6Y" firstAttribute="top" secondItem="POs-9R-DUW" secondAttribute="top" id="zTM-fU-L3O"/>
                 <constraint firstItem="VuA-jX-Kqu" firstAttribute="top" secondItem="Ilk-QS-8PT" secondAttribute="bottom" constant="39" id="zXV-S3-dmt"/>
-                <constraint firstItem="ATi-aw-lOp" firstAttribute="top" secondItem="a4o-bf-KQu" secondAttribute="bottom" constant="23" id="zeU-0O-mqX"/>
                 <constraint firstItem="0Ej-Lr-p20" firstAttribute="leading" secondItem="7fA-3M-fa5" secondAttribute="trailing" constant="8" id="zhV-Nm-bmz"/>
             </constraints>
             <point key="canvasLocation" x="-41" y="37"/>
