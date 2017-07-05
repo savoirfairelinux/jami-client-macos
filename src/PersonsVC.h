@@ -20,4 +20,6 @@
 
 @interface PersonsVC : NSViewController <NSOutlineViewDelegate>
 
+- (void)startCallForRow:(id)sender;
+
 @end

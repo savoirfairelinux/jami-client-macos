@@ -12,6 +12,7 @@
                 <outlet property="centerYQRCodeConstraint" destination="16A-gO-qJA" id="n19-pY-QTQ"/>
                 <outlet property="centerYWelcomeContainerConstraint" destination="Duk-XW-qcv" id="Jg8-0V-Khf"/>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
+                <outlet property="personsVC" destination="9RF-6W-vEW" id="QZW-1T-r5D"/>
                 <outlet property="qrcodeView" destination="dZR-JL-MY4" id="6Jf-42-qwY"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
@@ -427,7 +428,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
                                                     <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="S00-xr-jYM">
                                                         <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="70" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="10" outlineTableColumn="8Ve-L0-o7V" id="Hrg-Fe-uGq" customClass="RingOutlineView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
