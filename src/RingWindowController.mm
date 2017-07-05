@@ -46,6 +46,7 @@
 #import "views/BackgroundView.h"
 #import "ChooseAccountVC.h"
 #import "ContactRequestVC.h"
+#import "PersonsVC.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -65,6 +66,7 @@
 
     PreferencesWC* preferencesWC;
     IBOutlet SmartViewVC* smartViewVC;
+    IBOutlet PersonsVC* personsVC;
 
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
@@ -296,6 +298,21 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     [smartViewVC showSmartlist];
 }
 
+- (IBAction)callClickedAtRow:(id)sender
+{
+    NSTabViewItem *selectedTab = [smartViewVC.tabbar selectedTabViewItem];
+    int index = [smartViewVC.tabbar indexOfTabViewItem:selectedTab];
+    switch (index) {
+        case 0:
+            [smartViewVC startCallForRow:sender];
+            break;
+        case 2:
+            [personsVC startCallForRow:sender];
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark - Ring account migration
 
 - (void) migrateRingAccount:(Account*) acc

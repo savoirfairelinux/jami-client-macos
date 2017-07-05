@@ -56,7 +56,6 @@
     //UI elements
     __unsafe_unretained IBOutlet RingOutlineView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
-    __unsafe_unretained IBOutlet NSTabView* tabbar;
 
     /* Pending ring usernames lookup for the search entry */
     QMetaObject::Connection usernameLookupConnection;
@@ -65,6 +64,8 @@
 @end
 
 @implementation SmartViewVC
+
+@synthesize tabbar;
 
 // Tags for views
 NSInteger const IMAGE_TAG           = 100;
@@ -292,7 +293,7 @@ NSInteger const PRESENCE_TAG        = 800;
     return [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
 }
 
-- (IBAction)callClickedAtRow:(id)sender {
+- (void)startCallForRow:(id)sender {
     NSInteger row = [smartView rowForView:sender];
     [smartView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
     [self placeCall:nil];
