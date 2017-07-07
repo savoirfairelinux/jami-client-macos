@@ -54,6 +54,7 @@ Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 QMetaObject::Connection accountUpdate;
+QMetaObject::Connection personUpdate;
 AccountSelectionManager* accountManager;
 
 - (void)awakeFromNib
@@ -63,10 +64,23 @@ AccountSelectionManager* accountManager;
     profileImage.layer.masksToBounds = YES;
     accountManager = [[AccountSelectionManager alloc] init];
 
-    if (auto pro = ProfileModel::instance().selectedProfile()) {
-        auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
+    if (ProfileModel::instance().selectedProfile() && ProfileModel::instance().selectedProfile()->person()) {
+        Person* person = ProfileModel::instance().selectedProfile()->person();
+        auto photo = GlobalInstances::pixmapManipulator().contactPhoto(person, {140,140});
         [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        QObject::disconnect(personUpdate);
+        personUpdate = QObject::connect(person,
+                                        &Person::changed,
+                                        [=] {
+                                            //give time to cach to be updated and then change image
+                                            dispatch_time_t updateTime = dispatch_time(DISPATCH_TIME_NOW, 1);
+                                            dispatch_after(updateTime, dispatch_get_main_queue(), ^(void){
+                                                auto photo = GlobalInstances::pixmapManipulator().contactPhoto(person, {140,140});
+                                                [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+                                            });
+                                        });
     }
+
     accountsMenu = [[NSMenu alloc] initWithTitle:@""];
     [accountsMenu setDelegate:self];
     accountSelectionButton.menu = accountsMenu;
