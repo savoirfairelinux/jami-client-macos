@@ -34,6 +34,8 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "backends/AddressBookBackend.h"
 
+#import <AddressBook/AddressBook.h>
+
 class OnlyPersonProxyModel : public QSortFilterProxyModel
 {
 public:
@@ -58,6 +60,7 @@ public:
     __unsafe_unretained IBOutlet NSButton *createNewContactButton;
     __unsafe_unretained IBOutlet NSComboBox *categoryComboBox;
     __unsafe_unretained IBOutlet NSView *linkToExistingSubview;
+    __unsafe_unretained IBOutlet NSView *addCloudContactMsg;
 
     QSortFilterProxyModel* contactProxyModel;
     QNSTreeController* treeController;
@@ -139,6 +142,9 @@ NSInteger const DETAILS_TAG = 300;
 - (IBAction)presentNewContactForm:(id)sender {
     [createContactSubview setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     //[createContactSubview setBounds:linkToExistingSubview.bounds];
+    BOOL shoudHide = [ABAddressBook sharedAddressBook] == nil;
+    [addCloudContactMsg setHidden:shoudHide];
+
     [createContactSubview setFrame:linkToExistingSubview.frame];
     [linkToExistingSubview setHidden:YES];
     [self.view addSubview:createContactSubview];
