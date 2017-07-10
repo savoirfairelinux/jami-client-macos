@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A313a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PersonLinkerVC">
             <connections>
+                <outlet property="addCloudContactMsg" destination="TQq-By-akw" id="P1I-KU-vMh"/>
                 <outlet property="categoryComboBox" destination="MFf-kv-pz3" id="a2g-cf-dcv"/>
                 <outlet property="contactMethodLabel" destination="8pP-Sy-Vkd" id="UGZ-bY-lDO"/>
                 <outlet property="createContactSubview" destination="6M0-sm-haN" id="Ba5-9R-6fh"/>
