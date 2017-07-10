@@ -6,13 +6,13 @@
 "9e8-ji-QId.ibShadowedToolTip" = "Join call";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
-"ChW-kg-Sja.ibShadowedToolTip" = "Transfer";
+"ChW-kg-Sja.ibShadowedToolTip" = "Prenos";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
 "D0G-XT-lhI.ibShadowedToolTip" = "Zlož";
 
 /* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
-"Dqv-um-UUk.title" = "URI";
+"Dqv-um-UUk.title" = "URL";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
 "EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
@@ -39,7 +39,7 @@
 "X0W-vv-xua.title" = "wants to talk to you!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
-"anb-Y8-JQi.ibShadowedToolTip" = "Hold";
+"anb-Y8-JQi.ibShadowedToolTip" = "Podržať";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
 "fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
@@ -78,4 +78,4 @@
 "yZ6-1A-ZLT.title" = "wants to talk with you!";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
-"zsO-T7-9yi.placeholderString" = "Time";
+"zsO-T7-9yi.placeholderString" = "Čas";
