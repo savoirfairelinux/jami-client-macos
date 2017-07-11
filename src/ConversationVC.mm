@@ -218,6 +218,32 @@
     return NO;
 }
 
+-(BOOL)shouldHideSendRequestBtn {
+    /*to send contact request we need to meet thre condition:
+     1)contact method has RING protocol
+     2)accound is used to send request is also RING
+     3)contact  have not acceppt request yet*/
+    if(selectedContactMethod->protocolHint() != URI::ProtocolHint::RING) {
+        return YES;
+    }
+    if(selectedContactMethod->isConfirmed()) {
+        return YES;
+    }
+    if(selectedContactMethod->account()) {
+        return selectedContactMethod->account()->protocol() != Account::Protocol::RING;
+    }
+    if([self chosenAccount]) {
+        return [self chosenAccount]->protocol() != Account::Protocol::RING;
+    }
+    return NO;
+}
+
+-(void)updateSendButtonVisibility
+{
+    [sentContactRequestButton setHidden:[self shouldHideSendRequestBtn]];
+    sentContactRequestWidth.priority = [self shouldHideSendRequestBtn] ? 999: 250;
+}
+
 #pragma mark - NSPopUpButton item selection
 
 - (IBAction)itemChanged:(id)sender {
@@ -225,23 +251,7 @@
 
     selectedContactMethod = contactMethods.at(index);
 
-    /*to send contact request we need to meet two condition:
-     1)contact method has RING protocol
-     2)accound is used to send request is also RING*/
-
-    Boolean hideSendTrustRequestButton = NO;
-    if(selectedContactMethod->protocolHint() != URI::ProtocolHint::RING) {
-        hideSendTrustRequestButton = YES;
-    }
-    else if(selectedContactMethod->account()) {
-       hideSendTrustRequestButton = selectedContactMethod->account()->protocol() != Account::Protocol::RING;
-    }
-    else if([self chosenAccount]) {
-        Boolean hideSendTrustRequestButton = [self chosenAccount]->protocol() != Account::Protocol::RING;
-    }
-
-    [sentContactRequestButton setHidden:hideSendTrustRequestButton];
-    sentContactRequestWidth.priority = hideSendTrustRequestButton ? 999: 250;
+    [self updateSendButtonVisibility];
 
     [conversationTitle setStringValue:selectedContactMethod->primaryName().toNSString()];
     QObject::disconnect(contactMethodChanged);
@@ -249,6 +259,7 @@
                                             &ContactMethod::changed,
                                             [self] {
                                                 [conversationTitle setStringValue:selectedContactMethod->primaryName().toNSString()];
+                                                [self updateSendButtonVisibility];
                                             });
 
     if (auto txtRecording = selectedContactMethod->textRecording()) {
