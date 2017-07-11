@@ -477,6 +477,16 @@ NSInteger const PRESENCE_TAG        = 800;
     }
 }
 
+- (void) addContactForRow:(id) sender
+{
+    NSInteger row = [smartView rowForItem:[sender representedObject]];
+    if(row < 0) {
+        return;
+    }
+    [smartView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+    [self addToContact];
+}
+
 /**
  Copy a NSString in the general Pasteboard
 
@@ -572,10 +582,11 @@ NSInteger const PRESENCE_TAG        = 800;
         && !contactmethods.first()->contact()
         || contactmethods.first()->contact()->isPlaceHolder()) {
 
-        [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
-                              action:@selector(addToContact)
-                       keyEquivalent:@"a"
-                             atIndex:theMenu.itemArray.count];
+        NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
+                                                                action:@selector(addContactForRow:)
+                                                         keyEquivalent:@""];
+        [addContactItem setRepresentedObject:item];
+        [theMenu addItem:addContactItem];
     } else if (auto person = contactmethods.first()->contact()) {
         NSMenuItem* copyNameItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy name", @"Contextual menu action")
                                                              action:@selector(copyStringToPasteboard:)

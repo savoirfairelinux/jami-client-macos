@@ -230,10 +230,12 @@ NSInteger const PHOTO_TAG = 400;
             if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
                 NSMenu *theMenu = [[NSMenu alloc]
                                    initWithTitle:@""];
-                [theMenu insertItemWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
-                                      action:@selector(addToContact)
-                               keyEquivalent:@"a"
-                                     atIndex:0];
+                NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
+                                                                        action:@selector(addContactForRow:)
+                                                                 keyEquivalent:@""];
+
+                [addContactItem setRepresentedObject:item];
+                [theMenu addItem:addContactItem];
                 return theMenu;
             }
         }
@@ -270,6 +272,16 @@ NSInteger const PHOTO_TAG = 400;
 
         [addToContactPopover showRelativeToRect:[historyView frameOfOutlineCellAtRow:[historyView selectedRow]] ofView:historyView preferredEdge:NSMaxXEdge];
     }
+}
+
+- (void) addContactForRow:(id) sender
+{
+    NSInteger row = [historyView rowForItem:[sender representedObject]];
+    if(row < 0) {
+        return;
+    }
+    [historyView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+    [self addToContact];
 }
 
 #pragma mark - NSPopOverDelegate
