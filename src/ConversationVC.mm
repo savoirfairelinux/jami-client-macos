@@ -39,7 +39,6 @@
 #import "QNSTreeController.h"
 #import "INDSequentialTextSelectionManager.h"
 #import "delegates/ImageManipulationDelegate.h"
-#import "SendContactRequestWC.h"
 #import "PhoneDirectoryModel.h"
 #import "account.h"
 #import "AvailableAccountModel.h"
@@ -56,7 +55,6 @@
 
     QMetaObject::Connection contactMethodChanged;
     ContactMethod* selectedContactMethod;
-    SendContactRequestWC* sendRequestWC;
 
     __unsafe_unretained IBOutlet NSView* sendPanel;
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
@@ -157,12 +155,18 @@
     messagesViewVC.delegate = nil;
 }
 
-- (IBAction)openSendContactRequestWindow:(id)sender
+- (IBAction)sendContactRequest:(id)sender
 {
-    if(auto cm = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem])) {
-        sendRequestWC = [[SendContactRequestWC alloc] initWithWindowNibName:@"SendContactRequest"];
-        sendRequestWC.contactMethod = cm;
-        [sendRequestWC.window makeKeyAndOrderFront:sendRequestWC.window];
+    auto cm = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem]);
+    if(cm) {
+        if(cm->account() == nullptr) {
+            cm->setAccount([self chosenAccount]);
+        }
+
+        if(cm->account() == nullptr) {
+            return;
+        }
+        cm->account()->sendContactRequest(cm);
     }
 }
 
