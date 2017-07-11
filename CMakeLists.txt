@@ -166,8 +166,6 @@ SET(ringclient_CONTROLLERS
    src/ContactRequestsListVC.mm
    src/ContactRequestVC.h
    src/ContactRequestVC.mm
-   src/SendContactRequestWC.h
-   src/SendContactRequestWC.mm
    src/AccBannedContactsVC.h
    src/AccBannedContactsVC.mm
    src/MessagesVC.h
@@ -257,7 +255,6 @@ SET(ringclient_XIBS
    AccountMenuItemView
    ContactRequestList
    ContactRequest
-   SendContactRequest
    AccBannedContacts
 )
 
