@@ -291,12 +291,12 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="isI-We-3h9">
+                <button toolTip="Send Contact Request " verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="isI-We-3h9">
                     <rect key="frame" x="711" y="537" width="73" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" priority="250" id="J5j-bs-Mgk"/>
                     </constraints>
-                    <buttonCell key="cell" type="push" title="Invite" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9su-fU-MPG">
+                    <buttonCell key="cell" type="push" title="Invite" bezelStyle="rounded" alignment="center" borderStyle="border" toolTip="Send Contact Request" imageScaling="proportionallyDown" inset="2" id="9su-fU-MPG">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
@@ -304,7 +304,7 @@ Gw
 </string>
                     </buttonCell>
                     <connections>
-                        <action selector="openSendContactRequestWindow:" target="-2" id="Elh-XT-zVB"/>
+                        <action selector="sendContactRequest:" target="-2" id="aZD-AA-2JW"/>
                     </connections>
                 </button>
             </subviews>
