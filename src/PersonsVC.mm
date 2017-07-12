@@ -39,6 +39,8 @@
 #import "views/HoverTableRowView.h"
 #import "views/ContextualTableCellView.h"
 
+#import <AddressBook/AddressBook.h>
+
 class ReachablePersonModel : public QSortFilterProxyModel
 {
 public:
@@ -56,7 +58,7 @@ public:
 @interface PersonsVC () {
 
     QNSTreeController *treeController;
-    __unsafe_unretained IBOutlet NSOutlineView *personsView;
+    __unsafe_unretained IBOutlet RingOutlineView *personsView;
     QSortFilterProxyModel *contactProxyModel;
 
 }
@@ -87,6 +89,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
     [personsView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
     [personsView setTarget:self];
     [personsView setDoubleAction:@selector(callContact:)];
+    [personsView setContextMenuDelegate:self];
 
     CategorizedContactModel::instance().setUnreachableHidden(YES);
 }
@@ -230,6 +233,76 @@ NSInteger const CALL_BUTTON_TAG = 400;
 {
     QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
     return (((NSTreeNode*)item).indexPath.length == 2) ? 60.0 : 20.0;
+}
+
+#pragma mark - ContextMenuDelegate
+
+- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) item
+{
+    QModelIndex qIdx = [treeController toQIdx:item];
+    if (!qIdx.isValid()) {
+        return nil;
+    }
+
+    if (qIdx.parent().isValid()) {
+        Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
+        if (p) {
+            NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@""];
+            NSMenuItem* removeContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete contact", @"Contextual menu action")
+                                                                       action:@selector(removeContactForRow:)
+                                                                keyEquivalent:@""];
+            [removeContactItem setRepresentedObject:item];
+            [theMenu addItem:removeContactItem];
+            return theMenu;
+        }
+    }
+    return nil;
+}
+
+- (void) removeContactForRow:(id) sender
+{
+    QModelIndex qIdx = [treeController toQIdx:[sender representedObject]];
+    if (!qIdx.isValid()) {
+        return nil;
+    }
+
+    if (!qIdx.parent().isValid()) {
+        return;
+    }
+    Person* p = qvariant_cast<Person*>(qIdx.data((int)Person::Role::Object));
+    if(!p) {
+        return;
+    }
+
+    //check if contact is from MAC address book
+    ABPerson* adPerson = [[ABAddressBook sharedAddressBook] recordForUniqueId:[[NSString alloc] initWithUTF8String:p->uid().data()]];
+
+    if(adPerson) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:NSLocalizedString(@"Could not delete MAC contact", @"Contextual menu alert title")];
+        [alert setInformativeText:NSLocalizedString(@"To delete go to MAC Contacts App", @"Contextual menu alert remove contact")];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert runModal];
+        return;
+    }
+    NSString* name =  qIdx.data(Qt::DisplayRole).toString().toNSString();
+    if(name.length == 0) {
+        name = qIdx.data((int)Person::Role::IdOfLastCMUsed).toString().toNSString();
+    }
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert setMessageText:NSLocalizedString(@"Contact will be deleted", @"Contextual menu alert title")];
+    NSString* allertMsg = [NSString stringWithFormat:
+                           NSLocalizedString(@"Are you sure you want to delete contact \"%@\"", @"Contextual menu alert remove contact {Name}"), name];
+    [alert setInformativeText:allertMsg];
+    [alert setAlertStyle:NSAlertStyleWarning];
+
+    NSInteger answer = [alert runModal];
+    if (answer == NSAlertFirstButtonReturn) {
+        p->remove();
+    }
 }
 
 @end
