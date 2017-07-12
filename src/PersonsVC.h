@@ -18,7 +18,9 @@
  */
 #import <Cocoa/Cocoa.h>
 
-@interface PersonsVC : NSViewController <NSOutlineViewDelegate>
+#import "views/RingOutlineView.h"
+
+@interface PersonsVC : NSViewController <NSOutlineViewDelegate, ContextMenuDelegate>
 
 - (void)startCallForRow:(id)sender;
 
