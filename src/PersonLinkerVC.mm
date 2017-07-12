@@ -29,12 +29,11 @@
 #import <contactmethod.h>
 #import <numbercategorymodel.h>
 #import <globalinstances.h>
+#import <peerprofilecollection.h>
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
-#import "backends/AddressBookBackend.h"
 
-#import <AddressBook/AddressBook.h>
 
 class OnlyPersonProxyModel : public QSortFilterProxyModel
 {
@@ -142,8 +141,7 @@ NSInteger const DETAILS_TAG = 300;
 - (IBAction)presentNewContactForm:(id)sender {
     [createContactSubview setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     //[createContactSubview setBounds:linkToExistingSubview.bounds];
-    BOOL shoudHide = [ABAddressBook sharedAddressBook] == nil;
-    [addCloudContactMsg setHidden:shoudHide];
+    [addCloudContactMsg setHidden:TRUE];
 
     [createContactSubview setFrame:linkToExistingSubview.frame];
     [linkToExistingSubview setHidden:YES];
@@ -174,7 +172,15 @@ NSInteger const DETAILS_TAG = 300;
     numbers << self.methodToLink;
     p->setContactMethods(numbers);
     self.methodToLink->setPerson(p);
-    PersonModel::instance().addNewPerson(p);
+    auto personCollections = PersonModel::instance().collections();
+    CollectionInterface *peerProfileCollection = nil;
+    foreach(auto collection, personCollections) {
+        if(dynamic_cast<PeerProfileCollection*>(collection))
+            peerProfileCollection = collection;
+    }
+    if(peerProfileCollection) {
+        PersonModel::instance().addNewPerson(p, peerProfileCollection);
+    }
     [self.contactLinkedDelegate contactLinked];
 }
 
