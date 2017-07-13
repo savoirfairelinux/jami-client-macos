@@ -145,11 +145,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Je moet je account migreren vooraleer je deze kan exporteren";
 
-/* Error shown to user */
-"An error happened, contact request has not been sent" = "Er is een fout opgetreden, het contactverzoek is niet verzonden";
-
-/* Error shown to user */
-"Could not find contact to send request" = "Kan opgegeven contact niet vinden";
-
-/* Default contact request msg*/
-"Hi %@. Please add me to your contact list." = "Hé %@, voeg me toe aan je contacten.";

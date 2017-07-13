@@ -145,11 +145,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Prieš eksportuodami, turite perkelti savo paskyrą";
 
-/* Error shown to user */
-"An error happened, contact request has not been sent" = "An error happened, contact request has not been sent";
-
-/* Error shown to user */
-"Could not find contact to send request" = "Could not find contact to send request";
-
-/* Default contact request msg*/
-"Hi %@. Please add me to your contact list." = "Hi %@. Please add me to your contact list.";

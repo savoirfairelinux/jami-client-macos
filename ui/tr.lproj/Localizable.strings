@@ -145,11 +145,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Hesabı dışa aktarmadan önce taşımanız gerekir.";
 
-/* Error shown to user */
-"An error happened, contact request has not been sent" = "Bir hata oluştu, iletişim isteği gönderilemedi";
-
-/* Error shown to user */
-"Could not find contact to send request" = "İstek gönderilecek kişi bulunamadı";
-
-/* Default contact request msg*/
-"Hi %@. Please add me to your contact list." = "Merhaba %@. Lütfen beni kişi listene ekle.";

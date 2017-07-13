@@ -145,11 +145,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Musíte převést svůj účet před vyvedením";
 
-/* Error shown to user */
-"An error happened, contact request has not been sent" = "Nastala chyba. Žádost o kontakt nebyla odeslána";
-
-/* Error shown to user */
-"Could not find contact to send request" = "Nepodařilo se najít kontakt pro poslání žádosti";
-
-/* Default contact request msg*/
-"Hi %@. Please add me to your contact list." = "Ahoj %@. Přidejte si mě, prosím, do svého seznamu kontaktů.";

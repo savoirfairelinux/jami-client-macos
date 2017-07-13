@@ -145,11 +145,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "在导出前，您需要进行帐户迁移";
 
-/* Error shown to user */
-"An error happened, contact request has not been sent" = "发生错误，无法发送联系人请求";
-
-/* Error shown to user */
-"Could not find contact to send request" = "未找到您要请求的联系人";
-
-/* Default contact request msg*/
-"Hi %@. Please add me to your contact list." = "您好，%@，请把我添加到您的通讯录。";

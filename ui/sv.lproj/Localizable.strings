@@ -145,11 +145,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Du måste migrera ditt konto före exporten";
 
-/* Error shown to user */
-"An error happened, contact request has not been sent" = "Ett fel inträffade, kontaktbegäran har inte skickats";
-
-/* Error shown to user */
-"Could not find contact to send request" = "Kunde inte hitta kontakten att skicka förfrågan till";
-
-/* Default contact request msg*/
-"Hi %@. Please add me to your contact list." = "Hej %@. Var snäll och lägg till mig i din kontaktlista.";
