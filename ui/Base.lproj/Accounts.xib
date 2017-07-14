@@ -173,7 +173,6 @@
                         </subviews>
                     </clipView>
                     <constraints>
-                        <constraint firstAttribute="height" constant="472" id="UBl-FT-gaL"/>
                         <constraint firstAttribute="width" constant="250" id="aC0-6T-CUo"/>
                     </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="x1l-v5-r0B">
@@ -185,9 +184,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ob6-rc-0pc">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ob6-rc-0pc">
                     <rect key="frame" x="29" y="30" width="25" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="LD0-By-rSn"/>
+                        <constraint firstAttribute="height" constant="19" id="fq7-kf-WMZ"/>
+                    </constraints>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="jnk-VG-Do6">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -196,9 +198,12 @@
                         <action selector="removeAccount:" target="-2" id="nTB-Tc-25y"/>
                     </connections>
                 </button>
-                <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nRs-ZL-bau">
+                <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nRs-ZL-bau">
                     <rect key="frame" x="95" y="30" width="25" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="Cwe-N0-jdv"/>
+                        <constraint firstAttribute="width" constant="25" id="qWu-IV-gld"/>
+                    </constraints>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSActionTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="q7p-0B-d1J">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -207,9 +212,12 @@
                         <action selector="advancedActionsClicked:" target="-2" id="8tJ-gr-g2S"/>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vw8-CE-SI3">
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vw8-CE-SI3">
                     <rect key="frame" x="62" y="30" width="25" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="tWv-1t-IJ0"/>
+                        <constraint firstAttribute="width" constant="25" id="uzs-E6-3dm"/>
+                    </constraints>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="t1U-xO-AUQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -220,12 +228,20 @@
                 </button>
             </subviews>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="Ob6-rc-0pc" secondAttribute="bottom" constant="30" id="0C2-Ld-T0y"/>
+                <constraint firstItem="nRs-ZL-bau" firstAttribute="leading" secondItem="vw8-CE-SI3" secondAttribute="trailing" constant="8" id="3gp-2f-wq3"/>
+                <constraint firstAttribute="bottom" secondItem="vw8-CE-SI3" secondAttribute="bottom" constant="30" id="ABm-As-hUM"/>
                 <constraint firstAttribute="bottom" secondItem="Jki-s4-F1W" secondAttribute="bottom" constant="20" id="C1O-rd-eUI"/>
+                <constraint firstItem="nRs-ZL-bau" firstAttribute="leading" secondItem="vw8-CE-SI3" secondAttribute="trailing" constant="8" id="Fby-1i-GjO"/>
                 <constraint firstAttribute="trailing" secondItem="Jki-s4-F1W" secondAttribute="trailing" constant="20" id="J96-3h-sxa"/>
+                <constraint firstItem="Ob6-rc-0pc" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="29" id="MvW-9N-mfB"/>
+                <constraint firstAttribute="bottom" secondItem="ZBN-hf-rGe" secondAttribute="bottom" constant="20" id="WFi-ip-hsu"/>
                 <constraint firstItem="Jki-s4-F1W" firstAttribute="leading" secondItem="ZBN-hf-rGe" secondAttribute="trailing" constant="8" id="Zzg-Tr-BVP"/>
                 <constraint firstItem="Jki-s4-F1W" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="fez-KJ-jhG"/>
+                <constraint firstAttribute="bottom" secondItem="nRs-ZL-bau" secondAttribute="bottom" constant="30" id="iaa-cK-FqF"/>
                 <constraint firstItem="ZBN-hf-rGe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="jPM-jY-R59"/>
                 <constraint firstItem="ZBN-hf-rGe" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="u8B-Kk-OHn"/>
+                <constraint firstItem="vw8-CE-SI3" firstAttribute="leading" secondItem="Ob6-rc-0pc" secondAttribute="trailing" constant="8" id="yaX-kX-3fK"/>
             </constraints>
             <point key="canvasLocation" x="542" y="212"/>
         </customView>

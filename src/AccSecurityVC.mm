@@ -35,6 +35,7 @@
     __unsafe_unretained IBOutlet NSOutlineView *cipherListView;
     __unsafe_unretained IBOutlet NSButton *useTLS;
     __unsafe_unretained IBOutlet NSView *tlsContainer;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* tlsContainerHeight;
 
     __unsafe_unretained IBOutlet NSView *pvkContainer;
     __unsafe_unretained IBOutlet NSImageView *pvkPasswordValidation;
@@ -119,6 +120,7 @@ NS_ENUM(NSInteger, TagViews) {
 
     [useTLS setState:account->isTlsEnabled()];
     [tlsContainer setHidden:!account->isTlsEnabled()];
+    tlsContainerHeight.constant = (account->isTlsEnabled()) ? 196.0f : 0.0f;
 
     [useSRTP setState:account->isSrtpEnabled()];
     [srtpRTPFallback setState:account->isSrtpRtpFallback()];
@@ -171,6 +173,7 @@ NS_ENUM(NSInteger, TagViews) {
 - (IBAction)toggleUseTLS:(id)sender {
     [self currentAccount]->setTlsEnabled([sender state]);
     [tlsContainer setHidden:![sender state]];
+    tlsContainerHeight.constant = ([sender state]) ? 196.0f : 0.0f;
 }
 
 - (IBAction)toggleUseSRTP:(id)sender {
