@@ -166,8 +166,8 @@
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Sn1-dJ-QCw">
                     <rect key="frame" x="20" y="525" width="758" height="5"/>
                 </box>
-                <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ooq-vs-Xt1" customClass="IconButton">
-                    <rect key="frame" x="20" y="537" width="40" height="40"/>
+                <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ooq-vs-Xt1" customClass="HoverButton">
+                    <rect key="frame" x="20" y="534" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="69o-49-0QB"/>
                         <constraint firstAttribute="width" constant="40" id="ImE-zq-KIj"/>
@@ -180,8 +180,11 @@
                         <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
                             <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
                             <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -237,16 +240,21 @@
                                 <outlet property="delegate" destination="-2" id="2u2-D4-htz"/>
                             </connections>
                         </textField>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="IconButton">
-                            <rect key="frame" x="708" y="5" width="40" height="40"/>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
+                            <rect key="frame" x="708" y="15" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="TmF-ip-m4C"/>
                                 <constraint firstAttribute="height" constant="40" id="rbQ-lE-sAq"/>
                             </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="s6a-eK-t3T">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="s6a-eK-t3T">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="sendMessage:" target="-2" id="5Cf-jA-eJM"/>
                                 <binding destination="-2" name="enabled" keyPath="self.message.length" id="ZmZ-2N-CPX"/>
