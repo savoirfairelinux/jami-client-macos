@@ -30,7 +30,7 @@
 {
     if ([self.identifier isEqualToString:@"RightMessageView"]) {
         self.msgBackground.pointerDirection = RIGHT;
-        self.msgBackground.bgColor = [NSColor ringBlue];
+        self.msgBackground.bgColor = [NSColor ringLightBlue];
 
     }
     else {

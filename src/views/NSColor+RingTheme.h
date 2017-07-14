@@ -22,6 +22,7 @@
 @interface NSColor (RingTheme)
 
 + (NSColor*) ringBlue;
++ (NSColor*) ringLightBlue;
 + (NSColor*) ringBlueWithAlpha:(CGFloat) a;
 
 + (NSColor*) ringDarkBlue;

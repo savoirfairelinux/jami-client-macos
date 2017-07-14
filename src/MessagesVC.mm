@@ -107,11 +107,11 @@ QAbstractItemModel* currentModel;
 
     NSMutableAttributedString* msgAttString =
     [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",qIdx.data((int)Qt::DisplayRole).toString().toNSString()]
-                                           attributes:[self messageAttributesFor:qIdx]];
+                                           attributes:[self messageAttributes]];
 
     NSAttributedString* timestampAttrString =
     [[NSAttributedString alloc] initWithString:qIdx.data((int)Media::TextRecording::Role::FormattedDate).toString().toNSString()
-                                    attributes:[self timestampAttributesFor:qIdx]];
+                                    attributes:[self timestampAttributes]];
 
 
     CGFloat finalWidth = MAX(msgAttString.size.width, timestampAttrString.size.width);
@@ -143,10 +143,10 @@ QAbstractItemModel* currentModel;
     double someWidth = outlineView.frame.size.width * 0.7;
 
     NSMutableAttributedString* msgAttString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",qIdx.data((int)Qt::DisplayRole).toString().toNSString()]
-                                                                                     attributes:[self messageAttributesFor:qIdx]];
+                                                                                     attributes:[self messageAttributes]];
     NSAttributedString *timestampAttrString = [[NSAttributedString alloc] initWithString:
                                                qIdx.data((int)Media::TextRecording::Role::FormattedDate).toString().toNSString()
-                                                                              attributes:[self timestampAttributesFor:qIdx]];
+                                                                              attributes:[self timestampAttributes]];
 
     [msgAttString appendAttributedString:timestampAttrString];
 
@@ -163,17 +163,10 @@ QAbstractItemModel* currentModel;
 
 #pragma mark - Text formatting
 
-- (NSMutableDictionary*) timestampAttributesFor:(QModelIndex) qIdx
+- (NSMutableDictionary*) timestampAttributes
 {
-    auto dir = qvariant_cast<Media::Media::Direction>(qIdx.data((int)Media::TextRecording::Role::Direction));
     NSMutableDictionary* attrs = [NSMutableDictionary dictionary];
-
-    if (dir == Media::Media::Direction::IN) {
-        attrs[NSForegroundColorAttributeName] = [NSColor grayColor];
-    } else {
-        attrs[NSForegroundColorAttributeName] = [NSColor whiteColor];
-    }
-
+    attrs[NSForegroundColorAttributeName] = [NSColor grayColor];
     NSFont* systemFont = [NSFont systemFontOfSize:12.0f];
     attrs[NSFontAttributeName] = systemFont;
     attrs[NSParagraphStyleAttributeName] = [self paragraphStyle];
@@ -181,17 +174,10 @@ QAbstractItemModel* currentModel;
     return attrs;
 }
 
-- (NSMutableDictionary*) messageAttributesFor:(QModelIndex) qIdx
+- (NSMutableDictionary*) messageAttributes
 {
-    auto dir = qvariant_cast<Media::Media::Direction>(qIdx.data((int)Media::TextRecording::Role::Direction));
     NSMutableDictionary* attrs = [NSMutableDictionary dictionary];
-
-    if (dir == Media::Media::Direction::IN) {
-        attrs[NSForegroundColorAttributeName] = [NSColor blackColor];
-    } else {
-        attrs[NSForegroundColorAttributeName] = [NSColor whiteColor];
-    }
-
+    attrs[NSForegroundColorAttributeName] = [NSColor blackColor];
     NSFont* systemFont = [NSFont systemFontOfSize:14.0f];
     attrs[NSFontAttributeName] = systemFont;
     attrs[NSParagraphStyleAttributeName] = [self paragraphStyle];
