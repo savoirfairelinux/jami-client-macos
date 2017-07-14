@@ -79,8 +79,7 @@
     [self.view.layer setBackgroundColor:[NSColor ringGreyHighlight].CGColor];
     [self.view.layer setCornerRadius:5.0f];
 
-    [sendPanel setWantsLayer:YES];
-    [sendPanel setLayer:[CALayer layer]];
+    [messageField setFocusRingType:NSFocusRingTypeNone];
 
     [self setupChat];
 
@@ -119,7 +118,11 @@
                              [contactMethodsPopupButton addItemWithTitle:cm->uri().toNSString()];
                          }
 
-                         [contactMethodsPopupButton setEnabled:(contactMethods.length() > 1)];
+                         BOOL isSMultipleCM = (contactMethods.length() > 1);
+
+                         [contactMethodsPopupButton setEnabled:isSMultipleCM];
+                         [contactMethodsPopupButton setBordered:isSMultipleCM];
+                         [[contactMethodsPopupButton cell] setArrowPosition: !isSMultipleCM ? NSPopUpNoArrow : NSPopUpArrowAtBottom];
 
                          [emptyConversationPlaceHolder setHidden:NO];
                          // Select first cm
