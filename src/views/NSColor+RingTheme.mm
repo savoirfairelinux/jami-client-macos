@@ -51,6 +51,11 @@
     return [NSColor colorWithCalibratedRed:41/255.0 green:41/255.0 blue:41/255.0 alpha:1.0];
 }
 
++ (NSColor*) ringLightBlue
+{
+return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 alpha:0.3];
+}
+
 - (NSColor *)lightenColorByValue:(float)value {
     float red = [self redComponent];
     red += value;
