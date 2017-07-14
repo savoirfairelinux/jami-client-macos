@@ -207,6 +207,10 @@ SET(ringclient_VIEWS
    src/views/RoundedTextField.mm
    src/views/MessageBubbleView.h
    src/views/MessageBubbleView.mm
+   src/views/SendMessageCell.h
+   src/views/SendMessageCell.mm
+   src/views/SendMessagePanel.h
+   src/views/SendMessagePanel.mm
 )
 
 SET(ringclient_OTHERS
