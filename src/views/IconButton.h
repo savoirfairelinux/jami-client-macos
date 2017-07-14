@@ -62,5 +62,12 @@
 
 @property NSVisualEffectView* vibrantView;
 
+/*
+ * Button image color
+ * default value : [NSColor white];
+ */
+
+@property (nonatomic, strong) NSColor* imageColor;
+
 
 @end

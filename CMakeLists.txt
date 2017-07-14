@@ -211,6 +211,8 @@ SET(ringclient_VIEWS
    src/views/SendMessageCell.mm
    src/views/SendMessagePanel.h
    src/views/SendMessagePanel.mm
+   src/views/HoverButton.h
+   src/views/HoverButton.mm
 )
 
 SET(ringclient_OTHERS

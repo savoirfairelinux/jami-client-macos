@@ -21,7 +21,12 @@
 
 #import "NSColor+RingTheme.h"
 
+@interface IconButton()
+@property (nonatomic, strong) NSTrackingArea *trackingArea;
+@end
+
 @implementation IconButton
+@synthesize trackingArea;
 
 -(void) awakeFromNib {
     if (!self.bgColor) {
@@ -36,6 +41,7 @@
         self.imageInsets = 8.0f;
 
     self.pressed = NO;
+
 }
 
 -(void) setPressed:(BOOL)newVal
@@ -50,9 +56,20 @@
 
     NSColor* backgroundColor;
     NSColor* backgroundStrokeColor;
-    NSColor* tintColor = [NSColor whiteColor];
+    NSColor* tintColor = self.imageColor ? self.imageColor : [NSColor whiteColor];
 
-    if (self.mouseDown || self.isPressed) {
+    if (self.bgColor == [NSColor clearColor]) {
+        backgroundColor = self.bgColor ;
+        backgroundStrokeColor = self.bgColor;
+        if(!self.isEnabled) {
+            tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
+        }
+    }
+    else if (!self.isEnabled) {
+        backgroundColor = [self.bgColor colorWithAlphaComponent:0.7];
+        backgroundStrokeColor = [self.bgColor colorWithAlphaComponent:0.7];
+        tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
+    } else if (self.mouseDown || self.isPressed) {
         if (self.highlightColor) {
             backgroundColor = self.highlightColor;
             backgroundStrokeColor = [self.highlightColor darkenColorByValue:0.1];
@@ -60,11 +77,9 @@
             backgroundColor = [self.bgColor darkenColorByValue:0.3];
             backgroundStrokeColor = [self.bgColor darkenColorByValue:0.4];
         }
-    } else if (!self.isEnabled) {
-        backgroundColor = [self.bgColor colorWithAlphaComponent:0.7];
-        backgroundStrokeColor = [self.bgColor colorWithAlphaComponent:0.7];
-        tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
-    } else {
+    }
+
+    else {
         backgroundColor = self.bgColor;
         backgroundStrokeColor = [self.bgColor darkenColorByValue:0.1];
     }
