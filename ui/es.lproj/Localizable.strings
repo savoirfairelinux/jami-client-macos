@@ -20,10 +20,10 @@
 "Choose a CA list" = "Elegir una lista CA";
 
 /* Open panel title */
-"Choose a certificate" = "Elija un certificado";
+"Choose a certificate" = "Elegir un certificado";
 
 /* Open panel title */
-"Choose a directory" = "Elige un directorio";
+"Choose a directory" = "Elija un directorio";
 
 /* Open panel title */
 "Choose a private key file" = "Elija un archivo de llave privada";
@@ -32,7 +32,7 @@
 "Choose CA" = "Elegir CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Elige directorio";
+"Choose directory" = "Elija directorio";
 
 /* Contextual menu entry */
 "Choose file" = "Elegir archivo";
@@ -146,18 +146,18 @@
 "You have to migrate your account before exporting" = "Debes migrar tu cuenta antes de exportar";
 
 /* Contextual menu action */
-"Delete contact" = "Delete contact";
+"Delete contact" = "Eliminar contacto";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
+"Could not delete MAC contact" = "No se ha podido borrar el contacto MAC";
 
 /* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
+"To delete go to MAC Contacts App" = "Para borrarlo ve a la Aplicación de Contactos MAC";
 
 /* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
+"Contact will be deleted" = "El contacto se borrará";
 
 /* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
+"Are you sure you want to delete contact \"%@\"" = "¿Seguro que desea borrar el contacto \"%@\"?";
 
 
