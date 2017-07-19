@@ -115,7 +115,7 @@
 
                          [contactMethodsPopupButton removeAllItems];
                          for (auto cm : contactMethods) {
-                             [contactMethodsPopupButton addItemWithTitle:cm->uri().toNSString()];
+                             [contactMethodsPopupButton addItemWithTitle:cm->bestId().toNSString()];
                          }
 
                          BOOL isSMultipleCM = (contactMethods.length() > 1);
