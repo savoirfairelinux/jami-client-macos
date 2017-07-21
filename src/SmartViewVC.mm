@@ -266,14 +266,17 @@ NSInteger const PRESENCE_TAG        = 800;
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
     NSString* displayNameString = qIdx.data((int)Ring::Role::Name).toString().toNSString();
-    NSString* displayIDString = qIdx.data((int)Person::Role::IdOfLastCMUsed).toString().toNSString();
+    NSString* displayIDString = qIdx.data((int)Ring::Role::Number).toString().toNSString();
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
+        NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
         [displayName setStringValue:displayIDString];
+        [displayRingID setHidden:YES];
     }
     else {
         NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
         [displayName setStringValue:displayNameString];
         [displayRingID setStringValue:displayIDString];
+        [displayRingID setHidden:NO];
     }
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
 
