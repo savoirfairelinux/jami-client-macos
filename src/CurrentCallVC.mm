@@ -39,6 +39,8 @@
 #import <media/text.h>
 #import <person.h>
 #import <globalinstances.h>
+#import <personmodel.h>
+#import <peerprofilecollection.h>
 
 #import "AppDelegate.h"
 #import "views/ITProgressIndicator.h"
@@ -641,21 +643,40 @@
 - (IBAction)addToContact:(NSButton*) sender {
     auto contactmethod = CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex())->peerContactMethod();
 
-    if (self.addToContactPopover != nullptr) {
-        [self.addToContactPopover performClose:self];
-        self.addToContactPopover = NULL;
-    } else if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
-        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
-        [editorVC setMethodToLink:contactmethod];
-        [editorVC setContactLinkedDelegate:self];
-        self.addToContactPopover = [[NSPopover alloc] init];
-        [self.addToContactPopover setContentSize:editorVC.view.frame.size];
-        [self.addToContactPopover setContentViewController:editorVC];
-        [self.addToContactPopover setAnimates:YES];
-        [self.addToContactPopover setBehavior:NSPopoverBehaviorTransient];
-        [self.addToContactPopover setDelegate:self];
+    // TODO: Uncomment to reuse contact name editing popover
+//    if (self.addToContactPopover != nullptr) {
+//        [self.addToContactPopover performClose:self];
+//        self.addToContactPopover = NULL;
+//    } else if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
+//        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
+//        [editorVC setMethodToLink:contactmethod];
+//        [editorVC setContactLinkedDelegate:self];
+//        self.addToContactPopover = [[NSPopover alloc] init];
+//        [self.addToContactPopover setContentSize:editorVC.view.frame.size];
+//        [self.addToContactPopover setContentViewController:editorVC];
+//        [self.addToContactPopover setAnimates:YES];
+//        [self.addToContactPopover setBehavior:NSPopoverBehaviorTransient];
+//        [self.addToContactPopover setDelegate:self];
+//
+//        [self.addToContactPopover showRelativeToRect:sender.bounds ofView:sender preferredEdge:NSMaxXEdge];
+//    }
 
-        [self.addToContactPopover showRelativeToRect:sender.bounds ofView:sender preferredEdge:NSMaxXEdge];
+    auto* newPerson = new Person();
+    newPerson->setFormattedName(contactmethod->bestName());
+
+    Person::ContactMethods numbers;
+    numbers << contactmethod;
+    newPerson->setContactMethods(numbers);
+    contactmethod->setPerson(newPerson);
+
+    auto personCollections = PersonModel::instance().collections();
+    CollectionInterface *peerProfileCollection = nil;
+    foreach(auto collection, personCollections) {
+        if(dynamic_cast<PeerProfileCollection*>(collection))
+            peerProfileCollection = collection;
+    }
+    if(peerProfileCollection) {
+        PersonModel::instance().addNewPerson(newPerson, peerProfileCollection);
     }
 
     [videoView setCallDelegate:nil];

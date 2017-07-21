@@ -30,6 +30,8 @@
 #import <person.h>
 #import <contactmethod.h>
 #import <globalinstances.h>
+#import <personmodel.h>
+#import <peerprofilecollection.h>
 
 #import "QNSTreeController.h"
 #import "PersonLinkerVC.h"
@@ -256,21 +258,40 @@ NSInteger const PHOTO_TAG = 400;
         }
     }
 
-    if (addToContactPopover != nullptr) {
-        [addToContactPopover performClose:self];
-        addToContactPopover = NULL;
-    } else if (contactmethod) {
-        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
-        [editorVC setMethodToLink:contactmethod];
-        [editorVC setContactLinkedDelegate:self];
-        addToContactPopover = [[NSPopover alloc] init];
-        [addToContactPopover setContentSize:editorVC.view.frame.size];
-        [addToContactPopover setContentViewController:editorVC];
-        [addToContactPopover setAnimates:YES];
-        [addToContactPopover setBehavior:NSPopoverBehaviorTransient];
-        [addToContactPopover setDelegate:self];
+    // TODO: Uncomment to reuse contact name editing popover
+//    if (addToContactPopover != nullptr) {
+//        [addToContactPopover performClose:self];
+//        addToContactPopover = NULL;
+//    } else if (contactmethod) {
+//        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
+//        [editorVC setMethodToLink:contactmethod];
+//        [editorVC setContactLinkedDelegate:self];
+//        addToContactPopover = [[NSPopover alloc] init];
+//        [addToContactPopover setContentSize:editorVC.view.frame.size];
+//        [addToContactPopover setContentViewController:editorVC];
+//        [addToContactPopover setAnimates:YES];
+//        [addToContactPopover setBehavior:NSPopoverBehaviorTransient];
+//        [addToContactPopover setDelegate:self];
+//
+//        [addToContactPopover showRelativeToRect:[historyView frameOfOutlineCellAtRow:[historyView selectedRow]] ofView:historyView preferredEdge:NSMaxXEdge];
+//    }
 
-        [addToContactPopover showRelativeToRect:[historyView frameOfOutlineCellAtRow:[historyView selectedRow]] ofView:historyView preferredEdge:NSMaxXEdge];
+    auto* newPerson = new Person();
+    newPerson->setFormattedName(contactmethod->bestName());
+
+    Person::ContactMethods numbers;
+    numbers << contactmethod;
+    newPerson->setContactMethods(numbers);
+    contactmethod->setPerson(newPerson);
+
+    auto personCollections = PersonModel::instance().collections();
+    CollectionInterface *peerProfileCollection = nil;
+    foreach(auto collection, personCollections) {
+        if(dynamic_cast<PeerProfileCollection*>(collection))
+            peerProfileCollection = collection;
+    }
+    if(peerProfileCollection) {
+        PersonModel::instance().addNewPerson(newPerson, peerProfileCollection);
     }
 }
 

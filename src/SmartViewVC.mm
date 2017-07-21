@@ -39,6 +39,8 @@
 #import <globalinstances.h>
 #import <phonedirectorymodel.h>
 #import <AvailableAccountModel.h>
+#import <personmodel.h>
+#import <peerprofilecollection.h>
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
@@ -458,22 +460,41 @@ NSInteger const PRESENCE_TAG        = 800;
     if (contactmethod.isEmpty())
         return;
 
-    if (addToContactPopover != nullptr) {
-        [addToContactPopover performClose:self];
-        addToContactPopover = NULL;
-    } else if (contactmethod.first()) {
-        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
-        [editorVC setMethodToLink:contactmethod.first()];
-        [editorVC setContactLinkedDelegate:self];
-        addToContactPopover = [[NSPopover alloc] init];
-        [addToContactPopover setContentSize:editorVC.view.frame.size];
-        [addToContactPopover setContentViewController:editorVC];
-        [addToContactPopover setAnimates:YES];
-        [addToContactPopover setBehavior:NSPopoverBehaviorTransient];
-        [addToContactPopover setDelegate:self];
+    // TODO: Uncomment to reuse contact name editing popover
+//    if (addToContactPopover != nullptr) {
+//        [addToContactPopover performClose:self];
+//        addToContactPopover = NULL;
+//    } else if (contactmethod.first()) {
+//        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
+//        [editorVC setMethodToLink:contactmethod.first()];
+//        [editorVC setContactLinkedDelegate:self];
+//        addToContactPopover = [[NSPopover alloc] init];
+//        [addToContactPopover setContentSize:editorVC.view.frame.size];
+//        [addToContactPopover setContentViewController:editorVC];
+//        [addToContactPopover setAnimates:YES];
+//        [addToContactPopover setBehavior:NSPopoverBehaviorTransient];
+//        [addToContactPopover setDelegate:self];
+//
+//        [addToContactPopover showRelativeToRect:[smartView frameOfCellAtColumn:0 row:[smartView selectedRow]]
+//                                         ofView:smartView preferredEdge:NSMaxXEdge];
+//    }
 
-        [addToContactPopover showRelativeToRect:[smartView frameOfCellAtColumn:0 row:[smartView selectedRow]]
-                                         ofView:smartView preferredEdge:NSMaxXEdge];
+    auto* newPerson = new Person();
+    newPerson->setFormattedName(contactmethod.first()->bestName());
+
+    Person::ContactMethods numbers;
+    numbers << contactmethod.first();
+    newPerson->setContactMethods(numbers);
+    contactmethod.first()->setPerson(newPerson);
+
+    auto personCollections = PersonModel::instance().collections();
+    CollectionInterface *peerProfileCollection = nil;
+    foreach(auto collection, personCollections) {
+        if(dynamic_cast<PeerProfileCollection*>(collection))
+            peerProfileCollection = collection;
+    }
+    if(peerProfileCollection) {
+        PersonModel::instance().addNewPerson(newPerson, peerProfileCollection);
     }
 }
 
