@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
@@ -17,6 +17,8 @@
                 <outlet property="sendPanel" destination="Rth-di-Tls" id="vCd-kM-DLc"/>
                 <outlet property="sentContactRequestButton" destination="4ZO-un-Lrm" id="KbQ-lT-4ME"/>
                 <outlet property="sentContactRequestWidth" destination="v81-fy-pNZ" id="cJD-zQ-HkG"/>
+                <outlet property="titleHoverButtonConstraint" destination="vUO-eF-Kox" id="lYB-E6-4Ex"/>
+                <outlet property="titleTopConstraint" destination="32s-Wp-DE1" id="fms-Yu-vrn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -167,7 +169,7 @@
                     <rect key="frame" x="20" y="525" width="758" height="5"/>
                 </box>
                 <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ooq-vs-Xt1" customClass="HoverButton">
-                    <rect key="frame" x="20" y="534" width="40" height="40"/>
+                    <rect key="frame" x="20" y="537" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="69o-49-0QB"/>
                         <constraint firstAttribute="width" constant="40" id="ImE-zq-KIj"/>
@@ -192,7 +194,7 @@
                     </connections>
                 </button>
                 <popUpButton translatesAutoresizingMaskIntoConstraints="NO" id="xdB-aI-PSs" userLabel="CMs Popup menu">
-                    <rect key="frame" x="62" y="533" width="155" height="26"/>
+                    <rect key="frame" x="62" y="507" width="155" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="ESK-Wb-Nis"/>
                         <constraint firstAttribute="width" constant="150" id="Er6-l6-0VP"/>
@@ -210,7 +212,7 @@
                         <action selector="itemChanged:" target="-2" id="rVd-Nz-D6M"/>
                     </connections>
                 </popUpButton>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uqj-Xr-xl5">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uqj-Xr-xl5">
                     <rect key="frame" x="300" y="282" width="198" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Start the conversation!" id="bsl-nv-Wqq">
                         <font key="font" metaFont="systemSemibold" size="18"/>
@@ -221,7 +223,7 @@
                 <customView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-di-Tls" customClass="SendMessagePanel">
                     <rect key="frame" x="0.0" y="0.0" width="798" height="50"/>
                     <subviews>
-                        <textField verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
+                        <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
                             <rect key="frame" x="48" y="5" width="660" height="40"/>
                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr" customClass="SendMessageCell">
                                 <font key="font" metaFont="system"/>
@@ -240,7 +242,7 @@
                                 <outlet property="delegate" destination="-2" id="2u2-D4-htz"/>
                             </connections>
                         </textField>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
+                        <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
                             <rect key="frame" x="708" y="15" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="TmF-ip-m4C"/>
@@ -274,8 +276,8 @@
                         <outlet property="messageCell" destination="Ilz-7v-2fr" id="eOP-sJ-6Wf"/>
                     </connections>
                 </customView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
-                    <rect key="frame" x="68" y="559" width="44" height="22"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
+                    <rect key="frame" x="68" y="533" width="44" height="48"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Title" id="HnC-1N-RmR">
                         <font key="font" metaFont="system" size="18"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -337,6 +339,7 @@
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="qz7-sE-9Ml"/>
                 <constraint firstItem="Uqj-Xr-xl5" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="tmm-4H-81S"/>
                 <constraint firstItem="xdB-aI-PSs" firstAttribute="top" secondItem="ucx-6g-eJw" secondAttribute="bottom" constant="2" id="uJ0-ZI-9W2"/>
+                <constraint firstItem="ucx-6g-eJw" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="vUO-eF-Kox"/>
             </constraints>
             <point key="canvasLocation" x="514" y="354"/>
         </customView>
