@@ -64,6 +64,9 @@
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
+
+    IBOutlet NSLayoutConstraint* titleHoverButtonConstraint;
+    IBOutlet NSLayoutConstraint* titleTopConstraint;
 }
 
 
@@ -119,10 +122,15 @@
                          }
 
                          BOOL isSMultipleCM = (contactMethods.length() > 1);
+                         BOOL hideCMPopupButton = !isSMultipleCM && (contactMethods.first()->bestId() == contactMethods.first()->bestName());
 
                          [contactMethodsPopupButton setEnabled:isSMultipleCM];
                          [contactMethodsPopupButton setBordered:isSMultipleCM];
+                         [contactMethodsPopupButton setHidden:hideCMPopupButton];
                          [[contactMethodsPopupButton cell] setArrowPosition: !isSMultipleCM ? NSPopUpNoArrow : NSPopUpArrowAtBottom];
+
+                         [titleHoverButtonConstraint setActive:hideCMPopupButton];
+                         [titleTopConstraint setActive:!hideCMPopupButton];
 
                          [emptyConversationPlaceHolder setHidden:NO];
                          // Select first cm
@@ -260,12 +268,12 @@
 
     [self updateSendButtonVisibility];
 
-    [conversationTitle setStringValue:selectedContactMethod->primaryName().toNSString()];
+    [conversationTitle setStringValue:selectedContactMethod->bestName().toNSString()];
     QObject::disconnect(contactMethodChanged);
     contactMethodChanged = QObject::connect(selectedContactMethod,
                                             &ContactMethod::changed,
                                             [self] {
-                                                [conversationTitle setStringValue:selectedContactMethod->primaryName().toNSString()];
+                                                [conversationTitle setStringValue:selectedContactMethod->bestName().toNSString()];
                                                 [self updateSendButtonVisibility];
                                             });
 
