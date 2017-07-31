@@ -11,7 +11,7 @@
 "An error occured during the export" = "Eksportavimo metu, įvyko klaida";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Padaryti paskyros atsarginę kopiją";
 
 /* Contextual menu action */
 "Call number" = "Call number";
@@ -149,15 +149,15 @@
 "Delete contact" = "Ištrinti kontaktą";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
+"Could not delete MAC contact" = "Nepavyko ištrinti MAC kontakto";
 
 /* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
+"To delete go to MAC Contacts App" = "Norėdami ištrinti, pereikite į MAC kontaktų programą (angl. Contacts)";
 
 /* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
+"Contact will be deleted" = "Kontaktas bus ištrintas";
 
 /* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
+"Are you sure you want to delete contact \"%@\"" = "Ar tikrai norite ištrinti kontaktą \"%@\"";
 
 

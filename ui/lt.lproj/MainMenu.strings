@@ -12,7 +12,7 @@
 "24.title" = "Langas";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
+"29.title" = "Pagrindinis meniu";
 
 /* Class = "NSMenuItem"; title = "Ring"; ObjectID = "56"; */
 "56.title" = "Ring";
@@ -54,7 +54,7 @@
 "197.title" = "Kopijuoti";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "Select All";
+"198.title" = "Žymėti viską";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
 "199.title" = "Iškirpti";
@@ -144,13 +144,13 @@
 "349.title" = "Substitutions";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
-"350.title" = "Smart Copy/Paste";
+"350.title" = "Išmanusis kopijavimas/įdėjimas";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Smart Quotes";
+"351.title" = "Išmaniosios kabutės";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
-"354.title" = "Smart Links";
+"354.title" = "Išmaniosios nuorodos";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
 "450.title" = "Transformations";
@@ -159,7 +159,7 @@
 "451.title" = "Transformations";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Make Upper Case";
+"452.title" = "Paversti didžiosiomis raidėmis";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
 "454.title" = "Automatiškai taisyti rašybą";
@@ -168,13 +168,13 @@
 "457.title" = "Show Substitutions";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Smart Dashes";
+"460.title" = "Išmanieji brūkšniai";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "Text Replacement";
+"462.title" = "Teksto pakeitimas";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Make Lower Case";
+"465.title" = "Paversti mažosiomis raidėmis";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
 "466.title" = "Rašyti didžiosiomis raidėmis";

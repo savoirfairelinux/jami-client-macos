@@ -113,7 +113,7 @@
 "Share" = "共享";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "文本操作";
 
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "该用户名可用";
@@ -149,15 +149,15 @@
 "Delete contact" = "删除联系人";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
+"Could not delete MAC contact" = "无法删除 macOS 联系人";
 
 /* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
+"To delete go to MAC Contacts App" = "需要时请使用 macOS 通讯录应用进行删除";
 
 /* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
+"Contact will be deleted" = "联系人将被删除";
 
 /* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
+"Are you sure you want to delete contact \"%@\"" = "您确定您要删除联系人 \"%@\" 吗";
 
 
