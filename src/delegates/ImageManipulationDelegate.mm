@@ -41,6 +41,26 @@
 
 namespace Interfaces {
 
+    // Colors from material.io
+    const QColor ImageManipulationDelegate::avatarColors_[] = {
+        {"#fff44336"}, //Red
+        {"#ffe91e63"}, //Pink
+        {"#ff9c27b0"}, //Purple
+        {"#ff673ab7"}, //Deep Purple
+        {"#ff3f51b5"}, //Indigo
+        {"#ff2196f3"}, //Blue
+        {"#ff00bcd4"}, //Cyan
+        {"#ff009688"}, //Teal
+        {"#ff4caf50"}, //Green
+        {"#ff8bc34a"}, //Light Green
+        {"#ff9e9e9e"}, //Grey
+        {"#ffcddc39"}, //Lime
+        {"#ffffc107"}, //Amber
+        {"#ffff5722"}, //Deep Orange
+        {"#ff795548"}, //Brown
+        {"#ff607d8b"}  //Blue Grey
+    };
+
     ImageManipulationDelegate::ImageManipulationDelegate() {}
 
     QVariant ImageManipulationDelegate::contactPhoto(Person* c, const QSize& size, bool displayPresence) {
@@ -110,7 +130,9 @@ namespace Interfaces {
             m_hContactsPixmap.insert(index, toInsert);
 
         } else {
-            return drawDefaultUserPixmap(size);
+            return drawDefaultUserPixmap(size,
+                                         c->phoneNumbers().at(0)->uri().userinfo().at(0).toLatin1(),
+                                         c->phoneNumbers().at(0)->bestName().at(0).toUpper().toLatin1());
         }
 
         return pxm;
@@ -156,7 +178,9 @@ namespace Interfaces {
         if (n->contact()) {
             return contactPhoto(n->contact(), size, displayPresence);
         } else {
-            return drawDefaultUserPixmap(size);
+            return drawDefaultUserPixmap(size,
+                                         n->uri().userinfo().at(0).toLatin1(),
+                                         n->bestName().at(0).toUpper().toLatin1());
         }
     }
 
@@ -167,7 +191,7 @@ namespace Interfaces {
         const bool ret = image.loadFromData(QByteArray::fromBase64(data),type.toLatin1());
         if (!ret) {
             qDebug() << "vCard image loading failed";
-            return drawDefaultUserPixmap(decorationSize);
+            return drawDefaultUserPixmap(decorationSize, '?', '?');
         }
 
         return QPixmap::fromImage(image);
@@ -187,23 +211,30 @@ namespace Interfaces {
         return bArray;
     }
 
-    QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size, bool displayPresence, bool isPresent) {
+    QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size,  const char color, const char letter) {
+        // We start with a transparent avatar
+        QPixmap avatar(size);
+        avatar.fill(Qt::transparent);
 
-        auto index = QStringLiteral("%1%2").arg(size.width()).arg(size.height());
-        if (m_hDefaultUserPixmap.contains(index)) {
-            return m_hDefaultUserPixmap.value(index);
-        }
+        // We pick a color based on the passed character
+        QColor avColor = ImageManipulationDelegate::avatarColors_[color % 16];
 
-        // create the image somehow, load from file, draw into it...
-        auto sourceImgRef = CGImageSourceCreateWithData((__bridge CFDataRef)[[NSImage imageNamed:@"default_user_icon"] TIFFRepresentation], NULL);
-        auto imgRef = CGImageSourceCreateImageAtIndex(sourceImgRef, 0, NULL);
-        auto finalpxm =  QtMac::fromCGImageRef(resizeCGImage(imgRef, size));
-        CFRelease(sourceImgRef);
-        CFRelease(imgRef);
+        // We draw a circle with this color
+        QPainter painter(&avatar);
+        painter.setRenderHints(QPainter::Antialiasing|QPainter::SmoothPixmapTransform);
+        painter.setPen(Qt::transparent);
+        painter.setBrush(avColor);
+        painter.drawEllipse(avatar.rect());
 
-        m_hDefaultUserPixmap.insert(index, finalpxm);
+        // Then we paint a letter in the circle
+        auto font = painter.font();
+        font.setPointSize(avatar.height()/2);
+        painter.setFont(font);
+        painter.setPen(Qt::white);
+        QRect textRect = avatar.rect();
+        painter.drawText(textRect, QString(letter), QTextOption(Qt::AlignCenter));
 
-        return finalpxm;
+        return avatar;
     }
 
     CGImageRef ImageManipulationDelegate::resizeCGImage(CGImageRef image, const QSize& size) {
@@ -288,7 +319,9 @@ namespace Interfaces {
             && c->peerContactMethod()->contact()) {
                return contactPhoto(c->peerContactMethod()->contact(), decorationSize);
         } else
-            return drawDefaultUserPixmap(decorationSize);
+            return drawDefaultUserPixmap(decorationSize,
+                                         c->peerContactMethod()->uri().userinfo().at(0).toLatin1(),
+                                         c->peerContactMethod()->bestName().at(0).toUpper().toLatin1());
     }
 
     QVariant ImageManipulationDelegate::decorationRole(const ContactMethod* cm)
@@ -297,7 +330,9 @@ namespace Interfaces {
         if (cm && cm->contact() && cm->contact()->photo().isValid())
             return contactPhoto(cm->contact(), decorationSize);
         else
-            return drawDefaultUserPixmap(decorationSize);
+            return drawDefaultUserPixmap(decorationSize,
+                                         cm->uri().userinfo().at(0).toLatin1(),
+                                         cm->bestName().at(0).toUpper().toLatin1());
     }
 
     QVariant ImageManipulationDelegate::decorationRole(const Person* p)
@@ -310,7 +345,7 @@ namespace Interfaces {
         Q_UNUSED(acc)
         if (auto pro = ProfileModel::instance().selectedProfile())
             return contactPhoto(pro->person(), decorationSize);
-        return drawDefaultUserPixmap(decorationSize);
+        return drawDefaultUserPixmap(decorationSize, '?', '?');
     }
 
 } // namespace Interfaces

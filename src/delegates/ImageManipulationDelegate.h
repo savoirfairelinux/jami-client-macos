@@ -60,11 +60,12 @@ namespace Interfaces {
 
     private:
         //Helper
-        QPixmap drawDefaultUserPixmap(const QSize& size, bool displayPresence = false, bool isPresent = false);
+        QPixmap drawDefaultUserPixmap(const QSize& size, const char color, const char letter);
         CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
 
         QHash<QString, QPixmap> m_hDefaultUserPixmap;
         QHash<QString, QPair<QMetaObject::Connection, QPixmap>> m_hContactsPixmap;
+        static const QColor avatarColors_[];
 
         /**
          * Return a version of size destSize centered of the bigger photo
