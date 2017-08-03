@@ -1,0 +1,45 @@
+
+/* Class = "NSButtonCell"; title = "Require certificates for incoming TLS connections"; ObjectID = "1f9-X5-ykb"; */
+"1f9-X5-ykb.title" = "連入的 TLS 連線需要證書";
+
+/* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
+"1xi-9G-zOX.title" = "以客戶端驗證證書";
+
+/* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
+"2e5-zS-ghg.title" = "使用自訂加密法清單";
+
+/* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
+"5LC-T6-hpk.placeholderString" = "加密單元";
+
+/* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
+"7c2-kF-dcs.placeholderString" = "密碼...";
+
+/* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
+"9Q3-1W-Lh3.title" = "協商逾時";
+
+/* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
+"Ig9-B1-7N3.title" = "退回 RTP";
+
+/* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
+"JHb-iu-ZwI.title" = "私密金鑰";
+
+/* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "Jqz-P0-zAz"; */
+"Jqz-P0-zAz.title" = "使用者憑證";
+
+/* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
+"UxS-et-whJ.title" = "外連的 TLS 連線的伺服器名稱實體";
+
+/* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
+"YtQ-hx-hih.title" = "使用 SRTP";
+
+/* Class = "NSButtonCell"; title = "Use TLS transport"; ObjectID = "oTT-gO-fqM"; */
+"oTT-gO-fqM.title" = "使用 TLS 傳輸";
+
+/* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "uOE-XA-5gW"; */
+"uOE-XA-5gW.title" = "TLS 協定方法";
+
+/* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
+"vPF-Rp-aR6.title" = "證書機構清單";
+
+/* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
+"x2s-ov-cVQ.title" = "以伺服器驗證連入的證書";

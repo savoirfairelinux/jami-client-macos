@@ -1,86 +1,86 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "當匯出時遇到網路錯誤";
 
 /* Contextual menu action */
 "Add to contacts" = "加到聯絡人";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "別名：";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "當匯出時遇到錯誤";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "備份帳號";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "通話號碼";
 
 /* Open panel title */
-"Choose a CA list" = "Choose a CA list";
+"Choose a CA list" = "選擇證書機構清單";
 
 /* Open panel title */
-"Choose a certificate" = "Choose a certificate";
+"Choose a certificate" = "選擇證書";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "選擇目錄";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "選擇私密金鑰檔案";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "選擇證書機構";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "選擇目錄";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "選擇檔案";
 
 /* No comment provided by engineer. */
 "Copy" = "複製";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "複製名稱";
 
 /* Contextual menu action */
 "Copy number" = "複製號碼";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "建立 RING 帳號";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "建立 SIP 帳號";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "找不到輸入的名稱";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "導入您的帳號失敗。您可以按下 OK 重試，或是刪除您的帳號。";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "查詢失敗";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "來電從 %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "確定您有至少一個有效帳號";
 
 /* Message from {Name} */
-"Message from %@" = "Message from %@";
+"Message from %@" = "訊息從 %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "新的 SIP 帳號";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "沒有有效的帳號";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "密碼與確認不相符。";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "密碼太短";
 
 /* Indication for user */
 "Passwords don't match" = "密碼不相符";
@@ -92,72 +92,72 @@
 "Play" = "播放";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "拒絕";
 
 /* Contextual menu entry */
-"Remove value" = "Remove value";
+"Remove value" = "移除值";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
+"Reopen account to see your hash" = "重新開啟帳號以檢視您的雜湊值";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "還原帳號";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "修改輸入";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "RingID：";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "分享";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "文字動作";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "輸入的使用者名稱可用";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "輸入的使用者名稱無效。它必須有至少 3 個字元，且僅包含小寫字母與數字字元。";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "輸入的使用者名稱不可用";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
+"The following account needs to be migrated to the new Ring account format:" = "後面的帳號需要導入到新的 Ring 帳號格式：";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "您輸入的密碼無法解鎖這個帳號";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "您輸入的使用者名稱不符合在網路上的 RingID";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "要完成這個過程，您需要在新的裝置上開啟 Ring 並選擇「連結這個裝置到一個帳號」。您的 PIN 碼在 10 分鐘內有效。";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "要繼續導入，您必須為您的帳號選擇密碼。這個密碼會用於加密的您的主金鑰。您在加入新裝置到您的 Ring 帳號時會需要它。若您還沒準備好選擇密碼，您可以關掉 Ring 並稍後再繼續導入。";
 
 /* Name used when user leave field empty */
 "Unknown" = "未知";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "您必須在匯出前先導入您的帳號";
 
 /* Contextual menu action */
-"Delete contact" = "Delete contact";
+"Delete contact" = "刪除聯絡人";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
+"Could not delete MAC contact" = "無法刪除 MAC 聯絡人";
 
 /* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
+"To delete go to MAC Contacts App" = "要刪除請到 MAC 聯絡人 App";
 
 /* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
+"Contact will be deleted" = "聯絡人將會被刪除";
 
 /* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
+"Are you sure you want to delete contact \"%@\"" = "您確定您想要刪除聯絡人「%@」嗎";
 
 
