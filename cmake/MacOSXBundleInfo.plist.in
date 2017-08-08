@@ -15,7 +15,7 @@
     <key>SUPublicDSAKeyFile</key>
     <string>dsa_pub.pem</string>
     <key>SUFeedURL</key>
-    <string>https://gpl.savoirfairelinux.net/ring-download/mac_osx/sparkle-ring.xml</string>
+    <string>https://dl.ring.cx/mac_osx/sparkle-ring.xml</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleLongVersionString</key>
