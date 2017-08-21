@@ -119,7 +119,7 @@
 "The entered username is available" = "Указанное имя пользователя доступно";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Введённое имя пользователя недопустимо. Оно должно содержать не менее 3 символов и состоять из букв и цифр в нижнем регистре.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Введенное имя пользователя недопустимо. Оно должно содержать не менее 3 символов и состоять из букв и цифр в нижнем регистре.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Указанное имя пользователя недоступно";
@@ -128,10 +128,10 @@
 "The following account needs to be migrated to the new Ring account format:" = "Следующий аккаунт требуется преобразовать в новый формат аккаунта Ring:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "Введённый пароль не разблокирует этот аккаунт";
+"The password you entered does not unlock this account" = "Введенный пароль не подходит к этому аккаунту";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "Введённое имя пользователя не совпадает с RingID в сети";
+"The username you entered do not match a RingID on the network" = "Введенное имя пользователя не совпадает с RingID в сети";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Для завершения процесса вам нужно открыть Ring на новом устройстве и выбрать \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут.";
@@ -149,13 +149,13 @@
 "Delete contact" = "Удалить контакт";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Не удаётся удалить контакт MAC";
+"Could not delete MAC contact" = "Не удается удалить контакт MAC";
 
 /* Contextual menu alert remove contact */
 "To delete go to MAC Contacts App" = "Для удаления перейдите в приложение MAC Контакты";
 
 /* Contextual menu alert title */
-"Contact will be deleted" = "Контакт будет удалён";
+"Contact will be deleted" = "Контакт будет удален";
 
 /* Contextual menu alert remove contact {Name} */
 "Are you sure you want to delete contact \"%@\"" = "Вы уверены, что хотите удалить контакт \"%@\"?";

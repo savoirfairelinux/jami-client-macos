@@ -1,89 +1,89 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "En nettverksfeil inntraff under eksport";
 
 /* Contextual menu action */
 "Add to contacts" = "Legg til kontakter";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Alias:";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "En feil inntraff under eksport";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Sikkerhetskopier konto";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "Ring nummer";
 
 /* Open panel title */
-"Choose a CA list" = "Choose a CA list";
+"Choose a CA list" = "Velg en CA-liste";
 
 /* Open panel title */
-"Choose a certificate" = "Choose a certificate";
+"Choose a certificate" = "Velg et sertifikat";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "Velg ei mappe";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "Velg ei privat nøkkelfil";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "Velg CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "Velg mappe";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Velg fil";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopier";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Kopier navn";
 
 /* Contextual menu action */
-"Copy number" = "Copy number";
+"Copy number" = "Kopier nummer";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Opprett RING-konto";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Opprett SIP-konto";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "Innskrevet navn finnes ikke";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Klarte ikke å utføre oppslag";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "Innkommende samtale fra %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "Forsikre deg om at du har ihvertfall én gyldig konto";
 
 /* Message from {Name} */
-"Message from %@" = "Message from %@";
+"Message from %@" = "Melding fra %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Ny SIP-konto";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "Ingen gyldig konto tilgjengelig";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Passordet og bekreftelsen samsvarer ikke.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Passordet er for kort";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Passordene er ikke like";
 
 /* Button label */
 "Pause" = "Pause";
@@ -92,43 +92,43 @@
 "Play" = "Spill av";
 
 /* Button Action */
-"Refuse" = "Refuse";
+"Refuse" = "Avslå";
 
 /* Contextual menu entry */
-"Remove value" = "Remove value";
+"Remove value" = "Fjern verdi";
 
 /* Show advice to user */
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Gjenopprett konto";
 
 /* Button title */
 "Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "RingID:";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "Del";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "Teksthandlinger";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Innskrevet brukernavn er tilgjengelig";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Innskrevet brukernavn er ikke tilgjengelig";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Passordet du skrev inn låser ikke opp denne kontoen";
 
 /* Alert dialog title */
 "The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
@@ -149,13 +149,13 @@
 "Delete contact" = "Slett kontakt";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
+"Could not delete MAC contact" = "Kunne ikke slette MAC-kontakt";
 
 /* Contextual menu alert remove contact */
 "To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
 
 /* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
+"Contact will be deleted" = "Kontakten vil bli slettet";
 
 /* Contextual menu alert remove contact {Name} */
 "Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";

@@ -3,34 +3,34 @@
 "0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Kreves*";
 
 /* Class = "NSButtonCell"; title = "Register public username (experimental)"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register public username (experimental)";
+"AG5-GR-bii.title" = "Registrer offentlig brukernavn (eksperimentelt)";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Choose your password";
+"B6x-jj-48R.title" = "Velg ditt passord";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
-"BCg-5V-Ek4.placeholderString" = "Mandatory*";
+"BCg-5V-Ek4.placeholderString" = "Kreves*";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
-"YIN-YL-JBs.title" = "Just a moment...";
+"YIN-YL-JBs.title" = "Vent et øyeblikk…";
 
 /* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
-"fEY-eO-HwI.title" = "Repeat your password";
+"fEY-eO-HwI.title" = "Gjenta passordet ditt";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
-"gEy-ak-Cgq.placeholderString" = "'Unknown' if empty...";
+"gEy-ak-Cgq.placeholderString" = "\"Ukjent\" hvis tom…";
 
 /* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
-"gki-BR-jc3.title" = "Create your profile";
+"gki-BR-jc3.title" = "Opprett din profil";
 
 /* Class = "NSTextFieldCell"; title = "Create your account"; ObjectID = "qQl-Xn-c88"; */
-"qQl-Xn-c88.title" = "Create your account";
+"qQl-Xn-c88.title" = "Opprett din konto";
 
 /* Class = "NSTextFieldCell"; title = "Enter your full name"; ObjectID = "tzf-88-Yn5"; */
-"tzf-88-Yn5.title" = "Enter your full name";
+"tzf-88-Yn5.title" = "Skriv inn hele navnet ditt";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
 "v7f-52-GJA.title" = "Avbryt";

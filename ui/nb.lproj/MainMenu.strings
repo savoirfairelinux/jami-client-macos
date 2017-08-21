@@ -1,6 +1,6 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Bring All to Front";
+"5.title" = "Bring alle til forgrunnen";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "vindu";
@@ -24,7 +24,7 @@
 "58.title" = "Om Ring";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Preferences…";
+"129.title" = "Innstillinger…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Tjenester";
@@ -45,10 +45,10 @@
 "150.title" = "Vis alle";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "Stop Speaking";
+"195.title" = "Slutt å snakke";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "Start Speaking";
+"196.title" = "Begynn å snakke";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
 "197.title" = "Kopier";
@@ -75,10 +75,10 @@
 "204.title" = "Vis staving og gramatikk";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Edit";
+"205.title" = "Rediger";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
-"207.title" = "Undo";
+"207.title" = "Angre";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
 "208.title" = "Find neste";
@@ -90,22 +90,22 @@
 "210.title" = "Hopp til utvalg";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
-"211.title" = "Speech";
+"211.title" = "Tale";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "212"; */
-"212.title" = "Speech";
+"212.title" = "Tale";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
 "213.title" = "Finn forrige";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
-"215.title" = "Redo";
+"215.title" = "Gjenta";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
 "216.title" = "Staving og gramatikk";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Edit";
+"217.title" = "Rediger";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
 "218.title" = "Finn";
@@ -120,16 +120,16 @@
 "221.title" = "Use Selection for Find";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Zoom";
+"239.title" = "Forstørrelse";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "View";
+"295.title" = "Vis";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "View";
+"296.title" = "Vis";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "Show Toolbar";
+"297.title" = "Vis verktøyslinje";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
 "298.title" = "Customize Toolbar…";
@@ -147,10 +147,10 @@
 "350.title" = "Smart Copy/Paste";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Smart Quotes";
+"351.title" = "Smarte siteringer";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
-"354.title" = "Smart Links";
+"354.title" = "Smarte lenker";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
 "450.title" = "Transformations";
@@ -171,7 +171,7 @@
 "460.title" = "Smart Dashes";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "Text Replacement";
+"462.title" = "Teksterstatning";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
 "465.title" = "Make Lower Case";
@@ -189,7 +189,7 @@
 "491.title" = "Hjelp";
 
 /* Class = "NSMenuItem"; title = "Ring Help"; ObjectID = "492"; */
-"492.title" = "Ring Help";
+"492.title" = "Hjelp for Ring";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Søk og erstatt...";
@@ -204,7 +204,7 @@
 "1fJ-em-1ww.title" = "Vis";
 
 /* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Show recent";
+"GTY-d8-NBf.title" = "Vis nylige";
 
 /* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
 "GU3-tt-2de.title" = "Vis kontakter";
