@@ -12,7 +12,7 @@
 "24.title" = "vindu";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
+"29.title" = "AHovedMeny";
 
 /* Class = "NSMenuItem"; title = "Ring"; ObjectID = "56"; */
 "56.title" = "Ring";
@@ -117,7 +117,7 @@
 "220.title" = "Finn";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Use Selection for Find";
+"221.title" = "Bruk valg for å finne";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "Forstørrelse";
@@ -132,19 +132,19 @@
 "297.title" = "Vis verktøyslinje";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "Customize Toolbar…";
+"298.title" = "Tilpass menylinjen";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Check Grammar With Spelling";
+"346.title" = "Sjekk ";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "Substitutions";
+"348.title" = "Erstattere";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "Substitutions";
+"349.title" = "Erstattere";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
-"350.title" = "Smart Copy/Paste";
+"350.title" = "Smart kopier/lim inn";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
 "351.title" = "Smarte siteringer";
@@ -153,10 +153,10 @@
 "354.title" = "Smarte lenker";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
-"450.title" = "Transformations";
+"450.title" = "Transformasjoner";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "451"; */
-"451.title" = "Transformations";
+"451.title" = "Transformasjoner";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
 "452.title" = "Make Upper Case";

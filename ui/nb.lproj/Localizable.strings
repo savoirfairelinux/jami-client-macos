@@ -56,7 +56,7 @@
 "Entered name not found" = "Innskrevet navn finnes ikke";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Kunne ikke migrere din konto. Du kan prøve på nytt ved å trykke Ok eller slette kontoen din.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Klarte ikke å utføre oppslag";
@@ -98,13 +98,13 @@
 "Remove value" = "Fjern verdi";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
+"Reopen account to see your hash" = "Gjenåpne konto for å se din hash";
 
 /* Contextual menu entry */
 "Restore account" = "Gjenopprett konto";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Revider inntasting";
 
 /* Text shown to the user */
 "RingID : " = "RingID:";
@@ -119,31 +119,31 @@
 "The entered username is available" = "Innskrevet brukernavn er tilgjengelig";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Inntastet brukernavn er ugyldig. Det må være minst 3 tegn langt og inneholde kun små alfanumeriske tegn.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Innskrevet brukernavn er ikke tilgjengelig";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
+"The following account needs to be migrated to the new Ring account format:" = "Følgende konto må migreres til det nye Ring konto formatet:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Passordet du skrev inn låser ikke opp denne kontoen";
 
 /* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "The username you entered do not match a RingID on the network";
+"The username you entered do not match a RingID on the network" = "Brukernavnet du skrev inn samsvarte ikke med en RingID på nettverket";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "For å fullføre prosessen, må du åpne Ring på en ny enhet og velge \"Link denne enheten med en konto\". Din pinkode vil være gyldig i 10 minutter.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "For å fortsette med migreringen, må du velge passord for din konto. Dette passordet vil bli brukt til å kryptere din hovednøkkel. Den vil være nødvendig for å legge til nye enheter til din Ring konto. Hvis du ikke er klar til å velge et passord, kan du lukke Ring og fortsette migreringen seinere.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Ukjent";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Du må migrere din konto før du kan eksportere";
 
 /* Contextual menu action */
 "Delete contact" = "Slett kontakt";
@@ -152,12 +152,12 @@
 "Could not delete MAC contact" = "Kunne ikke slette MAC-kontakt";
 
 /* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
+"To delete go to MAC Contacts App" = "For å slette gå til MAC kontakter applikasjonen";
 
 /* Contextual menu alert title */
 "Contact will be deleted" = "Kontakten vil bli slettet";
 
 /* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
+"Are you sure you want to delete contact \"%@\"" = "Er du sikker på at du vil slette kontakten \"%@\"";
 
 

@@ -149,10 +149,10 @@
 "Delete contact" = "Supprimer le contact";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
+"Could not delete MAC contact" = "La suppression du contact MAC a échouée. ";
 
 /* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
+"To delete go to MAC Contacts App" = "Utiliser l'application de contact MAC pour supprimer.";
 
 /* Contextual menu alert title */
 "Contact will be deleted" = "Le contact sera supprimé";
