@@ -171,7 +171,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (BOOL)isRepeatPasswordValid
 {
-    return [self.password isEqualToString:self.repeatPassword];
+    return [self.password isEqualToString:self.repeatPassword] || ([self.password length] == 0 && [self.repeatPassword length] == 0);
 }
 
 - (BOOL)validateRepeatPassword:(NSError **)error

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2553a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
@@ -26,7 +26,7 @@
                 <view translatesAutoresizingMaskIntoConstraints="NO" id="B0P-LC-JmW">
                     <rect key="frame" x="0.0" y="0.0" width="355" height="222"/>
                     <subviews>
-                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hwa-xK-TuM">
+                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hwa-xK-TuM">
                             <rect key="frame" x="-2" y="103" width="359" height="17"/>
                             <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="An error occured, please check your password and pin." id="DyG-SJ-U1Q">
                                 <font key="font" metaFont="system"/>
@@ -62,7 +62,7 @@ Gw
                 <view translatesAutoresizingMaskIntoConstraints="NO" id="PQA-fA-Rio">
                     <rect key="frame" x="0.0" y="0.0" width="355" height="222"/>
                     <subviews>
-                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="80Z-XU-adp">
+                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80Z-XU-adp">
                             <rect key="frame" x="6" y="74" width="344" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="340" id="OcO-zL-LBK"/>
@@ -90,7 +90,7 @@ Gw
                 <view translatesAutoresizingMaskIntoConstraints="NO" id="jR6-WY-o19" userLabel="Second step">
                     <rect key="frame" x="0.0" y="0.0" width="355" height="222"/>
                     <subviews>
-                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BFR-6z-UlF">
+                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFR-6z-UlF">
                             <rect key="frame" x="78" y="153" width="200" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="ql3-eF-0Q3"/>
@@ -109,7 +109,7 @@ Gw
                                 <outlet property="nextKeyView" destination="VeW-tY-k3K" id="fgI-rk-Nuk"/>
                             </connections>
                         </textField>
-                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VeW-tY-k3K" customClass="NSSecureTextField">
+                        <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeW-tY-k3K" customClass="NSSecureTextField">
                             <rect key="frame" x="78" y="94" width="200" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="EQr-I3-bWf"/>
@@ -129,7 +129,7 @@ Gw
                                 <outlet property="nextKeyView" destination="xmI-fH-GpH" id="oQw-CE-3NA"/>
                             </connections>
                         </textField>
-                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nms-13-N3F">
+                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nms-13-N3F">
                             <rect key="frame" x="76" y="185" width="198" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="194" id="dTT-oe-Tym"/>
@@ -140,7 +140,7 @@ Gw
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-mP-zJd">
+                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-mP-zJd">
                             <rect key="frame" x="76" y="126" width="220" height="17"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="3tj-c0-BEv"/>
@@ -165,12 +165,7 @@ DQ
                             </buttonCell>
                             <connections>
                                 <action selector="importRingAccount:" target="-2" id="pa7-oH-87l"/>
-                                <binding destination="-2" name="enabled" keyPath="self.passwordValue.length" id="ILY-ps-FAA">
-                                    <dictionary key="options">
-                                        <integer key="NSNullPlaceholder" value="0"/>
-                                    </dictionary>
-                                </binding>
-                                <binding destination="-2" name="enabled2" keyPath="self.pinValue.length" previousBinding="ILY-ps-FAA" id="J0B-Hr-uwj">
+                                <binding destination="-2" name="enabled" keyPath="self.pinValue.length" id="5Vx-8d-FlP">
                                     <dictionary key="options">
                                         <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                         <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -216,7 +211,7 @@ Gw
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="uuC-qZ-khm" userLabel="First step">
                     <rect key="frame" x="0.0" y="0.0" width="355" height="222"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3JH-zM-ysj">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3JH-zM-ysj">
                             <rect key="frame" x="26" y="122" width="304" height="55"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="28q-2A-cNP"/>
@@ -229,7 +224,7 @@ Gw
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C9D-AI-hDL">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9D-AI-hDL">
                             <rect key="frame" x="13" y="97" width="149" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="2. Generate a PIN code" id="GfW-ah-8U1">
                                 <font key="font" metaFont="systemSemibold" size="13"/>
@@ -237,7 +232,7 @@ Gw
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4HV-K6-7nz">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4HV-K6-7nz">
                             <rect key="frame" x="14" y="185" width="316" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="1. Grab a device with the account you want to use" id="HcT-yD-KVo">
                                 <font key="font" metaFont="systemSemibold" size="13"/>
@@ -271,7 +266,7 @@ Gw
                                 <action selector="dismissViewWithError:" target="-2" id="Mc9-wx-5Cr"/>
                             </connections>
                         </button>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2hL-HI-nb6">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hL-HI-nb6">
                             <rect key="frame" x="25" y="55" width="304" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="300" id="UJk-c7-Edh"/>
