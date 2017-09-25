@@ -44,7 +44,7 @@
 "Copy name" = "Kopiér navn";
 
 /* Contextual menu action */
-"Copy number" = "Kopier nummer";
+"Copy number" = "Kopiér nummer";
 
 /* Contextual menu entry */
 "Create RING Account" = "Opret RING-konto";
@@ -65,7 +65,7 @@
 "Incoming call from %@" = "Indkommende opkald fra %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Vær sikker på at du har mindst en gyldig konto.";
+"Make sure you have at least one valid account" = "Sørg for at du har mindst én gyldig konto.";
 
 /* Message from {Name} */
 "Message from %@" = "Besked fra %@";
@@ -77,13 +77,13 @@
 "No valid account available" = "Ingen gyldig konto tilgængelig";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Kodeord og bekræftelse er ikke ens.";
+"Password and confirmation mismatch." = "Adgangskode og bekræftelse er ikke ens.";
 
 /* Indication for user */
-"Password is too short" = "Kodeordet er for kort";
+"Password is too short" = "Adgangskoden er for kort";
 
 /* Indication for user */
-"Passwords don't match" = "Kodeord stemmer ikke overens";
+"Passwords don't match" = "Adgangskoderne er ikke ens";
 
 /* Button label */
 "Pause" = "Pause";
@@ -98,7 +98,7 @@
 "Remove value" = "Fjern værdi";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Genåben konto for at se din hash";
+"Reopen account to see your hash" = "Genåbn konto for at se din hash";
 
 /* Contextual menu entry */
 "Restore account" = "Gendan konto";
@@ -128,7 +128,7 @@
 "The following account needs to be migrated to the new Ring account format:" = "De følgende konti skal migreres til det nye Ring-konto-format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "Det kodeord du har indtastet låser ikke op for denne konto";
+"The password you entered does not unlock this account" = "Den adgangskode du har indtastet låser ikke op for denne konto";
 
 /* Alert dialog title */
 "The username you entered do not match a RingID on the network" = "Det brugernavn du har indtastet er ikke tilknyttet et RingID på netværket";
@@ -137,7 +137,7 @@
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "For at færdiggøre processen, skal du åbne Ring på den nye enhed og vælge funktionen \"Tilknyt denne enhed til en konto\". Din PIN er gyldig i 10 minutter.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "For at fortsætte med migreringen, skal du vælge et kodeord til kontoen. Dette kodeord bruges til at kryptere din hovednøgle. Den skal bruges ved tilnytning af nye enheder til din Ring-konto. Hvis du ikke er klar til at vælge et kodeord, kan du lukke Ring og fortsætte med migreringen senere.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "For at fortsætte med migreringen, skal du vælge en adgangskode til kontoen. Denne adgangskode bruges til at kryptere din hovednøgle. Den skal bruges ved tilknytning af nye enheder til din Ring-konto. Hvis du ikke er klar til at vælge en adgangskode, kan du lukke Ring og fortsætte med migreringen senere.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Ukendt";
