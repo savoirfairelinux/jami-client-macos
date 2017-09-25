@@ -53,7 +53,15 @@
 
     __unsafe_unretained IBOutlet NSView* errorContainer;
 
+    __unsafe_unretained IBOutlet NSTextField* pinTextField;
+    __unsafe_unretained IBOutlet NSButton* fileButton;
+    __unsafe_unretained IBOutlet NSSecureTextField* passwordTextField;
+
+    __unsafe_unretained IBOutlet NSButton* linkButton;
+    NSString *fileButtonTitleBackup;
+
     Account* accountToCreate;
+    NSURL* backupFile;
     NSTimer* errorTimer;
     QMetaObject::Connection stateChanged;
 }
@@ -73,6 +81,12 @@
     [initialContainer setHidden:YES];
     [loadingContainer setHidden:YES];
     [errorContainer setHidden:YES];
+    [fileButton setTitle:fileButtonTitleBackup];
+    backupFile = nil;
+    [pinTextField setStringValue:@""];
+    [pinTextField setEnabled:YES];
+    [linkButton setEnabled:NO];
+    [passwordTextField setStringValue:@""];
 }
 
 - (void)show
@@ -81,6 +95,7 @@
     [initialContainer setHidden:YES];
     [loadingContainer setHidden:YES];
     [errorContainer setHidden:YES];
+    fileButtonTitleBackup = [fileButton title];
 }
 
 - (void)showError
@@ -109,7 +124,10 @@
         profile->save();
     }
     accountToCreate = AccountModel::instance().add(QString::fromNSString(NSFullUserName()), Account::Protocol::RING);
-    accountToCreate->setArchivePin(QString::fromNSString(self.pinValue));
+    if (backupFile == nil)
+        accountToCreate->setArchivePin(QString::fromNSString(self.pinValue));
+    else
+        accountToCreate->setArchivePath(QString::fromLocal8Bit([backupFile fileSystemRepresentation]));
     accountToCreate->setArchivePassword(QString::fromNSString(self.passwordValue));
 
     [self setCallback];
@@ -126,7 +144,25 @@
 - (IBAction)back:(id)sender
 {
     [self deleteAccount];
-    [self show];
+    [self goToStepOne:sender];
+}
+
+- (IBAction)pickBackupFile:(id)sender
+{
+    NSOpenPanel* filePicker = [NSOpenPanel openPanel];
+    [filePicker setCanChooseFiles:YES];
+    [filePicker setCanChooseDirectories:NO];
+    [filePicker setAllowsMultipleSelection:NO];
+
+    if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
+        if ([[filePicker URLs] count] == 1) {
+            backupFile = [[filePicker URLs] objectAtIndex:0];
+            [fileButton setTitle:[backupFile lastPathComponent]];
+            [pinTextField setEnabled:NO];
+            [pinTextField setStringValue:@""];
+            [linkButton setEnabled:YES];
+        }
+    }
 }
 
 /**
