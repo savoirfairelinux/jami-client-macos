@@ -127,7 +127,7 @@
     NSIndexPath* path = [self qIdxToNSIndexPath:qIdx];
     //qDebug() << "insertNodeAt" << qIdx;
     //NSLog(@"insertNodeAt index: %@", path);
-    if (path.length == 1 && [path indexAtPosition:0] <= [[self arrangedObjects] count])
+    if (path.length == 1 && [path indexAtPosition:0] <= [[[self arrangedObjects] childNodes] count])
         [self insertObject:[[Node alloc] init] atArrangedObjectIndexPath:path];
     else if (path.length > 1)
         [self insertObject:[[Node alloc] init] atArrangedObjectIndexPath:path];
