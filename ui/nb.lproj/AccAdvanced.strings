@@ -3,7 +3,7 @@
 "0eY-9x-bAr.placeholderString" = "Nettadresse for tjener…";
 
 /* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
-"6u9-cM-ep0.placeholderString" = "område...";
+"6u9-cM-ep0.placeholderString" = "område…";
 
 /* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
 "Atv-t7-5YJ.title" = "Samme som lokale parametre";
@@ -12,7 +12,7 @@
 "FQ4-fp-Pxj.title" = "Min";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Audio RTP port rekkevidde";
+"Jho-hi-Mvg.title" = "RTP-portrekkevidde for lyd";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
 "K9I-vh-jeu.title" = "Nettverksgrensesnitt";
@@ -33,7 +33,7 @@
 "Qf3-E3-5U6.title" = "Publisert adresse";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Video RTP port rekkevidde";
+"XA8-Sy-CYG.title" = "RTP-portrekkevidde for video";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "Min";
