@@ -170,6 +170,8 @@ SET(ringclient_CONTROLLERS
    src/AccBannedContactsVC.mm
    src/MessagesVC.h
    src/MessagesVC.mm
+   src/PasswordChangeWC.h
+   src/PasswordChangeWC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -262,6 +264,7 @@ SET(ringclient_XIBS
    ContactRequestList
    ContactRequest
    AccBannedContacts
+   PasswordChange
 )
 
 # Icons
