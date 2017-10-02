@@ -160,4 +160,23 @@
 /* Contextual menu alert remove contact {Name} */
 "Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
 
+/* Wrong password popover title */
+"Password is incorrect" = "Password is incorrect";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
+
+/* Enter old password instruction */
+"Enter your old password" = "Enter your old password";
+
+/* Enter new password instruction */
+"Chose a new password" = "Chose a new password";
+
+/* Repeat the new password instruction */
+"Repeat" = "Repeat";
+
+/* Cancel operation button label */
+"Cancel" = "Cancel"
+
+/* Accept form button label */
+"Accept" = "Accept"
