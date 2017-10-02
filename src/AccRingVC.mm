@@ -22,6 +22,7 @@
 #import <qitemselectionmodel.h>
 
 #import "RegisterNameWC.h"
+#import "PasswordChangeWC.h"
 
 @interface AccRingVC () <RegisterNameDelegate>
 
@@ -41,6 +42,7 @@
 @property (unsafe_unretained) IBOutlet NSButton *allowContacts;
 
 @property AbstractLoadingWC* accountModal;
+@property PasswordChangeWC* passwordModal;
 
 @end
 
@@ -131,6 +133,21 @@ typedef NS_ENUM(NSInteger, TagViews) {
           contextInfo: nil];
 #endif
     self.accountModal = registerWC;
+}
+
+- (IBAction)changePassword:(id)sender
+{
+    auto passwordWC = [[PasswordChangeWC alloc] initWithAccount:AccountModel::instance().selectedAccount()];
+#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+#else
+    [NSApp beginSheet: passwordWC.window
+       modalForWindow: self.view.window
+        modalDelegate: self
+       didEndSelector: nil
+          contextInfo: nil];
+#endif
+    self.passwordModal = passwordWC;
 }
 
 - (IBAction)toggleUpnp:(NSButton *)sender {
