@@ -1,86 +1,86 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Une erreur résaux c'est produite lors de l'exportation";
 
 /* Contextual menu action */
 "Add to contacts" = "Ajouter aux contacts";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Alias :";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "Une erreur s'est produite lors de l'exportation";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Compte de rechange";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "Appeler le numéro";
 
 /* Open panel title */
-"Choose a CA list" = "Choose a CA list";
+"Choose a CA list" = "Choisir une liste de CA";
 
 /* Open panel title */
-"Choose a certificate" = "Choose a certificate";
+"Choose a certificate" = "Choisissez un certificat";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "Choisir un Répertoire";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "Choisir un fichier de clés privées";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "Choisir le CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "Choisir un Répertoire";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Choisir un fichier";
 
 /* No comment provided by engineer. */
 "Copy" = "Copier";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Copier le nom";
 
 /* Contextual menu action */
 "Copy number" = "Copier le numéro";
 
 /* Contextual menu entry */
-"Create RING Account" = "Create RING Account";
+"Create RING Account" = "Créer un compte RING";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Creer un compte SIP";
 
 /* Alert dialog title */
-"Entered name not found" = "Entered name not found";
+"Entered name not found" = "Le nom entrée n'a pas été trouvé";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Échec de la migration de votre compte Vous pouvez réessayer en appuyant sur OK ou supprimer votre compte.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Échec de l'exécution de la recherche";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "Appel entrant de %@";
 
 /* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
+"Make sure you have at least one valid account" = "Assurez-vous d'avoir au moins un compte valid";
 
 /* Message from {Name} */
-"Message from %@" = "Message from %@";
+"Message from %@" = "Un message de %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Nouveau compte SIP";
 
 /* Alert dialog title */
-"No valid account available" = "No valid account available";
+"No valid account available" = "Aucun compte valid disponible";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Le mot de passe et la confirmation ne concorde pas ";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Mot de passe trop court";
 
 /* Indication for user */
 "Passwords don't match" = "Les mots de passes en sont pas identiques";
@@ -95,22 +95,22 @@
 "Refuse" = "Refuser";
 
 /* Contextual menu entry */
-"Remove value" = "Remove value";
+"Remove value" = "Enlever la valeur";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
+"Reopen account to see your hash" = "Réouvrir votre compte pour voir votre hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Réactiver le compte";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Réviser l'entrée";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "RingID :";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "Partage";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -146,7 +146,7 @@
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
 
 /* Contextual menu action */
-"Delete contact" = "Delete contact";
+"Delete contact" = "Supprimer le contact";
 
 /* Contextual menu alert title */
 "Could not delete MAC contact" = "Could not delete MAC contact";
