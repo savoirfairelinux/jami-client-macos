@@ -31,7 +31,7 @@
 #import <call.h>
 #import <recentmodel.h>
 #import <AvailableAccountModel.h>
-
+#import <api/lrc.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -64,6 +64,8 @@
     __unsafe_unretained IBOutlet NSButton* shareButton;
     __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
+    std::shared_ptr<lrc::api::Lrc> lrc_;
+
     PreferencesWC* preferencesWC;
     IBOutlet SmartViewVC* smartViewVC;
     IBOutlet PersonsVC* personsVC;
@@ -85,6 +87,8 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 
     [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
     self.window.titleVisibility = NSWindowTitleHidden;
+
+    lrc_.reset(new lrc::api::Lrc());
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
