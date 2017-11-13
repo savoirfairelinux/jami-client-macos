@@ -1,6 +1,8 @@
 /*
  *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *          Olivier Soldano <olivier.soldano@savoirfairelinux.com>
+ *          Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,9 +21,20 @@
 
 #import <Foundation/Foundation.h>
 
+namespace lrc {
+    namespace api {
+        class NewAccountModel;
+
+        namespace account {
+            struct Info;
+        }
+    }
+}
+
 @interface AccountSelectionManager : NSObject
 
-- (void) saveAccountWithIndex:(QModelIndex )index;
-- (void) selectChosenAccount;
+@property const lrc::api::account::Info& savedAccount;
+
+- (id) initWithAccountModel:(const lrc::api::NewAccountModel*) accMdl;
 
 @end
