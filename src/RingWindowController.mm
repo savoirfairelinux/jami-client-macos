@@ -33,6 +33,7 @@
 #import <recentmodel.h>
 #import <AvailableAccountModel.h>
 #import <api/lrc.h>
+#import <api/account.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -94,7 +95,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
     // toolbar items
-    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil];
+    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel())];
     contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -106,9 +107,21 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     [currentCallVC initFrame];
     [offlineVC initFrame];
 
-    [self checkAccountsToMigrate];
+//    [self checkAccountsToMigrate];
+
+    // Fresh run, we need to make sure RingID appears
+    [shareButton sendActionOn:NSLeftMouseDownMask];
+
+//    [self connect];
+    [self updateRingID];
+    // display accounts to select
+    NSToolbar *toolbar = self.window.toolbar;
+    toolbar.delegate = self;
+    [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
+    [toolbar insertItemWithItemIdentifier:kTrustRequestMenuItemIdentifier atIndex:2];
 }
 
+// TODO: Reimplement with new LRC signals
 - (void) connect
 {
     // Update Ring ID label based on account model changes
@@ -167,25 +180,25 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
  */
 - (void) updateRingID
 {
-    Account* finalChoice = nullptr;
+    auto& account = [chooseAccountVC selectedAccount];
 
     [ringIDLabel setStringValue:@""];
-    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
-    finalChoice = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
-    if(finalChoice == nil || (finalChoice->protocol() != Account::Protocol::RING)) {
+
+    if(account.profileInfo.type != lrc::api::profile::Type::RING) {
         self.hideRingID = YES;
         return;
     }
     self.hideRingID = NO;
-    auto name = finalChoice->registeredName();
+    auto& registeredName = account.registeredName;
+    auto& ringID = account.profileInfo.uri;
     NSString* uriToDisplay = nullptr;
-    if (!name.isNull() && !name.isEmpty()) {
-        uriToDisplay = name.toNSString();
+    if (!registeredName.empty()) {
+        uriToDisplay = @(registeredName.c_str());
     } else {
-        uriToDisplay = finalChoice->username().toNSString();
+        uriToDisplay = @(ringID.c_str());
     }
     [ringIDLabel setStringValue:uriToDisplay];
-    [self drawQRCode:finalChoice->username().toNSString()];
+    [self drawQRCode:@(ringID.c_str())];
 }
 
 - (IBAction)shareRingID:(id)sender {
@@ -320,6 +333,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 #endif
 }
 
+// TODO: Reimplement as a blocking loop when new LRC models handle migration
 - (void)checkAccountsToMigrate
 {
     auto ringList = AccountModel::instance().accountsToMigrate();
