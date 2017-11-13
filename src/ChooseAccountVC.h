@@ -1,6 +1,8 @@
 /*
  *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *          Olivier Soldano <olivier.soldano@savoirfairelinux.com>
+ *          Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,10 +20,12 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <api/newaccountmodel.h>
 
 @interface ChooseAccountVC : NSViewController
 
 -(void) enable;
 -(void) disable;
+-(id) initWithNibName:(NSNibName)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(const lrc::api::NewAccountModel*) accMdl;
 
 @end

@@ -1,6 +1,8 @@
 /*
  *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *          Olivier Soldano <olivier.soldano@savoirfairelinux.com>
+ *          Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,56 +31,14 @@
 
 NSString* const savedUserAccountKey = @"savedUserSelectedAccountKey";
 
-- (void) saveAccountWithIndex:(QModelIndex )index {
-    if(!index.isValid()) {
-        return;
-    }
-    QByteArray accountID = index.data(static_cast<int>(Account::Role::Id)).toByteArray();
-    if (accountID.isEmpty()) {
-        return;
-    }
-    NSString* accountToNSString = QString::QString(accountID).toNSString();
-    [[NSUserDefaults standardUserDefaults] setObject:accountToNSString forKey:savedUserAccountKey];
+- (void) saveAccountWithId:(NSString*)accId
+{
+    [[NSUserDefaults standardUserDefaults] setObject:accId forKey:savedUserAccountKey];
 }
 
-
-- (void) selectChosenAccount {
-    NSString* savedAccount = [[NSUserDefaults standardUserDefaults] stringForKey:savedUserAccountKey];
-    if(!savedAccount || savedAccount.length <= 0) {
-        return;
-    }
-    const char* secondName = [savedAccount UTF8String];
-    QByteArray assountToarray = QByteArray::QByteArray(secondName);
-    if (strlen(assountToarray) <= 0) {
-        return;
-    }
-    if (!(AccountModel::instance().getById(assountToarray))) {
-        return;
-    }
-    auto account = AccountModel::instance().getById(assountToarray);
-    QModelIndex savedIndex = QModelIndex::QModelIndex();
-    // first try to get saved account
-    savedIndex = AvailableAccountModel::instance().mapFromSource(account->index());
-    if (savedIndex.isValid()) {
-        AvailableAccountModel::instance().selectionModel()->setCurrentIndex(savedIndex, QItemSelectionModel::ClearAndSelect);
-        return;
-    }
-    // if account is not saved, try to select RING account
-    if (auto account = AvailableAccountModel::instance().currentDefaultAccount(URI::SchemeType::RING)) {
-        savedIndex = AvailableAccountModel::instance().mapFromSource(account->index());
-    }
-    if (savedIndex.isValid()) {
-        AvailableAccountModel::instance().selectionModel()->setCurrentIndex(savedIndex, QItemSelectionModel::ClearAndSelect);
-        return;
-    }
-    // if no RING account try to select SIP
-    if (auto account = AvailableAccountModel::instance().currentDefaultAccount(URI::SchemeType::SIP)) {
-        savedIndex = AvailableAccountModel::instance().mapFromSource(account->index());
-
-    }
-    if (savedIndex.isValid()) {
-        AvailableAccountModel::instance().selectionModel()->setCurrentIndex(savedIndex, QItemSelectionModel::ClearAndSelect);
-    }
+- (NSString*) getSavedAccountId
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:savedUserAccountKey];
 }
 
 @end

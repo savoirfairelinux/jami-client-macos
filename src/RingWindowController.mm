@@ -93,7 +93,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
     // toolbar items
-    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil];
+    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel())];
     contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -105,7 +105,12 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     [currentCallVC initFrame];
     [offlineVC initFrame];
 
-    [self checkAccountsToMigrate];
+    NSToolbar *toolbar = self.window.toolbar;
+    toolbar.delegate = self;
+    [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
+    [toolbar insertItemWithItemIdentifier:kTrustRequestMenuItemIdentifier atIndex:2];
+
+//    [self checkAccountsToMigrate];
 }
 
 - (void) connect
