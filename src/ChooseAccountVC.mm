@@ -1,6 +1,8 @@
 /*
  *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *  Author: Olivier Soldano <olivier.soldano@savoirfairelinux.com>
+ *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,15 +27,11 @@
 #import <QPixmap>
 
 //LRC
-#import <profilemodel.h>
-#import <profile.h>
-#import <person.h>
 #import <globalinstances.h>
-#import <accountmodel.h>
-#import <account.h>
 #import <QItemSelectionModel.h>
 #import <interfaces/pixmapmanipulatori.h>
-#import <AvailableAccountModel.h>
+#import <api/newaccountmodel.h>
+#import <api/account.h>
 
 //RING
 #import "views/AccountMenuItemView.h"
@@ -47,73 +45,73 @@
 
     __unsafe_unretained IBOutlet NSImageView*   profileImage;
     __unsafe_unretained IBOutlet NSPopUpButton* accountSelectionButton;
+    const lrc::api::NewAccountModel* accMdl_;
+    AccountSelectionManager* accountManager;
 
 }
 Boolean menuIsOpen;
 Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
-QMetaObject::Connection accountUpdate;
-QMetaObject::Connection personUpdate;
-AccountSelectionManager* accountManager;
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(const lrc::api::NewAccountModel*) accMdl
+{
+    accMdl_ = accMdl;
+    accountManager = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
+    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+}
 
 - (void)awakeFromNib
 {
     [profileImage setWantsLayer: YES];
     profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
     profileImage.layer.masksToBounds = YES;
-    accountManager = [[AccountSelectionManager alloc] init];
-
-    if (ProfileModel::instance().selectedProfile() && ProfileModel::instance().selectedProfile()->person()) {
-        Person* person = ProfileModel::instance().selectedProfile()->person();
-        auto photo = GlobalInstances::pixmapManipulator().contactPhoto(person, {140,140});
-        [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-        QObject::disconnect(personUpdate);
-        personUpdate = QObject::connect(person,
-                                        &Person::changed,
-                                        [=] {
-                                            //give time to cach to be updated and then change image
-                                            dispatch_time_t updateTime = dispatch_time(DISPATCH_TIME_NOW, 1);
-                                            dispatch_after(updateTime, dispatch_get_main_queue(), ^(void){
-                                                auto photo = GlobalInstances::pixmapManipulator().contactPhoto(person, {140,140});
-                                                [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-                                            });
-                                        });
-    }
 
     accountsMenu = [[NSMenu alloc] initWithTitle:@""];
     [accountsMenu setDelegate:self];
     accountSelectionButton.menu = accountsMenu;
     [self update];
 
-    QObject::disconnect(accountUpdate);
-    accountUpdate = QObject::connect(&AccountModel::instance(),
-                     &AccountModel::dataChanged,
-                     [=] {
+    QObject::connect(accMdl_,
+                     &lrc::api::NewAccountModel::accountAdded,
+                     [self]{
                          [self update];
                      });
-    QObject::connect(AvailableAccountModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [self](const QModelIndex& idx){
-                         if(!idx.isValid()) {
-                             return;
-                         }
-                         [accountManager saveAccountWithIndex:idx];
+    QObject::connect(accMdl_,
+                     &lrc::api::NewAccountModel::accountRemoved,
+                     [self]{
                          [self update];
                      });
-    QObject::connect(&AvailableAccountModel::instance(),
-                     &QAbstractItemModel::rowsRemoved,
+    QObject::connect(accMdl_,
+                     &lrc::api::NewAccountModel::profileUpdated,
                      [self]{
                          [self update];
                      });
 }
 
+-(const lrc::api::account::Info&) selectedAccount
+{
+    const auto& account = [accountManager savedAccount];
+    if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
+        try {
+            auto accountId = accMdl_->getAccountList().at(0);
+            const auto& fallbackAccount = accMdl_->getAccountInfo(accMdl_->getAccountList().at(0));
+            return fallbackAccount;
+        } catch (std::out_of_range& e) { // Is thrown if account model has no account. We then return an invalid account
+            return account;
+        }
+    }
+    return account;
+}
+
 -(void) updateMenu {
     [accountsMenu removeAllItems];
-    for (int i = 0; i < AvailableAccountModel::instance().rowCount(); i++) {
 
-        QModelIndex index = AvailableAccountModel::instance().selectionModel()->model()->index(i, 0);
-        Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
+    auto accList = accMdl_->getAccountList();
+
+    for (std::string accId : accList) {
+        auto& account = accMdl_->getAccountInfo(accId);
+
         NSMenuItem* menuBarItem = [[NSMenuItem alloc]
                                    initWithTitle:[self itemTitleForAccount:account]
                                    action:NULL
@@ -121,40 +119,48 @@ AccountSelectionManager* accountManager;
 
         menuBarItem.attributedTitle = [self attributedItemTitleForAccount:account];
         AccountMenuItemView *itemView = [[AccountMenuItemView alloc] initWithFrame:CGRectZero];
-        [itemView.accountLabel setStringValue:account->alias().toNSString()];
+        [itemView.accountLabel setStringValue:@(account.profileInfo.alias.c_str())];
         NSString* userNameString = [self nameForAccount: account];
         [itemView.userNameLabel setStringValue:userNameString];
-        switch (account->protocol()) {
-            case Account::Protocol::SIP:
+        switch (account.profileInfo.type) {
+            case lrc::api::profile::Type::SIP:
                 [itemView.accountTypeLabel setStringValue:@"SIP"];
                 break;
-            case Account::Protocol::RING:
+            case lrc::api::profile::Type::RING:
                 [itemView.accountTypeLabel setStringValue:@"RING"];
                 break;
             default:
                 break;
         }
-        auto humanState = account->toHumanStateName();
-        [itemView.accountStatus setStringValue:humanState.toNSString()];
+        // TODO: Reimplement account DHT registration state display if wanted
+//        auto humanState = account->toHumanStateName();
+//        NSString* humanState = @"Human state";
+//        [itemView.accountStatus setStringValue:humanState];
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
         [accountsMenu addItem:[NSMenuItem separatorItem]];
     }
 }
 
--(NSString*) nameForAccount:(Account*) account {
-    auto name = account->registeredName();
-    NSString* userNameString = nullptr;
-    if (!name.isNull() && !name.isEmpty()) {
-        userNameString = name.toNSString();
-    } else {
-        userNameString = account->username().toNSString();
-    }
-    return userNameString;
+-(void) updatePhoto
+{
+    auto& account = [self selectedAccount];
+    if(account.profileInfo.type == lrc::api::profile::Type::INVALID)
+        return;
+
+    QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
+
+    QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba);
+    [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
 }
 
--(NSString*) itemTitleForAccount:(Account*) account {
-    NSString* alias = account->alias().toNSString();
+-(NSString*) nameForAccount:(const lrc::api::account::Info&) account {
+    auto name = account.registeredName;
+    return @(name.c_str());
+}
+
+-(NSString*) itemTitleForAccount:(const lrc::api::account::Info&) account {
+    NSString* alias = @(account.profileInfo.alias.c_str());
     NSString* userNameString = [self nameForAccount: account];
     if([userNameString length] > 0) {
         alias = [NSString stringWithFormat: @"%@\n", alias];
@@ -162,8 +168,8 @@ AccountSelectionManager* accountManager;
     return [alias stringByAppendingString:userNameString];
 }
 
-- (NSAttributedString*) attributedItemTitleForAccount:(Account*) account {
-    NSString* alias = account->alias().toNSString();
+- (NSAttributedString*) attributedItemTitleForAccount:(const lrc::api::account::Info&) account {
+    NSString* alias = @(account.profileInfo.alias.c_str());
     NSString* userNameString = [self nameForAccount: account];
     if([userNameString length] > 0){
         alias = [NSString stringWithFormat: @"%@\n", alias];
@@ -193,6 +199,7 @@ AccountSelectionManager* accountManager;
         return;
     }
     [self updateMenu];
+    [self updatePhoto];
     [self setPopUpButtonSelection];
 }
 
@@ -202,9 +209,8 @@ AccountSelectionManager* accountManager;
         return;
     }
     [self.view setHidden:NO];
-    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
-    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
-    if(account == nil){
+    auto& account = [self selectedAccount];
+    if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
         return;
     }
     [accountSelectionButton selectItemWithTitle:[self itemTitleForAccount:account]];
@@ -214,12 +220,12 @@ AccountSelectionManager* accountManager;
 
 - (IBAction)itemChanged:(id)sender {
     NSInteger row = [(NSPopUpButton *)sender indexOfSelectedItem] / 2;
-    QModelIndex index = AvailableAccountModel::instance().selectionModel()->model()->index(row, 0);
-    if(!index.isValid()) {
+    auto accList = accMdl_->getAccountList();
+    if (row >= accList.size())
         return;
-    }
-    AvailableAccountModel::instance().selectionModel()->setCurrentIndex(index, QItemSelectionModel::ClearAndSelect);
-    [accountManager saveAccountWithIndex:index];
+
+    auto& account = accMdl_->getAccountInfo(accList[row]);
+    [accountManager setSavedAccount:account];
 }
 
 #pragma mark - NSMenuDelegate
