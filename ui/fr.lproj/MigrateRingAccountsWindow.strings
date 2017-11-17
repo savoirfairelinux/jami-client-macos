@@ -9,10 +9,10 @@
 "859-10-HEb.title" = "Le compte suivant doit être migré vers le nouveau format de compte Ring :\nIdentifiant :\nRingID :\nPour continuer, choisissez un mot de passe pour ce compte. Ce mot de passe sera utilisé pour encrypter votre compte. Il sera requis pour lier de nouveaux appareils à ce compte Ring.\nSi vous n'êtes pas prêt à choisir un mot de passe, vous pouvez fermer Ring et reprendre la migration plus tard.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Error durant la migration du compte";
+"8K3-9Z-MKH.title" = "Erreur durant la migration du compte";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Félicitations, votre compte a été migré avec succés";
+"C2l-rz-Gqt.title" = "Félicitations, votre compte a été migré avec succès";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
 "ITE-yD-CTb.title" = "Supprimer ce compte";
