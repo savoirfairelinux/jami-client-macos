@@ -57,5 +57,5 @@
 
 @end
 
-// Used by the HoverTableRowView and the RingOutlineView
+// Used by the HoverTableRowView and the RingTableView
 void DrawSeparatorInRect(NSRect rect);

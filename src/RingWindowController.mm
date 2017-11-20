@@ -47,7 +47,6 @@
 #import "views/BackgroundView.h"
 #import "ChooseAccountVC.h"
 #import "ContactRequestVC.h"
-#import "PersonsVC.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -69,7 +68,6 @@
 
     PreferencesWC* preferencesWC;
     IBOutlet SmartViewVC* smartViewVC;
-    IBOutlet PersonsVC* personsVC;
 
     CurrentCallVC* currentCallVC;
     ConversationVC* offlineVC;
@@ -105,6 +103,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 
     [currentCallVC initFrame];
     [offlineVC initFrame];
+    [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
 
 //    [self checkAccountsToMigrate];
 
@@ -322,9 +321,6 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     switch (index) {
         case 0:
             [smartViewVC startCallForRow:sender];
-            break;
-        case 2:
-            [personsVC startCallForRow:sender];
             break;
         default:
             break;
