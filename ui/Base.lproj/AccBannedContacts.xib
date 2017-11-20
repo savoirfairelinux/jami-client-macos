@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccBannedContactsVC">
@@ -22,16 +21,16 @@
                     <rect key="frame" x="20" y="68" width="536" height="273"/>
                     <clipView key="contentView" id="3TS-qm-PVP">
                         <rect key="frame" x="0.0" y="0.0" width="536" height="273"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="55" rowSizeStyle="automatic" viewBased="YES" outlineTableColumn="q9O-v7-HAE" id="Jww-D6-G6c" customClass="RingOutlineView">
+                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" autosaveColumns="NO" rowHeight="55" rowSizeStyle="automatic" viewBased="YES" outlineTableColumn="q9O-v7-HAE" id="Jww-D6-G6c" customClass="RingTableView">
                                 <rect key="frame" x="1" y="0.0" width="536" height="273"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="533" minWidth="40" maxWidth="1000" id="q9O-v7-HAE">
+                                    <tableColumn identifier="" width="533" minWidth="40" maxWidth="1000" id="q9O-v7-HAE">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -48,7 +47,7 @@
                                                 <rect key="frame" x="1" y="1" width="533" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="xiu-p3-rS2" userLabel="RingId label">
+                                                    <textField verticalHuggingPriority="750" tag="200" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xiu-p3-rS2" userLabel="RingId label">
                                                         <rect key="frame" x="68" y="5" width="397" height="14"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="ringID" id="KHF-ns-H2e">
                                                             <font key="font" metaFont="smallSystem"/>
@@ -56,7 +55,7 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" tag="100" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3J5-Lt-Tbh" userLabel="UserName label">
+                                                    <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" tag="100" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3J5-Lt-Tbh" userLabel="UserName label">
                                                         <rect key="frame" x="68" y="26" width="373" height="21"/>
                                                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" placeholderString="Name" id="j1x-P5-XrV">
                                                             <font key="font" metaFont="system" size="17"/>
@@ -131,7 +130,7 @@
                         <binding destination="-2" name="hidden" keyPath="self.bannedListIsEmpty" id="btT-0K-Nbc"/>
                     </connections>
                 </scrollView>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="cId-4e-cg5">
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cId-4e-cg5">
                     <rect key="frame" x="18" y="361" width="540" height="34"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="You have been blocked those contacts and now you could not receive message or calls from them." id="ChL-MC-7AO">
                         <font key="font" metaFont="system"/>
@@ -142,7 +141,7 @@
                         <binding destination="-2" name="hidden" keyPath="self.bannedListIsEmpty" id="PYP-Le-pFF"/>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJe-aB-0em">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kJe-aB-0em">
                     <rect key="frame" x="175" y="196" width="227" height="17"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Your list of banned contact is empty" id="U37-wU-p5w">
                         <font key="font" metaFont="system"/>
