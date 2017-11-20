@@ -19,9 +19,17 @@
 
 #import <Cocoa/Cocoa.h>
 
+namespace lrc {
+    namespace api {
+        class ConversationModel;
+    }
+}
+
 @interface SmartViewVC : NSViewController <NSTextFieldDelegate>
 
 @property (unsafe_unretained) IBOutlet NSTabView* tabbar;
+
+@property lrc::api::ConversationModel* conversationModel;
 
 - (void)showHistory;
 
