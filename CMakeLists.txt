@@ -130,10 +130,6 @@ SET(ringclient_CONTROLLERS
    src/VideoPrefsVC.mm
    src/VideoPrefsVC.h
    src/GeneralPrefsVC.h
-   src/HistoryVC.mm
-   src/HistoryVC.h
-   src/PersonsVC.mm
-   src/PersonsVC.h
    src/ChatVC.mm
    src/ChatVC.h
    src/PersonLinkerVC.mm
@@ -190,6 +186,8 @@ SET(ringclient_VIEWS
    src/views/ITProgressIndicator.h
    src/views/RingOutlineView.mm
    src/views/RingOutlineView.h
+   src/views/RingTableView.mm
+   src/views/RingTableView.h
    src/views/RingIDField.mm
    src/views/RingIDField.h
    src/views/HoverTableRowView.mm
@@ -230,7 +228,8 @@ SET(ringclient_OTHERS
    src/delegates/ImageManipulationDelegate.mm
    src/delegates/ImageManipulationDelegate.h
    src/AccountSelectionManager.h
-   src/AccountSelectionManager.mm)
+   src/AccountSelectionManager.mm
+   src/utils.h)
 
 
 SET(ringclient_XIBS
