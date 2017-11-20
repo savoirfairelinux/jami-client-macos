@@ -128,10 +128,6 @@ SET(ringclient_CONTROLLERS
    src/VideoPrefsVC.mm
    src/VideoPrefsVC.h
    src/GeneralPrefsVC.h
-   src/HistoryVC.mm
-   src/HistoryVC.h
-   src/PersonsVC.mm
-   src/PersonsVC.h
    src/ChatVC.mm
    src/ChatVC.h
    src/PersonLinkerVC.mm
@@ -186,8 +182,8 @@ SET(ringclient_VIEWS
    src/views/CallLayer.h
    src/views/ITProgressIndicator.mm
    src/views/ITProgressIndicator.h
-   src/views/RingOutlineView.mm
-   src/views/RingOutlineView.h
+   src/views/RingTableView.mm
+   src/views/RingTableView.h
    src/views/RingIDField.mm
    src/views/RingIDField.h
    src/views/HoverTableRowView.mm
