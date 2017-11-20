@@ -17,19 +17,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import "RingOutlineView.h"
+#import "RingTableView.h"
 
 #import "HoverTableRowView.h" // For the grid drawing shared code
 
-@implementation RingOutlineView
+@implementation RingTableView
 
 - (NSMenu*)menuForEvent:(NSEvent*)evt
 {
-    NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
-    int rowIdx = [self rowAtPoint:pt];
-    if (self.contextMenuDelegate && rowIdx >= 0) {
-        return [self.contextMenuDelegate contextualMenuForIndex:[self itemAtRow:rowIdx]];
-    }
+    // TODO : Reimplement without outlineView itemAtRow: method
+//    NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
+//    int rowIdx = [self rowAtPoint:pt];
+//    if (self.contextMenuDelegate && rowIdx >= 0) {
+//        return [self.contextMenuDelegate contextualMenuForIndex:[self itemAtRow:rowIdx]];
+//    }
     return nil;
 }
 

@@ -1,6 +1,8 @@
 /*
  *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *          Olivier Soldano <olivier.soldano@savoirfairelinux.com>
+ *          Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,41 +28,34 @@
 #import <QItemSelectionModel>
 
 //LRC
-#import <recentmodel.h>
-#import <callmodel.h>
-#import <call.h>
-#import <uri.h>
-#import <itemdataroles.h>
-#import <namedirectory.h>
-#import <accountmodel.h>
-#import <account.h>
-#import <person.h>
-#import <contactmethod.h>
 #import <globalinstances.h>
-#import <phonedirectorymodel.h>
-#import <AvailableAccountModel.h>
-#import <personmodel.h>
-#import <peerprofilecollection.h>
+#import <api/newaccountmodel.h>
+#import <api/conversationmodel.h>
+#import <api/account.h>
+#import <api/contact.h>
+#import <api/contactmodel.h>
+#import <api/newcallmodel.h>
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
 #import "views/HoverTableRowView.h"
 #import "PersonLinkerVC.h"
 #import "views/IconButton.h"
-#import "views/RingOutlineView.h"
+#import "views/RingTableView.h"
 #import "views/ContextualTableCellView.h"
 
-@interface SmartViewVC () <NSOutlineViewDelegate, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
+@interface SmartViewVC () <NSTableViewDelegate, NSTableViewDataSource, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
 
-    QNSTreeController *treeController;
     NSPopover* addToContactPopover;
 
     //UI elements
-    __unsafe_unretained IBOutlet RingOutlineView* smartView;
+    __unsafe_unretained IBOutlet RingTableView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
 
     /* Pending ring usernames lookup for the search entry */
     QMetaObject::Connection usernameLookupConnection;
+
+    lrc::api::ConversationModel* model_;
 }
 
 @end
@@ -82,14 +77,9 @@ NSInteger const PRESENCE_TAG        = 800;
 - (void)awakeFromNib
 {
     NSLog(@"INIT SmartView VC");
+    //get selected account
+    //encapsulate conversationmodel in local version
 
-    treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance().peopleProxy()];
-    [treeController setAvoidsEmptySelection:NO];
-    [treeController setChildrenKeyPath:@"children"];
-
-    [smartView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [smartView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [smartView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
     [smartView setTarget:self];
     [smartView setAction:@selector(selectRow:)];
     [smartView setDoubleAction:@selector(placeCall:)];
@@ -97,46 +87,49 @@ NSInteger const PRESENCE_TAG        = 800;
     [smartView setContextMenuDelegate:self];
     [smartView setShortcutsDelegate:self];
 
-    QObject::connect(RecentModel::instance().peopleProxy(),
-                     &QAbstractItemModel::dataChanged,
-                     [self](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         for(int row = topLeft.row() ; row <= bottomRight.row() ; ++row)
-                         {
-                             [smartView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row]
-                                                  columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-                         }
-                     });
+    [smartView setDataSource: self];
 
-    QObject::connect(RecentModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if(!current.isValid()) {
-                             [smartView deselectAll:nil];
-                             return;
-                         }
-
-                         auto proxyIdx = RecentModel::instance().peopleProxy()->mapFromSource(current);
-                         if (proxyIdx.isValid()) {
-                             [treeController setSelectionQModelIndex:proxyIdx];
-                             [tabbar selectTabViewItemAtIndex:0];
-                             [smartView scrollRowToVisible:proxyIdx.row()];
-                         }
-                     });
-
-    QObject::connect(RecentModel::instance().peopleProxy(),
-                     &QAbstractItemModel::rowsInserted,
-                     [=](const QModelIndex &parent, int first, int last) {
-                         Q_UNUSED(parent)
-                         Q_UNUSED(first)
-                         Q_UNUSED(last)
-                         [smartView scrollRowToVisible:0];
-                     });
-
-    QObject::connect(AvailableAccountModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [self](const QModelIndex& idx){
-                         [self clearSearchField];
-                     });
+// TODO : Reimplement necessary signal handlers
+//    QObject::connect(RecentModel::instance().peopleProxy(),
+//                     &QAbstractItemModel::dataChanged,
+//                     [self](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
+//                         for(int row = topLeft.row() ; row <= bottomRight.row() ; ++row)
+//                         {
+//                             [smartView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row]
+//                                                  columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+//                         }
+//                     });
+//
+//    QObject::connect(RecentModel::instance().selectionModel(),
+//                     &QItemSelectionModel::currentChanged,
+//                     [=](const QModelIndex &current, const QModelIndex &previous) {
+//                         if(!current.isValid()) {
+//                             [smartView deselectAll:nil];
+//                             return;
+//                         }
+//
+//                         auto proxyIdx = RecentModel::instance().peopleProxy()->mapFromSource(current);
+//                         if (proxyIdx.isValid()) {
+//                             [treeController setSelectionQModelIndex:proxyIdx];
+//                             [tabbar selectTabViewItemAtIndex:0];
+//                             [smartView scrollRowToVisible:proxyIdx.row()];
+//                         }
+//                     });
+//
+//    QObject::connect(RecentModel::instance().peopleProxy(),
+//                     &QAbstractItemModel::rowsInserted,
+//                     [=](const QModelIndex &parent, int first, int last) {
+//                         Q_UNUSED(parent)
+//                         Q_UNUSED(first)
+//                         Q_UNUSED(last)
+//                         [smartView scrollRowToVisible:0];
+//                     });
+//
+//    QObject::connect(AvailableAccountModel::instance().selectionModel(),
+//                     &QItemSelectionModel::currentChanged,
+//                     [self](const QModelIndex& idx){
+//                         [self clearSearchField];
+//                     });
 
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
@@ -149,48 +142,25 @@ NSInteger const PRESENCE_TAG        = 800;
 
 -(void) selectRow:(id)sender
 {
-    if ([treeController selectedNodes].count == 0) {
-        RecentModel::instance().selectionModel()->clearCurrentIndex();
+    if ([smartView selectedRow] == -1)
         return;
-    }
-    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-    auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
-    RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
+
+    auto conv = model_->filteredConversation([smartView selectedRow]);
+    model_->selectConversation(conv.uid);
 }
 
 - (void)placeCall:(id)sender
 {
-    QModelIndex qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-    ContactMethod* m = nil;
-
-    // Double click on an ongoing call
-    if (qIdx.parent().isValid()) {
+    NSInteger row;
+    if (sender != nil && [sender clickedRow] != -1)
+        row = [sender clickedRow];
+    else if ([smartView selectedRow] != -1)
+        row = [smartView selectedRow];
+    else
         return;
-    }
 
-    if([[treeController selectedNodes] count] > 0) {
-        QVariant var = qIdx.data((int)Call::Role::ContactMethod);
-        m = qvariant_cast<ContactMethod*>(var);
-        if (!m) {
-            // test if it is a person
-            QVariant var = qIdx.data((int)Person::Role::Object);
-            if (var.isValid()) {
-                Person *c = var.value<Person*>();
-                if (c->phoneNumbers().size() > 0) {
-                    m = c->phoneNumbers().first();
-                }
-            }
-        }
-    }
-
-    // Before calling check if we properly extracted a contact method and that
-    // there is NOT already an ongoing call for this index (e.g: no children for this node)
-    if(m && !RecentModel::instance().peopleProxy()->index(0, 0, qIdx).isValid()){
-        auto c = CallModel::instance().dialingCall();
-        c->setPeerContactMethod(m);
-        c << Call::Action::ACCEPT;
-        CallModel::instance().selectCall(c);
-    }
+    auto conv = model_->filteredConversation(row);
+    model_->placeCall(conv.uid);
 }
 
 - (void)showHistory
@@ -208,67 +178,88 @@ NSInteger const PRESENCE_TAG        = 800;
     [tabbar selectTabViewItemAtIndex:0];
 }
 
-#pragma mark - NSOutlineViewDelegate methods
+- (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
+{
+    model_ = conversationModel;
+    [smartView reloadData];
+}
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
+- (NSString *) bestNameForConversation:(const lrc::api::conversation::Info&) conv
+{
+    auto contact = model_->owner.contactModel->getContact(conv.participants[0]);
+    if (!contact.profileInfo.alias.empty())
+        return @(contact.profileInfo.alias.c_str());
+    else
+        return [self bestIDForConversation:conv];
+}
+
+- (NSString *) bestIDForConversation:(const lrc::api::conversation::Info&) conv
+{
+    auto contact = model_->owner.contactModel->getContact(conv.participants[0]);
+    if (!contact.registeredName.empty())
+        return @(contact.registeredName.c_str());
+    else
+        return @(contact.profileInfo.uri.c_str());
+}
+
+#pragma mark - NSTableViewDelegate methods
+
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
 {
     return YES;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+- (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     return NO;
 }
 
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    if ([treeController selectedNodes].count <= 0) {
-        RecentModel::instance().selectionModel()->clearCurrentIndex();
+    NSInteger row = [notification.object selectedRow];
+
+    if (row == -1)
         return;
-    }
+
+    auto uid = model_->filteredConversation(row).uid;
+    model_->selectConversation(uid);
 }
 
-- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
 {
-    QModelIndex proxyIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    QModelIndex qIdx = RecentModel::instance().peopleProxy()->mapToSource(proxyIdx);
+    return [tableView makeViewWithIdentifier:@"HoverRowView" owner:nil];
+}
 
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    if (model_ == nil)
+        return nil;
+
+    auto conversation = model_->filteredConversation(row);
     NSTableCellView* result;
-    if (!qIdx.parent().isValid()) {
-        result = [outlineView makeViewWithIdentifier:@"MainCell" owner:outlineView];
-        NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-        NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
-        [((ContextualTableCellView*) result) setContextualsControls:controls];
-        [((ContextualTableCellView*) result) setShouldBlurParentView:YES];
+    result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
+//    NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-        if (auto call = RecentModel::instance().getActiveCall(qIdx)) {
-            [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
-            [((ContextualTableCellView*) result) setActiveState:YES];
-        } else {
-            [details setStringValue:qIdx.data((int)Ring::Role::FormattedLastUsed).toString().toNSString()];
-            [((ContextualTableCellView*) result) setActiveState:NO];
-        }
+    NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
+    [((ContextualTableCellView*) result) setContextualsControls:controls];
+    [((ContextualTableCellView*) result) setShouldBlurParentView:YES];
 
-        NSTextField* unreadCount = [result viewWithTag:TXT_BUTTON_TAG];
-        int unread = qIdx.data((int)Ring::Role::UnreadTextMessageCount).toInt();
-        [unreadCount setHidden:(unread == 0)];
-        [unreadCount setStringValue:qIdx.data((int)Ring::Role::UnreadTextMessageCount).toString().toNSString()];
+//    if (auto call = RecentModel::instance().getActiveCall(qIdx)) {
+//        [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
+//        [((ContextualTableCellView*) result) setActiveState:YES];
+//    } else {
+//        [details setStringValue:qIdx.data((int)Ring::Role::FormattedLastUsed).toString().toNSString()];
+//        [((ContextualTableCellView*) result) setActiveState:NO];
+//    }
 
-    } else {
-        result = [outlineView makeViewWithIdentifier:@"CallCell" owner:outlineView];
-        NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CANCEL_BUTTON_TAG]];
-        [((ContextualTableCellView*) result) setContextualsControls:controls];
-        [((ContextualTableCellView*) result) setShouldBlurParentView:YES];
-        [((ContextualTableCellView*) result) setActiveState:NO];
-        NSTextField* details = [result viewWithTag:DETAILS_TAG];
-
-        [details setStringValue:qIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
-    }
+    NSTextField* unreadCount = [result viewWithTag:TXT_BUTTON_TAG];
+    [unreadCount setHidden:(conversation.unreadMessages == 0)];
+    [unreadCount setIntValue:conversation.unreadMessages];
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-    NSString* displayNameString = qIdx.data((int)Ring::Role::Name).toString().toNSString();
-    NSString* displayIDString = qIdx.data((int)Ring::Role::Number).toString().toNSString();
+    NSString* displayNameString = [self bestNameForConversation:conversation];
+    NSString* displayIDString = [self bestIDForConversation:conversation];
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
         NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
         [displayName setStringValue:displayIDString];
@@ -282,10 +273,11 @@ NSInteger const PRESENCE_TAG        = 800;
     }
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
 
-    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
+    auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, model_->owner)))];
 
     NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
-    if (qIdx.data(static_cast<int>(Ring::Role::IsPresent)).value<bool>()) {
+    if (model_->owner.contactModel->getContact(conversation.participants[0]).isPresent) {
         [presenceView setHidden:NO];
     } else {
         [presenceView setHidden:YES];
@@ -293,9 +285,21 @@ NSInteger const PRESENCE_TAG        = 800;
     return result;
 }
 
-- (NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    return [outlineView makeViewWithIdentifier:@"HoverRowView" owner:nil];
+    return 60.0;
+}
+
+#pragma mark - NSTableDataSource methods
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    if (tableView == smartView) {
+        if (model_ != nullptr)
+            return model_->allFilteredConversations().size();
+    }
+
+    return 0;
 }
 
 - (void)startCallForRow:(id)sender {
@@ -306,52 +310,27 @@ NSInteger const PRESENCE_TAG        = 800;
 
 - (IBAction)hangUpClickedAtRow:(id)sender {
     NSInteger row = [smartView rowForView:sender];
-    id callNode = [smartView itemAtRow:row];
-    auto callIdx = [treeController toQIdx:((NSTreeNode*)callNode)];
 
-    if (callIdx.isValid()) {
-        auto call = RecentModel::instance().getActiveCall(RecentModel::instance().peopleProxy()->mapToSource(callIdx));
-        call << Call::Action::REFUSE;
-    }
+    if (row == -1)
+        return;
+
+    auto conv = model_->filteredConversation(row);
+    auto& callId = conv.callId;
+
+    if (callId.empty())
+        return;
+
+    auto* callModel = model_->owner.callModel.get();
+    callModel->hangUp(callId);
 }
 
-- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
-{
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    return (((NSTreeNode*)item).indexPath.length == 1) ? 60.0 : 50.0;
-}
-
+// TODO: Replace call button with "+" sign (cf: GTK client)
 - (IBAction)placeCallFromSearchField:(id)sender
 {
     if ([searchField stringValue].length == 0) {
         return;
     }
-    [self processSearchFieldInputAndStartCall:YES];
-}
-
-- (void) startCallFromURI:(const URI&) uri
-{
-    auto cm = PhoneDirectoryModel::instance().getNumber(uri, [self chosenAccount]);
-    if(!cm->account() && [self chosenAccount]) {
-        cm->setAccount([self chosenAccount]);
-    }
-    auto c = CallModel::instance().dialingCall();
-    c->setPeerContactMethod(cm);
-    c << Call::Action::ACCEPT;
-    CallModel::instance().selectCall(c);
-}
-
-- (void) startConversationFromURI:(const URI&) uri
-{
-    auto cm = PhoneDirectoryModel::instance().getNumber(uri, [self chosenAccount]);
-    if(!cm->account() && [self chosenAccount]) {
-        cm->setAccount([self chosenAccount]);
-    }
-    time_t currentTime;
-    ::time(&currentTime);
-    cm->setLastUsed(currentTime);
-    auto proxyIdx = RecentModel::instance().peopleProxy()->mapToSource(RecentModel::instance().peopleProxy()->index(0, 0));
-    RecentModel::instance().selectionModel()->setCurrentIndex(proxyIdx, QItemSelectionModel::ClearAndSelect);
+    [self processSearchFieldInput];
 }
 
 - (void) displayErrorModalWithTitle:(NSString*) title WithMessage:(NSString*) message
@@ -365,150 +344,20 @@ NSInteger const PRESENCE_TAG        = 800;
     [alert beginSheetModalForWindow:self.view.window modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
 }
 
-- (void) processSearchFieldInputAndStartCall:(BOOL) shouldCall
+- (void) processSearchFieldInput
 {
-    NSString* noValidAccountTitle = NSLocalizedString(@"No valid account available",
-                                                      @"Alert dialog title");
-    NSString* noValidAccountMessage = NSLocalizedString(@"Make sure you have at least one valid account",
-                                                        @"Alert dialo message");
-
-    const auto* numberEntered = [searchField stringValue];
-    URI uri = URI(numberEntered.UTF8String);
-    [self clearSearchField];
-
-    if ([self chosenAccount] && [self chosenAccount]->protocol() == Account::Protocol::RING) {
-        if (uri.protocolHint() == URI::ProtocolHint::RING) {
-            // If it is a RingID start the conversation or the call
-            if (shouldCall) {
-                [self startCallFromURI:uri];
-            } else {
-                [self startConversationFromURI:uri];
-            }
-        } else {
-            // If it's not a ringID and the user choosen account is a Ring account do a search on the blockchain
-            QString usernameToLookup = uri.userinfo();
-            QObject::disconnect(usernameLookupConnection);
-            usernameLookupConnection = QObject::connect(&NameDirectory::instance(),
-                                                        &NameDirectory::registeredNameFound,
-                                                        [self,usernameToLookup,shouldCall] (const Account* account, NameDirectory::LookupStatus status, const QString& address, const QString& name) {
-                                                            if (usernameToLookup.compare(name) != 0) {
-                                                                //That is not our lookup.
-                                                                return;
-                                                            }
-                                                            switch(status) {
-                                                                case NameDirectory::LookupStatus::SUCCESS: {
-                                                                    URI uri = URI("ring:" + address);
-                                                                    if (shouldCall) {
-                                                                        [self startCallFromURI:uri];
-                                                                    } else {
-                                                                        [self startConversationFromURI:uri];
-                                                                    }
-                                                                    break;
-                                                                }
-                                                                case NameDirectory::LookupStatus::INVALID_NAME:
-                                                                case NameDirectory::LookupStatus::ERROR:
-                                                                case NameDirectory::LookupStatus::NOT_FOUND: {
-                                                                    [self displayErrorModalWithTitle:NSLocalizedString(@"Entered name not found",
-                                                                                                                       @"Alert dialog title")
-                                                                                         WithMessage:NSLocalizedString(@"The username you entered do not match a RingID on the network",
-                                                                                                                       @"Alert dialog title")];
-                                                                }
-                                                                    break;
-                                                            }
-                                                        });
-
-            NameDirectory::instance().lookupName([self chosenAccount], QString(), usernameToLookup);
-        }
-    } else if ([self chosenAccount] && [self chosenAccount]->protocol() == Account::Protocol::SIP) {
-        if (uri.protocolHint() == URI::ProtocolHint::RING) {
-            // If it is a RingID and no valid account is available, present error
-            [self displayErrorModalWithTitle:noValidAccountTitle
-                                 WithMessage:noValidAccountMessage];
-            return;
-        }
-        if (shouldCall) {
-            [self startCallFromURI:uri];
-        } else {
-            [self startConversationFromURI:uri];
-        }
-    } else {
-        [self displayErrorModalWithTitle:noValidAccountTitle
-                             WithMessage:noValidAccountMessage];
-    }
+    model_->setFilter(std::string([[searchField stringValue] UTF8String]));
 }
 
--(Account* ) chosenAccount
+-(const lrc::api::account::Info&) chosenAccount
 {
-    auto idx = AvailableAccountModel::instance().selectionModel()->currentIndex();
-    if (idx.isValid()) {
-        return idx.data(static_cast<int>(Ring::Role::Object)).value<Account*>();
-    }
-    return nullptr;
+    return model_->owner;
 }
 
 - (void) clearSearchField
 {
     [searchField setStringValue:@""];
-    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
-}
-
-- (void) addToContact
-{
-    if ([treeController selectedNodes].count == 0)
-        return;
-
-    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
-    auto contactmethod = RecentModel::instance().getContactMethods(originIdx);
-    if (contactmethod.isEmpty())
-        return;
-
-    // TODO: Uncomment to reuse contact name editing popover
-//    if (addToContactPopover != nullptr) {
-//        [addToContactPopover performClose:self];
-//        addToContactPopover = NULL;
-//    } else if (contactmethod.first()) {
-//        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
-//        [editorVC setMethodToLink:contactmethod.first()];
-//        [editorVC setContactLinkedDelegate:self];
-//        addToContactPopover = [[NSPopover alloc] init];
-//        [addToContactPopover setContentSize:editorVC.view.frame.size];
-//        [addToContactPopover setContentViewController:editorVC];
-//        [addToContactPopover setAnimates:YES];
-//        [addToContactPopover setBehavior:NSPopoverBehaviorTransient];
-//        [addToContactPopover setDelegate:self];
-//
-//        [addToContactPopover showRelativeToRect:[smartView frameOfCellAtColumn:0 row:[smartView selectedRow]]
-//                                         ofView:smartView preferredEdge:NSMaxXEdge];
-//    }
-
-    auto* newPerson = new Person();
-    newPerson->setFormattedName(contactmethod.first()->bestName());
-
-    Person::ContactMethods numbers;
-    numbers << contactmethod.first();
-    newPerson->setContactMethods(numbers);
-    contactmethod.first()->setPerson(newPerson);
-
-    auto personCollections = PersonModel::instance().collections();
-    CollectionInterface *peerProfileCollection = nil;
-    foreach(auto collection, personCollections) {
-        if(dynamic_cast<PeerProfileCollection*>(collection))
-            peerProfileCollection = collection;
-    }
-    if(peerProfileCollection) {
-        PersonModel::instance().addNewPerson(newPerson, peerProfileCollection);
-    }
-}
-
-- (void) addContactForRow:(id) sender
-{
-    NSInteger row = [smartView rowForItem:[sender representedObject]];
-    if(row < 0) {
-        return;
-    }
-    [smartView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-    [self addToContact];
+    [self processSearchFieldInput];
 }
 
 /**
@@ -523,20 +372,13 @@ NSInteger const PRESENCE_TAG        = 800;
     [pasteBoard setString:[sender representedObject] forType:NSStringPboardType];
 }
 
-- (void) callNumber:(id) sender
-{
-    Call* c = CallModel::instance().dialingCall();
-    c->setDialNumber(QString::fromNSString([sender representedObject]));
-    c << Call::Action::ACCEPT;
-}
-
 #pragma NSTextFieldDelegate
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
 {
     if (commandSelector == @selector(insertNewline:)) {
         if([[searchField stringValue] isNotEqualTo:@""]) {
-            [self processSearchFieldInputAndStartCall:NO];
+            [self processSearchFieldInput];
             return YES;
         }
     }
@@ -545,7 +387,7 @@ NSInteger const PRESENCE_TAG        = 800;
 
 - (void)controlTextDidChange:(NSNotification *) notification
 {
-    RecentModel::instance().peopleProxy()->setFilterWildcard(QString::fromNSString([searchField stringValue]));
+    [self processSearchFieldInput];
 }
 
 #pragma mark - NSPopOverDelegate
@@ -573,84 +415,80 @@ NSInteger const PRESENCE_TAG        = 800;
 
 - (void) onAddShortcut
 {
-    auto qIdx = [treeController toQIdx:[treeController selectedNodes][0]];
-    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
-    auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
-    if (contactmethods.isEmpty())
+    if ([smartView selectedRow] == -1)
         return;
 
-    auto contactmethod = contactmethods.first();
-    if (contactmethod && (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder())) {
-        [self addToContact];
-    }
+    auto uid = model_->filteredConversation([smartView selectedRow]).uid;
+    model_->makePermanent(uid);
 }
 
 #pragma mark - ContextMenuDelegate
 
-- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) item
-{
-    auto qIdx = [treeController toQIdx:item];
-
-    if (!qIdx.isValid()) {
-        return nil;
-    }
-
-    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
-    auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
-    if (contactmethods.isEmpty())
-        return nil;
-
-    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@""];
-
-    if (contactmethods.size() == 1
-        && !contactmethods.first()->contact()
-        || contactmethods.first()->contact()->isPlaceHolder()) {
-
-        NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
-                                                                action:@selector(addContactForRow:)
-                                                         keyEquivalent:@""];
-        [addContactItem setRepresentedObject:item];
-        [theMenu addItem:addContactItem];
-    } else if (auto person = contactmethods.first()->contact()) {
-        NSMenuItem* copyNameItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy name", @"Contextual menu action")
-                                                             action:@selector(copyStringToPasteboard:)
-                                                      keyEquivalent:@""];
-
-        [copyNameItem setRepresentedObject:person->formattedName().toNSString()];
-        [theMenu addItem:copyNameItem];
-    }
-
-    NSMenu* copySubmenu = [[NSMenu alloc] init];
-    NSMenu* callSubmenu = [[NSMenu alloc] init];
-
-    for (auto cm : contactmethods) {
-        NSMenuItem* tmpCopyItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
-                                                             action:@selector(copyStringToPasteboard:)
-                                                      keyEquivalent:@""];
-
-        [tmpCopyItem setRepresentedObject:cm->uri().toNSString()];
-        [copySubmenu addItem:tmpCopyItem];
-
-        NSMenuItem* tmpCallItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
-                                                             action:@selector(callNumber:)
-                                                      keyEquivalent:@""];
-        [tmpCallItem setRepresentedObject:cm->uri().toNSString()];
-        [callSubmenu addItem:tmpCallItem];
-    }
-
-    NSMenuItem* copyNumberItem = [[NSMenuItem alloc] init];
-    [copyNumberItem setTitle:NSLocalizedString(@"Copy number", @"Contextual menu action")];
-    [copyNumberItem setSubmenu:copySubmenu];
-
-    NSMenuItem* callItems = [[NSMenuItem alloc] init];
-    [callItems setTitle:NSLocalizedString(@"Call number", @"Contextual menu action")];
-    [callItems setSubmenu:callSubmenu];
-
-    [theMenu insertItem:copyNumberItem atIndex:theMenu.itemArray.count];
-    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:theMenu.itemArray.count];
-    [theMenu insertItem:callItems atIndex:theMenu.itemArray.count];
-
-    return theMenu;
-}
+// TODO: Reimplement contextual menu with new models and behaviors
+//- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) item
+//{
+//    auto qIdx = [treeController toQIdx:item];
+//
+//    if (!qIdx.isValid()) {
+//        return nil;
+//    }
+//
+//    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
+//    auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
+//    if (contactmethods.isEmpty())
+//        return nil;
+//
+//    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@""];
+//
+//    if (contactmethods.size() == 1
+//        && !contactmethods.first()->contact()
+//        || contactmethods.first()->contact()->isPlaceHolder()) {
+//
+//        NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
+//                                                                action:@selector(addContactForRow:)
+//                                                         keyEquivalent:@""];
+//        [addContactItem setRepresentedObject:item];
+//        [theMenu addItem:addContactItem];
+//    } else if (auto person = contactmethods.first()->contact()) {
+//        NSMenuItem* copyNameItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy name", @"Contextual menu action")
+//                                                             action:@selector(copyStringToPasteboard:)
+//                                                      keyEquivalent:@""];
+//
+//        [copyNameItem setRepresentedObject:person->formattedName().toNSString()];
+//        [theMenu addItem:copyNameItem];
+//    }
+//
+//    NSMenu* copySubmenu = [[NSMenu alloc] init];
+//    NSMenu* callSubmenu = [[NSMenu alloc] init];
+//
+//    for (auto cm : contactmethods) {
+//        NSMenuItem* tmpCopyItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
+//                                                             action:@selector(copyStringToPasteboard:)
+//                                                      keyEquivalent:@""];
+//
+//        [tmpCopyItem setRepresentedObject:cm->uri().toNSString()];
+//        [copySubmenu addItem:tmpCopyItem];
+//
+//        NSMenuItem* tmpCallItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
+//                                                             action:@selector(callNumber:)
+//                                                      keyEquivalent:@""];
+//        [tmpCallItem setRepresentedObject:cm->uri().toNSString()];
+//        [callSubmenu addItem:tmpCallItem];
+//    }
+//
+//    NSMenuItem* copyNumberItem = [[NSMenuItem alloc] init];
+//    [copyNumberItem setTitle:NSLocalizedString(@"Copy number", @"Contextual menu action")];
+//    [copyNumberItem setSubmenu:copySubmenu];
+//
+//    NSMenuItem* callItems = [[NSMenuItem alloc] init];
+//    [callItems setTitle:NSLocalizedString(@"Call number", @"Contextual menu action")];
+//    [callItems setSubmenu:callSubmenu];
+//
+//    [theMenu insertItem:copyNumberItem atIndex:theMenu.itemArray.count];
+//    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:theMenu.itemArray.count];
+//    [theMenu insertItem:callItems atIndex:theMenu.itemArray.count];
+//
+//    return theMenu;
+//}
 
 @end
