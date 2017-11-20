@@ -26,28 +26,22 @@
 #import <QItemSelectionModel>
 
 //LRC
-#import <recentmodel.h>
 #import <callmodel.h>
 #import <call.h>
-#import <uri.h>
 #import <itemdataroles.h>
-#import <namedirectory.h>
-#import <accountmodel.h>
-#import <account.h>
 #import <person.h>
 #import <contactmethod.h>
 #import <globalinstances.h>
 #import <phonedirectorymodel.h>
-#import <AvailableAccountModel.h>
 #import <personmodel.h>
-#import <peerprofilecollection.h>
+#import <api/newaccountmodel.h>
 
 #import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
 #import "views/HoverTableRowView.h"
 #import "PersonLinkerVC.h"
 #import "views/IconButton.h"
-#import "views/RingOutlineView.h"
+#import "views/RingTableView.h"
 #import "views/ContextualTableCellView.h"
 
 @interface SmartViewVC () <NSOutlineViewDelegate, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
@@ -56,7 +50,7 @@
     NSPopover* addToContactPopover;
 
     //UI elements
-    __unsafe_unretained IBOutlet RingOutlineView* smartView;
+    __unsafe_unretained IBOutlet RingTableView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
 
     /* Pending ring usernames lookup for the search entry */
@@ -82,7 +76,9 @@ NSInteger const PRESENCE_TAG        = 800;
 - (void)awakeFromNib
 {
     NSLog(@"INIT SmartView VC");
-
+    //get selected account
+    //encapsulate conversationmodel in local version
+    
     treeController = [[QNSTreeController alloc] initWithQModel:RecentModel::instance().peopleProxy()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setChildrenKeyPath:@"children"];

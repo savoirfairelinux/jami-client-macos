@@ -18,7 +18,7 @@
  */
 #import <Cocoa/Cocoa.h>
 
-#import "views/RingOutlineView.h"
+#import "views/RingTableView.h"
 
 @interface PersonsVC : NSViewController <NSOutlineViewDelegate, ContextMenuDelegate>
 

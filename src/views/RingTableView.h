@@ -17,11 +17,32 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-
 #import <Cocoa/Cocoa.h>
 
-#import "views/RingOutlineView.h"
+@protocol ContextMenuDelegate;
+@protocol ContextMenuDelegate
 
-@interface HistoryVC : NSViewController <NSOutlineViewDelegate, ContextMenuDelegate>
+@required
+
+- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) path;
+
+@end
+
+@protocol KeyboardShortcutDelegate;
+@protocol KeyboardShortcutDelegate
+
+@optional
+
+/**
+ *  This shortcut has to respond to cmd (⌘) + a
+ */
+- (void) onAddShortcut;
+
+@end
+
+@interface RingTableView : NSTableView
+
+@property (nonatomic,weak) id <ContextMenuDelegate>         contextMenuDelegate;
+@property (nonatomic,weak) id <KeyboardShortcutDelegate>    shortcutsDelegate;
 
 @end

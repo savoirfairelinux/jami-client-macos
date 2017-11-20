@@ -58,7 +58,7 @@ public:
 @interface PersonsVC () {
 
     QNSTreeController *treeController;
-    __unsafe_unretained IBOutlet RingOutlineView *personsView;
+    __unsafe_unretained IBOutlet RingTableView *personsView;
     QSortFilterProxyModel *contactProxyModel;
 
 }
@@ -105,13 +105,7 @@ NSInteger const CALL_BUTTON_TAG = 400;
         auto item = [treeController selectedNodes][0];
         QModelIndex qIdx = [treeController toQIdx:item];
         ContactMethod* m = nil;
-        if (!qIdx.parent().isValid()) {
-            if ([personsView isItemExpanded:item]) {
-                [[personsView animator] collapseItem:item];
-            } else
-                [[personsView animator] expandItem:item];
-            return;
-        }
+        
         if(((NSTreeNode*)[treeController selectedNodes][0]).indexPath.length == 2) {
             // Person
             QVariant var = qIdx.data((int)Person::Role::Object);
