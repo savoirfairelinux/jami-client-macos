@@ -193,21 +193,6 @@ NSInteger const PRESENCE_TAG        = 800;
     }
 }
 
-- (void)showHistory
-{
-    [tabbar selectTabViewItemAtIndex:1];
-}
-
-- (void)showContacts
-{
-    [tabbar selectTabViewItemAtIndex:2];
-}
-
-- (void)showSmartlist
-{
-    [tabbar selectTabViewItemAtIndex:0];
-}
-
 #pragma mark - NSOutlineViewDelegate methods
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;

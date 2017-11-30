@@ -23,12 +23,6 @@
 
 @property (unsafe_unretained) IBOutlet NSTabView* tabbar;
 
-- (void)showHistory;
-
-- (void)showContacts;
-
-- (void)showSmartlist;
-
 - (void)startCallForRow:(id)sender;
 
 @end
