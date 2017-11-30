@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWindowController">
@@ -275,30 +275,6 @@
                                         </menuItem>
                                     </items>
                                 </menu>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
-                <menuItem title="Show" id="12w-Fz-Scs">
-                    <menu key="submenu" title="Show" id="1fJ-em-1ww">
-                        <items>
-                            <menuItem title="Show contacts" id="GU3-tt-2de">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showContacts:" target="-1" id="A5d-DJ-xdI"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Show call history" id="Oco-m7-LtS">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showHistory:" target="-1" id="3Kd-iy-6b9"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Show recent" id="GTY-d8-NBf">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showSmartlist:" target="-1" id="7GT-ZF-CmM"/>
-                                </connections>
                             </menuItem>
                         </items>
                     </menu>
