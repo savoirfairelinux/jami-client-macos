@@ -283,21 +283,6 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
 }
 
-- (IBAction)showHistory:(NSButton*)sender
-{
-    [smartViewVC showHistory];
-}
-
-- (IBAction)showContacts:(NSButton*)sender
-{
-    [smartViewVC showContacts];
-}
-
-- (IBAction)showSmartlist:(NSButton*)sender
-{
-    [smartViewVC showSmartlist];
-}
-
 - (IBAction)callClickedAtRow:(id)sender
 {
     NSTabViewItem *selectedTab = [smartViewVC.tabbar selectedTabViewItem];
