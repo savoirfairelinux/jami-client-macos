@@ -33,11 +33,16 @@
 #import <QtMacExtras/qmacfunctions.h>
 #import <QtGui/QPalette>
 
-//Ring
+//LRC
 #import <person.h>
 #import <profilemodel.h>
 #import <profile.h>
 #import <contactmethod.h>
+#import <api/conversation.h>
+#import <api/account.h>
+#import <api/contactmodel.h>
+#import <api/contact.h>
+#import <api/profile.h>
 
 namespace Interfaces {
 
@@ -195,6 +200,83 @@ namespace Interfaces {
         }
 
         return QPixmap::fromImage(image);
+    }
+
+    char letterForDefaultUserPixmap(const lrc::api::conversation::Info& conversation, const lrc::api::account::Info& accountInfo)
+    {
+        auto contact = accountInfo.contactModel->getContact(conversation.participants[0]);
+        if (!contact.profileInfo.alias.empty())
+            return std::toupper(contact.profileInfo.alias.at(0));
+        else if(contact.profileInfo.type == lrc::api::profile::Type::RING && !contact.registeredName.empty())
+            return std::toupper(contact.registeredName.at(0));
+        else
+            return std::toupper(contact.profileInfo.uri.at(0));
+    }
+
+    QVariant ImageManipulationDelegate::conversationPhoto(const lrc::api::conversation::Info& conversation,
+                                                          const lrc::api::account::Info& accountInfo,
+                                                          const QSize& size,
+                                                          bool displayPresence)
+    {
+        Q_UNUSED(displayPresence)
+
+        auto& avatar = accountInfo.contactModel->getContact(conversation.participants[0]).profileInfo.avatar;
+        if (!avatar.empty()) {
+            QPixmap pxm;
+            const int radius = size.height() / 2;
+
+            // Check cache
+            auto index = QStringLiteral("%1%2%3").arg(size.width())
+            .arg(size.height())
+            .arg(QString::fromStdString(conversation.uid));
+
+            if (convPixmCache.contains(index)) {
+                return convPixmCache.value(index);
+            }
+
+            QPixmap contactPhoto(qvariant_cast<QPixmap>(personPhoto(QByteArray::fromStdString(avatar))).scaled(size, Qt::KeepAspectRatioByExpanding,
+                                                                                                               Qt::SmoothTransformation));
+            QPixmap finalImg;
+            if (contactPhoto.size() != size) {
+                finalImg = crop(contactPhoto, size);
+            } else
+                finalImg = contactPhoto;
+
+            pxm = QPixmap(size);
+            pxm.fill(Qt::transparent);
+            QPainter painter(&pxm);
+
+            //Clear the pixmap
+            painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+            painter.setCompositionMode(QPainter::CompositionMode_Clear);
+            painter.fillRect(0,0,size.width(),size.height(),QBrush(Qt::white));
+            painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+
+            //Add corner radius to the Pixmap
+            QRect pxRect = finalImg.rect();
+            QBitmap mask(pxRect.size());
+            QPainter customPainter(&mask);
+            customPainter.setRenderHints (QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+            customPainter.fillRect       (pxRect                , Qt::white );
+            customPainter.setBackground  (Qt::black                         );
+            customPainter.setBrush       (Qt::black                         );
+            customPainter.drawRoundedRect(pxRect,radius,radius              );
+            finalImg.setMask             (mask                              );
+            painter.drawPixmap           (0,0,finalImg                      );
+            painter.setBrush             (Qt::NoBrush                       );
+            painter.setPen               (Qt::black                         );
+            painter.setCompositionMode   (QPainter::CompositionMode_SourceIn);
+            painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
+
+            // Save in cache
+            convPixmCache.insert(index, pxm);
+
+            return pxm;
+        } else {
+            char color = accountInfo.contactModel->getContact(conversation.participants[0]).profileInfo.uri.at(0);
+            char letter = letterForDefaultUserPixmap(conversation, accountInfo);
+            return drawDefaultUserPixmap(size, color, letter);
+        }
     }
 
     QByteArray ImageManipulationDelegate::toByteArray(const QVariant& pxm)
