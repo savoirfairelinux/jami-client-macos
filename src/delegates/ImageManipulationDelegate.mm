@@ -33,11 +33,16 @@
 #import <QtMacExtras/qmacfunctions.h>
 #import <QtGui/QPalette>
 
-//Ring
+//LRC
 #import <person.h>
 #import <profilemodel.h>
 #import <profile.h>
 #import <contactmethod.h>
+#import <api/conversation.h>
+#import <api/account.h>
+#import <api/contactmodel.h>
+#import <api/contact.h>
+#import <api/profile.h>
 
 namespace Interfaces {
 
@@ -195,6 +200,86 @@ namespace Interfaces {
         }
 
         return QPixmap::fromImage(image);
+    }
+
+    char letterForDefaultUserPixmap(const lrc::api::contact::Info& contact)
+    {
+        if (!contact.profileInfo.alias.empty())
+            return std::toupper(contact.profileInfo.alias.at(0));
+        else if(contact.profileInfo.type == lrc::api::profile::Type::RING && !contact.registeredName.empty())
+            return std::toupper(contact.registeredName.at(0));
+        else
+            return std::toupper(contact.profileInfo.uri.at(0));
+    }
+
+    QVariant ImageManipulationDelegate::conversationPhoto(const lrc::api::conversation::Info& conversation,
+                                                          const lrc::api::account::Info& accountInfo,
+                                                          const QSize& size,
+                                                          bool displayPresence)
+    {
+        Q_UNUSED(displayPresence)
+
+        try {
+            auto contact = accountInfo.contactModel->getContact(conversation.participants[0]);
+            auto& avatar = contact.profileInfo.avatar;
+            if (!avatar.empty()) {
+                QPixmap pxm;
+                const int radius = size.height() / 2;
+
+                // Check cache
+                auto index = QStringLiteral("%1%2%3").arg(size.width())
+                .arg(size.height())
+                .arg(QString::fromStdString(conversation.uid));
+
+                if (convPixmCache.contains(index)) {
+                    return convPixmCache.value(index);
+                }
+
+                auto contactPhoto = qvariant_cast<QPixmap>(personPhoto(QByteArray::fromStdString(avatar)));
+                contactPhoto = contactPhoto.scaled(size, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+
+                QPixmap finalImg;
+                // We crop the avatar if picture is not squared as scaled() keep ratio of original picture
+                if (contactPhoto.size() != size) {
+                    finalImg = crop(contactPhoto, size);
+                } else
+                    finalImg = contactPhoto;
+
+                // Creating clean QPixmap
+                pxm = QPixmap(size);
+                pxm.fill(Qt::transparent);
+
+                //Add corner radius to the Pixmap
+                QPainter painter(&pxm);
+                painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+                painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+                QRect pxRect = finalImg.rect();
+                QBitmap mask(pxRect.size());
+                QPainter customPainter(&mask);
+                customPainter.setRenderHints (QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+                customPainter.fillRect       (pxRect                , Qt::white );
+                customPainter.setBackground  (Qt::black                         );
+                customPainter.setBrush       (Qt::black                         );
+                customPainter.drawRoundedRect(pxRect,radius,radius              );
+                finalImg.setMask             (mask                              );
+                painter.drawPixmap           (0,0,finalImg                      );
+                painter.setBrush             (Qt::NoBrush                       );
+                painter.setPen               (Qt::black                         );
+                painter.setCompositionMode   (QPainter::CompositionMode_SourceIn);
+                painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
+
+                // Save in cache
+                convPixmCache.insert(index, pxm);
+
+                return pxm;
+            } else {
+                char color = contact.profileInfo.uri.at(0);
+                char letter = letterForDefaultUserPixmap(contact);
+                return drawDefaultUserPixmap(size, color, letter);
+            }
+        } catch (const std::out_of_range& e) {
+            return drawDefaultUserPixmap(size, '?', '?');
+        }
     }
 
     QByteArray ImageManipulationDelegate::toByteArray(const QVariant& pxm)
