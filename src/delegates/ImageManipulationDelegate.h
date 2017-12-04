@@ -36,10 +36,16 @@ namespace Interfaces {
     class ImageManipulationDelegate : public PixmapManipulatorI {
 
     public:
+        static constexpr int IMG_SIZE = 80;
+
         ImageManipulationDelegate();
         QVariant contactPhoto(Person* c, const QSize& size, bool displayPresence = true) override;
         virtual QByteArray toByteArray(const QVariant& pxm) override;
         virtual QVariant personPhoto(const QByteArray& data, const QString& type = "PNG") override;
+        QVariant conversationPhoto(const lrc::api::conversation::Info& conversation,
+                                   const lrc::api::account::Info& accountInfo,
+                                   const QSize& size = QSize(IMG_SIZE, IMG_SIZE),
+                                   bool displayPresence = true) override;
 
         QVariant callPhoto(Call* c, const QSize& size, bool displayPresence = true) override;
         QVariant callPhoto(const ContactMethod* n, const QSize& size, bool displayPresence = true) override;
@@ -65,6 +71,7 @@ namespace Interfaces {
 
         QHash<QString, QPixmap> m_hDefaultUserPixmap;
         QHash<QString, QPair<QMetaObject::Connection, QPixmap>> m_hContactsPixmap;
+        QHash<QString, QPixmap> convPixmCache;
         static const QColor avatarColors_[];
 
         /**
@@ -73,6 +80,7 @@ namespace Interfaces {
         QPixmap crop(QPixmap& photo, const QSize& destSize);
 
         const QSize decorationSize = {80,80};
+
     };
 
 } // namespace Interfaces
