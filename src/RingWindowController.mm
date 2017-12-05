@@ -25,7 +25,6 @@
 #import <QItemSelection>
 
 //LRC
-#import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
@@ -33,6 +32,11 @@
 #import <AvailableAccountModel.h>
 #import <api/lrc.h>
 #import <api/account.h>
+#import <api/newaccountmodel.h>
+#import <api/newcallmodel.h>
+#import <api/behaviorcontroller.h>
+#import <api/conversation.h>
+
 
 // Ring
 #import "AppDelegate.h"
@@ -88,12 +92,12 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     self.window.titleVisibility = NSWindowTitleHidden;
 
     lrc_.reset(new lrc::api::Lrc());
-
-    currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel())];
     contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
+    currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil account:&[chooseAccountVC selectedAccount]];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -110,7 +114,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     // Fresh run, we need to make sure RingID appears
     [shareButton sendActionOn:NSLeftMouseDownMask];
 
-//    [self connect];
+    [self connect];
     [self updateRingID];
     // display accounts to select
     NSToolbar *toolbar = self.window.toolbar;
@@ -122,54 +126,77 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 // TODO: Reimplement with new LRC signals
 - (void) connect
 {
-    // Update Ring ID label based on account model changes
-    QObject::connect(RecentModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         auto call = RecentModel::instance().getActiveCall(current);
+//    // Update Ring ID label based on account model changes
+//    QObject::connect(RecentModel::instance().selectionModel(),
+//                     &QItemSelectionModel::currentChanged,
+//                     [=](const QModelIndex &current, const QModelIndex &previous) {
+//                         auto call = RecentModel::instance().getActiveCall(current);
+//
+//                         if(!current.isValid()) {
+//                             [offlineVC animateOut];
+//                             [currentCallVC animateOut];
+//                             [chooseAccountVC enable];
+//                             return;
+//                         }
+//
+//                         if (!call) {
+//                             [currentCallVC animateOut];
+//                             [offlineVC animateIn];
+//                             [chooseAccountVC enable];
+//                         } else {
+//                             [currentCallVC animateIn];
+//                             [offlineVC animateOut];
+//                             [chooseAccountVC disable];
+//                         }
+//                     });
 
-                         if(!current.isValid()) {
-                             [offlineVC animateOut];
-                             [currentCallVC animateOut];
-                             [chooseAccountVC enable];
-                             return;
-                         }
+//    QObject::connect(CallModel::instance().selectionModel(),
+//                     &QItemSelectionModel::currentChanged,
+//                     [=](const QModelIndex &current, const QModelIndex &previous) {
+//                         if(!current.isValid()) {
+//                             return;
+//                         }
+//
+//                         if (previous.isValid()) {
+//                             // We were already on a call
+//                             [currentCallVC animateOut];
+//                             [chooseAccountVC enable];
+//                         } else {
+//                             // Make sure Conversation view hides when selecting a valid call
+//                             [currentCallVC animateIn];
+//                             [offlineVC animateOut];
+//                             [chooseAccountVC disable];
+//                         }
+//                     });
 
-                         if (!call) {
-                             [currentCallVC animateOut];
-                             [offlineVC animateIn];
-                             [chooseAccountVC enable];
-                         } else {
-                             [currentCallVC animateIn];
-                             [offlineVC animateOut];
-                             [chooseAccountVC disable];
-                         }
-                     });
-
-    QObject::connect(CallModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if(!current.isValid()) {
-                             return;
-                         }
-
-                         if (previous.isValid()) {
-                             // We were already on a call
-                             [currentCallVC animateOut];
-                             [chooseAccountVC enable];
-                         } else {
-                             // Make sure Conversation view hides when selecting a valid call
-                             [currentCallVC animateIn];
-                             [offlineVC animateOut];
-                             [chooseAccountVC disable];
-                         }
-                     });
-    QObject::connect(AvailableAccountModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [self](const QModelIndex& idx){
-                         [self updateRingID];
+    QObject::connect(&lrc_->getBehaviorController(),
+                     &lrc::api::BehaviorController::showCallView,
+                     [self](const std::string callId,
+                            const lrc::api::conversation::Info convInfo){
+                         [currentCallVC setSelectedAccount:&lrc_->getAccountModel().getAccountInfo(convInfo.accountId)];
+                         [currentCallVC setCurrentCall:&lrc_->getAccountModel().
+                                                        getAccountInfo(convInfo.accountId).callModel->getCall(convInfo.callId)];
+                         [currentCallVC animateIn];
                          [offlineVC animateOut];
                      });
+
+    QObject::connect(&lrc_->getBehaviorController(),
+                     &lrc::api::BehaviorController::showIncomingCallView,
+                     [self](const std::string callId,
+                            const lrc::api::conversation::Info convInfo){
+                         [currentCallVC setSelectedAccount:&lrc_->getAccountModel().getAccountInfo(convInfo.accountId)];
+                         [currentCallVC setCurrentCall:&lrc_->getAccountModel().
+                          getAccountInfo(convInfo.accountId).callModel->getCall(convInfo.callId)];
+                         [currentCallVC animateIn];
+                         [offlineVC animateOut];
+                     });
+
+//    QObject::connect(AvailableAccountModel::instance().selectionModel(),
+//                     &QItemSelectionModel::currentChanged,
+//                     [self](const QModelIndex& idx){
+//                         [self updateRingID];
+//                         [offlineVC animateOut];
+//                     });
 }
 
 /**
