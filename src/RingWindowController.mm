@@ -26,7 +26,6 @@
 #import <QItemSelection>
 
 //LRC
-#import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
@@ -34,6 +33,11 @@
 #import <AvailableAccountModel.h>
 #import <api/lrc.h>
 #import <api/account.h>
+#import <api/newaccountmodel.h>
+#import <api/newcallmodel.h>
+#import <api/behaviorcontroller.h>
+#import <api/conversation.h>
+
 
 // Ring
 #import "AppDelegate.h"
@@ -109,6 +113,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     // Fresh run, we need to make sure RingID appears
     [shareButton sendActionOn:NSLeftMouseDownMask];
 
+    [self connect];
     [self updateRingID];
     // display accounts to select
     NSToolbar *toolbar = self.window.toolbar;
@@ -117,55 +122,29 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     [toolbar insertItemWithItemIdentifier:kTrustRequestMenuItemIdentifier atIndex:2];
 }
 
-// TODO: Reimplement with new LRC signals
 - (void) connect
 {
-    // Update Ring ID label based on account model changes
-    QObject::connect(RecentModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         auto call = RecentModel::instance().getActiveCall(current);
-
-                         if(!current.isValid()) {
-                             [offlineVC animateOut];
-                             [currentCallVC animateOut];
-                             [chooseAccountVC enable];
-                             return;
-                         }
-
-                         if (!call) {
-                             [currentCallVC animateOut];
-                             [offlineVC animateIn];
-                             [chooseAccountVC enable];
-                         } else {
-                             [currentCallVC animateIn];
-                             [offlineVC animateOut];
-                             [chooseAccountVC disable];
-                         }
+    QObject::connect(&lrc_->getBehaviorController(),
+                     &lrc::api::BehaviorController::showCallView,
+                     [self](const std::string accountId,
+                            const lrc::api::conversation::Info convInfo){
+                         auto* accInfo = &lrc_->getAccountModel().getAccountInfo(accountId);
+                         [currentCallVC setCurrentCall:convInfo.callId
+                                          conversation:convInfo.uid
+                                               account:accInfo];
+                         [currentCallVC animateIn];
+                         [offlineVC animateOut];
                      });
 
-    QObject::connect(CallModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if(!current.isValid()) {
-                             return;
-                         }
-
-                         if (previous.isValid()) {
-                             // We were already on a call
-                             [currentCallVC animateOut];
-                             [chooseAccountVC enable];
-                         } else {
-                             // Make sure Conversation view hides when selecting a valid call
-                             [currentCallVC animateIn];
-                             [offlineVC animateOut];
-                             [chooseAccountVC disable];
-                         }
-                     });
-    QObject::connect(AvailableAccountModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [self](const QModelIndex& idx){
-                         [self updateRingID];
+    QObject::connect(&lrc_->getBehaviorController(),
+                     &lrc::api::BehaviorController::showIncomingCallView,
+                     [self](const std::string accountId,
+                            const lrc::api::conversation::Info convInfo){
+                         auto* accInfo = &lrc_->getAccountModel().getAccountInfo(accountId);
+                         [currentCallVC setCurrentCall:convInfo.callId
+                                          conversation:convInfo.uid
+                                               account:accInfo];
+                         [currentCallVC animateIn];
                          [offlineVC animateOut];
                      });
 }
