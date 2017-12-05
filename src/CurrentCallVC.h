@@ -22,6 +22,10 @@
 
 #import "views/CallView.h"
 
+// LRC
+#import <api/account.h>
+#import <api/call.h>
+
 class Call;
 
 @interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {
@@ -31,5 +35,7 @@ class Call;
 -(void) initFrame;
 -(void) animateIn;
 -(void) animateOut;
-
+-(void) setCurrentCall:(const std::string&)callUid
+          conversation:(const std::string&)convUid
+               account:(const lrc::api::account::Info*)account;
 @end
