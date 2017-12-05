@@ -29,18 +29,11 @@
 #import <QPixmap>
 
 ///LRC
-#import <call.h>
-#import <callmodel.h>
-#import <recentmodel.h>
-#import <useractionmodel.h>
-#import <contactmethod.h>
 #import <video/previewmanager.h>
 #import <video/renderer.h>
-#import <media/text.h>
-#import <person.h>
-#import <globalinstances.h>
-#import <personmodel.h>
-#import <peerprofilecollection.h>
+#import <api/newcallmodel.h>
+#import <api/call.h>
+#import <api/conversationmodel.h>
 
 #import "AppDelegate.h"
 #import "views/ITProgressIndicator.h"
@@ -64,7 +57,12 @@
 
 @end
 
-@interface CurrentCallVC () <NSPopoverDelegate, ContactLinkedDelegate>
+@interface CurrentCallVC () <NSPopoverDelegate, ContactLinkedDelegate> {
+    const lrc::api::account::Info * selectedAccount_;
+    lrc::api::NewCallModel * callModel_;
+    lrc::api::ConversationModel * conversationModel_;
+    const lrc::api::call::Info *currentCall_;
+}
 
 // Main container
 @property (unsafe_unretained) IBOutlet NSSplitView* splitView;
@@ -79,7 +77,6 @@
 // Call Controls
 @property (unsafe_unretained) IBOutlet NSView* controlsPanel;
 
-@property QHash<int, IconButton*> actionHash;
 @property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
 @property (unsafe_unretained) IBOutlet IconButton* recordOnOffButton;
@@ -126,137 +123,41 @@
 @end
 
 @implementation CurrentCallVC
-@synthesize personLabel, personPhoto, actionHash, stateLabel, holdOnOffButton, hangUpButton,
+@synthesize personLabel, personPhoto, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
-            muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView, incomingDisplayName, incomingPersonPhoto,
-            previewView, splitView, loadingIndicator, ringingPanel, joinPanel, outgoingPanel;
+            muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
+            incomingDisplayName, incomingPersonPhoto, previewView, splitView, loadingIndicator, ringingPanel, joinPanel,
+            outgoingPanel;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
 
-- (void) updateAllActions
+-(void) setSelectedAccount:(const lrc::api::account::Info *) selectedAccount
 {
-    for (int i = 0 ; i < CallModel::instance().userActionModel()->rowCount() ; i++) {
-        [self updateActionAtIndex:i];
-    }
+    selectedAccount_ = selectedAccount;
+    callModel_ = selectedAccount_->callModel.get();
+    conversationModel_ = selectedAccount_->conversationModel.get();
 }
 
-- (void) updateActionAtIndex:(int) row
+-(void) setCurrentCall:(const lrc::api::call::Info *)call;
 {
-    const QModelIndex& idx = CallModel::instance().userActionModel()->index(row,0);
-    UserActionModel::Action action = qvariant_cast<UserActionModel::Action>(idx.data(UserActionModel::Role::ACTION));
-    if (auto a = actionHash[(int) action]) {
-        [a setHidden:!(idx.flags() & Qt::ItemIsEnabled)];
-        [a setPressed:(idx.data(Qt::CheckStateRole) == Qt::Checked) ? YES : NO];
-    }
-}
-
--(void) updateCall:(BOOL) firstRun
-{
-    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
-    if (!callIdx.isValid()) {
+    if (not callModel_->hasCall(call->id)){
+        currentCall_ = nil;
         return;
     }
-    auto current = CallModel::instance().selectedCall();
-
-    [personLabel setStringValue:callIdx.data(Qt::DisplayRole).toString().toNSString()];
-    [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
-    [stateLabel setStringValue:callIdx.data((int)Call::Role::HumanStateName).toString().toNSString()];
-
-    if (firstRun) {
-        QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(current, QSize(100,100));
-        [personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-    }
-
-    auto contactmethod = qvariant_cast<Call*>(callIdx.data(static_cast<int>(Call::Role::Object)))->peerContactMethod();
-    BOOL shouldShow = (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder());
-    [self.addContactButton setHidden:!shouldShow];
-
-    // Default values for this views
-    [loadingIndicator setHidden:YES];
-    [videoView setShouldAcceptInteractions:NO];
-    [ringingPanel setHidden:YES];
-    [outgoingPanel setHidden:YES];
-    [controlsPanel setHidden:NO];
-    [headerContainer setHidden:NO];
-
-    auto state = callIdx.data((int)Call::Role::State).value<Call::State>();
-    switch (state) {
-        case Call::State::NEW:
-            break;
-        case Call::State::DIALING:
-        case Call::State::INITIALIZATION:
-        case Call::State::CONNECTED:
-            [loadingIndicator setHidden:NO];
-        case Call::State::RINGING:
-            [controlsPanel setHidden:YES];
-            [outgoingPanel setHidden:NO];
-            break;
-        case Call::State::INCOMING:
-            [self setupIncoming:current];
-            break;
-        case Call::State::CONFERENCE:
-            [self setupConference:current];
-            break;
-        case Call::State::CURRENT:
-            [self setupCurrent:current];
-            break;
-        case Call::State::HOLD:
-            break;
-        case Call::State::BUSY:
-            break;
-        case Call::State::OVER:
-        case Call::State::FAILURE:
-            [controlsPanel setHidden:YES];
-            [outgoingPanel setHidden:NO];
-            if(self.splitView.isInFullScreenMode)
-                [self.splitView exitFullScreenModeWithOptions:nil];
-            break;
-    }
-
+    currentCall_ = call;
 }
 
--(void) setupIncoming:(Call*) c
+-(id) initWithNibName:(NSNibName)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil account:(lrc::api::account::Info *)currentAccount
 {
-    [ringingPanel setHidden:NO];
-    [controlsPanel setHidden:YES];
-    [headerContainer setHidden:YES];
-    QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(c, QSize(100,100));
-    [incomingPersonPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-    [incomingDisplayName setStringValue:c->formattedName().toNSString()];
+    [self setSelectedAccount:currentAccount];
+    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 }
-
--(void) setupCurrent:(Call*) c
-{
-    [joinPanel setHidden:!c->hasParentCall()];
-    [controlsPanel setHidden:c->hasParentCall()];
-    [videoView setShouldAcceptInteractions:YES];
-    [self.chatButton setHidden:NO];
-    [self.addParticipantButton setHidden:NO];
-    [self.transferButton setHidden:NO];
-}
-
--(void) setupConference:(Call*) c
-{
-    [videoView setShouldAcceptInteractions:YES];
-    [self.chatButton setHidden:NO];
-    [joinPanel setHidden:YES];
-    [self.addParticipantButton setHidden:NO];
-    [self.transferButton setHidden:YES];
-}
-
 
 - (void)awakeFromNib
 {
     NSLog(@"INIT CurrentCall VC");
     [self.view setWantsLayer:YES];
-
-    actionHash[ (int)UserActionModel::Action::ACCEPT] = pickUpButton;
-    actionHash[ (int)UserActionModel::Action::HOLD  ] = holdOnOffButton;
-    actionHash[ (int)UserActionModel::Action::RECORD] = recordOnOffButton;
-    actionHash[ (int)UserActionModel::Action::HANGUP] = hangUpButton;
-    actionHash[ (int)UserActionModel::Action::MUTE_AUDIO] = muteAudioButton;
-    actionHash[ (int)UserActionModel::Action::MUTE_VIDEO] = muteVideoButton;
 
     [previewView setWantsLayer:YES];
     [previewView.layer setBackgroundColor:[NSColor blackColor].CGColor];
@@ -281,98 +182,179 @@
     [self connect];
 }
 
+-(void) updateCall:(BOOL) firstRun withId: (const std::string *) callId
+{
+    if (not callModel_->hasCall(*callId)) {
+        return;
+    }
+    NSLog(@"\n status %@ \n",@(lrc::api::call::to_string(callModel_->getCall(*callId).status).c_str()));
+    [personLabel setStringValue:@(currentCall_->peer.c_str())];
+   // [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
+    [stateLabel setStringValue:@(to_string(currentCall_->status).c_str())];
+
+    if (firstRun) {
+        //QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(current, QSize(100,100));
+        //[personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    }
+
+//    auto contvactmethod = qvariant_cast<Call*>(callIdx.data(static_cast<int>(Call::Role::Object)))->peerContactMethod();
+//    BOOL shouldShow = (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder());
+//    [self.addContactButton setHidden:!shouldShow];
+
+    // Default values for this views
+    [loadingIndicator setHidden:YES];
+    [videoView setShouldAcceptInteractions:NO];
+    [ringingPanel setHidden:YES];
+    [outgoingPanel setHidden:YES];
+    [controlsPanel setHidden:NO];
+    [headerContainer setHidden:NO];
+
+    using Status = lrc::api::call::Status;
+    switch (currentCall_->status) {
+        case Status::SEARCHING:
+        case Status::OUTGOING_REQUESTED:
+        case Status::CONNECTING:
+            [loadingIndicator setHidden:NO];
+            break;
+        case Status::INCOMING_RINGING:
+            [controlsPanel setHidden:YES];
+            [outgoingPanel setHidden:YES];
+            [self setupIncoming:&currentCall_->id];
+            break;
+        case Status::OUTGOING_RINGING:
+            [controlsPanel setHidden:YES];
+            [outgoingPanel setHidden:NO];
+            break;
+//        case Status::CONFERENCE:
+//            [self setupConference:currentCall];
+//            break;
+        case Status::PAUSED:
+        case Status::PEER_PAUSED:
+        case Status::INACTIVE:
+        case Status::IN_PROGRESS:
+        case Status::CONNECTED:
+        case Status::AUTO_ANSWERING:
+            break;
+        case Status::ENDED:
+        case Status::TERMINATING:
+        case Status::INVALID:
+            [controlsPanel setHidden:YES];
+            [outgoingPanel setHidden:NO];
+            if(self.splitView.isInFullScreenMode)
+                [self.splitView exitFullScreenModeWithOptions:nil];
+            [self animateOut];
+            break;
+    }
+
+}
+
+-(void) setupIncoming:(const std::string *) callId
+{
+    if (not callModel_->hasCall(*callId)) {
+        return;
+    }
+
+    [ringingPanel setHidden:NO];
+    [controlsPanel setHidden:YES];
+    [headerContainer setHidden:YES];
+//    QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(c, QSize(100,100));
+//    [incomingPersonPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    [incomingDisplayName setStringValue:@(callModel_->getCall(*callId).peer.c_str())];
+}
+
+
+-(void) setupConference:(Call*) c
+{
+    [videoView setShouldAcceptInteractions:YES];
+    [self.chatButton setHidden:NO];
+    [joinPanel setHidden:YES];
+    [self.addParticipantButton setHidden:NO];
+    [self.transferButton setHidden:YES];
+}
+
+-(void)collapseRightView
+{
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSRect leftFrame = [left frame];
+    [right setHidden:YES];
+    [splitView display];
+}
+
+
+
 - (void) connect
 {
-    QObject::connect(RecentModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         auto call = RecentModel::instance().getActiveCall(current);
-                         if(!current.isValid() || !call) {
-                             return;
-                         }
-
-                         [self changeCallSelection:call];
-
-                         if (call->state() == Call::State::HOLD) {
-                             call << Call::Action::HOLD;
-                         }
-
-                         [self collapseRightView];
-                         [self updateCall:YES];
-                         [self updateAllActions];
-                     });
-
-    QObject::connect(CallModel::instance().userActionModel(),
-                     &QAbstractItemModel::dataChanged,
-                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                         const int first(topLeft.row()),last(bottomRight.row());
-                         for(int i = first; i <= last;i++) {
-                             [self updateActionAtIndex:i];
-                         }
-                     });
-
-    QObject::connect(&CallModel::instance(),
-                     &CallModel::callStateChanged,
-                     [self](Call* c, Call::State state) {
-                         auto current = CallModel::instance().selectionModel()->currentIndex();
-                         if (!current.isValid())
-                             [self animateOut];
-                         else if (CallModel::instance().getIndex(c) == current) {
-                             if (c->state() == Call::State::OVER) {
-                                 RecentModel::instance().selectionModel()->clearCurrentIndex();
-                             } else {
-                                 [self updateCall:NO];
-                             }
-                         }
-                     });
-
-    QObject::connect(&CallModel::instance(),
-                     &CallModel::incomingCall,
-                     [self](Call* c) {
-                         [self changeCallSelection:c];
-                     });
+//    QObject::connect(RecentModel::instance().selectionModel(),
+//                     &QItemSelectionModel::currentChanged,
+//                     [=](const QModelIndex &current, const QModelIndex &previous) {
+//                         auto call = RecentModel::instance().getActiveCall(current);
+//                         if(!current.isValid() || !call) {
+//                             return;
+//                         }
+//
+//                         [self changeCallSelection:call];
+//
+//                         if (call->state() == Call::State::HOLD) {
+//                             call << Call::Action::HOLD;
+//                         }
+//
+//                         [self collapseRightView];
+//                         [self updateCall:YES];
+//                     });
+//
+//    QObject::connect(&CallModel::instance(),
+//                     &CallModel::callStateChanged,
+//                     [self](Call* c, Call::State state) {
+//                         auto current = CallModel::instance().selectionModel()->currentIndex();
+//                         if (!current.isValid())
+//                             [self animateOut];
+//                         else if (CallModel::instance().getIndex(c) == current) {
+//                             if (c->state() == Call::State::OVER) {
+//                                 RecentModel::instance().selectionModel()->clearCurrentIndex();
+//                             } else {
+//                                 [self updateCall:NO];
+//                             }
+//                         }
+//                     });
+//
+//    QObject::connect(&CallModel::instance(),
+//                     &CallModel::incomingCall,
+//                     [self](Call* c) {
+//                         [self changeCallSelection:c];
+//                     });
 }
 
-- (void) changeCallSelection:(Call* )c
+- (void) changeCallSelection:(std::string *)callId
 {
+    if (not callModel_->hasCall(*callId)) {
+        return;
+    }
+
     QObject::disconnect(self.selectedCallChanged);
-    CallModel::instance().selectCall(c);
-    self.selectedCallChanged = QObject::connect(CallModel::instance().selectedCall(),
-                                                &Call::changed,
-                                                [=]() {
-                                                    [self updateCall:NO];
+    self.selectedCallChanged = QObject::connect(callModel_,
+                                                &lrc::api::NewCallModel::callStatusChanged,
+                                                [self](const std::string callId) {
+                                                    [self updateCall:NO withId:new std::string(callId)];
                                                 });
-}
-
-- (void) monitorIncomingTextMessages:(Media::Text*) media
-{
-    /* connect to incoming chat messages to open the chat view */
-    QObject::disconnect(self.messageConnection);
-    self.messageConnection = QObject::connect(media,
-                                              &Media::Text::messageReceived,
-                                              [self] (const QMap<QString,QString>& m) {
-                                                  if([[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]])
-                                                      [self uncollapseRightView];
-                                              });
 }
 
 -(void) connectVideoSignals
 {
-    QModelIndex idx = CallModel::instance().selectionModel()->currentIndex();
-    Call* call = CallModel::instance().getCall(idx);
     QObject::disconnect(self.videoStarted);
-    self.videoStarted = QObject::connect(call,
-                     &Call::videoStarted,
-                     [=](Video::Renderer* renderer) {
-                         NSLog(@"Video started!");
-                         [self connectVideoRenderer:renderer];
-                     });
+    self.videoStarted = QObject::connect(callModel_,
+                                         &lrc::api::NewCallModel::remotePreviewStarted,
+                                         [self](const std::string& callId, Video::Renderer* renderer) {
+                                             NSLog(@"Video started!");
+                                             [self connectVideoRenderer:renderer];
+                                         });
 
-    if(call->videoRenderer())
-    {
-        [self connectVideoRenderer:call->videoRenderer()];
+    if (callModel_->hasCall(currentCall_->id)) {
+        if (auto renderer = callModel_->getRenderer(currentCall_->id)) {
+            QObject::disconnect(self.videoStarted);
+            [self connectVideoRenderer: renderer];
+        }
     }
-
     [self connectPreviewRenderer];
 
 }
@@ -414,6 +396,10 @@
     QObject::disconnect(videoHolder.frameUpdated);
     QObject::disconnect(videoHolder.started);
     QObject::disconnect(videoHolder.stopped);
+
+    if(renderer == nil)
+        return;
+
     videoHolder.frameUpdated = QObject::connect(renderer,
                      &Video::Renderer::frameUpdated,
                      [=]() {
@@ -495,8 +481,30 @@
 
 # pragma private IN/OUT animations
 
+-(void)uncollapseRightView
+{
+    NSView *left  = [[splitView subviews] objectAtIndex:0];
+    NSView *right = [[splitView subviews] objectAtIndex:1];
+    [right setHidden:NO];
+
+    CGFloat dividerThickness = [splitView dividerThickness];
+
+    // get the different frames
+    NSRect leftFrame = [left frame];
+    NSRect rightFrame = [right frame];
+
+    leftFrame.size.width = (leftFrame.size.width - rightFrame.size.width - dividerThickness);
+    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+    [left setFrameSize:leftFrame.size];
+    [right setFrame:rightFrame];
+    [splitView display];
+
+    [self.chatVC takeFocus];
+}
+
 -(void) animateIn
 {
+    const std::string *callId = &currentCall_->id;
     CGRect frame = CGRectOffset(self.view.superview.bounds, -self.view.superview.bounds.size.width, 0);
     [self.view setHidden:NO];
 
@@ -513,31 +521,29 @@
 
         [self connectVideoSignals];
         /* check if text media is already present */
-        if(!CallModel::instance().selectedCall())
+        if(not callModel_->hasCall(*callId))
             return;
 
         [loadingIndicator setAnimates:YES];
-        [self updateCall:YES];
+        [self updateCall:YES withId:callId];
 
-        if (CallModel::instance().selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
-            Media::Text *text = CallModel::instance().selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::IN);
-            [self monitorIncomingTextMessages:text];
-        } else if (CallModel::instance().selectedCall()->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::OUT)) {
-            Media::Text *text = CallModel::instance().selectedCall()->firstMedia<Media::Text>(Media::Media::Direction::OUT);
-            [self monitorIncomingTextMessages:text];
-        } else {
-            /* monitor media for messaging text messaging */
-            self.mediaAddedConnection = QObject::connect(CallModel::instance().selectedCall(),
-                                                         &Call::mediaAdded,
-                                                         [self] (Media::Media* media) {
-                                                             if (media->type() == Media::Media::Type::TEXT) {                                                                     [self monitorIncomingTextMessages:(Media::Text*)media];
-                                                                 QObject::disconnect(self.mediaAddedConnection);
-                                                             }
-                                                         });
-        }
+        /* monitor media for messaging text messaging */
+        QObject::disconnect(self.messageConnection);
+        self.messageConnection = QObject::connect(conversationModel_,
+                                                  &lrc::api::ConversationModel::interactionStatusUpdated,
+                                                  [self] (std::string convUid,
+                                                          uint64_t msgId,
+                                                          lrc::api::interaction::Info msg) {
+                                                      if (msg.type == lrc::api::interaction::Type::TEXT) {
+                                                          if(not [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]]){
+                                                              return;
+                                                          }
+                                                          [self uncollapseRightView];
+                                                      }
+                                                  });
     }];
-    [self.view.layer addAnimation:animation forKey:animation.keyPath];
 
+    [self.view.layer addAnimation:animation forKey:animation.keyPath];
     [CATransaction commit];
 }
 
@@ -589,9 +595,9 @@
         [self.view setHidden:YES];
         // first make sure everything is disconnected
         [self cleanUp];
-        if (RecentModel::instance().getActiveCall(RecentModel::instance().selectionModel()->currentIndex())) {
-            [self animateIn];
-        }
+//        if (currentCall_) {
+//            [self animateIn];
+//        }
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
 
@@ -607,95 +613,22 @@
     NSLog(@"frame %@ : %f %f %f %f \n\n",name ,frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
 }
 
--(void)collapseRightView
-{
-    NSView *right = [[splitView subviews] objectAtIndex:1];
-    NSView *left  = [[splitView subviews] objectAtIndex:0];
-    NSRect leftFrame = [left frame];
-    [right setHidden:YES];
-    [splitView display];
-}
-
--(void)uncollapseRightView
-{
-    NSView *left  = [[splitView subviews] objectAtIndex:0];
-    NSView *right = [[splitView subviews] objectAtIndex:1];
-    [right setHidden:NO];
-
-    CGFloat dividerThickness = [splitView dividerThickness];
-
-    // get the different frames
-    NSRect leftFrame = [left frame];
-    NSRect rightFrame = [right frame];
-
-    leftFrame.size.width = (leftFrame.size.width - rightFrame.size.width - dividerThickness);
-    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
-    [left setFrameSize:leftFrame.size];
-    [right setFrame:rightFrame];
-    [splitView display];
-
-    [self.chatVC takeFocus];
-}
-
-
 #pragma mark - Button methods
 
-- (IBAction)addToContact:(NSButton*) sender {
-    auto contactmethod = CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex())->peerContactMethod();
-
-    // TODO: Uncomment to reuse contact name editing popover
-//    if (self.addToContactPopover != nullptr) {
-//        [self.addToContactPopover performClose:self];
-//        self.addToContactPopover = NULL;
-//    } else if (!contactmethod->contact() || contactmethod->contact()->isPlaceHolder()) {
-//        auto* editorVC = [[PersonLinkerVC alloc] initWithNibName:@"PersonLinker" bundle:nil];
-//        [editorVC setMethodToLink:contactmethod];
-//        [editorVC setContactLinkedDelegate:self];
-//        self.addToContactPopover = [[NSPopover alloc] init];
-//        [self.addToContactPopover setContentSize:editorVC.view.frame.size];
-//        [self.addToContactPopover setContentViewController:editorVC];
-//        [self.addToContactPopover setAnimates:YES];
-//        [self.addToContactPopover setBehavior:NSPopoverBehaviorTransient];
-//        [self.addToContactPopover setDelegate:self];
-//
-//        [self.addToContactPopover showRelativeToRect:sender.bounds ofView:sender preferredEdge:NSMaxXEdge];
-//    }
-
-    auto* newPerson = new Person();
-    newPerson->setFormattedName(contactmethod->bestName());
-
-    Person::ContactMethods numbers;
-    numbers << contactmethod;
-    newPerson->setContactMethods(numbers);
-    contactmethod->setPerson(newPerson);
-
-    auto personCollections = PersonModel::instance().collections();
-    CollectionInterface *peerProfileCollection = nil;
-    foreach(auto collection, personCollections) {
-        if(dynamic_cast<PeerProfileCollection*>(collection))
-            peerProfileCollection = collection;
-    }
-    if(peerProfileCollection) {
-        PersonModel::instance().addNewPerson(newPerson, peerProfileCollection);
-    }
-
-    [videoView setCallDelegate:nil];
-}
-
 - (IBAction)hangUp:(id)sender {
-    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::REFUSE;
+    callModel_->hangUp(currentCall_->id);
 }
 
 - (IBAction)accept:(id)sender {
-    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::ACCEPT;
+    callModel_->accept(currentCall_->id);
 }
 
 - (IBAction)toggleRecording:(id)sender {
-    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::RECORD_AUDIO;
+    callModel_->toggleAudioRecord(currentCall_->id);
 }
 
 - (IBAction)toggleHold:(id)sender {
-    CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex()) << Call::Action::HOLD;
+    callModel_->togglePause(currentCall_->id);
 }
 
 - (IBAction)toggleAdvancedControls:(id)sender {
@@ -713,7 +646,6 @@
     BOOL rightViewCollapsed = [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]];
     if (rightViewCollapsed) {
         [self uncollapseRightView];
-        CallModel::instance().getCall(CallModel::instance().selectionModel()->currentIndex())->addOutgoingMedia<Media::Text>();
     } else {
         [self collapseRightView];
     }
@@ -722,14 +654,12 @@
 
 - (IBAction)muteAudio:(id)sender
 {
-    UserActionModel* uam = CallModel::instance().userActionModel();
-    uam << UserActionModel::Action::MUTE_AUDIO;
+    callModel_->toggleMedia(currentCall_->id, lrc::api::NewCallModel::Media::AUDIO);
 }
 
 - (IBAction)muteVideo:(id)sender
 {
-    UserActionModel* uam = CallModel::instance().userActionModel();
-    uam << UserActionModel::Action::MUTE_VIDEO;
+    callModel_->toggleMedia(currentCall_->id, lrc::api::NewCallModel::Media::VIDEO);
 }
 
 - (IBAction)toggleTransferView:(id)sender {
@@ -773,8 +703,8 @@
  */
 - (IBAction)mergeCalls:(id)sender
 {
-    auto current = CallModel::instance().selectedCall();
-    current->joinToParent();
+//    auto current = CallModel::instance().selectedCall();
+//    current->joinToParent();
 }
 
 #pragma mark - NSPopOverDelegate

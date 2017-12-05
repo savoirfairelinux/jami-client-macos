@@ -22,6 +22,10 @@
 
 #import "views/CallView.h"
 
+// LRC
+#import <api/account.h>
+#import <api/call.h>
+
 class Call;
 
 @interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {
@@ -31,5 +35,7 @@ class Call;
 -(void) initFrame;
 -(void) animateIn;
 -(void) animateOut;
-
+-(id) initWithNibName:(NSNibName)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil account:(const lrc::api::account::Info *)currentAccount;
+-(void) setSelectedAccount:(const lrc::api::account::Info *)selectedAccount;
+-(void) setCurrentCall:(const lrc::api::call::Info *)call;
 @end
