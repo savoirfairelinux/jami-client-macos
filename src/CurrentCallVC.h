@@ -22,6 +22,9 @@
 
 #import "views/CallView.h"
 
+// LRC
+#import <api/account.h>
+
 class Call;
 
 @interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {

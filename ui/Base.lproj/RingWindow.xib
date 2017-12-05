@@ -26,35 +26,35 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="1053" height="658"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1200"/>
+            <rect key="contentRect" x="196" y="240" width="1053" height="678"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" autoresizesSubviews="NO" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="1053" height="658"/>
+                <rect key="frame" x="0.0" y="0.0" width="1053" height="678"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Pav-Bw-GgK">
-                        <rect key="frame" x="322" y="0.0" width="5" height="658"/>
+                        <rect key="frame" x="322" y="0.0" width="5" height="678"/>
                     </box>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YgH-CN-tkB" userLabel="Left Panel">
-                        <rect key="frame" x="0.0" y="0.0" width="324" height="658"/>
+                        <rect key="frame" x="0.0" y="0.0" width="324" height="678"/>
                         <subviews>
                             <tabView focusRingType="none" drawsBackground="NO" type="noTabsNoBorder" initialItem="0MO-4e-8mo" translatesAutoresizingMaskIntoConstraints="NO" id="xXW-iq-GcP">
-                                <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
+                                <rect key="frame" x="0.0" y="0.0" width="324" height="632"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="SmartView" identifier="" id="0MO-4e-8mo">
                                         <view key="view" id="D5P-tm-YgO">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="632"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="omo-Be-zok">
-                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="609"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="629"/>
                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vUu-vJ-ryG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="609"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="629"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="3NN-k0-vDM" id="tcL-dy-Q3h" customClass="RingTableView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="609"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="629"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="0.0" colorSpace="deviceWhite"/>
@@ -286,7 +286,7 @@
                                 </tabViewItems>
                             </tabView>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PoQ-x4-ES3">
-                                <rect key="frame" x="20" y="620" width="258" height="22"/>
+                                <rect key="frame" x="20" y="640" width="258" height="22"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Name, ringID" usesSingleLineMode="YES" bezelStyle="round" id="vvE-nM-kSl">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -297,7 +297,7 @@
                                 </connections>
                             </searchField>
                             <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="j5k-WC-n59" userLabel="Call Button" customClass="IconButton">
-                                <rect key="frame" x="286" y="616" width="30" height="30"/>
+                                <rect key="frame" x="286" y="636" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FTa-mZ-R4s"/>
                                     <constraint firstAttribute="width" constant="30" id="HPd-La-IgC"/>
@@ -330,7 +330,7 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-MB-mlx" userLabel="HomeView">
-                        <rect key="frame" x="326" y="0.0" width="727" height="658"/>
+                        <rect key="frame" x="326" y="0.0" width="727" height="678"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="6bh-ow-nJO" customClass="BackgroundView">
                                 <rect key="frame" x="0.0" y="0.0" width="727" height="172"/>
@@ -339,14 +339,14 @@
                                 </constraints>
                             </customView>
                             <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                                <rect key="frame" x="0.0" y="0.0" width="727" height="658"/>
+                                <rect key="frame" x="0.0" y="0.0" width="727" height="678"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="340" id="5yo-rb-X1O"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
                                 </constraints>
                             </customView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
-                                <rect key="frame" x="263" y="229" width="200" height="200"/>
+                                <rect key="frame" x="263" y="239" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="RCZ-Wt-iKD"/>
                                     <constraint firstAttribute="height" constant="200" id="tSn-OT-Zn8"/>
@@ -359,7 +359,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="D6e-KX-8gC">
-                                <rect key="frame" x="103" y="194" width="520" height="270"/>
+                                <rect key="frame" x="103" y="204" width="520" height="270"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
                                         <rect key="frame" x="95" y="98" width="330" height="19"/>
@@ -501,7 +501,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="f7W-vO-bCb"/>
             </connections>
-            <point key="canvasLocation" x="467.5" y="235"/>
+            <point key="canvasLocation" x="466.5" y="286"/>
         </window>
         <viewController id="jrf-42-1l2" customClass="SmartViewVC">
             <connections>

@@ -25,7 +25,6 @@
 #import <QItemSelection>
 
 //LRC
-#import <accountmodel.h>
 #import <callmodel.h>
 #import <account.h>
 #import <call.h>
@@ -33,6 +32,7 @@
 #import <AvailableAccountModel.h>
 #import <api/lrc.h>
 #import <api/account.h>
+#import <api/newaccountmodel.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -90,6 +90,10 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     lrc_.reset(new lrc::api::Lrc());
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    [currentCallVC setCurrentAccount: [chooseAccountVC selectedAccount]];
+    // set call model of currentcallVC
+    // trigger awake from nib?
+    
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel())];
