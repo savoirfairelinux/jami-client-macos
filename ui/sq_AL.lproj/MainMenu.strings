@@ -57,7 +57,7 @@
 "198.title" = "Përzgjidhi Krejt";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
-"199.title" = "Cut";
+"199.title" = "Prije";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
 "200.title" = "Drejtshkrim dhe Gramatikë";
@@ -90,10 +90,10 @@
 "210.title" = "Kalo te Përzgjedhja";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
-"211.title" = "Speech";
+"211.title" = "E folur";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "212"; */
-"212.title" = "Speech";
+"212.title" = "E folur";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
 "213.title" = "Gjej të Mëparshmin";
@@ -123,10 +123,10 @@
 "239.title" = "Zoom";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "View";
+"295.title" = "Shiheni";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "View";
+"296.title" = "Shiheni";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
 "297.title" = "Shfaqe Panelin";
@@ -147,10 +147,10 @@
 "350.title" = "Kopjim/Ngjitje e Mençur";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Smart Quotes";
+"351.title" = "Thonjëza të Mençura";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
-"354.title" = "Smart Links";
+"354.title" = "Lidhje të Mençura";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
 "450.title" = "Shndërrime";
@@ -168,7 +168,7 @@
 "457.title" = "Shfaq zëvendësime";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Smart Dashes";
+"460.title" = "Vija ndarëse të Mençura";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
 "462.title" = "Zëvendësim Teksti";
@@ -180,7 +180,7 @@
 "466.title" = "Capitalize";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "Paste and Match Style";
+"485.title" = "Ngjite dhe Përputhi Stilin";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
 "490.title" = "Ndihmë";

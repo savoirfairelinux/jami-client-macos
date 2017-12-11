@@ -3,10 +3,10 @@
 "2cB-dz-KYg.ibShadowedToolTip" = "Mbylle thirrjen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
-"9e8-ji-QId.ibShadowedToolTip" = "Join call";
+"9e8-ji-QId.ibShadowedToolTip" = "Merr pjesë në thirrje";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
-"ChW-kg-Sja.ibShadowedToolTip" = "Transfer";
+"ChW-kg-Sja.ibShadowedToolTip" = "Shpërngule";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
 "D0G-XT-lhI.ibShadowedToolTip" = "Mbylle thirrjen";
@@ -15,10 +15,10 @@
 "Dqv-um-UUk.title" = "URI";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
-"EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
+"EA3-Q5-Dyj.placeholderString" = "Emër Në Ekran Për Ardhësen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
-"G0w-c3-9pJ.ibShadowedToolTip" = "Record";
+"G0w-c3-9pJ.ibShadowedToolTip" = "Regjistroje";
 
 /* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
 "KPG-pB-gPm.title" = "Përgjigjuni";
@@ -33,7 +33,7 @@
 "TlL-HO-5Ey.title" = "Anuloje";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "VVL-A4-r7n"; */
-"VVL-A4-r7n.ibShadowedToolTip" = "Record";
+"VVL-A4-r7n.ibShadowedToolTip" = "Regjistroje";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
 "X0W-vv-xua.title" = "dëshiron të bisedojë me ju!";
@@ -42,7 +42,7 @@
 "anb-Y8-JQi.ibShadowedToolTip" = "Mbaje";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
+"fmp-x4-Pef.ibShadowedToolTip" = "Shfaq/fshih fjalosje";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
 "kIZ-mf-moM.ibShadowedToolTip" = "Shtoni pjesëmarrës";
@@ -54,7 +54,7 @@
 "mc3-HV-hek.ibShadowedToolTip" = "Mbylle thirrjen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
-"oRa-pS-HN2.ibShadowedToolTip" = "Record";
+"oRa-pS-HN2.ibShadowedToolTip" = "Regjistroje";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
 "osk-LS-0Qg.placeholderString" = "Emër personi";
@@ -69,7 +69,7 @@
 "tjM-py-p4V.title" = "Shpërfille";
 
 /* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "ugy-uK-901"; */
-"ugy-uK-901.placeholderString" = "State";
+"ugy-uK-901.placeholderString" = "Gjendje";
 
 /* Class = "NSTextFieldCell"; title = "Answer"; ObjectID = "wRO-X4-7IU"; */
 "wRO-X4-7IU.title" = "Përgjigjuni";

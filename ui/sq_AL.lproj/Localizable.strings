@@ -14,7 +14,7 @@
 "Backup account" = "Kopjeruaje llogarinë";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "Thirre numrin";
 
 /* Open panel title */
 "Choose a CA list" = "Zgjidhni një listë AD-sh";
@@ -56,10 +56,10 @@
 "Entered name not found" = "Emri i dhënë s’gjet";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Dështoi migrimi i llogarisë tuaj. Mund të riprovoni duke shtypur OK ose duke fshirë llogarinë tuaj.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migrimi i llogarisë tuaj dështoi. Mund të riprovoni duke shtypur OK, ose duke fshirë llogarinë tuaj.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Kryerja e kërkimit   dështoi";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Thirrje ardhëse pre %@";
@@ -149,16 +149,16 @@
 "Delete contact" = "Fshije kontaktin";
 
 /* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
+"Could not delete MAC contact" = "S’u fshi dot kontakti MAC";
 
 /* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
+"To delete go to MAC Contacts App" = "Për ta fshirë, shkoni te Aplikacioni Kontakte MAC";
 
 /* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
+"Contact will be deleted" = "Kontakti do të fshihet";
 
 /* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
+"Are you sure you want to delete contact \"%@\"" = "Jeni i sigurt se doni të fshihet kontakti \"%@\"";
 
 /* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+"Account has no password" = "Llogari s’ka fjalëkalim";
