@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016-2017 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,13 +25,7 @@
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
 
-#import <media/media.h>
-#import <recentmodel.h>
-#import <person.h>
-#import <contactmethod.h>
-#import <media/text.h>
-#import <media/textrecording.h>
-#import <callmodel.h>
+// LRC
 #import <globalinstances.h>
 
 #import "views/IconButton.h"
@@ -43,22 +38,17 @@
 #import "account.h"
 #import "AvailableAccountModel.h"
 #import "MessagesVC.h"
-
+#import "utils.h"
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface ConversationVC () <NSOutlineViewDelegate, MessagesVCDelegate> {
+@interface ConversationVC () {
 
     __unsafe_unretained IBOutlet NSTextField* messageField;
-    QVector<ContactMethod*> contactMethods;
     NSMutableString* textSelection;
-
-    QMetaObject::Connection contactMethodChanged;
-    ContactMethod* selectedContactMethod;
 
     __unsafe_unretained IBOutlet NSView* sendPanel;
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
-    __unsafe_unretained IBOutlet NSTextField* emptyConversationPlaceHolder;
     __unsafe_unretained IBOutlet IconButton* sendButton;
     __unsafe_unretained IBOutlet NSPopUpButton* contactMethodsPopupButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
@@ -67,12 +57,83 @@
 
     IBOutlet NSLayoutConstraint* titleHoverButtonConstraint;
     IBOutlet NSLayoutConstraint* titleTopConstraint;
+
+    std::string convUid_;
+    const lrc::api::conversation::Info* cachedConv_;
+    lrc::api::ConversationModel* convModel_;
+
+    // Both are needed to invalidate cached conversation as pointer
+    // may not be referencing the same conversation anymore
+    QMetaObject::Connection modelSortedSignal_;
+    QMetaObject::Connection filterChangedSignal_;
 }
 
 
 @end
 
 @implementation ConversationVC
+
+-(const lrc::api::conversation::Info*) getCurrentConversation
+{
+    if (convModel_ == nil || convUid_.empty())
+        return nil;
+
+    if (cachedConv_ != nil)
+        return cachedConv_;
+
+    auto& convQueue = convModel_->allFilteredConversations();
+
+    auto it = std::find_if(convQueue.begin(), convQueue.end(), [self](const lrc::api::conversation::Info& conv) {return conv.uid == convUid_;});
+
+    if (it != convQueue.end())
+        cachedConv_ = &(*it);
+
+    return cachedConv_;
+}
+
+-(void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model {
+    if (convUid_ == convUid && convModel_ == model)
+        return;
+
+    cachedConv_ = nil;
+    convUid_ = convUid;
+    convModel_ = model;
+
+    [messagesViewVC setConversationUid:convUid_ model:convModel_];
+
+    if (convUid_.empty() || convModel_ == nil)
+        return;
+
+    // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
+    // after a reordering.
+    QObject::disconnect(modelSortedSignal_);
+    QObject::disconnect(filterChangedSignal_);
+    modelSortedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
+                                          [self](){
+                                              cachedConv_ = nil;
+                                          });
+    filterChangedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::filterChanged,
+                                            [self](){
+                                                cachedConv_ = nil;
+                                            });
+
+    auto* conv = [self getCurrentConversation];
+
+    if (conv == nil)
+        return;
+
+    // Setup UI elements according to new conversation
+    NSString* bestName = bestNameForConversation(*conv, *convModel_);
+    [conversationTitle setStringValue: bestName];
+
+    [contactMethodsPopupButton setEnabled:NO];
+    [contactMethodsPopupButton setBordered:NO];
+    BOOL hideCMPopupButton = [bestNameForConversation(*conv, *convModel_) isEqualTo:bestIDForConversation(*conv, *convModel_)];
+    [contactMethodsPopupButton setHidden:hideCMPopupButton];
+
+    [titleHoverButtonConstraint setActive:hideCMPopupButton];
+    [titleTopConstraint setActive:!hideCMPopupButton];
+}
 
 - (void)loadView {
     [super loadView];
@@ -83,9 +144,6 @@
     [self.view.layer setCornerRadius:5.0f];
 
     [messageField setFocusRingType:NSFocusRingTypeNone];
-
-    [self setupChat];
-
 }
 
 -(Account* ) chosenAccount
@@ -105,80 +163,26 @@
     self.view.layer.position = self.view.frame.origin;
 }
 
-- (void) setupChat
-{
-    QObject::connect(RecentModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-
-                         contactMethods = RecentModel::instance().getContactMethods(current);
-                         if (contactMethods.isEmpty()) {
-                             return ;
-                         }
-
-                         [contactMethodsPopupButton removeAllItems];
-                         for (auto cm : contactMethods) {
-                             [contactMethodsPopupButton addItemWithTitle:cm->bestId().toNSString()];
-                         }
-
-                         BOOL isSMultipleCM = (contactMethods.length() > 1);
-                         BOOL hideCMPopupButton = !isSMultipleCM && (contactMethods.first()->bestId() == contactMethods.first()->bestName());
-
-                         [contactMethodsPopupButton setEnabled:isSMultipleCM];
-                         [contactMethodsPopupButton setBordered:isSMultipleCM];
-                         [contactMethodsPopupButton setHidden:hideCMPopupButton];
-                         [[contactMethodsPopupButton cell] setArrowPosition: !isSMultipleCM ? NSPopUpNoArrow : NSPopUpArrowAtBottom];
-
-                         [titleHoverButtonConstraint setActive:hideCMPopupButton];
-                         [titleTopConstraint setActive:!hideCMPopupButton];
-
-                         [emptyConversationPlaceHolder setHidden:NO];
-                         // Select first cm
-                         [contactMethodsPopupButton selectItemAtIndex:0];
-                         [self itemChanged:contactMethodsPopupButton];
-                     });
-}
-
 - (IBAction)sendMessage:(id)sender
 {
+    auto* conv = [self getCurrentConversation];
     /* make sure there is text to send */
     NSString* text = self.message;
     if (text && text.length > 0) {
-        QMap<QString, QString> messages;
-        messages["text/plain"] = QString::fromNSString(text);
-        contactMethods.at([contactMethodsPopupButton indexOfSelectedItem])->sendOfflineTextMessage(messages);
+        convModel_->sendMessage(conv->uid, std::string([text UTF8String]));
         self.message = @"";
+        [messagesViewVC newMessageSent];
     }
 }
 
 - (IBAction)placeCall:(id)sender
 {
-    if(auto cm = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem])) {
-        auto c = CallModel::instance().dialingCall();
-        c->setPeerContactMethod(cm);
-        c << Call::Action::ACCEPT;
-        CallModel::instance().selectCall(c);
-    }
+    auto* conv = [self getCurrentConversation];
+    convModel_->placeCall(conv->uid);
 }
 
 - (IBAction)backPressed:(id)sender {
-    RecentModel::instance().selectionModel()->clearCurrentIndex();
-    messagesViewVC.delegate = nil;
-}
-
-- (IBAction)sendContactRequest:(id)sender
-{
-    auto cm = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem]);
-    if(cm) {
-        if(cm->account() == nullptr) {
-            cm->setAccount([self chosenAccount]);
-        }
-
-        if(cm->account() == nullptr) {
-            return;
-        }
-        cm->account()->sendContactRequest(cm);
-    }
+    [self animateOut];
 }
 
 # pragma mark private IN/OUT animations
@@ -233,65 +237,5 @@
     return NO;
 }
 
--(BOOL)shouldHideSendRequestBtn {
-    /*to send contact request we need to meet thre condition:
-     1)contact method has RING protocol
-     2)accound is used to send request is also RING
-     3)contact  have not acceppt request yet*/
-    if(selectedContactMethod->protocolHint() != URI::ProtocolHint::RING) {
-        return YES;
-    }
-    if(selectedContactMethod->isConfirmed()) {
-        return YES;
-    }
-    if(selectedContactMethod->account()) {
-        return selectedContactMethod->account()->protocol() != Account::Protocol::RING;
-    }
-    if([self chosenAccount]) {
-        return [self chosenAccount]->protocol() != Account::Protocol::RING;
-    }
-    return NO;
-}
-
--(void)updateSendButtonVisibility
-{
-    [sentContactRequestButton setHidden:[self shouldHideSendRequestBtn]];
-    sentContactRequestWidth.priority = [self shouldHideSendRequestBtn] ? 999: 250;
-}
-
-#pragma mark - NSPopUpButton item selection
-
-- (IBAction)itemChanged:(id)sender {
-    NSInteger index = [(NSPopUpButton *)sender indexOfSelectedItem];
-
-    selectedContactMethod = contactMethods.at(index);
-
-    [self updateSendButtonVisibility];
-
-    [conversationTitle setStringValue:selectedContactMethod->bestName().toNSString()];
-    QObject::disconnect(contactMethodChanged);
-    contactMethodChanged = QObject::connect(selectedContactMethod,
-                                            &ContactMethod::changed,
-                                            [self] {
-                                                [conversationTitle setStringValue:selectedContactMethod->bestName().toNSString()];
-                                                [self updateSendButtonVisibility];
-                                            });
-
-    if (auto txtRecording = selectedContactMethod->textRecording()) {
-        messagesViewVC.delegate = self;
-        [messagesViewVC setUpViewWithModel:txtRecording->instantMessagingModel()];
-        [self.view.window makeFirstResponder:messageField];
-    }
-}
-
-#pragma mark - MessagesVC delegate
-
--(void) newMessageAdded {
-
-    if (auto txtRecording = contactMethods.at([contactMethodsPopupButton indexOfSelectedItem])->textRecording()) {
-        [emptyConversationPlaceHolder setHidden:txtRecording->instantMessagingModel()->rowCount() > 0];
-        txtRecording->setAllRead();
-    }
-}
 
 @end
