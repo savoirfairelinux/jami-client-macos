@@ -224,7 +224,8 @@ SET(ringclient_OTHERS
    src/delegates/ImageManipulationDelegate.mm
    src/delegates/ImageManipulationDelegate.h
    src/AccountSelectionManager.h
-   src/AccountSelectionManager.mm)
+   src/AccountSelectionManager.mm
+   src/utils.h)
 
 
 SET(ringclient_XIBS
