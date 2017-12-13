@@ -43,6 +43,7 @@
 #import "views/IconButton.h"
 #import "views/RingTableView.h"
 #import "views/ContextualTableCellView.h"
+#import "utils.h"
 
 @interface SmartViewVC () <NSTableViewDelegate, NSTableViewDataSource, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
 
@@ -184,24 +185,6 @@ NSInteger const PRESENCE_TAG        = 800;
     [smartView reloadData];
 }
 
-- (NSString *) bestNameForConversation:(const lrc::api::conversation::Info&) conv
-{
-    auto contact = model_->owner.contactModel->getContact(conv.participants[0]);
-    if (!contact.profileInfo.alias.empty())
-        return @(contact.profileInfo.alias.c_str());
-    else
-        return [self bestIDForConversation:conv];
-}
-
-- (NSString *) bestIDForConversation:(const lrc::api::conversation::Info&) conv
-{
-    auto contact = model_->owner.contactModel->getContact(conv.participants[0]);
-    if (!contact.registeredName.empty())
-        return @(contact.registeredName.c_str());
-    else
-        return @(contact.profileInfo.uri.c_str());
-}
-
 #pragma mark - NSTableViewDelegate methods
 
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
@@ -258,8 +241,8 @@ NSInteger const PRESENCE_TAG        = 800;
     [unreadCount setIntValue:conversation.unreadMessages];
 
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-    NSString* displayNameString = [self bestNameForConversation:conversation];
-    NSString* displayIDString = [self bestIDForConversation:conversation];
+    NSString* displayNameString = bestNameForConversation(conversation, *model_);
+    NSString* displayIDString = bestIDForConversation(conversation, *model_);
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
         NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
         [displayName setStringValue:displayIDString];
