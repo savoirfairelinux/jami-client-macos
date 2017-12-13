@@ -18,6 +18,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <api/conversationmodel.h>
+#import <api/conversation.h>
 
 @protocol MessagesVCDelegate
 
@@ -27,7 +29,9 @@
 
 @interface MessagesVC : NSViewController
 
--(void)setUpViewWithModel: (QAbstractItemModel*) model;
+-(void)setConversationUid:(const std::string)convUid model:(const lrc::api::ConversationModel*)model;
+-(void)newMessageSent;
+
 @property (retain, nonatomic) id <MessagesVCDelegate> delegate;
 
 @end
