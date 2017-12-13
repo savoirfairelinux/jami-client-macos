@@ -147,6 +147,16 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
                          [currentCallVC animateIn];
                          [offlineVC animateOut];
                      });
+
+    QObject::connect(&lrc_->getBehaviorController(),
+                     &lrc::api::BehaviorController::showChatView,
+                     [self](const std::string& accountId,
+                            const lrc::api::conversation::Info& convInfo){
+                         auto& accInfo = lrc_->getAccountModel().getAccountInfo(accountId);
+                         [offlineVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+                         [offlineVC animateIn];
+                         [currentCallVC animateOut];
+                     });
 }
 
 /**

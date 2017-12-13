@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConversationVC">
             <connections>
                 <outlet property="contactMethodsPopupButton" destination="xdB-aI-PSs" id="BZW-FI-WpH"/>
                 <outlet property="conversationTitle" destination="ucx-6g-eJw" id="40T-pM-nix"/>
-                <outlet property="emptyConversationPlaceHolder" destination="Uqj-Xr-xl5" id="N1g-ao-lda"/>
                 <outlet property="messageField" destination="bsk-Gj-qQ2" id="JYN-bF-ttw"/>
                 <outlet property="messagesViewVC" destination="iH6-17-JsM" id="uxH-Ra-lSr"/>
                 <outlet property="sendButton" destination="UJf-cF-RAo" id="8PF-7G-w1d"/>
                 <outlet property="sendPanel" destination="Rth-di-Tls" id="vCd-kM-DLc"/>
-                <outlet property="sentContactRequestButton" destination="4ZO-un-Lrm" id="KbQ-lT-4ME"/>
-                <outlet property="sentContactRequestWidth" destination="v81-fy-pNZ" id="cJD-zQ-HkG"/>
                 <outlet property="titleHoverButtonConstraint" destination="vUO-eF-Kox" id="lYB-E6-4Ex"/>
                 <outlet property="titleTopConstraint" destination="32s-Wp-DE1" id="fms-Yu-vrn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -37,14 +33,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="477"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="hwp-Th-i2d" id="bOO-CW-S21">
+                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="bOO-CW-S21">
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="477"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                         <tableColumns>
-                                            <tableColumn width="697" minWidth="40" maxWidth="1000" id="hwp-Th-i2d">
+                                            <tableColumn identifier="" width="697" minWidth="40" maxWidth="1000" id="hwp-Th-i2d">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -141,9 +137,10 @@
                                             </tableColumn>
                                         </tableColumns>
                                         <connections>
+                                            <outlet property="dataSource" destination="iH6-17-JsM" id="po1-Zr-U4G"/>
                                             <outlet property="delegate" destination="iH6-17-JsM" id="Zgx-7J-egB"/>
                                         </connections>
-                                    </outlineView>
+                                    </tableView>
                                 </subviews>
                             </clipView>
                             <constraints>
@@ -205,18 +202,7 @@
                             </connections>
                         </menu>
                     </popUpButtonCell>
-                    <connections>
-                        <action selector="itemChanged:" target="-2" id="rVd-Nz-D6M"/>
-                    </connections>
                 </popUpButton>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uqj-Xr-xl5">
-                    <rect key="frame" x="300" y="282" width="198" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Start the conversation!" id="bsl-nv-Wqq">
-                        <font key="font" metaFont="systemSemibold" size="18"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <customView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-di-Tls" customClass="SendMessagePanel">
                     <rect key="frame" x="0.0" y="0.0" width="798" height="50"/>
                     <subviews>
@@ -274,7 +260,7 @@
                     </connections>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
-                    <rect key="frame" x="68" y="533" width="44" height="48"/>
+                    <rect key="frame" x="68" y="533" width="43" height="48"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Title" id="HnC-1N-RmR">
                         <font key="font" metaFont="system" size="18"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -295,21 +281,6 @@
                         <action selector="placeCall:" target="-2" id="2h9-fM-gof"/>
                     </connections>
                 </button>
-                <button toolTip="Send Contact Request" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4ZO-un-Lrm" userLabel="Send Request" customClass="IconButton">
-                    <rect key="frame" x="688" y="537" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="KPs-ix-z2g"/>
-                        <constraint firstAttribute="width" priority="750" constant="40" id="LYJ-5C-Yza"/>
-                        <constraint firstAttribute="width" priority="250" id="v81-fy-pNZ"/>
-                    </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_person_add" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="xFh-Oa-4FF">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="sendContactRequest:" target="-2" id="jLP-xv-a2G"/>
-                    </connections>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ooq-vs-Xt1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="1xM-Rt-OXn"/>
@@ -320,7 +291,6 @@
                 <constraint firstAttribute="bottom" secondItem="Rth-di-Tls" secondAttribute="bottom" id="9nL-Hs-Oak"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="EJD-f8-Xqd" secondAttribute="leading" id="Ijp-QX-Dkw"/>
                 <constraint firstItem="cFH-d7-Erh" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="9" id="Tok-wc-chb"/>
-                <constraint firstItem="Uqj-Xr-xl5" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Tzd-wA-uMM"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="58" id="XkO-FA-l3J"/>
                 <constraint firstItem="Sn1-dJ-QCw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="58" id="aZT-2B-gv9"/>
                 <constraint firstAttribute="trailing" secondItem="cFH-d7-Erh" secondAttribute="trailing" constant="20" id="bWY-wj-6dr"/>
@@ -329,12 +299,9 @@
                 <constraint firstItem="Rth-di-Tls" firstAttribute="top" secondItem="EJD-f8-Xqd" secondAttribute="bottom" constant="1" id="f8h-bA-ZrZ"/>
                 <constraint firstItem="ooq-vs-Xt1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="9" id="gkR-53-qs5"/>
                 <constraint firstAttribute="trailing" secondItem="Rth-di-Tls" secondAttribute="trailing" id="iT0-rG-86d"/>
-                <constraint firstItem="cFH-d7-Erh" firstAttribute="centerY" secondItem="4ZO-un-Lrm" secondAttribute="centerY" id="lbz-xF-PHc"/>
                 <constraint firstAttribute="trailing" secondItem="Sn1-dJ-QCw" secondAttribute="trailing" constant="20" id="m05-gh-crH"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="trailing" secondItem="EJD-f8-Xqd" secondAttribute="trailing" id="mga-Tu-Ikb"/>
-                <constraint firstItem="cFH-d7-Erh" firstAttribute="leading" secondItem="4ZO-un-Lrm" secondAttribute="trailing" constant="10" id="pPF-TP-qLQ"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="qz7-sE-9Ml"/>
-                <constraint firstItem="Uqj-Xr-xl5" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="tmm-4H-81S"/>
                 <constraint firstItem="xdB-aI-PSs" firstAttribute="top" secondItem="ucx-6g-eJw" secondAttribute="bottom" constant="2" id="uJ0-ZI-9W2"/>
                 <constraint firstItem="ucx-6g-eJw" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="vUO-eF-Kox"/>
             </constraints>
@@ -351,6 +318,5 @@
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="ic_arrow_back" width="72" height="72"/>
-        <image name="ic_person_add" width="48" height="48"/>
     </resources>
 </document>
