@@ -18,6 +18,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <api/conversation.h>
+#import <api/conversationmodel.h>
 
 @interface ConversationVC : NSViewController
 
@@ -31,5 +33,7 @@
  * if message.length is > 0, button is enabled, otherwise disabled
  */
 @property (retain) NSString* message;
+
+- (void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
 
 @end
