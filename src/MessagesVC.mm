@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
+ *          Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,27 +19,27 @@
  */
 
 #import <QItemSelectionModel>
-#import <qstring.h>
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
 
-#import <media/media.h>
-#import <person.h>
-#import <media/text.h>
-#import <media/textrecording.h>
+// LRC
 #import <globalinstances.h>
+#import <api/interaction.h>
 
 #import "MessagesVC.h"
-#import "QNSTreeController.h"
 #import "views/IMTableCellView.h"
 #import "views/MessageBubbleView.h"
 #import "INDSequentialTextSelectionManager.h"
+#import "delegates/ImageManipulationDelegate.h"
 
-@interface MessagesVC () {
+@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource> {
 
-    QNSTreeController* treeController;
-    __unsafe_unretained IBOutlet NSOutlineView* conversationView;
+    __unsafe_unretained IBOutlet NSTableView* conversationView;
 
+    const lrc::api::conversation::Info* conv_;
+    const lrc::api::ConversationModel* convModel_;
+
+    QMetaObject::Connection newMessageSignal_;
 }
 
 @property (nonatomic, strong, readonly) INDSequentialTextSelectionManager* selectionManager;
@@ -46,107 +47,180 @@
 @end
 
 @implementation MessagesVC
-QAbstractItemModel* currentModel;
 
--(void)setUpViewWithModel: (QAbstractItemModel*) model {
+-(void)setConversation:(const lrc::api::conversation::Info *)conv model:(const lrc::api::ConversationModel *)model {
+    conv_ = conv;
+    convModel_ = model;
 
-     _selectionManager = [[INDSequentialTextSelectionManager alloc] init];
+    QObject::disconnect(newMessageSignal_);
+    newMessageSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newUnreadMessage,
+                                         [self](const std::string& uid, uint64_t msgId, const lrc::api::interaction::Info& msg){
+                                             if (uid != conv_->uid)
+                                                 return;
+                                             [conversationView reloadData];
+                                             [conversationView scrollToEndOfDocument:nil];
+                                         });
 
-    [self.selectionManager unregisterAllTextViews];
-
-    treeController = [[QNSTreeController alloc] initWithQModel:model];
-    [treeController setAvoidsEmptySelection:NO];
-    [treeController setChildrenKeyPath:@"children"];
-    [conversationView bind:@"content" toObject:treeController withKeyPath:@"arrangedObjects" options:nil];
-    [conversationView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
-    [conversationView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
+    [conversationView reloadData];
     [conversationView scrollToEndOfDocument:nil];
-    currentModel = model;
 }
 
-#pragma mark - NSOutlineViewDelegate methods
+-(void)newMessageSent
+{
+    [conversationView reloadData];
+}
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item;
+#pragma mark - NSTableViewDelegate methods
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
 {
     return YES;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+- (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    return YES;
+    return NO;
 }
 
-- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    if(!qIdx.isValid()) {
-        return [outlineView makeViewWithIdentifier:@"LeftMessageView" owner:self];
+    if(convModel_ == nil || conv_ == nil) {
+        return nil;
     }
-    auto dir = qvariant_cast<Media::Media::Direction>(qIdx.data((int)Media::TextRecording::Role::Direction));
+
+    // HACK HACK HACK HACK HACK
+    // The following code has to be replaced when every views are implemented for every interaction types
+    // This is an iterator which "jumps over" any interaction which is not a text one.
+    // It behaves as if interaction list was only containing text interactions.
+    std::map<uint64_t, lrc::api::interaction::Info>::const_iterator it;
+
+    {
+        int msgCount = 0;
+        it = std::find_if(conv_->interactions.begin(), conv_->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
+            if (inter.second.type == lrc::api::interaction::Type::TEXT) {
+                if (msgCount == row) {
+                    return true;
+                } else {
+                    msgCount++;
+                    return false;
+                }
+            }
+            return false;
+        });
+    }
+
+    if (it == conv_->interactions.end())
+        return nil;
+
     IMTableCellView* result;
 
-    if (dir == Media::Media::Direction::IN) {
-        result = [outlineView makeViewWithIdentifier:@"LeftMessageView" owner:self];
+    auto& interaction = it->second;
+
+    // TODO Implement interactions other than messages
+    if(interaction.type != lrc::api::interaction::Type::TEXT) {
+        return nil;
+    }
+
+    bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+
+    if (isOutgoing) {
+        result = [tableView makeViewWithIdentifier:@"RightMessageView" owner:self];
     } else {
-        result = [outlineView makeViewWithIdentifier:@"RightMessageView" owner:self];
+        result = [tableView makeViewWithIdentifier:@"LeftMessageView" owner:self];
     }
 
     // check if the message first in incoming or outgoing messages sequence
     Boolean isFirstInSequence = true;
-    int row = qIdx.row() - 1;
-    if(row >= 0) {
-        QModelIndex index = currentModel->index(row, 0);
-        if(index.isValid()) {
-            auto dirOld = qvariant_cast<Media::Media::Direction>(index.data((int)Media::TextRecording::Role::Direction));
-            isFirstInSequence = !(dirOld == dir);
-        }
+    if (it != conv_->interactions.begin()) {
+        auto previousIt = it;
+        previousIt--;
+        auto& previousInteraction = previousIt->second;
+        if (previousInteraction.type == lrc::api::interaction::Type::TEXT && (isOutgoing == lrc::api::interaction::isOutgoing(previousInteraction)))
+            isFirstInSequence = false;
     }
     [result.photoView setHidden:!isFirstInSequence];
     result.msgBackground.needPointer = isFirstInSequence;
     [result setup];
 
     NSMutableAttributedString* msgAttString =
-    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",qIdx.data((int)Qt::DisplayRole).toString().toNSString()]
+    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",@(interaction.body.c_str())]
                                            attributes:[self messageAttributes]];
 
+    NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
     NSAttributedString* timestampAttrString =
-    [[NSAttributedString alloc] initWithString:qIdx.data((int)Media::TextRecording::Role::FormattedDate).toString().toNSString()
+    [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
                                     attributes:[self timestampAttributes]];
-
 
     CGFloat finalWidth = MAX(msgAttString.size.width, timestampAttrString.size.width);
 
-    finalWidth = MIN(finalWidth + 30, outlineView.frame.size.width * 0.7);
-
-    NSString* msgString = qIdx.data((int)Qt::DisplayRole).toString().toNSString();
-    NSString* dateString = qIdx.data((int)Qt::DisplayRole).toString().toNSString();
+    finalWidth = MIN(finalWidth + 30, tableView.frame.size.width * 0.7);
 
     [msgAttString appendAttributedString:timestampAttrString];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
     [result.msgView checkTextInDocument:nil];
     [result updateWidthConstraint:finalWidth];
-    [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(qIdx.data(Qt::DecorationRole)))];
+
+    auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+    [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv_, convModel_->owner)))];
     return result;
 }
 
-- (void)outlineView:(NSOutlineView *)outlineView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
+- (void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
 {
-    if (IMTableCellView* cellView = [outlineView viewAtColumn:0 row:row makeIfNecessary:NO]) {
+    if (IMTableCellView* cellView = [tableView viewAtColumn:0 row:row makeIfNecessary:NO]) {
         [self.selectionManager registerTextView:cellView.msgView withUniqueIdentifier:@(row).stringValue];
     }
     [self.delegate newMessageAdded];
 }
 
-- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    QModelIndex qIdx = [treeController toQIdx:((NSTreeNode*)item)];
-    double someWidth = outlineView.frame.size.width * 0.7;
+    double someWidth = tableView.frame.size.width * 0.7;
 
-    NSMutableAttributedString* msgAttString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",qIdx.data((int)Qt::DisplayRole).toString().toNSString()]
-                                                                                     attributes:[self messageAttributes]];
-    NSAttributedString *timestampAttrString = [[NSAttributedString alloc] initWithString:
-                                               qIdx.data((int)Media::TextRecording::Role::FormattedDate).toString().toNSString()
-                                                                              attributes:[self timestampAttributes]];
+    if(convModel_ == nil || conv_ == nil) {
+        return 0;
+    }
+
+    // HACK HACK HACK HACK HACK
+    // The following code has to be replaced when every views are implemented for every interaction types
+    // This is an iterator which "jumps over" any interaction which is not a text one.
+    // It behaves as if interaction list was only containing text interactions.
+    std::map<uint64_t, lrc::api::interaction::Info>::const_iterator it;
+
+    {
+        int msgCount = 0;
+        it = std::find_if(conv_->interactions.begin(), conv_->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
+            if (inter.second.type == lrc::api::interaction::Type::TEXT) {
+                if (msgCount == row) {
+                    return true;
+                } else {
+                    msgCount++;
+                    return false;
+                }
+            }
+            return false;
+        });
+    }
+
+    if (it == conv_->interactions.end())
+        return 0;
+
+    auto& interaction = it->second;
+
+    // TODO Implement interactions other than messages
+    if(interaction.type != lrc::api::interaction::Type::TEXT) {
+        return 0;
+    }
+
+    NSMutableAttributedString* msgAttString =
+    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",@(interaction.body.c_str())]
+                                           attributes:[self messageAttributes]];
+
+    NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
+    NSAttributedString* timestampAttrString =
+    [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
+                                    attributes:[self timestampAttributes]];
+
+    [msgAttString appendAttributedString:timestampAttrString];
 
     [msgAttString appendAttributedString:timestampAttrString];
 
@@ -159,6 +233,25 @@ QAbstractItemModel* currentModel;
 
     double height = tv.frame.size.height + 10;
     return MAX(height, 50.0f);
+}
+
+#pragma mark - NSTableViewDataSource
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    if (conv_) {
+        int count;
+        count = std::count_if(conv_->interactions.begin(), conv_->interactions.end(), [](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
+            return inter.second.type == lrc::api::interaction::Type::TEXT;
+        });
+        return count;
+    }
+    return 0;
+
+    // TODO: Replace current code by the following one when every interactions implemented
+//    if (conv_) {
+//        return conv_->interactions.size();
+//    }
 }
 
 #pragma mark - Text formatting

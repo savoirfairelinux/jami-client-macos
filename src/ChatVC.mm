@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *          Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,45 +20,25 @@
 
 #import "ChatVC.h"
 
-#import <QItemSelectionModel>
-#import <qstring.h>
-
-#import <media/media.h>
-#import <media/text.h>
-#import <media/textrecording.h>
-#import <callmodel.h>
-
 #import "MessagesVC.h"
-
-@interface MediaConnectionsHolder : NSObject
-
-@property QMetaObject::Connection newMediaAdded;
-@property QMetaObject::Connection newMessage;
-
-@end
-
-@implementation MediaConnectionsHolder
-
-
-@end
 
 @interface ChatVC () <MessagesVCDelegate>
 {
- IBOutlet MessagesVC* messagesViewVC;
+    IBOutlet MessagesVC* messagesViewVC;
+
+    lrc::api::conversation::Info* conv_;
+    lrc::api::ConversationModel* convModel_;
 }
 
 @property (unsafe_unretained) IBOutlet NSTextField *messageField;
 @property (unsafe_unretained) IBOutlet NSButton *sendButton;
-
-
-@property MediaConnectionsHolder* mediaHolder;
 
 @end
 
 @implementation ChatVC
 
 
-@synthesize messageField,sendButton, mediaHolder;
+@synthesize messageField,sendButton;
 
 - (void)awakeFromNib
 {
@@ -67,72 +48,21 @@
     [self.view setLayer:[CALayer layer]];
     [self.view.layer setBackgroundColor:[NSColor controlColor].CGColor];
 
-    mediaHolder = [[MediaConnectionsHolder alloc] init];
-
-    QObject::connect(CallModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         [self setupChat];
-                     });
     messagesViewVC.delegate = self;
 }
 
-
-- (void) setupChat
+-(void)setConversation:(lrc::api::conversation::Info *)conv model:(lrc::api::ConversationModel *)model
 {
-    QObject::disconnect(mediaHolder.newMediaAdded);
-    QObject::disconnect(mediaHolder.newMessage);
+    conv_ = conv;
+    convModel_ = model;
 
-    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
-
-    if (!callIdx.isValid())
-        return;
-
-    Call* call = CallModel::instance().getCall(callIdx);
-
-    /* check if text media is already present */
-    if (call->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
-        Media::Text *text = call->firstMedia<Media::Text>(Media::Media::Direction::IN);
-        [self parseChatModel:text->recording()->instantMessagingModel()];
-    } else if (call->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::OUT)) {
-        Media::Text *text = call->firstMedia<Media::Text>(Media::Media::Direction::OUT);
-        [self parseChatModel:text->recording()->instantMessagingModel()];
-    } else {
-        /* monitor media for messaging text messaging */
-        mediaHolder.newMediaAdded = QObject::connect(call,
-                                                     &Call::mediaAdded,
-                                                     [self] (Media::Media* media) {
-                                                         if (media->type() == Media::Media::Type::TEXT) {
-                                                             QObject::disconnect(mediaHolder.newMediaAdded);
-                                                             [self parseChatModel:((Media::Text*)media)->recording()->instantMessagingModel()];
-                                                         }
-                                                     });
-    }
+    [messagesViewVC setConversation:conv_ model:convModel_];
 }
 
 #pragma mark - MessagesVC delegate
 
 -(void) newMessageAdded {
-
-    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
-    if (!callIdx.isValid())
-        return;
-    Call* call = CallModel::instance().getCall(callIdx);
-    if (call->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::IN)) {
-        Media::Text *text = call->firstMedia<Media::Text>(Media::Media::Direction::IN);
-        auto textRecording = text->recording();
-        textRecording->setAllRead();
-    } else if (call->hasMedia(Media::Media::Type::TEXT, Media::Media::Direction::OUT)) {
-        Media::Text *text = call->firstMedia<Media::Text>(Media::Media::Direction::OUT);
-        auto textRecording = text->recording();
-        textRecording->setAllRead();
-    }
-}
-
-- (void) parseChatModel:(QAbstractItemModel *)model
-
-{
-    [messagesViewVC setUpViewWithModel:model];
+    // TODO : Remove if we don't do anything when displaying new messages
 }
 
 - (void) takeFocus
@@ -141,19 +71,13 @@
 }
 
 - (IBAction)sendMessage:(id)sender {
-
-    QModelIndex callIdx = CallModel::instance().selectionModel()->currentIndex();
-    Call* call = CallModel::instance().getCall(callIdx);
-
     /* make sure there is text to send */
     NSString* text = self.message;
     if (text && text.length > 0) {
-        QMap<QString, QString> messages;
-        messages["text/plain"] = QString::fromNSString(text);
-        call->addOutgoingMedia<Media::Text>()->send(messages);
-        // Empty the text after sending it
-        [self.messageField setStringValue:@""];
+        convModel_->sendMessage(conv_->uid, std::string([text UTF8String]));
         self.message = @"";
+        [messageField setStringValue:@""];
+        [messagesViewVC newMessageSent];
     }
 }
 
