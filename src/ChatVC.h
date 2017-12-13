@@ -17,6 +17,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <Cocoa/Cocoa.h>
+#import <api/conversation.h>
+#import <api/conversationmodel.h>
 
 @interface ChatVC : NSViewController <NSTextFieldDelegate>
 
@@ -27,6 +29,7 @@
  */
 @property (retain) NSString* message;
 
+- (void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
 - (void) takeFocus;
 
 @end
