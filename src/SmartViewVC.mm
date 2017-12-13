@@ -54,9 +54,10 @@
     __unsafe_unretained IBOutlet NSSearchField* searchField;
 
     /* Pending ring usernames lookup for the search entry */
-    QMetaObject::Connection usernameLookupConnection;
+    QMetaObject::Connection usernameLookupConnection, modelSortedConnection_;
 
     lrc::api::ConversationModel* model_;
+    std::string selectedUid_;
 }
 
 @end
@@ -169,10 +170,37 @@ NSInteger const PRESENCE_TAG        = 800;
     [tabbar selectTabViewItemAtIndex:0];
 }
 
+-(void) reloadData
+{
+    [smartView deselectAll:nil];
+    [smartView reloadData];
+
+    if (!selectedUid_.empty() && model_ != nil) {
+        auto it = std::find_if(model_->allFilteredConversations().begin(), model_->allFilteredConversations().end(),
+                          [self] (const lrc::api::conversation::Info& conv) {
+                              return selectedUid_ == conv.uid;
+                          });
+        if (it != model_->allFilteredConversations().end()) {
+            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - model_->allFilteredConversations().begin())];
+            [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
+        }
+    }
+
+    [smartView scrollToBeginningOfDocument:nil];
+}
+
 - (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
 {
-    model_ = conversationModel;
-    [smartView reloadData];
+    if (model_ != conversationModel) {
+        model_ = conversationModel;
+        [self reloadData];
+        QObject::disconnect(modelSortedConnection_);
+        if (model_ != nil)
+            modelSortedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::modelSorted,
+                             [self] (){
+                                 [self reloadData];
+                             });
+    }
 }
 
 #pragma mark - NSTableViewDelegate methods
@@ -195,7 +223,10 @@ NSInteger const PRESENCE_TAG        = 800;
         return;
 
     auto uid = model_->filteredConversation(row).uid;
-    model_->selectConversation(uid);
+    if (selectedUid_ != uid) {
+        selectedUid_ = uid;
+        model_->selectConversation(uid);
+    }
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
