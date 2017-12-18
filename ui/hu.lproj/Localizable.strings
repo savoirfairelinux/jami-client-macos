@@ -2,7 +2,7 @@
 "A network error occured during the export" = "A network error occured during the export";
 
 /* Contextual menu action */
-"Add to contacts" = "Hozzáadás a partnerek listájához";
+"Add to contacts" = "Hozzáadás a partnerekhez";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
@@ -59,7 +59,7 @@
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "A keresés meghiúsult";
+"Failed to perform lookup" = "A kikeresés meghiúsult";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Incoming call from %@";
@@ -116,13 +116,13 @@
 "Text Actions" = "Text Actions";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "A beírt felhasználónév érhető";
+"The entered username is available" = "A beírt felhasználónév elérhető";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "A megadott felhasználónév nem érhető";
+"The entered username is not available" = "A beírt felhasználónév nem érhető el";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";

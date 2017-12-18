@@ -44,7 +44,7 @@
 "Copy name" = "Kopírovat název";
 
 /* Contextual menu action */
-"Copy number" = "Zkopírovat číslo";
+"Copy number" = "Kopírovat číslo";
 
 /* Contextual menu entry */
 "Create RING Account" = "Vytvořit účet RING";
@@ -125,7 +125,7 @@
 "The entered username is not available" = "Zadané uživatelské jméno není dostupné";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "Následující účet musí emigrovat do nového formátu Ring účtů:";
+"The following account needs to be migrated to the new Ring account format:" = "Následující účet musí být převeden do nového formátu účtů Ring:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Vámi zadané heslo neodemkne tento účet";
@@ -137,10 +137,10 @@
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pro dokončení tohoto postupu otevřete Ring na novém zařízení a vyberte volbu „Připojit toto zařízení k účtu“. Váš PIN zůstává platný 10 minut.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Pro pokračování v migraci musíte zvolit heslo pro váš účet. Toto heslo bude použito k zašifrování vašeho hlavního klíče. Bude požadováno pro přidávání nových zařízení k vašemu Ring účtu. Pokud nejste připraveni zvolit si heslo, můžete Ring zavřít a pokračovat v migraci později.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Pro pokračování v převodu si musíte k účtu zvolit heslo. Toto heslo bude použito k zašifrování vašeho hlavního klíče. Bude požadováno pro přidávání nových zařízení k vašemu účtu Ring. Pokud nejste připraveni si heslo zvolit, můžete Ring zavřít a pokračovat v převodu později.";
 
 /* Name used when user leave field empty */
-"Unknown" = "Neznámý";
+"Unknown" = "Neznámé";
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Musíte převést svůj účet před vyvedením";

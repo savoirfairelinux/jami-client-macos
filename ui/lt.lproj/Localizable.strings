@@ -116,13 +116,13 @@
 "Text Actions" = "Teksto veiksmai";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "Įrašytas naudotojo vardas yra prieinamas";
+"The entered username is available" = "Įvestas naudotojo vardas yra prieinamas";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Įvestas naudotojo vardas yra neteisingas. Jame privalo būti bent 3 simboliai ir tik mažosios raidės ar skaitmenys.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "Įrašytas naudotojo vardas yra neprieinamas";
+"The entered username is not available" = "Įvestas naudotojo vardas yra neprieinamas";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "Ši paskyra turi būti perkelta į naująjį Ring paskyros formatą:";

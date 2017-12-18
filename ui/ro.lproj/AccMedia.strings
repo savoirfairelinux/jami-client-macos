@@ -6,7 +6,7 @@
 "CO7-VF-04Q.title" = "Sus";
 
 /* Class = "NSButtonCell"; title = "Enable ringtones"; ObjectID = "KkI-i1-mfY"; */
-"KkI-i1-mfY.title" = "Activeaza tonuri de apel";
+"KkI-i1-mfY.title" = "Activează tonuri de apel";
 
 /* Class = "NSButtonCell"; title = "Up"; ObjectID = "MbZ-7X-K5I"; */
 "MbZ-7X-K5I.title" = "Sus";
@@ -18,7 +18,7 @@
 "aMg-uJ-Krx.title" = "Tonuri de apel";
 
 /* Class = "NSTextFieldCell"; title = "Codecs"; ObjectID = "biN-bX-qM1"; */
-"biN-bX-qM1.title" = "Codeci";
+"biN-bX-qM1.title" = "Codecuri";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Frequency"; ObjectID = "dwG-Ro-bIS"; */
 "dwG-Ro-bIS.placeholderString" = "Frecventa";
@@ -39,7 +39,7 @@
 "pvl-9U-X4l.placeholderString" = "Nume";
 
 /* Class = "NSTextFieldCell"; title = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)"; ObjectID = "rRr-la-G9L"; */
-"rRr-la-G9L.title" = "Codecurile sunt utilizate in momentul stabilirii unui canal de comunicare cu cineva. Acestia sunt activabili si reorganizabili (este preferat primul activ din lista)";
+"rRr-la-G9L.title" = "Codecurile sunt utilizate în momentul stabilirii unui canal de comunicare cu cineva. Acestea sunt activabile și reorganizabile (este preferat primul activ din listă)";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "rU5-XQ-Ixc"; */
 "rU5-XQ-Ixc.placeholderString" = "Nume";
