@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_0974dccd",
+        "filename": "src/delegates/ImageManipulationDelegate.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-12-19T16:54:45Z",
+      "side": 1,
+      "message": "could be given by argument, as already done in caller",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 90
+      },
+      "revId": "79c963d33fb62039550374a606961c402199c06b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_297718d6",
+        "filename": "src/delegates/ImageManipulationDelegate.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-12-19T16:54:45Z",
+      "side": 1,
+      "message": "complex code, to simplify",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 44
+      },
+      "revId": "79c963d33fb62039550374a606961c402199c06b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_6981208f",
+        "filename": "src/delegates/ImageManipulationDelegate.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-12-19T16:54:45Z",
+      "side": 1,
+      "message": "why? you\u0027ll fill with white just below",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 247,
+        "endChar": 42
+      },
+      "revId": "79c963d33fb62039550374a606961c402199c06b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_497ee4af",
+        "filename": "src/delegates/ImageManipulationDelegate.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-12-19T16:54:45Z",
+      "side": 1,
+      "message": "the third getContact... could be simplified",
+      "range": {
+        "startLine": 277,
+        "startChar": 55,
+        "endLine": 277,
+        "endChar": 65
+      },
+      "revId": "79c963d33fb62039550374a606961c402199c06b",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
