@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_2ce72614",
+        "filename": "src/AccountSelectionManager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-12-19T21:11:55Z",
+      "side": 1,
+      "message": "Author: must be used at each lines",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 5,
+        "endChar": 15
+      },
+      "revId": "d8e7718571e757520640655ee7df3d4e621c9fee",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
