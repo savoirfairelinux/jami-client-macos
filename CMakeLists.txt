@@ -16,7 +16,7 @@ SET(RING_VERSION_NAME "Liberté, Égalité, Fraternité - Version 1.0")
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
 SET(PROJ_COPYRIGHT " © 2015-2017 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
-ADD_DEFINITIONS("-std=c++11 -stdlib=libc++ -fobjc-arc")
+ADD_DEFINITIONS("-std=c++14 -stdlib=libc++ -fobjc-arc")
 
 PROJECT(${PROJ_NAME})
 
