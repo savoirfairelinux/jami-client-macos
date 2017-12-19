@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_e9441076",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-12-19T17:06:04Z",
+      "side": 1,
+      "message": "better design to use a unique_ptr here.\nno clear needs to use sharing behavior (and more dangerous)",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 19
+      },
+      "revId": "f5d995314292a6898ebd6ca6be885654eb2c498f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_c949548d",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-12-19T17:06:04Z",
+      "side": 1,
+      "message": "lrc_ \u003d std::make_unique\u003clrc::api::Lrc\u003e()",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 36
+      },
+      "revId": "f5d995314292a6898ebd6ca6be885654eb2c498f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
