@@ -18,6 +18,14 @@
  */
 #import <Cocoa/Cocoa.h>
 
+namespace lrc {
+    namespace api {
+        namespace account {
+            struct Info;
+        }
+    }
+}
+
 @interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate> {
     IBOutlet NSView *currentView;
 }
@@ -32,5 +40,13 @@
 @property (nonatomic) BOOL hideRingID;
 
 - (IBAction)openPreferences:(id)sender;
+
+/**
+ * This method is intended to be used by the ChooseAccountVC to signal the fact that
+ * the selected account has been changed by user. It will then forward this information
+ * to relevant controllers and views.
+ * @param accInfo reference to selected account
+ */
+- (void) selectAccount:(const lrc::api::account::Info&)accInfo;
 
 @end

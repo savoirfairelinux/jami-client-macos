@@ -97,7 +97,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
     // toolbar items
-    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel())];
+    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel()) delegate:self];
     contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -132,6 +132,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
                                                account:accInfo];
+                         [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [currentCallVC animateIn];
                          [offlineVC animateOut];
                      });
@@ -144,6 +145,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
                                                account:accInfo];
+                         [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [currentCallVC animateIn];
                          [offlineVC animateOut];
                      });
@@ -154,6 +156,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
                             const lrc::api::conversation::Info& convInfo){
                          auto& accInfo = lrc_->getAccountModel().getAccountInfo(accountId);
                          [offlineVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+                         [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [offlineVC animateIn];
                          [currentCallVC animateOut];
                      });
@@ -344,6 +347,15 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 - (void)migrationDidCompleteWithError
 {
     [self checkAccountsToMigrate];
+}
+
+-(void)selectAccount:(const lrc::api::account::Info&)accInfo
+{
+    // If the selected account has been changed, we close any open panel
+    if ([smartViewVC setConversationModel:accInfo.conversationModel.get()]) {
+        [currentCallVC animateOut];
+        [offlineVC animateOut];
+    }
 }
 
 #pragma mark - NSToolbarDelegate

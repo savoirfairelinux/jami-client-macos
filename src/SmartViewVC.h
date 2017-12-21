@@ -22,6 +22,10 @@
 namespace lrc {
     namespace api {
         class ConversationModel;
+
+        namespace conversation {
+            struct Info;
+        }
     }
 }
 
@@ -29,8 +33,17 @@ namespace lrc {
 
 @property (unsafe_unretained) IBOutlet NSTabView* tabbar;
 
-@property lrc::api::ConversationModel* conversationModel;
+- (BOOL)setConversationModel:(lrc::api::ConversationModel *)conversationModel;
 
 - (void)startCallForRow:(id)sender;
+
+/**
+ * This method is meant to be used by RingWindowController to set selected conversation in case
+ * a selection is triggered not by user but by LRC signal. If conversation is already selected, this method
+ * returns immediatly without changing any state.
+ * @param conv selected conversation
+ * @param model model responsible for conversation
+ */
+-(void)selectConversation:(const lrc::api::conversation::Info&)conv model:(lrc::api::ConversationModel*)model;
 
 @end
