@@ -96,7 +96,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
     // toolbar items
-    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel())];
+    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel()) parent:self];
     contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil account:&[chooseAccountVC selectedAccount]];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -129,9 +129,10 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
                      &lrc::api::BehaviorController::showCallView,
                      [self](const std::string callId,
                             const lrc::api::conversation::Info convInfo){
-                         [currentCallVC setSelectedAccount:&lrc_->getAccountModel().getAccountInfo(convInfo.accountId)];
-                         [currentCallVC setCurrentCall:&lrc_->getAccountModel().
-                                                        getAccountInfo(convInfo.accountId).callModel->getCall(convInfo.callId)];
+                         auto& accInfo = lrc_->getAccountModel().getAccountInfo(convInfo.accountId);
+                         [currentCallVC setSelectedAccount:&accInfo];
+                         [currentCallVC setCurrentCall:&accInfo.callModel->getCall(convInfo.callId)];
+                         [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [currentCallVC animateIn];
                          [offlineVC animateOut];
                      });
@@ -140,9 +141,10 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
                      &lrc::api::BehaviorController::showIncomingCallView,
                      [self](const std::string callId,
                             const lrc::api::conversation::Info convInfo){
-                         [currentCallVC setSelectedAccount:&lrc_->getAccountModel().getAccountInfo(convInfo.accountId)];
-                         [currentCallVC setCurrentCall:&lrc_->getAccountModel().
-                          getAccountInfo(convInfo.accountId).callModel->getCall(convInfo.callId)];
+                         auto& accInfo = lrc_->getAccountModel().getAccountInfo(convInfo.accountId);
+                         [currentCallVC setSelectedAccount:&accInfo];
+                         [currentCallVC setCurrentCall:&accInfo.callModel->getCall(convInfo.callId)];
+                         [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [currentCallVC animateIn];
                          [offlineVC animateOut];
                      });
@@ -153,6 +155,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
                             const lrc::api::conversation::Info& convInfo){
                          auto& accInfo = lrc_->getAccountModel().getAccountInfo(accountId);
                          [offlineVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+                         [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [offlineVC animateIn];
                          [currentCallVC animateOut];
                      });
@@ -343,6 +346,15 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 - (void)migrationDidCompleteWithError
 {
     [self checkAccountsToMigrate];
+}
+
+-(void)selectAccount:(const lrc::api::account::Info&)accInfo
+{
+    // If the selected account has been changed, we close any open panel
+    if ([smartViewVC setConversationModel:accInfo.conversationModel.get()]) {
+        [currentCallVC animateOut];
+        [offlineVC animateOut];
+    }
 }
 
 #pragma mark - NSToolbarDelegate

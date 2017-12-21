@@ -176,12 +176,14 @@ NSInteger const PRESENCE_TAG        = 800;
     [smartView scrollToBeginningOfDocument:nil];
 }
 
-- (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
+- (BOOL)setConversationModel:(lrc::api::ConversationModel *)conversationModel
 {
     if (model_ != conversationModel) {
         model_ = conversationModel;
+        selectedUid_.clear(); // Clear selected conversation as the selected account is being changed
         [self reloadData];
         QObject::disconnect(modelSortedConnection_);
+        QObject::disconnect(filterChangedConnection_);
         if (model_ != nil) {
             modelSortedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::modelSorted,
                                                       [self] (){
@@ -191,6 +193,31 @@ NSInteger const PRESENCE_TAG        = 800;
                                                         [self] (){
                                                             [self reloadData];
                                                         });
+            model_->setFilter(""); // Reset the filter
+        }
+        [searchField setStringValue:@""];
+        return YES;
+    }
+    return NO;
+}
+
+-(void)selectConversation:(const lrc::api::conversation::Info&)conv model:(lrc::api::ConversationModel*)model;
+{
+    auto& uid = conv.uid;
+    if (selectedUid_ == uid)
+        return;
+
+    [self setConversationModel:model];
+
+    if (model_ != nil){
+        auto it = std::find_if(model_->allFilteredConversations().begin(), model_->allFilteredConversations().end(),
+                               [self] (const lrc::api::conversation::Info& conv) {
+                                   return selectedUid_ == conv.uid;
+                               });
+        if (it != model_->allFilteredConversations().end()) {
+            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - model_->allFilteredConversations().begin())];
+            [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
+            selectedUid_ = uid;
         }
     }
 }
