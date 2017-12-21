@@ -36,6 +36,7 @@
 //RING
 #import "views/AccountMenuItemView.h"
 #import "AccountSelectionManager.h"
+#import "RingWindowController.h"
 
 @interface ChooseAccountVC () <NSMenuDelegate>
 
@@ -47,6 +48,7 @@
     __unsafe_unretained IBOutlet NSPopUpButton* accountSelectionButton;
     const lrc::api::NewAccountModel* accMdl_;
     AccountSelectionManager* accountSelectionManager_;
+    RingWindowController* parent_;
 
 }
 Boolean menuIsOpen;
@@ -54,10 +56,11 @@ Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(const lrc::api::NewAccountModel*) accMdl
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(const lrc::api::NewAccountModel*) accMdl parent:(RingWindowController *)parent
 {
     accMdl_ = accMdl;
     accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
+    parent_ = parent;
     return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 }
 
@@ -223,6 +226,7 @@ NSMenuItem* selectedMenuItem;
 
     auto& account = accMdl_->getAccountInfo(accList[row]);
     [accountSelectionManager_ setSavedAccount:account];
+    [parent_ selectAccount:account];
 }
 
 #pragma mark - NSMenuDelegate
