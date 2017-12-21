@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_073e83b8",
+        "filename": "src/SmartViewVC.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-21T23:34:11Z",
+      "side": 1,
+      "message": "Should we keep this button and function? Now it does the same as typing text in search field",
+      "range": {
+        "startLine": 282,
+        "startChar": 2,
+        "endLine": 282,
+        "endChar": 47
+      },
+      "revId": "10dbde3e0c16ba8f142c4e5f093f73106d8b7e76",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
