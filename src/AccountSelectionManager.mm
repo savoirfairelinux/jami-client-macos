@@ -57,8 +57,8 @@ NSString* const savedUserAccountKey = @"savedUserSelectedAccountKey";
 {
     if (acc.profileInfo.type == lrc::api::profile::Type::INVALID)
         return;
-    else
-        saveAccountWithId:@(acc.id.c_str());
+
+    [self saveAccountWithId:@(acc.id.c_str())];
 }
 
 @end
