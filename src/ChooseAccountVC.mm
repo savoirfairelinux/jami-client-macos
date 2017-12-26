@@ -94,17 +94,13 @@ NSMenuItem* selectedMenuItem;
 
 -(const lrc::api::account::Info&) selectedAccount
 {
-    const auto& account = [accountSelectionManager_ savedAccount];
-    if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
-        try {
-            auto accountId = accMdl_->getAccountList().at(0);
-            const auto& fallbackAccount = accMdl_->getAccountInfo(accMdl_->getAccountList().at(0));
-            return fallbackAccount;
-        } catch (std::out_of_range& e) { // Is thrown if account model has no account. We then return an invalid account
-            return account;
-        }
+    try {
+        return [accountSelectionManager_ savedAccount];
+    } catch (std::out_of_range& e) { // Is thrown when no account are saved yet
+        auto accountId = accMdl_->getAccountList().at(0);
+        const auto& fallbackAccount = accMdl_->getAccountInfo(accMdl_->getAccountList().at(0));
+        return fallbackAccount;
     }
-    return account;
 }
 
 -(void) updateMenu {
