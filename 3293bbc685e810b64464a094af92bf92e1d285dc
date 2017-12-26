@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_c7ec9bca",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-26T17:34:59Z",
+      "side": 1,
+      "message": "should we clean model selection as well? Otherwise this conversation could not be selected again, unless we select other conversation before",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 185,
+        "endChar": 21
+      },
+      "revId": "3293bbc685e810b64464a094af92bf92e1d285dc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_07ce835a",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-26T17:34:59Z",
+      "side": 1,
+      "message": "Is it safe to use this method without try catch? As it could throw exception.",
+      "range": {
+        "startLine": 155,
+        "startChar": 65,
+        "endLine": 155,
+        "endChar": 79
+      },
+      "revId": "3293bbc685e810b64464a094af92bf92e1d285dc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
