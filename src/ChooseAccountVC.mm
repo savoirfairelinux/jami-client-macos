@@ -94,17 +94,21 @@ NSMenuItem* selectedMenuItem;
 
 -(const lrc::api::account::Info&) selectedAccount
 {
-    const auto& account = [accountSelectionManager_ savedAccount];
-    if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
-        try {
-            auto accountId = accMdl_->getAccountList().at(0);
-            const auto& fallbackAccount = accMdl_->getAccountInfo(accMdl_->getAccountList().at(0));
+    try {
+        return [accountSelectionManager_ savedAccount];
+    } catch (std::out_of_range& e) { // Is thrown when no account are saved yet
+        auto accountList = accMdl_->getAccountList();
+        if (!accountList.empty()) {
+            const auto& fallbackAccount = accMdl_->getAccountInfo(accountList.at(0));
             return fallbackAccount;
-        } catch (std::out_of_range& e) { // Is thrown if account model has no account. We then return an invalid account
-            return account;
+        } else {
+            NSException* noAccEx = [NSException
+                                    exceptionWithName:@"NoAccountException"
+                                    reason:@"No account in AccountModel"
+                                    userInfo:nil];
+            @throw noAccEx;
         }
     }
-    return account;
 }
 
 -(void) updateMenu {
@@ -144,14 +148,19 @@ NSMenuItem* selectedMenuItem;
 
 -(void) updatePhoto
 {
-    auto& account = [self selectedAccount];
-    if(account.profileInfo.type == lrc::api::profile::Type::INVALID)
-        return;
+    @try {
+        auto& account = [self selectedAccount];
+        if(account.profileInfo.type == lrc::api::profile::Type::INVALID)
+            return;
 
-    QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
+        QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
 
-    QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba);
-    [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba);
+        [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    }
+    @catch (NSException *ex) {
+        NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
+    }
 }
 
 -(NSString*) nameForAccount:(const lrc::api::account::Info&) account {
@@ -209,11 +218,16 @@ NSMenuItem* selectedMenuItem;
         return;
     }
     [self.view setHidden:NO];
-    auto& account = [self selectedAccount];
-    if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
-        return;
+    @try {
+        auto& account = [self selectedAccount];
+        if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
+            return;
+        }
+        [accountSelectionButton selectItemWithTitle:[self itemTitleForAccount:account]];
     }
-    [accountSelectionButton selectItemWithTitle:[self itemTitleForAccount:account]];
+    @catch (NSException *ex) {
+        NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
+    }
 }
 
 #pragma mark - NSPopUpButton item selection
