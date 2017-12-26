@@ -148,6 +148,7 @@
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
+    [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
 }
 
 - (void)awakeFromNib
@@ -204,6 +205,7 @@
     [outgoingPanel setHidden:YES];
     [controlsPanel setHidden:NO];
     [headerContainer setHidden:NO];
+    [chatButton setHidden:NO];
 
     using Status = lrc::api::call::Status;
     switch (currentCall.status) {
