@@ -165,11 +165,10 @@
 
 - (IBAction)sendMessage:(id)sender
 {
-    auto* conv = [self getCurrentConversation];
     /* make sure there is text to send */
     NSString* text = self.message;
     if (text && text.length > 0) {
-        convModel_->sendMessage(conv->uid, std::string([text UTF8String]));
+        convModel_->sendMessage(convUid_, std::string([text UTF8String]));
         self.message = @"";
         [messagesViewVC newMessageSent];
     }

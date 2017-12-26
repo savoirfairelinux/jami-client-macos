@@ -682,7 +682,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="372" height="465"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="nFu-qN-GHK" id="ZOj-5b-rnp">
+                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="ZOj-5b-rnp">
                                                 <rect key="frame" x="0.0" y="0.0" width="372" height="465"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -786,9 +786,10 @@
                                                     </tableColumn>
                                                 </tableColumns>
                                                 <connections>
+                                                    <outlet property="dataSource" destination="loh-bZ-dDU" id="G8m-dx-6OM"/>
                                                     <outlet property="delegate" destination="loh-bZ-dDU" id="TuS-js-CeK"/>
                                                 </connections>
-                                            </outlineView>
+                                            </tableView>
                                         </subviews>
                                     </clipView>
                                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="zPy-Iz-oF9">
