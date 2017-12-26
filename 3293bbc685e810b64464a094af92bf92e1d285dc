@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_07232306",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 123
+      },
+      "writtenOn": "2017-12-26T19:12:10Z",
+      "side": 1,
+      "message": "Yes this is to be done but I will do it in a further patch.",
+      "parentUuid": "7a42497e_c7ec9bca",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 185,
+        "endChar": 21
+      },
+      "revId": "3293bbc685e810b64464a094af92bf92e1d285dc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_07ce835a",
         "filename": "src/RingWindowController.mm",
         "patchSetId": 9
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-26T17:34:59Z",
       "side": 1,
       "message": "Is it safe to use this method without try catch? As it could throw exception.",
+      "range": {
+        "startLine": 155,
+        "startChar": 65,
+        "endLine": 155,
+        "endChar": 79
+      },
+      "revId": "3293bbc685e810b64464a094af92bf92e1d285dc",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_27261f17",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 123
+      },
+      "writtenOn": "2017-12-26T19:12:10Z",
+      "side": 1,
+      "message": "In this specific case it is safe to assume that getAccountInfo() will not throw an exception as “accountId” is given by LRC and is passed untouched right away to getAccountInfo(). An exception at this point would be an error in LRC itself (It would have given us an incorrect “accountId” in the first place).",
+      "parentUuid": "7a42497e_07ce835a",
       "range": {
         "startLine": 155,
         "startChar": 65,
