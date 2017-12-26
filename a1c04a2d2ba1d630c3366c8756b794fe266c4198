@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_e79f1702",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-26T23:01:51Z",
+      "side": 1,
+      "message": "Maybe we still need to check if there is an account",
+      "range": {
+        "startLine": 100,
+        "startChar": 51,
+        "endLine": 100,
+        "endChar": 56
+      },
+      "revId": "a1c04a2d2ba1d630c3366c8756b794fe266c4198",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
