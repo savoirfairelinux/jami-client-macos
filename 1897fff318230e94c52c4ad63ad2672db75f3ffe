@@ -16,6 +16,24 @@
       "revId": "1897fff318230e94c52c4ad63ad2672db75f3ffe",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_07f5e382",
+        "filename": "src/SmartViewVC.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 123
+      },
+      "writtenOn": "2017-12-26T18:38:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a42497e_c7e2db02",
+      "revId": "1897fff318230e94c52c4ad63ad2672db75f3ffe",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
