@@ -108,7 +108,12 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 
     [currentCallVC initFrame];
     [offlineVC initFrame];
-    [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
+    @try {
+        [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
+    }
+    @catch (NSException *ex) {
+        NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
+    }
 
     // Fresh run, we need to make sure RingID appears
     [shareButton sendActionOn:NSLeftMouseDownMask];
@@ -168,25 +173,32 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
  */
 - (void) updateRingID
 {
-    auto& account = [chooseAccountVC selectedAccount];
+    @try {
+        auto& account = [chooseAccountVC selectedAccount];
 
-    [ringIDLabel setStringValue:@""];
+        [ringIDLabel setStringValue:@""];
 
-    if(account.profileInfo.type != lrc::api::profile::Type::RING) {
-        self.hideRingID = YES;
-        return;
+        if(account.profileInfo.type != lrc::api::profile::Type::RING) {
+            self.hideRingID = YES;
+            return;
+        }
+        self.hideRingID = NO;
+        auto& registeredName = account.registeredName;
+        auto& ringID = account.profileInfo.uri;
+        NSString* uriToDisplay = nullptr;
+        if (!registeredName.empty()) {
+            uriToDisplay = @(registeredName.c_str());
+        } else {
+            uriToDisplay = @(ringID.c_str());
+        }
+        [ringIDLabel setStringValue:uriToDisplay];
+        [self drawQRCode:@(ringID.c_str())];
     }
-    self.hideRingID = NO;
-    auto& registeredName = account.registeredName;
-    auto& ringID = account.profileInfo.uri;
-    NSString* uriToDisplay = nullptr;
-    if (!registeredName.empty()) {
-        uriToDisplay = @(registeredName.c_str());
-    } else {
-        uriToDisplay = @(ringID.c_str());
+    @catch (NSException *ex) {
+        NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
+        self.hideRingID = NO;
+        [ringIDLabel setStringValue:@"No account available"];
     }
-    [ringIDLabel setStringValue:uriToDisplay];
-    [self drawQRCode:@(ringID.c_str())];
 }
 
 - (IBAction)shareRingID:(id)sender {
