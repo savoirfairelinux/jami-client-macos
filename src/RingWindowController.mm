@@ -356,6 +356,9 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
         [currentCallVC animateOut];
         [offlineVC animateOut];
     }
+
+    // Welcome view informations are also updated
+    [self updateRingID];
 }
 
 #pragma mark - NSToolbarDelegate
