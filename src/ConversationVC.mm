@@ -62,10 +62,10 @@
     const lrc::api::conversation::Info* cachedConv_;
     lrc::api::ConversationModel* convModel_;
 
-    // Both are needed to invalidate cached conversation as pointer
+    // All those connections are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
-    QMetaObject::Connection modelSortedSignal_;
-    QMetaObject::Connection filterChangedSignal_;
+    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
+
 }
 
 
@@ -106,16 +106,26 @@
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
-    QObject::disconnect(modelSortedSignal_);
-    QObject::disconnect(filterChangedSignal_);
-    modelSortedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
+    QObject::disconnect(modelSortedConnection_);
+    QObject::disconnect(filterChangedConnection_);
+    QObject::disconnect(newConversationConnection_);
+    QObject::disconnect(conversationRemovedConnection_);
+    modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
                                           [self](){
                                               cachedConv_ = nil;
                                           });
-    filterChangedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::filterChanged,
+    filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::filterChanged,
                                             [self](){
                                                 cachedConv_ = nil;
                                             });
+    filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newConversation,
+                                                [self](){
+                                                    cachedConv_ = nil;
+                                                });
+    filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationRemoved,
+                                                [self](){
+                                                    cachedConv_ = nil;
+                                                });
 
     auto* conv = [self getCurrentConversation];
 
