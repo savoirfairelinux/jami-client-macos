@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a42497e_e7443776",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 123
+      },
+      "writtenOn": "2017-12-27T20:52:24Z",
+      "side": 1,
+      "message": "Done. It now throws an exception handled in every location where this method is called.",
+      "parentUuid": "7a42497e_e79f1702",
+      "range": {
+        "startLine": 100,
+        "startChar": 51,
+        "endLine": 100,
+        "endChar": 56
+      },
+      "revId": "a1c04a2d2ba1d630c3366c8756b794fe266c4198",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a42497e_a7634f19",
         "filename": "src/ChooseAccountVC.mm",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-27T19:04:01Z",
       "side": 1,
       "message": "redundant call",
+      "range": {
+        "startLine": 101,
+        "startChar": 62,
+        "endLine": 101,
+        "endChar": 93
+      },
+      "revId": "a1c04a2d2ba1d630c3366c8756b794fe266c4198",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_275e1f46",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 123
+      },
+      "writtenOn": "2017-12-27T20:52:24Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "7a42497e_a7634f19",
       "range": {
         "startLine": 101,
         "startChar": 62,
