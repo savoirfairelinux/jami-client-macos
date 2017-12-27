@@ -53,8 +53,7 @@
     __unsafe_unretained IBOutlet RingTableView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
 
-    /* Pending ring usernames lookup for the search entry */
-    QMetaObject::Connection usernameLookupConnection, modelSortedConnection_, filterChangedConnection_;
+    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
 
     lrc::api::ConversationModel* model_;
     std::string selectedUid_;
@@ -142,6 +141,7 @@ NSInteger const PRESENCE_TAG        = 800;
         [self reloadData];
         QObject::disconnect(modelSortedConnection_);
         QObject::disconnect(filterChangedConnection_);
+        QObject::disconnect(newConversationConnection_);
         if (model_ != nil) {
             modelSortedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::modelSorted,
                                                       [self] (){
@@ -151,6 +151,14 @@ NSInteger const PRESENCE_TAG        = 800;
                                                         [self] (){
                                                             [self reloadData];
                                                         });
+            newConversationConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::newConversation,
+                                                          [self] (){
+                                                              [self reloadData];
+                                                          });
+            conversationRemovedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::conversationRemoved,
+                                                              [self] (){
+                                                                  [self reloadData];
+                                                              });
             model_->setFilter(""); // Reset the filter
         }
         [searchField setStringValue:@""];
