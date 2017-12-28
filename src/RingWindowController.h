@@ -49,4 +49,10 @@ namespace lrc {
  */
 - (void) selectAccount:(const lrc::api::account::Info&)accInfo;
 
+/**
+ * Method triggered when a panel on the right is closed by user action. It triggers any action needed
+ * on itself or other view controllers to react properly to this event.
+ */
+-(void) rightPanelClosed;
+
 @end

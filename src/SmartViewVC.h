@@ -46,4 +46,9 @@ namespace lrc {
  */
 -(void)selectConversation:(const lrc::api::conversation::Info&)conv model:(lrc::api::ConversationModel*)model;
 
+/**
+ * Deselect any selected conversation
+ */
+-(void)deselect;
+
 @end
