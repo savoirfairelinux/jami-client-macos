@@ -21,6 +21,8 @@
 #import <api/conversation.h>
 #import <api/conversationmodel.h>
 
+@class RingWindowController;
+
 @interface ConversationVC : NSViewController
 
 -(void) initFrame;
@@ -35,5 +37,7 @@
 @property (retain) NSString* message;
 
 - (void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
+
+- (id)initWithNibName:(NSNibName)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow;
 
 @end
