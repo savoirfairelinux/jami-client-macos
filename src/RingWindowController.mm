@@ -95,7 +95,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     lrc_ = std::make_unique<lrc::api::Lrc>();
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
-    offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil];
+    offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel()) delegate:self];
     contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
@@ -371,6 +371,11 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
 
     // Welcome view informations are also updated
     [self updateRingID];
+}
+
+-(void)rightPanelClosed
+{
+    [smartViewVC deselect];
 }
 
 #pragma mark - NSToolbarDelegate

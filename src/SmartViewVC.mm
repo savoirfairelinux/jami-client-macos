@@ -189,6 +189,12 @@ NSInteger const PRESENCE_TAG        = 800;
     }
 }
 
+-(void)deselect
+{
+    selectedUid_.clear();
+    [smartView deselectAll:nil];
+}
+
 #pragma mark - NSTableViewDelegate methods
 
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row

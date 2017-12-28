@@ -39,6 +39,7 @@
 #import "AvailableAccountModel.h"
 #import "MessagesVC.h"
 #import "utils.h"
+#import "RingWindowController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -62,6 +63,8 @@
     const lrc::api::conversation::Info* cachedConv_;
     lrc::api::ConversationModel* convModel_;
 
+    RingWindowController* delegate;
+
     // All those connections are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
     QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
@@ -72,6 +75,12 @@
 @end
 
 @implementation ConversationVC
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow
+{
+    delegate = mainWindow;
+    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+}
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
 {
@@ -191,6 +200,7 @@
 }
 
 - (IBAction)backPressed:(id)sender {
+    [delegate rightPanelClosed];
     [self animateOut];
 }
 
