@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_226d6d33",
+        "filename": "src/ConversationVC.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2017-12-29T17:08:31Z",
+      "side": 1,
+      "message": "It is better to check self before performing any assignment. \n if ((self \u003d[self initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) !\u003d nil) {\n        delegate \u003d mainWindow;\n    }\n    return self;",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 25
+      },
+      "revId": "1766f22fe50642ad0e3ee78b8aaa264b36438d93",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
