@@ -62,6 +62,7 @@
     std::string convUid_;
     std::string callUid_;
     const lrc::api::account::Info *accountInfo_;
+    NSTimer* refreshDurationTimer;
 }
 
 // Main container
@@ -177,6 +178,28 @@
     [self.videoView setCallDelegate:self];
 }
 
+-(void) updateDurationLabel
+{
+    if (accountInfo_ != nil) {
+        auto* callModel = accountInfo_->callModel.get();
+        if (callModel->hasCall(callUid_)) {
+            auto& callStatus = callModel->getCall(callUid_).status;
+            if (callStatus != lrc::api::call::Status::ENDED &&
+                callStatus != lrc::api::call::Status::TERMINATING &&
+                callStatus != lrc::api::call::Status::INVALID) {
+                [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
+                return;
+            }
+        }
+    }
+
+    // If call is not running anymore or accountInfo_ is not set for any reason
+    // we stop the refresh loop
+    [refreshDurationTimer invalidate];
+    refreshDurationTimer = nil;
+    [timeSpentLabel setHidden:YES];
+}
+
 -(void) updateCall:(BOOL) firstRun
 {
     if (accountInfo_ == nil)
@@ -190,7 +213,14 @@
     auto currentCall = callModel->getCall(callUid_);
     NSLog(@"\n status %@ \n",@(lrc::api::call::to_string(currentCall.status).c_str()));
     [personLabel setStringValue:@(currentCall.peer.c_str())];
-   // [timeSpentLabel setStringValue:callIdx.data((int)Call::Role::Length).toString().toNSString()];
+    [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
+    [timeSpentLabel setHidden:NO];
+    if (refreshDurationTimer == nil)
+        refreshDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                                target:self
+                                                              selector:@selector(updateDurationLabel)
+                                                              userInfo:nil
+                                                               repeats:YES];
     [stateLabel setStringValue:@(to_string(currentCall.status).c_str())];
 
     if (firstRun) {
