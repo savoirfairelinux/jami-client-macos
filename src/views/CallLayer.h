@@ -25,6 +25,6 @@
 
 @property BOOL videoRunning;
 
-- (void) setCurrentFrame:(Video::Frame)framePtr ofSize:(QSize)frameSize;
+- (void) setCurrentFrame:(Video::Frame)framePtr;
 
 @end

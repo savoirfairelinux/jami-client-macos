@@ -465,15 +465,13 @@
 
 -(void) renderer: (Video::Renderer*)renderer renderFrameForDistantView:(CallView*) view
 {
-    QSize res = renderer->size();
-
     auto frame_ptr = renderer->currentFrame();
     if (!frame_ptr.ptr)
         return;
 
     CallLayer* callLayer = (CallLayer*) view.layer;
 
-    [callLayer setCurrentFrame:std::move(frame_ptr) ofSize:res];
+    [callLayer setCurrentFrame:std::move(frame_ptr)];
     [callLayer setVideoRunning:YES];
 }
 
