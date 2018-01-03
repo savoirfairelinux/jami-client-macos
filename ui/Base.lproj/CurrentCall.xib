@@ -56,7 +56,7 @@
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz">
                                     <rect key="frame" x="20" y="438" width="705" height="71"/>
                                     <subviews>
-                                        <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIU-M7-xpN">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIU-M7-xpN">
                                             <rect key="frame" x="583" y="23" width="104" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="9vz-kb-6L6"/>
