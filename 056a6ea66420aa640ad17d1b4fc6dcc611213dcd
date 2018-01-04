@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_22f44af1",
+        "filename": "src/CurrentCallVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-01-04T19:57:50Z",
+      "side": 1,
+      "message": "unnecessary change",
+      "range": {
+        "startLine": 196,
+        "startChar": 4,
+        "endLine": 196,
+        "endChar": 11
+      },
+      "revId": "056a6ea66420aa640ad17d1b4fc6dcc611213dcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_02f94ee9",
+        "filename": "src/CurrentCallVC.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-01-04T19:57:50Z",
+      "side": 1,
+      "message": "it is better to check if timer is not null as the function could be called multiple times during a call",
+      "range": {
+        "startLine": 214,
+        "startChar": 4,
+        "endLine": 214,
+        "endChar": 24
+      },
+      "revId": "056a6ea66420aa640ad17d1b4fc6dcc611213dcd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
