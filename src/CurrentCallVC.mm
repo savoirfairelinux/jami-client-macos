@@ -45,6 +45,7 @@
 #import "BrokerVC.h"
 #import "views/IconButton.h"
 #import "views/CallLayer.h"
+#import "utils.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -292,10 +293,7 @@
     [ringingPanel setHidden:NO];
     [controlsPanel setHidden:YES];
     [headerContainer setHidden:YES];
-    auto it = std::find_if(convModel->allFilteredConversations().begin(), convModel->allFilteredConversations().end(),
-                           [self] (const lrc::api::conversation::Info& conv) {
-                               return convUid_ == conv.uid;
-                           });
+    auto it = getConversationFromUid(convUid_, *convModel);
     if (it != convModel->allFilteredConversations().end()) {
         auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         QVariant photo = imgManip.conversationPhoto(*it, *accountInfo_);
