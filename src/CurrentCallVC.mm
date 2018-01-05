@@ -213,7 +213,9 @@
 
     auto currentCall = callModel->getCall(callUid_);
     NSLog(@"\n status %@ \n",@(lrc::api::call::to_string(currentCall.status).c_str()));
-    [personLabel setStringValue:@(currentCall.peer.c_str())];
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
+    if (convIt != accountInfo_->conversationModel->allFilteredConversations().end())
+        [personLabel setStringValue:bestNameForConversation(*convIt, *accountInfo_->conversationModel)];
     [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
     [timeSpentLabel setHidden:NO];
     if (refreshDurationTimer == nil)
@@ -298,7 +300,7 @@
         auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         QVariant photo = imgManip.conversationPhoto(*it, *accountInfo_);
         [incomingPersonPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-        [incomingDisplayName setStringValue:@(call.peer.c_str())];
+        [incomingDisplayName setStringValue:bestNameForConversation(*it, *convModel)];
     }
 }
 
