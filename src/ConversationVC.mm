@@ -95,7 +95,7 @@
 
     auto& convQueue = convModel_->allFilteredConversations();
 
-    auto it = std::find_if(convQueue.begin(), convQueue.end(), [self](const lrc::api::conversation::Info& conv) {return conv.uid == convUid_;});
+    auto it = getConversationFromUid(convUid_, *convModel_);
 
     if (it != convQueue.end())
         cachedConv_ = &(*it);

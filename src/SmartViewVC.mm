@@ -118,10 +118,7 @@ NSInteger const PRESENCE_TAG        = 800;
     [smartView reloadData];
 
     if (!selectedUid_.empty() && model_ != nil) {
-        auto it = std::find_if(model_->allFilteredConversations().begin(), model_->allFilteredConversations().end(),
-                          [self] (const lrc::api::conversation::Info& conv) {
-                              return selectedUid_ == conv.uid;
-                          });
+        auto it = getConversationFromUid(selectedUid_, *model_);
         if (it != model_->allFilteredConversations().end()) {
             NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - model_->allFilteredConversations().begin())];
             [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
@@ -177,10 +174,7 @@ NSInteger const PRESENCE_TAG        = 800;
     [self setConversationModel:model];
 
     if (model_ != nil) {
-        auto it = std::find_if(model_->allFilteredConversations().begin(), model_->allFilteredConversations().end(),
-                               [self] (const lrc::api::conversation::Info& conv) {
-                                   return selectedUid_ == conv.uid;
-                               });
+        auto it = getConversationFromUid(selectedUid_, *model_);
         if (it != model_->allFilteredConversations().end()) {
             NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - model_->allFilteredConversations().begin())];
             [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
