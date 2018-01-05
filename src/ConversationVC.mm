@@ -50,8 +50,8 @@
 
     __unsafe_unretained IBOutlet NSView* sendPanel;
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
+    __unsafe_unretained IBOutlet NSTextField *conversationID;
     __unsafe_unretained IBOutlet IconButton* sendButton;
-    __unsafe_unretained IBOutlet NSPopUpButton* contactMethodsPopupButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
@@ -146,12 +146,14 @@
 
     // Setup UI elements according to new conversation
     NSString* bestName = bestNameForConversation(*conv, *convModel_);
+    NSString* bestId = bestIDForConversation(*conv, *convModel_);
+    if (bestName == bestId) {
+        bestId = @(model->owner.contactModel->getContact(conv->participants[0]).profileInfo.uri.c_str());
+    }
     [conversationTitle setStringValue: bestName];
+    [conversationID setStringValue: bestId];
 
-    [contactMethodsPopupButton setEnabled:NO];
-    [contactMethodsPopupButton setBordered:NO];
     BOOL hideCMPopupButton = [bestNameForConversation(*conv, *convModel_) isEqualTo:bestIDForConversation(*conv, *convModel_)];
-    [contactMethodsPopupButton setHidden:hideCMPopupButton];
 
     [titleHoverButtonConstraint setActive:hideCMPopupButton];
     [titleTopConstraint setActive:!hideCMPopupButton];
