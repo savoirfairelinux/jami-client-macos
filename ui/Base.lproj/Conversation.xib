@@ -14,6 +14,7 @@
                 <outlet property="messagesViewVC" destination="iH6-17-JsM" id="uxH-Ra-lSr"/>
                 <outlet property="sendButton" destination="UJf-cF-RAo" id="8PF-7G-w1d"/>
                 <outlet property="sendPanel" destination="Rth-di-Tls" id="vCd-kM-DLc"/>
+                <outlet property="titleCenteredConstraint" destination="uTp-kU-NmC" id="ccn-92-zaA"/>
                 <outlet property="titleTopConstraint" destination="32s-Wp-DE1" id="fms-Yu-vrn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -244,7 +245,7 @@
                     </connections>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
-                    <rect key="frame" x="68" y="559" width="39" height="22"/>
+                    <rect key="frame" x="68" y="533" width="39" height="48"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Title" id="HnC-1N-RmR">
                         <font key="font" metaFont="system" size="18"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -295,6 +296,7 @@
                 <constraint firstAttribute="trailing" secondItem="Sn1-dJ-QCw" secondAttribute="trailing" constant="20" id="m05-gh-crH"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="trailing" secondItem="EJD-f8-Xqd" secondAttribute="trailing" id="mga-Tu-Ikb"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="qz7-sE-9Ml"/>
+                <constraint firstItem="ucx-6g-eJw" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="uTp-kU-NmC" userLabel="centeredTitle"/>
             </constraints>
             <point key="canvasLocation" x="514" y="354"/>
         </customView>

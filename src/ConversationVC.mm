@@ -56,7 +56,7 @@
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
 
-    IBOutlet NSLayoutConstraint* titleHoverButtonConstraint;
+    IBOutlet NSLayoutConstraint *titleCenteredConstraint;
     IBOutlet NSLayoutConstraint* titleTopConstraint;
 
     std::string convUid_;
@@ -147,16 +147,14 @@
     // Setup UI elements according to new conversation
     NSString* bestName = bestNameForConversation(*conv, *convModel_);
     NSString* bestId = bestIDForConversation(*conv, *convModel_);
-    if (bestName == bestId) {
-        bestId = @(model->owner.contactModel->getContact(conv->participants[0]).profileInfo.uri.c_str());
-    }
     [conversationTitle setStringValue: bestName];
     [conversationID setStringValue: bestId];
 
-    BOOL hideCMPopupButton = [bestNameForConversation(*conv, *convModel_) isEqualTo:bestIDForConversation(*conv, *convModel_)];
+    BOOL hideBestId = [bestNameForConversation(*conv, *convModel_) isEqualTo:bestIDForConversation(*conv, *convModel_)];
 
-    [titleHoverButtonConstraint setActive:hideCMPopupButton];
-    [titleTopConstraint setActive:!hideCMPopupButton];
+    [conversationID setHidden:hideBestId];
+    [titleCenteredConstraint setActive:hideBestId];
+    [titleTopConstraint setActive:!hideBestId];
 }
 
 - (void)loadView {
