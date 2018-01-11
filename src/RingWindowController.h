@@ -55,4 +55,11 @@ namespace lrc {
  */
 -(void) rightPanelClosed;
 
+/**
+ * Triggered by Conversation view when the current conversation is switching from pending state to
+ * trusted. It triggers conversation list change in SmartViewVC in order to keep current conversation
+ * visible in left list (to "follow it").
+ */
+-(void) currentConversationTrusted;
+
 @end

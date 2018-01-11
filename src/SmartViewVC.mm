@@ -52,6 +52,7 @@
     //UI elements
     __unsafe_unretained IBOutlet RingTableView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
+    __unsafe_unretained IBOutlet NSSegmentedControl *listTypeSelector;
 
     QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
 
@@ -187,6 +188,24 @@ NSInteger const PRESENCE_TAG        = 800;
 {
     selectedUid_.clear();
     [smartView deselectAll:nil];
+}
+
+- (IBAction) listTypeChanged:(id)sender
+{
+    NSInteger selectedItem = [sender selectedSegment];
+    if (selectedItem == 0) { // Conversations
+        model_->setFilter(lrc::api::profile::Type::RING);
+    } else if (selectedItem == 1){ // Contact Request
+        model_->setFilter(lrc::api::profile::Type::PENDING);
+    } else {
+        NSLog(@"Invalid item selected in list selector: %d", selectedItem);
+    }
+}
+
+-(void) selectConversationList
+{
+    [listTypeSelector setSelectedSegment:0];
+    model_->setFilter(lrc::api::profile::Type::RING);
 }
 
 #pragma mark - NSTableViewDelegate methods

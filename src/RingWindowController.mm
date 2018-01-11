@@ -51,7 +51,6 @@
 #import "views/NSColor+RingTheme.h"
 #import "views/BackgroundView.h"
 #import "ChooseAccountVC.h"
-#import "ContactRequestVC.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -78,12 +77,10 @@
     ConversationVC* offlineVC;
     // toolbar menu items
     ChooseAccountVC* chooseAccountVC;
-    ContactRequestVC* contactRequestVC;
 }
 
 static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
 NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
-NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIdentifier";
 
 - (void)windowDidLoad {
     [super windowDidLoad];
@@ -98,7 +95,6 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel()) delegate:self];
-    contactRequestVC = [[ContactRequestVC alloc] initWithNibName:@"ContactRequest" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -124,7 +120,6 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     NSToolbar *toolbar = self.window.toolbar;
     toolbar.delegate = self;
     [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
-    [toolbar insertItemWithItemIdentifier:kTrustRequestMenuItemIdentifier atIndex:2];
 }
 
 - (void) connect
@@ -313,6 +308,7 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
             break;
     }
 }
+
 #pragma mark - Ring account migration
 
 - (void) migrateRingAccount:(Account*) acc
@@ -347,7 +343,6 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
         NSToolbar *toolbar = self.window.toolbar;
         toolbar.delegate = self;
         [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
-        [toolbar insertItemWithItemIdentifier:kTrustRequestMenuItemIdentifier atIndex:2];
     }
 }
 
@@ -378,17 +373,17 @@ NSString* const kTrustRequestMenuItemIdentifier      = @"TrustRequestMenuItemIde
     [smartViewVC deselect];
 }
 
+-(void)currentConversationTrusted
+{
+    [smartViewVC selectConversationList];
+}
+
 #pragma mark - NSToolbarDelegate
 - (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
     if(itemIdentifier == kChangeAccountToolBarItemIdentifier) {
         NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kChangeAccountToolBarItemIdentifier];
         toolbarItem.view = chooseAccountVC.view;
-        return toolbarItem;
-    }
-    if(itemIdentifier == kTrustRequestMenuItemIdentifier) {
-        NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kTrustRequestMenuItemIdentifier];
-        toolbarItem.view = contactRequestVC.view;
         return toolbarItem;
     }
     return nil;

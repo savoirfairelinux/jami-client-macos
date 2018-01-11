@@ -51,4 +51,9 @@ namespace lrc {
  */
 -(void)deselect;
 
+/**
+ * Change list selection to Conversation
+ */
+-(void)selectConversationList;
+
 @end

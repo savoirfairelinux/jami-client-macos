@@ -27,7 +27,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="1053" height="658"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1200"/>
             <view key="contentView" autoresizesSubviews="NO" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="1053" height="658"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -39,22 +39,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="324" height="658"/>
                         <subviews>
                             <tabView focusRingType="none" drawsBackground="NO" type="noTabsNoBorder" initialItem="0MO-4e-8mo" translatesAutoresizingMaskIntoConstraints="NO" id="xXW-iq-GcP">
-                                <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
+                                <rect key="frame" x="0.0" y="0.0" width="324" height="586"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="SmartView" identifier="" id="0MO-4e-8mo">
                                         <view key="view" id="D5P-tm-YgO">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="612"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="586"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="omo-Be-zok">
-                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="609"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="583"/>
                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vUu-vJ-ryG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="609"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="583"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="3NN-k0-vDM" id="tcL-dy-Q3h" customClass="RingTableView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="609"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="583"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="0.0" colorSpace="deviceWhite"/>
@@ -284,6 +284,19 @@
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Nq-Rz-Etg">
+                                <rect key="frame" x="19" y="593" width="286" height="20"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="roundRect" trackingMode="selectOne" id="6T7-ip-Pun">
+                                    <font key="font" metaFont="cellTitle"/>
+                                    <segments>
+                                        <segment label="Conversations" selected="YES"/>
+                                        <segment label="Requests" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="listTypeChanged:" target="jrf-42-1l2" id="iha-7Z-YDQ"/>
+                                </connections>
+                            </segmentedControl>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PoQ-x4-ES3">
                                 <rect key="frame" x="20" y="620" width="284" height="22"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Name, ringID" usesSingleLineMode="YES" bezelStyle="round" id="vvE-nM-kSl">
@@ -299,12 +312,15 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PoQ-x4-ES3" secondAttribute="trailing" constant="20" id="4sB-9A-dhz"/>
                             <constraint firstItem="PoQ-x4-ES3" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="leading" constant="20" id="9e0-oX-skE"/>
-                            <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="PoQ-x4-ES3" secondAttribute="bottom" constant="8" id="FWN-Kb-wE9"/>
+                            <constraint firstItem="3Nq-Rz-Etg" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="leading" constant="20" id="ETk-YV-FSi"/>
                             <constraint firstAttribute="bottom" secondItem="xXW-iq-GcP" secondAttribute="bottom" id="MYN-Zf-Bvk"/>
                             <constraint firstAttribute="trailing" secondItem="xXW-iq-GcP" secondAttribute="trailing" id="TXC-lN-yL8"/>
                             <constraint firstAttribute="width" constant="324" id="Yjy-go-Dgc"/>
                             <constraint firstItem="xXW-iq-GcP" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="leading" id="aSr-vt-QvR"/>
+                            <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="3Nq-Rz-Etg" secondAttribute="bottom" constant="8" id="fH7-tg-ezt"/>
                             <constraint firstItem="PoQ-x4-ES3" firstAttribute="top" secondItem="YgH-CN-tkB" secondAttribute="top" constant="16" id="pNA-2g-7AA"/>
+                            <constraint firstAttribute="trailing" secondItem="3Nq-Rz-Etg" secondAttribute="trailing" constant="20" id="tNc-l9-Pmf"/>
+                            <constraint firstItem="3Nq-Rz-Etg" firstAttribute="top" secondItem="PoQ-x4-ES3" secondAttribute="bottom" constant="8" id="zhW-fF-b3T"/>
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-MB-mlx" userLabel="HomeView">
@@ -483,6 +499,7 @@
         </window>
         <viewController id="jrf-42-1l2" customClass="SmartViewVC">
             <connections>
+                <outlet property="listTypeSelector" destination="3Nq-Rz-Etg" id="hvc-OL-Hc5"/>
                 <outlet property="searchField" destination="PoQ-x4-ES3" id="pOb-2e-PPS"/>
                 <outlet property="smartView" destination="tcL-dy-Q3h" id="Zc4-OM-Xk7"/>
                 <outlet property="tabbar" destination="xXW-iq-GcP" id="Mnz-CR-TqJ"/>
