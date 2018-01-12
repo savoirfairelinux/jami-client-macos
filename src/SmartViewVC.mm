@@ -76,6 +76,10 @@ NSInteger const CANCEL_BUTTON_TAG   = 600;
 NSInteger const RING_ID_LABEL       = 700;
 NSInteger const PRESENCE_TAG        = 800;
 
+// Segment indices for smartlist selector
+NSInteger const CONVERSATION_SEG    = 0;
+NSInteger const REQUEST_SEG         = 1;
+
 - (void)awakeFromNib
 {
     NSLog(@"INIT SmartView VC");
@@ -193,18 +197,21 @@ NSInteger const PRESENCE_TAG        = 800;
 - (IBAction) listTypeChanged:(id)sender
 {
     NSInteger selectedItem = [sender selectedSegment];
-    if (selectedItem == 0) { // Conversations
-        model_->setFilter(lrc::api::profile::Type::RING);
-    } else if (selectedItem == 1){ // Contact Request
-        model_->setFilter(lrc::api::profile::Type::PENDING);
-    } else {
-        NSLog(@"Invalid item selected in list selector: %d", selectedItem);
+    switch (selectedItem) {
+        case CONVERSATION_SEG:
+            model_->setFilter(lrc::api::profile::Type::RING);
+            break;
+        case REQUEST_SEG:
+            model_->setFilter(lrc::api::profile::Type::PENDING);
+            break;
+        default:
+            NSLog(@"Invalid item selected in list selector: %d", selectedItem);
     }
 }
 
 -(void) selectConversationList
 {
-    [listTypeSelector setSelectedSegment:0];
+    [listTypeSelector setSelectedSegment:CONVERSATION_SEG];
     model_->setFilter(lrc::api::profile::Type::RING);
 }
 
