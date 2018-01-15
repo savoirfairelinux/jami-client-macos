@@ -58,6 +58,7 @@
 
     lrc::api::ConversationModel* model_;
     std::string selectedUid_;
+    lrc::api::profile::Type currentFilterType;
 }
 
 @end
@@ -101,6 +102,8 @@ NSInteger const REQUEST_SEG         = 1;
     [searchField setWantsLayer:YES];
     [searchField setLayer:[CALayer layer]];
     [searchField.layer setBackgroundColor:[NSColor colorWithCalibratedRed:0.949 green:0.949 blue:0.949 alpha:0.9].CGColor];
+
+    currentFilterType = lrc::api::profile::Type::RING;
 }
 
 - (void)placeCall:(id)sender
@@ -121,6 +124,15 @@ NSInteger const REQUEST_SEG         = 1;
 {
     [smartView deselectAll:nil];
     [smartView reloadData];
+
+    if (!model_->owner.contactModel->hasPendingRequests()) {
+        if (currentFilterType == lrc::api::profile::Type::PENDING) {
+            [self selectConversationList];
+        }
+        [listTypeSelector setEnabled:NO forSegment:REQUEST_SEG];
+    } else {
+        [listTypeSelector setEnabled:YES forSegment:REQUEST_SEG];
+    }
 
     if (!selectedUid_.empty() && model_ != nil) {
         auto it = getConversationFromUid(selectedUid_, *model_);
@@ -200,9 +212,11 @@ NSInteger const REQUEST_SEG         = 1;
     switch (selectedItem) {
         case CONVERSATION_SEG:
             model_->setFilter(lrc::api::profile::Type::RING);
+            currentFilterType = lrc::api::profile::Type::RING;
             break;
         case REQUEST_SEG:
             model_->setFilter(lrc::api::profile::Type::PENDING);
+            currentFilterType = lrc::api::profile::Type::PENDING;
             break;
         default:
             NSLog(@"Invalid item selected in list selector: %d", selectedItem);
@@ -212,7 +226,12 @@ NSInteger const REQUEST_SEG         = 1;
 -(void) selectConversationList
 {
     [listTypeSelector setSelectedSegment:CONVERSATION_SEG];
+
+    // Do not invert order of the next two lines or stack overflow
+    // may happen on -(void) reloadData call if filter is currently set to PENDING
+    currentFilterType = lrc::api::profile::Type::RING;
     model_->setFilter(lrc::api::profile::Type::RING);
+    model_->setFilter("");
 }
 
 #pragma mark - NSTableViewDelegate methods
