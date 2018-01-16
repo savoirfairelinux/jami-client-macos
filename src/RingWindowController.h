@@ -62,4 +62,11 @@ namespace lrc {
  */
 -(void) currentConversationTrusted;
 
+/**
+ * Triggered by SmartView when list type is changed by user. It closes the right view as the selected conversation
+ * is not in filtered list anymore.
+ * @note This method is not to be used if list change is triggered by a left panel view.
+ */
+-(void) listTypeChanged;
+
 @end
