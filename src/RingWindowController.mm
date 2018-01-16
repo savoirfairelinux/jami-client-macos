@@ -378,6 +378,11 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     [smartViewVC selectConversationList];
 }
 
+-(void) listTypeChanged {
+    [offlineVC animateOut];
+    [currentCallVC animateOut];
+}
+
 #pragma mark - NSToolbarDelegate
 - (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {

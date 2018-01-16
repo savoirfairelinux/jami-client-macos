@@ -44,6 +44,7 @@
 #import "views/RingTableView.h"
 #import "views/ContextualTableCellView.h"
 #import "utils.h"
+#import "RingWindowController.h"
 
 @interface SmartViewVC () <NSTableViewDelegate, NSTableViewDataSource, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
 
@@ -59,6 +60,8 @@
     lrc::api::ConversationModel* model_;
     std::string selectedUid_;
     lrc::api::profile::Type currentFilterType;
+
+    __unsafe_unretained IBOutlet RingWindowController *delegate;
 }
 
 @end
@@ -211,12 +214,18 @@ NSInteger const REQUEST_SEG         = 1;
     NSInteger selectedItem = [sender selectedSegment];
     switch (selectedItem) {
         case CONVERSATION_SEG:
-            model_->setFilter(lrc::api::profile::Type::RING);
-            currentFilterType = lrc::api::profile::Type::RING;
+            if (currentFilterType != lrc::api::profile::Type::RING) {
+                model_->setFilter(lrc::api::profile::Type::RING);
+                [delegate listTypeChanged];
+                currentFilterType = lrc::api::profile::Type::RING;
+            }
             break;
         case REQUEST_SEG:
-            model_->setFilter(lrc::api::profile::Type::PENDING);
-            currentFilterType = lrc::api::profile::Type::PENDING;
+            if (currentFilterType != lrc::api::profile::Type::PENDING) {
+                model_->setFilter(lrc::api::profile::Type::PENDING);
+                [delegate listTypeChanged];
+                currentFilterType = lrc::api::profile::Type::PENDING;
+            }
             break;
         default:
             NSLog(@"Invalid item selected in list selector: %d", selectedItem);

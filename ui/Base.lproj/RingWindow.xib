@@ -499,6 +499,7 @@
         </window>
         <viewController id="jrf-42-1l2" customClass="SmartViewVC">
             <connections>
+                <outlet property="delegate" destination="-2" id="SN7-eQ-w8z"/>
                 <outlet property="listTypeSelector" destination="3Nq-Rz-Etg" id="hvc-OL-Hc5"/>
                 <outlet property="searchField" destination="PoQ-x4-ES3" id="pOb-2e-PPS"/>
                 <outlet property="smartView" destination="tcL-dy-Q3h" id="Zc4-OM-Xk7"/>
