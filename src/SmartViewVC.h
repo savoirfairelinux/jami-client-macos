@@ -56,4 +56,9 @@ namespace lrc {
  */
 -(void)selectConversationList;
 
+/**
+ * Change list selection to Pending
+ */
+-(void)selectPendingList;
+
 @end
