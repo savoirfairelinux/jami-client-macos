@@ -37,7 +37,8 @@
 #import <api/newcallmodel.h>
 #import <api/behaviorcontroller.h>
 #import <api/conversation.h>
-
+#import <api/contactmodel.h>
+#import <api/contact.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -129,6 +130,11 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                      [self](const std::string accountId,
                             const lrc::api::conversation::Info convInfo){
                          auto* accInfo = &lrc_->getAccountModel().getAccountInfo(accountId);
+                         if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
+                             [smartViewVC selectPendingList];
+                         else
+                             [smartViewVC selectConversationList];
+
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
                                                account:accInfo];
@@ -142,6 +148,11 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                      [self](const std::string accountId,
                             const lrc::api::conversation::Info convInfo){
                          auto* accInfo = &lrc_->getAccountModel().getAccountInfo(accountId);
+                         if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
+                             [smartViewVC selectPendingList];
+                         else
+                             [smartViewVC selectConversationList];
+
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
                                                account:accInfo];

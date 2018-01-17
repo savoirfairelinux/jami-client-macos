@@ -234,12 +234,25 @@ NSInteger const REQUEST_SEG         = 1;
 
 -(void) selectConversationList
 {
+    if (currentFilterType == lrc::api::profile::Type::RING)
+        return;
     [listTypeSelector setSelectedSegment:CONVERSATION_SEG];
 
     // Do not invert order of the next two lines or stack overflow
     // may happen on -(void) reloadData call if filter is currently set to PENDING
     currentFilterType = lrc::api::profile::Type::RING;
     model_->setFilter(lrc::api::profile::Type::RING);
+    model_->setFilter("");
+}
+
+-(void) selectPendingList
+{
+    if (currentFilterType == lrc::api::profile::Type::PENDING)
+        return;
+    [listTypeSelector setSelectedSegment:REQUEST_SEG];
+
+    currentFilterType = lrc::api::profile::Type::PENDING;
+    model_->setFilter(lrc::api::profile::Type::PENDING);
     model_->setFilter("");
 }
 
