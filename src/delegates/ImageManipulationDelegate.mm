@@ -264,7 +264,7 @@ namespace Interfaces {
                 finalImg.setMask             (mask                              );
                 painter.drawPixmap           (0,0,finalImg                      );
                 painter.setBrush             (Qt::NoBrush                       );
-                painter.setPen               (Qt::black                         );
+                painter.setPen               (Qt::transparent                   );
                 painter.setCompositionMode   (QPainter::CompositionMode_SourceIn);
                 painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
 
