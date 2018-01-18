@@ -208,7 +208,12 @@
     [result updateWidthConstraint:finalWidth];
 
     auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-    [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+    if (isOutgoing) {
+        [result.photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
+    } else {
+        [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+    }
+
     return result;
 }
 
