@@ -286,6 +286,9 @@
                             </tabView>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Nq-Rz-Etg">
                                 <rect key="frame" x="19" y="593" width="286" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="OFJ-Ud-WD3"/>
+                                </constraints>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="roundRect" trackingMode="selectOne" id="6T7-ip-Pun">
                                     <font key="font" metaFont="cellTitle"/>
                                     <segments>
@@ -312,6 +315,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PoQ-x4-ES3" secondAttribute="trailing" constant="20" id="4sB-9A-dhz"/>
                             <constraint firstItem="PoQ-x4-ES3" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="leading" constant="20" id="9e0-oX-skE"/>
+                            <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="PoQ-x4-ES3" secondAttribute="bottom" priority="900" constant="8" id="ESF-pw-bYW"/>
                             <constraint firstItem="3Nq-Rz-Etg" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="leading" constant="20" id="ETk-YV-FSi"/>
                             <constraint firstAttribute="bottom" secondItem="xXW-iq-GcP" secondAttribute="bottom" id="MYN-Zf-Bvk"/>
                             <constraint firstAttribute="trailing" secondItem="xXW-iq-GcP" secondAttribute="trailing" id="TXC-lN-yL8"/>

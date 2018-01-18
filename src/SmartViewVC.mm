@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
  *  Author: Olivier Soldano <olivier.soldano@savoirfairelinux.com>
  *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
@@ -53,7 +53,8 @@
     //UI elements
     __unsafe_unretained IBOutlet RingTableView* smartView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
-    __unsafe_unretained IBOutlet NSSegmentedControl *listTypeSelector;
+    __strong IBOutlet NSSegmentedControl *listTypeSelector;
+    bool selectorIsPresent;
 
     QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
 
@@ -107,6 +108,7 @@ NSInteger const REQUEST_SEG         = 1;
     [searchField.layer setBackgroundColor:[NSColor colorWithCalibratedRed:0.949 green:0.949 blue:0.949 alpha:0.9].CGColor];
 
     currentFilterType = lrc::api::profile::Type::RING;
+    selectorIsPresent = true;
 }
 
 - (void)placeCall:(id)sender
@@ -126,16 +128,39 @@ NSInteger const REQUEST_SEG         = 1;
 -(void) reloadData
 {
     [smartView deselectAll:nil];
-    [smartView reloadData];
 
     if (!model_->owner.contactModel->hasPendingRequests()) {
         if (currentFilterType == lrc::api::profile::Type::PENDING) {
             [self selectConversationList];
         }
-        [listTypeSelector setEnabled:NO forSegment:REQUEST_SEG];
+        if (selectorIsPresent) {
+            [listTypeSelector removeFromSuperview];
+            selectorIsPresent = false;
+        }
     } else {
-        [listTypeSelector setEnabled:YES forSegment:REQUEST_SEG];
+        if (!selectorIsPresent) {
+            // First we restore the selector with selection on "Conversations"
+            [self.view addSubview:listTypeSelector];
+            [listTypeSelector setSelected:YES forSegment:CONVERSATION_SEG];
+
+            // Then constraints are recreated (as these are lost when calling removeFromSuperview)
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchField]-8-[listTypeSelector]"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:NSDictionaryOfVariableBindings(searchField, listTypeSelector)]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[listTypeSelector]-8-[tabbar]"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:NSDictionaryOfVariableBindings(listTypeSelector, tabbar)]];
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[listTypeSelector]-20-|"
+                                                                              options:0
+                                                                              metrics:nil
+                                                                                views:NSDictionaryOfVariableBindings(listTypeSelector)]];
+            selectorIsPresent = true;
+        }
     }
+
+    [smartView reloadData];
 
     if (!selectedUid_.empty() && model_ != nil) {
         auto it = getConversationFromUid(selectedUid_, *model_);
@@ -155,11 +180,11 @@ NSInteger const REQUEST_SEG         = 1;
     if (model_ != conversationModel) {
         model_ = conversationModel;
         selectedUid_.clear(); // Clear selected conversation as the selected account is being changed
-        [self reloadData];
         QObject::disconnect(modelSortedConnection_);
         QObject::disconnect(filterChangedConnection_);
         QObject::disconnect(newConversationConnection_);
         QObject::disconnect(conversationRemovedConnection_);
+        [self reloadData];
         if (model_ != nil) {
             modelSortedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::modelSorted,
                                                       [self] (){
