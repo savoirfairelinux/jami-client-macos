@@ -65,7 +65,6 @@
         CGPathAddArcToPoint(outlinePath, nil, maxx, miny, midx, miny, radius);
         CGPathCloseSubpath(outlinePath);
     }
-    CGContextSetShadowWithColor(context, CGSizeMake(0,1), 1, [NSColor lightGrayColor].CGColor);
     CGContextAddPath(context, outlinePath);
     CGContextFillPath(context);
 
