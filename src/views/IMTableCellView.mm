@@ -45,7 +45,7 @@
     [self.msgBackground setAutoresizingMask:NSViewHeightSizable];
     [self.msgView setEnabledTextCheckingTypes:NSTextCheckingTypeLink];
     [self.msgView setAutomaticLinkDetectionEnabled:YES];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]"
                                                                 options:0
                                                                 metrics:nil
                                                                   views:NSDictionaryOfVariableBindings(msgView)]];
