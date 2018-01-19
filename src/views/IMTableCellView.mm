@@ -40,11 +40,15 @@
     [self.msgView setBackgroundColor:[NSColor clearColor]];
     [self.msgView setString:@""];
     [self.msgView setAutoresizingMask:NSViewWidthSizable];
-     [self.msgView setAutoresizingMask:NSViewHeightSizable];
+    [self.msgView setAutoresizingMask:NSViewHeightSizable];
     [self.msgBackground setAutoresizingMask:NSViewWidthSizable];
     [self.msgBackground setAutoresizingMask:NSViewHeightSizable];
     [self.msgView setEnabledTextCheckingTypes:NSTextCheckingTypeLink];
     [self.msgView setAutomaticLinkDetectionEnabled:YES];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]-|"
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:NSDictionaryOfVariableBindings(msgView)]];
    }
 
 - (void) updateWidthConstraint:(CGFloat) newWidth
