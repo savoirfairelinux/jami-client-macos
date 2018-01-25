@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,8 +26,14 @@
 @property (nonatomic, strong) IBOutlet NSImageView* photoView;
 @property (nonatomic, strong) IBOutlet NSTextView* msgView;
 @property (nonatomic, strong) IBOutlet MessageBubbleView* msgBackground;
+@property (nonatomic, strong) IBOutlet NSButton* acceptButton;
+@property (nonatomic, strong) IBOutlet NSButton* declineButton;
+@property (nonatomic, strong) IBOutlet NSProgressIndicator* progressIndicator;
+@property (nonatomic, strong) IBOutlet NSTextField* statusLabel;
 
-- (void) setup;
+
+- (uint64_t) interaction;
+- (void) setupForInteraction:(uint64_t)inter;
 - (void) updateWidthConstraint:(CGFloat) newWidth;
 
 @end
