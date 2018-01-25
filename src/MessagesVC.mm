@@ -84,8 +84,8 @@
 
     // Signal triggered when messages are received
     QObject::disconnect(newMessageSignal_);
-    newMessageSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newUnreadMessage,
-                                         [self](const std::string& uid, uint64_t msgId, const lrc::api::interaction::Info& msg){
+    newMessageSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
+                                         [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                              if (uid != convUid_)
                                                  return;
                                              [conversationView reloadData];
