@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2017 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -29,7 +29,7 @@
 
 @interface MessagesVC : NSViewController
 
--(void)setConversationUid:(const std::string)convUid model:(const lrc::api::ConversationModel*)model;
+-(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
 -(void)newMessageSent;
 
 @property (retain, nonatomic) id <MessagesVCDelegate> delegate;
