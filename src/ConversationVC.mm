@@ -52,6 +52,7 @@
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
     __unsafe_unretained IBOutlet NSTextField *conversationID;
     __unsafe_unretained IBOutlet IconButton* sendButton;
+    __unsafe_unretained IBOutlet IconButton *sendFileButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
@@ -149,6 +150,7 @@
     NSString* bestId = bestIDForConversation(*conv, *convModel_);
     [conversationTitle setStringValue: bestName];
     [conversationID setStringValue: bestId];
+    [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
 
     BOOL hideBestId = [bestNameForConversation(*conv, *convModel_) isEqualTo:bestIDForConversation(*conv, *convModel_)];
 
@@ -197,6 +199,26 @@
         if (isPending)
             [delegate currentConversationTrusted];
         [messagesViewVC newMessageSent];
+    }
+}
+
+- (IBAction)sendFile:(id)sender
+{
+    NSOpenPanel* filePicker = [NSOpenPanel openPanel];
+    [filePicker setCanChooseFiles:YES];
+    [filePicker setCanChooseDirectories:NO];
+    [filePicker setAllowsMultipleSelection:NO];
+
+    if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
+        if ([[filePicker URLs] count] == 1) {
+            NSURL* url = [[filePicker URLs] objectAtIndex:0];
+            const char* fullPath = [url fileSystemRepresentation];
+            NSString* fileName = [url lastPathComponent];
+            NSLog(@">>>> Full path: %s, file name: %@", fullPath, fileName);
+            if (convModel_) {
+                convModel_->sendFile(convUid_, std::string(fullPath), std::string([fileName UTF8String]));
+            }
+        }
     }
 }
 
