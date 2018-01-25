@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,19 +25,25 @@
 @implementation IMTableCellView
 @synthesize msgView;
 @synthesize photoView;
+@synthesize acceptButton;
+@synthesize declineButton;
+@synthesize progressIndicator;
 
-
-- (void) setup
+- (void) setupDirection
 {
-    if ([self.identifier isEqualToString:@"RightMessageView"]) {
+    if ([self.identifier isEqualToString:@"RightMessageView"] || [self.identifier isEqualToString:@"RightFileView"]) {
         self.msgBackground.pointerDirection = RIGHT;
         self.msgBackground.bgColor = [NSColor ringLightBlue];
-
     }
     else {
         self.msgBackground.pointerDirection = LEFT;
         self.msgBackground.bgColor = [NSColor whiteColor];
     }
+}
+
+- (void) setup
+{
+    [self setupDirection];
     [self.msgView setBackgroundColor:[NSColor clearColor]];
     [self.msgView setString:@""];
     [self.msgView setAutoresizingMask:NSViewWidthSizable];
@@ -45,11 +52,17 @@
     [self.msgBackground setAutoresizingMask:NSViewHeightSizable];
     [self.msgView setEnabledTextCheckingTypes:NSTextCheckingTypeLink];
     [self.msgView setAutomaticLinkDetectionEnabled:YES];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]"
-                                                                options:0
-                                                                metrics:nil
-                                                                  views:NSDictionaryOfVariableBindings(msgView)]];
-   }
+    if ([self.identifier containsString:@"File"]) {
+        [self.progressIndicator setMinValue:0.0];
+        [self.progressIndicator setMaxValue:100.0];
+        [self.progressIndicator setDoubleValue:33.33];
+    } else {
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:NSDictionaryOfVariableBindings(msgView)]];
+    }
+}
 
 - (void) updateWidthConstraint:(CGFloat) newWidth
 {

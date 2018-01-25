@@ -25,6 +25,9 @@
 @property (nonatomic, strong) IBOutlet NSImageView* photoView;
 @property (nonatomic, strong) IBOutlet NSTextView* msgView;
 @property (nonatomic, strong) IBOutlet MessageBubbleView* msgBackground;
+@property (nonatomic, strong) IBOutlet NSButton* acceptButton;
+@property (nonatomic, strong) IBOutlet NSButton* declineButton;
+@property (nonatomic, strong) IBOutlet NSProgressIndicator* progressIndicator;
 
 - (void) setup;
 - (void) updateWidthConstraint:(CGFloat) newWidth;
