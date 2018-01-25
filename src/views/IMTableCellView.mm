@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2016-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,25 +19,34 @@
  */
 
 #import "IMTableCellView.h"
-
 #import "NSColor+RingTheme.h"
 
-@implementation IMTableCellView
+@implementation IMTableCellView {
+    uint64_t interaction;
+}
+
 @synthesize msgView;
 @synthesize photoView;
+@synthesize acceptButton;
+@synthesize declineButton;
+@synthesize progressIndicator;
 
-
-- (void) setup
+- (void) setupDirection
 {
-    if ([self.identifier isEqualToString:@"RightMessageView"]) {
+    if ([self.identifier isEqualToString:@"RightMessageView"] || [self.identifier isEqualToString:@"RightFileView"]) {
         self.msgBackground.pointerDirection = RIGHT;
         self.msgBackground.bgColor = [NSColor ringLightBlue];
-
     }
     else {
         self.msgBackground.pointerDirection = LEFT;
         self.msgBackground.bgColor = [NSColor whiteColor];
     }
+}
+
+- (void) setupForInteraction:(uint64_t)inter
+{
+    interaction = inter;
+    [self setupDirection];
     [self.msgView setBackgroundColor:[NSColor clearColor]];
     [self.msgView setString:@""];
     [self.msgView setAutoresizingMask:NSViewWidthSizable];
@@ -45,11 +55,88 @@
     [self.msgBackground setAutoresizingMask:NSViewHeightSizable];
     [self.msgView setEnabledTextCheckingTypes:NSTextCheckingTypeLink];
     [self.msgView setAutomaticLinkDetectionEnabled:YES];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]"
-                                                                options:0
-                                                                metrics:nil
-                                                                  views:NSDictionaryOfVariableBindings(msgView)]];
-   }
+    [self.msgView setEditable:NO];
+    if ([self.identifier containsString:@"File"]) {
+//        [self.progressIndicator setMinValue:0.0];
+//        [self.progressIndicator setMaxValue:100.0];
+//        [self.progressIndicator setDoubleValue:33.33];
+//        if (self.progressIndicator.indeterminate) [self.progressIndicator startAnimation:nil];
+    } else {
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]"
+                                                                    options:0
+                                                                    metrics:nil
+                                                                      views:NSDictionaryOfVariableBindings(msgView)]];
+    }
+}
+
+- (void) setTransferCreatedMode
+{
+    NSLog(@"$$$$ CRÉATÈDE");
+    if ([self.identifier isEqualToString:@"RightFileView"]) {
+        [self.declineButton setEnabled:NO];
+        [self.progressIndicator setHidden:NO];
+        [self.progressIndicator setIndeterminate:YES];
+        [self.progressIndicator startAnimation:nil];
+    } else if ([self.identifier isEqualToString:@"LeftFileView"]) {
+//        [self.acceptButton setEnabled:NO];
+//        [self.declineButton setEnabled:NO];
+    }
+}
+
+- (void) setTransferAwaitingMode
+{
+    NSLog(@"$$$$ AWAITINGUE");
+    if ([self.identifier isEqualToString:@"RightFileView"]) {
+        [self.progressIndicator setHidden:NO];
+        [self.progressIndicator setIndeterminate:YES];
+        [self.progressIndicator startAnimation:nil];
+    }
+}
+
+- (void) setTransferAcceptedMode
+{
+    if ([self.identifier containsString:@"File"]) {
+        if (self.acceptButton != nil) [self.acceptButton setHidden:YES];
+        [self.progressIndicator setHidden:NO];
+        [self.progressIndicator setIndeterminate:YES];
+        [self.progressIndicator startAnimation:nil];
+    }
+}
+
+- (void) setTransferOngoingMode
+{
+    if ([self.identifier containsString:@"File"]) {
+        if (self.acceptButton != nil) [self.acceptButton setHidden:YES];
+        [self.progressIndicator setHidden:NO];
+        [self.progressIndicator setMinValue:0.0];
+        [self.progressIndicator setMaxValue:100.0];
+        [self.progressIndicator setDoubleValue:33.33];
+    }
+}
+
+- (void) setTransferFinishedMode
+{
+    if ([self.identifier containsString:@"File"]) {
+        if (self.acceptButton != nil) [self.acceptButton setHidden:YES];
+        [self.declineButton setHidden:YES];
+    }
+}
+
+- (void) setTransferCanceledMode
+{
+    if ([self.identifier containsString:@"File"]) {
+        if (self.acceptButton != nil) [self.acceptButton setHidden:YES];
+        [self.declineButton setHidden:YES];
+    }
+}
+
+- (void) setTransferErrorMode
+{
+    if ([self.identifier containsString:@"File"]) {
+        if (self.acceptButton != nil) [self.acceptButton setHidden:YES];
+        [self.declineButton setHidden:YES];
+    }
+}
 
 - (void) updateWidthConstraint:(CGFloat) newWidth
 {
@@ -64,6 +151,11 @@
                                       constant:newWidth];
 
     [self.msgView addConstraint:constraint];
+}
+
+- (uint64_t)interaction
+{
+    return interaction;
 }
 
 @end

@@ -38,15 +38,16 @@
     __unsafe_unretained IBOutlet NSTableView* conversationView;
 
     std::string convUid_;
-    const lrc::api::ConversationModel* convModel_;
+    lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
 
-    QMetaObject::Connection newMessageSignal_;
+    QMetaObject::Connection newInteractionSignal_;
 
     // Both are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
     QMetaObject::Connection modelSortedSignal_;
     QMetaObject::Connection filterChangedSignal_;
+    QMetaObject::Connection interactionStatusUpdatedSignal_;
 }
 
 @property (nonatomic, strong, readonly) INDSequentialTextSelectionManager* selectionManager;
@@ -73,7 +74,7 @@
     return cachedConv_;
 }
 
--(void)setConversationUid:(const std::string)convUid model:(const lrc::api::ConversationModel *)model
+-(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model
 {
     if (convUid_ == convUid && convModel_ == model)
         return;
@@ -82,15 +83,23 @@
     convUid_ = convUid;
     convModel_ = model;
 
-    // Signal triggered when messages are received
-    QObject::disconnect(newMessageSignal_);
-    newMessageSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
+    // Signal triggered when messages are received or their status updated
+    QObject::disconnect(newInteractionSignal_);
+    QObject::disconnect(interactionStatusUpdatedSignal_);
+    newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
                                          [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                              if (uid != convUid_)
                                                  return;
                                              [conversationView reloadData];
                                              [conversationView scrollToEndOfDocument:nil];
                                          });
+    interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
+                                                       [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
+                                                           if (uid != convUid_)
+                                                               return;
+                                                           [conversationView reloadData];
+                                                           [conversationView scrollToEndOfDocument:nil];
+                                                       });
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
@@ -117,6 +126,33 @@
     [conversationView scrollToEndOfDocument:nil];
 }
 
+-(void) setCellMode:(IMTableCellView*)cellView forTransferStatus:(lrc::api::interaction::Status)status
+{
+    switch (status) {
+        case lrc::api::interaction::Status::TRANSFER_CREATED:
+            [cellView setTransferCreatedMode];
+            break;
+        case lrc::api::interaction::Status::TRANSFER_AWAITING:
+            [cellView setTransferAwaitingMode];
+            break;
+        case lrc::api::interaction::Status::TRANSFER_ONGOING:
+            [cellView setTransferOngoingMode];
+            break;
+        case lrc::api::interaction::Status::TRANSFER_FINISHED:
+            [cellView setTransferFinishedMode];
+            break;
+        case lrc::api::interaction::Status::TRANSFER_ACCEPTED:
+            [cellView setTransferAcceptedMode];
+            break;
+        case lrc::api::interaction::Status::TRANSFER_CANCELED:
+            [cellView setTransferCanceledMode];
+            break;
+        case lrc::api::interaction::Status::TRANSFER_ERROR:
+            [cellView setTransferErrorMode];
+            break;
+    }
+}
+
 #pragma mark - NSTableViewDelegate methods
 - (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
 {
@@ -137,14 +173,16 @@
 
     // HACK HACK HACK HACK HACK
     // The following code has to be replaced when every views are implemented for every interaction types
-    // This is an iterator which "jumps over" any interaction which is not a text one.
+    // This is an iterator which "jumps over" any interaction which is not a text or datatransfer one.
     // It behaves as if interaction list was only containing text interactions.
     std::map<uint64_t, lrc::api::interaction::Info>::const_iterator it;
 
     {
         int msgCount = 0;
         it = std::find_if(conv->interactions.begin(), conv->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
-            if (inter.second.type == lrc::api::interaction::Type::TEXT) {
+            if (inter.second.type == lrc::api::interaction::Type::TEXT
+                || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
+                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
                 if (msgCount == row) {
                     return true;
                 } else {
@@ -163,17 +201,26 @@
 
     auto& interaction = it->second;
 
-    // TODO Implement interactions other than messages
-    if(interaction.type != lrc::api::interaction::Type::TEXT) {
-        return nil;
-    }
-
     bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
 
-    if (isOutgoing) {
-        result = [tableView makeViewWithIdentifier:@"RightMessageView" owner:self];
-    } else {
-        result = [tableView makeViewWithIdentifier:@"LeftMessageView" owner:self];
+    switch (interaction.type) {
+        case lrc::api::interaction::Type::TEXT:
+            if (isOutgoing) {
+                result = [tableView makeViewWithIdentifier:@"RightMessageView" owner:self];
+            } else {
+                result = [tableView makeViewWithIdentifier:@"LeftMessageView" owner:self];
+            }
+            break;
+        case lrc::api::interaction::Type::INCOMING_DATA_TRANSFER:
+            result = [tableView makeViewWithIdentifier:@"LeftFileView" owner:self];
+            [self setCellMode:result forTransferStatus:interaction.status];
+            break;
+        case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
+            result = [tableView makeViewWithIdentifier:@"RightFileView" owner:self];
+            [self setCellMode:result forTransferStatus:interaction.status];
+            break;
+        default:  // If interaction is not of a known type
+            return nil;
     }
 
     // check if the message first in incoming or outgoing messages sequence
@@ -182,12 +229,14 @@
         auto previousIt = it;
         previousIt--;
         auto& previousInteraction = previousIt->second;
-        if (previousInteraction.type == lrc::api::interaction::Type::TEXT && (isOutgoing == lrc::api::interaction::isOutgoing(previousInteraction)))
+        if ((previousInteraction.type == lrc::api::interaction::Type::TEXT
+             || previousInteraction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
+             || previousInteraction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) && (isOutgoing == lrc::api::interaction::isOutgoing(previousInteraction)))
             isFirstInSequence = false;
     }
     [result.photoView setHidden:!isFirstInSequence];
     result.msgBackground.needPointer = isFirstInSequence;
-    [result setup];
+    [result setupForInteraction:it->first];
 
     NSMutableAttributedString* msgAttString =
     [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",@(interaction.body.c_str())]
@@ -235,14 +284,16 @@
 
     // HACK HACK HACK HACK HACK
     // The following code has to be replaced when every views are implemented for every interaction types
-    // This is an iterator which "jumps over" any interaction which is not a text one.
+    // This is an iterator which "jumps over" any interaction which is not a text or datatransfer one.
     // It behaves as if interaction list was only containing text interactions.
     std::map<uint64_t, lrc::api::interaction::Info>::const_iterator it;
 
     {
         int msgCount = 0;
         it = std::find_if(conv->interactions.begin(), conv->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
-            if (inter.second.type == lrc::api::interaction::Type::TEXT) {
+            if (inter.second.type == lrc::api::interaction::Type::TEXT
+                || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
+                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
                 if (msgCount == row) {
                     return true;
                 } else {
@@ -258,6 +309,9 @@
         return 0;
 
     auto& interaction = it->second;
+
+    if(interaction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER || interaction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER)
+        return 52.0;
 
     // TODO Implement interactions other than messages
     if(interaction.type != lrc::api::interaction::Type::TEXT) {
@@ -297,8 +351,11 @@
     if (conv) {
         int count;
         count = std::count_if(conv->interactions.begin(), conv->interactions.end(), [](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
-            return inter.second.type == lrc::api::interaction::Type::TEXT;
+            return inter.second.type == lrc::api::interaction::Type::TEXT
+            || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
+            || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER;
         });
+        NSLog(@"$$$ Interaction count: %d", count);
         return count;
     }
     return 0;
@@ -359,6 +416,29 @@
      [aMutableParagraphStyle setTailIndent:-5.0];
      [aMutableParagraphStyle setFirstLineHeadIndent:5.0];
      return aMutableParagraphStyle;
+}
+
+#pragma mark - Actions
+
+- (IBAction)acceptIncomingFile:(id)sender {
+    auto inter = [(IMTableCellView*)[[sender superview] superview] interaction];
+    if (convModel_ && !convUid_.empty()) {
+        NSSavePanel* filePicker = [NSSavePanel savePanel];
+        [filePicker setNameFieldStringValue:@""];
+
+        if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
+            const char* fullPath = [[filePicker URL] fileSystemRepresentation];
+            NSLog(@">>>> Set save path: %s", fullPath);
+            convModel_->acceptTransfer(convUid_, inter, fullPath);
+        }
+    }
+}
+
+- (IBAction)declineIncomingFile:(id)sender {
+    auto inter = [(IMTableCellView*)[[sender superview] superview] interaction];
+    if (convModel_ && !convUid_.empty()) {
+        convModel_->cancelTransfer(convUid_, inter);
+    }
 }
 
 @end
