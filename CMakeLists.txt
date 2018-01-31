@@ -11,10 +11,10 @@ IF("${RING_VERSION}" STREQUAL "")
    SET(RING_VERSION "1.0.0")
 ENDIF("${RING_VERSION}" STREQUAL "")
 
-SET(RING_VERSION_NAME "Liberté, Égalité, Fraternité - Version 1.0")
+SET(RING_VERSION_NAME "In varietate concordia")
 
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
-SET(PROJ_COPYRIGHT " © 2015-2017 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
+SET(PROJ_COPYRIGHT " © 2015-2018 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
 SET(CMAKE_CXX_STANDARD 14)
 
@@ -453,10 +453,10 @@ SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
         MACOSX_BUNDLE_GUI_IDENTIFIER "cx.ring"
         MACOSX_BUNDLE_SHORT_VERSION_STRING "${RING_VERSION_NAME}"
-        MACOSX_BUNDLE_LONG_VERSION_STRING "${PROJ_NAME} ${RING_VERSION_NAME} Nightly"
+        MACOSX_BUNDLE_LONG_VERSION_STRING "${PROJ_NAME} ${RING_VERSION_NAME}"
         MACOSX_BUNDLE_BUNDLE_VERSION ${RING_VERSION}
         MACOSX_BUNDLE_COPYRIGHT "${PROJ_COPYRIGHT}"
-        MACOSX_BUNDLE_INFO_STRING "Nightly build of ${PROJ_NAME} ${RING_VERSION} for testing and development"
+        MACOSX_BUNDLE_INFO_STRING "Build of ${PROJ_NAME}, version ${RING_VERSION}"
         MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
         MACOSX_BUNDLE_ICON_FILE "appicon.icns"
     )
