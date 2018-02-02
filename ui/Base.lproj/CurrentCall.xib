@@ -776,6 +776,307 @@
                                                                     <outlet property="photoView" destination="Aqd-t7-hSI" id="tFi-xR-zui"/>
                                                                 </connections>
                                                             </tableCellView>
+                                                            <tableCellView identifier="LeftFinishedFileView" id="fac-Kf-RfH" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                                <rect key="frame" x="1" y="125" width="369" height="60"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="1aC-fp-mZr">
+                                                                        <rect key="frame" x="0.0" y="25" width="30" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="Ytt-Mn-nI7"/>
+                                                                            <constraint firstAttribute="height" constant="30" id="gvg-Fs-Bez"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="g8K-K3-lzW"/>
+                                                                    </imageView>
+                                                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ocK-4E-xFU" customClass="MessageBubbleView">
+                                                                        <rect key="frame" x="55" y="10" width="605" height="40"/>
+                                                                        <subviews>
+                                                                            <customView horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vhy-kA-Ejd" customClass="NSTextView">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="605" height="40"/>
+                                                                            </customView>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oEK-Iz-g9Y" userLabel="Status Label">
+                                                                                <rect key="frame" x="548" y="17" width="43" height="17"/>
+                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Status" id="SNy-eT-sfm">
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Vhy-kA-Ejd" firstAttribute="top" secondItem="ocK-4E-xFU" secondAttribute="top" id="AD1-Tl-EFt"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="oEK-Iz-g9Y" secondAttribute="trailing" constant="5" id="RYR-zi-Ct7"/>
+                                                                            <constraint firstItem="Vhy-kA-Ejd" firstAttribute="leading" secondItem="ocK-4E-xFU" secondAttribute="leading" id="Siu-gE-27q"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Vhy-kA-Ejd" secondAttribute="bottom" id="gh8-fp-tbL"/>
+                                                                            <constraint firstItem="oEK-Iz-g9Y" firstAttribute="centerY" secondItem="ocK-4E-xFU" secondAttribute="centerY" id="ghn-G2-GpH"/>
+                                                                            <constraint firstItem="oEK-Iz-g9Y" firstAttribute="leading" secondItem="Vhy-kA-Ejd" secondAttribute="trailing" id="p8z-N4-CKv"/>
+                                                                        </constraints>
+                                                                    </customView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="ocK-4E-xFU" secondAttribute="bottom" constant="5" id="G8D-CQ-Jz0"/>
+                                                                    <constraint firstItem="1aC-fp-mZr" firstAttribute="top" secondItem="fac-Kf-RfH" secondAttribute="top" constant="5" id="eKu-d4-pV6"/>
+                                                                    <constraint firstItem="ocK-4E-xFU" firstAttribute="top" secondItem="fac-Kf-RfH" secondAttribute="top" constant="5" id="lww-OD-hDI"/>
+                                                                    <constraint firstItem="1aC-fp-mZr" firstAttribute="leading" secondItem="fac-Kf-RfH" secondAttribute="leading" id="txa-CC-PtO"/>
+                                                                    <constraint firstItem="ocK-4E-xFU" firstAttribute="leading" secondItem="1aC-fp-mZr" secondAttribute="trailing" constant="2" id="wqp-zA-cT6"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="msgBackground" destination="ocK-4E-xFU" id="H9y-9R-LKw"/>
+                                                                    <outlet property="msgView" destination="Vhy-kA-Ejd" id="u3h-TZ-hWb"/>
+                                                                    <outlet property="photoView" destination="1aC-fp-mZr" id="Nfi-Fw-BBk"/>
+                                                                    <outlet property="statusLabel" destination="oEK-Iz-g9Y" id="pHq-FS-2KY"/>
+                                                                </connections>
+                                                            </tableCellView>
+                                                            <tableCellView identifier="LeftIncomingFileView" id="Nuj-jZ-jYz" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                                <rect key="frame" x="1" y="187" width="369" height="60"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="pwI-oq-kbT">
+                                                                        <rect key="frame" x="0.0" y="25" width="30" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="30" id="QJm-ol-INX"/>
+                                                                            <constraint firstAttribute="width" constant="30" id="UDl-Qt-6CC"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="hOr-EW-mFs"/>
+                                                                    </imageView>
+                                                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jz3-nO-ELg" customClass="MessageBubbleView">
+                                                                        <rect key="frame" x="55" y="10" width="605" height="40"/>
+                                                                        <subviews>
+                                                                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XQQ-T0-W4d" userLabel="Accept">
+                                                                                <rect key="frame" x="562" y="6" width="44" height="43"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="32" id="P6G-6P-gz9"/>
+                                                                                    <constraint firstAttribute="width" constant="32" id="Qsy-EG-13y"/>
+                                                                                </constraints>
+                                                                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_action_accept" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k7b-0z-aoG">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="29n-ZT-ah3" userLabel="Decline">
+                                                                                <rect key="frame" x="530" y="6" width="44" height="43"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="32" id="9YD-8l-0cZ"/>
+                                                                                    <constraint firstAttribute="height" constant="32" id="XgO-RV-brJ"/>
+                                                                                </constraints>
+                                                                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_action_cancel" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="f7f-ur-JcQ">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                            <customView horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8GC-ys-Mbm" customClass="NSTextView">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="605" height="40"/>
+                                                                            </customView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="XQQ-T0-W4d" secondAttribute="trailing" constant="5" id="2hk-gf-gfB"/>
+                                                                            <constraint firstItem="29n-ZT-ah3" firstAttribute="top" secondItem="jz3-nO-ELg" secondAttribute="top" constant="5" id="87B-dQ-fDK"/>
+                                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="29n-ZT-ah3" secondAttribute="bottom" constant="5" id="FCC-r5-Xtg"/>
+                                                                            <constraint firstItem="29n-ZT-ah3" firstAttribute="leading" secondItem="8GC-ys-Mbm" secondAttribute="trailing" constant="5" id="H9e-EQ-3a8"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="8GC-ys-Mbm" secondAttribute="bottom" id="MpT-2b-PGf"/>
+                                                                            <constraint firstItem="8GC-ys-Mbm" firstAttribute="leading" secondItem="jz3-nO-ELg" secondAttribute="leading" id="PPX-PM-xXG"/>
+                                                                            <constraint firstItem="XQQ-T0-W4d" firstAttribute="leading" secondItem="29n-ZT-ah3" secondAttribute="trailing" constant="5" id="WMt-n7-Okr"/>
+                                                                            <constraint firstItem="XQQ-T0-W4d" firstAttribute="top" secondItem="jz3-nO-ELg" secondAttribute="top" constant="5" id="hyU-IL-Qix"/>
+                                                                            <constraint firstItem="8GC-ys-Mbm" firstAttribute="top" secondItem="jz3-nO-ELg" secondAttribute="top" id="la1-tI-IWk"/>
+                                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XQQ-T0-W4d" secondAttribute="bottom" constant="5" id="y6w-xn-DVj"/>
+                                                                        </constraints>
+                                                                    </customView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="pwI-oq-kbT" firstAttribute="leading" secondItem="Nuj-jZ-jYz" secondAttribute="leading" id="0bA-Uq-GtX"/>
+                                                                    <constraint firstItem="jz3-nO-ELg" firstAttribute="leading" secondItem="pwI-oq-kbT" secondAttribute="trailing" constant="2" id="Jm1-ho-yK4"/>
+                                                                    <constraint firstItem="pwI-oq-kbT" firstAttribute="top" secondItem="Nuj-jZ-jYz" secondAttribute="top" constant="5" id="c0v-Re-voc"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="jz3-nO-ELg" secondAttribute="bottom" constant="5" id="cV6-gu-3Py"/>
+                                                                    <constraint firstItem="jz3-nO-ELg" firstAttribute="top" secondItem="Nuj-jZ-jYz" secondAttribute="top" constant="5" id="z9U-3g-HJ7"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="acceptButton" destination="XQQ-T0-W4d" id="ZIY-FY-Yfd"/>
+                                                                    <outlet property="declineButton" destination="29n-ZT-ah3" id="nER-Vf-u41"/>
+                                                                    <outlet property="msgBackground" destination="jz3-nO-ELg" id="pOm-2e-qe5"/>
+                                                                    <outlet property="msgView" destination="8GC-ys-Mbm" id="QMV-Wm-kTb"/>
+                                                                    <outlet property="photoView" destination="pwI-oq-kbT" id="vac-LK-26j"/>
+                                                                </connections>
+                                                            </tableCellView>
+                                                            <tableCellView identifier="RightOngoingFileView" id="PF4-KK-XmV" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                                <rect key="frame" x="1" y="249" width="369" height="60"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="ahW-4Q-itX">
+                                                                        <rect key="frame" x="339" y="25" width="30" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="Id4-Mv-n2w"/>
+                                                                            <constraint firstAttribute="height" constant="30" id="QRV-ff-qZ8"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="JFW-WQ-a64"/>
+                                                                    </imageView>
+                                                                    <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lub-Tw-rRg" customClass="MessageBubbleView">
+                                                                        <rect key="frame" x="5" y="5" width="637" height="50"/>
+                                                                        <subviews>
+                                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="38z-tG-ed9" userLabel="Decline">
+                                                                                <rect key="frame" x="36" y="6" width="44" height="43"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="32" id="Q8c-6E-ReR"/>
+                                                                                    <constraint firstAttribute="height" constant="32" id="Vgt-pt-mXK"/>
+                                                                                </constraints>
+                                                                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_action_cancel" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yR6-oy-w73">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="KJY-TZ-7tK">
+                                                                                <rect key="frame" x="5" y="13" width="32" height="32"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="32" id="fVy-Sx-k4Z"/>
+                                                                                </constraints>
+                                                                            </progressIndicator>
+                                                                            <customView horizontalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6aR-4J-O5G" customClass="NSTextView">
+                                                                                <rect key="frame" x="74" y="0.0" width="637" height="50"/>
+                                                                            </customView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="38z-tG-ed9" secondAttribute="bottom" constant="5" id="9qi-L9-nkY"/>
+                                                                            <constraint firstItem="38z-tG-ed9" firstAttribute="leading" secondItem="KJY-TZ-7tK" secondAttribute="trailing" constant="5" id="SDo-nE-owx"/>
+                                                                            <constraint firstItem="6aR-4J-O5G" firstAttribute="leading" secondItem="38z-tG-ed9" secondAttribute="trailing" id="YgD-0s-4xs"/>
+                                                                            <constraint firstItem="6aR-4J-O5G" firstAttribute="top" secondItem="Lub-Tw-rRg" secondAttribute="top" id="cuo-mu-AN3"/>
+                                                                            <constraint firstItem="KJY-TZ-7tK" firstAttribute="leading" secondItem="Lub-Tw-rRg" secondAttribute="leading" constant="5" id="ppg-Me-UQP"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="6aR-4J-O5G" secondAttribute="bottom" id="sHc-hl-OVd"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="6aR-4J-O5G" secondAttribute="trailing" id="sNA-d2-G44"/>
+                                                                            <constraint firstItem="38z-tG-ed9" firstAttribute="top" secondItem="Lub-Tw-rRg" secondAttribute="top" constant="5" id="tg4-5C-4z4"/>
+                                                                            <constraint firstItem="KJY-TZ-7tK" firstAttribute="centerY" secondItem="38z-tG-ed9" secondAttribute="centerY" id="zGX-hT-NO3"/>
+                                                                        </constraints>
+                                                                    </customView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="Lub-Tw-rRg" firstAttribute="top" secondItem="PF4-KK-XmV" secondAttribute="top" constant="5" id="2Fm-vv-bAx"/>
+                                                                    <constraint firstItem="ahW-4Q-itX" firstAttribute="leading" secondItem="Lub-Tw-rRg" secondAttribute="trailing" constant="2" id="QOd-TE-YI1"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="ahW-4Q-itX" secondAttribute="trailing" id="l9d-YC-vt2"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Lub-Tw-rRg" secondAttribute="bottom" constant="5" id="nDe-Or-ldd"/>
+                                                                    <constraint firstItem="ahW-4Q-itX" firstAttribute="top" secondItem="PF4-KK-XmV" secondAttribute="top" constant="5" id="tbO-sx-FDX"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="declineButton" destination="38z-tG-ed9" id="U9W-mT-4Jf"/>
+                                                                    <outlet property="msgBackground" destination="Lub-Tw-rRg" id="Z2y-yJ-SGW"/>
+                                                                    <outlet property="msgView" destination="6aR-4J-O5G" id="TOl-5H-CkY"/>
+                                                                    <outlet property="photoView" destination="ahW-4Q-itX" id="bYE-f7-xhT"/>
+                                                                    <outlet property="progressIndicator" destination="KJY-TZ-7tK" id="H3W-o5-hFz"/>
+                                                                </connections>
+                                                            </tableCellView>
+                                                            <tableCellView identifier="LeftOngoingFileView" id="Qg5-zp-vcG" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                                <rect key="frame" x="1" y="311" width="369" height="60"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="AlZ-Hp-aSl">
+                                                                        <rect key="frame" x="0.0" y="25" width="30" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="30" id="QjH-ox-TwS"/>
+                                                                            <constraint firstAttribute="width" constant="30" id="cz1-lF-FqG"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="sAd-1s-adM"/>
+                                                                    </imageView>
+                                                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UnU-Rf-z1l" customClass="MessageBubbleView">
+                                                                        <rect key="frame" x="55" y="10" width="605" height="40"/>
+                                                                        <subviews>
+                                                                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NWW-80-fLk" userLabel="Decline">
+                                                                                <rect key="frame" x="530" y="6" width="44" height="43"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="32" id="3Si-qJ-bbH"/>
+                                                                                    <constraint firstAttribute="width" constant="32" id="Woj-aT-sOT"/>
+                                                                                </constraints>
+                                                                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_action_cancel" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bnO-MA-NO6">
+                                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                </buttonCell>
+                                                                            </button>
+                                                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="k62-1f-mVT" userLabel="Progress Indicator">
+                                                                                <rect key="frame" x="575" y="13" width="32" height="32"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="32" id="Mdm-9P-9UH"/>
+                                                                                    <constraint firstAttribute="height" constant="32" id="cvS-EO-hkm"/>
+                                                                                </constraints>
+                                                                            </progressIndicator>
+                                                                            <customView horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IR3-0b-k5T" customClass="NSTextView">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="605" height="40"/>
+                                                                            </customView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="NWW-80-fLk" firstAttribute="leading" secondItem="IR3-0b-k5T" secondAttribute="trailing" constant="5" id="5ea-RK-GQv"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="IR3-0b-k5T" secondAttribute="bottom" id="6eM-Kt-tCV"/>
+                                                                            <constraint firstItem="IR3-0b-k5T" firstAttribute="top" secondItem="UnU-Rf-z1l" secondAttribute="top" id="800-hj-Ab6"/>
+                                                                            <constraint firstItem="IR3-0b-k5T" firstAttribute="leading" secondItem="UnU-Rf-z1l" secondAttribute="leading" id="Fd4-OY-kMA"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="k62-1f-mVT" secondAttribute="trailing" constant="5" id="JjR-hO-mh6"/>
+                                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NWW-80-fLk" secondAttribute="bottom" constant="5" id="Yqf-CR-JrA"/>
+                                                                            <constraint firstItem="k62-1f-mVT" firstAttribute="leading" secondItem="NWW-80-fLk" secondAttribute="trailing" constant="5" id="ca0-N9-BZz"/>
+                                                                            <constraint firstItem="NWW-80-fLk" firstAttribute="top" secondItem="UnU-Rf-z1l" secondAttribute="top" constant="5" id="esP-Pw-T1s"/>
+                                                                            <constraint firstItem="k62-1f-mVT" firstAttribute="centerY" secondItem="NWW-80-fLk" secondAttribute="centerY" id="pMV-qf-Sva"/>
+                                                                        </constraints>
+                                                                    </customView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="AlZ-Hp-aSl" firstAttribute="leading" secondItem="Qg5-zp-vcG" secondAttribute="leading" id="0QM-r7-KDn"/>
+                                                                    <constraint firstItem="UnU-Rf-z1l" firstAttribute="leading" secondItem="AlZ-Hp-aSl" secondAttribute="trailing" constant="2" id="GbX-Qg-cSU"/>
+                                                                    <constraint firstItem="UnU-Rf-z1l" firstAttribute="top" secondItem="Qg5-zp-vcG" secondAttribute="top" constant="5" id="IYI-5a-x6I"/>
+                                                                    <constraint firstItem="AlZ-Hp-aSl" firstAttribute="top" secondItem="Qg5-zp-vcG" secondAttribute="top" constant="5" id="iZb-Gz-V9K"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="UnU-Rf-z1l" secondAttribute="bottom" constant="5" id="lPA-xu-hOR"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="declineButton" destination="NWW-80-fLk" id="01i-kc-693"/>
+                                                                    <outlet property="msgBackground" destination="UnU-Rf-z1l" id="wFR-lZ-el8"/>
+                                                                    <outlet property="msgView" destination="IR3-0b-k5T" id="87k-bF-42h"/>
+                                                                    <outlet property="photoView" destination="AlZ-Hp-aSl" id="xiR-Zr-zDQ"/>
+                                                                    <outlet property="progressIndicator" destination="k62-1f-mVT" id="sfI-Jb-K7G"/>
+                                                                </connections>
+                                                            </tableCellView>
+                                                            <tableCellView identifier="RightFinishedFileView" id="1A2-jz-Bay" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                                <rect key="frame" x="1" y="373" width="369" height="60"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="Lsr-r7-7u6">
+                                                                        <rect key="frame" x="339" y="25" width="30" height="30"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="eGt-tj-De4"/>
+                                                                            <constraint firstAttribute="height" constant="30" id="gaj-Cf-JqG"/>
+                                                                        </constraints>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="wX7-ov-hWR"/>
+                                                                    </imageView>
+                                                                    <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXS-xe-37A" customClass="MessageBubbleView">
+                                                                        <rect key="frame" x="5" y="5" width="637" height="50"/>
+                                                                        <subviews>
+                                                                            <customView horizontalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ym-Ad-jYp" customClass="NSTextView">
+                                                                                <rect key="frame" x="48" y="0.0" width="637" height="50"/>
+                                                                            </customView>
+                                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c5d-Vg-wak" userLabel="Status Label">
+                                                                                <rect key="frame" x="3" y="17" width="47" height="17"/>
+                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Status" id="dId-t9-Tys">
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="2ym-Ad-jYp" secondAttribute="trailing" id="Coe-JS-JsY"/>
+                                                                            <constraint firstItem="2ym-Ad-jYp" firstAttribute="leading" secondItem="c5d-Vg-wak" secondAttribute="trailing" id="J3v-LQ-uTB"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="2ym-Ad-jYp" secondAttribute="bottom" id="XDh-gW-BPw"/>
+                                                                            <constraint firstItem="2ym-Ad-jYp" firstAttribute="top" secondItem="ZXS-xe-37A" secondAttribute="top" id="gyN-GP-4iA"/>
+                                                                            <constraint firstItem="c5d-Vg-wak" firstAttribute="centerY" secondItem="ZXS-xe-37A" secondAttribute="centerY" id="hEy-9U-b9S"/>
+                                                                            <constraint firstItem="c5d-Vg-wak" firstAttribute="leading" secondItem="ZXS-xe-37A" secondAttribute="leading" constant="5" id="yPK-ia-xEX"/>
+                                                                        </constraints>
+                                                                    </customView>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="ZXS-xe-37A" secondAttribute="bottom" constant="5" id="6rK-6i-QX1"/>
+                                                                    <constraint firstItem="Lsr-r7-7u6" firstAttribute="top" secondItem="1A2-jz-Bay" secondAttribute="top" constant="5" id="ARZ-uc-YzK"/>
+                                                                    <constraint firstItem="ZXS-xe-37A" firstAttribute="top" secondItem="1A2-jz-Bay" secondAttribute="top" constant="5" id="Uo4-6U-VPE"/>
+                                                                    <constraint firstItem="Lsr-r7-7u6" firstAttribute="leading" secondItem="ZXS-xe-37A" secondAttribute="trailing" constant="2" id="Y7g-Qj-5AZ"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Lsr-r7-7u6" secondAttribute="trailing" id="qMe-Ab-ZwA"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <outlet property="msgBackground" destination="ZXS-xe-37A" id="oB7-O3-e9e"/>
+                                                                    <outlet property="msgView" destination="2ym-Ad-jYp" id="FAe-Qs-Ktc"/>
+                                                                    <outlet property="photoView" destination="Lsr-r7-7u6" id="6f6-Nw-b6j"/>
+                                                                    <outlet property="statusLabel" destination="c5d-Vg-wak" id="PXv-Zh-A8v"/>
+                                                                </connections>
+                                                            </tableCellView>
                                                         </prototypeCellViews>
                                                     </tableColumn>
                                                 </tableColumns>
