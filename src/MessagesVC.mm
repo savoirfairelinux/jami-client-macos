@@ -168,13 +168,13 @@
     // Then status label is updated if needed
     switch (status) {
         case lrc::api::interaction::Status::TRANSFER_FINISHED:
-            [result.statusLabel setStringValue:@"Success"];
+            [result.statusLabel setStringValue:NSLocalizedString(@"Success", @"File transfer successful label")];
             break;
         case lrc::api::interaction::Status::TRANSFER_CANCELED:
-            [result.statusLabel setStringValue:@"Canceled"];
+            [result.statusLabel setStringValue:NSLocalizedString(@"Canceled", @"File transfer canceled label")];
             break;
         case lrc::api::interaction::Status::TRANSFER_ERROR:
-            [result.statusLabel setStringValue:@"Failed"];
+            [result.statusLabel setStringValue:NSLocalizedString(@"Failed", @"File transfer failed label")];
     }
     return result;
 }
