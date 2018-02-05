@@ -203,7 +203,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
         self.hideRingID = NO;
-        [ringIDLabel setStringValue:@"No account available"];
+        [ringIDLabel setStringValue:NSLocalizedString(@"No account available", @"Displayed as RingID when no accounts are available for selection")];
     }
 }
 
