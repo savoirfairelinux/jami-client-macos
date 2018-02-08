@@ -215,7 +215,13 @@
             const char* fullPath = [url fileSystemRepresentation];
             NSString* fileName = [url lastPathComponent];
             if (convModel_) {
+                auto* conv = [self getCurrentConversation];
+                bool isPending = convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING;
+
                 convModel_->sendFile(convUid_, std::string(fullPath), std::string([fileName UTF8String]));
+
+                if (isPending)
+                    [delegate currentConversationTrusted];
             }
         }
     }
