@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
+
 /* Contextual menu action */
 "Add to contacts" = "Kişilere ekle";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Telefon numarası";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Bir onay kurumu listesi seç";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "SİP Hesabı Oluştur";
 
-/* Alert dialog title */
-"Entered name not found" = "Girilen ad bulunamadı";
+/* File transfer failed label */
+"Failed" = "Başarısız";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Hesabınız taşınırken hata oluştu. Tekrar tamamı tıklayabilir veya hesabınızı silebilirsiniz.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "%@'den gelen arama";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "En az bir geçerli hesabınız olduğundan emin olun";
-
 /* Message from {Name} */
 "Message from %@" = "%@'den ileti";
 
 /* User label */
 "New SIP account" = "Yeni SIP hesabı";
 
-/* Alert dialog title */
-"No valid account available" = "Geçerli hesap yok";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Parola ve doğrulama uyuşmuyor";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Paylaş";
 
+/* File transfer successful label */
+"Success" = "Başarılı";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Metin Eylemleri";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Girdiğiniz parola bu hesabı açmaz";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "Girdiğiniz kullanıcı adı ağ üzerindeki bir Ring Kimliğiyle uyuşmadı";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Süreci bitirmek için, yeni aygıtta Ring'i açmanız ve \"Bu aygıtı bir hesaba bağla\" seçeneğini seçmeniz gerekiyor. Pin'iniz 10 dakika için geçerlidir.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Hesabı dışa aktarmadan önce taşımanız gerekir.";
 
-/* Contextual menu action */
-"Delete contact" = "Kişiyi sil";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "MAC kişisi silinemedi";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "Silmek için MAC Kişiler Uygulamasına git";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "Kişi silinecek";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "\"%@\" kişisini silmek istediğinize emin misiniz?";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";

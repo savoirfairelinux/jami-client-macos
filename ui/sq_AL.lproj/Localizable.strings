@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Ndodhi një gabim rrjeti gjatë eksportimit";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Llogari s’ka fjalëkalim";
+
 /* Contextual menu action */
 "Add to contacts" = "Shtoje te kontaktet";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Thirre numrin";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Zgjidhni një listë AD-sh";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "Krijoni Llogari SIP";
 
-/* Alert dialog title */
-"Entered name not found" = "Emri i dhënë s’gjet";
+/* File transfer failed label */
+"Failed" = "Dështoi";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migrimi i llogarisë tuaj dështoi. Mund të riprovoni duke shtypur OK, ose duke fshirë llogarinë tuaj.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Thirrje ardhëse pre %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "Sigurohuni që keni të paktën një llogari të vlefshme";
-
 /* Message from {Name} */
 "Message from %@" = "Mesazh nga %@";
 
 /* User label */
 "New SIP account" = "Llogari e re SIP";
 
-/* Alert dialog title */
-"No valid account available" = "S’ka llogari të vlefshme të gatshme";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Mospërputhje fjalëkalimi dhe ripohimi të tij";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Share";
 
+/* File transfer successful label */
+"Success" = "Sukses";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Veprime Teksti";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "Emri i përdoruesit që dhatë nuk përputhet me ndonjë RingID te rrjeti";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Që të plotësohet procesi, lypset të hapni Ring-un në një pajisje të re dhe të zgjidhni mundësinë \"Lidheni këtë pajisje me një llogari\". Pin-i juaj është i vlefshëm vetëm për 10 minuta.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Llogarinë tuaj duhet ta migroni përpara eksportimit";
 
-/* Contextual menu action */
-"Delete contact" = "Fshije kontaktin";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "S’u fshi dot kontakti MAC";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "Për ta fshirë, shkoni te Aplikacioni Kontakte MAC";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "Kontakti do të fshihet";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Jeni i sigurt se doni të fshihet kontakti \"%@\"";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Llogari s’ka fjalëkalim";

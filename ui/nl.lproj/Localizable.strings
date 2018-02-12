@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Er is een netwerkfout opgetreden tijdens het exporteren";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account heeft geen wachtwoord";
+
 /* Contextual menu action */
 "Add to contacts" = "Aan contacten toevoegen";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Nummer bellen";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Kies een CA-lijst";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "SIP-account aanmaken";
 
-/* Alert dialog title */
-"Entered name not found" = "Ingevoerde naam niet gevonden";
+/* File transfer failed label */
+"Failed" = "Mislukt";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migreren van account mislukt. Je kan opnieuw proberen door op Oké te klikken of je account verwijderen.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Inkomende oproep van %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "Zorg dat je minstens een geldige account hebt";
-
 /* Message from {Name} */
 "Message from %@" = "Bericht van %@";
 
 /* User label */
 "New SIP account" = "Nieuwe SIP-account";
 
-/* Alert dialog title */
-"No valid account available" = "Geen geldige account beschikbaar";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Wachtwoord en bevestiging komen niet overeen.";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Delen";
 
+/* File transfer successful label */
+"Success" = "Klaar";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Teksthandelingen";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Het wachtwoord dat je hebt ingevoerd ontgrendelt deze account niet";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "De gebruikersnaam die je hebt ingevoerd komt niet overeen met een Ring-ID op het netwerk";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Om het proces te voltooien open je Ring op het nieuwe apparaat en kies je de optie \"Dit apparaat aan een account koppelen\". Je pincode is 10 minuten geldig.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Je moet je account migreren vooraleer je deze kan exporteren";
 
-/* Contextual menu action */
-"Delete contact" = "Contact verwijderen";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "Kon MAC-contact niet verwijderen";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "Ga naar MAC-contactentoepassing om te verwijderen";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "Contact zal verwijderd worden";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Weet je zeker dat je contact “%@” wil verwijderen?";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Account heeft geen wachtwoord";

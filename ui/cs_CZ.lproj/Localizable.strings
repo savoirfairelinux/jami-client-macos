@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Při vyvádění došlo k chybě sítě";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
+
 /* Contextual menu action */
 "Add to contacts" = "Přidat do kontaktů";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Volat číslo";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Vyberte seznam CA";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "Vytvořit účet SIP";
 
-/* Alert dialog title */
-"Entered name not found" = "Zadaný název nenalezen";
+/* File transfer failed label */
+"Failed" = "Hovor selhal";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Nepodařilo se přestěhovat váš účet. Můžete to zkusit ještě jednou stisknutím OK nebo svůj účet smazat.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Příchozí hovor od %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "Ujistěte se, že máte alespoň jeden platný účet";
-
 /* Message from {Name} */
 "Message from %@" = "Zpráva od  %@";
 
 /* User label */
 "New SIP account" = "Nový účet SIP";
 
-/* Alert dialog title */
-"No valid account available" = "Není dostupný žádný platný účet";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Heslo a jeho potvrzení se neshodují";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Sdílet";
 
+/* File transfer successful label */
+"Success" = "Úspěch";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Textové činnosti";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Vámi zadané heslo neodemkne tento účet";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "Uživatelské jméno, jež jste zadal, neodpovídá RingID na síti";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pro dokončení tohoto postupu otevřete Ring na novém zařízení a vyberte volbu „Připojit toto zařízení k účtu“. Váš PIN zůstává platný 10 minut.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Musíte převést svůj účet před vyvedením";
 
-/* Contextual menu action */
-"Delete contact" = "Smazat kontakt";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";

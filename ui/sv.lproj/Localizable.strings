@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Ett nätverksfel inträffade under exporten";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
+
 /* Contextual menu action */
 "Add to contacts" = "Lägg till i kontakter";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Ring upp nummer";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Välj en CA-lista";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "Skapa SIP-konto";
 
-/* Alert dialog title */
-"Entered name not found" = "Angivet namn kunde inte hittas";
+/* File transfer failed label */
+"Failed" = "Misslyckades";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Kunde inte migrera ditt konto. Du kan försöka igen genom att trycka OK, eller radera ditt konto.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Inkommande samtal från %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "Tillse att du har minst ett giltigt konto";
-
 /* Message from {Name} */
 "Message from %@" = "Meddelande från %@";
 
 /* User label */
 "New SIP account" = "Nytt SIP-konto";
 
-/* Alert dialog title */
-"No valid account available" = "Inget giltigt konto tillgängligt";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Lösenord och bekräftelse stämmer inte.";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Dela";
 
+/* File transfer successful label */
+"Success" = "Slutfört";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Textåtgärder";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Det angivna lösenordet låser inte upp detta konto";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "Användarnamnet matchar inget känt Ring-ID på nätverket";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "För att slutföra åtgärden, måste du nu öppna Ring på den nya enheten och välja alternativet \"Koppla den här enheten till ett konto\". PIN-koden är giltig i 10 minuter.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Du måste migrera ditt konto före exporten";
 
-/* Contextual menu action */
-"Delete contact" = "Ta bort kontakt";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "Kunde inte ta bort MAC-kontakt";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "För att ta bort, gå till MAC-kontaktappen";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "Kontakten kommer att tas bort";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Vill du verkligen ta bort kontakten \"%@\"?";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";

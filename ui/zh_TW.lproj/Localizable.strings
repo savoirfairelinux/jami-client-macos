@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "當匯出時遇到網路錯誤";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "無密碼的帳號";
+
 /* Contextual menu action */
 "Add to contacts" = "加到聯絡人";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "通話號碼";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "選擇證書機構清單";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "建立 SIP 帳號";
 
-/* Alert dialog title */
-"Entered name not found" = "找不到輸入的名稱";
+/* File transfer failed label */
+"Failed" = "失敗";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "導入您的帳號失敗。您可以按下 OK 重試，或是刪除您的帳號。";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "來電從 %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "確定您有至少一個有效帳號";
-
 /* Message from {Name} */
 "Message from %@" = "訊息從 %@";
 
 /* User label */
 "New SIP account" = "新的 SIP 帳號";
 
-/* Alert dialog title */
-"No valid account available" = "沒有有效的帳號";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "密碼與確認不相符。";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "分享";
 
+/* File transfer successful label */
+"Success" = "成功";
+
 /* No comment provided by engineer. */
 "Text Actions" = "文字動作";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "您輸入的密碼無法解鎖這個帳號";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "您輸入的使用者名稱不符合在網路上的 RingID";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "要完成這個過程，您需要在新的裝置上開啟 Ring 並選擇「連結這個裝置到一個帳號」。您的 PIN 碼在 10 分鐘內有效。";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "您必須在匯出前先導入您的帳號";
 
-/* Contextual menu action */
-"Delete contact" = "刪除聯絡人";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "無法刪除 MAC 聯絡人";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "要刪除請到 MAC 聯絡人 App";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "聯絡人將會被刪除";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "您確定您想要刪除聯絡人「%@」嗎";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "無密碼的帳號";

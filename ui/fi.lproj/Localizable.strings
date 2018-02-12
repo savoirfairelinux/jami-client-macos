@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Tiedonviennissä tapahtui verkkoyhteysvirhe";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
+
 /* Contextual menu action */
 "Add to contacts" = "Lisää yhteystietoihin";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Soita numeroon";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Choose a CA list";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "Luo SIP Tunnus";
 
-/* Alert dialog title */
-"Entered name not found" = "Nimeä ei löydy";
+/* File transfer failed label */
+"Failed" = "Epäonnistui";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Saapuva puhelu %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "Varmista että sinulla on edes yksi käytössä oleva tunnus. ";
-
 /* Message from {Name} */
 "Message from %@" = "Viesti %@";
 
 /* User label */
 "New SIP account" = "Uusi SIP tunnus";
 
-/* Alert dialog title */
-"No valid account available" = "Kelpaavaa tunnusta ei ole saatavilla";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Salasana ei täsmää tunnuksen kanssa. ";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Jako";
 
+/* File transfer successful label */
+"Success" = "Success";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Tekstitoiminnot";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Antamasi salasana ei avaa tämän tunnuksen salaisuuksia";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "Antamasi käyttäjänimi ei täsmää Ring- tunnuksien kanssa. ";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
 
-/* Contextual menu action */
-"Delete contact" = "Poista yhteystieto";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "Could not delete MAC contact";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "To delete go to MAC Contacts App";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "Contact will be deleted";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Are you sure you want to delete contact \"%@\"";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";

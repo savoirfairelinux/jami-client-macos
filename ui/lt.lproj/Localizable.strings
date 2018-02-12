@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Eksportavimo metu, įvyko klaida";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
+
 /* Contextual menu action */
 "Add to contacts" = "Pridėti prie kontaktų";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Call number";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Choose a CA list";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "Sukurti SIP paskyrą";
 
-/* Alert dialog title */
-"Entered name not found" = "Įvestas vardas nerastas";
+/* File transfer failed label */
+"Failed" = "Nepavyko";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Nepavyko perkelti jūsų paskyros. Jūs galite bandyti vėl, spusteldami Gerai arba galite ištrinti savo paskyrą.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Gaunamasis skambutis nuo %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "Make sure you have at least one valid account";
-
 /* Message from {Name} */
 "Message from %@" = "Žinutė nuo %@";
 
 /* User label */
 "New SIP account" = "Nauja SIP paskyra";
 
-/* Alert dialog title */
-"No valid account available" = "No valid account available";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Slaptažodis ir jo patvirtinimas nesutampa.";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Share";
 
+/* File transfer successful label */
+"Success" = "Pavyko";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Teksto veiksmai";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "Jūsų įvestas naudotojo vardas neatitinka tinkle esantį RingID";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Norėdami užbaigti procesą, jūs turite atverti Ring naujame įrenginyje ir pasirinkti parinktį \"Susieti šį įrenginį su paskyra\". Jūsų pin galioja 10 minučių.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Prieš eksportuodami, turite perkelti savo paskyrą";
 
-/* Contextual menu action */
-"Delete contact" = "Ištrinti kontaktą";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "Nepavyko ištrinti MAC kontakto";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "Norėdami ištrinti, pereikite į MAC kontaktų programą (angl. Contacts)";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "Kontaktas bus ištrintas";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "Ar tikrai norite ištrinti kontaktą \"%@\"";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";

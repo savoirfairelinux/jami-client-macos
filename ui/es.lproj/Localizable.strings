@@ -1,6 +1,9 @@
 
 "A network error occured during the export" = "Ocurrió un error durante la exportación";
 
+/* No password on this account text field placeholder */
+"Account has no password" = "Account has no password";
+
 /* Contextual menu action */
 "Add to contacts" = "Añadir a contactos";
 
@@ -15,6 +18,9 @@
 
 /* Contextual menu action */
 "Call number" = "Llamar";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
 
 /* Open panel title */
 "Choose a CA list" = "Elegir una lista CA";
@@ -52,8 +58,8 @@
 /* Contextual menu entry */
 "Create SIP Account" = "Crear cuenta SIP";
 
-/* Alert dialog title */
-"Entered name not found" = "El nombre ingresado no ha sido encontrado";
+/* File transfer failed label */
+"Failed" = "Falló";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Se produjo un error al migrar la cuenta. Presiona Aceptar para reintentarlo o elimina tu cuenta.";
@@ -64,17 +70,14 @@
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Llamada entrante de %@";
 
-/* Alert dialo message */
-"Make sure you have at least one valid account" = "Asegúrate de tener al menos una cuenta válida";
-
 /* Message from {Name} */
 "Message from %@" = "Mensaje de %@";
 
 /* User label */
 "New SIP account" = "Nueva cuenta SIP";
 
-/* Alert dialog title */
-"No valid account available" = "No hay una cuenta válida disponible";
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "La contraseña y la confirmación no coinciden";
@@ -112,6 +115,9 @@
 /* No comment provided by engineer. */
 "Share" = "Compartir";
 
+/* File transfer successful label */
+"Success" = "Hecho";
+
 /* No comment provided by engineer. */
 "Text Actions" = "Acciones del Texto";
 
@@ -130,9 +136,6 @@
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "La contraseña ingresada no puede desbloquear esta cuenta";
 
-/* Alert dialog title */
-"The username you entered do not match a RingID on the network" = "El nombre de usuario ingresado no coincide con un RingID en la red";
-
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Para completar el proceso, necesitas abrir Ring en el nuevo dispositivo y escoger la opción \"Conectar un dispositivo a esta cuenta\". El PIN es válido por 10 minutos.";
 
@@ -145,20 +148,3 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "Debes migrar tu cuenta antes de exportar";
 
-/* Contextual menu action */
-"Delete contact" = "Eliminar contacto";
-
-/* Contextual menu alert title */
-"Could not delete MAC contact" = "No se ha podido borrar el contacto MAC";
-
-/* Contextual menu alert remove contact */
-"To delete go to MAC Contacts App" = "Para borrarlo ve a la Aplicación de Contactos MAC";
-
-/* Contextual menu alert title */
-"Contact will be deleted" = "El contacto se borrará";
-
-/* Contextual menu alert remove contact {Name} */
-"Are you sure you want to delete contact \"%@\"" = "¿Seguro que desea borrar el contacto \"%@\"?";
-
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
