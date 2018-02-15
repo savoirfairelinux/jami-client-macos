@@ -54,6 +54,9 @@
 
 @end
 
+// Tags for view
+NSInteger const GENERIC_INT_TEXT_TAG = 100;
+
 @implementation MessagesVC
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
@@ -126,6 +129,18 @@
 {
     [conversationView reloadData];
     [conversationView scrollToEndOfDocument:nil];
+}
+
+-(NSTableCellView*) makeGenericInteractionViewForTableView:(NSTableView*)tableView withText:(NSString*)text
+{
+    NSTableCellView* result = [tableView makeViewWithIdentifier:@"GenericInteractionView" owner:self];
+    NSTextField* textField = [result viewWithTag:GENERIC_INT_TEXT_TAG];
+
+    // TODO: Fix symbol in LRC
+    NSString* fixedString = [text stringByReplacingOccurrencesOfString:@"🕽" withString:@"📞"];
+    [textField setStringValue:fixedString];
+
+    return result;
 }
 
 -(IMTableCellView*) makeViewforTransferStatus:(lrc::api::interaction::Status)status type:(lrc::api::interaction::Type)type tableView:(NSTableView*)tableView
@@ -208,7 +223,9 @@
         it = std::find_if(conv->interactions.begin(), conv->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
             if (inter.second.type == lrc::api::interaction::Type::TEXT
                 || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
-                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
+                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER
+                || inter.second.type == lrc::api::interaction::Type::CONTACT
+                || inter.second.type == lrc::api::interaction::Type::CALL) {
                 if (msgCount == row) {
                     return true;
                 } else {
@@ -241,6 +258,9 @@
         case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
             result = [self makeViewforTransferStatus:interaction.status type:interaction.type tableView:tableView];
             break;
+        case lrc::api::interaction::Type::CONTACT:
+        case lrc::api::interaction::Type::CALL:
+            return [self makeGenericInteractionViewForTableView:tableView withText:@(interaction.body.c_str())];
         default:  // If interaction is not of a known type
             return nil;
     }
@@ -288,12 +308,12 @@
     return result;
 }
 
-- (void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
-{
-    if (IMTableCellView* cellView = [tableView viewAtColumn:0 row:row makeIfNecessary:NO]) {
-        [self.selectionManager registerTextView:cellView.msgView withUniqueIdentifier:@(row).stringValue];
-    }
-}
+//- (void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
+//{
+//    if (IMTableCellView* cellView = [tableView viewAtColumn:0 row:row makeIfNecessary:NO]) {
+//        [self.selectionManager registerTextView:cellView.msgView withUniqueIdentifier:@(row).stringValue];
+//    }
+//}
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
@@ -315,7 +335,9 @@
         it = std::find_if(conv->interactions.begin(), conv->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
             if (inter.second.type == lrc::api::interaction::Type::TEXT
                 || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
-                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
+                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER
+                || inter.second.type == lrc::api::interaction::Type::CONTACT
+                || inter.second.type == lrc::api::interaction::Type::CALL) {
                 if (msgCount == row) {
                     return true;
                 } else {
@@ -334,6 +356,9 @@
 
     if(interaction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER || interaction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER)
         return 52.0;
+
+    if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
+        return 27.0;
 
     // TODO Implement interactions other than messages
     if(interaction.type != lrc::api::interaction::Type::TEXT) {
@@ -375,7 +400,9 @@
         count = std::count_if(conv->interactions.begin(), conv->interactions.end(), [](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
             return inter.second.type == lrc::api::interaction::Type::TEXT
             || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
-            || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER;
+            || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER
+            || inter.second.type == lrc::api::interaction::Type::CONTACT
+            || inter.second.type == lrc::api::interaction::Type::CALL;
         });
         NSLog(@"$$$ Interaction count: %d", count);
         return count;
