@@ -54,6 +54,9 @@
 
 @end
 
+// Tags for view
+NSInteger const GENERIC_INT_TEXT_TAG = 100;
+
 @implementation MessagesVC
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
@@ -128,6 +131,18 @@
     [conversationView scrollToEndOfDocument:nil];
 }
 
+-(NSTableCellView*) makeGenericInteractionViewForTableView:(NSTableView*)tableView withText:(NSString*)text
+{
+    NSTableCellView* result = [tableView makeViewWithIdentifier:@"GenericInteractionView" owner:self];
+    NSTextField* textField = [result viewWithTag:GENERIC_INT_TEXT_TAG];
+
+    // TODO: Fix symbol in LRC
+    NSString* fixedString = [text stringByReplacingOccurrencesOfString:@"🕽" withString:@"📞"];
+    [textField setStringValue:fixedString];
+
+    return result;
+}
+
 -(IMTableCellView*) makeViewforTransferStatus:(lrc::api::interaction::Status)status type:(lrc::api::interaction::Type)type tableView:(NSTableView*)tableView
 {
     IMTableCellView* result;
@@ -197,31 +212,9 @@
     if (conv == nil)
         return nil;
 
-    // HACK HACK HACK HACK HACK
-    // The following code has to be replaced when every views are implemented for every interaction types
-    // This is an iterator which "jumps over" any interaction which is not a text or datatransfer one.
-    // It behaves as if interaction list was only containing text interactions.
-    std::map<uint64_t, lrc::api::interaction::Info>::const_iterator it;
+    auto it = conv->interactions.begin();
 
-    {
-        int msgCount = 0;
-        it = std::find_if(conv->interactions.begin(), conv->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
-            if (inter.second.type == lrc::api::interaction::Type::TEXT
-                || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
-                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
-                if (msgCount == row) {
-                    return true;
-                } else {
-                    msgCount++;
-                    return false;
-                }
-            }
-            return false;
-        });
-    }
-
-    if (it == conv->interactions.end())
-        return nil;
+    std::advance(it, row);
 
     IMTableCellView* result;
 
@@ -243,6 +236,9 @@
         case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
             result = [self makeViewforTransferStatus:interaction.status type:interaction.type tableView:tableView];
             break;
+        case lrc::api::interaction::Type::CONTACT:
+        case lrc::api::interaction::Type::CALL:
+            return [self makeGenericInteractionViewForTableView:tableView withText:@(interaction.body.c_str())];
         default:  // If interaction is not of a known type
             return nil;
     }
@@ -290,13 +286,6 @@
     return result;
 }
 
-- (void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
-{
-    if (IMTableCellView* cellView = [tableView viewAtColumn:0 row:row makeIfNecessary:NO]) {
-        [self.selectionManager registerTextView:cellView.msgView withUniqueIdentifier:@(row).stringValue];
-    }
-}
-
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
     double someWidth = tableView.frame.size.width * 0.7;
@@ -306,36 +295,17 @@
     if (conv == nil)
         return 0;
 
-    // HACK HACK HACK HACK HACK
-    // The following code has to be replaced when every views are implemented for every interaction types
-    // This is an iterator which "jumps over" any interaction which is not a text or datatransfer one.
-    // It behaves as if interaction list was only containing text interactions.
-    std::map<uint64_t, lrc::api::interaction::Info>::const_iterator it;
+    auto it = conv->interactions.begin();
 
-    {
-        int msgCount = 0;
-        it = std::find_if(conv->interactions.begin(), conv->interactions.end(), [&msgCount, row](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
-            if (inter.second.type == lrc::api::interaction::Type::TEXT
-                || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
-                || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
-                if (msgCount == row) {
-                    return true;
-                } else {
-                    msgCount++;
-                    return false;
-                }
-            }
-            return false;
-        });
-    }
-
-    if (it == conv->interactions.end())
-        return 0;
+    std::advance(it, row);
 
     auto& interaction = it->second;
 
     if(interaction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER || interaction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER)
         return 52.0;
+
+    if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
+        return 27.0;
 
     // TODO Implement interactions other than messages
     if(interaction.type != lrc::api::interaction::Type::TEXT) {
@@ -372,24 +342,10 @@
 {
     auto* conv = [self getCurrentConversation];
 
-    if (conv) {
-        int count;
-        count = std::count_if(conv->interactions.begin(), conv->interactions.end(), [](const std::pair<uint64_t, lrc::api::interaction::Info>& inter) {
-            return inter.second.type == lrc::api::interaction::Type::TEXT
-            || inter.second.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
-            || inter.second.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER;
-        });
-        NSLog(@"$$$ Interaction count: %d", count);
-        return count;
-    }
-    return 0;
-
-#if 0
-    // TODO: Replace above code by the following one when every interaction types implemented
-    if (conv_) {
-        return conv_->interactions.size();
-    }
-#endif
+    if (conv)
+        return conv->interactions.size();
+    else
+        return 0;
 }
 
 #pragma mark - Text formatting
