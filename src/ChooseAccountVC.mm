@@ -140,6 +140,11 @@ NSMenuItem* selectedMenuItem;
                 break;
         }
 
+        bool isAccountAlone = accList.size() == 1;
+
+        [[accountSelectionButton cell] setArrowPosition: (isAccountAlone)?NSPopUpNoArrow:NSPopUpArrowAtBottom];
+        [accountSelectionButton setEnabled:!isAccountAlone];
+
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
         [accountsMenu addItem:[NSMenuItem separatorItem]];
