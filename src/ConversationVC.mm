@@ -194,10 +194,13 @@
     if (text && text.length > 0) {
         auto* conv = [self getCurrentConversation];
         bool isPending = convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING;
+
         convModel_->sendMessage(convUid_, std::string([text UTF8String]));
         self.message = @"";
+
         if (isPending)
             [delegate currentConversationTrusted];
+
         [messagesViewVC newMessageSent];
     }
 }
