@@ -56,7 +56,8 @@
     __strong IBOutlet NSSegmentedControl *listTypeSelector;
     bool selectorIsPresent;
 
-    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
+    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, interactionStatusUpdatedConnection_;
+    NSTimer* statusUpdateDebounceTimer;
 
     lrc::api::ConversationModel* model_;
     std::string selectedUid_;
@@ -184,6 +185,7 @@ NSInteger const REQUEST_SEG         = 1;
         QObject::disconnect(filterChangedConnection_);
         QObject::disconnect(newConversationConnection_);
         QObject::disconnect(conversationRemovedConnection_);
+        QObject::disconnect(interactionStatusUpdatedConnection_);
         [self reloadData];
         if (model_ != nil) {
             modelSortedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::modelSorted,
@@ -202,6 +204,23 @@ NSInteger const REQUEST_SEG         = 1;
                                                               [self] (){
                                                                   [self reloadData];
                                                               });
+            interactionStatusUpdatedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::interactionStatusUpdated,
+                                                                   [self] (const std::string& convUid) {
+                                                                       if (convUid != selectedUid_)
+                                                                           return;
+                                                                       auto it = getConversationFromUid(selectedUid_, *model_);
+                                                                       if (it != model_->allFilteredConversations().end()) {
+                                                                           // The following mechanism is here to debounce the interactionStatusUpdated so
+                                                                           // we do not redraw the conversation list for each message status changing
+                                                                           if (statusUpdateDebounceTimer != nil) {
+                                                                               [statusUpdateDebounceTimer invalidate];
+                                                                           }
+                                                                           statusUpdateDebounceTimer = [NSTimer timerWithTimeInterval:1.0 repeats:NO block:^(NSTimer * _Nonnull timer) {
+                                                                               [self reloadData];
+                                                                           }];
+                                                                           [[NSRunLoop mainRunLoop] addTimer:statusUpdateDebounceTimer forMode:NSRunLoopCommonModes];
+                                                                       }
+                                                                   });
             model_->setFilter(""); // Reset the filter
         }
         [searchField setStringValue:@""];
