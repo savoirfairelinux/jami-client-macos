@@ -259,15 +259,17 @@ NSInteger const REQUEST_SEG         = 1;
 
 -(void) selectConversationList
 {
-    if (currentFilterType == lrc::api::profile::Type::RING)
+    if (currentFilterType == lrc::api::profile::Type::RING or
+        currentFilterType == lrc::api::profile::Type::SIP)
         return;
+
     [listTypeSelector setSelectedSegment:CONVERSATION_SEG];
 
     // Do not invert order of the next two lines or stack overflow
     // may happen on -(void) reloadData call if filter is currently set to PENDING
     currentFilterType = lrc::api::profile::Type::RING;
     model_->setFilter(lrc::api::profile::Type::RING);
-    model_->setFilter("");
+    [self clearSearchField];
 }
 
 -(void) selectPendingList
@@ -278,7 +280,7 @@ NSInteger const REQUEST_SEG         = 1;
 
     currentFilterType = lrc::api::profile::Type::PENDING;
     model_->setFilter(lrc::api::profile::Type::PENDING);
-    model_->setFilter("");
+    [self clearSearchField];
 }
 
 #pragma mark - NSTableViewDelegate methods
@@ -301,7 +303,9 @@ NSInteger const REQUEST_SEG         = 1;
         return;
 
     auto uid = model_->filteredConversation(row).uid;
-    if (selectedUid_ != uid) {
+    auto& contactInfo = model_->owner.contactModel->getContact(model_->filteredConversation(row).participants.front());
+
+    if (selectedUid_ != uid && not contactInfo.profileInfo.uri.empty()) {
         selectedUid_ = uid;
         model_->selectConversation(uid);
     }

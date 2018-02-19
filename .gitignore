@@ -52,5 +52,6 @@ Makefile*
 *.qmlproject.user.*
 
 build/
+build-local/
 lib
 .DS_Store
