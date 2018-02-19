@@ -144,16 +144,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          }
                      });
 
-
-    QObject::connect(&Media::RecordingModel::instance(),
-                     &Media::RecordingModel::unreadMessagesCountChanged,
-                     [=](int unreadCount) {
-                         NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
-                         NSString* label = unreadCount ? [NSString stringWithFormat:@"%d", unreadCount]: @"";
-                         [tile setBadgeLabel:label];
-                         [NSApp requestUserAttention:NSCriticalRequest];
-                     });
-
     QObject::connect(&Media::RecordingModel::instance(),
                      &Media::RecordingModel::newTextMessage,
                      [=](Media::TextRecording* t, ContactMethod* cm) {
