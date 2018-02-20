@@ -563,6 +563,7 @@
     QObject::disconnect(previewHolder.frameUpdated);
     QObject::disconnect(previewHolder.stopped);
     QObject::disconnect(previewHolder.started);
+    QObject::disconnect(self.messageConnection);
     [previewView.layer setContents:nil];
 
     [_brokerPopoverVC performClose:self];
