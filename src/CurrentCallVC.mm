@@ -271,8 +271,6 @@
         case Status::INVALID:
             [controlsPanel setHidden:YES];
             [outgoingPanel setHidden:NO];
-            if(self.splitView.isInFullScreenMode)
-                [self.splitView exitFullScreenModeWithOptions:nil];
             [self animateOut];
             break;
     }
@@ -557,6 +555,8 @@
 
 -(void) cleanUp
 {
+    if(self.splitView.isInFullScreenMode)
+        [self.splitView exitFullScreenModeWithOptions:nil];
     QObject::disconnect(videoHolder.frameUpdated);
     QObject::disconnect(videoHolder.started);
     QObject::disconnect(videoHolder.stopped);
