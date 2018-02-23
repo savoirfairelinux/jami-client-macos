@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_ffda09e8",
+        "filename": "src/MessagesVC.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 124
+      },
+      "writtenOn": "2018-02-23T20:34:56Z",
+      "side": 1,
+      "message": "uncomment or suppress",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 294,
+        "endChar": 3
+      },
+      "revId": "dad62101fe4a7a283d289c5d30d7f0f4a16db873",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
