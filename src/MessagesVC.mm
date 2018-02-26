@@ -176,6 +176,7 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
             case lrc::api::interaction::Status::TRANSFER_FINISHED:
             case lrc::api::interaction::Status::TRANSFER_CANCELED:
             case lrc::api::interaction::Status::TRANSFER_ERROR:
+            case lrc::api::interaction::Status::TRANSFER_UNJOINABLE_PEER:
                 result = [tableView makeViewWithIdentifier:@"RightFinishedFileView" owner:self];
         }
     }
@@ -190,6 +191,10 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
             break;
         case lrc::api::interaction::Status::TRANSFER_ERROR:
             [result.statusLabel setStringValue:NSLocalizedString(@"Failed", @"File transfer failed label")];
+            break;
+        case lrc::api::interaction::Status::TRANSFER_UNJOINABLE_PEER:
+            [result.statusLabel setStringValue:NSLocalizedString(@"Unjoinable", @"File transfer peer unjoinable label")];
+            break;
     }
     return result;
 }
