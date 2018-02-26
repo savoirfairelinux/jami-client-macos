@@ -3,7 +3,7 @@
 "0eY-9x-bAr.placeholderString" = "URL shërbyesi…";
 
 /* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
-"6u9-cM-ep0.placeholderString" = "realm...";
+"6u9-cM-ep0.placeholderString" = "shtrirje…";
 
 /* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
 "Atv-t7-5YJ.title" = "Njësoj si parametrat vendorë";
@@ -12,13 +12,13 @@
 "FQ4-fp-Pxj.title" = "Min.";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Audio RTP port Range";
+"Jho-hi-Mvg.title" = "Interval porte RTP audioje";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
 "K9I-vh-jeu.title" = "Ndërfaqe Rrjeti";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Set published address and port";
+"OL5-DI-aCq.title" = "Caktoni adresë dhe portë të publikuar";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
 "OR2-la-DUE.placeholderString" = "fjalëkalim…";
@@ -27,13 +27,13 @@
 "P7k-xH-2mr.placeholderString" = "emër përdoruesi…";
 
 /* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
-"QS0-TJ-NQh.title" = "Using TURN";
+"QS0-TJ-NQh.title" = "Po përdoret TURN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
 "Qf3-E3-5U6.title" = "Adresë e Publikuar";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Video RTP port Range";
+"XA8-Sy-CYG.title" = "Interval porte RTP video";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "Min.";
@@ -45,10 +45,10 @@
 "fB0-X8-GXk.title" = "Radio";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
-"fCd-4d-sP0.title" = "Registration expire";
+"fCd-4d-sP0.title" = "Skadim regjistrimi";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
-"gVd-Dw-1B4.title" = "Using STUN";
+"gVd-Dw-1B4.title" = "Po përdoret STUN";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "oa2-Pe-6Uw"; */
 "oa2-Pe-6Uw.title" = "Maks.";
