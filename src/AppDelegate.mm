@@ -55,6 +55,8 @@
 
 @implementation AppDelegate
 
+NSTimer* preventSleepTimer;
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
@@ -74,6 +76,18 @@
     queue = dispatch_queue_create("scNetworkReachability", DISPATCH_QUEUE_SERIAL);
     [self setScNetworkQueue:queue];
     [self beginObservingReachabilityStatus];
+    [self startSleepPreventionTimer];
+}
+
+- (void) startSleepPreventionTimer
+{
+    if (preventSleepTimer != nil) {
+        [preventSleepTimer invalidate];
+    }
+    preventSleepTimer = [NSTimer timerWithTimeInterval:30.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        UpdateSystemActivity(OverallAct);
+    }];
+    [[NSRunLoop mainRunLoop] addTimer:preventSleepTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void) beginObservingReachabilityStatus
@@ -303,6 +317,9 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 - (void) cleanExit
 {
+    if (preventSleepTimer != nil) {
+        [preventSleepTimer invalidate];
+    }
     [self.wizard close];
     [self.ringWindowController close];
     delete CallModel::instance().QObject::parent();
