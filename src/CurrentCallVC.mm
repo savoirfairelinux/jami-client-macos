@@ -271,7 +271,7 @@
         case Status::INVALID:
             [controlsPanel setHidden:YES];
             [outgoingPanel setHidden:NO];
-            [self animateOut];
+            [self hideWithAnimation:false];
             break;
     }
 
@@ -504,55 +504,6 @@
     [self.chatVC takeFocus];
 }
 
--(void) animateIn
-{
-    CGRect frame = CGRectOffset(self.view.superview.bounds, -self.view.superview.bounds.size.width, 0);
-    [self.view setHidden:NO];
-
-    [CATransaction begin];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    [animation setFromValue:[NSValue valueWithPoint:frame.origin]];
-    [animation setToValue:[NSValue valueWithPoint:self.view.superview.bounds.origin]];
-    [animation setDuration:0.2f];
-    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
-    [CATransaction setCompletionBlock:^{
-        if (accountInfo_ == nil)
-            return;
-
-        auto* callModel = accountInfo_->callModel.get();
-        auto* convModel = accountInfo_->conversationModel.get();
-
-        // when call comes in we want to show the controls/header
-        [self mouseIsMoving:YES];
-
-        [self connectVideoSignals];
-        /* check if text media is already present */
-        if(not callModel->hasCall(callUid_))
-            return;
-
-        [loadingIndicator setAnimates:YES];
-        [self updateCall:YES];
-
-        /* monitor media for messaging text messaging */
-        QObject::disconnect(self.messageConnection);
-        self.messageConnection = QObject::connect(convModel,
-                                                  &lrc::api::ConversationModel::interactionStatusUpdated,
-                                                  [self] (std::string convUid,
-                                                          uint64_t msgId,
-                                                          lrc::api::interaction::Info msg) {
-                                                      if (msg.type == lrc::api::interaction::Type::TEXT) {
-                                                          if(not [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]]){
-                                                              return;
-                                                          }
-                                                          [self uncollapseRightView];
-                                                      }
-                                                  });
-    }];
-
-    [self.view.layer addAnimation:animation forKey:animation.keyPath];
-    [CATransaction commit];
-}
-
 -(void) cleanUp
 {
     if(self.splitView.isInFullScreenMode)
@@ -586,9 +537,74 @@
     [advancedPanel setHidden:YES];
 }
 
--(void) animateOut
+-(void) setupCallView
+{
+    if (accountInfo_ == nil)
+        return;
+
+    auto* callModel = accountInfo_->callModel.get();
+    auto* convModel = accountInfo_->conversationModel.get();
+
+    // when call comes in we want to show the controls/header
+    [self mouseIsMoving:YES];
+
+    [self connectVideoSignals];
+    /* check if text media is already present */
+    if(not callModel->hasCall(callUid_))
+        return;
+
+    [loadingIndicator setAnimates:YES];
+    [self updateCall:YES];
+
+    /* monitor media for messaging text messaging */
+    QObject::disconnect(self.messageConnection);
+    self.messageConnection = QObject::connect(convModel,
+                                              &lrc::api::ConversationModel::interactionStatusUpdated,
+                                              [self] (std::string convUid,
+                                                      uint64_t msgId,
+                                                      lrc::api::interaction::Info msg) {
+                                                  if (msg.type == lrc::api::interaction::Type::TEXT) {
+                                                      if(not [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]]){
+                                                          return;
+                                                      }
+                                                      [self uncollapseRightView];
+                                                  }
+                                              });
+}
+
+-(void) showWithAnimation:(BOOL)animate
+{
+    if (!animate) {
+        [self.view setHidden:NO];
+        [self setupCallView];
+        return;
+    }
+
+    CGRect frame = CGRectOffset(self.view.superview.bounds, -self.view.superview.bounds.size.width, 0);
+    [self.view setHidden:NO];
+
+    [CATransaction begin];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [animation setFromValue:[NSValue valueWithPoint:frame.origin]];
+    [animation setToValue:[NSValue valueWithPoint:self.view.superview.bounds.origin]];
+    [animation setDuration:0.2f];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+    [CATransaction setCompletionBlock:^{
+        [self setupCallView];
+    }];
+
+    [self.view.layer addAnimation:animation forKey:animation.keyPath];
+    [CATransaction commit];
+}
+
+-(void) hideWithAnimation:(BOOL)animate
 {
     if(self.view.frame.origin.x < 0) {
+        return;
+    }
+
+    if (!animate) {
+        [self.view setHidden:YES];
         return;
     }
 

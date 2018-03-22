@@ -235,13 +235,18 @@
 
 - (IBAction)backPressed:(id)sender {
     [delegate rightPanelClosed];
-    [self animateOut];
+    [self hideWithAnimation:false];
 }
 
 # pragma mark private IN/OUT animations
 
--(void) animateIn
+-(void) showWithAnimation:(BOOL)animate
 {
+    if (!animate) {
+        [self.view setHidden:NO];
+        return;
+    }
+
     CGRect frame = CGRectOffset(self.view.superview.bounds, -self.view.superview.bounds.size.width, 0);
     [self.view setHidden:NO];
 
@@ -256,9 +261,14 @@
     [CATransaction commit];
 }
 
--(void) animateOut
+-(void) hideWithAnimation:(BOOL)animate
 {
     if(self.view.frame.origin.x < 0) {
+        return;
+    }
+
+    if (!animate) {
+        [self.view setHidden:YES];
         return;
     }
 
