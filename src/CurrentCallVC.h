@@ -33,8 +33,8 @@ class Call;
 }
 
 -(void) initFrame;
--(void) animateIn;
--(void) animateOut;
+-(void) showWithAnimation:(BOOL)animate;
+-(void) hideWithAnimation:(BOOL)animate;
 -(void) setCurrentCall:(const std::string&)callUid
           conversation:(const std::string&)convUid
                account:(const lrc::api::account::Info*)account;

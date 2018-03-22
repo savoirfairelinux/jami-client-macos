@@ -75,7 +75,8 @@
     IBOutlet SmartViewVC* smartViewVC;
 
     CurrentCallVC* currentCallVC;
-    ConversationVC* offlineVC;
+    ConversationVC* conversationVC;
+
     // toolbar menu items
     ChooseAccountVC* chooseAccountVC;
 }
@@ -93,18 +94,18 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     lrc_ = std::make_unique<lrc::api::Lrc>();
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
-    offlineVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
+    conversationVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel()) delegate:self];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    [[offlineVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[conversationVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
     [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
-    [callView addSubview:[offlineVC view] positioned:NSWindowAbove relativeTo:nil];
+    [callView addSubview:[conversationVC view] positioned:NSWindowAbove relativeTo:nil];
 
     [currentCallVC initFrame];
-    [offlineVC initFrame];
+    [conversationVC initFrame];
     @try {
         [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
     }
@@ -139,8 +140,8 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                                           conversation:convInfo.uid
                                                account:accInfo];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
-                         [currentCallVC animateIn];
-                         [offlineVC animateOut];
+                         [currentCallVC showWithAnimation:false];
+                         [conversationVC hideWithAnimation:false];
                      });
 
     QObject::connect(&lrc_->getBehaviorController(),
@@ -157,8 +158,8 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                                           conversation:convInfo.uid
                                                account:accInfo];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
-                         [currentCallVC animateIn];
-                         [offlineVC animateOut];
+                         [currentCallVC showWithAnimation:false];
+                         [conversationVC hideWithAnimation:false];
                      });
 
     QObject::connect(&lrc_->getBehaviorController(),
@@ -166,10 +167,10 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                      [self](const std::string& accountId,
                             const lrc::api::conversation::Info& convInfo){
                          auto& accInfo = lrc_->getAccountModel().getAccountInfo(accountId);
-                         [offlineVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
-                         [offlineVC animateIn];
-                         [currentCallVC animateOut];
+                         [conversationVC showWithAnimation:false];
+                         [currentCallVC hideWithAnimation:false];
                      });
 }
 
@@ -371,8 +372,8 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
 {
     // If the selected account has been changed, we close any open panel
     if ([smartViewVC setConversationModel:accInfo.conversationModel.get()]) {
-        [currentCallVC animateOut];
-        [offlineVC animateOut];
+        [currentCallVC hideWithAnimation:false];
+        [conversationVC hideWithAnimation:false];
     }
 
     // Welcome view informations are also updated
@@ -390,8 +391,8 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
 }
 
 -(void) listTypeChanged {
-    [offlineVC animateOut];
-    [currentCallVC animateOut];
+    [conversationVC hideWithAnimation:false];
+    [currentCallVC hideWithAnimation:false];
 }
 
 #pragma mark - NSToolbarDelegate
