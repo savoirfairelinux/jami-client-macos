@@ -26,8 +26,8 @@
 @interface ConversationVC : NSViewController
 
 -(void) initFrame;
--(void) animateIn;
--(void) animateOut;
+-(void) showWithAnimation:(BOOL)animate;
+-(void) hideWithAnimation:(BOOL)animate;
 
 /**
  * Message contained in messageField TextField.
