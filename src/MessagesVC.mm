@@ -151,7 +151,7 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     if (type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER) {
         switch (status) {
             case lrc::api::interaction::Status::TRANSFER_CREATED:
-            case lrc::api::interaction::Status::TRANSFER_AWAITING:
+            case lrc::api::interaction::Status::TRANSFER_AWAITING_HOST:
                 result = [tableView makeViewWithIdentifier:@"LeftIncomingFileView" owner:self];
                 break;
             case lrc::api::interaction::Status::TRANSFER_ACCEPTED:
@@ -167,7 +167,7 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     } else if (type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
         switch (status) {
             case lrc::api::interaction::Status::TRANSFER_CREATED:
-            case lrc::api::interaction::Status::TRANSFER_AWAITING:
+            case lrc::api::interaction::Status::TRANSFER_AWAITING_PEER:
             case lrc::api::interaction::Status::TRANSFER_ONGOING:
             case lrc::api::interaction::Status::TRANSFER_ACCEPTED:
                 result = [tableView makeViewWithIdentifier:@"RightOngoingFileView" owner:self];
