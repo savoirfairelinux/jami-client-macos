@@ -180,10 +180,21 @@ NSLock* currentFrameLk;
 
         GLint inScalingUniform = glGetUniformLocation(sProg, "in_Scaling");
 
-        if (ratio < 1.0)
-            glUniform2f(inScalingUniform, 1.0, ratio);
-        else
-            glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
+        float multiplier = MAX(frameRatio, ratio);
+        if((viewRatio >= 1 && frameRatio >= 1) ||
+           (viewRatio < 1 && frameRatio < 1) ||
+           (ratio > 0.5 && ratio < 1.5) ) {
+            if (ratio > 1.0)
+                glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
+            else
+                glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
+        } else {
+            if (ratio < 1.0)
+                glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
+            else
+                glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
+
+        }
     }
     [currentFrameLk unlock];
 

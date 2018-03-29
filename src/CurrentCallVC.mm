@@ -177,6 +177,8 @@
     [loadingIndicator setInnerMargin:30];
 
     [self.videoView setCallDelegate:self];
+    CGColor* color = [[[NSColor blackColor] colorWithAlphaComponent:0.2] CGColor];
+    [headerContainer.layer setBackgroundColor:color];
 }
 
 -(void) updateDurationLabel
@@ -217,7 +219,6 @@
     if (convIt != accountInfo_->conversationModel->allFilteredConversations().end())
         [personLabel setStringValue:bestNameForConversation(*convIt, *accountInfo_->conversationModel)];
     [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
-    [timeSpentLabel setHidden:NO];
     if (refreshDurationTimer == nil)
         refreshDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                                 target:self
@@ -227,13 +228,12 @@
     [stateLabel setStringValue:@(to_string(currentCall.status).c_str())];
 
     if (firstRun) {
-        //QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(current, QSize(100,100));
+       // QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(currentCall, QSize(100,100), NO);
         //[personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
     }
 
     // Default values for this views
     [loadingIndicator setHidden:YES];
-    [videoView setShouldAcceptInteractions:NO];
     [ringingPanel setHidden:YES];
     [outgoingPanel setHidden:YES];
     [controlsPanel setHidden:NO];
@@ -263,6 +263,7 @@
         case Status::PEER_PAUSED:
         case Status::INACTIVE:
         case Status::IN_PROGRESS:
+            [timeSpentLabel setHidden:NO];
         case Status::CONNECTED:
         case Status::AUTO_ANSWERING:
             break;
@@ -350,6 +351,8 @@
                                          &lrc::api::NewCallModel::remotePreviewStarted,
                                          [self](const std::string& callId, Video::Renderer* renderer) {
                                              NSLog(@"Video started!");
+                                             [videoView setShouldAcceptInteractions:YES];
+                                             [self mouseIsMoving: NO];
                                              [self connectVideoRenderer:renderer];
                                          });
 
@@ -413,6 +416,8 @@
     videoHolder.started = QObject::connect(renderer,
                      &Video::Renderer::started,
                      [=]() {
+                         [self mouseIsMoving: NO];
+                         [videoView setShouldAcceptInteractions:YES];
                          QObject::disconnect(videoHolder.frameUpdated);
                          videoHolder.frameUpdated = QObject::connect(renderer,
                                                                      &Video::Renderer::frameUpdated,
@@ -424,6 +429,8 @@
     videoHolder.stopped = QObject::connect(renderer,
                      &Video::Renderer::stopped,
                      [=]() {
+                         [self mouseIsMoving: YES];
+                         [videoView setShouldAcceptInteractions:NO];
                          QObject::disconnect(videoHolder.frameUpdated);
                          [(CallLayer*)videoView.layer setVideoRunning:NO];
                      });
@@ -516,6 +523,7 @@
     QObject::disconnect(previewHolder.started);
     QObject::disconnect(self.messageConnection);
     [previewView.layer setContents:nil];
+    [(CallLayer*)videoView.layer setVideoRunning:NO];
 
     [_brokerPopoverVC performClose:self];
     [self.addToContactPopover performClose:self];
@@ -546,7 +554,8 @@
     auto* convModel = accountInfo_->conversationModel.get();
 
     // when call comes in we want to show the controls/header
-    [self mouseIsMoving:YES];
+    [self mouseIsMoving: YES];
+    [videoView setShouldAcceptInteractions: NO];
 
     [self connectVideoSignals];
     /* check if text media is already present */
@@ -604,6 +613,7 @@
     }
 
     if (!animate) {
+        [self cleanUp];
         [self.view setHidden:YES];
         return;
     }
