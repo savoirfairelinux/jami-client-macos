@@ -56,11 +56,12 @@
     __strong IBOutlet NSSegmentedControl *listTypeSelector;
     bool selectorIsPresent;
 
-    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, interactionStatusUpdatedConnection_;
+    QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, interactionStatusUpdatedConnection_;
     NSTimer* statusUpdateDebounceTimer;
 
     lrc::api::ConversationModel* model_;
     std::string selectedUid_;
+    NSInteger hoveredRow;
     lrc::api::profile::Type currentFilterType;
 
     __unsafe_unretained IBOutlet RingWindowController *delegate;
@@ -128,6 +129,7 @@ NSInteger const REQUEST_SEG         = 1;
 
 -(void) reloadData
 {
+    NSLog(@"reload");
     [smartView deselectAll:nil];
 
     if (!model_->owner.contactModel->hasPendingRequests()) {
@@ -176,12 +178,26 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView scrollToBeginningOfDocument:nil];
 }
 
+-(void) reloadConversationWithUid:(NSString *)uid
+{
+    if (model_ != nil) {
+        auto it = getConversationFromUid(std::string([uid UTF8String]), *model_);
+        if (it != model_->allFilteredConversations().end()) {
+            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - model_->allFilteredConversations().begin())];
+            NSLog(@"reloadConversationWithUid: %@", uid);
+            [smartView reloadDataForRowIndexes:indexSet
+                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+        }
+    }
+}
+
 - (BOOL)setConversationModel:(lrc::api::ConversationModel *)conversationModel
 {
     if (model_ != conversationModel) {
         model_ = conversationModel;
         selectedUid_.clear(); // Clear selected conversation as the selected account is being changed
         QObject::disconnect(modelSortedConnection_);
+        QObject::disconnect(modelUpdatedConnection_);
         QObject::disconnect(filterChangedConnection_);
         QObject::disconnect(newConversationConnection_);
         QObject::disconnect(conversationRemovedConnection_);
@@ -192,6 +208,10 @@ NSInteger const REQUEST_SEG         = 1;
                                                       [self] (){
                                                           [self reloadData];
                                                       });
+            modelUpdatedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::conversationUpdated,
+                                                       [self] (const std::string& uid){
+                                                           [self reloadConversationWithUid: [NSString stringWithUTF8String:uid.c_str()]];
+                                                       });
             filterChangedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::filterChanged,
                                                         [self] (){
                                                             [self reloadData];
@@ -342,17 +362,10 @@ NSInteger const REQUEST_SEG         = 1;
     result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
 //    NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-    NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
+    NSView* callButton = [result viewWithTag:CALL_BUTTON_TAG];
+    NSMutableArray* controls = [NSMutableArray arrayWithObject:callButton];
     [((ContextualTableCellView*) result) setContextualsControls:controls];
     [((ContextualTableCellView*) result) setShouldBlurParentView:YES];
-
-//    if (auto call = RecentModel::instance().getActiveCall(qIdx)) {
-//        [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
-//        [((ContextualTableCellView*) result) setActiveState:YES];
-//    } else {
-//        [details setStringValue:qIdx.data((int)Ring::Role::FormattedLastUsed).toString().toNSString()];
-//        [((ContextualTableCellView*) result) setActiveState:NO];
-//    }
 
     NSTextField* unreadCount = [result viewWithTag:TXT_BUTTON_TAG];
     [unreadCount setHidden:(conversation.unreadMessages == 0)];

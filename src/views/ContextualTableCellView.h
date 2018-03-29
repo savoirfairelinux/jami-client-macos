@@ -27,6 +27,11 @@
 @property (nonatomic) NSMutableArray* contextualsControls;
 
 /**
+ * BOOL tracking if the mouse is hovering over the cell
+ */
+@property (nonatomic) BOOL isMouseOver;
+
+/**
  * BOOL specifying if controls should be presented when mouse is hover
  */
 @property (nonatomic) BOOL activeState;

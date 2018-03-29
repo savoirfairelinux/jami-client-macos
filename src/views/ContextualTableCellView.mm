@@ -31,7 +31,6 @@
 
 @implementation ContextualTableCellView
 
-
 - (void)updateTrackingAreas {
     [super updateTrackingAreas];
     [self ensureTrackingArea];
@@ -51,6 +50,10 @@
 
 - (void)prepareForReuse
 {
+    if (self.isMouseOver) {
+        return;
+    }
+
     for (NSView* item in self.contextualsControls) {
         [item setHidden:YES];
         if(self.shouldBlurParentView && [item respondsToSelector:@selector(vibrantView)] && item.vibrantView)
@@ -60,6 +63,8 @@
 
 - (void)mouseEntered:(NSEvent *)theEvent
 {
+    self.isMouseOver = true;
+
     if (self.activeState)
         return;
 
@@ -94,6 +99,8 @@
 
 - (void)mouseExited:(NSEvent *)theEvent
 {
+    self.isMouseOver = false;
+
     for (NSView* item in self.contextualsControls) {
         [item setHidden:YES];
         if(self.shouldBlurParentView && [item respondsToSelector:@selector(vibrantView)] && item.vibrantView) {
