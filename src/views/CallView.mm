@@ -201,10 +201,10 @@
 
 - (void)mouseMoved:(NSEvent *)theEvent
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
-    [self performSelector:@selector(mouseIdle:) withObject:theEvent afterDelay:3];
-    if (self.callDelegate)
-        [self.callDelegate mouseIsMoving:YES];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
+        [self performSelector:@selector(mouseIdle:) withObject:theEvent afterDelay:3];
+        if (self.callDelegate && shouldAcceptInteractions)
+            [self.callDelegate mouseIsMoving:YES];
 }
 
 - (void) mouseIdle:(NSEvent *)theEvent
@@ -225,8 +225,9 @@
     else if([theEvent clickCount] == 2)
     {
         [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
-        if(self.callDelegate)
+        if(self.callDelegate) {
             [self.callDelegate callShouldToggleFullScreen];
+        }
     }
 }
 
