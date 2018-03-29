@@ -131,11 +131,11 @@
                                             [self](){
                                                 cachedConv_ = nil;
                                             });
-    filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newConversation,
+    newConversationConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newConversation,
                                                 [self](){
                                                     cachedConv_ = nil;
                                                 });
-    filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationRemoved,
+    conversationRemovedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationRemoved,
                                                 [self](){
                                                     cachedConv_ = nil;
                                                 });
