@@ -56,7 +56,7 @@
     __strong IBOutlet NSSegmentedControl *listTypeSelector;
     bool selectorIsPresent;
 
-    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, interactionStatusUpdatedConnection_;
+    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
     NSTimer* statusUpdateDebounceTimer;
 
     lrc::api::ConversationModel* model_;
@@ -176,6 +176,7 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView scrollToBeginningOfDocument:nil];
 }
 
+
 - (BOOL)setConversationModel:(lrc::api::ConversationModel *)conversationModel
 {
     if (model_ != conversationModel) {
@@ -186,6 +187,7 @@ NSInteger const REQUEST_SEG         = 1;
         QObject::disconnect(newConversationConnection_);
         QObject::disconnect(conversationRemovedConnection_);
         QObject::disconnect(interactionStatusUpdatedConnection_);
+        QObject::disconnect(conversationClearedConnection);
         [self reloadData];
         if (model_ != nil) {
             modelSortedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::modelSorted,
@@ -203,6 +205,11 @@ NSInteger const REQUEST_SEG         = 1;
             conversationRemovedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::conversationRemoved,
                                                               [self] (){
                                                                   [self reloadData];
+                                                              });
+            conversationClearedConnection = QObject::connect(model_, &lrc::api::ConversationModel::conversationCleared,
+                                                              [self] (const std::string& id){
+                                                                  [self deselect];
+                                                                  [delegate listTypeChanged];
                                                               });
             interactionStatusUpdatedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::interactionStatusUpdated,
                                                                    [self] (const std::string& convUid) {
@@ -516,73 +523,130 @@ NSInteger const REQUEST_SEG         = 1;
 
 #pragma mark - ContextMenuDelegate
 
-#if 0
-// TODO: Reimplement contextual menu with new models and behaviors
-- (NSMenu*) contextualMenuForIndex:(NSTreeNode*) item
+- (NSMenu*) contextualMenuForRow:(int) index
 {
-    auto qIdx = [treeController toQIdx:item];
-
-    if (!qIdx.isValid()) {
-        return nil;
-    }
-
-    auto originIdx = RecentModel::instance().peopleProxy()->mapToSource(qIdx);
-    auto contactmethods = RecentModel::instance().getContactMethods(originIdx);
-    if (contactmethods.isEmpty())
+    if (model_ == nil)
         return nil;
 
-    NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@""];
+    auto conversation = model_->filteredConversation(NSInteger(index));
 
-    if (contactmethods.size() == 1
-        && !contactmethods.first()->contact()
-        || contactmethods.first()->contact()->isPlaceHolder()) {
+    @try {
+        auto contact = model_->owner.contactModel->getContact(conversation.participants[0]);
+        if (contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
+            return nil;
+        }
 
-        NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
-                                                                action:@selector(addContactForRow:)
-                                                         keyEquivalent:@""];
-        [addContactItem setRepresentedObject:item];
-        [theMenu addItem:addContactItem];
-    } else if (auto person = contactmethods.first()->contact()) {
-        NSMenuItem* copyNameItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy name", @"Contextual menu action")
-                                                             action:@selector(copyStringToPasteboard:)
-                                                      keyEquivalent:@""];
+        BOOL isSIP = false;
+        BOOL isRingContact = false;
+        /* for SIP contact show only call menu options
+         * if contact does not have uri that is not RING contact
+         * for trusted Ring contact show option block contact
+         * for untrasted contact show option add contact
+         */
 
-        [copyNameItem setRepresentedObject:person->formattedName().toNSString()];
-        [theMenu addItem:copyNameItem];
+        if (contact.profileInfo.type == lrc::api::profile::Type::SIP) {
+            isSIP = true;
+        } else if (contact.profileInfo.uri.empty()) {
+            return nil;
+        }
+
+        else if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.isTrusted == true) {
+            isRingContact = true;
+        }
+        auto conversationUD = conversation.uid;
+        NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@""];
+        NSString* conversationUID = @(conversationUD.c_str());
+        NSMenuItem* separator = [NSMenuItem separatorItem];
+        NSMenuItem* videoCallItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Place video call",
+                                                                                        @"Contextual menu action")
+                                                               action:@selector(videoCall:)
+                                                        keyEquivalent:@""];
+        NSMenuItem* audioCallItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Place audio call",
+                                                                                        @"Contextual menu action")
+                                                               action:@selector(audioCall:)
+                                                        keyEquivalent:@""];
+        [videoCallItem setRepresentedObject: conversationUID];
+        [audioCallItem setRepresentedObject: conversationUID];
+        [theMenu addItem:videoCallItem];
+        [theMenu addItem:audioCallItem];
+        if (isSIP == false) {
+            [theMenu addItem:separator];
+            NSMenuItem* clearConversationItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear conversation", @"Contextual menu action")
+                                                                           action:@selector(clearConversation:)
+                                                                    keyEquivalent:@""];
+            [clearConversationItem setRepresentedObject: conversationUID];
+            [theMenu addItem:clearConversationItem];
+            if(isRingContact) {
+                NSMenuItem* blockContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Block contact", @"Contextual menu action")
+                                                                          action:@selector(blockContact:)
+                                                                   keyEquivalent:@""];
+                [blockContactItem setRepresentedObject: conversationUID];
+                [theMenu addItem:blockContactItem];
+            } else {
+                NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
+                                                                        action:@selector(addContact:)
+                                                                 keyEquivalent:@"A"];
+                [addContactItem setRepresentedObject: conversationUID];
+                [theMenu addItem:addContactItem];
+            }
+        }
+        return theMenu;
     }
-
-    NSMenu* copySubmenu = [[NSMenu alloc] init];
-    NSMenu* callSubmenu = [[NSMenu alloc] init];
-
-    for (auto cm : contactmethods) {
-        NSMenuItem* tmpCopyItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
-                                                             action:@selector(copyStringToPasteboard:)
-                                                      keyEquivalent:@""];
-
-        [tmpCopyItem setRepresentedObject:cm->uri().toNSString()];
-        [copySubmenu addItem:tmpCopyItem];
-
-        NSMenuItem* tmpCallItem = [[NSMenuItem alloc] initWithTitle:cm->uri().toNSString()
-                                                             action:@selector(callNumber:)
-                                                      keyEquivalent:@""];
-        [tmpCallItem setRepresentedObject:cm->uri().toNSString()];
-        [callSubmenu addItem:tmpCallItem];
+    @catch (NSException *exception) {
+        return nil;
     }
-
-    NSMenuItem* copyNumberItem = [[NSMenuItem alloc] init];
-    [copyNumberItem setTitle:NSLocalizedString(@"Copy number", @"Contextual menu action")];
-    [copyNumberItem setSubmenu:copySubmenu];
-
-    NSMenuItem* callItems = [[NSMenuItem alloc] init];
-    [callItems setTitle:NSLocalizedString(@"Call number", @"Contextual menu action")];
-    [callItems setSubmenu:callSubmenu];
-
-    [theMenu insertItem:copyNumberItem atIndex:theMenu.itemArray.count];
-    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:theMenu.itemArray.count];
-    [theMenu insertItem:callItems atIndex:theMenu.itemArray.count];
-
-    return theMenu;
 }
-#endif
+
+- (void) addContact: (NSMenuItem* ) item  {
+    auto menuObject = item.representedObject;
+    if(menuObject == nil) {
+        return;
+    }
+    NSString * convUId = (NSString*)menuObject;
+    std::string conversationID = std::string([convUId UTF8String]);
+    model_->makePermanent(conversationID);
+}
+
+- (void) blockContact: (NSMenuItem* ) item  {
+    auto menuObject = item.representedObject;
+    if(menuObject == nil) {
+        return;
+    }
+    NSString * convUId = (NSString*)menuObject;
+    std::string conversationID = std::string([convUId UTF8String]);
+    model_->clearHistory(conversationID);
+    model_->removeConversation(conversationID, true);
+}
+
+- (void) audioCall: (NSMenuItem* ) item  {
+    auto menuObject = item.representedObject;
+    if(menuObject == nil) {
+        return;
+    }
+    NSString * convUId = (NSString*)menuObject;
+    std::string conversationID = std::string([convUId UTF8String]);
+    model_->placeAudioOnlyCall(conversationID);
+
+}
+
+- (void) videoCall: (NSMenuItem* ) item  {
+    auto menuObject = item.representedObject;
+    if(menuObject == nil) {
+        return;
+    }
+    NSString * convUId = (NSString*)menuObject;
+    std::string conversationID = std::string([convUId UTF8String]);
+    model_->placeCall(conversationID);
+}
+
+- (void) clearConversation:(NSMenuItem* ) item  {
+    auto menuObject = item.representedObject;
+    if(menuObject == nil) {
+        return;
+    }
+    NSString * convUId = (NSString*)menuObject;
+    std::string conversationID = std::string([convUId UTF8String]);
+    model_->clearHistory(conversationID);
+}
 
 @end
