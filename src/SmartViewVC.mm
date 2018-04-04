@@ -468,13 +468,28 @@ NSInteger const REQUEST_SEG         = 1;
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
 {
-    if (commandSelector == @selector(insertNewline:)) {
-        if([[searchField stringValue] isNotEqualTo:@""]) {
-            [self processSearchFieldInput];
+    if (commandSelector != @selector(insertNewline:) || [[searchField stringValue] isEqual:@""]) {
+        return NO;
+    }
+    if (model_->allFilteredConversations().size() <= 0) {
+        return YES;
+    }
+    auto model = model_->filteredConversation(0);
+    auto uid = model.uid;
+    if (selectedUid_ == uid) {
+        return YES;
+    }
+    @try {
+        auto contact = model_->owner.contactModel->getContact(model.participants[0]);
+        if ((contact.profileInfo.uri.empty() && contact.profileInfo.type != lrc::api::profile::Type::SIP) || contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
             return YES;
         }
+        selectedUid_ = uid;
+        model_->selectConversation(uid);
+        return YES;
+    } @catch (NSException *exception) {
+        return YES;
     }
-    return NO;
 }
 
 - (void)controlTextDidChange:(NSNotification *) notification
