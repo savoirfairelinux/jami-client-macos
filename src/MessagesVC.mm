@@ -48,6 +48,7 @@
     QMetaObject::Connection modelSortedSignal_;
     QMetaObject::Connection filterChangedSignal_;
     QMetaObject::Connection interactionStatusUpdatedSignal_;
+    QMetaObject::Connection conversationClearedSignal;
 }
 
 @property (nonatomic, strong, readonly) INDSequentialTextSelectionManager* selectionManager;
@@ -89,6 +90,7 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     // Signal triggered when messages are received or their status updated
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
+    QObject::disconnect(conversationClearedSignal);
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
                                          [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                              if (uid != convUid_)
@@ -101,6 +103,12 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
                                                        [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                                            if (uid != convUid_)
                                                                return;
+                                                           cachedConv_ = nil;
+                                                           [conversationView reloadData];
+                                                           [conversationView scrollToEndOfDocument:nil];
+                                                       });
+    conversationClearedSignal = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationCleared,
+                                                       [self](){
                                                            cachedConv_ = nil;
                                                            [conversationView reloadData];
                                                            [conversationView scrollToEndOfDocument:nil];
