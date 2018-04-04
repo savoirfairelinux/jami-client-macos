@@ -26,11 +26,11 @@
 - (NSMenu*)menuForEvent:(NSEvent*)evt
 {
     // TODO : Reimplement without outlineView itemAtRow: method
-//    NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
-//    int rowIdx = [self rowAtPoint:pt];
-//    if (self.contextMenuDelegate && rowIdx >= 0) {
-//        return [self.contextMenuDelegate contextualMenuForIndex:[self itemAtRow:rowIdx]];
-//    }
+    NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
+    int rowIdx = [self rowAtPoint:pt];
+    if (self.contextMenuDelegate && rowIdx >= 0) {
+        return [self.contextMenuDelegate contextualMenuForRow:rowIdx];
+    }
     return nil;
 }
 
