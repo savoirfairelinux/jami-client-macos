@@ -57,7 +57,7 @@
     [backgroundColor setFill];
     [ovalPath fill];
     [borderColor setStroke];
-    [ovalPath setLineWidth: 0.5];
+    [ovalPath setLineWidth: 1.0];
     [ovalPath stroke];
     NSDictionary *att = nil;
 
@@ -65,11 +65,27 @@
     [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setLineBreakMode:NSLineBreakByWordWrapping];
     [style setAlignment:NSCenterTextAlignment];
+    NSFont *font = [NSFont systemFontOfSize:10.0];
+
+    if (self.stringValue.length > 1) {
+        font = [NSFont systemFontOfSize:8.0];
+    }
+    if (self.stringValue.length > 2) {
+       font = [NSFont systemFontOfSize:6.0];
+    }
+
     att = [[NSDictionary alloc] initWithObjectsAndKeys:
+           font,NSFontAttributeName,
            style, NSParagraphStyleAttributeName,
            [self textColor],
            NSForegroundColorAttributeName, nil];
-    [[self stringValue] drawInRect:dirtyRect withAttributes:att];
+    NSAttributedString *attrString =
+    [[NSAttributedString alloc] initWithString:[self stringValue]
+                                    attributes:att];
+    CGFloat stringHeight = attrString.size.height;
+    CGFloat originY = (group.size.height - stringHeight)  / 2;
+    NSRect titleRect = CGRectMake(group.origin.x, originY, group.size.width, group.size.height);
+    [[self stringValue] drawInRect:titleRect withAttributes:att];
 }
 
 @end
