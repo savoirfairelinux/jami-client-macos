@@ -2,10 +2,22 @@
 "A network error occured during the export" = "En nettverksfeil inntraff under eksport";
 
 /* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+"Account has no password" = "Kontoen mangler passord";
 
 /* Contextual menu action */
 "Add to contacts" = "Legg til kontakter";
+
+/* Contextual menu action */
+"Place video call" = "Place video call";
+
+/* Contextual menu action */
+"Place audio call" = "Place audio call";
+
+/* Contextual menu action */
+"Clear conversation" = "Clear conversation";
+
+/* Contextual menu action */
+"Block contact" = "Block contact";
 
 /* Text shown to the user */
 "Alias : " = "Alias:";
@@ -77,7 +89,7 @@
 "New SIP account" = "Ny SIP-konto";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Ingen konto tilgjengelig";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Passordet og bekreftelsen samsvarer ikke.";
