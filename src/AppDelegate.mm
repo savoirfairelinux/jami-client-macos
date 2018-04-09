@@ -27,6 +27,7 @@
 #import <media/recordingmodel.h>
 #import <media/textrecording.h>
 #import <QItemSelectionModel>
+#import <QDebug>
 #import <account.h>
 #import <AvailableAccountModel.h>
 
@@ -133,6 +134,16 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 - (void) connect
 {
+
+    //ProfileModel::instance().addCollection<LocalProfileCollection>(LoadOptions::FORCE_ENABLED);
+    QObject::connect(&AccountModel::instance(),
+                     &AccountModel::registrationChanged,
+                     [=](Account* a, bool registration) {
+                         qDebug() << "registrationChanged:" << a->id() << ":" << registration;
+                         //track buddy for account
+                         AccountModel::instance().subscribeToBuddies(a->id());
+                     });
+
     QObject::connect(&CallModel::instance(),
                      &CallModel::incomingCall,
                      [=](Call* call) {
