@@ -276,6 +276,7 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
 SET(ring_ICONS
+${CMAKE_CURRENT_SOURCE_DIR}/data/default_avatar_overlay.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background-light.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background-dark.png
