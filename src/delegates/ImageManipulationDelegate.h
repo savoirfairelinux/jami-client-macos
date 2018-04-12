@@ -67,6 +67,7 @@ namespace Interfaces {
     private:
         //Helper
         QPixmap drawDefaultUserPixmap(const QSize& size, const char color, const char letter);
+        QPixmap drawDefaultUserPixmapUriOnly(const QSize& size, const char color);
         CGImageRef resizeCGImage(CGImageRef image, const QSize& size);
 
         QHash<QString, QPixmap> m_hDefaultUserPixmap;
