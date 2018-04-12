@@ -204,12 +204,15 @@ namespace Interfaces {
 
     char letterForDefaultUserPixmap(const lrc::api::contact::Info& contact)
     {
-        if (!contact.profileInfo.alias.empty())
+        if (!contact.profileInfo.alias.empty()) {
             return std::toupper(contact.profileInfo.alias.at(0));
-        else if(contact.profileInfo.type == lrc::api::profile::Type::RING && !contact.registeredName.empty())
+        } else if((contact.profileInfo.type == lrc::api::profile::Type::RING ||
+                contact.profileInfo.type == lrc::api::profile::Type::PENDING) &&
+                  !contact.registeredName.empty()) {
             return std::toupper(contact.registeredName.at(0));
-        else
+        } else {
             return std::toupper(contact.profileInfo.uri.at(0));
+        }
     }
 
     QVariant ImageManipulationDelegate::conversationPhoto(const lrc::api::conversation::Info& conversation,
@@ -274,8 +277,16 @@ namespace Interfaces {
                 return pxm;
             } else {
                 char color = contact.profileInfo.uri.at(0);
-                char letter = letterForDefaultUserPixmap(contact);
-                return drawDefaultUserPixmap(size, color, letter);
+
+                if (!contact.profileInfo.alias.empty()) {
+                    return drawDefaultUserPixmap(size, color, std::toupper(contact.profileInfo.alias.at(0)));
+                } else if((contact.profileInfo.type == lrc::api::profile::Type::RING ||
+                           contact.profileInfo.type == lrc::api::profile::Type::PENDING) &&
+                          !contact.registeredName.empty()) {
+                    return drawDefaultUserPixmap(size, color, std::toupper(contact.registeredName.at(0)));
+                } else {
+                    return drawDefaultUserPixmapUriOnly(size, color);
+                }
             }
         } catch (const std::out_of_range& e) {
             return drawDefaultUserPixmap(size, '?', '?');
@@ -318,6 +329,36 @@ namespace Interfaces {
         painter.setPen(Qt::white);
         QRect textRect = avatar.rect();
         painter.drawText(textRect, QString(letter), QTextOption(Qt::AlignCenter));
+
+        return avatar;
+    }
+
+    QPixmap ImageManipulationDelegate::drawDefaultUserPixmapUriOnly(const QSize& size,  const char color) {
+        // We start with a transparent avatar
+        QPixmap avatar(size);
+        avatar.fill(Qt::transparent);
+
+        // We pick a color based on the passed character
+        QColor avColor = ImageManipulationDelegate::avatarColors_[color % 16];
+
+        // We draw a circle with this color
+        QPainter painter(&avatar);
+        painter.setRenderHints(QPainter::Antialiasing|QPainter::SmoothPixmapTransform);
+        painter.setPen(Qt::transparent);
+        painter.setBrush(avColor);
+        painter.drawEllipse(avatar.rect());
+
+        // Then we paint the avatar in the circle
+        QRect textRect = avatar.rect();
+        QImage defaultAvatarImage;
+        QRect rect = QRect(0, 0, size.width(), size.height());
+        NSURL *bundleURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        NSString *imagePath = [bundleURL.absoluteString stringByAppendingString:@"Contents/Resources/default_avatar_overlay.png"];
+        if (defaultAvatarImage.load(QString::fromNSString(imagePath).mid(7))) {
+            painter.drawImage(avatar.rect(), defaultAvatarImage);
+        } else {
+            painter.drawText(avatar.rect(), QString('?'), QTextOption(Qt::AlignCenter));
+        }
 
         return avatar;
     }
