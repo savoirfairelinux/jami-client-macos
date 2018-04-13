@@ -57,7 +57,6 @@
     bool selectorIsPresent;
 
     QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
-    NSTimer* statusUpdateDebounceTimer;
 
     lrc::api::ConversationModel* model_;
     std::string selectedUid_;
@@ -235,15 +234,7 @@ NSInteger const REQUEST_SEG         = 1;
                                                                            return;
                                                                        auto it = getConversationFromUid(selectedUid_, *model_);
                                                                        if (it != model_->allFilteredConversations().end()) {
-                                                                           // The following mechanism is here to debounce the interactionStatusUpdated so
-                                                                           // we do not redraw the conversation list for each message status changing
-                                                                           if (statusUpdateDebounceTimer != nil) {
-                                                                               [statusUpdateDebounceTimer invalidate];
-                                                                           }
-                                                                           statusUpdateDebounceTimer = [NSTimer timerWithTimeInterval:1.0 repeats:NO block:^(NSTimer * _Nonnull timer) {
-                                                                               [self reloadData];
-                                                                           }];
-                                                                           [[NSRunLoop mainRunLoop] addTimer:statusUpdateDebounceTimer forMode:NSRunLoopCommonModes];
+                                                                           [self reloadConversationWithUid: [NSString stringWithUTF8String:convUid.c_str()]];
                                                                        }
                                                                    });
             model_->setFilter(""); // Reset the filter
