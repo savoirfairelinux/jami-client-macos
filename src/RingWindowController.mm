@@ -186,10 +186,12 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
         [ringIDLabel setStringValue:@""];
 
         if(account.profileInfo.type != lrc::api::profile::Type::RING) {
-            self.hideRingID = YES;
+            self.notRingAccount = YES;
+            self.isSIPAccount = YES;
             return;
         }
-        self.hideRingID = NO;
+        self.isSIPAccount = NO;
+        self.notRingAccount = NO;
         auto& registeredName = account.registeredName;
         auto& ringID = account.profileInfo.uri;
         NSString* uriToDisplay = nullptr;
@@ -203,7 +205,8 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     }
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
-        self.hideRingID = NO;
+        self.notRingAccount = YES;
+        self.isSIPAccount = NO;
         [ringIDLabel setStringValue:NSLocalizedString(@"No account available", @"Displayed as RingID when no accounts are available for selection")];
     }
 }
@@ -377,6 +380,14 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     }
 
     // Welcome view informations are also updated
+    [self updateRingID];
+}
+
+-(void)allAccountsDeleted
+{
+    [smartViewVC clearConversationModel];
+    [currentCallVC hideWithAnimation:false];
+    [conversationVC hideWithAnimation:false];
     [self updateRingID];
 }
 

@@ -79,11 +79,25 @@ NSMenuItem* selectedMenuItem;
                      &lrc::api::NewAccountModel::accountAdded,
                      [self]{
                          [self update];
+                         @try {
+                             auto& account = [self selectedAccount];
+                             [delegate selectAccount:account];
+                         }
+                         @catch (NSException * e) {
+                             NSLog(@"account selection failed");
+                         }
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountRemoved,
                      [self]{
                          [self update];
+                         @try {
+                             auto& account = [self selectedAccount];
+                             [delegate selectAccount:account];
+                         }
+                         @catch (NSException * e) {
+                             [delegate allAccountsDeleted];
+                         }
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::profileUpdated,

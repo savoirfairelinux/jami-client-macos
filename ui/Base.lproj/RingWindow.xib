@@ -373,7 +373,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="EPK-C2-VsC"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="r7A-Pi-WHz"/>
                                         </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
@@ -388,7 +388,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="nmu-Lf-o2m"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.isSIPAccount" id="llK-P7-CiI"/>
                                         </connections>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
@@ -411,7 +411,7 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="WnF-cs-9yr"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="CUd-nb-MzH"/>
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="IconButton">
@@ -427,7 +427,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="toggleQRCode:" target="-2" id="jZa-65-o5C"/>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="4zb-wx-Nna"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="aWO-1T-QfL"/>
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
