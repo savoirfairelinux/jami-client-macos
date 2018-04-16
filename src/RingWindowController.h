@@ -34,10 +34,14 @@ namespace lrc {
  * KVO to show or hide some UI elements in RingWindow:
  * - Share button
  * - QRCode
- * - RingID field
  * - Explanatory label
  */
-@property (nonatomic) BOOL hideRingID;
+@property (nonatomic) BOOL notRingAccount;
+/**
+ * KVO to show or hide ringIDLabel
+ */
+@property (nonatomic) BOOL isSIPAccount;
+
 
 - (IBAction)openPreferences:(id)sender;
 
@@ -68,5 +72,10 @@ namespace lrc {
  * @note This method is not to be used if list change is triggered by a left panel view.
  */
 -(void) listTypeChanged;
+
+/**
+ * Triggered by Choosen account VC when all accounts deleted
+ */
+-(void)allAccountsDeleted;
 
 @end
