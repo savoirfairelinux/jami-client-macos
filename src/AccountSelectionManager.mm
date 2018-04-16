@@ -48,13 +48,20 @@ NSString* const savedUserAccountKey = @"savedUserSelectedAccountKey";
     return [[NSUserDefaults standardUserDefaults] stringForKey:savedUserAccountKey];
 }
 
+- (void) clearSelectedAccount
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:savedUserAccountKey];
+}
+
 - (const lrc::api::account::Info&) savedAccount
 {
     NSString* savedAccountId = [self getSavedAccountId];
     if (savedAccountId == nil) {
-        auto accId = accMdl_->getAccountList().front();
-        [self saveAccountWithId:@(accId.c_str())];
-        return accMdl_->getAccountInfo(accId);
+        NSException* noAccEx = [NSException
+                                exceptionWithName:@"NoAccountSavedException"
+                                reason:@"No saved account"
+                                userInfo:nil];
+        @throw noAccEx;
     } else
         return accMdl_->getAccountInfo(std::string([savedAccountId UTF8String]));
 }
