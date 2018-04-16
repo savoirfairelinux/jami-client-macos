@@ -120,6 +120,8 @@ NSInteger const REQUEST_SEG         = 1;
         row = [smartView selectedRow];
     else
         return;
+    if (model_ == nil)
+        return;
 
     auto conv = model_->filteredConversation(row);
     model_->placeCall(conv.uid);
@@ -129,6 +131,8 @@ NSInteger const REQUEST_SEG         = 1;
 {
     NSLog(@"reload");
     [smartView deselectAll:nil];
+    if (model_ == nil)
+        return;
 
     if (!model_->owner.contactModel->hasPendingRequests()) {
         if (currentFilterType == lrc::api::profile::Type::PENDING) {
@@ -266,6 +270,12 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView deselectAll:nil];
 }
 
+-(void) clearConversationModel {
+    model_ = nil;
+    [self deselect];
+    [smartView reloadData];
+}
+
 - (IBAction) listTypeChanged:(id)sender
 {
     NSInteger selectedItem = [sender selectedSegment];
@@ -330,6 +340,8 @@ NSInteger const REQUEST_SEG         = 1;
     NSInteger row = [notification.object selectedRow];
 
     if (row == -1)
+        return;
+    if (model_ == nil)
         return;
 
     auto uid = model_->filteredConversation(row).uid;
@@ -427,6 +439,8 @@ NSInteger const REQUEST_SEG         = 1;
 
     if (row == -1)
         return;
+    if (model_ == nil)
+        return;
 
     auto conv = model_->filteredConversation(row);
     auto& callId = conv.callId;
@@ -451,6 +465,8 @@ NSInteger const REQUEST_SEG         = 1;
 
 - (void) processSearchFieldInput
 {
+    if (model_ == nil)
+    return;
     model_->setFilter(std::string([[searchField stringValue] UTF8String]));
 }
 
@@ -482,6 +498,10 @@ NSInteger const REQUEST_SEG         = 1;
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
 {
     if (commandSelector != @selector(insertNewline:) || [[searchField stringValue] isEqual:@""]) {
+        return NO;
+    }
+    if (model_ == nil) {
+        [self displayErrorModalWithTitle:NSLocalizedString(@"No account available", @"Displayed as RingID when no accounts are available for selection") WithMessage:NSLocalizedString(@"Navigate to preferences to create a new account", @"Allert message when no accounts are available")];
         return NO;
     }
     if (model_->allFilteredConversations().size() <= 0) {
@@ -539,6 +559,8 @@ NSInteger const REQUEST_SEG         = 1;
 {
     if ([smartView selectedRow] == -1)
         return;
+    if (model_ == nil)
+        return ;
 
     auto uid = model_->filteredConversation([smartView selectedRow]).uid;
     model_->makePermanent(uid);

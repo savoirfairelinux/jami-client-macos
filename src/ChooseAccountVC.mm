@@ -77,17 +77,34 @@ NSMenuItem* selectedMenuItem;
 
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountAdded,
-                     [self]{
+                     [self] (const std::string& accountID) {
                          [self update];
+                         @try {
+                             auto& account = [self selectedAccount];
+                             [delegate selectAccount:account];
+                         }
+                         @catch (NSException * e) {
+                             NSLog(@"account selection failed");
+                         }
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountRemoved,
-                     [self]{
+                     [self] (const std::string& accountID) {
+                         if ([self selectedAccount].id.compare(accountID) == 0) {
+                             [accountSelectionManager_ clearSelectedAccount];
+                         }
+                         @try {
+                             auto& account = [self selectedAccount];
+                             [delegate selectAccount:account];
+                         }
+                         @catch (NSException * e) {
+                             [delegate allAccountsDeleted];
+                         }
                          [self update];
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::profileUpdated,
-                     [self]{
+                     [self] (const std::string& accountID) {
                          [self update];
                      });
 }
@@ -100,6 +117,9 @@ NSMenuItem* selectedMenuItem;
         auto accountList = accMdl_->getAccountList();
         if (!accountList.empty()) {
             const auto& fallbackAccount = accMdl_->getAccountInfo(accountList.at(0));
+            if (accountList.size() == 1) {
+                [accountSelectionManager_ setSavedAccount:fallbackAccount];
+            }
             return fallbackAccount;
         } else {
             NSException* noAccEx = [NSException
@@ -213,7 +233,6 @@ NSMenuItem* selectedMenuItem;
         return;
     }
     [self updateMenu];
-    [self updatePhoto];
     [self setPopUpButtonSelection];
 }
 

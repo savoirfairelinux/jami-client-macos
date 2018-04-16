@@ -13,6 +13,7 @@
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="qrcodeView" destination="dZR-JL-MY4" id="6Jf-42-qwY"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
+                <outlet property="ringLabelTrailingConstraint" destination="4u6-30-3Ac" id="SnB-9E-wuO"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
                 <outlet property="smartViewVC" destination="jrf-42-1l2" id="lM5-3U-244"/>
                 <outlet property="welcomeContainer" destination="D6e-KX-8gC" id="zV3-38-ClK"/>
@@ -373,7 +374,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="EPK-C2-VsC"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="r7A-Pi-WHz"/>
                                         </connections>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
@@ -388,7 +389,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="nmu-Lf-o2m"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.isSIPAccount" id="llK-P7-CiI"/>
                                         </connections>
                                     </textField>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
@@ -411,11 +412,14 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="WnF-cs-9yr"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="CUd-nb-MzH"/>
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="IconButton">
                                         <rect key="frame" x="431" y="62" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="FrZ-2C-m7y"/>
+                                        </constraints>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="qrcode" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vvm-Gy-Tbh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -427,7 +431,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="toggleQRCode:" target="-2" id="jZa-65-o5C"/>
-                                            <binding destination="-2" name="hidden" keyPath="self.hideRingID" id="4zb-wx-Nna"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="aWO-1T-QfL"/>
                                         </connections>
                                     </button>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
@@ -441,9 +445,8 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="f62-JV-dgr" firstAttribute="top" secondItem="D6e-KX-8gC" secondAttribute="top" constant="20" id="0b6-u8-yQg"/>
-                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="leading" secondItem="JN3-vO-zcd" secondAttribute="trailing" constant="11" id="4u6-30-3Ac"/>
+                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="leading" secondItem="JN3-vO-zcd" secondAttribute="trailing" priority="999" constant="11" id="4u6-30-3Ac"/>
                                     <constraint firstItem="Oac-o7-2Ge" firstAttribute="centerY" secondItem="JN3-vO-zcd" secondAttribute="centerY" id="9sL-W9-dDT"/>
-                                    <constraint firstItem="JN3-vO-zcd" firstAttribute="leading" secondItem="D6e-KX-8gC" secondAttribute="leading" constant="20" id="AMV-Tt-nEu"/>
                                     <constraint firstItem="VJ1-xk-v5e" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="ID9-YU-lFv"/>
                                     <constraint firstAttribute="trailing" secondItem="Oac-o7-2Ge" secondAttribute="trailing" constant="20" id="J2a-v7-JnP"/>
                                     <constraint firstItem="eXV-BT-B6J" firstAttribute="centerY" secondItem="JN3-vO-zcd" secondAttribute="centerY" id="KqQ-sn-ZT0"/>
@@ -454,6 +457,7 @@
                                     <constraint firstItem="kFj-Sh-o5u" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="X8P-ae-ug3"/>
                                     <constraint firstItem="eXV-BT-B6J" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="6" id="jfB-b4-Gyc"/>
                                     <constraint firstAttribute="width" constant="520" id="nXn-Wh-VAi"/>
+                                    <constraint firstItem="JN3-vO-zcd" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" priority="750" id="uWT-kG-rQw"/>
                                     <constraint firstItem="kFj-Sh-o5u" firstAttribute="top" secondItem="VJ1-xk-v5e" secondAttribute="bottom" constant="8" id="wQ0-UB-Yo2"/>
                                     <constraint firstItem="VJ1-xk-v5e" firstAttribute="top" secondItem="f62-JV-dgr" secondAttribute="bottom" constant="8" id="zNb-f8-m6q"/>
                                 </constraints>
