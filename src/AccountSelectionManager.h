@@ -35,6 +35,7 @@ namespace lrc {
 
 @property const lrc::api::account::Info& savedAccount;
 
+-(void) clearSelectedAccount;
 - (id) initWithAccountModel:(const lrc::api::NewAccountModel*) accMdl;
 
 @end
