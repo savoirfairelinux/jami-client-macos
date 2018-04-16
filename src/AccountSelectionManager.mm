@@ -51,12 +51,7 @@ NSString* const savedUserAccountKey = @"savedUserSelectedAccountKey";
 - (const lrc::api::account::Info&) savedAccount
 {
     NSString* savedAccountId = [self getSavedAccountId];
-    if (savedAccountId == nil) {
-        auto accId = accMdl_->getAccountList().front();
-        [self saveAccountWithId:@(accId.c_str())];
-        return accMdl_->getAccountInfo(accId);
-    } else
-        return accMdl_->getAccountInfo(std::string([savedAccountId UTF8String]));
+    return accMdl_->getAccountInfo(std::string([savedAccountId UTF8String]));
 }
 
 - (void) setSavedAccount:(const lrc::api::account::Info&) acc

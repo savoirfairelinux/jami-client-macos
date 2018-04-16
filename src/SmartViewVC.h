@@ -60,5 +60,9 @@ namespace lrc {
  * Change list selection to Pending
  */
 -(void)selectPendingList;
+/**
+ * clear conversation when account list is empty
+ */
+-(void) clearConversationModel;
 
 @end

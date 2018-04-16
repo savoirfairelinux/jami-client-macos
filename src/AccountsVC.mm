@@ -93,6 +93,8 @@ NSInteger const TAG_NAME        =   200;
 NSInteger const TAG_STATUS      =   300;
 NSInteger const TAG_TYPE        =   400;
 
+QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnection, accountTypeChangedConnection;
+
 
 - (void)awakeFromNib
 {
@@ -105,7 +107,10 @@ NSInteger const TAG_TYPE        =   400;
     [accountsListView bind:@"sortDescriptors" toObject:treeController withKeyPath:@"sortDescriptors" options:nil];
     [accountsListView bind:@"selectionIndexPaths" toObject:treeController withKeyPath:@"selectionIndexPaths" options:nil];
 
-    QObject::connect(&AccountModel::instance(),
+    QObject::disconnect(accountChangedConnection);
+    QObject::disconnect(selectedAccountChangedConnection);
+
+    accountChangedConnection = QObject::connect(&AccountModel::instance(),
                      &QAbstractItemModel::dataChanged,
                      [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
                         [accountsListView reloadDataForRowIndexes:
@@ -113,7 +118,7 @@ NSInteger const TAG_TYPE        =   400;
                         columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, accountsListView.tableColumns.count)]];
                      });
 
-    QObject::connect(AccountModel::instance().selectionModel(),
+    selectedAccountChangedConnection = QObject::connect(AccountModel::instance().selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          [accountDetailsView setHidden:!current.isValid()];
@@ -124,14 +129,14 @@ NSInteger const TAG_TYPE        =   400;
 
                         [treeController setSelectionQModelIndex:current];
                      });
-
-
     AccountModel::instance().selectionModel()->clearCurrentIndex();
+
 
     QModelIndex qProtocolIdx = AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
     [self.protocolList addItemWithTitle:
                            AccountModel::instance().protocolModel()->data(qProtocolIdx, Qt::DisplayRole).toString().toNSString()];
-    QObject::connect(AccountModel::instance().protocolModel()->selectionModel(),
+    QObject::disconnect(accountTypeChangedConnection);
+    accountTypeChangedConnection = QObject::connect(AccountModel::instance().protocolModel()->selectionModel(),
                      &QItemSelectionModel::currentChanged,
                      [=](const QModelIndex &current, const QModelIndex &previous) {
                          if (!current.isValid()) {
