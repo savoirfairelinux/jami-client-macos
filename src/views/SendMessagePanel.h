@@ -18,10 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "SendMessageCell.h"
 
-@interface SendMessagePanel : NSView <MessageCellDelegate>
-
-@property (nonatomic, strong) IBOutlet SendMessageCell* messageCell;
+@interface SendMessagePanel : NSView
 
 @end
