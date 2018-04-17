@@ -217,7 +217,8 @@ NSInteger const REQUEST_SEG         = 1;
                                                             [self reloadData];
                                                         });
             newConversationConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::newConversation,
-                                                          [self] (){
+                                                          [self] (const std::string& uid){
+                                                              [self updateConversationForNewContact:[NSString stringWithUTF8String:uid.c_str()]];
                                                               [self reloadData];
                                                           });
             conversationRemovedConnection_ = QObject::connect(model_, &lrc::api::ConversationModel::conversationRemoved,
@@ -475,6 +476,25 @@ NSInteger const REQUEST_SEG         = 1;
 {
     [searchField setStringValue:@""];
     [self processSearchFieldInput];
+}
+
+-(void)updateConversationForNewContact:(NSString *)uId {
+    if (model_ == nil) {
+        return;
+    }
+    auto uid = std::string([uId UTF8String]);
+    auto it = getConversationFromUid(uid, *model_);
+    if (it != model_->allFilteredConversations().end()) {
+        @try {
+            auto contact = model_->owner.contactModel->getContact(it->participants[0]);
+            if (!contact.profileInfo.uri.empty() && contact.profileInfo.uri.compare(selectedUid_) == 0) {
+                model_->selectConversation(uid);
+                [self clearSearchField];
+            }
+        } @catch (NSException *exception) {
+            return;
+        }
+    }
 }
 
 /**
