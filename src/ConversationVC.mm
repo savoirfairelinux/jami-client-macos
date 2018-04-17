@@ -29,6 +29,7 @@
 #import <globalinstances.h>
 
 #import "views/IconButton.h"
+#import "views/HoverButton.h"
 #import "views/IMTableCellView.h"
 #import "views/NSColor+RingTheme.h"
 #import "QNSTreeController.h"
@@ -53,6 +54,7 @@
     __unsafe_unretained IBOutlet NSTextField *conversationID;
     __unsafe_unretained IBOutlet IconButton* sendButton;
     __unsafe_unretained IBOutlet IconButton *sendFileButton;
+    __unsafe_unretained IBOutlet HoverButton *addContactButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
@@ -157,6 +159,8 @@
     [conversationID setHidden:hideBestId];
     [titleCenteredConstraint setActive:hideBestId];
     [titleTopConstraint setActive:!hideBestId];
+    auto accountType = convModel_->owner.profileInfo.type;
+    [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
 }
 
 - (void)loadView {
@@ -231,6 +235,18 @@
 {
     auto* conv = [self getCurrentConversation];
     convModel_->placeCall(conv->uid);
+}
+
+- (IBAction)placeAudioCall:(id)sender
+{
+    auto* conv = [self getCurrentConversation];
+    convModel_->placeAudioOnlyCall(conv->uid);
+}
+
+- (IBAction)addContact:(id)sender
+{
+    auto* conv = [self getCurrentConversation];
+    convModel_->makePermanent(conv->uid);
 }
 
 - (IBAction)backPressed:(id)sender {

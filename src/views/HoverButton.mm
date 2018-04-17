@@ -34,7 +34,9 @@
 }
 
 -(void)mouseEntered:(NSEvent *)theEvent {
-    self.bgColor = self.hoverColor;
+    if(self.isEnabled) {
+        self.bgColor = self.hoverColor;
+    }
     [super setNeedsDisplay:YES];
     [super mouseEntered:theEvent];
 }
