@@ -62,13 +62,21 @@
         backgroundColor = self.bgColor ;
         backgroundStrokeColor = self.bgColor;
         if(!self.isEnabled) {
-            tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
+            if (self.buttonDisableColor) {
+                tintColor = self.buttonDisableColor;
+            } else {
+                tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
+            }
         }
     }
     else if (!self.isEnabled) {
         backgroundColor = [self.bgColor colorWithAlphaComponent:0.7];
         backgroundStrokeColor = [self.bgColor colorWithAlphaComponent:0.7];
-        tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
+        if (self.buttonDisableColor) {
+            tintColor = self.buttonDisableColor;
+        } else {
+            tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
+        }
     } else if (self.mouseDown || self.isPressed) {
         if (self.highlightColor) {
             backgroundColor = self.highlightColor;
@@ -83,6 +91,8 @@
         backgroundColor = self.bgColor;
         backgroundStrokeColor = [self.bgColor darkenColorByValue:0.1];
     }
+
+    backgroundStrokeColor = NSColor.clearColor;
 
     //// Subframes
     NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5,

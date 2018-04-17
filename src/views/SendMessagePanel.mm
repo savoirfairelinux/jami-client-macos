@@ -22,33 +22,14 @@
 
 @implementation SendMessagePanel
 
--(void) awakeFromNib {
-    self.messageCell.viewDelegate = self;
-}
-
-
 - (void)drawRect:(NSRect)dirtyRect {
-
     NSBezierPath *path = [NSBezierPath bezierPath];
-    [path moveToPoint:NSMakePoint(40, dirtyRect.size.height)];
-    [path lineToPoint:NSMakePoint(dirtyRect.size.width - 40 , dirtyRect.size.height)];
-    BOOL isEditing = [(NSTextField *)[self.messageCell controlView] currentEditor] != nil;
-    if(isEditing) {
-        [[NSColor ringBlue]set];
-        [path setLineWidth:3];
-    }
-    else {
-
-        [[NSColor quaternaryLabelColor]set];
-        [path setLineWidth:2];
-    }
+    [path moveToPoint:NSMakePoint(0, dirtyRect.size.height)];
+    [path lineToPoint:NSMakePoint(dirtyRect.size.width, dirtyRect.size.height)];
+    [[NSColor quaternaryLabelColor]set];
+    [path setLineWidth:2];
     [path stroke];
     [super drawRect:dirtyRect];
-}
-
--(void) focusChanged {
-
-    [self setNeedsDisplay:YES];
 }
 
 @end
