@@ -69,5 +69,12 @@
 
 @property (nonatomic, strong) NSColor* imageColor;
 
+/*
+ * Image color when button is disabled
+ * default value : [[NSColor grayColor] colorWithAlphaComponent:0.3];
+ */
+
+@property (nonatomic, strong) NSColor* buttonDisableColor;
+
 
 @end
