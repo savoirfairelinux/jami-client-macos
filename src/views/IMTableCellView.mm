@@ -67,9 +67,9 @@
 
 - (void) updateWidthConstraint:(CGFloat) newWidth
 {
-    [self.msgView removeConstraints:[self.msgView constraints]];
+    [self.msgBackground removeConstraints:[self.msgBackground constraints]];
     NSLayoutConstraint* constraint = [NSLayoutConstraint
-                                      constraintWithItem:self.msgView
+                                      constraintWithItem:self.msgBackground
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                       toItem: nil
@@ -77,7 +77,8 @@
                                       multiplier:1.0f
                                       constant:newWidth];
 
-    [self.msgView addConstraint:constraint];
+    [self.msgBackground addConstraint:constraint];
+    [self.msgView removeConstraints:[self.msgView constraints]];
 }
 
 - (uint64_t)interaction
