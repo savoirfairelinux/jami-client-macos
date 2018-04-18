@@ -36,17 +36,19 @@
 
     if (self.pointerDirection == LEFT)
     {
-        minx += 6;
+        minx += 5;
         CGPathMoveToPoint(outlinePath, nil, midx, miny);
         CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
         CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
-        CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
-        if(self.needPointer) {
-            CGPathAddLineToPoint(outlinePath, nil, minx, maxy - 20);
-            CGPathAddLineToPoint(outlinePath, nil, minx - 6, maxy - 15);
-            CGPathAddLineToPoint(outlinePath, nil, minx, maxy - 10);
-        }
 
+        if(self.needPointer) {
+            CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, 0);
+            CGPathAddLineToPoint(outlinePath, nil, minx, maxy - 8);
+            CGPathAddLineToPoint(outlinePath, nil, minx - 5, maxy - 0);
+            CGPathAddLineToPoint(outlinePath, nil, minx, maxy - 0);
+        } else {
+        CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
+        }
         CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
         CGPathCloseSubpath(outlinePath);
     }
@@ -56,11 +58,13 @@
         CGPathMoveToPoint(outlinePath, nil, midx, miny);
         CGPathAddArcToPoint(outlinePath, nil, minx, miny, minx, midy, radius);
         CGPathAddArcToPoint(outlinePath, nil, minx, maxy, midx, maxy, radius);
-        CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, maxx, midy, radius);
         if(self.needPointer) {
-            CGPathAddLineToPoint(outlinePath, nil, maxx, maxy - 20);
-            CGPathAddLineToPoint(outlinePath, nil, maxx + 6, maxy - 15);
-            CGPathAddLineToPoint(outlinePath, nil, maxx, maxy - 10);
+            CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, maxx, midy, 0);
+            CGPathAddLineToPoint(outlinePath, nil, maxx, maxy - 8);
+            CGPathAddLineToPoint(outlinePath, nil, maxx + 5, maxy - 0);
+            CGPathAddLineToPoint(outlinePath, nil, maxx, maxy - 0);
+        } else {
+            CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, maxx, midy, radius);
         }
         CGPathAddArcToPoint(outlinePath, nil, maxx, miny, midx, miny, radius);
         CGPathCloseSubpath(outlinePath);

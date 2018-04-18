@@ -34,6 +34,6 @@
 
 - (uint64_t) interaction;
 - (void) setupForInteraction:(uint64_t)inter;
-- (void) updateWidthConstraint:(CGFloat) newWidth;
+- (void) updateWidthConstraint:(CGFloat) newWidth andHeight:(CGFloat) height;
 
 @end

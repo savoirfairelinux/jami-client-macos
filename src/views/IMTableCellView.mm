@@ -26,6 +26,7 @@
 }
 
 @synthesize msgView;
+@synthesize msgBackground;
 @synthesize photoView;
 @synthesize acceptButton;
 @synthesize declineButton;
@@ -58,18 +59,18 @@
     [self.msgView setAutomaticLinkDetectionEnabled:YES];
     [self.msgView setEditable:NO];
     if ([self.identifier containsString:@"Message"]) {
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[msgView]"
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[msgView]"
                                                                      options:0
                                                                      metrics:nil
                                                                        views:NSDictionaryOfVariableBindings(msgView)]];
     }
 }
 
-- (void) updateWidthConstraint:(CGFloat) newWidth
+- (void) updateWidthConstraint:(CGFloat) newWidth andHeight:(CGFloat) height
 {
-    [self.msgView removeConstraints:[self.msgView constraints]];
+    [self.msgBackground removeConstraints:[self.msgBackground constraints]];
     NSLayoutConstraint* constraint = [NSLayoutConstraint
-                                      constraintWithItem:self.msgView
+                                      constraintWithItem:self.msgBackground
                                       attribute:NSLayoutAttributeWidth
                                       relatedBy:NSLayoutRelationEqual
                                       toItem: nil
@@ -77,7 +78,26 @@
                                       multiplier:1.0f
                                       constant:newWidth];
 
-    [self.msgView addConstraint:constraint];
+    [self.msgBackground addConstraint:constraint];
+    [self.msgView removeConstraints:[self.msgView constraints]];
+    NSLayoutConstraint* constraintMessage = [NSLayoutConstraint
+                                      constraintWithItem:self.msgView
+                                      attribute:NSLayoutAttributeHeight
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem: nil
+                                      attribute:NSLayoutAttributeWidth
+                                      multiplier:1.0f
+                                      constant:height];
+    NSLayoutConstraint* constraintCenter= [NSLayoutConstraint
+                                             constraintWithItem:self.msgView
+                                             attribute:NSLayoutAttributeCenterY
+                                             relatedBy:NSLayoutRelationEqual
+                                             toItem: self.msgBackground
+                                             attribute:NSLayoutAttributeWidth
+                                             multiplier:1.0f
+                                             constant:0];
+    [self.msgView addConstraint:constraintMessage];
+    [self.msgView addConstraint:constraintCenter];
 }
 
 - (uint64_t)interaction

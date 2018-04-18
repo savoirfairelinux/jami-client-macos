@@ -270,26 +270,26 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     [result setupForInteraction:it->first];
 
     NSMutableAttributedString* msgAttString =
-    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",@(interaction.body.c_str())]
+    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",@(interaction.body.c_str())]
                                            attributes:[self messageAttributes]];
 
-    NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
-    NSAttributedString* timestampAttrString =
-    [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
-                                    attributes:[self timestampAttributes]];
+//    NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
+//    NSAttributedString* timestampAttrString =
+//    [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
+//                                    attributes:[self timestampAttributes]];
 
-    CGFloat finalWidth = MAX(msgAttString.size.width, timestampAttrString.size.width);
+    CGFloat finalWidth = MAX(msgAttString.size.width, 40);
 
     finalWidth = MIN(finalWidth + 30, tableView.frame.size.width * 0.7);
 
-    [msgAttString appendAttributedString:timestampAttrString];
+  //  [msgAttString appendAttributedString:timestampAttrString];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
     [result.msgView checkTextInDocument:nil];
-    [result updateWidthConstraint:finalWidth];
+    [result updateWidthConstraint:finalWidth andHeight:msgAttString.size.height];
 
-    auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
     if (!isOutgoing) {
-          [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
     }
 
     return result;
@@ -325,14 +325,14 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",@(interaction.body.c_str())]
                                            attributes:[self messageAttributes]];
 
-    NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
-    NSAttributedString* timestampAttrString =
-    [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
-                                    attributes:[self timestampAttributes]];
+    //NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
+   // NSAttributedString* timestampAttrString =
+   // [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
+     //                               attributes:[self timestampAttributes]];
 
-    [msgAttString appendAttributedString:timestampAttrString];
+   // [msgAttString appendAttributedString:timestampAttrString];
 
-    [msgAttString appendAttributedString:timestampAttrString];
+  //  [msgAttString appendAttributedString:timestampAttrString];
 
     NSRect frame = NSMakeRect(0, 0, someWidth, MAXFLOAT);
     NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
@@ -396,14 +396,15 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
      */
        NSMutableParagraphStyle* aMutableParagraphStyle =
      [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    //[aMutableParagraphStyle setAlignment:NSTextAlignmentCenter];
 
      // Now adjust our NSMutableParagraphStyle formatting to be whatever we want.
      // The numeric values below are in points (72 points per inch)
-     [aMutableParagraphStyle setLineSpacing:1.5];
-     [aMutableParagraphStyle setParagraphSpacing:5.0];
-     [aMutableParagraphStyle setHeadIndent:5.0];
-     [aMutableParagraphStyle setTailIndent:-5.0];
-     [aMutableParagraphStyle setFirstLineHeadIndent:5.0];
+     //[aMutableParagraphStyle setLineSpacing:1.5];
+     //[aMutableParagraphStyle setParagraphSpacing:5.0];
+    // [aMutableParagraphStyle setHeadIndent:5.0];
+    // [aMutableParagraphStyle setTailIndent:-5.0];
+    // [aMutableParagraphStyle setFirstLineHeadIndent:5.0];
      return aMutableParagraphStyle;
 }
 
