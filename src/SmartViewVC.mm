@@ -273,6 +273,10 @@ NSInteger const REQUEST_SEG         = 1;
     model_ = nil;
     [self deselect];
     [smartView reloadData];
+    if (selectorIsPresent) {
+        [listTypeSelector removeFromSuperview];
+        selectorIsPresent = false;
+    }
 }
 
 - (IBAction) listTypeChanged:(id)sender
