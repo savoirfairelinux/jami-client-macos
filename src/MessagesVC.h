@@ -30,6 +30,7 @@
 @interface MessagesVC : NSViewController
 
 -(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
+-(void)clearData;
 
 @property (retain, nonatomic) id <MessagesVCDelegate> delegate;
 
