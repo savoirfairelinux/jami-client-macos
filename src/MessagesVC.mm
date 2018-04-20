@@ -239,7 +239,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSTextField* timeField = [result viewWithTag:GENERIC_INT_TIME_TAG];
 
     // TODO: Fix symbol in LRC
-    NSString* fixedString = [text stringByReplacingOccurrencesOfString:@"🕽" withString:@"📞"];
+    NSString* fixedString = [text stringByReplacingOccurrencesOfString:@"🕽" withString:@"✘"];
     [textField setStringValue:fixedString];
     [timeField setStringValue:time];
 
@@ -390,8 +390,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             } else {
                 result = [tableView makeViewWithIdentifier:@"LeftMessageView" owner:self];
             }
-            if (interaction.status == lrc::api::interaction::Status::UNREAD)
-                convModel_->setInteractionRead(convUid_, it->first);
             break;
         case lrc::api::interaction::Type::INCOMING_DATA_TRANSFER:
         case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
