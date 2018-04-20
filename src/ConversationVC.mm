@@ -88,6 +88,18 @@
     return self;
 }
 
+-(void) clearData {
+    cachedConv_ = nil;
+    convUid_ = "";
+    convModel_ = nil;
+
+    [messagesViewVC clearData];
+    QObject::disconnect(modelSortedConnection_);
+    QObject::disconnect(filterChangedConnection_);
+    QObject::disconnect(newConversationConnection_);
+    QObject::disconnect(conversationRemovedConnection_);
+}
+
 -(const lrc::api::conversation::Info*) getCurrentConversation
 {
     if (convModel_ == nil || convUid_.empty())
@@ -281,6 +293,8 @@
     if(self.view.frame.origin.x < 0) {
         return;
     }
+
+    [self clearData];
 
     if (!animate) {
         [self.view setHidden:YES];

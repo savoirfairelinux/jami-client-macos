@@ -329,11 +329,11 @@
                                                                 </constraints>
                                                             </box>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="35p-WS-DUv" userLabel="ContactInteractionLabel">
-                                                                <rect key="frame" x="330" y="11" width="37" height="17"/>
+                                                                <rect key="frame" x="347" y="11" width="4" height="17"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="17" id="azh-RJ-oYw"/>
                                                                 </constraints>
-                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="jRF-Jm-tK5">
+                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="jRF-Jm-tK5">
                                                                     <font key="font" metaFont="systemLight" size="13"/>
                                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -379,13 +379,13 @@
                     </constraints>
                 </customView>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Sn1-dJ-QCw">
-                    <rect key="frame" x="0.0" y="765" width="798" height="5"/>
+                    <rect key="frame" x="0.0" y="770" width="798" height="5"/>
                 </box>
                 <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ooq-vs-Xt1" customClass="HoverButton">
-                    <rect key="frame" x="10" y="778" width="40" height="40"/>
+                    <rect key="frame" x="10" y="783" width="35" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="69o-49-0QB"/>
-                        <constraint firstAttribute="width" constant="40" id="ImE-zq-KIj"/>
+                        <constraint firstAttribute="height" constant="35" id="69o-49-0QB"/>
+                        <constraint firstAttribute="width" constant="35" id="ImE-zq-KIj"/>
                     </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_arrow_back" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="DP0-lw-oRl">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -396,7 +396,7 @@
                             <color key="value" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -407,7 +407,7 @@
                     <rect key="frame" x="49" y="0.0" width="700" height="60"/>
                     <subviews>
                         <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
-                            <rect key="frame" x="58" y="22" width="592" height="17"/>
+                            <rect key="frame" x="53" y="22" width="602" height="17"/>
                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr">
                                 <font key="font" metaFont="system"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -426,10 +426,10 @@
                             </connections>
                         </textField>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
-                            <rect key="frame" x="650" y="10" width="40" height="40"/>
+                            <rect key="frame" x="655" y="13" width="35" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="TmF-ip-m4C"/>
-                                <constraint firstAttribute="height" constant="40" id="rbQ-lE-sAq"/>
+                                <constraint firstAttribute="width" constant="35" id="TmF-ip-m4C"/>
+                                <constraint firstAttribute="height" constant="35" id="rbQ-lE-sAq"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="s6a-eK-t3T">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -452,10 +452,10 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-eT-PcN" customClass="HoverButton">
-                            <rect key="frame" x="10" y="10" width="40" height="40"/>
+                            <rect key="frame" x="10" y="13" width="35" height="35"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="C2W-wV-YvF"/>
-                                <constraint firstAttribute="width" constant="40" id="zZF-4P-pW9"/>
+                                <constraint firstAttribute="height" constant="35" id="C2W-wV-YvF"/>
+                                <constraint firstAttribute="width" constant="35" id="zZF-4P-pW9"/>
                             </constraints>
                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_file_upload" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="gfQ-c5-YPu">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -486,18 +486,18 @@
                     </constraints>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
-                    <rect key="frame" x="58" y="773" width="40" height="50"/>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Title" id="HnC-1N-RmR">
+                    <rect key="frame" x="53" y="778" width="4" height="45"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" id="HnC-1N-RmR">
                         <font key="font" metaFont="system" size="18"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-d7-Erh" userLabel="Call Button" customClass="HoverButton">
-                    <rect key="frame" x="748" y="778" width="40" height="40"/>
+                    <rect key="frame" x="753" y="783" width="35" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="4jd-jn-RY1"/>
-                        <constraint firstAttribute="height" constant="40" id="DMa-Lq-2Tk"/>
+                        <constraint firstAttribute="width" constant="35" id="4jd-jn-RY1"/>
+                        <constraint firstAttribute="height" constant="35" id="DMa-Lq-2Tk"/>
                     </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XOS-rh-WfH">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -515,19 +515,19 @@
                         <action selector="placeCall:" target="-2" id="2h9-fM-gof"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQT-Vf-Lhr" userLabel="IdLabel">
-                    <rect key="frame" x="68" y="779" width="275" height="18"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID" id="rW7-RD-TBM">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQT-Vf-Lhr" userLabel="IdLabel">
+                    <rect key="frame" x="53" y="783" width="4" height="16"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="rW7-RD-TBM">
                         <font key="font" metaFont="systemLight" size="12"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="RuH-fO-poy" userLabel="Audio Call Button" customClass="HoverButton">
-                    <rect key="frame" x="698" y="778" width="40" height="40"/>
+                    <rect key="frame" x="708" y="783" width="35" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="HyC-Bf-F7P"/>
-                        <constraint firstAttribute="height" constant="40" id="opT-rp-VwQ"/>
+                        <constraint firstAttribute="width" constant="35" id="HyC-Bf-F7P"/>
+                        <constraint firstAttribute="height" constant="35" id="opT-rp-VwQ"/>
                     </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="f0E-8f-ly5">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -546,10 +546,10 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="pGK-hO-X1Y" userLabel="Add Contact Button" customClass="HoverButton">
-                    <rect key="frame" x="648" y="778" width="40" height="40"/>
+                    <rect key="frame" x="663" y="783" width="35" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="Cxh-SD-Ozq"/>
-                        <constraint firstAttribute="height" constant="40" id="UUq-am-hL7"/>
+                        <constraint firstAttribute="width" constant="35" id="Cxh-SD-Ozq"/>
+                        <constraint firstAttribute="height" constant="35" id="UUq-am-hL7"/>
                     </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_person_add" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1oc-i4-1bh">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -580,7 +580,7 @@
                 <constraint firstItem="RuH-fO-poy" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="MS8-kk-8g8"/>
                 <constraint firstItem="cFH-d7-Erh" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="Tok-wc-chb"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="60" id="XkO-FA-l3J"/>
-                <constraint firstItem="Sn1-dJ-QCw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="60" id="aZT-2B-gv9"/>
+                <constraint firstItem="Sn1-dJ-QCw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="55" id="aZT-2B-gv9"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="trailing" secondItem="Ez2-Rf-DZN" secondAttribute="trailing" id="b6d-Ue-Zl5"/>
                 <constraint firstAttribute="trailing" secondItem="cFH-d7-Erh" secondAttribute="trailing" constant="10" id="bWY-wj-6dr"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="bvr-Gv-Sgb"/>
@@ -588,7 +588,6 @@
                 <constraint firstItem="SQT-Vf-Lhr" firstAttribute="bottom" secondItem="ooq-vs-Xt1" secondAttribute="bottom" id="e8m-qq-0SV"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="top" secondItem="EJD-f8-Xqd" secondAttribute="bottom" id="f8h-bA-ZrZ"/>
                 <constraint firstItem="RuH-fO-poy" firstAttribute="leading" secondItem="pGK-hO-X1Y" secondAttribute="trailing" constant="10" id="fCS-uv-8E2"/>
-                <constraint firstItem="ooq-vs-Xt1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="gkR-53-qs5"/>
                 <constraint firstAttribute="trailing" secondItem="EJD-f8-Xqd" secondAttribute="trailing" id="hSZ-8v-sis"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="Ez2-Rf-DZN" secondAttribute="leading" id="jyz-o7-MMh"/>
                 <constraint firstAttribute="trailing" secondItem="Sn1-dJ-QCw" secondAttribute="trailing" id="m05-gh-crH"/>
