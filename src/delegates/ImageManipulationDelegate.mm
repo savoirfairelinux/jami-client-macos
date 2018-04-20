@@ -277,13 +277,23 @@ namespace Interfaces {
                 return pxm;
             } else {
                 char color = contact.profileInfo.uri.at(0);
+                contact.profileInfo.alias.erase(std::remove(contact.profileInfo.alias.begin(), contact.profileInfo.alias.end(), '\n'), contact.profileInfo.alias.end());
+                contact.profileInfo.alias.erase(std::remove(contact.profileInfo.alias.begin(), contact.profileInfo.alias.end(), ' '), contact.profileInfo.alias.end());
+                contact.profileInfo.alias.erase(std::remove(contact.profileInfo.alias.begin(), contact.profileInfo.alias.end(), '\r'), contact.profileInfo.alias.end());
 
                 if (!contact.profileInfo.alias.empty()) {
                     return drawDefaultUserPixmap(size, color, std::toupper(contact.profileInfo.alias.at(0)));
                 } else if((contact.profileInfo.type == lrc::api::profile::Type::RING ||
                            contact.profileInfo.type == lrc::api::profile::Type::PENDING) &&
                           !contact.registeredName.empty()) {
-                    return drawDefaultUserPixmap(size, color, std::toupper(contact.registeredName.at(0)));
+                    contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\n'), contact.registeredName.end());
+                    contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), ' '), contact.registeredName.end());
+                    contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\r'), contact.registeredName.end());
+                    if(!contact.registeredName.empty()) {
+                        return drawDefaultUserPixmap(size, color, std::toupper(contact.registeredName.at(0)));
+                    } else {
+                        return drawDefaultUserPixmapUriOnly(size, color);
+                    }
                 } else {
                     return drawDefaultUserPixmapUriOnly(size, color);
                 }
