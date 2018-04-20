@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -17,21 +17,11 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
-#import <api/conversationmodel.h>
-#import <api/conversation.h>
+#import <Foundation/Foundation.h>
 
-@protocol MessagesVCDelegate
+@interface NSString (Extensions)
 
--(void)newMessageAdded;
-
-@end
-
-@interface MessagesVC : NSViewController
-
--(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
--(void)clearData;
-
-@property (retain, nonatomic) id <MessagesVCDelegate> delegate;
+- (NSString *) removeAllNewLinesAtTheEnd;
+- (NSString *) removeEmptyLinesAtBorders;
 
 @end

@@ -227,7 +227,9 @@ SET(ringclient_OTHERS
    src/delegates/ImageManipulationDelegate.h
    src/AccountSelectionManager.h
    src/AccountSelectionManager.mm
-   src/utils.h)
+   src/utils.h
+   src/NSString+Extensions.h
+   src/NSString+Extensions.mm)
 
 
 SET(ringclient_XIBS
@@ -275,6 +277,7 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
 SET(ring_ICONS
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_attachment.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/default_avatar_overlay.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
