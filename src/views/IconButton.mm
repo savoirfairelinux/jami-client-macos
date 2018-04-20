@@ -103,12 +103,9 @@
     //// Group
     {
         //// Oval Drawing
-        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:
-                                  NSMakeRect(NSMinX(group) + floor(NSWidth(group) * 0.00000 + 0.5),
-                                             NSMinY(group) + floor(NSHeight(group) * 0.00000 + 0.5),
-                                             floor(NSWidth(group) * 1.00000 + 0.5) - floor(NSWidth(group) * 0.00000 + 0.5),
-                                             floor(NSHeight(group) * 1.00000 + 0.5) - floor(NSHeight(group) * 0.00000 + 0.5))
-                                                                 xRadius:[self.cornerRadius floatValue] yRadius:[self.cornerRadius floatValue]];
+        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:dirtyRect
+                                                                 xRadius:[self.cornerRadius floatValue]
+                                                                 yRadius:[self.cornerRadius floatValue]];
 
         [backgroundColor setFill];
         [ovalPath fill];
