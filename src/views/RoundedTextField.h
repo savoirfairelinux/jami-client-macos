@@ -33,6 +33,11 @@
 @property (nonatomic, strong) NSColor* borderColor;
 
 /*
+ * default value : [NSNumber numberWithDouble:1.0];
+ */
+@property (nonatomic, strong) NSNumber* borderThickness;
+
+/*
  * default value : (self.frame) / 2;
  */
 @property (nonatomic, strong) NSNumber* cornerRadius;

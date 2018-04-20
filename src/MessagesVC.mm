@@ -234,8 +234,6 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
             } else {
                 result = [tableView makeViewWithIdentifier:@"LeftMessageView" owner:self];
             }
-            if (interaction.status == lrc::api::interaction::Status::UNREAD)
-                convModel_->setInteractionRead(convUid_, it->first);
             break;
         case lrc::api::interaction::Type::INCOMING_DATA_TRANSFER:
         case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
