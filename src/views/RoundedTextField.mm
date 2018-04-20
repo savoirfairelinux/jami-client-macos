@@ -34,6 +34,10 @@
         self.borderColor = [self.bgColor darkenColorByValue:0.1];
     }
 
+    if(!self.borderThickness) {
+        self.borderThickness = [NSNumber numberWithDouble:1.0];
+    }
+
     self.backgroundColor = [NSColor controlColor];
 }
 
@@ -42,6 +46,7 @@
 
     NSColor* backgroundColor = self.bgColor;
     NSColor* borderColor = self.borderColor;
+    CGFloat borderThickness = [self.borderThickness floatValue];
 
     NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5,
                               NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 0.5,
@@ -57,7 +62,7 @@
     [backgroundColor setFill];
     [ovalPath fill];
     [borderColor setStroke];
-    [ovalPath setLineWidth: 1.0];
+    [ovalPath setLineWidth: borderThickness];
     [ovalPath stroke];
     NSDictionary *att = nil;
 

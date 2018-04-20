@@ -18,6 +18,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "NSString+Extensions.h"
 #import <api/conversation.h>
 #import <api/conversationmodel.h>
 #import <api/account.h>
@@ -29,18 +30,31 @@ static inline NSString* bestIDForConversation(const lrc::api::conversation::Info
 {
     auto contact = model.owner.contactModel->getContact(conv.participants[0]);
     if (!contact.registeredName.empty())
-        return @(contact.registeredName.c_str());
+        return [@(contact.registeredName.c_str()) removeEmptyLinesAtBorders];
     else
-        return @(contact.profileInfo.uri.c_str());
+        return [@(contact.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
 }
 
 static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     auto contact = model.owner.contactModel->getContact(conv.participants[0]);
-    if (!contact.profileInfo.alias.empty())
-        return @(contact.profileInfo.alias.c_str());
-    else
+    if (contact.profileInfo.alias.empty()) {
         return bestIDForConversation(conv, model);
+    }
+    auto alias = contact.profileInfo.alias;
+    alias.erase(std::remove(alias.begin(), alias.end(), '\n'), alias.end());
+    return [@(alias.c_str()) removeEmptyLinesAtBorders];
+}
+
+static inline lrc::api::profile::Type profileType(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
+{
+    @try {
+        auto contact = model.owner.contactModel->getContact(conv.participants[0]);
+        return contact.profileInfo.type;
+    }
+    @catch (NSException *exception) {
+        lrc::api::profile::Type::INVALID;
+    }
 }
 
 /**
