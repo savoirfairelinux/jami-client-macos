@@ -52,7 +52,7 @@
 
 /*
  * Padding
- * default value : 5.0
+ * default value : 8.0
  */
 @property CGFloat imageInsets;
 
