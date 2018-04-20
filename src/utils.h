@@ -56,3 +56,19 @@ static inline lrc::api::ConversationModel::ConversationQueue::const_iterator get
                             return uid == conv.uid;
                         });
 }
+
+static inline void
+clearUnreadInteractions(const std::string& uid, lrc::api::ConversationModel& model) {
+    auto& conversations = model.allFilteredConversations();
+    auto conv = getConversationFromUid(uid, model);
+    if (conv == conversations.end()) {
+        return;
+    }
+    std::for_each(conv->interactions.begin(), conv->interactions.end(),
+                  [&] (const std::pair<uint64_t, lrc::api::interaction::Info>& interactionMapping) {
+                      auto& interaction = interactionMapping.second;
+                      if (interaction.type == lrc::api::interaction::Type::TEXT &&
+                          interaction.status == lrc::api::interaction::Status::UNREAD)
+                          model.setInteractionRead(uid, interactionMapping.first);
+                  });
+}

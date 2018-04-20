@@ -74,12 +74,11 @@
 // Tags for views
 NSInteger const IMAGE_TAG           = 100;
 NSInteger const DISPLAYNAME_TAG     = 200;
-NSInteger const DETAILS_TAG         = 300;
-NSInteger const CALL_BUTTON_TAG     = 400;
-NSInteger const TXT_BUTTON_TAG      = 500;
-NSInteger const CANCEL_BUTTON_TAG   = 600;
-NSInteger const RING_ID_LABEL       = 700;
-NSInteger const PRESENCE_TAG        = 800;
+NSInteger const NOTIFICATONS_TAG    = 300;
+NSInteger const RING_ID_LABEL       = 400;
+NSInteger const PRESENCE_TAG        = 500;
+NSInteger const TOTALMSGS_TAG       = 600;
+NSInteger const TOTALINVITES_TAG    = 700;
 
 // Segment indices for smartlist selector
 NSInteger const CONVERSATION_SEG    = 0;
@@ -127,12 +126,32 @@ NSInteger const REQUEST_SEG         = 1;
     model_->placeCall(conv.uid);
 }
 
+-(void) reloadSelectorNotifications
+{
+    auto conversations = model_->allFilteredConversations();
+    int totalUnreadMessages = 0;
+    for(auto it = conversations.begin(); it != conversations.end(); ++it) {
+        totalUnreadMessages += model_->getNumberOfUnreadMessagesFor((*it).uid);
+    }
+
+    NSTextField* totalMsgsCount = [self.view viewWithTag:TOTALMSGS_TAG];
+    [totalMsgsCount setHidden:(totalUnreadMessages == 0)];
+    [totalMsgsCount setIntValue:totalUnreadMessages];
+
+    // TODO: invite count
+    NSTextField* totalInvites = [self.view viewWithTag:TOTALINVITES_TAG];
+    [totalInvites setHidden:NO];
+    [totalInvites setIntValue:1];
+}
+
 -(void) reloadData
 {
     NSLog(@"reload");
     [smartView deselectAll:nil];
     if (model_ == nil)
         return;
+
+    [self reloadSelectorNotifications];
 
     if (!model_->owner.contactModel->hasPendingRequests()) {
         if (currentFilterType == lrc::api::profile::Type::PENDING) {
@@ -351,6 +370,8 @@ NSInteger const REQUEST_SEG         = 1;
     if (selectedUid_ != uid) {
         selectedUid_ = uid;
         model_->selectConversation(uid);
+        clearUnreadInteractions(uid, *(model_));
+        [self reloadSelectorNotifications];
     }
 }
 
@@ -368,21 +389,8 @@ NSInteger const REQUEST_SEG         = 1;
     NSTableCellView* result;
 
     result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
-//    NSTextField* details = [result viewWithTag:DETAILS_TAG];
 
-    NSMutableArray* controls = [NSMutableArray arrayWithObject:[result viewWithTag:CALL_BUTTON_TAG]];
-    [((ContextualTableCellView*) result) setContextualsControls:controls];
-    [((ContextualTableCellView*) result) setShouldBlurParentView:YES];
-
-    //    if (auto call = RecentModel::instance().getActiveCall(qIdx)) {
-    //        [details setStringValue:call->roleData((int)Ring::Role::FormattedState).toString().toNSString()];
-    //        [((ContextualTableCellView*) result) setActiveState:YES];
-    //    } else {
-    //        [details setStringValue:qIdx.data((int)Ring::Role::FormattedLastUsed).toString().toNSString()];
-    //        [((ContextualTableCellView*) result) setActiveState:NO];
-    //    }
-
-    NSTextField* unreadCount = [result viewWithTag:TXT_BUTTON_TAG];
+    NSTextField* unreadCount = [result viewWithTag:NOTIFICATONS_TAG];
     [unreadCount setHidden:(conversation.unreadMessages == 0)];
     [unreadCount setIntValue:conversation.unreadMessages];
 
