@@ -91,6 +91,9 @@
 /* Displayed as RingID when no accounts are available for selection */
 "No account available" = "No account available";
 
+/* Allert message when no accounts are available */
+"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Password e conferma non corrispondono";
 
