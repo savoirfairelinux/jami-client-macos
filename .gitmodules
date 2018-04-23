@@ -6,3 +6,7 @@
 	path = libqrencode
 	url = https://github.com/fukuchi/libqrencode.git
 	ignore = dirty
+[submodule "ReactiveObjC"]
+	path = ReactiveObjC
+	url = https://github.com/ReactiveCocoa/ReactiveObjC.git
+	ignore = dirty
