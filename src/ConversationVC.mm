@@ -96,7 +96,7 @@
     if (cachedConv_ != nil)
         return cachedConv_;
 
-    auto& convQueue = convModel_->allFilteredConversations();
+    auto convQueue = convModel_->allFilteredConversations();
 
     auto it = getConversationFromUid(convUid_, *convModel_);
 
@@ -202,7 +202,6 @@
         self.message = @"";
         if (isPending)
             [delegate currentConversationTrusted];
-        [messagesViewVC newMessageSent];
     }
 }
 

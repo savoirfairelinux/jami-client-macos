@@ -29,4 +29,8 @@
 + (NSImage *)imageResize:(NSImage*)anImage
                  newSize:(NSSize)newSize;
 
+- (NSImage *) roundCorners:(CGFloat)radius;
+
+- (NSImage *) imageResizeInsideMax:(CGFloat) dimension;
+
 @end
