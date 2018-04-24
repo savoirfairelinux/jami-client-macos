@@ -24,11 +24,23 @@ typedef NS_ENUM(NSInteger, PointerDirection) {
     RIGHT,
     BLOCK,
 };
+typedef NS_ENUM(NSInteger, BubbleType) {
+    SINGLE  = 0,
+    FIRST   = 1,
+    MIDDLE  = 2,
+    LAST    = 3,
+};
 
 @interface MessageBubbleView: NSView
-
+/*
+ * Background color of the bubble
+ */
 @property NSColor* bgColor;
-@property Boolean needPointer;
+@property BubbleType type;
 @property enum PointerDirection pointerDirection;
+/*
+ * Radius value for rounded corner. Default is 12
+ */
+@property CGFloat cornerRadius;
 
 @end
