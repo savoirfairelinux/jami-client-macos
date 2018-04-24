@@ -30,10 +30,12 @@
 @property (nonatomic, strong) IBOutlet NSButton* declineButton;
 @property (nonatomic, strong) IBOutlet NSProgressIndicator* progressIndicator;
 @property (nonatomic, strong) IBOutlet NSTextField* statusLabel;
+@property (nonatomic, strong) IBOutlet NSBox* timeBox;
+@property (nonatomic, strong) IBOutlet NSTextField* timeLabel;
 
 
 - (uint64_t) interaction;
 - (void) setupForInteraction:(uint64_t)inter;
-- (void) updateWidthConstraint:(CGFloat) newWidth;
+- (void) updateConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible;
 
 @end
