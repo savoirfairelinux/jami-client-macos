@@ -28,46 +28,86 @@
     [super drawRect:dirtyRect];
     CGContextRef context = (CGContextRef) [[NSGraphicsContext currentContext] graphicsPort];
     CGContextSetRGBFillColor(context, 1, 1, 1, 1);
-    CGFloat radius = 6;
-    CGFloat minx = CGRectGetMinX(dirtyRect), midx = CGRectGetMidX(dirtyRect), maxx = CGRectGetMaxX(dirtyRect);
-    CGFloat miny = CGRectGetMinY(dirtyRect), midy = CGRectGetMidY(dirtyRect), maxy = CGRectGetMaxY(dirtyRect);
-
+    CGFloat defaultRadius = 12;
+    CGFloat radius = (self.cornerRadius) ? self.cornerRadius : defaultRadius;
+    CGFloat minx = CGRectGetMinX(dirtyRect);
+    CGFloat midx = CGRectGetMidX(dirtyRect);
+    CGFloat maxx = CGRectGetMaxX(dirtyRect);
+    CGFloat miny = CGRectGetMinY(dirtyRect);
+    CGFloat midy = CGRectGetMidY(dirtyRect);
+    CGFloat maxy = CGRectGetMaxY(dirtyRect);
+    
     CGMutablePathRef outlinePath = CGPathCreateMutable();
-
+    
     if (self.pointerDirection == LEFT)
     {
-        minx += 6;
-        CGPathMoveToPoint(outlinePath, nil, midx, miny);
-        CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
-        CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
-        CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
-        if(self.needPointer) {
-            CGPathAddLineToPoint(outlinePath, nil, minx, maxy - 20);
-            CGPathAddLineToPoint(outlinePath, nil, minx - 6, maxy - 15);
-            CGPathAddLineToPoint(outlinePath, nil, minx, maxy - 10);
+        switch (self.type) {
+                case SINGLE:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
+                break;
+                case FIRST:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, 0);
+                break;
+                case MIDDLE:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, 0);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, 0);
+                break;
+                case LAST:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, 0);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
+                break;
         }
-
-        CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
-        CGPathCloseSubpath(outlinePath);
-    }
-    else
-    {
-        maxx-=6;
-        CGPathMoveToPoint(outlinePath, nil, midx, miny);
-        CGPathAddArcToPoint(outlinePath, nil, minx, miny, minx, midy, radius);
-        CGPathAddArcToPoint(outlinePath, nil, minx, maxy, midx, maxy, radius);
-        CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, maxx, midy, radius);
-        if(self.needPointer) {
-            CGPathAddLineToPoint(outlinePath, nil, maxx, maxy - 20);
-            CGPathAddLineToPoint(outlinePath, nil, maxx + 6, maxy - 15);
-            CGPathAddLineToPoint(outlinePath, nil, maxx, maxy - 10);
+    } else {
+        switch (self.type) {
+                case SINGLE:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
+                break;
+                case FIRST:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, 0);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
+                break;
+                case MIDDLE:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, 0);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, 0);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
+                break;
+                case LAST:
+                CGPathMoveToPoint(outlinePath, nil, midx, miny);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, miny, maxx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, maxx, maxy, midx, maxy, 0);
+                CGPathAddArcToPoint(outlinePath, nil, minx, maxy, minx, midy, radius);
+                CGPathAddArcToPoint(outlinePath, nil, minx, miny, midx, miny, radius);
+                break;
         }
-        CGPathAddArcToPoint(outlinePath, nil, maxx, miny, midx, miny, radius);
-        CGPathCloseSubpath(outlinePath);
     }
+    
+    CGPathCloseSubpath(outlinePath);
     CGContextAddPath(context, outlinePath);
     CGContextFillPath(context);
-
+    
     CGContextAddPath(context, outlinePath);
     CGContextClip(context);
     if(self.bgColor) {
@@ -76,4 +116,5 @@
         NSRectFill(dirtyRect);
     }
 }
+
 @end

@@ -33,6 +33,7 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "utils.h"
 
+
 @interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource> {
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
@@ -56,8 +57,24 @@
 
 // Tags for view
 NSInteger const GENERIC_INT_TEXT_TAG = 100;
+NSInteger const GENERIC_INT_TIME_TAG = 200;
+
+// values for elements size
+CGFloat   const GENERIC_CELL_HEIGHT  = 60;
+CGFloat   const TIME_BOX_HEIGHT      = 34;
+CGFloat   const MESSAGE_TEXT_PADDING = 10;
 
 @implementation MessagesVC
+
+//MessageBuble type
+typedef NS_ENUM(NSInteger, MessageSequencing) {
+    SINGLE_WITH_TIME       = 0,
+    SINGLE_WITHOUT_TIME    = 1,
+    FIRST_WITH_TIME        = 2,
+    FIRST_WITHOUT_TIME     = 3,
+    MIDDLE_IN_SEQUENCE     = 5,
+    LAST_IN_SEQUENCE       = 6,
+};
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
 {
@@ -77,6 +94,17 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     return cachedConv_;
 }
 
+-(void) reloadVisibleRows {
+    NSScrollView* scrollView = [conversationView enclosingScrollView];
+
+    CGRect visibleRect = scrollView.contentView.visibleRect;
+
+    NSRange range = [conversationView rowsInRect:visibleRect];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [conversationView reloadDataForRowIndexes:indexSet columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+
+}
+
 -(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model
 {
     if (convUid_ == convUid && convModel_ == model)
@@ -94,7 +122,9 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
                                              if (uid != convUid_)
                                                  return;
                                              cachedConv_ = nil;
-                                             [conversationView reloadData];
+                                             [conversationView noteNumberOfRowsChanged];
+                                             [self reloadVisibleRows];
+                                             //[conversationView reloadData];
                                              [conversationView scrollToEndOfDocument:nil];
                                          });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
@@ -102,8 +132,9 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
                                                            if (uid != convUid_)
                                                                return;
                                                            cachedConv_ = nil;
-                                                           [conversationView reloadData];
-                                                           [conversationView scrollToEndOfDocument:nil];
+                                                           [self reloadVisibleRows];
+                                                           //[conversationView reloadData];
+                                                         //  [conversationView scrollToEndOfDocument:nil];
                                                        });
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
@@ -125,24 +156,43 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     [conversationView scrollToEndOfDocument:nil];
 }
 
--(void)newMessageSent
-{
-    [conversationView reloadData];
-    [conversationView scrollToEndOfDocument:nil];
+-(void) reloadConversationForMessageUiD:(uint64_t) uid {
+    auto* conv = [self getCurrentConversation];
+
+    if (conv == nil)
+    return nil;
+    auto it = distance(conv->interactions.begin(),conv->interactions.find(uid));
+    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:it];
+    [conversationView reloadDataForRowIndexes:indexSet columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+   // NSLog(@"reloadConversationWithUid: %@", uid);
+   // [smartView reloadDataForRowIndexes:indexSet
+                      //   columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+   // conv->interactions.find(uid);
+
+    //auto it = conv->interactions.begin();
+
+   // std::advance(it, row);
 }
 
--(NSTableCellView*) makeGenericInteractionViewForTableView:(NSTableView*)tableView withText:(NSString*)text
+-(void)newMessageSent
+{
+   // [conversationView reloadData];
+   // [conversationView scrollToEndOfDocument:nil];
+}
+
+-(NSTableCellView*) makeGenericInteractionViewForTableView:(NSTableView*)tableView withText:(NSString*)text andTime:(NSString*) time
 {
     NSTableCellView* result = [tableView makeViewWithIdentifier:@"GenericInteractionView" owner:self];
     NSTextField* textField = [result viewWithTag:GENERIC_INT_TEXT_TAG];
+    NSTextField* timeField = [result viewWithTag:GENERIC_INT_TIME_TAG];
 
     // TODO: Fix symbol in LRC
     NSString* fixedString = [text stringByReplacingOccurrencesOfString:@"🕽" withString:@"📞"];
     [textField setStringValue:fixedString];
+    [timeField setStringValue:time];
 
     return result;
 }
-
 -(IMTableCellView*) makeViewforTransferStatus:(lrc::api::interaction::Status)status type:(lrc::api::interaction::Type)type tableView:(NSTableView*)tableView
 {
     IMTableCellView* result;
@@ -215,7 +265,7 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     auto* conv = [self getCurrentConversation];
 
     if (conv == nil)
-        return nil;
+    return nil;
 
     auto it = conv->interactions.begin();
 
@@ -224,68 +274,76 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     IMTableCellView* result;
 
     auto& interaction = it->second;
-
     bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
 
     switch (interaction.type) {
-        case lrc::api::interaction::Type::TEXT:
+            case lrc::api::interaction::Type::TEXT:
             if (isOutgoing) {
                 result = [tableView makeViewWithIdentifier:@"RightMessageView" owner:self];
             } else {
                 result = [tableView makeViewWithIdentifier:@"LeftMessageView" owner:self];
             }
             if (interaction.status == lrc::api::interaction::Status::UNREAD)
-                convModel_->setInteractionRead(convUid_, it->first);
+            convModel_->setInteractionRead(convUid_, it->first);
             break;
-        case lrc::api::interaction::Type::INCOMING_DATA_TRANSFER:
-        case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
+            case lrc::api::interaction::Type::INCOMING_DATA_TRANSFER:
+            case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
             result = [self makeViewforTransferStatus:interaction.status type:interaction.type tableView:tableView];
             break;
-        case lrc::api::interaction::Type::CONTACT:
-        case lrc::api::interaction::Type::CALL:
-            return [self makeGenericInteractionViewForTableView:tableView withText:@(interaction.body.c_str())];
+            case lrc::api::interaction::Type::CONTACT:
+            case lrc::api::interaction::Type::CALL: {
+                NSDate* msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
+                NSString* timeString = [self timeForMessage: msgTime];
+                return [self makeGenericInteractionViewForTableView:tableView withText:@(interaction.body.c_str()) andTime:timeString];
+            }
         default:  // If interaction is not of a known type
             return nil;
     }
-
-    // check if the message first in incoming or outgoing messages sequence
-    Boolean isFirstInSequence = true;
-    if (it != conv->interactions.begin()) {
-        auto previousIt = it;
-        previousIt--;
-        auto& previousInteraction = previousIt->second;
-        if ((previousInteraction.type == lrc::api::interaction::Type::TEXT
-             || previousInteraction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER
-             || previousInteraction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) && (isOutgoing == lrc::api::interaction::isOutgoing(previousInteraction)))
-            isFirstInSequence = false;
+    MessageSequencing sequence = [self computeSequencingFor:row];
+    BubbleType type = SINGLE;
+    if (sequence == FIRST_WITHOUT_TIME || sequence == FIRST_WITH_TIME) {
+        type = FIRST;
     }
-    [result.photoView setHidden:!isFirstInSequence];
-    result.msgBackground.needPointer = isFirstInSequence;
+    if (sequence == MIDDLE_IN_SEQUENCE) {
+        type = MIDDLE;
+    }
+    if (sequence == LAST_IN_SEQUENCE) {
+        type = LAST;
+    }
+    result.msgBackground.type = type;
     [result setupForInteraction:it->first];
+    bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
+
+    if (interaction.type == lrc::api::interaction::Type::TEXT) {
+
+        if (row == (conversationView.numberOfRows - 2)) {
+            [result.msgBackground setNeedsDisplay:YES];
+        }
 
     NSMutableAttributedString* msgAttString =
-    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",@(interaction.body.c_str())]
+    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",@(interaction.body.c_str())]
                                            attributes:[self messageAttributes]];
 
-    NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
-    NSAttributedString* timestampAttrString =
-    [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
-                                    attributes:[self timestampAttributes]];
+    CGSize messageSize = [self sizeFor: @(interaction.body.c_str()) maxWidth:tableView.frame.size.width * 0.7];
 
-    CGFloat finalWidth = MAX(msgAttString.size.width, timestampAttrString.size.width);
-
-    finalWidth = MIN(finalWidth + 30, tableView.frame.size.width * 0.7);
-
-    [msgAttString appendAttributedString:timestampAttrString];
+    [result updateConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
     [result.msgView checkTextInDocument:nil];
-    [result updateWidthConstraint:finalWidth];
-
-    auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-    if (!isOutgoing) {
-          [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
     }
 
+    if (shouldDisplayTime) {
+        NSDate* msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
+        NSString* timeString = [self timeForMessage: msgTime];
+        result.timeLabel.stringValue = timeString;
+    }
+    
+
+    bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != LAST_IN_SEQUENCE) ? YES : NO;
+    [result.photoView setHidden:!shouldDisplayAvatar];
+    if (!isOutgoing && shouldDisplayAvatar) {
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+    }
     return result;
 }
 
@@ -296,7 +354,7 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
     auto* conv = [self getCurrentConversation];
 
     if (conv == nil)
-        return 0;
+    return 0;
 
     auto it = conv->interactions.begin();
 
@@ -304,39 +362,166 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
 
     auto& interaction = it->second;
 
-    if(interaction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER || interaction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER)
-        return 52.0;
+    MessageSequencing sequence = [self computeSequencingFor:row];
+
+    bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
+
+
+    if(interaction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER || interaction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
+        if (shouldDisplayTime) {
+            return 52 + TIME_BOX_HEIGHT;
+        }
+    return 52.0;
+    }
 
     if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
-        return 27.0;
+    return GENERIC_CELL_HEIGHT;
 
     // TODO Implement interactions other than messages
     if(interaction.type != lrc::api::interaction::Type::TEXT) {
         return 0;
     }
 
+    CGSize messageSize = [self sizeFor: @(interaction.body.c_str()) maxWidth:tableView.frame.size.width * 0.7];
+    CGFloat singleLignMessageHeight = 15;
+
+    if (shouldDisplayTime) {
+        return MAX(messageSize.height + TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2,
+                   TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2 + singleLignMessageHeight);
+    }
+    return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2,
+               singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2);
+}
+
+-(CGSize) sizeFor:(NSString *) message maxWidth:(CGFloat) width {
+    CGFloat horizaontalMargin = 6;
     NSMutableAttributedString* msgAttString =
-    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n",@(interaction.body.c_str())]
+    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", message]
                                            attributes:[self messageAttributes]];
 
-    NSDate *msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
-    NSAttributedString* timestampAttrString =
-    [[NSAttributedString alloc] initWithString:[NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle]
-                                    attributes:[self timestampAttributes]];
-
-    [msgAttString appendAttributedString:timestampAttrString];
-
-    [msgAttString appendAttributedString:timestampAttrString];
-
-    NSRect frame = NSMakeRect(0, 0, someWidth, MAXFLOAT);
+    CGFloat finalWidth = MIN(msgAttString.size.width + horizaontalMargin * 2, width);
+    NSRect frame = NSMakeRect(0, 0, finalWidth, msgAttString.size.height);
     NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
-    [tv setEnabledTextCheckingTypes:NSTextCheckingTypeLink];
-    [tv setAutomaticLinkDetectionEnabled:YES];
     [[tv textStorage] setAttributedString:msgAttString];
     [tv sizeToFit];
+    return tv.frame.size;
+}
 
-    double height = tv.frame.size.height + 10;
-    return MAX(height, 50.0f);
+-(MessageSequencing) computeSequencingFor:(NSInteger) row {
+    auto* conv = [self getCurrentConversation];
+    if (conv == nil)
+    return SINGLE_WITHOUT_TIME;
+    auto it = conv->interactions.begin();
+    std::advance(it, row);
+    auto& interaction = it->second;
+    if (interaction.type != lrc::api::interaction::Type::TEXT) {
+        return SINGLE_WITH_TIME;
+    }
+    if (row == 0) {
+        if (it == conv->interactions.end()) {
+            return SINGLE_WITH_TIME;
+        }
+        auto nextIt = it;
+        nextIt++;
+        auto& nextInteraction = nextIt->second;
+        if ([self sequenceChangedFrom:interaction to: nextInteraction]) {
+            return SINGLE_WITH_TIME;
+        }
+        return FIRST_WITH_TIME;
+    }
+
+    if (row == conversationView.numberOfRows - 1) {
+        if(it == conv->interactions.begin()) {
+            return SINGLE_WITH_TIME;
+        }
+        auto previousIt = it;
+        previousIt--;
+        auto& previousInteraction = previousIt->second;
+        bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
+        bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
+        if (!timeChanged && !authorChanged) {
+            return LAST_IN_SEQUENCE;
+        }
+        if (!timeChanged && authorChanged) {
+            return SINGLE_WITHOUT_TIME;
+        }
+        return SINGLE_WITH_TIME;
+    }
+    if(it == conv->interactions.begin() || it == conv->interactions.end()) {
+        return SINGLE_WITH_TIME;
+    }
+    auto previousIt = it;
+    previousIt--;
+    auto& previousInteraction = previousIt->second;
+    auto nextIt = it;
+    nextIt++;
+    auto& nextInteraction = nextIt->second;
+
+    bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
+    bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
+    bool sequenceWillChange = [self sequenceChangedFrom:interaction to: nextInteraction];
+    if (!sequenceWillChange) {
+        if (!timeChanged && !authorChanged) {
+            return MIDDLE_IN_SEQUENCE;
+        }
+        if (timeChanged) {
+            return FIRST_WITH_TIME;
+        }
+        return FIRST_WITHOUT_TIME;
+    } if (!timeChanged && !authorChanged) {
+        return LAST_IN_SEQUENCE;
+    } if (timeChanged) {
+        return SINGLE_WITH_TIME;
+    }
+    return SINGLE_WITHOUT_TIME;
+}
+
+-(bool) sequenceChangedFrom:(lrc::api::interaction::Info) firstInteraction to:(lrc::api::interaction::Info) secondInteraction {
+    return ([self sequenceTimeChangedFrom:firstInteraction to:secondInteraction] || [self sequenceAuthorChangedFrom:firstInteraction to:secondInteraction]);
+}
+
+-(bool) sequenceTimeChangedFrom:(lrc::api::interaction::Info) firstInteraction to:(lrc::api::interaction::Info) secondInteraction {
+    bool timeChanged = NO;
+    NSDate* firstMessageTime = [NSDate dateWithTimeIntervalSince1970:firstInteraction.timestamp];
+    NSDate* secondMessageTime = [NSDate dateWithTimeIntervalSince1970:secondInteraction.timestamp];
+    bool hourComp = [[NSCalendar currentCalendar] compareDate:firstMessageTime toDate:secondMessageTime toUnitGranularity:NSCalendarUnitHour];
+    bool minutComp = [[NSCalendar currentCalendar] compareDate:firstMessageTime toDate:secondMessageTime toUnitGranularity:NSCalendarUnitMinute];
+    if(hourComp != NSOrderedSame || minutComp != NSOrderedSame) {
+        timeChanged = YES;
+    }
+    return timeChanged;
+}
+
+-(bool) sequenceAuthorChangedFrom:(lrc::api::interaction::Info) firstInteraction to:(lrc::api::interaction::Info) secondInteraction {
+    bool authorChanged = YES;
+    bool isOutgoing = lrc::api::interaction::isOutgoing(firstInteraction);
+    if ((secondInteraction.type == lrc::api::interaction::Type::TEXT) && (isOutgoing == lrc::api::interaction::isOutgoing(secondInteraction))) {
+        authorChanged = NO;
+    }
+    return authorChanged;
+}
+
+-(NSString *)timeForMessage:(NSDate*) msgTime {
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    if ([[NSCalendar currentCalendar] compareDate:today
+                                           toDate:msgTime
+                                toUnitGranularity:NSCalendarUnitYear]!= NSOrderedSame) {
+        return [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle];
+    }
+
+    if ([[NSCalendar currentCalendar] compareDate:today
+                                           toDate:msgTime
+                                toUnitGranularity:NSCalendarUnitDay]!= NSOrderedSame ||
+        [[NSCalendar currentCalendar] compareDate:today
+                                           toDate:msgTime
+                                toUnitGranularity:NSCalendarUnitMonth]!= NSOrderedSame) {
+            [dateFormatter setDateFormat:@"MMM dd, HH:mm"];
+            return [dateFormatter stringFromDate:msgTime];
+        }
+
+    [dateFormatter setDateFormat:@"HH:mm"];
+    return [dateFormatter stringFromDate:msgTime];
 }
 
 #pragma mark - NSTableViewDataSource
@@ -353,25 +538,11 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
 
 #pragma mark - Text formatting
 
-- (NSMutableDictionary*) timestampAttributes
-{
-    NSMutableDictionary* attrs = [NSMutableDictionary dictionary];
-    attrs[NSForegroundColorAttributeName] = [NSColor grayColor];
-    NSFont* systemFont = [NSFont systemFontOfSize:12.0f];
-    attrs[NSFontAttributeName] = systemFont;
-    attrs[NSParagraphStyleAttributeName] = [self paragraphStyle];
-
-    return attrs;
-}
-
 - (NSMutableDictionary*) messageAttributes
 {
     NSMutableDictionary* attrs = [NSMutableDictionary dictionary];
-    attrs[NSForegroundColorAttributeName] = [NSColor blackColor];
-    NSFont* systemFont = [NSFont systemFontOfSize:14.0f];
-    attrs[NSFontAttributeName] = systemFont;
+    attrs[NSForegroundColorAttributeName] = [NSColor labelColor];
     attrs[NSParagraphStyleAttributeName] = [self paragraphStyle];
-
     return attrs;
 }
 
@@ -388,17 +559,11 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
      Line break mode   NSLineBreakByWordWrapping
      All others   0.0
      */
-       NSMutableParagraphStyle* aMutableParagraphStyle =
-     [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-
-     // Now adjust our NSMutableParagraphStyle formatting to be whatever we want.
-     // The numeric values below are in points (72 points per inch)
-     [aMutableParagraphStyle setLineSpacing:1.5];
-     [aMutableParagraphStyle setParagraphSpacing:5.0];
-     [aMutableParagraphStyle setHeadIndent:5.0];
-     [aMutableParagraphStyle setTailIndent:-5.0];
-     [aMutableParagraphStyle setFirstLineHeadIndent:5.0];
-     return aMutableParagraphStyle;
+    NSMutableParagraphStyle* aMutableParagraphStyle =
+    [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [aMutableParagraphStyle setHeadIndent:1.0];
+    [aMutableParagraphStyle setFirstLineHeadIndent:1.0];
+    return aMutableParagraphStyle;
 }
 
 #pragma mark - Actions
