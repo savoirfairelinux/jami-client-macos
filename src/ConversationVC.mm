@@ -202,7 +202,6 @@
         self.message = @"";
         if (isPending)
             [delegate currentConversationTrusted];
-        [messagesViewVC newMessageSent];
     }
 }
 
