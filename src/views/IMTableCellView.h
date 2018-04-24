@@ -30,10 +30,20 @@
 @property (nonatomic, strong) IBOutlet NSButton* declineButton;
 @property (nonatomic, strong) IBOutlet NSProgressIndicator* progressIndicator;
 @property (nonatomic, strong) IBOutlet NSTextField* statusLabel;
+@property (nonatomic, strong) IBOutlet NSBox* timeBox;
+@property (nonatomic, strong) IBOutlet NSTextField* timeLabel;
+@property (nonatomic, strong) IBOutlet NSTextField* transferedFileName;
+@property (nonatomic, strong) IBOutlet NSImageView* transferedImage;
+@property (nonatomic, strong) IBOutlet NSProgressIndicator* sendingMessageIndicator;
+@property (nonatomic, strong) IBOutlet NSTextField* messageFailed;
+@property (nonatomic, strong) IBOutlet NSView* messageStatus;
 
 
 - (uint64_t) interaction;
 - (void) setupForInteraction:(uint64_t)inter;
-- (void) updateWidthConstraint:(CGFloat) newWidth;
+- (void) updateConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible;
+- (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
+-(void)  updateOutgoingImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
+-(void) invalidateImageConstraints;
 
 @end

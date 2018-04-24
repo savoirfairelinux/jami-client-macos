@@ -78,6 +78,7 @@ NSTimer* preventSleepTimer;
     [self setScNetworkQueue:queue];
     [self beginObservingReachabilityStatus];
     [self startSleepPreventionTimer];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 }
 
 - (void) startSleepPreventionTimer
