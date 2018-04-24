@@ -69,7 +69,6 @@
         convModel_->sendMessage(convUid_, std::string([text UTF8String]));
         self.message = @"";
         [messageField setStringValue:@""];
-        [messagesViewVC newMessageSent];
     }
 }
 
