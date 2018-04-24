@@ -50,7 +50,16 @@ static inline NSString* bestNameForConversation(const lrc::api::conversation::In
  * @param model ConversationModel in which to do the lookup
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
-static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const std::string& uid, const lrc::api::ConversationModel& model) {
+static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const std::string& uid, const lrc::api::ConversationModel& model, bool forceUpdate = false) {
+    if (forceUpdate) {
+    auto type = model.owner.profileInfo.type;
+    auto& convQueue = model.getFilteredConversations(type, true);
+    return std::find_if(convQueue.begin(), convQueue.end(),
+                        [&] (const lrc::api::conversation::Info& conv) {
+                            return uid == conv.uid;
+                        });
+    }
+
     return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
                         [&] (const lrc::api::conversation::Info& conv) {
                             return uid == conv.uid;
