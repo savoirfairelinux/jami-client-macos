@@ -265,6 +265,7 @@ SET(ringclient_XIBS
    ContactRequest
    AccBannedContacts
    PasswordChange
+   OngoingDataTransferCell
 )
 
 # Icons

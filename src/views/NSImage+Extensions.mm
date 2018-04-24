@@ -40,4 +40,38 @@
     return nil;
 }
 
+- (NSImage *) roundCorners:(CGFloat)radius {
+    NSImage *existingImage = self;
+    NSSize existingSize = [existingImage size];
+    NSSize newSize = NSMakeSize(existingSize.width, existingSize.height);
+    NSImage *composedImage = [[NSImage alloc] initWithSize:newSize];
+
+    [composedImage lockFocus];
+    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+
+    NSRect imageFrame = NSRectFromCGRect(CGRectMake(0, 0, existingSize.width, existingSize.height));
+    NSBezierPath *clipPath = [NSBezierPath bezierPathWithRoundedRect:imageFrame xRadius:radius yRadius:radius];
+    [clipPath setWindingRule:NSEvenOddWindingRule];
+    [clipPath addClip];
+
+    [existingImage drawAtPoint:NSZeroPoint fromRect:NSMakeRect(0, 0, newSize.width, newSize.height) operation:NSCompositeSourceOver fraction:1];
+
+    [composedImage unlockFocus];
+
+    return composedImage;
+}
+
+- (NSImage*) imageResizeInsideMax:(CGFloat) dimension {
+    if (self.size.width < dimension && self.size.height < dimension) {
+        return self;
+    }
+    CGFloat widthScaleFactor = dimension / self.size.width;
+    CGFloat heightScaleFactor = dimension / self.size.height;
+    CGFloat scale = MIN(widthScaleFactor, heightScaleFactor);
+    NSSize size = NSZeroSize;
+    size.width = self.size.width * scale;
+    size.height = self.size.height * scale;
+    return [NSImage imageResize:self newSize:size];
+}
+
 @end
