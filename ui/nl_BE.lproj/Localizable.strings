@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "Ocurrió un error durante la exportación";
+"A network error occured during the export" = "Der is een netwerkfout opgetreden tijdens het exporteren";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
 
 /* Contextual menu action */
-"Add to contacts" = "Agregar a contactos";
+"Add to contacts" = "Aan contacten toevoegen";
 
 /* Contextual menu action */
 "Place video call" = "Place video call";
@@ -23,7 +23,7 @@
 "Alias : " = "Alias : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "Ocurrió un error al exportar";
+"An error occured during the export" = "Der is een fout opgetreden tijdens het exporteren";
 
 /* Contextual menu entry */
 "Backup account" = "Backup account";
@@ -32,7 +32,7 @@
 "Call number" = "Call number";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "Geannuleerd";
 
 /* Open panel title */
 "Choose a CA list" = "Choose a CA list";
@@ -56,13 +56,13 @@
 "Choose file" = "Choose file";
 
 /* No comment provided by engineer. */
-"Copy" = "Copiar";
+"Copy" = "Kopiëren";
 
 /* Contextual menu action */
-"Copy name" = "Copiar nombre";
+"Copy name" = "Naam kopiëren";
 
 /* Contextual menu action */
-"Copy number" = "Copiar número";
+"Copy number" = "Nummer kopiëren";
 
 /* Contextual menu entry */
 "Create RING Account" = "Create RING Account";
@@ -71,13 +71,13 @@
 "Create SIP Account" = "Create SIP Account";
 
 /* File transfer failed label */
-"Failed" = "Falló";
+"Failed" = "Mislukt";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Opzoeken mislukt";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Incoming call from %@";
@@ -101,16 +101,16 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Paswoorden komen nie overeen";
 
 /* Button label */
-"Pause" = "Pause";
+"Pause" = "Pauze";
 
 /* Button label */
-"Play" = "Reproducir";
+"Play" = "Afspelen";
 
 /* Button Action */
-"Refuse" = "Rechazar";
+"Refuse" = "Afwijzen";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -128,28 +128,28 @@
 "RingID : " = "RingID : ";
 
 /* No comment provided by engineer. */
-"Share" = "Compartir";
+"Share" = "Delen";
 
 /* File transfer successful label */
-"Success" = "Éxito";
+"Success" = "Klaar";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "D’ingevoerde gebruikersnaam is beschikbaar";
 
 /* Text shown to user when his username is invalid to be registered */
 "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "D’ingevoerde gebruikersnaam is nie beschikbaar";
 
 /* Text shown to the user */
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "La contraseña ingresada no es válida";
+"The password you entered does not unlock this account" = "Het paswoord da’ g’hebt ingevoerd ontgrendeld dezen account nie";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -158,7 +158,7 @@
 "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.";
 
 /* Name used when user leave field empty */
-"Unknown" = "Desconocido";
+"Unknown" = "Onbekend";
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";

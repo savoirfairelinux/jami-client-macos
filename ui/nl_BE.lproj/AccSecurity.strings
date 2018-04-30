@@ -1,45 +1,45 @@
 
 /* Class = "NSButtonCell"; title = "Require certificates for incoming TLS connections"; ObjectID = "1f9-X5-ykb"; */
-"1f9-X5-ykb.title" = "Requiere certificados para conexiones TLS entrantes";
+"1f9-X5-ykb.title" = "Certificaten voor inkomende TLS-verbindingen vereisen";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Verificar certificados como cliente";
+"1xi-9G-zOX.title" = "Certificaten verifiëren als ne cliënt";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
-"2e5-zS-ghg.title" = "Usar lista de certificados personalizada";
+"2e5-zS-ghg.title" = "Aangepaste codering gebruiken";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "celda de cifrado";
+"5LC-T6-hpk.placeholderString" = "sleutelcel";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
-"7c2-kF-dcs.placeholderString" = "Contraseña...";
+"7c2-kF-dcs.placeholderString" = "Paswoord…";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
-"9Q3-1W-Lh3.title" = "Expiró la negociación";
+"9Q3-1W-Lh3.title" = "Tijdslimiet onderhandeling";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
-"Ig9-B1-7N3.title" = "Cambiar a RTP";
+"Ig9-B1-7N3.title" = "Terugvallen op RTP";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
-"JHb-iu-ZwI.title" = "Clave privada";
+"JHb-iu-ZwI.title" = "Persoonlijke sleutel";
 
 /* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "Jqz-P0-zAz"; */
-"Jqz-P0-zAz.title" = "Certificado de Usuario";
+"Jqz-P0-zAz.title" = "Gebruikerscertificaat";
 
 /* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
-"UxS-et-whJ.title" = "Nombre de la instancia del servidor para la conexión TLS saliente";
+"UxS-et-whJ.title" = "Servernaaminstantie voor uitgaande TLS-verbinding";
 
 /* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
-"YtQ-hx-hih.title" = "Usar SRTP";
+"YtQ-hx-hih.title" = "SRTP gebruiken";
 
 /* Class = "NSButtonCell"; title = "Use TLS transport"; ObjectID = "oTT-gO-fqM"; */
-"oTT-gO-fqM.title" = "Usar transporte TLS";
+"oTT-gO-fqM.title" = "TLS-transport gebruiken";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "uOE-XA-5gW"; */
-"uOE-XA-5gW.title" = "Protocolo TLS";
+"uOE-XA-5gW.title" = "TLS-protocolmethode";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
-"vPF-Rp-aR6.title" = "Lista de Certificados de Autoridad";
+"vPF-Rp-aR6.title" = "Lijst van certificeringsinstanties";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
-"x2s-ov-cVQ.title" = "Verificar certificados entrantes como servidor";
+"x2s-ov-cVQ.title" = "Inkomende certificaten verifiëren als ne server";
