@@ -110,19 +110,33 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     if (conv == nil)
         return;
-    auto it = distance(conv->interactions.begin(),conv->interactions.find(uid));
-    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:it];
+    auto it = conv->interactions.find(uid);
+    if (it == conv->interactions.end()) {
+        return;
+    }
+    auto itIndex = distance(conv->interactions.begin(),it);
+    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itIndex];
     //reload previous message to update bubbleview
-    if (it > 0) {
-        NSRange range = NSMakeRange(it - 1, it);
-        indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    if (itIndex > 0) {
+        auto previousIt = it;
+        previousIt--;
+        auto previousInteraction = previousIt->second;
+        if (previousInteraction.type == lrc::api::interaction::Type::TEXT) {
+            NSRange range = NSMakeRange(itIndex - 1, 2);
+            indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+        }
     }
     if (update) {
         [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
     }
     [conversationView reloadDataForRowIndexes: indexSet
                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    if (update) {
+    CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
+    NSRange range = [conversationView rowsInRect:visibleRect];
+    NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
+    NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
+    if (([conversationView numberOfRows] > 0) &&
+        lastvisibleRow == ([conversationView numberOfRows] -1)) {
         [conversationView scrollToEndOfDocument:nil];
     }
 }
@@ -406,6 +420,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     result.msgBackground.type = type;
     [result setupForInteraction:it->first];
     bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
+    bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
     [result.msgBackground setNeedsDisplay:YES];
     [result setNeedsDisplay:YES];
     [result.timeBox setNeedsDisplay:YES];
@@ -416,7 +431,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     CGSize messageSize = [self sizeFor: @(interaction.body.c_str()) maxWidth:tableView.frame.size.width * 0.7];
 
-    [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime];
+    [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime isTopPadding: shouldApplyPadding];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
     [result.msgView checkTextInDocument:nil];
 
@@ -494,9 +509,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     CGSize messageSize = [self sizeFor: @(interaction.body.c_str()) maxWidth:tableView.frame.size.width * 0.7];
     CGFloat singleLignMessageHeight = 15;
 
+    bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
+
     if (shouldDisplayTime) {
         return MAX(messageSize.height + TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2,
                    TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2 + singleLignMessageHeight);
+    }
+    if(shouldApplyPadding) {
+        return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2 + 15,
+                   singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2 + 15);
     }
     return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2,
                singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2);
@@ -588,6 +609,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
     bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
     bool sequenceWillChange = [self sequenceChangedFrom:interaction to: nextInteraction];
+    if (previousInteraction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER ||
+        previousInteraction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER) {
+        if(!sequenceWillChange) {
+            return FIRST_WITH_TIME;
+        }
+        return SINGLE_WITH_TIME;
+    }
     if (!sequenceWillChange) {
         if (!timeChanged && !authorChanged) {
             return MIDDLE_IN_SEQUENCE;
