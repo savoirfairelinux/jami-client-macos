@@ -60,7 +60,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [self.msgView setEditable:NO];
 }
 
-- (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible
+- (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding
 {
     [NSLayoutConstraint deactivateConstraints:[self.msgView constraints]];
     [NSLayoutConstraint deactivateConstraints:[self.timeBox constraints]];
@@ -89,7 +89,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     NSString* formatTime = [NSString stringWithFormat:@"V:[timeBox(%@)]", TIME_BOX_HEIGHT];
     [self.timeBox setHidden:NO];
     if (!visible) {
-        formatTime = [NSString stringWithFormat:@"V:[timeBox(1)]"];
+        formatTime = padding ? [NSString stringWithFormat:@"V:[timeBox(15)]"] : [NSString stringWithFormat:@"V:[timeBox(1)]"];
         [self.timeBox setHidden:YES];
     }
     NSArray* constraintsVerticalTimeBox = [NSLayoutConstraint

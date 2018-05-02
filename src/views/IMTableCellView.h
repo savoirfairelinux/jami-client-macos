@@ -41,7 +41,7 @@
 
 - (uint64_t) interaction;
 - (void) setupForInteraction:(uint64_t)inter;
-- (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible;
+- (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding;
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
 - (void) invalidateImageConstraints;
 
