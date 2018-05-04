@@ -88,11 +88,12 @@
     photoView.layer.masksToBounds = YES;
 
     if (auto pro = ProfileModel::instance().selectedProfile()) {
-        auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
-        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        if (pro->person() && pro->person()->photo().isValid()) {
+            auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
+            [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        }
         [profileNameField setStringValue:pro->person()->formattedName().toNSString()];
     }
-
 }
 
 - (void) dealloc
@@ -207,15 +208,14 @@
 {
     if (auto outputImage = [picker outputImage]) {
         [photoView setImage:outputImage];
-    } else
-        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
-    if (auto pro = ProfileModel::instance().selectedProfile()) {
-        QPixmap p;
-        auto smallImg = [NSImage imageResize:[photoView image] newSize:{100,100}];
-        if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
-            pro->person()->setPhoto(QVariant(p));
+        if (auto pro = ProfileModel::instance().selectedProfile()) {
+            QPixmap p;
+            auto smallImg = [NSImage imageResize:outputImage newSize:{100,100}];
+            if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
+                pro->person()->setPhoto(QVariant(p));
+            }
+            pro->save();
         }
-        pro->save();
     }
 }
 

@@ -21,7 +21,6 @@
 
 
 //Cocoa
-#import <AddressBook/AddressBook.h>
 #import <Quartz/Quartz.h>
 
 //Qt
@@ -112,13 +111,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
     [displayNameField setStringValue: NSFullUserName()];
     [self controlTextDidChange:[NSNotification notificationWithName:@"PlaceHolder" object:displayNameField]];
-
-    NSData* imgData = [[[ABAddressBook sharedAddressBook] me] imageData];
-    if (imgData != nil) {
-        [photoView setImage:[[NSImage alloc] initWithData:imgData]];
-    } else
-        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
-
+    
     [photoView setWantsLayer: YES];
     photoView.layer.cornerRadius = photoView.frame.size.width / 2;
     photoView.layer.masksToBounds = YES;
@@ -157,8 +150,6 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 {
     if (auto outputImage = [picker outputImage]) {
         [photoView setImage:outputImage];
-    } else {
-        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
     }
 }
 
@@ -238,11 +229,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
         auto smallImg = [NSImage imageResize:[photoView image] newSize:{100,100}];
         if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
             profile->person()->setPhoto(QVariant(p));
-        } else {
-            auto defaultAvatar = [NSImage imageResize:[NSImage imageNamed:@"default_user_icon"] newSize:{100,100}];
-            p.loadFromData(QByteArray::fromNSData([defaultAvatar TIFFRepresentation]));
-            profile->person()->setPhoto(QVariant(p));
-        }
+        } 
         profile->save();
     }
 
