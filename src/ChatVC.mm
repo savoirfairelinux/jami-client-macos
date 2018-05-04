@@ -21,6 +21,7 @@
 #import "ChatVC.h"
 
 #import "MessagesVC.h"
+#import "NSString+Extensions.h"
 
 @interface ChatVC ()
 {
@@ -60,6 +61,10 @@
 - (void) takeFocus
 {
     [self.view.window makeFirstResponder:self.messageField];
+}
+
+- (void)setMessage:(NSString *)newValue {
+    _message = [newValue removeEmptyLinesAtBorders];
 }
 
 - (IBAction)sendMessage:(id)sender {

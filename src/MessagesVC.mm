@@ -35,6 +35,7 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
+#import "NSString+Extensions.h"
 
 
 @interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource> {
@@ -314,7 +315,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     switch (status) {
             [result.statusLabel setTextColor:[NSColor textColor]];
         case lrc::api::interaction::Status::TRANSFER_FINISHED:
-            [result.statusLabel setTextColor:[NSColor greenColor]];
+            [result.statusLabel setTextColor:[NSColor greenSuccessColor]];
             [result.statusLabel setStringValue:NSLocalizedString(@"Success", @"File transfer successful label")];
             break;
         case lrc::api::interaction::Status::TRANSFER_CANCELED:
@@ -322,7 +323,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             [result.statusLabel setStringValue:NSLocalizedString(@"Canceled", @"File transfer canceled label")];
             break;
         case lrc::api::interaction::Status::TRANSFER_ERROR:
-            [result.statusLabel setTextColor:[NSColor redColor]];
+            [result.statusLabel setTextColor:[NSColor errorTransferColor]];
             [result.statusLabel setStringValue:NSLocalizedString(@"Failed", @"File transfer failed label")];
             break;
         case lrc::api::interaction::Status::TRANSFER_UNJOINABLE_PEER:
@@ -427,22 +428,55 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         type = LAST;
     }
     result.msgBackground.type = type;
-    [result setupForInteraction:it->first];
+    bool sendingFail = false;
+    [result.messageStatus setHidden:YES];
+    if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
+        if (interaction.status == lrc::api::interaction::Status::SENDING) {
+            [result.messageStatus setHidden:NO];
+            [result.sendingMessageIndicator startAnimation:nil];
+            [result.messageFailed setHidden:YES];
+        } else if (interaction.status == lrc::api::interaction::Status::FAILED) {
+            [result.messageStatus setHidden:NO];
+            [result.sendingMessageIndicator setHidden:YES];
+            [result.messageFailed setHidden:NO];
+            sendingFail = true;
+        }
+    }
+    [result setupForInteraction:it->first isFailed: sendingFail];
     bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
     bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
     [result.msgBackground setNeedsDisplay:YES];
     [result setNeedsDisplay:YES];
     [result.timeBox setNeedsDisplay:YES];
 
+    NSString *text = @(interaction.body.c_str());
+    text = [text removeEmptyLinesAtBorders];
+
     NSMutableAttributedString* msgAttString =
-    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",@(interaction.body.c_str())]
+    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:text]
                                            attributes:[self messageAttributes]];
 
-    CGSize messageSize = [self sizeFor: @(interaction.body.c_str()) maxWidth:tableView.frame.size.width * 0.7];
+    CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
 
     [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime isTopPadding: shouldApplyPadding];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
     [result.msgView checkTextInDocument:nil];
+
+    NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
+    NSArray *matches = [linkDetector matchesInString:result.msgView.string options:0 range:NSMakeRange(0, result.msgView.string.length)];
+
+    [result.msgView.textStorage beginEditing];
+
+    for (NSTextCheckingResult *match in matches) {
+        if (!match.URL) continue;
+
+        NSDictionary *linkAttributes = @{
+                                         NSLinkAttributeName: match.URL,
+                                         };
+        [result.msgView.textStorage addAttributes:linkAttributes range:match.range];
+    }
+
+    [result.msgView.textStorage endEditing];
 
     if (shouldDisplayTime) {
         NSDate* msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
@@ -456,18 +490,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (!isOutgoing && shouldDisplayAvatar) {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
-    }
-    [result.messageStatus setHidden:YES];
-    if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
-        if (interaction.status == lrc::api::interaction::Status::SENDING) {
-            [result.messageStatus setHidden:NO];
-            [result.sendingMessageIndicator startAnimation:nil];
-            [result.messageFailed setHidden:YES];
-        } else if (interaction.status == lrc::api::interaction::Status::FAILED) {
-            [result.messageStatus setHidden:NO];
-            [result.sendingMessageIndicator setHidden:YES];
-            [result.messageFailed setHidden:NO];
-        }
     }
     return result;
 }
@@ -515,7 +537,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return 0;
     }
 
-    CGSize messageSize = [self sizeFor: @(interaction.body.c_str()) maxWidth:tableView.frame.size.width * 0.7];
+    NSString *text = @(interaction.body.c_str());
+    text = [text removeEmptyLinesAtBorders];
+
+    CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
     CGFloat singleLignMessageHeight = 15;
 
     bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
