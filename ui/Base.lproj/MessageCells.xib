@@ -20,19 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hwh-Yh-uCt">
-                                <rect key="frame" x="2" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="jI8-zo-QHh"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="Qqd-oo-D8X">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-S9-kZz">
-                                <rect key="frame" x="188" y="9" width="24" height="17"/>
+                                <rect key="frame" x="196" y="9" width="8" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="20" id="h3Y-F2-Nvs"/>
                                 </constraints>
@@ -42,27 +31,10 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eRd-Hj-IT1">
-                                <rect key="frame" x="230" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="B48-aY-cf8"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="lIV-gA-jEu">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="hwh-Yh-uCt" firstAttribute="centerY" secondItem="A5o-ge-tn7" secondAttribute="centerY" id="0if-zK-K77"/>
-                            <constraint firstItem="eRd-Hj-IT1" firstAttribute="centerY" secondItem="A5o-ge-tn7" secondAttribute="centerY" id="1cz-ku-LaP"/>
-                            <constraint firstItem="EyK-S9-kZz" firstAttribute="leading" secondItem="hwh-Yh-uCt" secondAttribute="trailing" constant="20" id="84I-sQ-NUX"/>
-                            <constraint firstAttribute="trailing" secondItem="eRd-Hj-IT1" secondAttribute="trailing" constant="2" id="LKA-54-hRe"/>
-                            <constraint firstItem="hwh-Yh-uCt" firstAttribute="leading" secondItem="A5o-ge-tn7" secondAttribute="leading" constant="2" id="UhH-8u-zlP"/>
                             <constraint firstItem="EyK-S9-kZz" firstAttribute="centerY" secondItem="A5o-ge-tn7" secondAttribute="centerY" id="Xhn-0Q-8PC"/>
                             <constraint firstItem="EyK-S9-kZz" firstAttribute="centerX" secondItem="A5o-ge-tn7" secondAttribute="centerX" id="YY7-Iv-pYJ"/>
-                            <constraint firstItem="eRd-Hj-IT1" firstAttribute="leading" secondItem="EyK-S9-kZz" secondAttribute="trailing" constant="20" id="tu5-Gx-vvn"/>
                         </constraints>
                     </view>
                     <constraints>
@@ -167,19 +139,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fgj-n7-0gT">
-                                <rect key="frame" x="2" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="mgI-qs-K95"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="WaT-eW-huB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JUf-er-n2R">
-                                <rect key="frame" x="188" y="9" width="24" height="17"/>
+                                <rect key="frame" x="196" y="9" width="8" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="20" id="c90-0g-OVN"/>
                                 </constraints>
@@ -189,27 +150,10 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hdp-Uj-WNT">
-                                <rect key="frame" x="230" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="7qX-zT-yJP"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="EfP-Tf-gfm">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="fgj-n7-0gT" firstAttribute="centerY" secondItem="vWe-2x-kXT" secondAttribute="centerY" id="39d-3g-AIX"/>
-                            <constraint firstItem="Hdp-Uj-WNT" firstAttribute="leading" secondItem="JUf-er-n2R" secondAttribute="trailing" constant="20" id="N9t-FS-hRw"/>
                             <constraint firstItem="JUf-er-n2R" firstAttribute="centerY" secondItem="vWe-2x-kXT" secondAttribute="centerY" id="YR9-c8-hTx"/>
-                            <constraint firstItem="JUf-er-n2R" firstAttribute="leading" secondItem="fgj-n7-0gT" secondAttribute="trailing" constant="20" id="bT5-G9-EOP"/>
-                            <constraint firstItem="Hdp-Uj-WNT" firstAttribute="centerY" secondItem="vWe-2x-kXT" secondAttribute="centerY" id="bnu-Si-BTg"/>
-                            <constraint firstAttribute="trailing" secondItem="Hdp-Uj-WNT" secondAttribute="trailing" constant="2" id="exH-Tb-yGx"/>
                             <constraint firstItem="JUf-er-n2R" firstAttribute="centerX" secondItem="vWe-2x-kXT" secondAttribute="centerX" id="fwY-z1-u4c"/>
-                            <constraint firstItem="fgj-n7-0gT" firstAttribute="leading" secondItem="vWe-2x-kXT" secondAttribute="leading" constant="2" id="nJZ-CB-tem"/>
                         </constraints>
                     </view>
                     <constraints>
@@ -308,19 +252,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FnD-zZ-o1F">
-                                <rect key="frame" x="2" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="C5N-90-PUE"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="iO5-pR-BHa">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sRg-94-yH1">
-                                <rect key="frame" x="188" y="9" width="24" height="17"/>
+                                <rect key="frame" x="196" y="9" width="8" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="20" id="mLV-uI-q6J"/>
                                 </constraints>
@@ -330,27 +263,10 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TQZ-fe-D3x">
-                                <rect key="frame" x="230" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="oAJ-3t-Kfa"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="A3l-7R-sEr">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="TQZ-fe-D3x" firstAttribute="centerY" secondItem="G6u-o0-5uR" secondAttribute="centerY" id="3a8-08-BVx"/>
                             <constraint firstItem="sRg-94-yH1" firstAttribute="centerX" secondItem="G6u-o0-5uR" secondAttribute="centerX" id="8c1-Tj-0GO"/>
-                            <constraint firstItem="sRg-94-yH1" firstAttribute="leading" secondItem="FnD-zZ-o1F" secondAttribute="trailing" constant="20" id="GSI-S2-Lek"/>
-                            <constraint firstItem="TQZ-fe-D3x" firstAttribute="leading" secondItem="sRg-94-yH1" secondAttribute="trailing" constant="20" id="Gi8-F8-PVS"/>
-                            <constraint firstItem="FnD-zZ-o1F" firstAttribute="leading" secondItem="G6u-o0-5uR" secondAttribute="leading" constant="2" id="MeX-Gb-qWD"/>
-                            <constraint firstAttribute="trailing" secondItem="TQZ-fe-D3x" secondAttribute="trailing" constant="2" id="e0M-Lo-Ofp"/>
                             <constraint firstItem="sRg-94-yH1" firstAttribute="centerY" secondItem="G6u-o0-5uR" secondAttribute="centerY" id="p0Z-I5-USk"/>
-                            <constraint firstItem="FnD-zZ-o1F" firstAttribute="centerY" secondItem="G6u-o0-5uR" secondAttribute="centerY" id="upC-91-USZ"/>
                         </constraints>
                     </view>
                     <constraints>
@@ -451,19 +367,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16V-ln-ss9">
-                                <rect key="frame" x="2" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="YYX-lP-ZNJ"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="JXW-G1-35n">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2IY-Tt-uAF">
-                                <rect key="frame" x="188" y="9" width="24" height="17"/>
+                                <rect key="frame" x="196" y="9" width="8" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="20" id="nTF-Xv-8ok"/>
                                 </constraints>
@@ -473,27 +378,10 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MJO-J2-HCJ">
-                                <rect key="frame" x="230" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="RN3-qS-RPr"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="F80-Wf-vKb">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="16V-ln-ss9" firstAttribute="leading" secondItem="zwm-oF-RvK" secondAttribute="leading" constant="2" id="G6r-JS-qJ4"/>
-                            <constraint firstItem="MJO-J2-HCJ" firstAttribute="leading" secondItem="2IY-Tt-uAF" secondAttribute="trailing" constant="20" id="RG4-d1-WK6"/>
                             <constraint firstItem="2IY-Tt-uAF" firstAttribute="centerX" secondItem="zwm-oF-RvK" secondAttribute="centerX" id="Tt5-98-7WH"/>
-                            <constraint firstItem="2IY-Tt-uAF" firstAttribute="leading" secondItem="16V-ln-ss9" secondAttribute="trailing" constant="20" id="VrH-ro-ZGY"/>
-                            <constraint firstItem="16V-ln-ss9" firstAttribute="centerY" secondItem="zwm-oF-RvK" secondAttribute="centerY" id="XLA-pj-suG"/>
-                            <constraint firstItem="MJO-J2-HCJ" firstAttribute="centerY" secondItem="zwm-oF-RvK" secondAttribute="centerY" id="gqF-e3-Iib"/>
                             <constraint firstItem="2IY-Tt-uAF" firstAttribute="centerY" secondItem="zwm-oF-RvK" secondAttribute="centerY" id="tNc-uW-aBn"/>
-                            <constraint firstAttribute="trailing" secondItem="MJO-J2-HCJ" secondAttribute="trailing" constant="2" id="wSy-qz-jmi"/>
                         </constraints>
                     </view>
                     <constraints>
@@ -588,19 +476,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vft-hx-jRL">
-                                <rect key="frame" x="2" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="PWs-Ka-fpT"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="0rt-2a-vc8">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Od3-Cq-LmR">
-                                <rect key="frame" x="188" y="9" width="24" height="17"/>
+                                <rect key="frame" x="196" y="9" width="8" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="20" id="RoH-7v-RcD"/>
                                 </constraints>
@@ -610,27 +487,10 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ODz-rY-AYz">
-                                <rect key="frame" x="230" y="17" width="168" height="1"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.5" id="6aw-Wd-s4z"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" id="C0p-Lu-2bg">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Od3-Cq-LmR" firstAttribute="leading" secondItem="vft-hx-jRL" secondAttribute="trailing" constant="20" id="FmW-kw-khk"/>
                             <constraint firstItem="Od3-Cq-LmR" firstAttribute="centerX" secondItem="Jbl-ZD-fCi" secondAttribute="centerX" id="YbB-7M-3ST"/>
-                            <constraint firstItem="vft-hx-jRL" firstAttribute="centerY" secondItem="Jbl-ZD-fCi" secondAttribute="centerY" id="aHg-Xy-yYu"/>
                             <constraint firstItem="Od3-Cq-LmR" firstAttribute="centerY" secondItem="Jbl-ZD-fCi" secondAttribute="centerY" id="kla-ao-cdw"/>
-                            <constraint firstItem="vft-hx-jRL" firstAttribute="leading" secondItem="Jbl-ZD-fCi" secondAttribute="leading" constant="2" id="m2A-fV-jOH"/>
-                            <constraint firstItem="ODz-rY-AYz" firstAttribute="leading" secondItem="Od3-Cq-LmR" secondAttribute="trailing" constant="20" id="ts6-Dr-zgK"/>
-                            <constraint firstAttribute="trailing" secondItem="ODz-rY-AYz" secondAttribute="trailing" constant="2" id="wk4-po-Mf8"/>
-                            <constraint firstItem="ODz-rY-AYz" firstAttribute="centerY" secondItem="Jbl-ZD-fCi" secondAttribute="centerY" id="yPI-DP-KSF"/>
                         </constraints>
                     </view>
                     <constraints>
