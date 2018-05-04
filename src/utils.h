@@ -18,7 +18,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "NSString + Extensions.h"
+#import "NSString+Extensions.h"
 #import <api/conversation.h>
 #import <api/conversationmodel.h>
 #import <api/account.h>
