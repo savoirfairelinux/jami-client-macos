@@ -21,6 +21,7 @@
 #import "ChatVC.h"
 
 #import "MessagesVC.h"
+#import "NSString + Extensions.h"
 
 @interface ChatVC ()
 {
@@ -66,6 +67,7 @@
     /* make sure there is text to send */
     NSString* text = self.message;
     if (text && text.length > 0) {
+        text = [text removeEmptyLinesAtBorders];
         convModel_->sendMessage(convUid_, std::string([text UTF8String]));
         self.message = @"";
         [messageField setStringValue:@""];
