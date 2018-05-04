@@ -21,7 +21,6 @@
 
 
 //Cocoa
-#import <AddressBook/AddressBook.h>
 
 //LRC
 #import <accountmodel.h>
