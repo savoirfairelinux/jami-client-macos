@@ -41,6 +41,7 @@
 #import "MessagesVC.h"
 #import "utils.h"
 #import "RingWindowController.h"
+#import "NSString+Extensions.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -86,6 +87,10 @@
         delegate = mainWindow;
     }
     return self;
+}
+
+- (void)setMessage:(NSString *)newValue {
+    _message = [newValue removeEmptyLinesAtBorders];
 }
 
 -(void) clearData {
