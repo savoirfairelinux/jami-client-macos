@@ -56,6 +56,21 @@
 return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 alpha:0.3];
 }
 
++ (NSColor*) errorColor
+{
+    return [NSColor colorWithCalibratedRed:255/255.0 green:102/255.0 blue:102/255.0 alpha:1];
+}
+
++ (NSColor*) errorTransferColor
+{
+    return [NSColor colorWithCalibratedRed:204/255.0 green:51/255.0 blue:51/255.0 alpha:1];
+}
+
++ (NSColor*) greenSuccessColor
+{
+    return [NSColor colorWithCalibratedRed:0/255.0 green:178/255.0 blue:11/255.0 alpha:1];
+}
+
 - (NSColor *)lightenColorByValue:(float)value {
     float red = [self redComponent];
     red += value;
