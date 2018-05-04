@@ -427,7 +427,21 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         type = LAST;
     }
     result.msgBackground.type = type;
-    [result setupForInteraction:it->first];
+    bool sendingFail = false;
+    [result.messageStatus setHidden:YES];
+    if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
+        if (interaction.status == lrc::api::interaction::Status::SENDING) {
+            [result.messageStatus setHidden:NO];
+            [result.sendingMessageIndicator startAnimation:nil];
+            [result.messageFailed setHidden:YES];
+        } else if (interaction.status == lrc::api::interaction::Status::FAILED) {
+            [result.messageStatus setHidden:NO];
+            [result.sendingMessageIndicator setHidden:YES];
+            [result.messageFailed setHidden:NO];
+            sendingFail = true;
+        }
+    }
+    [result setupForInteraction:it->first isFailed: sendingFail];
     bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
     bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
     [result.msgBackground setNeedsDisplay:YES];
@@ -456,18 +470,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (!isOutgoing && shouldDisplayAvatar) {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
-    }
-    [result.messageStatus setHidden:YES];
-    if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
-        if (interaction.status == lrc::api::interaction::Status::SENDING) {
-            [result.messageStatus setHidden:NO];
-            [result.sendingMessageIndicator startAnimation:nil];
-            [result.messageFailed setHidden:YES];
-        } else if (interaction.status == lrc::api::interaction::Status::FAILED) {
-            [result.messageStatus setHidden:NO];
-            [result.sendingMessageIndicator setHidden:YES];
-            [result.messageFailed setHidden:NO];
-        }
     }
     return result;
 }

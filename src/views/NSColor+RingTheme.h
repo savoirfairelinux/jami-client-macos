@@ -30,6 +30,7 @@
 + (NSColor*) ringGreyHighlight;
 + (NSColor*) ringGreyLight;
 + (NSColor*) ringDarkGrey;
++ (NSColor*) errorColor;
 
 - (NSColor *)lightenColorByValue:(float)value;
 - (NSColor *)darkenColorByValue:(float)value;

@@ -40,6 +40,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     if ([self.identifier containsString:@"Right"]) {
         self.msgBackground.pointerDirection = RIGHT;
         self.msgBackground.bgColor = [NSColor ringLightBlue];
+        self.messageFailed.image = [NSColor image: [NSImage imageNamed:@"ic_action_cancel.png"] tintedWithColor:[[NSColor errorColor] lightenColorByValue:0.05]];
     }
     else {
         self.msgBackground.pointerDirection = LEFT;
@@ -59,6 +60,14 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [self.msgView setAutomaticLinkDetectionEnabled:YES];
     [self.msgView setEditable:NO];
 }
+
+- (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed {
+    [self setupForInteraction:inter];
+    if (failed) {
+       self.msgBackground.bgColor = [[NSColor errorColor] lightenColorByValue:0.2];
+    }
+}
+
 
 - (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding
 {
