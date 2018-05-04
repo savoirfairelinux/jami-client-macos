@@ -19,7 +19,6 @@
 
 #import "RingWizardLinkAccountVC.h"
 //Cocoa
-#import <AddressBook/AddressBook.h>
 #import <Quartz/Quartz.h>
 
 //Qt
