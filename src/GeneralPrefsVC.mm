@@ -52,6 +52,7 @@
     __unsafe_unretained IBOutlet NSButton* historySwitch;
     __unsafe_unretained IBOutlet NSButton* photoView;
     __unsafe_unretained IBOutlet NSTextField* profileNameField;
+    __unsafe_unretained IBOutlet NSImageView* addProfilePhotoImage;
 }
 @end
 
@@ -86,13 +87,19 @@
     [photoView setWantsLayer: YES];
     photoView.layer.cornerRadius = photoView.frame.size.width / 2;
     photoView.layer.masksToBounds = YES;
+    [addProfilePhotoImage setWantsLayer: YES];
+    [addProfilePhotoImage setHidden:NO];
+    [photoView setBordered:YES];
 
     if (auto pro = ProfileModel::instance().selectedProfile()) {
-        auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
-        [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
         [profileNameField setStringValue:pro->person()->formattedName().toNSString()];
+        if (pro->person() && pro->person()->photo().isValid()) {
+            auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
+            [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+            [addProfilePhotoImage setHidden:YES];
+            [photoView setBordered:NO];
+        }
     }
-
 }
 
 - (void) dealloc
@@ -207,15 +214,19 @@
 {
     if (auto outputImage = [picker outputImage]) {
         [photoView setImage:outputImage];
-    } else
-        [photoView setImage:[NSImage imageNamed:@"default_user_icon"]];
-    if (auto pro = ProfileModel::instance().selectedProfile()) {
-        QPixmap p;
-        auto smallImg = [NSImage imageResize:[photoView image] newSize:{100,100}];
-        if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
-            pro->person()->setPhoto(QVariant(p));
+        [addProfilePhotoImage setHidden:YES];
+        [photoView setBordered:NO];
+        if (auto pro = ProfileModel::instance().selectedProfile()) {
+            QPixmap p;
+            auto smallImg = [NSImage imageResize:outputImage newSize:{100,100}];
+            if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
+                pro->person()->setPhoto(QVariant(p));
+            }
+            pro->save();
         }
-        pro->save();
+    } else if (!photoView.image){
+        [addProfilePhotoImage setHidden:NO];
+        [photoView setBordered:YES];
     }
 }
 
