@@ -19,7 +19,6 @@
 #import "RingWizardWC.h"
 
 //Cocoa
-#import <AddressBook/AddressBook.h>
 #import <Quartz/Quartz.h>
 
 

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPrefsVC">
             <connections>
+                <outlet property="addProfilePhotoImage" destination="3l7-TU-AMG" id="oQC-jN-JV0"/>
                 <outlet property="checkIntervalPopUp" destination="RYP-3d-PCa" id="JNO-GR-CV8"/>
                 <outlet property="historyChangedLabel" destination="Gyi-ID-Z3v" id="aoO-Fh-UCQ"/>
                 <outlet property="historyStepper" destination="QmA-ZI-ZL5" id="dDV-1G-rZs"/>
@@ -26,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="502" height="421"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField toolTip="Profile" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MV1-AC-qE7">
+                <textField toolTip="Profile" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MV1-AC-qE7">
                     <rect key="frame" x="30" y="384" width="79" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="75" id="Nj8-qG-TRL"/>
@@ -37,8 +38,8 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mjw-8U-dzO">
-                    <rect key="frame" x="210" y="305" width="197" height="22"/>
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mjw-8U-dzO">
+                    <rect key="frame" x="211" y="306" width="197" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="197" id="pDD-Xk-k4K"/>
                     </constraints>
@@ -64,7 +65,7 @@
                         <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_notifications" id="PuD-KZ-Zat"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j3T-5j-Fom">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j3T-5j-Fom">
                     <rect key="frame" x="30" y="256" width="449" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Behaviours" id="Rzy-Gh-3wQ">
                         <font key="font" metaFont="systemBold"/>
@@ -108,7 +109,7 @@
                         <binding destination="Sz0-vm-i3t" name="value" keyPath="values.history_limit" id="c2j-mK-kYa"/>
                     </connections>
                 </stepper>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHZ-7Q-5iP">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHZ-7Q-5iP">
                     <rect key="frame" x="202" y="123" width="40" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="Qal-Za-gWz"/>
@@ -126,7 +127,7 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nah-Jm-ZYB">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nah-Jm-ZYB">
                     <rect key="frame" x="269" y="125" width="33" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="08C-IP-5pg"/>
@@ -153,7 +154,7 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yVO-jk-ay3">
                     <rect key="frame" x="20" y="20" width="462" height="61"/>
                     <subviews>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="diX-uH-Ce8">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diX-uH-Ce8">
                             <rect key="frame" x="18" y="44" width="52" height="17"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Update" id="r4u-t3-gBc">
                                 <font key="font" metaFont="systemBold"/>
@@ -201,7 +202,7 @@
                         <constraint firstItem="diX-uH-Ce8" firstAttribute="top" secondItem="yVO-jk-ay3" secondAttribute="top" id="uF2-Tp-YBe"/>
                     </constraints>
                 </customView>
-                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-ID-Z3v">
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-ID-Z3v">
                     <rect key="frame" x="306" y="126" width="171" height="14"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="(Applied on application restart)" id="OTl-vx-S43">
                         <font key="font" metaFont="smallSystem"/>
@@ -209,7 +210,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="NO" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fC0-ce-Yiz">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fC0-ce-Yiz">
                     <rect key="frame" x="18" y="147" width="399" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="395" id="6HO-p7-tAk"/>
@@ -229,20 +230,21 @@
                         <binding destination="Sz0-vm-i3t" name="value" keyPath="values.window_behaviour" id="ZSW-he-LAz"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="L6I-bx-LnN">
-                    <rect key="frame" x="132" y="281" width="70" height="70"/>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L6I-bx-LnN">
+                    <rect key="frame" x="132" y="281" width="71" height="70"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="70" id="gAI-0Z-pME"/>
+                        <constraint firstAttribute="height" constant="70" id="RFb-D4-827"/>
+                        <constraint firstAttribute="width" constant="71" id="gAI-0Z-pME"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSUser" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8lT-0k-EYB">
+                    <buttonCell key="cell" type="inline" bezelStyle="inline" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="8lT-0k-EYB">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
                     <connections>
                         <action selector="editPhoto:" target="-2" id="VuT-vf-PDV"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c9L-Qb-bNK">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9L-Qb-bNK">
                     <rect key="frame" x="42" y="359" width="482" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="This is shared with your contacts " id="vbU-2S-O58">
                         <font key="font" metaFont="system"/>
@@ -250,6 +252,14 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3l7-TU-AMG">
+                    <rect key="frame" x="153" y="302" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="3dM-RS-1SR"/>
+                        <constraint firstAttribute="width" constant="30" id="San-2A-6Wv"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_picture" id="crR-s1-YoQ"/>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="QmA-ZI-ZL5" firstAttribute="centerY" secondItem="nah-Jm-ZYB" secondAttribute="centerY" id="2CN-A5-Lfs"/>
@@ -262,6 +272,7 @@
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="Is4-pD-LOT" secondAttribute="leading" id="Fdb-2p-ULe"/>
                 <constraint firstItem="c9L-Qb-bNK" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="44" id="Fei-kE-ggH"/>
                 <constraint firstItem="c9L-Qb-bNK" firstAttribute="trailing" secondItem="yVO-jk-ay3" secondAttribute="trailing" constant="40" id="GMc-d7-Qoe"/>
+                <constraint firstItem="3l7-TU-AMG" firstAttribute="centerY" secondItem="L6I-bx-LnN" secondAttribute="centerY" id="Hqj-y0-lOR"/>
                 <constraint firstItem="1Nr-L4-fcd" firstAttribute="top" secondItem="Is4-pD-LOT" secondAttribute="bottom" constant="13" id="IQl-Me-RRm"/>
                 <constraint firstItem="nah-Jm-ZYB" firstAttribute="leading" secondItem="QmA-ZI-ZL5" secondAttribute="trailing" constant="8" id="JJi-0O-nUi"/>
                 <constraint firstItem="tHZ-7Q-5iP" firstAttribute="top" secondItem="QmA-ZI-ZL5" secondAttribute="top" id="Jrk-f0-97K"/>
@@ -274,6 +285,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gyi-ID-Z3v" secondAttribute="trailing" constant="20" id="Z4C-x5-1Op"/>
                 <constraint firstItem="DgD-2y-4g5" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="58" id="aPM-dp-Eym"/>
                 <constraint firstAttribute="bottom" secondItem="yVO-jk-ay3" secondAttribute="bottom" constant="20" id="bAA-rc-QhB"/>
+                <constraint firstItem="3l7-TU-AMG" firstAttribute="centerX" secondItem="L6I-bx-LnN" secondAttribute="centerX" id="bNA-y1-w4O"/>
                 <constraint firstItem="tHZ-7Q-5iP" firstAttribute="leading" secondItem="DgD-2y-4g5" secondAttribute="trailing" constant="8" id="bV5-ZQ-94d"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="1Nr-L4-fcd" secondAttribute="leading" id="csu-Ug-9sD"/>
                 <constraint firstItem="MV1-AC-qE7" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="eb5-W0-5Yr"/>
@@ -297,6 +309,6 @@
         <customObject id="VEJ-ic-3Ub" customClass="SUUpdater"/>
     </objects>
     <resources>
-        <image name="NSUser" width="32" height="32"/>
+        <image name="ic_picture" width="72" height="72"/>
     </resources>
 </document>
