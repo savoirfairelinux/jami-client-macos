@@ -171,6 +171,7 @@ SET(ringclient_CONTROLLERS
    src/MessagesVC.mm
    src/PasswordChangeWC.h
    src/PasswordChangeWC.mm
+   src/LrcModelsSProtocol.h
 )
 
 SET(ringclient_BACKENDS
@@ -277,6 +278,7 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 
 SET(ring_ICONS
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_attachment.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/default_avatar_overlay.png

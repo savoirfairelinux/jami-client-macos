@@ -35,7 +35,6 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
-#import "NSString+Extensions.h"
 
 
 @interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource> {
@@ -205,25 +204,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                                convModel_->refreshFilter();
                                                            }
                                                            [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
-                                                           //accept incoming transfer
-                                                           if (interaction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER &&
-                                                               (interaction.status == lrc::api::interaction::Status::TRANSFER_AWAITING_HOST ||
-                                                                interaction.status == lrc::api::interaction::Status::TRANSFER_CREATED)) {
-                                                                   lrc::api::datatransfer::Info info = {};
-                                                                   convModel_->getTransferInfo(interactionId, info);
-                                                                   double convertData = static_cast<double>(info.totalSize);
-                                                                   NSString* pathUrl =  @(info.displayName.c_str());
-                                                                   
-                                                                   NSString* fileExtension = pathUrl.pathExtension;
-                                                                   
-                                                                   CFStringRef utiType = UTTypeCreatePreferredIdentifierForTag(
-                                                                                                                               kUTTagClassFilenameExtension, (__bridge CFStringRef)fileExtension, NULL);
-                                                                   
-                                                                   bool isImage = UTTypeConformsTo(utiType, kUTTypeImage);
-                                                                   if( convertData <= 10485760 && isImage) {
-                                                                       [self acceptFile:interactionId];
-                                                                   }
-                                                               }
                                                        });
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
@@ -336,13 +316,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [result invalidateImageConstraints];
     NSString* name =  @(interaction.body.c_str());
     if (name.length > 0) {
-        if (([name rangeOfString:@"/"].location != NSNotFound)) {
-            NSArray *listItems = [name componentsSeparatedByString:@"/"];
-            NSString* name1 = listItems.lastObject;
-            fileName = name1;
-        } else {
-            fileName = name;
-        }
+       fileName = [name lastPathComponent];
     }
     result.transferedFileName.stringValue = fileName;
     if (status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
@@ -754,19 +728,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [aMutableParagraphStyle setHeadIndent:1.0];
     [aMutableParagraphStyle setFirstLineHeadIndent:1.0];
     return aMutableParagraphStyle;
-}
-
-- (void)acceptFile:(uint64_t)interactionID {
-    NSURL *downloadsURL = [[NSFileManager defaultManager]
-                           URLForDirectory:NSDownloadsDirectory
-                           inDomain:NSUserDomainMask appropriateForURL:nil
-                           create:YES error:nil];
-    auto& inter = [self getCurrentConversation]->interactions.find(interactionID)->second;
-    if (convModel_ && !convUid_.empty()) {
-         NSURL *bUrl = [downloadsURL URLByAppendingPathComponent:@(inter.body.c_str())];
-        const char* fullPath = [bUrl fileSystemRepresentation];
-        convModel_->acceptTransfer(convUid_, interactionID, fullPath);
-    }
 }
 
 #pragma mark - Actions

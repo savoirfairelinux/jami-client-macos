@@ -18,9 +18,10 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsSProtocol.h"
 
 #import <account.h>
 
-@interface AccRingVC : NSViewController <NSTextFieldDelegate>
+@interface AccRingVC : NSViewController <NSTextFieldDelegate, LrcModelsSProtocol>
 
 @end

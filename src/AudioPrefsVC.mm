@@ -42,6 +42,9 @@
 @synthesize alwaysRecordingButton;
 @synthesize muteDTMFButton;
 
+-(id) initWithNibName:(NSNibName)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    return [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+}
 - (void)loadView
 {
     [super loadView];
