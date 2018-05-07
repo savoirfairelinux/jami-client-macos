@@ -119,7 +119,7 @@ NSInteger const REQUEST_SEG         = 1;
     selectorIsPresent = true;
 
     smartView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
-    
+
 }
 
 - (void)placeCall:(id)sender
@@ -506,11 +506,7 @@ NSInteger const REQUEST_SEG         = 1;
         lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString stringByReplacingOccurrencesOfString:@"📞" withString:@""];
         if (conversation.interactions[lastUid].type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER
             || conversation.interactions[lastUid].type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER) {
-            if (([lastInteractionSnippetFixedString rangeOfString:@"/"].location != NSNotFound)) {
-                NSArray *listItems = [lastInteractionSnippetFixedString componentsSeparatedByString:@"/"];
-                NSString* name = listItems.lastObject;
-                lastInteractionSnippetFixedString = name;
-            }
+            lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString lastPathComponent];
         }
         [interactionSnippet setStringValue:lastInteractionSnippetFixedString];
 

@@ -87,6 +87,7 @@
 @synthesize accountModal;
 @synthesize wizard;
 @synthesize bannedListTabItem;
+@synthesize dataTransferModel;
 
 NSInteger const TAG_CHECK       =   100;
 NSInteger const TAG_NAME        =   200;
@@ -95,9 +96,17 @@ NSInteger const TAG_TYPE        =   400;
 
 QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnection, accountTypeChangedConnection;
 
-
-- (void)awakeFromNib
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::DataTransferModel*) dataTransferModel
 {
+    if (self =  [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.dataTransferModel = dataTransferModel;
+    }
+    return self;
+}
+
+- (void)loadView {
+    [super loadView];
     treeController = [[QNSTreeController alloc] initWithQModel:&AccountModel::instance()];
     [treeController setAvoidsEmptySelection:NO];
     [treeController setAlwaysUsesMultipleValuesMarker:YES];
@@ -111,24 +120,24 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
     QObject::disconnect(selectedAccountChangedConnection);
 
     accountChangedConnection = QObject::connect(&AccountModel::instance(),
-                     &QAbstractItemModel::dataChanged,
-                     [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
-                        [accountsListView reloadDataForRowIndexes:
-                        [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
-                        columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, accountsListView.tableColumns.count)]];
-                     });
+                                                &QAbstractItemModel::dataChanged,
+                                                [=](const QModelIndex &topLeft, const QModelIndex &bottomRight) {
+                                                    [accountsListView reloadDataForRowIndexes:
+                                                     [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(topLeft.row(), bottomRight.row() + 1)]
+                                                                                columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, accountsListView.tableColumns.count)]];
+                                                });
 
     selectedAccountChangedConnection = QObject::connect(AccountModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         [accountDetailsView setHidden:!current.isValid()];
-                         if(!current.isValid()) {
-                             [accountsListView deselectAll:nil];
-                             return;
-                         }
+                                                        &QItemSelectionModel::currentChanged,
+                                                        [=](const QModelIndex &current, const QModelIndex &previous) {
+                                                            [accountDetailsView setHidden:!current.isValid()];
+                                                            if(!current.isValid()) {
+                                                                [accountsListView deselectAll:nil];
+                                                                return;
+                                                            }
 
-                        [treeController setSelectionQModelIndex:current];
-                     });
+                                                            [treeController setSelectionQModelIndex:current];
+                                                        });
     AccountModel::instance().selectionModel()->clearCurrentIndex();
 
 
@@ -137,14 +146,14 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
                            AccountModel::instance().protocolModel()->data(qProtocolIdx, Qt::DisplayRole).toString().toNSString()];
     QObject::disconnect(accountTypeChangedConnection);
     accountTypeChangedConnection = QObject::connect(AccountModel::instance().protocolModel()->selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if (!current.isValid()) {
-                             return;
-                         }
-                         [protocolList removeAllItems];
-                         [protocolList addItemWithTitle:AccountModel::instance().protocolModel()->data(current, Qt::DisplayRole).toString().toNSString()];
-                     });
+                                                    &QItemSelectionModel::currentChanged,
+                                                    [=](const QModelIndex &current, const QModelIndex &previous) {
+                                                        if (!current.isValid()) {
+                                                            return;
+                                                        }
+                                                        [protocolList removeAllItems];
+                                                        [protocolList addItemWithTitle:AccountModel::instance().protocolModel()->data(current, Qt::DisplayRole).toString().toNSString()];
+                                                    });
 
     self.generalVC = [[AccGeneralVC alloc] initWithNibName:@"AccGeneral" bundle:nil];
     [[self.generalVC view] setFrame:[self.generalTabItem.view frame]];
@@ -166,7 +175,7 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
     [[self.securityVC view] setBounds:[self.securityTabItem.view bounds]];
     [self.securityTabItem setView:self.securityVC.view];
 
-    self.ringVC = [[AccRingVC alloc] initWithNibName:@"AccRing" bundle:nil];
+    self.ringVC = [[AccRingVC alloc] initWithNibName:@"AccRing" bundle:nil model: self.dataTransferModel];
     [[self.ringVC view] setFrame:[self.ringTabItem.view frame]];
     [[self.ringVC view] setBounds:[self.ringTabItem.view bounds]];
     [self.ringTabItem setView:self.ringVC.view];

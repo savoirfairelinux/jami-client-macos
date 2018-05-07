@@ -23,6 +23,9 @@
 
 #import "RegisterNameWC.h"
 #import "PasswordChangeWC.h"
+#import "Constants.h"
+
+#import <api/datatransfermodel.h>
 
 @interface AccRingVC () <RegisterNameDelegate>
 
@@ -40,6 +43,8 @@
 @property (unsafe_unretained) IBOutlet NSButton *allowUnknown;
 @property (unsafe_unretained) IBOutlet NSButton *allowHistory;
 @property (unsafe_unretained) IBOutlet NSButton *allowContacts;
+@property (unsafe_unretained) IBOutlet NSButton *downloadFolder;
+
 
 @property AbstractLoadingWC* accountModal;
 @property PasswordChangeWC* passwordModal;
@@ -56,6 +61,7 @@
 @synthesize userAgentButton;
 @synthesize userAgentTextField;
 @synthesize allowContacts, allowHistory, allowUnknown;
+@synthesize dataTransferModel;
 
 typedef NS_ENUM(NSInteger, TagViews) {
     ALIAS = 0,
@@ -63,6 +69,15 @@ typedef NS_ENUM(NSInteger, TagViews) {
     USERAGENT,
     BLOCKCHAIN,
 };
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::DataTransferModel*) dataTransferModel
+{
+    if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.dataTransferModel = dataTransferModel;
+    }
+    return self;
+}
 
 - (void)awakeFromNib
 {
@@ -112,6 +127,9 @@ typedef NS_ENUM(NSInteger, TagViews) {
     }
 
     [self refreshRegisteredName:account];
+    if (dataTransferModel) {
+        self.downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+    }
 }
 
 - (void) refreshRegisteredName:(Account*) account
@@ -173,6 +191,19 @@ typedef NS_ENUM(NSInteger, TagViews) {
 }
 - (IBAction)toggleAllowFromContacts:(id)sender {
     AccountModel::instance().selectedAccount()->setAllowIncomingFromContact([sender state] == NSOnState);
+}
+- (IBAction)changeDownloadFolder:(id)sender {
+
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setAllowsMultipleSelection:NO];
+    [panel setCanChooseDirectories:YES];
+    [panel setCanChooseFiles:NO];
+    if ([panel runModal] != NSFileHandlingPanelOKButton) return;
+    if ([[panel URLs] lastObject] == nil) return;
+    NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
+    dataTransferModel->downloadDirectory = std::string([path UTF8String]);
+    self.downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+    [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
 }
 
 #pragma mark - NSTextFieldDelegate methods
