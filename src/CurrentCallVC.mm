@@ -34,6 +34,8 @@
 #import <api/newcallmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
+#import <accountmodel.h>
+#import <codecmodel.h>
 #import <globalinstances.h>
 
 #import "AppDelegate.h"
@@ -43,6 +45,7 @@
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
 #import "BrokerVC.h"
+#import "VideoQualityVC.h"
 #import "views/IconButton.h"
 #import "views/CallLayer.h"
 #import "utils.h"
@@ -89,6 +92,7 @@
 @property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
+@property (unsafe_unretained) IBOutlet IconButton* qualityButton;
 
 @property (unsafe_unretained) IBOutlet NSView* advancedPanel;
 @property (unsafe_unretained) IBOutlet IconButton* advancedButton;
@@ -100,6 +104,7 @@
 
 @property (strong) NSPopover* addToContactPopover;
 @property (strong) NSPopover* brokerPopoverVC;
+@property (strong) NSPopover* videoQualityPopoverVC;
 @property (strong) IBOutlet ChatVC* chatVC;
 
 // Ringing call panel
@@ -354,6 +359,7 @@
                                              [videoView setShouldAcceptInteractions:YES];
                                              [self mouseIsMoving: NO];
                                              [self connectVideoRenderer:renderer];
+                                             setVideoQuality(true, 50.0, accountInfo_->id);
                                          });
 
     if (callModel->hasCall(callUid_)) {
@@ -771,6 +777,24 @@
     }
 }
 
+- (IBAction)toggleQualityView:(id)sender {
+    if (_videoQualityPopoverVC != nullptr) {
+        [_videoQualityPopoverVC performClose:self];
+        _videoQualityPopoverVC = NULL;
+        [self.qualityButton setPressed:NO];
+    } else {
+        auto* videoQualityVC = [[VideoQualityVC alloc] init];
+        _videoQualityPopoverVC = [[NSPopover alloc] init];
+        [_videoQualityPopoverVC setContentSize:videoQualityVC.view.frame.size];
+        [_videoQualityPopoverVC setContentViewController:videoQualityVC];
+        [_videoQualityPopoverVC setAnimates:YES];
+        [_videoQualityPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [_videoQualityPopoverVC setDelegate:self];
+        [_videoQualityPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+        [videoView setCallDelegate:nil];
+    }
+}
+
 /**
  *  Merge current call with its parent call
  */
@@ -794,8 +818,14 @@
         self.addToContactPopover = NULL;
     }
 
+    if (_videoQualityPopoverVC != nullptr) {
+        [_videoQualityPopoverVC performClose:self];
+        _videoQualityPopoverVC = NULL;
+    }
+
     [self.addContactButton setPressed:NO];
     [self.transferButton setPressed:NO];
+    [self.qualityButton setPressed:NO];
     [self.addParticipantButton setState:NSOffState];
 }
 
