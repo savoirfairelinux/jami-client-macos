@@ -17,14 +17,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+#import <map>
+
 #import <Foundation/Foundation.h>
 #import "NSString+Extensions.h"
+
+// new lrc
 #import <api/conversation.h>
 #import <api/conversationmodel.h>
 #import <api/account.h>
 #import <api/contactmodel.h>
 #import <api/contact.h>
-#import <map>
+
+// old lrc
+#import <QSortFilterProxyModel>
+#import <accountmodel.h>
+#import <codecmodel.h>
 
 static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
@@ -76,4 +84,42 @@ static inline lrc::api::ConversationModel::ConversationQueue::const_iterator get
                         [&] (const lrc::api::conversation::Info& conv) {
                             return uid == conv.uid;
                         });
+}
+
+static inline void
+setVideoQuality(bool autoQuality, double desiredQuality, std::string accountId)
+{
+    auto thisAccount = AccountModel::instance().getById(QByteArray::fromStdString(accountId));
+    if (const auto& codecModel = thisAccount->codecModel()) {
+        const auto& videoCodecs = codecModel->videoCodecs();
+        for (int i=0; i < videoCodecs->rowCount();i++) {
+            const auto& idx = videoCodecs->index(i,0);
+
+            if (autoQuality) {
+                videoCodecs->setData(idx, "true", CodecModel::Role::AUTO_QUALITY_ENABLED);
+            } else {
+                auto min_bitrate = idx.data(static_cast<int>(CodecModel::Role::MIN_BITRATE)).toInt();
+                auto max_bitrate = idx.data(static_cast<int>(CodecModel::Role::MAX_BITRATE)).toInt();
+                auto min_quality = idx.data(static_cast<int>(CodecModel::Role::MIN_QUALITY)).toInt();
+                auto max_quality = idx.data(static_cast<int>(CodecModel::Role::MAX_QUALITY)).toInt();
+
+                double bitrate;
+                bitrate = min_bitrate + (double)(max_bitrate - min_bitrate) * (desiredQuality / 100.0);
+                if (bitrate < 0) {
+                    bitrate = 0;
+                }
+
+                double quality; // note: a lower value means higher quality
+                quality = (double)min_quality - (min_quality - max_quality) * (desiredQuality / 100.0);
+                if (quality < 0) {
+                    quality = 0;
+                }
+
+                videoCodecs->setData(idx, "false", CodecModel::Role::AUTO_QUALITY_ENABLED);
+                videoCodecs->setData(idx, QString::number((int)bitrate), CodecModel::Role::BITRATE);
+                videoCodecs->setData(idx, QString::number((int)quality), CodecModel::Role::QUALITY);
+            }
+        }
+        codecModel << CodecModel::EditAction::SAVE;
+    }
 }
