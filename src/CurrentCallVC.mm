@@ -34,6 +34,8 @@
 #import <api/newcallmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
+#import <accountmodel.h>
+#import <codecmodel.h>
 #import <globalinstances.h>
 
 #import "AppDelegate.h"
@@ -43,6 +45,7 @@
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
 #import "BrokerVC.h"
+#import "VideoQualityVC.h"
 #import "views/IconButton.h"
 #import "views/CallLayer.h"
 #import "utils.h"
@@ -89,6 +92,7 @@
 @property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
+@property (unsafe_unretained) IBOutlet IconButton* qualityButton;
 
 @property (unsafe_unretained) IBOutlet NSView* advancedPanel;
 @property (unsafe_unretained) IBOutlet IconButton* advancedButton;
@@ -100,6 +104,7 @@
 
 @property (strong) NSPopover* addToContactPopover;
 @property (strong) NSPopover* brokerPopoverVC;
+@property (strong) NSPopover* videoQualityPopoverVC;
 @property (strong) IBOutlet ChatVC* chatVC;
 
 // Ringing call panel
@@ -354,6 +359,7 @@
                                              [videoView setShouldAcceptInteractions:YES];
                                              [self mouseIsMoving: NO];
                                              [self connectVideoRenderer:renderer];
+                                             [self setVideoQuality:true :50.0];
                                          });
 
     if (callModel->hasCall(callUid_)) {
@@ -364,6 +370,43 @@
     }
     [self connectPreviewRenderer];
 
+}
+
+-(void) setVideoQuality:(BOOL)autoQuality :(double)desiredQuality
+{
+    auto thisAccount = AccountModel::instance().getById(QByteArray::fromStdString(accountInfo_->id));
+    if (const auto& codecModel = thisAccount->codecModel()) {
+        const auto& videoCodecs = codecModel->videoCodecs();
+        for (int i=0; i < videoCodecs->rowCount();i++) {
+            const auto& idx = videoCodecs->index(i,0);
+
+            if (autoQuality) {
+                videoCodecs->setData(idx, "true", CodecModel::Role::AUTO_QUALITY_ENABLED);
+            } else {
+                auto min_bitrate = idx.data(static_cast<int>(CodecModel::Role::MIN_BITRATE)).toInt();
+                auto max_bitrate = idx.data(static_cast<int>(CodecModel::Role::MAX_BITRATE)).toInt();
+                auto min_quality = idx.data(static_cast<int>(CodecModel::Role::MIN_QUALITY)).toInt();
+                auto max_quality = idx.data(static_cast<int>(CodecModel::Role::MAX_QUALITY)).toInt();
+
+                double bitrate;
+                bitrate = min_bitrate + (double)(max_bitrate - min_bitrate) * (desiredQuality / 100.0);
+                if (bitrate < 0) {
+                    bitrate = 0;
+                }
+
+                double quality; // note: a lower value means higher quality
+                quality = (double)min_quality - (min_quality - max_quality) * (desiredQuality / 100.0);
+                if (quality < 0) {
+                    quality = 0;
+                }
+
+                videoCodecs->setData(idx, "false", CodecModel::Role::AUTO_QUALITY_ENABLED);
+                videoCodecs->setData(idx, QString::number((int)bitrate), CodecModel::Role::BITRATE);
+                videoCodecs->setData(idx, QString::number((int)quality), CodecModel::Role::QUALITY);
+            }
+        }
+        codecModel << CodecModel::EditAction::SAVE;
+    }
 }
 
 -(void) connectPreviewRenderer
@@ -771,6 +814,24 @@
     }
 }
 
+- (IBAction)toggleQualityView:(id)sender {
+    if (_videoQualityPopoverVC != nullptr) {
+        [_videoQualityPopoverVC performClose:self];
+        _videoQualityPopoverVC = NULL;
+        [self.qualityButton setPressed:NO];
+    } else {
+        auto* videoQualityVC = [[VideoQualityVC alloc] init];
+        _videoQualityPopoverVC = [[NSPopover alloc] init];
+        [_videoQualityPopoverVC setContentSize:videoQualityVC.view.frame.size];
+        [_videoQualityPopoverVC setContentViewController:videoQualityVC];
+        [_videoQualityPopoverVC setAnimates:YES];
+        [_videoQualityPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [_videoQualityPopoverVC setDelegate:self];
+        [_videoQualityPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+        [videoView setCallDelegate:nil];
+    }
+}
+
 /**
  *  Merge current call with its parent call
  */
@@ -794,8 +855,14 @@
         self.addToContactPopover = NULL;
     }
 
+    if (_videoQualityPopoverVC != nullptr) {
+        [_videoQualityPopoverVC performClose:self];
+        _videoQualityPopoverVC = NULL;
+    }
+
     [self.addContactButton setPressed:NO];
     [self.transferButton setPressed:NO];
+    [self.qualityButton setPressed:NO];
     [self.addParticipantButton setState:NSOffState];
 }
 
