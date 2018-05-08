@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd ../install/lrc/lib/cmake/LibRingClient/
+export CMAKE_PREFIX_PATH=$(brew --prefix qt5)
 export CMAKELRCPATH=`pwd`
 cd -
 mkdir -p Ring && cd Ring
