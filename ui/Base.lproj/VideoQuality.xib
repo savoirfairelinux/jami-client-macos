@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="VideoQualityVC">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="4m5-Tk-FK2"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="82" height="198"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xEB-oB-Tge">
+                    <rect key="frame" x="16" y="14" width="51" height="18"/>
+                    <buttonCell key="cell" type="check" title="Auto" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Kjz-PM-NV8">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <slider horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WRU-R7-GkQ">
+                    <rect key="frame" x="32" y="69" width="19" height="96"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="91" id="Awi-wK-qzw"/>
+                    </constraints>
+                    <sliderCell key="cell" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="vmP-LS-gj8"/>
+                </slider>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8h1-qO-Hxg" userLabel="Quality Up Label">
+                    <rect key="frame" x="32" y="169" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="fIq-3g-pNe"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="+" id="b2b-jw-8C2">
+                        <font key="font" metaFont="system" size="18"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZqZ-pY-4Kq" userLabel="Quality Down Label">
+                    <rect key="frame" x="32" y="50" width="17" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="dV7-Fk-prh"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="-" id="856-iu-J8s">
+                        <font key="font" metaFont="system" size="18"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="WRU-R7-GkQ" firstAttribute="top" secondItem="8h1-qO-Hxg" secondAttribute="bottom" constant="6" id="Cqj-Kc-4eW"/>
+                <constraint firstItem="ZqZ-pY-4Kq" firstAttribute="top" secondItem="WRU-R7-GkQ" secondAttribute="bottom" constant="2" id="LiL-Fs-1dZ"/>
+                <constraint firstItem="xEB-oB-Tge" firstAttribute="top" secondItem="ZqZ-pY-4Kq" secondAttribute="bottom" constant="20" id="PSc-HG-5eo"/>
+                <constraint firstItem="xEB-oB-Tge" firstAttribute="centerX" secondItem="WRU-R7-GkQ" secondAttribute="centerX" id="TVY-Xn-4QZ"/>
+                <constraint firstItem="WRU-R7-GkQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8h1-qO-Hxg" secondAttribute="leading" id="WCU-tz-Rfv"/>
+                <constraint firstAttribute="bottom" secondItem="xEB-oB-Tge" secondAttribute="bottom" constant="16" id="cT3-e2-Jzz"/>
+                <constraint firstItem="WRU-R7-GkQ" firstAttribute="leading" secondItem="ZqZ-pY-4Kq" secondAttribute="leading" id="gI8-lj-M2e"/>
+                <constraint firstItem="8h1-qO-Hxg" firstAttribute="leading" secondItem="WRU-R7-GkQ" secondAttribute="leading" id="qrE-RO-KTh"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZqZ-pY-4Kq" secondAttribute="trailing" constant="20" symbolic="YES" id="tAa-X7-Zoe"/>
+                <constraint firstAttribute="trailing" secondItem="8h1-qO-Hxg" secondAttribute="trailing" constant="32" id="tS4-8f-3kW"/>
+            </constraints>
+            <point key="canvasLocation" x="234" y="376"/>
+        </customView>
+    </objects>
+</document>

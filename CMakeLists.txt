@@ -171,6 +171,8 @@ SET(ringclient_CONTROLLERS
    src/MessagesVC.mm
    src/PasswordChangeWC.h
    src/PasswordChangeWC.mm
+   src/VideoQualityVC.h
+   src/VideoQualityVC.mm
 )
 
 SET(ringclient_BACKENDS
@@ -268,6 +270,7 @@ SET(ringclient_XIBS
    AccBannedContacts
    PasswordChange
    MessageCells
+   VideoQuality
 )
 
 # Icons
