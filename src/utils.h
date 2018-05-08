@@ -17,14 +17,22 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+#import <map>
+
 #import <Foundation/Foundation.h>
 #import "NSString+Extensions.h"
+
+// new lrc
 #import <api/conversation.h>
 #import <api/conversationmodel.h>
 #import <api/account.h>
 #import <api/contactmodel.h>
 #import <api/contact.h>
-#import <map>
+
+// old lrc
+#import <QSortFilterProxyModel>
+#import <accountmodel.h>
+#import <codecmodel.h>
 
 static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
@@ -76,4 +84,23 @@ static inline lrc::api::ConversationModel::ConversationQueue::const_iterator get
                         [&] (const lrc::api::conversation::Info& conv) {
                             return uid == conv.uid;
                         });
+}
+
+static inline void
+setVideoAutoQuality(bool autoQuality, std::string accountId)
+{
+    auto thisAccount = AccountModel::instance().getById(QByteArray::fromStdString(accountId));
+    if (const auto& codecModel = thisAccount->codecModel()) {
+        const auto& videoCodecs = codecModel->videoCodecs();
+        for (int i=0; i < videoCodecs->rowCount();i++) {
+            const auto& idx = videoCodecs->index(i,0);
+
+            if (autoQuality) {
+                videoCodecs->setData(idx, "true", CodecModel::Role::AUTO_QUALITY_ENABLED);
+            } else {
+                videoCodecs->setData(idx, "false", CodecModel::Role::AUTO_QUALITY_ENABLED);
+            }
+        }
+        codecModel << CodecModel::EditAction::SAVE;
+    }
 }

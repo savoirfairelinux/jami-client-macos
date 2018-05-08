@@ -34,6 +34,7 @@
 #import <api/newcallmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
+#import <callmodel.h>
 #import <globalinstances.h>
 
 #import "AppDelegate.h"
@@ -76,6 +77,11 @@
 @property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
 @property (unsafe_unretained) IBOutlet NSImageView* personPhoto;
 
+@property (unsafe_unretained) IBOutlet NSImageView* outgoingPhoto;
+@property (unsafe_unretained) IBOutlet NSTextField* outgoingPersonLabel;
+@property (unsafe_unretained) IBOutlet NSTextField* outgoingStateLabel;
+@property (unsafe_unretained) IBOutlet NSTextField* outgoingId;
+
 // Call Controls
 @property (unsafe_unretained) IBOutlet NSView* controlsPanel;
 
@@ -85,10 +91,10 @@
 @property (unsafe_unretained) IBOutlet IconButton* pickUpButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteAudioButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteVideoButton;
-@property (unsafe_unretained) IBOutlet IconButton* addContactButton;
 @property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
+@property (unsafe_unretained) IBOutlet IconButton* qualityButton;
 
 @property (unsafe_unretained) IBOutlet NSView* advancedPanel;
 @property (unsafe_unretained) IBOutlet IconButton* advancedButton;
@@ -129,7 +135,7 @@
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
             incomingDisplayName, incomingPersonPhoto, previewView, splitView, loadingIndicator, ringingPanel, joinPanel,
-            outgoingPanel;
+            outgoingPanel, outgoingPersonLabel, outgoingStateLabel, outgoingPhoto, outgoingId;
 
 @synthesize previewHolder;
 @synthesize videoHolder;
@@ -171,10 +177,10 @@
     videoHolder = [[RendererConnectionsHolder alloc] init];
 
     [loadingIndicator setColor:[NSColor whiteColor]];
-    [loadingIndicator setNumberOfLines:100];
-    [loadingIndicator setWidthOfLine:2];
-    [loadingIndicator setLengthOfLine:2];
-    [loadingIndicator setInnerMargin:30];
+    [loadingIndicator setNumberOfLines:200];
+    [loadingIndicator setWidthOfLine:4];
+    [loadingIndicator setLengthOfLine:4];
+    [loadingIndicator setInnerMargin:59];
 
     [self.videoView setCallDelegate:self];
     CGColor* color = [[[NSColor blackColor] colorWithAlphaComponent:0.2] CGColor];
@@ -203,7 +209,7 @@
     [timeSpentLabel setHidden:YES];
 }
 
--(void) updateCall:(BOOL) firstRun
+-(void) updateCall
 {
     if (accountInfo_ == nil)
         return;
@@ -216,8 +222,13 @@
     auto currentCall = callModel->getCall(callUid_);
     NSLog(@"\n status %@ \n",@(lrc::api::call::to_string(currentCall.status).c_str()));
     auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
-    if (convIt != accountInfo_->conversationModel->allFilteredConversations().end())
-        [personLabel setStringValue:bestNameForConversation(*convIt, *accountInfo_->conversationModel)];
+    if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
+        NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
+        [personLabel setStringValue:bestName];
+        [outgoingPersonLabel setStringValue:bestName];
+        [outgoingId setStringValue:bestIDForConversation(*convIt, *accountInfo_->conversationModel)];
+    }
+
     [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
     if (refreshDurationTimer == nil)
         refreshDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -226,11 +237,7 @@
                                                               userInfo:nil
                                                                repeats:YES];
     [stateLabel setStringValue:@(to_string(currentCall.status).c_str())];
-
-    if (firstRun) {
-       // QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(currentCall, QSize(100,100), NO);
-        //[personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-    }
+    [outgoingStateLabel setStringValue:@(to_string(currentCall.status).c_str())];
 
     // Default values for this views
     [loadingIndicator setHidden:YES];
@@ -245,9 +252,15 @@
         case Status::SEARCHING:
         case Status::OUTGOING_REQUESTED:
         case Status::CONNECTING:
+            [headerContainer setHidden:YES];
+            [outgoingPanel setHidden:NO];
+            [outgoingPhoto setHidden:NO];
+            [self setupContactInfo:outgoingPhoto];
             [loadingIndicator setHidden:NO];
+            [controlsPanel setHidden:YES];
             break;
         case Status::INCOMING_RINGING:
+            [outgoingPhoto setHidden:YES];
             [controlsPanel setHidden:YES];
             [outgoingPanel setHidden:YES];
             [self setupIncoming:callUid_];
@@ -255,15 +268,22 @@
         case Status::OUTGOING_RINGING:
             [controlsPanel setHidden:YES];
             [outgoingPanel setHidden:NO];
+            [loadingIndicator setHidden:NO];
+            [headerContainer setHidden:YES];
             break;
-//        case Status::CONFERENCE:
-//            [self setupConference:currentCall];
-//            break;
+        /*case Status::CONFERENCE:
+            [self setupConference:currentCall];
+            break;*/
         case Status::PAUSED:
         case Status::PEER_PAUSED:
         case Status::INACTIVE:
         case Status::IN_PROGRESS:
+            // change constraints (uncollapse avatar)
+            [self setupContactInfo:personPhoto];
             [timeSpentLabel setHidden:NO];
+            [outgoingPhoto setHidden:YES];
+            [headerContainer setHidden:NO];
+            break;
         case Status::CONNECTED:
         case Status::AUTO_ANSWERING:
             break;
@@ -276,6 +296,17 @@
             break;
     }
 
+}
+
+-(void) setupContactInfo:(NSImageView*)imageView
+{
+    auto* convModel = accountInfo_->conversationModel.get();
+    auto it = getConversationFromUid(convUid_, *convModel);
+    if (it != convModel->allFilteredConversations().end()) {
+        auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        QVariant photo = imgManip.conversationPhoto(*it, *accountInfo_, QSize(120, 120), NO);
+        [imageView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    }
 }
 
 -(void) setupIncoming:(const std::string&) callId
@@ -336,7 +367,7 @@
     self.selectedCallChanged = QObject::connect(callModel,
                                                 &lrc::api::NewCallModel::callStatusChanged,
                                                 [self](const std::string callId) {
-                                                    [self updateCall:NO];
+                                                    [self updateCall];
                                                 });
 }
 
@@ -530,7 +561,7 @@
 
     [self.chatButton setHidden:YES];
     [self.addParticipantButton setHidden:YES];
-    [self.transferButton setHidden:YES];
+    [self.qualityButton setHidden:YES];
 
     [self.chatButton setPressed:NO];
     [self.mergeCallsButton setState:NSOffState];
@@ -539,7 +570,9 @@
     [personLabel setStringValue:@""];
     [timeSpentLabel setStringValue:@""];
     [stateLabel setStringValue:@""];
-    [self.addContactButton setHidden:YES];
+
+    [outgoingPersonLabel setStringValue:@""];
+    [outgoingStateLabel setStringValue:@""];
 
     [advancedButton setPressed:NO];
     [advancedPanel setHidden:YES];
@@ -563,7 +596,7 @@
         return;
 
     [loadingIndicator setAnimates:YES];
-    [self updateCall:YES];
+    [self updateCall];
 
     /* monitor media for messaging text messaging */
     QObject::disconnect(self.messageConnection);
@@ -794,8 +827,8 @@
         self.addToContactPopover = NULL;
     }
 
-    [self.addContactButton setPressed:NO];
     [self.transferButton setPressed:NO];
+    [self.qualityButton setPressed:NO];
     [self.addParticipantButton setState:NSOffState];
 }
 
