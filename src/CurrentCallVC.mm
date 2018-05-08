@@ -34,6 +34,7 @@
 #import <api/newcallmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
+#import <callmodel.h>
 #import <globalinstances.h>
 
 #import "AppDelegate.h"
@@ -43,6 +44,7 @@
 #import "PersonLinkerVC.h"
 #import "ChatVC.h"
 #import "BrokerVC.h"
+#import "VideoQualityVC.h"
 #import "views/IconButton.h"
 #import "views/CallLayer.h"
 #import "utils.h"
@@ -75,6 +77,7 @@
 @property (unsafe_unretained) IBOutlet NSTextField* stateLabel;
 @property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
 @property (unsafe_unretained) IBOutlet NSImageView* personPhoto;
+@property (unsafe_unretained) IBOutlet NSImageView* outgoingPhoto;
 
 // Call Controls
 @property (unsafe_unretained) IBOutlet NSView* controlsPanel;
@@ -85,10 +88,10 @@
 @property (unsafe_unretained) IBOutlet IconButton* pickUpButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteAudioButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteVideoButton;
-@property (unsafe_unretained) IBOutlet IconButton* addContactButton;
 @property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
+@property (unsafe_unretained) IBOutlet IconButton* qualityButton;
 
 @property (unsafe_unretained) IBOutlet NSView* advancedPanel;
 @property (unsafe_unretained) IBOutlet IconButton* advancedButton;
@@ -100,6 +103,7 @@
 
 @property (strong) NSPopover* addToContactPopover;
 @property (strong) NSPopover* brokerPopoverVC;
+@property (strong) NSPopover* videoQualityPopoverVC;
 @property (strong) IBOutlet ChatVC* chatVC;
 
 // Ringing call panel
@@ -125,7 +129,7 @@
 @end
 
 @implementation CurrentCallVC
-@synthesize personLabel, personPhoto, stateLabel, holdOnOffButton, hangUpButton,
+@synthesize outgoingPhoto, personLabel, personPhoto, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
             incomingDisplayName, incomingPersonPhoto, previewView, splitView, loadingIndicator, ringingPanel, joinPanel,
@@ -171,10 +175,10 @@
     videoHolder = [[RendererConnectionsHolder alloc] init];
 
     [loadingIndicator setColor:[NSColor whiteColor]];
-    [loadingIndicator setNumberOfLines:100];
-    [loadingIndicator setWidthOfLine:2];
-    [loadingIndicator setLengthOfLine:2];
-    [loadingIndicator setInnerMargin:30];
+    [loadingIndicator setNumberOfLines:200];
+    [loadingIndicator setWidthOfLine:4];
+    [loadingIndicator setLengthOfLine:4];
+    [loadingIndicator setInnerMargin:59];
 
     [self.videoView setCallDelegate:self];
     CGColor* color = [[[NSColor blackColor] colorWithAlphaComponent:0.2] CGColor];
@@ -203,7 +207,7 @@
     [timeSpentLabel setHidden:YES];
 }
 
--(void) updateCall:(BOOL) firstRun
+-(void) updateCall
 {
     if (accountInfo_ == nil)
         return;
@@ -227,11 +231,6 @@
                                                                repeats:YES];
     [stateLabel setStringValue:@(to_string(currentCall.status).c_str())];
 
-    if (firstRun) {
-       // QVariant photo = GlobalInstances::pixmapManipulator().callPhoto(currentCall, QSize(100,100), NO);
-        //[personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-    }
-
     // Default values for this views
     [loadingIndicator setHidden:YES];
     [ringingPanel setHidden:YES];
@@ -245,9 +244,15 @@
         case Status::SEARCHING:
         case Status::OUTGOING_REQUESTED:
         case Status::CONNECTING:
+            [headerContainer setHidden:YES];
+            [outgoingPanel setHidden:NO];
+            [outgoingPhoto setHidden:NO];
+            [self setupContactInfo:outgoingPhoto];
             [loadingIndicator setHidden:NO];
+            [controlsPanel setHidden:YES];
             break;
         case Status::INCOMING_RINGING:
+            [outgoingPhoto setHidden:YES];
             [controlsPanel setHidden:YES];
             [outgoingPanel setHidden:YES];
             [self setupIncoming:callUid_];
@@ -255,15 +260,22 @@
         case Status::OUTGOING_RINGING:
             [controlsPanel setHidden:YES];
             [outgoingPanel setHidden:NO];
+            [loadingIndicator setHidden:NO];
+            [headerContainer setHidden:YES];
             break;
-//        case Status::CONFERENCE:
-//            [self setupConference:currentCall];
-//            break;
+        /*case Status::CONFERENCE:
+            [self setupConference:currentCall];
+            break;*/
         case Status::PAUSED:
         case Status::PEER_PAUSED:
         case Status::INACTIVE:
         case Status::IN_PROGRESS:
+            // change constraints (uncollapse avatar)
+            [self setupContactInfo:personPhoto];
             [timeSpentLabel setHidden:NO];
+            [outgoingPhoto setHidden:YES];
+            [headerContainer setHidden:NO];
+            break;
         case Status::CONNECTED:
         case Status::AUTO_ANSWERING:
             break;
@@ -276,6 +288,17 @@
             break;
     }
 
+}
+
+-(void) setupContactInfo:(NSImageView*)imageView
+{
+    auto* convModel = accountInfo_->conversationModel.get();
+    auto it = getConversationFromUid(convUid_, *convModel);
+    if (it != convModel->allFilteredConversations().end()) {
+        auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        QVariant photo = imgManip.conversationPhoto(*it, *accountInfo_, QSize(120, 120), NO);
+        [imageView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    }
 }
 
 -(void) setupIncoming:(const std::string&) callId
@@ -336,7 +359,7 @@
     self.selectedCallChanged = QObject::connect(callModel,
                                                 &lrc::api::NewCallModel::callStatusChanged,
                                                 [self](const std::string callId) {
-                                                    [self updateCall:NO];
+                                                    [self updateCall];
                                                 });
 }
 
@@ -354,6 +377,7 @@
                                              [videoView setShouldAcceptInteractions:YES];
                                              [self mouseIsMoving: NO];
                                              [self connectVideoRenderer:renderer];
+                                             setVideoQuality(true, 50.0, accountInfo_->id);
                                          });
 
     if (callModel->hasCall(callUid_)) {
@@ -539,7 +563,6 @@
     [personLabel setStringValue:@""];
     [timeSpentLabel setStringValue:@""];
     [stateLabel setStringValue:@""];
-    [self.addContactButton setHidden:YES];
 
     [advancedButton setPressed:NO];
     [advancedPanel setHidden:YES];
@@ -563,7 +586,7 @@
         return;
 
     [loadingIndicator setAnimates:YES];
-    [self updateCall:YES];
+    [self updateCall];
 
     /* monitor media for messaging text messaging */
     QObject::disconnect(self.messageConnection);
@@ -771,6 +794,24 @@
     }
 }
 
+- (IBAction)toggleQualityView:(id)sender {
+    if (_videoQualityPopoverVC != nullptr) {
+        [_videoQualityPopoverVC performClose:self];
+        _videoQualityPopoverVC = NULL;
+        [self.qualityButton setPressed:NO];
+    } else {
+        auto* videoQualityVC = [[VideoQualityVC alloc] init];
+        _videoQualityPopoverVC = [[NSPopover alloc] init];
+        [_videoQualityPopoverVC setContentSize:videoQualityVC.view.frame.size];
+        [_videoQualityPopoverVC setContentViewController:videoQualityVC];
+        [_videoQualityPopoverVC setAnimates:YES];
+        [_videoQualityPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [_videoQualityPopoverVC setDelegate:self];
+        [_videoQualityPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+        [videoView setCallDelegate:nil];
+    }
+}
+
 /**
  *  Merge current call with its parent call
  */
@@ -794,8 +835,13 @@
         self.addToContactPopover = NULL;
     }
 
-    [self.addContactButton setPressed:NO];
+    if (_videoQualityPopoverVC != nullptr) {
+        [_videoQualityPopoverVC performClose:self];
+        _videoQualityPopoverVC = NULL;
+    }
+
     [self.transferButton setPressed:NO];
+    [self.qualityButton setPressed:NO];
     [self.addParticipantButton setState:NSOffState];
 }
 
