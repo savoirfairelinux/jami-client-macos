@@ -424,6 +424,13 @@ NSInteger const REQUEST_SEG         = 1;
     [unreadCount setIntValue:conversation.unreadMessages];
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
     NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
+    NSTextField* lastInteractionDate = [result viewWithTag:DATE_TAG];
+    NSTextField* interactionSnippet = [result viewWithTag:SNIPPET_TAG];
+    [displayName setStringValue:@""];
+    [displayRingID setStringValue:@""];
+    [lastInteractionDate setStringValue:@""];
+    [interactionSnippet setStringValue:@""];
+    NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
     NSString* displayNameString = bestNameForConversation(conversation, *convModel_);
     NSString* displayIDString = bestIDForConversation(conversation, *convModel_);
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
@@ -435,10 +442,24 @@ NSInteger const REQUEST_SEG         = 1;
         [displayRingID setStringValue:displayIDString];
         [displayRingID setHidden:NO];
     }
-
-    NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
     auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-    [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, convModel_->owner)))];
+    NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, convModel_->owner)));
+    if(image) {
+        [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
+        NSArray* constraints = [NSLayoutConstraint
+                                constraintsWithVisualFormat:@"H:[photoView(54)]"
+                                options:0
+                                metrics:nil                                                                          views:NSDictionaryOfVariableBindings(photoView)];
+        [NSLayoutConstraint activateConstraints:constraints];
+    } else {
+        [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
+        NSArray* constraints = [NSLayoutConstraint
+                                constraintsWithVisualFormat:@"H:[photoView(0)]"
+                                options:0
+                                metrics:nil                                                                          views:NSDictionaryOfVariableBindings(photoView)];
+        [NSLayoutConstraint activateConstraints:constraints];
+    }
+    [photoView setImage: image];
 
     NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
     auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
@@ -447,8 +468,6 @@ NSInteger const REQUEST_SEG         = 1;
     } else {
         [presenceView setHidden:YES];
     }
-    NSTextField* lastInteractionDate = [result viewWithTag:DATE_TAG];
-    NSTextField* interactionSnippet = [result viewWithTag:SNIPPET_TAG];
     NSButton* addContactButton = [result viewWithTag:ADD_BUTTON_TAG];
     NSButton* refuseContactButton = [result viewWithTag:REFUSE_BUTTON_TAG];
     NSButton* blockContactButton = [result viewWithTag:BLOCK_BUTTON_TAG];
