@@ -86,12 +86,12 @@
                                                                                         </textFieldCell>
                                                                                     </textField>
                                                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="sHH-wj-oHs">
-                                                                                        <rect key="frame" x="12" y="6" width="48" height="48"/>
+                                                                                        <rect key="frame" x="6" y="6" width="54" height="48"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="width" constant="48" id="C2Y-L7-ryb"/>
+                                                                                            <constraint firstAttribute="width" constant="54" id="C2Y-L7-ryb"/>
                                                                                             <constraint firstAttribute="height" constant="48" id="Q3H-Dy-81c"/>
                                                                                         </constraints>
-                                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="bqQ-Jp-DPH"/>
+                                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="right" imageScaling="proportionallyDown" image="NSUser" id="bqQ-Jp-DPH"/>
                                                                                     </imageView>
                                                                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="300" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="14" translatesAutoresizingMaskIntoConstraints="NO" id="MYe-rn-qOP" userLabel="UnreadMsgCount" customClass="RoundedTextField">
                                                                                         <rect key="frame" x="50" y="40" width="10" height="14"/>
@@ -238,7 +238,7 @@
                                                                                 </subviews>
                                                                                 <constraints>
                                                                                     <constraint firstItem="epa-Ih-aKF" firstAttribute="top" secondItem="Z6G-mQ-L3J" secondAttribute="top" constant="7" id="34y-lV-vl2"/>
-                                                                                    <constraint firstItem="sHH-wj-oHs" firstAttribute="leading" secondItem="Z6G-mQ-L3J" secondAttribute="leading" constant="12" id="CGt-hN-ulS"/>
+                                                                                    <constraint firstItem="sHH-wj-oHs" firstAttribute="leading" secondItem="Z6G-mQ-L3J" secondAttribute="leading" constant="6" id="CGt-hN-ulS"/>
                                                                                     <constraint firstItem="ejM-H2-aJX" firstAttribute="leading" secondItem="Fc5-KS-cim" secondAttribute="trailing" constant="5" id="CqZ-iW-bob"/>
                                                                                     <constraint firstItem="bZ6-1S-zx2" firstAttribute="leading" secondItem="epa-Ih-aKF" secondAttribute="leading" id="Ffs-rJ-b8V"/>
                                                                                     <constraint firstItem="YkV-D4-ddd" firstAttribute="trailing" secondItem="sHH-wj-oHs" secondAttribute="trailing" constant="-0.5" id="HSa-sm-3vp"/>
