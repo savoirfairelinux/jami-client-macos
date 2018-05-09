@@ -380,15 +380,16 @@ NSInteger const REQUEST_SEG         = 1;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     NSInteger row = [notification.object selectedRow];
+    NSInteger rows = [smartView numberOfRows];
 
-    [smartView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row){
-        NSTableRowView* cellRowView = [smartView rowViewAtRow:row makeIfNecessary:NO];
-        if(rowView.selected){
+    for (int i = 0; i< rows; i++) {
+        NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary:YES];
+        if (i == row) {
             cellRowView.backgroundColor = [NSColor controlColor];
-        }else{
+        } else {
             cellRowView.backgroundColor = [NSColor whiteColor];
         }
-    }];
+    }
 
     if (row == -1)
         return;
