@@ -32,6 +32,7 @@
 #import <person.h>
 #import <globalinstances.h>
 #import <media/recordingmodel.h>
+#import <api/datatransfermodel.h>
 
 #if ENABLE_SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -53,10 +54,23 @@
     __unsafe_unretained IBOutlet NSButton* photoView;
     __unsafe_unretained IBOutlet NSTextField* profileNameField;
     __unsafe_unretained IBOutlet NSImageView* addProfilePhotoImage;
+    __unsafe_unretained IBOutlet NSButton *downloadFolder;
 }
 @end
 
 @implementation GeneralPrefsVC
+
+@synthesize dataTransferModel;
+
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::DataTransferModel*) dataTransferModel
+{
+    if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.dataTransferModel = dataTransferModel;
+    }
+    return self;
+}
 
 - (void)loadView
 {
@@ -100,6 +114,9 @@
             [photoView setBordered:NO];
         }
     }
+    if (dataTransferModel) {
+        downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+    }
 }
 
 - (void) dealloc
@@ -121,6 +138,20 @@
     [historyChangedLabel setHidden:NO];
     [historyStepper setEnabled:[sender state]];
     [historyTextField setEnabled:[sender state]];
+}
+
+- (IBAction)changeDownloadFolder:(id)sender {
+
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setAllowsMultipleSelection:NO];
+    [panel setCanChooseDirectories:YES];
+    [panel setCanChooseFiles:NO];
+    if ([panel runModal] != NSFileHandlingPanelOKButton) return;
+    if ([[panel URLs] lastObject] == nil) return;
+    NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
+    dataTransferModel->downloadDirectory = std::string([path UTF8String]);
+    downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+    [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
 }
 
 // KVO handler

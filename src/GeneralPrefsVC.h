@@ -19,7 +19,8 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsSProtocol.h"
 
-@interface GeneralPrefsVC : NSViewController
+@interface GeneralPrefsVC : NSViewController <LrcModelsSProtocol>
 
 @end

@@ -17,8 +17,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsSProtocol.h"
 
-@interface PreferencesWC : NSWindowController <NSWindowDelegate>
+@interface PreferencesWC : NSWindowController <NSWindowDelegate, LrcModelsSProtocol>
 
 - (void)displayGeneral:(NSToolbarItem *)sender;
 - (void)displayAudio:(NSToolbarItem *)sender;
