@@ -31,4 +31,6 @@ namespace Preferences {
     NSString * const WindowBehaviour = @"window_behaviour";
     /* KVO compliant */
     NSString * const Notifications = @"enable_notifications";
+    /* download folder for incoming images*/
+    NSString * const DownloadFolder = @"download_folder";
 }

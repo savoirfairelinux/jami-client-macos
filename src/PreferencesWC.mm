@@ -25,6 +25,7 @@
 #import <codecmodel.h>
 #import <profilemodel.h>
 #import <profile.h>
+#import <api/datatransfermodel.h>
 
 //Ring
 #import "AccountsVC.h"
@@ -36,8 +37,9 @@
 
     __unsafe_unretained IBOutlet NSView *prefsContainer;
     NSViewController *currentVC;
-
 }
+
+@synthesize dataTransferModel;
 
 // Identifiers used in PreferencesWindow.xib for tabs
 static auto const kProfilePrefsIdentifier = @"AccountsPrefsIdentifier";
@@ -53,6 +55,15 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [self displayGeneral:nil];
 }
 
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::DataTransferModel*) dataTransferModel
+{
+    if (self = [self initWithWindowNibName:nibNameOrNil])
+    {
+        self.dataTransferModel = dataTransferModel;
+    }
+    return self;
+}
+
 - (void)windowWillClose:(NSNotification *)notification
 {
     AccountModel::instance().save();
@@ -63,7 +74,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil];
+     currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil model: self.dataTransferModel];
 
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
@@ -90,7 +101,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 - (IBAction)displayAccounts:(NSToolbarItem *)sender
 {
     [[prefsContainer subviews]
-     makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    makeObjectsPerformSelector:@selector(removeFromSuperview)];
     currentVC = [[AccountsVC alloc] initWithNibName:@"Accounts" bundle:nil];
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
