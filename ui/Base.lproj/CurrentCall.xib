@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
@@ -777,19 +777,14 @@
                                                                         </constraints>
                                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="AmG-9L-7JZ"/>
                                                                     </imageView>
-                                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="wfP-VD-ALD" customClass="MessageBubbleView">
+                                                                    <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wfP-VD-ALD" customClass="MessageBubbleView">
                                                                         <rect key="frame" x="50" y="0.0" width="287" height="26"/>
                                                                         <subviews>
-                                                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="PUG-NN-vrV" customClass="NSTextView">
+                                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUG-NN-vrV" customClass="NSTextView">
                                                                                 <rect key="frame" x="0.0" y="-25" width="287" height="48"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             </customView>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="PUG-NN-vrV" firstAttribute="leading" secondItem="wfP-VD-ALD" secondAttribute="leading" id="1f0-zg-Hvm"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="PUG-NN-vrV" secondAttribute="trailing" id="JSK-qe-xls"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="PUG-NN-vrV" secondAttribute="bottom" constant="-25" id="lQm-Ue-mua"/>
-                                                                            <constraint firstItem="PUG-NN-vrV" firstAttribute="top" secondItem="wfP-VD-ALD" secondAttribute="top" constant="3" id="tkd-UZ-D3R"/>
-                                                                        </constraints>
                                                                     </customView>
                                                                 </subviews>
                                                                 <constraints>
@@ -801,7 +796,6 @@
                                                                     <constraint firstItem="siU-cO-eGp" firstAttribute="leading" secondItem="ISP-Ld-mHk" secondAttribute="leading" id="adZ-9b-R8G"/>
                                                                     <constraint firstItem="KCp-bZ-69S" firstAttribute="leading" secondItem="ISP-Ld-mHk" secondAttribute="leading" id="wUx-5B-FOC"/>
                                                                     <constraint firstAttribute="bottom" secondItem="wfP-VD-ALD" secondAttribute="bottom" id="wxQ-eM-vOR"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="wfP-VD-ALD" secondAttribute="trailing" constant="-8" id="ye2-e8-LDL"/>
                                                                 </constraints>
                                                                 <connections>
                                                                     <outlet property="msgBackground" destination="wfP-VD-ALD" id="fbB-OB-zyZ"/>
@@ -842,23 +836,17 @@
                                                                             <constraint firstAttribute="height" constant="34" id="p3P-Wg-s0n"/>
                                                                         </constraints>
                                                                     </box>
-                                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="0o9-as-0kP" customClass="MessageBubbleView">
+                                                                    <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0o9-as-0kP" customClass="MessageBubbleView">
                                                                         <rect key="frame" x="58" y="0.0" width="271" height="26"/>
                                                                         <subviews>
-                                                                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3id-hP-gmA" customClass="NSTextView">
+                                                                            <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3id-hP-gmA" customClass="NSTextView">
                                                                                 <rect key="frame" x="0.0" y="-14" width="58" height="0.0"/>
+                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             </customView>
                                                                         </subviews>
-                                                                        <constraints>
-                                                                            <constraint firstItem="3id-hP-gmA" firstAttribute="top" secondItem="0o9-as-0kP" secondAttribute="top" constant="40" id="Gu3-09-70Y"/>
-                                                                            <constraint firstItem="3id-hP-gmA" firstAttribute="leading" secondItem="0o9-as-0kP" secondAttribute="leading" id="OZk-VX-6m9"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="3id-hP-gmA" secondAttribute="bottom" constant="-14" id="PRc-v8-dCp"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="3id-hP-gmA" secondAttribute="trailing" constant="253" id="o9d-kz-fGq"/>
-                                                                        </constraints>
                                                                     </customView>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstItem="0o9-as-0kP" firstAttribute="leading" secondItem="rMU-hx-cKa" secondAttribute="leading" constant="58" id="DSf-ri-RXA"/>
                                                                     <constraint firstItem="hfc-s5-yWK" firstAttribute="top" secondItem="rMU-hx-cKa" secondAttribute="top" id="G37-AS-eTc"/>
                                                                     <constraint firstAttribute="trailing" secondItem="0o9-as-0kP" secondAttribute="trailing" id="Qjo-Xd-8ci"/>
                                                                     <constraint firstAttribute="bottom" secondItem="0o9-as-0kP" secondAttribute="bottom" id="XTL-j6-WbQ"/>
