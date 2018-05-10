@@ -382,22 +382,22 @@ NSInteger const REQUEST_SEG         = 1;
     NSInteger row = [notification.object selectedRow];
     NSInteger rows = [smartView numberOfRows];
 
-    for (int i = 0; i< rows; i++) {
+    if (row == -1)
+        return;
+    if (convModel_ == nil)
+        return;
+
+    for (int i = 0; i < rows; i++) {
         NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary:YES];
-        if (i == row) {
+        if (i == row && !isSearchingContactItem(row, *(convModel_))) {
             cellRowView.backgroundColor = [NSColor controlColor];
         } else {
             cellRowView.backgroundColor = [NSColor whiteColor];
         }
     }
 
-    if (row == -1)
-        return;
-    if (convModel_ == nil)
-        return;
-
     auto uid = convModel_->filteredConversation(row).uid;
-    if (selectedUid_ != uid) {
+    if (selectedUid_ != uid && !isSearchingContactItem(row, *(convModel_))) {
         selectedUid_ = uid;
         convModel_->selectConversation(uid);
         convModel_->clearUnreadInteractions(uid);

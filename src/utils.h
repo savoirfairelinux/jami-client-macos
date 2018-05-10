@@ -104,3 +104,26 @@ setVideoAutoQuality(bool autoQuality, std::string accountId)
         codecModel << CodecModel::EditAction::SAVE;
     }
 }
+
+static inline bool
+isSearchingContactItem(const int row, const lrc::api::ConversationModel& model)
+{
+    bool isTemporary = false;
+    auto conversation = model.filteredConversation(row);
+    if (conversation.participants.empty()) {
+        isTemporary = true;
+    } else {
+        auto contactUri = conversation.participants.front();
+        if (!contactUri.empty()) {
+            try {
+                auto& contactInfo = model.owner.contactModel->getContact(contactUri);
+                if (contactInfo.profileInfo.uri.empty()) {
+                    isTemporary = true;
+                }
+            } catch (std::out_of_range& e) {
+                isTemporary = true;
+            }
+        }
+    }
+    return isTemporary;
+}
