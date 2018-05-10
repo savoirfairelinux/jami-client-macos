@@ -39,6 +39,7 @@
 #import <api/conversation.h>
 #import <api/contactmodel.h>
 #import <api/contact.h>
+#import <api/datatransfermodel.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -123,6 +124,16 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     NSToolbar *toolbar = self.window.toolbar;
     toolbar.delegate = self;
     [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
+    // set download folder (default - 'Downloads')
+    NSString* path = [[NSUserDefaults standardUserDefaults] stringForKey:Preferences::DownloadFolder];
+    if (!path || path.length == 0) {
+        NSURL *downloadsURL = [[NSFileManager defaultManager]
+                               URLForDirectory:NSDownloadsDirectory
+                               inDomain:NSUserDomainMask appropriateForURL:nil
+                               create:YES error:nil];
+        path = [[downloadsURL path] stringByAppendingString:@"/"];
+    }
+    lrc_->getDataTransferModel().downloadDirectory = std::string([path UTF8String]);
 }
 
 - (void) connect
@@ -310,7 +321,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
 
 - (IBAction)openPreferences:(id)sender
 {
-    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName:@"PreferencesWindow"];
+    preferencesWC = [[PreferencesWC alloc] initWithNibName:@"PreferencesWindow" bundle: nil model:&(lrc_->getDataTransferModel())];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
 }
 
