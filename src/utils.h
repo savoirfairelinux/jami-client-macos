@@ -36,14 +36,19 @@
 
 static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
-    auto contact = model.owner.contactModel->getContact(conv.participants[0]);
-    if (!contact.registeredName.empty()) {
-        contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\n'), contact.registeredName.end());
-        contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\r'), contact.registeredName.end());
-        return [@(contact.registeredName.c_str()) removeEmptyLinesAtBorders];
+    try {
+        auto contact = model.owner.contactModel->getContact(conv.participants[0]);
+        if (!contact.registeredName.empty()) {
+            contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\n'), contact.registeredName.end());
+            contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\r'), contact.registeredName.end());
+            return [@(contact.registeredName.c_str()) removeEmptyLinesAtBorders];
+        }
+        else {
+            return [@(contact.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
+        }
+    } catch (std::out_of_range& e) {
+        NSLog(@"bestIDForConversation: getContact - out of range");
     }
-    else
-        return [@(contact.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
 }
 
 static inline NSString* bestIDForAccount(const lrc::api::account::Info& account)
@@ -80,17 +85,21 @@ static inline NSString* bestNameForContact(const lrc::api::contact::Info& contac
 
 static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
-    auto contact = model.owner.contactModel->getContact(conv.participants[0]);
-    if (contact.profileInfo.alias.empty()) {
-        return bestIDForConversation(conv, model);
+    try {
+        auto contact = model.owner.contactModel->getContact(conv.participants[0]);
+        if (contact.profileInfo.alias.empty()) {
+            return bestIDForConversation(conv, model);
+        }
+        auto alias = contact.profileInfo.alias;
+        alias.erase(std::remove(alias.begin(), alias.end(), '\n'), alias.end());
+        alias.erase(std::remove(alias.begin(), alias.end(), '\r'), alias.end());
+        if(alias.length() == 0) {
+            return bestIDForConversation(conv, model);
+        }
+        return @(alias.c_str());
+    } catch (std::out_of_range& e) {
+        NSLog(@"bestNameForConversation: getContact - out of range");
     }
-    auto alias = contact.profileInfo.alias;
-    alias.erase(std::remove(alias.begin(), alias.end(), '\n'), alias.end());
-    alias.erase(std::remove(alias.begin(), alias.end(), '\r'), alias.end());
-    if(alias.length() == 0) {
-        return bestIDForConversation(conv, model);
-    }
-    return @(alias.c_str());
 }
 
 static inline lrc::api::profile::Type profileType(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)

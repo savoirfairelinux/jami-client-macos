@@ -464,12 +464,18 @@ NSInteger const REQUEST_SEG         = 1;
     [photoView setImage: image];
 
     NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
-    auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
-    if (contact.isPresent) {
-        [presenceView setHidden:NO];
-    } else {
-        [presenceView setHidden:YES];
+    [presenceView setHidden:YES];
+    if (!conversation.participants.empty()){
+        try {
+            auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
+            if (contact.isPresent) {
+                [presenceView setHidden:NO];
+            }
+        } catch (std::out_of_range& e) {
+            NSLog(@"viewForTableColumn: getContact - out of range");
+        }
     }
+
     NSButton* addContactButton = [result viewWithTag:ADD_BUTTON_TAG];
     NSButton* refuseContactButton = [result viewWithTag:REFUSE_BUTTON_TAG];
     NSButton* blockContactButton = [result viewWithTag:BLOCK_BUTTON_TAG];
