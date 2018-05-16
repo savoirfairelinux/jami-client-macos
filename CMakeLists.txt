@@ -276,7 +276,7 @@ SET(ringclient_XIBS
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
-
+SET(myApp_Entitlements ${CMAKE_CURRENT_SOURCE_DIR}/data/entitlements.plist)
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
