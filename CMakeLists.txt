@@ -276,7 +276,6 @@ SET(ringclient_XIBS
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
-
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
@@ -467,6 +466,7 @@ SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_STRING "Build of ${PROJ_NAME}, version ${RING_VERSION}"
         MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
         MACOSX_BUNDLE_ICON_FILE "appicon.icns"
+        XCODE_ATTRIBUTE_CODE_SIGN_ENTITLEMENTS "${CMAKE_CURRENT_LIST_DIR}/data/Ring.entitlements"
     )
 
 # Make sure we can find the 'ibtool' program. If we can NOT find it we
