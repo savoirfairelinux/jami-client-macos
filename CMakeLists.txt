@@ -5,13 +5,18 @@ IF(POLICY CMP0022)
 ENDIF(POLICY CMP0022)
 
 SET(PROJ_NAME Ring)
+SET(RELEASE_TYPE website)
 
 # To build nighlies we need to update RING_VERSION with an optional command line arg
+IF("${RELEASE_TYPE}" STREQUAL "AppStore")
+   SET(RING_VERSION "0.0.2")
+   SET(RING_VERSION_NAME "1")
+ELSE("${RELEASE_TYPE}" STREQUAL "AppStore")
 IF("${RING_VERSION}" STREQUAL "")
    SET(RING_VERSION "1.0.0")
 ENDIF("${RING_VERSION}" STREQUAL "")
-
 SET(RING_VERSION_NAME "In varietate concordia")
+ENDIF("${RELEASE_TYPE}" STREQUAL "AppStore")
 
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
 SET(PROJ_COPYRIGHT " © 2015-2018 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
@@ -276,7 +281,6 @@ SET(ringclient_XIBS
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
-
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
@@ -459,7 +463,12 @@ SET(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
 
 SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
-        MACOSX_BUNDLE_GUI_IDENTIFIER "cx.ring"
+        IF("${RELEASE_TYPE}" STREQUAL "AppStore")
+          MACOSX_BUNDLE_GUI_IDENTIFIER "com.savoirfairelinux.ring.osx"
+          XCODE_ATTRIBUTE_CODE_SIGN_ENTITLEMENTS "${CMAKE_CURRENT_LIST_DIR}/data/Ring.entitlements"
+        ELSE("${RELEASE_TYPE}" STREQUAL "AppStore")
+          MACOSX_BUNDLE_GUI_IDENTIFIER "cx.ring"
+        ENDIF("${RELEASE_TYPE}" STREQUAL "AppStore")
         MACOSX_BUNDLE_SHORT_VERSION_STRING "${RING_VERSION_NAME}"
         MACOSX_BUNDLE_LONG_VERSION_STRING "${PROJ_NAME} ${RING_VERSION_NAME}"
         MACOSX_BUNDLE_BUNDLE_VERSION ${RING_VERSION}
