@@ -5,13 +5,18 @@ IF(POLICY CMP0022)
 ENDIF(POLICY CMP0022)
 
 SET(PROJ_NAME Ring)
+option(RELEASE_TYPE "RELEASE_TYPE" "website")
 
 # To build nighlies we need to update RING_VERSION with an optional command line arg
 IF("${RING_VERSION}" STREQUAL "")
    SET(RING_VERSION "1.0.0")
 ENDIF("${RING_VERSION}" STREQUAL "")
-
-SET(RING_VERSION_NAME "In varietate concordia")
+# if build for App Store version and build number should be incremented
+IF("${RELEASE_TYPE}" STREQUAL "AppStore")
+   SET(RING_VERSION_NAME "1")
+ELSE()
+   SET(RING_VERSION_NAME "In varietate concordia")
+ENDIF()
 
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
 SET(PROJ_COPYRIGHT " © 2015-2018 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
@@ -276,7 +281,6 @@ SET(ringclient_XIBS
 SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
-
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
@@ -457,7 +461,22 @@ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework SystemConfigura
 SET(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
 SET(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
 
-SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
+# App store version should be sandboxed and using different bundle identifier
+IF("${RELEASE_TYPE}" STREQUAL "AppStore")
+    SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
+        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.savoirfairelinux.ring.macos"
+        XCODE_ATTRIBUTE_CODE_SIGN_ENTITLEMENTS "${CMAKE_CURRENT_LIST_DIR}/data/Ring.entitlements"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "${RING_VERSION_NAME}"
+        MACOSX_BUNDLE_LONG_VERSION_STRING "${PROJ_NAME} ${RING_VERSION_NAME}"
+        MACOSX_BUNDLE_BUNDLE_VERSION ${RING_VERSION}
+        MACOSX_BUNDLE_COPYRIGHT "${PROJ_COPYRIGHT}"
+        MACOSX_BUNDLE_INFO_STRING "Build of ${PROJ_NAME}, version ${RING_VERSION}"
+        MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
+        MACOSX_BUNDLE_ICON_FILE "appicon.icns"
+    )
+ELSE()
+    SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
         MACOSX_BUNDLE_GUI_IDENTIFIER "cx.ring"
         MACOSX_BUNDLE_SHORT_VERSION_STRING "${RING_VERSION_NAME}"
@@ -468,7 +487,7 @@ SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
         MACOSX_BUNDLE_BUNDLE_NAME ${PROJ_NAME}
         MACOSX_BUNDLE_ICON_FILE "appicon.icns"
     )
-
+ENDIF()
 # Make sure we can find the 'ibtool' program. If we can NOT find it we
 # skip generation of this project
 FIND_PROGRAM(IBTOOL ibtool HINTS "/usr/bin" "${OSX_DEVELOPER_ROOT}/usr/bin")
