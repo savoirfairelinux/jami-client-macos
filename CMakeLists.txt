@@ -326,6 +326,8 @@ SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
+SET_SOURCE_FILES_PROPERTIES(container-migration.plist PROPERTIES
+MACOSX_PACKAGE_LOCATION Resources)
 
 # package ringtones
 IF(NOT IS_DIRECTORY ${RINGTONE_DIR})
@@ -408,6 +410,7 @@ SET(TO_ADD
    ${LOCALIZABLE_FILES}
    ${myApp_ICON}
    Credits.rtf
+   container-migration.plist
    ${ring_ICONS}
    ${ring_RINGTONES})
 
