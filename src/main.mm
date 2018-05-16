@@ -40,7 +40,8 @@ int main(int argc, const char *argv[]) {
     dir.cdUp();
     dir.cdUp();
     dir.cd("Plugins");
-    QCoreApplication::addLibraryPath(dir.absolutePath());
+    QApplication::setLibraryPaths(QStringList(dir.absolutePath()));
+    //QCoreApplication::addLibraryPath(dir.absolutePath());
     qDebug() << "" << QCoreApplication::libraryPaths();
     //Qt event loop will override native event loop
     QApplication* app = new QApplication(argc, const_cast<char**>(argv));
