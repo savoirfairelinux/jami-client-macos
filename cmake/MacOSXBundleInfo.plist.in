@@ -28,10 +28,14 @@
     <string>${MACOSX_BUNDLE_SHORT_VERSION_STRING}</string>
     <key>CFBundleSignature</key>
     <string>????</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>10.10</string> 
     <key>CFBundleVersion</key>
     <string>${MACOSX_BUNDLE_BUNDLE_VERSION}</string>
     <key>CSResourcesFileMapped</key>
     <true/>
+    <key>LSApplicationCategoryType</key>
+	  <string>public.app-category.social-networking</string>
     <key>LSRequiresCarbon</key>
     <true/>
     <key>NSHumanReadableCopyright</key>

@@ -8,10 +8,10 @@ SET(PROJ_NAME Ring)
 
 # To build nighlies we need to update RING_VERSION with an optional command line arg
 IF("${RING_VERSION}" STREQUAL "")
-   SET(RING_VERSION "1.0.0")
+   SET(RING_VERSION "0.0.2")
 ENDIF("${RING_VERSION}" STREQUAL "")
 
-SET(RING_VERSION_NAME "In varietate concordia")
+SET(RING_VERSION_NAME "1")
 
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
 SET(PROJ_COPYRIGHT " © 2015-2018 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
