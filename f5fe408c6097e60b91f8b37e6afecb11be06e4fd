@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_a09fde4f",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-05-23T18:47:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa57193c_40888222",
+      "range": {
+        "startLine": 13,
+        "startChar": 21,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "f5fe408c6097e60b91f8b37e6afecb11be06e4fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_009faa60",
         "filename": "CMakeLists.txt",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_00adea88",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-05-23T18:47:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa57193c_009faa60",
+      "range": {
+        "startLine": 469,
+        "startChar": 64,
+        "endLine": 469,
+        "endChar": 67
+      },
+      "revId": "f5fe408c6097e60b91f8b37e6afecb11be06e4fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_60878610",
         "filename": "CMakeLists.txt",
         "patchSetId": 7
@@ -59,6 +107,30 @@
       "writtenOn": "2018-05-23T16:12:15Z",
       "side": 1,
       "message": "the expression in the else and endif clause is optional: https://cmake.org/cmake/help/latest/command/if.html",
+      "range": {
+        "startLine": 479,
+        "startChar": 0,
+        "endLine": 479,
+        "endChar": 43
+      },
+      "revId": "f5fe408c6097e60b91f8b37e6afecb11be06e4fd",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_e0a9d67c",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-05-23T18:47:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa57193c_60878610",
       "range": {
         "startLine": 479,
         "startChar": 0,
