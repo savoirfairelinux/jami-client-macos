@@ -131,6 +131,7 @@
         [self showNewAccountVC];
     } else {
         [self.window close];
+        [[NSApplication sharedApplication] removeWindowsItem:self.window];
     }
 
 }
@@ -141,6 +142,7 @@
 {
     if (success) {
         [self.window close];
+        [[NSApplication sharedApplication] removeWindowsItem:self.window];
         if (!isCancelable){
             AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
             [appDelegate showMainWindow];
@@ -156,6 +158,7 @@
 {
     if (success) {
         [self.window close];
+        [[NSApplication sharedApplication] removeWindowsItem:self.window];
         if (!isCancelable){
             AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
             [appDelegate showMainWindow];

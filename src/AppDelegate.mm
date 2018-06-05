@@ -238,6 +238,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     if(self.ringWindowController == nil) {
         self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
     }
+    [[NSApplication sharedApplication] removeWindowsItem:self.wizard.window];
     [self.ringWindowController.window makeKeyAndOrderFront:self];
 }
 
