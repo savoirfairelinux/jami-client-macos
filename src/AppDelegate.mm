@@ -59,6 +59,17 @@
 NSTimer* preventSleepTimer;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+
+    // hide "Check for update" menu item when sparkle is disabled
+    NSMenu *mainMenu = [[NSApplication sharedApplication] mainMenu];
+    NSMenu *ringMenu = [[mainMenu itemAtIndex:0] submenu];
+    NSMenuItem *updateItem = [ringMenu itemAtIndex:1];
+#if ENABLE_SPARKLE
+    updateItem.hidden = false;
+#else
+    updateItem.hidden = true;
+#endif
+
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
