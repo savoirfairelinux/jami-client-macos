@@ -235,7 +235,9 @@ SET(ringclient_OTHERS
    src/AccountSelectionManager.mm
    src/utils.h
    src/NSString+Extensions.h
-   src/NSString+Extensions.mm)
+   src/NSString+Extensions.mm
+   src/RingMainWindow.h
+   src/RingMainWindow.mm)
 
 
 SET(ringclient_XIBS
