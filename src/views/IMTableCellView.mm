@@ -57,6 +57,8 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [self.msgView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.msgBackground setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.msgView setEditable:NO];
+    [(NSButtonCell*)transferedImage.cell setShowsStateBy:NSNoCellMask];
+    [(NSButtonCell*)transferedImage.cell setHighlightsBy:NSNoCellMask];
     acceptButton.image = [NSColor image: [NSImage imageNamed:@"ic_file_upload.png"] tintedWithColor:[NSColor greenSuccessColor]];
     declineButton.image = [NSColor image: [NSImage imageNamed:@"ic_action_cancel.png"] tintedWithColor:[NSColor redColor]];
 }

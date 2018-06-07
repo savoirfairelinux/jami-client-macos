@@ -35,11 +35,15 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/IconButton.h"
+#import <QuickLook/QuickLook.h>
+#import <Quartz/Quartz.h>
 
 
-@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource> {
+@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource> {
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
+    __unsafe_unretained IBOutlet NSView* containerView;
 
     std::string convUid_;
     lrc::api::ConversationModel* convModel_;
@@ -52,6 +56,7 @@
     QMetaObject::Connection modelSortedSignal_;
     QMetaObject::Connection filterChangedSignal_;
     QMetaObject::Connection interactionStatusUpdatedSignal_;
+    NSString* previewImage;
 }
 
 @property (nonatomic, strong, readonly) INDSequentialTextSelectionManager* selectionManager;
@@ -70,6 +75,7 @@ CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
 CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
 
 @implementation MessagesVC
+
 
 //MessageBuble type
 typedef NS_ENUM(NSInteger, MessageSequencing) {
@@ -266,6 +272,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 [result.declineButton setTarget:self];
                 break;}
             case lrc::api::interaction::Status::TRANSFER_FINISHED:
+                result = [tableView makeViewWithIdentifier:@"LeftFinishedFileView" owner:conversationView];
+                [result.transferedFileName setAction:@selector(imagePreview:)];
+                [result.transferedFileName setTarget:self];
+                [result.transferedFileName.cell setHighlightsBy:NSContentsCellMask];
+                break;
             case lrc::api::interaction::Status::TRANSFER_CANCELED:
             case lrc::api::interaction::Status::TRANSFER_ERROR:
                 result = [tableView makeViewWithIdentifier:@"LeftFinishedFileView" owner:conversationView];
@@ -284,6 +295,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 [result.declineButton setTarget:self];
                 break;
             case lrc::api::interaction::Status::TRANSFER_FINISHED:
+                result = [tableView makeViewWithIdentifier:@"RightFinishedFileView" owner:conversationView];
+                [result.transferedFileName setAction:@selector(imagePreview:)];
+                [result.transferedFileName setTarget:self];
+                [result.transferedFileName.cell setHighlightsBy:NSContentsCellMask];
+                break;
             case lrc::api::interaction::Status::TRANSFER_CANCELED:
             case lrc::api::interaction::Status::TRANSFER_ERROR:
             case lrc::api::interaction::Status::TRANSFER_UNJOINABLE_PEER:
@@ -318,15 +334,32 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (name.length > 0) {
        fileName = [name lastPathComponent];
     }
-    result.transferedFileName.stringValue = fileName;
+    NSFont *nameFont = [NSFont userFontOfSize:14.0];
+    NSColor *nameColor = [NSColor textColor];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    paragraphStyle.alignment = NSTextAlignmentLeft;
+    NSDictionary *nameAttr = [NSDictionary dictionaryWithObjectsAndKeys:nameFont,NSFontAttributeName,
+                                 nameColor,NSForegroundColorAttributeName,
+                                 paragraphStyle,NSParagraphStyleAttributeName, nil];
+    NSAttributedString* nameAttributedString = [[NSAttributedString alloc] initWithString:fileName attributes:nameAttr];
+    result.transferedFileName.attributedTitle = nameAttributedString;
     if (status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
-        NSImage* image = [self getImageForFilePath:name];
+        NSColor *higlightColor = [NSColor grayColor];
+        NSDictionary *alternativeNametAttr = [NSDictionary dictionaryWithObjectsAndKeys:nameFont,NSFontAttributeName,
+                                  higlightColor,NSForegroundColorAttributeName,
+                                  paragraphStyle,NSParagraphStyleAttributeName, nil];
+        NSAttributedString* alternativeString = [[NSAttributedString alloc] initWithString:fileName attributes:alternativeNametAttr];
+        result.transferedFileName.attributedAlternateTitle = alternativeString;
+        NSImage* image = [self getImageForFilePath:name size:MAX_TRANSFERED_IMAGE_SIZE];
         if (([name rangeOfString:@"/"].location == NSNotFound)) {
-            image = [self getImageForFilePath:[self getDataTransferPath:interactionID]];
+            image = [self getImageForFilePath:[self getDataTransferPath:interactionID] size:MAX_TRANSFERED_IMAGE_SIZE];
         }
         if(image != nil) {
             result.transferedImage.image = [image roundCorners:14];
             [result updateImageConstraint:image.size.width andHeight:image.size.height];
+            [result.transferedImage setAction:@selector(imagePreview:)];
+            [result.transferedImage setTarget:self];
         }
     }
     [result setupForInteraction:interactionID];
@@ -492,9 +525,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
         if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
             NSString* name =  @(interaction.body.c_str());
-            NSImage* image = [self getImageForFilePath:name];
+            NSImage* image = [self getImageForFilePath:name size:MAX_TRANSFERED_IMAGE_SIZE];
             if (([name rangeOfString:@"/"].location == NSNotFound)) {
-                image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
+                image = [self getImageForFilePath:[self getDataTransferPath:it->first] size:MAX_TRANSFERED_IMAGE_SIZE];
             }
             if (image != nil) {
                 return image.size.height + TIME_BOX_HEIGHT;
@@ -540,12 +573,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return @(info.path.c_str());
 }
 
--(NSImage*) getImageForFilePath: (NSString *) path {
+-(NSImage*) getImageForFilePath: (NSString *) path size:(CGFloat)size {
     if (path.length <= 0) {return nil;}
     if (![[NSFileManager defaultManager] fileExistsAtPath: path]) {return nil;}
     NSImage* transferedImage = [[NSImage alloc] initWithContentsOfFile: path];
     if(transferedImage != nil) {
-        return [transferedImage imageResizeInsideMax: MAX_TRANSFERED_IMAGE_SIZE];
+        return [transferedImage imageResizeInsideMax: size];
     }
     return nil;
 }
@@ -752,6 +785,43 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (convModel_ && !convUid_.empty()) {
         convModel_->cancelTransfer(convUid_, inter);
     }
+}
+
+- (void)imagePreview:(id)sender {
+    uint64_t interId;
+    if ([[sender superview] isKindOfClass:[IMTableCellView class]]) {
+        interId = [(IMTableCellView*)[sender superview] interaction];
+    } else if ([[[sender superview] superview] isKindOfClass:[IMTableCellView class]]) {
+        interId = [(IMTableCellView*)[[sender superview] superview] interaction];
+    } else {
+        return;
+    }
+    auto it = [self getCurrentConversation]->interactions.find(interId);
+    if (it == [self getCurrentConversation]->interactions.end()) {
+        return;
+    }
+    auto& interaction = it->second;
+    NSString* name =  @(interaction.body.c_str());
+    if (([name rangeOfString:@"/"].location == NSNotFound)) {
+        name = [self getDataTransferPath:interId];
+    }
+    previewImage = name;
+    if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
+        [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
+    } else {
+        [[QLPreviewPanel sharedPreviewPanel] updateController];
+        [QLPreviewPanel sharedPreviewPanel].dataSource = self;
+        [[QLPreviewPanel sharedPreviewPanel] setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
+        [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+    }
+}
+
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
+    return 1;
+}
+
+- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
+    return [NSURL fileURLWithPath:previewImage];
 }
 
 @end
