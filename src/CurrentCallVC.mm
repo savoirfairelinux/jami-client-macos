@@ -156,6 +156,10 @@
     convUid_ = convUid;
     accountInfo_ = account;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
+    auto currentCall = callModel->getCall(callUid_);
+    if(currentCall.isAudioOnly) {
+        muteVideoButton.image = [NSImage imageNamed:@"ic_action_mute_video.png"];
+    }
 }
 
 - (void)awakeFromNib
@@ -720,6 +724,7 @@
     auto* callModel = accountInfo_->callModel.get();
 
     callModel->toggleAudioRecord(callUid_);
+    [recordOnOffButton setPressed:!recordOnOffButton.isPressed];
 }
 
 - (IBAction)toggleHold:(id)sender {
@@ -727,6 +732,12 @@
         return;
 
     auto* callModel = accountInfo_->callModel.get();
+    auto currentCall = callModel->getCall(callUid_);
+    if (currentCall.status != lrc::api::call::Status::PAUSED) {
+        holdOnOffButton.image = [NSImage imageNamed:@"ic_action_holdoff.png"];
+    } else {
+        holdOnOffButton.image = [NSImage imageNamed:@"ic_action_hold.png"];
+    }
 
     callModel->togglePause(callUid_);
 }
@@ -758,7 +769,12 @@
         return;
 
     auto* callModel = accountInfo_->callModel.get();
-
+    auto currentCall = callModel->getCall(callUid_);
+    if (currentCall.audioMuted) {
+        muteAudioButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+    } else {
+       muteAudioButton.image = [NSImage imageNamed:@"ic_action_mute_audio.png"];
+    }
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::AUDIO);
 }
 
@@ -766,9 +782,15 @@
 {
     if (accountInfo_ == nil)
         return;
-
     auto* callModel = accountInfo_->callModel.get();
-
+    auto currentCall = callModel->getCall(callUid_);
+    if(!currentCall.isAudioOnly) {
+        if (currentCall.videoMuted) {
+            muteVideoButton.image = [NSImage imageNamed:@"ic_action_video.png"];
+        } else {
+            muteVideoButton.image = [NSImage imageNamed:@"ic_action_mute_video.png"];
+        }
+    }
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::VIDEO);
 }
 
