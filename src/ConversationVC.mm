@@ -126,7 +126,7 @@
 -(void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model {
     if (convUid_ == convUid && convModel_ == model)
         return;
-
+    [self clearData];
     cachedConv_ = nil;
     convUid_ = convUid;
     convModel_ = model;

@@ -114,14 +114,15 @@ return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 a
 
 + (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint
 {
+    NSImage* image = img;
     if (tint) {
-        [img lockFocus];
+        [image lockFocus];
         [tint set];
-        NSRect imageRect = {NSZeroPoint, [img size]};
+        NSRect imageRect = {NSZeroPoint, [image size]};
         NSRectFillUsingOperation(imageRect, NSCompositeSourceAtop);
-        [img unlockFocus];
+        [image unlockFocus];
     }
-    return img;
+    return image;
 }
 
 @end

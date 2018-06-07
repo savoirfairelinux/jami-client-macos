@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
@@ -29,16 +29,16 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="EJD-f8-Xqd">
-                    <rect key="frame" x="0.0" y="60" width="798" height="708"/>
+                    <rect key="frame" x="0.0" y="60" width="798" height="713"/>
                     <subviews>
                         <scrollView verticalCompressionResistancePriority="250" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="Ez2-Rf-DZN">
-                            <rect key="frame" x="49" y="0.0" width="700" height="708"/>
+                            <rect key="frame" x="49" y="0.0" width="700" height="713"/>
                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="ofC-Bs-tHR">
-                                <rect key="frame" x="0.0" y="0.0" width="700" height="708"/>
+                                <rect key="frame" x="0.0" y="0.0" width="700" height="713"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="bOO-CW-S21">
-                                        <rect key="frame" x="0.0" y="0.0" width="700" height="693"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="700" height="698"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -165,7 +165,7 @@
                                                                 </subviews>
                                                             </customView>
                                                             <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R85-0p-W1u">
-                                                                <rect key="frame" x="323" y="0.0" width="40" height="30"/>
+                                                                <rect key="frame" x="323" y="0.0" width="30" height="30"/>
                                                                 <subviews>
                                                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0wQ-xJ-dyK">
                                                                         <rect key="frame" x="7" y="7" width="16" height="16"/>
@@ -513,7 +513,7 @@
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="L79-xO-12P"/>
                 <constraint firstItem="RuH-fO-poy" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="MS8-kk-8g8"/>
                 <constraint firstItem="cFH-d7-Erh" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="Tok-wc-chb"/>
-                <constraint firstItem="EJD-f8-Xqd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="60" id="XkO-FA-l3J"/>
+                <constraint firstItem="EJD-f8-Xqd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="55" id="XkO-FA-l3J"/>
                 <constraint firstItem="Sn1-dJ-QCw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="55" id="aZT-2B-gv9"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="trailing" secondItem="Ez2-Rf-DZN" secondAttribute="trailing" id="b6d-Ue-Zl5"/>
                 <constraint firstAttribute="trailing" secondItem="cFH-d7-Erh" secondAttribute="trailing" constant="10" id="bWY-wj-6dr"/>
@@ -533,6 +533,7 @@
         <userDefaultsController representsSharedInstance="YES" id="Zjc-KB-CJZ"/>
         <viewController id="iH6-17-JsM" customClass="MessagesVC">
             <connections>
+                <outlet property="containerView" destination="EJD-f8-Xqd" id="hoF-D3-hw1"/>
                 <outlet property="conversationView" destination="bOO-CW-S21" id="Vzg-3J-K2b"/>
             </connections>
         </viewController>
