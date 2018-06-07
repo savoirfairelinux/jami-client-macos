@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
@@ -165,7 +165,7 @@
                                                                 </subviews>
                                                             </customView>
                                                             <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R85-0p-W1u">
-                                                                <rect key="frame" x="323" y="0.0" width="40" height="30"/>
+                                                                <rect key="frame" x="323" y="0.0" width="30" height="30"/>
                                                                 <subviews>
                                                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0wQ-xJ-dyK">
                                                                         <rect key="frame" x="7" y="7" width="16" height="16"/>
@@ -533,6 +533,7 @@
         <userDefaultsController representsSharedInstance="YES" id="Zjc-KB-CJZ"/>
         <viewController id="iH6-17-JsM" customClass="MessagesVC">
             <connections>
+                <outlet property="containerView" destination="EJD-f8-Xqd" id="hoF-D3-hw1"/>
                 <outlet property="conversationView" destination="bOO-CW-S21" id="Vzg-3J-K2b"/>
             </connections>
         </viewController>

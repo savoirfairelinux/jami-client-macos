@@ -33,7 +33,7 @@
 @property (nonatomic, strong) IBOutlet NSBox* timeBox;
 @property (nonatomic, strong) IBOutlet NSTextField* timeLabel;
 @property (nonatomic, strong) IBOutlet NSTextField* transferedFileName;
-@property (nonatomic, strong) IBOutlet NSImageView* transferedImage;
+@property (nonatomic, strong) IBOutlet NSButton* transferedImage;
 @property (nonatomic, strong) IBOutlet NSProgressIndicator* sendingMessageIndicator;
 @property (nonatomic, strong) IBOutlet NSImageView* messageFailed;
 @property (nonatomic, strong) IBOutlet NSView* messageStatus;
