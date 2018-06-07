@@ -284,6 +284,7 @@ SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 SET(ring_ICONS
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_attachment.png
