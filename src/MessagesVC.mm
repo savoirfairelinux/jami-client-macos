@@ -35,11 +35,13 @@
 #import "delegates/ImageManipulationDelegate.h"
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/IconButton.h"
 
 
 @interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource> {
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
+    __unsafe_unretained IBOutlet NSView* containerView;
 
     std::string convUid_;
     lrc::api::ConversationModel* convModel_;
@@ -61,6 +63,7 @@
 // Tags for view
 NSInteger const GENERIC_INT_TEXT_TAG = 100;
 NSInteger const GENERIC_INT_TIME_TAG = 200;
+NSInteger const IMAGE_PREVIEW_TAG = 300;
 
 // views size
 CGFloat   const GENERIC_CELL_HEIGHT       = 60;
@@ -70,6 +73,7 @@ CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
 CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
 
 @implementation MessagesVC
+
 
 //MessageBuble type
 typedef NS_ENUM(NSInteger, MessageSequencing) {
@@ -99,6 +103,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(filterChangedSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(newInteractionSignal_);
+    NSView* imageView = [containerView viewWithTag:IMAGE_PREVIEW_TAG];
+    [[imageView superview] removeFromSuperview];
 }
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
@@ -320,13 +326,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
     result.transferedFileName.stringValue = fileName;
     if (status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
-        NSImage* image = [self getImageForFilePath:name];
+        NSImage* image = [self getImageForFilePath:name size:MAX_TRANSFERED_IMAGE_SIZE];
         if (([name rangeOfString:@"/"].location == NSNotFound)) {
-            image = [self getImageForFilePath:[self getDataTransferPath:interactionID]];
+            image = [self getImageForFilePath:[self getDataTransferPath:interactionID] size:MAX_TRANSFERED_IMAGE_SIZE];
         }
         if(image != nil) {
             result.transferedImage.image = [image roundCorners:14];
             [result updateImageConstraint:image.size.width andHeight:image.size.height];
+            [result.transferedImage setAction:@selector(imagePreview:)];
+            [result.transferedImage setTarget:self];
         }
     }
     [result setupForInteraction:interactionID];
@@ -492,9 +500,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
         if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
             NSString* name =  @(interaction.body.c_str());
-            NSImage* image = [self getImageForFilePath:name];
+            NSImage* image = [self getImageForFilePath:name size:MAX_TRANSFERED_IMAGE_SIZE];
             if (([name rangeOfString:@"/"].location == NSNotFound)) {
-                image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
+                image = [self getImageForFilePath:[self getDataTransferPath:it->first] size:MAX_TRANSFERED_IMAGE_SIZE];
             }
             if (image != nil) {
                 return image.size.height + TIME_BOX_HEIGHT;
@@ -540,12 +548,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return @(info.path.c_str());
 }
 
--(NSImage*) getImageForFilePath: (NSString *) path {
+-(NSImage*) getImageForFilePath: (NSString *) path size:(CGFloat)size {
     if (path.length <= 0) {return nil;}
     if (![[NSFileManager defaultManager] fileExistsAtPath: path]) {return nil;}
     NSImage* transferedImage = [[NSImage alloc] initWithContentsOfFile: path];
     if(transferedImage != nil) {
-        return [transferedImage imageResizeInsideMax: MAX_TRANSFERED_IMAGE_SIZE];
+        return [transferedImage imageResizeInsideMax: size];
     }
     return nil;
 }
@@ -751,6 +759,73 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (convModel_ && !convUid_.empty()) {
         convModel_->cancelTransfer(convUid_, inter);
     }
+}
+
+- (void)imagePreview:(id)sender {
+    if (![sender isKindOfClass:[NSButton class]]) {return;}
+    NSButton* imageButton =(NSButton*)sender;
+    auto interId = [(IMTableCellView*)[sender superview] interaction];
+    auto it = [self getCurrentConversation]->interactions.find(interId);
+    if (it == [self getCurrentConversation]->interactions.end()) {
+        return;
+    }
+    auto& interaction = it->second;
+    NSString* name =  @(interaction.body.c_str());
+    if (([name rangeOfString:@"/"].location == NSNotFound)) {
+        name = [self getDataTransferPath:interId];
+    }
+    CGFloat imageSize = MIN(containerView.frame.size.width, containerView.frame.size.height);
+    NSImage* image = [self getImageForFilePath:name size: imageSize];
+    if(!image) {return;}
+
+    NSView* backgroundView = [[NSView alloc] init];
+    [backgroundView setWantsLayer:YES];
+    backgroundView.layer.backgroundColor = [[[NSColor whiteColor] colorWithAlphaComponent:0.9] CGColor];
+    backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+    [containerView addSubview:backgroundView positioned:NSWindowAbove relativeTo:nil];
+    NSArray* backcgroundHorizontal = [NSLayoutConstraint
+                                      constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(0)-[backgroundView]-(0)-|"]
+                                      options:0
+                                      metrics:nil                                                                          views:NSDictionaryOfVariableBindings(backgroundView)];
+    NSArray* backcgroundVertical = [NSLayoutConstraint
+                                    constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(0)-[backgroundView]-(0)-|"]
+                                    options:0
+                                    metrics:nil                                                                          views:NSDictionaryOfVariableBindings(backgroundView)];
+    NSArray* backgroundConstraints =[backcgroundHorizontal arrayByAddingObjectsFromArray:backcgroundVertical] ;
+    [NSLayoutConstraint activateConstraints:backgroundConstraints];
+
+    NSImageView* imageView = [[NSImageView alloc] init];
+    [backgroundView addSubview:imageView positioned:NSWindowAbove relativeTo:nil];
+    imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [imageView setImageScaling:NSImageScaleProportionallyUpOrDown];
+    [imageView setImageFrameStyle:NSImageFrameNone];
+    imageView.image = [image roundCorners:20];
+    imageView.tag = IMAGE_PREVIEW_TAG;
+    NSArray* imageHorizontal = [NSLayoutConstraint
+                                constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(1)-[imageView]-(1)-|"]
+                                options:0
+                                metrics:nil                                                                          views:NSDictionaryOfVariableBindings(imageView)];
+    NSArray* imageVertical = [NSLayoutConstraint
+                              constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(1)-[imageView]-(1)-|"]
+                              options:0
+                              metrics:nil                                                                          views:NSDictionaryOfVariableBindings(imageView)];
+    NSArray* constraints =[imageHorizontal arrayByAddingObjectsFromArray:imageVertical];
+    [NSLayoutConstraint activateConstraints:constraints];
+
+    NSButton* closeButton = [[NSButton alloc] initWithFrame:containerView.frame];
+    [imageView addSubview:closeButton positioned:NSWindowAbove relativeTo:nil];
+    [closeButton setTitle: @""];
+    [closeButton setButtonType:NSMomentaryLightButton];
+    [[closeButton cell] setShowsStateBy:NSNoCellMask];
+    [[closeButton cell] setHighlightsBy:NSNoCellMask];
+    [closeButton setBordered:false];
+    [closeButton setAction:@selector(closePreview:)];
+    [closeButton setTarget:self];
+}
+
+- (void)closePreview:(id)sender {
+    NSView* imageView = [[sender superview] superview];
+    [imageView removeFromSuperview];
 }
 
 @end

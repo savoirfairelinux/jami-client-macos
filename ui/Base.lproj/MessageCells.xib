@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
@@ -130,17 +130,17 @@
             <point key="canvasLocation" x="139" y="167"/>
         </tableCellView>
         <tableCellView identifier="LeftFinishedFileView" id="eW8-NR-350" userLabel="IMTableCellView" customClass="IMTableCellView">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="172"/>
+            <rect key="frame" x="0.0" y="0.0" width="264" height="172"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <box boxType="custom" borderType="none" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="EAm-7Z-ubs">
-                    <rect key="frame" x="0.0" y="138" width="400" height="34"/>
+                    <rect key="frame" x="0.0" y="138" width="264" height="34"/>
                     <view key="contentView" id="vWe-2x-kXT">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="34"/>
+                        <rect key="frame" x="0.0" y="0.0" width="264" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JUf-er-n2R">
-                                <rect key="frame" x="196" y="9" width="8" height="17"/>
+                                <rect key="frame" x="128" y="9" width="8" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="20" id="c90-0g-OVN"/>
                                 </constraints>
@@ -179,10 +179,10 @@
                             </constraints>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="yjj-R0-GLl"/>
                         </imageView>
-                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AOC-mE-DQI">
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gJC-xP-uTF">
                             <rect key="frame" x="53" y="106" width="184" height="17"/>
-                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="BU5-xs-IBT">
-                                <font key="font" metaFont="systemSemibold" size="13"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="20r-mt-kVL">
+                                <font key="font" metaFont="system"/>
                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -200,8 +200,8 @@
                         </box>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="AOC-mE-DQI" firstAttribute="leading" secondItem="gXD-VF-3Sl" secondAttribute="trailing" constant="10" id="1DK-mk-Ep3"/>
-                        <constraint firstItem="AOC-mE-DQI" firstAttribute="top" secondItem="rfH-MI-dNw" secondAttribute="top" constant="15" id="9BN-fl-qze"/>
+                        <constraint firstItem="gJC-xP-uTF" firstAttribute="top" secondItem="rfH-MI-dNw" secondAttribute="top" constant="15" id="It6-bi-MaQ"/>
+                        <constraint firstItem="gJC-xP-uTF" firstAttribute="leading" secondItem="gXD-VF-3Sl" secondAttribute="trailing" constant="10" id="PGy-Sf-9nG"/>
                         <constraint firstItem="gXD-VF-3Sl" firstAttribute="leading" secondItem="rfH-MI-dNw" secondAttribute="leading" constant="15" id="Qzf-1C-Nkx"/>
                         <constraint firstItem="gXD-VF-3Sl" firstAttribute="top" secondItem="rfH-MI-dNw" secondAttribute="top" constant="15" id="RGa-mT-1Zc"/>
                         <constraint firstItem="ldC-Xq-oV5" firstAttribute="leading" secondItem="rfH-MI-dNw" secondAttribute="leading" constant="20" id="cJD-KH-VU4"/>
@@ -209,25 +209,28 @@
                         <constraint firstAttribute="trailing" secondItem="ypT-pD-ceZ" secondAttribute="trailing" constant="15" id="hhF-wq-lKL"/>
                         <constraint firstItem="ypT-pD-ceZ" firstAttribute="top" secondItem="gXD-VF-3Sl" secondAttribute="bottom" constant="15" id="p33-XJ-GjX"/>
                         <constraint firstItem="ypT-pD-ceZ" firstAttribute="leading" secondItem="rfH-MI-dNw" secondAttribute="leading" constant="15" id="qdS-RJ-JAB"/>
-                        <constraint firstAttribute="trailing" secondItem="AOC-mE-DQI" secondAttribute="trailing" constant="15" id="tYA-nB-27I"/>
+                        <constraint firstAttribute="trailing" secondItem="gJC-xP-uTF" secondAttribute="trailing" constant="15" id="sEV-Dg-wYW"/>
                         <constraint firstAttribute="bottom" secondItem="ldC-Xq-oV5" secondAttribute="bottom" constant="10" id="tmi-TO-YiG"/>
                     </constraints>
                 </view>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7UD-vn-oi8">
-                    <rect key="frame" x="40" y="0.0" width="0.0" height="138"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="u22-jR-dkf"/>
-                </imageView>
+                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hxG-Yd-cRF">
+                    <rect key="frame" x="40" y="0.0" width="48" height="138"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="fOs-co-GVj">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="hxG-Yd-cRF" firstAttribute="top" secondItem="EAm-7Z-ubs" secondAttribute="bottom" id="39u-ZX-g6R"/>
+                <constraint firstItem="hxG-Yd-cRF" firstAttribute="leading" secondItem="BPl-0q-GSo" secondAttribute="trailing" constant="10" id="3oQ-t9-qcp"/>
                 <constraint firstItem="rfH-MI-dNw" firstAttribute="leading" secondItem="BPl-0q-GSo" secondAttribute="trailing" constant="10" id="611-lJ-BBQ"/>
                 <constraint firstItem="rfH-MI-dNw" firstAttribute="top" secondItem="EAm-7Z-ubs" secondAttribute="bottom" id="HIj-cX-wOT"/>
                 <constraint firstItem="EAm-7Z-ubs" firstAttribute="leading" secondItem="eW8-NR-350" secondAttribute="leading" id="JhW-lj-cC3"/>
                 <constraint firstAttribute="trailing" secondItem="EAm-7Z-ubs" secondAttribute="trailing" id="Q5D-pe-Xft"/>
+                <constraint firstAttribute="bottom" secondItem="hxG-Yd-cRF" secondAttribute="bottom" id="U5P-2F-5pI"/>
                 <constraint firstItem="EAm-7Z-ubs" firstAttribute="top" secondItem="eW8-NR-350" secondAttribute="top" id="W4u-5d-H5k"/>
                 <constraint firstItem="BPl-0q-GSo" firstAttribute="leading" secondItem="eW8-NR-350" secondAttribute="leading" id="Y7M-PN-14V"/>
-                <constraint firstItem="7UD-vn-oi8" firstAttribute="leading" secondItem="BPl-0q-GSo" secondAttribute="trailing" constant="10" id="a31-m9-ozj"/>
-                <constraint firstItem="7UD-vn-oi8" firstAttribute="top" secondItem="EAm-7Z-ubs" secondAttribute="bottom" id="cRN-Cx-mx2"/>
-                <constraint firstAttribute="bottom" secondItem="7UD-vn-oi8" secondAttribute="bottom" id="mBE-yc-RCa"/>
                 <constraint firstItem="rfH-MI-dNw" firstAttribute="bottom" secondItem="BPl-0q-GSo" secondAttribute="bottom" id="s5i-QD-LqE"/>
                 <constraint firstAttribute="bottom" secondItem="rfH-MI-dNw" secondAttribute="bottom" id="vyt-jC-mVO"/>
             </constraints>
@@ -237,8 +240,8 @@
                 <outlet property="statusLabel" destination="ldC-Xq-oV5" id="qmg-YD-p6y"/>
                 <outlet property="timeBox" destination="EAm-7Z-ubs" id="4bu-p8-yDg"/>
                 <outlet property="timeLabel" destination="JUf-er-n2R" id="mdy-VT-uV5"/>
-                <outlet property="transferedFileName" destination="AOC-mE-DQI" id="Z7q-DD-ni5"/>
-                <outlet property="transferedImage" destination="7UD-vn-oi8" id="YYT-DU-itS"/>
+                <outlet property="transferedFileName" destination="gJC-xP-uTF" id="T4F-DC-EbR"/>
+                <outlet property="transferedImage" destination="hxG-Yd-cRF" id="yBf-Uw-eMd"/>
             </connections>
             <point key="canvasLocation" x="132" y="-22"/>
         </tableCellView>
@@ -542,21 +545,24 @@
                         <constraint firstAttribute="trailing" secondItem="wLw-Lb-baF" secondAttribute="trailing" constant="15" id="yqT-e3-1Rn"/>
                     </constraints>
                 </view>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bXz-Qu-7HX">
-                    <rect key="frame" x="400" y="0.0" width="0.0" height="138"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="5Js-l5-7dJ"/>
-                </imageView>
+                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ra-MQ-dQc">
+                    <rect key="frame" x="176" y="0.0" width="48" height="138"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ime-Ce-yIP">
+                        <behavior key="behavior" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="9ra-MQ-dQc" firstAttribute="top" secondItem="e0e-TK-qch" secondAttribute="bottom" id="47p-LD-eW3"/>
                 <constraint firstItem="e0e-TK-qch" firstAttribute="top" secondItem="rmZ-yh-rX1" secondAttribute="top" id="8NZ-EV-k0V"/>
-                <constraint firstAttribute="bottom" secondItem="bXz-Qu-7HX" secondAttribute="bottom" id="Ca3-5W-DMG"/>
                 <constraint firstItem="e0e-TK-qch" firstAttribute="leading" secondItem="rmZ-yh-rX1" secondAttribute="leading" id="JHH-tM-TTv"/>
+                <constraint firstAttribute="bottom" secondItem="9ra-MQ-dQc" secondAttribute="bottom" id="Z8C-ig-6oB"/>
+                <constraint firstAttribute="trailing" secondItem="9ra-MQ-dQc" secondAttribute="trailing" id="ZdJ-Th-dsy"/>
                 <constraint firstAttribute="bottom" secondItem="uQv-aG-QZp" secondAttribute="bottom" id="iyK-vD-6gs"/>
                 <constraint firstAttribute="trailing" secondItem="uQv-aG-QZp" secondAttribute="trailing" id="nBz-tG-1V1"/>
-                <constraint firstAttribute="trailing" secondItem="bXz-Qu-7HX" secondAttribute="trailing" id="paZ-cl-fq4"/>
                 <constraint firstItem="uQv-aG-QZp" firstAttribute="top" secondItem="e0e-TK-qch" secondAttribute="bottom" id="rvb-My-XBo"/>
                 <constraint firstAttribute="trailing" secondItem="e0e-TK-qch" secondAttribute="trailing" id="w3i-dk-KKy"/>
-                <constraint firstItem="bXz-Qu-7HX" firstAttribute="top" secondItem="e0e-TK-qch" secondAttribute="bottom" id="zXr-X6-l7P"/>
             </constraints>
             <connections>
                 <outlet property="msgBackground" destination="uQv-aG-QZp" id="poE-7z-JEI"/>
@@ -564,7 +570,7 @@
                 <outlet property="timeBox" destination="e0e-TK-qch" id="JPW-TW-Byd"/>
                 <outlet property="timeLabel" destination="Od3-Cq-LmR" id="lja-3j-VsT"/>
                 <outlet property="transferedFileName" destination="wLw-Lb-baF" id="66e-Vm-3Pt"/>
-                <outlet property="transferedImage" destination="bXz-Qu-7HX" id="Flw-il-Ypa"/>
+                <outlet property="transferedImage" destination="9ra-MQ-dQc" id="BsK-nv-ovu"/>
             </connections>
             <point key="canvasLocation" x="147" y="1290"/>
         </tableCellView>

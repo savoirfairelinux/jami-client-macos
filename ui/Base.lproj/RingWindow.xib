@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -422,23 +422,23 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-MB-mlx" userLabel="HomeView">
-                        <rect key="frame" x="326" y="0.0" width="727" height="658"/>
+                        <rect key="frame" x="325" y="0.0" width="728" height="658"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="6bh-ow-nJO" customClass="BackgroundView">
-                                <rect key="frame" x="0.0" y="0.0" width="727" height="172"/>
+                                <rect key="frame" x="0.0" y="0.0" width="728" height="172"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="172" id="hCN-uz-Nmc"/>
                                 </constraints>
                             </customView>
                             <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
-                                <rect key="frame" x="0.0" y="0.0" width="727" height="658"/>
+                                <rect key="frame" x="0.0" y="0.0" width="728" height="658"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="340" id="5yo-rb-X1O"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
                                 </constraints>
                             </customView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
-                                <rect key="frame" x="263" y="229" width="200" height="200"/>
+                                <rect key="frame" x="264" y="229" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="RCZ-Wt-iKD"/>
                                     <constraint firstAttribute="height" constant="200" id="tSn-OT-Zn8"/>
@@ -451,7 +451,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="D6e-KX-8gC">
-                                <rect key="frame" x="103" y="194" width="520" height="270"/>
+                                <rect key="frame" x="104" y="194" width="520" height="270"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
                                         <rect key="frame" x="95" y="98" width="330" height="19"/>
@@ -576,7 +576,7 @@
                     <constraint firstItem="Pav-Bw-GgK" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="trailing" id="RdH-bx-3aI"/>
                     <constraint firstAttribute="trailing" secondItem="Fzg-MB-mlx" secondAttribute="trailing" id="T3I-2c-Eto"/>
                     <constraint firstItem="Fzg-MB-mlx" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="VUS-o0-RNY"/>
-                    <constraint firstItem="Fzg-MB-mlx" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="trailing" constant="2" id="Xgw-Na-kgh"/>
+                    <constraint firstItem="Fzg-MB-mlx" firstAttribute="leading" secondItem="YgH-CN-tkB" secondAttribute="trailing" constant="1" id="Xgw-Na-kgh"/>
                     <constraint firstItem="Pav-Bw-GgK" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="hcV-ir-ZEc"/>
                     <constraint firstAttribute="bottom" secondItem="YgH-CN-tkB" secondAttribute="bottom" id="hkC-sf-sNA"/>
                     <constraint firstAttribute="bottom" secondItem="Fzg-MB-mlx" secondAttribute="bottom" id="tQc-0j-ggO"/>
