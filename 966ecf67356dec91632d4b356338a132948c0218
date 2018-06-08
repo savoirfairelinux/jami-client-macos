@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5c1566_b9d0bff8",
+        "filename": "src/utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-06-08T20:32:13Z",
+      "side": 1,
+      "message": "isAppSandboxConatinURL -\u003e doesAppSandboxContainsURL or appSandboxContainsURL ?",
+      "range": {
+        "startLine": 108,
+        "startChar": 19,
+        "endLine": 108,
+        "endChar": 41
+      },
+      "revId": "966ecf67356dec91632d4b356338a132948c0218",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
+    }
+  ]
+}
