@@ -41,6 +41,7 @@
 #import "Constants.h"
 #import "views/NSImage+Extensions.h"
 #import "delegates/ImageManipulationDelegate.h"
+#import "utils.h"
 
 @interface GeneralPrefsVC () {
     __unsafe_unretained IBOutlet NSTextField* historyChangedLabel;
@@ -146,6 +147,7 @@
     [panel setAllowsMultipleSelection:NO];
     [panel setCanChooseDirectories:YES];
     [panel setCanChooseFiles:NO];
+    panel.delegate = self;
     if ([panel runModal] != NSFileHandlingPanelOKButton) return;
     if ([[panel URLs] lastObject] == nil) return;
     NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
@@ -269,6 +271,15 @@
         pro->person()->setFormattedName(profileNameField.stringValue.UTF8String);
         pro->save();
     }
+}
+
+#pragma mark - NSOpenSavePanelDelegate delegate methods
+
+- (BOOL) panel:(id)sender shouldEnableURL:(NSURL*)url {
+    if(!appSandboxed()) {
+        return YES;
+    }
+    return isUrlAccessibleFromSandbox(url);
 }
 
 @end

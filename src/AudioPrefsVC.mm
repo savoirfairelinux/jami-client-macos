@@ -24,6 +24,7 @@
 #import <audio/inputdevicemodel.h>
 #import <audio/outputdevicemodel.h>
 #import <qitemselectionmodel.h>
+#import "utils.h"
 
 @interface AudioPrefsVC ()
 
@@ -59,14 +60,8 @@
 
     [self.muteDTMFButton setState:
             Audio::Settings::instance().areDTMFMuted()?NSOnState:NSOffState];
-
-    if([Media::RecordingModel::instance().recordPath().toNSString() isEqualToString:@""]) {
-        NSArray* pathComponentArray = [self pathComponentArray];
-        [recordingsPathControl setPathComponentCells:pathComponentArray];
-    } else {
-        [recordingsPathControl setURL:
-         [NSURL URLWithString:Media::RecordingModel::instance().recordPath().toNSString()]];
-    }
+    NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:Media::RecordingModel::instance().recordPath().toNSString()];
+    [recordingsPathControl setPathComponentCells:pathComponentArray];
 }
 
 - (IBAction)toggleMuteDTMF:(NSButton *)sender
@@ -81,8 +76,9 @@
 
 - (IBAction)pathControlSingleClick:(id)sender {
     // Select that chosen component of the path.
-    [self.recordingsPathControl setURL:[[self.recordingsPathControl clickedPathComponentCell] URL]];
-    Media::RecordingModel::instance().setRecordPath(QString::fromNSString([self.recordingsPathControl.URL path]));
+    NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:[[self.recordingsPathControl clickedPathComponentCell] URL].path];
+    [recordingsPathControl setPathComponentCells:pathComponentArray];
+ Media::RecordingModel::instance().setRecordPath(QString::fromNSString([self.recordingsPathControl.URL path]));
 }
 
 - (IBAction)chooseOutput:(id)sender {
@@ -104,29 +100,30 @@
 /*
  Assemble a set of custom cells to display into an array to pass to the path control.
  */
-- (NSArray *)pathComponentArray
+- (NSArray *)pathComponentArrayWithCurrentUrl:(NSString *) url
 {
+
     NSMutableArray *pathComponentArray = [[NSMutableArray alloc] init];
 
     NSFileManager *fileManager = [[NSFileManager alloc] init];
-
-    NSURL* desktopURL = [fileManager URLForDirectory:NSDesktopDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    NSURL* documentsURL = [fileManager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-    NSURL* userURL = [fileManager URLForDirectory:NSUserDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    NSURL* downloadURL = [fileManager URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
 
     NSPathComponentCell *componentCell;
-
-    // Use utility method to obtain a NSPathComponentCell based on icon, title and URL.
-    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Desktop" URL:desktopURL];
+    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Downloads" URL:downloadURL];
     [pathComponentArray addObject:componentCell];
-
-    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Documents" URL:documentsURL];
-    [pathComponentArray addObject:componentCell];
-
-    componentCell = [self componentCellForType:kUserFolderIcon withTitle:NSUserName() URL:userURL];
-    [pathComponentArray addObject:componentCell];
-
-    return pathComponentArray;
+    NSString * downloads = [downloadURL path];
+    if([url isEqualToString:downloads]) {
+        return pathComponentArray;
+    }
+    if(![url isEqualToString:@""]) {
+        NSString * name = [url componentsSeparatedByString:@"/"].lastObject;
+        if(!name) {
+            return pathComponentArray;
+        }
+        componentCell = [self componentCellForType:kGenericFolderIcon withTitle:name URL:[NSURL URLWithString: url]];
+        [pathComponentArray addObject:componentCell];
+        return pathComponentArray;
+    }
 }
 
 /*
@@ -171,6 +168,13 @@
 {
     [recordingsPathControl setURL:url];
     return YES;
+}
+
+- (BOOL) panel:(id)sender shouldEnableURL:(NSURL*)url {
+    if(!appSandboxed()) {
+        return YES;
+    }
+    return isUrlAccessibleFromSandbox(url);
 }
 
 #pragma mark - NSMenuDelegate methods
