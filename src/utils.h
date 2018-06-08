@@ -104,3 +104,36 @@ setVideoAutoQuality(bool autoQuality, std::string accountId)
         codecModel << CodecModel::EditAction::SAVE;
     }
 }
+
+static inline bool isAppSandboxConatinURL(NSURL* url)
+{
+    NSFileManager* fileManager = [[NSFileManager alloc] init];
+    NSArray* urlPathsMusic = [fileManager URLsForDirectory:NSMusicDirectory
+                                                 inDomains:NSUserDomainMask];
+    NSArray* urlPathsPictures = [fileManager URLsForDirectory:NSPicturesDirectory
+                                                    inDomains:NSUserDomainMask];
+    NSArray* urlPathsDownloads = [fileManager URLsForDirectory:NSDownloadsDirectory
+                                                     inDomains:NSUserDomainMask];
+    NSArray* urlPathsMovies = [fileManager URLsForDirectory:NSMoviesDirectory
+                                                  inDomains:NSUserDomainMask];
+    NSArray* availablePaths = [[[urlPathsMusic arrayByAddingObjectsFromArray: urlPathsPictures] arrayByAddingObjectsFromArray: urlPathsDownloads] arrayByAddingObjectsFromArray: urlPathsMovies];
+    if([availablePaths containsObject:url]) {
+        return YES;
+    }
+    for (NSURL* availableUrl in availablePaths) {
+        if ([url.path containsString:availableUrl.path]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+static inline bool appSandboxed()
+{
+    NSString* bundleID = [[NSBundle mainBundle] bundleIdentifier];
+    NSDictionary* environment = [[NSProcessInfo processInfo] environment];
+    if(environment[bundleID]) {
+        return YES;
+    }
+    return NO;
+}
