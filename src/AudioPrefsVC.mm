@@ -124,6 +124,7 @@
         [pathComponentArray addObject:componentCell];
         return pathComponentArray;
     }
+    return pathComponentArray;
 }
 
 /*
