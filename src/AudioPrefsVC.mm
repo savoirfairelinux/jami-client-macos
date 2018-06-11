@@ -122,12 +122,12 @@
         }
         componentCell = [self componentCellForType:kGenericFolderIcon withTitle:name URL:[NSURL URLWithString: url]];
         [pathComponentArray addObject:componentCell];
-        return pathComponentArray;
     }
+    return pathComponentArray;
 }
 
 /*
- This method is used by pathComponentArray to create a NSPathComponent cell based on icon, title and URL information. 
+ This method is used by pathComponentArray to create a NSPathComponent cell based on icon, title and URL information.
  Each path component needs an icon, URL and title.
  */
 - (NSPathComponentCell *)componentCellForType:(OSType)withIconType withTitle:(NSString *)title URL:(NSURL *)url
