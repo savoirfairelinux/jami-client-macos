@@ -122,8 +122,8 @@
         }
         componentCell = [self componentCellForType:kGenericFolderIcon withTitle:name URL:[NSURL URLWithString: url]];
         [pathComponentArray addObject:componentCell];
-        return pathComponentArray;
     }
+    return pathComponentArray;
 }
 
 /*
