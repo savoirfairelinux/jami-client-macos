@@ -668,6 +668,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 -(NSString *)timeForMessage:(NSDate*) msgTime {
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[[NSLocale currentLocale] localeIdentifier]]];
     if ([[NSCalendar currentCalendar] compareDate:today
                                            toDate:msgTime
                                 toUnitGranularity:NSCalendarUnitYear]!= NSOrderedSame) {
