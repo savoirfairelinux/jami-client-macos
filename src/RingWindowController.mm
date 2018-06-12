@@ -321,6 +321,10 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
 
 - (IBAction)openPreferences:(id)sender
 {
+    if (preferencesWC) {
+        [preferencesWC.window orderFront:preferencesWC.window];
+        return;
+    }
     preferencesWC = [[PreferencesWC alloc] initWithNibName:@"PreferencesWindow" bundle: nil model:&(lrc_->getDataTransferModel())];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
 }
