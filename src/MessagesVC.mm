@@ -132,14 +132,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return;
     }
     auto itIndex = distance(conv->interactions.begin(),it);
+    itIndex = conversationView.numberOfRows - 1 - itIndex;
     NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itIndex];
     //reload previous message to update bubbleview
-    if (itIndex > 0) {
+    if (itIndex < conversationView.numberOfRows - 1) {
         auto previousIt = it;
         previousIt--;
         auto previousInteraction = previousIt->second;
         if (previousInteraction.type == lrc::api::interaction::Type::TEXT) {
-            NSRange range = NSMakeRange(itIndex - 1, 2);
+            NSRange range = NSMakeRange(itIndex, 2);
             indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
         }
     }
@@ -148,36 +149,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
     [conversationView reloadDataForRowIndexes: indexSet
                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
-    NSRange range = [conversationView rowsInRect:visibleRect];
-    NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
-    NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
-    if (([conversationView numberOfRows] > 0) &&
-        lastvisibleRow == ([conversationView numberOfRows] -1)) {
-        [conversationView scrollToEndOfDocument:nil];
-    }
-}
-
--(void) reloadConversationForMessage:(uint64_t) uid shouldUpdateHeight:(bool)update updateConversation:(bool) updateConversation {
-    auto* conv = [self getCurrentConversation];
-
-    if (conv == nil)
-        return;
-    auto it = distance(conv->interactions.begin(),conv->interactions.find(uid));
-    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:it];
-    //reload previous message to update bubbleview
-    if (it > 0) {
-        NSRange range = NSMakeRange(it - 1, it);
-        indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-    }
-    if (update) {
-        [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
-    }
-    [conversationView reloadDataForRowIndexes: indexSet
-                                columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    if (update) {
-        [conversationView scrollToEndOfDocument:nil];
-    }
 }
 
 -(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model
@@ -197,8 +168,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                  if (uid != convUid_)
                                                      return;
                                                  cachedConv_ = nil;
-                                                 [conversationView noteNumberOfRowsChanged];
-                                                 [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
+                                                 [conversationView reloadData];
+                                                // [conversationView noteNumberOfRowsChanged];
+                                                        //[self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
                                              });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
                                                        [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
@@ -225,7 +197,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                               cachedConv_ = nil;
                                           });
     [conversationView reloadData];
-    [conversationView scrollToEndOfDocument:nil];
+    //[conversationView scrollToBeginningOfDocument:nil];
+    //[conversationView scrollToEndOfDocument:nil];
 }
 
 #pragma mark - configure cells
@@ -395,6 +368,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return nil;
 
     auto it = conv->interactions.begin();
+    row = tableView.numberOfRows - row -1;
 
     std::advance(it, row);
 
@@ -511,6 +485,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return 0;
 
     auto it = conv->interactions.begin();
+    row = tableView.numberOfRows - row -1;
 
     std::advance(it, row);
 
@@ -601,7 +576,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto* conv = [self getCurrentConversation];
     if (conv == nil)
     return SINGLE_WITHOUT_TIME;
+
     auto it = conv->interactions.begin();
+   // row = conversationView.numberOfRows - row -1;
     std::advance(it, row);
     auto interaction = it->second;
     if (interaction.type != lrc::api::interaction::Type::TEXT) {
