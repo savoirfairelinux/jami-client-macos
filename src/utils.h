@@ -131,8 +131,9 @@ static inline bool isUrlAccessibleFromSandbox(NSURL* url)
 static inline bool appSandboxed()
 {
     NSString* bundleID = [[NSBundle mainBundle] bundleIdentifier];
-    NSDictionary* environment = [[NSProcessInfo processInfo] environment];
-    if(environment[bundleID]) {
+    NSString* url = [[NSURL fileURLWithPath:NSHomeDirectory()] path];
+    NSString* appPath = [@"Library/Containers/" stringByAppendingString:bundleID];
+    if ([url containsString: appPath]) {
         return YES;
     }
     return NO;
