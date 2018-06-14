@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,6 +10,7 @@
                 <outlet property="addProfilePhotoImage" destination="3l7-TU-AMG" id="oQC-jN-JV0"/>
                 <outlet property="checkIntervalPopUp" destination="RYP-3d-PCa" id="JNO-GR-CV8"/>
                 <outlet property="downloadFolder" destination="7bY-JW-z0U" id="ylD-Yb-I2N"/>
+                <outlet property="downloadFolderLabel" destination="IHD-1X-sid" id="XnP-ui-hIA"/>
                 <outlet property="historyChangedLabel" destination="Gyi-ID-Z3v" id="aoO-Fh-UCQ"/>
                 <outlet property="historyStepper" destination="QmA-ZI-ZL5" id="dDV-1G-rZs"/>
                 <outlet property="historySwitch" destination="DgD-2y-4g5" id="GYk-pz-jGT"/>
