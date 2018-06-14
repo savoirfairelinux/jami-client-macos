@@ -40,6 +40,7 @@
 #import <api/contactmodel.h>
 #import <api/contact.h>
 #import <api/datatransfermodel.h>
+#import <media/recordingmodel.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -53,6 +54,7 @@
 #import "views/NSColor+RingTheme.h"
 #import "views/BackgroundView.h"
 #import "ChooseAccountVC.h"
+#import "utils.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -124,16 +126,17 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     NSToolbar *toolbar = self.window.toolbar;
     toolbar.delegate = self;
     [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
-    // set download folder (default - 'Downloads')
+    // set download folder (default - 'Documents')
     NSString* path = [[NSUserDefaults standardUserDefaults] stringForKey:Preferences::DownloadFolder];
     if (!path || path.length == 0) {
-        NSURL *downloadsURL = [[NSFileManager defaultManager]
-                               URLForDirectory:NSDownloadsDirectory
-                               inDomain:NSUserDomainMask appropriateForURL:nil
-                               create:YES error:nil];
-        path = [[downloadsURL path] stringByAppendingString:@"/"];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        path = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     }
     lrc_->getDataTransferModel().downloadDirectory = std::string([path UTF8String]);
+    if(appSandboxed()) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        Media::RecordingModel::instance().setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
+    }
 }
 
 - (void) connect

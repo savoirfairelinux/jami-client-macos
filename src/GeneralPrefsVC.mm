@@ -56,6 +56,7 @@
     __unsafe_unretained IBOutlet NSTextField* profileNameField;
     __unsafe_unretained IBOutlet NSImageView* addProfilePhotoImage;
     __unsafe_unretained IBOutlet NSButton *downloadFolder;
+    __unsafe_unretained IBOutlet NSTextField *downloadFolderLabel;
 }
 @end
 
@@ -114,6 +115,12 @@
             [addProfilePhotoImage setHidden:YES];
             [photoView setBordered:NO];
         }
+    }
+    if (appSandboxed()) {
+        [downloadFolder setHidden:YES];
+        [downloadFolder setEnabled:NO];
+        [downloadFolderLabel setHidden: YES];
+        return;
     }
     if (dataTransferModel) {
         downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
@@ -276,10 +283,7 @@
 #pragma mark - NSOpenSavePanelDelegate delegate methods
 
 - (BOOL) panel:(id)sender shouldEnableURL:(NSURL*)url {
-    if(!appSandboxed()) {
-        return YES;
-    }
-    return isUrlAccessibleFromSandbox(url);
+    return YES;
 }
 
 @end
