@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,9 +9,13 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AudioPrefsVC">
             <connections>
                 <outlet property="alwaysRecordingButton" destination="kOg-hX-1Q5" id="n6R-hv-JLY"/>
+                <outlet property="audioMarginBottomConstraint" destination="Oln-9b-2Ri" id="gcF-44-IOP"/>
+                <outlet property="audioMarginTopConstraint" destination="Fo0-5T-cmf" id="oRv-y8-en7"/>
                 <outlet property="inputDeviceList" destination="bK9-uH-jDb" id="zhZ-Cr-n6B"/>
                 <outlet property="muteDTMFButton" destination="Jyg-5H-Ygw" id="PDq-aH-ieL"/>
                 <outlet property="outputDeviceList" destination="9SA-9E-IzQ" id="YpE-Fz-J8P"/>
+                <outlet property="recordingHeaderTitle" destination="ftI-JV-7cE" id="pKF-X5-Ykn"/>
+                <outlet property="recordingpathLabel" destination="She-fN-vzD" id="DKZ-Ln-xNz"/>
                 <outlet property="recordingsPathControl" destination="nyE-tZ-v4C" id="4cw-pY-c3Z"/>
                 <outlet property="view" destination="deY-JV-Rfe" id="ebJ-o2-NpL"/>
             </connections>

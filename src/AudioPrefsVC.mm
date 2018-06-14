@@ -33,15 +33,23 @@
 @property (assign) IBOutlet NSPopUpButton *inputDeviceList;
 @property (assign) IBOutlet NSButton *alwaysRecordingButton;
 @property (assign) IBOutlet NSButton *muteDTMFButton;
+@property (assign) IBOutlet NSTextField *recordingHeaderTitle;
+@property (assign) IBOutlet NSTextField *recordingpathLabel;
+@property (assign) IBOutlet NSLayoutConstraint* audioMarginTopConstraint;
+@property (assign) IBOutlet NSLayoutConstraint* audioMarginBottomConstraint;
+
+
+
 
 @end
 
 @implementation AudioPrefsVC
-@synthesize recordingsPathControl;
+@synthesize recordingsPathControl, recordingHeaderTitle, recordingpathLabel;
 @synthesize outputDeviceList;
 @synthesize inputDeviceList;
 @synthesize alwaysRecordingButton;
 @synthesize muteDTMFButton;
+@synthesize audioMarginTopConstraint, audioMarginBottomConstraint;
 
 - (void)loadView
 {
@@ -62,6 +70,16 @@
             Audio::Settings::instance().areDTMFMuted()?NSOnState:NSOffState];
     NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:Media::RecordingModel::instance().recordPath().toNSString()];
     [recordingsPathControl setPathComponentCells:pathComponentArray];
+
+    if (appSandboxed()) {
+        [alwaysRecordingButton setHidden:YES];
+        [recordingsPathControl setEnabled:NO];
+        [recordingsPathControl setHidden: YES];
+        [recordingHeaderTitle setHidden: YES];
+        [recordingpathLabel setHidden: YES];
+        audioMarginTopConstraint.constant = 10.0f;
+        audioMarginBottomConstraint.constant = 67.0f;
+    }
 }
 
 - (IBAction)toggleMuteDTMF:(NSButton *)sender
@@ -171,10 +189,7 @@
 }
 
 - (BOOL) panel:(id)sender shouldEnableURL:(NSURL*)url {
-    if(!appSandboxed()) {
-        return YES;
-    }
-    return isUrlAccessibleFromSandbox(url);
+    return YES;
 }
 
 #pragma mark - NSMenuDelegate methods
