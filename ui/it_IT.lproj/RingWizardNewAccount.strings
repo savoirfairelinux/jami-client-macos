@@ -5,8 +5,8 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Obbligatorio*";
 
-/* Class = "NSButtonCell"; title = "Register public username (experimental)"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Registra un nome utente pubblico (sperimentale)";
+/* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
+"AG5-GR-bii.title" = "Registra nome utente pubblico";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
 "B6x-jj-48R.title" = "Scegli la tua password";
