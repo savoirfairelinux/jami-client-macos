@@ -8,16 +8,16 @@
 "Add to contacts" = "Ajouter aux contacts";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Faire un appel vidéo";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Faire un appel audio";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Effacer la conversation";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Bloquer le contact";
 
 /* Text shown to the user */
 "Alias : " = "Identifiant :";
@@ -92,7 +92,7 @@
 "No account available" = "Pas de compte disponible";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Se rendre dans les préférences afin de créer un nouveau compte";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Le mot de passe et sa confirmation ne correspondent pas.";
