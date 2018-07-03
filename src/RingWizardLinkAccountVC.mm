@@ -38,6 +38,7 @@
 
 #import "Constants.h"
 #import "views/NSImage+Extensions.h"
+#import "utils.h"
 
 @interface RingWizardLinkAccountVC ()
 
@@ -165,12 +166,14 @@
  */
 - (void)registerDefaultPreferences
 {
-    // enable AutoStartup
-    LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    if (loginItemsRef == nil) return;
-    CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
-    LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
-    if (itemRef) CFRelease(itemRef);
+    if (!appSandboxed()) {
+        // enable AutoStartup
+        LSSharedFileListRef loginItemsRef = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+        if (loginItemsRef == nil) return;
+        CFURLRef appUrl = (__bridge CFURLRef)[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]];
+        LSSharedFileListItemRef itemRef = LSSharedFileListInsertItemURL(loginItemsRef, kLSSharedFileListItemLast, NULL, NULL, appUrl, NULL, NULL);
+        if (itemRef) CFRelease(itemRef);
+    }
 
     // enable Notifications
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::Notifications];
