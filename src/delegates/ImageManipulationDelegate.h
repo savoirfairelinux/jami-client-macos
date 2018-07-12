@@ -41,7 +41,7 @@ namespace Interfaces {
         ImageManipulationDelegate();
         QVariant contactPhoto(Person* c, const QSize& size, bool displayPresence = true) override;
         virtual QByteArray toByteArray(const QVariant& pxm) override;
-        virtual QVariant personPhoto(const QByteArray& data, const QString& type = "PNG") override;
+        virtual QVariant personPhoto(const QByteArray& data, const QString& type = nil) override;
         QVariant conversationPhoto(const lrc::api::conversation::Info& conversation,
                                    const lrc::api::account::Info& accountInfo,
                                    const QSize& size = QSize(IMG_SIZE, IMG_SIZE),
