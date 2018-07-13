@@ -23,12 +23,26 @@
 
 @end
 
-@implementation RingWizardChooseVC
+@implementation RingWizardChooseVC {
+
+__unsafe_unretained IBOutlet NSButton* createSIPAccount;
+
+}
 
 @synthesize delegate;
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.view setAutoresizingMask: NSViewHeightSizable];
+}
+
 - (void)showCancelButton:(BOOL)showCancel{
     self.isCancelable = showCancel;
+    [createSIPAccount setHidden: YES];
+}
+
+- (void)showAdvancedButton:(BOOL)showAdvanced {
+    self.withAdvancedOptions = showAdvanced;
 }
 
 - (IBAction)createRingAccount:(id)sender
@@ -49,6 +63,21 @@
 {
     if ([self.delegate respondsToSelector:@selector(didCompleteWithAction:)]){
         [delegate didCompleteWithAction:WIZARD_ACTION_INVALID];
+    }
+}
+
+- (IBAction)showCreateSIP:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(didCompleteWithAction:)]){
+        [delegate didCompleteWithAction:WIZARD_ACTION_ADVANCED];
+    }
+    [createSIPAccount setHidden: NO];
+}
+
+- (IBAction)addSIPAccount:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(didCompleteWithAction:)]){
+        [delegate didCompleteWithAction:WIZARD_ACTION_SIP_ACCOUNT];
     }
 }
 

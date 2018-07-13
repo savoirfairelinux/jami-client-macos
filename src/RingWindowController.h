@@ -17,6 +17,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsSProtocol.h"
 
 namespace lrc {
     namespace api {
@@ -26,7 +27,7 @@ namespace lrc {
     }
 }
 
-@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate> {
+@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate, LrcModelsSProtocol> {
     IBOutlet NSView *currentView;
 }
 

@@ -177,6 +177,8 @@ SET(ringclient_CONTROLLERS
    src/PasswordChangeWC.h
    src/PasswordChangeWC.mm
    src/LrcModelsSProtocol.h
+   src/AddSIPAccountVC.mm
+   src/AddSIPAccountVC.h
 )
 
 SET(ringclient_BACKENDS
@@ -276,6 +278,7 @@ SET(ringclient_XIBS
    AccBannedContacts
    PasswordChange
    MessageCells
+   AddSIPAccountVC
 )
 
 # Icons
