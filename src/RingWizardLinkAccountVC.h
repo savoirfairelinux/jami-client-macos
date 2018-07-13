@@ -18,12 +18,14 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsSProtocol.h"
 
 @protocol RingWizardLinkDelegate <NSObject>
 - (void)didLinkAccountWithSuccess:(BOOL)success;
+- (void)showView:(NSView*)view;
 @end
 
-@interface RingWizardLinkAccountVC : NSViewController
+@interface RingWizardLinkAccountVC : NSViewController <LrcModelsSProtocol>
 @property (nonatomic, weak) NSWindowController <RingWizardLinkDelegate>* delegate;
 @property (nonatomic, weak) NSString* pinValue;
 @property (nonatomic, weak) NSString* passwordValue;
