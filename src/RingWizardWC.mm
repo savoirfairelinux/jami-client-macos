@@ -43,18 +43,24 @@
     BOOL isCancelable;
 }
 
-- (instancetype)initWithWindowNibName:(NSString *)windowNibName{
-    self = [super initWithWindowNibName:windowNibName];
+@synthesize accountModel;
 
-    chooseActiontWC = [[RingWizardChooseVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
-    linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil];
-    newAccountWC = [[RingWizardNewAccountVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel;
+{
+    if (self =  [self initWithWindowNibName:nibNameOrNil])
+    {
+        self.accountModel = accountModel;
+    }
     return self;
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    newAccountWC = [[RingWizardNewAccountVC alloc] initWithNibName:@"RingWizardNewAccount" bundle:nil accountmodel:self.accountModel];
+
+    chooseActiontWC = [[RingWizardChooseVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
+    linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil];
     [chooseActiontWC setDelegate:self];
     [linkAccountWC setDelegate:self];
     [newAccountWC setDelegate:self];

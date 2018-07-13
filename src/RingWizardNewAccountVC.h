@@ -18,13 +18,14 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsSProtocol.h"
 
 @protocol RingWizardNewDelegate <NSObject>
 - (void)didCreateAccountWithSuccess:(BOOL)success;
 - (void)showView:(NSView*)view;
 @end
 
-@interface RingWizardNewAccountVC : NSViewController
+@interface RingWizardNewAccountVC : NSViewController <LrcModelsSProtocol>
 
 @property (nonatomic, weak)NSWindowController <RingWizardNewDelegate>* delegate;
 
