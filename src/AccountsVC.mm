@@ -95,6 +95,8 @@ NSInteger const TAG_TYPE        =   400;
 
 QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnection, accountTypeChangedConnection;
 
+@synthesize accountModel;
+
 
 - (void)loadView {
     [super loadView];
@@ -180,6 +182,15 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
     [[self.bannedContactsVC view] setFrame:[self.bannedListTabItem.view frame]];
     [[self.bannedContactsVC view] setBounds:[self.bannedListTabItem.view bounds]];
     [self.bannedListTabItem setView:self.bannedContactsVC.view];
+}
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel
+{
+    if (self =  [self initWithNibName: nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.accountModel= accountModel;
+    }
+    return self;
 }
 
 - (void) setupSIPPanels
@@ -428,8 +439,9 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
 
 - (void)createRingAccount:(NSMenuItem*) sender
 {
-    wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
-    [wizard showChooseWithCancelButton: YES];
+
+    wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: self.accountModel];
+    [wizard showChooseWithCancelButton: YES andAdvanced: YES];
     // [wizard.window makeKeyAndOrderFront:self];
 #if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
     [self.view.window beginSheet:wizard.window completionHandler:nil];
