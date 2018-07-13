@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 22018 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,17 +18,15 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "RingWizardChooseVC.h"
-#import "RingWizardNewAccountVC.h"
-#import "RingWizardLinkAccountVC.h"
 #import "LrcModelsSProtocol.h"
-#import "AddSIPAccountVC.h"
 
-@interface RingWizardWC : NSWindowController <NSWindowDelegate, NSPathControlDelegate,
-    NSOpenSavePanelDelegate, RingWizardChooseDelegate, RingWizardNewDelegate,
-    RingWizardLinkDelegate, AddSIPAccountDelegate, LrcModelsSProtocol>
-- (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced;
-- (void)showNewAccountVC;
-- (void)showLinkAccountVC;
-- (void)showSIPAccountVC;
+@protocol AddSIPAccountDelegate <NSObject>
+- (void)close;
+- (void)showView:(NSView*)view;
+@end
+
+@interface AddSIPAccountVC : NSViewController <LrcModelsSProtocol>
+@property (nonatomic, weak) NSWindowController <AddSIPAccountDelegate>* delegate;
+- (void)show;
+
 @end

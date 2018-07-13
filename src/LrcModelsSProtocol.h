@@ -17,13 +17,19 @@
 namespace lrc {
     namespace api {
         class DataTransferModel;
+        class NewAccountModel;
+        class BehaviorController;
     }
 }
 
 @protocol LrcModelsSProtocol
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::DataTransferModel*) dataTransferModel;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(const lrc::api::DataTransferModel*) dataTransferModel;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(const lrc::api::NewAccountModel*) accountModel;
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel dataTransferModel:(const lrc::api::DataTransferModel*)dataTransferModel behaviourController:(const lrc::api::BehaviorController*) behaviorController;
 
 @property lrc::api::DataTransferModel* dataTransferModel;
+@property lrc::api::NewAccountModel* accountModel;
+@property lrc::api::BehaviorController* behaviorController;
 
 @end

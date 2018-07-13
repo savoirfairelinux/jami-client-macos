@@ -180,7 +180,7 @@ NSMenuItem* selectedMenuItem;
 
         QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
 
-        QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba);
+        QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba, nil);
         [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
     }
     @catch (NSException *ex) {
@@ -234,6 +234,7 @@ NSMenuItem* selectedMenuItem;
     }
     [self updateMenu];
     [self setPopUpButtonSelection];
+    [self updatePhoto];
 }
 
 -(void) setPopUpButtonSelection {
@@ -265,6 +266,7 @@ NSMenuItem* selectedMenuItem;
     auto& account = accMdl_->getAccountInfo(accList[row]);
     [accountSelectionManager_ setSavedAccount:account];
     [delegate selectAccount:account];
+    [self updatePhoto];
 }
 
 #pragma mark - NSMenuDelegate
