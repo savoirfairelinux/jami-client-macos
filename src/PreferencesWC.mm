@@ -39,7 +39,7 @@
     NSViewController *currentVC;
 }
 
-@synthesize dataTransferModel;
+@synthesize dataTransferModel, accountModel, behaviorController;
 
 // Identifiers used in PreferencesWindow.xib for tabs
 static auto const kProfilePrefsIdentifier = @"AccountsPrefsIdentifier";
@@ -55,11 +55,13 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [self displayGeneral:nil];
 }
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::DataTransferModel*) dataTransferModel
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController
 {
-    if (self = [self initWithWindowNibName:nibNameOrNil])
+    if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
+        self.accountModel = accountModel;
         self.dataTransferModel = dataTransferModel;
+        self.behaviorController = behaviorController;
     }
     return self;
 }
@@ -74,7 +76,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-     currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil model: self.dataTransferModel];
+     currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil dataTransferModel: self.dataTransferModel];
 
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
@@ -102,7 +104,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
     makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    currentVC = [[AccountsVC alloc] initWithNibName:@"Accounts" bundle:nil];
+    currentVC = [[AccountsVC alloc] initWithNibName:@"Accounts" bundle:nil accountmodel:self.accountModel];
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
 }

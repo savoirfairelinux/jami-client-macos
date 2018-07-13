@@ -16,12 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#import "RingWizardWC.h"
 
 //Cocoa
 #import <Quartz/Quartz.h>
 
-
+#import "RingWizardWC.h"
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "views/NSImage+Extensions.h"
@@ -29,7 +28,6 @@
 #import "RingWizardNewAccountVC.h"
 #import "RingWizardLinkAccountVC.h"
 #import "RingWizardChooseVC.h"
-
 
 @interface RingWizardWC ()
 
@@ -40,26 +38,37 @@
     IBOutlet RingWizardNewAccountVC* newAccountWC;
     IBOutlet RingWizardLinkAccountVC* linkAccountWC;
     IBOutlet RingWizardChooseVC* chooseActiontWC;
+    IBOutlet AddSIPAccountVC* addSIPAccountVC;
     BOOL isCancelable;
+    BOOL withAdvanced;
 }
 
-- (instancetype)initWithWindowNibName:(NSString *)windowNibName{
-    self = [super initWithWindowNibName:windowNibName];
+@synthesize accountModel;
 
-    chooseActiontWC = [[RingWizardChooseVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
-    linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil];
-    newAccountWC = [[RingWizardNewAccountVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel;
+{
+    if (self =  [self initWithWindowNibName:nibNameOrNil])
+    {
+        self.accountModel = accountModel;
+    }
     return self;
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    newAccountWC = [[RingWizardNewAccountVC alloc] initWithNibName:@"RingWizardNewAccount" bundle:nil accountmodel:self.accountModel];
+
+    chooseActiontWC = [[RingWizardChooseVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
+    linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil accountmodel:self.accountModel];
+    addSIPAccountVC = [[AddSIPAccountVC alloc] initWithNibName:@"AddSIPAccountVC" bundle:nil accountmodel:self.accountModel];
+    [addSIPAccountVC setDelegate:self];
     [chooseActiontWC setDelegate:self];
     [linkAccountWC setDelegate:self];
     [newAccountWC setDelegate:self];
     [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
-    [self showChooseWithCancelButton:isCancelable];
+    [self showChooseWithCancelButton:isCancelable andAdvanced: withAdvanced];
+    self.window.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantLight];
 }
 
 - (void)removeSubviews
@@ -71,13 +80,15 @@
 }
 
 #define headerHeight 60
-#define minHeight 141
-#define defaultMargin 20
+#define minHeight 150
+#define defaultMargin 5
+#define heightWithSIP 160
 - (void)showView:(NSView*)view
 {
     [self removeSubviews];
     NSRect frame = [self.container frame];
-    float sizeFrame = MAX(minHeight, view.bounds.size.height);
+    CGFloat height = withAdvanced ? minHeight : minHeight - 10;
+    float sizeFrame = MAX(height, view.frame.size.height);
     frame.size.height = sizeFrame;
     [view setFrame:frame];
 
@@ -88,6 +99,28 @@
     [self.window setFrame:frameWindows display:YES animate:YES];
 
     [self.container addSubview:view];
+}
+
+- (void) updateWindowHeight: (CGFloat) height {
+    NSRect frame = [self.container frame];
+    float sizeFrame = height;
+    frame.size.height = sizeFrame;
+    [self.container setFrame:frame];
+    float size = headerHeight + sizeFrame + defaultMargin;
+    NSRect frameWindows = self.window.frame;
+    frameWindows.size.height = size;
+    [self.window setFrame:frameWindows display:YES animate:YES];
+}
+
+- (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced {
+    [chooseActiontWC showCancelButton:showCancel];
+    [chooseActiontWC showAdvancedButton:showAdvanced];
+    isCancelable = showCancel;
+    withAdvanced = showAdvanced;
+    NSRect frame = CGRectMake(0, 0, chooseActiontWC.view.frame.size.width, 0);
+    chooseActiontWC.view.frame = frame;
+    [self showView:chooseActiontWC.view];
+
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel
@@ -109,6 +142,12 @@
     [linkAccountWC show];
 }
 
+- (void)showSIPAccountVC
+{
+    [self showView: addSIPAccountVC.view];
+    [addSIPAccountVC show];
+}
+
 # pragma NSWindowDelegate methods
 
 - (void)windowWillClose:(NSNotification *)notification
@@ -125,15 +164,18 @@
 
 - (void)didCompleteWithAction:(WizardAction)action
 {
-    if (action == WIZARD_ACTION_LINK){
+    if (action == WIZARD_ACTION_LINK) {
         [self showLinkAccountVC];
-    } else if (action == WIZARD_ACTION_NEW){
+    } else if (action == WIZARD_ACTION_NEW) {
         [self showNewAccountVC];
+    } else if (action == WIZARD_ACTION_ADVANCED) {
+        [self updateWindowHeight: heightWithSIP];
+    } else if (action == WIZARD_ACTION_SIP_ACCOUNT) {
+        [self showSIPAccountVC];
     } else {
         [self.window close];
         [[NSApplication sharedApplication] removeWindowsItem:self.window];
     }
-
 }
 
 #pragma - WizardCreateAccountDelegate methods
@@ -148,7 +190,7 @@
             [appDelegate showMainWindow];
         }
     } else {
-        [self showChooseWithCancelButton:isCancelable];
+        [self showChooseWithCancelButton: isCancelable andAdvanced: withAdvanced];
     }
 }
 
@@ -164,8 +206,15 @@
             [appDelegate showMainWindow];
         }
     } else {
-        [self showChooseWithCancelButton:isCancelable];
+        [self showChooseWithCancelButton: isCancelable andAdvanced: withAdvanced];
     }
+}
+
+#pragma - AddSIPAccountDelegate methods
+
+- (void)close {
+    [self.window close];
+    [[NSApplication sharedApplication] removeWindowsItem:self.window];
 }
 
 @end
