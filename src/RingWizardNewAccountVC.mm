@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
  *  Author: Loïc Siret <loic.siret@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,17 +27,14 @@
 //Qt
 #import <QUrl>
 #import <QPixmap>
+#import <QSize>
+#import <QtMacExtras/qmacfunctions.h>
 
 //LRC
-#import <accountmodel.h>
-#import <protocolmodel.h>
-#import <profilemodel.h>
-#import <QItemSelectionModel>
+#import <api/lrc.h>
+#import <api/newaccountmodel.h>
 #import <account.h>
-#import <certificate.h>
-#import <profilemodel.h>
-#import <profile.h>
-#import <person.h>
+#import <interfaces/pixmapmanipulatori.h>
 
 #import "AppDelegate.h"
 #import "Constants.h"
@@ -69,14 +67,13 @@
     __unsafe_unretained IBOutlet NSPopover* helpBlockchainContainer;
     __unsafe_unretained IBOutlet NSPopover* helpPasswordContainer;
 
-    Account* accountToCreate;
-    NSTimer* errorTimer;
-    QMetaObject::Connection stateChanged;
-    QMetaObject::Connection registrationEnded;
     QMetaObject::Connection registeredNameFound;
+    QMetaObject::Connection accountCreated;
+    QMetaObject::Connection accountRemoved;
 
     BOOL lookupQueued;
     NSString* usernameWaitingForLookupResult;
+    std::string accountToCreate;
 }
 
 NSInteger const DISPLAY_NAME_TAG                = 1;
@@ -86,6 +83,15 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
 NSInteger const ERROR_PASSWORD_TOO_SHORT        = -1;
 NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
+@synthesize accountModel;
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel {
+    if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.accountModel = accountModel;
+    }
+    return self;
+}
 
 - (BOOL)produceError:(NSError**)error withCode:(NSInteger)code andMessage:(NSString*)message
 {
@@ -219,35 +225,48 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
         return;
     }
 
+    QObject::disconnect(accountCreated);
+    QObject::disconnect(accountRemoved);
+    accountCreated = QObject::connect(self.accountModel,
+                                      &lrc::api::NewAccountModel::accountAdded,
+                                      [self] (const std::string& accountID) {
+                                          if(accountID.compare(accountToCreate) != 0) {
+                                              return;
+                                          }
+                                          QObject::disconnect(accountCreated);
+                                          QObject::disconnect(accountRemoved);
+                                          //set account avatar
+                                          if([photoView image]) {
+                                              NSImage *avatarImage = [photoView image];
+                                              auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
+                                              std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
+                                              self.accountModel->setAvatar(accountID, imageToString);
+                                          }
+                                          //register username
+                                          if (self.registeredName && ![self.registeredName isEqualToString:@""]) {
+                                              NSString *passwordString = self.password ? self.password: @"";
+                                              NSString *usernameString = self.registeredName;
+                                              self.accountModel->registerName(accountID, [passwordString UTF8String], [usernameString UTF8String]);
+                                          }
+
+                                          [self registerDefaultPreferences];
+                                          [self.delegate didCreateAccountWithSuccess:YES];
+                                      });
+    //if account creation failed remove loading view
+    accountRemoved = QObject::connect(self.accountModel,
+                                      &lrc::api::NewAccountModel::accountRemoved,
+                                      [self] (const std::string& accountID) {
+                                          if(accountID.compare(accountToCreate) != 0) {
+                                              return;
+                                          }
+                                          QObject::disconnect(accountCreated);
+                                          QObject::disconnect(accountRemoved);
+                                          [self.delegate didCreateAccountWithSuccess:NO];
+                                      });
     [self display:loadingView];
     [progressBar startAnimation:nil];
 
-    NSString* displayName = displayNameField.stringValue;
-    if ([displayName isEqualToString:@""]) {
-        displayName = NSLocalizedString(@"Unknown", @"Name used when user leave field empty");
-    }
-
-    accountToCreate = AccountModel::instance().add(QString::fromNSString(displayName), Account::Protocol::RING);
-    accountToCreate->setAlias([displayName UTF8String]);
-    accountToCreate->setDisplayName([displayName UTF8String]);
-
-    if (auto profile = ProfileModel::instance().selectedProfile()) {
-        profile->person()->setFormattedName([displayName UTF8String]);
-        QPixmap p;
-        auto smallImg = [NSImage imageResize:[photoView image] newSize:{100,100}];
-        if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
-            profile->person()->setPhoto(QVariant(p));
-        }
-        profile->save();
-
-    }
-
-    QModelIndex qIdx = AccountModel::instance().protocolModel()->selectionModel()->currentIndex();
-
-    [self setCallback];
-
-    [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
-    [self registerDefaultPreferences];
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, [displayNameField.stringValue UTF8String],"",[passwordField.stringValue UTF8String]);
 }
 
 /**
@@ -268,86 +287,6 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::Notifications];
 }
 
-- (void)saveAccount
-{
-    accountToCreate->setArchivePassword(QString::fromNSString(passwordField.stringValue));
-    accountToCreate->setUpnpEnabled(YES); // Always active upnp
-    accountToCreate << Account::EditAction::SAVE;
-}
-
-- (void)setCallback
-{
-    stateChanged = QObject::connect(&AccountModel::instance(),
-                                    &AccountModel::accountStateChanged,
-                                    [=](Account *account, const Account::RegistrationState state) {
-                                        switch(state){
-                                            case Account::RegistrationState::READY:
-                                            case Account::RegistrationState::TRYING:
-                                            case Account::RegistrationState::UNREGISTERED:{
-                                                accountToCreate << Account::EditAction::RELOAD;
-                                                QObject::disconnect(stateChanged);
-                                                //try to register username
-                                                if (self.signUpBlockchainState == NSOnState){
-                                                    [self startNameRegistration:account];
-                                                } else {
-                                                    [self.delegate didCreateAccountWithSuccess:YES];
-                                                }
-                                                break;
-                                            }
-                                            case Account::RegistrationState::ERROR:
-                                                QObject::disconnect(stateChanged);
-                                                [self.delegate didCreateAccountWithSuccess:NO];
-                                                break;
-                                            case Account::RegistrationState::INITIALIZING:
-                                            case Account::RegistrationState::COUNT__:{
-                                                //Do Nothing
-                                                break;
-                                            }
-                                        }
-                                    });
-}
-
-- (void) startNameRegistration:(Account*) account
-{
-    // Dismiss this screen if after 30 seconds the name is still not registered
-    errorTimer = [NSTimer scheduledTimerWithTimeInterval:30
-                                                  target:self
-                                                selector:@selector(nameRegistrationTimeout) userInfo:nil
-                                                 repeats:NO];
-    registrationEnded = QObject::connect(account,
-                                         &Account::nameRegistrationEnded,
-                                         [=] (NameDirectory::RegisterNameStatus status,  const QString& name) {
-                                             QObject::disconnect(registrationEnded);
-                                             switch(status) {
-                                                 case NameDirectory::RegisterNameStatus::WRONG_PASSWORD:
-                                                 case NameDirectory::RegisterNameStatus::ALREADY_TAKEN:
-                                                 case NameDirectory::RegisterNameStatus::NETWORK_ERROR: {
-                                                     [self couldNotRegisterUsername];
-                                                     break;
-                                                 }
-                                                 case NameDirectory::RegisterNameStatus::SUCCESS: {
-                                                     break;
-                                                 }
-                                             }
-
-                                             [self.delegate didCreateAccountWithSuccess:YES];
-                                         });
-    self.isUserNameAvailable = account->registerName(QString::fromNSString(self.password),
-                                                     QString::fromNSString(self.registeredName));
-    if (!self.isUserNameAvailable){
-        NSLog(@"Could not initialize registerName operation");
-        QObject::disconnect(registrationEnded);
-        [self.delegate didCreateAccountWithSuccess:YES];
-    }
-}
-
-- (void)nameRegistrationTimeout
-{
-    // This callback is used when registration takes more than 30 seconds
-    // It skips the wizard and brings the main window
-    [self.delegate didCreateAccountWithSuccess:YES];
-}
-
 - (IBAction)cancel:(id)sender
 {
     [self.delegate didCreateAccountWithSuccess:NO];
@@ -360,11 +299,6 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     if (self.withBlockchain) {
         [self lookupUserName];
     }
-}
-
-- (void)couldNotRegisterUsername
-{
-    // Do nothing
 }
 
 - (BOOL)withBlockchain
