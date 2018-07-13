@@ -21,11 +21,14 @@
 #import "RingWizardChooseVC.h"
 #import "RingWizardNewAccountVC.h"
 #import "RingWizardLinkAccountVC.h"
+#import "LrcModelsProtocol.h"
+#import "AddSIPAccountVC.h"
+
 @interface RingWizardWC : NSWindowController <NSWindowDelegate, NSPathControlDelegate,
     NSOpenSavePanelDelegate, RingWizardChooseDelegate, RingWizardNewDelegate,
-    RingWizardLinkDelegate>
-
-- (void)showChooseWithCancelButton:(BOOL)showCancel;
+    RingWizardLinkDelegate, AddSIPAccountDelegate, LrcModelsProtocol>
+- (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced;
 - (void)showNewAccountVC;
 - (void)showLinkAccountVC;
+- (void)showSIPAccountVC;
 @end

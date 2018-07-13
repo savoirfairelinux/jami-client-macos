@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,6 +24,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="450" height="318"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="iI2-Gb-gPl">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="318"/>
+                    </visualEffectView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="9ok-Ga-Q8u" userLabel="header">
                         <rect key="frame" x="0.0" y="258" width="450" height="60"/>
                         <subviews>
@@ -57,10 +60,14 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="iI2-Gb-gPl" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" id="3IK-uK-GhR"/>
+                    <constraint firstItem="iI2-Gb-gPl" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" id="EBJ-vq-VyN"/>
+                    <constraint firstAttribute="trailing" secondItem="iI2-Gb-gPl" secondAttribute="trailing" id="K7w-99-HOk"/>
                     <constraint firstItem="9ok-Ga-Q8u" firstAttribute="top" secondItem="Wgr-xH-z0G" secondAttribute="top" id="Swu-Wv-5zO"/>
                     <constraint firstItem="T98-k1-e6X" firstAttribute="leading" secondItem="9ok-Ga-Q8u" secondAttribute="leading" id="ZVp-x0-6tM"/>
                     <constraint firstAttribute="trailing" secondItem="9ok-Ga-Q8u" secondAttribute="trailing" id="dNA-c1-YAU"/>
                     <constraint firstItem="T98-k1-e6X" firstAttribute="trailing" secondItem="9ok-Ga-Q8u" secondAttribute="trailing" id="nO3-RU-q91"/>
+                    <constraint firstAttribute="bottom" secondItem="iI2-Gb-gPl" secondAttribute="bottom" id="q20-Nh-dQD"/>
                     <constraint firstAttribute="bottom" secondItem="T98-k1-e6X" secondAttribute="bottom" id="qCC-en-fqL"/>
                     <constraint firstItem="T98-k1-e6X" firstAttribute="top" secondItem="9ok-Ga-Q8u" secondAttribute="bottom" id="sSS-2c-qrc"/>
                     <constraint firstItem="9ok-Ga-Q8u" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" id="zPn-Ld-oZC"/>
@@ -69,7 +76,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="cKX-Z2-yDq"/>
             </connections>
-            <point key="canvasLocation" x="447.5" y="-489"/>
+            <point key="canvasLocation" x="447" y="-489"/>
         </window>
         <viewController nibName="RingWizardChoose" id="TGh-Qf-0hi" customClass="RingWizardChooseVC"/>
         <viewController nibName="RingWizardLinkAccount" id="Hlf-uv-gt6" customClass="RingWizardLinkAccountVC"/>

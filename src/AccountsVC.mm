@@ -95,6 +95,8 @@ NSInteger const TAG_TYPE        =   400;
 
 QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnection, accountTypeChangedConnection;
 
+@synthesize accountModel;
+
 
 - (void)loadView {
     [super loadView];
@@ -180,6 +182,15 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
     [[self.bannedContactsVC view] setFrame:[self.bannedListTabItem.view frame]];
     [[self.bannedContactsVC view] setBounds:[self.bannedListTabItem.view bounds]];
     [self.bannedListTabItem setView:self.bannedContactsVC.view];
+}
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel
+{
+    if (self =  [self initWithNibName: nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.accountModel= accountModel;
+    }
+    return self;
 }
 
 - (void) setupSIPPanels
@@ -404,17 +415,10 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
 
 - (IBAction)addAccountClicked:(NSButton *)sender
 {
-    NSMenu* menu = [[NSMenu alloc] init];
-    [menu insertItemWithTitle:NSLocalizedString(@"Create RING Account", @"Contextual menu entry")
-                       action:@selector(createRingAccount:)
-                keyEquivalent:@""
-                      atIndex:0];
-    [menu insertItemWithTitle:NSLocalizedString(@"Create SIP Account", @"Contextual menu entry")
-                       action:@selector(createSIPAccount:)
-                keyEquivalent:@""
-                      atIndex:0];
-
-    [NSMenu popUpContextMenu:menu withEvent:[self forgedEventForButton:sender] forView:(NSButton *)sender];
+    wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: self.accountModel];
+    [wizard showChooseWithCancelButton: YES andAdvanced: YES];
+    [self.view.window beginSheet:wizard.window completionHandler:nil];
+    [wizard showWindow:self];
 }
 
 - (void)createSIPAccount:(NSMenuItem*) sender
@@ -424,23 +428,6 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
     acc->setProtocol(Account::Protocol::SIP);
     acc->setDTMFType(DtmfType::OverSip);
     AccountModel::instance().save();
-}
-
-- (void)createRingAccount:(NSMenuItem*) sender
-{
-    wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
-    [wizard showChooseWithCancelButton: YES];
-    // [wizard.window makeKeyAndOrderFront:self];
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
-    [self.view.window beginSheet:wizard.window completionHandler:nil];
-#else
-    [NSApp beginSheet: wizard.window
-       modalForWindow: self.view.window
-        modalDelegate: self
-       didEndSelector: nil
-          contextInfo: nil];
-#endif
-    [wizard showWindow:self];
 }
 
 #pragma mark - BackupAccountDelegate methods

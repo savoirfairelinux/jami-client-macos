@@ -19,8 +19,8 @@
 
 
 #import <Cocoa/Cocoa.h>
-#import "LrcModelsSProtocol.h"
+#import "LrcModelsProtocol.h"
 
-@interface GeneralPrefsVC : NSViewController <LrcModelsSProtocol, NSOpenSavePanelDelegate>
+@interface GeneralPrefsVC : NSViewController <LrcModelsProtocol, NSOpenSavePanelDelegate>
 
 @end
