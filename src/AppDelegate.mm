@@ -30,6 +30,7 @@
 #import <QDebug>
 #import <account.h>
 #import <AvailableAccountModel.h>
+#import <api/lrc.h>
 
 
 #if ENABLE_SPARKLE
@@ -54,9 +55,11 @@
 
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate {
 
 NSTimer* preventSleepTimer;
+std::unique_ptr<lrc::api::Lrc> lrc;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
@@ -76,6 +79,7 @@ NSTimer* preventSleepTimer;
 
     NSAppleEventManager* appleEventManager = [NSAppleEventManager sharedAppleEventManager];
     [appleEventManager setEventHandler:self andSelector:@selector(handleQuitEvent:withReplyEvent:) forEventClass:kCoreEventClass andEventID:kAEQuitApplication];
+    lrc = std::make_unique<lrc::api::Lrc>();
 
     if([self checkForRingAccount]) {
         [self showMainWindow];
@@ -239,7 +243,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 - (void) showWizard
 {
     if(self.wizard == nil) {
-        self.wizard = [[RingWizardWC alloc] initWithWindowNibName:@"RingWizard"];
+        self.wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: &lrc->getAccountModel()];
     }
     [self.wizard.window makeKeyAndOrderFront:self];
 }
@@ -247,7 +251,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 - (void) showMainWindow
 {
     if(self.ringWindowController == nil) {
-        self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow"];
+        self.ringWindowController = [[RingWindowController alloc] initWithWindowNibName:@"RingWindow" bundle: nil accountModel:&lrc->getAccountModel() dataTransferModel:&lrc->getDataTransferModel() behaviourController:&lrc->getBehaviorController()];
     }
     [[NSApplication sharedApplication] removeWindowsItem:self.wizard.window];
     [self.ringWindowController.window makeKeyAndOrderFront:self];
