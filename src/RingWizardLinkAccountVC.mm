@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
  *  Author: Loïc Siret <loic.siret@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,15 +27,8 @@
 #import <QPixmap>
 
 //LRC
-#import <accountmodel.h>
-#import <protocolmodel.h>
-#import <profilemodel.h>
-#import <QItemSelectionModel>
-#import <account.h>
-#import <certificate.h>
-#import <profilemodel.h>
-#import <profile.h>
-#import <person.h>
+#import <api/lrc.h>
+#import <api/newaccountmodel.h>
 
 #import "Constants.h"
 #import "views/NSImage+Extensions.h"
@@ -60,15 +54,23 @@
     __unsafe_unretained IBOutlet NSButton* linkButton;
     NSString *fileButtonTitleBackup;
 
-    Account* accountToCreate;
     NSURL* backupFile;
-    NSTimer* errorTimer;
-    QMetaObject::Connection stateChanged;
+    QMetaObject::Connection accountCreated;
+    QMetaObject::Connection accountRemoved;
+    std::string accountToCreate;
 }
 
+@synthesize accountModel;
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel {
+    if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.accountModel = accountModel;
+    }
+    return self;
+}
 - (IBAction)goToStepTwo:(id)sender
 {
-    [self disconnectCallback];
     [firstStepContainer setHidden:YES];
     [initialContainer setHidden:NO];
     [loadingContainer setHidden:YES];
@@ -103,6 +105,8 @@
     [initialContainer setHidden:YES];
     [loadingContainer setHidden:YES];
     [errorContainer setHidden:NO];
+    QObject::disconnect(accountCreated);
+    QObject::disconnect(accountRemoved);
 }
 - (void)showLoading
 {
@@ -114,22 +118,30 @@
 
 - (IBAction)importRingAccount:(id)sender
 {
+    QObject::disconnect(accountCreated);
+    QObject::disconnect(accountRemoved);
+    accountCreated = QObject::connect(self.accountModel,
+                                      &lrc::api::NewAccountModel::accountAdded,
+                                      [self] (const std::string& accountID) {
+                                          [self.delegate didLinkAccountWithSuccess:YES];
+                                          [self registerDefaultPreferences];
+                                          QObject::disconnect(accountCreated);
+                                          QObject::disconnect(accountRemoved);
+                                      });
+    // account that is invalid will be removed, connect the signal to show error message
+    accountRemoved = QObject::connect(self.accountModel,
+                                      &lrc::api::NewAccountModel::accountRemoved,
+                                      [self] (const std::string& accountID) {
+                                          if(accountID.compare(accountToCreate) == 0) {
+                                              [self showError];
+                                          }
+                                      });
+
     [self showLoading];
-    if (auto profile = ProfileModel::instance().selectedProfile()) {
-        profile->person()->setFormattedName([NSFullUserName() UTF8String]);
-        profile->save();
-    }
-    accountToCreate = AccountModel::instance().add(QString::fromNSString(NSFullUserName()), Account::Protocol::RING);
-    if (backupFile == nil)
-        accountToCreate->setArchivePin(QString::fromNSString(self.pinValue));
-    else
-        accountToCreate->setArchivePath(QString::fromLocal8Bit([backupFile fileSystemRepresentation]));
-    accountToCreate->setArchivePassword(QString::fromNSString(self.passwordValue));
-
-    [self setCallback];
-
-    [self performSelector:@selector(saveAccount) withObject:nil afterDelay:1];
-    [self registerDefaultPreferences];
+    NSString *pin = backupFile ? @"" : (self.pinValue ? self.pinValue : @"");
+    NSString *archivePath = backupFile ? [backupFile path] : @"";
+    NSString *pathword = self.passwordValue ? self.passwordValue : @"";
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, "",[archivePath UTF8String], [pathword UTF8String], [pin UTF8String]);
 }
 
 - (IBAction)dismissViewWithError:(id)sender
@@ -139,7 +151,6 @@
 
 - (IBAction)back:(id)sender
 {
-    [self deleteAccount];
     [self goToStepOne:sender];
 }
 
@@ -177,65 +188,6 @@
 
     // enable Notifications
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::Notifications];
-}
-
-- (void)saveAccount
-{
-    accountToCreate->setUpnpEnabled(YES); // Always active upnp
-    accountToCreate << Account::EditAction::SAVE;
-}
-
-- (void)deleteAccount
-{
-    if(auto account = AccountModel::instance().getById(accountToCreate->id())) {
-        AccountModel::instance().remove(accountToCreate);
-        AccountModel::instance().save();
-    }
-}
-
-- (void)disconnectCallback
-{
-    [errorTimer invalidate];
-    QObject::disconnect(stateChanged);
-}
-
-- (void)setCallback
-{
-    errorTimer = [NSTimer scheduledTimerWithTimeInterval:30
-                                                  target:self
-                                                selector:@selector(didLinkFailed) userInfo:nil
-                                                 repeats:NO];
-
-    stateChanged = QObject::connect(&AccountModel::instance(),
-                                    &AccountModel::accountStateChanged,
-                                    [=](Account *account, const Account::RegistrationState state) {
-                                        switch(state){
-                                            case Account::RegistrationState::READY:
-                                            case Account::RegistrationState::TRYING:
-                                            case Account::RegistrationState::UNREGISTERED:{
-                                                accountToCreate<< Account::EditAction::RELOAD;
-                                                QObject::disconnect(stateChanged);
-                                                [errorTimer invalidate];
-                                                [self.delegate didLinkAccountWithSuccess:YES];
-                                                break;
-                                            }
-                                            case Account::RegistrationState::ERROR:
-                                                QObject::disconnect(stateChanged);
-                                                [errorTimer invalidate];
-                                                [self showError];
-                                                break;
-                                            case Account::RegistrationState::INITIALIZING:
-                                            case Account::RegistrationState::COUNT__:{
-                                                //DO Nothing
-                                                break;
-                                            }
-                                        }
-                                    });
-}
-
-- (void)didLinkFailed
-{
-    [self showError];
 }
 
 @end

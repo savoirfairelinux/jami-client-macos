@@ -73,8 +73,6 @@
     __unsafe_unretained IBOutlet NSButton* shareButton;
     __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
-    std::unique_ptr<lrc::api::Lrc> lrc_;
-
     PreferencesWC* preferencesWC;
     IBOutlet SmartViewVC* smartViewVC;
 
@@ -88,6 +86,19 @@
 static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
 NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
 
+@synthesize dataTransferModel, accountModel, behaviorController;
+
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController
+{
+    if (self =  [self initWithWindowNibName:nibNameOrNil])
+    {
+        self.accountModel = accountModel;
+        self.dataTransferModel = dataTransferModel;
+        self.behaviorController = behaviorController;
+    }
+    return self;
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
@@ -95,12 +106,10 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
     self.window.titleVisibility = NSWindowTitleHidden;
 
-    lrc_ = std::make_unique<lrc::api::Lrc>();
-
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     conversationVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
-    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:&(lrc_->getAccountModel()) delegate:self];
+    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:self.accountModel delegate:self];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[conversationVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -132,7 +141,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         path = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     }
-    lrc_->getDataTransferModel().downloadDirectory = std::string([path UTF8String]);
+    self.dataTransferModel->downloadDirectory = std::string([path UTF8String]);
     if(appSandboxed()) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         Media::RecordingModel::instance().setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
@@ -141,11 +150,11 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
 
 - (void) connect
 {
-    QObject::connect(&lrc_->getBehaviorController(),
+    QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showCallView,
                      [self](const std::string accountId,
                             const lrc::api::conversation::Info convInfo){
-                         auto* accInfo = &lrc_->getAccountModel().getAccountInfo(accountId);
+                         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
                          if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                              [smartViewVC selectPendingList];
                          else
@@ -159,11 +168,11 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                          [conversationVC hideWithAnimation:false];
                      });
 
-    QObject::connect(&lrc_->getBehaviorController(),
+    QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showIncomingCallView,
                      [self](const std::string accountId,
                             const lrc::api::conversation::Info convInfo){
-                         auto* accInfo = &lrc_->getAccountModel().getAccountInfo(accountId);
+                         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
                          if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                              [smartViewVC selectPendingList];
                          else
@@ -177,11 +186,11 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                          [conversationVC hideWithAnimation:false];
                      });
 
-    QObject::connect(&lrc_->getBehaviorController(),
+    QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showChatView,
                      [self](const std::string& accountId,
                             const lrc::api::conversation::Info& convInfo){
-                         auto& accInfo = lrc_->getAccountModel().getAccountInfo(accountId);
+                         auto& accInfo = self.accountModel->getAccountInfo(accountId);
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [conversationVC showWithAnimation:false];
@@ -328,7 +337,8 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
         [preferencesWC.window orderFront:preferencesWC.window];
         return;
     }
-    preferencesWC = [[PreferencesWC alloc] initWithNibName:@"PreferencesWindow" bundle: nil model:&(lrc_->getDataTransferModel())];
+
+    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName: @"PreferencesWindow" bundle: nil accountModel:self.accountModel dataTransferModel:self.dataTransferModel behaviourController:self.behaviorController];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
 }
 
