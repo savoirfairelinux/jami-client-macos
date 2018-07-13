@@ -65,7 +65,7 @@
 @synthesize dataTransferModel;
 
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::DataTransferModel*) dataTransferModel
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(lrc::api::DataTransferModel*) dataTransferModel
 {
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
