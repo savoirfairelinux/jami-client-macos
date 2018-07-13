@@ -18,7 +18,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsProtocol.h"
 
-@interface AccountsVC : NSViewController <NSOutlineViewDelegate, NSMenuDelegate>
+@interface AccountsVC : NSViewController <NSOutlineViewDelegate, NSMenuDelegate, LrcModelsProtocol>
 
 @end

@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Loïc Siret <loic.siret@savoirfairelinux.com>
+ *  Copyright (C) 22018 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,24 +20,13 @@
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
 
-@protocol RingWizardNewDelegate <NSObject>
-- (void)didCreateAccountWithSuccess:(BOOL)success;
+@protocol AddSIPAccountDelegate <NSObject>
+- (void)close;
 - (void)showView:(NSView*)view;
 @end
 
-@interface RingWizardNewAccountVC : NSViewController <LrcModelsProtocol>
-
-@property (nonatomic, weak)NSWindowController <RingWizardNewDelegate>* delegate;
-
-@property (nonatomic, weak)NSString* registeredName;
-@property (nonatomic, weak)NSString* password;
-@property (nonatomic, weak)NSString* repeatPassword;
-@property (readonly)BOOL isRepeatPasswordValid;
-@property (readonly)BOOL isPasswordValid;
-@property (assign)BOOL isUserNameAvailable;
-
-@property (readonly)BOOL userNameAvailableORNotBlockchain;
-@property (readonly)BOOL withBlockchain;
-@property (assign)NSInteger signUpBlockchainState;
+@interface AddSIPAccountVC : NSViewController <LrcModelsProtocol>
+@property (nonatomic, weak) NSWindowController <AddSIPAccountDelegate>* delegate;
 - (void)show;
+
 @end
