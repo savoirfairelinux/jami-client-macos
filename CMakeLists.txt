@@ -15,7 +15,7 @@ ENDIF("${RING_VERSION}" STREQUAL "")
 IF("${RELEASE_TYPE}" STREQUAL "AppStore")
    SET(RING_VERSION_NAME "1")
 ELSE()
-   SET(RING_VERSION_NAME "In varietate concordia")
+   SET(RING_VERSION_NAME "Live Free or Die")
 ENDIF()
 
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
