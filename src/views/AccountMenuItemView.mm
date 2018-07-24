@@ -46,6 +46,11 @@
         self.frame = viewFromXib.frame;
         self.containerView = viewFromXib;
         [self addSubview:self.containerView];
+        [self.accountAvatar setWantsLayer:YES];
+        self.accountAvatar.layer.cornerRadius = self.accountAvatar.frame.size.width * 0.5;
+        self.accountAvatar.layer.masksToBounds = YES;
+        [self.accountStatus setWantsLayer:YES];
+        [self.accountAvatar.layer setBackgroundColor:[[NSColor ringGreyLight] CGColor]];
     }
 }
 
@@ -64,11 +69,11 @@
     NSMenuItem *menuItem = ([self enclosingMenuItem]);
     BOOL isHighlighted = [menuItem isHighlighted];
     if (isHighlighted) {
-        [[NSColor ringGreyHighlight] set];
-        [NSBezierPath fillRect:rect];
+        [self.backgroundView setFillColor:[NSColor controlLightHighlightColor]];
     } else {
-        [super drawRect: rect];
+        [self.backgroundView setFillColor:[NSColor controlColor]];
     }
+     [super drawRect: rect];
 }
 
 @end
