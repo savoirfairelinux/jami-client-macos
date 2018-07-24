@@ -55,10 +55,12 @@
 #import "views/BackgroundView.h"
 #import "ChooseAccountVC.h"
 #import "utils.h"
+#import "RingWizardWC.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
 @property (retain) MigrateRingAccountsWC* migrateWC;
+@property RingWizardWC* wizard;
 
 @end
 
@@ -87,6 +89,7 @@ static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
 NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
 
 @synthesize dataTransferModel, accountModel, behaviorController;
+@synthesize wizard;
 
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController
 {
@@ -446,6 +449,13 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
         return toolbarItem;
     }
     return nil;
+}
+
+- (void) createNewAccount {
+    wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: self.accountModel];
+    [wizard showChooseWithCancelButton: YES];
+    [self.window beginSheet:wizard.window completionHandler:nil];
+    [wizard showWindow:self];
 }
 
 @end

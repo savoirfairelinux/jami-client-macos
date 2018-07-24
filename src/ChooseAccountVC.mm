@@ -37,6 +37,7 @@
 #import "views/AccountMenuItemView.h"
 #import "AccountSelectionManager.h"
 #import "RingWindowController.h"
+#import "utils.h"
 
 @interface ChooseAccountVC () <NSMenuDelegate>
 
@@ -73,6 +74,7 @@ NSMenuItem* selectedMenuItem;
     accountsMenu = [[NSMenu alloc] initWithTitle:@""];
     [accountsMenu setDelegate:self];
     accountSelectionButton.menu = accountsMenu;
+    [accountSelectionButton setAutoenablesItems:NO];
     [self update];
 
     QObject::connect(accMdl_,
@@ -104,6 +106,11 @@ NSMenuItem* selectedMenuItem;
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::profileUpdated,
+                     [self] (const std::string& accountID) {
+                         [self update];
+                     });
+    QObject::connect(accMdl_,
+                     &lrc::api::NewAccountModel::accountStatusChanged,
                      [self] (const std::string& accountID) {
                          [self update];
                      });
@@ -149,6 +156,15 @@ NSMenuItem* selectedMenuItem;
         [itemView.accountLabel setStringValue:@(account.profileInfo.alias.c_str())];
         NSString* userNameString = [self nameForAccount: account];
         [itemView.userNameLabel setStringValue:userNameString];
+        QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
+        QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba, nil);
+        if(QtMac::toNSImage(qvariant_cast<QPixmap>(photo))) {
+            [itemView.accountAvatar setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        } else {
+            [itemView.accountAvatar setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
+        }
+        BOOL accountNotRegistered = account.status == lrc::api::account::Status::REGISTERED ? NO : YES;
+        [itemView.accountStatus setHidden:accountNotRegistered];
         switch (account.profileInfo.type) {
             case lrc::api::profile::Type::SIP:
                 [itemView.accountTypeLabel setStringValue:@"SIP"];
@@ -165,10 +181,33 @@ NSMenuItem* selectedMenuItem;
         [[accountSelectionButton cell] setArrowPosition: (isAccountAlone)?NSPopUpNoArrow:NSPopUpArrowAtBottom];
         [accountSelectionButton setEnabled:!isAccountAlone];
 
+        [itemView.createNewAccount setHidden:YES];
+        [itemView.createNewAccountImage setHidden:YES];
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
         [accountsMenu addItem:[NSMenuItem separatorItem]];
     }
+
+    NSMenuItem* menuBarItem = [[NSMenuItem alloc]
+                               initWithTitle:@""
+                               action:nil
+                               keyEquivalent:@""];
+    AccountMenuItemView *itemView = [[AccountMenuItemView alloc] initWithFrame:CGRectZero];
+    [itemView.accountAvatar setHidden:YES];
+    [itemView.accountStatus setHidden:YES];
+    [itemView.accountTypeLabel setHidden:YES];
+    [itemView.userNameLabel setHidden:YES];
+    [itemView.accountLabel setHidden:YES];
+    [itemView.createNewAccount setAction:@selector(createNewAccount:)];
+    [itemView.createNewAccount setTarget:self];
+    [menuBarItem setView: itemView];
+    [accountsMenu addItem: menuBarItem];
+    [[accountSelectionButton itemAtIndex:[accountsMenu numberOfItems] -1] setEnabled:NO];
+}
+
+- (void)createNewAccount:(id)sender {
+    [accountSelectionButton.menu cancelTrackingWithoutAnimation];
+    [delegate createNewAccount];
 }
 
 -(void) updatePhoto
@@ -189,23 +228,22 @@ NSMenuItem* selectedMenuItem;
 }
 
 -(NSString*) nameForAccount:(const lrc::api::account::Info&) account {
-    auto name = account.registeredName;
-    return @(name.c_str());
+    return bestIDForAccount(account);
 }
 
 -(NSString*) itemTitleForAccount:(const lrc::api::account::Info&) account {
-    NSString* alias = @(account.profileInfo.alias.c_str());
+    NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    if([userNameString length] > 0) {
+    if(![alias isEqualToString:userNameString]) {
         alias = [NSString stringWithFormat: @"%@\n", alias];
     }
     return [alias stringByAppendingString:userNameString];
 }
 
 - (NSAttributedString*) attributedItemTitleForAccount:(const lrc::api::account::Info&) account {
-    NSString* alias = @(account.profileInfo.alias.c_str());
+    NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    if([userNameString length] > 0){
+     if(![alias isEqualToString:userNameString]) {
         alias = [NSString stringWithFormat: @"%@\n", alias];
     }
     NSFont *fontAlias = [NSFont userFontOfSize:14.0];
