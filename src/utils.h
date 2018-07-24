@@ -46,6 +46,22 @@ static inline NSString* bestIDForConversation(const lrc::api::conversation::Info
         return [@(contact.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
 }
 
+static inline NSString* bestIDForAccount(const lrc::api::account::Info& account)
+{
+    if (!account.registeredName.empty()) {
+        return [@(account.registeredName.c_str()) removeEmptyLinesAtBorders];
+    }
+    return [@(account.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
+}
+
+static inline NSString* bestNameForAccount(const lrc::api::account::Info& account)
+{
+    if (account.profileInfo.alias.empty()) {
+        return bestIDForAccount(account);
+    }
+    return @(account.profileInfo.alias.c_str());
+}
+
 static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     auto contact = model.owner.contactModel->getContact(conv.participants[0]);
