@@ -79,4 +79,6 @@ namespace lrc {
  */
 -(void)allAccountsDeleted;
 
+- (void) createNewAccount;
+
 @end
