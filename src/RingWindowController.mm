@@ -448,4 +448,9 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     return nil;
 }
 
+- (void) createNewAccount {
+    NSLog(@"create new account");
+
+}
+
 @end
