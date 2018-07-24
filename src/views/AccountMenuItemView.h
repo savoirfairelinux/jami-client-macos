@@ -25,6 +25,10 @@
 @property (nonatomic, strong) IBOutlet NSTextField* accountLabel;
 @property (nonatomic, strong) IBOutlet NSTextField* userNameLabel;
 @property (nonatomic, strong) IBOutlet NSTextField* accountTypeLabel;
+@property (nonatomic, strong) IBOutlet NSBox* backgroundView;
+@property (nonatomic, strong) IBOutlet NSImageView* accountAvatar;
 @property (nonatomic, strong) IBOutlet NSTextField* accountStatus;
+@property (nonatomic, strong) IBOutlet NSButton* createNewAccount;
+@property (nonatomic, strong) IBOutlet NSImageView* createNewAccountImage;
 
 @end
