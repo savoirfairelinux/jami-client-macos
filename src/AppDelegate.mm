@@ -334,7 +334,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 - (void)handleQuitEvent:(NSAppleEventDescriptor*)event withReplyEvent:(NSAppleEventDescriptor*)replyEvent
 {
-    [self cleanExit];
+    [[NSApplication sharedApplication] terminate:self];
 }
 
 -(void)applicationWillTerminate:(NSNotification *)notification
