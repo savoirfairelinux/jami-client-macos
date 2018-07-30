@@ -1,5 +1,5 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Hálózati hiba történt az exportálás során";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
@@ -23,7 +23,7 @@
 "Alias : " = "Alias : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "Hiba történt az exportálás során";
 
 /* Contextual menu entry */
 "Backup account" = "Backup account";
@@ -131,7 +131,7 @@
 "Share" = "Share";
 
 /* File transfer successful label */
-"Success" = "Success";
+"Success" = "Siker";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -149,7 +149,7 @@
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "A megadott jelszó nem oldja fel ezt a fiókot";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
