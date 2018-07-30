@@ -33,4 +33,6 @@
 
 - (NSImage *) imageResizeInsideMax:(CGFloat) dimension;
 
+- (NSImage *) cropImageToSize:(NSSize)newSize;
+
 @end

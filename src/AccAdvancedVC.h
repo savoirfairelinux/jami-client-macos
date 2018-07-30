@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,8 +20,21 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import <account.h>
+#import "LrcModelsSProtocol.h"
+#include <string>
 
-@interface AccAdvancedVC : NSViewController <NSTextFieldDelegate>
+@protocol AccountAdvancedProtocol
+- (void) setSelectedAccount:(std::string) account;
+@end
+
+@interface AccAdvancedVC : NSViewController <NSTableViewDataSource, NSTableViewDelegate, AccountAdvancedProtocol, LrcModelsSProtocol>
+
+@property std::string selectedAccountID;
+@property (unsafe_unretained) IBOutlet NSButton* selectCACertificateButton;
+@property (unsafe_unretained) IBOutlet NSButton* selectUserCertificateButton;
+@property (unsafe_unretained) IBOutlet NSButton* selectPrivateKeyButton;
+@property (unsafe_unretained) IBOutlet NSSecureTextField *privateKeyPaswordField;
+
+- (IBAction) valueDidChange: (id) sender;
 
 @end

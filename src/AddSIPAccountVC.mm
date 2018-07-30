@@ -28,6 +28,7 @@
 
 //ring
 #import "AddSIPAccountVC.h"
+#import "views/NSImage+Extensions.h"
 
 @interface AddSIPAccountVC () {
     __unsafe_unretained IBOutlet NSButton* photoView;
@@ -103,7 +104,7 @@ NSTimer* timeoutTimer;
                                           QObject::disconnect(accountCreated);
                                           [self.delegate close];
                                       });
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [displayName UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [@"SIP" UTF8String]);
 
     timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                     target:self
@@ -134,6 +135,9 @@ NSTimer* timeoutTimer;
 {
     if (auto outputImage = [picker outputImage]) {
         [photoView setBordered:NO];
+        auto image = [picker inputImage];
+        CGFloat newSize = MIN(image.size.height, image.size.width);
+        outputImage = [outputImage cropImageToSize:CGSizeMake(newSize, newSize)];
         [photoView setImage:outputImage];
         [addProfilePhotoImage setHidden:YES];
     } else if(!photoView.image) {
