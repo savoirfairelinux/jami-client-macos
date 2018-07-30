@@ -44,6 +44,23 @@
 
 }
 
+-(instancetype)initWithFrame:(NSRect)frameRect {
+    self = [super initWithFrame: frameRect];
+    if (!self.bgColor) {
+        self.bgColor = [NSColor ringBlue];
+    }
+
+    if (!self.cornerRadius) {
+        self.cornerRadius = @(NSWidth(self.frame) / 2);
+    }
+
+    if (self.imageInsets == 0)
+        self.imageInsets = 8.0f;
+
+    self.pressed = NO;
+    return self;
+}
+
 -(void) setPressed:(BOOL)newVal
 {
     _pressed = newVal;

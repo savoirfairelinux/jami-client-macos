@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PreferencesWC">
@@ -15,9 +16,9 @@
         <window title="Ring Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" showsToolbarButton="NO" animationBehavior="default" id="C1T-wE-wxb">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="469" y="334" width="653" height="383"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="33Y-I6-Ofh">
-                <rect key="frame" x="0.0" y="-1" width="653" height="383"/>
+                <rect key="frame" x="0.0" y="0.0" width="653" height="383"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="pWP-Wb-B2n">
@@ -53,18 +54,12 @@
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="627205FE-1164-4992-8C29-54EB6409DF24" label="Advanced" paletteLabel="Advanced" tag="-1" image="NSAdvanced" id="Qza-fj-d45"/>
-                    <toolbarItem implicitItemIdentifier="29496C21-46DD-4A3D-903C-644AF346B69A" explicitItemIdentifier="AccountsPrefsIdentifier" label="Accounts" paletteLabel="Accounts" tag="-1" image="NSUserAccounts" selectable="YES" id="bRw-gW-tRJ">
-                        <connections>
-                            <action selector="displayAccounts:" target="-2" id="qE9-O3-Jio"/>
-                        </connections>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aIF-RX-dpX"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="GQi-nL-0Ey"/>
                     <toolbarItem reference="iuJ-eu-b7f"/>
                     <toolbarItem reference="jLi-an-TR2"/>
-                    <toolbarItem reference="bRw-gW-tRJ"/>
                     <toolbarItem reference="aIF-RX-dpX"/>
                 </defaultToolbarItems>
             </toolbar>
@@ -76,7 +71,6 @@
     </objects>
     <resources>
         <image name="NSAdvanced" width="32" height="32"/>
-        <image name="NSUserAccounts" width="32" height="32"/>
         <image name="audio" width="36" height="36"/>
         <image name="general" width="36" height="36"/>
         <image name="video" width="36" height="36"/>

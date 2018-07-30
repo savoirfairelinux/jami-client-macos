@@ -103,7 +103,7 @@ NSTimer* timeoutTimer;
                                           QObject::disconnect(accountCreated);
                                           [self.delegate close];
                                       });
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [displayName UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [@"SIP" UTF8String]);
 
     timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                     target:self
