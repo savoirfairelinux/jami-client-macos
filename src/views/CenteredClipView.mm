@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,22 +17,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "CenteredClipView.h"
 
+@implementation CenteredClipView
 
-#import "LoadingWCDelegate.h"
-#import "AbstractLoadingWC.h"
-#import "LrcModelsProtocol.h"
-#include <string>
+- (NSRect)constrainBoundsRect:(NSRect)proposedClipViewBoundsRect {
 
-@interface ExportPasswordWC : AbstractLoadingWC <LrcModelsProtocol>
+    NSRect rect = [super constrainBoundsRect:proposedClipViewBoundsRect];
+    NSView * view = self.documentView;
+    if (view) {
 
-/**
- * password string contained in passwordField.
- * This is a KVO method to bind the text with the OK Button
- * if password.length is > 0, button is enabled, otherwise disabled
- */
-@property (retain) NSString* password;
-@property std::string selectedAccountID;
-
+        if (proposedClipViewBoundsRect.size.width > view.frame.size.width) {
+            rect.origin.x = (rect.size.width - view.frame.size.width) / -2.0 ;
+        }
+    }
+    return rect;
+}
 @end

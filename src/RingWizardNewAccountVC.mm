@@ -164,6 +164,9 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 {
     if (auto outputImage = [picker outputImage]) {
         [photoView setBordered:NO];
+        auto image = [picker inputImage];
+        CGFloat newSize = MIN(image.size.height, image.size.width);
+        outputImage = [outputImage cropImageToSize:CGSizeMake(newSize, newSize)];
         [photoView setImage:outputImage];
         [addProfilePhotoImage setHidden:YES];
     } else if(!photoView.image) {
@@ -271,7 +274,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [self display:loadingView];
     [progressBar startAnimation:nil];
 
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, [displayNameField.stringValue UTF8String],"",[passwordField.stringValue UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, [displayNameField.stringValue UTF8String],"",[passwordField.stringValue UTF8String], "");
 }
 
 /**
