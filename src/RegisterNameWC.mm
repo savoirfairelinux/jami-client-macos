@@ -17,20 +17,15 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
+#import <Cocoa/Cocoa.h>
+
 #import "RegisterNameWC.h"
-
-
-//Cocoa
-
-//LRC
-#import <accountmodel.h>
-#import <QItemSelectionModel>
-#import <account.h>
-
 #import "AppDelegate.h"
 
-@interface RegisterNameWC ()
-@end
+//LRC
+#import <api/lrc.h>
+#import <api/newaccountmodel.h>
+#import <account.h>
 
 @implementation RegisterNameWC
 {
@@ -50,30 +45,26 @@
 
 NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
 
-- (id)initWithDelegate:(id <LoadingWCDelegate>) del
-{
-    return [self initWithDelegate:del actionCode:0];
-}
+@synthesize accountModel;
 
-- (id)initWithDelegate:(id <RegisterNameDelegate>) del actionCode:(NSInteger) code
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel
 {
-    return [super initWithWindowNibName:@"RegisterNameWindow" delegate:del actionCode:code];
+    if (self = [self initWithWindowNibName:nibNameOrNil])
+    {
+        self.accountModel= accountModel;
+    }
+    return self;
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    auto accounts = self.accountModel->getAccountList();
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
-    self.registeredName = @"";
     [ivLookupResult setHidden:YES];
     [indicatorLookupResult setHidden:YES];
-}
-
-#pragma mark - Input validation
-
-- (BOOL)isPasswordValid
-{
-    return self.password.length >= 6;
+    self.password = @"";
+    self.registeredName = @"";
 }
 
 #pragma mark - Username validation delegate methods
@@ -164,13 +155,11 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
                                                }
                                                [self showLookUpAvailable:isAvailable andText: message];
                                                [self onUsernameAvailabilityChangedWithNewAvailability:isAvailable];
-
                                            }
                                            );
 
     //Start the lookup in a second so that the UI dosen't seem to freeze
     BOOL result = NameDirectory::instance().lookupName(nullptr, QString(), QString::fromNSString(usernameWaitingForLookupResult));
-
 }
 
 - (void)controlTextDidChange:(NSNotification *)notif
@@ -204,8 +193,7 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
     [self showLoading];
     [self setCallback];
 
-    self.isUserNameAvailable = AccountModel::instance().selectedAccount()->registerName(QString::fromNSString(self.password),
-                                                                                        QString::fromNSString(self.registeredName));
+    self.isUserNameAvailable = self.accountModel->registerName(self.selectedAccountID, [self.password UTF8String], [self.registeredName UTF8String]);
     if (!self.isUserNameAvailable) {
         NSLog(@"Could not initialize registerName operation");
         QObject::disconnect(registrationEnded);
@@ -215,23 +203,27 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
 - (void)setCallback
 {
     QObject::disconnect(registrationEnded);
-    registrationEnded = QObject::connect(AccountModel::instance().selectedAccount(),
-                                         &Account::nameRegistrationEnded,
-                                         [=] (NameDirectory::RegisterNameStatus status,  const QString& name)
-                                         {
-                                             QObject::disconnect(registrationEnded);
-                                             switch(status) {
-                                                 case NameDirectory::RegisterNameStatus::WRONG_PASSWORD:
-                                                 case NameDirectory::RegisterNameStatus::ALREADY_TAKEN:
-                                                 case NameDirectory::RegisterNameStatus::NETWORK_ERROR:
+    registrationEnded = QObject::connect(self.accountModel,
+                                         &lrc::api::NewAccountModel::nameRegistrationEnded,
+                                         [self] (const std::string& accountId, lrc::api::account::RegisterNameStatus status, const std::string& name) {
+                                             if(accountId.compare(self.selectedAccountID) != 0) {
+                                                 return;
+                                             }
+                                             switch(status)
+                                             {
+                                                 case lrc::api::account::RegisterNameStatus::SUCCESS: {
+                                                     [self.delegate didRegisterName:  self.registeredName withSuccess: YES];
+                                                     break;
+                                                 }
+                                                 case lrc::api::account::RegisterNameStatus::INVALID_NAME:
+                                                 case lrc::api::account::RegisterNameStatus::WRONG_PASSWORD:
+                                                 case lrc::api::account::RegisterNameStatus::NETWORK_ERROR:
+                                                 case lrc::api::account::RegisterNameStatus::ALREADY_TAKEN: {
                                                      [self showError];
                                                      break;
-                                                 case NameDirectory::RegisterNameStatus::SUCCESS:
-                                                     [self.delegate didRegisterNameWithSuccess];
-                                                     // Artificial refresh of the model to update the welcome view
-                                                     Q_EMIT AccountModel::instance().dataChanged(QModelIndex(), QModelIndex());
-                                                     break;
+                                                 }
                                              }
+                                             QObject::disconnect(registrationEnded);
                                          });
 }
 
@@ -241,9 +233,5 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
     return [NSSet setWithObjects: NSStringFromSelector(@selector(isUserNameAvailable)), nil];
 }
 
-+ (NSSet *)keyPathsForValuesAffectingIsPasswordValid
-{
-    return [NSSet setWithObjects:@"password", nil];
-}
 
 @end

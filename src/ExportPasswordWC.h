@@ -19,20 +19,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import <account.h>
 
 #import "LoadingWCDelegate.h"
 #import "AbstractLoadingWC.h"
+#import "LrcModelsSProtocol.h"
+#include <string>
 
-@protocol ExportPasswordDelegate <LoadingWCDelegate>
-
-@optional
-- (void)didCompleteWithPin:(NSString*) path Password:(NSString*) password;
-- (void)didStartWithPassword:(NSString*) password;
-
-@end
-
-@interface ExportPasswordWC : AbstractLoadingWC
+@interface ExportPasswordWC : AbstractLoadingWC <LrcModelsSProtocol>
 
 /**
  * password string contained in passwordField.
@@ -40,6 +33,6 @@
  * if password.length is > 0, button is enabled, otherwise disabled
  */
 @property (retain) NSString* password;
-@property (assign) Account* account;
+@property std::string selectedAccountID;
 
 @end

@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,11 +18,24 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsSProtocol.h"
+#include <string>
 
-#import <account.h>
+@protocol AccountGeneralDelegate <NSObject>
+-(void) triggerAdvancedOptions;
+-(void) updateFrame;
+@end
 
-@interface AccGeneralVC : NSViewController <NSTextFieldDelegate> {
+@protocol AccountGeneralProtocol
+@property (retain, nonatomic) id <AccountGeneralDelegate> delegate;
+- (IBAction)triggerAdwancedSettings: (NSButton *)sender;
+- (void) setSelectedAccount:(std::string) account;
+@end
 
-}
+@interface AccountSettingsVC : NSViewController <LrcModelsSProtocol, AccountGeneralDelegate>
+- (void) initFrame;
+- (void) setSelectedAccount:(std::string) account;
+- (void) show;
+-(void) hide;
 
 @end

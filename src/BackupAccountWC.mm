@@ -19,17 +19,17 @@
 #import "BackupAccountWC.h"
 
 //LRC
-#import <accountmodel.h>
+#import <api/lrc.h>
+#import <api/newaccountmodel.h>
+#import <account.h>
 
 //Ring
 #import "views/ITProgressIndicator.h"
 
 @interface BackupAccountWC() <NSTextFieldDelegate> {
     __unsafe_unretained IBOutlet NSPathControl* path;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordConfirmationField;
     __unsafe_unretained IBOutlet ITProgressIndicator* progressIndicator;
-
+    __unsafe_unretained IBOutlet NSButton* cancelButton;
 }
 
 @end
@@ -39,16 +39,16 @@
         unsigned int didCompleteExport:1;
     } delegateRespondsTo;
 }
-@synthesize accounts;
 
-- (id)initWithDelegate:(id <LoadingWCDelegate>) del
-{
-    return [self initWithDelegate:del actionCode:0];
-}
+@synthesize accountModel;
 
-- (id)initWithDelegate:(id <BackupAccountDelegate>) del actionCode:(NSInteger) code
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel
 {
-    return [super initWithWindowNibName:@"BackupAccountWindow" delegate:del actionCode:code];
+    if (self = [self initWithWindowNibName:nibNameOrNil])
+    {
+        self.accountModel= accountModel;
+    }
+    return self;
 }
 
 - (void)windowDidLoad
@@ -65,18 +65,6 @@
     }
 }
 
-- (BOOL)validatePasswords
-{
-    BOOL result = (self.password.length != 0 && [self.password isEqualToString:self.passwordConfirmation]);
-    NSLog(@"ValidatesPasswords : %s", result ? "true" : "false");
-    return result;
-}
-
-+ (NSSet *)keyPathsForValuesAffectingValidatePasswords
-{
-    return [NSSet setWithObjects:@"password", @"passwordConfirmation", nil];
-}
-
 - (void) setAllowFileSelection:(BOOL) b
 {
     _allowFileSelection = b;
@@ -85,20 +73,22 @@
 
 - (IBAction)completeAction:(id)sender
 {
-    auto finalURL = [path.URL URLByAppendingPathComponent:@"accounts.ring"];
+    auto accounts = accountModel->getAccountList();
+    if(accounts.empty()) {
+        return;
+    }
+    auto selectedAccountID = accounts.at(0);
+    auto finalURL = [path.URL URLByAppendingPathComponent:[@"Account_" stringByAppendingString: @(selectedAccountID.c_str())]];
     [self showLoading];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        int result = AccountModel::instance().exportAccounts(accounts, finalURL.path.UTF8String, passwordField.stringValue.UTF8String);
-        switch (result) {
-            case 0:
-                if (delegateRespondsTo.didCompleteExport){
-                    [((id<BackupAccountDelegate>)self.delegate) didCompleteExportWithPath:finalURL];
-                }
-                [self close];
-                break;
-            default:{
-                [self showError] ;
-            }break;
+        if (self.accountModel->exportToFile(selectedAccountID, finalURL.path.UTF8String)) {
+            if (delegateRespondsTo.didCompleteExport) {
+                [((id<BackupAccountDelegate>)self.delegate) didCompleteExportWithPath:finalURL];
+            }
+            [self close];
+            [self.window.sheetParent endSheet: self.window];
+        } else {
+            [self showError];
         }
     });
 }

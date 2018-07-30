@@ -30,7 +30,7 @@
 #import "QNSTreeController.h"
 #import "ExportPasswordWC.h"
 
-@interface AccDevicesVC () <ExportPasswordDelegate>
+@interface AccDevicesVC ()
 
 @property QNSTreeController* devicesTreeController;
 @property ExportPasswordWC* passwordWC;
@@ -77,25 +77,25 @@ NSInteger const TAG_DEVICE_IDS  =   200;
     NSButton* btbAdd = (NSButton *) sender;
 
     self.account = AccountModel::instance().selectedAccount();
-    [self showPasswordPrompt];
+   // [self showPasswordPrompt];
 }
 #pragma mark - Export methods
 
-- (void)showPasswordPrompt
-{
-    auto account = AccountModel::instance().selectedAccount();
-    passwordWC = [[ExportPasswordWC alloc] initWithDelegate:self actionCode:1];
-    [passwordWC setAccount: account];
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
-    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
-#else
-    [NSApp beginSheet: passwordWC.window
-       modalForWindow: self.view.window
-        modalDelegate: self
-       didEndSelector: nil
-          contextInfo: nil];
-#endif
-}
+//- (void)showPasswordPrompt
+//{
+//    auto account = AccountModel::instance().selectedAccount();
+//    passwordWC = [[ExportPasswordWC alloc] initWithDelegate:self actionCode:1];
+//    [passwordWC setAccount: account];
+//#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+//    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+//#else
+//    [NSApp beginSheet: passwordWC.window
+//       modalForWindow: self.view.window
+//        modalDelegate: self
+//       didEndSelector: nil
+//          contextInfo: nil];
+//#endif
+//}
 
 
 #pragma mark - NSOutlineViewDelegate methods
