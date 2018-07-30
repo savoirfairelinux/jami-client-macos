@@ -49,21 +49,19 @@
     __unsafe_unretained IBOutlet NSImageView*   profileImage;
     __unsafe_unretained IBOutlet NSTextField*    accountStatus;
     __unsafe_unretained IBOutlet NSPopUpButton* accountSelectionButton;
-    const lrc::api::NewAccountModel* accMdl_;
+    lrc::api::NewAccountModel* accMdl_;
     AccountSelectionManager* accountSelectionManager_;
-    RingWindowController* delegate;
-
 }
 Boolean menuIsOpen;
 Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(const lrc::api::NewAccountModel*) accMdl delegate:(RingWindowController *)mainWindow
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow
 {
     accMdl_ = accMdl;
     accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
-    delegate = mainWindow;
+    self.delegate = mainWindow;
     return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 }
 
@@ -86,7 +84,7 @@ NSMenuItem* selectedMenuItem;
                          [self update];
                          @try {
                              auto& account = [self selectedAccount];
-                             [delegate selectAccount:account];
+                             [self.delegate selectAccount:account currentRemoved: NO];
                          }
                          @catch (NSException * e) {
                              NSLog(@"account selection failed");
@@ -100,10 +98,10 @@ NSMenuItem* selectedMenuItem;
                          }
                          @try {
                              auto& account = [self selectedAccount];
-                             [delegate selectAccount:account];
+                             [self.delegate selectAccount:account currentRemoved: YES];
                          }
                          @catch (NSException * e) {
-                             [delegate allAccountsDeleted];
+                             [self.delegate allAccountsDeleted];
                          }
                          [self update];
                      });
@@ -167,7 +165,7 @@ NSMenuItem* selectedMenuItem;
 
     // create "add a new account" menu item
     NSMenuItem* menuBarItem = [[NSMenuItem alloc]
-                               initWithTitle:@""
+                               initWithTitle:@"Add Account"
                                action:nil
                                keyEquivalent:@""];
     AccountMenuItemView *itemView = [[AccountMenuItemView alloc] initWithFrame:CGRectZero];
@@ -180,7 +178,8 @@ NSMenuItem* selectedMenuItem;
     [itemView.createNewAccount setTarget:self];
     [menuBarItem setView: itemView];
     [accountsMenu addItem: menuBarItem];
-    [[accountSelectionButton itemAtIndex:[accountsMenu numberOfItems] -1] setEnabled:NO];
+    [profileImage setHidden:accList.empty()];
+    [accountStatus setHidden:accList.empty()];
 }
 
 -(void) configureView: (AccountMenuItemView *) itemView forAccount:(const std::string&) accountId {
@@ -195,8 +194,7 @@ NSMenuItem* selectedMenuItem;
     } else {
         [itemView.accountAvatar setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
     }
-    BOOL accountNotRegistered = account.status == lrc::api::account::Status::REGISTERED ? NO : YES;
-    [itemView.accountStatus setHidden:accountNotRegistered];
+    [itemView.accountStatus setHidden:!account.enabled];
     switch (account.profileInfo.type) {
         case lrc::api::profile::Type::SIP:
             [itemView.accountTypeLabel setStringValue:@"SIP"];
@@ -214,7 +212,7 @@ NSMenuItem* selectedMenuItem;
 
 - (void)createNewAccount:(id)sender {
     [accountSelectionButton.menu cancelTrackingWithoutAnimation];
-    [delegate createNewAccount];
+    [self.delegate createNewAccount];
 }
 
 -(void) updatePhoto
@@ -232,8 +230,7 @@ NSMenuItem* selectedMenuItem;
         } else {
             [profileImage setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
         }
-        BOOL accountNotRegistered = account.status == lrc::api::account::Status::REGISTERED ? NO : YES;
-        [accountStatus setHidden:accountNotRegistered];
+        [accountStatus setHidden:!account.enabled];
     }
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
@@ -256,9 +253,6 @@ NSMenuItem* selectedMenuItem;
 - (NSAttributedString*) attributedItemTitleForAccount:(const lrc::api::account::Info&) account {
     NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    if(![alias isEqualToString:userNameString]) {
-        alias = [NSString stringWithFormat: @"%@\n", alias];
-    }
     NSFont *fontAlias = [NSFont userFontOfSize:14.0];
     NSFont *fontUserName = [NSFont userFontOfSize:11.0];
     NSColor *colorAlias = [NSColor labelColor];
@@ -271,6 +265,15 @@ NSMenuItem* selectedMenuItem;
     NSDictionary *userNameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:fontUserName,NSFontAttributeName,
                                    colorAUserName,NSForegroundColorAttributeName,
                                    paragraphStyle,NSParagraphStyleAttributeName, nil];
+
+    if([alias isEqualToString:userNameString] || [userNameString length] == 0) {
+        paragraphStyle.paragraphSpacingBefore = 20;
+        aliasAttrs = [NSDictionary dictionaryWithObjectsAndKeys:fontAlias,NSFontAttributeName,
+                      colorAlias,NSForegroundColorAttributeName,
+                      paragraphStyle,NSParagraphStyleAttributeName, nil];
+        return [[NSAttributedString alloc] initWithString:alias attributes:aliasAttrs];
+    }
+    alias = [NSString stringWithFormat: @"%@\n", alias];
     NSAttributedString* attributedString = [[NSAttributedString alloc] initWithString:alias attributes:aliasAttrs];
     NSAttributedString* attributedStringSecond= [[NSAttributedString alloc] initWithString:userNameString attributes:userNameAttrs];
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
@@ -316,7 +319,7 @@ NSMenuItem* selectedMenuItem;
 
     auto& account = accMdl_->getAccountInfo(accList[row]);
     [accountSelectionManager_ setSavedAccount:account];
-    [delegate selectAccount:account];
+    [self.delegate selectAccount:account currentRemoved: NO];
     [self updatePhoto];
 }
 

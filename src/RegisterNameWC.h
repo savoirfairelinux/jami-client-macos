@@ -17,24 +17,24 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
 
 #import "AbstractLoadingWC.h"
 #import "LoadingWCDelegate.h"
+#import "LrcModelsProtocol.h"
+#include <string>
+
 
 @protocol RegisterNameDelegate <LoadingWCDelegate>
 
 @optional
 
-- (void) didRegisterNameWithSuccess;
+- (void) didRegisterName:(NSString *) name withSuccess:(BOOL) success;
 
 @end
 
-@interface RegisterNameWC : AbstractLoadingWC
+@interface RegisterNameWC : AbstractLoadingWC <LrcModelsProtocol>
 
-- (id)initWithDelegate:(id <LoadingWCDelegate>) del;
-
-@property (nonatomic, weak) NSWindowController <RegisterNameDelegate>* delegate;
+@property (nonatomic, weak) NSViewController <RegisterNameDelegate>* delegate;
 
 /**
  * KVO with the registeredNameField
@@ -49,7 +49,8 @@
 /**
  * KVO validators for the UI
  */
-@property (readonly)BOOL isPasswordValid;
 @property (assign)BOOL isUserNameAvailable;
+
+@property std::string selectedAccountID;
 
 @end

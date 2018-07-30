@@ -19,7 +19,10 @@
 #import "ExportPasswordWC.h"
 
 //LRC
+#import <api/lrc.h>
+#import <api/newaccountmodel.h>
 #import <account.h>
+#import <api/account.h>
 
 //Ring
 #import "views/ITProgressIndicator.h"
@@ -32,34 +35,19 @@
 @end
 
 @implementation ExportPasswordWC {
-    struct {
-        unsigned int didStart:1;
-        unsigned int didComplete:1;
-    } delegateRespondsTo;
+
 }
 
-@synthesize account;
+@synthesize accountModel;
 QMetaObject::Connection accountConnection;
 
-
-#pragma mark - Initialize
-- (id)initWithDelegate:(id <ExportPasswordDelegate>) del actionCode:(NSInteger) code
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel
 {
-    return [super initWithWindowNibName:@"ExportPasswordWindow" delegate:del actionCode:code];
-}
-
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-}
-
-- (void)setDelegate:(id <ExportPasswordDelegate>)aDelegate
-{
-    if (super.delegate != aDelegate) {
-        [super setDelegate: aDelegate];
-        delegateRespondsTo.didStart = [aDelegate respondsToSelector:@selector(didStartWithPassword:)];
-        delegateRespondsTo.didComplete = [aDelegate respondsToSelector:@selector(didCompleteWithPin:Password:)];
+    if (self =  [self initWithWindowNibName: nibNameOrNil])
+    {
+        self.accountModel= accountModel;
     }
+    return self;
 }
 
 - (void)showError:(NSString*) errorMessage
@@ -80,44 +68,42 @@ QMetaObject::Connection accountConnection;
 #pragma mark - Events Handlers
 - (IBAction)completeAction:(id)sender
 {
-    // Check to avoid exporting an old account (not supported by daemon)
-    if (account->needsMigration()) {
-        [self showError:NSLocalizedString(@"You have to migrate your account before exporting", @"Error shown to user")];
-    } else {
-        NSString* password = passwordField.stringValue;
-        [self showLoading];
-        QObject::disconnect(accountConnection);
-        accountConnection = QObject::connect(account,
-                                             &Account::exportOnRingEnded,
-                                             [=](Account::ExportOnRingStatus status,const QString &pin) {
-                                                 NSLog(@"Export ended!");
-                                                 switch (status) {
-                                                     case Account::ExportOnRingStatus::SUCCESS:{
-                                                         NSString *nsPin = pin.toNSString();
-                                                         NSLog(@"Export ended with Success, pin is %@",nsPin);
-                                                         [resultField setAttributedStringValue:[self formatPinMessage:nsPin]];
-                                                         [self showFinal];
-                                                     }
-                                                         break;
-                                                     case Account::ExportOnRingStatus::WRONG_PASSWORD:{
-                                                         NSLog(@"Export ended with wrong password");
-                                                         [self showError:NSLocalizedString(@"The password you entered does not unlock this account", @"Error shown to the user" )];
-                                                     }
-                                                         break;
-                                                     case Account::ExportOnRingStatus::NETWORK_ERROR:{
-                                                         NSLog(@"Export ended with NetworkError!");
-                                                         [self showError:NSLocalizedString(@"A network error occured during the export", @"Error shown to the user" )];
-                                                     }
-                                                         break;
-                                                     default:{
-                                                         NSLog(@"Export ended with Unknown status!");
-                                                         [self showError:NSLocalizedString(@"An error occured during the export", @"Error shown to the user" )];
-                                                     }
-                                                         break;
+    NSString* password = passwordField.stringValue;
+    [self showLoading];
+    QObject::disconnect(accountConnection);
+    accountConnection = QObject::connect(self.accountModel,
+                                         &lrc::api::NewAccountModel::exportOnRingEnded,
+                                         [self] (const std::string &accountID, lrc::api::account::ExportOnRingStatus status, const std::string &pin){
+                                             if(accountID.compare(self.selectedAccountID) != 0) {
+                                                 return;
+                                             }
+                                             switch (status) {
+                                                 case lrc::api::account::ExportOnRingStatus::SUCCESS: {
+                                                     NSString *nsPin = @(pin.c_str());
+                                                     NSLog(@"Export ended with Success, pin is %@",nsPin);
+                                                     [resultField setAttributedStringValue:[self formatPinMessage:nsPin]];
+                                                     [self showFinal];
                                                  }
-                                             });
-        account->exportOnRing(QString::fromNSString(password));
-    }
+                                                     break;
+                                                 case lrc::api::account::ExportOnRingStatus::WRONG_PASSWORD:{
+                                                     NSLog(@"Export ended with wrong password");
+                                                     [self showError:NSLocalizedString(@"The password you entered does not unlock this account", @"Error shown to the user" )];
+                                                 }
+                                                     break;
+                                                 case lrc::api::account::ExportOnRingStatus::NETWORK_ERROR:{
+                                                     NSLog(@"Export ended with NetworkError!");
+                                                     [self showError:NSLocalizedString(@"A network error occured during the export", @"Error shown to the user" )];
+                                                 }
+                                                     break;
+                                                 default:{
+                                                     NSLog(@"Export ended with Unknown status!");
+                                                     [self showError:NSLocalizedString(@"An error occured during the export", @"Error shown to the user" )];
+                                                 }
+                                                     break;
+                                             }
+                                              QObject::disconnect(accountConnection);
+                                         });
+    self.accountModel->exportOnRing(self.selectedAccountID, [password UTF8String]);
 }
 
 //TODO: Move String formatting to a dedicated Utility Classes
@@ -130,7 +116,7 @@ QMetaObject::Connection accountConnection;
 
     NSMutableParagraphStyle* mutParaStyle=[[NSMutableParagraphStyle alloc] init];
     [mutParaStyle setAlignment:NSCenterTextAlignment];
-    
+
     [thePin addAttributes:[NSDictionary dictionaryWithObject:mutParaStyle forKey:NSParagraphStyleAttributeName] range:range];
 
     NSMutableAttributedString* infos = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.","Title shown to user to concat with Pin")];
