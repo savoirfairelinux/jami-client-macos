@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
- *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,20 +17,20 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
-#import "LrcModelsSProtocol.h"
-#include <string>
+#import "CenteredClipView.h"
 
-@protocol PasswordChangeDelegate
+@implementation CenteredClipView
 
-@optional
+- (NSRect)constrainBoundsRect:(NSRect)proposedClipViewBoundsRect {
 
--(void) paswordCreatedWithSuccess:(BOOL) success;
+    NSRect rect = [super constrainBoundsRect:proposedClipViewBoundsRect];
+    NSView * view = self.documentView;
+    if (view) {
 
-@end
-
-@interface PasswordChangeWC : NSWindowController <NSTextFieldDelegate, LrcModelsSProtocol>
-@property std::string selectedAccountID;
-@property (retain, nonatomic) id <PasswordChangeDelegate> delegate;
-
+        if (proposedClipViewBoundsRect.size.width > view.frame.size.width) {
+            rect.origin.x = (rect.size.width - view.frame.size.width) / -2.0 ;
+        }
+    }
+    return rect;
+}
 @end

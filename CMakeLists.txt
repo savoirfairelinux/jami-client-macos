@@ -112,16 +112,16 @@ SET(ringclient_CONTROLLERS
    src/RingWindowController.h
    src/PreferencesWC.mm
    src/PreferencesWC.h
-   src/AccGeneralVC.mm
-   src/AccGeneralVC.h
-   src/AccMediaVC.mm
-   src/AccMediaVC.h
-   src/AccRingVC.mm
-   src/AccRingVC.h
+   src/AccSipGeneralVC.mm
+   src/AccSipGeneralVC.h
    src/AccAdvancedVC.mm
    src/AccAdvancedVC.h
-   src/AccSecurityVC.mm
-   src/AccSecurityVC.h
+   src/AccRingGeneralVC.mm
+   src/AccRingGeneralVC.h
+   src/AccAdvancedSipVC.mm
+   src/AccAdvancedSipVC.h
+   src/AccAdvancedRingVC.mm
+   src/AccAdvancedRingVC.h
    src/CertificateWC.mm
    src/CertificateWC.h
    src/BackupAccountWC.mm
@@ -179,6 +179,8 @@ SET(ringclient_CONTROLLERS
    src/LrcModelsSProtocol.h
    src/AddSIPAccountVC.mm
    src/AddSIPAccountVC.h
+   src/AccountSettingsVC.mm
+   src/AccountSettingsVC.h
 )
 
 SET(ringclient_BACKENDS
@@ -222,6 +224,8 @@ SET(ringclient_VIEWS
    src/views/SendMessagePanel.mm
    src/views/HoverButton.h
    src/views/HoverButton.mm
+   src/views/CenteredClipView.h
+   src/views/CenteredClipView.mm
 )
 
 SET(ringclient_OTHERS
@@ -248,11 +252,11 @@ SET(ringclient_XIBS
    CurrentCall
    GeneralPrefs
    Accounts
-   AccGeneral
+   AccSipGeneral
    AccMedia
-   AccRing
-   AccAdvanced
-   AccSecurity
+   AccRingGeneral
+   AccAdvancedSip
+   AccAdvancedRing
    AudioPrefs
    VideoPrefs
    PreferencesWindow
@@ -279,6 +283,7 @@ SET(ringclient_XIBS
    PasswordChange
    MessageCells
    AddSIPAccountVC
+   AccountSettings
 )
 
 # Icons

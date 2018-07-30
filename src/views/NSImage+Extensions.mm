@@ -25,6 +25,7 @@
                  newSize:(NSSize)newSize
 {
     auto sourceImage = anImage;
+    NSSize size = anImage.size;
     // Report an error if the source isn't a valid image
     if (![sourceImage isValid]) {
         NSLog(@"Invalid Image");
@@ -72,6 +73,23 @@
     size.width = self.size.width * scale;
     size.height = self.size.height * scale;
     return [NSImage imageResize:self newSize:size];
+}
+
+- (NSImage *) cropImageToSize:(NSSize)newSize {
+    CGImageSourceRef source;
+    NSPoint origin = CGPointMake((self.size.width - newSize.width) * 0.5, (self.size.height - newSize.height) * 0.5);
+
+    source = CGImageSourceCreateWithData((CFDataRef)[self TIFFRepresentation], NULL);
+    CGImageRef imageRef =  CGImageSourceCreateImageAtIndex(source, 0, NULL);
+
+    CGRect sizeToBe = CGRectMake(origin.x, origin.y, newSize.width, newSize.height);
+    CGImageRef croppedImage = CGImageCreateWithImageInRect(imageRef, sizeToBe);
+    NSImage *finalImage = [[NSImage alloc] initWithCGImage:croppedImage size:NSZeroSize];
+    CFRelease(imageRef);
+    CFRelease(croppedImage);
+
+    return finalImage;
+
 }
 
 @end
