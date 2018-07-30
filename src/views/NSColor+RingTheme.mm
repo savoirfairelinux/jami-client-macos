@@ -72,6 +72,9 @@ return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 a
 }
 
 - (NSColor *)lightenColorByValue:(float)value {
+    if(![self isKindOfClass:[NSCalibratedRGBColorSpace class]]) {
+        return self;
+    }
     float red = [self redComponent];
     red += value;
 
@@ -85,6 +88,9 @@ return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 a
 }
 
 - (NSColor *)darkenColorByValue:(float)value {
+    if(![self isKindOfClass:[NSCalibratedRGBColorSpace class]]) {
+        return self;
+    }
     float red = [self redComponent];
     red -= value;
 

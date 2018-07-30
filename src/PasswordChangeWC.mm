@@ -18,11 +18,12 @@
  */
 
 #import "PasswordChangeWC.h"
-#import <accountmodel.h>
+#import <api/lrc.h>
+#import <api/account.h>
+#import <api/newaccountmodel.h>
 
 @implementation PasswordChangeWC
 {
-    Account* account;
     __unsafe_unretained IBOutlet NSSecureTextField *oldPassword;
     __unsafe_unretained IBOutlet NSSecureTextField *newPassword;
     __unsafe_unretained IBOutlet NSSecureTextField *repeatedPassword;
@@ -34,28 +35,35 @@
     IBOutlet NSPopover *wrongPasswordPopover;
 }
 
--(id)initWithAccount:(Account*)acc
+@synthesize accountModel;
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel
 {
-    account = acc;
-    return [super initWithWindowNibName:@"PasswordChange"];
+    if (self = [self initWithWindowNibName:nibNameOrNil])
+    {
+        self.accountModel= accountModel;
+    }
+    return self;
 }
 
 -(void)windowDidLoad
 {
     [super windowDidLoad];
-    if (account != nullptr) {
-        const auto hasPassword = account->archiveHasPassword();
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    BOOL hasPassword = accountProperties.archiveHasPassword;
 
-        [oldPassword setEnabled:hasPassword];
-        [oldPassword setPlaceholderString:(hasPassword)?@"":NSLocalizedString(@"Account has no password", @"No password on this account text field placeholder")];
-    }
+    [oldPassword setEnabled:hasPassword];
+    [oldPassword setPlaceholderString:(hasPassword)?@"":NSLocalizedString(@"Account has no password", @"No password on this account text field placeholder")];
 }
 
 -(IBAction)accept:(id)sender
 {
-    if (account->changePassword(QString::fromNSString([oldPassword stringValue]), QString::fromNSString([newPassword stringValue])))
-    {
-        AccountModel::instance().save();
+    if (self.accountModel->changeAccountPassword(self.selectedAccountID, [[oldPassword stringValue] UTF8String], [[newPassword stringValue] UTF8String])) {
+        lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+        BOOL haspassword = ![[newPassword stringValue] isEqualToString:@""];
+        accountProperties.archiveHasPassword = haspassword;
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+        [self.delegate paswordCreatedWithSuccess: haspassword];
         [self close];
     } else {
         [oldPassword setStringValue:@""];
@@ -66,6 +74,11 @@
 -(IBAction)cancel:(id)sender
 {
     [self close];
+}
+
+-(void) close {
+    [NSApp endSheet:self.window];
+    [self.window orderOut:self];
 }
 
 #pragma mark - NSTextFieldDelegate methods

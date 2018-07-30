@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
- *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
+ *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,19 +19,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "LrcModelsSProtocol.h"
-#include <string>
+#import "AccAdvancedVC.h"
 
-@protocol PasswordChangeDelegate
-
-@optional
-
--(void) paswordCreatedWithSuccess:(BOOL) success;
-
-@end
-
-@interface PasswordChangeWC : NSWindowController <NSTextFieldDelegate, LrcModelsSProtocol>
-@property std::string selectedAccountID;
-@property (retain, nonatomic) id <PasswordChangeDelegate> delegate;
+@interface AccAdvancedRingVC : AccAdvancedVC <NSTextFieldDelegate>
 
 @end

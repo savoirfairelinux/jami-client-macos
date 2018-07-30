@@ -33,6 +33,18 @@
     self.bgColor = self.mouseOutsideColor;
 }
 
+-(instancetype)initWithFrame:(NSRect)frameRect {
+    self = [super initWithFrame: frameRect];
+    if(!self.hoverColor) {
+        self.hoverColor = [NSColor ringBlue];
+    }
+    if(!self.mouseOutsideColor) {
+        self.mouseOutsideColor = [NSColor clearColor];
+    }
+    self.bgColor = self.mouseOutsideColor;
+    return self;
+}
+
 -(void)mouseEntered:(NSEvent *)theEvent {
     if(self.isEnabled) {
         self.bgColor = self.hoverColor;
@@ -69,12 +81,5 @@
     [super drawRect:dirtyRect];
 }
 
--(void)mouseDown:(NSEvent *)theEvent
-{
-    [super mouseDown:theEvent];
-    if(self.isEnabled) {
-        self.bgColor = self.mouseOutsideColor;
-    }
-}
 
 @end
