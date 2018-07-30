@@ -18,10 +18,19 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <account.h>
+#import "LrcModelsProtocol.h"
+#include <string>
 
-@interface PasswordChangeWC : NSWindowController <NSTextFieldDelegate>
+@protocol PasswordChangeDelegate
 
--(id)initWithAccount:(Account*)acc;
+@optional
+
+-(void) paswordCreatedWithSuccess:(BOOL) success;
+
+@end
+
+@interface PasswordChangeWC : NSWindowController <NSTextFieldDelegate, LrcModelsProtocol>
+@property std::string selectedAccountID;
+@property (retain, nonatomic) id <PasswordChangeDelegate> delegate;
 
 @end

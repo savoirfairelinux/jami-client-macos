@@ -18,6 +18,7 @@
  */
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
+#import "ChooseAccountVC.h"
 
 namespace lrc {
     namespace api {
@@ -27,7 +28,7 @@ namespace lrc {
     }
 }
 
-@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate, LrcModelsProtocol> {
+@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate, ChooseAccountDelegate, LrcModelsProtocol> {
     IBOutlet NSView *currentView;
 }
 
@@ -45,14 +46,6 @@ namespace lrc {
 
 
 - (IBAction)openPreferences:(id)sender;
-
-/**
- * This method is intended to be used by the ChooseAccountVC to signal the fact that
- * the selected account has been changed by user. It will then forward this information
- * to relevant controllers and views.
- * @param accInfo reference to selected account
- */
-- (void) selectAccount:(const lrc::api::account::Info&)accInfo;
 
 /**
  * Method triggered when a panel on the right is closed by user action. It triggers any action needed
@@ -73,12 +66,5 @@ namespace lrc {
  * @note This method is not to be used if list change is triggered by a left panel view.
  */
 -(void) listTypeChanged;
-
-/**
- * Triggered by Choosen account VC when all accounts deleted
- */
--(void)allAccountsDeleted;
-
-- (void) createNewAccount;
 
 @end

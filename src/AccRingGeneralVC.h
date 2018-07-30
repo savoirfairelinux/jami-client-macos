@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,7 +19,16 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsProtocol.h"
+#import "BackupAccountWC.h"
+#import "RegisterNameWC.h"
+#import "AccountSettingsVC.h"
+#import "PasswordChangeWC.h"
 
-@interface AccSecurityVC : NSViewController<NSMenuDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate>
+@interface AccRingGeneralVC : NSViewController <NSTextFieldDelegate, LrcModelsProtocol, BackupAccountDelegate, RegisterNameDelegate, AccountGeneralProtocol, NSTableViewDelegate, NSTableViewDataSource, PasswordChangeDelegate>
+
+- (void) setSelectedAccount:(std::string) account;
+
+@property (assign)BOOL accountEnabled;
 
 @end

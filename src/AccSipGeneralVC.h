@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,20 +20,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-#import "LoadingWCDelegate.h"
-#import "AbstractLoadingWC.h"
+#import <account.h>
 #import "LrcModelsProtocol.h"
-#include <string>
+#import "AccountSettingsVC.h"
 
-@interface ExportPasswordWC : AbstractLoadingWC <LrcModelsProtocol>
-
-/**
- * password string contained in passwordField.
- * This is a KVO method to bind the text with the OK Button
- * if password.length is > 0, button is enabled, otherwise disabled
- */
-@property (retain) NSString* password;
-@property std::string selectedAccountID;
+@interface AccSipGeneralVC : NSViewController <NSTextFieldDelegate, LrcModelsProtocol, AccountGeneralProtocol>
+@property (assign)BOOL accountEnabled;
 
 @end
