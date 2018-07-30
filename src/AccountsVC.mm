@@ -31,11 +31,8 @@
 #import <account.h>
 
 #import "QNSTreeController.h"
-#import "AccGeneralVC.h"
-#import "AccMediaVC.h"
 #import "AccAdvancedVC.h"
-#import "AccSecurityVC.h"
-#import "AccRingVC.h"
+#import "AccAdvancedVC.h"
 #import "AccDevicesVC.h"
 #import "BackupAccountWC.h"
 #import "RestoreAccountWC.h"
@@ -51,22 +48,24 @@
 @property (retain) IBOutlet NSTabViewItem *mediaTabItem;
 @property (retain) IBOutlet NSTabViewItem *advancedTabItem;
 @property (retain) IBOutlet NSTabViewItem *securityTabItem;
-@property (retain) IBOutlet NSTabViewItem *ringTabItem;
+@property (retain) IBOutlet NSTabViewItem *ringGeneralTabItem;
 @property (retain) IBOutlet NSTabViewItem *ringDevicesTabItem;
 @property (retain) IBOutlet NSTabViewItem *bannedListTabItem;
+
+
 
 @property QNSTreeController *treeController;
 @property (assign) IBOutlet NSOutlineView *accountsListView;
 @property (assign) IBOutlet NSTabView *accountDetailsView;
 @property (unsafe_unretained) IBOutlet NSButton* exportAccountButton;
 
-@property AccRingVC* ringVC;
+//@property AccRingGeneralVC* ringGeneralVC;
 @property AccDevicesVC* devicesVC;
-@property AccGeneralVC* generalVC;
-@property AccMediaVC* audioVC;
+//@property AccGeneralVC* generalVC;
+//@property AccMediaVC* mediaVC;
 @property AccAdvancedVC* advancedVC;
 @property AccBannedContactsVC* bannedContactsVC;
-@property AccSecurityVC* securityVC;
+//@property AccSecurityVC* securityVC;
 @property AbstractLoadingWC* accountModal;
 @property RingWizardWC* wizard;
 
@@ -79,7 +78,7 @@
 @synthesize mediaTabItem;
 @synthesize advancedTabItem;
 @synthesize securityTabItem;
-@synthesize ringTabItem;
+@synthesize ringGeneralTabItem;
 @synthesize ringDevicesTabItem;
 @synthesize accountsListView;
 @synthesize accountDetailsView;
@@ -148,30 +147,31 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
                                                         [protocolList addItemWithTitle:AccountModel::instance().protocolModel()->data(current, Qt::DisplayRole).toString().toNSString()];
                                                     });
 
-    self.generalVC = [[AccGeneralVC alloc] initWithNibName:@"AccGeneral" bundle:nil];
-    [[self.generalVC view] setFrame:[self.generalTabItem.view frame]];
-    [[self.generalVC view] setBounds:[self.generalTabItem.view bounds]];
-    [self.generalTabItem setView:self.generalVC.view];
-
-    self.audioVC = [[AccMediaVC alloc] initWithNibName:@"AccMedia" bundle:nil];
-    [[self.audioVC view] setFrame:[self.mediaTabItem.view frame]];
-    [[self.audioVC view] setBounds:[self.mediaTabItem.view bounds]];
-    [self.mediaTabItem setView:self.audioVC.view];
+//    self.generalVC = [[AccGeneralVC alloc] initWithNibName:@"AccGeneral" bundle:nil];
+//    [[self.generalVC view] setFrame:[self.generalTabItem.view frame]];
+//    [[self.generalVC view] setBounds:[self.generalTabItem.view bounds]];
+//    [self.generalTabItem setView:self.generalVC.view];
+//
+//    self.mediaVC = [[AccMediaVC alloc] initWithNibName:@"AccMedia" bundle:nil];
+//    [[self.mediaVC view] setFrame:[self.mediaTabItem.view frame]];
+//    [[self.mediaVC view] setBounds:[self.mediaTabItem.view bounds]];
+//    [self.mediaTabItem setView:self.mediaVC.view];
 
     self.advancedVC = [[AccAdvancedVC alloc] initWithNibName:@"AccAdvanced" bundle:nil];
     [[self.advancedVC view] setFrame:[self.advancedTabItem.view frame]];
     [[self.advancedVC view] setBounds:[self.advancedTabItem.view bounds]];
     [self.advancedTabItem setView:self.advancedVC.view];
 
-    self.securityVC = [[AccSecurityVC alloc] initWithNibName:@"AccSecurity" bundle:nil];
-    [[self.securityVC view] setFrame:[self.securityTabItem.view frame]];
-    [[self.securityVC view] setBounds:[self.securityTabItem.view bounds]];
-    [self.securityTabItem setView:self.securityVC.view];
+//    self.securityVC = [[AccSecurityVC alloc] initWithNibName:@"AccSecurity" bundle:nil];
+//    [[self.securityVC view] setFrame:[self.securityTabItem.view frame]];
+//    [[self.securityVC view] setBounds:[self.securityTabItem.view bounds]];
+//    [self.securityTabItem setView:self.securityVC.view];
 
-    self.ringVC = [[AccRingVC alloc] initWithNibName:@"AccRing" bundle:nil];
-    [[self.ringVC view] setFrame:[self.ringTabItem.view frame]];
-    [[self.ringVC view] setBounds:[self.ringTabItem.view bounds]];
-    [self.ringTabItem setView:self.ringVC.view];
+//    self.ringGeneralVC = [[AccRingGeneralVC alloc] initWithNibName:@"AccRingGeneral" bundle:nil accountmodel: accountModel];
+//    [[self.ringGeneralVC view] setFrame:[ringGeneralTabItem.view frame]];
+//    [[self.ringGeneralVC view] setBounds:[ringGeneralTabItem.view bounds]];
+//    [self.ringGeneralTabItem setView:self.ringGeneralVC.view];
+     [self setupRINGPanels];
 
     self.devicesVC = [[AccDevicesVC alloc] initWithNibName:@"AccDevices" bundle:nil];
     [[self.devicesVC view] setFrame:[self.ringDevicesTabItem.view frame]];
@@ -212,7 +212,11 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
         [configPanels removeTabViewItem:item];
     }
 
-    [configPanels insertTabViewItem:ringTabItem atIndex:0];
+        [configPanels insertTabViewItem:ringGeneralTabItem atIndex:0];
+        [configPanels insertTabViewItem:mediaTabItem atIndex:1];
+        [configPanels insertTabViewItem:securityTabItem atIndex:2];
+    [self.accountDetailsView setHidden:NO];
+
     [configPanels insertTabViewItem:ringDevicesTabItem atIndex:1];
     [configPanels insertTabViewItem:mediaTabItem atIndex:2];
     [configPanels insertTabViewItem:advancedTabItem atIndex:3];
@@ -353,27 +357,27 @@ QMetaObject::Connection accountChangedConnection, selectedAccountChangedConnecti
 
 - (void) backupAccount:(NSMenuItem*) sender
 {
-    auto passwordWC = [[BackupAccountWC alloc] initWithDelegate:self];
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
-    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
-#else
-    [NSApp beginSheet: passwordWC.window
-       modalForWindow: self.view.window
-        modalDelegate: self
-       didEndSelector: nil
-          contextInfo: nil];
-#endif
-    [passwordWC setAllowFileSelection:NO];
-    if(treeController.selectedNodes.count > 0) {
-        QStringList accounts;
-        for (id item : [treeController selectedNodes]) {
-            QModelIndex accIdx = [treeController toQIdx:item];
-            accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
-        }
-        [passwordWC setAccounts:accounts];
-    }
-    [passwordWC showWindow:self];
-    accountModal = passwordWC;
+//    auto passwordWC = [[BackupAccountWC alloc] initWithDelegate:self];
+//#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
+//    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+//#else
+//    [NSApp beginSheet: passwordWC.window
+//       modalForWindow: self.view.window
+//        modalDelegate: self
+//       didEndSelector: nil
+//          contextInfo: nil];
+//#endif
+//    [passwordWC setAllowFileSelection:NO];
+//    if(treeController.selectedNodes.count > 0) {
+//        QStringList accounts;
+//        for (id item : [treeController selectedNodes]) {
+//            QModelIndex accIdx = [treeController toQIdx:item];
+//            accounts << AccountModel::instance().getAccountByModelIndex(accIdx)->id();
+//        }
+//        [passwordWC setAccounts:accounts];
+//    }
+//    [passwordWC showWindow:self];
+//    accountModal = passwordWC;
 }
 
 - (void) restoreAccount:(NSMenuItem*) sender

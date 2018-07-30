@@ -31,14 +31,20 @@ namespace lrc {
     }
 }
 
-@class RingWindowController;
+@protocol ChooseAccountDelegate <NSObject>
+- (void) selectAccount:(const lrc::api::account::Info&)accInfo;
+- (void) allAccountsDeleted;
+- (void) createNewAccount;
+@end
 
 @interface ChooseAccountVC : NSViewController
+
+@property (retain, nonatomic) id <ChooseAccountDelegate> delegate;
 
 @property (readonly) const lrc::api::account::Info& selectedAccount;
 
 -(void) enable;
 -(void) disable;
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(const lrc::api::NewAccountModel*) accMdl delegate:(RingWindowController *)mainWindow;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow;
 
 @end

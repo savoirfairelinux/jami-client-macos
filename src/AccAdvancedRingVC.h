@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,9 +19,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "AccAdvancedVC.h"
 
-#import <account.h>
-
-@interface AccRingVC : NSViewController <NSTextFieldDelegate>
+@interface AccAdvancedRingVC : AccAdvancedVC <NSTextFieldDelegate>
 
 @end

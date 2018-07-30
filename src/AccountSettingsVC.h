@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2017 Savoir-faire Linux Inc.
- *  Author: Anthony Léonard <anthony.leonard@savoirfairelinux.com>
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,21 @@
 #import "LrcModelsSProtocol.h"
 #include <string>
 
-@interface PasswordChangeWC : NSWindowController <NSTextFieldDelegate, LrcModelsSProtocol>
-@property std::string selectedAccountID;
+@protocol AccountGeneralDelegate <NSObject>
+-(void) triggerAdvancedOptions;
+-(void) updateFrame;
+-(void) hide;
+@end
+
+@protocol AccountGeneralProtocol
+@property (retain, nonatomic) id <AccountGeneralDelegate> delegate;
+- (IBAction)triggerAdwancedSettings: (NSButton *)sender;
+- (void) setSelectedAccount:(std::string) account;
+@end
+
+@interface AccountSettingsVC : NSViewController <LrcModelsSProtocol, AccountGeneralDelegate>
+- (void) initFrame;
+- (void) setSelectedAccount:(std::string) account;
+- (void) show;
 
 @end

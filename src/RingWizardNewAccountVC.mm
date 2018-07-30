@@ -271,7 +271,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [self display:loadingView];
     [progressBar startAnimation:nil];
 
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, [displayNameField.stringValue UTF8String],"",[passwordField.stringValue UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, [displayNameField.stringValue UTF8String],"",[passwordField.stringValue UTF8String], "");
 }
 
 /**

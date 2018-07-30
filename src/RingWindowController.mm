@@ -53,9 +53,9 @@
 #import "views/IconButton.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/BackgroundView.h"
-#import "ChooseAccountVC.h"
 #import "utils.h"
 #import "RingWizardWC.h"
+#import "AccountSettingsVC.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -80,6 +80,7 @@
 
     CurrentCallVC* currentCallVC;
     ConversationVC* conversationVC;
+    AccountSettingsVC* settingsVC;
 
     // toolbar menu items
     ChooseAccountVC* chooseAccountVC;
@@ -87,6 +88,7 @@
 
 static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
 NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
+NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemIdentifier";
 
 @synthesize dataTransferModel, accountModel, behaviorController;
 @synthesize wizard;
@@ -113,15 +115,19 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     conversationVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:self.accountModel delegate:self];
+    settingsVC = [[AccountSettingsVC alloc] initWithNibName:@"AccountSettings" bundle:nil accountmodel:self.accountModel];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[conversationVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[settingsVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
     [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
     [callView addSubview:[conversationVC view] positioned:NSWindowAbove relativeTo:nil];
+    [self.window.contentView addSubview:[settingsVC view] positioned:NSWindowAbove relativeTo:nil];
 
     [currentCallVC initFrame];
     [conversationVC initFrame];
+    [settingsVC initFrame];
     @try {
         [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
     }
@@ -138,6 +144,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     NSToolbar *toolbar = self.window.toolbar;
     toolbar.delegate = self;
     [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
+    [toolbar insertItemWithItemIdentifier:kOpenAccountToolBarItemIdentifier atIndex:1];
     // set download folder (default - 'Documents')
     NSString* path = [[NSUserDefaults standardUserDefaults] stringForKey:Preferences::DownloadFolder];
     if (!path || path.length == 0) {
@@ -169,6 +176,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [currentCallVC showWithAnimation:false];
                          [conversationVC hideWithAnimation:false];
+                         [settingsVC hide];
                      });
 
     QObject::connect(self.behaviorController,
@@ -187,6 +195,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [currentCallVC showWithAnimation:false];
                          [conversationVC hideWithAnimation:false];
+                         [settingsVC hide];
                      });
 
     QObject::connect(self.behaviorController,
@@ -198,6 +207,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [conversationVC showWithAnimation:false];
                          [currentCallVC hideWithAnimation:false];
+                         [settingsVC hide];
                      });
 }
 
@@ -415,6 +425,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
 
     // Welcome view informations are also updated
     [self updateRingID];
+    [settingsVC setSelectedAccount:accInfo.id];
 }
 
 -(void)allAccountsDeleted
@@ -438,6 +449,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
 -(void) listTypeChanged {
     [conversationVC hideWithAnimation:false];
     [currentCallVC hideWithAnimation:false];
+    [settingsVC hide];
 }
 
 #pragma mark - NSToolbarDelegate
@@ -447,15 +459,42 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
         NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kChangeAccountToolBarItemIdentifier];
         toolbarItem.view = chooseAccountVC.view;
         return toolbarItem;
+    } else if(itemIdentifier == kOpenAccountToolBarItemIdentifier) {
+        NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kOpenAccountToolBarItemIdentifier];
+        NSView *container = [[NSView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        NSButton *openSettingsButton = [[NSButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [openSettingsButton setBordered: NO];
+        openSettingsButton.image = [NSImage imageNamed: NSImageNameSmartBadgeTemplate];
+        [openSettingsButton setAction:@selector(openAccountSettings:)];
+        [openSettingsButton setTarget:self];
+        [container addSubview:openSettingsButton];
+        toolbarItem.view = container;
+        return toolbarItem;
     }
     return nil;
 }
 
+- (IBAction)openAccountSettings:(NSButton *)sender
+{
+    if(![settingsVC.view isHidden]) {
+        [settingsVC hide];
+        sender.image = [NSImage imageNamed: NSImageNameSmartBadgeTemplate];
+        return;
+    }
+    [settingsVC setSelectedAccount: [chooseAccountVC selectedAccount].id];
+    [currentCallVC hideWithAnimation:false];
+    [conversationVC hideWithAnimation:false];
+    sender.image = [NSImage imageNamed: NSImageNameMenuOnStateTemplate];
+    [settingsVC show];
+}
+
 - (void) createNewAccount {
+    [settingsVC hide];
+    [currentCallVC hideWithAnimation:false];
+    [conversationVC hideWithAnimation:false];
     wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: self.accountModel];
     [wizard showChooseWithCancelButton: YES andAdvanced: YES];
     [self.window beginSheet:wizard.window completionHandler:nil];
-    [wizard showWindow:self];
 }
 
 @end

@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -174,6 +175,7 @@
         [self showSIPAccountVC];
     } else {
         [self.window close];
+        [NSApp endSheet:self.window];
         [[NSApplication sharedApplication] removeWindowsItem:self.window];
     }
 }
@@ -184,6 +186,7 @@
 {
     if (success) {
         [self.window close];
+        [NSApp endSheet:self.window];
         [[NSApplication sharedApplication] removeWindowsItem:self.window];
         if (!isCancelable){
             AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
@@ -200,6 +203,7 @@
 {
     if (success) {
         [self.window close];
+        [NSApp endSheet:self.window];
         [[NSApplication sharedApplication] removeWindowsItem:self.window];
         if (!isCancelable){
             AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
@@ -214,6 +218,7 @@
 
 - (void)close {
     [self.window close];
+    [NSApp endSheet:self.window];
     [[NSApplication sharedApplication] removeWindowsItem:self.window];
 }
 

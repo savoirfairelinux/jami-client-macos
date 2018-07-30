@@ -1,6 +1,7 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
+ *  Copyright (C) 2015-2018 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,288 +17,445 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#define REGISTRATION_TAG 0
-#define LOCALPORT_TAG 1
-#define STUNURL_TAG 2
-#define PUBLICADDR_TAG 3
-#define PUBLICPORT_TAG 4
-#define MINAUDIO_TAG 5
-#define MAXAUDIO_TAG 6
-#define MINVIDEO_TAG 7
-#define MAXVIDEO_TAG 8
-
-#define TURN_SERVER_TAG     9
-#define TURN_USERNAME_TAG   10
-#define TURN_PASSWORD_TAG   11
-#define TURN_REALM_TAG      12
-
 #import "AccAdvancedVC.h"
 
-///Qt
-#import <qitemselectionmodel.h>
-
-///LRC
-#import <accountmodel.h>
-#import <credentialmodel.h>
-#import <credential.h>
-
+//LRC
+#import <api/lrc.h>
+#import <api/newaccountmodel.h>
+#import <api/newdevicemodel.h>
+#import <api/newcodecmodel.h>
+#import <account.h>
 
 @interface AccAdvancedVC ()
-@property (unsafe_unretained) IBOutlet NSView *registrationContainer;
-@property (unsafe_unretained) IBOutlet NSView *mainContainer;
 
-@property (unsafe_unretained) IBOutlet NSTextField *registrationField;
-@property (unsafe_unretained) IBOutlet NSTextField *localPortField;
-@property (unsafe_unretained) IBOutlet NSButton *isUsingSTUN;
-
-@property (unsafe_unretained) IBOutlet NSTextField *STUNserverURLField;
-@property (unsafe_unretained) IBOutlet NSTextField *minAudioRTPRange;
-@property (unsafe_unretained) IBOutlet NSTextField *maxAudioRTPRange;
-@property (unsafe_unretained) IBOutlet NSTextField *minVideoRTPRange;
-@property (unsafe_unretained) IBOutlet NSTextField *maxVideoRTPRange;
-
-@property (unsafe_unretained) IBOutlet NSButton *isUsingTURN;
-@property (unsafe_unretained) IBOutlet NSTextField *turnServerURL;
-@property (unsafe_unretained) IBOutlet NSTextField *turnUsername;
-@property (unsafe_unretained) IBOutlet NSSecureTextField *turnPassword;
-@property (unsafe_unretained) IBOutlet NSTextField *turnRealm;
-
-@property (unsafe_unretained) IBOutlet NSStepper *registrationStepper;
-@property (unsafe_unretained) IBOutlet NSStepper *localPortStepper;
-@property (unsafe_unretained) IBOutlet NSStepper *minAudioPortStepper;
-@property (unsafe_unretained) IBOutlet NSStepper *maxAudioPortStepper;
-@property (unsafe_unretained) IBOutlet NSStepper *minVideoPortStepper;
-@property (unsafe_unretained) IBOutlet NSStepper *maxVideoPortStepper;
-
-@property (unsafe_unretained) IBOutlet NSMatrix *publishAddrAndPortRadioGroup;
-@property (unsafe_unretained) IBOutlet NSTextField *publishedAddrField;
-@property (unsafe_unretained) IBOutlet NSTextField *publishedPortField;
+@property (unsafe_unretained) IBOutlet NSButton* ringtoneSelectionButton;
+@property (unsafe_unretained) IBOutlet NSButton* enableRingtone;
+@property (unsafe_unretained) IBOutlet NSButton* autoAnswer;
+@property (unsafe_unretained) IBOutlet NSButton* toggleUPnPButton;
+@property (unsafe_unretained) IBOutlet NSButton* useTURNButton;
+@property (unsafe_unretained) IBOutlet NSButton* useSTUNButton;
+@property (unsafe_unretained) IBOutlet NSButton *toggleVideoButton;
+@property (unsafe_unretained) IBOutlet NSTableView* audioCodecView;
+@property (unsafe_unretained) IBOutlet NSTableView* videoCodecView;
+@property (unsafe_unretained) IBOutlet NSTextField *turnAddressField;
+@property (unsafe_unretained) IBOutlet NSTextField *turnUsernameField;
+@property (unsafe_unretained) IBOutlet NSSecureTextField *turnPasswordField;
+@property (unsafe_unretained) IBOutlet NSTextField *turnRealmField;
+@property (unsafe_unretained) IBOutlet NSTextField *stunAddressField;
+@property (unsafe_unretained) IBOutlet NSButton *disableVideoButton;
 
 @end
 
 @implementation AccAdvancedVC
-@synthesize registrationField;
-@synthesize localPortField;
-@synthesize isUsingSTUN;
-@synthesize STUNserverURLField;
-@synthesize minAudioRTPRange;
-@synthesize maxAudioRTPRange;
-@synthesize minVideoRTPRange;
-@synthesize maxVideoRTPRange;
-@synthesize registrationStepper;
-@synthesize localPortStepper;
-@synthesize turnPassword, isUsingTURN, turnRealm, turnServerURL, turnUsername;
-@synthesize minAudioPortStepper;
-@synthesize maxAudioPortStepper;
-@synthesize minVideoPortStepper;
-@synthesize maxVideoPortStepper;
-@synthesize publishAddrAndPortRadioGroup;
-@synthesize publishedAddrField;
-@synthesize publishedPortField;
+
+@synthesize audioCodecView, videoCodecView;
+@synthesize privateKeyPaswordField, turnAddressField, turnUsernameField, turnPasswordField, turnRealmField, stunAddressField;
+@synthesize ringtoneSelectionButton, selectCACertificateButton, selectUserCertificateButton, selectPrivateKeyButton;
+@synthesize enableRingtone, toggleVideoButton, autoAnswer, toggleUPnPButton, useTURNButton, useSTUNButton, disableVideoButton;
+@synthesize accountModel;
+
+NS_ENUM(NSInteger, ButtonsTags) {
+    TAG_RINGTONE = 1,
+    TAG_CA_CERTIFICATE,
+    TAG_USER_CERTIFICATE,
+    TAG_PRIVATE_KEY
+};
+
+NS_ENUM(NSInteger, TextFieldsViews) {
+    PRIVATE_KEY_PASSWORG_TAG = 1,
+    TURN_ADDRESS_TAG,
+    TURN_USERNAME_TAG,
+    TURN_PASSWORD_TAG,
+    TURN_REALM_TAG,
+    STUN_ADDRESS_TAG
+};
+
+NS_ENUM(NSInteger, tablesViews) {
+    AUDIO_CODEC_NAME_TAG = 1,
+    AUDIO_CODEC_SAMPLERATE_TAG,
+    AUDIO_CODEC_ENABLE_TAG,
+    VIDEO_CODEC_NAME_TAG,
+    VIDIO_CODEC_ENABLE_TAG
+};
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel
+{
+    if (self =  [self initWithNibName: nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.accountModel= accountModel;
+    }
+    return self;
+}
 
 - (void)awakeFromNib
 {
-    NSLog(@"INIT Advanced VC");
-    [registrationStepper setTag:REGISTRATION_TAG];
-    [localPortStepper setTag:LOCALPORT_TAG];
-    [minAudioPortStepper setTag:MINAUDIO_TAG];
-    [maxAudioPortStepper setTag:MAXAUDIO_TAG];
-    [minVideoPortStepper setTag:MINVIDEO_TAG];
-    [maxVideoPortStepper setTag:MAXVIDEO_TAG];
-
-    [turnServerURL setTag:TURN_SERVER_TAG];
-    [turnUsername setTag:TURN_USERNAME_TAG];
-    [turnPassword setTag:TURN_PASSWORD_TAG];
-    [turnRealm setTag:TURN_REALM_TAG];
-
-    [registrationField setTag:REGISTRATION_TAG];
-    [localPortField setTag:LOCALPORT_TAG];
-    [minAudioRTPRange setTag:MINAUDIO_TAG];
-    [maxAudioRTPRange setTag:MAXAUDIO_TAG];
-    [minVideoRTPRange setTag:MINVIDEO_TAG];
-    [maxVideoRTPRange setTag:MAXVIDEO_TAG];
-
-    [STUNserverURLField setTag:STUNURL_TAG];
-    [publishedPortField setTag:PUBLICPORT_TAG];
-    [publishedAddrField setTag:PUBLICADDR_TAG];
-
-    QObject::connect(AccountModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if(!current.isValid())
-                             return;
-                         [self loadAccount];
-                     });
-
+    [super awakeFromNib];
+    audioCodecView.delegate = self;
+    audioCodecView.dataSource = self;
+    videoCodecView.delegate = self;
+    videoCodecView.dataSource = self;
+    [disableVideoButton setWantsLayer:YES];
+    disableVideoButton.layer.backgroundColor = [[NSColor colorWithRed:239/255.0 green:239/255.0 blue:239/255.0 alpha:0.3] CGColor];
+    [self setTags];
 }
 
-- (Account*) currentAccount
-{
-    auto accIdx = AccountModel::instance().selectionModel()->currentIndex();
-    return AccountModel::instance().getAccountByModelIndex(accIdx);
+-(void) setTags {
+    [ringtoneSelectionButton setTag: TAG_RINGTONE];
+    [selectCACertificateButton setTag: TAG_CA_CERTIFICATE];
+    [selectUserCertificateButton setTag: TAG_USER_CERTIFICATE];
+    [selectPrivateKeyButton setTag: TAG_PRIVATE_KEY];
+    [privateKeyPaswordField setTag: PRIVATE_KEY_PASSWORG_TAG];
+    [turnAddressField setTag: TURN_ADDRESS_TAG];
+    [turnUsernameField setTag: TURN_USERNAME_TAG];
+    [turnPasswordField setTag: TURN_PASSWORD_TAG];
+    [turnRealmField setTag: TURN_REALM_TAG];
+    [stunAddressField setTag: STUN_ADDRESS_TAG];
 }
 
-- (void)loadAccount
-{
-    auto account = [self currentAccount];
+-(void) update {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    [ringtoneSelectionButton setTitle: [@(accountProperties.Ringtone.ringtonePath.c_str()) lastPathComponent]];
+    [enableRingtone setState :accountProperties.Ringtone.ringtoneEnabled];
+    [autoAnswer setState: accountProperties.autoAnswer];
+    [selectPrivateKeyButton setTitle: [@(accountProperties.TLS.privateKeyFile.c_str()) lastPathComponent]];
+    [selectUserCertificateButton setTitle:[@(accountProperties.TLS.certificateFile.c_str()) lastPathComponent]];
+    [selectCACertificateButton setTitle: [@(accountProperties.TLS.certificateListFile.c_str()) lastPathComponent]];
+    [toggleUPnPButton setState:accountProperties.upnpEnabled];
+    [useTURNButton setState:accountProperties.TURN.enable];
+    [useSTUNButton setState:accountProperties.STUN.enable];
+    [privateKeyPaswordField setStringValue:@(accountProperties.TLS.password.c_str())];
+    [turnAddressField setStringValue:@(accountProperties.TURN.server.c_str())];
+    [turnUsernameField setStringValue:@(accountProperties.TURN.username.c_str())];
+    [turnPasswordField setStringValue:@(accountProperties.TURN.password.c_str())];
+    [turnRealmField setStringValue:@(accountProperties.TURN.realm.c_str())];
+    [stunAddressField setStringValue:@(accountProperties.STUN.server.c_str())];
+    [stunAddressField setEditable:accountProperties.STUN.enable];
+    [turnAddressField setEditable:accountProperties.TURN.enable];
+    [turnUsernameField setEditable:accountProperties.TURN.enable];
+    [turnPasswordField setEditable:accountProperties.TURN.enable];
+    [turnRealmField setEditable:accountProperties.TURN.enable];
+    [disableVideoButton setHidden:accountProperties.Video.videoEnabled];
+    [toggleVideoButton setState:accountProperties.Video.videoEnabled];
+    [audioCodecView reloadData];
+    [videoCodecView reloadData];
+}
 
-    [self updateControlsWithTag:REGISTRATION_TAG];
-    [self updateControlsWithTag:LOCALPORT_TAG];
-    [self updateControlsWithTag:MINAUDIO_TAG];
-    [self updateControlsWithTag:MAXAUDIO_TAG];
-    [self updateControlsWithTag:MINVIDEO_TAG];
-    [self updateControlsWithTag:MAXVIDEO_TAG];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self update];
+}
 
-    [STUNserverURLField setStringValue:account->sipStunServer().toNSString()];
-    [isUsingSTUN setState:account->isSipStunEnabled()?NSOnState:NSOffState];
-    [STUNserverURLField setEnabled:account->isSipStunEnabled()];
+#pragma mark - AccountAdvancedProtocol methods
 
-    [isUsingTURN setState:account->isTurnEnabled()?NSOnState:NSOffState];
-    [self toggleTURN:isUsingTURN];
-    [turnServerURL setStringValue:account->turnServer().toNSString()];
+- (void) setSelectedAccount:(std::string) account {
+    self.selectedAccountID = account;
+    [self update];
+}
 
-    auto turnCreds = account->credentialModel()->primaryCredential(Credential::Type::TURN);
+#pragma mark - Actions
 
-    [turnUsername setStringValue:turnCreds->username().toNSString()];
-    [turnPassword setStringValue:turnCreds->password().toNSString()];
-    [turnRealm setStringValue:turnCreds->realm().toNSString()];
-
-    if(account->isPublishedSameAsLocal())
-        [publishAddrAndPortRadioGroup selectCellAtRow:0 column:0];
-    else {
-        [publishAddrAndPortRadioGroup selectCellAtRow:1 column:0];
-    }
-
-    [publishedAddrField setStringValue:account->publishedAddress().toNSString()];
-    [publishedPortField setIntValue:account->publishedPort()];
-    [publishedAddrField setEnabled:!account->isPublishedSameAsLocal()];
-    [publishedPortField setEnabled:!account->isPublishedSameAsLocal()];
-
-    if(account->protocol() == Account::Protocol::RING) {
-        [self.registrationContainer setHidden:YES];
-    } else {
-        [self.registrationContainer setHidden:NO];
+- (IBAction)autoAnswerCall:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if( accountProperties.autoAnswer != [sender state]) {
+        accountProperties.autoAnswer = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
     }
 }
 
-#pragma mark - NSTextFieldDelegate methods
-
--(void)controlTextDidChange:(NSNotification *)notif
-{
-    NSTextField *textField = [notif object];
-    NSRange test = [[textField currentEditor] selectedRange];
-
-    [self valueDidChange:textField];
-    //FIXME: saving account lose focus because in NSTreeController we remove and reinsert row so View selection change
-    [textField.window makeFirstResponder:textField];
-    [[textField currentEditor] setSelectedRange:test];
+- (IBAction)autoEnableRingtone:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if(accountProperties.Ringtone.ringtoneEnabled != [sender state]) {
+        accountProperties.Ringtone.ringtoneEnabled = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+        [ringtoneSelectionButton setEnabled:[sender state]];
+    }
 }
 
-- (IBAction) valueDidChange: (id) sender
-{
+- (IBAction)togleUPnP:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if( accountProperties.upnpEnabled != [sender state]) {
+        accountProperties.upnpEnabled = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+    }
+}
+
+- (IBAction)useTURN:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if( accountProperties.TURN.enable != [sender state]) {
+        accountProperties.TURN.enable = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+        [turnAddressField setEditable:[sender state]];
+        [turnUsernameField setEditable:[sender state]];
+        [turnPasswordField setEditable:[sender state]];
+        [turnRealmField setEditable:[sender state]];
+    }
+}
+
+- (IBAction)useSTUN:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if( accountProperties.STUN.enable != [sender state]) {
+        accountProperties.STUN.enable = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+        [stunAddressField setEditable:[sender state]];
+    }
+}
+
+- (IBAction)selectFile:(id)sender {
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setAllowsMultipleSelection:NO];
+    [panel setCanChooseDirectories:NO];
+    [panel setCanChooseFiles:YES];
+    if ([panel runModal] != NSFileHandlingPanelOKButton) return;
+    if ([[panel URLs] lastObject] == nil) return;
+    NSString * path = [[[panel URLs] lastObject] path];
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     switch ([sender tag]) {
-        case REGISTRATION_TAG:
-            [self currentAccount]->setRegistrationExpire([sender integerValue]);
+        case TAG_RINGTONE:
+            if(accountProperties.Ringtone.ringtonePath != [path UTF8String]) {
+                accountProperties.Ringtone.ringtonePath = [path UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+                [ringtoneSelectionButton setTitle:[path lastPathComponent]];
+            }
             break;
-        case LOCALPORT_TAG:
-            [self currentAccount]->setLocalPort([sender integerValue]);
+        case TAG_CA_CERTIFICATE:
+            if(accountProperties.TLS.certificateListFile != [path UTF8String] ) {
+                accountProperties.TLS.certificateListFile = [path UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+                [selectCACertificateButton setTitle:[path lastPathComponent]];
+            }
             break;
-        case STUNURL_TAG:
-            [self currentAccount]->setSipStunServer([[sender stringValue] UTF8String]);
+        case TAG_USER_CERTIFICATE:
+            if(accountProperties.TLS.certificateFile != [path UTF8String] ) {
+                accountProperties.TLS.certificateFile = [path UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+                [selectUserCertificateButton setTitle:[path lastPathComponent]];
+            }
             break;
-        case PUBLICADDR_TAG:
-            [self currentAccount]->setPublishedAddress([[sender stringValue] UTF8String]);
+        case TAG_PRIVATE_KEY:
+            if(accountProperties.TLS.privateKeyFile != [path UTF8String] ) {
+                accountProperties.TLS.privateKeyFile = [path UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+                [selectPrivateKeyButton setTitle:[path lastPathComponent]];
+            }
             break;
-        case PUBLICPORT_TAG:
-            [self currentAccount]->setPublishedPort([sender integerValue]);
+    }
+}
+
+- (IBAction)valueDidChange:(id)sender
+{
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    switch ([sender tag]) {
+        case PRIVATE_KEY_PASSWORG_TAG:
+            if(accountProperties.TLS.password != [[sender stringValue] UTF8String]) {
+                accountProperties.TLS.password = [[sender stringValue] UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+            }
             break;
-        case MINAUDIO_TAG:
-            [self currentAccount]->setAudioPortMin([sender integerValue]);
-            break;
-        case MAXAUDIO_TAG:
-            [self currentAccount]->setAudioPortMax([sender integerValue]);
-            break;
-        case MINVIDEO_TAG:
-            [self currentAccount]->setVideoPortMin([sender integerValue]);
-            break;
-        case MAXVIDEO_TAG:
-            [self currentAccount]->setVideoPortMax([sender integerValue]);
-            break;
-        case TURN_SERVER_TAG:
-            [self currentAccount]->setTurnServer([[sender stringValue] UTF8String]);
+        case TURN_ADDRESS_TAG:
+            if(accountProperties.TURN.server != [[sender stringValue] UTF8String]) {
+                accountProperties.TURN.server = [[sender stringValue] UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+            }
             break;
         case TURN_USERNAME_TAG:
-            [self currentAccount]->credentialModel()->primaryCredential(Credential::Type::TURN)->setUsername([[sender stringValue] UTF8String]);
+            if(accountProperties.TURN.username != [[sender stringValue] UTF8String]) {
+                accountProperties.TURN.username = [[sender stringValue] UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+            }
             break;
         case TURN_PASSWORD_TAG:
-            [self currentAccount]->credentialModel()->primaryCredential(Credential::Type::TURN)->setPassword([[sender stringValue] UTF8String]);
+            if(accountProperties.TURN.password != [[sender stringValue] UTF8String]) {
+                accountProperties.TURN.password = [[sender stringValue] UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+            }
             break;
         case TURN_REALM_TAG:
-            [self currentAccount]->credentialModel()->primaryCredential(Credential::Type::TURN)->setRealm([[sender stringValue] UTF8String]);
+            if(accountProperties.TURN.realm != [[sender stringValue] UTF8String]) {
+                accountProperties.TURN.realm = [[sender stringValue] UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+            }
+            break;
+        case STUN_ADDRESS_TAG:
+            if(accountProperties.STUN.server != [[sender stringValue] UTF8String]) {
+                accountProperties.STUN.server = [[sender stringValue] UTF8String];
+                self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+            }
             break;
         default:
             break;
     }
-    [self updateControlsWithTag:[sender tag]];
 }
 
-- (IBAction)toggleSTUN:(NSButton *)sender
-{
-    [self currentAccount]->setSipStunEnabled([sender state]);
-    [STUNserverURLField setEnabled:[self currentAccount]->isSipStunEnabled()];
-}
-
-- (IBAction)toggleTURN:(id)sender {
-    [self currentAccount]->setTurnEnabled([sender state]);
-    [turnServerURL setEnabled:[sender state]];
-    [turnUsername setEnabled:[sender state]];
-    [turnPassword setEnabled:[sender state]];
-    [turnRealm setEnabled:[sender state]];
-}
-
-- (IBAction)didSwitchPublishedAddress:(NSMatrix *)matrix
-{
-    NSInteger row = [matrix selectedRow];
-    if(row == 0) {
-        [self currentAccount]->setPublishedSameAsLocal(YES);
-    } else {
-        [self currentAccount]->setPublishedSameAsLocal(NO);
+- (IBAction)moveAudioCodecUp:(id)sender {
+    NSInteger row = [audioCodecView selectedRow];
+    if(row < 0) {
+        return;
     }
-    [publishedAddrField setEnabled:![self currentAccount]->isPublishedSameAsLocal()];
-    [publishedPortField setEnabled:![self currentAccount]->isPublishedSameAsLocal()];
-
+    auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
+    auto codec = audioCodecs.begin();
+    std::advance(codec, row);
+    if (codec == audioCodecs.end()) {
+        return;
+    }
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->increasePriority(codec->id, false);
+    [audioCodecView reloadData];
+    row = row == 0 ? row: row-1;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
+    [audioCodecView selectRowIndexes:indexSet byExtendingSelection: NO];
+    [audioCodecView scrollRowToVisible:row];
 }
 
-- (void) updateControlsWithTag:(NSInteger) tag
-{
-    switch (tag) {
-        case REGISTRATION_TAG:
-            [registrationStepper setIntegerValue:[self currentAccount]->registrationExpire()];
-            [registrationField setIntegerValue:[self currentAccount]->registrationExpire()];
-            break;
-        case LOCALPORT_TAG:
-            [localPortStepper setIntegerValue:[self currentAccount]->localPort()];
-            [localPortField setIntegerValue:[self currentAccount]->localPort()];
-            break;
-        case MINAUDIO_TAG:
-            [minAudioPortStepper setIntegerValue:[self currentAccount]->audioPortMin()];
-            [minAudioRTPRange setIntegerValue:[self currentAccount]->audioPortMin()];
-            break;
-        case MAXAUDIO_TAG:
-            [maxAudioPortStepper setIntegerValue:[self currentAccount]->audioPortMax()];
-            [maxAudioRTPRange setIntegerValue:[self currentAccount]->audioPortMax()];
-            break;
-        case MINVIDEO_TAG:
-            [minVideoPortStepper setIntegerValue:[self currentAccount]->videoPortMin()];
-            [minVideoRTPRange setIntegerValue:[self currentAccount]->videoPortMin()];
-            break;
-        case MAXVIDEO_TAG:
-            [maxVideoPortStepper setIntegerValue:[self currentAccount]->videoPortMax()];
-            [maxVideoRTPRange setIntegerValue:[self currentAccount]->videoPortMax()];
-            break;
-        default:
-            break;
+- (IBAction)moveAudioCodecDown:(id)sender {
+    NSInteger row = [audioCodecView selectedRow];
+    if(row < 0) {
+        return;
     }
+    auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
+    auto codec = audioCodecs.begin();
+    std::advance(codec, row);
+    if (codec == audioCodecs.end()) {
+        return;
+    }
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->decreasePriority(codec->id, false);
+    [audioCodecView reloadData];
+    row = (row == ([audioCodecView numberOfRows] - 1)) ? row: row+1;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
+    [audioCodecView selectRowIndexes:indexSet byExtendingSelection: NO];
+    [audioCodecView scrollRowToVisible:row];
+}
+
+- (IBAction)moveVideoCodecUp:(id)sender {
+    NSInteger row = [videoCodecView selectedRow];
+    if(row < 0) {
+        return;
+    }
+    auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
+    auto codec = videoCodecs.begin();
+    std::advance(codec, row);
+    if (codec == videoCodecs.end()) {
+        return;
+    }
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->increasePriority(codec->id, YES);
+    [videoCodecView reloadData];
+    row = row == 0 ? row: row-1;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
+    [videoCodecView selectRowIndexes:indexSet byExtendingSelection: NO];
+    [videoCodecView scrollRowToVisible:row];
+}
+
+- (IBAction)moveVideoCodecDown:(id)sender {
+    NSInteger row = [videoCodecView selectedRow];
+    if(row < 0) {
+        return;
+    }
+    auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
+    auto codec = videoCodecs.begin();
+    std::advance(codec, row);
+    if (codec == videoCodecs.end()) {
+        return;
+    }
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->decreasePriority(codec->id, YES);
+    [videoCodecView reloadData];
+    row = row == [videoCodecView numberOfRows] - 1 ? row: row+1;
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
+    [videoCodecView selectRowIndexes:indexSet byExtendingSelection: NO];
+    [videoCodecView scrollRowToVisible:row];
+}
+
+- (IBAction)toggleVideoEnabled:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if(accountProperties.Video.videoEnabled != [sender state]) {
+        accountProperties.Video.videoEnabled = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+        [videoCodecView setEnabled:[sender state]];
+        [videoCodecView reloadData];
+        [disableVideoButton setHidden:[sender state]];
+    }
+}
+
+- (IBAction)enableAudioCodec:(id)sender
+{
+    NSInteger row = [audioCodecView rowForView:sender];
+    if(row < 0) {
+        return;
+    }
+    auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
+    auto codec = audioCodecs.begin();
+    std::advance(codec, row);
+    if (codec != audioCodecs.end() && codec->enabled != [sender state]) {
+        self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->enable(codec->id, [sender state]);
+    }
+}
+
+- (IBAction)enableVideoCodec:(id)sender
+{
+    NSInteger row = [videoCodecView rowForView:sender];
+    if(row < 0) {
+        return;
+    }
+    auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
+    auto codec = videoCodecs.begin();
+    std::advance(codec, row);
+    if (codec != videoCodecs.end() && codec->enabled != [sender state]) {
+        self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->enable(codec->id, [sender state]);
+    }
+}
+
+#pragma mark - NSTableViewDelegate methods
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    if(tableView == audioCodecView) {
+        NSTableCellView* audioCodecView = [tableView makeViewWithIdentifier:@"TableCellAudioCodecItem" owner:self];
+        NSTextField* nameLabel = [audioCodecView viewWithTag: AUDIO_CODEC_NAME_TAG];
+        NSTextField* samplerateLabel = [audioCodecView viewWithTag: AUDIO_CODEC_SAMPLERATE_TAG];
+        NSButton* codecEnableButton = [audioCodecView viewWithTag: AUDIO_CODEC_ENABLE_TAG];
+        auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
+        auto codec = audioCodecs.begin();
+        std::advance(codec, row);
+        if (codec != audioCodecs.end()) {
+            [nameLabel setStringValue: @(codec->name.c_str())];
+            [samplerateLabel setStringValue: [@(codec->samplerate.c_str()) stringByAppendingString:@" Hz"]];
+            [codecEnableButton setState:codec->enabled];
+            [codecEnableButton setAction:@selector(enableAudioCodec:)];
+            [codecEnableButton setTarget:self];
+            return audioCodecView;
+        }
+    } else if (tableView == videoCodecView) {
+        NSTableCellView* videoCodecView = [tableView makeViewWithIdentifier:@"TableCellVideoCodecItem" owner:self];
+        NSTextField* nameLabel = [videoCodecView viewWithTag: VIDEO_CODEC_NAME_TAG];
+        NSButton* codecEnableButton = [audioCodecView viewWithTag: VIDIO_CODEC_ENABLE_TAG];
+        nameLabel.textColor = [tableView isEnabled] ? [NSColor labelColor] : [NSColor lightGrayColor];
+        [codecEnableButton setEnabled:[tableView isEnabled]];
+        auto codecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
+        auto codec = codecs.begin();
+        std::advance(codec, row);
+        if (codec != codecs.end()) {
+            [nameLabel setStringValue: @(codec->name.c_str())];
+            [codecEnableButton setState:codec->enabled];
+            [codecEnableButton setAction:@selector(enableVideoCodec:)];
+            [codecEnableButton setTarget:self];
+            return videoCodecView;
+        }
+    }
+}
+
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
+{
+    if(![tableView isEnabled]) {
+        return nil;
+    }
+    return [tableView makeViewWithIdentifier:@"HoverRowView" owner:nil];
+}
+
+#pragma mark - NSTableViewDataSource methods
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    if(tableView == audioCodecView) {
+        return self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs().size();
+    } else if (tableView == videoCodecView){
+        return self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs().size();
+    }
+    return 0;
 }
 
 @end
