@@ -64,11 +64,11 @@
     [self.inputDeviceList addItemWithTitle:
             Audio::Settings::instance().inputDeviceModel()->data(qInputIdx, Qt::DisplayRole).toString().toNSString()];
     [self.alwaysRecordingButton setState:
-            Media::RecordingModel::instance().isAlwaysRecording() ? NSOnState:NSOffState];
+            media::RecordingModel::instance().isAlwaysRecording() ? NSOnState:NSOffState];
 
     [self.muteDTMFButton setState:
             Audio::Settings::instance().areDTMFMuted()?NSOnState:NSOffState];
-    NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:Media::RecordingModel::instance().recordPath().toNSString()];
+    NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:media::RecordingModel::instance().recordPath().toNSString()];
     [recordingsPathControl setPathComponentCells:pathComponentArray];
 
     if (appSandboxed()) {
@@ -89,14 +89,14 @@
 
 - (IBAction)toggleAlwaysRecording:(NSButton *)sender
 {
-    Media::RecordingModel::instance().setAlwaysRecording([sender state] == NSOnState);
+    media::RecordingModel::instance().setAlwaysRecording([sender state] == NSOnState);
 }
 
 - (IBAction)pathControlSingleClick:(id)sender {
     // Select that chosen component of the path.
     NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:[[self.recordingsPathControl clickedPathComponentCell] URL].path];
     [recordingsPathControl setPathComponentCells:pathComponentArray];
- Media::RecordingModel::instance().setRecordPath(QString::fromNSString([self.recordingsPathControl.URL path]));
+ media::RecordingModel::instance().setRecordPath(QString::fromNSString([self.recordingsPathControl.URL path]));
 }
 
 - (IBAction)chooseOutput:(id)sender {

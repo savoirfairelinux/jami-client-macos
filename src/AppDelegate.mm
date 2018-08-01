@@ -180,21 +180,21 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          }
                      });
 
-    QObject::connect(&Media::RecordingModel::instance(),
-                     &Media::RecordingModel::newTextMessage,
-                     [=](Media::TextRecording* t, ContactMethod* cm) {
+    QObject::connect(&media::RecordingModel::instance(),
+                     &media::RecordingModel::newTextMessage,
+                     [=](media::TextRecording* t, ContactMethod* cm) {
 
                          BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
                          auto qIdx = t->instantTextMessagingModel()->index(t->instantTextMessagingModel()->rowCount()-1, 0);
 
                          // Don't show a notification if we are sending the text OR window already has focus OR user disabled notifications
-                         if(qvariant_cast<Media::Media::Direction>(qIdx.data((int)Media::TextRecording::Role::Direction)) == Media::Media::Direction::OUT
+                         if(qvariant_cast<media::Media::Direction>(qIdx.data((int)media::TextRecording::Role::Direction)) == media::Media::Direction::OUT
                             || self.ringWindowController.window.isMainWindow || !shouldNotify)
                              return;
 
                          NSUserNotification* notification = [[NSUserNotification alloc] init];
 
-                         NSString* localizedTitle = [NSString stringWithFormat:NSLocalizedString(@"Message from %@", @"Message from {Name}"), qIdx.data((int)Media::TextRecording::Role::AuthorDisplayname).toString().toNSString()];
+                         NSString* localizedTitle = [NSString stringWithFormat:NSLocalizedString(@"Message from %@", @"Message from {Name}"), qIdx.data((int)media::TextRecording::Role::AuthorDisplayname).toString().toNSString()];
 
                          [notification setTitle:localizedTitle];
                          [notification setSoundName:NSUserNotificationDefaultSoundName];
