@@ -134,7 +134,7 @@
 
 - (IBAction)clearHistory:(id)sender {
     CategorizedHistoryModel::instance().clearAllCollections();
-    Media::RecordingModel::instance().clearAllCollections();
+    media::RecordingModel::instance().clearAllCollections();
     [historyChangedLabel setHidden:NO];
 }
 

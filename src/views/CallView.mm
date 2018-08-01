@@ -171,7 +171,7 @@
     if ( [sender draggingSource] != self ) {
         NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
         if (auto current = CallModel::instance().selectedCall()) {
-            if (auto outVideo = current->firstMedia<Media::Video>(Media::Media::Direction::OUT)) {
+            if (auto outVideo = current->firstMedia<media::Video>(media::Media::Direction::OUT)) {
                 outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
                 return YES;
             }
@@ -235,7 +235,7 @@
 {
     int index = [contextualMenu indexOfItem:sender];
     if (auto current = CallModel::instance().selectedCall()) {
-        if (auto outVideo = current->firstMedia<Media::Video>(Media::Media::Direction::OUT)) {
+        if (auto outVideo = current->firstMedia<media::Video>(media::Media::Direction::OUT)) {
             outVideo->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
         }
     }
@@ -260,7 +260,7 @@
         if (result == NSFileHandlingPanelOKButton) {
             NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
             if (auto current = CallModel::instance().selectedCall()) {
-                if (auto outVideo = current->firstMedia<Media::Video>(Media::Media::Direction::OUT)) {
+                if (auto outVideo = current->firstMedia<media::Video>(media::Media::Direction::OUT)) {
                     outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
                 }
             }

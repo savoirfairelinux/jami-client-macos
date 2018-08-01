@@ -135,7 +135,7 @@ NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarIte
     lrc_->getDataTransferModel().downloadDirectory = std::string([path UTF8String]);
     if(appSandboxed()) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        Media::RecordingModel::instance().setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
+        media::RecordingModel::instance().setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
     }
 }
 
