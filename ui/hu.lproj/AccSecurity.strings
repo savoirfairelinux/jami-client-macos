@@ -9,16 +9,16 @@
 "2e5-zS-ghg.title" = "Egyéni titkosítási lista használata";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "cipher cell";
+"5LC-T6-hpk.placeholderString" = "titkos cellát";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
 "7c2-kF-dcs.placeholderString" = "Jelszó…";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
-"9Q3-1W-Lh3.title" = "Negotiation timeout";
+"9Q3-1W-Lh3.title" = "Tárgyalási időtúllépés";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
-"Ig9-B1-7N3.title" = "Fallback on RTP";
+"Ig9-B1-7N3.title" = "RTP visszatérés";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
 "JHb-iu-ZwI.title" = "Titkos kulcs";
@@ -27,7 +27,7 @@
 "Jqz-P0-zAz.title" = "Felhasználói tanúsítvány";
 
 /* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
-"UxS-et-whJ.title" = "Server name instance for outgoing TLS connection";
+"UxS-et-whJ.title" = "Kiszolgálónév példány kimenő TLS kapcsolat esetén";
 
 /* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
 "YtQ-hx-hih.title" = "SRTP használata";
