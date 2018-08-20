@@ -163,3 +163,9 @@
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
 
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+

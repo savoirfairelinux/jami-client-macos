@@ -6,7 +6,7 @@
 "1TO-Ov-S8j.placeholderString" = "Obowiązkowe*";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register public username";
+"AG5-GR-bii.title" = "Zarejestruj publiczną nazwę użytkownika";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
 "B6x-jj-48R.title" = "Wybierz hasło";
@@ -21,7 +21,7 @@
 "fEY-eO-HwI.title" = "Powtórz hasło";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
-"gEy-ak-Cgq.placeholderString" = "'Nieznane' jeśli puste...";
+"gEy-ak-Cgq.placeholderString" = "Enter name";
 
 /* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
 "gki-BR-jc3.title" = "Stwórz swój profil";
