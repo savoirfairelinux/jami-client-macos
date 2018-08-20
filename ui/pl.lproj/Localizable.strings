@@ -1,5 +1,5 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Wystąpił błąd sieci podczas eksportowania";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
@@ -32,7 +32,7 @@
 "Call number" = "Zadzwoń na numer";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "Anulowano";
 
 /* Open panel title */
 "Choose a CA list" = "Wybierz listę CA";
@@ -101,7 +101,7 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Hasła nie pasują";
 
 /* Button label */
 "Pause" = "Pauza";
@@ -149,7 +149,7 @@
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Hasło, które zostało wpisane, nie odblokowuje tego konta";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -162,4 +162,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 

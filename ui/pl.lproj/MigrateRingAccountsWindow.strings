@@ -1,24 +1,24 @@
 
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
-"1ob-x1-u74.title" = "Account migration completed";
+"1ob-x1-u74.title" = "Zakończono przenoszenie konta";
 
 /* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "RingID";
+"859-10-HEb.placeholderString" = "ID Ring";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later.";
+"859-10-HEb.title" = "Następujące konto wymaga przeniesienia do nowego formatu konta Ring account format:\\nAlias:\\nID:\\nAby rozpocząć przenoszenie konta, musisz wybrać hasło dla swojego konta. To hasło będzie używane, by szyfrować twój główny klucz. Będzie ono wymagane, by dodawać nowe urządzenia do twojego konta Ring. Jeżeli nie jesteś gotowy(a), by wybrać hasło, możesz zamknąć Ring i wznowić przenoszenie konta później.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Account migration error";
+"8K3-9Z-MKH.title" = "Błąd przenoszenia konta";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Congratulations, your account has been migrated with Success.";
+"C2l-rz-Gqt.title" = "Gratulacje, twoje konto zostało pomyślnie przeniesione.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
-"ITE-yD-CTb.title" = "Delete this account";
+"ITE-yD-CTb.title" = "Usuń to konto";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
-"KuO-oT-zhY.placeholderString" = "Confirm your new password...";
+"KuO-oT-zhY.placeholderString" = "Potwierdź nowe hasło...";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "OK";
@@ -30,13 +30,13 @@
 "VN1-A3-RIh.title" = "OK";
 
 /* Class = "NSTextFieldCell"; title = "Confirmation"; ObjectID = "aOa-1q-AZe"; */
-"aOa-1q-AZe.title" = "Confirmation";
+"aOa-1q-AZe.title" = "Potwierdzenie";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.placeholderString" = "error label";
+"e7n-Ev-bK7.placeholderString" = "etykieta błędu";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
-"rW5-Il-5YD.title" = "Migrate";
+"rW5-Il-5YD.title" = "Przenieś";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "vwh-K9-3O9"; */
 "vwh-K9-3O9.title" = "Hasło";

@@ -3,13 +3,13 @@
 "1TO-Ov-S8j.placeholderString" = "Obowiązkowe*";
 
 /* Class = "NSTextFieldCell"; title = "Other users can use it instead of your RingID"; ObjectID = "9gi-0u-67t"; */
-"9gi-0u-67t.title" = "Other users can use it instead of your RingID";
+"9gi-0u-67t.title" = "Inni użytkownicy mogą jej używać, zamiast twojego RingID";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
-"Aeh-tK-RjX.title" = "An error occured during your username registration";
+"Aeh-tK-RjX.title" = "Wystąpił błąd podczas rejestracji nazwy użytkownika";
 
 /* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Enter your Ring account password";
+"B6x-jj-48R.title" = "Wpisz hasło do twojego konta Ring";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
 "JWw-7m-ywL.title" = "Okno";
@@ -18,7 +18,7 @@
 "YIN-YL-JBs.title" = "Chwileczkę...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
-"bdC-Uc-Qhs.placeholderString" = "Username...";
+"bdC-Uc-Qhs.placeholderString" = "Nazwa użytkownika...";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "cbA-c2-LlV"; */
 "cbA-c2-LlV.title" = "Anuluj";
@@ -33,4 +33,4 @@
 "lT3-Bh-MnL.title" = "Zarejestruj";
 
 /* Class = "NSTextFieldCell"; title = "Register username on the blockchain"; ObjectID = "tje-EZ-ZPI"; */
-"tje-EZ-ZPI.title" = "Register username on the blockchain";
+"tje-EZ-ZPI.title" = "Zarejestruj nazwę użytkownika w blockchain";

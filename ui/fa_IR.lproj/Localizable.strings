@@ -71,7 +71,7 @@
 "Create SIP Account" = "ساخت حساب کاربری سیپ";
 
 /* File transfer failed label */
-"Failed" = "شکست خورد";
+"Failed" = "انجام نشد";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "انتقال حساب ناموفق بود. می‌توانید با فشردن دکمه خب دوباره سعی نمایید یا حساب کاربری خود را حذف کنید.";
@@ -162,4 +162,10 @@
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
