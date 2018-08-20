@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95e2c825_4825c1e5",
+        "filename": "src/AccAdvancedRingVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 0
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0eb3207a_335cacb7",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 80,
+        "startChar": 3,
+        "endLine": 80,
+        "endChar": 32
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ea9aef2_ad2f2943",
+        "filename": "src/AccDevicesVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 0
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4d5455f_bb377654",
+        "filename": "src/AccountsVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "doubled import",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 25
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf58e1ff_b88c926f",
+        "filename": "src/AccountsVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 0
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "653c68b4_1b28e268",
+        "filename": "src/AccountsVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 64
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f8509c8_2e327e9a",
+        "filename": "src/AccountsVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "extra tab ?",
+      "range": {
+        "startLine": 215,
+        "startChar": 8,
+        "endLine": 217,
+        "endChar": 67
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a859396e_74caac58",
+        "filename": "src/AccountsVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 32
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e6aac91_e33a22ab",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 54
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea3cd431_fe910b2a",
+        "filename": "src/ChooseAccountVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 197,
+        "startChar": 3,
+        "endLine": 197,
+        "endChar": 101
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56d305a0_5a819ec9",
+        "filename": "src/ExportPasswordWC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented code ?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adda6a40_17ce611d",
+        "filename": "src/ExportPasswordWC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "commented comment ?",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 63
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d77c0286_f6bf56cf",
+        "filename": "src/RingWindowController.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 90
+      },
+      "writtenOn": "2018-08-20T16:53:37Z",
+      "side": 1,
+      "message": "accountSettingShouldOpen -\u003e accountSettingsShouldOpen ?",
+      "range": {
+        "startLine": 505,
+        "startChar": 8,
+        "endLine": 505,
+        "endChar": 32
+      },
+      "revId": "bb0fdf81184470bae9abedf1cc60b761b41621f5",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
