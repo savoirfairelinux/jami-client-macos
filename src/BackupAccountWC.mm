@@ -73,24 +73,17 @@
 
 - (IBAction)completeAction:(id)sender
 {
-    auto accounts = accountModel->getAccountList();
-    if(accounts.empty()) {
-        return;
-    }
-    auto selectedAccountID = accounts.at(0);
-    auto finalURL = [path.URL URLByAppendingPathComponent:[@"Account_" stringByAppendingString: @(selectedAccountID.c_str())]];
+    auto finalURL = [path.URL URLByAppendingPathComponent:[@"Account_" stringByAppendingString: @(std::string(self.selectedAccountID + ".gz").c_str())]];
     [self showLoading];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (self.accountModel->exportToFile(selectedAccountID, finalURL.path.UTF8String)) {
-            if (delegateRespondsTo.didCompleteExport) {
-                [((id<BackupAccountDelegate>)self.delegate) didCompleteExportWithPath:finalURL];
-            }
-            [self close];
-            [self.window.sheetParent endSheet: self.window];
-        } else {
-            [self showError];
+    if (self.accountModel->exportToFile(self.selectedAccountID, finalURL.path.UTF8String)) {
+        if (delegateRespondsTo.didCompleteExport) {
+            [((id<BackupAccountDelegate>)self.delegate) didCompleteExportWithPath:finalURL];
         }
-    });
+        [self close];
+        [self.window.sheetParent endSheet: self.window];
+    } else {
+        [self showError];
+    }
 }
 
 - (void)showLoading
@@ -100,6 +93,26 @@
     [progressIndicator setLengthOfLine:5];
     [progressIndicator setInnerMargin:20];
     [super showLoading];
+}
+
+- (IBAction)pathControlSingleClick:(id)sender {
+    [path setURL:[[path clickedPathComponentCell] URL]];
+}
+
+#pragma mark - NSPathControlDelegate
+
+- (void)pathControl:(NSPathControl *)pathControl willPopUpMenu:(NSMenu *)menu {
+    while ([[menu itemArray] count] >= 4) {
+        [menu removeItemAtIndex:3];
+    }
+}
+- (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
+{
+    NSLog(@"willDisplayOpenPanel");
+    [openPanel setAllowsMultipleSelection:NO];
+    [openPanel setResolvesAliases:YES];
+    [openPanel setDirectory:NSHomeDirectory()];
+    [openPanel setDelegate:self];
 }
 
 @end
