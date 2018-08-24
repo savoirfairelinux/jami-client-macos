@@ -398,6 +398,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     BackupAccountWC* passwordWC = [[BackupAccountWC alloc] initWithNibName:@"BackupAccountWindow" bundle: nil accountmodel: self.accountModel];
     passwordWC.delegate = self;
     [passwordWC setAllowFileSelection:NO];
+    passwordWC.selectedAccountID = self.selectedAccountID;
     accountModal = passwordWC;
     [self.view.window beginSheet:passwordWC.window completionHandler:nil];
 }

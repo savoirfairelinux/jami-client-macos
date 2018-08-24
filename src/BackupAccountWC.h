@@ -33,11 +33,12 @@
 
 @end
 
-@interface BackupAccountWC : AbstractLoadingWC <LrcModelsProtocol>
+@interface BackupAccountWC : AbstractLoadingWC <LrcModelsProtocol, NSPathControlDelegate, NSOpenSavePanelDelegate>
 
 /**
  * Allow the NSPathControl of this window to select files or not
  */
 @property (nonatomic) BOOL allowFileSelection;
+@property std::string selectedAccountID;
 
 @end
