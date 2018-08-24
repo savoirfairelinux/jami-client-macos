@@ -87,9 +87,13 @@ DQ
                                 <rect key="frame" x="47" y="74" width="286" height="26"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="S8N-6a-Pll">
                                     <font key="font" metaFont="system"/>
-                                    <url key="url" string="file:///Users/"/>
+                                    <url key="url" string="file:///Downloads"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </pathCell>
+                                <connections>
+                                    <action selector="pathControlSingleClick:" target="-2" id="ATY-Ld-Sok"/>
+                                    <outlet property="delegate" destination="-2" id="m1j-G8-TUK"/>
+                                </connections>
                             </pathControl>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CR7-hP-0ow">
                                 <rect key="frame" x="18" y="128" width="344" height="20"/>
