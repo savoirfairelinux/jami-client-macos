@@ -160,7 +160,6 @@ NSMenuItem* selectedMenuItem;
         }
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
-        [accountsMenu addItem:[NSMenuItem separatorItem]];
     }
 
     // create "add a new account" menu item
@@ -312,7 +311,7 @@ NSMenuItem* selectedMenuItem;
 #pragma mark - NSPopUpButton item selection
 
 - (IBAction)itemChanged:(id)sender {
-    NSInteger row = [(NSPopUpButton *)sender indexOfSelectedItem] / 2;
+    NSInteger row = [(NSPopUpButton *)sender indexOfSelectedItem];
     auto accList = accMdl_->getAccountList();
     if (row >= accList.size())
         return;
