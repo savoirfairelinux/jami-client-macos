@@ -40,6 +40,10 @@
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
 
+@interface NSMenu ()
+- (void) _setHasPadding: (BOOL) pad onEdge: (int) whatEdge;
+@end
+
 @interface ChooseAccountVC () <NSMenuDelegate>
 
 @end
@@ -73,6 +77,11 @@ NSMenuItem* selectedMenuItem;
     profileImage.layer.backgroundColor = [[NSColor ringGreyLight] CGColor];
 
     accountsMenu = [[NSMenu alloc] initWithTitle:@""];
+    if ([accountsMenu respondsToSelector: @selector(_setHasPadding:onEdge:)])
+    {
+        [accountsMenu _setHasPadding: NO onEdge: 1];
+        [accountsMenu _setHasPadding: NO onEdge: 3];
+    }
     [accountsMenu setDelegate:self];
     accountSelectionButton.menu = accountsMenu;
     [accountSelectionButton setAutoenablesItems:NO];
@@ -160,7 +169,6 @@ NSMenuItem* selectedMenuItem;
         }
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
-        [accountsMenu addItem:[NSMenuItem separatorItem]];
     }
 
     // create "add a new account" menu item
@@ -312,7 +320,7 @@ NSMenuItem* selectedMenuItem;
 #pragma mark - NSPopUpButton item selection
 
 - (IBAction)itemChanged:(id)sender {
-    NSInteger row = [(NSPopUpButton *)sender indexOfSelectedItem] / 2;
+    NSInteger row = [(NSPopUpButton *)sender indexOfSelectedItem];
     auto accList = accMdl_->getAccountList();
     if (row >= accList.size())
         return;
