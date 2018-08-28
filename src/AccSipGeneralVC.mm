@@ -75,6 +75,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    [[self view] setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewHeightSizable];
     [photoView setBordered:YES];
     [addProfilePhotoImage setWantsLayer: YES];
     [self setEditingMode:NO];

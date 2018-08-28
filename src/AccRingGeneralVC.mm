@@ -119,6 +119,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     devicesTableView.dataSource = self;
     blockedContactsTableView.delegate = self;
     blockedContactsTableView.dataSource= self;
+    [[self view] setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewHeightSizable];
 }
 
 - (void)viewDidLoad {
