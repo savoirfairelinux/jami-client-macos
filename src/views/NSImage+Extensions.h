@@ -18,6 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#include <string>
 
 @interface NSImage (Extensions)
 
@@ -34,5 +35,6 @@
 - (NSImage *) imageResizeInsideMax:(CGFloat) dimension;
 
 - (NSImage *) cropImageToSize:(NSSize)newSize;
+- (std::string) convertToRingAvatar;
 
 @end

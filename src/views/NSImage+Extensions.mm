@@ -19,6 +19,9 @@
 
 #import "NSImage+Extensions.h"
 
+//Qt
+#import <QPixmap>
+
 @implementation NSImage (Extensions)
 
 + (NSImage *)imageResize:(NSImage*)anImage
@@ -87,9 +90,17 @@
     NSImage *finalImage = [[NSImage alloc] initWithCGImage:croppedImage size:NSZeroSize];
     CFRelease(imageRef);
     CFRelease(croppedImage);
-
     return finalImage;
+}
 
+- (std::string) convertToRingAvatar {
+    int profileImageSize = 400;
+    double newSize = MIN(MIN(self.size.width, self.size.height), profileImageSize);
+    NSImage *outputImage = [self imageResizeInsideMax: newSize];
+    NSData *imageData = [outputImage TIFFRepresentation];
+    auto imageToBytes = QByteArray::fromNSData(imageData).toBase64();
+    std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
+    return imageToString;
 }
 
 @end

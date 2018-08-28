@@ -229,12 +229,10 @@ typedef NS_ENUM(NSInteger, TagViews) {
         auto image = [picker inputImage];
         CGFloat newSize = MIN(image.size.height, image.size.width);
         outputImage = [outputImage cropImageToSize:CGSizeMake(newSize, newSize)];
+        self.accountModel->setAvatar(self.selectedAccountID, [outputImage convertToRingAvatar]);
         [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
         [photoView setBordered:NO];
         [addProfilePhotoImage setHidden:YES];
-        auto imageToBytes = QByteArray::fromNSData([outputImage TIFFRepresentation]).toBase64();
-        std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
-        self.accountModel->setAvatar(self.selectedAccountID, imageToString);
     } else if(!photoView.image) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
