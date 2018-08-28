@@ -86,9 +86,7 @@ NSTimer* timeoutTimer;
                                           }
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
-                                              auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
-                                              std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
-                                              self.accountModel->setAvatar(accountID, imageToString);
+                                              self.accountModel->setAvatar(accountID, [avatarImage convertToRingAvatar]);
                                           }
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
                                           if(![serverField.stringValue isEqualToString:@""]) {
