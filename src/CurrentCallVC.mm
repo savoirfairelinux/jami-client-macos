@@ -257,7 +257,6 @@
     using Status = lrc::api::call::Status;
     switch (currentCall.status) {
         case Status::SEARCHING:
-        case Status::OUTGOING_REQUESTED:
         case Status::CONNECTING:
             [headerContainer setHidden:YES];
             [outgoingPanel setHidden:NO];
@@ -282,7 +281,6 @@
             [self setupConference:currentCall];
             break;*/
         case Status::PAUSED:
-        case Status::PEER_PAUSED:
         case Status::INACTIVE:
         case Status::IN_PROGRESS:
             // change constraints (uncollapse avatar)
@@ -292,7 +290,6 @@
             [headerContainer setHidden:NO];
             break;
         case Status::CONNECTED:
-        case Status::AUTO_ANSWERING:
             break;
         case Status::ENDED:
         case Status::TERMINATING:
