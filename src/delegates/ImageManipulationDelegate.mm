@@ -317,6 +317,22 @@ namespace Interfaces {
         return bArray;
     }
 
+    QByteArray ImageManipulationDelegate::compressedImage(const QByteArray& data)
+    {
+        QImage image;
+        const bool ret = image.loadFromData(QByteArray::fromBase64(data),nil);
+        if (!ret) {
+            qDebug() << "vCard image loading failed";
+            return data;
+        }
+        auto pixmap = QPixmap::fromImage(image);
+        QByteArray bArray;
+        QBuffer buffer(&bArray);
+        buffer.open(QIODevice::WriteOnly);
+        pixmap.scaled({128,128}).save(&buffer, "JPEG", 90);
+        return bArray.toBase64();
+    }
+
     QPixmap ImageManipulationDelegate::drawDefaultUserPixmap(const QSize& size,  const char color, const char letter) {
         // We start with a transparent avatar
         QPixmap avatar(size);

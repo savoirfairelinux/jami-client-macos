@@ -246,9 +246,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                           //set account avatar
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
-                                              auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
-                                              std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
-                                              self.accountModel->setAvatar(accountID, imageToString);
+                                              self.accountModel->setAvatar(accountID, [avatarImage convertToRingAvatar]);
                                           }
                                           //register username
                                           if (self.registeredName && ![self.registeredName isEqualToString:@""]) {
