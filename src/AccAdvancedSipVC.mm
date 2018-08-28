@@ -97,6 +97,8 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
     [maxAudioRTPRange setTag:MAXAUDIO_TAG];
     [minVideoRTPRange setTag:MINVIDEO_TAG];
     [maxVideoRTPRange setTag:MAXVIDEO_TAG];
+    [[self view] setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewHeightSizable];
+
 }
 
 -(void)viewDidLoad {

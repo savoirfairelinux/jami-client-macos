@@ -166,13 +166,13 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uj-O6-qH5">
+                <scrollView autohidesScrollers="YES" horizontalLineScroll="52" horizontalPageScroll="10" verticalLineScroll="52" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uj-O6-qH5">
                     <rect key="frame" x="20" y="120" width="580" height="150"/>
                     <clipView key="contentView" drawsBackground="NO" id="wA7-kx-iIb">
                         <rect key="frame" x="1" y="1" width="578" height="148"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="55" rowSizeStyle="automatic" viewBased="YES" id="Zw2-AJ-V23">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="50" rowSizeStyle="automatic" viewBased="YES" id="Zw2-AJ-V23">
                                 <rect key="frame" x="0.0" y="0.0" width="578" height="148"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -249,7 +249,7 @@
                                                 </constraints>
                                             </tableCellView>
                                             <customView identifier="HoverRowView" id="CPL-go-ebR" customClass="HoverTableRowView">
-                                                <rect key="frame" x="1" y="53" width="575" height="55"/>
+                                                <rect key="frame" x="1" y="53" width="575" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </customView>
                                         </prototypeCellViews>
@@ -432,7 +432,7 @@
                                                 </constraints>
                                             </tableCellView>
                                             <customView identifier="HoverRowView" id="UPU-qX-wdn" customClass="HoverTableRowView">
-                                                <rect key="frame" x="1" y="52" width="575" height="55"/>
+                                                <rect key="frame" x="1" y="52" width="575" height="52"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </customView>
                                         </prototypeCellViews>
