@@ -252,9 +252,10 @@ NSMenuItem* selectedMenuItem;
 -(NSString*) itemTitleForAccount:(const lrc::api::account::Info&) account {
     NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    if(![alias isEqualToString:userNameString]) {
-        alias = [NSString stringWithFormat: @"%@\n", alias];
+    if([alias isEqualToString:userNameString] || [userNameString length] == 0) {
+        return alias;
     }
+    alias = [NSString stringWithFormat: @"%@\n", alias];
     return [alias stringByAppendingString:userNameString];
 }
 
