@@ -3,7 +3,7 @@
 "2cB-dz-KYg.ibShadowedToolTip" = "Lerak";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
-"9e8-ji-QId.ibShadowedToolTip" = "Join call";
+"9e8-ji-QId.ibShadowedToolTip" = "Hívások csatlakozása";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
 "ChW-kg-Sja.ibShadowedToolTip" = "Átvitel";
@@ -15,7 +15,7 @@
 "Dqv-um-UUk.title" = "URI";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
-"EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
+"EA3-Q5-Dyj.placeholderString" = "Bejövő megjelenítési név";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
 "G0w-c3-9pJ.ibShadowedToolTip" = "Felvétel";
@@ -36,19 +36,19 @@
 "VVL-A4-r7n.ibShadowedToolTip" = "Felvétel";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
-"X0W-vv-xua.title" = "wants to talk to you!";
+"X0W-vv-xua.title" = "beszélni akar Önnel!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
 "anb-Y8-JQi.ibShadowedToolTip" = "Tartás";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
+"fmp-x4-Pef.ibShadowedToolTip" = "Csevegés be-/kikapcsolása";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
-"kIZ-mf-moM.ibShadowedToolTip" = "Add participant";
+"kIZ-mf-moM.ibShadowedToolTip" = "Résztvevő hozzáadása";
 
 /* Class = "NSButtonCell"; title = "Button"; ObjectID = "kxH-yM-TLd"; */
-"kxH-yM-TLd.title" = "Button";
+"kxH-yM-TLd.title" = "Gomb";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
 "mc3-HV-hek.ibShadowedToolTip" = "Lerak";
@@ -57,13 +57,13 @@
 "oRa-pS-HN2.ibShadowedToolTip" = "Felvétel";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
-"osk-LS-0Qg.placeholderString" = "Person name";
+"osk-LS-0Qg.placeholderString" = "Személy név";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Pick up";
+"qgD-3D-nD5.ibShadowedToolTip" = "Felvenni";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
-"tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
+"tQl-cT-0Lb.ibShadowedToolTip" = "Hang némítása";
 
 /* Class = "NSTextFieldCell"; title = "Ignore"; ObjectID = "tjM-py-p4V"; */
 "tjM-py-p4V.title" = "Figyelmen kívül hagy";
@@ -75,7 +75,7 @@
 "wRO-X4-7IU.title" = "Válaszol";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
-"yZ6-1A-ZLT.title" = "wants to talk with you!";
+"yZ6-1A-ZLT.title" = "beszélni akar Önnel!";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
 "zsO-T7-9yi.placeholderString" = "Idő";

@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long.";
+"0qE-Sz-hdc.title" = "Ezt bejelölve, regisztrál egy egyedi felhasználónevet a Ring hálózaton. Az emberek ezt a Ring azonosítója (amely 40 karakter hosszú) helyett használhatják, hogy elérjék Önt.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Kötelező*";
@@ -21,7 +21,7 @@
 "fEY-eO-HwI.title" = "Ismételje meg a jelszavát";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
-"gEy-ak-Cgq.placeholderString" = "Enter name";
+"gEy-ak-Cgq.placeholderString" = "Név megadása";
 
 /* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
 "gki-BR-jc3.title" = "Saját profil létrehozása";
@@ -36,7 +36,7 @@
 "v7f-52-GJA.title" = "Mégse";
 
 /* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
-"zUH-kc-cik.title" = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.";
+"zUH-kc-cik.title" = "A jelszónak legalább 6 karakterből kell állnia. Ez a jelszó a fiókadatainak titkosítására lesz használva és arra, hogy más eszközöket kapcsoljon a fiókjához.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
 "zfA-n9-V4X.title" = "Létrehozás";
