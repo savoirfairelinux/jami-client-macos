@@ -69,7 +69,6 @@
     [newAccountWC setDelegate:self];
     [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
     [self showChooseWithCancelButton:isCancelable andAdvanced: withAdvanced];
-    self.window.appearance = [NSAppearance appearanceNamed:NSAppearanceNameVibrantLight];
 }
 
 - (void)removeSubviews

@@ -39,12 +39,12 @@
 /**
  * KVO with the registeredNameField
  */
-@property (nonatomic, weak)NSString* registeredName;
+//@property (nonatomic, weak)NSString* registeredName;
 
 /**
  * KVO with the passwordField
  */
-@property (nonatomic, weak)NSString* password;
+//@property (nonatomic, weak)NSString* password;
 
 /**
  * KVO validators for the UI
