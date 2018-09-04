@@ -33,8 +33,20 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
                     </buttonCell>
+                </button>
+                <button verticalHuggingPriority="750" alphaValue="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="h0K-g2-bgQ" customClass="HoverButton">
+                    <rect key="frame" x="155" y="287" width="91" height="90"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" refusesFirstResponder="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Ded-FV-C1n">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="editPhoto:" target="-2" id="6Cy-I5-H1E"/>
+                        <action selector="editPhoto:" target="-2" id="ZqF-dw-9gc"/>
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vGN-UO-vCk">
@@ -148,6 +160,8 @@ Gw
                 </textField>
             </subviews>
             <constraints>
+                <constraint firstItem="h0K-g2-bgQ" firstAttribute="top" secondItem="gTr-1R-5qI" secondAttribute="top" id="3p7-UD-eti"/>
+                <constraint firstItem="h0K-g2-bgQ" firstAttribute="bottom" secondItem="gTr-1R-5qI" secondAttribute="bottom" id="9PF-KD-nWz"/>
                 <constraint firstItem="k1Y-Gu-pHf" firstAttribute="top" secondItem="AbV-oR-qrC" secondAttribute="top" id="BAX-Ro-h80"/>
                 <constraint firstItem="SUD-CK-UdK" firstAttribute="bottom" secondItem="lgy-cp-ZAK" secondAttribute="bottom" id="CUL-RU-jNp"/>
                 <constraint firstItem="SyG-hW-jMO" firstAttribute="top" secondItem="ZIg-7T-R16" secondAttribute="bottom" constant="20" id="CqL-Zc-y07"/>
@@ -158,6 +172,7 @@ Gw
                 <constraint firstAttribute="trailing" secondItem="SyG-hW-jMO" secondAttribute="trailing" constant="20" id="Meg-na-Q6u"/>
                 <constraint firstAttribute="trailing" secondItem="H2H-Nj-iaA" secondAttribute="trailing" constant="20" id="N1z-aK-mCv"/>
                 <constraint firstItem="D0T-VV-iYE" firstAttribute="bottom" secondItem="ltT-Ku-8cT" secondAttribute="bottom" id="OJd-Jr-GTq"/>
+                <constraint firstItem="h0K-g2-bgQ" firstAttribute="trailing" secondItem="gTr-1R-5qI" secondAttribute="trailing" id="P8V-b6-9vP"/>
                 <constraint firstItem="5bs-k5-y85" firstAttribute="bottom" secondItem="KhB-Ik-Njv" secondAttribute="bottom" id="Ppo-F5-NZ1"/>
                 <constraint firstItem="SUD-CK-UdK" firstAttribute="leading" secondItem="5bs-k5-y85" secondAttribute="leading" id="QLI-6r-1Am"/>
                 <constraint firstAttribute="trailing" secondItem="D0T-VV-iYE" secondAttribute="trailing" constant="20" id="TB2-A1-kcZ"/>
@@ -185,6 +200,7 @@ Gw
                 <constraint firstItem="lgy-cp-ZAK" firstAttribute="top" secondItem="ltT-Ku-8cT" secondAttribute="bottom" constant="20" id="vOg-6e-IOQ"/>
                 <constraint firstItem="ltT-Ku-8cT" firstAttribute="leading" secondItem="AbV-oR-qrC" secondAttribute="leading" constant="20" id="voL-dH-p00"/>
                 <constraint firstItem="vGN-UO-vCk" firstAttribute="top" secondItem="gTr-1R-5qI" secondAttribute="bottom" constant="20" id="xN0-Qd-on6"/>
+                <constraint firstItem="h0K-g2-bgQ" firstAttribute="leading" secondItem="gTr-1R-5qI" secondAttribute="leading" id="xbD-Wf-3Ry"/>
                 <constraint firstAttribute="trailing" secondItem="vGN-UO-vCk" secondAttribute="trailing" constant="80" id="xrR-Fc-y0P"/>
                 <constraint firstItem="KhB-Ik-Njv" firstAttribute="top" secondItem="SyG-hW-jMO" secondAttribute="bottom" constant="20" id="yb8-g2-sOW"/>
             </constraints>
