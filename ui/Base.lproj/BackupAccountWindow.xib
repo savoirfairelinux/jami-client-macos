@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BackupAccountWC">
@@ -24,17 +25,17 @@
             <rect key="contentRect" x="196" y="240" width="380" height="168"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="380" height="168"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="158"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="XMQ-jJ-yqG">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="168"/>
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="158"/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="3Jv-gr-8Hf">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="168"/>
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="158"/>
                         <subviews>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ovf-4O-7LZ" customClass="ITProgressIndicator">
-                                <rect key="frame" x="155" y="49" width="70" height="70"/>
+                                <rect key="frame" x="155" y="44" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="aK6-EW-mJE"/>
                                     <constraint firstAttribute="height" constant="70" id="xfx-Hb-kNz"/>
@@ -47,10 +48,10 @@
                         </constraints>
                     </customView>
                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ty1-sj-tT6">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="168"/>
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="158"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="G1N-th-ZtP">
-                                <rect key="frame" x="33" y="76" width="314" height="17"/>
+                                <rect key="frame" x="33" y="71" width="314" height="17"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="An error occured during the backup" placeholderString="" id="e7n-Ev-bK7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -81,10 +82,10 @@ DQ
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="xUT-yB-g8Q">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="168"/>
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="158"/>
                         <subviews>
                             <pathControl verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ww6-ha-GhI">
-                                <rect key="frame" x="47" y="74" width="286" height="26"/>
+                                <rect key="frame" x="47" y="62" width="286" height="26"/>
                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="S8N-6a-Pll">
                                     <font key="font" metaFont="system"/>
                                     <url key="url" string="file:///Downloads"/>
@@ -96,12 +97,23 @@ DQ
                                 </connections>
                             </pathControl>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CR7-hP-0ow">
-                                <rect key="frame" x="18" y="128" width="344" height="20"/>
+                                <rect key="frame" x="33" y="101" width="329" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Nxf-vc-UNz"/>
+                                    <constraint firstAttribute="height" constant="16" id="0Si-aD-Fbw"/>
                                 </constraints>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Choose where to backup your account. " placeholderString="" id="KYZ-TW-44Y">
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Choose where to backup your account. " placeholderString="" id="KYZ-TW-44Y">
                                     <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YtM-Br-yAx">
+                                <rect key="frame" x="33" y="122" width="329" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="rGH-FQ-PqM"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Export Account" id="MYh-XG-Mdn">
+                                    <font key="font" metaFont="systemSemibold" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -120,7 +132,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yf1-T3-fOf">
-                                <rect key="frame" x="217" y="13" width="82" height="32"/>
+                                <rect key="frame" x="225" y="13" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cSU-aD-OwX">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -134,15 +146,19 @@ Gw
                             </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="CR7-hP-0ow" firstAttribute="top" secondItem="YtM-Br-yAx" secondAttribute="bottom" constant="5" id="6VO-0G-1nw"/>
+                            <constraint firstItem="CR7-hP-0ow" firstAttribute="leading" secondItem="YtM-Br-yAx" secondAttribute="leading" id="7me-Cp-onx"/>
                             <constraint firstItem="ww6-ha-GhI" firstAttribute="leading" secondItem="xUT-yB-g8Q" secondAttribute="leading" constant="50" id="94f-3j-Ecs"/>
-                            <constraint firstItem="CR7-hP-0ow" firstAttribute="top" secondItem="xUT-yB-g8Q" secondAttribute="top" constant="20" id="Gar-kL-wdU"/>
-                            <constraint firstItem="oXB-Be-LaB" firstAttribute="leading" secondItem="Yf1-T3-fOf" secondAttribute="trailing" constant="20" id="Tsc-ay-3Q9"/>
+                            <constraint firstAttribute="trailing" secondItem="YtM-Br-yAx" secondAttribute="trailing" constant="20" id="Bch-2U-PFS"/>
+                            <constraint firstItem="YtM-Br-yAx" firstAttribute="leading" secondItem="xUT-yB-g8Q" secondAttribute="leading" constant="35" id="Qm2-ht-q92"/>
+                            <constraint firstItem="oXB-Be-LaB" firstAttribute="leading" secondItem="Yf1-T3-fOf" secondAttribute="trailing" constant="12" id="Tsc-ay-3Q9"/>
+                            <constraint firstItem="YtM-Br-yAx" firstAttribute="top" secondItem="xUT-yB-g8Q" secondAttribute="top" constant="20" id="Wmj-Hw-Qf9"/>
                             <constraint firstAttribute="trailing" secondItem="oXB-Be-LaB" secondAttribute="trailing" constant="20" id="aTI-SX-1jI"/>
-                            <constraint firstItem="CR7-hP-0ow" firstAttribute="leading" secondItem="xUT-yB-g8Q" secondAttribute="leading" constant="20" id="at8-jS-cPG"/>
+                            <constraint firstItem="oXB-Be-LaB" firstAttribute="top" secondItem="ww6-ha-GhI" secondAttribute="bottom" constant="25" id="gqC-9x-QYa"/>
                             <constraint firstAttribute="trailing" secondItem="ww6-ha-GhI" secondAttribute="trailing" constant="50" id="jfu-vK-fXY"/>
                             <constraint firstAttribute="trailing" secondItem="CR7-hP-0ow" secondAttribute="trailing" constant="20" id="lu3-Jz-6TR"/>
                             <constraint firstAttribute="bottom" secondItem="Yf1-T3-fOf" secondAttribute="bottom" constant="20" id="oCq-S8-TrF"/>
-                            <constraint firstItem="ww6-ha-GhI" firstAttribute="top" secondItem="CR7-hP-0ow" secondAttribute="bottom" constant="30" id="tca-nk-lN4"/>
+                            <constraint firstItem="ww6-ha-GhI" firstAttribute="top" secondItem="CR7-hP-0ow" secondAttribute="bottom" constant="15" id="tca-nk-lN4"/>
                             <constraint firstAttribute="bottom" secondItem="oXB-Be-LaB" secondAttribute="bottom" constant="20" id="ueM-rT-B60"/>
                         </constraints>
                     </customView>
