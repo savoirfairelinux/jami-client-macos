@@ -63,15 +63,17 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
     [ivLookupResult setHidden:YES];
     [indicatorLookupResult setHidden:YES];
-    self.password = @"";
-    self.registeredName = @"";
+   // self.password = @"";
+    //self.registeredName = @"";
+   // [registeredNameField setPlaceholderString:@"Username..."];
+  //  [passwordField setPlaceholderString:@"Password..."];
 }
 
 #pragma mark - Username validation delegate methods
 
 - (BOOL)userNameAvailable
 {
-    return (self.registeredName.length > 0 && self.isUserNameAvailable);
+    return (registeredNameField.stringValue.length > 0 && self.isUserNameAvailable);
 }
 
 - (void)showLookUpAvailable:(BOOL)available andText:(NSString *)message
@@ -193,7 +195,7 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
     [self showLoading];
     [self setCallback];
 
-    self.isUserNameAvailable = self.accountModel->registerName(self.selectedAccountID, [self.password UTF8String], [self.registeredName UTF8String]);
+    self.isUserNameAvailable = self.accountModel->registerName(self.selectedAccountID, [passwordField.stringValue UTF8String], [registeredNameField.stringValue UTF8String]);
     if (!self.isUserNameAvailable) {
         NSLog(@"Could not initialize registerName operation");
         QObject::disconnect(registrationEnded);
@@ -212,7 +214,7 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
                                              switch(status)
                                              {
                                                  case lrc::api::account::RegisterNameStatus::SUCCESS: {
-                                                     [self.delegate didRegisterName:  self.registeredName withSuccess: YES];
+                                                     [self.delegate didRegisterName:  registeredNameField.stringValue withSuccess: YES];
                                                      break;
                                                  }
                                                  case lrc::api::account::RegisterNameStatus::INVALID_NAME:

@@ -25,8 +25,10 @@
 @implementation PasswordChangeWC
 {
     __unsafe_unretained IBOutlet NSSecureTextField *oldPassword;
+    __unsafe_unretained IBOutlet NSTextField *oldPasswordTitle;
     __unsafe_unretained IBOutlet NSSecureTextField *newPassword;
     __unsafe_unretained IBOutlet NSSecureTextField *repeatedPassword;
+    __unsafe_unretained IBOutlet NSLayoutConstraint *newPasswordTopConstraint;
 
     __unsafe_unretained IBOutlet NSImageView *repeatPasswordValid;
 
@@ -51,9 +53,9 @@
     [super windowDidLoad];
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     BOOL hasPassword = accountProperties.archiveHasPassword;
-
-    [oldPassword setEnabled:hasPassword];
-    [oldPassword setPlaceholderString:(hasPassword)?@"":NSLocalizedString(@"Account has no password", @"No password on this account text field placeholder")];
+    [oldPassword setHidden: !hasPassword];
+    [oldPasswordTitle setHidden: !hasPassword];
+    newPasswordTopConstraint.constant = hasPassword ? 15.0 : -oldPasswordTitle.frame.size.height;
 }
 
 -(IBAction)accept:(id)sender
@@ -67,6 +69,7 @@
         [self close];
     } else {
         [oldPassword setStringValue:@""];
+        [oldPassword setPlaceholderString:@"Enter your old password"];
         [wrongPasswordPopover showRelativeToRect:oldPassword.visibleRect ofView:oldPassword preferredEdge:NSMinYEdge];
     }
 }
