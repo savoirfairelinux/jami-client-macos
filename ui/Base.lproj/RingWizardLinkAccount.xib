@@ -65,13 +65,14 @@ DQ
             <point key="canvasLocation" x="-12" y="401"/>
         </view>
         <view id="jR6-WY-o19" userLabel="Second step">
-            <rect key="frame" x="0.0" y="0.0" width="453" height="341"/>
+            <rect key="frame" x="0.0" y="0.0" width="453" height="357"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BFR-6z-UlF">
-                    <rect key="frame" x="20" y="119" width="175" height="22"/>
+                    <rect key="frame" x="20" y="135" width="175" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="175" id="DaY-ui-oUD"/>
+                        <constraint firstAttribute="height" constant="22" id="tvw-MZ-CPe"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="" bezelStyle="round" id="5pW-QD-iHi">
                         <font key="font" metaFont="system"/>
@@ -88,8 +89,9 @@ DQ
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VeW-tY-k3K" customClass="NSSecureTextField">
-                    <rect key="frame" x="127" y="50" width="200" height="22"/>
+                    <rect key="frame" x="127" y="66" width="200" height="22"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="22" id="CbP-8C-NGV"/>
                         <constraint firstAttribute="width" constant="200" id="Ro2-GV-HNp"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="" bezelStyle="round" id="9k8-c8-GFI" customClass="NSSecureTextFieldCell">
@@ -107,7 +109,7 @@ DQ
                     </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nms-13-N3F">
-                    <rect key="frame" x="18" y="151" width="95" height="17"/>
+                    <rect key="frame" x="18" y="167" width="95" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Enter your PIN" id="3ik-rY-Gig">
                         <font key="font" metaFont="systemSemibold" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -115,7 +117,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ODM-Sx-sdp">
-                    <rect key="frame" x="22" y="188" width="410" height="153"/>
+                    <rect key="frame" x="22" y="204" width="410" height="153"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="406" id="FO7-qh-6vk"/>
                     </constraints>
@@ -129,7 +131,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-mP-zJd">
-                    <rect key="frame" x="125" y="82" width="220" height="17"/>
+                    <rect key="frame" x="125" y="98" width="220" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Enter your Ring account password" id="U2K-fu-INc">
                         <font key="font" metaFont="systemSemibold" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -137,7 +139,7 @@ DQ
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tMy-fd-gBJ">
-                    <rect key="frame" x="213" y="119" width="27" height="17"/>
+                    <rect key="frame" x="213" y="135" width="27" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="OR" id="1NY-Yu-wH1">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -145,11 +147,8 @@ DQ
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gR3-2L-BlK" userLabel="File button">
-                    <rect key="frame" x="252" y="112" width="187" height="32"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="175" id="kGT-O6-tWw"/>
-                    </constraints>
-                    <buttonCell key="cell" type="push" title="Select Account" bezelStyle="rounded" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJE-cy-nfQ">
+                    <rect key="frame" x="252" y="128" width="187" height="33"/>
+                    <buttonCell key="cell" type="push" title="Select archive" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJE-cy-nfQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -174,7 +173,7 @@ Gw
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJh-69-hJQ">
-                    <rect key="frame" x="256" y="151" width="98" height="17"/>
+                    <rect key="frame" x="256" y="167" width="98" height="17"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Import Archive" id="kXa-FL-Enf">
                         <font key="font" metaFont="systemSemibold" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -207,16 +206,19 @@ DQ
                 </button>
             </subviews>
             <constraints>
+                <constraint firstItem="gR3-2L-BlK" firstAttribute="bottom" secondItem="BFR-6z-UlF" secondAttribute="bottom" id="2sI-hp-gKD"/>
                 <constraint firstItem="gR3-2L-BlK" firstAttribute="leading" secondItem="XJh-69-hJQ" secondAttribute="leading" id="3Sb-xe-LzJ"/>
+                <constraint firstItem="oxG-mq-q2J" firstAttribute="top" secondItem="VeW-tY-k3K" secondAttribute="bottom" constant="25" id="Dmh-y9-SA3"/>
                 <constraint firstItem="XJh-69-hJQ" firstAttribute="bottom" secondItem="Nms-13-N3F" secondAttribute="bottom" id="Ea3-e7-Axb"/>
                 <constraint firstItem="Nms-13-N3F" firstAttribute="top" secondItem="ODM-Sx-sdp" secondAttribute="bottom" constant="20" id="FQZ-zG-nLF"/>
+                <constraint firstItem="gR3-2L-BlK" firstAttribute="width" secondItem="BFR-6z-UlF" secondAttribute="width" id="GyZ-Y9-jZQ"/>
                 <constraint firstItem="ODM-Sx-sdp" firstAttribute="centerX" secondItem="jR6-WY-o19" secondAttribute="centerX" id="IEF-Dw-yyn"/>
                 <constraint firstItem="VeW-tY-k3K" firstAttribute="top" secondItem="AGs-mP-zJd" secondAttribute="bottom" constant="10" id="KLm-ry-Wv8"/>
                 <constraint firstAttribute="bottom" secondItem="xmI-fH-GpH" secondAttribute="bottom" constant="20" id="RGd-y5-GmA"/>
                 <constraint firstItem="VeW-tY-k3K" firstAttribute="centerX" secondItem="jR6-WY-o19" secondAttribute="centerX" id="S61-lS-dGB"/>
-                <constraint firstItem="gR3-2L-BlK" firstAttribute="bottom" secondItem="BFR-6z-UlF" secondAttribute="bottom" id="UvD-Qw-h3C"/>
                 <constraint firstItem="BFR-6z-UlF" firstAttribute="leading" secondItem="Nms-13-N3F" secondAttribute="leading" id="VNR-FF-Ym8"/>
                 <constraint firstAttribute="trailing" secondItem="gR3-2L-BlK" secondAttribute="trailing" constant="20" id="ZEt-dR-0c6"/>
+                <constraint firstItem="gR3-2L-BlK" firstAttribute="height" secondItem="BFR-6z-UlF" secondAttribute="height" id="bHw-n5-uLo"/>
                 <constraint firstItem="BFR-6z-UlF" firstAttribute="leading" secondItem="jR6-WY-o19" secondAttribute="leading" constant="20" id="bJx-Di-hd1"/>
                 <constraint firstItem="gR3-2L-BlK" firstAttribute="leading" secondItem="tMy-fd-gBJ" secondAttribute="trailing" constant="20" id="bph-Lh-VGW"/>
                 <constraint firstItem="xmI-fH-GpH" firstAttribute="leading" secondItem="oxG-mq-q2J" secondAttribute="trailing" constant="20" id="dHF-fR-9e9"/>
@@ -229,7 +231,7 @@ DQ
                 <constraint firstAttribute="trailing" secondItem="xmI-fH-GpH" secondAttribute="trailing" constant="20" id="zcJ-ZX-QDZ"/>
                 <constraint firstAttribute="bottom" secondItem="oxG-mq-q2J" secondAttribute="bottom" constant="20" id="zcc-T5-hHj"/>
             </constraints>
-            <point key="canvasLocation" x="629" y="438.5"/>
+            <point key="canvasLocation" x="628.5" y="449.5"/>
         </view>
         <customView id="1O6-eM-Cg5">
             <rect key="frame" x="0.0" y="0.0" width="355" height="60"/>
