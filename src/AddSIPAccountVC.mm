@@ -133,6 +133,10 @@ NSTimer* timeoutTimer;
                 returnCode:(NSInteger) code
                contextInfo:(void*) contextInfo
 {
+    //do nothing when editing canceled 
+    if (code == 0) {
+        return;
+    }
     if (auto outputImage = [picker outputImage]) {
         [photoView setBordered:NO];
         auto image = [picker inputImage];
