@@ -225,6 +225,10 @@ typedef NS_ENUM(NSInteger, TagViews) {
                 returnCode:(NSInteger) code
                contextInfo:(void*) contextInfo
 {
+    //do nothing when editing canceled 
+    if (code == 0) {
+        return;
+    }
     if (auto outputImage = [picker outputImage]) {
         auto image = [picker inputImage];
         CGFloat newSize = MIN(image.size.height, image.size.width);
