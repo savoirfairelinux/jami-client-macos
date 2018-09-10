@@ -17,7 +17,7 @@
 "Clear conversation" = "Clear conversation";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Заблокировать контакт";
 
 /* Text shown to the user */
 "Alias : " = "Псевдоним:";
@@ -168,4 +168,7 @@
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+
+/* export account button title */
+"Select archive" = "Select archive";
 
