@@ -17,6 +17,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <Cocoa/Cocoa.h>
+#import <string>
 
 @protocol CallDelegate;
 @protocol CallDelegate
@@ -45,5 +46,7 @@
  *  Delegate to inform about desire to move
  */
 @property (nonatomic) id <CallDelegate> callDelegate;
+
+@property std::string callId;
 
 @end
