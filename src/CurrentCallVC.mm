@@ -160,6 +160,7 @@
     if(currentCall.isAudioOnly) {
         muteVideoButton.image = [NSImage imageNamed:@"ic_action_mute_video.png"];
     }
+    videoView.callId = callUid;
 }
 
 - (void)awakeFromNib
