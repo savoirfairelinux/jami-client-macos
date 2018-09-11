@@ -23,7 +23,6 @@
 #import <QItemSelectionModel>
 #import <QAbstractProxyModel>
 #import <QUrl>
-
 #import <video/configurationproxy.h>
 #import <video/sourcemodel.h>
 #import <media/video.h>
@@ -162,7 +161,8 @@
     //check to see if we can accept the data
     return conforms;
 }
-
+#if 0
+// TODO: add file as a source
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
     /*------------------------------------------------------
@@ -170,7 +170,7 @@
      --------------------------------------------------------*/
     if ( [sender draggingSource] != self ) {
         NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-        if (auto current = CallModel::instance().selectedCall()) {
+        if (auto current = CallModel::instance().getCall(QString::fromUtf8(self.callId.c_str()))) {
             if (auto outVideo = current->firstMedia<media::Video>(media::Media::Direction::OUT)) {
                 outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
                 return YES;
@@ -180,6 +180,7 @@
 
     return NO;
 }
+#endif
 
 - (void)showContextualMenu:(NSEvent *)theEvent {
 
@@ -189,12 +190,18 @@
         Video::Device* device = Video::DeviceModel::instance().devices()[i];
         [contextualMenu insertItemWithTitle:device->name().toNSString() action:@selector(switchInput:) keyEquivalent:@"" atIndex:i];
     }
-
+    [contextualMenu insertItemWithTitle:NSLocalizedString(@"Share screen", @"Contextual menu entry")
+                                 action:@selector(captureScreen:)
+                          keyEquivalent:@""
+                                atIndex:contextualMenu.itemArray.count];
+#if 0
+// TODO: add file as a source
     [contextualMenu addItem:[NSMenuItem separatorItem]];
     [contextualMenu insertItemWithTitle:NSLocalizedString(@"Choose file", @"Contextual menu entry")
                                  action:@selector(chooseFile:)
                           keyEquivalent:@""
                                 atIndex:contextualMenu.itemArray.count];
+#endif
 
     [NSMenu popUpContextMenu:contextualMenu withEvent:theEvent forView:self];
 }
@@ -216,27 +223,33 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     if([theEvent clickCount] == 1 && shouldAcceptInteractions) {
-        if(!contextualMenu)
-            [self performSelector:@selector(showContextualMenu:) withObject:theEvent afterDelay:[NSEvent doubleClickInterval]];
-        else
-            contextualMenu = nil;
-    }
-    else if([theEvent clickCount] == 2)
-    {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self]; // cancel showContextualMenu
-        if(self.callDelegate) {
-            [self.callDelegate callShouldToggleFullScreen];
-        }
+        [self performSelector:@selector(showContextualMenu:) withObject:theEvent afterDelay:[NSEvent doubleClickInterval]];
+    } else if([theEvent clickCount] == 2 && self.callDelegate) {
+        [self.callDelegate callShouldToggleFullScreen];
     }
 }
 
 - (void) switchInput:(NSMenuItem*) sender
 {
     int index = [contextualMenu indexOfItem:sender];
-    if (auto current = CallModel::instance().selectedCall()) {
+    if (auto current = CallModel::instance().getCall(QString::fromUtf8(self.callId.c_str()))) {
+    //if (auto current = CallModel::instance().getActiveCalls()[0]) {
         if (auto outVideo = current->firstMedia<media::Video>(media::Media::Direction::OUT)) {
             outVideo->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
+        }
+    }
+}
+
+- (void) captureScreen:(NSMenuItem*) sender
+{
+    if (auto current = CallModel::instance().getCall(QString::fromUtf8(self.callId.c_str()))) {
+        if (auto outVideo = current->firstMedia<media::Video>(media::Media::Direction::OUT)) {
+            NSScreen *mainScreen = [NSScreen mainScreen];
+            NSRect screenFrame = mainScreen.frame;
+            QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
+            outVideo->sourceModel()->setDisplay(0, captureRect);
         }
     }
 }
@@ -259,7 +272,7 @@
     [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
-            if (auto current = CallModel::instance().selectedCall()) {
+            if (auto current = CallModel::instance().getCall(QString::fromUtf8(self.callId.c_str()))) {
                 if (auto outVideo = current->firstMedia<media::Video>(media::Media::Direction::OUT)) {
                     outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
                 }
