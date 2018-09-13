@@ -35,4 +35,6 @@
 
 - (NSImage *) cropImageToSize:(NSSize)newSize;
 
+- (NSImage *)roundCornersImageCornerRadius:(NSInteger) radius;
+
 @end

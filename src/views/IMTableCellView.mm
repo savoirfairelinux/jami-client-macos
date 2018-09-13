@@ -20,6 +20,9 @@
 
 #import "IMTableCellView.h"
 #import "NSColor+RingTheme.h"
+#import <CoreGraphics/CoreGraphics.h>
+#import <QuartzCore/QuartzCore.h>
+
 
 @implementation IMTableCellView {
     uint64_t interaction;
@@ -57,8 +60,6 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [self.msgView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.msgBackground setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.msgView setEditable:NO];
-    [(NSButtonCell*)transferedImage.cell setShowsStateBy:NSNoCellMask];
-    [(NSButtonCell*)transferedImage.cell setHighlightsBy:NSNoCellMask];
     acceptButton.image = [NSColor image: [NSImage imageNamed:@"ic_file_upload.png"] tintedWithColor:[NSColor greenSuccessColor]];
     declineButton.image = [NSColor image: [NSImage imageNamed:@"ic_action_cancel.png"] tintedWithColor:[NSColor redColor]];
 }
@@ -128,6 +129,22 @@ NSString* const TIME_BOX_HEIGHT = @"34";
                                     metrics:nil                                                                          views:NSDictionaryOfVariableBindings(transferedImage)];
     NSArray* constraints =[constraintsHorizontal arrayByAddingObjectsFromArray:constraintsVertical] ;
     [NSLayoutConstraint activateConstraints:constraintsHorizontal];
+}
+
+- (void) updateImageConstraintWithMax: (CGFloat) maxDimension {
+    CGFloat widthScaleFactor = maxDimension / self.transferedImage.image.size.width;
+    CGFloat heightScaleFactor = maxDimension / self.transferedImage.image.size.height;
+    NSSize size = NSZeroSize;
+    if((widthScaleFactor >= 0) && (heightScaleFactor >= 0)) {
+        size.width = transferedImage.image.size.width;
+        size.height = transferedImage.image.size.height;
+
+    } else {
+        CGFloat scale = MIN(widthScaleFactor, heightScaleFactor);
+        size.width = transferedImage.image.size.width * scale;
+        size.height = transferedImage.image.size.height * scale;
+    }
+    [self updateImageConstraint:size.width andHeight: size.height];
 }
 
 - (void) invalidateImageConstraints {

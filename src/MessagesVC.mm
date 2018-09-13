@@ -356,10 +356,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             image = [self getImageForFilePath:[self getDataTransferPath:interactionID] size:MAX_TRANSFERED_IMAGE_SIZE];
         }
         if(image != nil) {
-            result.transferedImage.image = [image roundCorners:14];
-            [result updateImageConstraint:image.size.width andHeight:image.size.height];
-            [result.transferedImage setAction:@selector(imagePreview:)];
-            [result.transferedImage setTarget:self];
+            result.transferedImage.image = image;
+            [result updateImageConstraintWithMax: MAX_TRANSFERED_IMAGE_SIZE];
+            [result.openImagebutton setAction:@selector(imagePreview:)];
+            [result.openImagebutton setTarget:self];
         }
     }
     [result setupForInteraction:interactionID];
@@ -576,9 +576,21 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 -(NSImage*) getImageForFilePath: (NSString *) path size:(CGFloat)size {
     if (path.length <= 0) {return nil;}
     if (![[NSFileManager defaultManager] fileExistsAtPath: path]) {return nil;}
-    NSImage* transferedImage = [[NSImage alloc] initWithContentsOfFile: path];
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:path];
+    NSImage *transferedImage = [[NSImage alloc] initWithData: data];
+   NSArray *reps = [transferedImage representations];
+    for (NSBitmapImageRep* rep in reps) {
+        NSNumber *number = [rep valueForProperty: NSImageFrameCount];
+       // NSNumber *number = [rep valueForKey: NSImageFrameCount] ;
+        NSNumber *numberFrame = [rep valueForProperty: NSImageCurrentFrame];
+        NSNumber *currentFrameDuration = [rep valueForProperty: NSImageCurrentFrameDuration];
+        [rep setProperty:NSImageCurrentFrameDuration withValue:@(0.90)];
+    }
+
+
+   // NSImage* transferedImage = [[NSImage alloc] initWithContentsOfFile: path];
     if(transferedImage != nil) {
-        return [transferedImage imageResizeInsideMax: size];
+        return transferedImage;//[transferedImage imageResizeInsideMax: size];
     }
     return nil;
 }

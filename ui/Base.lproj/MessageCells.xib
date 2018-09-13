@@ -128,11 +128,11 @@
             <point key="canvasLocation" x="139" y="167"/>
         </tableCellView>
         <tableCellView identifier="LeftFinishedFileView" id="eW8-NR-350" userLabel="IMTableCellView" customClass="IMTableCellView">
-            <rect key="frame" x="0.0" y="0.0" width="264" height="172"/>
+            <rect key="frame" x="0.0" y="0.0" width="264" height="57"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <box boxType="custom" borderType="none" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="EAm-7Z-ubs">
-                    <rect key="frame" x="0.0" y="138" width="264" height="34"/>
+                    <rect key="frame" x="0.0" y="23" width="264" height="34"/>
                     <view key="contentView" id="vWe-2x-kXT">
                         <rect key="frame" x="0.0" y="0.0" width="264" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,10 +167,10 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="CbP-fL-hnq"/>
                 </imageView>
                 <view translatesAutoresizingMaskIntoConstraints="NO" id="rfH-MI-dNw" customClass="MessageBubbleView">
-                    <rect key="frame" x="40" y="0.0" width="250" height="138"/>
+                    <rect key="frame" x="40" y="0.0" width="250" height="23"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gXD-VF-3Sl">
-                            <rect key="frame" x="15" y="103" width="30" height="20"/>
+                            <rect key="frame" x="15" y="-12" width="30" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="6H8-jT-mn3"/>
                                 <constraint firstAttribute="height" constant="20" id="R4X-bF-Ge1"/>
@@ -178,7 +178,7 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="yjj-R0-GLl"/>
                         </imageView>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NbG-jg-Rsk">
-                            <rect key="frame" x="55" y="105" width="180" height="18"/>
+                            <rect key="frame" x="55" y="-10" width="180" height="18"/>
                             <buttonCell key="cell" type="square" title="Round Rect" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="8CE-a4-Ayu">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="14"/>
@@ -193,7 +193,7 @@
                             </textFieldCell>
                         </textField>
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ypT-pD-ceZ">
-                            <rect key="frame" x="15" y="85" width="220" height="5"/>
+                            <rect key="frame" x="15" y="-30" width="220" height="5"/>
                         </box>
                     </subviews>
                     <constraints>
@@ -210,35 +210,55 @@
                         <constraint firstItem="NbG-jg-Rsk" firstAttribute="top" secondItem="rfH-MI-dNw" secondAttribute="top" constant="15" id="wGz-05-VEt"/>
                     </constraints>
                 </view>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hxG-Yd-cRF">
-                    <rect key="frame" x="40" y="0.0" width="48" height="138"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="fOs-co-GVj">
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wGS-P4-qNL">
+                    <rect key="frame" x="40" y="0.0" width="10" height="23"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="Sav-r4-aC6"/>
+                </imageView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7XH-9N-c5g" customClass="HoverButton">
+                    <rect key="frame" x="40" y="0.0" width="10" height="23"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="25g-in-yWt">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="cornerColor">
+                            <color key="value" red="0.94117647058823528" green="0.94117647058823528" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                            <color key="value" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="hxG-Yd-cRF" firstAttribute="top" secondItem="EAm-7Z-ubs" secondAttribute="bottom" id="39u-ZX-g6R"/>
-                <constraint firstItem="hxG-Yd-cRF" firstAttribute="leading" secondItem="BPl-0q-GSo" secondAttribute="trailing" constant="10" id="3oQ-t9-qcp"/>
                 <constraint firstItem="rfH-MI-dNw" firstAttribute="leading" secondItem="BPl-0q-GSo" secondAttribute="trailing" constant="10" id="611-lJ-BBQ"/>
+                <constraint firstItem="7XH-9N-c5g" firstAttribute="bottom" secondItem="wGS-P4-qNL" secondAttribute="bottom" id="7xg-xB-k0N"/>
                 <constraint firstItem="rfH-MI-dNw" firstAttribute="top" secondItem="EAm-7Z-ubs" secondAttribute="bottom" id="HIj-cX-wOT"/>
                 <constraint firstItem="EAm-7Z-ubs" firstAttribute="leading" secondItem="eW8-NR-350" secondAttribute="leading" id="JhW-lj-cC3"/>
+                <constraint firstAttribute="bottom" secondItem="wGS-P4-qNL" secondAttribute="bottom" id="NGw-Kb-y44"/>
+                <constraint firstItem="7XH-9N-c5g" firstAttribute="trailing" secondItem="wGS-P4-qNL" secondAttribute="trailing" id="OEw-jb-FKE"/>
                 <constraint firstAttribute="trailing" secondItem="EAm-7Z-ubs" secondAttribute="trailing" id="Q5D-pe-Xft"/>
-                <constraint firstAttribute="bottom" secondItem="hxG-Yd-cRF" secondAttribute="bottom" id="U5P-2F-5pI"/>
                 <constraint firstItem="EAm-7Z-ubs" firstAttribute="top" secondItem="eW8-NR-350" secondAttribute="top" id="W4u-5d-H5k"/>
                 <constraint firstItem="BPl-0q-GSo" firstAttribute="leading" secondItem="eW8-NR-350" secondAttribute="leading" id="Y7M-PN-14V"/>
+                <constraint firstItem="7XH-9N-c5g" firstAttribute="leading" secondItem="wGS-P4-qNL" secondAttribute="leading" id="mLF-3I-e1L"/>
+                <constraint firstItem="wGS-P4-qNL" firstAttribute="top" secondItem="EAm-7Z-ubs" secondAttribute="bottom" id="q6v-Q9-mg2"/>
                 <constraint firstItem="rfH-MI-dNw" firstAttribute="bottom" secondItem="BPl-0q-GSo" secondAttribute="bottom" id="s5i-QD-LqE"/>
                 <constraint firstAttribute="bottom" secondItem="rfH-MI-dNw" secondAttribute="bottom" id="vyt-jC-mVO"/>
+                <constraint firstItem="7XH-9N-c5g" firstAttribute="top" secondItem="wGS-P4-qNL" secondAttribute="top" id="z8d-A5-a2s"/>
+                <constraint firstItem="wGS-P4-qNL" firstAttribute="leading" secondItem="BPl-0q-GSo" secondAttribute="trailing" constant="10" id="zlY-t4-J7v"/>
             </constraints>
             <connections>
                 <outlet property="msgBackground" destination="rfH-MI-dNw" id="AJp-Zq-XG8"/>
+                <outlet property="openImagebutton" destination="7XH-9N-c5g" id="6re-SE-3gr"/>
                 <outlet property="photoView" destination="BPl-0q-GSo" id="6XR-pb-GjY"/>
                 <outlet property="statusLabel" destination="ldC-Xq-oV5" id="qmg-YD-p6y"/>
                 <outlet property="timeBox" destination="EAm-7Z-ubs" id="4bu-p8-yDg"/>
                 <outlet property="timeLabel" destination="JUf-er-n2R" id="mdy-VT-uV5"/>
                 <outlet property="transferedFileName" destination="NbG-jg-Rsk" id="ao1-1g-gNT"/>
-                <outlet property="transferedImage" destination="hxG-Yd-cRF" id="yBf-Uw-eMd"/>
+                <outlet property="transferedImage" destination="wGS-P4-qNL" id="3gA-qc-ICe"/>
             </connections>
             <point key="canvasLocation" x="132" y="-22"/>
         </tableCellView>
@@ -465,11 +485,11 @@
             <point key="canvasLocation" x="139" y="750"/>
         </tableCellView>
         <tableCellView identifier="RightFinishedFileView" id="rmZ-yh-rX1" userLabel="IMTableCellView" customClass="IMTableCellView">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="172"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <box boxType="custom" borderType="none" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="e0e-TK-qch">
-                    <rect key="frame" x="0.0" y="138" width="400" height="34"/>
+                    <rect key="frame" x="0.0" y="6" width="400" height="34"/>
                     <view key="contentView" id="Jbl-ZD-fCi">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -496,10 +516,10 @@
                     </constraints>
                 </box>
                 <view translatesAutoresizingMaskIntoConstraints="NO" id="uQv-aG-QZp" customClass="MessageBubbleView">
-                    <rect key="frame" x="150" y="0.0" width="250" height="138"/>
+                    <rect key="frame" x="150" y="0.0" width="250" height="6"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gyB-QF-uEW">
-                            <rect key="frame" x="15" y="103" width="30" height="20"/>
+                            <rect key="frame" x="15" y="-29" width="30" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="20F-SE-qna"/>
                                 <constraint firstAttribute="height" constant="20" id="4aT-Xp-Gdi"/>
@@ -507,7 +527,7 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="yAd-of-sXU"/>
                         </imageView>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jRP-c4-heJ">
-                            <rect key="frame" x="55" y="104" width="180" height="19"/>
+                            <rect key="frame" x="55" y="-28" width="180" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="3i8-bi-EQN">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system" size="14"/>
@@ -522,7 +542,7 @@
                             </textFieldCell>
                         </textField>
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="gLx-wW-frG">
-                            <rect key="frame" x="15" y="85" width="220" height="5"/>
+                            <rect key="frame" x="15" y="-47" width="220" height="5"/>
                         </box>
                     </subviews>
                     <constraints>
@@ -539,32 +559,52 @@
                         <constraint firstItem="jRP-c4-heJ" firstAttribute="leading" secondItem="gyB-QF-uEW" secondAttribute="trailing" constant="10" id="wI3-Hn-sFr"/>
                     </constraints>
                 </view>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ra-MQ-dQc">
-                    <rect key="frame" x="176" y="0.0" width="48" height="138"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ime-Ce-yIP">
-                        <behavior key="behavior" lightByContents="YES"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KzR-Xo-Vlj">
+                    <rect key="frame" x="400" y="0.0" width="0.0" height="6"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="Ea2-xs-9NC"/>
+                </imageView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ld8-l1-IEa" customClass="HoverButton">
+                    <rect key="frame" x="400" y="0.0" width="0.0" height="6"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="PfG-Ue-7zC">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="cornerColor">
+                            <color key="value" red="0.94117647058823528" green="0.94117647058823528" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="9ra-MQ-dQc" firstAttribute="top" secondItem="e0e-TK-qch" secondAttribute="bottom" id="47p-LD-eW3"/>
+                <constraint firstItem="KzR-Xo-Vlj" firstAttribute="trailing" secondItem="ld8-l1-IEa" secondAttribute="trailing" id="2yE-GJ-IQU"/>
                 <constraint firstItem="e0e-TK-qch" firstAttribute="top" secondItem="rmZ-yh-rX1" secondAttribute="top" id="8NZ-EV-k0V"/>
+                <constraint firstItem="KzR-Xo-Vlj" firstAttribute="top" secondItem="ld8-l1-IEa" secondAttribute="top" id="ExB-dn-NAm"/>
+                <constraint firstAttribute="bottom" secondItem="KzR-Xo-Vlj" secondAttribute="bottom" id="FG9-hP-jwr"/>
+                <constraint firstAttribute="trailing" secondItem="KzR-Xo-Vlj" secondAttribute="trailing" id="G62-7V-dcz"/>
                 <constraint firstItem="e0e-TK-qch" firstAttribute="leading" secondItem="rmZ-yh-rX1" secondAttribute="leading" id="JHH-tM-TTv"/>
-                <constraint firstAttribute="bottom" secondItem="9ra-MQ-dQc" secondAttribute="bottom" id="Z8C-ig-6oB"/>
-                <constraint firstAttribute="trailing" secondItem="9ra-MQ-dQc" secondAttribute="trailing" id="ZdJ-Th-dsy"/>
+                <constraint firstItem="KzR-Xo-Vlj" firstAttribute="top" secondItem="e0e-TK-qch" secondAttribute="bottom" id="QFA-JJ-eQE"/>
+                <constraint firstItem="KzR-Xo-Vlj" firstAttribute="leading" secondItem="ld8-l1-IEa" secondAttribute="leading" id="aWC-JV-Yfg"/>
                 <constraint firstAttribute="bottom" secondItem="uQv-aG-QZp" secondAttribute="bottom" id="iyK-vD-6gs"/>
                 <constraint firstAttribute="trailing" secondItem="uQv-aG-QZp" secondAttribute="trailing" id="nBz-tG-1V1"/>
                 <constraint firstItem="uQv-aG-QZp" firstAttribute="top" secondItem="e0e-TK-qch" secondAttribute="bottom" id="rvb-My-XBo"/>
                 <constraint firstAttribute="trailing" secondItem="e0e-TK-qch" secondAttribute="trailing" id="w3i-dk-KKy"/>
+                <constraint firstItem="KzR-Xo-Vlj" firstAttribute="bottom" secondItem="ld8-l1-IEa" secondAttribute="bottom" id="wIL-PM-J2D"/>
             </constraints>
             <connections>
                 <outlet property="msgBackground" destination="uQv-aG-QZp" id="poE-7z-JEI"/>
+                <outlet property="openImagebutton" destination="ld8-l1-IEa" id="lGl-pq-r5p"/>
                 <outlet property="statusLabel" destination="eHR-Hi-Zl2" id="TvR-nl-6eO"/>
                 <outlet property="timeBox" destination="e0e-TK-qch" id="JPW-TW-Byd"/>
                 <outlet property="timeLabel" destination="Od3-Cq-LmR" id="lja-3j-VsT"/>
                 <outlet property="transferedFileName" destination="jRP-c4-heJ" id="5OM-gW-g7U"/>
-                <outlet property="transferedImage" destination="9ra-MQ-dQc" id="BsK-nv-ovu"/>
+                <outlet property="transferedImage" destination="KzR-Xo-Vlj" id="0Aj-VB-IrK"/>
             </connections>
             <point key="canvasLocation" x="147" y="1290"/>
         </tableCellView>

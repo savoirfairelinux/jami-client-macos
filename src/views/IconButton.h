@@ -76,5 +76,12 @@
 
 @property (nonatomic, strong) NSColor* buttonDisableColor;
 
+/*
+ * Color of the button corners. Draw circle with cornerRadius filled with bgColor
+ * and fill corner with cornerColor
+ */
+@property (nonatomic, strong) NSColor* cornerColor;
+
+
 
 @end
