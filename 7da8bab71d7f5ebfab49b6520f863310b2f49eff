@@ -22,6 +22,30 @@
       "revId": "7da8bab71d7f5ebfab49b6520f863310b2f49eff",
       "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7efcc63d_3f59196b",
+        "filename": "src/views/CallView.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2018-09-13T21:54:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f40a5137_3cec3991",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "7da8bab71d7f5ebfab49b6520f863310b2f49eff",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": false
     }
   ]
 }
