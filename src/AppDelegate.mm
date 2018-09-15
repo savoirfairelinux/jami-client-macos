@@ -52,12 +52,12 @@
 @property DialpadWC* dialpad;
 @property (nonatomic, strong) dispatch_queue_t scNetworkQueue;
 @property (nonatomic, assign) SCNetworkReachabilityRef currentReachability;
+@property (strong) id activity;
 
 @end
 
 @implementation AppDelegate {
 
-NSTimer* preventSleepTimer;
 std::unique_ptr<lrc::api::Lrc> lrc;
 }
 
@@ -92,18 +92,8 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     queue = dispatch_queue_create("scNetworkReachability", DISPATCH_QUEUE_SERIAL);
     [self setScNetworkQueue:queue];
     [self beginObservingReachabilityStatus];
-    [self startSleepPreventionTimer];
-}
-
-- (void) startSleepPreventionTimer
-{
-    if (preventSleepTimer != nil) {
-        [preventSleepTimer invalidate];
-    }
-    preventSleepTimer = [NSTimer timerWithTimeInterval:30.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        UpdateSystemActivity(OverallAct);
-    }];
-    [[NSRunLoop mainRunLoop] addTimer:preventSleepTimer forMode:NSRunLoopCommonModes];
+    NSActivityOptions options = NSActivitySuddenTerminationDisabled | NSActivityAutomaticTerminationDisabled | NSActivityBackground;
+    self.activity = [[NSProcessInfo processInfo] beginActivityWithOptions:options reason:@"Receiving calls and messages"];
 }
 
 - (void) beginObservingReachabilityStatus
@@ -344,8 +334,9 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 - (void) cleanExit
 {
-    if (preventSleepTimer != nil) {
-        [preventSleepTimer invalidate];
+    if (self.activity != nil) {
+        [[NSProcessInfo processInfo] endActivity:self.activity];
+        self.activity = nil;
     }
     [self.wizard close];
     [self.ringWindowController close];
