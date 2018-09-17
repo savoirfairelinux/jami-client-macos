@@ -33,10 +33,11 @@
 @property (nonatomic, strong) IBOutlet NSBox* timeBox;
 @property (nonatomic, strong) IBOutlet NSTextField* timeLabel;
 @property (nonatomic, strong) IBOutlet NSButton* transferedFileName;
-@property (nonatomic, strong) IBOutlet NSButton* transferedImage;
+@property (nonatomic, strong) IBOutlet NSImageView* transferedImage;
 @property (nonatomic, strong) IBOutlet NSProgressIndicator* sendingMessageIndicator;
 @property (nonatomic, strong) IBOutlet NSImageView* messageFailed;
 @property (nonatomic, strong) IBOutlet NSView* messageStatus;
+@property (nonatomic, strong) IBOutlet NSButton* openImagebutton;
 
 
 - (uint64_t) interaction;
@@ -44,6 +45,7 @@
 - (void) setupForInteraction:(uint64_t)inter;
 - (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding;
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
+- (void) updateImageConstraintWithMax: (CGFloat) maxDimension;
 - (void) invalidateImageConstraints;
 
 @end
