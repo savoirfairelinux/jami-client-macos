@@ -123,6 +123,62 @@
         NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:dirtyRect
                                                                  xRadius:[self.cornerRadius floatValue]
                                                                  yRadius:[self.cornerRadius floatValue]];
+        if(self.cornerColor) {
+            NSRect frame = [self frame];
+
+            [backgroundColor setFill];
+            [ovalPath fill];
+            [NSGraphicsContext saveGraphicsState];
+
+            CGPoint top = CGPointMake(frame.size.width * 0.5, 0);
+            CGPoint right = CGPointMake(frame.size.width, frame.size.height * 0.5);
+            CGPoint bottom = CGPointMake(frame.size.width * 0.5, frame.size.height);
+            CGPoint left = CGPointMake(0, frame.size.height * 0.5);
+            CGPoint topLeft = CGPointMake(0, 0);
+            CGPoint topRight = CGPointMake(frame.size.width, 0);
+            CGPoint bottomLeft = CGPointMake(0, frame.size.height);
+            CGPoint bottomRight = CGPointMake(frame.size.width, frame.size.height);
+
+            NSBezierPath* topLeftPath = [[NSBezierPath alloc] init];
+            NSPoint pointArrayLeft[3];
+            pointArrayLeft[0] = left;
+            pointArrayLeft[1] = topLeft;
+            pointArrayLeft[2] = top;
+
+            [topLeftPath appendBezierPathWithPoints:pointArrayLeft count:3];
+            [topLeftPath appendBezierPathWithArcFromPoint: topLeft toPoint: left radius: 20.0f];
+            [self.cornerColor setFill];
+            [topLeftPath fill];
+
+            NSBezierPath* topRightPath = [[NSBezierPath alloc] init];
+            NSPoint pointArrayTop[3];
+            pointArrayTop[0] = top;
+            pointArrayTop[1] = topRight;
+            pointArrayTop[2] = right;
+            [topRightPath appendBezierPathWithPoints:pointArrayTop count:3];
+            [topRightPath appendBezierPathWithArcFromPoint: topRight toPoint: top radius: 20.0f];
+            [topRightPath fill];
+
+            NSBezierPath* bottomLeftPath = [[NSBezierPath alloc] init];
+            NSPoint pointArrayRight[3];
+            pointArrayRight[0] = right;
+            pointArrayRight[1] = bottomRight;
+            pointArrayRight[2] = bottom;
+            [bottomLeftPath appendBezierPathWithPoints:pointArrayRight count:3];
+            [bottomLeftPath appendBezierPathWithArcFromPoint: bottomRight toPoint: right radius: 20.0f];
+            [bottomLeftPath fill];
+
+            NSBezierPath* bottomRightPath = [[NSBezierPath alloc] init];
+            NSPoint pointArrayBottom[3];
+            pointArrayBottom[0] = bottom;
+            pointArrayBottom[1] = bottomLeft;
+            pointArrayBottom[2] = left;
+            [bottomRightPath appendBezierPathWithPoints:pointArrayBottom count:3];
+            [bottomRightPath appendBezierPathWithArcFromPoint: bottomLeft toPoint: bottom radius: 20.0f];
+            [bottomRightPath fill];
+            [NSGraphicsContext saveGraphicsState];
+            return;
+        }
 
         [backgroundColor setFill];
         [ovalPath fill];

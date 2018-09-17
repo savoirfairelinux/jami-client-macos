@@ -351,15 +351,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                   paragraphStyle,NSParagraphStyleAttributeName, nil];
         NSAttributedString* alternativeString = [[NSAttributedString alloc] initWithString:fileName attributes:alternativeNametAttr];
         result.transferedFileName.attributedAlternateTitle = alternativeString;
-        NSImage* image = [self getImageForFilePath:name size:MAX_TRANSFERED_IMAGE_SIZE];
+        NSImage* image = [self getImageForFilePath:name];
         if (([name rangeOfString:@"/"].location == NSNotFound)) {
-            image = [self getImageForFilePath:[self getDataTransferPath:interactionID] size:MAX_TRANSFERED_IMAGE_SIZE];
+            image = [self getImageForFilePath:[self getDataTransferPath:interactionID]];
         }
         if(image != nil) {
-            result.transferedImage.image = [image roundCorners:14];
-            [result updateImageConstraint:image.size.width andHeight:image.size.height];
-            [result.transferedImage setAction:@selector(imagePreview:)];
-            [result.transferedImage setTarget:self];
+            result.transferedImage.image = image;
+            [result updateImageConstraintWithMax: MAX_TRANSFERED_IMAGE_SIZE];
+            [result.openImagebutton setAction:@selector(imagePreview:)];
+            [result.openImagebutton setTarget:self];
         }
     }
     [result setupForInteraction:interactionID];
@@ -525,12 +525,21 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
         if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
             NSString* name =  @(interaction.body.c_str());
-            NSImage* image = [self getImageForFilePath:name size:MAX_TRANSFERED_IMAGE_SIZE];
+            NSImage* image = [self getImageForFilePath:name];
             if (([name rangeOfString:@"/"].location == NSNotFound)) {
-                image = [self getImageForFilePath:[self getDataTransferPath:it->first] size:MAX_TRANSFERED_IMAGE_SIZE];
+                image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
             }
             if (image != nil) {
-                return image.size.height + TIME_BOX_HEIGHT;
+                CGFloat widthScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.width;
+                CGFloat heightScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.height;
+                CGFloat heigt = 0;
+                if((widthScaleFactor >= 1) && (heightScaleFactor >= 1)) {
+                    heigt = image.size.height;
+                } else {
+                    CGFloat scale = MIN(widthScaleFactor, heightScaleFactor);
+                    heigt = image.size.height * scale;
+                }
+                return heigt + TIME_BOX_HEIGHT;
             }
         }
         return BUBBLE_HEIGHT_FOR_TRANSFERED_FILE + TIME_BOX_HEIGHT;
@@ -573,14 +582,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return @(info.path.c_str());
 }
 
--(NSImage*) getImageForFilePath: (NSString *) path size:(CGFloat)size {
+-(NSImage*) getImageForFilePath: (NSString *) path {
     if (path.length <= 0) {return nil;}
     if (![[NSFileManager defaultManager] fileExistsAtPath: path]) {return nil;}
     NSImage* transferedImage = [[NSImage alloc] initWithContentsOfFile: path];
-    if(transferedImage != nil) {
-        return [transferedImage imageResizeInsideMax: size];
-    }
-    return nil;
+    return transferedImage;
 }
 
 -(CGSize) sizeFor:(NSString *) message maxWidth:(CGFloat) width {
