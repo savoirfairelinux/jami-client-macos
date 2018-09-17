@@ -297,6 +297,11 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
     // enable Notifications
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::Notifications];
+
+    //enable proxy by default
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountToCreate);
+    accountProperties.proxyEnabled = YES;
+    self.accountModel->setAccountConfig(accountToCreate, accountProperties);
 }
 
 - (IBAction)cancel:(id)sender
