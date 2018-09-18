@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,7 +11,9 @@
                 <outlet property="container" destination="T98-k1-e6X" id="ucm-VA-quB"/>
                 <outlet property="linkAccountWC" destination="Hlf-uv-gt6" id="GFL-I8-wsd"/>
                 <outlet property="newAccountWC" destination="M2H-0Y-6UW" id="w3w-Wd-TvD"/>
+                <outlet property="ringImage" destination="P7h-tj-klA" id="Tjn-Tk-S5m"/>
                 <outlet property="window" destination="4LP-GX-BkH" id="Bgr-iZ-rif"/>
+                <outlet property="windowHeader" destination="EpY-Kl-fNa" id="vWf-25-bWR"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -73,6 +75,7 @@
                     <constraint firstItem="9ok-Ga-Q8u" firstAttribute="leading" secondItem="Wgr-xH-z0G" secondAttribute="leading" id="zPn-Ld-oZC"/>
                 </constraints>
             </view>
+            <contentBorderThickness minY="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="delegate" destination="-2" id="cKX-Z2-yDq"/>
             </connections>

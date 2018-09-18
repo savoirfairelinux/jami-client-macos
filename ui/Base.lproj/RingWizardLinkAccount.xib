@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardLinkAccountVC">
             <connections>
                 <outlet property="errorContainer" destination="B0P-LC-JmW" id="lKa-Nb-o79"/>
                 <outlet property="fileButton" destination="gR3-2L-BlK" id="9CB-3U-Izb"/>
+                <outlet property="helpArchiveFileContainer" destination="M1j-Dr-kfj" id="S9g-pn-iVd"/>
+                <outlet property="helpPINContainer" destination="FI2-Q8-dc7" id="OHg-wo-QaV"/>
                 <outlet property="initialContainer" destination="jR6-WY-o19" id="zJs-xD-OjK"/>
                 <outlet property="linkButton" destination="xmI-fH-GpH" id="pWU-MH-4Up"/>
                 <outlet property="loadingContainer" destination="1O6-eM-Cg5" id="AnP-jD-EcD"/>
@@ -22,10 +23,25 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="kG1-xB-0op">
-            <rect key="frame" x="0.0" y="0.0" width="355" height="228"/>
+            <rect key="frame" x="0.0" y="0.0" width="453" height="211"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <point key="canvasLocation" x="334" y="754"/>
         </customView>
+        <popover behavior="t" id="FI2-Q8-dc7" userLabel="Help PIN container">
+            <connections>
+                <outlet property="contentViewController" destination="mSv-u1-Hvk" id="8QY-x6-ynn"/>
+            </connections>
+        </popover>
+        <popover behavior="t" id="M1j-Dr-kfj" userLabel="Help archive file container">
+            <connections>
+                <outlet property="contentViewController" destination="RJp-dy-UIe" id="swQ-5X-I7m"/>
+            </connections>
+        </popover>
+        <viewController id="RJp-dy-UIe" userLabel="Popover View Controller archive">
+            <connections>
+                <outlet property="view" destination="TUh-Kb-Ooa" id="ZjR-pP-jAl"/>
+            </connections>
+        </viewController>
         <view id="B0P-LC-JmW">
             <rect key="frame" x="0.0" y="0.0" width="338" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -65,7 +81,7 @@ DQ
             <point key="canvasLocation" x="-12" y="401"/>
         </view>
         <view id="jR6-WY-o19" userLabel="Second step">
-            <rect key="frame" x="0.0" y="0.0" width="453" height="357"/>
+            <rect key="frame" x="0.0" y="0.0" width="453" height="211"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BFR-6z-UlF">
@@ -76,13 +92,17 @@ DQ
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="" bezelStyle="round" id="5pW-QD-iHi">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.pinValue" id="GrX-eR-RHE">
+                        <binding destination="-2" name="value" keyPath="self.pinValue" id="vVf-hg-sWk">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSMultipleValuesPlaceholder">PIN</string>
+                                <string key="NSNoSelectionPlaceholder">PIN</string>
+                                <string key="NSNotApplicablePlaceholder">PIN</string>
+                                <string key="NSNullPlaceholder">PIN</string>
                             </dictionary>
                         </binding>
                         <outlet property="nextKeyView" destination="VeW-tY-k3K" id="fgI-rk-Nuk"/>
@@ -96,13 +116,17 @@ DQ
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="" bezelStyle="round" id="9k8-c8-GFI" customClass="NSSecureTextFieldCell">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
-                        <binding destination="-2" name="value" keyPath="self.passwordValue" id="DMG-pk-2GO">
+                        <binding destination="-2" name="value" keyPath="self.passwordValue" id="WlR-QM-tK4">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSMultipleValuesPlaceholder">Password...</string>
+                                <string key="NSNoSelectionPlaceholder">Password...</string>
+                                <string key="NSNotApplicablePlaceholder">Password...</string>
+                                <string key="NSNullPlaceholder">Password...</string>
                             </dictionary>
                         </binding>
                         <outlet property="nextKeyView" destination="xmI-fH-GpH" id="oQw-CE-3NA"/>
@@ -117,15 +141,12 @@ DQ
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ODM-Sx-sdp">
-                    <rect key="frame" x="22" y="204" width="410" height="153"/>
+                    <rect key="frame" x="22" y="194" width="410" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="406" id="FO7-qh-6vk"/>
                     </constraints>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="06g-zM-5Qz">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="To link this device to another account, you have two possibilities:" id="06g-zM-5Qz">
                         <font key="font" metaFont="system"/>
-                        <string key="title">     To link this device to another account, you have two possibilities. You can import your account from the DHT, but first, you need to obtain a PIN code.
-     To generate the PIN code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
-     Or, you can directly import your account from an archive.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -148,7 +169,7 @@ DQ
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gR3-2L-BlK" userLabel="File button">
                     <rect key="frame" x="252" y="128" width="187" height="33"/>
-                    <buttonCell key="cell" type="push" title="Select archive" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJE-cy-nfQ">
+                    <buttonCell key="cell" type="push" title="Select file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJE-cy-nfQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -173,8 +194,8 @@ Gw
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJh-69-hJQ">
-                    <rect key="frame" x="256" y="167" width="98" height="17"/>
-                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Import Archive" id="kXa-FL-Enf">
+                    <rect key="frame" x="256" y="167" width="119" height="17"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Import archive file" id="kXa-FL-Enf">
                         <font key="font" metaFont="systemSemibold" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -194,14 +215,35 @@ DQ
                     </buttonCell>
                     <connections>
                         <action selector="importRingAccount:" target="-2" id="pa7-oH-87l"/>
-                        <binding destination="-2" name="enabled" keyPath="self.pinValue.length" id="5Vx-8d-FlP">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="0"/>
-                            </dictionary>
-                        </binding>
+                        <binding destination="-2" name="enabled" keyPath="self.pinValue.length" id="TT6-xW-5yT"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fLL-gK-4t4">
+                    <rect key="frame" x="112" y="161" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="0LU-Yk-LuP"/>
+                        <constraint firstAttribute="width" constant="21" id="tNR-Eo-lqA"/>
+                    </constraints>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pwF-hR-gRN">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="showPINHelp:" target="-2" id="ydM-Gx-cxG"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RUb-Ti-5Wa">
+                    <rect key="frame" x="374" y="161" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="izp-Ie-IXy"/>
+                        <constraint firstAttribute="width" constant="21" id="pGS-LU-Ufn"/>
+                    </constraints>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fAO-vt-wCG">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="showArchiveFileHelp:" target="-2" id="jB7-Xj-lSX"/>
                     </connections>
                 </button>
             </subviews>
@@ -210,11 +252,10 @@ DQ
                 <constraint firstItem="gR3-2L-BlK" firstAttribute="leading" secondItem="XJh-69-hJQ" secondAttribute="leading" id="3Sb-xe-LzJ"/>
                 <constraint firstItem="oxG-mq-q2J" firstAttribute="top" secondItem="VeW-tY-k3K" secondAttribute="bottom" constant="25" id="Dmh-y9-SA3"/>
                 <constraint firstItem="XJh-69-hJQ" firstAttribute="bottom" secondItem="Nms-13-N3F" secondAttribute="bottom" id="Ea3-e7-Axb"/>
-                <constraint firstItem="Nms-13-N3F" firstAttribute="top" secondItem="ODM-Sx-sdp" secondAttribute="bottom" constant="20" id="FQZ-zG-nLF"/>
+                <constraint firstItem="Nms-13-N3F" firstAttribute="top" secondItem="ODM-Sx-sdp" secondAttribute="bottom" constant="10" id="FQZ-zG-nLF"/>
                 <constraint firstItem="gR3-2L-BlK" firstAttribute="width" secondItem="BFR-6z-UlF" secondAttribute="width" id="GyZ-Y9-jZQ"/>
                 <constraint firstItem="ODM-Sx-sdp" firstAttribute="centerX" secondItem="jR6-WY-o19" secondAttribute="centerX" id="IEF-Dw-yyn"/>
                 <constraint firstItem="VeW-tY-k3K" firstAttribute="top" secondItem="AGs-mP-zJd" secondAttribute="bottom" constant="10" id="KLm-ry-Wv8"/>
-                <constraint firstAttribute="bottom" secondItem="xmI-fH-GpH" secondAttribute="bottom" constant="20" id="RGd-y5-GmA"/>
                 <constraint firstItem="VeW-tY-k3K" firstAttribute="centerX" secondItem="jR6-WY-o19" secondAttribute="centerX" id="S61-lS-dGB"/>
                 <constraint firstItem="BFR-6z-UlF" firstAttribute="leading" secondItem="Nms-13-N3F" secondAttribute="leading" id="VNR-FF-Ym8"/>
                 <constraint firstAttribute="trailing" secondItem="gR3-2L-BlK" secondAttribute="trailing" constant="20" id="ZEt-dR-0c6"/>
@@ -224,9 +265,14 @@ DQ
                 <constraint firstItem="xmI-fH-GpH" firstAttribute="leading" secondItem="oxG-mq-q2J" secondAttribute="trailing" constant="12" id="dHF-fR-9e9"/>
                 <constraint firstItem="tMy-fd-gBJ" firstAttribute="leading" secondItem="BFR-6z-UlF" secondAttribute="trailing" constant="20" id="dOi-ky-Ahw"/>
                 <constraint firstItem="ODM-Sx-sdp" firstAttribute="top" secondItem="jR6-WY-o19" secondAttribute="top" id="enl-hy-pbK"/>
+                <constraint firstItem="RUb-Ti-5Wa" firstAttribute="leading" secondItem="XJh-69-hJQ" secondAttribute="trailing" constant="3" id="fkb-lM-fER"/>
                 <constraint firstItem="AGs-mP-zJd" firstAttribute="top" secondItem="BFR-6z-UlF" secondAttribute="bottom" constant="20" id="iDb-fC-FSV"/>
                 <constraint firstItem="tMy-fd-gBJ" firstAttribute="bottom" secondItem="BFR-6z-UlF" secondAttribute="bottom" id="iEi-PE-jQZ"/>
+                <constraint firstItem="fLL-gK-4t4" firstAttribute="leading" secondItem="Nms-13-N3F" secondAttribute="trailing" constant="3" id="kei-I9-cVO"/>
+                <constraint firstItem="fLL-gK-4t4" firstAttribute="centerY" secondItem="Nms-13-N3F" secondAttribute="centerY" id="lsA-0K-v4d"/>
                 <constraint firstItem="BFR-6z-UlF" firstAttribute="top" secondItem="Nms-13-N3F" secondAttribute="bottom" constant="10" id="rdN-I0-ITJ"/>
+                <constraint firstItem="xmI-fH-GpH" firstAttribute="bottom" secondItem="oxG-mq-q2J" secondAttribute="bottom" id="tlD-aX-78f"/>
+                <constraint firstItem="RUb-Ti-5Wa" firstAttribute="centerY" secondItem="XJh-69-hJQ" secondAttribute="centerY" id="y21-jb-dMu"/>
                 <constraint firstItem="VeW-tY-k3K" firstAttribute="leading" secondItem="AGs-mP-zJd" secondAttribute="leading" id="yQW-Ia-QEk"/>
                 <constraint firstAttribute="trailing" secondItem="xmI-fH-GpH" secondAttribute="trailing" constant="20" id="zcJ-ZX-QDZ"/>
                 <constraint firstAttribute="bottom" secondItem="oxG-mq-q2J" secondAttribute="bottom" constant="20" id="zcc-T5-hHj"/>
@@ -242,7 +288,7 @@ DQ
                     <constraints>
                         <constraint firstAttribute="width" constant="340" id="Obs-3i-AVf"/>
                     </constraints>
-                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Just a moment..." id="zWn-4H-ODH">
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Linking..." id="zWn-4H-ODH">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -263,5 +309,56 @@ DQ
             </constraints>
             <point key="canvasLocation" x="139" y="-39"/>
         </customView>
+        <customView id="3h3-dd-sYm">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="138"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Hbu-B5-EjR">
+                    <rect key="frame" x="18" y="20" width="314" height="98"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="justified" id="2uK-1s-tk7">
+                        <font key="font" metaFont="smallSystem"/>
+                        <string key="title">	You can import your account from the another device, but first, you need to obtain a PIN code. 
+	To generate the PIN code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.</string>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Hbu-B5-EjR" secondAttribute="bottom" constant="20" id="XpN-O6-0N6"/>
+                <constraint firstItem="Hbu-B5-EjR" firstAttribute="top" secondItem="3h3-dd-sYm" secondAttribute="top" constant="20" id="Y1N-SW-sWw"/>
+                <constraint firstAttribute="trailing" secondItem="Hbu-B5-EjR" secondAttribute="trailing" constant="20" id="lhv-H3-i6N"/>
+                <constraint firstItem="Hbu-B5-EjR" firstAttribute="leading" secondItem="3h3-dd-sYm" secondAttribute="leading" constant="20" id="nEo-HE-IG6"/>
+            </constraints>
+            <point key="canvasLocation" x="-651" y="802.5"/>
+        </customView>
+        <customView id="TUh-Kb-Ooa">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="68"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="DCW-q4-nx3">
+                    <rect key="frame" x="18" y="20" width="312" height="28"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="kfe-m7-MTT">
+                        <font key="font" metaFont="smallSystem"/>
+                        <string key="title">	You can directly import your account from an archive file on your device.</string>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="DCW-q4-nx3" secondAttribute="bottom" constant="20" id="0Rp-8b-fRf"/>
+                <constraint firstItem="DCW-q4-nx3" firstAttribute="leading" secondItem="TUh-Kb-Ooa" secondAttribute="leading" constant="20" id="0px-6B-pQs"/>
+                <constraint firstAttribute="trailing" secondItem="DCW-q4-nx3" secondAttribute="trailing" constant="20" id="FDk-2p-B9C"/>
+                <constraint firstItem="DCW-q4-nx3" firstAttribute="top" secondItem="TUh-Kb-Ooa" secondAttribute="top" constant="20" id="ciM-86-3z2"/>
+            </constraints>
+            <point key="canvasLocation" x="-606" y="599"/>
+        </customView>
+        <viewController id="mSv-u1-Hvk" userLabel="Popover View Controller PIN">
+            <connections>
+                <outlet property="view" destination="3h3-dd-sYm" id="a01-TF-mJX"/>
+            </connections>
+        </viewController>
+        <userDefaultsController representsSharedInstance="YES" id="adK-QV-iDD"/>
     </objects>
 </document>

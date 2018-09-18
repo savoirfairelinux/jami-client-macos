@@ -23,6 +23,7 @@
 @protocol RingWizardNewDelegate <NSObject>
 - (void)didCreateAccountWithSuccess:(BOOL)success;
 - (void)showView:(NSView*)view;
+- (void) updateFrame:(float)height;
 @end
 
 @interface RingWizardNewAccountVC : NSViewController <LrcModelsProtocol>
