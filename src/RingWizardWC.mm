@@ -33,6 +33,7 @@
 @interface RingWizardWC ()
 
 @property (retain, nonatomic)IBOutlet NSView* container;
+@property (retain, nonatomic)IBOutlet NSTextField* windowHeader;
 
 @end
 @implementation RingWizardWC {
@@ -80,71 +81,67 @@
 }
 
 #define headerHeight 60
-#define minHeight 150
+#define minHeight 140
 #define defaultMargin 5
 #define heightWithSIP 160
 - (void)showView:(NSView*)view
 {
     [self removeSubviews];
     NSRect frame = [self.container frame];
-    CGFloat height = withAdvanced ? minHeight : minHeight - 10;
+    CGFloat height = minHeight;
     float sizeFrame = MAX(height, view.frame.size.height);
     frame.size.height = sizeFrame;
-    [view setFrame:frame];
-
+    [view setFrame: frame];
     [self.container setFrame:frame];
-    float size = headerHeight + sizeFrame + defaultMargin;
+    float titleBarHeight = self.window.frame.size.height - [self.window contentRectForFrameRect:self.window.frame].size.height;
+    titleBarHeight = self.window.isSheet ? 0 : titleBarHeight;
+    float size = headerHeight + sizeFrame + titleBarHeight;
     NSRect frameWindows = self.window.frame;
     frameWindows.size.height = size;
     [self.window setFrame:frameWindows display:YES animate:YES];
-
     [self.container addSubview:view];
 }
 
-- (void) updateWindowHeight: (CGFloat) height {
-    NSRect frame = [self.container frame];
-    float sizeFrame = height;
-    frame.size.height = sizeFrame;
-    [self.container setFrame:frame];
-    float size = headerHeight + sizeFrame + defaultMargin;
-    NSRect frameWindows = self.window.frame;
-    frameWindows.size.height = size;
-    [self.window setFrame:frameWindows display:YES animate:YES];
-}
-
 - (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced {
+    [self.windowHeader setStringValue:@"Welcome to Ring"];
+    [self showView:chooseActiontWC.view];
     [chooseActiontWC showCancelButton:showCancel];
     [chooseActiontWC showAdvancedButton:showAdvanced];
     isCancelable = showCancel;
     withAdvanced = showAdvanced;
-    NSRect frame = CGRectMake(0, 0, chooseActiontWC.view.frame.size.width, 0);
-    chooseActiontWC.view.frame = frame;
+    [chooseActiontWC updateFrame];
     [self showView:chooseActiontWC.view];
-
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel
 {
+    [self.windowHeader setStringValue:@"Welcome to Ring"];
+    [self showView:chooseActiontWC.view];
     [chooseActiontWC showCancelButton:showCancel];
     isCancelable = showCancel;
-    [self showView:chooseActiontWC.view];
 }
 
 - (void)showNewAccountVC
 {
+    [self.windowHeader setStringValue:@"Create a new Ring account"];
+    [chooseActiontWC showCancelButton: isCancelable];
     [self showView: newAccountWC.view];
     [newAccountWC show];
 }
 
 - (void)showLinkAccountVC
 {
+    [self.windowHeader setStringValue:@"Link to an account"];
+    [chooseActiontWC showCancelButton: isCancelable];
     [self showView: linkAccountWC.view];
     [linkAccountWC show];
 }
 
 - (void)showSIPAccountVC
 {
+    [self.windowHeader setStringValue:@"Add a SIP account"];
     [self showView: addSIPAccountVC.view];
+    [chooseActiontWC showAdvancedButton: NO];
     [addSIPAccountVC show];
 }
 
@@ -169,7 +166,7 @@
     } else if (action == WIZARD_ACTION_NEW) {
         [self showNewAccountVC];
     } else if (action == WIZARD_ACTION_ADVANCED) {
-        [self updateWindowHeight: heightWithSIP];
+        [self showView:chooseActiontWC.view];
     } else if (action == WIZARD_ACTION_SIP_ACCOUNT) {
         [self showSIPAccountVC];
     } else {

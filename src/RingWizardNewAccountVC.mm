@@ -93,11 +93,6 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.view setAutoresizingMask: NSViewHeightSizable];
-}
-
 - (BOOL)produceError:(NSError**)error withCode:(NSInteger)code andMessage:(NSString*)message
 {
     if (error != NULL){

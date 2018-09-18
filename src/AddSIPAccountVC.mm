@@ -49,7 +49,7 @@ NSTimer* timeoutTimer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setAutoresizingMask: NSViewHeightSizable];
+    [self.view setAutoresizingMask: NSViewMaxYMargin | NSViewHeightSizable];
 }
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel {
