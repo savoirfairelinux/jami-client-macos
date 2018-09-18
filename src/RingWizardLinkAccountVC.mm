@@ -51,15 +51,17 @@
     __unsafe_unretained IBOutlet NSSecureTextField* passwordTextField;
 
     __unsafe_unretained IBOutlet NSButton* linkButton;
+    __unsafe_unretained IBOutlet NSPopover* helpPINContainer;
+    __unsafe_unretained IBOutlet NSPopover* helpArchiveFileContainer;
     NSString *fileButtonTitleBackup;
 
-    NSURL* backupFile;
+    //NSURL* backupFile;
     QMetaObject::Connection accountCreated;
     QMetaObject::Connection accountRemoved;
     std::string accountToCreate;
 }
 
-@synthesize accountModel;
+@synthesize accountModel, backupFile;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel {
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
@@ -71,7 +73,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setAutoresizingMask: NSViewHeightSizable];
     fileButtonTitleBackup = NSLocalizedString(@"Select archive",
                                               @"export account button title");
 }
@@ -83,7 +84,7 @@
     backupFile = nil;
     [pinTextField setStringValue:@""];
     [pinTextField setEnabled:YES];
-    [linkButton setEnabled:YES];
+    [linkButton setEnabled:NO];
     [passwordTextField setStringValue:@""];
 }
 
@@ -124,6 +125,7 @@
     NSString *pin = backupFile ? @"" : (self.pinValue ? self.pinValue : @"");
     NSString *archivePath = backupFile ? [backupFile path] : @"";
     NSString *pathword = self.passwordValue ? self.passwordValue : @"";
+    NSLog(@"password , %@", pathword);
     accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, "",[archivePath UTF8String], [pathword UTF8String], [pin UTF8String]);
 }
 
@@ -148,6 +150,16 @@
             [linkButton setEnabled:YES];
         }
     }
+}
+
+- (IBAction)showPINHelp:(id)sender
+{
+    [helpPINContainer showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
+}
+
+- (IBAction)showArchiveFileHelp:(id)sender
+{
+    [helpArchiveFileContainer showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
 /**
