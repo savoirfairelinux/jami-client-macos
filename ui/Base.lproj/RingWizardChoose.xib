@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardChooseVC">
             <connections>
+                <outlet property="buttonTopConstraint" destination="qRn-oO-10Y" id="3a1-dP-qLm"/>
                 <outlet property="createSIPAccount" destination="Ivs-g5-gQs" id="Xdt-qd-UCr"/>
                 <outlet property="view" destination="uHQ-s7-X3y" id="1wM-Vd-wef"/>
             </connections>
@@ -15,13 +16,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <userDefaultsController representsSharedInstance="YES" id="ck0-Ru-0YG"/>
         <view id="uHQ-s7-X3y">
-            <rect key="frame" x="0.0" y="0.0" width="525" height="129"/>
+            <rect key="frame" x="0.0" y="0.0" width="525" height="178"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="UXp-us-Mbl">
                     <rect key="frame" x="435" y="17" width="72" height="29"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="68" id="BJn-n9-or6"/>
+                        <constraint firstAttribute="height" constant="24" id="Fh7-qA-9D4"/>
                     </constraints>
                     <buttonCell key="cell" type="bevel" title="Cancel" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YJ3-7G-cU1">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -37,7 +39,10 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
-                    <rect key="frame" x="160" y="82" width="205" height="29"/>
+                    <rect key="frame" x="160" y="131" width="205" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="kX1-30-jfa"/>
+                    </constraints>
                     <buttonCell key="cell" type="bevel" title="Create a Ring account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -47,7 +52,10 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-ql-oGP">
-                    <rect key="frame" x="160" y="50" width="205" height="29"/>
+                    <rect key="frame" x="160" y="99" width="205" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="OX0-Ne-mlD"/>
+                    </constraints>
                     <buttonCell key="cell" type="bevel" title="Link this device to an account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Z9K-mD-ucr">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -57,7 +65,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QmU-Ya-gnp">
-                    <rect key="frame" x="225" y="20" width="76" height="17"/>
+                    <rect key="frame" x="225" y="69" width="76" height="17"/>
                     <buttonCell key="cell" type="bevel" title="Advanced..." bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="9cQ-dy-J3x">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -72,7 +80,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ivs-g5-gQs">
-                    <rect key="frame" x="160" y="-15" width="205" height="29"/>
+                    <rect key="frame" x="160" y="34" width="205" height="29"/>
                     <buttonCell key="cell" type="bevel" title="Add a SIP Account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H7M-ZV-CGK">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -94,6 +102,7 @@
                 <constraint firstItem="pcF-lX-ex4" firstAttribute="centerX" secondItem="uHQ-s7-X3y" secondAttribute="centerX" id="iq8-Px-R61"/>
                 <constraint firstItem="QmU-Ya-gnp" firstAttribute="centerX" secondItem="uHQ-s7-X3y" secondAttribute="centerX" id="kyQ-sv-2I2"/>
                 <constraint firstItem="pcF-lX-ex4" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="n6m-l1-sty"/>
+                <constraint firstItem="UXp-us-Mbl" firstAttribute="top" secondItem="QmU-Ya-gnp" secondAttribute="bottom" constant="25" id="qRn-oO-10Y"/>
                 <constraint firstItem="Ivs-g5-gQs" firstAttribute="leading" secondItem="pcF-lX-ex4" secondAttribute="leading" id="rrB-3i-N0R"/>
                 <constraint firstItem="pcF-lX-ex4" firstAttribute="top" secondItem="uHQ-s7-X3y" secondAttribute="top" constant="20" id="v64-PJ-sTS"/>
             </constraints>
