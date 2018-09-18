@@ -72,6 +72,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setAutoresizingMask: NSViewHeightSizable];
+    [initialContainer setAutoresizingMask: NSViewHeightSizable];
+    [loadingContainer setAutoresizingMask: NSViewHeightSizable];
+    [errorContainer setAutoresizingMask: NSViewHeightSizable];
     fileButtonTitleBackup = NSLocalizedString(@"Select archive",
                                               @"export account button title");
 }

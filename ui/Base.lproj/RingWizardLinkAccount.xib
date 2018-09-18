@@ -22,7 +22,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="kG1-xB-0op">
-            <rect key="frame" x="0.0" y="0.0" width="355" height="228"/>
+            <rect key="frame" x="0.0" y="0.0" width="453" height="357"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <point key="canvasLocation" x="334" y="754"/>
         </customView>
@@ -123,9 +123,9 @@ DQ
                     </constraints>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="06g-zM-5Qz">
                         <font key="font" metaFont="system"/>
-                        <string key="title">     To link this device to another account, you have two possibilities. You can import your account from the DHT, but first, you need to obtain a PIN code.
-     To generate the PIN code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
-     Or, you can directly import your account from an archive.</string>
+                        <string key="title">     To link this device to another account, you have two possibilities:
+     - you can import your account from the another device, but first, you need to obtain a PIN code. To generate the PIN code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.
+     - or, you can directly import your account from an archive file.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -148,7 +148,7 @@ DQ
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gR3-2L-BlK" userLabel="File button">
                     <rect key="frame" x="252" y="128" width="187" height="33"/>
-                    <buttonCell key="cell" type="push" title="Select archive" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJE-cy-nfQ">
+                    <buttonCell key="cell" type="push" title="Select file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJE-cy-nfQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -173,8 +173,8 @@ Gw
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJh-69-hJQ">
-                    <rect key="frame" x="256" y="167" width="98" height="17"/>
-                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Import Archive" id="kXa-FL-Enf">
+                    <rect key="frame" x="256" y="167" width="119" height="17"/>
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Import archive file" id="kXa-FL-Enf">
                         <font key="font" metaFont="systemSemibold" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -242,7 +242,7 @@ DQ
                     <constraints>
                         <constraint firstAttribute="width" constant="340" id="Obs-3i-AVf"/>
                     </constraints>
-                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Just a moment..." id="zWn-4H-ODH">
+                    <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Linking an account..." id="zWn-4H-ODH">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

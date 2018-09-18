@@ -26,6 +26,7 @@
 @implementation RingWizardChooseVC {
 
 __unsafe_unretained IBOutlet NSButton* createSIPAccount;
+__unsafe_unretained IBOutlet NSLayoutConstraint* buttonTopConstraint;
 
 }
 
@@ -36,9 +37,10 @@ __unsafe_unretained IBOutlet NSButton* createSIPAccount;
     [self.view setAutoresizingMask: NSViewHeightSizable];
 }
 
-- (void)showCancelButton:(BOOL)showCancel{
-    self.isCancelable = showCancel;
+- (void)showCancelButton:(BOOL)showCancel {
     [createSIPAccount setHidden: YES];
+    buttonTopConstraint.constant = showCancel ? 25 : 0;
+    self.isCancelable = showCancel;
 }
 
 - (void)showAdvancedButton:(BOOL)showAdvanced {
@@ -69,9 +71,10 @@ __unsafe_unretained IBOutlet NSButton* createSIPAccount;
 - (IBAction)showCreateSIP:(id)sender
 {
     if ([self.delegate respondsToSelector:@selector(didCompleteWithAction:)]){
+        buttonTopConstraint.constant = 57;
         [delegate didCompleteWithAction:WIZARD_ACTION_ADVANCED];
+        [createSIPAccount setHidden: NO];
     }
-    [createSIPAccount setHidden: NO];
 }
 
 - (IBAction)addSIPAccount:(id)sender

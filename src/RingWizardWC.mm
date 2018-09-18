@@ -45,6 +45,8 @@
 }
 
 @synthesize accountModel;
+CGFloat originX = 0;
+CGFloat originY = 0;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel;
 {
@@ -68,7 +70,13 @@
     [linkAccountWC setDelegate:self];
     [newAccountWC setDelegate:self];
     [self.window setBackgroundColor:[NSColor ringGreyHighlight]];
+   // [self showChooseWithCancelButton:isCancelable andAdvanced: withAdvanced];
+    CGRect frame= self.window.frame;
+    originX = self.window.frame.origin.x;
+    originY = self.window.frame.origin.y;
+    [self.container setAutoresizingMask: NSViewHeightSizable];
     [self showChooseWithCancelButton:isCancelable andAdvanced: withAdvanced];
+
 }
 
 - (void)removeSubviews
@@ -87,18 +95,19 @@
 {
     [self removeSubviews];
     NSRect frame = [self.container frame];
-    CGFloat height = withAdvanced ? minHeight : minHeight - 10;
+    CGFloat height = minHeight;
     float sizeFrame = MAX(height, view.frame.size.height);
     frame.size.height = sizeFrame;
     [view setFrame:frame];
 
     [self.container setFrame:frame];
-    float size = headerHeight + sizeFrame + defaultMargin;
+    [self.container addSubview:view];
+    float size = headerHeight + sizeFrame;
     NSRect frameWindows = self.window.frame;
     frameWindows.size.height = size;
+   // frameWindows.origin.x = originX;
+    //frameWindows.origin.y = originY;
     [self.window setFrame:frameWindows display:YES animate:YES];
-
-    [self.container addSubview:view];
 }
 
 - (void) updateWindowHeight: (CGFloat) height {
@@ -106,38 +115,39 @@
     float sizeFrame = height;
     frame.size.height = sizeFrame;
     [self.container setFrame:frame];
-    float size = headerHeight + sizeFrame + defaultMargin;
+    float size = headerHeight + sizeFrame;
     NSRect frameWindows = self.window.frame;
     frameWindows.size.height = size;
     [self.window setFrame:frameWindows display:YES animate:YES];
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced {
+   // NSRect frame = CGRectMake(0, 0, chooseActiontWC.view.frame.size.width, 0);
+   // chooseActiontWC.view.frame = frame;
+    [self showView:chooseActiontWC.view];
     [chooseActiontWC showCancelButton:showCancel];
     [chooseActiontWC showAdvancedButton:showAdvanced];
     isCancelable = showCancel;
     withAdvanced = showAdvanced;
-    NSRect frame = CGRectMake(0, 0, chooseActiontWC.view.frame.size.width, 0);
-    chooseActiontWC.view.frame = frame;
-    [self showView:chooseActiontWC.view];
-
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel
 {
+    [self showView:chooseActiontWC.view];
     [chooseActiontWC showCancelButton:showCancel];
     isCancelable = showCancel;
-    [self showView:chooseActiontWC.view];
 }
 
 - (void)showNewAccountVC
 {
+    [chooseActiontWC showCancelButton: isCancelable];
     [self showView: newAccountWC.view];
     [newAccountWC show];
 }
 
 - (void)showLinkAccountVC
 {
+    [chooseActiontWC showCancelButton: isCancelable];
     [self showView: linkAccountWC.view];
     [linkAccountWC show];
 }
@@ -145,6 +155,7 @@
 - (void)showSIPAccountVC
 {
     [self showView: addSIPAccountVC.view];
+    [chooseActiontWC showAdvancedButton: NO];
     [addSIPAccountVC show];
 }
 
