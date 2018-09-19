@@ -383,7 +383,7 @@ NSInteger const REQUEST_SEG         = 1;
     NSInteger rows = [smartView numberOfRows];
 
     for (int i = 0; i< rows; i++) {
-        NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary:YES];
+        NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary: NO];
         if (i == row) {
             cellRowView.backgroundColor = [NSColor controlColor];
         } else {
