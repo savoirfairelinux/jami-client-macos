@@ -167,6 +167,8 @@ SET(ringclient_CONTROLLERS
    src/AddSIPAccountVC.h
    src/AccountSettingsVC.mm
    src/AccountSettingsVC.h
+   src/LeaveMessageVC.mm
+   src/LeaveMessageVC.h
 )
 
 SET(ringclient_BACKENDS
@@ -261,6 +263,7 @@ SET(ringclient_XIBS
    MessageCells
    AddSIPAccountVC
    AccountSettings
+   LeaveMessageVC
 )
 
 # Icons
@@ -269,6 +272,10 @@ SET(myApp_ICON ${CMAKE_CURRENT_SOURCE_DIR}/data/appicon.icns)
 SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 SET(ring_ICONS
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_file.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_exit.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_stoprecord.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
