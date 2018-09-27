@@ -36,6 +36,7 @@
 #import "utils.h"
 #import "RingWindowController.h"
 #import "NSString+Extensions.h"
+#import "LeaveMessageVC.h"
 
 @interface ConversationVC () {
 
@@ -46,6 +47,7 @@
 
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
+    LeaveMessageVC* leaveMessageVC;
 
     IBOutlet NSLayoutConstraint *titleCenteredConstraint;
     IBOutlet NSLayoutConstraint* titleTopConstraint;
@@ -55,6 +57,7 @@
     lrc::api::ConversationModel* convModel_;
 
     RingWindowController* delegate;
+    NSMutableArray* leaveMessageConversations;
 
     // All those connections are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
@@ -74,6 +77,10 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     if (self = [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         delegate = mainWindow;
+        leaveMessageVC = [[LeaveMessageVC alloc] initWithNibName:@"LeaveMessageVC" bundle:nil];
+        [[leaveMessageVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+        [self.view addSubview:[leaveMessageVC view] positioned:NSWindowAbove relativeTo:nil];
+        [leaveMessageVC initFrame];
     }
     return self;
 }
@@ -120,6 +127,10 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
     if (convUid_.empty() || convModel_ == nil)
         return;
+    if(![leaveMessageConversations containsObject:@(convUid_.c_str())]) {
+        [leaveMessageVC hide];
+
+    }
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
@@ -247,5 +258,9 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     [CATransaction commit];
 }
 
+- (void) leaveMessageForconversation:(std::string)conversationId conversationModel:(lrc::api::ConversationModel*)conversationModel andAVModel:(const lrc::api::AVModel*)aVModel {
+    [leaveMessageVC setConversationUID: conversationId conversationModel: conversationModel andAVModel: aVModel];
+    [leaveMessageConversations addObject: @(conversationId.c_str())];
+}
 
 @end
