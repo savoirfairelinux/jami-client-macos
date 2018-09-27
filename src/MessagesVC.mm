@@ -50,7 +50,6 @@
     std::string convUid_;
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
-
     QMetaObject::Connection newInteractionSignal_;
 
     // Both are needed to invalidate cached conversation as pointer
@@ -790,6 +789,24 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return [dateFormatter stringFromDate:msgTime];
 }
 
+- (void) updateSendMessageHeight {
+    NSAttributedString *msgAttString = messageField.attributedStringValue;
+    NSRect frame = NSMakeRect(0, 0, messageField.frame.size.width, msgAttString.size.height);
+    NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
+    [[tv textStorage] setAttributedString:msgAttString];
+    [tv sizeToFit];
+    CGFloat height = tv.frame.size.height + MEESAGE_MARGIN * 2;
+    CGFloat newHeight = MIN(SEND_PANEL_MAX_HEIGHT, MAX(SEND_PANEL_DEFAULT_HEIGHT, height));
+    if(messagesBottomMargin.constant == newHeight) {
+        return;
+    }
+    messagesBottomMargin.constant = newHeight;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self scrollToBottom];
+        sendPanelHeight.constant = newHeight;
+    });
+}
+
 #pragma mark - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -877,37 +894,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
         [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
     } else {
-        [[QLPreviewPanel sharedPreviewPanel] updateController];
-        [QLPreviewPanel sharedPreviewPanel].dataSource = self;
-        [[QLPreviewPanel sharedPreviewPanel] setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
-        [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:self];
+        });
     }
-}
-
-- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
-    return 1;
-}
-
-- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
-    return [NSURL fileURLWithPath:previewImage];
-}
-
-- (void) updateSendMessageHeight {
-    NSAttributedString *msgAttString = messageField.attributedStringValue;
-    NSRect frame = NSMakeRect(0, 0, messageField.frame.size.width, msgAttString.size.height);
-    NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
-    [[tv textStorage] setAttributedString:msgAttString];
-    [tv sizeToFit];
-    CGFloat height = tv.frame.size.height + MEESAGE_MARGIN * 2;
-    CGFloat newHeight = MIN(SEND_PANEL_MAX_HEIGHT, MAX(SEND_PANEL_DEFAULT_HEIGHT, height));
-    if(messagesBottomMargin.constant == newHeight) {
-        return;
-    }
-    messagesBottomMargin.constant = newHeight;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self scrollToBottom];
-        sendPanelHeight.constant = newHeight;
-    });
 }
 
 - (IBAction)sendMessage:(id)sender {
@@ -969,6 +959,30 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (void)controlTextDidChange:(NSNotification *)aNotification {
     [self updateSendMessageHeight];
+}
+
+#pragma mark - QLPreviewPanelDataSource
+
+-(void)beginPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    panel.dataSource = self;
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel {
+    panel.dataSource = nil;
+}
+
+-(BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    return YES;
+}
+
+- (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {
+    return 1;
+}
+
+- (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
+    return [NSURL fileURLWithPath:previewImage];
 }
 
 @end
