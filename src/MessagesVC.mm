@@ -38,7 +38,7 @@
 #import <Quartz/Quartz.h>
 
 
-@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource> {
+@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource, QLPreviewPanelDelegate> {
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
     __unsafe_unretained IBOutlet NSView* containerView;
@@ -50,7 +50,6 @@
     std::string convUid_;
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
-
     QMetaObject::Connection newInteractionSignal_;
 
     // Both are needed to invalidate cached conversation as pointer
@@ -877,11 +876,24 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
         [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
     } else {
-        [[QLPreviewPanel sharedPreviewPanel] updateController];
-        [QLPreviewPanel sharedPreviewPanel].dataSource = self;
-        [[QLPreviewPanel sharedPreviewPanel] setAnimationBehavior:NSWindowAnimationBehaviorDocumentWindow];
-        [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[QLPreviewPanel sharedPreviewPanel] makeKeyAndOrderFront:self];
+        });
     }
+}
+
+-(void)beginPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    panel.dataSource = self;
+}
+
+- (void)endPreviewPanelControl:(QLPreviewPanel *)panel {
+    panel.dataSource = nil;
+}
+
+-(BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel
+{
+    return YES;
 }
 
 - (NSInteger)numberOfPreviewItemsInPreviewPanel:(QLPreviewPanel *)panel {

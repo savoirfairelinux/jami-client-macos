@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2018 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-
 #import <Cocoa/Cocoa.h>
 #import <string>
 
@@ -26,21 +25,21 @@ namespace lrc {
         class ConversationModel;
     }
 }
-@class RingWindowController;
-@class LeaveMessageVC;
-@protocol LeaveMessageDelegate;
 
-@interface ConversationVC : NSViewController <LeaveMessageDelegate>
+@protocol LeaveMessageDelegate
 
--(void) initFrame;
--(void) showWithAnimation:(BOOL)animate;
--(void) hideWithAnimation:(BOOL)animate;
-
-- (void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow aVModel:(lrc::api::AVModel*) avModel;
-- (void) presentLeaveMessageView;
-
--(NSViewController*) getMessagesView;
+-(void) messageCompleted;
 
 @end
+
+@interface LeaveMessageVC : NSViewController
+
+@property (retain, nonatomic) id <LeaveMessageDelegate> delegate;
+
+-(void)setConversationUID:(const std::string) convUid conversationModel:(lrc::api::ConversationModel*) convModel;
+-(void) hide;
+-(void) initFrame;
+-(void) setAVModel: (const lrc::api::AVModel*) avmodel;
+
+@end
+

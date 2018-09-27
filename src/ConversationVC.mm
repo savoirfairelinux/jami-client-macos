@@ -36,8 +36,12 @@
 #import "utils.h"
 #import "RingWindowController.h"
 #import "NSString+Extensions.h"
+#import "LeaveMessageVC.h"
+#import <QuickLook/QuickLook.h>
+#import <Quartz/Quartz.h>
+#import "LeaveMessageVC.h"
 
-@interface ConversationVC () {
+@interface ConversationVC () <QLPreviewPanelDataSource, QLPreviewPanelDelegate>{
 
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
     __unsafe_unretained IBOutlet NSTextField *conversationID;
@@ -46,6 +50,7 @@
 
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
+    LeaveMessageVC* leaveMessageVC;
 
     IBOutlet NSLayoutConstraint *titleCenteredConstraint;
     IBOutlet NSLayoutConstraint* titleTopConstraint;
@@ -55,6 +60,7 @@
     lrc::api::ConversationModel* convModel_;
 
     RingWindowController* delegate;
+    NSMutableArray* leaveMessageConversations;
 
     // All those connections are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
@@ -69,13 +75,24 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
 @implementation ConversationVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow aVModel:(lrc::api::AVModel*) avModel
 {
     if (self = [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         delegate = mainWindow;
+        leaveMessageVC = [[LeaveMessageVC alloc] initWithNibName:@"LeaveMessageVC" bundle:nil];
+        [[leaveMessageVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+        [self.view addSubview:[leaveMessageVC view] positioned:NSWindowAbove relativeTo:nil];
+        [leaveMessageVC initFrame];
+        [leaveMessageVC setAVModel: avModel];
+        leaveMessageConversations = [[NSMutableArray alloc] init];
+        leaveMessageVC.delegate = self;
     }
     return self;
+}
+
+-(NSViewController*) getMessagesView {
+    return messagesViewVC;
 }
 
 -(void) clearData {
@@ -120,6 +137,11 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
     if (convUid_.empty() || convModel_ == nil)
         return;
+    if([leaveMessageConversations containsObject:@(convUid_.c_str())]) {
+        [leaveMessageVC setConversationUID: convUid_ conversationModel: convModel_];
+    } else {
+        [leaveMessageVC hide];
+    }
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
@@ -247,5 +269,13 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     [CATransaction commit];
 }
 
+- (void) presentLeaveMessageView {
+    [leaveMessageVC setConversationUID: convUid_ conversationModel: convModel_];
+    [leaveMessageConversations addObject:@(convUid_.c_str())];
+}
+
+-(void) messageCompleted {
+    [leaveMessageConversations removeObject:@(convUid_.c_str())];
+}
 
 @end
