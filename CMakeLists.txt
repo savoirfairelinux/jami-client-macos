@@ -177,6 +177,8 @@ SET(ringclient_CONTROLLERS
    src/AddSIPAccountVC.h
    src/AccountSettingsVC.mm
    src/AccountSettingsVC.h
+   src/LeaveMessageVC.mm
+   src/LeaveMessageVC.h
 )
 
 SET(ringclient_BACKENDS
@@ -278,6 +280,7 @@ SET(ringclient_XIBS
    MessageCells
    AddSIPAccountVC
    AccountSettings
+   LeaveMessageVC
 )
 
 # Icons
