@@ -57,6 +57,7 @@
 #import "utils.h"
 #import "RingWizardWC.h"
 #import "AccountSettingsVC.h"
+#import "LeaveMessageVC.h"
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -82,6 +83,7 @@
     CurrentCallVC* currentCallVC;
     ConversationVC* conversationVC;
     AccountSettingsVC* settingsVC;
+    LeaveMessageVC* leaveMessageVC;
 
     // toolbar menu items
     ChooseAccountVC* chooseAccountVC;
@@ -91,16 +93,17 @@ static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
 NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
 NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemIdentifier";
 
-@synthesize dataTransferModel, accountModel, behaviorController;
+@synthesize dataTransferModel, accountModel, behaviorController, avModel;
 @synthesize wizard;
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
         self.accountModel = accountModel;
         self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
+        self.avModel = avModel;
     }
     return self;
 }
@@ -117,18 +120,22 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:self.accountModel delegate:self];
     settingsVC = [[AccountSettingsVC alloc] initWithNibName:@"AccountSettings" bundle:nil accountmodel:self.accountModel];
+    leaveMessageVC = [[LeaveMessageVC alloc] initWithNibName:@"LeaveMessageVC" bundle:nil];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[conversationVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[settingsVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [[leaveMessageVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
     [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
     [callView addSubview:[conversationVC view] positioned:NSWindowAbove relativeTo:nil];
+    [callView addSubview:[leaveMessageVC view] positioned:NSWindowAbove relativeTo:nil];
     [self.window.contentView addSubview:[settingsVC view] positioned:NSWindowAbove relativeTo:nil];
 
     [currentCallVC initFrame];
     [conversationVC initFrame];
     [settingsVC initFrame];
+    [leaveMessageVC initFrame];
     @try {
         [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
     }
@@ -178,6 +185,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          [currentCallVC showWithAnimation:false];
                          [conversationVC hideWithAnimation:false];
                          [self accountSettingsShouldOpen: NO];
+                         [leaveMessageVC hide];
                      });
 
     QObject::connect(self.behaviorController,
@@ -197,6 +205,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          [currentCallVC showWithAnimation:false];
                          [conversationVC hideWithAnimation:false];
                          [self accountSettingsShouldOpen: NO];
+                         [leaveMessageVC hide];
                      });
 
     QObject::connect(self.behaviorController,
@@ -208,6 +217,19 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [conversationVC showWithAnimation:false];
                          [currentCallVC hideWithAnimation:false];
+                         [self accountSettingsShouldOpen: NO];
+                         [leaveMessageVC hide];
+                     });
+    QObject::connect(self.behaviorController,
+                     &lrc::api::BehaviorController::showLetMessageView,
+                     [self](const std::string& accountId,
+                            const lrc::api::conversation::Info& convInfo){
+                         auto& accInfo = self.accountModel->getAccountInfo(accountId);
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+                         [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
+                         [conversationVC showWithAnimation: false];
+                         [currentCallVC hideWithAnimation: false];
+                         [leaveMessageVC setConversationUID:convInfo.uid conversationModel:accInfo.conversationModel.get() andAVModel:self.avModel];
                          [self accountSettingsShouldOpen: NO];
                      });
 }
