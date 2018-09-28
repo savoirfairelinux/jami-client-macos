@@ -21,6 +21,7 @@
 
 //cocoa
 #import <Quartz/Quartz.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 //Qt
@@ -356,7 +357,20 @@ typedef NS_ENUM(NSInteger, TagViews) {
 - (IBAction)editPhoto:(id)sender
 {
     auto pictureTaker = [IKPictureTaker pictureTaker];
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+    {
+        [pictureTaker setValue:0 forKey:IKPictureTakerAllowsVideoCaptureKey];
+    }
 
+    if(authStatus == AVAuthorizationStatusNotDetermined)
+    {
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            if(!granted){
+                [pictureTaker setValue:0 forKey:IKPictureTakerAllowsVideoCaptureKey];
+            }
+        }];
+    }
     [pictureTaker beginPictureTakerSheetForWindow:[self.view window]
                                      withDelegate:self
                                    didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)

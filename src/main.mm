@@ -31,7 +31,6 @@
 #import <localprofilecollection.h>
 #import <profilemodel.h>
 
-#import "backends/AddressBookBackend.h"
 #import "delegates/ImageManipulationDelegate.h"
 
 int main(int argc, const char *argv[]) {
@@ -60,8 +59,6 @@ int main(int argc, const char *argv[]) {
     }
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
-
-    ProfileModel::instance().addCollection<LocalProfileCollection>(LoadOptions::FORCE_ENABLED);
 
     return NSApplicationMain(argc, argv);
 }
