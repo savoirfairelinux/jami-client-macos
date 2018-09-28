@@ -20,6 +20,7 @@
 
 //cocoa
 #import <Quartz/Quartz.h>
+#import <AVFoundation/AVFoundation.h>
 
 //LRC
 #import <api/lrc.h>
@@ -121,7 +122,22 @@ NSTimer* timeoutTimer;
 - (IBAction)editPhoto:(id)sender
 {
     auto pictureTaker = [IKPictureTaker pictureTaker];
+    if (@available(macOS 10.14, *)) {
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+        {
+            [pictureTaker setValue:0 forKey:IKPictureTakerAllowsVideoCaptureKey];
+        }
 
+        if(authStatus == AVAuthorizationStatusNotDetermined)
+        {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if(!granted){
+                    [pictureTaker setValue:0 forKey:IKPictureTakerAllowsVideoCaptureKey];
+                }
+            }];
+        }
+    }
     [pictureTaker beginPictureTakerSheetForWindow:[self.delegate window]
                                      withDelegate:self
                                    didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)
