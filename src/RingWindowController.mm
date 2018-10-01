@@ -462,10 +462,14 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 {
     if(itemIdentifier == kChangeAccountToolBarItemIdentifier) {
         NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kChangeAccountToolBarItemIdentifier];
+        toolbarItem.maxSize = NSMakeSize(187, 30);
+        toolbarItem.minSize = NSMakeSize(187, 30);
         toolbarItem.view = chooseAccountVC.view;
         return toolbarItem;
     } else if(itemIdentifier == kOpenAccountToolBarItemIdentifier) {
         NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kOpenAccountToolBarItemIdentifier];
+        toolbarItem.maxSize = NSMakeSize(30, 30);
+        toolbarItem.minSize = NSMakeSize(30, 30);
         HoverButton *openSettingsButton = [[HoverButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
         openSettingsButton.bgColor = [NSColor clearColor];
         openSettingsButton.imageColor = [NSColor darkGrayColor];
