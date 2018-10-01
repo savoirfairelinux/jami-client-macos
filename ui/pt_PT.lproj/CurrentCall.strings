@@ -3,7 +3,7 @@
 "2cB-dz-KYg.ibShadowedToolTip" = "Desligar";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
-"9e8-ji-QId.ibShadowedToolTip" = "Juntar chamada";
+"9e8-ji-QId.ibShadowedToolTip" = "Juntar-me à chamada";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
 "ChW-kg-Sja.ibShadowedToolTip" = "Transferir";
@@ -15,7 +15,7 @@
 "Dqv-um-UUk.title" = "URI";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
-"EA3-Q5-Dyj.placeholderString" = "Nome de exibição de entrada";
+"EA3-Q5-Dyj.placeholderString" = "Nome Mostrado de Chamada Recebida";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
 "G0w-c3-9pJ.ibShadowedToolTip" = "Gravar";
@@ -36,13 +36,13 @@
 "VVL-A4-r7n.ibShadowedToolTip" = "Gravar";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
-"X0W-vv-xua.title" = "quer falar com você!";
+"X0W-vv-xua.title" = "quer falar consigo!";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
 "anb-Y8-JQi.ibShadowedToolTip" = "Modo de espera";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Alternar bate-papo";
+"fmp-x4-Pef.ibShadowedToolTip" = "Alternar conversa";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
 "kIZ-mf-moM.ibShadowedToolTip" = "Adicionar participante";
@@ -75,7 +75,7 @@
 "wRO-X4-7IU.title" = "Resposta";
 
 /* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
-"yZ6-1A-ZLT.title" = "querem falar com você!";
+"yZ6-1A-ZLT.title" = "quer falar consigo!";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
 "zsO-T7-9yi.placeholderString" = "Tempo";
