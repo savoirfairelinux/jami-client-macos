@@ -1,0 +1,42 @@
+
+/* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Ring network. People can use it to contact you instead of using your RingID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
+"0qE-Sz-hdc.title" = "Marcando isto, irá registar um nome de utilizador único na rede Ring. As pessoas podem usá-lo para o contactar em vez de usarem o seu RingID, que contém 40 caracteres.";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
+"1TO-Ov-S8j.placeholderString" = "Obrigatório*";
+
+/* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
+"AG5-GR-bii.title" = "Registar nome de utilizador público";
+
+/* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
+"B6x-jj-48R.title" = "Escolha a sua palavra-chave";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
+"BCg-5V-Ek4.placeholderString" = "Obrigatório*";
+
+/* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
+"YIN-YL-JBs.title" = "Só um momento...";
+
+/* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
+"fEY-eO-HwI.title" = "Repita a sua palavra-chave";
+
+/* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
+"gEy-ak-Cgq.placeholderString" = "Introduza o nome";
+
+/* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
+"gki-BR-jc3.title" = "Criar o seu perfil";
+
+/* Class = "NSTextFieldCell"; title = "Create your account"; ObjectID = "qQl-Xn-c88"; */
+"qQl-Xn-c88.title" = "Criar a sua conta";
+
+/* Class = "NSTextFieldCell"; title = "Enter your full name"; ObjectID = "tzf-88-Yn5"; */
+"tzf-88-Yn5.title" = "Introduza o seu nome completo";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
+"v7f-52-GJA.title" = "Cancelar";
+
+/* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
+"zUH-kc-cik.title" = "A sua palavra-chave deve ter pelo menos 6 caracteres. Ela será utilizada para criptografar os dados da sua conta e associar novos dispositivos à sua conta.";
+
+/* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
+"zfA-n9-V4X.title" = "Criar";

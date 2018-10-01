@@ -1,27 +1,27 @@
 
 /* Class = "NSTextFieldCell"; title = "Follow the process on the device. The PIN is only valid for 10 minutes."; ObjectID = "2n6-m3-fbj"; */
-"2n6-m3-fbj.title" = "Siga o processo no seu dispositivo.\nSeu PIN só será válido por 10 minutos.";
+"2n6-m3-fbj.title" = "Siga o processo no seu dispositivo.\nO seu PIN só será válido por 10 minutos.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
-"3ik-rY-Gig.title" = "Entre com seu PIN";
+"3ik-rY-Gig.title" = "Introduza o seu PIN";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "4ev-TK-8Yt"; */
 "4ev-TK-8Yt.title" = "Cancelar";
 
 /* Class = "NSTextFieldCell"; title = "Go to the account management setting of the device, choose the Ring account to use and select \"Link another device to this account\".  "; ObjectID = "4me-D9-6GK"; */
-"4me-D9-6GK.title" = "Vá para as configurações de gerenciamento de conta, escolha a conta Ring a usar e selecione \"Associar outro dispositivo à esta conta\". ↵";
+"4me-D9-6GK.title" = "Aceda às configurações de gestão de conta no dispositivo, escolha a \nconta Ring a usar e selecione \"Associar outro dispositivo a esta conta\". ↵";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
-"8b8-bt-eAj.title" = "Link";
+"8b8-bt-eAj.title" = "Associar";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
-"DyG-SJ-U1Q.title" = "Ocorreu um erro, por favor, confira sua senha e pin.";
+"DyG-SJ-U1Q.title" = "Ocorreu um erro. Por favor verifique a sua palavra-chave e o PIN.";
 
 /* Class = "NSTextFieldCell"; title = "2. Generate a PIN code"; ObjectID = "GfW-ah-8U1"; */
-"GfW-ah-8U1.title" = "2. Criar um Código PIN";
+"GfW-ah-8U1.title" = "2. Gerar um Código PIN";
 
 /* Class = "NSTextFieldCell"; title = "1. Grab a device with the account you want to use"; ObjectID = "HcT-yD-KVo"; */
-"HcT-yD-KVo.title" = "1. Pegue um dispositivo com a conta que deseja usar";
+"HcT-yD-KVo.title" = "1. Pegue num dispositivo com a conta que deseja usar";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "M4C-GY-B6t"; */
 "M4C-GY-B6t.title" = "Só um momento...";
@@ -30,7 +30,7 @@
 "Pcj-BY-tou.title" = "Cancelar";
 
 /* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "U2K-fu-INc"; */
-"U2K-fu-INc.title" = "Entre com a senha da sua conta Ring";
+"U2K-fu-INc.title" = "Introduza a palavra-chave da sua conta Ring";
 
 /* Class = "NSButtonCell"; title = "I'm ready"; ObjectID = "XN4-uc-BSt"; */
 "XN4-uc-BSt.title" = "Estou pronto";

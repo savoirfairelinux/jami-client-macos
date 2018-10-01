@@ -1,18 +1,18 @@
 
 /* Class = "NSButtonCell"; title = "Require certificates for incoming TLS connections"; ObjectID = "1f9-X5-ykb"; */
-"1f9-X5-ykb.title" = "Requer certificados para conexões de entrada TLS";
+"1f9-X5-ykb.title" = "Necessita de certificados para conexões TLS recebidas";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Verificar certificados, como um cliente";
+"1xi-9G-zOX.title" = "Verificar certificados, como cliente";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
-"2e5-zS-ghg.title" = "Use lista de cifra personalizada";
+"2e5-zS-ghg.title" = "Usar lista de cifras personalizada";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
 "5LC-T6-hpk.placeholderString" = "célula de cifra";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
-"7c2-kF-dcs.placeholderString" = "Senha...";
+"7c2-kF-dcs.placeholderString" = "Palavra-chave...";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
 "9Q3-1W-Lh3.title" = "Tempo limite de negociação";
@@ -36,7 +36,7 @@
 "oTT-gO-fqM.title" = "Usar transporte TLS";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "uOE-XA-5gW"; */
-"uOE-XA-5gW.title" = "Método de Protocolo TLS";
+"uOE-XA-5gW.title" = "Método de protocolo TLS";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
 "vPF-Rp-aR6.title" = "Lista de Autoridades de Certificados";

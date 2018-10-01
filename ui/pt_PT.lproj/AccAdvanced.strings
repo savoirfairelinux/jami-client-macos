@@ -1,72 +1,72 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "0eY-9x-bAr"; */
-"0eY-9x-bAr.placeholderString" = "Kiszolgáló URL…";
+"0eY-9x-bAr.placeholderString" = "URL do servidor...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
-"6u9-cM-ep0.placeholderString" = "tartomány…";
+"6u9-cM-ep0.placeholderString" = "domínio...";
 
 /* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
-"Atv-t7-5YJ.title" = "Ugyanaz, mint a helyi paraméterek";
+"Atv-t7-5YJ.title" = "Igual aos parâmetros locais";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "FQ4-fp-Pxj"; */
-"FQ4-fp-Pxj.title" = "Minimum";
+"FQ4-fp-Pxj.title" = "Mín";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Hang RTP porttartomány";
+"Jho-hi-Mvg.title" = "Intervalo de portas RTP de áudio";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
-"K9I-vh-jeu.title" = "Hálózati interfész";
+"K9I-vh-jeu.title" = "Interface da Rede";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Nyilvános cím és port beállítása";
+"OL5-DI-aCq.title" = "Configurar endereço e portas publicadas";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
-"OR2-la-DUE.placeholderString" = "jelszó…";
+"OR2-la-DUE.placeholderString" = "palavra-chave...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "username..."; ObjectID = "P7k-xH-2mr"; */
-"P7k-xH-2mr.placeholderString" = "felhasználónév…";
+"P7k-xH-2mr.placeholderString" = "nome de utilizador...";
 
 /* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
-"QS0-TJ-NQh.title" = "TURN használata";
+"QS0-TJ-NQh.title" = "A usar TURN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
-"Qf3-E3-5U6.title" = "Nyilvános cím";
+"Qf3-E3-5U6.title" = "Endereço Publicado";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Videó RTP porttartomány";
+"XA8-Sy-CYG.title" = "Intervalo de portas RTP de vídeo";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
-"a6W-wm-OmC.title" = "Minimum";
+"a6W-wm-OmC.title" = "Mín";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "dbq-qU-93x"; */
-"dbq-qU-93x.title" = "Maximum";
+"dbq-qU-93x.title" = "Máx";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "fB0-X8-GXk"; */
-"fB0-X8-GXk.title" = "Rádió";
+"fB0-X8-GXk.title" = "Rádio";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
-"fCd-4d-sP0.title" = "Regisztráció lejárta";
+"fCd-4d-sP0.title" = "O registo expirou";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
-"gVd-Dw-1B4.title" = "STUN használata";
+"gVd-Dw-1B4.title" = "A usar STUN";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "oa2-Pe-6Uw"; */
-"oa2-Pe-6Uw.title" = "Maximum";
+"oa2-Pe-6Uw.title" = "Máx";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "sTk-1C-1KO"; */
-"sTk-1C-1KO.title" = "Cím";
+"sTk-1C-1KO.title" = "Endereço";
 
 /* Class = "NSTextFieldCell"; title = "Local port"; ObjectID = "shs-Xm-qnY"; */
-"shs-Xm-qnY.title" = "Helyi port";
+"shs-Xm-qnY.title" = "Porta local";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
-"uzg-09-8vi.placeholderString" = "Kiszolgáló url…";
+"uzg-09-8vi.placeholderString" = "URL do servidor...";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "wl8-YK-M76"; */
-"wl8-YK-M76.title" = "Port";
+"wl8-YK-M76.title" = "Porta";
 
 /* Class = "NSTextFieldCell"; title = "seconds"; ObjectID = "xGw-j0-4ID"; */
-"xGw-j0-4ID.title" = "másodperc";
+"xGw-j0-4ID.title" = "segundos";
 
 /* Class = "NSTextFieldCell"; title = "Registration"; ObjectID = "yB5-ET-gBL"; */
-"yB5-ET-gBL.title" = "Regisztráció";
+"yB5-ET-gBL.title" = "Registo";
