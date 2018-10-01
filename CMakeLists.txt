@@ -13,7 +13,7 @@ IF("${RING_VERSION}" STREQUAL "")
 ENDIF("${RING_VERSION}" STREQUAL "")
 # if build for App Store version and build number should be incremented
 IF("${RELEASE_TYPE}" STREQUAL "AppStore")
-   SET(RING_VERSION_NAME "1.3")
+   SET(RING_VERSION_NAME "1.31")
 ELSE()
    SET(RING_VERSION_NAME "Live Free or Die")
 ENDIF()
