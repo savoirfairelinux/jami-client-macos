@@ -69,11 +69,11 @@
     NSMenuItem *menuItem = ([self enclosingMenuItem]);
     BOOL isHighlighted = [menuItem isHighlighted];
     if (isHighlighted) {
-        [self.backgroundView setFillColor:[NSColor controlLightHighlightColor]];
+        [self.backgroundView setFillColor:[NSColor whiteColor]];
     } else {
-        [self.backgroundView setFillColor:[NSColor controlColor]];
+        [self.backgroundView setFillColor:[NSColor ringGreyHighlight]];
     }
-     [super drawRect: rect];
+    [super drawRect: rect];
 }
 
 @end
