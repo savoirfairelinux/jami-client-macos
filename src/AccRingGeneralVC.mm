@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-   // [photoView setBordered:YES];
+    [photoView setBordered:YES];
     [addProfilePhotoImage setWantsLayer: YES];
     devicesTableView.delegate = self;
     devicesTableView.dataSource = self;
@@ -141,7 +141,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
     QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba, nil);
     if(QtMac::toNSImage(qvariant_cast<QPixmap>(photo))) {
-        //[photoView setBordered:NO];
+        [photoView setBordered:NO];
         NSImage *image = QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
         CGFloat newSize = MIN(image.size.height, image.size.width);
         image = [image cropImageToSize:CGSizeMake(newSize, newSize)];
@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [addProfilePhotoImage setHidden:YES];
     } else {
         [photoView setImage:nil];
-       // [photoView setBordered:YES];
+        [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
     }
     NSString* displayName = @(account.profileInfo.alias.c_str());
@@ -235,13 +235,13 @@ typedef NS_ENUM(NSInteger, TagViews) {
         CGFloat newSize = MIN(image.size.height, image.size.width);
         outputImage = [outputImage cropImageToSize:CGSizeMake(newSize, newSize)];
         [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
-       // [photoView setBordered:NO];
+        [photoView setBordered:NO];
         [addProfilePhotoImage setHidden:YES];
         auto imageToBytes = QByteArray::fromNSData([outputImage TIFFRepresentation]).toBase64();
         std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
         self.accountModel->setAvatar(self.selectedAccountID, imageToString);
     } else if(!photoView.image) {
-        //[photoView setBordered:YES];
+        [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
     }
 }

@@ -13,7 +13,6 @@
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="qrcodeView" destination="dZR-JL-MY4" id="6Jf-42-qwY"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
-                <outlet property="ringLabelTrailingConstraint" destination="4u6-30-3Ac" id="SnB-9E-wuO"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
                 <outlet property="smartViewVC" destination="jrf-42-1l2" id="lM5-3U-244"/>
                 <outlet property="welcomeContainer" destination="D6e-KX-8gC" id="zV3-38-ClK"/>
@@ -460,21 +459,31 @@
                                             <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="r7A-Pi-WHz"/>
                                         </connections>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID" customClass="RingIDField">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="phj-Jr-1k3" customClass="RingIDField">
                                         <rect key="frame" x="20" y="64" width="400" height="26"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID">
+                                                <rect key="frame" x="-2" y="3" width="404" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="400" id="ywt-Ml-u9k"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="qCF-Zf-vZg">
+                                                    <font key="font" size="15" name="HelveticaNeue"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="TYe-h2-pPT"/>
-                                            <constraint firstAttribute="width" constant="400" id="ywt-Ml-u9k"/>
+                                            <constraint firstAttribute="height" constant="26" id="MfX-MV-DHO"/>
+                                            <constraint firstItem="JN3-vO-zcd" firstAttribute="centerX" secondItem="phj-Jr-1k3" secondAttribute="centerX" id="NjD-HV-YiQ"/>
+                                            <constraint firstAttribute="width" constant="400" id="OiR-zK-Cwd"/>
+                                            <constraint firstItem="JN3-vO-zcd" firstAttribute="centerY" secondItem="phj-Jr-1k3" secondAttribute="centerY" id="aWE-ds-8AU"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="border" alignment="center" id="qCF-Zf-vZg">
-                                            <font key="font" size="15" name="HelveticaNeue"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
                                         <connections>
-                                            <binding destination="-2" name="hidden" keyPath="self.isSIPAccount" id="llK-P7-CiI"/>
+                                            <binding destination="-2" name="hidden" keyPath="self.isSIPAccount" id="wn4-Ot-QG5"/>
                                         </connections>
-                                    </textField>
+                                    </customView>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
                                         <rect key="frame" x="148" y="175" width="225" height="75"/>
                                         <constraints>
@@ -528,19 +537,18 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="f62-JV-dgr" firstAttribute="top" secondItem="D6e-KX-8gC" secondAttribute="top" constant="20" id="0b6-u8-yQg"/>
-                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="leading" secondItem="JN3-vO-zcd" secondAttribute="trailing" priority="999" constant="11" id="4u6-30-3Ac"/>
-                                    <constraint firstItem="Oac-o7-2Ge" firstAttribute="centerY" secondItem="JN3-vO-zcd" secondAttribute="centerY" id="9sL-W9-dDT"/>
+                                    <constraint firstItem="Oac-o7-2Ge" firstAttribute="centerY" secondItem="phj-Jr-1k3" secondAttribute="centerY" id="7Mi-oH-cpB"/>
                                     <constraint firstItem="VJ1-xk-v5e" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="ID9-YU-lFv"/>
                                     <constraint firstAttribute="trailing" secondItem="Oac-o7-2Ge" secondAttribute="trailing" constant="20" id="J2a-v7-JnP"/>
-                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="centerY" secondItem="JN3-vO-zcd" secondAttribute="centerY" id="KqQ-sn-ZT0"/>
                                     <constraint firstAttribute="height" constant="270" id="PLl-IK-oQA"/>
                                     <constraint firstItem="Oac-o7-2Ge" firstAttribute="leading" secondItem="eXV-BT-B6J" secondAttribute="trailing" constant="9" id="TPn-gc-dPs"/>
                                     <constraint firstItem="f62-JV-dgr" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="VTp-M2-i33"/>
-                                    <constraint firstItem="JN3-vO-zcd" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="8" id="WCt-uf-zGJ"/>
                                     <constraint firstItem="kFj-Sh-o5u" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="X8P-ae-ug3"/>
+                                    <constraint firstItem="phj-Jr-1k3" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="8" id="bWw-O7-rZE"/>
+                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="centerY" secondItem="phj-Jr-1k3" secondAttribute="centerY" id="hRc-dW-Yyd"/>
+                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="leading" secondItem="phj-Jr-1k3" secondAttribute="trailing" constant="11" id="iRA-Sd-F98"/>
                                     <constraint firstItem="eXV-BT-B6J" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="6" id="jfB-b4-Gyc"/>
                                     <constraint firstAttribute="width" constant="520" id="nXn-Wh-VAi"/>
-                                    <constraint firstItem="JN3-vO-zcd" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" priority="750" id="uWT-kG-rQw"/>
                                     <constraint firstItem="kFj-Sh-o5u" firstAttribute="top" secondItem="VJ1-xk-v5e" secondAttribute="bottom" constant="8" id="wQ0-UB-Yo2"/>
                                     <constraint firstItem="VJ1-xk-v5e" firstAttribute="top" secondItem="f62-JV-dgr" secondAttribute="bottom" constant="8" id="zNb-f8-m6q"/>
                                 </constraints>

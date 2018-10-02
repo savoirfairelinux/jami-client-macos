@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccAdvancedSipVC">
@@ -121,8 +119,8 @@
                             <constraint firstItem="aBx-M9-wnx" firstAttribute="top" secondItem="ekW-LY-oqG" secondAttribute="bottom" constant="15" id="sGM-pf-0GL"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Zuz-jy-rLn">
                     <rect key="frame" x="0.0" y="1193" width="620" height="485"/>
@@ -208,7 +206,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="mYs-pD-pXF">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -264,7 +262,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="egE-Ir-0cY">
-                                <rect key="frame" x="233" y="165" width="76" height="26"/>
+                                <rect key="frame" x="233" y="165" width="77" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="8bw-iH-XGl" id="dcE-rf-Tm5">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -296,7 +294,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="Mrt-9v-Uj4">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -342,14 +340,14 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IoY-ZS-7VV">
-                                <rect key="frame" x="235" y="104" width="100" height="20"/>
+                                <rect key="frame" x="235" y="105" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="dUK-le-Goh"/>
                                     <constraint firstAttribute="width" constant="100" id="ta2-QL-xwf"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="mEp-p9-tWW">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -357,7 +355,7 @@
                                 </connections>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RP0-Do-gcb">
-                                <rect key="frame" x="334" y="100" width="19" height="27"/>
+                                <rect key="frame" x="334" y="101" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65535" id="dsa-z0-WJE"/>
                                 <connections>
                                     <action selector="valueDidChange:" target="-2" id="1oy-K8-jC3"/>
@@ -422,8 +420,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Owe-Lu-zR2" secondAttribute="bottom" constant="20" id="jNF-F2-EkV"/>
                     </constraints>
-                    <color key="borderColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ekM-Cg-DEo">
                     <rect key="frame" x="0.0" y="804" width="620" height="369"/>
@@ -479,7 +477,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="KcQ-HO-vOe">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -494,7 +492,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WFm-Xg-Rlu">
-                                <rect key="frame" x="38" y="206" width="86" height="18"/>
+                                <rect key="frame" x="38" y="206" width="85" height="18"/>
                                 <buttonCell key="cell" type="check" title="Use TURN" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Gwi-Mp-NpZ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -529,7 +527,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="5g0-Nd-Ptp">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -541,7 +539,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="laV-DS-wae">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -553,7 +551,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="CQN-CP-bJS">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -565,7 +563,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="mWt-yj-FVC">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -593,7 +591,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="6KZ-JC-XX7">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -608,7 +606,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="jre-v9-By2">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -616,14 +614,14 @@
                                 </connections>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TaV-85-mCI">
-                                <rect key="frame" x="377" y="294" width="19" height="27"/>
+                                <rect key="frame" x="377" y="293" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65535" id="fow-yQ-gYK"/>
                                 <connections>
                                     <action selector="valueDidChange:" target="-2" id="S8O-9h-D05"/>
                                 </connections>
                             </stepper>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MYL-ee-crQ">
-                                <rect key="frame" x="258" y="262" width="19" height="27"/>
+                                <rect key="frame" x="258" y="261" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65535" id="n6p-9C-ftc"/>
                                 <connections>
                                     <action selector="valueDidChange:" target="-2" id="mME-Gr-iMX"/>
@@ -685,8 +683,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="vnG-dH-RtH" secondAttribute="bottom" constant="20" id="xeK-Nm-M8u"/>
                     </constraints>
-                    <color key="borderColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="A31-3Y-z4R">
                     <rect key="frame" x="0.0" y="632" width="620" height="152"/>
@@ -726,7 +724,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="CeS-VR-vU3">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -734,7 +732,7 @@
                                 </connections>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fXf-Az-A7P">
-                                <rect key="frame" x="199" y="16" width="19" height="27"/>
+                                <rect key="frame" x="199" y="15" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65535" id="7RD-Re-qoB"/>
                                 <connections>
                                     <action selector="valueDidChange:" target="-2" id="kzx-pt-er8"/>
@@ -758,7 +756,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="m0F-fc-Ath">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -786,8 +784,8 @@
                             <constraint firstItem="UJW-6B-wXE" firstAttribute="top" secondItem="8Y1-hZ-pq5" secondAttribute="bottom" constant="15" id="yff-Fx-MSk"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="cwV-lc-jju">
                     <rect key="frame" x="0.0" y="259" width="300" height="353"/>
@@ -816,7 +814,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="" width="253" minWidth="40" maxWidth="1000" id="uKm-dm-acu">
+                                                <tableColumn width="253" minWidth="40" maxWidth="1000" id="uKm-dm-acu">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -879,11 +877,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="234" id="0p8-WN-wM4"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Ba0-vO-MMF">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Ba0-vO-MMF">
                                     <rect key="frame" x="1" y="217" width="236" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="0ta-9B-BZm">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="0ta-9B-BZm">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -930,8 +928,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="wHU-iX-91g"/>
                     </constraints>
-                    <color key="borderColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="MBR-AC-HFq">
                     <rect key="frame" x="319" y="259" width="300" height="353"/>
@@ -1015,7 +1013,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="5FI-uT-Eg9">
-                                                                    <rect key="frame" x="223" y="17" width="22" height="18"/>
+                                                                    <rect key="frame" x="223" y="16" width="22" height="18"/>
                                                                     <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7Ra-Rx-VYM">
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
@@ -1042,11 +1040,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="234" id="Ie1-uA-KFc"/>
                                 </constraints>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="6f3-tz-lVA">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="6f3-tz-lVA">
                                     <rect key="frame" x="1" y="217" width="236" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="oWf-ht-xYu">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="oWf-ht-xYu">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1106,8 +1104,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="dxj-bU-vaM"/>
                     </constraints>
-                    <color key="borderColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="wyZ-Hb-BNf">
                     <rect key="frame" x="0.0" y="20" width="620" height="219"/>
@@ -1158,7 +1156,7 @@
                                         <real key="maximum" value="65534"/>
                                     </numberFormatter>
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -1166,7 +1164,7 @@
                                 </connections>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CJp-f0-CVS">
-                                <rect key="frame" x="171" y="80" width="19" height="27"/>
+                                <rect key="frame" x="171" y="79" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="fb8-Fb-KfF"/>
                                 <connections>
                                     <action selector="valueDidChange:" target="-2" id="vYd-jk-JPn"/>
@@ -1187,7 +1185,7 @@
                                         <real key="maximum" value="65534"/>
                                     </numberFormatter>
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -1228,7 +1226,7 @@
                                         <real key="maximum" value="65534"/>
                                     </numberFormatter>
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -1236,7 +1234,7 @@
                                 </connections>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cBH-m7-dIR">
-                                <rect key="frame" x="171" y="16" width="19" height="27"/>
+                                <rect key="frame" x="171" y="15" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="1UJ-Yy-aOP"/>
                                 <connections>
                                     <action selector="valueDidChange:" target="-2" id="k5z-3q-bbb"/>
@@ -1257,7 +1255,7 @@
                                         <real key="maximum" value="65534"/>
                                     </numberFormatter>
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
@@ -1265,7 +1263,7 @@
                                 </connections>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iGx-YR-Efs">
-                                <rect key="frame" x="471" y="16" width="19" height="27"/>
+                                <rect key="frame" x="471" y="15" width="19" height="27"/>
                                 <stepperCell key="cell" continuous="YES" alignment="left" maxValue="65534" id="dhg-QK-CT6"/>
                                 <connections>
                                     <action selector="valueDidChange:" target="-2" id="WFo-zc-52g"/>
@@ -1312,8 +1310,8 @@
                             <constraint firstItem="fgZ-CW-Fvh" firstAttribute="leading" secondItem="z9P-Rk-RQN" secondAttribute="trailing" constant="10" id="vMb-el-uDN"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
-                    <color key="fillColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </box>
             </subviews>
             <constraints>

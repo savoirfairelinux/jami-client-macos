@@ -19,6 +19,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface RingIDField : NSTextField
+@interface RingIDField : NSView
 
 @end

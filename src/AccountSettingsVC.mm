@@ -92,6 +92,7 @@ CGFloat const VIEW_INSET = 20;
         [self hide];
         return;
     }
+    [self.view.window makeFirstResponder:self.view];
     [accountGeneralVC setSelectedAccount: selectedAccountID];
     [accountAdvancedVC setSelectedAccount: selectedAccountID];
     [self displayGeneralSettings];
