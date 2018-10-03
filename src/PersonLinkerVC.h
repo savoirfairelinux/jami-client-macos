@@ -29,11 +29,9 @@
 
 @end
 
-class ContactMethod;
 
 @interface PersonLinkerVC : NSViewController <NSOutlineViewDelegate>
 
-@property ContactMethod* const methodToLink;
 
 /*
  * Delegate to inform about completion of the linking process between

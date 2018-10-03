@@ -28,7 +28,6 @@
 
 //LRC
 #import <globalinstances.h>
-#import <QItemSelectionModel.h>
 #import <interfaces/pixmapmanipulatori.h>
 #import <api/newaccountmodel.h>
 #import <api/account.h>

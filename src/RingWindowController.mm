@@ -21,16 +21,12 @@
 #include <qrencode.h>
 #include <memory>
 
-//Qt
-#import <QItemSelectionModel>
-#import <QItemSelection>
 
 //LRC
-#import <callmodel.h>
-#import <account.h>
-#import <call.h>
-#import <recentmodel.h>
-#import <AvailableAccountModel.h>
+//#import <callmodel.h>
+//#import <account.h>
+//#import <call.h>
+//#import <recentmodel.h>
 #import <api/lrc.h>
 #import <api/account.h>
 #import <api/newaccountmodel.h>

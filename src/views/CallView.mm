@@ -169,15 +169,15 @@
     /*------------------------------------------------------
      method that should handle the drop data
      --------------------------------------------------------*/
-    if ( [sender draggingSource] != self ) {
-        NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-        Call* call = [self getCurrentCall];
-        if (call == nullptr) return;
-        if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-            outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
-            return YES;
-        }
-    }
+//    if ( [sender draggingSource] != self ) {
+//        NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
+//        Call* call = [self getCurrentCall];
+//        if (call == nullptr) return;
+//        if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
+//            outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
+//            return YES;
+//        }
+//    }
 
     return NO;
 }
@@ -237,63 +237,63 @@
 
 - (void) switchInput:(NSMenuItem*) sender
 {
-    int index = [contextualMenu indexOfItem:sender];
-    Call* call = [self getCurrentCall];
-    if (call == nullptr) return;
-    if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-        outVideo->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
-    }
+//    int index = [contextualMenu indexOfItem:sender];
+//    Call* call = [self getCurrentCall];
+//    if (call == nullptr) return;
+//    if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
+//        outVideo->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
+//    }
 }
 
 - (void) captureScreen:(NSMenuItem*) sender
 {
-    Call* call = [self getCurrentCall];
-    if (call == nullptr) return;
-    if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-        NSScreen *mainScreen = [NSScreen mainScreen];
-        NSRect screenFrame = mainScreen.frame;
-        QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
-        outVideo->sourceModel()->setDisplay(0, captureRect);
-    }
+//    Call* call = [self getCurrentCall];
+//    if (call == nullptr) return;
+//    if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
+//        NSScreen *mainScreen = [NSScreen mainScreen];
+//        NSRect screenFrame = mainScreen.frame;
+//        QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
+//        outVideo->sourceModel()->setDisplay(0, captureRect);
+//    }
 }
 
 - (void) chooseFile:(NSMenuItem*) sender
 {
-    Call* call = [self getCurrentCall];
-    if (call == nullptr) return;
-
-    NSOpenPanel *browsePanel = [[NSOpenPanel alloc] init];
-    [browsePanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
-    [browsePanel setCanChooseFiles:YES];
-    [browsePanel setCanChooseDirectories:NO];
-    [browsePanel setCanCreateDirectories:NO];
-
-    //NSMutableArray* fileTypes = [[NSMutableArray alloc] initWithArray:[NSImage imageTypes]];
-    NSMutableArray* fileTypes = [NSMutableArray array];
-    [fileTypes addObject:(__bridge NSString *)kUTTypeVideo];
-    [fileTypes addObject:(__bridge NSString *)kUTTypeMovie];
-    [fileTypes addObject:(__bridge NSString *)kUTTypeImage];
-    [browsePanel setAllowedFileTypes:fileTypes];
-    [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
-        if (result == NSFileHandlingPanelOKButton) {
-            NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
-            if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-                outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
-            }
-        }
-    }];
+//    Call* call = [self getCurrentCall];
+//    if (call == nullptr) return;
+//
+//    NSOpenPanel *browsePanel = [[NSOpenPanel alloc] init];
+//    [browsePanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+//    [browsePanel setCanChooseFiles:YES];
+//    [browsePanel setCanChooseDirectories:NO];
+//    [browsePanel setCanCreateDirectories:NO];
+//
+//    //NSMutableArray* fileTypes = [[NSMutableArray alloc] initWithArray:[NSImage imageTypes]];
+//    NSMutableArray* fileTypes = [NSMutableArray array];
+//    [fileTypes addObject:(__bridge NSString *)kUTTypeVideo];
+//    [fileTypes addObject:(__bridge NSString *)kUTTypeMovie];
+//    [fileTypes addObject:(__bridge NSString *)kUTTypeImage];
+//    [browsePanel setAllowedFileTypes:fileTypes];
+//    [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
+//        if (result == NSFileHandlingPanelOKButton) {
+//            NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
+//            if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
+//                outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
+//            }
+//        }
+//    }];
 
 }
 
--(Call *) getCurrentCall {
-    auto calls = CallModel::instance().getActiveCalls();
-    Call* call = nullptr;
-    for (int i = 0; i< calls.size(); i++) {
-        if (calls.at(i)->historyId() == QString::fromStdString(self.callId)) {
-            return calls.at(i);
-        }
-    }
-    return call;
-}
+//-(Call *) getCurrentCall {
+//    auto calls = CallModel::instance().getActiveCalls();
+//    Call* call = nullptr;
+//    for (int i = 0; i< calls.size(); i++) {
+//        if (calls.at(i)->historyId() == QString::fromStdString(self.callId)) {
+//            return calls.at(i);
+//        }
+//    }
+//    return call;
+//}
 
 @end

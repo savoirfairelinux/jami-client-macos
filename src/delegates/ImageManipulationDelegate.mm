@@ -35,8 +35,8 @@
 
 //LRC
 #import <person.h>
-#import <profilemodel.h>
-#import <profile.h>
+//#import <profilemodel.h>
+//#import <profile.h>
 #import <contactmethod.h>
 #import <api/conversation.h>
 #import <api/account.h>
@@ -423,18 +423,18 @@ namespace Interfaces {
         Q_UNUSED(level)
         return QVariant();
     }
-    QVariant
-    ImageManipulationDelegate::historySortingCategoryIcon(const CategorizedHistoryModel::SortedProxy::Categories cat) const
-    {
-        Q_UNUSED(cat)
-        return QVariant();
-    }
-    QVariant
-    ImageManipulationDelegate::contactSortingCategoryIcon(const CategorizedContactModel::SortedProxy::Categories cat) const
-    {
-        Q_UNUSED(cat)
-        return QVariant();
-    }
+//    QVariant
+//    ImageManipulationDelegate::historySortingCategoryIcon(const CategorizedHistoryModel::SortedProxy::Categories cat) const
+//    {
+//        Q_UNUSED(cat)
+//        return QVariant();
+//    }
+//    QVariant
+//    ImageManipulationDelegate::contactSortingCategoryIcon(const CategorizedContactModel::SortedProxy::Categories cat) const
+//    {
+//        Q_UNUSED(cat)
+//        return QVariant();
+//    }
 
     QVariant
     ImageManipulationDelegate::userActionIcon(const UserActionElement& state) const
@@ -479,8 +479,8 @@ namespace Interfaces {
     QVariant ImageManipulationDelegate::decorationRole(const Account* acc)
     {
         Q_UNUSED(acc)
-        if (auto pro = ProfileModel::instance().selectedProfile())
-            return contactPhoto(pro->person(), decorationSize);
+//        if (auto pro = ProfileModel::instance().selectedProfile())
+//            return contactPhoto(pro->person(), decorationSize);
         return QVariant();
     }
 

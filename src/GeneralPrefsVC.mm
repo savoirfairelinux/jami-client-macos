@@ -26,10 +26,6 @@
 #import <QPixmap>
 
 //LRC
-#import <categorizedhistorymodel.h>
-#import <profilemodel.h>
-#import <profile.h>
-#import <person.h>
 #import <globalinstances.h>
 #import <media/recordingmodel.h>
 #import <api/datatransfermodel.h>
@@ -52,9 +48,6 @@
     __unsafe_unretained IBOutlet NSTextField* historyTextField;
     __unsafe_unretained IBOutlet NSStepper* historyStepper;
     __unsafe_unretained IBOutlet NSButton* historySwitch;
-    __unsafe_unretained IBOutlet NSButton* photoView;
-    __unsafe_unretained IBOutlet NSTextField* profileNameField;
-    __unsafe_unretained IBOutlet NSImageView* addProfilePhotoImage;
     __unsafe_unretained IBOutlet NSButton *downloadFolder;
     __unsafe_unretained IBOutlet NSTextField *downloadFolderLabel;
 }
@@ -81,14 +74,14 @@
 
     [startUpButton setState:[self isLaunchAtStartup]];
 
-    int historyLimit = CategorizedHistoryModel::instance().historyLimit();
-    [historyTextField setStringValue:[NSString stringWithFormat:@"%d", historyLimit]];
-    [historyStepper setIntValue:historyLimit];
+   // int historyLimit = CategorizedHistoryModel::instance().historyLimit();
+   // [historyTextField setStringValue:[NSString stringWithFormat:@"%d", historyLimit]];
+   // [historyStepper setIntValue:historyLimit];
 
-    BOOL limited = CategorizedHistoryModel::instance().isHistoryLimited();
-    [historySwitch setState:limited];
-    [historyStepper setEnabled:limited];
-    [historyTextField setEnabled:limited];
+//    BOOL limited = CategorizedHistoryModel::instance().isHistoryLimited();
+//    [historySwitch setState:limited];
+//    [historyStepper setEnabled:limited];
+//    [historyTextField setEnabled:limited];
 #if ENABLE_SPARKLE
     [sparkleContainer setHidden:NO];
     SUUpdater *updater = [SUUpdater sharedUpdater];
@@ -99,23 +92,6 @@
 #else
     [sparkleContainer setHidden:YES];
 #endif
-
-    [photoView setWantsLayer: YES];
-    photoView.layer.cornerRadius = photoView.frame.size.width / 2;
-    photoView.layer.masksToBounds = YES;
-    [addProfilePhotoImage setWantsLayer: YES];
-    [addProfilePhotoImage setHidden:NO];
-    [photoView setBordered:YES];
-
-    if (auto pro = ProfileModel::instance().selectedProfile()) {
-        [profileNameField setStringValue:pro->person()->formattedName().toNSString()];
-        if (pro->person() && pro->person()->photo().isValid()) {
-            auto photo = GlobalInstances::pixmapManipulator().contactPhoto(pro->person(), {140,140});
-            [photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-            [addProfilePhotoImage setHidden:YES];
-            [photoView setBordered:NO];
-        }
-    }
     if (appSandboxed()) {
         [downloadFolder setHidden:YES];
         [downloadFolder setEnabled:NO];
@@ -133,19 +109,19 @@
 }
 
 - (IBAction)clearHistory:(id)sender {
-    CategorizedHistoryModel::instance().clearAllCollections();
-    media::RecordingModel::instance().clearAllCollections();
-    [historyChangedLabel setHidden:NO];
+//    CategorizedHistoryModel::instance().clearAllCollections();
+//    media::RecordingModel::instance().clearAllCollections();
+//    [historyChangedLabel setHidden:NO];
 }
 
 - (IBAction)toggleHistory:(NSButton*)sender {
-    CategorizedHistoryModel::instance().setHistoryLimited([sender state]);
-    int historyLimit = CategorizedHistoryModel::instance().historyLimit();
-    [historyTextField setStringValue:[NSString stringWithFormat:@"%d", historyLimit]];
-    [historyStepper setIntValue:historyLimit];
-    [historyChangedLabel setHidden:NO];
-    [historyStepper setEnabled:[sender state]];
-    [historyTextField setEnabled:[sender state]];
+//    CategorizedHistoryModel::instance().setHistoryLimited([sender state]);
+//    int historyLimit = CategorizedHistoryModel::instance().historyLimit();
+//    [historyTextField setStringValue:[NSString stringWithFormat:@"%d", historyLimit]];
+//    [historyStepper setIntValue:historyLimit];
+//    [historyChangedLabel setHidden:NO];
+//    [historyStepper setEnabled:[sender state]];
+//    [historyTextField setEnabled:[sender state]];
 }
 
 - (IBAction)changeDownloadFolder:(id)sender {
@@ -164,14 +140,14 @@
 }
 
 // KVO handler
--(void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject
-                       change:(NSDictionary *)aChange context:(void *)aContext
-{
-    if ([aKeyPath isEqualToString:Preferences::HistoryLimit]) {
-        CategorizedHistoryModel::instance().setHistoryLimit([[aChange objectForKey: NSKeyValueChangeNewKey] integerValue]);
-        [historyChangedLabel setHidden:NO];
-    }
-}
+//-(void)observeValueForKeyPath:(NSString *)aKeyPath ofObject:(id)anObject
+//                       change:(NSDictionary *)aChange context:(void *)aContext
+//{
+//    if ([aKeyPath isEqualToString:Preferences::HistoryLimit]) {
+//        CategorizedHistoryModel::instance().setHistoryLimit([[aChange objectForKey: NSKeyValueChangeNewKey] integerValue]);
+//        [historyChangedLabel setHidden:NO];
+//    }
+//}
 
 #pragma mark - Startup API
 
@@ -246,38 +222,6 @@
                                      withDelegate:self
                                    didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)
                                       contextInfo:nil];
-}
-
-- (void) pictureTakerDidEnd:(IKPictureTaker *) picker
-                 returnCode:(NSInteger) code
-                contextInfo:(void*) contextInfo
-{
-    if (auto outputImage = [picker outputImage]) {
-        [photoView setImage:outputImage];
-        [addProfilePhotoImage setHidden:YES];
-        [photoView setBordered:NO];
-        if (auto pro = ProfileModel::instance().selectedProfile()) {
-            QPixmap p;
-            auto smallImg = [NSImage imageResize:outputImage newSize:{100,100}];
-            if (p.loadFromData(QByteArray::fromNSData([smallImg TIFFRepresentation]))) {
-                pro->person()->setPhoto(QVariant(p));
-            }
-            pro->save();
-        }
-    } else if (!photoView.image){
-        [addProfilePhotoImage setHidden:NO];
-        [photoView setBordered:YES];
-    }
-}
-
-#pragma mark - NSTextFieldDelegate methods
-
--(void)controlTextDidChange:(NSNotification *)notif
-{
-    if (auto pro = ProfileModel::instance().selectedProfile()) {
-        pro->person()->setFormattedName(profileNameField.stringValue.UTF8String);
-        pro->save();
-    }
 }
 
 #pragma mark - NSOpenSavePanelDelegate delegate methods

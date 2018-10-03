@@ -162,12 +162,6 @@ SET(ringclient_CONTROLLERS
    src/RegisterNameWC.h
    src/ChooseAccountVC.h
    src/ChooseAccountVC.mm
-   src/ContactRequestsListVC.h
-   src/ContactRequestsListVC.mm
-   src/ContactRequestVC.h
-   src/ContactRequestVC.mm
-   src/AccBannedContactsVC.h
-   src/AccBannedContactsVC.mm
    src/MessagesVC.h
    src/MessagesVC.mm
    src/PasswordChangeWC.h
@@ -271,9 +265,6 @@ SET(ringclient_XIBS
    RegisterNameWindow
    ChooseAccount
    AccountMenuItemView
-   ContactRequestList
-   ContactRequest
-   AccBannedContacts
    PasswordChange
    MessageCells
    AddSIPAccountVC

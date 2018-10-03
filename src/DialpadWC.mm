@@ -19,12 +19,6 @@
 
 #import "DialpadWC.h"
 
-///Qt
-#import <QtCore/qitemselectionmodel.h>
-
-///LRC
-#import <callmodel.h>
-
 @interface DialpadWC ()
 
 @property (unsafe_unretained) IBOutlet NSTextField* composerField;
@@ -36,16 +30,6 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-
-    QObject::connect(CallModel::instance().selectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         [composerField setStringValue:@""];
-                         [composerField setNeedsDisplay:YES];
-                         if(!current.isValid()) {
-                             [self.window close];
-                         }
-                     });
 }
 
 - (IBAction)dtmfPressed:(id)sender
@@ -66,11 +50,9 @@
 
 - (void) sendDTMF:(NSString*) dtmf
 {
-    if (auto current = CallModel::instance().selectedCall()) {
-        current->playDTMF(QString::fromUtf8([dtmf UTF8String]));
-    }
+    //TODO playDTMF
     [composerField setStringValue:
-     [NSString stringWithFormat: @"%@ %@", [composerField stringValue], dtmf]];
+    [NSString stringWithFormat: @"%@ %@", [composerField stringValue], dtmf]];
 }
 
 ///Accessibility

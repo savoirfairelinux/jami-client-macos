@@ -29,8 +29,13 @@
 #import <QItemSelectionModel>
 #import <QDebug>
 #import <account.h>
-#import <AvailableAccountModel.h>
+//#import <AvailableAccountModel.h>
 #import <api/lrc.h>
+#import <api/newaccountmodel.h>
+#import <api/newcallmodel.h>
+#import <api/behaviorcontroller.h>
+#import <api/conversation.h>
+#import <api/contactmodel.h>
 
 
 #if ENABLE_SPARKLE
@@ -140,7 +145,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 - (void) connect
 {
 
-    //ProfileModel::instance().addCollection<LocalProfileCollection>(LoadOptions::FORCE_ENABLED);
     QObject::connect(&AccountModel::instance(),
                      &AccountModel::registrationChanged,
                      [=](Account* a, bool registration) {
@@ -149,16 +153,13 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          AccountModel::instance().subscribeToBuddies(a->id());
                      });
 
-    QObject::connect(&CallModel::instance(),
-                     &CallModel::incomingCall,
-                     [=](Call* call) {
-                         // on incoming call set selected account match call destination account
-                         if (call->account()) {
-                             QModelIndex index = call->account()->index();
-                             index = AvailableAccountModel::instance().mapFromSource(index);
-
-                             AvailableAccountModel::instance().selectionModel()->setCurrentIndex(index,
-                                                                                                 QItemSelectionModel::ClearAndSelect);
+    QObject::connect(&lrc->getBehaviorController(),
+                     &lrc::api::BehaviorController::showIncomingCallView,
+                     [self](const std::string accountId,
+                            const lrc::api::conversation::Info convInfo){
+                         auto* accInfo = &lrc->getAccountModel().getAccountInfo(accountId);
+                         if(accInfo->callModel->getCall(convInfo.callId).isOutgoing) {
+                             return;
                          }
                          BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::WindowBehaviour];
                          BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
@@ -170,38 +171,64 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          }
 
                          if(shouldNotify) {
-                             [self showIncomingNotification:call];
+                                [self showIncomingNotification:accInfo->callModel->getCall(convInfo.callId).peer];
                          }
+                         
                      });
 
-    QObject::connect(&media::RecordingModel::instance(),
-                     &media::RecordingModel::newTextMessage,
-                     [=](media::TextRecording* t, ContactMethod* cm) {
+//    QObject::connect(&CallModel::instance(),
+//                     &CallModel::incomingCall,
+//                     [=](Call* call) {
+//                         // on incoming call set selected account match call destination account
+////                         if (call->account()) {
+////                             QModelIndex index = call->account()->index();
+////                             index = AvailableAccountModel::instance().mapFromSource(index);
+////
+////                             AvailableAccountModel::instance().selectionModel()->setCurrentIndex(index,
+////                                                                                                 QItemSelectionModel::ClearAndSelect);
+////                         }
+//                         BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::WindowBehaviour];
+//                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
+//                         if (shouldComeToForeground) {
+//                             [NSApp activateIgnoringOtherApps:YES];
+//                             if ([self.ringWindowController.window isMiniaturized]) {
+//                                 [self.ringWindowController.window deminiaturize:self];
+//                             }
+//                         }
+//
+//                         if(shouldNotify) {
+//                             [self showIncomingNotification:call];
+//                         }
+//                     });
 
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
-                         auto qIdx = t->instantTextMessagingModel()->index(t->instantTextMessagingModel()->rowCount()-1, 0);
-
-                         // Don't show a notification if we are sending the text OR window already has focus OR user disabled notifications
-                         if(qvariant_cast<media::Media::Direction>(qIdx.data((int)media::TextRecording::Role::Direction)) == media::Media::Direction::OUT
-                            || self.ringWindowController.window.isMainWindow || !shouldNotify)
-                             return;
-
-                         NSUserNotification* notification = [[NSUserNotification alloc] init];
-
-                         NSString* localizedTitle = [NSString stringWithFormat:NSLocalizedString(@"Message from %@", @"Message from {Name}"), qIdx.data((int)media::TextRecording::Role::AuthorDisplayname).toString().toNSString()];
-
-                         [notification setTitle:localizedTitle];
-                         [notification setSoundName:NSUserNotificationDefaultSoundName];
-                         [notification setSubtitle:qIdx.data().toString().toNSString()];
-
-                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-                     });
+//    QObject::connect(&media::RecordingModel::instance(),
+//                     &media::RecordingModel::newTextMessage,
+//                     [=](media::TextRecording* t, ContactMethod* cm) {
+//
+//                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
+//                         auto qIdx = t->instantTextMessagingModel()->index(t->instantTextMessagingModel()->rowCount()-1, 0);
+//
+//                         // Don't show a notification if we are sending the text OR window already has focus OR user disabled notifications
+//                         if(qvariant_cast<media::Media::Direction>(qIdx.data((int)media::TextRecording::Role::Direction)) == media::Media::Direction::OUT
+//                            || self.ringWindowController.window.isMainWindow || !shouldNotify)
+//                             return;
+//
+//                         NSUserNotification* notification = [[NSUserNotification alloc] init];
+//
+//                         NSString* localizedTitle = [NSString stringWithFormat:NSLocalizedString(@"Message from %@", @"Message from {Name}"), qIdx.data((int)media::TextRecording::Role::AuthorDisplayname).toString().toNSString()];
+//
+//                         [notification setTitle:localizedTitle];
+//                         [notification setSoundName:NSUserNotificationDefaultSoundName];
+//                         [notification setSubtitle:qIdx.data().toString().toNSString()];
+//
+//                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+//                     });
 }
 
-- (void) showIncomingNotification:(Call*) call{
+- (void) showIncomingNotification:(std::string) peerName{
     NSUserNotification* notification = [[NSUserNotification alloc] init];
     NSString* localizedTitle = [NSString stringWithFormat:
-                                NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"), call->peerName().toNSString()];
+                                NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"), @(peerName.c_str())];
     [notification setTitle:localizedTitle];
     [notification setSoundName:NSUserNotificationDefaultSoundName];
 
@@ -220,14 +247,14 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 - (void) userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification
 {
-    if(notification.activationType == NSUserNotificationActivationTypeActionButtonClicked) {
-        CallModel::instance().selectedCall() << Call::Action::REFUSE;
-    } else {
-        [NSApp activateIgnoringOtherApps:YES];
-        if ([self.ringWindowController.window isMiniaturized]) {
-            [self.ringWindowController.window deminiaturize:self];
-        }
-    }
+//    if(notification.activationType == NSUserNotificationActivationTypeActionButtonClicked) {
+//        CallModel::instance().selectedCall() << Call::Action::REFUSE;
+//    } else {
+//        [NSApp activateIgnoringOtherApps:YES];
+//        if ([self.ringWindowController.window isMiniaturized]) {
+//            [self.ringWindowController.window deminiaturize:self];
+//        }
+//    }
 }
 
 - (void) showWizard
@@ -286,30 +313,30 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
  */
 - (void)handleGetURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
-    NSString* query = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    NSURL* url = [[NSURL alloc] initWithString:query];
-    NSString* ringID = [url host];
-    if (!ringID) {
-        //not a valid NSURL, try to parse query directly
-        ringID = [query substringFromIndex:@"ring:".length];
-    }
-
-    // check for a valid ring hash
-    NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
-    BOOL valid = [[ringID stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
-
-    if(valid && ringID.length == 40) {
-        Call* c = CallModel::instance().dialingCall();
-        c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:%@",ringID]));
-        c << Call::Action::ACCEPT;
-    } else {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:@"Error"];
-        [alert setInformativeText:@"ringID cannot be read from this URL."];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        [alert runModal];
-    }
+//    NSString* query = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+//    NSURL* url = [[NSURL alloc] initWithString:query];
+//    NSString* ringID = [url host];
+//    if (!ringID) {
+//        //not a valid NSURL, try to parse query directly
+//        ringID = [query substringFromIndex:@"ring:".length];
+//    }
+//
+//    // check for a valid ring hash
+//    NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
+//    BOOL valid = [[ringID stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
+//
+//    if(valid && ringID.length == 40) {
+//        Call* c = CallModel::instance().dialingCall();
+//        c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:%@",ringID]));
+//        c << Call::Action::ACCEPT;
+//    } else {
+//        NSAlert *alert = [[NSAlert alloc] init];
+//        [alert addButtonWithTitle:@"OK"];
+//        [alert setMessageText:@"Error"];
+//        [alert setInformativeText:@"ringID cannot be read from this URL."];
+//        [alert setAlertStyle:NSWarningAlertStyle];
+//        [alert runModal];
+//    }
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
@@ -340,7 +367,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     }
     [self.wizard close];
     [self.ringWindowController close];
-    delete CallModel::instance().QObject::parent();
+   // delete CallModel::instance().QObject::parent();
     [[NSApplication sharedApplication] terminate:self];
 }
 

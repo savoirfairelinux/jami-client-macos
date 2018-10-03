@@ -20,10 +20,11 @@
 
 #import "ConversationVC.h"
 
-#import <QItemSelectionModel>
 #import <qstring.h>
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
+
+#import <QuartzCore/QuartzCore.h>
 
 // LRC
 #import <globalinstances.h>
@@ -32,18 +33,13 @@
 #import "views/HoverButton.h"
 #import "views/IMTableCellView.h"
 #import "views/NSColor+RingTheme.h"
-#import "QNSTreeController.h"
 #import "INDSequentialTextSelectionManager.h"
 #import "delegates/ImageManipulationDelegate.h"
-#import "PhoneDirectoryModel.h"
-#import "account.h"
-#import "AvailableAccountModel.h"
 #import "MessagesVC.h"
 #import "utils.h"
 #import "RingWindowController.h"
 #import "NSString+Extensions.h"
 
-#import <QuartzCore/QuartzCore.h>
 
 @interface ConversationVC () {
 
@@ -189,16 +185,6 @@
     [self.view.layer setCornerRadius:5.0f];
 
     [messageField setFocusRingType:NSFocusRingTypeNone];
-}
-
--(Account* ) chosenAccount
-{
-    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
-    if(!index.isValid()) {
-        return nullptr;
-    }
-    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
-    return account;
 }
 
 - (void) initFrame

@@ -21,7 +21,7 @@
 //LRC
 #import <api/lrc.h>
 #import <api/newaccountmodel.h>
-#import <account.h>
+//#import <account.h>
 #import <api/account.h>
 
 //Ring

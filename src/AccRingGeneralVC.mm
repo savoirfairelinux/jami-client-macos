@@ -37,7 +37,6 @@
 #import <globalinstances.h>
 
 #import "RegisterNameWC.h"
-#import "RestoreAccountWC.h"
 #import "BackupAccountWC.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/NSImage+Extensions.h"

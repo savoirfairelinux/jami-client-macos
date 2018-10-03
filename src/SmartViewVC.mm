@@ -45,6 +45,7 @@
 #import "PersonLinkerVC.h"
 #import "views/IconButton.h"
 #import "views/RingTableView.h"
+#import "views/NSColor+RingTheme.h"
 #import "views/ContextualTableCellView.h"
 #import "utils.h"
 #import "RingWindowController.h"
@@ -386,7 +387,7 @@ NSInteger const REQUEST_SEG         = 1;
     for (int i = 0; i< rows; i++) {
         NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary: NO];
         if (i == row) {
-            cellRowView.backgroundColor = [NSColor controlColor];
+            cellRowView.backgroundColor = [NSColor ringGreyHighlight];
         } else {
             cellRowView.backgroundColor = [NSColor whiteColor];
         }
