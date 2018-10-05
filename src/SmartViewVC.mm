@@ -106,15 +106,6 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView setShortcutsDelegate:self];
 
     [smartView setDataSource: self];
-
-    [self.view setWantsLayer:YES];
-    [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
-
-    [searchField setWantsLayer:YES];
-    [searchField setLayer:[CALayer layer]];
-    [searchField.layer setBackgroundColor:[NSColor colorWithCalibratedRed:0.949 green:0.949 blue:0.949 alpha:0.9].CGColor];
-
     currentFilterType = lrc::api::profile::Type::RING;
     selectorIsPresent = true;
 
@@ -384,12 +375,8 @@ NSInteger const REQUEST_SEG         = 1;
     NSInteger rows = [smartView numberOfRows];
 
     for (int i = 0; i< rows; i++) {
-        NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary: NO];
-        if (i == row) {
-            cellRowView.backgroundColor = [NSColor controlColor];
-        } else {
-            cellRowView.backgroundColor = [NSColor whiteColor];
-        }
+        HoverTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary: NO];
+        [cellRowView drawSelection: (i == row)];
     }
 
     if (row == -1)

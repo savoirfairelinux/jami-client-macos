@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -109,8 +110,8 @@
                             <constraint firstItem="Qcu-SR-qaS" firstAttribute="leading" secondItem="7AV-dG-fCE" secondAttribute="trailing" constant="10" id="uWm-Da-7Z3"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Ywo-5x-8kh">
                     <rect key="frame" x="0.0" y="1064" width="620" height="91"/>
@@ -160,8 +161,8 @@
                             <constraint firstItem="xba-4j-Fkx" firstAttribute="top" secondItem="468-K4-aHN" secondAttribute="top" constant="20" id="uuD-le-hAv"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="eGX-gk-Zxp">
                     <rect key="frame" x="0.0" y="924" width="620" height="120"/>
@@ -241,8 +242,8 @@
                             <constraint firstItem="XWv-rk-HwX" firstAttribute="top" secondItem="QnU-yY-uCs" secondAttribute="top" constant="20" id="w58-M0-4yd"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="vYi-gW-MrY">
                     <rect key="frame" x="0.0" y="718" width="620" height="186"/>
@@ -363,8 +364,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="PdV-TO-zeb" secondAttribute="bottom" constant="20" id="af1-6H-Qj5"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="sy5-OH-wyB">
                     <rect key="frame" x="0.0" y="393" width="620" height="305"/>
@@ -569,8 +570,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="e5r-aX-zQa" secondAttribute="bottom" constant="20" id="ePQ-YR-17s"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="7eU-EP-4br">
                     <rect key="frame" x="0.0" y="20" width="300" height="353"/>
@@ -716,8 +717,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="CKH-DF-dFI"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="K0z-NH-3Cq">
                     <rect key="frame" x="319" y="20" width="300" height="353"/>
@@ -892,8 +893,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="aDB-9b-0Yt"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
             </subviews>
             <constraints>
