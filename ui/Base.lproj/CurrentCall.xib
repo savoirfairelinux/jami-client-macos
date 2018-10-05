@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
@@ -60,10 +57,10 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz">
-                                    <rect key="frame" x="0.0" y="410" width="745" height="71"/>
+                                    <rect key="frame" x="0.0" y="409" width="745" height="72"/>
                                     <subviews>
                                         <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIU-M7-xpN">
-                                            <rect key="frame" x="623" y="23" width="104" height="24"/>
+                                            <rect key="frame" x="623" y="24" width="104" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="9vz-kb-6L6"/>
                                             </constraints>
@@ -88,7 +85,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X5k-sy-WtA">
-                                            <rect key="frame" x="20" y="10" width="50" height="50"/>
+                                            <rect key="frame" x="20" y="11" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="2tx-rb-idH"/>
                                                 <constraint firstAttribute="height" constant="50" id="B5W-X8-r0z"/>
@@ -578,7 +575,7 @@
                                     <rect key="frame" x="135" y="120" width="404" height="291"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Cd-Vs-wtu">
-                                            <rect key="frame" x="234" y="18" width="43" height="17"/>
+                                            <rect key="frame" x="233" y="18" width="43" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="39" id="6I1-DY-t1P"/>
                                             </constraints>
@@ -589,7 +586,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="neP-Vf-7Tp">
-                                            <rect key="frame" x="126" y="18" width="49" height="17"/>
+                                            <rect key="frame" x="125" y="18" width="49" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="45" id="NB4-kw-0Lb"/>
                                             </constraints>
@@ -600,7 +597,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-D2-O1C">
-                                            <rect key="frame" x="139" y="121" width="127" height="17"/>
+                                            <rect key="frame" x="138" y="121" width="127" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="wants to talk to you!" id="X0W-vv-xua">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
@@ -619,7 +616,7 @@
                                             <rect key="frame" x="127" y="146" width="150" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Incoming Display Name" id="EA3-Q5-Dyj">
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
@@ -725,7 +722,7 @@
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                 <tableColumns>
-                                                    <tableColumn identifier="" width="329" minWidth="40" maxWidth="1000" id="nFu-qN-GHK">
+                                                    <tableColumn width="329" minWidth="40" maxWidth="1000" id="nFu-qN-GHK">
                                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -923,11 +920,11 @@
                                         </subviews>
                                     </clipView>
                                     <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="17"/>
-                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="zPy-Iz-oF9">
+                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="zPy-Iz-oF9">
                                         <rect key="frame" x="-100" y="-100" width="739" height="15"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
-                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="u8k-Pu-yAS">
+                                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="u8k-Pu-yAS">
                                         <rect key="frame" x="-100" y="-100" width="15" height="402"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
@@ -950,7 +947,7 @@
                                     <rect key="frame" x="20" y="20" width="286" height="22"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" bezelStyle="round" id="QW9-Ty-ZEe">
                                         <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
@@ -1063,7 +1060,7 @@
     </objects>
     <resources>
         <image name="NSGoRightTemplate" width="9" height="12"/>
-        <image name="NSUser" width="32" height="32"/>
+        <image name="NSUser" width="128" height="128"/>
         <image name="ic_action_accept" width="72" height="72"/>
         <image name="ic_action_add_participant" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>

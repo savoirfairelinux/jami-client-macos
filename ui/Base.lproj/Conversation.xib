@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ConversationVC">
@@ -44,7 +42,7 @@
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                         <tableColumns>
-                                            <tableColumn identifier="" width="697" minWidth="40" maxWidth="1000" id="hwp-Th-i2d">
+                                            <tableColumn width="697" minWidth="40" maxWidth="1000" id="hwp-Th-i2d">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -278,11 +276,11 @@
                                 <constraint firstAttribute="width" constant="700" id="hVv-sa-XIA"/>
                             </constraints>
                             <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="15"/>
-                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="6oQ-AB-A54">
+                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="6oQ-AB-A54">
                                 <rect key="frame" x="-100" y="-100" width="739" height="15"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
-                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="pfa-gR-gKp">
+                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="pfa-gR-gKp">
                                 <rect key="frame" x="-100" y="-100" width="15" height="402"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </scroller>
@@ -329,7 +327,7 @@
                             <rect key="frame" x="53" y="22" width="602" height="17"/>
                             <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr">
                                 <font key="font" metaFont="system"/>
-                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                             <connections>

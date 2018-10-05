@@ -745,7 +745,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 - (NSMutableDictionary*) messageAttributes
 {
     NSMutableDictionary* attrs = [NSMutableDictionary dictionary];
-    attrs[NSForegroundColorAttributeName] = [NSColor labelColor];
+   // attrs[NSForegroundColorAttributeName] = [NSColor labelColor];
     attrs[NSParagraphStyleAttributeName] = [self paragraphStyle];
     return attrs;
 }
