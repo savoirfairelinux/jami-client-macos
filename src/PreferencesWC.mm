@@ -31,6 +31,7 @@
 #import "GeneralPrefsVC.h"
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
+#import "views/NSColor+RingTheme.h"
 
 @implementation PreferencesWC {
 
@@ -49,6 +50,11 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
+    NSArray *items = [self.window.toolbar items];
+    for(NSToolbarItem *toolbarItem in items) {
+        NSImage * image =  [NSColor image: [toolbarItem image] tintedWithColor: [NSColor secondaryLabelColor]];
+        toolbarItem.image = image;
+    }
     [self.window.toolbar setSelectedItemIdentifier:kGeneralPrefsIdentifier];
     [self displayGeneral:nil];
 }
