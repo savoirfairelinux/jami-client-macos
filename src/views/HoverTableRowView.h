@@ -54,8 +54,10 @@
 }
 
 @property BOOL highlightable;
+- (void) drawSelection: (BOOL) isSelected;
 
 @end
 
 // Used by the HoverTableRowView and the RingTableView
 void DrawSeparatorInRect(NSRect rect);
+
