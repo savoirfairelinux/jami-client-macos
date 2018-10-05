@@ -51,6 +51,7 @@
 
 @interface HoverTableRowView ()
 @property BOOL mouseInside;
+@property NSVisualEffectView* effect_view;
 @end
 
 @implementation HoverTableRowView
@@ -59,7 +60,7 @@
 
 - (instancetype)init
 {
-    self.highlightable = YES;
+    [self configureView];
 }
 
 -  (id)initWithFrame:(CGRect)aRect
@@ -67,9 +68,8 @@
     self = [super initWithFrame:aRect];
 
     if (self) {
-        self.highlightable = YES;
+        [self configureView];
     }
-
     return self;
 }
 
@@ -77,14 +77,18 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.highlightable = YES;
+        [self configureView];
     }
-
     return self;
 }
 
-- (void)dealloc {
-
+- (void)configureView {
+    self.highlightable = YES;
+    self.effect_view = [[NSVisualEffectView alloc] initWithFrame: [self bounds]];
+    [self.effect_view setAutoresizingMask:NSViewHeightSizable | NSViewWidthSizable];
+    [self addSubview: self.effect_view positioned: NSWindowBelow relativeTo:nil];
+    [self.effect_view setHidden:YES];
+    [self.effect_view setMaterial: static_cast<NSVisualEffectMaterial>(3)];
 }
 
 - (void)setMouseInside:(BOOL)value {
@@ -123,18 +127,16 @@
     self.mouseInside = NO;
 }
 
+-(void) drawSelection: (BOOL) isSelected {
+   [self.effect_view setHidden: !isSelected];
+    [self.effect_view setMaterial: isSelected ? static_cast<NSVisualEffectMaterial>(4) : static_cast<NSVisualEffectMaterial>(3)];
+}
 - (void)drawBackgroundInRect:(NSRect)dirtyRect {
     // Custom background drawing. We don't call super at all.
-    [self.backgroundColor set];
-    // Fill with the background color first
-    NSRectFill(self.bounds);
+    [self.effect_view setHidden:YES];
 
-    // Draw a gradient
-    if (self.mouseInside && self.highlightable) {
-        NSRect selectionRect = NSRect(self.bounds);
-        [[NSColor ringGreyHighlight] setFill];
-        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
-        [selectionPath fill];
+    if ((self.mouseInside) && self.highlightable) {
+        [self.effect_view setHidden:NO];
     }
 }
 
@@ -153,14 +155,7 @@
 
 // Only called if the 'selected' property is yes.
 - (void)drawSelectionInRect:(NSRect)dirtyRect {
-    // Check the selectionHighlightStyle, in case it was set to None
-    if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone) {
-        // We want a hard-crisp stroke, and stroking 1 pixel will border half on one side and half on another, so we offset by the 0.5 to handle this
-        NSRect selectionRect = NSRect(self.bounds);
-        [[NSColor ringGreyHighlight] setFill];
-        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
-        [selectionPath fill];
-    }
+    [self.effect_view setHidden:NO];
 }
 
 // interiorBackgroundStyle is normaly "dark" when the selection is drawn (self.selected == YES) and we are in a key window (self.emphasized == YES). However, we always draw a light selection, so we override this method to always return a light color.
