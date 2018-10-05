@@ -454,7 +454,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     CGFloat advancedHeight = self.advancedButtonMarginConstraint.constant;
     self.advancedButtonMarginConstraint.constant = (height== 2) ? 40 : 30;
     self.bannedContactHeightConstraint.constant = (height== 2) ? 150 : 2;
-    [[[self.blockedContactsTableView superview] superview] setHidden:![[[self.blockedContactsTableView superview] superview] isHidden]];
+    [[[[self.blockedContactsTableView superview] superview] superview] setHidden:![[[[self.blockedContactsTableView superview] superview] superview] isHidden]];
     [blockedContactsTableView reloadData];
 }
 
