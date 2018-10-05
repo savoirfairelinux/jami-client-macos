@@ -27,7 +27,7 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     CGContextRef context = (CGContextRef) [[NSGraphicsContext currentContext] graphicsPort];
-    CGContextSetRGBFillColor(context, 1, 1, 1, 1);
+    CGContextSetRGBFillColor(context, 1, 1, 1, 0);
     CGFloat defaultRadius = 16;
     CGFloat radius = (self.cornerRadius) ? self.cornerRadius : defaultRadius;
     CGFloat minx = CGRectGetMinX(dirtyRect);

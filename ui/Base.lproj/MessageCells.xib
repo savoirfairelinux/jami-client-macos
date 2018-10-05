@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,7 +59,7 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="Jpz-4x-jYM"/>
                         </imageView>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZA5-7h-yNn">
-                            <rect key="frame" x="55" y="46" width="180" height="19"/>
+                            <rect key="frame" x="55" y="47" width="180" height="18"/>
                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="DmW-13-1QZ">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="14"/>
@@ -87,7 +86,7 @@
                             </buttonCell>
                         </button>
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="yhT-5T-phc">
-                            <rect key="frame" x="15" y="28" width="220" height="5"/>
+                            <rect key="frame" x="15" y="29" width="220" height="5"/>
                         </box>
                     </subviews>
                     <constraints>
@@ -222,7 +221,7 @@
                     </buttonCell>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="cornerColor">
-                            <color key="value" red="0.94117647058823528" green="0.94117647058823528" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
                             <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
@@ -313,7 +312,7 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="q2e-Jw-ifg"/>
                         </imageView>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tUr-hG-Ef4">
-                            <rect key="frame" x="55" y="46" width="180" height="19"/>
+                            <rect key="frame" x="55" y="47" width="180" height="18"/>
                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="Oo1-gq-aPY">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="14"/>
@@ -336,7 +335,7 @@
                             </constraints>
                         </progressIndicator>
                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="9ze-gS-MRW">
-                            <rect key="frame" x="15" y="28" width="220" height="5"/>
+                            <rect key="frame" x="15" y="29" width="220" height="5"/>
                         </box>
                     </subviews>
                     <constraints>
@@ -419,7 +418,7 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="1qg-9v-1DA"/>
                         </imageView>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WnO-2x-32a">
-                            <rect key="frame" x="55" y="104" width="180" height="19"/>
+                            <rect key="frame" x="55" y="105" width="180" height="18"/>
                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="fu2-X7-GW8">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system" size="14"/>
@@ -527,7 +526,7 @@
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="yAd-of-sXU"/>
                         </imageView>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jRP-c4-heJ">
-                            <rect key="frame" x="55" y="-28" width="180" height="19"/>
+                            <rect key="frame" x="55" y="-27" width="180" height="18"/>
                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="3i8-bi-EQN">
                                 <behavior key="behavior" lightByContents="YES"/>
                                 <font key="font" metaFont="system" size="14"/>
@@ -571,7 +570,7 @@
                     </buttonCell>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="cornerColor">
-                            <color key="value" red="0.94117647058823528" green="0.94117647058823528" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
                             <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
