@@ -71,10 +71,11 @@
 - (void) drawRect: (NSRect) rect {
     NSMenuItem *menuItem = ([self enclosingMenuItem]);
     BOOL isHighlighted = [menuItem isHighlighted];
+    NSColor* highlightBackground = @available(macOS 10.14, *) ? [NSColor controlColor] : [NSColor whiteColor];
     if (isHighlighted) {
-        [self.backgroundView setFillColor:[NSColor whiteColor]];
+        [self.backgroundView setFillColor: highlightBackground];
     } else {
-        [self.backgroundView setFillColor:[NSColor ringGreyHighlight]];
+        [self.backgroundView setFillColor:[NSColor windowBackgroundColor]];
     }
     [super drawRect: rect];
 }
