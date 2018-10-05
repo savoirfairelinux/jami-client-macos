@@ -46,7 +46,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     }
     else {
         self.msgBackground.pointerDirection = LEFT;
-        self.msgBackground.bgColor = [NSColor whiteColor];
+        self.msgBackground.bgColor = @available(macOS 10.14, *) ? [NSColor controlColor] : [NSColor whiteColor];
     }
 }
 
