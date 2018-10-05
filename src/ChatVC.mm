@@ -22,6 +22,7 @@
 
 #import "MessagesVC.h"
 #import "NSString+Extensions.h"
+#import "views/NSColor+RingTheme.h"
 
 @interface ChatVC ()
 {
@@ -45,9 +46,9 @@
 {
     NSLog(@"Init ChatVC");
 
-    [self.view setWantsLayer:YES];
-    [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor controlColor].CGColor];
+  //  [self.view setWantsLayer:YES];
+   // [self.view setLayer:[CALayer layer]];
+  //  [self.view.layer setBackgroundColor:[NSColor ringGreyHighlight].CGColor];
 }
 
 -(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model

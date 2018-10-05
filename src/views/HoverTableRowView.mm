@@ -51,6 +51,7 @@
 
 @interface HoverTableRowView ()
 @property BOOL mouseInside;
+@property NSVisualEffectView* effect_view;
 @end
 
 @implementation HoverTableRowView
@@ -60,6 +61,11 @@
 - (instancetype)init
 {
     self.highlightable = YES;
+    self.effect_view = [[NSVisualEffectView alloc] initWithFrame: [self bounds]];
+    [self.effect_view setAutoresizingMask:NSViewHeightSizable | NSViewWidthSizable];
+    [self addSubview: self.effect_view positioned: NSWindowBelow relativeTo:nil];
+    [self.effect_view setHidden:YES];
+    [self.effect_view setMaterial: static_cast<NSVisualEffectMaterial>(4)];
 }
 
 -  (id)initWithFrame:(CGRect)aRect
@@ -68,6 +74,11 @@
 
     if (self) {
         self.highlightable = YES;
+         self.effect_view = [[NSVisualEffectView alloc] initWithFrame: [self bounds]];
+        [self.effect_view setAutoresizingMask:NSViewHeightSizable | NSViewWidthSizable];
+         [self addSubview: self.effect_view positioned: NSWindowBelow relativeTo:nil];
+        [self.effect_view setHidden:YES];
+        [self.effect_view setMaterial: static_cast<NSVisualEffectMaterial>(4)];
     }
 
     return self;
@@ -78,6 +89,11 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.highlightable = YES;
+        self.effect_view = [[NSVisualEffectView alloc] initWithFrame: [self bounds]];
+        [self.effect_view setAutoresizingMask:NSViewHeightSizable | NSViewWidthSizable];
+        [self addSubview: self.effect_view positioned: NSWindowBelow relativeTo:nil];
+        [self.effect_view setHidden:YES];
+        [self.effect_view setMaterial: static_cast<NSVisualEffectMaterial>(4)];
     }
 
     return self;
@@ -124,17 +140,25 @@
 }
 
 - (void)drawBackgroundInRect:(NSRect)dirtyRect {
+    [super drawBackgroundInRect:dirtyRect];
     // Custom background drawing. We don't call super at all.
-    [self.backgroundColor set];
+   // [self.backgroundColor set];
     // Fill with the background color first
-    NSRectFill(self.bounds);
+   // NSRectFill(self.bounds);
+   // [self.effect_view removeFromSuperview];
+    [self.effect_view setHidden:YES];
 
     // Draw a gradient
     if (self.mouseInside && self.highlightable) {
-        NSRect selectionRect = NSRect(self.bounds);
-        [[NSColor ringGreyHighlight] setFill];
-        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
-        [selectionPath fill];
+        [self.effect_view setHidden:NO];
+       // [self.effect_view setMaterial: static_cast<NSVisualEffectMaterial>(4)];
+       // [self addSubview: self.effect_view positioned: NSWindowBelow relativeTo:nil];
+       // NSRect selectionRect = NSRect(self.bounds);
+       // [[NSColor alternatingContentBackgroundColors][0] setFill];
+     //   NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
+       // [selectionPath fill];
+    } else {
+      //  [self.effect_view removeFromSuperview];
     }
 }
 
@@ -156,10 +180,11 @@
     // Check the selectionHighlightStyle, in case it was set to None
     if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone) {
         // We want a hard-crisp stroke, and stroking 1 pixel will border half on one side and half on another, so we offset by the 0.5 to handle this
-        NSRect selectionRect = NSRect(self.bounds);
-        [[NSColor ringGreyHighlight] setFill];
-        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
-        [selectionPath fill];
+       // NSRect selectionRect = NSRect(self.bounds);
+       // [[NSColor ringGreyHighlight] setFill];
+       // NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
+       // [selectionPath fill];
+        [self.effect_view setHidden:NO];
     }
 }
 

@@ -183,10 +183,10 @@
 - (void)loadView {
     [super loadView];
     // Do view setup here.
-    [self.view setWantsLayer:YES];
-    [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor ringGreyHighlight].CGColor];
-    [self.view.layer setCornerRadius:5.0f];
+   // [self.view setWantsLayer:YES];
+  //  [self.view setLayer:[CALayer layer]];
+   // [self.view.layer setBackgroundColor:[NSColor ringGreyHighlight].CGColor];
+   // [self.view.layer setCornerRadius:5.0f];
 
     [messageField setFocusRingType:NSFocusRingTypeNone];
 }

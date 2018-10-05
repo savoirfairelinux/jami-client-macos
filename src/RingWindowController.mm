@@ -109,7 +109,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
 
-    [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
+//    [self.window setBackgroundColor:[NSColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:1.0]];
     self.window.titleVisibility = NSWindowTitleHidden;
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
@@ -178,6 +178,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          [currentCallVC showWithAnimation:false];
                          [conversationVC hideWithAnimation:false];
                          [self accountSettingsShouldOpen: NO];
+                         [welcomeContainer setHidden: YES];
                      });
 
     QObject::connect(self.behaviorController,
@@ -197,6 +198,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          [currentCallVC showWithAnimation:false];
                          [conversationVC hideWithAnimation:false];
                          [self accountSettingsShouldOpen: NO];
+                         [welcomeContainer setHidden: YES];
                      });
 
     QObject::connect(self.behaviorController,
@@ -209,6 +211,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          [conversationVC showWithAnimation:false];
                          [currentCallVC hideWithAnimation:false];
                          [self accountSettingsShouldOpen: NO];
+                         [welcomeContainer setHidden: YES];
                      });
 }
 
@@ -302,7 +305,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     for(int i = 0; i < width; ++i) {
         for(int j = 0; j < width; ++j) {
             if(*data & 1) {
-                CGContextSetFillColorWithColor(ctx, [NSColor ringDarkGrey].CGColor);
+                CGContextSetFillColorWithColor(ctx, [NSColor labelColor].CGColor);
                 rectDraw.origin = CGPointMake((j + qr_margin) * zoom,(i + qr_margin) * zoom);
                 CGContextAddRect(ctx, rectDraw);
                 CGContextFillPath(ctx);
@@ -444,6 +447,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 -(void)rightPanelClosed
 {
     [smartViewVC deselect];
+    [welcomeContainer setHidden:NO];
 }
 
 -(void)currentConversationTrusted
@@ -455,6 +459,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     [conversationVC hideWithAnimation:false];
     [currentCallVC hideWithAnimation:false];
     [self accountSettingsShouldOpen: NO];
+    [welcomeContainer setHidden: YES];
 }
 
 #pragma mark - NSToolbarDelegate
@@ -507,9 +512,12 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 }
 
 -(void) accountSettingsShouldOpen: (BOOL) open {
+    [smartViewVC.view setHidden:open];
+    [welcomeContainer setHidden: open];
     if (open) {
         @try {
             [settingsVC setSelectedAccount: [chooseAccountVC selectedAccount].id];
+            [smartViewVC.view setHidden:YES];
         }
         @catch (NSException *ex) {
             NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);

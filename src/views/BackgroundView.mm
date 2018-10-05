@@ -27,22 +27,22 @@
 
 @implementation BackgroundView
 
--(void) awakeFromNib
-{
-    switch (self.theme) {
-        case Dark:
-            self.centerImage = [NSImage imageNamed:@"background-dark.png"];
-            break;
-        case Light:
-        default:
-            self.centerImage = [NSImage imageNamed:@"background-light.png"];
-            break;
-    }
-}
-
-- (void) drawRect:(NSRect)dirtyRect
-{
-    NSDrawThreePartImage([self frame], nil, self.centerImage, nil, NO, NSCompositeSourceOver, 1.0, NO);
-}
+//-(void) awakeFromNib
+//{
+//    switch (self.theme) {
+//        case Dark:
+//            self.centerImage = [NSImage imageNamed:@"background-dark.png"];
+//            break;
+//        case Light:
+//        default:
+//            self.centerImage = [NSImage imageNamed:@"background-light.png"];
+//            break;
+//    }
+//}
+//
+//- (void) drawRect:(NSRect)dirtyRect
+//{
+//    NSDrawThreePartImage([self frame], nil, self.centerImage, nil, NO, NSCompositeSourceOver, 1.0, NO);
+//}
 
 @end

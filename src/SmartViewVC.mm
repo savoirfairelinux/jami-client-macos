@@ -107,18 +107,21 @@ NSInteger const REQUEST_SEG         = 1;
 
     [smartView setDataSource: self];
 
-    [self.view setWantsLayer:YES];
-    [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
+    //[self.view setWantsLayer:YES];
+   // [self.view setLayer:[CALayer layer]];
+   // [self.view.layer setBackgroundColor:[NSColor whiteColor].CGColor];
 
-    [searchField setWantsLayer:YES];
-    [searchField setLayer:[CALayer layer]];
-    [searchField.layer setBackgroundColor:[NSColor colorWithCalibratedRed:0.949 green:0.949 blue:0.949 alpha:0.9].CGColor];
-
+   // [searchField setWantsLayer:YES];
+   // [searchField setLayer:[CALayer layer]];
+   // searchField.layer.cornerRadius = 10;
+ //  [searchField.layer setBackgroundColor:[NSColor colorWithCalibratedRed:0.949 green:0.949 blue:0.949 alpha:0.9].CGColor];
+//    searchField.bezeled = YES;
+//    searchField.bezelStyle = NSTextFieldRoundedBezel;
+//    [searchField setDrawsBackground:YES];
     currentFilterType = lrc::api::profile::Type::RING;
     selectorIsPresent = true;
 
-    smartView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
+    //smartView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
 
 }
 
@@ -383,14 +386,18 @@ NSInteger const REQUEST_SEG         = 1;
     NSInteger row = [notification.object selectedRow];
     NSInteger rows = [smartView numberOfRows];
 
-    for (int i = 0; i< rows; i++) {
-        NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary: NO];
-        if (i == row) {
-            cellRowView.backgroundColor = [NSColor controlColor];
-        } else {
-            cellRowView.backgroundColor = [NSColor whiteColor];
-        }
-    }
+//    for (int i = 0; i< rows; i++) {
+//        NSTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary: NO];
+//        if (i == row) {
+//            NSVisualEffectView* effect_view = [[NSVisualEffectView alloc]
+//                                               initWithFrame: [cellRowView bounds]];
+//           // cellRowView.backgroundColor = [NSColor findHighlightColor];
+//            [effect_view setMaterial: static_cast<NSVisualEffectMaterial>(4)];
+//            [cellRowView addSubview:effect_view positioned: NSWindowBelow relativeTo:nil];
+//        } else {
+//            cellRowView.backgroundColor = [NSColor clearColor];
+//        }
+//    }
 
     if (row == -1)
         return;
