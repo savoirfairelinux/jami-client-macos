@@ -67,7 +67,7 @@ CGFloat const VIEW_INSET = 20;
     [super viewDidLoad];
     [self.view setWantsLayer:YES];
     [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor ringGreyHighlight].CGColor];
+  //  [self.view.layer setBackgroundColor:[NSColor ringGreyHighlight].CGColor];
     [self.view.layer setCornerRadius:5.0f];
 }
 

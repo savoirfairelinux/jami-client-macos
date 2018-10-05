@@ -128,7 +128,7 @@
 
             [backgroundColor setFill];
             [ovalPath fill];
-            [NSGraphicsContext saveGraphicsState];
+           // [NSGraphicsContext saveGraphicsState];
 
             CGPoint top = CGPointMake(frame.size.width * 0.5, 0);
             CGPoint right = CGPointMake(frame.size.width, frame.size.height * 0.5);
