@@ -41,15 +41,6 @@
 
 @synthesize messageField,sendButton;
 
-- (void)awakeFromNib
-{
-    NSLog(@"Init ChatVC");
-
-    [self.view setWantsLayer:YES];
-    [self.view setLayer:[CALayer layer]];
-    [self.view.layer setBackgroundColor:[NSColor controlColor].CGColor];
-}
-
 -(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model
 {
     convUid_ = convUid;

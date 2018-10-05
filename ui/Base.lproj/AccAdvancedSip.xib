@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -119,8 +120,8 @@
                             <constraint firstItem="aBx-M9-wnx" firstAttribute="top" secondItem="ekW-LY-oqG" secondAttribute="bottom" constant="15" id="sGM-pf-0GL"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Zuz-jy-rLn">
                     <rect key="frame" x="0.0" y="1193" width="620" height="485"/>
@@ -420,8 +421,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Owe-Lu-zR2" secondAttribute="bottom" constant="20" id="jNF-F2-EkV"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ekM-Cg-DEo">
                     <rect key="frame" x="0.0" y="804" width="620" height="369"/>
@@ -683,8 +684,8 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="vnG-dH-RtH" secondAttribute="bottom" constant="20" id="xeK-Nm-M8u"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="A31-3Y-z4R">
                     <rect key="frame" x="0.0" y="632" width="620" height="152"/>
@@ -784,8 +785,8 @@
                             <constraint firstItem="UJW-6B-wXE" firstAttribute="top" secondItem="8Y1-hZ-pq5" secondAttribute="bottom" constant="15" id="yff-Fx-MSk"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="cwV-lc-jju">
                     <rect key="frame" x="0.0" y="259" width="300" height="353"/>
@@ -803,7 +804,7 @@
                             </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNe-in-0Y8">
                                 <rect key="frame" x="20" y="60" width="258" height="234"/>
-                                <clipView key="contentView" id="hf6-xl-LUZ">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hf6-xl-LUZ">
                                     <rect key="frame" x="1" y="1" width="256" height="232"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -873,6 +874,7 @@
                                             </tableColumns>
                                         </tableView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="234" id="0p8-WN-wM4"/>
@@ -928,8 +930,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="wHU-iX-91g"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="MBR-AC-HFq">
                     <rect key="frame" x="319" y="259" width="300" height="353"/>
@@ -976,7 +978,7 @@
                             </box>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TK9-rV-fbS">
                                 <rect key="frame" x="20" y="60" width="258" height="234"/>
-                                <clipView key="contentView" copiesOnScroll="NO" id="DEy-oQ-HGz">
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="DEy-oQ-HGz">
                                     <rect key="frame" x="1" y="1" width="256" height="232"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -1036,6 +1038,7 @@
                                             </tableColumns>
                                         </tableView>
                                     </subviews>
+                                    <nil key="backgroundColor"/>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="234" id="Ie1-uA-KFc"/>
@@ -1104,8 +1107,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="dxj-bU-vaM"/>
                     </constraints>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="wyZ-Hb-BNf">
                     <rect key="frame" x="0.0" y="20" width="620" height="219"/>
@@ -1310,8 +1313,8 @@
                             <constraint firstItem="fgZ-CW-Fvh" firstAttribute="leading" secondItem="z9P-Rk-RQN" secondAttribute="trailing" constant="10" id="vMb-el-uDN"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="fillColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
             </subviews>
             <constraints>
