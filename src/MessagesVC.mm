@@ -328,6 +328,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             break;
     }
     result.transferedImage.image = nil;
+    [result.openImagebutton setHidden:YES];
     [result.msgBackground setHidden:NO];
     [result invalidateImageConstraints];
     NSString* name =  @(interaction.body.c_str());
@@ -360,6 +361,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             [result updateImageConstraintWithMax: MAX_TRANSFERED_IMAGE_SIZE];
             [result.openImagebutton setAction:@selector(imagePreview:)];
             [result.openImagebutton setTarget:self];
+            [result.openImagebutton setHidden:NO];
         }
     }
     [result setupForInteraction:interactionID];
