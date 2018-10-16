@@ -120,7 +120,7 @@ return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 a
 
 + (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint
 {
-    NSImage* image = img;
+    NSImage* image = [img copy];
     if (tint) {
         [image lockFocus];
         [tint set];
