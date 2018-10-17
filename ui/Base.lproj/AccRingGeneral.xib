@@ -522,6 +522,8 @@
                 <constraint firstItem="Y8L-GO-1Qy" firstAttribute="top" secondItem="dOT-gX-qDn" secondAttribute="bottom" constant="15" id="Qyx-Mb-U5a"/>
                 <constraint firstItem="pzl-nx-92N" firstAttribute="top" secondItem="hsy-0z-bp6" secondAttribute="bottom" constant="15" id="Sff-Zn-zbU"/>
                 <constraint firstItem="dOT-gX-qDn" firstAttribute="top" secondItem="pzl-nx-92N" secondAttribute="bottom" constant="20" id="T2X-WC-rFy"/>
+                <constraint firstAttribute="bottom" secondItem="ODP-YD-5vy" secondAttribute="bottom" constant="20" id="TsA-3f-VGs"/>
+                <constraint firstItem="Y8L-GO-1Qy" firstAttribute="leading" secondItem="h5N-dv-68N" secondAttribute="leading" constant="20" id="Wgo-JG-hSY"/>
                 <constraint firstItem="h3Q-Fn-uye" firstAttribute="leading" secondItem="oVO-wj-fwQ" secondAttribute="trailing" constant="32" id="ZRY-Rq-HKF"/>
                 <constraint firstItem="pzl-nx-92N" firstAttribute="leading" secondItem="h5N-dv-68N" secondAttribute="leading" constant="20" id="ZdS-4M-DNc"/>
                 <constraint firstItem="ODP-YD-5vy" firstAttribute="centerX" secondItem="h5N-dv-68N" secondAttribute="centerX" id="aP4-Wz-IvA"/>
