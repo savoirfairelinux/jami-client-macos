@@ -52,7 +52,7 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
 
 -(void) viewDidLoad {
     [super viewDidLoad];
-    [[self view] setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin | NSViewHeightSizable];
+    [[self view] setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin];
     [self updateView];
 }
 
