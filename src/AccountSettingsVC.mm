@@ -93,15 +93,25 @@ CGFloat const VIEW_INSET = 20;
 - (void) show {
     [self.view setHidden:NO];
     [self displayGeneralSettings];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateInset) name:NSWindowDidResizeNotification object:nil];
+}
+
+- (void)updateInset {
+    if(self.containerView.documentView.frame.size.height > (self.containerView.frame.size.height + VIEW_INSET) &&  self.containerView.contentInsets.bottom <= VIEW_INSET) {
+        return;
+    }
+    int bottomInset = self.containerView.frame.size.height - self.containerView.documentView.frame.size.height - VIEW_INSET;
+    self.containerView.contentInsets = NSEdgeInsetsMake(VIEW_INSET, 0, bottomInset, 0);
 }
 
 -(void)displayGeneralSettings {
     self.containerView.documentView = accountGeneralVC.view;
-    int bottomInset = self.containerView.frame.size.height - accountGeneralVC.view.frame.size.height - VIEW_INSET;
-    self.containerView.contentInsets = NSEdgeInsetsMake(VIEW_INSET, 0, bottomInset, 0);
+    [self updateInset];
+
 }
 
--(void)displayAllSettings {
+-(void)displayAllSettingAndScrollToAdvanced: (BOOL) shouldScroll {
+    CGRect visibleRect = self.containerView.visibleRect;
     CGRect settingsFrame = accountGeneralVC.view.frame;
     settingsFrame.size.height = settingsFrame.size.height + accountAdvancedVC.view.frame.size.height;
     NSView* container = [[NSView alloc] initWithFrame:settingsFrame];
@@ -111,9 +121,37 @@ CGFloat const VIEW_INSET = 20;
     accountGeneralVC.view.frame = generalSettingsFrame;
     [container addSubview:accountGeneralVC.view];
     self.containerView.documentView = container;
-    int bottomInset = self.containerView.frame.size.height - accountGeneralVC.view.frame.size.height - accountAdvancedVC.view.frame.size.height - VIEW_INSET;
-    self.containerView.contentInsets = NSEdgeInsetsMake(VIEW_INSET, 0, (bottomInset > 0) ? bottomInset : 0, 0);
-   [self scrollToTopScrollView: self.containerView];
+    //return scroll to position it was before changing scroll document view
+    NSPoint oldOrigin = NSMakePoint(0.0, [[self.containerView documentView] frame].size.height
+                                    - NSHeight([[self.containerView contentView] bounds])
+                                    - (NSHeight([[accountGeneralVC view] bounds])
+                                       - visibleRect.size.height));
+    [[self.containerView documentView] scrollPoint: oldOrigin];
+    if(!shouldScroll) {
+        [self updateInset];
+        return;
+    }
+    //animte scroll to advanced option
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.5];
+    NSClipView* clipView = [self.containerView contentView];
+    NSPoint newOrigin = NSMakePoint(0.0, accountAdvancedVC.view.frame.size.height
+                                    - visibleRect.size.height
+                                    + VIEW_INSET);
+    NSPoint clipViewOrigin = [clipView bounds].origin;
+    clipViewOrigin.y = clipViewOrigin.y - NSHeight([[accountGeneralVC view] bounds]);
+    CGFloat accountHeight = NSHeight([[accountGeneralVC view] bounds]);
+    CGFloat visibleHeight = visibleRect.size.height;
+    if(accountGeneralVC.view.frame.size.height > visibleRect.size.height) {
+        clipViewOrigin.y = clipViewOrigin.y
+        + accountGeneralVC.view.frame.size.height
+        - visibleRect.size.height
+        + VIEW_INSET;
+    }
+    [[clipView animator] setBoundsOrigin:clipViewOrigin];
+    [NSAnimationContext endGrouping];
+    [[self.containerView documentView] scrollPoint: newOrigin];
+    [self updateInset];
 }
 
 -(void) scrollToTopScrollView: (NSScrollView *) scrollView {
@@ -121,10 +159,9 @@ CGFloat const VIEW_INSET = 20;
     if ([[scrollView documentView] isFlipped]) {
         newScrollOrigin=NSMakePoint(0.0,0.0);
     } else {
-        newScrollOrigin=NSMakePoint(0.0,NSMaxY([[scrollView documentView] frame])
+        newScrollOrigin=NSMakePoint(0.0, NSMaxY([[ self.containerView documentView] frame])
                                     -NSHeight([[scrollView contentView] bounds]));
     }
-
     [[scrollView documentView] scrollPoint:newScrollOrigin];
 }
 
@@ -133,7 +170,7 @@ CGFloat const VIEW_INSET = 20;
 
 -(void) updateFrame {
     if (accountAdvancedVC.view.superview == self.containerView.documentView) {
-        [self displayAllSettings];
+        [self displayAllSettingAndScrollToAdvanced: NO];
         return;
     }
     [self displayGeneralSettings];
@@ -144,11 +181,13 @@ CGFloat const VIEW_INSET = 20;
         [self displayGeneralSettings];
         return;
     }
-    [self displayAllSettings];
+    [self displayAllSettingAndScrollToAdvanced: YES];
 }
 
 - (void) hide {
     [self.view setHidden:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidResizeNotification object:nil];
 }
+
 
 @end
