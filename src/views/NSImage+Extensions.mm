@@ -42,8 +42,7 @@
 }
 
 - (NSImage *) roundCorners:(CGFloat)radius {
-    NSImage *existingImage = self;
-    NSSize existingSize = [existingImage size];
+    NSSize existingSize = [self size];
     NSSize newSize = NSMakeSize(existingSize.width, existingSize.height);
     NSImage *composedImage = [[NSImage alloc] initWithSize:newSize];
 
@@ -55,7 +54,7 @@
     [clipPath setWindingRule:NSEvenOddWindingRule];
     [clipPath addClip];
 
-    [existingImage drawAtPoint:NSZeroPoint fromRect:NSMakeRect(0, 0, newSize.width, newSize.height) operation:NSCompositeSourceOver fraction:1];
+    [self drawAtPoint:NSZeroPoint fromRect:NSMakeRect(0, 0, newSize.width, newSize.height) operation:NSCompositeSourceOver fraction:1];
 
     [composedImage unlockFocus];
 
