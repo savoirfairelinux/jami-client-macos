@@ -122,7 +122,11 @@ NSMenuItem* selectedMenuItem;
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountStatusChanged,
                      [self] (const std::string& accountID) {
-                         [self update];
+                         if([self selectedAccount].id == accountID) {
+                             [self update];
+                             return;
+                         }
+                         [self updateMenuItemForAccount:accountID];
                      });
 }
 
@@ -146,6 +150,16 @@ NSMenuItem* selectedMenuItem;
             @throw noAccEx;
         }
     }
+}
+
+-(void) updateMenuItemForAccount: (const std::string&) accountID {
+    AccountMenuItemView *itemView =
+    [accountsMenu itemWithTag:[@(accountID.c_str()) intValue]].view;
+    if(!itemView) {
+        return;
+    }
+    [self configureView:itemView forAccount:accountID];
+
 }
 
 -(void) updateMenu {
@@ -195,10 +209,10 @@ NSMenuItem* selectedMenuItem;
     [itemView.accountLabel setStringValue:@(account.profileInfo.alias.c_str())];
     NSString* userNameString = [self nameForAccount: account];
     [itemView.userNameLabel setStringValue:userNameString];
-    QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
-    QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba, nil);
-    if(QtMac::toNSImage(qvariant_cast<QPixmap>(photo))) {
-        [itemView.accountAvatar setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(account.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSImage *image = [[NSImage alloc] initWithData:imageData];
+    if(image) {
+        [itemView.accountAvatar setImage: image];
     } else {
         [itemView.accountAvatar setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
     }
@@ -229,12 +243,10 @@ NSMenuItem* selectedMenuItem;
         auto& account = [self selectedAccount];
         if(account.profileInfo.type == lrc::api::profile::Type::INVALID)
             return;
-
-        QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
-
-        QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba, nil);
-        if(QtMac::toNSImage(qvariant_cast<QPixmap>(photo))) {
-            [profileImage setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(account.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSImage *image = [[NSImage alloc] initWithData:imageData];
+        if(image) {
+            [profileImage setImage: image];
         } else {
             [profileImage setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
         }
