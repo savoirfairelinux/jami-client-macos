@@ -137,15 +137,12 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 -(void) updateView {
     const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
-    QByteArray ba = QByteArray::fromStdString(account.profileInfo.avatar);
 
-    QVariant photo = GlobalInstances::pixmapManipulator().personPhoto(ba, nil);
-    if(QtMac::toNSImage(qvariant_cast<QPixmap>(photo))) {
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(account.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSImage *image = [[NSImage alloc] initWithData:imageData];
+    if(image) {
         [photoView setBordered:NO];
-        NSImage *image = QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
-        CGFloat newSize = MIN(image.size.height, image.size.width);
-        image = [image cropImageToSize:CGSizeMake(newSize, newSize)];
-        [photoView setImage: [image roundCorners: image.size.height * 0.5]];
+        [photoView setImage: [image roundCorners: 350]];
         [addProfilePhotoImage setHidden:YES];
     } else {
         [photoView setImage:nil];
