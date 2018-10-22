@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AddSIPAccountVC">
@@ -53,7 +52,7 @@
                     <rect key="frame" x="80" y="245" width="240" height="22"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Enter name" bezelStyle="round" id="YeS-R8-ZLT">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -88,15 +87,15 @@
                     <rect key="frame" x="20" y="222" width="360" height="5"/>
                 </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KhB-Ik-Njv">
-                    <rect key="frame" x="18" y="150" width="72" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User Name" id="Srm-hv-9WR">
+                    <rect key="frame" x="18" y="150" width="78" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="User Name*" id="Srm-hv-9WR">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ltT-Ku-8cT">
-                    <rect key="frame" x="18" y="113" width="63" height="17"/>
+                    <rect key="frame" x="18" y="113" width="78" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password" id="Aem-zQ-Ya3">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -104,7 +103,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lgy-cp-ZAK">
-                    <rect key="frame" x="18" y="76" width="67" height="17"/>
+                    <rect key="frame" x="18" y="76" width="78" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SIP Server" id="ubR-HD-O15">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -112,18 +111,29 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5bs-k5-y85">
-                    <rect key="frame" x="150" y="150" width="230" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="Rej-Yd-PDb">
+                    <rect key="frame" x="114" y="150" width="266" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter username (mandatory field)" bezelStyle="round" id="Rej-Yd-PDb">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
+                    <connections>
+                        <binding destination="-2" name="value" keyPath="self.userName" id="ZBr-lO-u1S">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                <string key="NSMultipleValuesPlaceholder">Enter username(mandatory field)</string>
+                                <string key="NSNoSelectionPlaceholder">Enter username(mandatory field)</string>
+                                <string key="NSNotApplicablePlaceholder">Enter username(mandatory field)</string>
+                                <string key="NSNullPlaceholder">Enter username(mandatory field)</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </textField>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D0T-VV-iYE" customClass="NSSecureTextField">
-                    <rect key="frame" x="150" y="113" width="230" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="DBU-zJ-vj6">
+                    <rect key="frame" x="114" y="113" width="266" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter password" bezelStyle="round" id="DBU-zJ-vj6">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -135,6 +145,7 @@
                     </buttonCell>
                     <connections>
                         <action selector="addAccount:" target="-2" id="64G-sG-ojK"/>
+                        <binding destination="-2" name="enabled" keyPath="self.userName.length" id="Sh5-X5-lWo"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eYs-22-jZA">
@@ -151,22 +162,25 @@ Gw
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SUD-CK-UdK">
-                    <rect key="frame" x="150" y="76" width="230" height="22"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="0UI-j5-0at">
+                    <rect key="frame" x="114" y="76" width="266" height="22"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Enter SIP address" bezelStyle="round" id="0UI-j5-0at">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="h0K-g2-bgQ" firstAttribute="top" secondItem="gTr-1R-5qI" secondAttribute="top" id="3p7-UD-eti"/>
+                <constraint firstItem="lgy-cp-ZAK" firstAttribute="trailing" secondItem="KhB-Ik-Njv" secondAttribute="trailing" id="82g-n3-028"/>
                 <constraint firstItem="h0K-g2-bgQ" firstAttribute="bottom" secondItem="gTr-1R-5qI" secondAttribute="bottom" id="9PF-KD-nWz"/>
                 <constraint firstItem="k1Y-Gu-pHf" firstAttribute="top" secondItem="AbV-oR-qrC" secondAttribute="top" id="BAX-Ro-h80"/>
                 <constraint firstItem="SUD-CK-UdK" firstAttribute="bottom" secondItem="lgy-cp-ZAK" secondAttribute="bottom" id="CUL-RU-jNp"/>
                 <constraint firstItem="SyG-hW-jMO" firstAttribute="top" secondItem="ZIg-7T-R16" secondAttribute="bottom" constant="20" id="CqL-Zc-y07"/>
                 <constraint firstItem="Uof-hc-DnR" firstAttribute="centerY" secondItem="gTr-1R-5qI" secondAttribute="centerY" id="E0o-1N-dI8"/>
+                <constraint firstItem="ltT-Ku-8cT" firstAttribute="leading" secondItem="KhB-Ik-Njv" secondAttribute="leading" id="I5y-hT-7kU"/>
                 <constraint firstItem="k1Y-Gu-pHf" firstAttribute="leading" secondItem="AbV-oR-qrC" secondAttribute="leading" constant="20" id="Ib0-eE-tLs"/>
+                <constraint firstItem="5bs-k5-y85" firstAttribute="leading" secondItem="KhB-Ik-Njv" secondAttribute="trailing" constant="20" id="KOU-1n-TBv"/>
                 <constraint firstItem="gTr-1R-5qI" firstAttribute="top" secondItem="Sfl-q6-sGH" secondAttribute="bottom" constant="20" id="L9m-LI-eOI"/>
                 <constraint firstItem="H2H-Nj-iaA" firstAttribute="bottom" secondItem="eYs-22-jZA" secondAttribute="bottom" id="MKJ-vd-s0d"/>
                 <constraint firstAttribute="trailing" secondItem="SyG-hW-jMO" secondAttribute="trailing" constant="20" id="Meg-na-Q6u"/>
@@ -175,6 +189,7 @@ Gw
                 <constraint firstItem="h0K-g2-bgQ" firstAttribute="trailing" secondItem="gTr-1R-5qI" secondAttribute="trailing" id="P8V-b6-9vP"/>
                 <constraint firstItem="5bs-k5-y85" firstAttribute="bottom" secondItem="KhB-Ik-Njv" secondAttribute="bottom" id="Ppo-F5-NZ1"/>
                 <constraint firstItem="SUD-CK-UdK" firstAttribute="leading" secondItem="5bs-k5-y85" secondAttribute="leading" id="QLI-6r-1Am"/>
+                <constraint firstItem="lgy-cp-ZAK" firstAttribute="leading" secondItem="KhB-Ik-Njv" secondAttribute="leading" id="SAd-Tg-BOL"/>
                 <constraint firstAttribute="trailing" secondItem="D0T-VV-iYE" secondAttribute="trailing" constant="20" id="TB2-A1-kcZ"/>
                 <constraint firstItem="ZIg-7T-R16" firstAttribute="leading" secondItem="AbV-oR-qrC" secondAttribute="leading" constant="20" id="UPm-ck-fNx"/>
                 <constraint firstItem="H2H-Nj-iaA" firstAttribute="leading" secondItem="eYs-22-jZA" secondAttribute="trailing" constant="10" id="aS4-4o-cA4"/>
@@ -187,11 +202,11 @@ Gw
                 <constraint firstAttribute="trailing" secondItem="ZIg-7T-R16" secondAttribute="trailing" constant="20" id="jbY-Wn-N2s"/>
                 <constraint firstItem="D0T-VV-iYE" firstAttribute="leading" secondItem="5bs-k5-y85" secondAttribute="leading" id="krH-LJ-nEV"/>
                 <constraint firstAttribute="trailing" secondItem="k1Y-Gu-pHf" secondAttribute="trailing" constant="20" id="lGK-7a-GnJ"/>
-                <constraint firstItem="5bs-k5-y85" firstAttribute="leading" secondItem="AbV-oR-qrC" secondAttribute="leading" constant="150" id="mEb-jR-66f"/>
                 <constraint firstItem="Sfl-q6-sGH" firstAttribute="top" secondItem="k1Y-Gu-pHf" secondAttribute="bottom" constant="20" id="mys-s9-Hi1"/>
                 <constraint firstItem="ZIg-7T-R16" firstAttribute="top" secondItem="vGN-UO-vCk" secondAttribute="bottom" constant="20" id="nKR-Nc-r2K"/>
                 <constraint firstItem="vGN-UO-vCk" firstAttribute="leading" secondItem="AbV-oR-qrC" secondAttribute="leading" constant="80" id="nyQ-aG-Thc"/>
                 <constraint firstAttribute="trailing" secondItem="Sfl-q6-sGH" secondAttribute="trailing" constant="20" id="p7B-t7-Uuz"/>
+                <constraint firstItem="ltT-Ku-8cT" firstAttribute="trailing" secondItem="KhB-Ik-Njv" secondAttribute="trailing" id="pgi-Wp-s73"/>
                 <constraint firstAttribute="bottom" secondItem="H2H-Nj-iaA" secondAttribute="bottom" constant="20" id="rlf-hh-jtE"/>
                 <constraint firstItem="Sfl-q6-sGH" firstAttribute="leading" secondItem="AbV-oR-qrC" secondAttribute="leading" constant="20" id="shS-ge-hQq"/>
                 <constraint firstItem="lgy-cp-ZAK" firstAttribute="leading" secondItem="AbV-oR-qrC" secondAttribute="leading" constant="20" id="skr-4Q-Z9U"/>
@@ -206,6 +221,7 @@ Gw
             </constraints>
             <point key="canvasLocation" x="-339" y="177"/>
         </view>
+        <userDefaultsController representsSharedInstance="YES" id="T91-Zn-FQu"/>
     </objects>
     <resources>
         <image name="ic_picture" width="72" height="72"/>
