@@ -82,9 +82,6 @@ NSTimer* timeoutTimer;
     accountCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
                                       [self] (const std::string& accountID) {
-                                          if(accountID.compare(accountToCreate) != 0) {
-                                              return;
-                                          }
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
                                               auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
@@ -105,7 +102,7 @@ NSTimer* timeoutTimer;
                                           QObject::disconnect(accountCreated);
                                           [self.delegate close];
                                       });
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [@"SIP" UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [displayName UTF8String]);
 
     timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                     target:self
