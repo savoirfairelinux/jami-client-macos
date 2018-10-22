@@ -122,11 +122,11 @@ NSMenuItem* selectedMenuItem;
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountStatusChanged,
                      [self] (const std::string& accountID) {
+                          [self updateMenuItemForAccount:accountID];
                          if([self selectedAccount].id == accountID) {
-                             [self update];
-                             return;
+                             [self setPopUpButtonSelection];
+                             [self updatePhoto];
                          }
-                         [self updateMenuItemForAccount:accountID];
                      });
 }
 
@@ -138,9 +138,7 @@ NSMenuItem* selectedMenuItem;
         auto accountList = accMdl_->getAccountList();
         if (!accountList.empty()) {
             const auto& fallbackAccount = accMdl_->getAccountInfo(accountList.at(0));
-            if (accountList.size() == 1) {
-                [accountSelectionManager_ setSavedAccount:fallbackAccount];
-            }
+            [accountSelectionManager_ setSavedAccount:fallbackAccount];
             return fallbackAccount;
         } else {
             NSException* noAccEx = [NSException
