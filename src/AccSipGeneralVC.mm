@@ -206,40 +206,36 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 - (IBAction)changeEditingMode:(id)sender
 {
-    if([userNameField isEditable]) {
+    if([passwordField isEditable]) {
         [self setEditingMode:NO];
+        [self saveAccount];
         return;
     }
     [self setEditingMode:YES];
 }
 
 -(void) setEditingMode:(BOOL) shouldEdit {
-    [userNameField setEditable:shouldEdit];
     [passwordField setEditable:shouldEdit];
     [proxyField setEditable:shouldEdit];
     [voicemailField setEditable:shouldEdit];
     [serverField setEditable:shouldEdit];
-    [userNameField setDrawsBackground:!shouldEdit];
     [passwordField setDrawsBackground:!shouldEdit];
     [proxyField setDrawsBackground:!shouldEdit];
     [voicemailField setDrawsBackground:!shouldEdit];
     [serverField setDrawsBackground:!shouldEdit];
-    [userNameField setBezeled:shouldEdit];
     [passwordField setBezeled:shouldEdit];
     [proxyField setBezeled:shouldEdit];
     [voicemailField setBezeled:shouldEdit];
     [serverField setBezeled:shouldEdit];
     if(shouldEdit) {
         [serverField setBezelStyle:NSTextFieldSquareBezel];
-        [userNameField setBezelStyle:NSTextFieldSquareBezel];
         [passwordField setBezelStyle:NSTextFieldSquareBezel];
         [proxyField setBezelStyle:NSTextFieldSquareBezel];
         [voicemailField setBezelStyle:NSTextFieldSquareBezel];
-        [userNameField becomeFirstResponder];
+        [passwordField becomeFirstResponder];
         [editAccountButton setTitle:@"Done"];
         return;
     }
-    [self saveAccount];
     [editAccountButton setTitle:@"Edit Account"];
     [self.view resignFirstResponder];
 }
@@ -248,7 +244,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     accountProperties.hostname = [serverField.stringValue UTF8String];
     accountProperties.password = [passwordField.stringValue UTF8String];
-    accountProperties.username = [userNameField.stringValue UTF8String];
     accountProperties.routeset = [proxyField.stringValue UTF8String];
     accountProperties.mailbox = [voicemailField.stringValue UTF8String];
     self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);

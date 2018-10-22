@@ -27,6 +27,7 @@
 
 @interface AddSIPAccountVC : NSViewController <LrcModelsProtocol>
 @property (nonatomic, weak) NSWindowController <AddSIPAccountDelegate>* delegate;
+@property (retain) NSString* userName;
 - (void)show;
 
 @end
