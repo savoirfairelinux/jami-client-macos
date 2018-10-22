@@ -208,6 +208,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 {
     if([userNameField isEditable]) {
         [self setEditingMode:NO];
+        [self saveAccount];
         return;
     }
     [self setEditingMode:YES];
@@ -239,7 +240,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [editAccountButton setTitle:@"Done"];
         return;
     }
-    [self saveAccount];
     [editAccountButton setTitle:@"Edit Account"];
     [self.view resignFirstResponder];
 }

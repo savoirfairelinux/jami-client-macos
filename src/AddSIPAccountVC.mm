@@ -71,7 +71,7 @@ NSTimer* timeoutTimer;
 
 - (IBAction)cancel:(id)sender
 {
-    [self.delegate close];
+    [self.delegate didCreateAccountWithSuccess: NO];
 }
 
 - (IBAction)addAccount:(id)sender
@@ -82,9 +82,6 @@ NSTimer* timeoutTimer;
     accountCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
                                       [self] (const std::string& accountID) {
-                                          if(accountID.compare(accountToCreate) != 0) {
-                                              return;
-                                          }
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
                                               auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
@@ -98,14 +95,11 @@ NSTimer* timeoutTimer;
                                           if(![passwordField.stringValue isEqualToString:@""]) {
                                               accountProperties.password = [passwordField.stringValue UTF8String];
                                           }
-                                          if(![userNameField.stringValue isEqualToString:@""]) {
-                                              accountProperties.username = [userNameField.stringValue UTF8String];
-                                          }
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           QObject::disconnect(accountCreated);
-                                          [self.delegate close];
+                                          [self.delegate didCreateAccountWithSuccess: YES];
                                       });
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [@"SIP" UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [displayName UTF8String], "", "", "", [userNameField.stringValue UTF8String]);
 
     timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                     target:self
@@ -115,7 +109,7 @@ NSTimer* timeoutTimer;
 
 -(void) addingAccountTimeout {
     QObject::disconnect(accountCreated);
-    [self.delegate close];
+    [self.delegate didCreateAccountWithSuccess: YES];
 }
 
 
