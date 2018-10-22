@@ -236,10 +236,4 @@
     }
 }
 
-#pragma - AddSIPAccountDelegate methods
-
-- (void)close {
-    [self showChooseWithCancelButton: isCancelable andAdvanced: withAdvanced];
-}
-
 @end
