@@ -60,6 +60,7 @@ Boolean menuIsOpen;
 Boolean menuNeedsUpdate;
 NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
+NSMutableDictionary* menuItemsTags;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow
 {
@@ -85,6 +86,7 @@ NSMenuItem* selectedMenuItem;
     [accountsMenu setDelegate:self];
     accountSelectionButton.menu = accountsMenu;
     [accountSelectionButton setAutoenablesItems:NO];
+    menuItemsTags = [[NSMutableDictionary alloc] init];
     [self update];
 
     QObject::connect(accMdl_,
@@ -122,11 +124,11 @@ NSMenuItem* selectedMenuItem;
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountStatusChanged,
                      [self] (const std::string& accountID) {
-                         if([self selectedAccount].id == accountID) {
-                             [self update];
-                             return;
-                         }
                          [self updateMenuItemForAccount:accountID];
+                         if([self selectedAccount].id == accountID) {
+                             // update account state
+                             [self updatePhoto];
+                         }
                      });
 }
 
@@ -138,9 +140,7 @@ NSMenuItem* selectedMenuItem;
         auto accountList = accMdl_->getAccountList();
         if (!accountList.empty()) {
             const auto& fallbackAccount = accMdl_->getAccountInfo(accountList.at(0));
-            if (accountList.size() == 1) {
-                [accountSelectionManager_ setSavedAccount:fallbackAccount];
-            }
+            [accountSelectionManager_ setSavedAccount:fallbackAccount];
             return fallbackAccount;
         } else {
             NSException* noAccEx = [NSException
@@ -153,13 +153,11 @@ NSMenuItem* selectedMenuItem;
 }
 
 -(void) updateMenuItemForAccount: (const std::string&) accountID {
-    AccountMenuItemView *itemView =
-    [accountsMenu itemWithTag:[@(accountID.c_str()) intValue]].view;
-    if(!itemView) {
-        return;
-    }
-    [self configureView:itemView forAccount:accountID];
-
+    NSMenuItem *item  =[accountsMenu itemWithTag:[menuItemsTags[@(accountID.c_str())] intValue]];
+    if(!item) {return;}
+    AccountMenuItemView *itemView =item.view;
+    if(!itemView) {return;}
+    [self configureView:itemView forAccount:accountID forMenuItem: item];
 }
 
 -(void) updateMenu {
@@ -175,12 +173,11 @@ NSMenuItem* selectedMenuItem;
                                    action:NULL
                                    keyEquivalent:@""];
 
-        menuBarItem.attributedTitle = [self attributedItemTitleForAccount:account];
         AccountMenuItemView *itemView = [[AccountMenuItemView alloc] initWithFrame:CGRectZero];
-        [self configureView:itemView forAccount:accId];
-        if([@(accId.c_str()) intValue] != 0) {
-            [menuBarItem setTag:[@(accId.c_str()) intValue]];
-        }
+        [self configureView:itemView forAccount:accId forMenuItem: menuBarItem];
+        int itemTag = arc4random_uniform(1000);
+        menuItemsTags[@(accId.c_str())] = [NSNumber numberWithInt: itemTag];
+        [menuBarItem setTag:itemTag];
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
     }
@@ -204,8 +201,9 @@ NSMenuItem* selectedMenuItem;
     [accountStatus setHidden:accList.empty()];
 }
 
--(void) configureView: (AccountMenuItemView *) itemView forAccount:(const std::string&) accountId {
+-(void) configureView: (AccountMenuItemView *) itemView forAccount:(const std::string&) accountId forMenuItem:(NSMenuItem *) item {
     auto& account = accMdl_->getAccountInfo(accountId);
+    item.attributedTitle = [self attributedItemTitleForAccount:account];
     [itemView.accountLabel setStringValue:@(account.profileInfo.alias.c_str())];
     NSString* userNameString = [self nameForAccount: account];
     [itemView.userNameLabel setStringValue:userNameString];
@@ -323,7 +321,7 @@ NSMenuItem* selectedMenuItem;
         if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
             return;
         }
-        [accountSelectionButton selectItemWithTitle:[self itemTitleForAccount:account]];
+        [accountSelectionButton selectItemWithTag:[menuItemsTags[@(account.id.c_str())] intValue]];
     }
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
