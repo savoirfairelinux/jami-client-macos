@@ -387,6 +387,7 @@
                                          &lrc::api::NewCallModel::remotePreviewStarted,
                                          [self](const std::string& callId, Video::Renderer* renderer) {
                                              NSLog(@"Video started!");
+                                             [videoView setLayer:[[CallLayer alloc] init]];
                                              [videoView setShouldAcceptInteractions:YES];
                                              [self mouseIsMoving: NO];
                                              [self connectVideoRenderer:renderer];
@@ -395,6 +396,7 @@
     if (callModel->hasCall(callUid_)) {
         if (auto renderer = callModel->getRenderer(callUid_)) {
             QObject::disconnect(self.videoStarted);
+             [videoView setLayer:[[CallLayer alloc] init]];
             [self connectVideoRenderer: renderer];
         }
     }
@@ -465,6 +467,8 @@
     videoHolder.stopped = QObject::connect(renderer,
                      &Video::Renderer::stopped,
                      [=]() {
+                         [videoView setLayer:[CALayer layer]];
+                         [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
                          [self mouseIsMoving: YES];
                          [videoView setShouldAcceptInteractions:NO];
                          QObject::disconnect(videoHolder.frameUpdated);
@@ -559,7 +563,8 @@
     QObject::disconnect(previewHolder.started);
     QObject::disconnect(self.messageConnection);
     [previewView.layer setContents:nil];
-    [(CallLayer*)videoView.layer setVideoRunning:NO];
+    [videoView setLayer:[CALayer layer]];
+    [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
 
     [_brokerPopoverVC performClose:self];
     [self.addToContactPopover performClose:self];

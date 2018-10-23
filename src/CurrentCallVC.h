@@ -31,7 +31,6 @@ class Call;
 @interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {
 
 }
-
 -(void) initFrame;
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;

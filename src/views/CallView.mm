@@ -51,6 +51,8 @@
     {
         [self registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
         [self setWantsLayer:YES];
+        [self setLayer:[CALayer layer]];
+        [self.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
     }
 
     [self.window setAcceptsMouseMovedEvents:YES];
@@ -65,12 +67,6 @@
     [self addTrackingArea:area];
     return self;
 }
-
-- (CALayer *)makeBackingLayer
-{
-    return (CALayer*) [[CallLayer alloc] init];
-}
-
 
 #pragma mark - Destination Operations
 

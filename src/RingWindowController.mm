@@ -56,6 +56,14 @@
 #import "utils.h"
 #import "RingWizardWC.h"
 #import "AccountSettingsVC.h"
+#import "views/CallLayer.h"
+
+typedef NS_ENUM(NSInteger, ViewState) {
+    SHOW_WELCOME_SCREEN = 0,
+    SHOW_CONVERSATION_SCREEN,
+    SHOW_CALL_SCREEN,
+    SHOW_SETTINGS_SCREEN,
+};
 
 @interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
 
@@ -104,6 +112,58 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     return self;
 }
 
+-(void)changeViewTo:(ViewState) state  {
+    switch (state) {
+        case SHOW_WELCOME_SCREEN:
+            [self accountSettingsShouldOpen: NO];
+            [conversationVC hideWithAnimation:false];
+            [currentCallVC hideWithAnimation:false];
+            [currentCallVC.view removeFromSuperview];
+            [welcomeContainer setHidden: NO];
+            [smartViewVC.view setHidden: NO];
+            [settingsVC hide];
+            break;
+        case SHOW_CONVERSATION_SCREEN:
+            [self accountSettingsShouldOpen: NO];
+            [conversationVC showWithAnimation:false];
+            [currentCallVC hideWithAnimation:false];
+            [currentCallVC.view removeFromSuperview];
+            [welcomeContainer setHidden: YES];
+            [smartViewVC.view setHidden: NO];
+            [settingsVC hide];
+            break;
+        case SHOW_CALL_SCREEN:
+            [self accountSettingsShouldOpen: NO];
+            if (![currentCallVC.view superview]) {
+            [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
+            [currentCallVC initFrame];
+            [currentCallVC showWithAnimation:false];
+            [conversationVC hideWithAnimation:false];
+            [welcomeContainer setHidden: YES];
+            [smartViewVC.view setHidden: NO];
+            [settingsVC hide];
+            }
+            [currentCallVC showWithAnimation:false];
+            break;
+        case SHOW_SETTINGS_SCREEN:
+            @try {
+                [self accountSettingsShouldOpen: YES];
+            }
+            @catch (NSException *ex) {
+                return;
+            }
+            [welcomeContainer setHidden: YES];
+            [currentCallVC hideWithAnimation:false];
+            [currentCallVC.view removeFromSuperview];
+            [conversationVC hideWithAnimation:false];
+            [smartViewVC.view setHidden: YES];
+            [settingsVC show];
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
@@ -120,11 +180,9 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     [[conversationVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[settingsVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
-    [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
     [callView addSubview:[conversationVC view] positioned:NSWindowAbove relativeTo:nil];
     [self.window.contentView addSubview:[settingsVC view] positioned:NSWindowAbove relativeTo:nil];
 
-    [currentCallVC initFrame];
     [conversationVC initFrame];
     [settingsVC initFrame];
     @try {
@@ -173,10 +231,8 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                                           conversation:convInfo.uid
                                                account:accInfo];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
-                         [currentCallVC showWithAnimation:false];
-                         [conversationVC hideWithAnimation:false];
-                         [self accountSettingsShouldOpen: NO];
-                         [welcomeContainer setHidden: YES];
+                         [self changeViewTo:SHOW_CALL_SCREEN];
+
                      });
 
     QObject::connect(self.behaviorController,
@@ -193,10 +249,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                                           conversation:convInfo.uid
                                                account:accInfo];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
-                         [currentCallVC showWithAnimation:false];
-                         [conversationVC hideWithAnimation:false];
-                         [self accountSettingsShouldOpen: NO];
-                         [welcomeContainer setHidden: YES];
+                         [self changeViewTo:SHOW_CALL_SCREEN];
                      });
 
     QObject::connect(self.behaviorController,
@@ -206,10 +259,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          auto& accInfo = self.accountModel->getAccountInfo(accountId);
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
-                         [conversationVC showWithAnimation:false];
-                         [currentCallVC hideWithAnimation:false];
-                         [self accountSettingsShouldOpen: NO];
-                         [welcomeContainer setHidden: YES];
+                         [self changeViewTo:SHOW_CONVERSATION_SCREEN];
                      });
 }
 
@@ -420,25 +470,17 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 - (void) selectAccount:(const lrc::api::account::Info&)accInfo currentRemoved:(BOOL) removed
 {
     // If the selected account has been changed, we close any open panel
-    if ([smartViewVC setConversationModel:accInfo.conversationModel.get()]) {
-        [currentCallVC hideWithAnimation:false];
-        [conversationVC hideWithAnimation:false];
-    }
-
+    [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     // Welcome view informations are also updated
     [self updateRingID];
     [settingsVC setSelectedAccount:accInfo.id];
-    if (removed) {
-        [self accountSettingsShouldOpen: NO];
-    }
+    [self changeViewTo: ([settingsVC.view isHidden] || removed)  ?  SHOW_WELCOME_SCREEN : SHOW_SETTINGS_SCREEN];
 }
 
 -(void)allAccountsDeleted
 {
     [smartViewVC clearConversationModel];
-    [currentCallVC hideWithAnimation:false];
-    [conversationVC hideWithAnimation:false];
-    [self accountSettingsShouldOpen: NO];
+    [self changeViewTo:SHOW_WELCOME_SCREEN];
     [self updateRingID];
 }
 
@@ -454,10 +496,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 }
 
 -(void) listTypeChanged {
-    [conversationVC hideWithAnimation:false];
-    [currentCallVC hideWithAnimation:false];
-    [self accountSettingsShouldOpen: NO];
-    [welcomeContainer setHidden: NO];
+    [self changeViewTo:SHOW_WELCOME_SCREEN];
 }
 
 #pragma mark - NSToolbarDelegate
@@ -493,38 +532,20 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 
 - (IBAction)openAccountSettings:(NSButton *)sender
 {
-    if(![settingsVC.view isHidden]) {
-        [self accountSettingsShouldOpen: NO];
-        return;
-    }
-    [self accountSettingsShouldOpen: YES];
+    [self changeViewTo: [settingsVC.view isHidden] ?  SHOW_SETTINGS_SCREEN : SHOW_WELCOME_SCREEN];
 }
 
 - (void) createNewAccount {
-    [self accountSettingsShouldOpen: NO];
-    [currentCallVC hideWithAnimation:false];
-    [conversationVC hideWithAnimation:false];
+    [self changeViewTo:SHOW_WELCOME_SCREEN];
     wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: self.accountModel];
     [wizard showChooseWithCancelButton: YES andAdvanced: YES];
     [self.window beginSheet:wizard.window completionHandler:nil];
 }
 
 -(void) accountSettingsShouldOpen: (BOOL) open {
-    [smartViewVC.view setHidden:open];
-    [welcomeContainer setHidden: open];
+
     if (open) {
-        @try {
-            [settingsVC setSelectedAccount: [chooseAccountVC selectedAccount].id];
-        }
-        @catch (NSException *ex) {
-            NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
-            return;
-        }
-        [currentCallVC hideWithAnimation:false];
-        [conversationVC hideWithAnimation:false];
-        [settingsVC show];
-    } else {
-        [settingsVC hide];
+        [settingsVC setSelectedAccount: [chooseAccountVC selectedAccount].id];
     }
     NSToolbar *toolbar = self.window.toolbar;
     NSArray *settings = [toolbar items];
