@@ -175,7 +175,6 @@
             [bottomRightPath appendBezierPathWithPoints:pointArrayBottom count:3];
             [bottomRightPath appendBezierPathWithArcFromPoint: bottomLeft toPoint: bottom radius: 20.0f];
             [bottomRightPath fill];
-            [NSGraphicsContext saveGraphicsState];
             return;
         }
 
