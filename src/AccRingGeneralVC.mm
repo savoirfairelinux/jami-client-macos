@@ -258,6 +258,8 @@ typedef NS_ENUM(NSInteger, TagViews) {
     buttonRegisterWidthConstraint.constant = 0.0;
     [registerNameButton setHidden:YES];
     [registeredNameField setStringValue:name];
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
 }
 
 #pragma mark - NSTextFieldDelegate delegate methods

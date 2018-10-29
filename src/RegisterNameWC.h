@@ -37,16 +37,6 @@
 @property (nonatomic, weak) NSViewController <RegisterNameDelegate>* delegate;
 
 /**
- * KVO with the registeredNameField
- */
-//@property (nonatomic, weak)NSString* registeredName;
-
-/**
- * KVO with the passwordField
- */
-//@property (nonatomic, weak)NSString* password;
-
-/**
  * KVO validators for the UI
  */
 @property (assign)BOOL isUserNameAvailable;

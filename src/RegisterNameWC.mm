@@ -30,7 +30,6 @@
 @implementation RegisterNameWC
 {
     __unsafe_unretained IBOutlet NSTextField* registeredNameField;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
     __unsafe_unretained IBOutlet NSImageView* ivLookupResult;
     __unsafe_unretained IBOutlet NSProgressIndicator* indicatorLookupResult;
 
@@ -63,10 +62,6 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
     [ivLookupResult setHidden:YES];
     [indicatorLookupResult setHidden:YES];
-   // self.password = @"";
-    //self.registeredName = @"";
-   // [registeredNameField setPlaceholderString:@"Username..."];
-  //  [passwordField setPlaceholderString:@"Password..."];
 }
 
 #pragma mark - Username validation delegate methods
@@ -195,7 +190,7 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
     [self showLoading];
     [self setCallback];
 
-    self.isUserNameAvailable = self.accountModel->registerName(self.selectedAccountID, [passwordField.stringValue UTF8String], [registeredNameField.stringValue UTF8String]);
+    self.isUserNameAvailable = self.accountModel->registerName(self.selectedAccountID, "", [registeredNameField.stringValue UTF8String]);
     if (!self.isUserNameAvailable) {
         NSLog(@"Could not initialize registerName operation");
         QObject::disconnect(registrationEnded);
