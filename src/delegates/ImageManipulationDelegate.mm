@@ -229,6 +229,9 @@ namespace Interfaces {
                 QPixmap pxm;
                 const int radius = size.height() / 2;
 
+                /*
+                 * we could not now clear cache and image coul be outdated
+                 * so do not use cache now
                 // Check cache
                 auto index = QStringLiteral("%1%2%3").arg(size.width())
                 .arg(size.height())
@@ -237,6 +240,7 @@ namespace Interfaces {
                 if (convPixmCache.contains(index)) {
                     return convPixmCache.value(index);
                 }
+                */
 
                 auto contactPhoto = qvariant_cast<QPixmap>(personPhoto(QByteArray::fromStdString(avatar)));
                 contactPhoto = contactPhoto.scaled(size, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
@@ -272,7 +276,7 @@ namespace Interfaces {
                 painter.drawRoundedRect(0,0,pxm.height(),pxm.height(),radius,radius);
 
                 // Save in cache
-                convPixmCache.insert(index, pxm);
+                //convPixmCache.insert(index, pxm);
 
                 return pxm;
             } else {

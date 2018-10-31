@@ -132,6 +132,7 @@
 @property QMetaObject::Connection selectedCallChanged;
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection mediaAddedConnection;
+@property QMetaObject::Connection profileUpdatedConnection;
 
 @end
 
@@ -353,16 +354,14 @@
         [backgroundImage setImage: image];
         [backgroundImage setHidden:NO];
     } else {
-       // [bluerBackgroundEffect setHidden:YES];
         [bluerBackgroundEffect.layer setBackgroundFilters:nil];
         [bluerBackgroundEffect setFillColor:[NSColor ringDarkGrey]];
         [backgroundImage setHidden:YES];
         [backgroundImage setImage:nil];
-       // [videoView.layer setBackgroundColor:[[NSColor ringDarkGrey] CGColor]];
     }
 }
 
--(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault  {
+-(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault {
     auto* convModel = accountInfo_->conversationModel.get();
     auto convIt = getConversationFromUid(convUid_, *convModel);
     if (convIt == convModel->allFilteredConversations().end()) {
@@ -691,6 +690,33 @@
                                                       [self uncollapseRightView];
                                                   }
                                               });
+    //monitor for updated profile
+    QObject::disconnect(self.profileUpdatedConnection);
+    self.profileUpdatedConnection =
+    QObject::connect(accountInfo_->contactModel.get(),
+                     &lrc::api::ContactModel::contactAdded,
+                     [self](const std::string &contactUri) {
+                         auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+                         if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
+                             return;
+                         }
+                         if (convIt->participants.empty()) {
+                             return;
+
+                         }
+                         auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
+                         if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
+                             accountInfo_->conversationModel->makePermanent(convUid_);
+                         [incomingPersonPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+                         [outgoingPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+                          [self.delegate conversationInfoUpdatedFor:convUid_];
+                         if(accountInfo_->callModel.get()->getCall(callUid_).isAudioOnly) {
+                         [audioCallPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+                             [self setBackground];
+                             return;
+                         }
+                         [personPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+                     });
 }
 
 -(void) showWithAnimation:(BOOL)animate

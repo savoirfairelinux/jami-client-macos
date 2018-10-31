@@ -178,6 +178,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     self.window.titleVisibility = NSWindowTitleHidden;
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    currentCallVC.delegate = self;
     conversationVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
     //chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:self.accountModel delegate:self];
@@ -525,6 +526,12 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     if (open) {
         [settingsVC setSelectedAccount: [chooseAccountVC selectedAccount].id];
     }
+}
+
+#pragma mark - CallViewControllerDelegate
+
+-(void) conversationInfoUpdatedFor:(const std::string&) conversationID {
+    [smartViewVC reloadConversationWithUid:@(conversationID.c_str())];
 }
 
 @end
