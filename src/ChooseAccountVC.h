@@ -20,6 +20,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <string>
 
 namespace lrc {
     namespace api {

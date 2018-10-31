@@ -28,9 +28,16 @@
 
 class Call;
 
+@protocol CallViewControllerDelegate
+
+-(void) conversationInfoUpdatedFor:(const std::string&) conversationID;
+
+@end
+
 @interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {
 
 }
+@property (retain, nonatomic) id <CallViewControllerDelegate> delegate;
 -(void) initFrame;
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;
