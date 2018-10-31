@@ -132,6 +132,7 @@
 @property QMetaObject::Connection selectedCallChanged;
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection mediaAddedConnection;
+@property QMetaObject::Connection profileUpdatedConnection;
 
 @end
 
@@ -338,13 +339,13 @@
 -(void) setUpAudioOnlyView {
     [audioCallView setHidden:NO];
     [headerContainer setHidden:YES];
-    [audioCallPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+    [audioCallPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES useCache: YES]];
 }
 
 -(void) setBackground {
     auto* convModel = accountInfo_->conversationModel.get();
     auto it = getConversationFromUid(convUid_, *convModel);
-    NSImage *image= [self getContactImageOfSize:120.0 withDefaultAvatar:NO];
+    NSImage *image= [self getContactImageOfSize:120.0 withDefaultAvatar:NO useCache: YES];
     if(image) {
         CIFilter* bluerFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
         [bluerFilter setDefaults];
@@ -362,7 +363,7 @@
     }
 }
 
--(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault  {
+-(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault useCache:(BOOL) useCache {
     auto* convModel = accountInfo_->conversationModel.get();
     auto convIt = getConversationFromUid(convUid_, *convModel);
     if (convIt == convModel->allFilteredConversations().end()) {
@@ -370,7 +371,7 @@
     }
     if(shouldDrawDefault) {
         auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-        QVariant photo = imgManip.conversationPhoto(*convIt, *accountInfo_, QSize(size, size), NO);
+        QVariant photo = imgManip.conversationPhoto(*convIt, *accountInfo_, QSize(size, size), NO, useCache);
         return QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
     }
     auto contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
@@ -381,7 +382,7 @@
 
 -(void) setupContactInfo:(NSImageView*)imageView
 {
-    [imageView setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+    [imageView setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES useCache: YES]];
 }
 
 -(void) setupIncoming:(const std::string&) callId
@@ -402,7 +403,7 @@
     [headerContainer setHidden:YES];
     auto it = getConversationFromUid(convUid_, *convModel);
     if (it != convModel->allFilteredConversations().end()) {
-        [incomingPersonPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+        [incomingPersonPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES useCache: YES]];
         [incomingDisplayName setStringValue:bestNameForConversation(*it, *convModel)];
     }
 }
@@ -691,6 +692,34 @@
                                                       [self uncollapseRightView];
                                                   }
                                               });
+    //monitor for updated profile
+    QObject::disconnect(self.profileUpdatedConnection);
+    self.profileUpdatedConnection =
+    QObject::connect(accountInfo_->contactModel.get(),
+                     &lrc::api::ContactModel::contactAdded,
+                     [self](const std::string &contactUri) {
+                         auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+                         if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
+                             return;
+                         }
+                         if (convIt->participants.empty()) {
+                             return;
+
+                         }
+                         auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
+                         if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
+                             accountInfo_->conversationModel->makePermanent(convUid_);
+                         // profile image could be updated so, clear cached images for this conversation
+                         [incomingPersonPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES useCache: NO]];
+                         [outgoingPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES useCache: YES]];
+                          [self.delegate conversationInfoUpdatedFor:convUid_];
+                         if(accountInfo_->callModel.get()->getCall(callUid_).isAudioOnly) {
+                         [audioCallPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES useCache: YES]];
+                             [self setBackground];
+                             return;
+                         }
+                         [personPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES useCache: YES]];
+                     });
 }
 
 -(void) showWithAnimation:(BOOL)animate

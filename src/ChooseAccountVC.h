@@ -20,6 +20,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <string>
 
 namespace lrc {
     namespace api {
@@ -45,6 +46,7 @@ namespace lrc {
 
 -(void) enable;
 -(void) disable;
+-(void) selectAccountWithID:(const std::string) accountID;
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow;
 
 @end

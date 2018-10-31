@@ -19,6 +19,7 @@
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
 #import "ChooseAccountVC.h"
+#import "CurrentCallVC.h"
 
 namespace lrc {
     namespace api {
@@ -28,7 +29,7 @@ namespace lrc {
     }
 }
 
-@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate, ChooseAccountDelegate, LrcModelsProtocol> {
+@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate, ChooseAccountDelegate, LrcModelsProtocol, CallViewControllerDelegate> {
     IBOutlet NSView *currentView;
 }
 

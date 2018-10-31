@@ -171,6 +171,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     self.window.titleVisibility = NSWindowTitleHidden;
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
+    currentCallVC.delegate = self;
     conversationVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
     chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:self.accountModel delegate:self];
@@ -221,6 +222,10 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                      &lrc::api::BehaviorController::showCallView,
                      [self](const std::string accountId,
                             const lrc::api::conversation::Info convInfo){
+                         //update account selection
+                         if (accountId != chooseAccountVC.selectedAccount.id) {
+                             [chooseAccountVC selectAccountWithID:accountId];
+                         }
                          auto* accInfo = &self.accountModel->getAccountInfo(accountId);
                          if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                              [smartViewVC selectPendingList];
@@ -240,6 +245,10 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                      [self](const std::string accountId,
                             const lrc::api::conversation::Info convInfo){
                          auto* accInfo = &self.accountModel->getAccountInfo(accountId);
+                         //update account selection
+                         if (accountId != chooseAccountVC.selectedAccount.id) {
+                             [chooseAccountVC selectAccountWithID:accountId];
+                         }
                          if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                              [smartViewVC selectPendingList];
                          else
@@ -567,6 +576,12 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
             toolbarItem.view = openSettingsButton;
         }
     }
+}
+
+#pragma mark - CallViewControllerDelegate
+
+-(void) conversationInfoUpdatedFor:(const std::string&) conversationID {
+    [smartViewVC reloadConversationWithUid:@(conversationID.c_str())];
 }
 
 @end

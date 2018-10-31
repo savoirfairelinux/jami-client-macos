@@ -218,7 +218,8 @@ namespace Interfaces {
     QVariant ImageManipulationDelegate::conversationPhoto(const lrc::api::conversation::Info& conversation,
                                                           const lrc::api::account::Info& accountInfo,
                                                           const QSize& size,
-                                                          bool displayPresence)
+                                                          bool displayPresence,
+                                                          bool useCache)
     {
         Q_UNUSED(displayPresence)
 
@@ -233,8 +234,16 @@ namespace Interfaces {
                 auto index = QStringLiteral("%1%2%3").arg(size.width())
                 .arg(size.height())
                 .arg(QString::fromStdString(conversation.uid));
+                // if we don't want to use cache clear it
+                if(!useCache) {
+                    foreach (const QString cacheKey, convPixmCache.keys()) {
+                        if (cacheKey.contains(QString::fromStdString(conversation.uid))) {
+                            convPixmCache.remove(cacheKey);
+                        }
+                    }
+                }
 
-                if (convPixmCache.contains(index)) {
+                if (convPixmCache.contains(index) && useCache) {
                     return convPixmCache.value(index);
                 }
 

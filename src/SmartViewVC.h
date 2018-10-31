@@ -65,4 +65,6 @@ namespace lrc {
  */
 -(void) clearConversationModel;
 
+-(void) reloadConversationWithUid:(NSString *)uid;
+
 @end

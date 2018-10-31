@@ -45,7 +45,8 @@ namespace Interfaces {
         QVariant conversationPhoto(const lrc::api::conversation::Info& conversation,
                                    const lrc::api::account::Info& accountInfo,
                                    const QSize& size = QSize(IMG_SIZE, IMG_SIZE),
-                                   bool displayPresence = true) override;
+                                   bool displayPresence = true,
+                                   bool useCache = true) override;
 
         QVariant callPhoto(Call* c, const QSize& size, bool displayPresence = true) override;
         QVariant callPhoto(const ContactMethod* n, const QSize& size, bool displayPresence = true) override;

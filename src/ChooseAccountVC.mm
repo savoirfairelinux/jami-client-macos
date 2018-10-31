@@ -373,4 +373,11 @@ NSMenuItem* selectedMenuItem;
     [accountSelectionButton setEnabled:NO];
 }
 
+-(void) selectAccountWithID:(const std::string)accountID {
+    const auto& account = accMdl_->getAccountInfo(accountID);
+    [accountSelectionManager_ setSavedAccount:account];
+    [self updatePhoto];
+    [self setPopUpButtonSelection];
+}
+
 @end
