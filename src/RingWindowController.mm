@@ -65,7 +65,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     SHOW_SETTINGS_SCREEN,
 };
 
-@interface RingWindowController () <MigrateRingAccountsDelegate, NSToolbarDelegate>
+@interface RingWindowController () <MigrateRingAccountsDelegate>
 
 @property (retain) MigrateRingAccountsWC* migrateWC;
 @property RingWizardWC* wizard;
@@ -91,7 +91,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     AccountSettingsVC* settingsVC;
 
     // toolbar menu items
-    ChooseAccountVC* chooseAccountVC;
+    IBOutlet ChooseAccountVC* chooseAccountVC;
 }
 
 static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
@@ -110,6 +110,13 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
         self.behaviorController = behaviorController;
     }
     return self;
+}
+
+- (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions
+{
+    return (NSApplicationPresentationFullScreen |
+            NSApplicationPresentationAutoHideMenuBar |
+            NSApplicationPresentationAutoHideToolbar);
 }
 
 -(void)changeViewTo:(ViewState) state  {
@@ -173,8 +180,10 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     conversationVC = [[ConversationVC alloc] initWithNibName:@"Conversation" bundle:nil delegate:self];
     // toolbar items
-    chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:self.accountModel delegate:self];
+    //chooseAccountVC = [[ChooseAccountVC alloc] initWithNibName:@"ChooseAccount" bundle:nil model:self.accountModel delegate:self];
+    [chooseAccountVC updateWithDelegate: self andModel:self.accountModel];
     settingsVC = [[AccountSettingsVC alloc] initWithNibName:@"AccountSettings" bundle:nil accountmodel:self.accountModel];
+    //[self.window.contentView addSubview:[chooseAccountVC view]];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[conversationVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
@@ -197,11 +206,6 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 
     [self connect];
     [self updateRingID];
-    // display accounts to select
-    NSToolbar *toolbar = self.window.toolbar;
-    toolbar.delegate = self;
-    [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
-    [toolbar insertItemWithItemIdentifier:kOpenAccountToolBarItemIdentifier atIndex:1];
     // set download folder (default - 'Documents')
     NSString* path = [[NSUserDefaults standardUserDefaults] stringForKey:Preferences::DownloadFolder];
     if (!path || path.length == 0) {
@@ -213,6 +217,8 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         media::RecordingModel::instance().setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
     }
+    NSToolbar *tb = [[self window] toolbar];
+    [tb setAllowsUserCustomization:NO];
 }
 
 - (void) connect
@@ -450,10 +456,6 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 
         [self connect];
         [self updateRingID];
-        // display accounts to select
-        NSToolbar *toolbar = self.window.toolbar;
-        toolbar.delegate = self;
-        [toolbar insertItemWithItemIdentifier:kChangeAccountToolBarItemIdentifier atIndex:1];
     }
 }
 
@@ -499,37 +501,6 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     [self changeViewTo:SHOW_WELCOME_SCREEN];
 }
 
-#pragma mark - NSToolbarDelegate
-- (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
-{
-    if(itemIdentifier == kChangeAccountToolBarItemIdentifier) {
-        NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kChangeAccountToolBarItemIdentifier];
-        toolbarItem.maxSize = NSMakeSize(187, 30);
-        toolbarItem.minSize = NSMakeSize(187, 30);
-        toolbarItem.view = chooseAccountVC.view;
-        return toolbarItem;
-    } else if(itemIdentifier == kOpenAccountToolBarItemIdentifier) {
-        NSToolbarItem *toolbarItem = [[NSToolbarItem alloc] initWithItemIdentifier:kOpenAccountToolBarItemIdentifier];
-        toolbarItem.maxSize = NSMakeSize(30, 30);
-        toolbarItem.minSize = NSMakeSize(30, 30);
-        HoverButton *openSettingsButton = [[HoverButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
-        openSettingsButton.bgColor = [NSColor clearColor];
-        openSettingsButton.imageColor = [NSColor darkGrayColor];
-        openSettingsButton.hoverColor = [NSColor controlHighlightColor];
-        openSettingsButton.highlightColor = [NSColor lightGrayColor];
-        openSettingsButton.imageInsets = 6;
-        openSettingsButton.title = @"";
-        [openSettingsButton setBordered: NO];
-        [openSettingsButton setTransparent:YES];
-        openSettingsButton.image = [NSImage imageNamed: NSImageNameSmartBadgeTemplate];
-        [openSettingsButton setAction:@selector(openAccountSettings:)];
-        [openSettingsButton setTarget:self];
-        toolbarItem.view = openSettingsButton;
-        return toolbarItem;
-    }
-    return nil;
-}
-
 - (IBAction)openAccountSettings:(NSButton *)sender
 {
     [self changeViewTo: [settingsVC.view isHidden] ?  SHOW_SETTINGS_SCREEN : SHOW_WELCOME_SCREEN];
@@ -543,29 +514,8 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 }
 
 -(void) accountSettingsShouldOpen: (BOOL) open {
-
     if (open) {
         [settingsVC setSelectedAccount: [chooseAccountVC selectedAccount].id];
-    }
-    NSToolbar *toolbar = self.window.toolbar;
-    NSArray *settings = [toolbar items];
-
-    for(NSToolbarItem *toolbarItem in settings) {
-        if (toolbarItem.itemIdentifier == kOpenAccountToolBarItemIdentifier) {
-            HoverButton *openSettingsButton = [[HoverButton alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
-            openSettingsButton.bgColor = [NSColor clearColor];
-            openSettingsButton.imageColor = [NSColor darkGrayColor];
-            openSettingsButton.hoverColor = [NSColor controlHighlightColor];
-            openSettingsButton.highlightColor = [NSColor lightGrayColor];
-            openSettingsButton.imageInsets = 6;
-            openSettingsButton.title = @"";
-            [openSettingsButton setBordered: NO];
-            [openSettingsButton setTransparent:YES];
-            openSettingsButton.image = open ? [NSImage imageNamed: NSImageNameMenuOnStateTemplate] : [NSImage imageNamed: NSImageNameSmartBadgeTemplate];
-            [openSettingsButton setAction:@selector(openAccountSettings:)];
-            [openSettingsButton setTarget:self];
-            toolbarItem.view = openSettingsButton;
-        }
     }
 }
 
