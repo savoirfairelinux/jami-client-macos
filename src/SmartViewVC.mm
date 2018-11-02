@@ -58,6 +58,7 @@
     __unsafe_unretained IBOutlet NSSearchField* searchField;
     __strong IBOutlet NSSegmentedControl *listTypeSelector;
     __strong IBOutlet NSLayoutConstraint *listTypeSelectorHeight;
+    __strong IBOutlet NSLayoutConstraint *listTypeSelectorBottom;
     bool selectorIsPresent;
 
     QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, newInteractionConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
@@ -169,6 +170,7 @@ NSInteger const REQUEST_SEG         = 1;
         }
         if (selectorIsPresent) {
             listTypeSelectorHeight.constant = 0.0;
+            listTypeSelectorBottom.priority = 250;
             [listTypeSelector setHidden:YES];
             selectorIsPresent = false;
         }
@@ -176,6 +178,7 @@ NSInteger const REQUEST_SEG         = 1;
         if (!selectorIsPresent) {
             [listTypeSelector setSelected:YES forSegment:CONVERSATION_SEG];
             listTypeSelectorHeight.constant = 18.0;
+            listTypeSelectorBottom.priority = 999;
             [listTypeSelector setHidden:NO];
             selectorIsPresent = true;
         }

@@ -42,9 +42,11 @@ namespace lrc {
 @property (retain, nonatomic) id <ChooseAccountDelegate> delegate;
 
 @property (readonly) const lrc::api::account::Info& selectedAccount;
+//@property const lrc::api::NewAccountModel* accMdl_;
 
 -(void) enable;
 -(void) disable;
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow;
+//-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow;
+-(void) updateWithDelegate:(id <ChooseAccountDelegate> )mainWindow andModel:(lrc::api::NewAccountModel*) accMdl;
 
 @end
