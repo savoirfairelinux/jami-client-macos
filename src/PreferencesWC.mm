@@ -57,6 +57,8 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     }
     [self.window.toolbar setSelectedItemIdentifier:kGeneralPrefsIdentifier];
     [self displayGeneral:nil];
+    NSToolbar *tb = [[self window] toolbar];
+    [tb setAllowsUserCustomization:NO];
 }
 
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController

@@ -50,7 +50,7 @@
         self.accountAvatar.layer.cornerRadius = self.accountAvatar.frame.size.width * 0.5;
         self.accountAvatar.layer.masksToBounds = YES;
         [self.accountStatus setWantsLayer:YES];
-        [self.accountAvatar.layer setBackgroundColor:[[NSColor ringGreyLight] CGColor]];
+        [self.accountAvatar.layer setBackgroundColor:[[NSColor disabledControlTextColor] CGColor]];
         if (@available(macOS 10.14, *)) {
             self.createNewAccountImage.contentTintColor = [NSColor clearColor];
         }
