@@ -24,11 +24,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="820" height="828"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kLY-tq-1VN">
-                                <rect key="frame" x="100" y="0.0" width="620" height="828"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <view translatesAutoresizingMaskIntoConstraints="NO" id="kLY-tq-1VN">
+                                <rect key="frame" x="0.0" y="0.0" width="820" height="828"/>
                             </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="kLY-tq-1VN" firstAttribute="top" secondItem="AS0-K7-DN3" secondAttribute="top" id="4CT-Hj-pCH"/>
+                            <constraint firstAttribute="trailing" secondItem="kLY-tq-1VN" secondAttribute="trailing" id="6GS-uR-GPw"/>
+                            <constraint firstAttribute="bottom" secondItem="kLY-tq-1VN" secondAttribute="bottom" id="fVJ-2P-P8O"/>
+                            <constraint firstItem="kLY-tq-1VN" firstAttribute="leading" secondItem="AS0-K7-DN3" secondAttribute="leading" id="lhW-c7-4Wl"/>
+                        </constraints>
                         <color key="backgroundColor" name="alternatingContentBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <edgeInsets key="contentInsets" left="0.0" right="0.0" top="20" bottom="0.0"/>
@@ -41,15 +46,45 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <button toolTip="Back" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cyq-zN-98i" customClass="HoverButton">
+                    <rect key="frame" x="5" y="758" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="XcV-yi-oBH"/>
+                        <constraint firstAttribute="width" constant="40" id="zzo-rZ-gMc"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_arrow_back" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="Xsh-Ml-mxa">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                            <color key="value" red="0.76470588240000004" green="0.76470588240000004" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                            <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="openAccountSettings:" target="-1" id="9qG-1H-U0l"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="FE5-WQ-UWb" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="0TU-rV-Feb"/>
+                <constraint firstItem="cyq-zN-98i" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="30" id="DSp-Zd-np2"/>
                 <constraint firstItem="FE5-WQ-UWb" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Eod-1m-b43"/>
                 <constraint firstAttribute="trailing" secondItem="FE5-WQ-UWb" secondAttribute="trailing" id="Eoo-Ln-11S"/>
                 <constraint firstItem="FE5-WQ-UWb" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="K1o-6r-aG8"/>
                 <constraint firstAttribute="bottom" secondItem="FE5-WQ-UWb" secondAttribute="bottom" id="V1A-Qu-x4s"/>
+                <constraint firstItem="cyq-zN-98i" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="5" id="m4c-u7-L7d"/>
             </constraints>
             <point key="canvasLocation" x="139" y="267.5"/>
         </customView>
     </objects>
+    <resources>
+        <image name="ic_arrow_back" width="72" height="72"/>
+    </resources>
 </document>

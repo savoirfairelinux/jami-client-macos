@@ -62,15 +62,23 @@ NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 NSMutableDictionary* menuItemsTags;
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow
-{
+//-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow
+//{
+//    accMdl_ = accMdl;
+//    accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
+//    self.delegate = mainWindow;
+//    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//}
+
+-(void) updateWithDelegate:(id <ChooseAccountDelegate> )mainWindow andModel:(lrc::api::NewAccountModel*) accMdl {
     accMdl_ = accMdl;
-    accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
-    self.delegate = mainWindow;
-    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+        accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
+        self.delegate = mainWindow;
+    [self initView];
+
 }
 
-- (void)awakeFromNib
+- (void)initView
 {
     [profileImage setWantsLayer: YES];
     profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
@@ -88,6 +96,7 @@ NSMutableDictionary* menuItemsTags;
     [accountSelectionButton setAutoenablesItems:NO];
     menuItemsTags = [[NSMutableDictionary alloc] init];
     [self update];
+
 
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountAdded,
@@ -132,6 +141,7 @@ NSMutableDictionary* menuItemsTags;
                          }
                      });
 }
+
 
 -(const lrc::api::account::Info&) selectedAccount
 {
@@ -273,12 +283,13 @@ NSMutableDictionary* menuItemsTags;
 - (NSAttributedString*) attributedItemTitleForAccount:(const lrc::api::account::Info&) account {
     NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    NSFont *fontAlias = [NSFont userFontOfSize:14.0];
-    NSFont *fontUserName = [NSFont userFontOfSize:11.0];
+    NSFont *fontAlias = [NSFont fontWithName:@"Helvetica Neue" size:16.0];
+    NSFont *fontUserName = [NSFont fontWithName:@"Helvetica Neue Light" size:13.0];
     NSColor *colorAlias = [NSColor labelColor];
     NSColor *colorAUserName = [NSColor secondaryLabelColor];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    paragraphStyle.lineSpacing = 3;
     NSDictionary *aliasAttrs = [NSDictionary dictionaryWithObjectsAndKeys:fontAlias,NSFontAttributeName,
                                 colorAlias,NSForegroundColorAttributeName,
                                 paragraphStyle,NSParagraphStyleAttributeName, nil];
@@ -341,6 +352,10 @@ NSMutableDictionary* menuItemsTags;
     [accountSelectionManager_ setSavedAccount:account];
     [self.delegate selectAccount:account currentRemoved: NO];
     [self updatePhoto];
+}
+
+- (IBAction)openMenu:(id)sender {
+    [accountSelectionButton performClick:nil];
 }
 
 #pragma mark - NSMenuDelegate
