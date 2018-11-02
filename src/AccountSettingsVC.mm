@@ -46,7 +46,7 @@ AccSipGeneralVC* sipGeneralVC;
 AccAdvancedRingVC* ringAdvancedVC;
 AccAdvancedSipVC* sipAdvancedVC;
 
-CGFloat const VIEW_INSET = 20;
+CGFloat const VIEW_INSET = 40;
 
 @synthesize accountModel;
 
@@ -139,7 +139,7 @@ CGFloat const VIEW_INSET = 20;
                                     - visibleRect.size.height
                                     + VIEW_INSET);
     NSPoint clipViewOrigin = [clipView bounds].origin;
-    clipViewOrigin.y = clipViewOrigin.y - NSHeight([[accountGeneralVC view] bounds]);
+    clipViewOrigin.y = clipViewOrigin.y - NSHeight([[accountGeneralVC view] bounds]) - VIEW_INSET * 0.5;
     CGFloat accountHeight = NSHeight([[accountGeneralVC view] bounds]);
     CGFloat visibleHeight = visibleRect.size.height;
     if(accountGeneralVC.view.frame.size.height > visibleRect.size.height) {
