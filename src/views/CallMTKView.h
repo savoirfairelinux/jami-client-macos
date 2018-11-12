@@ -23,5 +23,6 @@
 @interface CallMTKView: MTKView
 -(void)renderWithPixelBuffer:(CVPixelBufferRef)buffer size:(CGSize)size rotation: (float)rotation fillFrame: (bool)fill;
 -(void)fillWithBlack;
+-(void)setupView;
 @property bool stopRendering;
 @end

@@ -17,7 +17,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+
+extern "C" {
+#import "libavutil/frame.h"
+#import "libavutil/display.h"
+}
+
 #import "VideoPrefsVC.h"
+#import "views/CallMTKView.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -31,7 +38,7 @@
 
 @interface VideoPrefsVC ()
 
-@property (assign) IBOutlet NSView* previewView;
+@property (assign) IBOutlet CallMTKView* previewView;
 @property (assign) IBOutlet NSPopUpButton* videoDevicesList;
 @property (assign) IBOutlet NSPopUpButton* sizesList;
 @property (assign) IBOutlet NSPopUpButton* ratesList;
@@ -51,7 +58,10 @@
 QMetaObject::Connection frameUpdated;
 QMetaObject::Connection previewStarted;
 QMetaObject::Connection previewStopped;
-Video::DeviceModel *deviceModel;
+QMetaObject::Connection deviceEvent;
+CVPixelBufferPoolRef pixelBufferPool;
+CVPixelBufferRef pixelBuffer;
+std::string currentVideoDevice;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil avModel:(lrc::api::AVModel*) avModel
 {
@@ -62,233 +72,275 @@ Video::DeviceModel *deviceModel;
     return self;
 }
 
-- (void)loadView
-{
+- (void)loadView {
     [super loadView];
-    deviceModel = &Video::DeviceModel::instance();
-    auto device = deviceModel->activeDevice();
+    auto devices = avModel->getDevices();
+    auto defaultDevice = avModel->getDefaultDeviceName();
     [videoDevicesList removeAllItems];
-    if (deviceModel->devices().size() > 0) {
-        for (auto device : deviceModel->devices()) {
-            [videoDevicesList addItemWithTitle: device->name().toNSString()];
+    if (devices.size() > 0) {
+        for (auto device : devices) {
+            [videoDevicesList addItemWithTitle: @(device.c_str())];
         }
-        [videoDevicesList selectItemWithTitle: device->name().toNSString()];
+        [videoDevicesList selectItemWithTitle: @(defaultDevice.c_str())];
+        currentVideoDevice = defaultDevice;
         [self updateWhenDeviceChanged];
     }
-    QObject::connect(deviceModel,
-                     &Video::DeviceModel::changed,
-                     [=]() {
-                         [videoDevicesList removeAllItems];
-                         [sizesList removeAllItems];
-                         [ratesList removeAllItems];
-                         if (deviceModel->devices().size() <= 0) {
-                             return;
-                         }
-                         for (auto device : deviceModel->devices()) {
-                             [videoDevicesList addItemWithTitle: device->name().toNSString()];
-                         }
-                         auto device = deviceModel->activeDevice();
-                         if(!device) {
-                             deviceModel->setActive(0);
-                             device = deviceModel->activeDevice();
-                         }
-                         [videoDevicesList selectItemWithTitle: device->name().toNSString()];
-                         [self updateWhenDeviceChanged];
-                     });
-
-    [previewView setWantsLayer:YES];
-    [previewView setLayer:[CALayer layer]];
-    [previewView.layer setBackgroundColor:[NSColor blackColor].CGColor];
-    [previewView.layer setContentsGravity:kCAGravityResizeAspect];
-    [previewView.layer setFrame:previewView.frame];
-    [previewView.layer setBounds:previewView.frame];
-
     [self.enableHardwareAccelerationButton setState: self.avModel->getDecodingAccelerated()];
+    [self.previewView setupView];
 }
 
 -(void) updateWhenDeviceChanged {
-    auto device = deviceModel->activeDevice();
     [sizesList removeAllItems];
     [ratesList removeAllItems];
-    if (device->channelList().size() <= 0) {
+    auto device = avModel->getDefaultDeviceName();
+    auto deviceCapabilities = avModel->getDeviceCapabilities(device);
+    auto currentSettings = avModel->getDeviceSettings(device);
+    if (deviceCapabilities.size() <= 0) {
         return;
     }
-    for (auto resolution : device->channelList()[0]->validResolutions()) {
-        [sizesList  addItemWithTitle: resolution->name().toNSString()];
+    auto currentChannel = currentSettings.channel;
+    currentChannel = currentChannel.empty() ? "default" : currentChannel;
+    auto channelCaps = deviceCapabilities.at(currentChannel);
+    for (auto [resolution, frameRateList] : channelCaps) {
+        [sizesList  addItemWithTitle: @(resolution.c_str())];
+        for (auto rate : frameRateList) {
+            [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
+        }
     }
-    auto activeResolution = device->channelList()[0]->activeResolution();
-    if(!activeResolution) {
-        device->channelList()[0]->setActiveResolution(0);
-        activeResolution = device->channelList()[0]->activeResolution();
-    }
-    [sizesList selectItemWithTitle: activeResolution->name().toNSString()];
-    if(activeResolution->validRates().size() <= 0) {
-        return;
-    }
-    for (auto rate : activeResolution->validRates()) {
-        [ratesList addItemWithTitle: rate->name().toNSString()];
-    }
-    auto activeRate = activeResolution->activeRate();
-    if(!activeRate) {
-        activeResolution->setActiveRate(0);
-        activeRate = activeResolution->activeRate();
-    }
-    [ratesList selectItemWithTitle:activeResolution->activeRate()->name().toNSString()];
+    [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
+    [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
 }
 
 - (IBAction)chooseDevice:(id)sender {
     int index = [sender indexOfSelectedItem];
-    if (index == deviceModel->activeIndex()) {
-        return;
-    }
-    deviceModel->setActive(index);
+    auto devices = avModel->getDevices();
+    auto newDevice = devices.at(index);
+    avModel->setDefaultDevice(newDevice);
     [self updateWhenDeviceChanged];
+    if (self.shouldHandlePreview) {
+        [self connectPreviewSignals];
+        avModel->stopPreview();
+        avModel->startPreview();
+    }
 }
 
 - (IBAction)chooseSize:(id)sender {
     int index = [sender indexOfSelectedItem];
-    auto device = Video::DeviceModel::instance().activeDevice();
-    device->channelList()[0]->setActiveResolution(index);
-    auto activeResolution = device->channelList()[0]->activeResolution();
-    if(activeResolution->validRates().size() > 0) {
-        for (auto rate : activeResolution->validRates()) {
-            [ratesList addItemWithTitle: rate->name().toNSString()];
+    auto resolution = [[sizesList itemTitleAtIndex:index] UTF8String];
+    auto device = avModel->getDefaultDeviceName();
+    auto deviceCapabilities = avModel->getDeviceCapabilities(device);
+    auto currentSettings = avModel->getDeviceSettings(device);
+    lrc::api::video::Settings settings{ "", avModel->getDefaultDeviceName(),
+        currentSettings.rate, resolution};
+    avModel->setDeviceSettings(settings);
+    [ratesList removeAllItems];
+    auto currentChannel = currentSettings.channel;
+    currentChannel = currentChannel.empty() ? "default" : currentChannel;
+    auto channelCaps = deviceCapabilities.at(currentChannel);
+    for (auto [resolution, frameRateList] : channelCaps) {
+        for (auto rate : frameRateList) {
+            [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
         }
     }
-    [ratesList selectItemWithTitle:activeResolution->activeRate()->name().toNSString()];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        deviceModel->setActive([videoDevicesList indexOfSelectedItem]);
-    });
+    currentSettings = avModel->getDeviceSettings(device);
+    [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
+    [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
 }
 
 - (IBAction)chooseRate:(id)sender {
     int index = [sender indexOfSelectedItem];
-    Video::DeviceModel::instance().activeDevice()->channelList()[0]->activeResolution()->setActiveRate(index);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        deviceModel->setActive([videoDevicesList indexOfSelectedItem]);
-    });
+    auto rate = [[ratesList itemTitleAtIndex:index] floatValue];
+    auto device = avModel->getDefaultDeviceName();
+    auto deviceCapabilities = avModel->getDeviceCapabilities(device);
+    auto currentSettings = avModel->getDeviceSettings(device);
+    lrc::api::video::Settings settings{ "", avModel->getDefaultDeviceName(),
+        rate, currentSettings.size};
+    currentSettings = avModel->getDeviceSettings(device);
+    avModel->setDeviceSettings(settings);
 }
 
 - (IBAction)toggleHardwareAcceleration:(NSButton *)sender {
     bool enabled = [sender state]==NSOnState;
     self.avModel->setDecodingAccelerated(enabled);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        deviceModel->setActive([videoDevicesList indexOfSelectedItem]);
+}
+
+- (void) connectPreviewSignals {
+    [previewView fillWithBlack];
+    previewStarted =
+    QObject::connect(avModel,
+                     &lrc::api::AVModel::rendererStarted,
+                     [=](const std::string& id) {
+                         if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
+                             return;
+                         }
+                        self.previewView.stopRendering = false;
+                        QObject::disconnect(frameUpdated);
+                        QObject::disconnect(previewStarted);
+                        QObject::disconnect(previewStopped);
+                        frameUpdated =
+                         QObject::connect(avModel,
+                                          &lrc::api::AVModel::frameUpdated,
+                                          [=](const std::string& id) {
+                                              if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
+                                                  return;
+                                              }
+                                              auto renderer = &avModel->getRenderer(id);
+                                              if(!renderer->isRendering()) {
+                                                  return;
+                                              }
+                                              [self renderer:renderer
+                                          renderFrameForView: previewView];
+                         });
+                         previewStopped = QObject::connect(avModel,
+                                                           &lrc::api::AVModel::rendererStopped,
+                                                           [=](const std::string& id) {
+                                                               if (id != lrc::api::video
+                                                                   ::PREVIEW_RENDERER_ID) {
+                                                                   return;
+                                                               }
+                                                               QObject::disconnect(previewStopped);
+                                                               QObject::disconnect(frameUpdated);
+                         });
     });
 }
 
-- (void) connectPreviewSignals
-{
-    QObject::disconnect(frameUpdated);
-    QObject::disconnect(previewStopped);
-    QObject::disconnect(previewStarted);
-
-    previewStarted = QObject::connect(&Video::PreviewManager::instance(),
-                                      &Video::PreviewManager::previewStarted,
-                                      [=](Video::Renderer* renderer) {
-                                          NSLog(@"Preview started");
-                                          QObject::disconnect(frameUpdated);
-                                          frameUpdated = QObject::connect(renderer,
-                                                                          &Video::Renderer::frameUpdated,
-                                                                          [=]() {
-                                                                              [self renderer:Video::PreviewManager::instance().previewRenderer() renderFrameForView:previewView];
-                                                                          });
-                                      });
-
-    previewStopped = QObject::connect(&Video::PreviewManager::instance(),
-                                      &Video::PreviewManager::previewStopped,
-                                      [=](Video::Renderer* renderer) {
-                                          NSLog(@"Preview stopped");
-                                          QObject::disconnect(frameUpdated);
-                                          [previewView.layer setContents:nil];
-                                      });
-
-    frameUpdated = QObject::connect(Video::PreviewManager::instance().previewRenderer(),
-                                    &Video::Renderer::frameUpdated,
-                                    [=]() {
-                                        [self renderer:Video::PreviewManager::instance().previewRenderer()
-                                    renderFrameForView:previewView];
-                                    });
+-(void)connectdDeviceEvent {
+    QObject::disconnect(deviceEvent);
+    deviceEvent = QObject::connect(avModel,
+                                   &lrc::api::AVModel::deviceEvent,
+                                   [=]() {
+                                       auto defaultDevice = avModel->getDefaultDeviceName();
+                                       bool updatePreview = avModel->getRenderer(lrc::api ::video::PREVIEW_RENDERER_ID).isRendering() && (defaultDevice != currentVideoDevice);
+                                       if (updatePreview) {
+                                           [previewView fillWithBlack];
+                                           self.previewView.stopRendering = true;
+                                           avModel->setDefaultDevice(defaultDevice);
+                                           [self connectPreviewSignals];
+                                           avModel->stopPreview();
+                                           avModel->startPreview();
+                                       }
+                                       [videoDevicesList removeAllItems];
+                                       auto devices = avModel->getDevices();
+                                       if (devices.size() > 0) {
+                                           for (auto device : devices) {
+                                               [videoDevicesList addItemWithTitle: @(device.c_str())];
+                                           }
+                                           currentVideoDevice = defaultDevice;
+                                           [videoDevicesList selectItemWithTitle: @(defaultDevice.c_str())];
+                                           [self updateWhenDeviceChanged];
+                                       }
+                                   });
 }
 
--(void) renderer: (Video::Renderer*)renderer renderFrameForView:(NSView*) view
+-(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForView:(CallMTKView*) view
 {
-    QSize res = renderer->size();
-
-    auto frame_ptr = renderer->currentFrame();
-    auto frame_data = frame_ptr.ptr;
-    if (!frame_data)
-        return;
-
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef newContext = CGBitmapContextCreate(frame_data,
-                                                    res.width(),
-                                                    res.height(),
-                                                    8,
-                                                    4*res.width(),
-                                                    colorSpace,
-                                                    kCGImageAlphaPremultipliedLast);
-
-
-    CGImageRef newImage = CGBitmapContextCreateImage(newContext);
-
-    /*We release some components*/
-    CGContextRelease(newContext);
-    CGColorSpaceRelease(colorSpace);
-
-    [CATransaction begin];
-    view.layer.contents = (__bridge id)newImage;
-    [CATransaction commit];
-
-    CFRelease(newImage);
+    @autoreleasepool {
+        auto framePtr = renderer->currentAVFrame();
+        auto frame = framePtr.get();
+        if(!frame || !frame->width || !frame->height) {
+            return;
+        }
+        auto rendSize = renderer->size();
+        auto frameSize = CGSizeMake(frame->width, frame->height);
+        auto rotation = 0;
+        if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
+            [view renderWithPixelBuffer:(CVPixelBufferRef)frame->data[3]
+                                   size: frameSize
+                               rotation: rotation
+                              fillFrame: false];
+            return;
+        }
+        else if (CVPixelBufferRef pixBuffer = [self getBufferForPreviewFromFrame:frame]) {
+            [view renderWithPixelBuffer: pixBuffer
+                                   size: frameSize
+                               rotation: rotation
+                              fillFrame: false];
+        }
+    }
 }
 
-- (void) viewWillAppear
-{
+-(CVPixelBufferRef) getBufferForPreviewFromFrame:(const AVFrame*)frame {
+    if(!frame || !frame->data[0] || !frame->data[1]) {
+        return nil;
+    }
+    CVReturn theError;
+    bool createPool = false;
+    if (!pixelBufferPool) {
+        createPool = true;
+    } else {
+        NSDictionary* atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetAttributes(pixelBufferPool);
+        if(!atributes)
+            atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPool);
+        int width = [[atributes objectForKey:(NSString*)kCVPixelBufferWidthKey] intValue];
+        int height = [[atributes objectForKey:(NSString*)kCVPixelBufferHeightKey] intValue];
+        if (width != frame->width || height != frame->height) {
+            createPool = true;
+        }
+    }
+    if (createPool) {
+        CVPixelBufferPoolRelease(pixelBufferPool);
+        CVPixelBufferRelease(pixelBuffer);
+        pixelBuffer = nil;
+        pixelBufferPool = nil;
+        NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
+        [attributes setObject:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange] forKey:(NSString*)kCVPixelBufferPixelFormatTypeKey];
+        [attributes setObject:[NSNumber numberWithInt:frame->width] forKey: (NSString*)kCVPixelBufferWidthKey];
+        [attributes setObject:[NSNumber numberWithInt:frame->height] forKey: (NSString*)kCVPixelBufferHeightKey];
+        [attributes setObject:@(frame->linesize[0]) forKey:(NSString*)kCVPixelBufferBytesPerRowAlignmentKey];
+        [attributes setObject:[NSDictionary dictionary] forKey:(NSString*)kCVPixelBufferIOSurfacePropertiesKey];
+        theError = CVPixelBufferPoolCreate(kCFAllocatorDefault, NULL, (__bridge CFDictionaryRef) attributes, &pixelBufferPool);
+        if (theError != kCVReturnSuccess) {
+            NSLog(@"CVPixelBufferPoolCreate Failed");
+            return nil;
+        }
+    }
+    if(!pixelBuffer) {
+        NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
+        theError = CVPixelBufferPoolCreatePixelBuffer(NULL, pixelBufferPool, &pixelBuffer);
+        if(theError != kCVReturnSuccess) {
+            NSLog(@"CVPixelBufferPoolCreatePixelBuffer Failed");
+            return nil;
+        }
+    }
+    theError = CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    if (theError != kCVReturnSuccess) {
+        NSLog(@"lock error");
+        return nil;
+    }
+    size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    void* base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    memcpy(base, frame->data[0], bytePerRowY * frame->height);
+    base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    memcpy(base, frame->data[1], bytesPerRowUV * frame->height/2);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    return pixelBuffer;
+}
+
+- (void) viewDidAppear {
+    [super viewDidAppear];
     // check if preview has to be started/stopped by this controller
-    self.shouldHandlePreview = !Video::PreviewManager::instance().previewRenderer()->isRendering();
-
-    [self connectPreviewSignals];
+    self.shouldHandlePreview =
+    !avModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID).isRendering();
+    [self connectdDeviceEvent];
     if (self.shouldHandlePreview) {
-        Video::PreviewManager::instance().stopPreview();
-        Video::PreviewManager::instance().startPreview();
+        self.previewView.stopRendering = false;
+        [self connectPreviewSignals];
+        avModel->stopPreview();
+        avModel->startPreview();
     }
 }
 
-- (void)viewWillDisappear
-{
+- (void)viewWillDisappear {
+    [super viewWillDisappear];
     QObject::disconnect(frameUpdated);
     QObject::disconnect(previewStopped);
     QObject::disconnect(previewStarted);
+    QObject::disconnect(deviceEvent);
     if (self.shouldHandlePreview) {
-        Video::PreviewManager::instance().stopPreview();
+        self.previewView.stopRendering = true;
+        avModel->stopPreview();
     }
-}
-
-#pragma mark - NSMenuDelegate methods
-
-- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
-{
-    if(self.videoDevicesList.menu == menu) {
-        auto device = deviceModel->devices()[index];
-        [item setTitle: device->name().toNSString()];
-        if (index == deviceModel->activeIndex()) {
-            [videoDevicesList selectItem:item];
-        }
-    } else if(self.sizesList.menu == menu) {
-        auto resolution = deviceModel->activeDevice()->channelList()[0]->validResolutions()[index];
-        [item setTitle: resolution->name().toNSString()];
-        if (resolution == deviceModel->activeDevice()->channelList()[0]->activeResolution()) {
-            [sizesList selectItem:item];
-        }
-    } else if(self.ratesList.menu == menu) {
-        auto rate = deviceModel->activeDevice()->channelList()[0]->activeResolution()->validRates()[index];
-        [item setTitle: rate->name().toNSString()];
-        if (rate == deviceModel->activeDevice()->channelList()[0]->activeResolution()->activeRate()) {
-            [ratesList selectItem:item];
-        }
-    }
-    return YES;
 }
 
 @end
