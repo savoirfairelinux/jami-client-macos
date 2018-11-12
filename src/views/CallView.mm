@@ -24,15 +24,6 @@
 #import <QAbstractProxyModel>
 #import <QUrl>
 
-#import <video/configurationproxy.h>
-#import <video/sourcemodel.h>
-#import <media/video.h>
-#import <callmodel.h>
-#import <video/previewmanager.h>
-#import <video/renderer.h>
-#import <video/device.h>
-#import <video/devicemodel.h>
-
 @interface CallView ()
 
 @property NSMenu *contextualMenu;
@@ -183,9 +174,11 @@
 
     contextualMenu = [[NSMenu alloc] initWithTitle:@"Switch camera"];
 
-    for(int i = 0 ; i < Video::DeviceModel::instance().devices().size() ; ++i) {
-        Video::Device* device = Video::DeviceModel::instance().devices()[i];
-        [contextualMenu insertItemWithTitle:device->name().toNSString() action:@selector(switchInput:) keyEquivalent:@"" atIndex:i];
+    auto devices = [self.callDelegate getDeviceList];
+
+    for(int i = 0 ; i < devices.size() ; ++i) {
+        std::string device = devices[i];
+        [contextualMenu insertItemWithTitle:@(device.c_str()) action:@selector(switchInput:) keyEquivalent:@"" atIndex:i];
     }
     [contextualMenu insertItemWithTitle:NSLocalizedString(@"Share screen", @"Contextual menu entry")
                                  action:@selector(captureScreen:)
@@ -234,38 +227,23 @@
 - (void) switchInput:(NSMenuItem*) sender
 {
     int index = [contextualMenu indexOfItem:sender];
-    Call* call = [self getCurrentCall];
-    if (call == nullptr) return;
-    if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-        outVideo->sourceModel()->switchTo(Video::DeviceModel::instance().devices()[index]);
-    }
+    [self.callDelegate switchToDevice: index];
 }
 
 - (void) captureScreen:(NSMenuItem*) sender
 {
-    Call* call = [self getCurrentCall];
-    if (call == nullptr) return;
-    if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-        NSScreen *mainScreen = [NSScreen mainScreen];
-        NSRect screenFrame = mainScreen.frame;
-        QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
-        outVideo->sourceModel()->setDisplay(0, captureRect);
-    }
+    [self.callDelegate screenShare];
 }
 
 - (void) chooseFile:(NSMenuItem*) sender
 {
-    Call* call = [self getCurrentCall];
-    if (call == nullptr) return;
-
     NSOpenPanel *browsePanel = [[NSOpenPanel alloc] init];
     [browsePanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
     [browsePanel setCanChooseFiles:YES];
     [browsePanel setCanChooseDirectories:NO];
     [browsePanel setCanCreateDirectories:NO];
 
-    //NSMutableArray* fileTypes = [[NSMutableArray alloc] initWithArray:[NSImage imageTypes]];
-    NSMutableArray* fileTypes = [NSMutableArray array];
+    NSMutableArray* fileTypes = [[NSMutableArray alloc] initWithArray:[NSImage imageTypes]];
     [fileTypes addObject:(__bridge NSString *)kUTTypeVideo];
     [fileTypes addObject:(__bridge NSString *)kUTTypeMovie];
     [fileTypes addObject:(__bridge NSString *)kUTTypeImage];
@@ -273,23 +251,9 @@
     [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
-            if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-                outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([theDoc.path UTF8String])));
-            }
+            [self.callDelegate switchToFile: [theDoc.path UTF8String]];
         }
     }];
-
-}
-
--(Call *) getCurrentCall {
-    auto calls = CallModel::instance().getActiveCalls();
-    Call* call = nullptr;
-    for (int i = 0; i< calls.size(); i++) {
-        if (calls.at(i)->historyId() == QString::fromStdString(self.callId)) {
-            return calls.at(i);
-        }
-    }
-    return call;
 }
 
 @end

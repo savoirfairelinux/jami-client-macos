@@ -23,6 +23,12 @@
 #import "views/CallView.h"
 #import <api/account.h>
 
+namespace lrc {
+    namespace api {
+        class AVModel;
+    }
+}
+
 @protocol CallViewControllerDelegate
 
 -(void) conversationInfoUpdatedFor:(const std::string&) conversationID;
@@ -39,5 +45,6 @@
 -(void) hideWithAnimation:(BOOL)animate;
 -(void) setCurrentCall:(const std::string&)callUid
           conversation:(const std::string&)convUid
-               account:(const lrc::api::account::Info*)account;
+               account:(const lrc::api::account::Info*)account
+               avModel:(lrc::api::AVModel *)avModel;
 @end

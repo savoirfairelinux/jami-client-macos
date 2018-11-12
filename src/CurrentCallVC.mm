@@ -29,6 +29,7 @@ extern "C" {
 #import <QtMacExtras/qmacfunctions.h>
 #import <QtCore/qabstractitemmodel.h>
 #import <QPixmap>
+#import <QUrl>
 
 ///LRC
 #import <video/previewmanager.h>
@@ -36,6 +37,7 @@ extern "C" {
 #import <api/newcallmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
+#import <api/avmodel.h>
 #import <globalinstances.h>
 
 #import "AppDelegate.h"
@@ -128,8 +130,7 @@ extern "C" {
 
 @property (unsafe_unretained) IBOutlet CallMTKView *videoMTKView;
 
-@property RendererConnectionsHolder* previewHolder;
-@property RendererConnectionsHolder* videoHolder;
+@property RendererConnectionsHolder* renderConnections;
 @property QMetaObject::Connection videoStarted;
 @property QMetaObject::Connection selectedCallChanged;
 @property QMetaObject::Connection messageConnection;
@@ -140,6 +141,7 @@ extern "C" {
 @end
 
 @implementation CurrentCallVC
+lrc::api::AVModel* mediaModel;
 @synthesize personLabel, personPhoto, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
@@ -147,8 +149,7 @@ extern "C" {
             outgoingPanel, outgoingPersonLabel, outgoingStateLabel, outgoingPhoto, outgoingId,
             callRecordButtonMarginLeft, audioCallView, audioCallPhoto, audioCallTime, audioCallPersonLabel, audioCallPersonId, backgroundImage, bluerBackgroundEffect;
 
-@synthesize previewHolder;
-@synthesize videoHolder;
+@synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
 CVPixelBufferRef pixelBufferDistantView;
 CVPixelBufferPoolRef pixelBufferPoolPreview;
@@ -156,11 +157,13 @@ CVPixelBufferRef pixelBufferPreview;
 
 -(void) setCurrentCall:(const std::string&)callUid
           conversation:(const std::string&)convUid
-               account:(const lrc::api::account::Info*)account;
+               account:(const lrc::api::account::Info*)account
+               avModel:(lrc::api::AVModel *)avModel;
 {
     if(account == nil)
         return;
 
+    mediaModel = avModel;
     auto* callModel = account->callModel.get();
 
     if (not callModel->hasCall(callUid)){
@@ -185,8 +188,7 @@ CVPixelBufferRef pixelBufferPreview;
     [controlsPanel.layer setBackgroundColor:[NSColor clearColor].CGColor];
     [controlsPanel.layer setFrame:controlsPanel.frame];
 
-    previewHolder = [[RendererConnectionsHolder alloc] init];
-    videoHolder = [[RendererConnectionsHolder alloc] init];
+    renderConnections = [[RendererConnectionsHolder alloc] init];
 
     [loadingIndicator setColor:[NSColor whiteColor]];
     [loadingIndicator setNumberOfLines:200];
@@ -474,125 +476,89 @@ CVPixelBufferRef pixelBufferPreview;
 {
     if (accountInfo_ == nil)
         return;
-
-    auto* callModel = accountInfo_->callModel.get();
-    QObject::disconnect(self.videoStarted);
-    self.videoStarted = QObject::connect(callModel,
-                                         &lrc::api::NewCallModel::remotePreviewStarted,
-                                         [self](const std::string& callId, Video::Renderer* renderer) {
-                                             [videoView setShouldAcceptInteractions:YES];
-                                             [self.videoMTKView setHidden:NO];
-                                             [self mouseIsMoving: NO];
-                                             [self connectVideoRenderer:renderer];
-                                         });
-
-    if (callModel->hasCall(callUid_)) {
-        if (auto renderer = callModel->getRenderer(callUid_)) {
-            QObject::disconnect(self.videoStarted);
-            [self.videoMTKView setHidden:NO];
-            [self connectVideoRenderer: renderer];
-        }
-    }
-    [self connectPreviewRenderer];
+    [self connectRenderer];
 }
 
--(void) connectPreviewRenderer
+-(void) connectRenderer
 {
-    QObject::disconnect(previewHolder.frameUpdated);
-    QObject::disconnect(previewHolder.stopped);
-    QObject::disconnect(previewHolder.started);
-    previewHolder.started =
-    QObject::connect(&Video::PreviewManager::instance(),
-                     &Video::PreviewManager::previewStarted,
-                     [=](Video::Renderer* renderer) {
-                         [self.previewView setHidden:NO];
-                         self.previewView.stopRendering = false;
-                         QObject::disconnect(previewHolder.frameUpdated);
-                         previewHolder.frameUpdated =
-                         QObject::connect(renderer,
-                                          &Video::Renderer::frameUpdated,
-                                          [=]() {
-                                              if(!renderer->isRendering()) {
-                                                  return;
+    QObject::disconnect(renderConnections.frameUpdated);
+    QObject::disconnect(renderConnections.stopped);
+    QObject::disconnect(renderConnections.started);
+    renderConnections.started =
+    QObject::connect(mediaModel,
+                     &lrc::api::AVModel::rendererStarted,
+                     [=](const std::string& id) {
+                         if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+                             [self.previewView setHidden:NO];
+                             self.previewView.stopRendering = false;
+                         } else {
+                             [self mouseIsMoving: NO];
+                             self.videoMTKView.stopRendering = false;
+                             [self.videoMTKView setHidden:NO];
+                             [bluerBackgroundEffect setHidden:YES];
+                             [backgroundImage setHidden:YES];
+                             [videoView setShouldAcceptInteractions:YES];
+                         }
+                         QObject::disconnect(renderConnections.frameUpdated);
+                         renderConnections.frameUpdated =
+                         QObject::connect(mediaModel,
+                                          &lrc::api::AVModel::frameUpdated,
+                                          [=](const std::string& id) {
+                                              if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+                                                  auto renderer = &mediaModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID);
+                                                  if(!renderer->isRendering()) {
+                                                      return;
+                                                  }
+                                                  [self renderer: renderer renderFrameForPreviewView:previewView];
+
+                                              } else {
+                                                  auto renderer = &mediaModel->getRenderer(id);
+                                                  if(!renderer->isRendering()) {
+                                                      return;
+                                                  }
+                                                  [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
                                               }
-                                              [self renderer:renderer renderFrameForPreviewView: self.previewView];
-                         });
-    });
-    previewHolder.stopped = QObject::connect(&Video::PreviewManager::instance(),
-                     &Video::PreviewManager::previewStopped,
-                     [=](Video::Renderer* renderer) {
-                        QObject::disconnect(previewHolder.frameUpdated);
-                        [self.previewView setHidden:YES];
-                        self.previewView.stopRendering = true;
+                                          });
                      });
-
-    previewHolder.frameUpdated =
-    QObject::connect(Video::PreviewManager::instance().previewRenderer(),
-                     &Video::Renderer::frameUpdated,
-                     [=]() {
-                         if(!Video::PreviewManager::instance()
-                            .previewRenderer()->isRendering()) {
-                             return;
+    renderConnections.stopped =
+    QObject::connect(mediaModel,
+                     &lrc::api::AVModel::rendererStopped,
+                     [=](const std::string& id) {
+                         QObject::disconnect(renderConnections.frameUpdated);
+                         if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+                             [self.previewView setHidden:YES];
+                             self.previewView.stopRendering = true;
+                         } else {
+                             [self mouseIsMoving: YES];
+                             self.videoMTKView.stopRendering = true;
+                             [self.videoMTKView setHidden:YES];
+                             [bluerBackgroundEffect setHidden:NO];
+                             [backgroundImage setHidden:NO];
+                             [videoView setShouldAcceptInteractions:NO];
                          }
-                         [self renderer:Video::PreviewManager::instance()
-                          .previewRenderer() renderFrameForPreviewView: self.previewView];
-    });
-}
+                     });
+    renderConnections.frameUpdated =
+    QObject::connect(mediaModel,
+                     &lrc::api::AVModel::frameUpdated,
+                     [=](const std::string& id) {
+                         if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+                             auto renderer = &mediaModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID);
+                             if(!renderer->isRendering()) {
+                                 return;
+                             }
+                             [self renderer: renderer renderFrameForPreviewView:previewView];
 
--(void) connectVideoRenderer: (Video::Renderer*)renderer
-{
-    QObject::disconnect(videoHolder.frameUpdated);
-    QObject::disconnect(videoHolder.started);
-    QObject::disconnect(videoHolder.stopped);
-
-    if(renderer == nil)
-        return;
-
-    videoHolder.frameUpdated = QObject::connect(renderer,
-                     &Video::Renderer::frameUpdated,
-                     [=]() {
-                         if(!renderer->isRendering()) {
-                             return;
+                         } else {
+                             auto renderer = &mediaModel->getRenderer(id);
+                             if(!renderer->isRendering()) {
+                                 return;
+                             }
+                             [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
                          }
-                         [self renderer:renderer renderFrameForDistantView:self.videoMTKView];
-                     });
-
-    videoHolder.started =
-    QObject::connect(renderer,
-                     &Video::Renderer::started,
-                     [=]() {
-                         [self mouseIsMoving: NO];
-                         self.videoMTKView.stopRendering = false;
-                         [self.videoMTKView setHidden:NO];
-                         [bluerBackgroundEffect setHidden:YES];
-                         [backgroundImage setHidden:YES];
-                         [videoView setShouldAcceptInteractions:YES];
-                         QObject::disconnect(videoHolder.frameUpdated);
-                         videoHolder.frameUpdated
-                         = QObject::connect(renderer,
-                                            &Video::Renderer::frameUpdated,
-                                            [=]() {
-                                                if(!renderer->isRendering()) {
-                                                    return;
-                                                }
-                                                [self renderer:renderer renderFrameForDistantView:self.videoMTKView];
-                                            });
-                     });
-
-    videoHolder.stopped = QObject::connect(renderer,
-                     &Video::Renderer::stopped,
-                     [=]() {
-                         [self mouseIsMoving: YES];
-                         self.videoMTKView.stopRendering = true;
-                         [self.videoMTKView setHidden:YES];
-                         [bluerBackgroundEffect setHidden:NO];
-                         [backgroundImage setHidden:NO];
-                         [videoView setShouldAcceptInteractions:NO];
-                         QObject::disconnect(videoHolder.frameUpdated);
                      });
 }
 
--(void) renderer: (Video::Renderer*)renderer renderFrameForPreviewView:(CallMTKView*) view
+-(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForPreviewView:(CallMTKView*) view
 {
     @autoreleasepool {
         auto framePtr = renderer->currentAVFrame();
@@ -618,7 +584,7 @@ CVPixelBufferRef pixelBufferPreview;
     }
 }
 
--(void) renderer: (Video::Renderer*)renderer renderFrameForDistantView:(CallMTKView*) view
+-(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForDistantView:(CallMTKView*) view
 {
     @autoreleasepool {
         auto framePtr = renderer->currentAVFrame();
@@ -657,6 +623,8 @@ CVPixelBufferRef pixelBufferPreview;
         createPool = true;
     } else {
         NSDictionary* atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetAttributes(pixelBufferPoolPreview);
+        if(!atributes)
+            atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPoolPreview);
         int width = [[atributes objectForKey:(NSString*)kCVPixelBufferWidthKey] intValue];
         int height = [[atributes objectForKey:(NSString*)kCVPixelBufferHeightKey] intValue];
         if (width != frame->width || height != frame->height) {
@@ -712,6 +680,8 @@ CVPixelBufferRef pixelBufferPreview;
         createPool = true;
     }
     NSDictionary* atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPoolDistantView);
+    if(!atributes)
+        atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPoolDistantView);
     int width = [[atributes objectForKey:(NSString*)kCVPixelBufferWidthKey] intValue];
     int height = [[atributes objectForKey:(NSString*)kCVPixelBufferHeightKey] intValue];
     if (width != frame->width || height != frame->height) {
@@ -809,12 +779,9 @@ CVPixelBufferRef pixelBufferPreview;
 {
     if(self.splitView.isInFullScreenMode)
         [self.splitView exitFullScreenModeWithOptions:nil];
-    QObject::disconnect(videoHolder.frameUpdated);
-    QObject::disconnect(videoHolder.started);
-    QObject::disconnect(videoHolder.stopped);
-    QObject::disconnect(previewHolder.frameUpdated);
-    QObject::disconnect(previewHolder.stopped);
-    QObject::disconnect(previewHolder.started);
+    QObject::disconnect(renderConnections.frameUpdated);
+    QObject::disconnect(renderConnections.started);
+    QObject::disconnect(renderConnections.stopped);
     QObject::disconnect(self.messageConnection);
 
     [self.chatButton setHidden:YES];
@@ -1157,6 +1124,26 @@ CVPixelBufferRef pixelBufferPreview;
 - (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex
 {
     return YES;
+}
+
+-(void) screenShare {
+    NSScreen *mainScreen = [NSScreen mainScreen];
+    NSRect screenFrame = mainScreen.frame;
+    QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
+    mediaModel->setDisplay(0, screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
+}
+-(void) switchToDevice:(int)deviceID {
+    auto devices = mediaModel->getDevices();
+    auto device = devices[deviceID];
+    mediaModel->switchInputTo(device);
+}
+
+-(std::vector<std::string>) getDeviceList {
+    return mediaModel->getDevices();
+}
+
+-(void) switchToFile:(std::string)uri {
+    mediaModel->setInputFile(QUrl::fromLocalFile(uri.c_str()).toLocalFile().toStdString());
 }
 
 @end

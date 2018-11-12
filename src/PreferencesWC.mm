@@ -81,7 +81,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    currentVC = [[AudioPrefsVC alloc] initWithNibName:@"AudioPrefs" bundle:nil];
+    currentVC = [[AudioPrefsVC alloc] initWithNibName:@"AudioPrefs" bundle:nil avModel: self.avModel];
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
 }
