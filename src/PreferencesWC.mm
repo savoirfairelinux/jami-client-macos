@@ -55,6 +55,10 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [tb setAllowsUserCustomization:NO];
 }
 
+-(void)close {
+    [super close];
+}
+
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel dataTransferModel:(lrc::api::DataTransferModel*)dataTransferModel behaviourController:(lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
@@ -81,7 +85,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    currentVC = [[AudioPrefsVC alloc] initWithNibName:@"AudioPrefs" bundle:nil];
+    currentVC = [[AudioPrefsVC alloc] initWithNibName:@"AudioPrefs" bundle:nil avModel: self.avModel];
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
 }
@@ -130,6 +134,11 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
                                           styleMask: NSTitledWindowMask];
 
     return (frame.size.height - contentRect.size.height);
+}
+
+- (BOOL)windowShouldClose:(id)sender {
+   [self.window orderOut:self];
+   return NO;
 }
 
 @end

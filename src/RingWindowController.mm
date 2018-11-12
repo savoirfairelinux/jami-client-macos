@@ -103,6 +103,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
         self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
+        self.avModel->useAVFrame(YES);
+        avModel->deactivateOldVideoModels();
     }
     return self;
 }
@@ -137,6 +139,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [settingsVC hide];
             break;
         case SHOW_CALL_SCREEN:
+            self.avModel->useAVFrame(YES);
             [self accountSettingsShouldOpen: NO];
             if (![currentCallVC.view superview]) {
             [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];
@@ -223,7 +226,6 @@ typedef NS_ENUM(NSInteger, ViewState) {
     NSResponder * viewNextResponder = [self nextResponder];
     [self setNextResponder: [conversationVC getMessagesView]];
     [[conversationVC getMessagesView] setNextResponder: viewNextResponder];
-    self.avModel->useAVFrame(YES);
 }
 
 - (void) connect
@@ -240,7 +242,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
-                                               account:accInfo];
+                                               account:accInfo
+                                               avModel: avModel];
                          [self changeViewTo:SHOW_CALL_SCREEN];
 
                      });
@@ -257,7 +260,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
-                                               account:accInfo];
+                                               account:accInfo
+                                               avModel: avModel];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [self changeViewTo:SHOW_CALL_SCREEN];
                      });
@@ -508,6 +512,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [delegate showWizard];
 }
 
+- (void)close {
+    [super close];
+}
+
 -(void)rightPanelClosed
 {
     [smartViewVC deselect];
@@ -589,7 +597,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
     }
     [currentCallVC setCurrentCall:[callId UTF8String]
                      conversation:[conversationId UTF8String]
-                          account:&accInfo];
+                          account:&accInfo
+                          avModel:avModel];
     [self changeViewTo:SHOW_CALL_SCREEN];
 }
 
@@ -607,5 +616,16 @@ typedef NS_ENUM(NSInteger, ViewState) {
         [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
     }
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+        AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+
+}
+
+- (BOOL)windowShouldClose:(id)sender {
+    [NSApp hide:nil];
+    return NO;
 }
 @end

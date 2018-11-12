@@ -53,60 +53,64 @@ struct Uniforms {
 {
     self = [super initWithFrame:frame];
     if (self) {
-        id<MTLDevice> device = MTLCreateSystemDefaultDevice();
-        self.device = device;
-        commandQueue = [device newCommandQueue];
-        self.colorPixelFormat = MTLPixelFormatBGRA8Unorm;
-        commandQueue = [device newCommandQueue];
-
-        CVReturn err = CVMetalTextureCacheCreate(kCFAllocatorDefault,
-                                                 NULL,
-                                                 self.device,
-                                                 NULL,
-                                                 &textureCache);
-
-        vertexBuffer = [device newBufferWithBytes:&kImagePlaneVertexData
-                                           length:sizeof(kImagePlaneVertexData)
-                                          options:MTLResourceCPUCacheModeDefaultCache];
-
-        NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-        NSString *libraryPath = [resourcePath stringByAppendingPathComponent:@"Shader.metallib"];
-        id <MTLLibrary> library = [device newLibraryWithFile:libraryPath error:nil];
-        id<MTLFunction> vertexFunc = [library newFunctionWithName:@"imageVertex"];
-        id<MTLFunction> fragmentFunc = [library newFunctionWithName:@"imageFragment"];
-
-        // Create a vertex descriptor for our image plane vertex buffer
-        MTLVertexDescriptor *imagePlaneVertexDescriptor = [[MTLVertexDescriptor alloc] init];
-
-        // Positions.
-        imagePlaneVertexDescriptor.attributes[kVertexAttributePosition].format = MTLVertexFormatFloat2;
-        imagePlaneVertexDescriptor.attributes[kVertexAttributePosition].offset = 0;
-        imagePlaneVertexDescriptor.attributes[kVertexAttributePosition].bufferIndex = kBufferIndexMeshPositions;
-
-        // Texture coordinates.
-        imagePlaneVertexDescriptor.attributes[kVertexAttributeTexcoord].format = MTLVertexFormatFloat2;
-        imagePlaneVertexDescriptor.attributes[kVertexAttributeTexcoord].offset = 8;
-        imagePlaneVertexDescriptor.attributes[kVertexAttributeTexcoord].bufferIndex = kBufferIndexMeshPositions;
-
-        // Position Buffer Layout
-        imagePlaneVertexDescriptor.layouts[kBufferIndexMeshPositions].stride = 16;
-        imagePlaneVertexDescriptor.layouts[kBufferIndexMeshPositions].stepRate = 1;
-        imagePlaneVertexDescriptor.layouts[kBufferIndexMeshPositions].stepFunction = MTLVertexStepFunctionPerVertex;
-
-        MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
-        pipelineDescriptor.vertexFunction = vertexFunc;
-        pipelineDescriptor.fragmentFunction = fragmentFunc;
-        pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
-        pipelineDescriptor.vertexDescriptor = imagePlaneVertexDescriptor;
-
-        pipeline = [device newRenderPipelineStateWithDescriptor:pipelineDescriptor error:NULL];
-        MTLDepthStencilDescriptor *depthStateDescriptor = [[MTLDepthStencilDescriptor alloc] init];
-        depthStateDescriptor.depthCompareFunction = MTLCompareFunctionAlways;
-        depthStateDescriptor.depthWriteEnabled = NO;
-        depthState = [device newDepthStencilStateWithDescriptor:depthStateDescriptor];
-        self.preferredFramesPerSecond = 30;
+        [self setupView];
     }
     return self;
+}
+
+-(void)setupView {
+    id<MTLDevice> device = MTLCreateSystemDefaultDevice();
+    self.device = device;
+    commandQueue = [device newCommandQueue];
+    self.colorPixelFormat = MTLPixelFormatBGRA8Unorm;
+    commandQueue = [device newCommandQueue];
+
+    CVReturn err = CVMetalTextureCacheCreate(kCFAllocatorDefault,
+                                             NULL,
+                                             self.device,
+                                             NULL,
+                                             &textureCache);
+
+    vertexBuffer = [device newBufferWithBytes:&kImagePlaneVertexData
+                                       length:sizeof(kImagePlaneVertexData)
+                                      options:MTLResourceCPUCacheModeDefaultCache];
+
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString *libraryPath = [resourcePath stringByAppendingPathComponent:@"Shader.metallib"];
+    id <MTLLibrary> library = [device newLibraryWithFile:libraryPath error:nil];
+    id<MTLFunction> vertexFunc = [library newFunctionWithName:@"imageVertex"];
+    id<MTLFunction> fragmentFunc = [library newFunctionWithName:@"imageFragment"];
+
+    // Create a vertex descriptor for our image plane vertex buffer
+    MTLVertexDescriptor *imagePlaneVertexDescriptor = [[MTLVertexDescriptor alloc] init];
+
+    // Positions.
+    imagePlaneVertexDescriptor.attributes[kVertexAttributePosition].format = MTLVertexFormatFloat2;
+    imagePlaneVertexDescriptor.attributes[kVertexAttributePosition].offset = 0;
+    imagePlaneVertexDescriptor.attributes[kVertexAttributePosition].bufferIndex = kBufferIndexMeshPositions;
+
+    // Texture coordinates.
+    imagePlaneVertexDescriptor.attributes[kVertexAttributeTexcoord].format = MTLVertexFormatFloat2;
+    imagePlaneVertexDescriptor.attributes[kVertexAttributeTexcoord].offset = 8;
+    imagePlaneVertexDescriptor.attributes[kVertexAttributeTexcoord].bufferIndex = kBufferIndexMeshPositions;
+
+    // Position Buffer Layout
+    imagePlaneVertexDescriptor.layouts[kBufferIndexMeshPositions].stride = 16;
+    imagePlaneVertexDescriptor.layouts[kBufferIndexMeshPositions].stepRate = 1;
+    imagePlaneVertexDescriptor.layouts[kBufferIndexMeshPositions].stepFunction = MTLVertexStepFunctionPerVertex;
+
+    MTLRenderPipelineDescriptor *pipelineDescriptor = [MTLRenderPipelineDescriptor new];
+    pipelineDescriptor.vertexFunction = vertexFunc;
+    pipelineDescriptor.fragmentFunction = fragmentFunc;
+    pipelineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+    pipelineDescriptor.vertexDescriptor = imagePlaneVertexDescriptor;
+
+    pipeline = [device newRenderPipelineStateWithDescriptor:pipelineDescriptor error:NULL];
+    MTLDepthStencilDescriptor *depthStateDescriptor = [[MTLDepthStencilDescriptor alloc] init];
+    depthStateDescriptor.depthCompareFunction = MTLCompareFunctionAlways;
+    depthStateDescriptor.depthWriteEnabled = NO;
+    depthState = [device newDepthStencilStateWithDescriptor:depthStateDescriptor];
+    self.preferredFramesPerSecond = 30;
 }
 
 - (void)fillWithBlack {
