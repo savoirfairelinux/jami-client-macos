@@ -26,6 +26,10 @@
 
 -(void) callShouldToggleFullScreen;
 -(void) mouseIsMoving:(BOOL) move;
+-(void) screenShare;
+-(void) switchToDevice:(int)deviceID;
+-(void) switchToFile:(std::string)uri;
+-(std::vector<std::string>) getDeviceList;
 
 @end
 
