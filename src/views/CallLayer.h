@@ -20,11 +20,20 @@
 #import <Cocoa/Cocoa.h>
 #import <QSize>
 #import <video/renderer.h>
+///LRC
+#import <video/previewmanager.h>
+#import <video/renderer.h>
+#import <api/newcallmodel.h>
+#import <api/call.h>
+#import <api/conversationmodel.h>
+#import <api/avmodel.h>
+#import <api/newvideo.h>
+#include <api/newcodecmodel.h>
 
 @interface CallLayer : NSOpenGLLayer
 
 @property BOOL videoRunning;
 
-- (void) setCurrentFrame:(Video::Frame)framePtr;
+- (void) setCurrentFrame:(CVPixelBufferRef)framePtr;
 
 @end

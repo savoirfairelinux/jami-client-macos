@@ -56,7 +56,7 @@ void main()
 GLuint tex, vbo, vShader, fShader, sProg, vao;
 
 // Last frame data and attributes
-Video::Frame currentFrame;
+CVPixelBufferRef currentFrame;
 BOOL currentFrameDisplayed;
 NSLock* currentFrameLk;
 
@@ -165,17 +165,17 @@ NSLock* currentFrameLk;
 
     [currentFrameLk lock];
     if(!currentFrameDisplayed) {
-        if(currentFrame.ptr) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, currentFrame.width, currentFrame.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, currentFrame.ptr);
+        if(currentFrame) {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 720, 1280, 0, GL_RGBA, GL_UNSIGNED_BYTE, currentFrame);
         }
         currentFrameDisplayed = YES;
     }
     // To ensure that we will not divide by zero
-    if (currentFrame.ptr && currentFrame.width && currentFrame.height) {
+    if (currentFrame) {
         // Compute scaling factor to keep the original aspect ratio of the video
         CGSize viewSize = self.frame.size;
         float viewRatio = viewSize.width/viewSize.height;
-        float frameRatio = ((float)currentFrame.width)/((float)currentFrame.height);
+        float frameRatio = ((float)720)/((float)1280);
         float ratio = viewRatio * (1/frameRatio);
 
         GLint inScalingUniform = glGetUniformLocation(sProg, "in_Scaling");
@@ -205,10 +205,10 @@ NSLock* currentFrameLk;
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-- (void) setCurrentFrame:(Video::Frame)framePtr
+- (void) setCurrentFrame:(CVPixelBufferRef)framePtr
 {
     [currentFrameLk lock];
-    currentFrame = std::move(framePtr);
+    currentFrame = framePtr;
     currentFrameDisplayed = NO;
     [currentFrameLk unlock];
 }

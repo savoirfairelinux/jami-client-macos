@@ -102,6 +102,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
+        avModel->deactivateOldVideoModels();
     }
     return self;
 }
@@ -238,7 +239,9 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
-                                               account:accInfo];
+                                               account:accInfo
+                          avModel: avModel];
+                         [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [self changeViewTo:SHOW_CALL_SCREEN];
 
                      });
@@ -255,7 +258,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
-                                               account:accInfo];
+                                               account:accInfo
+                                               avModel: avModel];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [self changeViewTo:SHOW_CALL_SCREEN];
                      });
@@ -587,7 +591,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
     }
     [currentCallVC setCurrentCall:[callId UTF8String]
                      conversation:[conversationId UTF8String]
-                          account:&accInfo];
+                          account:&accInfo
+                          avModel:avModel];
     [self changeViewTo:SHOW_CALL_SCREEN];
 }
 
