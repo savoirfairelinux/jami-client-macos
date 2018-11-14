@@ -34,6 +34,10 @@
 #import <api/newcallmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
+#import <api/avmodel.h>
+#import <api/newvideo.h>
+#include <api/newcodecmodel.h>
+
 #import <globalinstances.h>
 
 #import "AppDelegate.h"
@@ -136,6 +140,8 @@
 @end
 
 @implementation CurrentCallVC
+
+lrc::api::AVModel* mediaModel;
 @synthesize personLabel, personPhoto, stateLabel, holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
@@ -148,10 +154,13 @@
 
 -(void) setCurrentCall:(const std::string&)callUid
           conversation:(const std::string&)convUid
-               account:(const lrc::api::account::Info*)account;
+               account:(const lrc::api::account::Info*)account
+               avModel:(lrc::api::AVModel *)avModel
 {
     if(account == nil)
         return;
+
+    mediaModel = avModel;
 
     auto* callModel = account->callModel.get();
 
@@ -476,17 +485,26 @@
     QObject::disconnect(previewHolder.frameUpdated);
     QObject::disconnect(previewHolder.stopped);
     QObject::disconnect(previewHolder.started);
-    previewHolder.started = QObject::connect(&Video::PreviewManager::instance(),
-                     &Video::PreviewManager::previewStarted,
-                     [=](Video::Renderer* renderer) {
-                         QObject::disconnect(previewHolder.frameUpdated);
-                         previewHolder.frameUpdated = QObject::connect(renderer,
-                                                                       &Video::Renderer::frameUpdated,
-                                                                       [=]() {
-                                                                           [self renderer:Video::PreviewManager::instance().previewRenderer()
-                                                                       renderFrameForPreviewView:previewView];
-                                                                       });
-                     });
+    previewHolder.started = QObject::connect(mediaModel,
+                                             &lrc::api::AVModel::rendererStarted,
+                                             [=](const std::string& id) {
+                                                 if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+
+                                                 } else {
+
+                                                 }
+                                             });
+    //QObject::connect(&Video::PreviewManager::instance(),
+//                     &Video::PreviewManager::previewStarted,
+//                     [=](Video::Renderer* renderer) {
+//                         QObject::disconnect(previewHolder.frameUpdated);
+//                         previewHolder.frameUpdated = QObject::connect(renderer,
+//                                                                       &Video::Renderer::frameUpdated,
+//                                                                       [=]() {
+//                                                                           [self renderer:Video::PreviewManager::instance().previewRenderer()
+//                                                                       renderFrameForPreviewView:previewView];
+//                                                                       });
+//                     });
 
     previewHolder.stopped = QObject::connect(&Video::PreviewManager::instance(),
                      &Video::PreviewManager::previewStopped,

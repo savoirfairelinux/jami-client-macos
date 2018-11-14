@@ -26,6 +26,12 @@
 #import <api/account.h>
 #import <api/call.h>
 
+namespace lrc {
+    namespace api {
+        class AVModel;
+    }
+}
+
 class Call;
 
 @interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {
@@ -36,5 +42,6 @@ class Call;
 -(void) hideWithAnimation:(BOOL)animate;
 -(void) setCurrentCall:(const std::string&)callUid
           conversation:(const std::string&)convUid
-               account:(const lrc::api::account::Info*)account;
+               account:(const lrc::api::account::Info*)account
+               avModel:(lrc::api::AVModel *)avModel;
 @end

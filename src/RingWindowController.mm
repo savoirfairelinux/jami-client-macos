@@ -98,7 +98,7 @@ static NSString* const kPreferencesIdentifier        = @"PreferencesIdentifier";
 NSString* const kChangeAccountToolBarItemIdentifier  = @"ChangeAccountToolBarItemIdentifier";
 NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemIdentifier";
 
-@synthesize dataTransferModel, accountModel, behaviorController;
+@synthesize dataTransferModel, accountModel, behaviorController, avModel;
 @synthesize wizard;
 
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
@@ -230,7 +230,8 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
-                                               account:accInfo];
+                                               account:accInfo
+                          avModel: avModel];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [self changeViewTo:SHOW_CALL_SCREEN];
 
@@ -248,7 +249,8 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
-                                               account:accInfo];
+                                               account:accInfo
+                                               avModel: avModel];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [self changeViewTo:SHOW_CALL_SCREEN];
                      });
