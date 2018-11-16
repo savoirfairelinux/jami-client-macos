@@ -37,7 +37,6 @@
 #import <account.h>
 #import <interfaces/pixmapmanipulatori.h>
 
-#import "AppDelegate.h"
 #import "Constants.h"
 #import "views/NSImage+Extensions.h"
 #import "views/NSColor+RingTheme.h"
@@ -67,6 +66,9 @@
 
     __unsafe_unretained IBOutlet NSPopover* helpBlockchainContainer;
     __unsafe_unretained IBOutlet NSPopover* helpPasswordContainer;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* buttonTopConstraint;
+    __unsafe_unretained IBOutlet NSBox* passwordBox;
+    __unsafe_unretained IBOutlet NSButton* passwordButton;
 
     QMetaObject::Connection registeredNameFound;
     QMetaObject::Connection accountCreated;
@@ -86,17 +88,15 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 @synthesize accountModel;
 
+#define heightWithCancelAndAdvanced 468
+#define defaultHeight 408
+
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel {
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         self.accountModel = accountModel;
     }
     return self;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.view setAutoresizingMask: NSViewHeightSizable];
 }
 
 - (BOOL)produceError:(NSError**)error withCode:(NSInteger)code andMessage:(NSString*)message
@@ -120,7 +120,6 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (void)show
 {
-    AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [displayNameField setTag:DISPLAY_NAME_TAG];
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
     [displayNameField setStringValue: NSFullUserName()];
@@ -132,6 +131,16 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [self toggleSignupRing:nil];
     [addProfilePhotoImage setWantsLayer: YES];
     [photoView setBordered:YES];
+    [passwordButton setState: NSControlStateValueOff];
+    NSRect viewFrame = creationView.frame;
+    viewFrame.size.height = defaultHeight;
+    creationView.frame = viewFrame;
+
+    buttonTopConstraint.constant = 25;
+    [passwordBox setHidden: YES];
+    self.registeredName = @"";
+    self.password = @"";
+    self.repeatPassword = @"";
 
     [self display:creationView];
 }
@@ -326,6 +335,26 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 {
     if (self.withBlockchain) {
         [self lookupUserName];
+    }
+}
+
+- (IBAction)togglePasswordButton:(NSButton *)sender
+{
+    NSRect viewFrame = creationView.frame;
+    if([sender state] == NSControlStateValueOn) {
+        viewFrame.size.height = heightWithCancelAndAdvanced;
+        [self.delegate updateFrame: heightWithCancelAndAdvanced];
+        creationView.frame = viewFrame;
+        buttonTopConstraint.constant = 85;
+        [passwordBox setHidden: NO];
+    } else {
+        buttonTopConstraint.priority = 100;
+        viewFrame.size.height = defaultHeight;
+        [self.delegate updateFrame: defaultHeight];
+        creationView.frame = viewFrame;
+        buttonTopConstraint.constant = 25;
+        buttonTopConstraint.priority = 999;
+        [passwordBox setHidden: YES];
     }
 }
 

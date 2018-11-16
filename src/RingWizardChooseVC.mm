@@ -26,23 +26,31 @@
 @implementation RingWizardChooseVC {
 
 __unsafe_unretained IBOutlet NSButton* createSIPAccount;
+__unsafe_unretained IBOutlet NSLayoutConstraint* buttonTopConstraint;
 
 }
 
 @synthesize delegate;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.view setAutoresizingMask: NSViewHeightSizable];
-}
+#define heightWithAdvanced 220
+#define heightWithCancel 148
+#define heightWithCancelAndAdvanced 168
+#define defaultHeight 168
 
-- (void)showCancelButton:(BOOL)showCancel{
-    self.isCancelable = showCancel;
+- (void)showCancelButton:(BOOL)showCancel {
     [createSIPAccount setHidden: YES];
+    buttonTopConstraint.constant = showCancel ? 25 : 0;
+    self.isCancelable = showCancel;
 }
 
 - (void)showAdvancedButton:(BOOL)showAdvanced {
     self.withAdvancedOptions = showAdvanced;
+}
+
+- (void)updateFrame {
+    NSRect viewFrame = self.view.frame;
+    viewFrame.size.height = (self.isCancelable && self.withAdvancedOptions) ? heightWithCancelAndAdvanced : self.isCancelable  ? heightWithCancel : defaultHeight;
+    self.view.frame = viewFrame;
 }
 
 - (IBAction)createRingAccount:(id)sender
@@ -69,9 +77,13 @@ __unsafe_unretained IBOutlet NSButton* createSIPAccount;
 - (IBAction)showCreateSIP:(id)sender
 {
     if ([self.delegate respondsToSelector:@selector(didCompleteWithAction:)]){
+        buttonTopConstraint.constant = 57;
+        NSRect viewFrame = self.view.frame;
+        viewFrame.size.height = heightWithAdvanced;
+        self.view.frame = viewFrame;
         [delegate didCompleteWithAction:WIZARD_ACTION_ADVANCED];
+        [createSIPAccount setHidden: NO];
     }
-    [createSIPAccount setHidden: NO];
 }
 
 - (IBAction)addSIPAccount:(id)sender

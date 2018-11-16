@@ -29,6 +29,7 @@
 @property (nonatomic, weak) NSWindowController <RingWizardLinkDelegate>* delegate;
 @property (nonatomic, weak) NSString* pinValue;
 @property (nonatomic, weak) NSString* passwordValue;
+@property NSURL* backupFile;
 
 - (void)show;
 @end
