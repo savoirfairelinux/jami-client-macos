@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, WizardAction) {
 - (void)showCancelButton:(BOOL)showCancel;
 
 - (void)showAdvancedButton:(BOOL)showAdvanced;
+- (void)updateFrame;
 
 @end
 
