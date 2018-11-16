@@ -513,6 +513,14 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     [self.window beginSheet:wizard.window completionHandler:nil];
 }
 
+- (NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet
+       usingRect:(NSRect)rect
+{
+    float titleBarHeight = self.window.frame.size.height - [NSWindow contentRectForFrameRect:self.window.frame styleMask:self.window.styleMask].size.height;
+    rect.origin.y = self.window.frame.size.height;
+    return rect;
+}
+
 -(void) accountSettingsShouldOpen: (BOOL) open {
     if (open) {
         [settingsVC setSelectedAccount: [chooseAccountVC selectedAccount].id];

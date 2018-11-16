@@ -31,6 +31,7 @@
 #import <account.h>
 #import <AvailableAccountModel.h>
 #import <api/lrc.h>
+#import <api/newaccountmodel.h>
 
 
 #if ENABLE_SPARKLE
@@ -258,17 +259,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 - (BOOL) checkForRingAccount
 {
-    BOOL foundRingAcc = NO;
-    for (int i = 0 ; i < AccountModel::instance().rowCount() ; ++i) {
-        QModelIndex idx = AccountModel::instance().index(i);
-        Account* acc = AccountModel::instance().getAccountByModelIndex(idx);
-        if(acc->protocol() == Account::Protocol::RING && !acc->isNew()) {
-            if (acc->displayName().isEmpty())
-                acc->setDisplayName(acc->alias());
-            foundRingAcc = YES;
-        }
-    }
-    return foundRingAcc;
+    return !lrc->getAccountModel().getAccountList().empty();
 }
 
 -(void)applicationWillFinishLaunching:(NSNotification *)aNotification

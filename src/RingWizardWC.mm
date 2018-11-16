@@ -33,6 +33,9 @@
 @interface RingWizardWC ()
 
 @property (retain, nonatomic)IBOutlet NSView* container;
+@property (retain, nonatomic)IBOutlet NSTextField* windowHeader;
+@property (retain, nonatomic)IBOutlet NSImageView* ringImage;
+@property (retain, nonatomic)IBOutlet NSLayoutConstraint* titleConstraint;
 
 @end
 @implementation RingWizardWC {
@@ -44,7 +47,7 @@
     BOOL withAdvanced;
 }
 
-@synthesize accountModel;
+@synthesize accountModel, ringImage, titleConstraint;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel;
 {
@@ -78,72 +81,93 @@
     }
 }
 
-#define headerHeight 60
-#define minHeight 150
+#define headerHeight 70
+#define minHeight 140
 #define defaultMargin 5
-#define heightWithSIP 160
 - (void)showView:(NSView*)view
 {
     [self removeSubviews];
     NSRect frame = [self.container frame];
-    CGFloat height = withAdvanced ? minHeight : minHeight - 10;
+    CGFloat height = minHeight;
     float sizeFrame = MAX(height, view.frame.size.height);
     frame.size.height = sizeFrame;
-    [view setFrame:frame];
-
+    [view setFrame: frame];
     [self.container setFrame:frame];
-    float size = headerHeight + sizeFrame + defaultMargin;
+    float titleBarHeight = self.window.frame.size.height -
+    [NSWindow contentRectForFrameRect: self.window.frame styleMask:self.window.styleMask].size.height;
+    titleBarHeight = self.window.isSheet ? 0 : titleBarHeight;
+    float size = headerHeight + sizeFrame + titleBarHeight;
     NSRect frameWindows = self.window.frame;
     frameWindows.size.height = size;
     [self.window setFrame:frameWindows display:YES animate:YES];
-
     [self.container addSubview:view];
 }
 
-- (void) updateWindowHeight: (CGFloat) height {
-    NSRect frame = [self.container frame];
-    float sizeFrame = height;
-    frame.size.height = sizeFrame;
-    [self.container setFrame:frame];
-    float size = headerHeight + sizeFrame + defaultMargin;
+- (void) updateFrame:(float) height {
+    float titleBarHeight = self.window.frame.size.height -
+    [NSWindow contentRectForFrameRect: self.window.frame styleMask:self.window.styleMask].size.height;
+    titleBarHeight = self.window.isSheet ? 0 : titleBarHeight;
+    float size = headerHeight + height + titleBarHeight;
     NSRect frameWindows = self.window.frame;
     frameWindows.size.height = size;
     [self.window setFrame:frameWindows display:YES animate:YES];
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced {
+    [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Ring",
+                                                        @"Welcome title")];
+    [ringImage setHidden: NO];
+    titleConstraint.constant = -26.5;
+    [self showView:chooseActiontWC.view];
     [chooseActiontWC showCancelButton:showCancel];
     [chooseActiontWC showAdvancedButton:showAdvanced];
     isCancelable = showCancel;
     withAdvanced = showAdvanced;
-    NSRect frame = CGRectMake(0, 0, chooseActiontWC.view.frame.size.width, 0);
-    chooseActiontWC.view.frame = frame;
+    [chooseActiontWC updateFrame];
     [self showView:chooseActiontWC.view];
-
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel
 {
+    [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Ring",
+                                                         @"Welcome title")];
+    [ringImage setHidden: NO];
+    titleConstraint.constant = -26.5;
+    [self showView:chooseActiontWC.view];
     [chooseActiontWC showCancelButton:showCancel];
     isCancelable = showCancel;
-    [self showView:chooseActiontWC.view];
 }
 
 - (void)showNewAccountVC
 {
+    [self.windowHeader setStringValue: NSLocalizedString(@"Create a new account",
+                                                         @"Welcome title")];
+    [chooseActiontWC showCancelButton: isCancelable];
+    [ringImage setHidden: YES];
+    titleConstraint.constant = 0;
     [self showView: newAccountWC.view];
     [newAccountWC show];
 }
 
 - (void)showLinkAccountVC
 {
+    [self.windowHeader setStringValue: NSLocalizedString(@"Link to an account",
+                                                         @"link account title")];
+    [ringImage setHidden: YES];
+    titleConstraint.constant = 0;
+    [chooseActiontWC showCancelButton: isCancelable];
     [self showView: linkAccountWC.view];
     [linkAccountWC show];
 }
 
 - (void)showSIPAccountVC
 {
+    [self.windowHeader setStringValue: NSLocalizedString(@"Add a SIP account",
+                                                         @"Welcome title")];
+    [ringImage setHidden: YES];
+    titleConstraint.constant = 0;
     [self showView: addSIPAccountVC.view];
+    [chooseActiontWC showAdvancedButton: NO];
     [addSIPAccountVC show];
 }
 
@@ -168,7 +192,7 @@
     } else if (action == WIZARD_ACTION_NEW) {
         [self showNewAccountVC];
     } else if (action == WIZARD_ACTION_ADVANCED) {
-        [self updateWindowHeight: heightWithSIP];
+        [self showView:chooseActiontWC.view];
     } else if (action == WIZARD_ACTION_SIP_ACCOUNT) {
         [self showSIPAccountVC];
     } else {
@@ -215,9 +239,7 @@
 #pragma - AddSIPAccountDelegate methods
 
 - (void)close {
-    [self.window close];
-    [NSApp endSheet:self.window];
-    [[NSApplication sharedApplication] removeWindowsItem:self.window];
+    [self showChooseWithCancelButton: isCancelable andAdvanced: withAdvanced];
 }
 
 @end
