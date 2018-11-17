@@ -1,5 +1,5 @@
 
-"A network error occured during the export" = "Der is een netwerkfout opgetreden tijdens het exporteren";
+"A network error occured during the export" = "Er is een netwerkfout opgetreden tijdens het exporteren";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
@@ -14,16 +14,16 @@
 "Place audio call" = "Place audio call";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Wis het gesprek";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Blokkeer contact";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "Der is een fout opgetreden tijdens het exporteren";
+"An error occured during the export" = "Er is een fout opgetreden tijdens het exporteren";
 
 /* Contextual menu entry */
 "Backup account" = "Backup account";
@@ -152,7 +152,7 @@
 "The following account needs to be migrated to the new Ring account format:" = "The following account needs to be migrated to the new Ring account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "Het paswoord dat ge hebt ingevoerd ontgrendelt dezen account niet";
+"The password you entered does not unlock this account" = "Het paswoord dat u hebt ingevoerd ontgrendelt dit account niet";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";

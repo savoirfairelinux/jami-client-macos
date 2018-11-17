@@ -3,7 +3,7 @@
 "1f9-X5-ykb.title" = "Certificaten voor inkomende TLS-verbindingen vereisen";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Certificaten verifiëren als ne cliënt";
+"1xi-9G-zOX.title" = "Certificaten verifiëren als een cliënt";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
 "2e5-zS-ghg.title" = "Aangepaste codering gebruiken";
@@ -42,4 +42,4 @@
 "vPF-Rp-aR6.title" = "Lijst van certificeringsinstanties";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
-"x2s-ov-cVQ.title" = "Inkomende certificaten verifiëren als ne server";
+"x2s-ov-cVQ.title" = "Inkomende certificaten verifiëren als een server";

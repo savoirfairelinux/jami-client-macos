@@ -12,13 +12,13 @@
 "FQ4-fp-Pxj.title" = "کمینه";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Audio RTP port Range";
+"Jho-hi-Mvg.title" = "دامنه پورت صدا RTP";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
 "K9I-vh-jeu.title" = "رابط شبکه";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Set published address and port";
+"OL5-DI-aCq.title" = "تنظیم پورت و نشانی منتشر شده";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
 "OR2-la-DUE.placeholderString" = "گذرواژه...";
@@ -33,7 +33,7 @@
 "Qf3-E3-5U6.title" = "نشانی منتشر شده";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Video RTP port Range";
+"XA8-Sy-CYG.title" = "دامنه پورت ویدیو RTP";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "کمینه";
@@ -45,7 +45,7 @@
 "fB0-X8-GXk.title" = "رادیو";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
-"fCd-4d-sP0.title" = "Registration expire";
+"fCd-4d-sP0.title" = "انقضاء ثبت نام";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
 "gVd-Dw-1B4.title" = "استفاده از STUN";
