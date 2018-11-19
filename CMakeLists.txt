@@ -269,7 +269,6 @@ SET(ringclient_XIBS
    RingWizardChoose
    Dialpad
    RegisterNameWindow
-   ChooseAccount
    AccountMenuItemView
    ContactRequestList
    ContactRequest
