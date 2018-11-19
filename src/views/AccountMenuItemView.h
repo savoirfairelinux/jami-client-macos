@@ -18,6 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "RoundedTextField.h"
 
 @interface AccountMenuItemView : NSView
 
@@ -27,7 +28,7 @@
 @property (nonatomic, strong) IBOutlet NSTextField* accountTypeLabel;
 @property (nonatomic, strong) IBOutlet NSBox* backgroundView;
 @property (nonatomic, strong) IBOutlet NSImageView* accountAvatar;
-@property (nonatomic, strong) IBOutlet NSTextField* accountStatus;
+@property (nonatomic, strong) IBOutlet RoundedTextField* accountStatus;
 @property (nonatomic, strong) IBOutlet NSButton* createNewAccount;
 @property (nonatomic, strong) IBOutlet NSImageView* createNewAccountImage;
 

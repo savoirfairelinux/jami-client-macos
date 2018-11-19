@@ -33,6 +33,8 @@
 + (NSColor*) errorColor;
 + (NSColor*) greenSuccessColor;
 + (NSColor*) errorTransferColor;
++ (NSColor*) presenceColor;
++ (NSColor*) unregisteredColor;
 
 - (NSColor *)lightenColorByValue:(float)value;
 - (NSColor *)darkenColorByValue:(float)value;
