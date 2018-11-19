@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AccRingGeneralVC">
             <connections>
+                <outlet property="accountStatus" destination="JDZ-Ww-J0R" id="6aL-GS-YIh"/>
                 <outlet property="addProfilePhotoImage" destination="Lsc-U9-fTH" id="G9k-ly-ijQ"/>
                 <outlet property="advancedButtonMarginConstraint" destination="9ET-E5-F0k" id="zEw-dH-YpR"/>
                 <outlet property="bannedContactHeightConstraint" destination="Oyx-FU-ni1" id="Kye-yG-CHK"/>
@@ -320,6 +321,29 @@
                                     <action selector="editPhoto:" target="-2" id="cfC-jn-h6W"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JDZ-Ww-J0R" userLabel="AccountStatus" customClass="RoundedTextField">
+                                <rect key="frame" x="90" y="41" width="19" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15.5" id="3Tq-vh-zjv"/>
+                                    <constraint firstAttribute="height" constant="19.5" id="Lvn-j5-zSj"/>
+                                </constraints>
+                                <textFieldCell key="cell" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" id="JqD-r2-vsb">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                        <color key="value" red="0.29803921570000003" green="0.85098039219999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderThickness">
+                                        <real key="value" value="1.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lsc-U9-fTH">
                                 <rect key="frame" x="49" y="90" width="30" height="30"/>
                                 <constraints>
@@ -342,12 +366,14 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="a04-w7-5Bn" firstAttribute="centerX" secondItem="edz-Bo-zxA" secondAttribute="centerX" id="0mp-ac-frU"/>
+                            <constraint firstItem="JDZ-Ww-J0R" firstAttribute="trailing" secondItem="NwI-6i-crp" secondAttribute="trailing" constant="-21" id="7pw-7d-7Ut"/>
                             <constraint firstItem="n2O-cF-oZh" firstAttribute="leading" secondItem="edz-Bo-zxA" secondAttribute="leading" id="AUG-3f-scp"/>
                             <constraint firstItem="n2O-cF-oZh" firstAttribute="top" secondItem="a04-w7-5Bn" secondAttribute="bottom" constant="20" id="KhI-6h-8XR"/>
                             <constraint firstItem="NwI-6i-crp" firstAttribute="leading" secondItem="a04-w7-5Bn" secondAttribute="leading" id="NQW-YJ-6bY"/>
                             <constraint firstItem="NwI-6i-crp" firstAttribute="top" secondItem="a04-w7-5Bn" secondAttribute="top" id="PQn-8z-xDL"/>
                             <constraint firstAttribute="trailing" secondItem="n2O-cF-oZh" secondAttribute="trailing" id="hfH-o5-XHE"/>
                             <constraint firstItem="Lsc-U9-fTH" firstAttribute="centerY" secondItem="a04-w7-5Bn" secondAttribute="centerY" id="iwV-Th-OV6"/>
+                            <constraint firstItem="JDZ-Ww-J0R" firstAttribute="bottom" secondItem="NwI-6i-crp" secondAttribute="bottom" id="kIG-eu-dku"/>
                             <constraint firstItem="NwI-6i-crp" firstAttribute="trailing" secondItem="a04-w7-5Bn" secondAttribute="trailing" id="rTJ-s0-Fmw"/>
                             <constraint firstAttribute="bottom" secondItem="n2O-cF-oZh" secondAttribute="bottom" id="uBU-6F-YaI"/>
                             <constraint firstItem="Lsc-U9-fTH" firstAttribute="centerX" secondItem="a04-w7-5Bn" secondAttribute="centerX" id="uyy-Ng-jY4"/>

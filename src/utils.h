@@ -21,6 +21,8 @@
 
 #import <Foundation/Foundation.h>
 #import "NSString+Extensions.h"
+#import "views/NSColor+RingTheme.h"
+
 
 // new lrc
 #import <api/conversation.h>
@@ -178,4 +180,20 @@ static inline bool appSandboxed()
         return YES;
     }
     return NO;
+}
+
+static inline NSColor* colorForAccountStatus(const lrc::api::account::Status status)
+{
+    NSColor *accountStatusColor = [NSColor unregisteredColor];
+    switch (status) {
+        case  lrc::api::account::Status::REGISTERED:
+            accountStatusColor = [NSColor presenceColor];
+            break;
+        case  lrc::api::account::Status::TRYING:
+            accountStatusColor = [NSColor orangeColor];
+            break;
+        default:
+            break;
+    }
+    return accountStatusColor;
 }

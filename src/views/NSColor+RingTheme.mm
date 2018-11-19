@@ -66,10 +66,21 @@ return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 a
     return [NSColor colorWithCalibratedRed:204/255.0 green:51/255.0 blue:51/255.0 alpha:1];
 }
 
++ (NSColor*) unregisteredColor
+{
+    return [NSColor colorWithCalibratedRed:255/255.0 green:59/255.0 blue:40/255.0 alpha:1];
+}
+
 + (NSColor*) greenSuccessColor
 {
     return [NSColor colorWithCalibratedRed:0/255.0 green:178/255.0 blue:11/255.0 alpha:1];
 }
+
++ (NSColor*) presenceColor
+{
+    return [NSColor colorWithCalibratedRed:76/255.0 green:217/255.0 blue:100/255.0 alpha:1];
+}
+
 
 - (NSColor *)lightenColorByValue:(float)value {
     if(![self isKindOfClass:[NSCalibratedRGBColorSpace class]]) {
