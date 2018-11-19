@@ -42,6 +42,7 @@
 #import "views/NSColor+RingTheme.h"
 #import "views/NSImage+Extensions.h"
 #import "views/HoverTableRowView.h"
+#import "views/RoundedTextField.h"
 #import "ExportPasswordWC.h"
 #import "utils.h"
 
@@ -50,6 +51,7 @@
 @property (unsafe_unretained) IBOutlet NSTextField *displayNameField;
 @property (unsafe_unretained) IBOutlet NSTextField *ringIDField;
 @property (unsafe_unretained) IBOutlet NSTextField *registeredNameField;
+@property (unsafe_unretained) IBOutlet RoundedTextField *accountStatus;
 @property (unsafe_unretained) IBOutlet NSButton *registerNameButton;
 @property (unsafe_unretained) IBOutlet NSButton* photoView;
 @property (unsafe_unretained) IBOutlet NSButton* passwordButton;
@@ -75,6 +77,7 @@ QMetaObject::Connection deviceRevokedSignal;
 QMetaObject::Connection deviceUpdatedSignal;
 QMetaObject::Connection contactBlockedSignal;
 QMetaObject::Connection bannedContactsChangedSignal;
+QMetaObject::Connection accountStateChangedSignal;
 
 
 @synthesize displayNameField;
@@ -172,6 +175,8 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [removeAccountButton setAttributedTitle:colorTitle];
     [devicesTableView reloadData];
     [blockedContactsTableView reloadData];
+    self.accountStatus.bgColor = colorForAccountStatus(accountModel->getAccountInfo(self.selectedAccountID).status);
+    [self.accountStatus setNeedsDisplay:YES];
 }
 
 -(void) connectSignals {
@@ -179,6 +184,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     QObject::disconnect(deviceRevokedSignal);
     QObject::disconnect(deviceUpdatedSignal);
     QObject::disconnect(bannedContactsChangedSignal);
+    QObject::disconnect(accountStateChangedSignal);
     deviceAddedSignal = QObject::connect(&*(self.accountModel->getAccountInfo(self.selectedAccountID)).deviceModel,
                                          &lrc::api::NewDeviceModel::deviceAdded,
                                          [self] (const std::string &id) {
@@ -208,6 +214,15 @@ typedef NS_ENUM(NSInteger, TagViews) {
                                                    &lrc::api::ContactModel::bannedStatusChanged,
                                                    [self] (const std::string &contactUri, bool banned) {
                                                        [blockedContactsTableView reloadData];
+                                                   });
+    accountStateChangedSignal = QObject::connect(self.accountModel,
+                                                   &lrc::api::NewAccountModel::accountStatusChanged,
+                                                   [self] (const std::string& accountID) {
+                                                       if(accountID != self.selectedAccountID) {
+                                                           return;
+                                                       }
+                                                       self.accountStatus.bgColor = colorForAccountStatus(accountModel->getAccountInfo(accountID).status);
+                                                       [self.accountStatus setNeedsDisplay:YES];
                                                    });
 }
 

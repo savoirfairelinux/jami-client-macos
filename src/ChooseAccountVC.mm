@@ -39,6 +39,7 @@
 #import "RingWindowController.h"
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/RoundedTextField.h"
 
 @interface NSMenu ()
 - (void) _setHasPadding: (BOOL) pad onEdge: (int) whatEdge;
@@ -51,7 +52,8 @@
 @implementation ChooseAccountVC {
 
     __unsafe_unretained IBOutlet NSImageView*   profileImage;
-    __unsafe_unretained IBOutlet NSTextField*    accountStatus;
+    __unsafe_unretained IBOutlet RoundedTextField* accountStatus;
+    __unsafe_unretained IBOutlet NSTextField* selectedAccountTitle;
     __unsafe_unretained IBOutlet NSPopUpButton* accountSelectionButton;
     lrc::api::NewAccountModel* accMdl_;
     AccountSelectionManager* accountSelectionManager_;
@@ -75,7 +77,6 @@ NSMutableDictionary* menuItemsTags;
         accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
         self.delegate = mainWindow;
     [self initView];
-
 }
 
 - (void)initView
@@ -225,7 +226,7 @@ NSMutableDictionary* menuItemsTags;
     } else {
         [itemView.accountAvatar setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
     }
-    [itemView.accountStatus setHidden:!account.enabled];
+    itemView.accountStatus.bgColor = colorForAccountStatus(account.status);
     switch (account.profileInfo.type) {
         case lrc::api::profile::Type::SIP:
             [itemView.accountTypeLabel setStringValue:@"SIP"];
@@ -259,7 +260,8 @@ NSMutableDictionary* menuItemsTags;
         } else {
             [profileImage setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
         }
-        [accountStatus setHidden:!account.enabled];
+        accountStatus.bgColor = colorForAccountStatus(account.status);
+        [accountStatus setNeedsDisplay: YES];
     }
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
@@ -283,17 +285,19 @@ NSMutableDictionary* menuItemsTags;
 - (NSAttributedString*) attributedItemTitleForAccount:(const lrc::api::account::Info&) account {
     NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    NSFont *fontAlias = [NSFont fontWithName:@"Helvetica Neue" size:16.0];
+    NSFont *fontAlias = [NSFont fontWithName:@"Helvetica Neue Light" size:16.0];
     NSFont *fontUserName = [NSFont fontWithName:@"Helvetica Neue Light" size:13.0];
-    NSColor *colorAlias = [NSColor labelColor];
-    NSColor *colorAUserName = [NSColor secondaryLabelColor];
+    NSColor *colorAlias = [NSColor textColor];
+    NSColor *colorAUserName = [NSColor labelColor];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
     paragraphStyle.lineSpacing = 3;
-    NSDictionary *aliasAttrs = [NSDictionary dictionaryWithObjectsAndKeys:fontAlias,NSFontAttributeName,
+    NSDictionary *aliasAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                fontAlias,NSFontAttributeName,
                                 colorAlias,NSForegroundColorAttributeName,
                                 paragraphStyle,NSParagraphStyleAttributeName, nil];
-    NSDictionary *userNameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:fontUserName,NSFontAttributeName,
+    NSDictionary *userNameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   fontUserName,NSFontAttributeName,
                                    colorAUserName,NSForegroundColorAttributeName,
                                    paragraphStyle,NSParagraphStyleAttributeName, nil];
 
@@ -334,6 +338,7 @@ NSMutableDictionary* menuItemsTags;
             return;
         }
         [accountSelectionButton selectItemWithTag:[menuItemsTags[@(account.id.c_str())] intValue]];
+        [selectedAccountTitle setAttributedStringValue: accountSelectionButton.attributedTitle];
     }
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
@@ -352,6 +357,7 @@ NSMutableDictionary* menuItemsTags;
     [accountSelectionManager_ setSavedAccount:account];
     [self.delegate selectAccount:account currentRemoved: NO];
     [self updatePhoto];
+    [selectedAccountTitle setAttributedStringValue: accountSelectionButton.attributedTitle];
 }
 
 - (IBAction)openMenu:(id)sender {
