@@ -8,10 +8,10 @@
 "Add to contacts" = "Hozzáadás a partnerekhez";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Videohívás";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Hanghívás";
 
 /* Contextual menu action */
 "Clear conversation" = "Beszélgetés törlése";
@@ -26,7 +26,7 @@
 "An error occured during the export" = "Hiba történt az exportálás során";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Fiók biztonsági mentése";
 
 /* Contextual menu action */
 "Call number" = "Call number";
@@ -35,25 +35,25 @@
 "Canceled" = "Törölve";
 
 /* Open panel title */
-"Choose a CA list" = "Choose a CA list";
+"Choose a CA list" = "CA lista kiválasztása";
 
 /* Open panel title */
-"Choose a certificate" = "Choose a certificate";
+"Choose a certificate" = "Tanúsítvány kiválasztása";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "Könyvtár kiválasztása";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "Személyes kulcsfájl kiválasztása";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
+"Choose CA" = "CA kiválasztása";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "Könyvtár kiválasztása";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Fájl kiválasztása";
 
 /* Contextual menu entry */
 "Share screen" = "Share screen";
@@ -71,7 +71,7 @@
 "Create RING Account" = "Create RING Account";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "SIP fiók létrehozása";
 
 /* File transfer failed label */
 "Failed" = "Sikertelen";
@@ -89,10 +89,10 @@
 "Message from %@" = "Message from %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Új SIP fiók";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Nincs elérhető fiókot";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
@@ -116,19 +116,19 @@
 "Refuse" = "Elutasítás";
 
 /* Contextual menu entry */
-"Remove value" = "Remove value";
+"Remove value" = "Érték eltávolítása";
 
 /* Show advice to user */
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Fiók visszaállítása";
 
 /* Button title */
 "Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"RingID : " = "Ring azonosító:";
 
 /* No comment provided by engineer. */
 "Share" = "Megosztás ";
@@ -167,11 +167,19 @@
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Fiók eltávolítása";
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
 /* export account button title */
 "Select archive" = "Select archive";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "Isten hozott a Ringben";
+"Create a new account" = "Új fiók létrehozása";
+"Add a SIP account" = "Add a SIP account";
 

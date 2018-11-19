@@ -8,10 +8,10 @@
 "Add to contacts" = "加到聯絡人";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "撥出視訊通話";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "開始語音通話";
 
 /* Contextual menu action */
 "Clear conversation" = "清除對話";
@@ -56,7 +56,7 @@
 "Choose file" = "選擇檔案";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "分享畫面";
 
 /* No comment provided by engineer. */
 "Copy" = "複製";
@@ -95,7 +95,7 @@
 "No account available" = "無可用帳號";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "到偏好設定以建立新帳號";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "密碼與確認不相符。";
@@ -167,11 +167,19 @@
 "You have to migrate your account before exporting" = "您必須在匯出前先導入您的帳號";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "移除帳號";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "點選「確定」後，您將會在此裝置上移除此帳號！此動作不可復原。同時，您已註冊的名稱也將會遺失。";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "選取歸檔";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "歡迎來到 Ring";
+"Create a new account" = "建立新帳號";
+"Add a SIP account" = "Add a SIP account";
 

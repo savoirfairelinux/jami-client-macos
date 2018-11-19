@@ -56,7 +56,7 @@
 "Choose file" = "Choisir le fichier";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Partager votre écran";
 
 /* No comment provided by engineer. */
 "Copy" = "Copier";
@@ -167,11 +167,19 @@
 "You have to migrate your account before exporting" = "Migrer votre compte avec de l'exporter";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Supprimer le compte";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "EN cliquant OK vous supprimerez ce compte sur l'appareil !\nCette action est irréversible et vous pourriez perdre votre nom d'enregistrement.";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Sélectionner un fichier archive";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "Bienvenue sur Ring";
+"Create a new account" = "Créer un nouveau compte";
+"Add a SIP account" = "Add a SIP account";
 

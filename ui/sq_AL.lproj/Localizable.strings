@@ -56,7 +56,7 @@
 "Choose file" = "Zgjidhni kartelë";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Ndani ekranin me të tjerët";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopjoje";
@@ -167,11 +167,19 @@
 "You have to migrate your account before exporting" = "Llogarinë tuaj duhet ta migroni përpara eksportimit";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Hiqe llogarinë";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Duke klikuar \"OK\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Gjithashtu, emri juaj i regjistrimit mund të humbë.";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Përzgjidhni arkiv";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "Mirë se vini te Ring";
+"Create a new account" = "Krijoni një llogari të re";
+"Add a SIP account" = "Add a SIP account";
 

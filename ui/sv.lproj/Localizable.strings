@@ -56,7 +56,7 @@
 "Choose file" = "Välj fil";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Dela skärmen";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopiera";
@@ -167,11 +167,19 @@
 "You have to migrate your account before exporting" = "Du måste migrera ditt konto före exporten";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Ta bort konto";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Genom att klicka \"OK\" tar du bort kontot från denna enhet! Denna åtgärd kan inte ångras. Även ditt registrerade namn kan förloras.";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Välj arkiv";
+
+/* link account title */
+"Link to an account" = "Link to an account";
+
+/* Welcome title */
+"Welcome to Ring" = "Välkommen till ring";
+"Create a new account" = "Skapa ett nytt konto";
+"Add a SIP account" = "Add a SIP account";
 
