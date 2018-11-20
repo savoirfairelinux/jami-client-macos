@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -63,13 +63,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y36-PZ-d50">
-                                    <rect key="frame" x="0.0" y="0.0" width="717" height="481"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="717" height="480"/>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="FQi-0j-YVX"/>
                                 </imageView>
                                 <box boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="CDQ-nt-oe4">
-                                    <rect key="frame" x="0.0" y="0.0" width="717" height="481"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="717" height="480"/>
                                     <view key="contentView" id="DWB-Kg-ugE">
-                                        <rect key="frame" x="0.0" y="0.0" width="717" height="481"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="717" height="480"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </view>
                                     <color key="fillColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -677,7 +677,7 @@
                                 </customView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="Y36-PZ-d50" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="6xq-XN-D61"/>
+                                <constraint firstItem="Y36-PZ-d50" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" constant="1" id="6xq-XN-D61"/>
                                 <constraint firstAttribute="bottom" secondItem="Eoi-B8-iL6" secondAttribute="bottom" constant="20" id="9j2-HZ-hNX"/>
                                 <constraint firstItem="W4l-Be-bhM" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="De3-8O-mXx"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="trailing" secondItem="Y36-PZ-d50" secondAttribute="trailing" id="E1t-Ce-1m4"/>

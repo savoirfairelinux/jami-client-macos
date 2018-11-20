@@ -1000,4 +1000,9 @@
     [[headerContainer animator] setAlphaValue:move];
 }
 
+- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex
+{
+    return YES;
+}
+
 @end
