@@ -69,7 +69,7 @@
 
 // Main container
 @property (unsafe_unretained) IBOutlet NSSplitView* splitView;
-@property (unsafe_unretained) IBOutlet NSImageView* backgroundImage;
+@property (unsafe_unretained) IBOutlet NSView* backgroundImage;
 @property (unsafe_unretained) IBOutlet NSBox* bluerBackgroundEffect;
 
 // Header info
@@ -201,6 +201,8 @@
     bluerBackgroundEffect.alphaValue = 0.6;
     [audioCallView setWantsLayer:YES];
     [audioCallView.layer setBackgroundColor: [[NSColor clearColor] CGColor]];
+    [backgroundImage setWantsLayer: YES];
+    backgroundImage.layer.contentsGravity = kCAGravityResizeAspectFill;
 }
 
 -(void) updateDurationLabel
@@ -332,7 +334,6 @@
     [headerContainer setHidden:NO];
     [previewView setHidden: NO];
     [bluerBackgroundEffect setHidden:YES];
-    [bluerBackgroundEffect.layer setBackgroundFilters: nil];
     [backgroundImage setHidden:YES];
 }
 
@@ -347,17 +348,24 @@
     auto it = getConversationFromUid(convUid_, *convModel);
     NSImage *image= [self getContactImageOfSize:120.0 withDefaultAvatar:NO];
     if(image) {
+        CIImage * ciImage = [[CIImage alloc] initWithData:[image TIFFRepresentation]];
+        CIContext *context = [[CIContext alloc] init];
+        CIFilter *clamp = [CIFilter filterWithName:@"CIAffineClamp"];
+        [clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
+        [clamp setValue:ciImage forKey: kCIInputImageKey];
         CIFilter* bluerFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
         [bluerFilter setDefaults];
-        [bluerFilter setValue:[NSNumber numberWithFloat: 30] forKey:@"inputRadius"];
-        [bluerBackgroundEffect.layer setBackgroundFilters:@[bluerFilter]];
-        [backgroundImage setImage: image];
+        [bluerFilter setValue:[NSNumber numberWithFloat: 9] forKey:@"inputRadius"];
+        [bluerFilter setValue:[clamp valueForKey:kCIOutputImageKey] forKey: kCIInputImageKey];
+        CIImage *result = [bluerFilter valueForKey:kCIOutputImageKey];
+        CGRect extent = [result extent];
+        CGImageRef cgImage = [context createCGImage:result fromRect: [ciImage extent]];
+        NSImage *bluredImage = [[NSImage alloc] initWithCGImage:cgImage size:NSSizeFromCGSize(CGSizeMake(image.size.width, image.size.height))];
+        backgroundImage.layer.contents = bluredImage;
         [backgroundImage setHidden:NO];
     } else {
-        [bluerBackgroundEffect.layer setBackgroundFilters:nil];
         [bluerBackgroundEffect setFillColor:[NSColor ringDarkGrey]];
         [backgroundImage setHidden:YES];
-        [backgroundImage setImage:nil];
     }
 }
 
@@ -653,8 +661,6 @@
     //background view
     [bluerBackgroundEffect setHidden:NO];
     [backgroundImage setHidden:NO];
-    [backgroundImage setImage:nil];
-    [bluerBackgroundEffect setBackgroundFilters:nil];
     //outgoing view
     [outgoingPersonLabel setStringValue:@""];
     [outgoingStateLabel setStringValue:@""];
@@ -1002,6 +1008,11 @@
 {
     [[controlsPanel animator] setAlphaValue:move]; // fade out
     [[headerContainer animator] setAlphaValue:move];
+}
+
+- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex
+{
+    return YES;
 }
 
 @end
