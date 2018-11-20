@@ -462,7 +462,7 @@
     if (callModel->hasCall(callUid_)) {
         if (auto renderer = callModel->getRenderer(callUid_)) {
             QObject::disconnect(self.videoStarted);
-             [videoView setLayer:[[CallLayer alloc] init]];
+             //[videoView setLayer:[[CallLayer alloc] init]];
             [self connectVideoRenderer: renderer];
         }
     }
@@ -520,6 +520,9 @@
     videoHolder.started = QObject::connect(renderer,
                      &Video::Renderer::started,
                      [=]() {
+                         if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+                             [videoView setLayer:[[CallLayer alloc] init]];
+                         }
                          [self mouseIsMoving: NO];
                          [videoView setShouldAcceptInteractions:YES];
                          QObject::disconnect(videoHolder.frameUpdated);
@@ -581,9 +584,10 @@
         return;
 
     CallLayer* callLayer = (CallLayer*) view.layer;
-
-    [callLayer setCurrentFrame:std::move(frame_ptr)];
-    [callLayer setVideoRunning:YES];
+    if ([callLayer respondsToSelector:@selector(setCurrentFrame:)]) {
+        [callLayer setCurrentFrame:std::move(frame_ptr)];
+        [callLayer setVideoRunning:YES];
+    }
 }
 
 - (void) initFrame
