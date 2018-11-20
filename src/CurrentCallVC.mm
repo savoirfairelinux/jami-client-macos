@@ -350,8 +350,9 @@
         CIFilter* bluerFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
         [bluerFilter setDefaults];
         [bluerFilter setValue:[NSNumber numberWithFloat: 30] forKey:@"inputRadius"];
-        [bluerBackgroundEffect.layer setBackgroundFilters:@[bluerFilter]];
-        [backgroundImage setImage: image];
+        CIFilter *clamp = [CIFilter filterWithName:@"CIAffineClamp"];
+        [clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
+        [bluerBackgroundEffect.layer setBackgroundFilters:@[clamp, bluerFilter]];
         [backgroundImage setHidden:NO];
     } else {
         [bluerBackgroundEffect.layer setBackgroundFilters:nil];
@@ -1002,6 +1003,11 @@
 {
     [[controlsPanel animator] setAlphaValue:move]; // fade out
     [[headerContainer animator] setAlphaValue:move];
+}
+
+- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex
+{
+    return YES;
 }
 
 @end
