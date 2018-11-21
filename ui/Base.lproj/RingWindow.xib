@@ -415,7 +415,7 @@
                                                                 <constraint firstAttribute="width" constant="60" id="KtL-VU-Ogg"/>
                                                                 <constraint firstAttribute="height" constant="60" id="kpW-PV-bet"/>
                                                             </constraints>
-                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="eAf-yJ-LkB"/>
+                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="eAf-yJ-LkB"/>
                                                         </imageView>
                                                         <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Rh-O4-gug" userLabel="AccountStatus" customClass="RoundedTextField">
                                                             <rect key="frame" x="59" y="7" width="15" height="15"/>
@@ -444,7 +444,7 @@
                                                             <rect key="frame" x="81" y="26" width="15" height="23"/>
                                                             <popUpButtonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" transparent="YES" inset="2" arrowPosition="noArrow" selectedItem="6VL-DN-Xpm" id="lsj-R0-ZSF">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="ITi-wC-nfo">
                                                                     <items>
                                                                         <menuItem state="on" id="6VL-DN-Xpm">

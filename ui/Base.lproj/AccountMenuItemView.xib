@@ -59,7 +59,7 @@
                         <constraint firstAttribute="height" constant="40" id="2Pd-xj-eIf"/>
                         <constraint firstAttribute="width" constant="40" id="IEA-OA-uSx"/>
                     </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="right" imageScaling="proportionallyDown" id="B0y-e0-cVi"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="right" imageScaling="proportionallyUpOrDown" id="B0y-e0-cVi"/>
                 </imageView>
                 <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="500" translatesAutoresizingMaskIntoConstraints="NO" id="TdK-5g-ddU" userLabel="AccountState" customClass="RoundedTextField">
                     <rect key="frame" x="34" y="10" width="13" height="14"/>
