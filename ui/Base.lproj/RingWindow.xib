@@ -112,22 +112,22 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <tabView focusRingType="none" drawsBackground="NO" type="noTabsNoBorder" initialItem="0MO-4e-8mo" translatesAutoresizingMaskIntoConstraints="NO" id="xXW-iq-GcP">
-                                        <rect key="frame" x="0.0" y="0.0" width="324" height="501"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="324" height="475"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="SmartView" identifier="" id="0MO-4e-8mo">
                                                 <view key="view" id="D5P-tm-YgO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="501"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="475"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="omo-Be-zok">
-                                                            <rect key="frame" x="0.0" y="0.0" width="324" height="498"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="324" height="472"/>
                                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vUu-vJ-ryG">
-                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="498"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="324" height="472"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="8" outlineTableColumn="3NN-k0-vDM" id="tcL-dy-Q3h" customClass="RingTableView">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="498"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="324" height="472"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.0" colorSpace="deviceWhite"/>
@@ -444,7 +444,7 @@
                                                             <rect key="frame" x="81" y="26" width="15" height="23"/>
                                                             <popUpButtonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" transparent="YES" inset="2" arrowPosition="noArrow" selectedItem="6VL-DN-Xpm" id="lsj-R0-ZSF">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="ITi-wC-nfo">
                                                                     <items>
                                                                         <menuItem state="on" id="6VL-DN-Xpm">
@@ -538,14 +538,14 @@
                                     <constraint firstAttribute="trailing" secondItem="6ek-bf-c5r" secondAttribute="trailing" constant="13" id="GhG-h3-Ynv"/>
                                     <constraint firstItem="VsX-mX-hf3" firstAttribute="leading" secondItem="3Nq-Rz-Etg" secondAttribute="leading" constant="115" id="H15-xN-keV"/>
                                     <constraint firstAttribute="trailing" secondItem="xXW-iq-GcP" secondAttribute="trailing" id="IMT-fC-kq3"/>
-                                    <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="PoQ-x4-ES3" secondAttribute="bottom" priority="900" constant="8" id="MMH-93-sOz"/>
+                                    <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="PoQ-x4-ES3" secondAttribute="bottom" priority="800" constant="8" id="MMH-93-sOz"/>
                                     <constraint firstAttribute="trailing" secondItem="3Nq-Rz-Etg" secondAttribute="trailing" constant="13" id="TVW-7Y-L79"/>
                                     <constraint firstAttribute="trailing" secondItem="PoQ-x4-ES3" secondAttribute="trailing" constant="13" id="VXm-NA-edt"/>
                                     <constraint firstAttribute="trailing" secondItem="anW-mG-aee" secondAttribute="trailing" id="WG7-3T-Z6v"/>
                                     <constraint firstItem="PoQ-x4-ES3" firstAttribute="leading" secondItem="0xt-Yr-Jqx" secondAttribute="leading" constant="13" id="XzG-Pl-DF1"/>
                                     <constraint firstItem="tBR-mv-w66" firstAttribute="leading" secondItem="3Nq-Rz-Etg" secondAttribute="leading" constant="257" id="aNt-lE-9XG"/>
                                     <constraint firstItem="6ek-bf-c5r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="V1L-TB-Wng" secondAttribute="trailing" constant="20" id="acC-II-m6u"/>
-                                    <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="3Nq-Rz-Etg" secondAttribute="bottom" priority="800" constant="8" id="dFh-ij-z52"/>
+                                    <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="3Nq-Rz-Etg" secondAttribute="bottom" priority="999" constant="8" id="dFh-ij-z52"/>
                                     <constraint firstItem="xXW-iq-GcP" firstAttribute="leading" secondItem="0xt-Yr-Jqx" secondAttribute="leading" id="gEe-iR-Ygm"/>
                                     <constraint firstItem="tBR-mv-w66" firstAttribute="top" secondItem="3Nq-Rz-Etg" secondAttribute="top" constant="-4" id="lxv-3f-EsK"/>
                                     <constraint firstItem="VsX-mX-hf3" firstAttribute="top" secondItem="3Nq-Rz-Etg" secondAttribute="top" constant="-4" id="pzo-8u-NhI"/>
