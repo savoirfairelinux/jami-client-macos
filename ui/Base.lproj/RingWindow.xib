@@ -415,7 +415,7 @@
                                                                 <constraint firstAttribute="width" constant="60" id="KtL-VU-Ogg"/>
                                                                 <constraint firstAttribute="height" constant="60" id="kpW-PV-bet"/>
                                                             </constraints>
-                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="eAf-yJ-LkB"/>
+                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="eAf-yJ-LkB"/>
                                                         </imageView>
                                                         <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Rh-O4-gug" userLabel="AccountStatus" customClass="RoundedTextField">
                                                             <rect key="frame" x="59" y="7" width="15" height="15"/>
