@@ -104,7 +104,7 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     void (^callbackBlock)(SCNetworkReachabilityFlags) = ^(SCNetworkReachabilityFlags flags) {
         BOOL reachable = (flags & kSCNetworkReachabilityFlagsReachable) != 0;
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            AccountModel::instance().slotConnectivityChanged();
+            lrc->connectivityChanged();
         }];
     };
 
