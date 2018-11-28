@@ -237,7 +237,6 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
                                                account:accInfo];
-                         [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [self changeViewTo:SHOW_CALL_SCREEN];
 
                      });

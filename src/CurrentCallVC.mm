@@ -171,6 +171,25 @@
     videoView.callId = callUid;
 }
 
+- (void) ensureLayoutForCallStatus:(lrc::api::call::Status) status {
+    using Status = lrc::api::call::Status;
+    switch (status) {
+        case Status::IN_PROGRESS:
+            if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+                [videoView setLayer:[[CallLayer alloc] init]];
+            }
+            break;
+        default:
+            if ([videoView.layer isKindOfClass:[CallLayer class]]) {
+                [videoView setLayer:[CALayer layer]];
+                [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
+            }
+            break;
+    }
+    holdOnOffButton.image = status == lrc::api::call::Status::PAUSED ?
+    [NSImage imageNamed:@"ic_action_holdoff.png"] : [NSImage imageNamed:@"ic_action_hold.png"];
+}
+
 - (void)awakeFromNib
 {
     NSLog(@"INIT CurrentCall VC");
@@ -279,6 +298,7 @@
     [self setBackground];
 
     using Status = lrc::api::call::Status;
+    [self ensureLayoutForCallStatus:currentCall.status];
     switch (currentCall.status) {
         case Status::SEARCHING:
         case Status::CONNECTING:
@@ -321,10 +341,10 @@
         case Status::INVALID:
             [controlsPanel setHidden:YES];
             [outgoingPanel setHidden:NO];
+            [self cleanUp];
             [self hideWithAnimation:false];
             break;
     }
-
 }
 
 -(void) setUpVideoCallView {
@@ -460,7 +480,6 @@
     self.videoStarted = QObject::connect(callModel,
                                          &lrc::api::NewCallModel::remotePreviewStarted,
                                          [self](const std::string& callId, Video::Renderer* renderer) {
-                                             NSLog(@"Video started!");
                                              [videoView setLayer:[[CallLayer alloc] init]];
                                              [videoView setShouldAcceptInteractions:YES];
                                              [self mouseIsMoving: NO];
@@ -470,7 +489,6 @@
     if (callModel->hasCall(callUid_)) {
         if (auto renderer = callModel->getRenderer(callUid_)) {
             QObject::disconnect(self.videoStarted);
-             //[videoView setLayer:[[CallLayer alloc] init]];
             [self connectVideoRenderer: renderer];
         }
     }
@@ -498,7 +516,7 @@
     previewHolder.stopped = QObject::connect(&Video::PreviewManager::instance(),
                      &Video::PreviewManager::previewStopped,
                      [=](Video::Renderer* renderer) {
-                         QObject::disconnect(previewHolder.frameUpdated);
+                        QObject::disconnect(previewHolder.frameUpdated);
                         [previewView.layer setContents:nil];
                      });
 
@@ -522,6 +540,9 @@
     videoHolder.frameUpdated = QObject::connect(renderer,
                      &Video::Renderer::frameUpdated,
                      [=]() {
+                         if(!renderer->isRendering()) {
+                             return;
+                         }
                          [self renderer:renderer renderFrameForDistantView:videoView];
                      });
 
@@ -544,12 +565,12 @@
     videoHolder.stopped = QObject::connect(renderer,
                      &Video::Renderer::stopped,
                      [=]() {
+                         [(CallLayer*)videoView.layer setVideoRunning:NO];
                          [videoView setLayer:[CALayer layer]];
                          [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
                          [self mouseIsMoving: YES];
                          [videoView setShouldAcceptInteractions:NO];
                          QObject::disconnect(videoHolder.frameUpdated);
-                         [(CallLayer*)videoView.layer setVideoRunning:NO];
                      });
 }
 
@@ -719,7 +740,7 @@
                              accountInfo_->conversationModel->makePermanent(convUid_);
                          [incomingPersonPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
                          [outgoingPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
-                          [self.delegate conversationInfoUpdatedFor:convUid_];
+                         [self.delegate conversationInfoUpdatedFor:convUid_];
                          if(accountInfo_->callModel.get()->getCall(callUid_).isAudioOnly) {
                          [audioCallPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
                              [self setBackground];
@@ -761,7 +782,6 @@
     }
 
     if (!animate) {
-        [self cleanUp];
         [self.view setHidden:YES];
         return;
     }
