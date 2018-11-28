@@ -166,8 +166,8 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
     [maxAudioRTPRange setIntegerValue: accountProperties.Audio.audioPortMax];
     [minVideoPortStepper setIntegerValue: accountProperties.Video.videoPortMin];
     [minVideoRTPRange setIntegerValue: accountProperties.Video.videoPortMin];
-    [maxVideoPortStepper setIntegerValue: accountProperties.Video.videoPortMin];
-    [maxVideoRTPRange setIntegerValue: accountProperties.Video.videoPortMin];
+    [maxVideoPortStepper setIntegerValue: accountProperties.Video.videoPortMax];
+    [maxVideoRTPRange setIntegerValue: accountProperties.Video.videoPortMax];
 }
 
 #pragma mark - Actions
