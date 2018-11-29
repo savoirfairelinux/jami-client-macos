@@ -57,6 +57,9 @@
     __unsafe_unretained IBOutlet IconButton *sendFileButton;
     __unsafe_unretained IBOutlet HoverButton *addContactButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* sendPanelHeight;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* messagesBottomMargin;
+
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
 
@@ -72,11 +75,15 @@
     // All those connections are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
     QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
+    NSMutableDictionary *pendingMessagesToSend;
 
 }
 
-
 @end
+
+NSInteger const MEESAGE_MARGIN = 21;
+NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
+NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
 @implementation ConversationVC
 
@@ -85,6 +92,7 @@
     if (self = [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         delegate = mainWindow;
+        pendingMessagesToSend = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -94,6 +102,9 @@
 }
 
 -(void) clearData {
+    if (!convUid_.empty()) {
+        pendingMessagesToSend[@(convUid_.c_str())] = messageField.stringValue;
+    }
     cachedConv_ = nil;
     convUid_ = "";
     convModel_ = nil;
@@ -178,6 +189,17 @@
     [titleTopConstraint setActive:!hideBestId];
     auto accountType = convModel_->owner.profileInfo.type;
     [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
+    if(pendingMessagesToSend[@(convUid_.c_str())]) {
+    self.message = pendingMessagesToSend[@(convUid_.c_str())];
+    [self updateSendMessageHeight];
+    } else {
+        self.message = @"";
+        if(sendPanelHeight.constant != SEND_PANEL_DEFAULT_HEIGHT) {
+            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            [messagesViewVC scrollToBottom];
+        }
+    }
 }
 
 - (void)loadView {
@@ -211,6 +233,11 @@
         bool isPending = convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING;
         convModel_->sendMessage(convUid_, std::string([text UTF8String]));
         self.message = @"";
+        if(sendPanelHeight.constant != SEND_PANEL_DEFAULT_HEIGHT) {
+            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            [messagesViewVC scrollToBottom];
+        }
         if (isPending)
             [delegate currentConversationTrusted];
     }
@@ -317,16 +344,43 @@
     [CATransaction commit];
 }
 
+- (void) updateSendMessageHeight {
+    NSAttributedString *msgAttString = messageField.attributedStringValue;
+    NSRect frame = NSMakeRect(0, 0, messageField.frame.size.width, msgAttString.size.height);
+    NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
+    [[tv textStorage] setAttributedString:msgAttString];
+    [tv sizeToFit];
+    CGFloat height = tv.frame.size.height + MEESAGE_MARGIN * 2;
+    CGFloat newHeight = MIN(SEND_PANEL_MAX_HEIGHT, MAX(SEND_PANEL_DEFAULT_HEIGHT, height));
+    if(messagesBottomMargin.constant == newHeight) {
+        return;
+    }
+    messagesBottomMargin.constant = newHeight;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [messagesViewVC scrollToBottom];
+        sendPanelHeight.constant = newHeight;
+    });
+}
+
 #pragma mark - NSTextFieldDelegate
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
 {
-    if (commandSelector == @selector(insertNewline:) && self.message.length > 0) {
-        [self sendMessage:nil];
+    if (commandSelector == @selector(insertNewline:)) {
+        if(self.message.length > 0) {
+            [self sendMessage:nil];
+        } else if(sendPanelHeight.constant != SEND_PANEL_DEFAULT_HEIGHT) {
+            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            [messagesViewVC scrollToBottom];
+        }
         return YES;
     }
     return NO;
 }
 
+- (void)controlTextDidChange:(NSNotification *)aNotification {
+    [self updateSendMessageHeight];
+}
 
 @end

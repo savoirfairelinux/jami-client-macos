@@ -95,6 +95,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [conversationView registerNib:cellNib forIdentifier:@"LeftFinishedFileView"];
     [conversationView registerNib:cellNib forIdentifier:@"RightOngoingFileView"];
     [conversationView registerNib:cellNib forIdentifier:@"RightFinishedFileView"];
+    [[conversationView.enclosingScrollView contentView] setCopiesOnScroll:NO];
 }
 -(void) clearData {
     cachedConv_ = nil;
@@ -105,6 +106,17 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(filterChangedSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(newInteractionSignal_);
+}
+
+-(void) scrollToBottom {
+    CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
+    NSRange range = [conversationView rowsInRect:visibleRect];
+    NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
+    NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
+    if (([conversationView numberOfRows] > 0) &&
+        lastvisibleRow == ([conversationView numberOfRows] -1)) {
+        [conversationView scrollToEndOfDocument:nil];
+    }
 }
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
@@ -469,7 +481,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime isTopPadding: shouldApplyPadding];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
-    [result.msgView checkTextInDocument:nil];
+   // [result.msgView checkTextInDocument:nil];
 
     NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     NSArray *matches = [linkDetector matchesInString:result.msgView.string options:0 range:NSMakeRange(0, result.msgView.string.length)];
