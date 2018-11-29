@@ -110,6 +110,8 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     NSArray* constraints = [[[constraintsMessageHorizontal arrayByAddingObjectsFromArray:constraintsMessageVertical]
                              arrayByAddingObject:centerMessageConstraint] arrayByAddingObjectsFromArray:constraintsVerticalTimeBox];
     [NSLayoutConstraint activateConstraints:constraints];
+    //update message frame immediatly
+    [self.msgView layoutSubtreeIfNeeded];
 }
 
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height {
