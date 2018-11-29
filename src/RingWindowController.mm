@@ -125,6 +125,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
             [self accountSettingsShouldOpen: NO];
             [conversationVC hideWithAnimation:false];
             [currentCallVC hideWithAnimation:false];
+            [currentCallVC cleanUp];
             [currentCallVC.view removeFromSuperview];
             [welcomeContainer setHidden: NO];
             [smartViewVC.view setHidden: NO];
@@ -134,6 +135,7 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
             [self accountSettingsShouldOpen: NO];
             [conversationVC showWithAnimation:false];
             [currentCallVC hideWithAnimation:false];
+            [currentCallVC cleanUp];
             [currentCallVC.view removeFromSuperview];
             [welcomeContainer setHidden: YES];
             [smartViewVC.view setHidden: NO];

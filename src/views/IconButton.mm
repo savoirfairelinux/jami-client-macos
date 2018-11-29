@@ -212,6 +212,14 @@
                style, NSParagraphStyleAttributeName,
                [NSColor whiteColor],
                NSForegroundColorAttributeName, nil];
+        if(self.fontSize) {
+            NSFont *font = [NSFont fontWithName:@"Helvetica Neue Light" size: self.fontSize];
+            att = [[NSDictionary alloc] initWithObjectsAndKeys:
+                   font,NSFontAttributeName,
+                   style, NSParagraphStyleAttributeName,
+                   [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+
+        }
 
         rect.size = [[self title] sizeWithAttributes:att];
         rect.origin.x = floor( NSMidX([self bounds]) - rect.size.width / 2 );

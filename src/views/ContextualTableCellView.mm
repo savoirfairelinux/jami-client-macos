@@ -18,6 +18,7 @@
  */
 
 #import "ContextualTableCellView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface NSView (extension)
 @property NSVisualEffectView* vibrantView;
@@ -69,7 +70,16 @@
         return;
 
     for (NSView* item in self.contextualsControls) {
+        item.alphaValue = 0;
         [item setHidden:NO];
+
+        CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
+        fadeIn.toValue = [NSNumber numberWithFloat:1.0];
+        fadeIn.duration = 0.4f;
+
+        [item.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
+        item.alphaValue = 1;
         if(!self.shouldBlurParentView)
         {
             break;
