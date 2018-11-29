@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -119,6 +119,7 @@
             <connections>
                 <outlet property="acceptButton" destination="829-to-lM4" id="rZu-K5-leg"/>
                 <outlet property="declineButton" destination="rGw-yF-hxm" id="cqg-aF-bBK"/>
+                <outlet property="msgBackground" destination="9bA-XZ-y8X" id="HSQ-eX-LaA"/>
                 <outlet property="photoView" destination="bbY-3f-2Wi" id="jZb-ne-NZj"/>
                 <outlet property="timeBox" destination="Ko5-2g-foK" id="wNa-aC-Y5o"/>
                 <outlet property="timeLabel" destination="EyK-S9-kZz" id="slc-h9-LP4"/>
@@ -367,6 +368,7 @@
             </constraints>
             <connections>
                 <outlet property="declineButton" destination="3gN-Us-HWE" id="WYo-gh-5fw"/>
+                <outlet property="msgBackground" destination="YEa-1b-wNo" id="vVZ-CE-r2Q"/>
                 <outlet property="photoView" destination="ocf-Pp-J4F" id="e04-18-iXb"/>
                 <outlet property="progressIndicator" destination="7hN-OZ-vA4" id="Wda-hA-Ne0"/>
                 <outlet property="timeBox" destination="dDX-sZ-ylI" id="rAa-Jo-eXW"/>
@@ -476,6 +478,7 @@
             </constraints>
             <connections>
                 <outlet property="declineButton" destination="2cr-cl-DfB" id="0Rk-eA-Fyg"/>
+                <outlet property="msgBackground" destination="UY2-T5-a0P" id="mFn-YC-kPu"/>
                 <outlet property="progressIndicator" destination="Sv9-jf-3cY" id="6Y2-mi-Ml4"/>
                 <outlet property="timeBox" destination="x2B-gu-YBe" id="xPh-3D-3a0"/>
                 <outlet property="timeLabel" destination="2IY-Tt-uAF" id="uee-Wx-1bT"/>

@@ -29,13 +29,6 @@
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;
 
-/**
- * Message contained in messageField TextField.
- * This is a KVO method to bind the text with the send Button
- * if message.length is > 0, button is enabled, otherwise disabled
- */
-@property (retain) NSString* message;
-
 - (void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow;

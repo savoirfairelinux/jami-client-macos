@@ -157,7 +157,6 @@ NSInteger const REQUEST_SEG         = 1;
 
 -(void) reloadData
 {
-    NSLog(@"reload");
     [smartView deselectAll:nil];
     if (convModel_ == nil)
         return;
@@ -207,7 +206,6 @@ NSInteger const REQUEST_SEG         = 1;
     auto it = getConversationFromUid(std::string([uid UTF8String]), *convModel_);
     if (it != convModel_->allFilteredConversations().end()) {
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
-        NSLog(@"reloadConversationWithUid: %@", uid);
         [smartView reloadDataForRowIndexes:indexSet
                              columnIndexes:[NSIndexSet indexSetWithIndex:0]];
     }
