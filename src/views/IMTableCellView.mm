@@ -61,6 +61,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [self.msgView setEditable:NO];
     acceptButton.image = [NSColor image: [NSImage imageNamed:@"ic_file_upload.png"] tintedWithColor:[NSColor greenSuccessColor]];
     declineButton.image = [NSColor image: [NSImage imageNamed:@"ic_action_cancel.png"] tintedWithColor:[NSColor redColor]];
+    msgView.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
 }
 
 - (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed {
@@ -110,6 +111,8 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     NSArray* constraints = [[[constraintsMessageHorizontal arrayByAddingObjectsFromArray:constraintsMessageVertical]
                              arrayByAddingObject:centerMessageConstraint] arrayByAddingObjectsFromArray:constraintsVerticalTimeBox];
     [NSLayoutConstraint activateConstraints:constraints];
+    //update message frame immediatly
+    [self.msgView setNeedsDisplay:YES];
 }
 
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height {

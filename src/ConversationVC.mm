@@ -20,7 +20,6 @@
 
 #import "ConversationVC.h"
 
-#import <QItemSelectionModel>
 #import <qstring.h>
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
@@ -32,12 +31,7 @@
 #import "views/HoverButton.h"
 #import "views/IMTableCellView.h"
 #import "views/NSColor+RingTheme.h"
-#import "QNSTreeController.h"
-#import "INDSequentialTextSelectionManager.h"
 #import "delegates/ImageManipulationDelegate.h"
-#import "PhoneDirectoryModel.h"
-#import "account.h"
-#import "AvailableAccountModel.h"
 #import "MessagesVC.h"
 #import "utils.h"
 #import "RingWindowController.h"
@@ -47,16 +41,11 @@
 
 @interface ConversationVC () {
 
-    __unsafe_unretained IBOutlet NSTextField* messageField;
-    NSMutableString* textSelection;
-
-    __unsafe_unretained IBOutlet NSView* sendPanel;
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
     __unsafe_unretained IBOutlet NSTextField *conversationID;
-    __unsafe_unretained IBOutlet IconButton* sendButton;
-    __unsafe_unretained IBOutlet IconButton *sendFileButton;
     __unsafe_unretained IBOutlet HoverButton *addContactButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
+
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
 
@@ -72,11 +61,13 @@
     // All those connections are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
     QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
-
 }
 
-
 @end
+
+NSInteger const MEESAGE_MARGIN = 21;
+NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
+NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
 @implementation ConversationVC
 
@@ -87,10 +78,6 @@
         delegate = mainWindow;
     }
     return self;
-}
-
-- (void)setMessage:(NSString *)newValue {
-    _message = [newValue removeEmptyLinesAtBorders];
 }
 
 -(void) clearData {
@@ -169,7 +156,6 @@
     NSString* bestId = bestIDForConversation(*conv, *convModel_);
     [conversationTitle setStringValue: bestName];
     [conversationID setStringValue: bestId];
-    [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
 
     BOOL hideBestId = [bestNameForConversation(*conv, *convModel_) isEqualTo:bestIDForConversation(*conv, *convModel_)];
 
@@ -180,65 +166,11 @@
     [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
 }
 
-- (void)loadView {
-    [super loadView];
-    [messageField setFocusRingType:NSFocusRingTypeNone];
-}
-
--(Account* ) chosenAccount
-{
-    QModelIndex index = AvailableAccountModel::instance().selectionModel()->currentIndex();
-    if(!index.isValid()) {
-        return nullptr;
-    }
-    Account* account = index.data(static_cast<int>(Account::Role::Object)).value<Account*>();
-    return account;
-}
-
 - (void) initFrame
 {
     [self.view setFrame:self.view.superview.bounds];
     [self.view setHidden:YES];
     self.view.layer.position = self.view.frame.origin;
-}
-
-- (IBAction)sendMessage:(id)sender
-{
-    /* make sure there is text to send */
-    NSString* text = self.message;
-    if (text && text.length > 0) {
-        auto* conv = [self getCurrentConversation];
-        bool isPending = convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING;
-        convModel_->sendMessage(convUid_, std::string([text UTF8String]));
-        self.message = @"";
-        if (isPending)
-            [delegate currentConversationTrusted];
-    }
-}
-
-- (IBAction)sendFile:(id)sender
-{
-    NSOpenPanel* filePicker = [NSOpenPanel openPanel];
-    [filePicker setCanChooseFiles:YES];
-    [filePicker setCanChooseDirectories:NO];
-    [filePicker setAllowsMultipleSelection:NO];
-
-    if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
-        if ([[filePicker URLs] count] == 1) {
-            NSURL* url = [[filePicker URLs] objectAtIndex:0];
-            const char* fullPath = [url fileSystemRepresentation];
-            NSString* fileName = [url lastPathComponent];
-            if (convModel_) {
-                auto* conv = [self getCurrentConversation];
-                bool isPending = convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING;
-
-                convModel_->sendFile(convUid_, std::string(fullPath), std::string([fileName UTF8String]));
-
-                if (isPending)
-                    [delegate currentConversationTrusted];
-            }
-        }
-    }
 }
 
 - (IBAction)placeCall:(id)sender
@@ -315,17 +247,6 @@
 
     [self.view.layer setPosition:frame.origin];
     [CATransaction commit];
-}
-
-#pragma mark - NSTextFieldDelegate
-
-- (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
-{
-    if (commandSelector == @selector(insertNewline:) && self.message.length > 0) {
-        [self sendMessage:nil];
-        return YES;
-    }
-    return NO;
 }
 
 
