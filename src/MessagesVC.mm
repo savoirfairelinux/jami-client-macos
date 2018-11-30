@@ -36,6 +36,7 @@
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/IconButton.h"
+#import "views/ContextualTableCellView.h"
 #import <QuickLook/QuickLook.h>
 #import <Quartz/Quartz.h>
 
@@ -68,7 +69,7 @@ NSInteger const GENERIC_INT_TEXT_TAG = 100;
 NSInteger const GENERIC_INT_TIME_TAG = 200;
 
 // views size
-CGFloat   const GENERIC_CELL_HEIGHT       = 60;
+CGFloat   const GENERIC_CELL_HEIGHT       = 40;
 CGFloat   const TIME_BOX_HEIGHT           = 34;
 CGFloat   const MESSAGE_TEXT_PADDING      = 10;
 CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
@@ -232,7 +233,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(NSTableCellView*) makeGenericInteractionViewForTableView:(NSTableView*)tableView withText:(NSString*)text andTime:(NSString*) time
 {
-    NSTableCellView* result = [tableView makeViewWithIdentifier:@"GenericInteractionView" owner:self];
+    NSTableCellView * result = [tableView makeViewWithIdentifier:@"GenericInteractionView" owner:self];
+    //NSTableCellView* result = [tableView makeViewWithIdentifier:@"GenericInteractionView" owner:self];
     NSTextField* textField = [result viewWithTag:GENERIC_INT_TEXT_TAG];
     NSTextField* timeField = [result viewWithTag:GENERIC_INT_TIME_TAG];
 
@@ -240,6 +242,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSString* fixedString = [text stringByReplacingOccurrencesOfString:@"🕽" withString:@"📞"];
     [textField setStringValue:fixedString];
     [timeField setStringValue:time];
+
+    NSMutableArray* contextualsControls = [[NSMutableArray alloc] init];
+    [contextualsControls addObject:timeField];
+     [((ContextualTableCellView*) result) setContextualsControls:contextualsControls];
+    //result.contextualsControls = contextualsControls;
 
     return result;
 }

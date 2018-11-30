@@ -736,24 +736,21 @@
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-DU-cs6">
-                                                                                    <rect key="frame" x="161" y="9" width="8" height="17"/>
+                                                                                    <rect key="frame" x="49" y="5" width="8" height="14"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" priority="250" constant="20" id="HNl-gc-YBr"/>
                                                                                     </constraints>
                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="UrO-87-XKZ">
-                                                                                        <font key="font" metaFont="system"/>
+                                                                                        <font key="font" metaFont="system" size="11"/>
                                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
                                                                                 </textField>
                                                                             </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstItem="IJm-DU-cs6" firstAttribute="centerY" secondItem="zOQ-1z-mQG" secondAttribute="centerY" id="im1-8w-nQm"/>
-                                                                                <constraint firstItem="IJm-DU-cs6" firstAttribute="centerX" secondItem="zOQ-1z-mQG" secondAttribute="centerX" id="pYe-Le-3Gc"/>
-                                                                            </constraints>
                                                                         </view>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="34" id="PmQ-jg-thf"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="IJm-DU-cs6" secondAttribute="bottom" constant="5" id="wPD-Fu-3VM"/>
                                                                         </constraints>
                                                                     </box>
                                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="siU-cO-eGp">
@@ -781,6 +778,7 @@
                                                                     <constraint firstItem="wfP-VD-ALD" firstAttribute="leading" secondItem="siU-cO-eGp" secondAttribute="trailing" constant="20" id="QN7-Em-AFu"/>
                                                                     <constraint firstItem="wfP-VD-ALD" firstAttribute="bottom" secondItem="siU-cO-eGp" secondAttribute="bottom" id="a6Y-Ho-AVA"/>
                                                                     <constraint firstItem="siU-cO-eGp" firstAttribute="leading" secondItem="ISP-Ld-mHk" secondAttribute="leading" id="adZ-9b-R8G"/>
+                                                                    <constraint firstItem="IJm-DU-cs6" firstAttribute="leading" secondItem="wfP-VD-ALD" secondAttribute="leading" constant="1" id="kAy-PD-CAR"/>
                                                                     <constraint firstItem="KCp-bZ-69S" firstAttribute="leading" secondItem="ISP-Ld-mHk" secondAttribute="leading" id="wUx-5B-FOC"/>
                                                                     <constraint firstAttribute="bottom" secondItem="wfP-VD-ALD" secondAttribute="bottom" id="wxQ-eM-vOR"/>
                                                                 </constraints>
@@ -803,23 +801,20 @@
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xkH-rw-k6w">
-                                                                                    <rect key="frame" x="161" y="9" width="8" height="17"/>
+                                                                                    <rect key="frame" x="322" y="5" width="8" height="14"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" priority="250" constant="20" id="IIf-Z3-Q3T"/>
                                                                                     </constraints>
                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="f76-cI-oqW">
-                                                                                        <font key="font" metaFont="system"/>
+                                                                                        <font key="font" metaFont="system" size="11"/>
                                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
                                                                                 </textField>
                                                                             </subviews>
-                                                                            <constraints>
-                                                                                <constraint firstItem="xkH-rw-k6w" firstAttribute="centerY" secondItem="Ae5-hd-Kkm" secondAttribute="centerY" id="RJe-dB-bmp"/>
-                                                                                <constraint firstItem="xkH-rw-k6w" firstAttribute="centerX" secondItem="Ae5-hd-Kkm" secondAttribute="centerX" id="XLg-lD-XzA"/>
-                                                                            </constraints>
                                                                         </view>
                                                                         <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="xkH-rw-k6w" secondAttribute="bottom" constant="5" id="1Za-qu-wxq"/>
                                                                             <constraint firstAttribute="height" constant="34" id="p3P-Wg-s0n"/>
                                                                         </constraints>
                                                                     </box>
@@ -834,6 +829,7 @@
                                                                     </customView>
                                                                 </subviews>
                                                                 <constraints>
+                                                                    <constraint firstItem="xkH-rw-k6w" firstAttribute="trailing" secondItem="0o9-as-0kP" secondAttribute="trailing" constant="-1" id="6qs-Yp-kt8"/>
                                                                     <constraint firstItem="hfc-s5-yWK" firstAttribute="top" secondItem="rMU-hx-cKa" secondAttribute="top" id="G37-AS-eTc"/>
                                                                     <constraint firstAttribute="trailing" secondItem="0o9-as-0kP" secondAttribute="trailing" id="Qjo-Xd-8ci"/>
                                                                     <constraint firstAttribute="bottom" secondItem="0o9-as-0kP" secondAttribute="bottom" id="XTL-j6-WbQ"/>
@@ -848,54 +844,54 @@
                                                                     <outlet property="timeLabel" destination="xkH-rw-k6w" id="WQc-BF-dSZ"/>
                                                                 </connections>
                                                             </tableCellView>
-                                                            <tableCellView identifier="GenericInteractionView" id="0tt-a5-Dex" userLabel="GenericInteractionView">
-                                                                <rect key="frame" x="1" y="125" width="329" height="60"/>
+                                                            <tableCellView identifier="GenericInteractionView" id="0tt-a5-Dex" userLabel="GenericInteractionView" customClass="ContextualTableCellView">
+                                                                <rect key="frame" x="1" y="125" width="329" height="40"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <box boxType="custom" borderType="none" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="DSf-SJ-l6k">
-                                                                        <rect key="frame" x="0.0" y="23" width="329" height="30"/>
+                                                                        <rect key="frame" x="0.0" y="3" width="329" height="30"/>
                                                                         <view key="contentView" id="sEZ-LN-VHO">
                                                                             <rect key="frame" x="0.0" y="0.0" width="329" height="30"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="SMB-Vk-E06">
-                                                                                    <rect key="frame" x="161" y="7" width="8" height="17"/>
+                                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="Wyd-h8-NpR" userLabel="ContactInteractionLabel">
+                                                                                    <rect key="frame" x="163" y="7" width="4" height="17"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="17" id="blq-Kh-Y2Y"/>
+                                                                                    </constraints>
+                                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="GBy-HF-JeP">
+                                                                                        <font key="font" metaFont="systemLight" size="13"/>
+                                                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                    </textFieldCell>
+                                                                                </textField>
+                                                                                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="SMB-Vk-E06">
+                                                                                    <rect key="frame" x="173" y="7" width="8" height="14"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" priority="250" constant="20" id="Wod-ib-NVj"/>
                                                                                     </constraints>
                                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="ahn-Mr-638">
-                                                                                        <font key="font" metaFont="system"/>
+                                                                                        <font key="font" metaFont="system" size="11"/>
                                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
                                                                                 </textField>
                                                                             </subviews>
                                                                             <constraints>
-                                                                                <constraint firstItem="SMB-Vk-E06" firstAttribute="centerY" secondItem="sEZ-LN-VHO" secondAttribute="centerY" id="4hU-BS-mJi"/>
-                                                                                <constraint firstItem="SMB-Vk-E06" firstAttribute="centerX" secondItem="sEZ-LN-VHO" secondAttribute="centerX" id="LMS-0P-rxh"/>
+                                                                                <constraint firstItem="SMB-Vk-E06" firstAttribute="bottom" secondItem="Wyd-h8-NpR" secondAttribute="bottom" id="7Nu-BN-mzF"/>
+                                                                                <constraint firstItem="Wyd-h8-NpR" firstAttribute="centerX" secondItem="sEZ-LN-VHO" secondAttribute="centerX" id="bgt-7y-txI"/>
+                                                                                <constraint firstItem="SMB-Vk-E06" firstAttribute="leading" secondItem="Wyd-h8-NpR" secondAttribute="trailing" constant="10" id="dfk-ow-et5"/>
+                                                                                <constraint firstItem="Wyd-h8-NpR" firstAttribute="centerY" secondItem="sEZ-LN-VHO" secondAttribute="centerY" id="tjn-h8-1Ab"/>
                                                                             </constraints>
                                                                         </view>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="30" id="VFG-7p-7Hg"/>
                                                                         </constraints>
                                                                     </box>
-                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="Wyd-h8-NpR" userLabel="ContactInteractionLabel">
-                                                                        <rect key="frame" x="146" y="11" width="37" height="17"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="17" id="blq-Kh-Y2Y"/>
-                                                                        </constraints>
-                                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="GBy-HF-JeP">
-                                                                            <font key="font" metaFont="systemLight" size="13"/>
-                                                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                        </textFieldCell>
-                                                                    </textField>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstItem="DSf-SJ-l6k" firstAttribute="leading" secondItem="0tt-a5-Dex" secondAttribute="leading" id="7ds-Qq-U8q"/>
                                                                     <constraint firstItem="DSf-SJ-l6k" firstAttribute="top" secondItem="0tt-a5-Dex" secondAttribute="top" constant="7" id="9zu-Oh-w26"/>
-                                                                    <constraint firstItem="DSf-SJ-l6k" firstAttribute="bottom" secondItem="Wyd-h8-NpR" secondAttribute="top" constant="5" id="RB3-cN-Bso"/>
-                                                                    <constraint firstItem="Wyd-h8-NpR" firstAttribute="centerX" secondItem="0tt-a5-Dex" secondAttribute="centerX" id="X7O-3d-Apd"/>
                                                                     <constraint firstAttribute="trailing" secondItem="DSf-SJ-l6k" secondAttribute="trailing" id="iXU-70-hKW"/>
                                                                 </constraints>
                                                             </tableCellView>
