@@ -80,6 +80,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     __unsafe_unretained IBOutlet NSView* welcomeContainer;
     __unsafe_unretained IBOutlet NSView* callView;
     __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
+    __unsafe_unretained IBOutlet NSTextField* explanationLabel;
     __unsafe_unretained IBOutlet NSButton* shareButton;
     __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
@@ -293,8 +294,10 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
         NSString* uriToDisplay = nullptr;
         if (!registeredName.empty()) {
             uriToDisplay = @(registeredName.c_str());
+            [explanationLabel setStringValue: NSLocalizedString(@"This is your Jami username. \nCopy and share it with your friends!", @"Explanation label when user have Jami username")];
         } else {
             uriToDisplay = @(ringID.c_str());
+            [explanationLabel setStringValue: NSLocalizedString(@"This is your ID. \nCopy and share it with your friends!", @"Explanation label when user have just ID")];
         }
         [ringIDLabel setStringValue:uriToDisplay];
         [self drawQRCode:@(ringID.c_str())];
@@ -318,8 +321,9 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
 
 - (IBAction)toggleQRCode:(id)sender {
     // Toggle pressed state of QRCode button
-    [sender setPressed:![sender isPressed]];
-    [self showQRCode:[sender isPressed]];
+  //  [sender setPressed:![sender isPressed]];
+    bool show = qrcodeView.animator.alphaValue == 0.0f ? YES: NO;
+    [self showQRCode: show];
 }
 
 /**

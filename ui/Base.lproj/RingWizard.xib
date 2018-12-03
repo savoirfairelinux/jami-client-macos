@@ -34,15 +34,15 @@
                         <rect key="frame" x="0.0" y="248" width="450" height="70"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EpY-Kl-fNa">
-                                <rect key="frame" x="88" y="17" width="221" height="36"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Ring" id="2mM-yx-BfM">
+                                <rect key="frame" x="86" y="17" width="225" height="36"/>
+                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Jami" id="2mM-yx-BfM">
                                     <font key="font" metaFont="system" size="30"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P7h-tj-klA">
-                                <rect key="frame" x="315" y="12" width="45" height="46"/>
+                                <rect key="frame" x="317" y="12" width="45" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="XMY-BN-Ymg"/>
                                     <constraint firstAttribute="height" constant="46" id="i8K-g8-EfQ"/>
@@ -87,6 +87,6 @@
         <viewController nibName="RingWizardNewAccount" id="M2H-0Y-6UW" customClass="RingWizardNewAccountVC"/>
     </objects>
     <resources>
-        <image name="symbol_blue" width="161.6842041015625" height="161.6842041015625"/>
+        <image name="symbol_blue" width="512" height="512"/>
     </resources>
 </document>
