@@ -43,7 +43,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="kX1-30-jfa"/>
                     </constraints>
-                    <buttonCell key="cell" type="bevel" title="Create a Ring account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
+                    <buttonCell key="cell" type="bevel" title="Create a Jami account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

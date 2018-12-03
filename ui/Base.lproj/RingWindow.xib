@@ -586,12 +586,14 @@
                                 <rect key="frame" x="105" y="194" width="520" height="270"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
-                                        <rect key="frame" x="95" y="98" width="330" height="19"/>
+                                        <rect key="frame" x="95" y="79" width="330" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="326" id="i1K-ok-BEb"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="This is your RingID. Copy and share it with your friends!" id="Xb9-UT-M2F">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="Xb9-UT-M2F">
                                             <font key="font" size="13" name="HelveticaNeue"/>
+                                            <string key="title">This is your ID.
+Copy and share it with your friends!</string>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -600,7 +602,7 @@
                                         </connections>
                                     </textField>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="phj-Jr-1k3" customClass="RingIDField">
-                                        <rect key="frame" x="20" y="64" width="400" height="26"/>
+                                        <rect key="frame" x="20" y="45" width="400" height="26"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID">
                                                 <rect key="frame" x="-2" y="3" width="404" height="21"/>
@@ -633,7 +635,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
                                     </imageView>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge">
-                                        <rect key="frame" x="470" y="62" width="30" height="30"/>
+                                        <rect key="frame" x="470" y="43" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="AXu-uA-KCC"/>
                                             <constraint firstAttribute="width" constant="30" id="h6a-Lg-QRm"/>
@@ -648,7 +650,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="IconButton">
-                                        <rect key="frame" x="431" y="62" width="30" height="30"/>
+                                        <rect key="frame" x="431" y="43" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="FrZ-2C-m7y"/>
                                         </constraints>
@@ -668,7 +670,7 @@
                                     </button>
                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
                                         <rect key="frame" x="23" y="125" width="473" height="42"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Ring is free software for universal communication which respects the freedoms and privacy of its users." id="eln-Vm-t0d">
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Jami is free software for universal communication which respects the freedoms and privacy of its users." id="eln-Vm-t0d">
                                             <font key="font" size="15" name="HelveticaNeue"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -774,7 +776,7 @@
         <image name="ic_action_cancel" width="72" height="72"/>
         <image name="ic_person_add" width="48" height="48"/>
         <image name="qrcode" width="72" height="72"/>
-        <image name="symbol_blue" width="161.6842041015625" height="161.6842041015625"/>
-        <image name="symbol_name" width="573" height="191"/>
+        <image name="symbol_blue" width="512" height="512"/>
+        <image name="symbol_name" width="400" height="144"/>
     </resources>
 </document>
