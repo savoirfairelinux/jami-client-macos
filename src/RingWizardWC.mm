@@ -114,7 +114,7 @@
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced {
-    [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Ring",
+    [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Jami",
                                                         @"Welcome title")];
     [ringImage setHidden: NO];
     titleConstraint.constant = -26.5;
@@ -129,7 +129,7 @@
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel
 {
-    [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Ring",
+    [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Jami",
                                                          @"Welcome title")];
     [ringImage setHidden: NO];
     titleConstraint.constant = -26.5;

@@ -118,7 +118,7 @@ QMetaObject::Connection accountConnection;
 
     [thePin addAttributes:[NSDictionary dictionaryWithObject:mutParaStyle forKey:NSParagraphStyleAttributeName] range:range];
 
-    NSMutableAttributedString* infos = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.","Title shown to user to concat with Pin")];
+    NSMutableAttributedString* infos = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.","Title shown to user to concat with Pin")];
     [thePin appendAttributedString:infos];
     [thePin endEditing];
 

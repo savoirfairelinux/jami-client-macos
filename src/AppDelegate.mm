@@ -87,6 +87,13 @@ std::unique_ptr<lrc::api::Lrc> lrc;
 
     NSAppleEventManager* appleEventManager = [NSAppleEventManager sharedAppleEventManager];
     [appleEventManager setEventHandler:self andSelector:@selector(handleQuitEvent:withReplyEvent:) forEventClass:kCoreEventClass andEventID:kAEQuitApplication];
+
+    dispatch_queue_t queue = NULL;
+    queue = dispatch_queue_create("scNetworkReachability", DISPATCH_QUEUE_SERIAL);
+    [self setScNetworkQueue:queue];
+    [self beginObservingReachabilityStatus];
+    NSActivityOptions options = NSActivitySuddenTerminationDisabled | NSActivityAutomaticTerminationDisabled | NSActivityBackground;
+    self.activity = [[NSProcessInfo processInfo] beginActivityWithOptions:options reason:@"Receiving calls and messages"];
     lrc = std::make_unique<lrc::api::Lrc>();
 
     if([self checkForRingAccount]) {
@@ -95,13 +102,6 @@ std::unique_ptr<lrc::api::Lrc> lrc;
         [self showWizard];
     }
     [self connect];
-
-    dispatch_queue_t queue = NULL;
-    queue = dispatch_queue_create("scNetworkReachability", DISPATCH_QUEUE_SERIAL);
-    [self setScNetworkQueue:queue];
-    [self beginObservingReachabilityStatus];
-    NSActivityOptions options = NSActivitySuddenTerminationDisabled | NSActivityAutomaticTerminationDisabled | NSActivityBackground;
-    self.activity = [[NSProcessInfo processInfo] beginActivityWithOptions:options reason:@"Receiving calls and messages"];
 }
 
 - (void) beginObservingReachabilityStatus
