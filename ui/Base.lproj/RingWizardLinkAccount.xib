@@ -318,7 +318,7 @@ DQ
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="justified" id="2uK-1s-tk7">
                         <font key="font" metaFont="smallSystem"/>
                         <string key="title">	You can import your account from the another device, but first, you need to obtain a PIN code. 
-	To generate the PIN code, go to the account management setting of a previous device, choose the Ring Account to use and select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.</string>
+	To generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

@@ -4,7 +4,7 @@ IF(POLICY CMP0022)
   CMAKE_POLICY(SET CMP0022 NEW)
 ENDIF(POLICY CMP0022)
 
-SET(PROJ_NAME Ring)
+SET(PROJ_NAME Jami)
 option(RELEASE_TYPE "RELEASE_TYPE" "website")
 
 # To build nighlies we need to update RING_VERSION with an optional command line arg

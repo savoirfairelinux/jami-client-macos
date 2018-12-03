@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -103,7 +103,7 @@
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="30" drawsBackground="YES" id="JvS-c4-OeT">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
@@ -160,7 +160,7 @@
                             </buttonCell>
                         </button>
                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RYP-3d-PCa" userLabel="Update interval">
-                            <rect key="frame" x="264" y="12" width="100" height="26"/>
+                            <rect key="frame" x="264" y="12" width="100" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="95" id="oLq-z9-b9M"/>
                             </constraints>
@@ -209,7 +209,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="419" id="iUi-lt-J9M"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Bring Ring to foreground on incoming calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uYI-hA-JHk">
+                    <buttonCell key="cell" type="check" title="Bring Jami to foreground on incoming calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uYI-hA-JHk">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
