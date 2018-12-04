@@ -82,6 +82,11 @@
  */
 @property (nonatomic, strong) NSColor* cornerColor;
 
+/*
+ * Font size of the button title.
+ */
+@property CGFloat fontSize;
+
 
 
 @end

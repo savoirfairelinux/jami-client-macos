@@ -21,17 +21,16 @@
 #import <api/conversationmodel.h>
 #import <api/conversation.h>
 
-@protocol MessagesVCDelegate
-
--(void)newMessageAdded;
-
-@end
-
 @interface MessagesVC : NSViewController
 
 -(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
 -(void)clearData;
 
-@property (retain, nonatomic) id <MessagesVCDelegate> delegate;
+/**
+ * Message contained in messageField TextField.
+ * This is a KVO method to bind the text with the send Button
+ * if message.length is > 0, button is enabled, otherwise disabled
+ */
+@property (retain) NSString* message;
 
 @end
