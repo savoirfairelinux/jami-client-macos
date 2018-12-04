@@ -39,6 +39,7 @@ class Call;
 }
 @property (retain, nonatomic) id <CallViewControllerDelegate> delegate;
 -(void) initFrame;
+-(void) cleanUp;
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;
 -(void) setCurrentCall:(const std::string&)callUid

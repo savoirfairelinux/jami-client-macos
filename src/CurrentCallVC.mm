@@ -339,10 +339,6 @@
         case Status::ENDED:
         case Status::TERMINATING:
         case Status::INVALID:
-            [controlsPanel setHidden:YES];
-            [outgoingPanel setHidden:NO];
-            [self cleanUp];
-            [self hideWithAnimation:false];
             break;
     }
 }
