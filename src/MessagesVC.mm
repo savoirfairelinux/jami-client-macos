@@ -19,7 +19,6 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <QItemSelectionModel>
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
 
@@ -31,7 +30,6 @@
 #import "views/IMTableCellView.h"
 #import "views/MessageBubbleView.h"
 #import "views/NSImage+Extensions.h"
-#import "INDSequentialTextSelectionManager.h"
 #import "delegates/ImageManipulationDelegate.h"
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
@@ -44,6 +42,10 @@
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
     __unsafe_unretained IBOutlet NSView* containerView;
+    __unsafe_unretained IBOutlet NSTextField* messageField;
+    __unsafe_unretained IBOutlet IconButton *sendFileButton;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* sendPanelHeight;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* messagesBottomMargin;
 
     std::string convUid_;
     lrc::api::ConversationModel* convModel_;
@@ -57,9 +59,9 @@
     QMetaObject::Connection filterChangedSignal_;
     QMetaObject::Connection interactionStatusUpdatedSignal_;
     NSString* previewImage;
+    NSMutableDictionary *pendingMessagesToSend;
 }
 
-@property (nonatomic, strong, readonly) INDSequentialTextSelectionManager* selectionManager;
 
 @end
 
@@ -73,6 +75,9 @@ CGFloat   const TIME_BOX_HEIGHT           = 34;
 CGFloat   const MESSAGE_TEXT_PADDING      = 10;
 CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
 CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
+NSInteger const MEESAGE_MARGIN = 21;
+NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
+NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
 @implementation MessagesVC
 
@@ -95,8 +100,28 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [conversationView registerNib:cellNib forIdentifier:@"LeftFinishedFileView"];
     [conversationView registerNib:cellNib forIdentifier:@"RightOngoingFileView"];
     [conversationView registerNib:cellNib forIdentifier:@"RightFinishedFileView"];
+    [[conversationView.enclosingScrollView contentView] setCopiesOnScroll:NO];
+    [messageField setFocusRingType:NSFocusRingTypeNone];
+    [conversationView setWantsLayer:YES];
 }
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        pendingMessagesToSend = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
+
+- (void)setMessage:(NSString *)newValue {
+    _message = [newValue removeEmptyLinesAtBorders];
+}
+
 -(void) clearData {
+    if (!convUid_.empty()) {
+        pendingMessagesToSend[@(convUid_.c_str())] = messageField.stringValue;
+    }
     cachedConv_ = nil;
     convUid_ = "";
     convModel_ = nil;
@@ -105,6 +130,17 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(filterChangedSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(newInteractionSignal_);
+}
+
+-(void) scrollToBottom {
+    CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
+    NSRange range = [conversationView rowsInRect:visibleRect];
+    NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
+    NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
+    if (([conversationView numberOfRows] > 0) &&
+        lastvisibleRow == ([conversationView numberOfRows] -1)) {
+        [conversationView scrollToEndOfDocument:nil];
+    }
 }
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
@@ -224,8 +260,32 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                           [self](){
                                               cachedConv_ = nil;
                                           });
+    if (pendingMessagesToSend[@(convUid_.c_str())]) {
+        self.message = pendingMessagesToSend[@(convUid_.c_str())];
+        [self updateSendMessageHeight];
+    } else {
+        self.message = @"";
+        if(messagesBottomMargin.constant != SEND_PANEL_DEFAULT_HEIGHT) {
+            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            [self scrollToBottom];
+        }
+    }
+    conversationView.alphaValue = 0.0;
     [conversationView reloadData];
     [conversationView scrollToEndOfDocument:nil];
+    CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
+    fadeIn.toValue = [NSNumber numberWithFloat:1.0];
+    fadeIn.duration = 0.4f;
+
+    [conversationView.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
+    conversationView.alphaValue = 1;
+    auto* conv = [self getCurrentConversation];
+
+    if (conv == nil)
+        return;
+    [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
 }
 
 #pragma mark - configure cells
@@ -469,7 +529,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime isTopPadding: shouldApplyPadding];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
-    [result.msgView checkTextInDocument:nil];
+   // [result.msgView checkTextInDocument:nil];
 
     NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     NSArray *matches = [linkDetector matchesInString:result.msgView.string options:0 range:NSMakeRange(0, result.msgView.string.length)];
@@ -830,6 +890,85 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
     return [NSURL fileURLWithPath:previewImage];
+}
+
+- (void) updateSendMessageHeight {
+    NSAttributedString *msgAttString = messageField.attributedStringValue;
+    NSRect frame = NSMakeRect(0, 0, messageField.frame.size.width, msgAttString.size.height);
+    NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
+    [[tv textStorage] setAttributedString:msgAttString];
+    [tv sizeToFit];
+    CGFloat height = tv.frame.size.height + MEESAGE_MARGIN * 2;
+    CGFloat newHeight = MIN(SEND_PANEL_MAX_HEIGHT, MAX(SEND_PANEL_DEFAULT_HEIGHT, height));
+    if(messagesBottomMargin.constant == newHeight) {
+        return;
+    }
+    messagesBottomMargin.constant = newHeight;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self scrollToBottom];
+        sendPanelHeight.constant = newHeight;
+    });
+}
+
+- (IBAction)sendMessage:(id)sender {
+    NSString* text = self.message;
+    if (text && text.length > 0) {
+        auto* conv = [self getCurrentConversation];
+        convModel_->sendMessage(convUid_, std::string([text UTF8String]));
+        self.message = @"";
+        if(sendPanelHeight.constant != SEND_PANEL_DEFAULT_HEIGHT) {
+            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            [self scrollToBottom];
+        }
+    }
+}
+
+- (IBAction)openEmojy:(id)sender {
+    [messageField.window makeFirstResponder: messageField];
+    [[messageField currentEditor] moveToEndOfLine:nil];
+    [NSApp orderFrontCharacterPalette: messageField];
+}
+
+- (IBAction)sendFile:(id)sender {
+    NSOpenPanel* filePicker = [NSOpenPanel openPanel];
+    [filePicker setCanChooseFiles:YES];
+    [filePicker setCanChooseDirectories:NO];
+    [filePicker setAllowsMultipleSelection:NO];
+
+    if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
+        if ([[filePicker URLs] count] == 1) {
+            NSURL* url = [[filePicker URLs] objectAtIndex:0];
+            const char* fullPath = [url fileSystemRepresentation];
+            NSString* fileName = [url lastPathComponent];
+            if (convModel_) {
+                auto* conv = [self getCurrentConversation];
+                convModel_->sendFile(convUid_, std::string(fullPath), std::string([fileName UTF8String]));
+            }
+        }
+    }
+}
+
+
+#pragma mark - NSTextFieldDelegate
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
+{
+    if (commandSelector == @selector(insertNewline:)) {
+        if(self.message.length > 0) {
+            [self sendMessage: nil];
+        } else if(messagesBottomMargin.constant != SEND_PANEL_DEFAULT_HEIGHT) {
+            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
+            [self scrollToBottom];
+        }
+        return YES;
+    }
+    return NO;
+}
+
+- (void)controlTextDidChange:(NSNotification *)aNotification {
+    [self updateSendMessageHeight];
 }
 
 @end
