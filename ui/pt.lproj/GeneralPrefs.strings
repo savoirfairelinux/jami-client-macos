@@ -8,11 +8,11 @@
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "AId-am-73Q"; */
 "AId-am-73Q.title" = "Weekly";
 
-/* Class = "NSTextFieldCell"; title = "History"; ObjectID = "DSD-yl-noX"; */
-"DSD-yl-noX.title" = "Histórico";
-
 /* Class = "NSTextFieldCell"; title = "30"; ObjectID = "JvS-c4-OeT"; */
 "JvS-c4-OeT.title" = "30";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Profile"; ObjectID = "MV1-AC-qE7"; */
+"MV1-AC-qE7.ibShadowedToolTip" = "Perfil";
 
 /* Class = "NSButtonCell"; title = "Launch on Startup"; ObjectID = "O2C-xR-mHF"; */
 "O2C-xR-mHF.title" = "Launch on Startup";
@@ -20,11 +20,14 @@
 /* Class = "NSTextFieldCell"; title = "(Applied on application restart)"; ObjectID = "OTl-vx-S43"; */
 "OTl-vx-S43.title" = "(Applied on application restart)";
 
-/* Class = "NSTextFieldCell"; title = "Interruptions"; ObjectID = "Rzy-Gh-3wQ"; */
-"Rzy-Gh-3wQ.title" = "Interruptions";
+/* Class = "NSTextFieldCell"; title = "Behaviours"; ObjectID = "Rzy-Gh-3wQ"; */
+"Rzy-Gh-3wQ.title" = "Behaviours";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
 "T3a-yx-ZaW.title" = "Automatically check for updates";
+
+/* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "Thg-oC-5Qw"; */
+"Thg-oC-5Qw.title" = "Perfil";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "cB6-4m-9MU"; */
 "cB6-4m-9MU.title" = "Daily";
@@ -41,14 +44,11 @@
 /* Class = "NSTextFieldCell"; title = "Update"; ObjectID = "r4u-t3-gBc"; */
 "r4u-t3-gBc.title" = "Update";
 
-/* Class = "NSTextFieldCell"; title = "Window behaviour"; ObjectID = "sog-Ok-Y0N"; */
-"sog-Ok-Y0N.title" = "Window behaviour";
-
-/* Class = "NSButtonCell"; title = "Enable Notifications"; ObjectID = "uCL-ye-tsv"; */
-"uCL-ye-tsv.title" = "Enable Notifications";
+/* Class = "NSButtonCell"; title = "Enable Desktop Notifications"; ObjectID = "uCL-ye-tsv"; */
+"uCL-ye-tsv.title" = "Enable Desktop Notifications";
 
 /* Class = "NSButtonCell"; title = "Bring Ring to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
 "uYI-hA-JHk.title" = "Bring Ring to foreground on incoming calls";
 
-/* Class = "NSTextFieldCell"; title = "Desktop Notifications"; ObjectID = "xlz-zw-IJI"; */
-"xlz-zw-IJI.title" = "Desktop Notifications";
+/* Class = "NSTextFieldCell"; title = "This is shared with your contacts "; ObjectID = "vbU-2S-O58"; */
+"vbU-2S-O58.title" = "This is shared with your contacts ";
