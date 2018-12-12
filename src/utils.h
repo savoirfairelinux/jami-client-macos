@@ -129,6 +129,19 @@ static inline lrc::api::ConversationModel::ConversationQueue::const_iterator get
                         });
 }
 
+/**
+ * This function return an iterator pointing to a Conversation::Info in ConversationModel given its participant uri. Will not work for group chat.
+ * @param uri URI of participant
+ * @param model ConversationModel in which to do the lookup
+ * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
+ */
+static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromURI(const std::string& uri, const lrc::api::ConversationModel& model) {
+    return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
+                        [&] (const lrc::api::conversation::Info& conv) {
+                            return uri == conv.participants[0];
+                        });
+}
+
 static inline void
 setVideoAutoQuality(bool autoQuality, std::string accountId)
 {

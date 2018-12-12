@@ -535,4 +535,57 @@ NSString* const kOpenAccountToolBarItemIdentifier    = @"OpenAccountToolBarItemI
     [smartViewVC reloadConversationWithUid:@(conversationID.c_str())];
 }
 
+-(void) showConversation:(NSString* )conversationId forAccount:(NSString*)accountId {
+    auto& accInfo = self.accountModel->getAccountInfo([accountId UTF8String]);
+    [chooseAccountVC selectAccount: accountId];
+    [settingsVC setSelectedAccount: [accountId UTF8String]];
+    [smartViewVC setConversationModel:accInfo.conversationModel.get()];
+    [smartViewVC selectConversationList];
+    [self updateRingID];
+    auto convInfo = getConversationFromUid([conversationId UTF8String], *accInfo.conversationModel.get());
+    auto convQueue = accInfo.conversationModel.get()->allFilteredConversations();
+    if (convInfo != convQueue.end()) {
+        [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];
+        [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
+        accInfo.conversationModel.get()->clearUnreadInteractions([conversationId UTF8String]);
+    }
+    [self changeViewTo:SHOW_CONVERSATION_SCREEN];
+}
+
+-(void) showCall:(NSString* )callId forAccount:(NSString*)accountId forConversation:(NSString*)conversationId {
+    auto& accInfo = self.accountModel->getAccountInfo([accountId UTF8String]);
+    [chooseAccountVC selectAccount: accountId];
+    [settingsVC setSelectedAccount:accInfo.id];
+    [smartViewVC setConversationModel:accInfo.conversationModel.get()];
+    [self updateRingID];
+    auto convInfo = getConversationFromUid([conversationId UTF8String], *accInfo.conversationModel.get());
+    auto convQueue = accInfo.conversationModel.get()->allFilteredConversations();
+    if (convInfo != convQueue.end()) {
+        if (accInfo.contactModel->getContact(convInfo->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
+            [smartViewVC selectPendingList];
+        else
+            [smartViewVC selectConversationList];
+        [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
+    }
+    [currentCallVC setCurrentCall:[callId UTF8String]
+                     conversation:[conversationId UTF8String]
+                          account:&accInfo];
+    [self changeViewTo:SHOW_CALL_SCREEN];
+}
+
+-(void) showContactRequestFor:(NSString* )accountId contactUri:(NSString*)uri {
+    auto& accInfo = self.accountModel->getAccountInfo([accountId UTF8String]);
+    [chooseAccountVC selectAccount: accountId];
+    [settingsVC setSelectedAccount:accInfo.id];
+    [smartViewVC setConversationModel:accInfo.conversationModel.get()];
+    [self updateRingID];
+    [smartViewVC selectPendingList];
+    auto convInfo = getConversationFromURI([uri UTF8String], *accInfo.conversationModel.get());
+    auto convQueue = accInfo.conversationModel.get()->allFilteredConversations();
+    if (convInfo != convQueue.end()) {
+        [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];
+        [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
+    }
+    [self changeViewTo:SHOW_CONVERSATION_SCREEN];
+}
 @end

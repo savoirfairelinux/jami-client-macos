@@ -321,7 +321,8 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     }
 
     // enable Notifications
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::Notifications];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::CallNotifications];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::MessagesNotifications];
 }
 
 - (IBAction)cancel:(id)sender

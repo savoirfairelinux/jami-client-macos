@@ -175,6 +175,7 @@
     }
 
     // enable Notifications
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::Notifications];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::CallNotifications];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:Preferences::MessagesNotifications];
 }
 @end

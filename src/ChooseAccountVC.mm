@@ -393,4 +393,14 @@ NSMutableDictionary* menuItemsTags;
     [accountSelectionButton setEnabled:NO];
 }
 
+- (void)selectAccount:(NSString*)accountID {
+    auto accList = accMdl_->getAccountList();
+    if(std::find(accList.begin(), accList.end(), [accountID UTF8String]) != accList.end()) {
+        auto& account = accMdl_->getAccountInfo([accountID UTF8String]);
+        [accountSelectionManager_ setSavedAccount:account];
+        [self updatePhoto];
+        [self setPopUpButtonSelection];
+    }
+}
+
 @end
