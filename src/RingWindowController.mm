@@ -26,10 +26,6 @@
 #import <QItemSelection>
 
 //LRC
-#import <callmodel.h>
-#import <account.h>
-#import <call.h>
-#import <recentmodel.h>
 #import <AvailableAccountModel.h>
 #import <api/lrc.h>
 #import <api/account.h>

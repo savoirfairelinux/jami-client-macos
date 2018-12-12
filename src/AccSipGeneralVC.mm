@@ -32,7 +32,6 @@
 #import <api/newaccountmodel.h>
 #import <api/newdevicemodel.h>
 #import <interfaces/pixmapmanipulatori.h>
-#import <globalinstances.h>
 
 #import "AccSipGeneralVC.h"
 #import "views/NSColor+RingTheme.h"

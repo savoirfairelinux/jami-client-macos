@@ -27,10 +27,6 @@
 #import <QTranslator>
 #import <QLocale>
 
-//LRC
-#import <localprofilecollection.h>
-#import <profilemodel.h>
-
 #import "delegates/ImageManipulationDelegate.h"
 
 int main(int argc, const char *argv[]) {

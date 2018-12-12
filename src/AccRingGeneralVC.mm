@@ -34,7 +34,6 @@
 #import <api/newaccountmodel.h>
 #import <api/newdevicemodel.h>
 #import <interfaces/pixmapmanipulatori.h>
-#import <globalinstances.h>
 
 #import "RegisterNameWC.h"
 #import "RestoreAccountWC.h"
