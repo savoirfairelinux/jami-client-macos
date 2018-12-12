@@ -20,18 +20,13 @@
 
 #import "AppDelegate.h"
 
+//lrc
 #import <callmodel.h>
-#import <qapplication.h>
-#import <accountmodel.h>
-#import <protocolmodel.h>
-#import <media/recordingmodel.h>
-#import <media/textrecording.h>
-#import <QItemSelectionModel>
-#import <QDebug>
-#import <account.h>
-#import <AvailableAccountModel.h>
 #import <api/lrc.h>
 #import <api/newaccountmodel.h>
+#import <api/behaviorcontroller.h>
+#import <api/conversation.h>
+#import <api/newcallmodel.h>
 
 
 #if ENABLE_SPARKLE
@@ -41,6 +36,7 @@
 #import "Constants.h"
 #import "RingWizardWC.h"
 #import "DialpadWC.h"
+#import "utils.h"
 
 #if ENABLE_SPARKLE
 @interface AppDelegate() <SUUpdaterDelegate>
@@ -56,6 +52,17 @@
 @property (strong) id activity;
 
 @end
+
+NSString * const MESSAGE_NOTIFICATION = @"message_notification_type";
+NSString * const CALL_NOTIFICATION = @"call_notification_type";
+NSString * const CONTACT_REQUEST_NOTIFICATION = @"contact_request_notification_type";
+
+NSString * const ACCOUNT_ID = @"account_id_notification_info";
+NSString * const CALL_ID = @"call_id_notification_info";
+NSString * const CONVERSATION_ID = @"conversation_id_notification_info";
+NSString * const CONTACT_URI = @"contact_uri_notification_info";
+NSString * const NOTIFICATION_TYPE = @"contact_type_notification_info";
+
 
 @implementation AppDelegate {
 
@@ -140,95 +147,165 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 - (void) connect
 {
-
-    //ProfileModel::instance().addCollection<LocalProfileCollection>(LoadOptions::FORCE_ENABLED);
-    QObject::connect(&AccountModel::instance(),
-                     &AccountModel::registrationChanged,
-                     [=](Account* a, bool registration) {
-                         qDebug() << "registrationChanged:" << a->id() << ":" << registration;
-                         //track buddy for account
-                         AccountModel::instance().subscribeToBuddies(a->id());
-                     });
-
-    QObject::connect(&CallModel::instance(),
-                     &CallModel::incomingCall,
-                     [=](Call* call) {
-                         // on incoming call set selected account match call destination account
-                         if (call->account()) {
-                             QModelIndex index = call->account()->index();
-                             index = AvailableAccountModel::instance().mapFromSource(index);
-
-                             AvailableAccountModel::instance().selectionModel()->setCurrentIndex(index,
-                                                                                                 QItemSelectionModel::ClearAndSelect);
-                         }
-                         BOOL shouldComeToForeground = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::WindowBehaviour];
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
-                         if (shouldComeToForeground) {
-                             [NSApp activateIgnoringOtherApps:YES];
-                             if ([self.ringWindowController.window isMiniaturized]) {
-                                 [self.ringWindowController.window deminiaturize:self];
-                             }
-                         }
-
-                         if(shouldNotify) {
-                             [self showIncomingNotification:call];
-                         }
-                     });
-
-    QObject::connect(&media::RecordingModel::instance(),
-                     &media::RecordingModel::newTextMessage,
-                     [=](media::TextRecording* t, ContactMethod* cm) {
-
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::Notifications];
-                         auto qIdx = t->instantTextMessagingModel()->index(t->instantTextMessagingModel()->rowCount()-1, 0);
-
-                         // Don't show a notification if we are sending the text OR window already has focus OR user disabled notifications
-                         if(qvariant_cast<media::Media::Direction>(qIdx.data((int)media::TextRecording::Role::Direction)) == media::Media::Direction::OUT
-                            || self.ringWindowController.window.isMainWindow || !shouldNotify)
+    QObject::connect(&lrc->getBehaviorController(),
+                     &lrc::api::BehaviorController::newTrustRequest,
+                     [self] (const std::string& accountId, const std::string& contactUri) {
+                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ContactRequestNotifications];
+                         if(!shouldNotify) {
                              return;
+                         }
+                         NSUserNotification* notification = [[NSUserNotification alloc] init];
+                         auto contactModel = lrc->getAccountModel()
+                         .getAccountInfo(accountId).contactModel.get();
+                         NSString* name = contactModel->getContact(contactUri)
+                         .registeredName.empty() ?
+                         @(contactUri.c_str()) :
+                         @(contactModel->getContact(contactUri).registeredName.c_str());
+                         NSString* localizedMessage =
+                         NSLocalizedString(@"Send you a contact request",
+                                           @"Notification message");
 
+                         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+                         userInfo[ACCOUNT_ID] = @(accountId.c_str());
+                         userInfo[CONTACT_URI] = @(contactUri.c_str());
+                         userInfo[NOTIFICATION_TYPE] = CONTACT_REQUEST_NOTIFICATION;
+
+                         [notification setTitle: name];
+                         notification.informativeText = localizedMessage;
+                         [notification setSoundName:NSUserNotificationDefaultSoundName];
+                         [notification setUserInfo: userInfo];
+
+                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+
+                     });
+
+    QObject::connect(&lrc->getBehaviorController(),
+                     &lrc::api::BehaviorController::showIncomingCallView,
+                     [self] (const std::string& accountId, lrc::api::conversation::Info conversationInfo) {
+                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::CallNotifications];
+                         if(!shouldNotify) {
+                             return;
+                         }
+                         NSString* name = bestIDForConversation(conversationInfo, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
                          NSUserNotification* notification = [[NSUserNotification alloc] init];
 
-                         NSString* localizedTitle = [NSString stringWithFormat:NSLocalizedString(@"Message from %@", @"Message from {Name}"), qIdx.data((int)media::TextRecording::Role::AuthorDisplayname).toString().toNSString()];
+                         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+                         userInfo[ACCOUNT_ID] = @(accountId.c_str());
+                         userInfo[CALL_ID] = @(conversationInfo.callId.c_str());
+                         userInfo[CONVERSATION_ID] = @(conversationInfo.uid.c_str());
+                         userInfo[NOTIFICATION_TYPE] = CALL_NOTIFICATION;
+
+                         NSString* localizedTitle = [NSString stringWithFormat:
+                                                     NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"),
+                                                     name];
+                         // try to activate action button
+                         @try {
+                             [notification setValue:@YES forKey:@"_showsButtons"];
+                         }
+                         @catch (NSException *exception) {
+                             NSLog(@"Action button not activable on notification");
+                         }
+                         [notification setUserInfo: userInfo];
+                         [notification setOtherButtonTitle:NSLocalizedString(@"Refuse", @"Button Action")];
+                         [notification setActionButtonTitle:NSLocalizedString(@"Accept", @"Button Action")];
+                         [notification setTitle:localizedTitle];
+                         [notification setSoundName:NSUserNotificationDefaultSoundName];
+
+                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+                     });
+
+    QObject::connect(&lrc->getBehaviorController(),
+                     &lrc::api::BehaviorController::newUnreadInteraction,
+                     [self] (const std::string& accountId, const std::string& conversation,
+                             uint64_t interactionId, const lrc::api::interaction::Info& interaction) {
+                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::MessagesNotifications];
+                         if(!shouldNotify) {
+                             return;
+                         }
+                         NSUserNotification* notification = [[NSUserNotification alloc] init];
+
+                         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+                         userInfo[ACCOUNT_ID] = @(accountId.c_str());
+                         userInfo[CONVERSATION_ID] = @(conversation.c_str());
+                         userInfo[NOTIFICATION_TYPE] = MESSAGE_NOTIFICATION;
+                         NSString* name = @(interaction.authorUri.c_str());
+                         auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
+                         auto convQueue = lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get()->allFilteredConversations();
+                         if (convIt != convQueue.end()) {
+                             name = bestIDForConversation(*convIt, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
+                         }
+                         NSString* localizedTitle = [NSString stringWithFormat:
+                                                     NSLocalizedString(@"Incoming message from %@",@"Incoming message from {Name}"),
+                                                     name];
 
                          [notification setTitle:localizedTitle];
                          [notification setSoundName:NSUserNotificationDefaultSoundName];
-                         [notification setSubtitle:qIdx.data().toString().toNSString()];
+                         [notification setSubtitle:@(interaction.body.c_str())];
+                         [notification setUserInfo: userInfo];
 
                          [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
                      });
 }
 
-- (void) showIncomingNotification:(Call*) call{
-    NSUserNotification* notification = [[NSUserNotification alloc] init];
-    NSString* localizedTitle = [NSString stringWithFormat:
-                                NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"), call->peerName().toNSString()];
-    [notification setTitle:localizedTitle];
-    [notification setSoundName:NSUserNotificationDefaultSoundName];
-
-    // try to activate action button
-    @try {
-        [notification setValue:@YES forKey:@"_showsButtons"];
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didDismissAlert:(NSUserNotification *)alert {
+    // check if user click refuse on incoming call notifications
+    if(alert.activationType != NSUserNotificationActivationTypeNone) {
+        return;
     }
-    @catch (NSException *exception) {
-        // private API _showsButtons has changed...
-        NSLog(@"Action button not activable on notification");
-    }
-    [notification setActionButtonTitle:NSLocalizedString(@"Refuse", @"Button Action")];
 
-    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+    auto info = alert.userInfo;
+    if(!info) {
+        return;
+    }
+    NSString* identifier = info[NOTIFICATION_TYPE];
+    NSString* callId = info[CALL_ID];
+    NSString* accountId = info[ACCOUNT_ID];
+    if(!identifier || !callId || !accountId) {
+        return;
+    }
+    if([identifier isEqualToString: CALL_NOTIFICATION]) {
+        auto accountInfo = &lrc->getAccountModel().getAccountInfo([accountId UTF8String]);
+        if (accountInfo == nil)
+            return;
+        auto* callModel = accountInfo->callModel.get();
+        callModel->hangUp([callId UTF8String]);
+    }
 }
 
 - (void) userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification
 {
-    if(notification.activationType == NSUserNotificationActivationTypeActionButtonClicked) {
-        CallModel::instance().selectedCall() << Call::Action::REFUSE;
-    } else {
-        [NSApp activateIgnoringOtherApps:YES];
-        if ([self.ringWindowController.window isMiniaturized]) {
+    auto info = notification.userInfo;
+    if(!info) {
+        return;
+    }
+    NSString* identifier = info[NOTIFICATION_TYPE];
+    if([identifier isEqualToString: CALL_NOTIFICATION]) {
+        if(notification.activationType == NSUserNotificationActivationTypeActionButtonClicked
+           || notification.activationType == NSUserNotificationActivationTypeContentsClicked) {
+            NSString* callId = info[CALL_ID];
+            NSString* accountId = info[ACCOUNT_ID];
+            NSString *conversationId = info[CONVERSATION_ID];
+            auto accountInfo = &lrc->getAccountModel().getAccountInfo([accountId UTF8String]);
+            if (accountInfo == nil)
+                return;
+            auto* callModel = accountInfo->callModel.get();
+            callModel->accept([callId UTF8String]);
             [self.ringWindowController.window deminiaturize:self];
+            [_ringWindowController showCall:callId forAccount:accountId forConversation:conversationId];
+        }
+    } else if(notification.activationType == NSUserNotificationActivationTypeContentsClicked) {
+        [self.ringWindowController.window deminiaturize:self];
+        if([identifier isEqualToString: MESSAGE_NOTIFICATION]) {
+            NSString* accountId = info[ACCOUNT_ID];
+            NSString *conversationId = info[CONVERSATION_ID];
+            [_ringWindowController showConversation:conversationId forAccount:accountId];
+        } else if([identifier isEqualToString: CONTACT_REQUEST_NOTIFICATION]) {
+            NSString* accountId = info[ACCOUNT_ID];
+            NSString *contactUri = info[CONTACT_URI];
+            [_ringWindowController showContactRequestFor:accountId contactUri: contactUri];
         }
     }
+    [[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
 }
 
 - (void) showWizard
@@ -331,7 +408,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     }
     [self.wizard close];
     [self.ringWindowController close];
-    delete CallModel::instance().QObject::parent();
     [[NSApplication sharedApplication] terminate:self];
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,10 +10,6 @@
                 <outlet property="checkIntervalPopUp" destination="RYP-3d-PCa" id="JNO-GR-CV8"/>
                 <outlet property="downloadFolder" destination="7bY-JW-z0U" id="ylD-Yb-I2N"/>
                 <outlet property="downloadFolderLabel" destination="IHD-1X-sid" id="XnP-ui-hIA"/>
-                <outlet property="historyChangedLabel" destination="Gyi-ID-Z3v" id="aoO-Fh-UCQ"/>
-                <outlet property="historyStepper" destination="QmA-ZI-ZL5" id="dDV-1G-rZs"/>
-                <outlet property="historySwitch" destination="DgD-2y-4g5" id="GYk-pz-jGT"/>
-                <outlet property="historyTextField" destination="tHZ-7Q-5iP" id="keP-y2-7Pg"/>
                 <outlet property="sparkleContainer" destination="yVO-jk-ay3" id="zni-hI-88D"/>
                 <outlet property="startUpButton" destination="1Nr-L4-fcd" id="veu-Hi-c7L"/>
                 <outlet property="toggleAutomaticUpdateCheck" destination="MCd-PD-kd7" id="rSB-ac-Nm2"/>
@@ -27,33 +23,48 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Oth-up-2k2">
-                    <rect key="frame" x="56" y="264" width="423" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="419" id="upW-bh-eQg"/>
-                    </constraints>
-                    <buttonCell key="cell" type="check" title="Enable Desktop Notifications" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uCL-ye-tsv">
+                    <rect key="frame" x="38" y="264" width="252" height="18"/>
+                    <buttonCell key="cell" type="check" title="Enable notifications for incoming calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uCL-ye-tsv">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_notifications" id="PuD-KZ-Zat"/>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_call_notifications" id="ATK-nw-aIW"/>
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="1Nr-L4-fcd">
-                    <rect key="frame" x="56" y="210" width="423" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="419" id="8Mk-zb-NLA"/>
-                    </constraints>
+                    <rect key="frame" x="38" y="128" width="134" height="18"/>
                     <buttonCell key="cell" type="check" title="Launch on Startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="O2C-xR-mHF">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="toggleLaunchAtStartup:" target="-2" id="Rky-YK-2yk"/>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.window_behaviour" id="dve-QX-8LV"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Esb-Tu-Qdy">
+                    <rect key="frame" x="38" y="230" width="285" height="18"/>
+                    <buttonCell key="cell" type="check" title="Enable notifications for incoming messages" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0jV-Q4-232">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_messages_notifications" id="iOY-gd-hFa"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="amh-rw-Lc6">
+                    <rect key="frame" x="38" y="196" width="227" height="18"/>
+                    <buttonCell key="cell" type="check" title="Enable notifications for invitations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Lww-Wb-yrf">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_invitations_notifications" id="dc9-OG-CTZ"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bY-JW-z0U">
-                    <rect key="frame" x="171" y="166" width="82" height="32"/>
+                    <rect key="frame" x="141" y="84" width="82" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="d7f-Id-S7d"/>
                     </constraints>
@@ -66,80 +77,15 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHD-1X-sid">
-                    <rect key="frame" x="56" y="175" width="103" height="17"/>
+                    <rect key="frame" x="38" y="93" width="103" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Download folder" id="6Ye-pe-9WV">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="DgD-2y-4g5">
-                    <rect key="frame" x="56" y="125" width="140" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="215" id="DuR-wd-CxJ"/>
-                    </constraints>
-                    <buttonCell key="cell" type="check" title="Keep my history for" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3Pb-Ec-zl5">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleHistory:" target="-2" id="2wV-yt-1YG"/>
-                    </connections>
-                </button>
-                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QmA-ZI-ZL5">
-                    <rect key="frame" x="247" y="120" width="19" height="27"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="13" id="o2I-Rn-0uA"/>
-                    </constraints>
-                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" doubleValue="30" id="30B-YQ-Opa"/>
-                    <connections>
-                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.history_limit" id="c2j-mK-kYa"/>
-                    </connections>
-                </stepper>
-                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHZ-7Q-5iP">
-                    <rect key="frame" x="202" y="123" width="40" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="Qal-Za-gWz"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="30" drawsBackground="YES" id="JvS-c4-OeT">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="Sz0-vm-i3t" name="value" keyPath="values.history_limit" id="4us-N3-vCf">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nah-Jm-ZYB">
-                    <rect key="frame" x="269" y="125" width="33" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="08C-IP-5pg"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="days" id="e5K-l0-Nfw">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U84-le-Iy4">
-                    <rect key="frame" x="58" y="93" width="122" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="122" id="3MQ-xB-seJ"/>
-                    </constraints>
-                    <buttonCell key="cell" type="roundRect" title="Clear History" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cd5-9L-Bbb">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="clearHistory:" target="-2" id="yN7-bB-7EY"/>
-                    </connections>
-                </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yVO-jk-ay3">
-                    <rect key="frame" x="20" y="20" width="462" height="61"/>
+                    <rect key="frame" x="20" y="12" width="462" height="61"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diX-uH-Ce8">
                             <rect key="frame" x="18" y="44" width="52" height="17"/>
@@ -160,7 +106,7 @@
                             </buttonCell>
                         </button>
                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RYP-3d-PCa" userLabel="Update interval">
-                            <rect key="frame" x="264" y="12" width="100" height="26"/>
+                            <rect key="frame" x="264" y="12" width="100" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="95" id="oLq-z9-b9M"/>
                             </constraints>
@@ -189,26 +135,8 @@
                         <constraint firstItem="diX-uH-Ce8" firstAttribute="top" secondItem="yVO-jk-ay3" secondAttribute="top" id="uF2-Tp-YBe"/>
                     </constraints>
                 </customView>
-                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gyi-ID-Z3v">
-                    <rect key="frame" x="306" y="127" width="172" height="14"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="(Applied on application restart)" id="OTl-vx-S43">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fC0-ce-Yiz">
-                    <rect key="frame" x="18" y="147" width="399" height="8"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="395" id="6HO-p7-tAk"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="JrN-bM-7Wz"/>
-                    </constraints>
-                </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Is4-pD-LOT">
-                    <rect key="frame" x="56" y="237" width="423" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="419" id="iUi-lt-J9M"/>
-                    </constraints>
+                    <rect key="frame" x="38" y="162" width="280" height="18"/>
                     <buttonCell key="cell" type="check" title="Bring Ring to foreground on incoming calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uYI-hA-JHk">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -219,37 +147,25 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="QmA-ZI-ZL5" firstAttribute="centerY" secondItem="nah-Jm-ZYB" secondAttribute="centerY" id="2CN-A5-Lfs"/>
-                <constraint firstItem="fC0-ce-Yiz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="2iV-DB-Zna"/>
-                <constraint firstItem="1Nr-L4-fcd" firstAttribute="leading" secondItem="DgD-2y-4g5" secondAttribute="leading" id="3wo-TW-rpe"/>
-                <constraint firstItem="DgD-2y-4g5" firstAttribute="baseline" secondItem="tHZ-7Q-5iP" secondAttribute="baseline" id="9yS-UP-Xii"/>
-                <constraint firstItem="Gyi-ID-Z3v" firstAttribute="leading" secondItem="nah-Jm-ZYB" secondAttribute="trailing" constant="8" id="EYY-WC-fCM"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="Is4-pD-LOT" secondAttribute="leading" id="Fdb-2p-ULe"/>
-                <constraint firstItem="1Nr-L4-fcd" firstAttribute="top" secondItem="Is4-pD-LOT" secondAttribute="bottom" constant="13" id="IQl-Me-RRm"/>
-                <constraint firstItem="nah-Jm-ZYB" firstAttribute="leading" secondItem="QmA-ZI-ZL5" secondAttribute="trailing" constant="8" id="JJi-0O-nUi"/>
-                <constraint firstItem="tHZ-7Q-5iP" firstAttribute="top" secondItem="QmA-ZI-ZL5" secondAttribute="top" id="Jrk-f0-97K"/>
-                <constraint firstItem="7bY-JW-z0U" firstAttribute="leading" secondItem="IHD-1X-sid" secondAttribute="trailing" constant="20" id="Ptz-be-9mW"/>
-                <constraint firstItem="Gyi-ID-Z3v" firstAttribute="centerY" secondItem="nah-Jm-ZYB" secondAttribute="centerY" id="VGH-9C-eD1"/>
+                <constraint firstItem="1Nr-L4-fcd" firstAttribute="top" secondItem="Is4-pD-LOT" secondAttribute="bottom" constant="20" id="IQl-Me-RRm"/>
+                <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="40" id="L3i-yX-aR1"/>
+                <constraint firstItem="Is4-pD-LOT" firstAttribute="top" secondItem="amh-rw-Lc6" secondAttribute="bottom" constant="20" id="Mhj-qi-2kU"/>
+                <constraint firstItem="amh-rw-Lc6" firstAttribute="leading" secondItem="Oth-up-2k2" secondAttribute="leading" id="Onb-2V-oDj"/>
+                <constraint firstItem="IHD-1X-sid" firstAttribute="leading" secondItem="1Nr-L4-fcd" secondAttribute="leading" id="ROL-JN-PCH"/>
+                <constraint firstItem="Esb-Tu-Qdy" firstAttribute="top" secondItem="Oth-up-2k2" secondAttribute="bottom" constant="20" id="SdP-aO-0F7"/>
+                <constraint firstItem="Esb-Tu-Qdy" firstAttribute="leading" secondItem="Oth-up-2k2" secondAttribute="leading" id="TOO-U1-1YT"/>
                 <constraint firstItem="IHD-1X-sid" firstAttribute="top" secondItem="1Nr-L4-fcd" secondAttribute="bottom" constant="20" id="X4c-Ad-8yh"/>
-                <constraint firstItem="QmA-ZI-ZL5" firstAttribute="leading" secondItem="tHZ-7Q-5iP" secondAttribute="trailing" constant="8" id="YPs-UE-IFi"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gyi-ID-Z3v" secondAttribute="trailing" constant="20" id="Z4C-x5-1Op"/>
                 <constraint firstItem="7bY-JW-z0U" firstAttribute="centerY" secondItem="IHD-1X-sid" secondAttribute="centerY" id="aI1-uX-lQY"/>
-                <constraint firstItem="DgD-2y-4g5" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="58" id="aPM-dp-Eym"/>
-                <constraint firstAttribute="bottom" secondItem="yVO-jk-ay3" secondAttribute="bottom" constant="20" id="bAA-rc-QhB"/>
-                <constraint firstItem="tHZ-7Q-5iP" firstAttribute="leading" secondItem="DgD-2y-4g5" secondAttribute="trailing" constant="8" id="bV5-ZQ-94d"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="1Nr-L4-fcd" secondAttribute="leading" id="csu-Ug-9sD"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="dA1-zE-Xe8"/>
-                <constraint firstItem="DgD-2y-4g5" firstAttribute="leading" secondItem="U84-le-Iy4" secondAttribute="leading" id="ggy-GJ-WMj"/>
-                <constraint firstItem="DgD-2y-4g5" firstAttribute="leading" secondItem="IHD-1X-sid" secondAttribute="leading" id="hIj-5P-1iF"/>
-                <constraint firstItem="Is4-pD-LOT" firstAttribute="top" secondItem="Oth-up-2k2" secondAttribute="bottom" constant="13" id="lHy-u9-IB0"/>
+                <constraint firstItem="yVO-jk-ay3" firstAttribute="top" secondItem="IHD-1X-sid" secondAttribute="bottom" constant="20" id="pNA-q8-Kbk"/>
                 <constraint firstItem="yVO-jk-ay3" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="qa3-OH-fvn"/>
-                <constraint firstItem="U84-le-Iy4" firstAttribute="top" secondItem="DgD-2y-4g5" secondAttribute="bottom" constant="15" id="szl-Nh-CbR"/>
-                <constraint firstItem="fC0-ce-Yiz" firstAttribute="top" secondItem="IHD-1X-sid" secondAttribute="bottom" constant="20" id="vNW-gf-432"/>
-                <constraint firstItem="yVO-jk-ay3" firstAttribute="top" secondItem="U84-le-Iy4" secondAttribute="bottom" constant="13" id="wfT-QL-241"/>
+                <constraint firstItem="amh-rw-Lc6" firstAttribute="top" secondItem="Esb-Tu-Qdy" secondAttribute="bottom" constant="20" id="tcE-4N-wrm"/>
                 <constraint firstAttribute="trailing" secondItem="yVO-jk-ay3" secondAttribute="trailing" constant="20" id="wig-B4-OtV"/>
-                <constraint firstItem="tHZ-7Q-5iP" firstAttribute="top" secondItem="fC0-ce-Yiz" secondAttribute="bottom" constant="2" id="wo5-OT-LTj"/>
+                <constraint firstItem="7bY-JW-z0U" firstAttribute="leading" secondItem="IHD-1X-sid" secondAttribute="trailing" constant="8" id="wji-Ac-kwB"/>
             </constraints>
-            <point key="canvasLocation" x="312.5" y="81.5"/>
+            <point key="canvasLocation" x="312" y="81"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="Sz0-vm-i3t"/>
         <customObject id="VEJ-ic-3Ub" customClass="SUUpdater"/>

@@ -30,7 +30,11 @@ namespace Preferences {
     /* KVO compliant */
     NSString * const WindowBehaviour = @"window_behaviour";
     /* KVO compliant */
-    NSString * const Notifications = @"enable_notifications";
+    NSString * const CallNotifications = @"enable_call_notifications";
+    /* KVO compliant */
+    NSString * const MessagesNotifications = @"enable_messages_notifications";
+    /* KVO compliant */
+    NSString * const ContactRequestNotifications = @"enable_invitations_notifications";
     /* download folder for incoming images*/
     NSString * const DownloadFolder = @"download_folder";
 }
