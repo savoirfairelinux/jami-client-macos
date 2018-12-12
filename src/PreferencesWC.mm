@@ -18,13 +18,7 @@
  */
 #import "PreferencesWC.h"
 
-#import <QuartzCore/QuartzCore.h>
 
-//LRC
-#import <accountmodel.h>
-#import <codecmodel.h>
-#import <profilemodel.h>
-#import <profile.h>
 #import <api/datatransfermodel.h>
 
 //Ring

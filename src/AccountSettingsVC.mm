@@ -19,7 +19,6 @@
 
 //LRC
 #import <api/lrc.h>
-#import <api/account.h>
 #import <api/newaccountmodel.h>
 
 #import "views/NSColor+RingTheme.h"

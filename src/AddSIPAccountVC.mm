@@ -25,7 +25,6 @@
 //LRC
 #import <api/lrc.h>
 #import <api/newaccountmodel.h>
-#import <account.h>
 
 //ring
 #import "AddSIPAccountVC.h"

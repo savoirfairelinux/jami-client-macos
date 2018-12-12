@@ -39,17 +39,15 @@
 #import <api/contactmodel.h>
 #import <api/newcallmodel.h>
 
-#import "QNSTreeController.h"
 #import "delegates/ImageManipulationDelegate.h"
 #import "views/HoverTableRowView.h"
-#import "PersonLinkerVC.h"
 #import "views/IconButton.h"
 #import "views/RingTableView.h"
 #import "views/ContextualTableCellView.h"
 #import "utils.h"
 #import "RingWindowController.h"
 
-@interface SmartViewVC () <NSTableViewDelegate, NSTableViewDataSource, NSPopoverDelegate, ContextMenuDelegate, ContactLinkedDelegate, KeyboardShortcutDelegate> {
+@interface SmartViewVC () <NSTableViewDelegate, NSTableViewDataSource, NSPopoverDelegate, ContextMenuDelegate, KeyboardShortcutDelegate> {
 
     NSPopover* addToContactPopover;
 
