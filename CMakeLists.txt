@@ -135,12 +135,8 @@ SET(ringclient_CONTROLLERS
    src/GeneralPrefsVC.h
    src/ChatVC.mm
    src/ChatVC.h
-   src/PersonLinkerVC.mm
-   src/PersonLinkerVC.h
    src/SmartViewVC.mm
    src/SmartViewVC.h
-   src/BrokerVC.mm
-   src/BrokerVC.h
    src/ConversationVC.mm
    src/ConversationVC.h
    src/LoadingWCDelegate.h
@@ -162,12 +158,6 @@ SET(ringclient_CONTROLLERS
    src/RegisterNameWC.h
    src/ChooseAccountVC.h
    src/ChooseAccountVC.mm
-   src/ContactRequestsListVC.h
-   src/ContactRequestsListVC.mm
-   src/ContactRequestVC.h
-   src/ContactRequestVC.mm
-   src/AccBannedContactsVC.h
-   src/AccBannedContactsVC.mm
    src/MessagesVC.h
    src/MessagesVC.mm
    src/PasswordChangeWC.h
@@ -248,7 +238,6 @@ SET(ringclient_XIBS
    CurrentCall
    GeneralPrefs
    AccSipGeneral
-   AccMedia
    AccRingGeneral
    AccAdvancedSip
    AccAdvancedRing
@@ -261,8 +250,6 @@ SET(ringclient_XIBS
    RestoreAccountWindow
    ExportPasswordWindow
    MigrateRingAccountsWindow
-   PersonLinker
-   Broker
    Conversation
    RingWizardLinkAccount
    RingWizardNewAccount
@@ -270,9 +257,6 @@ SET(ringclient_XIBS
    Dialpad
    RegisterNameWindow
    AccountMenuItemView
-   ContactRequestList
-   ContactRequest
-   AccBannedContacts
    PasswordChange
    MessageCells
    AddSIPAccountVC

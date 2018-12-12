@@ -21,12 +21,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "views/CallView.h"
-
-// LRC
 #import <api/account.h>
-#import <api/call.h>
-
-class Call;
 
 @protocol CallViewControllerDelegate
 

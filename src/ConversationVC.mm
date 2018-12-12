@@ -23,9 +23,9 @@
 #import <qstring.h>
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
+#import <QuartzCore/QuartzCore.h>
 
 // LRC
-#import <globalinstances.h>
 
 #import "views/IconButton.h"
 #import "views/HoverButton.h"
@@ -36,8 +36,6 @@
 #import "utils.h"
 #import "RingWindowController.h"
 #import "NSString+Extensions.h"
-
-#import <QuartzCore/QuartzCore.h>
 
 @interface ConversationVC () {
 

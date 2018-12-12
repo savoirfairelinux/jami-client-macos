@@ -21,7 +21,6 @@
 //LRC
 #import <api/lrc.h>
 #import <api/newaccountmodel.h>
-#import <account.h>
 
 //Ring
 #import "views/ITProgressIndicator.h"

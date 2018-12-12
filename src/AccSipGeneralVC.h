@@ -20,7 +20,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import <account.h>
 #import "LrcModelsProtocol.h"
 #import "AccountSettingsVC.h"
 

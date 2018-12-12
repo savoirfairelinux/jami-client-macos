@@ -24,8 +24,6 @@
 #import <QMimeData>
 #import <QtMacExtras/qmacfunctions.h>
 #import <QtCore/qabstractitemmodel.h>
-#import <QItemSelectionModel>
-#import <QItemSelection>
 #import <QPixmap>
 
 ///LRC
@@ -41,9 +39,7 @@
 #import "views/CallView.h"
 #import "views/NSColor+RingTheme.h"
 #import "delegates/ImageManipulationDelegate.h"
-#import "PersonLinkerVC.h"
 #import "ChatVC.h"
-#import "BrokerVC.h"
 #import "views/IconButton.h"
 #import "views/CallLayer.h"
 #import "utils.h"
@@ -60,7 +56,7 @@
 
 @end
 
-@interface CurrentCallVC () <NSPopoverDelegate, ContactLinkedDelegate> {
+@interface CurrentCallVC () <NSPopoverDelegate> {
     std::string convUid_;
     std::string callUid_;
     const lrc::api::account::Info *accountInfo_;
@@ -918,39 +914,11 @@
 }
 
 - (IBAction)toggleTransferView:(id)sender {
-    if (_brokerPopoverVC != nullptr) {
-        [_brokerPopoverVC performClose:self];
-        _brokerPopoverVC = NULL;
-        [self.transferButton setPressed:NO];
-    } else {
-        auto* brokerVC = [[BrokerVC alloc] initWithMode:BrokerMode::TRANSFER];
-        _brokerPopoverVC = [[NSPopover alloc] init];
-        [_brokerPopoverVC setContentSize:brokerVC.view.frame.size];
-        [_brokerPopoverVC setContentViewController:brokerVC];
-        [_brokerPopoverVC setAnimates:YES];
-        [_brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
-        [_brokerPopoverVC setDelegate:self];
-        [_brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
-        [videoView setCallDelegate:nil];
-    }
+
 }
 
 - (IBAction)toggleAddParticipantView:(id)sender {
-    if (_brokerPopoverVC != nullptr) {
-        [_brokerPopoverVC performClose:self];
-        _brokerPopoverVC = NULL;
-        [self.addParticipantButton setPressed:NO];
-    } else {
-        auto* brokerVC = [[BrokerVC alloc] initWithMode:BrokerMode::CONFERENCE];
-        _brokerPopoverVC = [[NSPopover alloc] init];
-        [_brokerPopoverVC setContentSize:brokerVC.view.frame.size];
-        [_brokerPopoverVC setContentViewController:brokerVC];
-        [_brokerPopoverVC setAnimates:YES];
-        [_brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
-        [_brokerPopoverVC setDelegate:self];
-        [_brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
-        [videoView setCallDelegate:nil];
-    }
+    
 }
 
 #pragma mark - NSPopOverDelegate
