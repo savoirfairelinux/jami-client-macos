@@ -8,8 +8,8 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "4ev-TK-8Yt"; */
 "4ev-TK-8Yt.title" = "取消";
 
-/* Class = "NSTextFieldCell"; title = "Go to the account management setting of the device, choose the Ring account to use and select \"Link another device to this account\".  "; ObjectID = "4me-D9-6GK"; */
-"4me-D9-6GK.title" = "到裝置的帳號管理設定頁面，選擇使用 Ring 帳號並選取「連結其他裝置到此帳號」。\n";
+/* Class = "NSTextFieldCell"; title = "Go to the account management setting of the device, choose the Jami account to use and select \"Link another device to this account\".  "; ObjectID = "4me-D9-6GK"; */
+"4me-D9-6GK.title" = "Go to the account management setting of the device, choose the Jami account to use and select \"Link another device to this account\".  ";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
 "8b8-bt-eAj.title" = "連結";
@@ -29,8 +29,8 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
 "Pcj-BY-tou.title" = "取消";
 
-/* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "U2K-fu-INc"; */
-"U2K-fu-INc.title" = "輸入你的 Ring 帳號密碼";
+/* Class = "NSTextFieldCell"; title = "Enter password"; ObjectID = "U2K-fu-INc"; */
+"U2K-fu-INc.title" = "輸入密碼";
 
 /* Class = "NSButtonCell"; title = "I'm ready"; ObjectID = "XN4-uc-BSt"; */
 "XN4-uc-BSt.title" = "我準備好了";

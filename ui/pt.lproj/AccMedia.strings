@@ -6,7 +6,7 @@
 "CO7-VF-04Q.title" = "Ativo";
 
 /* Class = "NSButtonCell"; title = "Enable ringtones"; ObjectID = "KkI-i1-mfY"; */
-"KkI-i1-mfY.title" = "Enable ringtones";
+"KkI-i1-mfY.title" = "Ativar toques";
 
 /* Class = "NSButtonCell"; title = "Up"; ObjectID = "MbZ-7X-K5I"; */
 "MbZ-7X-K5I.title" = "Ativo";
@@ -15,16 +15,16 @@
 "OSC-eG-2kt.title" = "Vídeo";
 
 /* Class = "NSTextFieldCell"; title = "Ringtones"; ObjectID = "aMg-uJ-Krx"; */
-"aMg-uJ-Krx.title" = "Ringtones";
+"aMg-uJ-Krx.title" = "Toques de chamada";
 
 /* Class = "NSTextFieldCell"; title = "Codecs"; ObjectID = "biN-bX-qM1"; */
 "biN-bX-qM1.title" = "Codecs";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Frequency"; ObjectID = "dwG-Ro-bIS"; */
-"dwG-Ro-bIS.placeholderString" = "Frequency";
+"dwG-Ro-bIS.placeholderString" = "Frequência";
 
 /* Class = "NSTextFieldCell"; title = "details"; ObjectID = "dwG-Ro-bIS"; */
-"dwG-Ro-bIS.title" = "details";
+"dwG-Ro-bIS.title" = "detalhes";
 
 /* Class = "NSTextFieldCell"; title = "Audio"; ObjectID = "gzX-Wc-S6g"; */
 "gzX-Wc-S6g.title" = "Áudio";
@@ -33,13 +33,13 @@
 "gza-RF-yKF.title" = "Desligado";
 
 /* Class = "NSButtonCell"; title = "Play"; ObjectID = "hHf-uc-NlW"; */
-"hHf-uc-NlW.title" = "Play";
+"hHf-uc-NlW.title" = "Reproduzir";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "pvl-9U-X4l"; */
 "pvl-9U-X4l.placeholderString" = "Nome";
 
 /* Class = "NSTextFieldCell"; title = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)"; ObjectID = "rRr-la-G9L"; */
-"rRr-la-G9L.title" = "Codecs are used when establishing a communication with someone. They are activable and reorderable (first enabled in list preferred)";
+"rRr-la-G9L.title" = "Os codecs são usados ao estabelecer uma comunicação com alguém. É possível ativá-los e reordená-los (o primeiro ativado na lista é o preferido)";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "rU5-XQ-Ixc"; */
 "rU5-XQ-Ixc.placeholderString" = "Nome";

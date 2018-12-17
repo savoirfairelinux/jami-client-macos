@@ -1,48 +1,48 @@
 
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
-"1ob-x1-u74.title" = "Account migration completed";
+"1ob-x1-u74.title" = "Terminada a migração da conta";
 
-/* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "RingID";
+/* Class = "NSTextFieldCell"; placeholderString = "ID"; ObjectID = "859-10-HEb"; */
+"859-10-HEb.placeholderString" = "ID";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later.";
+"859-10-HEb.title" = "The following account needs to be migrated to the new Jami account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If your not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Account migration error";
+"8K3-9Z-MKH.title" = "Erro de migração de conta";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Congratulations, your account has been migrated with Success.";
+"C2l-rz-Gqt.title" = "Parabéns, a sua nova conta foi migrada com sucesso.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
-"ITE-yD-CTb.title" = "Delete this account";
+"ITE-yD-CTb.title" = "Eliminar esta conta";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
-"KuO-oT-zhY.placeholderString" = "Confirm your new password...";
+"KuO-oT-zhY.placeholderString" = "Confirme a sua nova palavra-chave...";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "OK";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Window";
+"QvC-M9-y7g.title" = "Janela";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "VN1-A3-RIh"; */
 "VN1-A3-RIh.title" = "OK";
 
 /* Class = "NSTextFieldCell"; title = "Confirmation"; ObjectID = "aOa-1q-AZe"; */
-"aOa-1q-AZe.title" = "Confirmation";
+"aOa-1q-AZe.title" = "Confirmação";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.placeholderString" = "error label";
+"e7n-Ev-bK7.placeholderString" = "rótulo do erro";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
-"rW5-Il-5YD.title" = "Migrate";
+"rW5-Il-5YD.title" = "Migrar";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "vwh-K9-3O9"; */
-"vwh-K9-3O9.title" = "Senha";
+"vwh-K9-3O9.title" = "Palavra-chave";
 
 /* Class = "NSTextFieldCell"; title = "Account migration required"; ObjectID = "wmv-sA-Mlh"; */
 "wmv-sA-Mlh.title" = "Necessária migração de conta";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "xqz-Uz-hqU"; */
-"xqz-Uz-hqU.placeholderString" = "Password...";
+"xqz-Uz-hqU.placeholderString" = "Palavra-chave...";

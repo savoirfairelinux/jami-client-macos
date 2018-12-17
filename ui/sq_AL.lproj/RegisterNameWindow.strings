@@ -2,14 +2,14 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "E detyrueshme*";
 
-/* Class = "NSTextFieldCell"; title = "Other users can use it instead of your RingID"; ObjectID = "9gi-0u-67t"; */
-"9gi-0u-67t.title" = "Përdorues të tjerë mund të përdorin këtë, në vend se të RingID tuaj";
+/* Class = "NSTextFieldCell"; title = "Other users can use it instead of your ID"; ObjectID = "9gi-0u-67t"; */
+"9gi-0u-67t.title" = "Other users can use it instead of your ID";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
 "Aeh-tK-RjX.title" = "Ndodhi një gabim gjatë regjistrimit të emrit tuaj të përdoruesit";
 
-/* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Jepni fjalëkalimin e llogarisë tuaj Ring";
+/* Class = "NSTextFieldCell"; title = "Enter your password"; ObjectID = "B6x-jj-48R"; */
+"B6x-jj-48R.title" = "Jepni fjalëkalimin tuaj";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
 "JWw-7m-ywL.title" = "Dritare";

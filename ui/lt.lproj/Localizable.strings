@@ -68,7 +68,7 @@
 "Copy number" = "Kopijuoti numerį";
 
 /* Contextual menu entry */
-"Create RING Account" = "Sukurti RING paskyrą";
+"Create Jami Account" = "Create Jami Account";
 
 /* Contextual menu entry */
 "Create SIP Account" = "Sukurti SIP paskyrą";
@@ -84,6 +84,9 @@
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Gaunamasis skambutis nuo %@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
 
 /* Message from {Name} */
 "Message from %@" = "Žinutė nuo %@";
@@ -114,6 +117,7 @@
 
 /* Button Action */
 "Refuse" = "Atmesti";
+"Accept" = "Priimti";
 
 /* Contextual menu entry */
 "Remove value" = "Šalinti reikšmę";
@@ -128,7 +132,7 @@
 "Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"ID : " = "ID : ";
 
 /* No comment provided by engineer. */
 "Share" = "Share";
@@ -149,16 +153,16 @@
 "The entered username is not available" = "Įvestas naudotojo vardas yra neprieinamas";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "Ši paskyra turi būti perkelta į naująjį Ring paskyros formatą:";
+"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Norėdami užbaigti procesą, jūs turite atverti Ring naujame įrenginyje ir pasirinkti parinktį \"Susieti šį įrenginį su paskyra\". Jūsų pin galioja 10 minučių.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Norėdami tęsti perkėlimą, privalote pasirinkti savo paskyrai slaptažodį. Šis slaptažodis bus naudojamas jūsų pagrindiniam raktui užšifruoti. Taip pat jis bus reikalingas pridedant naujus įrenginius į jūsų Ring paskyrą. Jeigu jūs nesate pasiruošę pasirinkti slaptažodį, tuomet galite užverti Ring ir pratęsti perkėlimą vėliau.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Nežinomas";
@@ -179,7 +183,15 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "Sveiki atvykę į Ring";
+"Welcome to Ring" = "Welcome to Jami";
 "Create a new account" = "Create a new account";
 "Add a SIP account" = "Add a SIP account";
 
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";

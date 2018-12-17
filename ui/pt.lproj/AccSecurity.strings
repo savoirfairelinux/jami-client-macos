@@ -1,45 +1,45 @@
 
 /* Class = "NSButtonCell"; title = "Require certificates for incoming TLS connections"; ObjectID = "1f9-X5-ykb"; */
-"1f9-X5-ykb.title" = "Require certificates for incoming TLS connections";
+"1f9-X5-ykb.title" = "Necessita de certificados para conexões TLS recebidas";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Verify certificates, as a client";
+"1xi-9G-zOX.title" = "Verificar certificados, como cliente";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
 "2e5-zS-ghg.title" = "Usar lista personalizada de algoritmos de cifragem";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "cipher cell";
+"5LC-T6-hpk.placeholderString" = "célula de cifra";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
-"7c2-kF-dcs.placeholderString" = "Password...";
+"7c2-kF-dcs.placeholderString" = "Palavra-chave...";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
-"9Q3-1W-Lh3.title" = "Negotiation timeout";
+"9Q3-1W-Lh3.title" = "Tempo limite de negociação";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
-"Ig9-B1-7N3.title" = "Fallback on RTP";
+"Ig9-B1-7N3.title" = "Reserva em RTP";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
 "JHb-iu-ZwI.title" = "Chave privada";
 
 /* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "Jqz-P0-zAz"; */
-"Jqz-P0-zAz.title" = "User Certificate";
+"Jqz-P0-zAz.title" = "Certificado do Utilizador";
 
 /* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
-"UxS-et-whJ.title" = "Server name instance for outgoing TLS connection";
+"UxS-et-whJ.title" = "Nome da instância do servidor para conexões de saída TLS";
 
 /* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
-"YtQ-hx-hih.title" = "Use SRTP";
+"YtQ-hx-hih.title" = "Usar SRTP";
 
 /* Class = "NSButtonCell"; title = "Use TLS transport"; ObjectID = "oTT-gO-fqM"; */
-"oTT-gO-fqM.title" = "Use TLS transport";
+"oTT-gO-fqM.title" = "Usar transporte TLS";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "uOE-XA-5gW"; */
 "uOE-XA-5gW.title" = "Método de protocolo TLS";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
-"vPF-Rp-aR6.title" = "Certificate Authority list";
+"vPF-Rp-aR6.title" = "Lista de Autoridades de Certificados";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
-"x2s-ov-cVQ.title" = "Verify incoming certificates, as a server";
+"x2s-ov-cVQ.title" = "Verificar certificados recebidos, como um servidor";

@@ -68,7 +68,7 @@
 "Copy number" = "复制号码";
 
 /* Contextual menu entry */
-"Create RING Account" = "创建Ring帐户";
+"Create Jami Account" = "Create Jami Account";
 
 /* Contextual menu entry */
 "Create SIP Account" = "创建SIP帐户";
@@ -84,6 +84,9 @@
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "来电：%@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
 
 /* Message from {Name} */
 "Message from %@" = "消息来自%@";
@@ -114,6 +117,7 @@
 
 /* Button Action */
 "Refuse" = "拒接";
+"Accept" = "接听";
 
 /* Contextual menu entry */
 "Remove value" = "删除";
@@ -128,7 +132,7 @@
 "Revise Input" = "修改输入";
 
 /* Text shown to the user */
-"RingID : " = "RingID：";
+"ID : " = "ID : ";
 
 /* No comment provided by engineer. */
 "Share" = "共享";
@@ -149,16 +153,16 @@
 "The entered username is not available" = "该用户名不可用";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "以下帐户需要迁移至新版Ring数据格式：";
+"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "您输入的密码无法解锁该帐户";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "要完成该操作，请在新设备上打开Ring，点击“将此设备与一个帐户进行连接”进行设置。您的PIN在10分钟内有效。";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "要进行帐户迁移，您需要为该帐户设置一个密码，用于加密您的主密钥。当您连接该帐户至其他设备时，您需要输入这个密码。如果您尚未确定密码，请关闭Ring并稍后重新进行迁移。";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Name used when user leave field empty */
 "Unknown" = "未知";
@@ -179,7 +183,15 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "欢迎来到Ring";
+"Welcome to Ring" = "Welcome to Jami";
 "Create a new account" = "新建帐户";
 "Add a SIP account" = "Add a SIP account";
 
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";

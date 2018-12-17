@@ -1,9 +1,9 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "0eY-9x-bAr"; */
-"0eY-9x-bAr.placeholderString" = "Server url...";
+"0eY-9x-bAr.placeholderString" = "URL do servidor...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
-"6u9-cM-ep0.placeholderString" = "realm...";
+"6u9-cM-ep0.placeholderString" = "domínio...";
 
 /* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
 "Atv-t7-5YJ.title" = "Igual aos parâmetros locais";
@@ -12,28 +12,28 @@
 "FQ4-fp-Pxj.title" = "Min";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
-"Jho-hi-Mvg.title" = "Audio RTP port Range";
+"Jho-hi-Mvg.title" = "Intervalo de portas RTP de áudio";
 
 /* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
-"K9I-vh-jeu.title" = "Network Interface";
+"K9I-vh-jeu.title" = "Interface da Rede";
 
 /* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
-"OL5-DI-aCq.title" = "Set published address and port";
+"OL5-DI-aCq.title" = "Configurar endereço e portas publicadas";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
-"OR2-la-DUE.placeholderString" = "password...";
+"OR2-la-DUE.placeholderString" = "palavra-chave...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "username..."; ObjectID = "P7k-xH-2mr"; */
-"P7k-xH-2mr.placeholderString" = "username...";
+"P7k-xH-2mr.placeholderString" = "nome de utilizador...";
 
 /* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
-"QS0-TJ-NQh.title" = "Using TURN";
+"QS0-TJ-NQh.title" = "A usar TURN";
 
 /* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
-"Qf3-E3-5U6.title" = "Published Address";
+"Qf3-E3-5U6.title" = "Endereço Publicado";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
-"XA8-Sy-CYG.title" = "Video RTP port Range";
+"XA8-Sy-CYG.title" = "Intervalo de portas RTP de vídeo";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
 "a6W-wm-OmC.title" = "Min";
@@ -42,13 +42,13 @@
 "dbq-qU-93x.title" = "Max";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "fB0-X8-GXk"; */
-"fB0-X8-GXk.title" = "Radio";
+"fB0-X8-GXk.title" = "Rádio";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
-"fCd-4d-sP0.title" = "Registration expire";
+"fCd-4d-sP0.title" = "O registo expirou";
 
 /* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
-"gVd-Dw-1B4.title" = "Using STUN";
+"gVd-Dw-1B4.title" = "A usar STUN";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "oa2-Pe-6Uw"; */
 "oa2-Pe-6Uw.title" = "Max";
@@ -57,16 +57,16 @@
 "sTk-1C-1KO.title" = "Endereço";
 
 /* Class = "NSTextFieldCell"; title = "Local port"; ObjectID = "shs-Xm-qnY"; */
-"shs-Xm-qnY.title" = "Local port";
+"shs-Xm-qnY.title" = "Porta local";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
-"uzg-09-8vi.placeholderString" = "Server url...";
+"uzg-09-8vi.placeholderString" = "URL do servidor...";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "wl8-YK-M76"; */
 "wl8-YK-M76.title" = "Porta";
 
 /* Class = "NSTextFieldCell"; title = "seconds"; ObjectID = "xGw-j0-4ID"; */
-"xGw-j0-4ID.title" = "seconds";
+"xGw-j0-4ID.title" = "segundos";
 
 /* Class = "NSTextFieldCell"; title = "Registration"; ObjectID = "yB5-ET-gBL"; */
-"yB5-ET-gBL.title" = "Registration";
+"yB5-ET-gBL.title" = "Registo";

@@ -68,7 +68,7 @@
 "Copy number" = "Nummer kopiëren";
 
 /* Contextual menu entry */
-"Create RING Account" = "Ring-account aanmaken";
+"Create Jami Account" = "Create Jami Account";
 
 /* Contextual menu entry */
 "Create SIP Account" = "SIP-account aanmaken";
@@ -84,6 +84,9 @@
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Inkomende oproep van %@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
 
 /* Message from {Name} */
 "Message from %@" = "Bericht van %@";
@@ -114,6 +117,7 @@
 
 /* Button Action */
 "Refuse" = "Afwijzen";
+"Accept" = "Aanvaarden";
 
 /* Contextual menu entry */
 "Remove value" = "Waarde verwijderen";
@@ -128,7 +132,7 @@
 "Revise Input" = "Invoer herzien";
 
 /* Text shown to the user */
-"RingID : " = "Ring-ID:";
+"ID : " = "ID:";
 
 /* No comment provided by engineer. */
 "Share" = "Delen";
@@ -149,16 +153,16 @@
 "The entered username is not available" = "De ingevoerde gebruikersnaam is niet beschikbaar";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "De volgende account moet gemigreerd worden naar het nieuwe Ring-accountformaat:";
+"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Het wachtwoord dat je hebt ingevoerd ontgrendelt deze account niet";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Om het proces te voltooien open je Ring op het nieuwe apparaat en kies je de optie \"Dit apparaat aan een account koppelen\". Je pincode is 10 minuten geldig.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Om door te gaan met de migratie moet je een wachtwoord voor je account kiezen. Dit wachtwoord zal gebruikt worden om je hoofdsleutel te versleutelen. Het wachtwoord wordt vereist om nieuwe apparaten aan je Ring-account toe te voegen. Als je nog niet klaar bent om een wachtwoord te kiezen kan je Ring sluiten en de migratie later verderzetten.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Onbekend";
@@ -179,7 +183,15 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "Welkom bij Ring";
+"Welcome to Ring" = "Welcome to Jami";
 "Create a new account" = "Nieuwe account aanmaken";
 "Add a SIP account" = "Add a SIP account";
 
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";

@@ -44,11 +44,11 @@
 /* Class = "NSTextFieldCell"; title = "Update"; ObjectID = "r4u-t3-gBc"; */
 "r4u-t3-gBc.title" = "Mise à jour";
 
-/* Class = "NSButtonCell"; title = "Enable Desktop Notifications"; ObjectID = "uCL-ye-tsv"; */
-"uCL-ye-tsv.title" = "Activer les notifications";
+/* Class = "NSButtonCell"; title = "Enable notifications for incoming calls"; ObjectID = "uCL-ye-tsv"; */
+"uCL-ye-tsv.title" = "Enable notifications for incoming calls";
 
-/* Class = "NSButtonCell"; title = "Bring Ring to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
-"uYI-hA-JHk.title" = "Mettre Ring au premier plan lors d'un appel entrant";
+/* Class = "NSButtonCell"; title = "Bring Jami to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
+"uYI-hA-JHk.title" = "Bring Jami to foreground on incoming calls";
 
 /* Class = "NSTextFieldCell"; title = "This is shared with your contacts "; ObjectID = "vbU-2S-O58"; */
 "vbU-2S-O58.title" = "Ceci est partagé avec vos contacts";

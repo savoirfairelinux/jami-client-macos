@@ -2,11 +2,11 @@
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
 "1ob-x1-u74.title" = "Hesap taşıma tamamlandı";
 
-/* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "Ring Kimliği";
+/* Class = "NSTextFieldCell"; placeholderString = "ID"; ObjectID = "859-10-HEb"; */
+"859-10-HEb.placeholderString" = "Kimlik";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "Belirtilen hesabın yeni Ring hesap biçimine göç etmesi gerekiyor:\\nTakma ad: \\nKimlik: \\nGöçü sürdürmek için, hesabınız için bir parola seçmelisiniz. Bu parola ana anahtarınızı şifrelemek için kullanılacak. Bu, yeni aygıtları Ring hesabınıza eklerken gerekecek. Eğer parola seçmek için hazır değilseniz, Ring'i kapatabilir ve göçü daha sonra sürdürebilirsiniz.";
+"859-10-HEb.title" = "The following account needs to be migrated to the new Jami account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If your not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
 "8K3-9Z-MKH.title" = "Hesap taşıma hatası";

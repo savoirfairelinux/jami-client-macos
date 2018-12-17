@@ -2,14 +2,14 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Pakollinen*";
 
-/* Class = "NSTextFieldCell"; title = "Other users can use it instead of your RingID"; ObjectID = "9gi-0u-67t"; */
-"9gi-0u-67t.title" = "Muut voivat käyttää sitä RingID:n sijaan";
+/* Class = "NSTextFieldCell"; title = "Other users can use it instead of your ID"; ObjectID = "9gi-0u-67t"; */
+"9gi-0u-67t.title" = "Other users can use it instead of your ID";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
 "Aeh-tK-RjX.title" = "Käyttäjänimen rekisteröinnissä tapahtui virhe";
 
-/* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Syötä Ring- käyttäjätunnuksen salasana";
+/* Class = "NSTextFieldCell"; title = "Enter your password"; ObjectID = "B6x-jj-48R"; */
+"B6x-jj-48R.title" = "Enter your password";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
 "JWw-7m-ywL.title" = "Ikkuna";

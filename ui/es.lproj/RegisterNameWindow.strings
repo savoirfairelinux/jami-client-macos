@@ -2,14 +2,14 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Requerido*";
 
-/* Class = "NSTextFieldCell"; title = "Other users can use it instead of your RingID"; ObjectID = "9gi-0u-67t"; */
-"9gi-0u-67t.title" = "Otros usuarios pueden utilizarlo en lugar de tu RingID";
+/* Class = "NSTextFieldCell"; title = "Other users can use it instead of your ID"; ObjectID = "9gi-0u-67t"; */
+"9gi-0u-67t.title" = "Other users can use it instead of your ID";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
 "Aeh-tK-RjX.title" = "Se ha producido un error al registrar el nombre de usuario";
 
-/* Class = "NSTextFieldCell"; title = "Enter your Ring account password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Ingresa la contraseña de tu cuenta de Ring";
+/* Class = "NSTextFieldCell"; title = "Enter your password"; ObjectID = "B6x-jj-48R"; */
+"B6x-jj-48R.title" = "Ingresa tu contraseña";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
 "JWw-7m-ywL.title" = "Ventana";
@@ -33,4 +33,4 @@
 "lT3-Bh-MnL.title" = "Registrar";
 
 /* Class = "NSTextFieldCell"; title = "Register a public username"; ObjectID = "tje-EZ-ZPI"; */
-"tje-EZ-ZPI.title" = "Register a public username";
+"tje-EZ-ZPI.title" = "Registrar nombre de usuario público";

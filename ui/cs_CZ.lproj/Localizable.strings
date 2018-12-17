@@ -68,7 +68,7 @@
 "Copy number" = "Kopírovat číslo";
 
 /* Contextual menu entry */
-"Create RING Account" = "Vytvořit účet RING";
+"Create Jami Account" = "Create Jami Account";
 
 /* Contextual menu entry */
 "Create SIP Account" = "Vytvořit účet SIP";
@@ -84,6 +84,9 @@
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Příchozí hovor od %@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
 
 /* Message from {Name} */
 "Message from %@" = "Zpráva od  %@";
@@ -114,6 +117,7 @@
 
 /* Button Action */
 "Refuse" = "Odmítnout";
+"Accept" = "Přijmout";
 
 /* Contextual menu entry */
 "Remove value" = "Odstranit hodnotu";
@@ -128,7 +132,7 @@
 "Revise Input" = "Pozměnit vstup";
 
 /* Text shown to the user */
-"RingID : " = "RingID : ";
+"ID : " = "ID: ";
 
 /* No comment provided by engineer. */
 "Share" = "Sdílet";
@@ -149,16 +153,16 @@
 "The entered username is not available" = "Zadané uživatelské jméno není dostupné";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Ring account format:" = "Následující účet musí být převeden do nového formátu účtů Ring:";
+"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Vámi zadané heslo neodemkne tento účet";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Ring on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pro dokončení tohoto postupu otevřete Ring na novém zařízení a vyberte volbu „Připojit toto zařízení k účtu“. Váš PIN zůstává platný 10 minut.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later." = "Pro pokračování v převodu si musíte k účtu zvolit heslo. Toto heslo bude použito k zašifrování vašeho hlavního klíče. Bude požadováno pro přidávání nových zařízení k vašemu účtu Ring. Pokud nejste připraveni si heslo zvolit, můžete Ring zavřít a pokračovat v převodu později.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Neznámé";
@@ -179,7 +183,15 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "Vítejte v Ringu";
+"Welcome to Ring" = "Welcome to Jami";
 "Create a new account" = "Create a new account";
 "Add a SIP account" = "Add a SIP account";
 
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";

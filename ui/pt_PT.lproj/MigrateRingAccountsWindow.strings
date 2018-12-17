@@ -2,11 +2,11 @@
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
 "1ob-x1-u74.title" = "Terminada a migração da conta";
 
-/* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "RingID";
+/* Class = "NSTextFieldCell"; placeholderString = "ID"; ObjectID = "859-10-HEb"; */
+"859-10-HEb.placeholderString" = "ID";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "A seguinte conta tem de ser migrada para o novo formato da conta Ring:\\nApelido: \\nID:\\nPara continuar a migração, tem de escolher uma palavra-chave para a sua conta. Esta palavra-chave será utilizada para criptografar a sua palavra-chave mestre. Ela será solicitada quando forem adicionados novos dispositivos na sua conta Ring. Caso não decida criar uma palavra-chave agora, pode fechar o Ring e continuar com a migração mais tarde.";
+"859-10-HEb.title" = "The following account needs to be migrated to the new Jami account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If your not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
 "8K3-9Z-MKH.title" = "Erro de migração de conta";
