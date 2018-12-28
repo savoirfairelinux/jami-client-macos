@@ -45,6 +45,7 @@ static inline NSString* bestIDForConversation(const lrc::api::conversation::Info
         }
     } catch (std::out_of_range& e) {
         NSLog(@"bestIDForConversation: getContact - out of range");
+        return @"";
     }
 }
 
@@ -96,6 +97,7 @@ static inline NSString* bestNameForConversation(const lrc::api::conversation::In
         return @(alias.c_str());
     } catch (std::out_of_range& e) {
         NSLog(@"bestNameForConversation: getContact - out of range");
+        return @"";
     }
 }
 
