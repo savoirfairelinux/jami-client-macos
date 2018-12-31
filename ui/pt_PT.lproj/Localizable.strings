@@ -86,7 +86,7 @@
 "Incoming call from %@" = "A receber chamada de %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Mensagem recebida de %@";
 
 /* Message from {Name} */
 "Message from %@" = "Mensagem de %@";
@@ -110,7 +110,7 @@
 "Passwords don't match" = "As palavras-chave não são iguais";
 
 /* Button label */
-"Pause" = "Pausar";
+"Pause" = "Pausa";
 
 /* Button label */
 "Play" = "Reproduzir";
@@ -132,7 +132,7 @@
 "Revise Input" = "Rever o introduzido";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"ID : " = "ID: ";
 
 /* No comment provided by engineer. */
 "Share" = "Partilhar";
@@ -153,16 +153,16 @@
 "The entered username is not available" = "O nome de utilizador introduzido não está disponível";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "A seguinte conta tem de ser migrada para o novo formato de conta Jami:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "A palavra-chave que introduziu não desbloqueia esta conta";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Para terminar o processo, tem de abrir o Jami no dispositivo e escolher a opção \"Associar este dispositivo a uma conta.\" O seu PIN é válido por 10 minutos.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Para continuar com a migração, tem de escolher uma palavra-chave para a sua conta. Esta palavra-chave será utilizada para encriptar a sua chave-mestra. Será necessária para adicionar novos dispositivos à sua conta Jami. Se não está pronto a escolher uma palavra-chave, pode fechar o Jami e continuar a migração mais tarde.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Desconhecido";
@@ -180,18 +180,18 @@
 "Select archive" = "Selecionar arquivo";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Associar a uma conta";
 
 /* Welcome title */
 "Welcome to Ring" = "Bem-vindo ao Jami";
 "Create a new account" = "Criar nova conta";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Adicionar uma conta SIP";
 
 /* Notification message */
 "Send you a contact request" = "Send you a contact request";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Este é o seu nome de utilizador Jami.\nCopie e o partilhe-o com os seus amigos!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Este é o seu ID.\nCopie-o e partilhe-o com os seus amigos!";

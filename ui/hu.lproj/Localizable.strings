@@ -2,7 +2,7 @@
 "A network error occured during the export" = "Hálózati hiba történt az exportálás során";
 
 /* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+"Account has no password" = "A fiók nincs jelszava";
 
 /* Contextual menu action */
 "Add to contacts" = "Hozzáadás a partnerekhez";
@@ -20,7 +20,7 @@
 "Block contact" = "Partner letiltása";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Álnév:";
 
 /* Error shown to the user */
 "An error occured during the export" = "Hiba történt az exportálás során";
@@ -29,7 +29,7 @@
 "Backup account" = "Fiók biztonsági mentése";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "Hívja a számot";
 
 /* File transfer canceled label */
 "Canceled" = "Törölve";
@@ -77,16 +77,16 @@
 "Failed" = "Sikertelen";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Az fiók átvitel nem sikerült. Törölje a fiókot, vagy az újrapróbálkozáshoz az Rendben gombbal.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "A kikeresés meghiúsult";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "Bejövő hívás a következőtől: %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Bejövő üzenet a következőtől: %@";
 
 /* Message from {Name} */
 "Message from %@" = "Üzenet a következőtől: %@";
@@ -98,13 +98,13 @@
 "No account available" = "Nincs elérhető fiókot";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Új fiók létrehozásához navigáljon a beállításokhoz";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "A jelszavak nem egyeznek.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "A jelszó túl rövid";
 
 /* Indication for user */
 "Passwords don't match" = "A jelszavak nem egyeznek";
@@ -123,16 +123,16 @@
 "Remove value" = "Érték eltávolítása";
 
 /* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
+"Reopen account to see your hash" = "A hash érték megjelenítéséhez nyissa meg újra a fiókot";
 
 /* Contextual menu entry */
 "Restore account" = "Fiók visszaállítása";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Bevitel módosítása";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"ID : " = "Azonosító:";
 
 /* No comment provided by engineer. */
 "Share" = "Megosztás ";
@@ -141,57 +141,57 @@
 "Success" = "Siker";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "Szöveges műveletek";
 
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "A beírt felhasználónév elérhető";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Felhasználónév érvénytelen. Legalább 3 karakterből kell állnia, és csak kisbetűs alfanumerikus karaktereket tartalmazhat.";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "A beírt felhasználónév nem érhető el";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "A fiók átvitel szükséges az új Jami fiók formátumra:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "A megadott jelszó nem oldja fel ezt a fiókot";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön. Hozzon létre egy új fiókot az „Eszköz összekapcsolása egy fiókhoz” opcióval. A PIN-kódja 10 percig érvényes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Az áttelepítés folytatásához ki kell választania a fiókhoz tartozó jelszót. Ezt a jelszót fogja használni a fő kulcs titkosításához. Szükséges, hogy új eszközöket adjon hozzá a Jami fiókjához. Ha nem áll készen a jelszó kiválasztására, akkor bezárhatja a Jami-t és később folytathatja az áttelepítést.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Ismeretlen";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "A fiók átvitelre a fiók exportálása előtt szükség van";
 
 /* Remove account alert title */
 "Remove account" = "Fiók eltávolítása";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Figyelmeztetés! Ez a művelet eltávolítja ezt a fiókot az eszközön!\nMegjegyzés: ez a művelet nem vonható vissza. A regisztrált neved is elveszhet!";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Fiók archívum kiválasztása…";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Fiók összekapcsolása";
 
 /* Welcome title */
 "Welcome to Ring" = "Isten hozott!";
 "Create a new account" = "Új fiók létrehozása";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "SIP fiók hozzáadása";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Kapcsolatfelvétel kérelme";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Ez az Ön Jami azonosítója.\nMásolja ki, és ossza meg barátaival!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Ez az Ön azonosítója.\nMásolja és ossza meg a barátaival!";

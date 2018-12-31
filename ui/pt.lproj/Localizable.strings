@@ -2,16 +2,16 @@
 "A network error occured during the export" = "Ocorreu um erro na rede durante a exportação";
 
 /* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+"Account has no password" = "A conta não tem palavra-chave";
 
 /* Contextual menu action */
 "Add to contacts" = "Adicionar aos contactos";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Fazer video-chamada";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Fazer chamada de áudio";
 
 /* Contextual menu action */
 "Clear conversation" = "Limpar conversação";
@@ -20,16 +20,16 @@
 "Block contact" = "Bloquear contacto";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Alias : " = "Apelido: ";
 
 /* Error shown to the user */
 "An error occured during the export" = "Ocorreu um erro durante a exportação";
 
 /* Contextual menu entry */
-"Backup account" = "Backup account";
+"Backup account" = "Conta de cópia de segurança";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Call number" = "Número de chamada";
 
 /* File transfer canceled label */
 "Canceled" = "Cancelada";
@@ -41,7 +41,7 @@
 "Choose a certificate" = "Choose a certificate";
 
 /* Open panel title */
-"Choose a directory" = "Choose a directory";
+"Choose a directory" = "Escolher um diretório";
 
 /* Open panel title */
 "Choose a private key file" = "Choose a private key file";
@@ -50,19 +50,19 @@
 "Choose CA" = "Choose CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choose directory";
+"Choose directory" = "Escolher diretório";
 
 /* Contextual menu entry */
 "Choose file" = "Choose file";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Partilhar ecrã";
 
 /* No comment provided by engineer. */
 "Copy" = "Copiar";
 
 /* Contextual menu action */
-"Copy name" = "Copy name";
+"Copy name" = "Copiar nome";
 
 /* Contextual menu action */
 "Copy number" = "Copiar número";
@@ -71,46 +71,46 @@
 "Create Jami Account" = "Criar Conta Jami";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Create SIP Account";
+"Create SIP Account" = "Criar conta SIP";
 
 /* File transfer failed label */
 "Failed" = "Falhou";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "A migração da sua conta falhou. Pode tentar novamente pressionando OK ou eliminar a sua conta.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Não foi possível efetuar a pesquisa";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "A receber chamada de %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Mensagem recebida de %@";
 
 /* Message from {Name} */
-"Message from %@" = "Message from %@";
+"Message from %@" = "Mensagem de %@";
 
 /* User label */
-"New SIP account" = "New SIP account";
+"New SIP account" = "Nova conta SIP";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Nenhuma conta disponível";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Navegar para as preferências para criar uma nova conta";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "A palavra-chave e a sua confirmação não coicidem.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "A palavra-chave é demasiado curta";
 
 /* Indication for user */
 "Passwords don't match" = "As palavras-chave não são iguais";
 
 /* Button label */
-"Pause" = "Pause";
+"Pause" = "Pausa";
 
 /* Button label */
 "Play" = "Reproduzir";
@@ -120,19 +120,19 @@
 "Accept" = "Aceitar";
 
 /* Contextual menu entry */
-"Remove value" = "Remove value";
+"Remove value" = "Remover valor";
 
 /* Show advice to user */
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restore account";
+"Restore account" = "Restaurar conta";
 
 /* Button title */
-"Revise Input" = "Revise Input";
+"Revise Input" = "Rever o introduzido";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"ID : " = "ID: ";
 
 /* No comment provided by engineer. */
 "Share" = "Partilhar";
@@ -141,57 +141,57 @@
 "Success" = "Sucesso";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "Ações de Texto";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "O nome de utilizador introduzido está disponível";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "O nome de utilizador introduzido não é válido. Tem de ter pelo menos 3 caracteres e conter apenas caracteres alfanuméricos de minúsculas.";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "O nome de utilizador introduzido não está disponível";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "A seguinte conta tem de ser migrada para o novo formato de conta Jami:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "A palavra-chave que introduziu não desbloqueia esta conta";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Para terminar o processo, tem de abrir o Jami no dispositivo e escolher a opção \"Associar este dispositivo a uma conta.\" O seu PIN é válido por 10 minutos.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Para continuar com a migração, tem de escolher uma palavra-chave para a sua conta. Esta palavra-chave será utilizada para encriptar a sua chave-mestra. Será necessária para adicionar novos dispositivos à sua conta Jami. Se não está pronto a escolher uma palavra-chave, pode fechar o Jami e continuar a migração mais tarde.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Desconhecido";
 
 /* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
+"You have to migrate your account before exporting" = "Tem de migrar a sua conta antes de exportar";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Remover conta";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Ao clicar em \"OK\" irá remover esta conta neste dispositivo! Esta ação não pode ser desfeita. O seu nome de utilizador também será perdido.";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Selecionar arquivo";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Associar a uma conta";
 
 /* Welcome title */
 "Welcome to Ring" = "Bem-vindo ao Jami";
 "Create a new account" = "Criar nova conta";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Adicionar uma conta SIP";
 
 /* Notification message */
 "Send you a contact request" = "Send you a contact request";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Este é o seu nome de utilizador Jami.\nCopie e o partilhe-o com os seus amigos!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Este é o seu ID.\nCopie-o e partilhe-o com os seus amigos!";

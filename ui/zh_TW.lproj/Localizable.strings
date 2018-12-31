@@ -86,7 +86,7 @@
 "Incoming call from %@" = "來電從 %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "從 %@ 收到訊息";
 
 /* Message from {Name} */
 "Message from %@" = "訊息從 %@";
@@ -132,7 +132,7 @@
 "Revise Input" = "修改輸入";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"ID : " = "ID：";
 
 /* No comment provided by engineer. */
 "Share" = "分享";
@@ -153,16 +153,16 @@
 "The entered username is not available" = "輸入的使用者名稱不可用";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "需要將以下的帳號導入為新的 Jami 帳號格式：";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "您輸入的密碼無法解鎖這個帳號";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "要完成這個過程，您需要在新的裝置上開啟 Jami 並選擇「連結這個裝置到一個帳號」。您的 PIN 碼在 10 分鐘內有效。";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "要繼續導入，您必須為您的帳號選擇密碼。這個密碼會用於加密的您的主金鑰。您在加入新裝置到您的 Jami 帳號時會需要它。若您還沒準備好選擇密碼，您可以關掉 Jami 並稍後再繼續導入。";
 
 /* Name used when user leave field empty */
 "Unknown" = "未知";
@@ -180,18 +180,18 @@
 "Select archive" = "選取歸檔";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "連結到帳號";
 
 /* Welcome title */
 "Welcome to Ring" = "歡迎來到 Jami";
 "Create a new account" = "建立新帳號";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "新增 SIP 帳號";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "傳送給您聯絡人請求";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "這是您的 Jami 使用者名稱。\n複製並與您的朋友分享！";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "這是您的 ID。\n複製並與您的朋友分享！";

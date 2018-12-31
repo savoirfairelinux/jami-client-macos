@@ -86,7 +86,7 @@
 "Incoming call from %@" = "Inkommande samtal från %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Inkommande meddelande från %@";
 
 /* Message from {Name} */
 "Message from %@" = "Meddelande från %@";
@@ -153,16 +153,16 @@
 "The entered username is not available" = "Lösenordet är inte tillgängligt";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "Följande konto behöver migreras till det nya Jami-formatet:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Det angivna lösenordet låser inte upp detta konto";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "För att slutföra åtgärden, måste du nu öppna Jami på den nya enheten och välja alternativet \"Koppla den här enheten till ett konto\". PIN-koden är giltig i 10 minuter.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "För att gå vidare med migreringen, måste du välja ett lösenord för ditt konto. Detta lösenord kommer att användas för att kryptera din huvudnyckel. Huvudnyckeln krävs för att lägga till nya enheter till ditt Jami-konto. Om du inte är redo att välja ett lösenord, kan du stänga ner Jami och återuppta migreringen senare.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Okänd";
@@ -180,18 +180,18 @@
 "Select archive" = "Välj arkiv";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Koppla till ett konto";
 
 /* Welcome title */
 "Welcome to Ring" = "Välkommen till Jami!";
 "Create a new account" = "Skapa ett nytt konto";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Lägg till ett SIP-konto";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Skickar en kontaktförfrågan";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Detta är ditt Jami-namn.\nKopiera och dela det med dina vänner!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Detta är ditt ID.\nKopiera och dela det med dina vänner!";
