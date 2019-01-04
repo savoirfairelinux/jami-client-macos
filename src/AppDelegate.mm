@@ -186,6 +186,15 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          if(!shouldNotify) {
                              return;
                          }
+                         bool isIncoming = false;
+                         auto callModel = lrc->getAccountModel()
+                         .getAccountInfo(accountId).callModel.get();
+                         if(callModel->hasCall(conversationInfo.callId)) {
+                             isIncoming = !callModel->getCall(conversationInfo.callId).isOutgoing;
+                         }
+                         if(!isIncoming) {
+                             return;
+                         }
                          NSString* name = bestIDForConversation(conversationInfo, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
                          NSUserNotification* notification = [[NSUserNotification alloc] init];
 
