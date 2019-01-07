@@ -33,7 +33,7 @@
     NSViewController *currentVC;
 }
 
-@synthesize dataTransferModel, accountModel, behaviorController;
+@synthesize dataTransferModel, accountModel, behaviorController, avModel;
 
 // Identifiers used in PreferencesWindow.xib for tabs
 static auto const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
@@ -55,13 +55,14 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [tb setAllowsUserCustomization:NO];
 }
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel dataTransferModel:(lrc::api::DataTransferModel*)dataTransferModel behaviourController:(lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
         self.accountModel = accountModel;
         self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
+        self.avModel = avModel;
     }
     return self;
 }
@@ -89,7 +90,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    currentVC = [[VideoPrefsVC alloc] initWithNibName:@"VideoPrefs" bundle:nil];
+    currentVC = [[VideoPrefsVC alloc] initWithNibName:@"VideoPrefs" bundle:nil avModel: self.avModel];
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
 }

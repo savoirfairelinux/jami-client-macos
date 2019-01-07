@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,15 +21,13 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import <QItemSelectionModel>
-#import <QAbstractProxyModel>
-
-#import <video/configurationproxy.h>
-#import <video/sourcemodel.h>
 #import <video/previewmanager.h>
 #import <video/renderer.h>
-#import <video/device.h>
 #import <video/devicemodel.h>
+#import "video/channel.h"
+#import "video/resolution.h"
+#import "video/rate.h"
+#import <api/avmodel.h>
 
 @interface VideoPrefsVC ()
 
@@ -47,63 +46,54 @@
 @synthesize videoDevicesList;
 @synthesize sizesList;
 @synthesize ratesList;
+@synthesize avModel;
 
 QMetaObject::Connection frameUpdated;
 QMetaObject::Connection previewStarted;
 QMetaObject::Connection previewStopped;
+Video::DeviceModel *deviceModel;
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil avModel:(lrc::api::AVModel*) avModel
+{
+    if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.avModel = avModel;
+    }
+    return self;
+}
 
 - (void)loadView
 {
     [super loadView];
-
-    // Make sure models are loaded
-    Video::ConfigurationProxy::deviceModel().rowCount();
-    Video::ConfigurationProxy::resolutionModel().rowCount();
-    Video::ConfigurationProxy::rateModel().rowCount();
-
-    // Prepopulate values
-    QModelIndex qDeviceIdx = Video::ConfigurationProxy::deviceSelectionModel().currentIndex();
-    [videoDevicesList addItemWithTitle:Video::ConfigurationProxy::deviceModel().data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
-
-    QModelIndex qSizeIdx = Video::ConfigurationProxy::resolutionSelectionModel().currentIndex();
-    [sizesList addItemWithTitle:Video::ConfigurationProxy::resolutionModel().data(qSizeIdx, Qt::DisplayRole).toString().toNSString()];
-
-    QModelIndex qRate = Video::ConfigurationProxy::rateSelectionModel().currentIndex();
-    [ratesList addItemWithTitle:Video::ConfigurationProxy::rateModel().data(qDeviceIdx, Qt::DisplayRole).toString().toNSString()];
-
-    // connect to model reset (device may have changed) and selection changed signals
-    QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::resolutionModel()),
-                     &QAbstractProxyModel::modelReset,
+    deviceModel = &Video::DeviceModel::instance();
+    auto device = deviceModel->activeDevice();
+    [videoDevicesList removeAllItems];
+    if (deviceModel->devices().size() > 0) {
+        for (auto device : deviceModel->devices()) {
+            [videoDevicesList addItemWithTitle: device->name().toNSString()];
+        }
+        [videoDevicesList selectItemWithTitle: device->name().toNSString()];
+        [self updateWhenDeviceChanged];
+    }
+    QObject::connect(deviceModel,
+                     &Video::DeviceModel::changed,
                      [=]() {
+                         [videoDevicesList removeAllItems];
                          [sizesList removeAllItems];
-                     });
-
-    QObject::connect(&Video::ConfigurationProxy::resolutionSelectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if (!current.isValid()) {
+                         [ratesList removeAllItems];
+                         if (deviceModel->devices().size() <= 0) {
                              return;
                          }
-                         [sizesList removeAllItems];
-                         [sizesList addItemWithTitle:Video::ConfigurationProxy::resolutionSelectionModel().currentIndex().data(Qt::DisplayRole).toString().toNSString()];
-
-                     });
-
-    QObject::connect(qobject_cast<QAbstractProxyModel*>(&Video::ConfigurationProxy::rateModel()),
-                     &QAbstractProxyModel::modelReset,
-                     [=]() {
-                         [ratesList removeAllItems];
-                     });
-
-    QObject::connect(&Video::ConfigurationProxy::rateSelectionModel(),
-                     &QItemSelectionModel::currentChanged,
-                     [=](const QModelIndex &current, const QModelIndex &previous) {
-                         if (!current.isValid()) {
-                             return;
+                         for (auto device : deviceModel->devices()) {
+                             [videoDevicesList addItemWithTitle: device->name().toNSString()];
                          }
-                         [ratesList removeAllItems];
-                         [ratesList addItemWithTitle:Video::ConfigurationProxy::rateSelectionModel().currentIndex().data(Qt::DisplayRole).toString().toNSString()];
-
+                         auto device = deviceModel->activeDevice();
+                         if(!device) {
+                             deviceModel->setActive(0);
+                             device = deviceModel->activeDevice();
+                         }
+                         [videoDevicesList selectItemWithTitle: device->name().toNSString()];
+                         [self updateWhenDeviceChanged];
                      });
 
     [previewView setWantsLayer:YES];
@@ -113,31 +103,78 @@ QMetaObject::Connection previewStopped;
     [previewView.layer setFrame:previewView.frame];
     [previewView.layer setBounds:previewView.frame];
 
-    [self.enableHardwareAccelerationButton setState:Video::ConfigurationProxy::getDecodingAccelerated()];
+    [self.enableHardwareAccelerationButton setState: self.avModel->getDecodingAccelerated()];
+}
 
+-(void) updateWhenDeviceChanged {
+    auto device = deviceModel->activeDevice();
+    [sizesList removeAllItems];
+    [ratesList removeAllItems];
+    if (device->channelList().size() <= 0) {
+        return;
+    }
+    for (auto resolution : device->channelList()[0]->validResolutions()) {
+        [sizesList  addItemWithTitle: resolution->name().toNSString()];
+    }
+    auto activeResolution = device->channelList()[0]->activeResolution();
+    if(!activeResolution) {
+        device->channelList()[0]->setActiveResolution(0);
+        activeResolution = device->channelList()[0]->activeResolution();
+    }
+    [sizesList selectItemWithTitle: activeResolution->name().toNSString()];
+    if(activeResolution->validRates().size() <= 0) {
+        return;
+    }
+    for (auto rate : activeResolution->validRates()) {
+        [ratesList addItemWithTitle: rate->name().toNSString()];
+    }
+    auto activeRate = activeResolution->activeRate();
+    if(!activeRate) {
+        activeResolution->setActiveRate(0);
+        activeRate = activeResolution->activeRate();
+    }
+    [ratesList selectItemWithTitle:activeResolution->activeRate()->name().toNSString()];
 }
 
 - (IBAction)chooseDevice:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Video::ConfigurationProxy::deviceModel().index(index, 0);
-    Video::ConfigurationProxy::deviceSelectionModel().setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    if (index == deviceModel->activeIndex()) {
+        return;
+    }
+    deviceModel->setActive(index);
+    [self updateWhenDeviceChanged];
 }
 
 - (IBAction)chooseSize:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Video::ConfigurationProxy::resolutionModel().index(index, 0);
-    Video::ConfigurationProxy::resolutionSelectionModel().setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    auto device = Video::DeviceModel::instance().activeDevice();
+    device->channelList()[0]->setActiveResolution(index);
+    auto activeResolution = device->channelList()[0]->activeResolution();
+    if(activeResolution->validRates().size() > 0) {
+        for (auto rate : activeResolution->validRates()) {
+            [ratesList addItemWithTitle: rate->name().toNSString()];
+        }
+    }
+    [ratesList selectItemWithTitle:activeResolution->activeRate()->name().toNSString()];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        deviceModel->setActive([videoDevicesList indexOfSelectedItem]);
+    });
 }
 
 - (IBAction)chooseRate:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Video::ConfigurationProxy::rateModel().index(index, 0);
-    Video::ConfigurationProxy::rateSelectionModel().setCurrentIndex(qIdx, QItemSelectionModel::ClearAndSelect);
+    Video::DeviceModel::instance().activeDevice()->channelList()[0]->activeResolution()->setActiveRate(index);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        deviceModel->setActive([videoDevicesList indexOfSelectedItem]);
+    });
 }
 
 - (IBAction)toggleHardwareAcceleration:(NSButton *)sender {
     bool enabled = [sender state]==NSOnState;
-    Video::ConfigurationProxy::setDecodingAccelerated(enabled);
+    self.avModel->setDecodingAccelerated(enabled);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        deviceModel->setActive([videoDevicesList indexOfSelectedItem]);
+    });
 }
 
 - (void) connectPreviewSignals
@@ -170,7 +207,7 @@ QMetaObject::Connection previewStopped;
                                     &Video::Renderer::frameUpdated,
                                     [=]() {
                                         [self renderer:Video::PreviewManager::instance().previewRenderer()
-                                                  renderFrameForView:previewView];
+                                    renderFrameForView:previewView];
                                     });
 }
 
@@ -213,6 +250,7 @@ QMetaObject::Connection previewStopped;
 
     [self connectPreviewSignals];
     if (self.shouldHandlePreview) {
+        Video::PreviewManager::instance().stopPreview();
         Video::PreviewManager::instance().startPreview();
     }
 }
@@ -231,40 +269,26 @@ QMetaObject::Connection previewStopped;
 
 - (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
 {
-    QModelIndex qIdx;
     if(self.videoDevicesList.menu == menu) {
-        qIdx = Video::ConfigurationProxy::deviceModel().index(index, 0);
-        [item setTitle:Video::ConfigurationProxy::deviceModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
-        if (qIdx == Video::ConfigurationProxy::deviceSelectionModel().currentIndex()) {
+        auto device = deviceModel->devices()[index];
+        [item setTitle: device->name().toNSString()];
+        if (index == deviceModel->activeIndex()) {
             [videoDevicesList selectItem:item];
         }
     } else if(self.sizesList.menu == menu) {
-        qIdx = Video::ConfigurationProxy::resolutionModel().index(index, 0);
-        [item setTitle:Video::ConfigurationProxy::resolutionModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
-        if (qIdx == Video::ConfigurationProxy::resolutionSelectionModel().currentIndex()) {
+        auto resolution = deviceModel->activeDevice()->channelList()[0]->validResolutions()[index];
+        [item setTitle: resolution->name().toNSString()];
+        if (resolution == deviceModel->activeDevice()->channelList()[0]->activeResolution()) {
             [sizesList selectItem:item];
         }
-
     } else if(self.ratesList.menu == menu) {
-        qIdx = Video::ConfigurationProxy::rateModel().index(index, 0);
-        [item setTitle:Video::ConfigurationProxy::rateModel().data(qIdx, Qt::DisplayRole).toString().toNSString()];
-        if (qIdx == Video::ConfigurationProxy::rateSelectionModel().currentIndex()) {
+        auto rate = deviceModel->activeDevice()->channelList()[0]->activeResolution()->validRates()[index];
+        [item setTitle: rate->name().toNSString()];
+        if (rate == deviceModel->activeDevice()->channelList()[0]->activeResolution()->activeRate()) {
             [ratesList selectItem:item];
         }
     }
     return YES;
-}
-
-- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
-{
-    if(self.videoDevicesList.menu == menu) {
-        return Video::ConfigurationProxy::deviceModel().rowCount();
-    } else if(self.sizesList.menu == menu) {
-        return Video::ConfigurationProxy::resolutionModel().rowCount();
-    } else if(self.ratesList.menu == menu) {
-        return Video::ConfigurationProxy::rateModel().rowCount();
-    }
-    return 0;
 }
 
 @end

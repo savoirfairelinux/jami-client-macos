@@ -423,7 +423,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         return;
     }
 
-    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName: @"PreferencesWindow" bundle: nil accountModel:self.accountModel dataTransferModel:self.dataTransferModel behaviourController:self.behaviorController];
+    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName: @"PreferencesWindow" bundle: nil accountModel:self.accountModel dataTransferModel:self.dataTransferModel behaviourController:self.behaviorController avModel: self.avModel];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
 }
 
