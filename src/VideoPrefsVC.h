@@ -19,8 +19,9 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsProtocol.h"
 
-@interface VideoPrefsVC : NSViewController <NSMenuDelegate> {
+@interface VideoPrefsVC : NSViewController <LrcModelsProtocol, NSMenuDelegate> {
 
 }
 
