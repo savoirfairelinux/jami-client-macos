@@ -92,13 +92,13 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="boQ-fa-nNO"/>
                 </imageView>
                 <box titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WtB-WH-CJz">
-                    <rect key="frame" x="306" y="118" width="187" height="86"/>
+                    <rect key="frame" x="305" y="118" width="188" height="86"/>
                     <view key="contentView" id="tbn-BB-CbR">
-                        <rect key="frame" x="3" y="3" width="181" height="80"/>
+                        <rect key="frame" x="3" y="3" width="182" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-tU-YNA">
-                                <rect key="frame" x="57" y="53" width="66" height="17"/>
+                                <rect key="frame" x="58" y="53" width="66" height="17"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Recording" id="kIq-PG-Ymw">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -106,7 +106,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1k9-gR-Qgh">
-                                <rect key="frame" x="48" y="8" width="84" height="35"/>
+                                <rect key="frame" x="49" y="8" width="84" height="35"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="00:00" id="78U-cA-2f2">
                                     <font key="font" metaFont="system" size="29"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -122,15 +122,15 @@
                         </constraints>
                     </view>
                     <constraints>
-                        <constraint firstAttribute="width" constant="181" id="Wgv-cO-Eg5"/>
+                        <constraint firstAttribute="width" constant="182" id="Wgv-cO-Eg5"/>
                         <constraint firstAttribute="height" constant="80" id="dEB-5M-hAm"/>
                     </constraints>
                     <font key="titleFont" metaFont="cellTitle"/>
                 </box>
                 <box title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MxH-aj-EXO">
-                    <rect key="frame" x="306" y="118" width="187" height="86"/>
+                    <rect key="frame" x="305" y="118" width="188" height="86"/>
                     <view key="contentView" id="U9z-Rg-Zs3">
-                        <rect key="frame" x="3" y="3" width="181" height="80"/>
+                        <rect key="frame" x="3" y="3" width="182" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <box boxType="custom" borderType="bezel" cornerRadius="20" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Zlv-nH-Y9y">
@@ -201,7 +201,7 @@
                             <constraint firstItem="XN4-Vb-UWd" firstAttribute="top" secondItem="U9z-Rg-Zs3" secondAttribute="top" id="073-sZ-trD"/>
                             <constraint firstItem="Zlv-nH-Y9y" firstAttribute="leading" secondItem="U9z-Rg-Zs3" secondAttribute="leading" constant="20" id="Xh6-x6-TnF"/>
                             <constraint firstItem="Zlv-nH-Y9y" firstAttribute="top" secondItem="U9z-Rg-Zs3" secondAttribute="top" id="aot-Tv-9mi"/>
-                            <constraint firstAttribute="trailing" secondItem="XN4-Vb-UWd" secondAttribute="trailing" constant="10" id="hUi-OE-cZU"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XN4-Vb-UWd" secondAttribute="trailing" constant="10" id="hUi-OE-cZU"/>
                             <constraint firstItem="XN4-Vb-UWd" firstAttribute="leading" secondItem="Zlv-nH-Y9y" secondAttribute="trailing" constant="11" id="j7u-cW-AWB"/>
                         </constraints>
                     </view>
