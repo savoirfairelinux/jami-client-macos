@@ -81,7 +81,14 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     updateItem.hidden = true;
 #endif
 
+#ifndef NDEBUG
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
+#else
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
+#endif
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
+//     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSConstraintBasedLayoutLogUnsatisfiable"];
+//     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"__NSConstraintBasedLayoutLogUnsatisfiable"];
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 
