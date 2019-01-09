@@ -53,7 +53,12 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    [path setURL: [NSURL fileURLWithPath:NSHomeDirectory()]];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains (NSDownloadsDirectory, NSUserDomainMask, YES);
+    if(paths.count <= 0) {
+        return;
+    }
+    NSString * downloadPath = [paths objectAtIndex:0];
+    [path setURL: [NSURL URLWithString: downloadPath]];
 }
 
 - (void)setDelegate:(id <BackupAccountDelegate>)aDelegate
@@ -107,10 +112,14 @@
 }
 - (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
 {
-    NSLog(@"willDisplayOpenPanel");
     [openPanel setAllowsMultipleSelection:NO];
     [openPanel setResolvesAliases:YES];
-    [openPanel setDirectory:NSHomeDirectory()];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains (NSDownloadsDirectory, NSUserDomainMask, YES);
+    if(paths.count <= 0) {
+        return;
+    }
+    NSString * downloadPath = [paths objectAtIndex:0];
+    [openPanel setDirectoryURL:[NSURL URLWithString: downloadPath]];
     [openPanel setDelegate:self];
 }
 
