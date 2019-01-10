@@ -498,6 +498,12 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [smartViewVC clearConversationModel];
     [self changeViewTo:SHOW_WELCOME_SCREEN];
     [self updateRingID];
+    qrcodeView.animator.alphaValue = 0.0;
+    [centerYQRCodeConstraint.animator setConstant: 0];
+    [centerYWelcomeContainerConstraint.animator setConstant: 0];
+    [self close];
+    AppDelegate* delegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+    [delegate showWizard];
 }
 
 -(void)rightPanelClosed
