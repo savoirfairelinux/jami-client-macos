@@ -84,6 +84,8 @@
     [pinTextField setStringValue:@""];
     [pinTextField setEnabled:YES];
     [linkButton setEnabled:NO];
+    self.passwordValue = @"";
+    self.pinValue = @"";
     [passwordTextField setStringValue:@""];
 }
 
@@ -106,6 +108,9 @@
     accountCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
                                       [self] (const std::string& accountID) {
+                                           if(accountID.compare(accountToCreate) != 0) {
+                                               return;
+                                           }
                                           [self.delegate didLinkAccountWithSuccess:YES];
                                           [self registerDefaultPreferences];
                                           QObject::disconnect(accountCreated);
@@ -114,6 +119,13 @@
     // account that is invalid will be removed, connect the signal to show error message
     accountRemoved = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountRemoved,
+                                      [self] (const std::string& accountID) {
+                                          if(accountID.compare(accountToCreate) == 0) {
+                                              [self showError];
+                                          }
+                                      });
+    accountRemoved = QObject::connect(self.accountModel,
+                                      &lrc::api::NewAccountModel::invalidAccountDetected,
                                       [self] (const std::string& accountID) {
                                           if(accountID.compare(accountToCreate) == 0) {
                                               [self showError];
