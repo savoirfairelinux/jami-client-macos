@@ -902,6 +902,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (IBAction)sendMessage:(id)sender {
     NSString* text = self.message;
+    unichar separatorChar = NSLineSeparatorCharacter;
+    NSString *separatorString = [NSString stringWithCharacters:&separatorChar length:1];
+    text = [text stringByReplacingOccurrencesOfString: separatorString withString: @"\n"];
     if (text && text.length > 0) {
         auto* conv = [self getCurrentConversation];
         convModel_->sendMessage(convUid_, std::string([text UTF8String]));
