@@ -1,0 +1,72 @@
+
+/* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "0eY-9x-bAr"; */
+"0eY-9x-bAr.placeholderString" = "Serwer URL...";
+
+/* Class = "NSTextFieldCell"; placeholderString = "realm..."; ObjectID = "6u9-cM-ep0"; */
+"6u9-cM-ep0.placeholderString" = "sfera...";
+
+/* Class = "NSButtonCell"; title = "Same as local parameters"; ObjectID = "Atv-t7-5YJ"; */
+"Atv-t7-5YJ.title" = "Tak samo jak lokalne parametry.";
+
+/* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "FQ4-fp-Pxj"; */
+"FQ4-fp-Pxj.title" = "Min";
+
+/* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Jho-hi-Mvg"; */
+"Jho-hi-Mvg.title" = "Zakres Portów Audio RTP";
+
+/* Class = "NSTextFieldCell"; title = "Network Interface"; ObjectID = "K9I-vh-jeu"; */
+"K9I-vh-jeu.title" = "Interfejs Sieciowy";
+
+/* Class = "NSButtonCell"; title = "Set published address and port"; ObjectID = "OL5-DI-aCq"; */
+"OL5-DI-aCq.title" = "Ustaw opublikowany adres i port";
+
+/* Class = "NSSecureTextFieldCell"; placeholderString = "password..."; ObjectID = "OR2-la-DUE"; */
+"OR2-la-DUE.placeholderString" = "hasło...";
+
+/* Class = "NSTextFieldCell"; placeholderString = "username..."; ObjectID = "P7k-xH-2mr"; */
+"P7k-xH-2mr.placeholderString" = "nazwa użytkownika...";
+
+/* Class = "NSButtonCell"; title = "Using TURN"; ObjectID = "QS0-TJ-NQh"; */
+"QS0-TJ-NQh.title" = "Używam TURN";
+
+/* Class = "NSTextFieldCell"; title = "Published Address"; ObjectID = "Qf3-E3-5U6"; */
+"Qf3-E3-5U6.title" = "Opublikowany Adres";
+
+/* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "XA8-Sy-CYG"; */
+"XA8-Sy-CYG.title" = "Zakres Portów Wideo RTP";
+
+/* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "a6W-wm-OmC"; */
+"a6W-wm-OmC.title" = "Min";
+
+/* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "dbq-qU-93x"; */
+"dbq-qU-93x.title" = "Max";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "fB0-X8-GXk"; */
+"fB0-X8-GXk.title" = "Radio";
+
+/* Class = "NSTextFieldCell"; title = "Registration expire"; ObjectID = "fCd-4d-sP0"; */
+"fCd-4d-sP0.title" = "Rejestracja wygasła";
+
+/* Class = "NSButtonCell"; title = "Using STUN"; ObjectID = "gVd-Dw-1B4"; */
+"gVd-Dw-1B4.title" = "Używam STUN";
+
+/* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "oa2-Pe-6Uw"; */
+"oa2-Pe-6Uw.title" = "Max";
+
+/* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "sTk-1C-1KO"; */
+"sTk-1C-1KO.title" = "Adres";
+
+/* Class = "NSTextFieldCell"; title = "Local port"; ObjectID = "shs-Xm-qnY"; */
+"shs-Xm-qnY.title" = "Port lokalny";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Server url..."; ObjectID = "uzg-09-8vi"; */
+"uzg-09-8vi.placeholderString" = "Serwer URL...";
+
+/* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "wl8-YK-M76"; */
+"wl8-YK-M76.title" = "Port";
+
+/* Class = "NSTextFieldCell"; title = "seconds"; ObjectID = "xGw-j0-4ID"; */
+"xGw-j0-4ID.title" = "sekundy";
+
+/* Class = "NSTextFieldCell"; title = "Registration"; ObjectID = "yB5-ET-gBL"; */
+"yB5-ET-gBL.title" = "Rejestracja";

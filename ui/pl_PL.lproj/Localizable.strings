@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "Wystąpił błąd sieci podczas eksportowania";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
 
 /* Contextual menu action */
-"Add to contacts" = "Add to contacts";
+"Add to contacts" = "Dodaj do kontaków";
 
 /* Contextual menu action */
 "Place video call" = "Place video call";
@@ -17,13 +17,13 @@
 "Clear conversation" = "Clear conversation";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Blokuj kontakt";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "Wystąpił błąd podczas eksportowania.";
 
 /* Contextual menu entry */
 "Backup account" = "Backup account";
@@ -65,16 +65,16 @@
 "Copy name" = "Copy name";
 
 /* Contextual menu action */
-"Copy number" = "Copy number";
+"Copy number" = "Skopiuj numer";
 
 /* Contextual menu entry */
-"Create Jami Account" = "Create Jami Account";
+"Create Jami Account" = "Stwórz Konto Jami";
 
 /* Contextual menu entry */
 "Create SIP Account" = "Create SIP Account";
 
 /* File transfer failed label */
-"Failed" = "Failed";
+"Failed" = "Nie powiodła się";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -107,17 +107,17 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Hasła nie pasują";
 
 /* Button label */
 "Pause" = "Pause";
 
 /* Button label */
-"Play" = "Play";
+"Play" = "Graj";
 
 /* Button Action */
-"Refuse" = "Refuse";
-"Accept" = "Accept";
+"Refuse" = "Odmów";
+"Accept" = "Akceptuj";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -135,10 +135,10 @@
 "ID : " = "ID : ";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "Podziel się";
 
 /* File transfer successful label */
-"Success" = "Success";
+"Success" = "Sukces";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -156,7 +156,7 @@
 "The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Hasło, które zostało wpisane, nie odblokowuje tego konta";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -165,7 +165,7 @@
 "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Name used when user leave field empty */
-"Unknown" = "Unknown";
+"Unknown" = "Nieznane";
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
@@ -184,7 +184,7 @@
 
 /* Welcome title */
 "Welcome to Ring" = "Welcome to Jami";
-"Create a new account" = "Create a new account";
+"Create a new account" = "Utwórz nowe konto";
 "Add a SIP account" = "Add a SIP account";
 
 /* Notification message */

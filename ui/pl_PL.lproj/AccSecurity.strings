@@ -1,45 +1,45 @@
 
 /* Class = "NSButtonCell"; title = "Require certificates for incoming TLS connections"; ObjectID = "1f9-X5-ykb"; */
-"1f9-X5-ykb.title" = "Tanúsítványok megkövetelése a bejövő TLS kapcsolatokhoz";
+"1f9-X5-ykb.title" = "Wymagaj certyfikat dla przychodzących połączeń TLS";
 
 /* Class = "NSButtonCell"; title = "Verify certificates, as a client"; ObjectID = "1xi-9G-zOX"; */
-"1xi-9G-zOX.title" = "Tanúsítványok ellenőrzése, ügyfélként";
+"1xi-9G-zOX.title" = "Zweryfikuj certyfikaty jako klient";
 
 /* Class = "NSButtonCell"; title = "Use custom cipher list"; ObjectID = "2e5-zS-ghg"; */
-"2e5-zS-ghg.title" = "Egyéni titkosítási lista használata";
+"2e5-zS-ghg.title" = "Użyj niestandardowich listy szyfrów";
 
 /* Class = "NSTextFieldCell"; placeholderString = "cipher cell"; ObjectID = "5LC-T6-hpk"; */
-"5LC-T6-hpk.placeholderString" = "titkos cellát";
+"5LC-T6-hpk.placeholderString" = "szyfr komórkę";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "7c2-kF-dcs"; */
-"7c2-kF-dcs.placeholderString" = "Jelszó…";
+"7c2-kF-dcs.placeholderString" = "Hasło...";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout"; ObjectID = "9Q3-1W-Lh3"; */
-"9Q3-1W-Lh3.title" = "Tárgyalási időtúllépés";
+"9Q3-1W-Lh3.title" = "Limit czasu do negocjacji";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP"; ObjectID = "Ig9-B1-7N3"; */
-"Ig9-B1-7N3.title" = "RTP visszatérés";
+"Ig9-B1-7N3.title" = "Cofnij się do RTP";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "JHb-iu-ZwI"; */
-"JHb-iu-ZwI.title" = "Személyes kulcs";
+"JHb-iu-ZwI.title" = "Klucz prywatny";
 
 /* Class = "NSTextFieldCell"; title = "User Certificate"; ObjectID = "Jqz-P0-zAz"; */
-"Jqz-P0-zAz.title" = "Felhasználói tanúsítvány";
+"Jqz-P0-zAz.title" = "Certyfikat Użytkownika";
 
 /* Class = "NSTextFieldCell"; title = "Server name instance for outgoing TLS connection"; ObjectID = "UxS-et-whJ"; */
-"UxS-et-whJ.title" = "Kiszolgálónév példány kimenő TLS kapcsolat esetén";
+"UxS-et-whJ.title" = "Nazwa serwera instancji połączenia wychodzącego przez TLS";
 
 /* Class = "NSButtonCell"; title = "Use SRTP"; ObjectID = "YtQ-hx-hih"; */
-"YtQ-hx-hih.title" = "SRTP használata";
+"YtQ-hx-hih.title" = "Użyj SRTP";
 
 /* Class = "NSButtonCell"; title = "Use TLS transport"; ObjectID = "oTT-gO-fqM"; */
-"oTT-gO-fqM.title" = "TLS szállítás használata";
+"oTT-gO-fqM.title" = "Korzystaj z transportu TLS";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "uOE-XA-5gW"; */
-"uOE-XA-5gW.title" = "TLS szabályhalmaz eljárás";
+"uOE-XA-5gW.title" = "Metoda protokołu TLS";
 
 /* Class = "NSTextFieldCell"; title = "Certificate Authority list"; ObjectID = "vPF-Rp-aR6"; */
-"vPF-Rp-aR6.title" = "Tanúsítványkibocsátó lista";
+"vPF-Rp-aR6.title" = "Lista Autorytetów Certyfikat";
 
 /* Class = "NSButtonCell"; title = "Verify incoming certificates, as a server"; ObjectID = "x2s-ov-cVQ"; */
-"x2s-ov-cVQ.title" = "Bejövő tanúsítványok ellenőrzése, kiszolgálóként";
+"x2s-ov-cVQ.title" = "Zweryfikuj przychodzące certyfikaty jako serwer";

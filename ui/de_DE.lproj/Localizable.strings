@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "Ein Fehler trat während des Exports";
+"A network error occured during the export" = "Ein Netzwerk-Fehler trat während des Exports auf";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
 
 /* Contextual menu action */
-"Add to contacts" = "Kontakte hinzufügen";
+"Add to contacts" = "Kontakt hinzufügen";
 
 /* Contextual menu action */
 "Place video call" = "Place video call";
@@ -17,13 +17,13 @@
 "Clear conversation" = "Clear conversation";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Kontakt blockieren";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "Ein Fehler trat während des Exports";
+"An error occured during the export" = "Ein Fehler trat während des Exports auf";
 
 /* Contextual menu entry */
 "Backup account" = "Backup account";
@@ -68,7 +68,7 @@
 "Copy number" = "Nummer kopieren";
 
 /* Contextual menu entry */
-"Create Jami Account" = "Create Jami Account";
+"Create Jami Account" = "Jami-Konto erstellen";
 
 /* Contextual menu entry */
 "Create SIP Account" = "Create SIP Account";
@@ -138,7 +138,7 @@
 "Share" = "Freigeben";
 
 /* File transfer successful label */
-"Success" = "Success";
+"Success" = "Erfolg";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -156,7 +156,7 @@
 "The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Das eingegebene Passwort passt nicht zu diesem Konto";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -183,7 +183,7 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "Welcome to Jami";
+"Welcome to Ring" = "Willkommen bei Jami";
 "Create a new account" = "Create a new account";
 "Add a SIP account" = "Add a SIP account";
 
