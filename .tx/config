@@ -1,115 +1,115 @@
 [main]
 host = https://www.transifex.com
 
-[ring.localizablestrings]
+[jami.localizablestrings]
 file_filter = ui/<lang>.lproj/Localizable.strings
 source_file = ui/Base.lproj/Localizable.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccAdvanced]
+[jami.osxAccAdvanced]
 file_filter = ui/<lang>.lproj/AccAdvanced.strings
 source_file = ui/Base.lproj/AccAdvanced.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccAudio]
+[jami.osxAccAudio]
 file_filter = ui/<lang>.lproj/AccAudio.strings
 source_file = ui/Base.lproj/AccAudio.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccGeneral]
+[jami.osxAccGeneral]
 file_filter = ui/<lang>.lproj/AccGeneral.strings
 source_file = ui/Base.lproj/AccGeneral.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccounts]
+[jami.osxAccounts]
 file_filter = ui/<lang>.lproj/Accounts.strings
 source_file = ui/Base.lproj/Accounts.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccRing]
+[jami.osxAccRing]
 file_filter = ui/<lang>.lproj/AccRing.strings
 source_file = ui/Base.lproj/AccRing.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccSecurity]
+[jami.osxAccSecurity]
 file_filter = ui/<lang>.lproj/AccSecurity.strings
 source_file = ui/Base.lproj/AccSecurity.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAccVideo]
+[jami.osxAccVideo]
 file_filter = ui/<lang>.lproj/AccVideo.strings
 source_file = ui/Base.lproj/AccVideo.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxAudioPrefs]
+[jami.osxAudioPrefs]
 file_filter = ui/<lang>.lproj/AudioPrefs.strings
 source_file = ui/Base.lproj/AudioPrefs.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxCertificateWindow]
+[jami.osxCertificateWindow]
 file_filter = ui/<lang>.lproj/CertificateWindow.strings
 source_file = ui/Base.lproj/CertificateWindow.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxCurrentCall]
+[jami.osxCurrentCall]
 file_filter = ui/<lang>.lproj/CurrentCall.strings
 source_file = ui/Base.lproj/CurrentCall.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxGeneralPrefs]
+[jami.osxGeneralPrefs]
 file_filter = ui/<lang>.lproj/GeneralPrefs.strings
 source_file = ui/Base.lproj/GeneralPrefs.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxMainMenu]
+[jami.osxMainMenu]
 file_filter = ui/<lang>.lproj/MainMenu.strings
 source_file = ui/Base.lproj/MainMenu.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxPersonLinker]
+[jami.osxPersonLinker]
 file_filter = ui/<lang>.lproj/PersonLinker.strings
 source_file = ui/Base.lproj/PersonLinker.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxPreferencesWindow]
+[jami.osxPreferencesWindow]
 file_filter = ui/<lang>.lproj/PreferencesWindow.strings
 source_file = ui/Base.lproj/PreferencesWindow.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxRingWindow]
+[jami.osxRingWindow]
 file_filter = ui/<lang>.lproj/RingWindow.strings
 source_file = ui/Base.lproj/RingWindow.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxRingWizard]
+[jami.osxRingWizard]
 file_filter = ui/<lang>.lproj/RingWizard.strings
 source_file = ui/Base.lproj/RingWizard.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxVideoPrefs]
+[jami.osxVideoPrefs]
 file_filter = ui/<lang>.lproj/VideoPrefs.strings
 source_file = ui/Base.lproj/VideoPrefs.strings
 source_lang = en
 type = STRINGS
 
-[ring.osxConversation]
+[jami.osxConversation]
 file_filter = ui/<lang>.lproj/Conversation.strings
 source_file = ui/Base.lproj/Conversation.strings
 source_lang = en
