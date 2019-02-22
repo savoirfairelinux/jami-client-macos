@@ -1,12 +1,12 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "Ezt bejelölve, regisztrál egy egyedi felhasználónevet a Jami hálózaton. Az emberek ezt az azonosítója (amely 40 karakter hosszú) helyett használhatják, hogy elérjék Önt.";
+"0qE-Sz-hdc.title" = "Ezt bejelölve, bejegyez egy egyedi felhasználónevet a Jami hálózaton. Az emberek ezt az azonosítója (amely 40 karakter hosszú) helyett használhatják, hogy elérjék Önt.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Kötelező*";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Regisztráljon nyilvános felhasználónevet";
+"AG5-GR-bii.title" = "Nyilvános felhasználónév bejegyeztetése";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
 "B6x-jj-48R.title" = "Válassza ki jelszavát";
@@ -30,7 +30,7 @@
 "qQl-Xn-c88.title" = "Fiók létrehozása";
 
 /* Class = "NSTextFieldCell"; title = "Enter your full name"; ObjectID = "tzf-88-Yn5"; */
-"tzf-88-Yn5.title" = "Add meg a teljes neved";
+"tzf-88-Yn5.title" = "Adja meg a teljes neved";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
 "v7f-52-GJA.title" = "Mégse";

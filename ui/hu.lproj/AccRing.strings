@@ -12,13 +12,13 @@
 "EDd-FX-wcz.title" = "Engedélyek";
 
 /* Class = "NSButtonCell"; title = "Register name"; ObjectID = "G8M-go-xvD"; */
-"G8M-go-xvD.title" = "Regisztrációs név";
+"G8M-go-xvD.title" = "Bejegyeztetés név";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name or nickname..."; ObjectID = "HN3-i9-zmw"; */
 "HN3-i9-zmw.placeholderString" = "Név vagy becenév…";
 
 /* Class = "NSButtonCell"; title = "Auto-answer calls"; ObjectID = "OeY-na-0YT"; */
-"OeY-na-0YT.title" = "Hívások automatikus fogadása";
+"OeY-na-0YT.title" = "Hívások önműködő fogadása";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your call history"; ObjectID = "PaC-xE-SHA"; */
 "PaC-xE-SHA.title" = "Hívások engedélyezése a hívási előzményekben szereplő személyektől";
@@ -30,7 +30,7 @@
 "ddk-1G-0jU.title" = "Egyéni felhasználói ügynök";
 
 /* Class = "NSTextFieldCell"; title = "Blockchain server"; ObjectID = "fSU-Pc-Y5a"; */
-"fSU-Pc-Y5a.title" = "Blokklánc kiszolgáló";
+"fSU-Pc-Y5a.title" = "Elosztott adatbázis kiszolgáló";
 
 /* Class = "NSButtonCell"; title = "Allow calls from peers in your contact list"; ObjectID = "fX7-9W-XFl"; */
 "fX7-9W-XFl.title" = "Hívások engedélyezése a kapcsolatlistán szereplő személyektől";
@@ -42,4 +42,4 @@
 "lHI-bz-ddQ.title" = "UPnP engedélyezve";
 
 /* Class = "NSTextFieldCell"; title = "Registered Name"; ObjectID = "sBB-y7-xhL"; */
-"sBB-y7-xhL.title" = "Regisztrált név";
+"sBB-y7-xhL.title" = "Bejegyzett név";
