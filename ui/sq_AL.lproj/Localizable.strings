@@ -86,7 +86,7 @@
 "Incoming call from %@" = "Thirrje ardhëse pre %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Mesazhe ardhur nga %@";
 
 /* Message from {Name} */
 "Message from %@" = "Mesazh nga %@";
@@ -153,16 +153,16 @@
 "The entered username is not available" = "Emri i dhënë për përdorues s’është i lirë";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "Llogaria vijuese lypset të migrohet në formatin e ri të llogarive Jami:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Fjalëkalimi që dhatë nuk e shkyç këtë llogari";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Që të plotësoni procesin, lypset të hapni Jami-n te pajisja e re dhe të zgjidhni mundësinë \"Lidhe këtë pajisje me një llogari\". PIN-i juaj është i vlefshëm për 10 minuta.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Që të vazhdohet me migrimin, duhet të zgjidhni një fjalëkalim për llogarinë tuaj. Ky fjalëkalim do të përdoret për të fshehtëzuar kyçin tuaj të përgjithshëm. I cili është i domosdoshëm për shtim pajisjesh të reja te llogaria juaj Jami. Nëse s’jeni gati për zgjedhjen e një fjalëkalimi, mund ta mbyllni Jami-n dhe t’i riktheheni migrimit më vonë.";
 
 /* Name used when user leave field empty */
 "Unknown" = "I panjohur";
@@ -180,18 +180,18 @@
 "Select archive" = "Përzgjidhni arkiv";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Lidhje për te një llogari";
 
 /* Welcome title */
 "Welcome to Ring" = "Mirë se vini te Jami";
 "Create a new account" = "Krijoni një llogari të re";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Shtoni një llogari SIP";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Dërgoni një kërkesë kontakti";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Ky është emri juaj si përdorues i Jami-t. \nKopjojeni dhe jepuani shokëve tuaj!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Kjo ështër ID-ja juaj. \nKopjojeni dhe jepuani shokëve tuaj!";
