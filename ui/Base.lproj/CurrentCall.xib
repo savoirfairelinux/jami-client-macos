@@ -1062,7 +1062,7 @@
         <userDefaultsController representsSharedInstance="YES" id="cb1-cg-dMu"/>
     </objects>
     <resources>
-        <image name="NSUser" width="128" height="128"/>
+        <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_accept" width="72" height="72"/>
         <image name="ic_action_add_participant" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>
