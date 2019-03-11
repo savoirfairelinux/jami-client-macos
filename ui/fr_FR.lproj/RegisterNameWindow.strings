@@ -1,24 +1,24 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Obligatoire*";
 
 /* Class = "NSTextFieldCell"; title = "Other users can use it instead of your ID"; ObjectID = "9gi-0u-67t"; */
-"9gi-0u-67t.title" = "Other users can use it instead of your ID";
+"9gi-0u-67t.title" = "Vos interlocuteurs peuvent l'utiliser à la place de votre ID.";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
-"Aeh-tK-RjX.title" = "An error occured during your username registration";
+"Aeh-tK-RjX.title" = "Une erreur est survenue pendant l'enregistrement de votre nom d'utilisateur ";
 
 /* Class = "NSTextFieldCell"; title = "Enter your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Enter your password";
+"B6x-jj-48R.title" = "Entrer votre mot de passe";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
-"JWw-7m-ywL.title" = "fenêtre";
+"JWw-7m-ywL.title" = "Fenêtre";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
-"YIN-YL-JBs.title" = "Just a moment...";
+"YIN-YL-JBs.title" = "Veuillez patienter...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
-"bdC-Uc-Qhs.placeholderString" = "Username...";
+"bdC-Uc-Qhs.placeholderString" = "Nom d'utilisateur...";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "cbA-c2-LlV"; */
 "cbA-c2-LlV.title" = "Annuler";
@@ -30,7 +30,7 @@
 "fOn-FV-2x8.title" = "d'accord";
 
 /* Class = "NSButtonCell"; title = "Register"; ObjectID = "lT3-Bh-MnL"; */
-"lT3-Bh-MnL.title" = "Register";
+"lT3-Bh-MnL.title" = "Enregistrer";
 
 /* Class = "NSTextFieldCell"; title = "Register a public username"; ObjectID = "tje-EZ-ZPI"; */
-"tje-EZ-ZPI.title" = "Register a public username";
+"tje-EZ-ZPI.title" = "Enregistrer un nom d'utilisateur publique";

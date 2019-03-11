@@ -2,7 +2,7 @@
 "A network error occured during the export" = "Ndodhi një gabim rrjeti gjatë eksportimit";
 
 /* No password on this account text field placeholder */
-"Account has no password" = "Llogari s’ka fjalëkalim";
+"Account has no password" = "Llogaria s’ka fjalëkalim";
 
 /* Contextual menu action */
 "Add to contacts" = "Shtoje te kontaktet";
@@ -56,7 +56,7 @@
 "Choose file" = "Zgjidhni kartelë";
 
 /* Contextual menu entry */
-"Share screen" = "Ndani ekranin me të tjerët";
+"Share screen" = "Tregojuani ekranin të tjerëve";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopjoje";
@@ -65,7 +65,7 @@
 "Copy name" = "Kopjo emrin";
 
 /* Contextual menu action */
-"Copy number" = "Kopjoje numrin";
+"Copy number" = "Kopjo numrin";
 
 /* Contextual menu entry */
 "Create Jami Account" = "Krijoni Llogari Jami";
@@ -83,10 +83,10 @@
 "Failed to perform lookup" = "Kryerja e kërkimit   dështoi";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Thirrje ardhëse pre %@";
+"Incoming call from %@" = "Thirrje ardhëse prej %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Mesazhe ardhur nga %@";
+"Incoming message from %@" = "Mesazh ardhur nga %@";
 
 /* Message from {Name} */
 "Message from %@" = "Mesazh nga %@";
@@ -174,7 +174,7 @@
 "Remove account" = "Hiqe llogarinë";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Duke klikuar \"OK\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Gjithashtu, emri juaj i regjistrimit mund të humbë.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Duke klikuar \"OK\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Gjithashtu, mund të humbë emri juaj i regjistrimit.";
 
 /* export account button title */
 "Select archive" = "Përzgjidhni arkiv";

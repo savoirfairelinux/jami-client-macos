@@ -2,22 +2,22 @@
 "A network error occured during the export" = "Eksportavimo metu, įvyko klaida";
 
 /* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+"Account has no password" = "Paskyra neturi slaptažodžio";
 
 /* Contextual menu action */
 "Add to contacts" = "Pridėti prie kontaktų";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Pradėti vaizdo skambutį";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Pradėti garso skambutį";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Išvalyti pokalbį";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Užblokuoti kontaktą";
 
 /* Text shown to the user */
 "Alias : " = "Slapyvardis : ";
@@ -44,7 +44,7 @@
 "Choose a directory" = "Pasirinkti katalogą";
 
 /* Open panel title */
-"Choose a private key file" = "Choose a private key file";
+"Choose a private key file" = "Pasirinkti privačiojo rakto failą";
 
 /* Open panel prompt for 'Choose a file' */
 "Choose CA" = "Choose CA";
@@ -56,7 +56,7 @@
 "Choose file" = "Pasirinkti failą";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Bendrinti ekraną";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopijuoti";
@@ -95,7 +95,7 @@
 "New SIP account" = "Nauja SIP paskyra";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Nėra prieinamų paskyrų";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
@@ -135,7 +135,7 @@
 "ID : " = "ID : ";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "Bendrinti";
 
 /* File transfer successful label */
 "Success" = "Pavyko";
@@ -153,16 +153,16 @@
 "The entered username is not available" = "Įvestas naudotojo vardas yra neprieinamas";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "Ši paskyra turi būti perkelta į naująjį Jami paskyros formatą:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Norėdami užbaigti procesą, turite atverti Jami naujame įrenginyje ir pasirinkti parinktį \"Susieti šį įrenginį su paskyra\". Jūsų pin galioja 10 minučių.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Norėdami tęsti perkėlimą, privalote pasirinkti savo paskyrai slaptažodį. Šis slaptažodis bus naudojamas jūsų pagrindiniam raktui užšifruoti. Taip pat jis bus reikalingas pridedant naujus įrenginius į jūsų Jami paskyrą. Jeigu jūs nesate pasiruošę pasirinkti slaptažodį, tuomet galite užverti Jami ir pratęsti perkėlimą vėliau.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Nežinomas";
@@ -171,27 +171,27 @@
 "You have to migrate your account before exporting" = "Prieš eksportuodami, turite perkelti savo paskyrą";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Šalinti paskyrą";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Spustelėję \"Gerai\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
 
 /* export account button title */
 "Select archive" = "Select archive";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Susieti su paskyra";
 
 /* Welcome title */
 "Welcome to Ring" = "Sveiki atvykę į Jami";
-"Create a new account" = "Create a new account";
-"Add a SIP account" = "Add a SIP account";
+"Create a new account" = "Sukurti naują paskyrą";
+"Add a SIP account" = "Pridėti SIP paskyrą";
 
 /* Notification message */
 "Send you a contact request" = "Send you a contact request";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Tai yra jūsų Jami naudotojo vardas. \nNukopijuokite jį ir dalinkitės juo su savo draugais!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Tai yra jūsų ID. \nNukopijuokite jį ir dalinkitės juo su savo draugais!";

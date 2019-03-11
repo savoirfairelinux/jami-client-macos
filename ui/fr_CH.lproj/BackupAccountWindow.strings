@@ -21,13 +21,13 @@
 "KYZ-TW-44Y.title" = "Choose where to backup your account.";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Window";
+"QvC-M9-y7g.title" = "Fenêtre";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "VN1-A3-RIh"; */
-"VN1-A3-RIh.title" = "OK";
+"VN1-A3-RIh.title" = "ok";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "cSU-aD-OwX"; */
-"cSU-aD-OwX.title" = "Cancel";
+"cSU-aD-OwX.title" = "Annuler";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "ccf-Bx-Qq8"; */
 "ccf-Bx-Qq8.ibShadowedIsNilPlaceholder" = "mot de passe...";
@@ -45,7 +45,7 @@
 "e7n-Ev-bK7.title" = "An error occured during the backup";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "rW5-Il-5YD"; */
-"rW5-Il-5YD.title" = "OK";
+"rW5-Il-5YD.title" = "ok";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "vwh-K9-3O9"; */
 "vwh-K9-3O9.title" = "Password";

@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "Un problème de réseau est survenu pendant l'export";
+"A network error occured during the export" = "A network error occured during the export";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
 
 /* Contextual menu action */
-"Add to contacts" = "Ajouter dans les contacts";
+"Add to contacts" = "Add to contacts";
 
 /* Contextual menu action */
 "Place video call" = "Place video call";
@@ -20,70 +20,70 @@
 "Block contact" = "Block contact";
 
 /* Text shown to the user */
-"Alias : " = "Alias";
+"Alias : " = "Alias : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "Une erreur est survenue pendant l'export";
+"An error occured during the export" = "An error occured during the export";
 
 /* Contextual menu entry */
 "Backup account" = "Backup account";
 
 /* Contextual menu action */
-"Call number" = "Appeler un numéro";
+"Call number" = "Call number";
 
 /* File transfer canceled label */
 "Canceled" = "Canceled";
 
 /* Open panel title */
-"Choose a CA list" = "Choisir une liste d'autorité de certification";
+"Choose a CA list" = "Choose a CA list";
 
 /* Open panel title */
-"Choose a certificate" = "Choisir un certificat";
+"Choose a certificate" = "Choose a certificate";
 
 /* Open panel title */
-"Choose a directory" = "Choisir un répertoire";
+"Choose a directory" = "Choose a directory";
 
 /* Open panel title */
-"Choose a private key file" = "Choisir une clé privée";
+"Choose a private key file" = "Choose a private key file";
 
 /* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choisir une autorité de certification";
+"Choose CA" = "Choose CA";
 
 /* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Choisir un répertoire";
+"Choose directory" = "Choose directory";
 
 /* Contextual menu entry */
-"Choose file" = "Choisir un fichier";
+"Choose file" = "Choose file";
 
 /* Contextual menu entry */
 "Share screen" = "Share screen";
 
 /* No comment provided by engineer. */
-"Copy" = "Copier";
+"Copy" = "Copy";
 
 /* Contextual menu action */
-"Copy name" = "Copier le nom";
+"Copy name" = "Copy name";
 
 /* Contextual menu action */
-"Copy number" = "Copier le numéro de téléphone";
+"Copy number" = "Copy number";
 
 /* Contextual menu entry */
 "Create Jami Account" = "Create Jami Account";
 
 /* Contextual menu entry */
-"Create SIP Account" = "Créer un compte SIP";
+"Create SIP Account" = "Create SIP Account";
 
 /* File transfer failed label */
 "Failed" = "Failed";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Échec lors de la migration de votre compte. Vous pouvez réessayer en cliquant sur OK ou bien supprimer votre compte";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Failed to perform lookup";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Appel entrant de %@";
+"Incoming call from %@" = "Incoming call from %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Incoming message from %@";
@@ -104,20 +104,20 @@
 "Password and confirmation mismatch." = "Password and confirmation mismatch.";
 
 /* Indication for user */
-"Password is too short" = "Le mot de passe est trop court";
+"Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Les mots de passe saisis sont différents";
+"Passwords don't match" = "Passwords don't match";
 
 /* Button label */
 "Pause" = "Pause";
 
 /* Button label */
-"Play" = "jouer";
+"Play" = "Play";
 
 /* Button Action */
-"Refuse" = "Refuser";
-"Accept" = "Accepter";
+"Refuse" = "Refuse";
+"Accept" = "Accept";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -126,7 +126,7 @@
 "Reopen account to see your hash" = "Reopen account to see your hash";
 
 /* Contextual menu entry */
-"Restore account" = "Restaurer un compte";
+"Restore account" = "Restore account";
 
 /* Button title */
 "Revise Input" = "Revise Input";
@@ -165,7 +165,7 @@
 "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Name used when user leave field empty */
-"Unknown" = "Inconnu";
+"Unknown" = "Unknown";
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";

@@ -1,27 +1,27 @@
 
 /* Class = "NSTextFieldCell"; title = "Follow the process on the device. The PIN is only valid for 10 minutes."; ObjectID = "2n6-m3-fbj"; */
-"2n6-m3-fbj.title" = "Follow the process on the device. The PIN is only valid for 10 minutes.";
+"2n6-m3-fbj.title" = "Suivre le processus sur votre appareil. Le NIP est seulement valide pour une durée de 10 minutes.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
-"3ik-rY-Gig.title" = "Enter your PIN";
+"3ik-rY-Gig.title" = "Entrer votre NIP";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "4ev-TK-8Yt"; */
 "4ev-TK-8Yt.title" = "Annuler";
 
 /* Class = "NSTextFieldCell"; title = "Go to the account management setting of the device, choose the Jami account to use and select \"Link another device to this account\".  "; ObjectID = "4me-D9-6GK"; */
-"4me-D9-6GK.title" = "Go to the account management setting of the device, choose the Jami account to use and select \"Link another device to this account\".  ";
+"4me-D9-6GK.title" = "Aller dans les paramètres de gestion de compte de votre appareil, choisir le compte Jami à utiliser et sélectionner \"Connecter un autre appareil à ce compte\".";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
-"8b8-bt-eAj.title" = "Link";
+"8b8-bt-eAj.title" = "Lier";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
-"DyG-SJ-U1Q.title" = "An error occured, please check your password and pin.";
+"DyG-SJ-U1Q.title" = "Une erreur est survenue. Vérifiez votre mot de passe et votre NIP";
 
 /* Class = "NSTextFieldCell"; title = "2. Generate a PIN code"; ObjectID = "GfW-ah-8U1"; */
-"GfW-ah-8U1.title" = "2. Generate a PIN code";
+"GfW-ah-8U1.title" = "2. Générer un NIP";
 
 /* Class = "NSTextFieldCell"; title = "1. Grab a device with the account you want to use"; ObjectID = "HcT-yD-KVo"; */
-"HcT-yD-KVo.title" = "1. Grab a device with the account you want to use";
+"HcT-yD-KVo.title" = "1. Saisir un appareil lié avec le compte que vous voulez utiliser";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "M4C-GY-B6t"; */
 "M4C-GY-B6t.title" = "Juste un moment ...";
@@ -33,7 +33,7 @@
 "U2K-fu-INc.title" = "Entrer le mot de passe";
 
 /* Class = "NSButtonCell"; title = "I'm ready"; ObjectID = "XN4-uc-BSt"; */
-"XN4-uc-BSt.title" = "I'm ready";
+"XN4-uc-BSt.title" = "Je suis prêt";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "t12-O0-kcf"; */
 "t12-O0-kcf.title" = "OK";
