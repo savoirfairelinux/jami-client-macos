@@ -7,42 +7,6 @@ source_file = ui/Base.lproj/Localizable.strings
 source_lang = en
 type = STRINGS
 
-[jami.osxAccAdvanced]
-file_filter = ui/<lang>.lproj/AccAdvanced.strings
-source_file = ui/Base.lproj/AccAdvanced.strings
-source_lang = en
-type = STRINGS
-
-[jami.osxAccMedia]
-file_filter = ui/<lang>.lproj/AccMedia.strings
-source_file = ui/Base.lproj/AccMedia.strings
-source_lang = en
-type = STRINGS
-
-[jami.osxAccGeneral]
-file_filter = ui/<lang>.lproj/AccGeneral.strings
-source_file = ui/Base.lproj/AccGeneral.strings
-source_lang = en
-type = STRINGS
-
-[jami.osxAccounts]
-file_filter = ui/<lang>.lproj/Accounts.strings
-source_file = ui/Base.lproj/Accounts.strings
-source_lang = en
-type = STRINGS
-
-[jami.osxAccRing]
-file_filter = ui/<lang>.lproj/AccRing.strings
-source_file = ui/Base.lproj/AccRing.strings
-source_lang = en
-type = STRINGS
-
-[jami.osxAccSecurity]
-file_filter = ui/<lang>.lproj/AccSecurity.strings
-source_file = ui/Base.lproj/AccSecurity.strings
-source_lang = en
-type = STRINGS
-
 [jami.osxAudioPrefs]
 file_filter = ui/<lang>.lproj/AudioPrefs.strings
 source_file = ui/Base.lproj/AudioPrefs.strings
@@ -148,5 +112,59 @@ type = STRINGS
 [jami.osxMigrateRingAccountsWindow]
 file_filter = ui/<lang>.lproj/MigrateRingAccountsWindow.strings
 source_file = ui/Base.lproj/MigrateRingAccountsWindow.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAccAdvancedRing]
+file_filter = ui/<lang>.lproj/AccAdvancedRing.strings
+source_file = ui/Base.lproj/AccAdvancedRing.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAccAdvancedSip]
+file_filter = ui/<lang>.lproj/AccAdvancedSip.strings
+source_file = ui/Base.lproj/AccAdvancedSip.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAccountSettings]
+file_filter = ui/<lang>.lproj/AccountSettings.strings
+source_file = ui/Base.lproj/AccountSettings.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAccRingGeneral]
+file_filter = ui/<lang>.lproj/AccRingGeneral.strings
+source_file = ui/Base.lproj/AccRingGeneral.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAccSipGeneral]
+file_filter = ui/<lang>.lproj/AccSipGeneral.strings
+source_file = ui/Base.lproj/AccSipGeneral.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAddSipAccountVC]
+file_filter = ui/<lang>.lproj/AddSipAccountVC.strings
+source_file = ui/Base.lproj/AddSipAccountVC.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxLeaveMessageVC]
+file_filter = ui/<lang>.lproj/LeaveMessageVC.strings
+source_file = ui/Base.lproj/LeaveMessageVC.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxMessageCells]
+file_filter = ui/<lang>.lproj/MessageCells.strings
+source_file = ui/Base.lproj/MessageCells.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxPasswordChange]
+file_filter = ui/<lang>.lproj/PasswordChange.strings
+source_file = ui/Base.lproj/PasswordChange.strings
 source_lang = en
 type = STRINGS
