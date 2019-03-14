@@ -1,15 +1,15 @@
 
-/* Class = "NSTextFieldCell"; title = "Follow the process on the device. The PIN is only valid for 10 minutes."; ObjectID = "2n6-m3-fbj"; */
-"2n6-m3-fbj.title" = "Follow the process on the device. The PIN is only valid for 10 minutes.";
+/* Class = "NSTextFieldCell"; title = "To link this device to another account, you have two possibilities:"; ObjectID = "06g-zM-5Qz"; */
+"06g-zM-5Qz.title" = "To link this device to another account, you have two possibilities:";
+
+/* Class = "NSTextFieldCell"; title = "OR"; ObjectID = "1NY-Yu-wH1"; */
+"1NY-Yu-wH1.title" = "OR";
+
+/* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
+"2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
 "3ik-rY-Gig.title" = "Enter your PIN";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "4ev-TK-8Yt"; */
-"4ev-TK-8Yt.title" = "ألغِ";
-
-/* Class = "NSTextFieldCell"; title = "Go to the account management setting of the device, choose the Jami account to use and select \"Link another device to this account\".  "; ObjectID = "4me-D9-6GK"; */
-"4me-D9-6GK.title" = "Go to the account management setting of the device, choose the Jami account to use and select \"Link another device to this account\".  ";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
 "8b8-bt-eAj.title" = "Link";
@@ -17,23 +17,47 @@
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
 "DyG-SJ-U1Q.title" = "An error occured, please check your password and pin.";
 
-/* Class = "NSTextFieldCell"; title = "2. Generate a PIN code"; ObjectID = "GfW-ah-8U1"; */
-"GfW-ah-8U1.title" = "2. Generate a PIN code";
-
-/* Class = "NSTextFieldCell"; title = "1. Grab a device with the account you want to use"; ObjectID = "HcT-yD-KVo"; */
-"HcT-yD-KVo.title" = "1. Grab a device with the account you want to use";
-
-/* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "M4C-GY-B6t"; */
-"M4C-GY-B6t.title" = "الرجاء الإنتظار لحظة...";
-
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
 "Pcj-BY-tou.title" = "ألغِ";
 
 /* Class = "NSTextFieldCell"; title = "Enter password"; ObjectID = "U2K-fu-INc"; */
 "U2K-fu-INc.title" = "Enter password";
 
-/* Class = "NSButtonCell"; title = "I'm ready"; ObjectID = "XN4-uc-BSt"; */
-"XN4-uc-BSt.title" = "I'm ready";
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
+"WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "كلمة السر...";
 
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "t12-O0-kcf"; */
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
+"WlR-QM-tK4.ibShadowedMultipleValuesPlaceholder" = "كلمة السر...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
+"WlR-QM-tK4.ibShadowedNoSelectionPlaceholder" = "كلمة السر...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
+"WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "كلمة السر...";
+
+/* Class = "NSButtonCell"; title = "Select file"; ObjectID = "XJE-cy-nfQ"; */
+"XJE-cy-nfQ.title" = "Select file";
+
+/* Class = "NSTextFieldCell"; title = "Import archive file"; ObjectID = "kXa-FL-Enf"; */
+"kXa-FL-Enf.title" = "Import archive file";
+
+/* Class = "NSTextFieldCell"; title = "\tYou can directly import your account from an archive file on your device."; ObjectID = "kfe-m7-MTT"; */
+"kfe-m7-MTT.title" = "\tYou can directly import your account from an archive file on your device.";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "t12-O0-kcf"; */
 "t12-O0-kcf.title" = "موافق";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
+"vVf-hg-sWk.ibShadowedIsNilPlaceholder" = "PIN";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
+"vVf-hg-sWk.ibShadowedMultipleValuesPlaceholder" = "PIN";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
+"vVf-hg-sWk.ibShadowedNoSelectionPlaceholder" = "PIN";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
+"vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "PIN";
+
+/* Class = "NSTextFieldCell"; title = "Linking..."; ObjectID = "zWn-4H-ODH"; */
+"zWn-4H-ODH.title" = "Linking...";
