@@ -146,8 +146,8 @@ source_lang = en
 type = STRINGS
 
 [jami.osxAddSipAccountVC]
-file_filter = ui/<lang>.lproj/AddSipAccountVC.strings
-source_file = ui/Base.lproj/AddSipAccountVC.strings
+file_filter = ui/<lang>.lproj/AddSIPAccountVC.strings
+source_file = ui/Base.lproj/AddSIPAccountVC.strings
 source_lang = en
 type = STRINGS
 
