@@ -1,12 +1,12 @@
 
 /* Class = "NSTextFieldCell"; title = "To link this device to another account, you have two possibilities:"; ObjectID = "06g-zM-5Qz"; */
-"06g-zM-5Qz.title" = "To link this device to another account, you have two possibilities:";
+"06g-zM-5Qz.title" = "連將此裝置連結到另一個帳號，您有兩種選擇：";
 
 /* Class = "NSTextFieldCell"; title = "OR"; ObjectID = "1NY-Yu-wH1"; */
-"1NY-Yu-wH1.title" = "OR";
+"1NY-Yu-wH1.title" = "或";
 
 /* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
-"2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"2uK-1s-tk7.title" = "\t您可以從其他裝置匯入您的帳號，但您必須先取得 PIN 碼。 \n\t要生成 PIN 碼，請到帳號管理設定中的前一個裝置，選擇要使用的 Jami 帳號，並選取「連結其他裝置到這個帳號」。您將會取得用以完成此表單的 PIN 碼。PIN 碼的有效期限只有10分鐘。";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
 "3ik-rY-Gig.title" = "輸入您的 PIN";
@@ -36,13 +36,13 @@
 "WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "密碼...";
 
 /* Class = "NSButtonCell"; title = "Select file"; ObjectID = "XJE-cy-nfQ"; */
-"XJE-cy-nfQ.title" = "Select file";
+"XJE-cy-nfQ.title" = "選取檔案";
 
 /* Class = "NSTextFieldCell"; title = "Import archive file"; ObjectID = "kXa-FL-Enf"; */
-"kXa-FL-Enf.title" = "Import archive file";
+"kXa-FL-Enf.title" = "匯入封存檔";
 
 /* Class = "NSTextFieldCell"; title = "\tYou can directly import your account from an archive file on your device."; ObjectID = "kfe-m7-MTT"; */
-"kfe-m7-MTT.title" = "\tYou can directly import your account from an archive file on your device.";
+"kfe-m7-MTT.title" = "\t您可以直接從您裝置上的封存檔匯入您的帳號。";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "t12-O0-kcf"; */
 "t12-O0-kcf.title" = "確定";
@@ -60,4 +60,4 @@
 "vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "PIN 碼";
 
 /* Class = "NSTextFieldCell"; title = "Linking..."; ObjectID = "zWn-4H-ODH"; */
-"zWn-4H-ODH.title" = "Linking...";
+"zWn-4H-ODH.title" = "正在連結……";

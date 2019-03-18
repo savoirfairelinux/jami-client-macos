@@ -8,10 +8,10 @@
 "Add to contacts" = "Добавить в контакты";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Сделать видеозвонок";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Сделать аудиозвонок";
 
 /* Contextual menu action */
 "Clear conversation" = "Очистить разговор";
@@ -56,7 +56,7 @@
 "Choose file" = "Выбрать файл";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Транслировать экран";
 
 /* No comment provided by engineer. */
 "Copy" = "Копировать";
@@ -86,7 +86,7 @@
 "Incoming call from %@" = "Входящий вызов от %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Входящее сообщение от %@";
 
 /* Message from {Name} */
 "Message from %@" = "Сообщение от %@";
@@ -95,10 +95,10 @@
 "New SIP account" = "Новый SIP аккаунт";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Нет аккаунтов";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Зайдите в настройки, чтобы создать аккаунт";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Пароль и подтверждение не совпадают.";
@@ -153,16 +153,16 @@
 "The entered username is not available" = "Указанное имя пользователя недоступно";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "Следующий аккаунт требуется преобразовать в новый формат аккаунта Jami:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Введенный пароль не подходит к этому аккаунту";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Для завершения процесса вам нужно открыть Jami на новом устройстве и выбрать \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Чтобы продолжить перенос, вам нужно выбрать пароль для вашего аккаунта. Этот пароль будет использован для шифрования вашего основного ключа. Он потребуется для добавления новых устройств к вашему аккаунту Jami. Если вы не готовы выбрать пароль, можете закрыть Jami и продолжить перенос позднее.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Неизвестно";
@@ -171,27 +171,27 @@
 "You have to migrate your account before exporting" = "Вам нужно перенести аккаунт перед экспортом";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Удаление учетной записи";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Нажатие \"ОК\" удалит данный аккаунт на данном устройстве! Это действие невозможно отменить. Также вы можете потерять зарегистрированное имя!";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Выберите архив";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Привязать к аккаунту";
 
 /* Welcome title */
 "Welcome to Ring" = "Добро пожаловать в Jami";
 "Create a new account" = "Создать новый аккаунт";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Добавить аккаунт SIP";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Отправил Вам запрос на добавление в контакты";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Это ваше имя пользователя Jami.\nСкопируйте и поделитесь им со своими друзьями!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Это ваш ID.\nСкопируйте и поделитесь им с Вашими друзьями!";

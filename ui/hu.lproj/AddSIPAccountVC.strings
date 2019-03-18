@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter SIP address"; ObjectID = "0UI-j5-0at"; */
-"0UI-j5-0at.placeholderString" = "Enter SIP address";
+"0UI-j5-0at.placeholderString" = "Adja meg a SIP-címet";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "Aem-zQ-Ya3"; */
 "Aem-zQ-Ya3.title" = "Jelszó";
@@ -18,7 +18,7 @@
 "Rej-Yd-PDb.placeholderString" = "Felhasználónév megadása";
 
 /* Class = "NSTextFieldCell"; title = "User Name"; ObjectID = "Srm-hv-9WR"; */
-"Srm-hv-9WR.title" = "User Name";
+"Srm-hv-9WR.title" = "Felhasználónév";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "YeS-R8-ZLT"; */
 "YeS-R8-ZLT.placeholderString" = "Név megadása";
@@ -27,7 +27,7 @@
 "fgN-nq-QdO.title" = "Profil";
 
 /* Class = "NSTextFieldCell"; title = "SIP Server"; ObjectID = "ubR-HD-O15"; */
-"ubR-HD-O15.title" = "SIP Server";
+"ubR-HD-O15.title" = "SIP-kiszolgáló";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "zAN-HT-1oE"; */
 "zAN-HT-1oE.title" = "Fiók";

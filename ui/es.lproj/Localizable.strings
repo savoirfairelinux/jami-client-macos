@@ -2,16 +2,16 @@
 "A network error occured during the export" = "Ocurrió un error durante la exportación";
 
 /* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+"Account has no password" = "La cuenta no tiene contraseña";
 
 /* Contextual menu action */
 "Add to contacts" = "Añadir a contactos";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Realizar videollamada";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Realizar llamada de audio";
 
 /* Contextual menu action */
 "Clear conversation" = "Limpiar conversación";
@@ -56,7 +56,7 @@
 "Choose file" = "Elegir archivo";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Compartir pantalla";
 
 /* No comment provided by engineer. */
 "Copy" = "Copiar";
@@ -86,7 +86,7 @@
 "Incoming call from %@" = "Llamada entrante de %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Mensaje entrante de %@";
 
 /* Message from {Name} */
 "Message from %@" = "Mensaje de %@";
@@ -95,10 +95,10 @@
 "New SIP account" = "Nueva cuenta SIP";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "No hay ninguna cuenta disponible";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Ir a preferencias para crear una nueva cuenta";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "La contraseña y la confirmación no coinciden";
@@ -153,16 +153,16 @@
 "The entered username is not available" = "El nombre de usuario tecleado no está disponible";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"The following account needs to be migrated to the new Jami account format:" = "Esta cuenta debe migrarse al nuevo formato de cuenta de Jami:";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "La contraseña ingresada no puede desbloquear esta cuenta";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Para completar el proces, abre Jami en el nuevo dispositivo y elige la opción \"Enlazar este dispositivo con una cuenta\". El pin es válido durante 10 minutos.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Para proceder con la migración, escoge una contraseña para tu cuenta. Esta contraseña se utilizará para cifrar tu clave maestra y será necesaria para añadir dispositivos a tu cuenta Jami. Si no estás listo para escoger una contraseña, cierra Jami y continúa con la migración más adelante.";
 
 /* Name used when user leave field empty */
 "Unknown" = "Desconocido";
@@ -171,27 +171,27 @@
 "You have to migrate your account before exporting" = "Debes migrar tu cuenta antes de exportar";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Eliminar cuenta";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Al hacer clic en \"OK\", esta cuenta se eliminará de este dispositivo. Esta acción es irreversible. Es posible que se pierda el nombre registrado.";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Seleccionar archivo";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Link to an account" = "Enlace a una cuenta";
 
 /* Welcome title */
 "Welcome to Ring" = "Bienvenido a Jami";
 "Create a new account" = "Crear una cuenta";
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Añadir una cuenta SIP";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Enviarte una solicitud de contacto";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Este es tu nombre de usuario en Jami.\n¡Cópialo y compártelo con tus amigos!";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Este es tu ID.\n¡Cópialo y compártelo con tus amigos!";
