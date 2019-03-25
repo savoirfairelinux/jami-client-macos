@@ -1,9 +1,9 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long.";
+"0qE-Sz-hdc.title" = "Wenn Sie dies anklicken, registrieren Sie einen einzigartigen Benutzernamen im Jami-Netzwerk. Damit können andere Leute Sie kontaktieren und brauchen nicht Ihre 40 Zeichen lange Jami-ID.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Obligatorisch*";
+"1TO-Ov-S8j.placeholderString" = "Pfilchtfeld*";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
 "AG5-GR-bii.title" = "Öffentlichen Benutzernamen registrieren";
@@ -12,7 +12,7 @@
 "B6x-jj-48R.title" = "Wählen Sie Ihr Passwort aus";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
-"BCg-5V-Ek4.placeholderString" = "Obligatorisch*";
+"BCg-5V-Ek4.placeholderString" = "Pfilchtfeld*";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
 "YIN-YL-JBs.title" = "Nur einen Moment...";
@@ -21,7 +21,7 @@
 "fEY-eO-HwI.title" = "Wiederholen Sie Ihr Passwort";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
-"gEy-ak-Cgq.placeholderString" = "Enter name";
+"gEy-ak-Cgq.placeholderString" = "Namen eingeben";
 
 /* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
 "gki-BR-jc3.title" = "Erstellen Sie Ihr Profil";
