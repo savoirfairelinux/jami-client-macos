@@ -124,8 +124,6 @@ SET(ringclient_CONTROLLERS
    src/AccAdvancedRingVC.h
    src/CertificateWC.mm
    src/CertificateWC.h
-   src/BackupAccountWC.mm
-   src/BackupAccountWC.h
    src/RestoreAccountWC.mm
    src/RestoreAccountWC.h
    src/AudioPrefsVC.mm
@@ -248,7 +246,6 @@ SET(ringclient_XIBS
    PreferencesWindow
    RingWizard
    CertificateWindow
-   BackupAccountWindow
    RestoreAccountWindow
    ExportPasswordWindow
    MigrateRingAccountsWindow

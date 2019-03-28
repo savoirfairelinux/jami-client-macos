@@ -36,7 +36,6 @@
 #import <interfaces/pixmapmanipulatori.h>
 
 #import "RegisterNameWC.h"
-#import "BackupAccountWC.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/NSImage+Extensions.h"
 #import "views/HoverTableRowView.h"
@@ -428,12 +427,18 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 - (IBAction)exportAccount:(id)sender
 {
-    BackupAccountWC* passwordWC = [[BackupAccountWC alloc] initWithNibName:@"BackupAccountWindow" bundle: nil accountmodel: self.accountModel];
-    passwordWC.delegate = self;
-    [passwordWC setAllowFileSelection:NO];
-    passwordWC.selectedAccountID = self.selectedAccountID;
-    accountModal = passwordWC;
-    [self.view.window beginSheet:passwordWC.window completionHandler:nil];
+    NSSavePanel* filePicker = [NSSavePanel savePanel];
+    NSString* name  = [@(self.selectedAccountID.c_str()) stringByAppendingString: @".gz"];
+    [filePicker setNameFieldStringValue: name];
+
+    if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
+        const char* fullPath = [[filePicker URL] fileSystemRepresentation];
+        if (self.accountModel->exportToFile(self.selectedAccountID, fullPath)) {
+            [self didCompleteExportWithPath:[filePicker URL]];
+        } else {
+            [self showAlertWithTitle: @"" andText: NSLocalizedString(@"An error occured during the backup", @"Backup error")];
+        }
+    }
 }
 
 - (IBAction)startNameRegistration:(id)sender

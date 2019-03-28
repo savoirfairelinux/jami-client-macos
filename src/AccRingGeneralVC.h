@@ -20,12 +20,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
-#import "BackupAccountWC.h"
 #import "RegisterNameWC.h"
 #import "AccountSettingsVC.h"
 #import "PasswordChangeWC.h"
 
-@interface AccRingGeneralVC : NSViewController <NSTextFieldDelegate, LrcModelsProtocol, BackupAccountDelegate, RegisterNameDelegate, AccountGeneralProtocol, NSTableViewDelegate, NSTableViewDataSource, PasswordChangeDelegate>
+@interface AccRingGeneralVC : NSViewController <NSTextFieldDelegate, LrcModelsProtocol, RegisterNameDelegate, AccountGeneralProtocol, NSTableViewDelegate, NSTableViewDataSource, PasswordChangeDelegate>
 
 - (void) setSelectedAccount:(std::string) account;
 
