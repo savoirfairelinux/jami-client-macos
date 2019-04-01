@@ -195,3 +195,6 @@
 
 /* Explanation label when user have just ID */
 "This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Backup error */
+"An error occured during the backup" = "Der opstod en fejl under sikkerhedskopiering";

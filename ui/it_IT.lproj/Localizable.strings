@@ -17,7 +17,7 @@
 "Clear conversation" = "Clear conversation";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Blocca contatto";
 
 /* Text shown to the user */
 "Alias : " = "Alias :";
@@ -184,7 +184,7 @@
 
 /* Welcome title */
 "Welcome to Ring" = "Benvenuto in Jami";
-"Create a new account" = "Create a new account";
+"Create a new account" = "Crea un nuovo account";
 "Add a SIP account" = "Add a SIP account";
 
 /* Notification message */
@@ -195,3 +195,6 @@
 
 /* Explanation label when user have just ID */
 "This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Backup error */
+"An error occured during the backup" = "Si è verificato un errore durante il backup";

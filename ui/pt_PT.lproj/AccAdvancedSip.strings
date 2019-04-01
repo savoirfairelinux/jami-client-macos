@@ -36,7 +36,7 @@
 "9p9-GR-XKU.title" = "Porta";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "A31-3Y-z4R"; */
-"A31-3Y-z4R.title" = "Box";
+"A31-3Y-z4R.title" = "Caixa";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
 "ELr-A7-mGE.title" = "Endereço publicado";
@@ -57,7 +57,7 @@
 "Jfp-NE-ODd.title" = "Negociação de Sessão SDP (caso falhe o ICE)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
-"MBR-AC-HFq.title" = "Box";
+"MBR-AC-HFq.title" = "Caixa";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
 "Mho-w1-ZPJ.title" = "Item 3";
@@ -72,7 +72,7 @@
 "Ogj-NW-fZ9.title" = "Intervalo de portas RTP de áudio";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
-"Ppa-zn-w1X.title" = "Box";
+"Ppa-zn-w1X.title" = "Caixa";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
 "Qk8-tH-a0l.title" = "Ativar SDES para protocolo de troca de chaves";
@@ -96,7 +96,7 @@
 "Xxr-gl-ukE.title" = "Endereço";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
-"Zuz-jy-rLn.title" = "Box";
+"Zuz-jy-rLn.title" = "Caixa";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
 "aYs-wh-Hpr.title" = "Endereço TURN";
@@ -108,19 +108,19 @@
 "cN3-lC-dNM.title" = "Apenas utilizado durante uma negociação de sessão SDP, caso o ICE não seja suportado";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
-"cwV-lc-jju.title" = "Box";
+"cwV-lc-jju.title" = "Caixa";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
 "dtf-uk-n1B.title" = "Tempo de espera de negociação (seg)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
-"ekM-Cg-DEo.title" = "Box";
+"ekM-Cg-DEo.title" = "Caixa";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
 "fjH-ej-gEr.title" = "Interface de rede";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
+"fyT-bU-m54.title" = "Verificar certificados recebidos (lado do servidor)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "Codecs de vídeo";
@@ -129,7 +129,7 @@
 "jgX-tQ-dIA.title" = "Texto da Célula";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
-"l86-cH-pp8.title" = "Box";
+"l86-cH-pp8.title" = "Caixa";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "nh9-3y-CEI"; */
 "nh9-3y-CEI.title" = "Máx";
@@ -156,7 +156,7 @@
 "wq6-KV-8X3.title" = "Máx";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
-"wyZ-Hb-BNf.title" = "Box";
+"wyZ-Hb-BNf.title" = "Caixa";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "x93-zk-hAW"; */
 "x93-zk-hAW.title" = "UPnP";
