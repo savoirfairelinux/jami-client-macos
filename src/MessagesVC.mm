@@ -34,6 +34,7 @@
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/IconButton.h"
+#import "views/ContextualTableCellView.h"
 #import <QuickLook/QuickLook.h>
 #import <Quartz/Quartz.h>
 
@@ -51,6 +52,7 @@
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
     QMetaObject::Connection newInteractionSignal_;
+    QMetaObject::Connection interactionRemovedSignal_;
 
     // Both are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
@@ -227,6 +229,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     // Signal triggered when messages are received or their status updated
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
+    QObject::disconnect(interactionRemovedSignal_);
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
                                              [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                                  if (uid != convUid_)
@@ -235,6 +238,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                  [conversationView noteNumberOfRowsChanged];
                                                  [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
                                              });
+    interactionRemovedSignal_ = QObject
+    ::connect(convModel_,
+              &lrc::api::ConversationModel::interactionRemoved,
+              [self](const std::string& uid, uint64_t interactionId){
+                  if (uid != convUid_)
+                      return;
+                  cachedConv_ = nil;
+                  [conversationView reloadData];
+              });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
                                                        [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                                            if (uid != convUid_)
@@ -496,21 +508,38 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         type = LAST;
     }
     result.msgBackground.type = type;
-    bool sendingFail = false;
     [result.messageStatus setHidden:YES];
+    [result.cancelMessageButton setHidden:YES];
     if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
         if (interaction.status == lrc::api::interaction::Status::SENDING) {
             [result.messageStatus setHidden:NO];
-            [result.sendingMessageIndicator startAnimation:nil];
             [result.messageFailed setHidden:YES];
+            NSMutableArray* contextualsControls = [[NSMutableArray alloc] init];
+            [contextualsControls addObject: result.cancelMessageButton ];
+            [((IMTableCellView*) result) setContextualsControls:contextualsControls];
+            NSTimeInterval current = [[NSDate date] timeIntervalSince1970];
+            if ((current - interaction.timestamp) < 10) {
+                [result.sendingMessageIndicator setHidden:NO];
+                [result.sendingMessageIndicator startAnimation:nil];
+                [result.messagePending setHidden:YES];
+                NSMutableArray* contextualsControls = [[NSMutableArray alloc] init];
+                [contextualsControls addObject: result.sendingMessageIndicator];
+                [((IMTableCellView*) result) setContextualsControlsToHide:contextualsControls];
+            } else {
+                [result.sendingMessageIndicator setHidden:YES];
+                [result.messagePending setHidden:NO];
+                NSMutableArray* contextualsControls = [[NSMutableArray alloc] init];
+                [contextualsControls addObject: result.messagePending];
+                [((IMTableCellView*) result) setContextualsControlsToHide:contextualsControls];
+            }
         } else if (interaction.status == lrc::api::interaction::Status::FAILED) {
             [result.messageStatus setHidden:NO];
             [result.sendingMessageIndicator setHidden:YES];
+            [result.messagePending setHidden:YES];
             [result.messageFailed setHidden:NO];
-            sendingFail = true;
         }
     }
-    [result setupForInteraction:it->first isFailed: sendingFail];
+    [result setupForInteraction:it->first];
     bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
     bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
     [result.msgBackground setNeedsDisplay:YES];
@@ -551,6 +580,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         NSString* timeString = [self timeForMessage: msgTime];
         result.timeLabel.stringValue = timeString;
     }
+    if (isOutgoing) {
+        [result.cancelMessageButton setAction:@selector(cancelMessage:)];
+        [result.cancelMessageButton setTarget:self];
+    }
 
     bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != FIRST_WITHOUT_TIME
                                 && sequence != FIRST_WITH_TIME) ? YES : NO;
@@ -560,6 +593,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
     }
     return result;
+}
+
+- (void)cancelMessage:(id)sender {
+    auto inter = [(IMTableCellView*)[sender superview] interaction];
+    if (convModel_ && !convUid_.empty()) {
+        convModel_->cancelMessage(inter);
+    }
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row

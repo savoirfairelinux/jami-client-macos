@@ -22,9 +22,14 @@
 @interface ContextualTableCellView : NSTableCellView
 
 /**
- * List of subviews to hide/show when mouse is tracked
+ * List of subviews to show when mouse is entered
  */
 @property (nonatomic) NSMutableArray* contextualsControls;
+
+/**
+ * List of subviews to show when mouse is leaved
+ */
+@property (nonatomic) NSMutableArray* contextualsControlsToHide;
 
 /**
  * BOOL tracking if the mouse is hovering over the cell

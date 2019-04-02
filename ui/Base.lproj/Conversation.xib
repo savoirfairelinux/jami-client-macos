@@ -172,31 +172,59 @@
                                                                     </customView>
                                                                 </subviews>
                                                             </customView>
+                                                            <button hidden="YES" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jw5-si-cFF">
+                                                                <rect key="frame" x="333" y="7" width="30" height="16"/>
+                                                                <buttonCell key="cell" type="bevel" title="Cancel" bezelStyle="circular" alignment="center" imageScaling="proportionallyDown" inset="2" id="MnE-oY-ma0">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="systemThin" size="12"/>
+                                                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                                                </buttonCell>
+                                                            </button>
                                                             <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R85-0p-W1u">
                                                                 <rect key="frame" x="323" y="0.0" width="30" height="30"/>
                                                                 <subviews>
                                                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="0wQ-xJ-dyK">
-                                                                        <rect key="frame" x="7" y="7" width="16" height="16"/>
+                                                                        <rect key="frame" x="8" y="8" width="14" height="14"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="16" id="1bf-RT-KMB"/>
-                                                                            <constraint firstAttribute="width" constant="16" id="gx0-ZN-nlt"/>
+                                                                            <constraint firstAttribute="height" constant="14" id="1bf-RT-KMB"/>
+                                                                            <constraint firstAttribute="width" constant="14" id="gx0-ZN-nlt"/>
                                                                         </constraints>
                                                                     </progressIndicator>
-                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="za2-Ke-9nQ">
-                                                                        <rect key="frame" x="9" y="5" width="16" height="16"/>
+                                                                    <box boxType="custom" borderWidth="0.0" cornerRadius="3" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="fFs-nI-2Wa">
+                                                                        <rect key="frame" x="21" y="3" width="6" height="6"/>
+                                                                        <view key="contentView" id="VQO-Ns-SIm">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="6" height="6"/>
+                                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        </view>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="16" id="BKb-Uw-NSP"/>
-                                                                            <constraint firstAttribute="height" constant="16" id="IoY-PR-zGC"/>
+                                                                            <constraint firstAttribute="width" constant="6" id="7qA-6V-CtT"/>
+                                                                            <constraint firstAttribute="height" constant="6" id="XUZ-vk-411"/>
                                                                         </constraints>
-                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_action_cancel" id="O50-s7-kS5"/>
-                                                                    </imageView>
+                                                                        <color key="fillColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </box>
+                                                                    <textField verticalHuggingPriority="750" preferredMaxLayoutWidth="8" translatesAutoresizingMaskIntoConstraints="NO" id="hWt-lP-b4W" customClass="NSTextFiled">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="29" height="20"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="25" id="M5m-Rq-0KY"/>
+                                                                            <constraint firstAttribute="height" constant="20" id="jjz-ob-F9k"/>
+                                                                        </constraints>
+                                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="..." id="CzA-vI-wTk">
+                                                                            <font key="font" metaFont="system" size="11"/>
+                                                                            <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                    </textField>
                                                                 </subviews>
                                                                 <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="fFs-nI-2Wa" secondAttribute="bottom" constant="3" id="IvN-ut-eVk"/>
                                                                     <constraint firstItem="0wQ-xJ-dyK" firstAttribute="centerX" secondItem="R85-0p-W1u" secondAttribute="centerX" id="KLO-Vq-RJs"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="za2-Ke-9nQ" secondAttribute="trailing" constant="5" id="QhI-3G-EAl"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="za2-Ke-9nQ" secondAttribute="bottom" constant="5" id="RWd-cl-5nZ"/>
-                                                                    <constraint firstItem="0wQ-xJ-dyK" firstAttribute="centerY" secondItem="R85-0p-W1u" secondAttribute="centerY" id="cey-zL-zGt"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="hWt-lP-b4W" secondAttribute="bottom" id="Lp4-TS-k3e"/>
+                                                                    <constraint firstItem="0wQ-xJ-dyK" firstAttribute="centerY" secondItem="R85-0p-W1u" secondAttribute="centerY" id="fPd-Re-iLh"/>
                                                                     <constraint firstAttribute="width" constant="30" id="jtG-UX-K2l"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="hWt-lP-b4W" secondAttribute="trailing" constant="3" id="lCb-cD-ZY3"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="fFs-nI-2Wa" secondAttribute="trailing" constant="3" id="tAp-h5-GRZ"/>
                                                                     <constraint firstAttribute="height" constant="30" id="yN5-VE-3mY"/>
                                                                 </constraints>
                                                             </customView>
@@ -207,12 +235,16 @@
                                                             <constraint firstItem="R85-0p-W1u" firstAttribute="bottom" secondItem="Sfu-lT-vTc" secondAttribute="bottom" id="D27-qd-IeC"/>
                                                             <constraint firstAttribute="trailing" secondItem="Sfu-lT-vTc" secondAttribute="trailing" id="Dud-fA-h31"/>
                                                             <constraint firstItem="Sfu-lT-vTc" firstAttribute="leading" secondItem="R85-0p-W1u" secondAttribute="trailing" id="Mwz-p4-40h"/>
+                                                            <constraint firstItem="jw5-si-cFF" firstAttribute="trailing" secondItem="R85-0p-W1u" secondAttribute="trailing" constant="-5" id="RNZ-bp-fIi"/>
+                                                            <constraint firstItem="jw5-si-cFF" firstAttribute="centerY" secondItem="R85-0p-W1u" secondAttribute="centerY" id="WC6-A5-r5c"/>
                                                             <constraint firstItem="Sfu-lT-vTc" firstAttribute="top" secondItem="ciI-CA-tly" secondAttribute="bottom" id="djM-3i-lA2"/>
                                                             <constraint firstItem="ciI-CA-tly" firstAttribute="leading" secondItem="Kuf-56-7Og" secondAttribute="leading" id="fUJ-Nz-gfY"/>
                                                             <constraint firstItem="ciI-CA-tly" firstAttribute="top" secondItem="Kuf-56-7Og" secondAttribute="top" id="kle-LJ-tbx"/>
                                                         </constraints>
                                                         <connections>
-                                                            <outlet property="messageFailed" destination="za2-Ke-9nQ" id="xJl-IG-hnJ"/>
+                                                            <outlet property="cancelMessageButton" destination="jw5-si-cFF" id="YDN-Nc-Kra"/>
+                                                            <outlet property="messageFailed" destination="fFs-nI-2Wa" id="q3n-W1-qf0"/>
+                                                            <outlet property="messagePending" destination="hWt-lP-b4W" id="Uu2-pl-xoP"/>
                                                             <outlet property="messageStatus" destination="R85-0p-W1u" id="m2j-ho-aqf"/>
                                                             <outlet property="msgBackground" destination="Sfu-lT-vTc" id="7bK-eM-vle"/>
                                                             <outlet property="msgView" destination="gob-L5-RgR" id="jaX-qj-YQA"/>
@@ -587,7 +619,6 @@
     </objects>
     <resources>
         <image name="ic_action_call" width="72" height="72"/>
-        <image name="ic_action_cancel" width="72" height="72"/>
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="ic_arrow_back" width="72" height="72"/>

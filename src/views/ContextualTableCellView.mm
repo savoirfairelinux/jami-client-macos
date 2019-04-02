@@ -18,6 +18,7 @@
  */
 
 #import "ContextualTableCellView.h"
+#import <Quartz/Quartz.h>
 
 @interface NSView (extension)
 @property NSVisualEffectView* vibrantView;
@@ -59,6 +60,10 @@
         if(self.shouldBlurParentView && [item respondsToSelector:@selector(vibrantView)] && item.vibrantView)
             [item.vibrantView setHidden:YES];
     }
+
+    for (NSView* item in self.contextualsControlsToHide) {
+        [item setHidden:NO];
+    }
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent
@@ -69,7 +74,15 @@
         return;
 
     for (NSView* item in self.contextualsControls) {
-        [item setHidden:NO];
+        item.alphaValue = 0;
+        item.hidden = NO;
+        CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
+        fadeIn.toValue = [NSNumber numberWithFloat:1.0];
+        fadeIn.duration = 0.3f;
+
+        [item.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
+        item.alphaValue = 1;
         if(!self.shouldBlurParentView)
         {
             break;
@@ -95,6 +108,10 @@
             [item.vibrantView setHidden:NO];
         }
     }
+
+    for (NSView* item in self.contextualsControlsToHide) {
+        [item setHidden:YES];
+    }
 }
 
 - (void)mouseExited:(NSEvent *)theEvent
@@ -106,6 +123,10 @@
         if(self.shouldBlurParentView && [item respondsToSelector:@selector(vibrantView)] && item.vibrantView) {
             [item.vibrantView setHidden:YES];
         }
+    }
+
+    for (NSView* item in self.contextualsControlsToHide) {
+        [item setHidden:NO];
     }
 }
 

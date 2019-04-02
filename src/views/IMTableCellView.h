@@ -20,8 +20,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MessageBubbleView.h"
+#import "RoundedTextField.h"
+#import "ContextualTableCellView.h"
 
-@interface IMTableCellView : NSTableCellView
+@interface IMTableCellView : ContextualTableCellView
 
 @property (nonatomic, strong) IBOutlet NSImageView* photoView;
 @property (nonatomic, strong) IBOutlet NSTextView* msgView;
@@ -35,13 +37,14 @@
 @property (nonatomic, strong) IBOutlet NSButton* transferedFileName;
 @property (nonatomic, strong) IBOutlet NSImageView* transferedImage;
 @property (nonatomic, strong) IBOutlet NSProgressIndicator* sendingMessageIndicator;
-@property (nonatomic, strong) IBOutlet NSImageView* messageFailed;
+@property (nonatomic, strong) IBOutlet RoundedTextField* messagePending;
 @property (nonatomic, strong) IBOutlet NSView* messageStatus;
+@property (nonatomic, strong) IBOutlet NSBox* messageFailed;
 @property (nonatomic, strong) IBOutlet NSButton* openImagebutton;
+@property (nonatomic, strong) IBOutlet NSButton* cancelMessageButton;
 
 
 - (uint64_t) interaction;
-- (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed;
 - (void) setupForInteraction:(uint64_t)inter;
 - (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding;
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
