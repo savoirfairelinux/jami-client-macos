@@ -18,13 +18,13 @@
 "O2C-xR-mHF.title" = "Automatisch starten";
 
 /* Class = "NSTextFieldCell"; title = "(Applied on application restart)"; ObjectID = "OTl-vx-S43"; */
-"OTl-vx-S43.title" = "(Actief nadat toepassing is herstart)";
+"OTl-vx-S43.title" = "(Actief nadat toepassing herstart is)";
 
 /* Class = "NSTextFieldCell"; title = "Behaviours"; ObjectID = "Rzy-Gh-3wQ"; */
 "Rzy-Gh-3wQ.title" = "Gedrag";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
-"T3a-yx-ZaW.title" = "Automatisch controleren op updates";
+"T3a-yx-ZaW.title" = "Automatisch op updates controleren";
 
 /* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "Thg-oC-5Qw"; */
 "Thg-oC-5Qw.title" = "Profiel";
@@ -45,10 +45,10 @@
 "r4u-t3-gBc.title" = "Update";
 
 /* Class = "NSButtonCell"; title = "Enable notifications for incoming calls"; ObjectID = "uCL-ye-tsv"; */
-"uCL-ye-tsv.title" = "Enable notifications for incoming calls";
+"uCL-ye-tsv.title" = "Meldingen inschakelen voor inkomende oproepen";
 
 /* Class = "NSButtonCell"; title = "Bring Jami to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
-"uYI-hA-JHk.title" = "Bring Jami to foreground on incoming calls";
+"uYI-hA-JHk.title" = "Jami naar voorgrond brengen bij inkomende oproepen";
 
 /* Class = "NSTextFieldCell"; title = "This is shared with your contacts "; ObjectID = "vbU-2S-O58"; */
 "vbU-2S-O58.title" = "Dit wordt gedeeld met uw contacten";

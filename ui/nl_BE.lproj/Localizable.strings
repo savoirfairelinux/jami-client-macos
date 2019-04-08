@@ -5,7 +5,7 @@
 "Account has no password" = "Account has no password";
 
 /* Contextual menu action */
-"Add to contacts" = "Aan contacten toevoegen";
+"Add to contacts" = "Toevoegen aan contacten";
 
 /* Contextual menu action */
 "Place video call" = "Place video call";
@@ -14,10 +14,10 @@
 "Place audio call" = "Place audio call";
 
 /* Contextual menu action */
-"Clear conversation" = "Wis het gesprek";
+"Clear conversation" = "Gesprek wissen";
 
 /* Contextual menu action */
-"Block contact" = "Blokkeer contact";
+"Block contact" = "Contact blokkeren";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
@@ -68,7 +68,7 @@
 "Copy number" = "Nummer kopiëren";
 
 /* Contextual menu entry */
-"Create Jami Account" = "Create Jami Account";
+"Create Jami Account" = "Jami-account aanmaken";
 
 /* Contextual menu entry */
 "Create SIP Account" = "Create SIP Account";
@@ -107,7 +107,7 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Paswoorden komen nie overeen";
+"Passwords don't match" = "Wachtwoorden komen niet overeen";
 
 /* Button label */
 "Pause" = "Pauze";
@@ -156,7 +156,7 @@
 "The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "Het paswoord dat u hebt ingevoerd ontgrendelt dit account niet";
+"The password you entered does not unlock this account" = "Het wachtwoord dat u heeft ingegeven ontgrendelt deze account niet";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -171,7 +171,7 @@
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Account verwijderen";
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
@@ -183,8 +183,8 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "Welcome to Jami";
-"Create a new account" = "Nieuwen account aanmaken";
+"Welcome to Ring" = "Welkom bij Jami";
+"Create a new account" = "Nieuwe account aanmaken";
 "Add a SIP account" = "Add a SIP account";
 
 /* Notification message */
@@ -197,4 +197,4 @@
 "This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
 
 /* Backup error */
-"An error occured during the backup" = "Er is een fout opgetreden tijdens het maken van de back-up";
+"An error occured during the backup" = "Er is een fout opgetreden tijdens het maken van de reservekopie";

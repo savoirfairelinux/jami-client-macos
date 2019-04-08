@@ -21,7 +21,7 @@
 "57.title" = "Jami";
 
 /* Class = "NSMenuItem"; title = "About Jami"; ObjectID = "58"; */
-"58.title" = "About Jami";
+"58.title" = "Over Jami";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
 "129.title" = "Voorkeuren…";
@@ -33,10 +33,10 @@
 "131.title" = "Diensten";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Hide Jami";
+"134.title" = "Jami verbergen";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "Quit Jami";
+"136.title" = "Jami afsluiten";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Anderen verbergen";
@@ -45,10 +45,10 @@
 "150.title" = "Alles tonen";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "Stopt met spreken";
+"195.title" = "Stop met spreken";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "Begind met spreken";
+"196.title" = "Begin met spreken";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
 "197.title" = "Kopiëren";
@@ -75,7 +75,7 @@
 "204.title" = "Spelling en grammatica tonen";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Bewerken";
+"205.title" = "Wijzigen";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
 "207.title" = "Ongedaan maken";
@@ -105,19 +105,19 @@
 "216.title" = "Spelling en grammatica";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Bewerken";
+"217.title" = "Wijzigen";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
 "218.title" = "Zoeken";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Spelling controleren tijdens typen";
+"219.title" = "Spelling controleren tijdens schrijven";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
 "220.title" = "Zoeken";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Selectie gebruiken voor te zoeken";
+"221.title" = "Selectie gebruiken om te zoeken";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "Zoom";
@@ -135,7 +135,7 @@
 "298.title" = "Werkbalk aanpassen…";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Grammatica samen met spelling controleren";
+"346.title" = "Grammatica controleren met spelling";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
 "348.title" = "Correcties";
@@ -144,7 +144,7 @@
 "349.title" = "Correcties";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
-"350.title" = "Slim kopiëren/plakken";
+"350.title" = "Slim knippen/plakken";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
 "351.title" = "Slimme citaten";
@@ -162,13 +162,13 @@
 "452.title" = "In hoofdletters";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Spelling automatisch corrigeren";
+"454.title" = "Automatisch spelling corrigeren";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
 "457.title" = "Correcties tonen";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Slimme streepkes";
+"460.title" = "Slimme strepen";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
 "462.title" = "Tekstvervanging";
@@ -180,7 +180,7 @@
 "466.title" = "Met hoofdletters";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "Plakken me’ dezelfde opmaak";
+"485.title" = "Plakken met zelfde opmaak";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
 "490.title" = "Hulp";
@@ -189,13 +189,13 @@
 "491.title" = "Hulp";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami Help";
+"492.title" = "Jami-hulp";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Zoeken en vervangen…";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Controleren op updates…";
+"593.title" = "Zoeken naar updates…";
 
 /* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
 "12w-Fz-Scs.title" = "Tonen";

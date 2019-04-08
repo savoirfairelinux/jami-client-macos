@@ -6,19 +6,19 @@
 "859-10-HEb.placeholderString" = "ID";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "The following account needs to be migrated to the new Jami account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If your not ready to choose a password, you may close Jami and resume the migration later.";
+"859-10-HEb.title" = "Het volgende account moet gemigreerd worden naar het nieuwe Jami-accountformaat:\\nAlias:\\nID:\\nOm door te gaan met de migratie dient u een wachtwoord voor uw account kiezen. Dit wachtwoord zal gebruikt worden om uw hoofdsleutel te versleutelen. Het wachtwoord wordt vereist om nieuwe apparaten aan uw Jami-account toe te voegen. Als u nog niet klaar bent om een wachtwoord te kiezen, kunt u Jami sluiten en de migratie later verderzetten.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
 "8K3-9Z-MKH.title" = "Accountmigratiefout";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Je account is succesvol gemigreerd.";
+"C2l-rz-Gqt.title" = "Uw account is succesvol gemigreerd.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
-"ITE-yD-CTb.title" = "Deze account verwijderen";
+"ITE-yD-CTb.title" = "Dit account verwijderen";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
-"KuO-oT-zhY.placeholderString" = "Bevestig je nieuwe wachtwoord…";
+"KuO-oT-zhY.placeholderString" = "Bevestig uw nieuwe wachtwoord…";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "Oké";

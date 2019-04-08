@@ -9,19 +9,19 @@
 "24s-we-pkD.title" = "Beveiliging";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
+"2rB-Bv-c9U.title" = "Registratie verval time-out (seconden)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Call settings";
+"3Uq-Nb-J1A.title" = "Oproepinstellingen";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
 "3rM-KT-bNf.title" = "RTP gebruiken bij mislukte versleuteling";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Auto answer calls";
+"3vs-TI-tkg.title" = "Oproepen automatisch beantwoorden";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
-"6eH-la-JbF.title" = "TURN realm";
+"6eH-la-JbF.title" = "TURN-realm";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
 "72p-GY-gu6.title" = "Wachtwoord persoonlijke sleutel";
@@ -39,7 +39,7 @@
 "A31-3Y-z4R.title" = "Vak";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Published address";
+"ELr-A7-mGE.title" = "Gepubliceerd adres";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
 "Gwi-Mp-NpZ.title" = "TURN gebruiken";
@@ -48,7 +48,7 @@
 "HRM-FR-1sH.title" = "STUN gebruiken";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN address";
+"HYt-sW-yd0.title" = "STUN-adres";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
 "JV8-cY-6vR.title" = "Certificaat voor inkomende TLS-verbindingen vereisen";
@@ -63,7 +63,7 @@
 "Mho-w1-ZPJ.title" = "Item 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Custom ringtone";
+"Nqr-gj-dOH.title" = "Aangepaste beltoon";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
 "OEo-C7-vEh.title" = "Item 2";
@@ -75,7 +75,7 @@
 "Ppa-zn-w1X.title" = "Vak";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "SDES inschakelen voor sleuteluitwisselingsprotocol";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Tekstvak";
@@ -99,13 +99,13 @@
 "Zuz-jy-rLn.title" = "Vak";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN address";
+"aYs-wh-Hpr.title" = "TURN-adres";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
 "b2y-85-ZHK.title" = "CA-certificaat";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
+"cN3-lC-dNM.title" = "Enkel gebruikt tijdens SDP-onderhandelingen ingeval ICE niet ondersteund wordt";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "Vak";
@@ -117,10 +117,10 @@
 "ekM-Cg-DEo.title" = "Vak";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Network interface";
+"fjH-ej-gEr.title" = "Netwerkinterface";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
+"fyT-bU-m54.title" = "Inkomende certificaten verifiëren (serverzijde)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "Videocodecs";
@@ -138,19 +138,19 @@
 "nq0-Js-9Cr.title" = "Min";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Use custom address and port";
+"nuq-Wl-sfd.title" = "Voeg aangepast adres en poort toe";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
 "rMN-Wf-tmp.title" = "TURN-gebruikersnaam";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
+"vCS-s8-mZI.title" = "Mediastreams versleutelen (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
 "vZH-42-mUi.title" = "Onderhandeling versleutelen (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
-"vpo-fl-9TS.title" = "Connectivity";
+"vpo-fl-9TS.title" = "Connectiviteit";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
 "wq6-KV-8X3.title" = "Max";
