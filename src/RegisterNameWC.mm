@@ -30,6 +30,9 @@
 @implementation RegisterNameWC
 {
     __unsafe_unretained IBOutlet NSTextField* registeredNameField;
+    __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
+    __unsafe_unretained IBOutlet NSTextField* passwordLabel;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* passwordTopConstraint;
     __unsafe_unretained IBOutlet NSImageView* ivLookupResult;
     __unsafe_unretained IBOutlet NSProgressIndicator* indicatorLookupResult;
 
@@ -39,10 +42,12 @@
     QMetaObject::Connection registeredNameFound;
 
     BOOL lookupQueued;
+    BOOL needPassword;
     NSString* usernameWaitingForLookupResult;
 }
 
 NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
+NSInteger const PASSWORD_TAG             = 3;
 
 @synthesize accountModel;
 
@@ -59,6 +64,11 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
 {
     [super windowDidLoad];
     auto accounts = self.accountModel->getAccountList();
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    needPassword = accountProperties.archiveHasPassword;
+    [passwordField setHidden: !needPassword];
+    [passwordLabel setHidden: !needPassword];
+    passwordTopConstraint.constant = needPassword ? 20.0 : -20.0;
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
     [ivLookupResult setHidden:YES];
     [indicatorLookupResult setHidden:YES];
@@ -81,6 +91,10 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
 - (void)onUsernameAvailabilityChangedWithNewAvailability:(BOOL)newAvailability
 {
     self.isUserNameAvailable = newAvailability;
+
+    self.couldRegister = needPassword ?
+    self.isUserNameAvailable && [self.passwordString length] > 0 :
+    self.isUserNameAvailable;
 }
 
 - (void)hideLookupSpinner
@@ -162,15 +176,18 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
 - (void)controlTextDidChange:(NSNotification *)notif
 {
     NSTextField* textField = [notif object];
-    if (textField.tag != BLOCKCHAIN_NAME_TAG) {
-        return;
-    }
-    NSString* alias = textField.stringValue;
+    if (textField.tag == BLOCKCHAIN_NAME_TAG) {
+        NSString* alias = textField.stringValue;
 
-    [self showLookupSpinner];
-    [self onUsernameAvailabilityChangedWithNewAvailability:NO];
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self performSelector:@selector(lookUp:) withObject:alias afterDelay:0.5];
+        [self showLookupSpinner];
+        [self onUsernameAvailabilityChangedWithNewAvailability:NO];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        [self performSelector:@selector(lookUp:) withObject:alias afterDelay:0.5];
+    } else if (textField.tag == PASSWORD_TAG) {
+        self.couldRegister = needPassword ?
+        self.isUserNameAvailable && [self.passwordString length] > 0 :
+        self.isUserNameAvailable;
+    }
 }
 
 - (void) lookUp:(NSString*) name
@@ -186,11 +203,17 @@ NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
 
 - (IBAction)registerUsername:(id)sender
 {
+    NSString *password = passwordField.stringValue;
+    if((!password || [password length] == 0) && needPassword) {
+        return;
+    }
     [registrationProgress startAnimation:nil];
     [self showLoading];
     [self setCallback];
 
-    self.isUserNameAvailable = self.accountModel->registerName(self.selectedAccountID, "", [registeredNameField.stringValue UTF8String]);
+    self.isUserNameAvailable = self.accountModel->registerName(self.selectedAccountID,
+                                                               [password UTF8String],
+                                                               [registeredNameField.stringValue UTF8String]);
     if (!self.isUserNameAvailable) {
         NSLog(@"Could not initialize registerName operation");
         QObject::disconnect(registrationEnded);

@@ -41,6 +41,10 @@
  */
 @property (assign)BOOL isUserNameAvailable;
 
+@property (assign)BOOL couldRegister;
+
+@property (assign)NSString* passwordString;
+
 @property std::string selectedAccountID;
 
 @end
