@@ -42,6 +42,7 @@
 #import "views/RoundedTextField.h"
 #import "ExportPasswordWC.h"
 #import "utils.h"
+#import "Constants.h"
 
 @interface AccRingGeneralVC ()
 
@@ -114,7 +115,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [photoView setBordered:YES];
     [addProfilePhotoImage setWantsLayer: YES];
     devicesTableView.delegate = self;
     devicesTableView.dataSource = self;
@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     NSImage *image = [[NSImage alloc] initWithData:imageData];
     if(image) {
         [photoView setBordered:NO];
-        [photoView setImage: [image roundCorners: 350]];
+        [photoView setImage: [image roundCorners: image.size.height * 0.5]];
         [addProfilePhotoImage setHidden:YES];
     } else {
         [photoView setImage:nil];
@@ -241,8 +241,8 @@ typedef NS_ENUM(NSInteger, TagViews) {
     }
     if (auto outputImage = [picker outputImage]) {
         auto image = [picker inputImage];
-        CGFloat newSize = MIN(image.size.height, image.size.width);
-        outputImage = [outputImage cropImageToSize:CGSizeMake(newSize, newSize)];
+        CGFloat newSize = MIN(MIN(image.size.height, image.size.width), MAX_IMAGE_SIZE);
+        outputImage = [outputImage imageResizeInsideMax: newSize];
         [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
         [photoView setBordered:NO];
         [addProfilePhotoImage setHidden:YES];

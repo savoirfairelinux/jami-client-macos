@@ -36,6 +36,7 @@
 #import "AccSipGeneralVC.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/NSImage+Extensions.h"
+#import "Constants.h"
 
 @interface AccSipGeneralVC ()
 
@@ -76,7 +77,6 @@ typedef NS_ENUM(NSInteger, TagViews) {
 -(void)viewDidLoad {
     [super viewDidLoad];
     [[self view] setAutoresizingMask: NSViewMinXMargin | NSViewMaxXMargin];
-    [photoView setBordered:YES];
     [addProfilePhotoImage setWantsLayer: YES];
     [self setEditingMode:NO];
     [self updateView];
@@ -93,8 +93,8 @@ typedef NS_ENUM(NSInteger, TagViews) {
     if (auto outputImage = [picker outputImage]) {
         [photoView setBordered:NO];
         auto image = [picker inputImage];
-        CGFloat newSize = MIN(image.size.height, image.size.width);
-        outputImage = [outputImage cropImageToSize:CGSizeMake(newSize, newSize)];
+        CGFloat newSize = MIN(MIN(image.size.height, image.size.width), MAX_IMAGE_SIZE);
+        outputImage = [outputImage imageResizeInsideMax: newSize];
         [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
         [addProfilePhotoImage setHidden:YES];
         auto imageToBytes = QByteArray::fromNSData([outputImage TIFFRepresentation]).toBase64();
@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     NSImage *image = [[NSImage alloc] initWithData:imageData];
     if(image) {
         [photoView setBordered:NO];
-        [photoView setImage: [image roundCorners: 350]];
+        [photoView setImage: [image roundCorners: image.size.height * 0.5]];
         [addProfilePhotoImage setHidden:YES];
     } else {
         [photoView setImage:nil];

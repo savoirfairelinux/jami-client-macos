@@ -194,8 +194,8 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     if (auto outputImage = [picker outputImage]) {
         [photoView setBordered:NO];
         auto image = [picker inputImage];
-        CGFloat newSize = MIN(image.size.height, image.size.width);
-        outputImage = [outputImage cropImageToSize:CGSizeMake(newSize, newSize)];
+        CGFloat newSize = MIN(MIN(image.size.height, image.size.width), MAX_IMAGE_SIZE);
+        outputImage = [outputImage imageResizeInsideMax: newSize];
         [photoView setImage:outputImage];
         [addProfilePhotoImage setHidden:YES];
     } else if(!photoView.image) {

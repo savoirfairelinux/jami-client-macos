@@ -38,3 +38,5 @@ namespace Preferences {
     /* download folder for incoming images*/
     NSString * const DownloadFolder = @"download_folder";
 }
+
+const CGFloat MAX_IMAGE_SIZE = 1024;
