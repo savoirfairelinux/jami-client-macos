@@ -1,24 +1,24 @@
 
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
-"1ob-x1-u74.title" = "Account migration completed";
+"1ob-x1-u74.title" = "Переведення облікового запису завершено";
 
 /* Class = "NSTextFieldCell"; placeholderString = "ID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "ID";
+"859-10-HEb.placeholderString" = "Ідентифікатор";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "The following account needs to be migrated to the new Jami account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If your not ready to choose a password, you may close Jami and resume the migration later.";
+"859-10-HEb.title" = "Наступні облікові записи потрібно перевести в новий формат облікового запису Джамі:\\nПсевдонім:\\nІдентифікатор:\nЩоб виконати переведення, вам необхідно обрати пароль для вашого облікового запису. Цей пароль буде використано для шифрування головного ключа. Він буде потрібний для додавання нових пристроїв до вашого облікового запису Джамі. Якщо ви не готові вибрати пароль, ви можете закрити Джамі й повернутися до переведення пізніше.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Account migration error";
+"8K3-9Z-MKH.title" = "Помилка переведення облікового запису";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Congratulations, your account has been migrated with Success.";
+"C2l-rz-Gqt.title" = "Вітаємо, ваш обліковий запис успішно переведено.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
-"ITE-yD-CTb.title" = "Delete this account";
+"ITE-yD-CTb.title" = "Видалити цей обліковий запис";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
-"KuO-oT-zhY.placeholderString" = "Confirm your new password...";
+"KuO-oT-zhY.placeholderString" = "Підтвердить ваш новий пароль…";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "OK";
@@ -30,19 +30,19 @@
 "VN1-A3-RIh.title" = "OK";
 
 /* Class = "NSTextFieldCell"; title = "Confirmation"; ObjectID = "aOa-1q-AZe"; */
-"aOa-1q-AZe.title" = "Confirmation";
+"aOa-1q-AZe.title" = "Підтвердження";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
 "e7n-Ev-bK7.placeholderString" = "назва помилки";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
-"rW5-Il-5YD.title" = "Migrate";
+"rW5-Il-5YD.title" = "Перевести";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "vwh-K9-3O9"; */
 "vwh-K9-3O9.title" = "Пароль";
 
 /* Class = "NSTextFieldCell"; title = "Account migration required"; ObjectID = "wmv-sA-Mlh"; */
-"wmv-sA-Mlh.title" = "Account migration required";
+"wmv-sA-Mlh.title" = "Необхідно перевести обліковий запис";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "xqz-Uz-hqU"; */
 "xqz-Uz-hqU.placeholderString" = "Пароль...";

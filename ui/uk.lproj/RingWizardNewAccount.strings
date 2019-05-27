@@ -1,42 +1,42 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long.";
+"0qE-Sz-hdc.title" = "Увімкнувши цю опцію, ви зареєструєте унікальне ім'я користувача в мережі Джамі. Люди можуть використовувати його замість вашого 40-значного ідентифікатора.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Обов'язкові*";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register public username";
+"AG5-GR-bii.title" = "Зареєструвати публічне ум'я користувача";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Choose your password";
+"B6x-jj-48R.title" = "Оберіть ваш пароль";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
-"BCg-5V-Ek4.placeholderString" = "Mandatory*";
+"BCg-5V-Ek4.placeholderString" = "Обов'язкові*";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
 "YIN-YL-JBs.title" = "Зачекайте трохи...";
 
 /* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
-"fEY-eO-HwI.title" = "Repeat your password";
+"fEY-eO-HwI.title" = "Повторіть ваш пароль";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
 "gEy-ak-Cgq.placeholderString" = "Введіть ім'я";
 
 /* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
-"gki-BR-jc3.title" = "Create your profile";
+"gki-BR-jc3.title" = "Створіть ваш профіль";
 
 /* Class = "NSTextFieldCell"; title = "Create your account"; ObjectID = "qQl-Xn-c88"; */
-"qQl-Xn-c88.title" = "Create your account";
+"qQl-Xn-c88.title" = "Створіть ваш обліковий запис";
 
 /* Class = "NSTextFieldCell"; title = "Enter your full name"; ObjectID = "tzf-88-Yn5"; */
-"tzf-88-Yn5.title" = "Enter your full name";
+"tzf-88-Yn5.title" = "Введіть ваше повне ім'я";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
 "v7f-52-GJA.title" = "Відміна";
 
 /* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
-"zUH-kc-cik.title" = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.";
+"zUH-kc-cik.title" = "Ваш пароль має бути принаймні з 6 знаків. Його буде використано для шифрування відомостей вашого облікового запису та прив'язування нових пристроїв до вашого облікового запису.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
 "zfA-n9-V4X.title" = "Створити";

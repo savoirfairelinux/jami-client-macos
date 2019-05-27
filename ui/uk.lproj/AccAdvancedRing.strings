@@ -1,33 +1,33 @@
 
 /* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow call from untrusted peers";
+"1Xr-BO-Pu3.title" = "Дозволити дзвінки від незнайомців";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "538-we-FTp"; */
-"538-we-FTp.title" = "Яшик";
+"538-we-FTp.title" = "Ящик";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "7eU-EP-4br"; */
-"7eU-EP-4br.title" = "Яшик";
+"7eU-EP-4br.title" = "Ящик";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "Адреса TURN";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "Налаштування дзвінків";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "Приймати дзвінки автоматично";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Текстова клітинка";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Name server";
+"ID3-Sv-gYY.title" = "Сервер імен";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
-"K0z-NH-3Cq.title" = "Яшик";
+"K0z-NH-3Cq.title" = "Ящик";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
 "LWs-a2-E7f.title" = "Сертифікат користувача";
@@ -39,16 +39,16 @@
 "Qxp-I4-A7W.title" = "Безпека";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "Використовувати проксі";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "Відео кодеки";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
-"XU0-bl-lDD.title" = "TURN realm";
+"XU0-bl-lDD.title" = "Простір TURN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "Адреса STUN";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "Початкове завантаження";
@@ -57,16 +57,16 @@
 "YcX-lE-8ug.title" = "Пароль від приватного ключа";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
-"Ywo-5x-8kh.title" = "Яшик";
+"Ywo-5x-8kh.title" = "Ящик";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ZNe-H0-dJk"; */
-"ZNe-H0-dJk.title" = "Яшик";
+"ZNe-H0-dJk.title" = "Ящик";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "ZqB-gt-yFt"; */
 "ZqB-gt-yFt.title" = "Адреса";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "eGX-gk-Zxp"; */
-"eGX-gk-Zxp.title" = "Яшик";
+"eGX-gk-Zxp.title" = "Ящик";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
 "eMG-uY-bpH.title" = "Обрати ім'я";
@@ -84,10 +84,10 @@
 "nqX-Vu-UuA.title" = "Використовувати STUN";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Custom ringtone";
+"qFq-Yh-2JL.title" = "Користувацький сигнал дзвінка";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Connectivity";
+"sVe-iG-OCw.title" = "З'єднання";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
 "soR-nF-ybe.title" = "Приватний ключ";
@@ -99,7 +99,7 @@
 "vYi-gW-MrY.title" = "Яшик";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "Налаштування OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "Використовувати TURN";

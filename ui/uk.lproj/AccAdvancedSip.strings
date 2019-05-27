@@ -9,19 +9,19 @@
 "24s-we-pkD.title" = "Безпека";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
+"2rB-Bv-c9U.title" = "Час до закінчення реєстрації (в секундах)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Call settings";
+"3Uq-Nb-J1A.title" = "Налаштування дзвінків";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
 "3rM-KT-bNf.title" = "Використання RTP у випадку проблем з кодуванням";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Auto answer calls";
+"3vs-TI-tkg.title" = "Приймати дзвінки автоматично";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
-"6eH-la-JbF.title" = "TURN realm";
+"6eH-la-JbF.title" = "Простір TURN";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
 "72p-GY-gu6.title" = "Пароль від приватного ключа";
@@ -30,7 +30,7 @@
 "8JD-11-wHZ.title" = "Ім’я вихідного TLS сервера";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Item 1";
+"8bw-iH-XGl.title" = "Одиниця 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "Порт";
@@ -39,7 +39,7 @@
 "A31-3Y-z4R.title" = "Яшик";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Published address";
+"ELr-A7-mGE.title" = "Оприлюднена адреса";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
 "Gwi-Mp-NpZ.title" = "Використовувати TURN";
@@ -48,7 +48,7 @@
 "HRM-FR-1sH.title" = "Використовувати STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN address";
+"HYt-sW-yd0.title" = "Адреса STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
 "JV8-cY-6vR.title" = "Вимагати сертифікат безпеки для вхідних TLS з’єднань";
@@ -60,13 +60,13 @@
 "MBR-AC-HFq.title" = "Яшик";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Item 3";
+"Mho-w1-ZPJ.title" = "Одиниця 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Custom ringtone";
+"Nqr-gj-dOH.title" = "Користувацький сигнал дзвінка";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Item 2";
+"OEo-C7-vEh.title" = "Одиниця 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
 "Ogj-NW-fZ9.title" = "Порти для передачі аудіо по RTP";
@@ -75,7 +75,7 @@
 "Ppa-zn-w1X.title" = "Яшик";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "Увімкнути SDES для протоколу обміну ключами";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Текстова клітинка";
@@ -99,13 +99,13 @@
 "Zuz-jy-rLn.title" = "Яшик";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN address";
+"aYs-wh-Hpr.title" = "Адреса TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
 "b2y-85-ZHK.title" = "CA сертифікат";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
+"cN3-lC-dNM.title" = "Використовується лише під час встановлення SDP, якщо ICE не підтримується";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "Яшик";
@@ -117,10 +117,10 @@
 "ekM-Cg-DEo.title" = "Яшик";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Network interface";
+"fjH-ej-gEr.title" = "Мережевий інтерфейс";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
+"fyT-bU-m54.title" = "Перевіряти вхідні сертифікати (на стороні сервера)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "Відео кодеки";
@@ -138,19 +138,19 @@
 "nq0-Js-9Cr.title" = "Мінімально";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Use custom address and port";
+"nuq-Wl-sfd.title" = "Використовувати нестандартні адресу та порт";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
 "rMN-Wf-tmp.title" = "Обрати ім'я";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
+"vCS-s8-mZI.title" = "Шифрувати медіа потік (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
 "vZH-42-mUi.title" = "Шифрування переговорів (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
-"vpo-fl-9TS.title" = "Connectivity";
+"vpo-fl-9TS.title" = "З'єднання";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
 "wq6-KV-8X3.title" = "Максимально";

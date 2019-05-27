@@ -17,7 +17,7 @@
 "Clear conversation" = "Clear conversation";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Заблокувати контакт";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
@@ -68,7 +68,7 @@
 "Copy number" = "Копіювати номер";
 
 /* Contextual menu entry */
-"Create Jami Account" = "Create Jami Account";
+"Create Jami Account" = "Створіть обліковий запис Джамі";
 
 /* Contextual menu entry */
 "Create SIP Account" = "Create SIP Account";
@@ -107,7 +107,7 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Паролі не збігаються";
 
 /* Button label */
 "Pause" = "Пауза";
@@ -138,7 +138,7 @@
 "Share" = "Поділитися";
 
 /* File transfer successful label */
-"Success" = "Success";
+"Success" = "Успішно";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Текст дій";
@@ -183,8 +183,8 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "Welcome to Jami";
-"Create a new account" = "Create a new account";
+"Welcome to Ring" = "Вітаємо в Джамі";
+"Create a new account" = "Створити новий обліковий запис";
 "Add a SIP account" = "Add a SIP account";
 
 /* Notification message */

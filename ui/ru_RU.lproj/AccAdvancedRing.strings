@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow call from untrusted peers";
+"1Xr-BO-Pu3.title" = "Разрешить вызовы от недоверенных участников";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -15,16 +15,16 @@
 "8mv-Ia-GM4.title" = "TURN address";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "Настройки вызовов";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "Автоматически принимать входящие вызовы";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Текстовое поле";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Name server";
+"ID3-Sv-gYY.title" = "Сервер имён";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
 "K0z-NH-3Cq.title" = "Коробка";
@@ -33,7 +33,7 @@
 "LWs-a2-E7f.title" = "Сертификат пользователя";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Q4t-zo-brK"; */
-"Q4t-zo-brK.title" = "Audio codecs";
+"Q4t-zo-brK.title" = "Аудиоодеки";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "Qxp-I4-A7W"; */
 "Qxp-I4-A7W.title" = "Безопасность";
@@ -42,7 +42,7 @@
 "VyP-8T-aNA.title" = "Enable proxy";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
-"Wrh-zD-uh5.title" = "Video codecs";
+"Wrh-zD-uh5.title" = "Видеокодеки";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
 "XU0-bl-lDD.title" = "TURN realm";
@@ -84,10 +84,10 @@
 "nqX-Vu-UuA.title" = "Использовать STUN";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Custom ringtone";
+"qFq-Yh-2JL.title" = "Мелодия звонка";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Connectivity";
+"sVe-iG-OCw.title" = "Связь";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
 "soR-nF-ybe.title" = "Приватный ключ";
@@ -99,7 +99,7 @@
 "vYi-gW-MrY.title" = "Коробка";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "Конфигурация OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "Использовать TURN";

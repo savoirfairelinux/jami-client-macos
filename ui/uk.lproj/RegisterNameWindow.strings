@@ -1,15 +1,15 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Mandatory*";
+"1TO-Ov-S8j.placeholderString" = "Обов'язкові*";
 
 /* Class = "NSTextFieldCell"; title = "Other users can use it instead of your ID"; ObjectID = "9gi-0u-67t"; */
-"9gi-0u-67t.title" = "Other users can use it instead of your ID";
+"9gi-0u-67t.title" = "Інші користувачі можуть використовувати його замість вашого ідентифікатора";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
-"Aeh-tK-RjX.title" = "An error occured during your username registration";
+"Aeh-tK-RjX.title" = "Збій реєстрації вашого імені користувача";
 
 /* Class = "NSTextFieldCell"; title = "Enter your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Enter your password";
+"B6x-jj-48R.title" = "Введіть ваш пароль";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
 "JWw-7m-ywL.title" = "Вікно";
@@ -18,7 +18,7 @@
 "YIN-YL-JBs.title" = "Зачекайте трохи...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
-"bdC-Uc-Qhs.placeholderString" = "Username...";
+"bdC-Uc-Qhs.placeholderString" = "Ім'я користувача…";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "cbA-c2-LlV"; */
 "cbA-c2-LlV.title" = "Відміна";
@@ -33,4 +33,4 @@
 "lT3-Bh-MnL.title" = "Зареєструватися";
 
 /* Class = "NSTextFieldCell"; title = "Register a public username"; ObjectID = "tje-EZ-ZPI"; */
-"tje-EZ-ZPI.title" = "Register a public username";
+"tje-EZ-ZPI.title" = "Зареєструвати публічне ум'я користувача";

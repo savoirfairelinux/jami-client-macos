@@ -6,7 +6,7 @@
 "859-10-HEb.placeholderString" = "ID";
 
 /* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "The following account needs to be migrated to the new Jami account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If your not ready to choose a password, you may close Jami and resume the migration later.";
+"859-10-HEb.title" = "Następujące konto wymaga przeniesienia do nowego formatu konta Jami account format:\\nAlias:\\nID:\\nAby rozpocząć przenoszenie konta, musisz wybrać hasło dla swojego konta. To hasło będzie używane, by szyfrować twój główny klucz. Będzie ono wymagane, by dodawać nowe urządzenia do twojego konta Jami. Jeżeli nie jesteś gotowy(-a), by wybrać hasło, możesz zamknąć Jami i wznowić przenoszenie konta później.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
 "8K3-9Z-MKH.title" = "Błąd przenoszenia konta";

@@ -1,27 +1,27 @@
 
 /* Class = "NSTextFieldCell"; title = "To link this device to another account, you have two possibilities:"; ObjectID = "06g-zM-5Qz"; */
-"06g-zM-5Qz.title" = "To link this device to another account, you have two possibilities:";
+"06g-zM-5Qz.title" = "Щоб прив'язати цей пристрій до іншого облікового запису, ви можете обрати одну з двох можливостей:";
 
 /* Class = "NSTextFieldCell"; title = "OR"; ObjectID = "1NY-Yu-wH1"; */
-"1NY-Yu-wH1.title" = "OR";
+"1NY-Yu-wH1.title" = "АБО";
 
 /* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
-"2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"2uK-1s-tk7.title" = "\tВи можете завантажити ваш обліковий запис з іншого пристрою, але, спершу, вам потрібно отримати PIN-код. \n\tЩоб отримати PIN-код, перейдіть до налаштувань управління обліковим записом попереднього пристрою, виберіть обліковий запис Джамі й оберіть «Прив'язати інший пристрій до цього облікового запису». Ви отримаєте PIN-код, який потрібно ввести тут. PIN-код дійсний лише протягом 10 хвилин.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
-"3ik-rY-Gig.title" = "Enter your PIN";
+"3ik-rY-Gig.title" = "Ввести свій PIN-код";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
-"8b8-bt-eAj.title" = "Link";
+"8b8-bt-eAj.title" = "Зв'язати";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
-"DyG-SJ-U1Q.title" = "An error occured, please check your password and pin.";
+"DyG-SJ-U1Q.title" = "Стався збій. Будь ласка, перевірте ваш пароль і PIN-код";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
 "Pcj-BY-tou.title" = "Відміна";
 
 /* Class = "NSTextFieldCell"; title = "Enter password"; ObjectID = "U2K-fu-INc"; */
-"U2K-fu-INc.title" = "Enter password";
+"U2K-fu-INc.title" = "Ввести пароль";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
 "WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "Пароль...";
@@ -36,28 +36,28 @@
 "WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "Пароль...";
 
 /* Class = "NSButtonCell"; title = "Select file"; ObjectID = "XJE-cy-nfQ"; */
-"XJE-cy-nfQ.title" = "Select file";
+"XJE-cy-nfQ.title" = "Обрати файл";
 
 /* Class = "NSTextFieldCell"; title = "Import archive file"; ObjectID = "kXa-FL-Enf"; */
-"kXa-FL-Enf.title" = "Import archive file";
+"kXa-FL-Enf.title" = "Завантажити файл архіву";
 
 /* Class = "NSTextFieldCell"; title = "\tYou can directly import your account from an archive file on your device."; ObjectID = "kfe-m7-MTT"; */
-"kfe-m7-MTT.title" = "\tYou can directly import your account from an archive file on your device.";
+"kfe-m7-MTT.title" = "\tВи можете завантажити ваш обліковий запис безпосередньо з файлу архіву на вашому пристрої.";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "t12-O0-kcf"; */
 "t12-O0-kcf.title" = "OK";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
-"vVf-hg-sWk.ibShadowedIsNilPlaceholder" = "PIN";
+"vVf-hg-sWk.ibShadowedIsNilPlaceholder" = "PIN-код";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
-"vVf-hg-sWk.ibShadowedMultipleValuesPlaceholder" = "PIN";
+"vVf-hg-sWk.ibShadowedMultipleValuesPlaceholder" = "PIN-код";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
-"vVf-hg-sWk.ibShadowedNoSelectionPlaceholder" = "PIN";
+"vVf-hg-sWk.ibShadowedNoSelectionPlaceholder" = "PIN-код";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
-"vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "PIN";
+"vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "PIN-код";
 
 /* Class = "NSTextFieldCell"; title = "Linking..."; ObjectID = "zWn-4H-ODH"; */
-"zWn-4H-ODH.title" = "Linking...";
+"zWn-4H-ODH.title" = "Зв'язую…";

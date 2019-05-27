@@ -9,16 +9,16 @@
 "24s-we-pkD.title" = "Безопасность";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
+"2rB-Bv-c9U.title" = "Ожидание завершения регистрации (секунды)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Call settings";
+"3Uq-Nb-J1A.title" = "Настройки вызовов";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Fallback on RTP on encryption failure";
+"3rM-KT-bNf.title" = "Использовать RTP, если шифрование отсутствует";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Auto answer calls";
+"3vs-TI-tkg.title" = "Автоматически принимать входящие вызовы";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
 "6eH-la-JbF.title" = "TURN realm";
@@ -27,7 +27,7 @@
 "72p-GY-gu6.title" = "Пароль приватного ключа";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
-"8JD-11-wHZ.title" = "Outgoing TLS server name";
+"8JD-11-wHZ.title" = "Имя исходящего сервера TLS";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
 "8bw-iH-XGl.title" = "Item 1";
@@ -39,7 +39,7 @@
 "A31-3Y-z4R.title" = "Коробка";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Published address";
+"ELr-A7-mGE.title" = "Публикуемый адрес";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
 "Gwi-Mp-NpZ.title" = "Использовать TURN";
@@ -51,10 +51,10 @@
 "HYt-sW-yd0.title" = "STUN address";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "Require a certificate for incoming TLS connections";
+"JV8-cY-6vR.title" = "Требовать сертификат для входящих TLS соединений";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "SDP Session Negotiation (ICE Fallback)";
+"Jfp-NE-ODd.title" = "Согласование сесcии SDP (ICE недоступен)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
 "MBR-AC-HFq.title" = "Коробка";
@@ -63,7 +63,7 @@
 "Mho-w1-ZPJ.title" = "Item 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Custom ringtone";
+"Nqr-gj-dOH.title" = "Мелодия звонка";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
 "OEo-C7-vEh.title" = "Item 2";
@@ -75,19 +75,19 @@
 "Ppa-zn-w1X.title" = "Коробка";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "Разрешить SDES в протоколе обмена ключами";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Текстовое поле";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
-"Vke-hs-iXz.title" = "Audio codecs";
+"Vke-hs-iXz.title" = "Аудиоодеки";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
 "W9F-Nf-ehp.title" = "Приватный ключ";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Verify answer certificates (client side)";
+"WsS-1e-Epm.title" = "Проверять исходящие сертификаты (на стороне клиента)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
 "Xp3-bL-3Cs.title" = "Сертификат пользователя";
@@ -111,19 +111,19 @@
 "cwV-lc-jju.title" = "Коробка";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Negotiation timeout (seconds)";
+"dtf-uk-n1B.title" = "Ожидание разговора (секунд)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "Коробка";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Network interface";
+"fjH-ej-gEr.title" = "Сетевой интерфейс";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
 "fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
-"gJs-aX-7Ox.title" = "Video codecs";
+"gJs-aX-7Ox.title" = "Видеокодеки";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
 "jgX-tQ-dIA.title" = "Текстовое поле";
@@ -138,7 +138,7 @@
 "nq0-Js-9Cr.title" = "Мин";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Use custom address and port";
+"nuq-Wl-sfd.title" = "Использовать указанные адрес и порт";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
 "rMN-Wf-tmp.title" = "Имя пользователя";
@@ -147,10 +147,10 @@
 "vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Encrypt negotiation (TLS)";
+"vZH-42-mUi.title" = "Шифровать разговор (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
-"vpo-fl-9TS.title" = "Connectivity";
+"vpo-fl-9TS.title" = "Связь";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
 "wq6-KV-8X3.title" = "Макс";
@@ -165,4 +165,4 @@
 "xjL-Wb-7VN.title" = "Пароль";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLS protocol method";
+"zBy-cW-KY3.title" = "Метод протокола TLS";

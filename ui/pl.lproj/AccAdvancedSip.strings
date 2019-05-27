@@ -30,7 +30,7 @@
 "8JD-11-wHZ.title" = "Nazwa wychodzącego TLS serwera";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Item 1";
+"8bw-iH-XGl.title" = "Element 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "Port";
@@ -48,7 +48,7 @@
 "HRM-FR-1sH.title" = "Użyj STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN address";
+"HYt-sW-yd0.title" = "Adres STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
 "JV8-cY-6vR.title" = "Wymagamy certyfikat dla przychodzących połączeń TLS";
@@ -60,13 +60,13 @@
 "MBR-AC-HFq.title" = "Blok";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Item 3";
+"Mho-w1-ZPJ.title" = "Element 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
 "Nqr-gj-dOH.title" = "Użyj własnego dzwonka";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Item 2";
+"OEo-C7-vEh.title" = "Element 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
 "Ogj-NW-fZ9.title" = "Zakres Portów Audio RTP";
@@ -99,13 +99,13 @@
 "Zuz-jy-rLn.title" = "Blok";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN address";
+"aYs-wh-Hpr.title" = "Adres TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
 "b2y-85-ZHK.title" = "Certyfikat CA";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
+"cN3-lC-dNM.title" = "Używane tylko podczas negocjacji SDP w przypadku, gdy ICE nie jest wspierane";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "Blok";
@@ -120,7 +120,7 @@
 "fjH-ej-gEr.title" = "Interfejs sieciowy";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
+"fyT-bU-m54.title" = "Zweryfikuj przychodzące certyfikaty (po stronie serwera)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "Kodeki wideo";
@@ -144,7 +144,7 @@
 "rMN-Wf-tmp.title" = "Nazwa użytkownika TURN";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
+"vCS-s8-mZI.title" = "Szyfruj strumienie multimedialne (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
 "vZH-42-mUi.title" = "Negocjacja szyfrowania (TLS)";
