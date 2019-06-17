@@ -1,12 +1,12 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "Zaškrtnutím tejto možnosti si zaregistrujete používateľské meno na sieti Jami. Ľudom na kontakt s vami postačí použiť toto meno namiesto vášho ID, ktoré má 40 znakov.";
+"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Mandatory*";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Registrovať verejné používateľské meno";
+"AG5-GR-bii.title" = "Register public username";
 
 /* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
 "B6x-jj-48R.title" = "Choose your password";
@@ -21,10 +21,10 @@
 "fEY-eO-HwI.title" = "Repeat your password";
 
 /* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
-"gEy-ak-Cgq.placeholderString" = "Zadajte meno";
+"gEy-ak-Cgq.placeholderString" = "Enter name";
 
 /* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
-"gki-BR-jc3.title" = "Vytvorte si váš profil";
+"gki-BR-jc3.title" = "ਆਪਣਾ ਪ੍ਰੋਫਾਈਲ ਬਣਾਓ";
 
 /* Class = "NSTextFieldCell"; title = "Create your account"; ObjectID = "qQl-Xn-c88"; */
 "qQl-Xn-c88.title" = "Create your account";
@@ -33,10 +33,10 @@
 "tzf-88-Yn5.title" = "Enter your full name";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
-"v7f-52-GJA.title" = "Zruš";
+"v7f-52-GJA.title" = "ਰੱਦ ਕਰੋ";
 
 /* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
 "zUH-kc-cik.title" = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
-"zfA-n9-V4X.title" = "Vytvor";
+"zfA-n9-V4X.title" = "ਬਣਾਓ";

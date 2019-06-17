@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "Počas exportu sa vyskytla chyba siete";
+"A network error occured during the export" = "ਨਿਰਯਾਤ ਵੇਲੇ ਕੋਈ ਨੈੱਟਵਰਕ ਗੜਬੜ ਹੋਈ";
 
 /* No password on this account text field placeholder */
 "Account has no password" = "Account has no password";
 
 /* Contextual menu action */
-"Add to contacts" = "Pridať kontakt";
+"Add to contacts" = "ਸੰਪਰਕਾਂ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ";
 
 /* Contextual menu action */
 "Place video call" = "Place video call";
@@ -17,16 +17,16 @@
 "Clear conversation" = "Clear conversation";
 
 /* Contextual menu action */
-"Block contact" = "Zablokovať kontakt";
+"Block contact" = "ਸੰਪਰਕ ਬਲਾਕ ਕਰੋ";
 
 /* Text shown to the user */
 "Alias : " = "Alias : ";
 
 /* Error shown to the user */
-"An error occured during the export" = "Počas exportu sa vyskytla chyba";
+"An error occured during the export" = "ਨਿਰਯਾਤ ਵੇਲੇ ਕੋਈ ਗੜਬੜ ਹੋਈ";
 
 /* Contextual menu entry */
-"Backup account" = "Zálohovať účet";
+"Backup account" = "ਬੈਕਅੱਪ ਖਾਤਾ";
 
 /* Contextual menu action */
 "Call number" = "Call number";
@@ -59,13 +59,13 @@
 "Share screen" = "Share screen";
 
 /* No comment provided by engineer. */
-"Copy" = "Kopírovať";
+"Copy" = "ਕਾਪੀ ਕਰੋ";
 
 /* Contextual menu action */
 "Copy name" = "Copy name";
 
 /* Contextual menu action */
-"Copy number" = "Skopírovať číslo";
+"Copy number" = "ਨੰਬਰ ਕਾਪੀ ਕਰੋ";
 
 /* Contextual menu entry */
 "Create Jami Account" = "Create Jami Account";
@@ -74,7 +74,7 @@
 "Create SIP Account" = "Create SIP Account";
 
 /* File transfer failed label */
-"Failed" = "Chyba";
+"Failed" = "ਅਸਫਲ ਰਿਹਾ";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -83,7 +83,7 @@
 "Failed to perform lookup" = "Failed to perform lookup";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Prichádzajúci hovor od %@";
+"Incoming call from %@" = "Incoming call from %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Incoming message from %@";
@@ -113,11 +113,11 @@
 "Pause" = "Pause";
 
 /* Button label */
-"Play" = "Spusť";
+"Play" = "ਚਲਾਓ";
 
 /* Button Action */
-"Refuse" = "Odmietnuť";
-"Accept" = "Prijať";
+"Refuse" = "ਨਾ-ਮਨਜ਼ੂਰ ਕਰੋ";
+"Accept" = "ਮਨਜ਼ੂਰ ਕਰੋ";
 
 /* Contextual menu entry */
 "Remove value" = "Remove value";
@@ -135,10 +135,10 @@
 "ID : " = "ID : ";
 
 /* No comment provided by engineer. */
-"Share" = "Zdieľať";
+"Share" = "ਸਾਂਝਾ ਕਰੋ";
 
 /* File transfer successful label */
-"Success" = "Úspech";
+"Success" = "ਸਫਲਤਾ";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -156,7 +156,7 @@
 "The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "Heslo, ktoré ste zadali, neodomyká tento účet";
+"The password you entered does not unlock this account" = "ਤੁਹਾਡੇ ਦਾਖਲ ਕੀਤੇ ਪਾਸਵਰਡ ਨਾਲ ਇਹ ਖਾਤਾ ਅਣਲਾਕ ਨਹੀਂ ਹੁੰਦਾ";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -165,7 +165,7 @@
 "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
 
 /* Name used when user leave field empty */
-"Unknown" = "Neznámy";
+"Unknown" = "ਅਣਪਛਾਤਾ";
 
 /* Error shown to user */
 "You have to migrate your account before exporting" = "You have to migrate your account before exporting";
@@ -183,7 +183,7 @@
 "Link to an account" = "Link to an account";
 
 /* Welcome title */
-"Welcome to Ring" = "Vitajte v Jami";
+"Welcome to Ring" = "Jami ਵਿੱਚ ਜੀ ਆਇਆਂ ਨੂੰ";
 "Create a new account" = "Create a new account";
 "Add a SIP account" = "Add a SIP account";
 

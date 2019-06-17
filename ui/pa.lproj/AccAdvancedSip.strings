@@ -3,34 +3,34 @@
 "0Fh-Sz-TMo.title" = "Min";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "0cb-ib-oHd"; */
-"0cb-ib-oHd.title" = "Rozsah video RTP portov";
+"0cb-ib-oHd.title" = "Video RTP port Range";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "24s-we-pkD"; */
-"24s-we-pkD.title" = "Bezpečnosť";
+"24s-we-pkD.title" = "ਸੁਰੱਖਿਆ";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Časový limit exprirácie registrácie (v sekundách)";
+"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Nastavenia hovoru";
+"3Uq-Nb-J1A.title" = "Call settings";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Pri zlyhaní šifrovania použiť RTP";
+"3rM-KT-bNf.title" = "Fallback on RTP on encryption failure";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Automaticky odpovedať na hovory";
+"3vs-TI-tkg.title" = "Auto answer calls";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
 "6eH-la-JbF.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
-"72p-GY-gu6.title" = "Heslo privátneho kľúča";
+"72p-GY-gu6.title" = "Private key password";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
-"8JD-11-wHZ.title" = "Meno odchádzajúceho TLS servera";
+"8JD-11-wHZ.title" = "Outgoing TLS server name";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Položka 1";
+"8bw-iH-XGl.title" = "Item 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "Port";
@@ -39,19 +39,19 @@
 "A31-3Y-z4R.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Publikované adresy";
+"ELr-A7-mGE.title" = "Published address";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
-"Gwi-Mp-NpZ.title" = "Použiť TURN";
+"Gwi-Mp-NpZ.title" = "TURN ਵਰਤੋ";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
-"HRM-FR-1sH.title" = "Použiť STUN";
+"HRM-FR-1sH.title" = "Use STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN adresa";
+"HYt-sW-yd0.title" = "STUN address";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "Vyžadovať certifikáty pre prichádzajúce TLS pripojenia";
+"JV8-cY-6vR.title" = "Require a certificate for incoming TLS connections";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
 "Jfp-NE-ODd.title" = "SDP Session Negotiation (ICE Fallback)";
@@ -60,73 +60,73 @@
 "MBR-AC-HFq.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Položka 3";
+"Mho-w1-ZPJ.title" = "Item 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Vlastný vyzváňací tón";
+"Nqr-gj-dOH.title" = "Custom ringtone";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Položka 2";
+"OEo-C7-vEh.title" = "Item 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
-"Ogj-NW-fZ9.title" = "Rozsah audio RTP portov";
+"Ogj-NW-fZ9.title" = "Audio RTP port Range";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
 "Ppa-zn-w1X.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Povoliť SDES ako protokol výmeny kľúčov";
+"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
-"RIj-rT-gSd.title" = "Textové pole";
+"RIj-rT-gSd.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
-"Vke-hs-iXz.title" = "Audio kodeky";
+"Vke-hs-iXz.title" = "Audio codecs";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
-"W9F-Nf-ehp.title" = "Privátny kľúč";
+"W9F-Nf-ehp.title" = "Private key";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Overiť certifikáty odpovedí (na strane klienta)";
+"WsS-1e-Epm.title" = "Verify answer certificates (client side)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
-"Xp3-bL-3Cs.title" = "Používateľský certifikát";
+"Xp3-bL-3Cs.title" = "User certificate";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "Xxr-gl-ukE"; */
-"Xxr-gl-ukE.title" = "Adresa";
+"Xxr-gl-ukE.title" = "Address";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
 "Zuz-jy-rLn.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN adresa";
+"aYs-wh-Hpr.title" = "TURN address";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "CA certifikát";
+"b2y-85-ZHK.title" = "CA certificate";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Používané výhradne počas SDP vyjednávania v prípadoch, kde ICE nie je podporovaný";
+"cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Časový limit vyjednávania (v sekundách)";
+"dtf-uk-n1B.title" = "Negotiation timeout (seconds)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Sieťové rozhranie";
+"fjH-ej-gEr.title" = "Network interface";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Overiť prichádzajúce certifikáty (na strane serveru)";
+"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
-"gJs-aX-7Ox.title" = "Video kodeky";
+"gJs-aX-7Ox.title" = "Video codecs";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
-"jgX-tQ-dIA.title" = "Textové pole";
+"jgX-tQ-dIA.title" = "Text Cell";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
 "l86-cH-pp8.title" = "Box";
@@ -138,19 +138,19 @@
 "nq0-Js-9Cr.title" = "Min";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Použiť vlastnú adresu a port";
+"nuq-Wl-sfd.title" = "Use custom address and port";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "TURN používateľské meno";
+"rMN-Wf-tmp.title" = "TURN ਵਰਤੋਂਕਾਰ ਨਾਂ";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Zašifrovať prúdy médií (SRTP)";
+"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Zašifrovať vyjednávanie (TLS)";
+"vZH-42-mUi.title" = "Encrypt negotiation (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
-"vpo-fl-9TS.title" = "Pripovenia";
+"vpo-fl-9TS.title" = "Connectivity";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
 "wq6-KV-8X3.title" = "Max";
@@ -162,7 +162,7 @@
 "x93-zk-hAW.title" = "UPnP";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "xjL-Wb-7VN"; */
-"xjL-Wb-7VN.title" = "TURN heslo";
+"xjL-Wb-7VN.title" = "TURN ਪਾਸਵਰਡ";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLS protokolová metóda";
+"zBy-cW-KY3.title" = "TLS protocol method";

@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Tillatt anrop fra klienter du ikke stoler på";
+"1Xr-BO-Pu3.title" = "Povoliť hovor od nedôveryhodných peerov";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -12,49 +12,49 @@
 "7eU-EP-4br.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "TURN adresa";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Samtaleoppsett";
+"BIS-Ft-yJn.title" = "Nastavenia hovoru";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Besvar anrop automatisk";
+"DSe-Cs-oD6.title" = "Automaticky odpovedať na hovory";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
-"EyV-Io-d3f.title" = "Tekstcelle";
+"EyV-Io-d3f.title" = "Textové pole";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Navnetjener";
+"ID3-Sv-gYY.title" = "Menný server";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
 "K0z-NH-3Cq.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
-"LWs-a2-E7f.title" = "Brukersertifikat";
+"LWs-a2-E7f.title" = "Používateľský certifikát";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Q4t-zo-brK"; */
-"Q4t-zo-brK.title" = "Lydkodek";
+"Q4t-zo-brK.title" = "Audio kodeky";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "Qxp-I4-A7W"; */
-"Qxp-I4-A7W.title" = "Sikkerhet";
+"Qxp-I4-A7W.title" = "Bezpečnosť";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "Povoliť proxy";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
-"Wrh-zD-uh5.title" = "Videokodek";
+"Wrh-zD-uh5.title" = "Video kodeky";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
 "XU0-bl-lDD.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "STUN adresa";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
-"YJM-iQ-0lE.title" = "Bootstrap";
+"YJM-iQ-0lE.title" = "Zavádzač";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "YcX-lE-8ug"; */
-"YcX-lE-8ug.title" = "Passord for privatnøkkel";
+"YcX-lE-8ug.title" = "Heslo privátneho kľúča";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
 "Ywo-5x-8kh.title" = "Box";
@@ -63,34 +63,34 @@
 "ZNe-H0-dJk.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "ZqB-gt-yFt"; */
-"ZqB-gt-yFt.title" = "Adresse";
+"ZqB-gt-yFt.title" = "Adresa";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "eGX-gk-Zxp"; */
 "eGX-gk-Zxp.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
-"eMG-uY-bpH.title" = "TURN-brukernavn";
+"eMG-uY-bpH.title" = "TURN používateľské meno";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "g8T-u3-MS3"; */
-"g8T-u3-MS3.title" = "Tekstcelle";
+"g8T-u3-MS3.title" = "Textové pole";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "gUl-Px-cIJ"; */
-"gUl-Px-cIJ.title" = "TURN-passord";
+"gUl-Px-cIJ.title" = "TURN heslo";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "k7i-pK-JXp"; */
-"k7i-pK-JXp.title" = "CA-sertifikat";
+"k7i-pK-JXp.title" = "CA certifikát";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "nqX-Vu-UuA"; */
-"nqX-Vu-UuA.title" = "Bruk STUN";
+"nqX-Vu-UuA.title" = "Použiť STUN";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Tilpasset ringetone";
+"qFq-Yh-2JL.title" = "Vlastný vyzváňací tón";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Forbindelsesstatus";
+"sVe-iG-OCw.title" = "Pripojenia";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
-"soR-nF-ybe.title" = "Privat nøkkel";
+"soR-nF-ybe.title" = "Privátny kľúč";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
 "sy5-OH-wyB.title" = "Box";
@@ -99,7 +99,7 @@
 "vYi-gW-MrY.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT-oppsett";
+"xJT-ij-69q.title" = "Konfigurácia OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
-"zPJ-cO-neQ.title" = "Bruk TURN";
+"zPJ-cO-neQ.title" = "Použiť TURN";
