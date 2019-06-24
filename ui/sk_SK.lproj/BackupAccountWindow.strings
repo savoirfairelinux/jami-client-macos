@@ -1,6 +1,6 @@
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm..."; ObjectID = "5Qf-em-tN4"; */
-"5Qf-em-tN4.placeholderString" = "Potvrď";
+"5Qf-em-tN4.placeholderString" = "Potvrdiť";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "5cX-yS-4Sl"; */
 "5cX-yS-4Sl.ibShadowedIsNilPlaceholder" = "Heslo";
@@ -15,16 +15,16 @@
 "5cX-yS-4Sl.ibShadowedNotApplicablePlaceholder" = "Heslo";
 
 /* Class = "NSTextFieldCell"; title = "Where"; ObjectID = "9h8-GU-av4"; */
-"9h8-GU-av4.title" = "Where";
+"9h8-GU-av4.title" = "Kam";
 
 /* Class = "NSTextFieldCell"; title = "Choose where to backup your account."; ObjectID = "KYZ-TW-44Y"; */
-"KYZ-TW-44Y.title" = "Choose where to backup your account.";
+"KYZ-TW-44Y.title" = "Vyberte umiestnenie, kam chcete uložiť zálohu vášho účtu.";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Okno";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "VN1-A3-RIh"; */
-"VN1-A3-RIh.title" = "Ok";
+"VN1-A3-RIh.title" = "OK";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "cSU-aD-OwX"; */
 "cSU-aD-OwX.title" = "Zruš";
@@ -42,7 +42,7 @@
 "ccf-Bx-Qq8.ibShadowedNotApplicablePlaceholder" = "Heslo";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during the backup"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.title" = "An error occured during the backup";
+"e7n-Ev-bK7.title" = "Počas zálohovania sa objavila chyba";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "rW5-Il-5YD"; */
 "rW5-Il-5YD.title" = "Ok";

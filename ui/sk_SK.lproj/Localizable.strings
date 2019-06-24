@@ -14,7 +14,7 @@
 "Place audio call" = "Place audio call";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Vymazať konverzáciu";
 
 /* Contextual menu action */
 "Block contact" = "Zablokovať kontakt";
@@ -68,7 +68,7 @@
 "Copy number" = "Skopírovať číslo";
 
 /* Contextual menu entry */
-"Create Jami Account" = "Create Jami Account";
+"Create Jami Account" = "Vytvoriť Jami účet";
 
 /* Contextual menu entry */
 "Create SIP Account" = "Create SIP Account";
@@ -107,7 +107,7 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Heslá sa nezhodujú";
 
 /* Button label */
 "Pause" = "Pause";
@@ -184,7 +184,7 @@
 
 /* Welcome title */
 "Welcome to Ring" = "Vitajte v Jami";
-"Create a new account" = "Create a new account";
+"Create a new account" = "Vytvoriť nový účet";
 "Add a SIP account" = "Add a SIP account";
 
 /* Notification message */
@@ -197,4 +197,4 @@
 "This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
 
 /* Backup error */
-"An error occured during the backup" = "An error occured during the backup";
+"An error occured during the backup" = "Počas zálohovania sa objavila chyba";

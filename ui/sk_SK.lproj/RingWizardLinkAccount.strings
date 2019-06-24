@@ -9,19 +9,19 @@
 "2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
-"3ik-rY-Gig.title" = "Enter your PIN";
+"3ik-rY-Gig.title" = "Zadajte váš PIN";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
-"8b8-bt-eAj.title" = "Link";
+"8b8-bt-eAj.title" = "Prepojiť";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
-"DyG-SJ-U1Q.title" = "An error occured, please check your password and pin.";
+"DyG-SJ-U1Q.title" = "Objavila sa chyba, skontrolujte zadané heslo a PIN";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
-"Pcj-BY-tou.title" = "Zruš";
+"Pcj-BY-tou.title" = "Zrušiť";
 
 /* Class = "NSTextFieldCell"; title = "Enter password"; ObjectID = "U2K-fu-INc"; */
-"U2K-fu-INc.title" = "Zadaj heslo";
+"U2K-fu-INc.title" = "Zadajte heslo";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
 "WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "Heslo";
@@ -45,7 +45,7 @@
 "kfe-m7-MTT.title" = "\tYou can directly import your account from an archive file on your device.";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "t12-O0-kcf"; */
-"t12-O0-kcf.title" = "Ok";
+"t12-O0-kcf.title" = "OK";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
 "vVf-hg-sWk.ibShadowedIsNilPlaceholder" = "PIN";
