@@ -1,6 +1,6 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Bring All to Front";
+"5.title" = "Tuo kaikki eteen";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Ikkuna";
@@ -21,7 +21,7 @@
 "57.title" = "Jami";
 
 /* Class = "NSMenuItem"; title = "About Jami"; ObjectID = "58"; */
-"58.title" = "About Jami";
+"58.title" = "Tietoa Jamista";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
 "129.title" = "Asetukset...";
@@ -33,10 +33,10 @@
 "131.title" = "Palvelut";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Hide Jami";
+"134.title" = "Piilota Jami";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "Quit Jami";
+"136.title" = "Lopeta Jami";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Piilota muut";
@@ -123,10 +123,10 @@
 "239.title" = "Zoomaa";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "View";
+"295.title" = "Näkymä";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "View";
+"296.title" = "Näkymä";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
 "297.title" = "Näytä työkalupalkki";
@@ -138,10 +138,10 @@
 "346.title" = "Tarkista oikeinkirjoitus";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "Substitutions";
+"348.title" = "Vastikkeet";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "Substitutions";
+"349.title" = "Vastikkeet";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
 "350.title" = "Älykäs kopiointi ja liittäminen";
@@ -153,10 +153,10 @@
 "354.title" = "Älykkäät linkit";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
-"450.title" = "Transformations";
+"450.title" = "Muodot";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "451"; */
-"451.title" = "Transformations";
+"451.title" = "Muodot";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
 "452.title" = "Muuta Isoiksi kirjaimiksi";
@@ -177,19 +177,19 @@
 "465.title" = "Muuta pikkukirjaimiksi";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
-"466.title" = "Capitalize";
+"466.title" = "Isot kirjaimet";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "Paste and Match Style";
+"485.title" = "Liitä ja muokkaa samaksi tyyliksi";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
-"490.title" = "Help";
+"490.title" = "Apua";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
-"491.title" = "Help";
+"491.title" = "Apua";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami Help";
+"492.title" = "Apua Jamin käyttöön";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Etsi ja Korvaa";
