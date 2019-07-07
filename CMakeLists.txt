@@ -37,6 +37,8 @@ FIND_PACKAGE(OpenGL REQUIRED)
 EXECUTE_PROCESS(COMMAND git submodule update --init
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
+get_filename_component(PARENT_DIR ${CMAKE_SOURCE_DIR} PATH)
+
 INCLUDE(ExternalProject)
 ExternalProject_Add(libqrencode
     GIT_SUBMODULES libqrencode
@@ -52,6 +54,18 @@ ExternalProject_Add(libqrencode
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/libqrencode/include)
 LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/libqrencode/lib)
+INCLUDE_DIRECTORIES(${PARENT_DIR}/daemon/contrib/native/ffmpeg)
+LINK_DIRECTORIES(${PARENT_DIR}/daemon/contrib/x86_64-apple-darwin18.5.0/lib)
+
+set(SHADERS_FILE "Shader.metallib")
+add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
+                    COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
+                    COMMENT "Creating Shader.metallib")
+
+                    add_custom_target(
+    shader ALL
+    DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib
+    )
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -212,6 +226,8 @@ SET(ringclient_VIEWS
    src/views/HoverButton.mm
    src/views/CenteredClipView.h
    src/views/CenteredClipView.mm
+   src/views/CallMTKView.h
+   src/views/CallMTKView.mm
 )
 
 SET(ringclient_OTHERS
@@ -229,8 +245,9 @@ SET(ringclient_OTHERS
    src/NSString+Extensions.h
    src/NSString+Extensions.mm
    src/RingMainWindow.h
-   src/RingMainWindow.mm)
-
+   src/RingMainWindow.mm
+   src/Shader.metal
+)
 
 SET(ringclient_XIBS
    MainMenu
@@ -323,6 +340,8 @@ SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
 SET_SOURCE_FILES_PROPERTIES(Credits.rtf PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
+SET_SOURCE_FILES_PROPERTIES(Shader.metallib PROPERTIES
+       MACOSX_PACKAGE_LOCATION Resources)
 
 # package ringtones
 IF(NOT IS_DIRECTORY ${RINGTONE_DIR})
@@ -405,6 +424,7 @@ SET(TO_ADD
    ${LOCALIZABLE_FILES}
    ${myApp_ICON}
    Credits.rtf
+   Shader.metallib
    ${ring_ICONS}
    ${ring_RINGTONES})
 
@@ -438,6 +458,8 @@ TARGET_LINK_LIBRARIES( ${PROJ_NAME}
    -lqrencode
 )
 
+target_link_libraries(${PROJ_NAME} libavutil.a)
+
 IF(ENABLE_SPARKLE)
    TARGET_LINK_LIBRARIES(${PROJ_NAME} ${SPARKLE_FRAMEWORK})
 ENDIF(ENABLE_SPARKLE)
@@ -448,6 +470,8 @@ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Quartz")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AVFoundation")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AddressBook")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework SystemConfiguration")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework MetalKit")
+SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Metal")
 
 # These variables are specific to our plist and are NOT standard CMake variables
 SET(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
