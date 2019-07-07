@@ -17,6 +17,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import "CurrentCallVC.h"
+extern "C" {
+#import "libavutil/frame.h"
+#import "libavutil/display.h"
+}
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -43,6 +47,7 @@
 #import "views/IconButton.h"
 #import "views/CallLayer.h"
 #import "utils.h"
+#import "views/CallMTKView.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -122,6 +127,8 @@
 @property (unsafe_unretained) IBOutlet CallView *videoView;
 @property (unsafe_unretained) IBOutlet NSView *previewView;
 
+@property (unsafe_unretained) IBOutlet CallMTKView *videoMTKView;
+
 @property RendererConnectionsHolder* previewHolder;
 @property RendererConnectionsHolder* videoHolder;
 @property QMetaObject::Connection videoStarted;
@@ -142,6 +149,8 @@
 
 @synthesize previewHolder;
 @synthesize videoHolder;
+CVPixelBufferPoolRef pixelBufferPool;
+CVPixelBufferRef pixelBuffer;
 
 -(void) setCurrentCall:(const std::string&)callUid
           conversation:(const std::string&)convUid
@@ -167,28 +176,8 @@
     videoView.callId = callUid;
 }
 
-- (void) ensureLayoutForCallStatus:(lrc::api::call::Status) status {
-    using Status = lrc::api::call::Status;
-    switch (status) {
-        case Status::IN_PROGRESS:
-            if (![videoView.layer isKindOfClass:[CallLayer class]]) {
-                [videoView setLayer:[[CallLayer alloc] init]];
-            }
-            break;
-        default:
-            if ([videoView.layer isKindOfClass:[CallLayer class]]) {
-                [videoView setLayer:[CALayer layer]];
-                [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
-            }
-            break;
-    }
-    holdOnOffButton.image = status == lrc::api::call::Status::PAUSED ?
-    [NSImage imageNamed:@"ic_action_holdoff.png"] : [NSImage imageNamed:@"ic_action_hold.png"];
-}
-
 - (void)awakeFromNib
 {
-    NSLog(@"INIT CurrentCall VC");
     [self.view setWantsLayer:YES];
 
     [previewView setWantsLayer:YES];
@@ -294,7 +283,8 @@
     [self setBackground];
 
     using Status = lrc::api::call::Status;
-    [self ensureLayoutForCallStatus:currentCall.status];
+    holdOnOffButton.image = currentCall.status == lrc::api::call::Status::PAUSED ?
+    [NSImage imageNamed:@"ic_action_holdoff.png"] : [NSImage imageNamed:@"ic_action_hold.png"];
     switch (currentCall.status) {
         case Status::SEARCHING:
         case Status::CONNECTING:
@@ -321,6 +311,7 @@
             [self setupConference:currentCall];
             break;*/
         case Status::PAUSED:
+            [self.videoMTKView fillWithBlack];
         case Status::INACTIVE:
         case Status::IN_PROGRESS:
             // change constraints (uncollapse avatar)
@@ -397,7 +388,6 @@
     return [[NSImage alloc] initWithData:imageData];
 }
 
-
 -(void) setupContactInfo:(NSImageView*)imageView
 {
     [imageView setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
@@ -425,7 +415,6 @@
         [incomingDisplayName setStringValue:bestNameForConversation(*it, *convModel)];
     }
 }
-
 
 -(void) setupConference:(Call*) c
 {
@@ -472,7 +461,6 @@
     self.videoStarted = QObject::connect(callModel,
                                          &lrc::api::NewCallModel::remotePreviewStarted,
                                          [self](const std::string& callId, Video::Renderer* renderer) {
-                                             [videoView setLayer:[[CallLayer alloc] init]];
                                              [videoView setShouldAcceptInteractions:YES];
                                              [self mouseIsMoving: NO];
                                              [self connectVideoRenderer:renderer];
@@ -500,8 +488,8 @@
                          previewHolder.frameUpdated = QObject::connect(renderer,
                                                                        &Video::Renderer::frameUpdated,
                                                                        [=]() {
-                                                                           [self renderer:Video::PreviewManager::instance().previewRenderer()
-                                                                       renderFrameForPreviewView:previewView];
+                                                                         //  [self renderer:Video::PreviewManager::instance().previewRenderer()
+                                                                       //renderFrameForPreviewView:previewView];
                                                                        });
                      });
 
@@ -509,14 +497,14 @@
                      &Video::PreviewManager::previewStopped,
                      [=](Video::Renderer* renderer) {
                         QObject::disconnect(previewHolder.frameUpdated);
-                        [previewView.layer setContents:nil];
+                        //[previewView.layer setContents:nil];
                      });
 
     previewHolder.frameUpdated = QObject::connect(Video::PreviewManager::instance().previewRenderer(),
                                                  &Video::Renderer::frameUpdated,
                                                  [=]() {
-                                                     [self renderer:Video::PreviewManager::instance().previewRenderer()
-                                                            renderFrameForPreviewView:previewView];
+                                                    // [self renderer:Video::PreviewManager::instance().previewRenderer()
+                                                          //  renderFrameForPreviewView:previewView];
                                                  });
 }
 
@@ -530,36 +518,47 @@
         return;
 
     videoHolder.frameUpdated = QObject::connect(renderer,
-                     &Video::Renderer::frameUpdated,
-                     [=]() {
+                     &Video::Renderer::avFrameUpdated,
+                     [=](const void *frame) {
                          if(!renderer->isRendering()) {
                              return;
                          }
-                         [self renderer:renderer renderFrameForDistantView:videoView];
+                         @autoreleasepool {
+                         auto castedFrame = (const AVFrame *) frame;
+                         if (!castedFrame) {
+                             return;
+                         }
+                         [self viewForDistantView: castedFrame];
+                         }
                      });
 
-    videoHolder.started = QObject::connect(renderer,
+    videoHolder.started =
+    QObject::connect(renderer,
                      &Video::Renderer::started,
                      [=]() {
-                         if (![videoView.layer isKindOfClass:[CallLayer class]]) {
-                             [videoView setLayer:[[CallLayer alloc] init]];
-                         }
                          [self mouseIsMoving: NO];
                          [videoView setShouldAcceptInteractions:YES];
                          QObject::disconnect(videoHolder.frameUpdated);
-                         videoHolder.frameUpdated = QObject::connect(renderer,
-                                                                     &Video::Renderer::frameUpdated,
-                                                                     [=]() {
-                                                                         [self renderer:renderer renderFrameForDistantView:videoView];
-                                                                     });
+                         videoHolder.frameUpdated
+                         = QObject::connect(renderer,
+                                            &Video::Renderer::avFrameUpdated,
+                                            [=](const void *frame) {
+                                                if(!renderer->isRendering()) {
+                                                    return;
+                                                }
+                                                @autoreleasepool {
+                                                auto castedFrame = (const AVFrame *) frame;
+                                                if (!castedFrame) {
+                                                    return;
+                                                }
+                                                [self viewForDistantView: castedFrame];
+                                                }
+                                            });
                      });
 
     videoHolder.stopped = QObject::connect(renderer,
                      &Video::Renderer::stopped,
                      [=]() {
-                         [(CallLayer*)videoView.layer setVideoRunning:NO];
-                         [videoView setLayer:[CALayer layer]];
-                         [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
                          [self mouseIsMoving: YES];
                          [videoView setShouldAcceptInteractions:NO];
                          QObject::disconnect(videoHolder.frameUpdated);
@@ -598,17 +597,72 @@
     CFRelease(newImage);
 }
 
--(void) renderer: (Video::Renderer*)renderer renderFrameForDistantView:(CallView*) view
-{
-    auto frame_ptr = renderer->currentFrame();
-    if (!frame_ptr.ptr)
-        return;
-
-    CallLayer* callLayer = (CallLayer*) view.layer;
-    if ([callLayer respondsToSelector:@selector(setCurrentFrame:)]) {
-        [callLayer setCurrentFrame:std::move(frame_ptr)];
-        [callLayer setVideoRunning:YES];
+-(void) viewForDistantView:(const AVFrame*) frame {
+    auto frameSize = CGSizeMake(frame->width, frame->height);
+    auto rotation = 0;
+    if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
+        const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
+        rotation = av_display_rotation_get(data);
     }
+    if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
+        [self.videoMTKView renderWithPixelBuffer:(CVPixelBufferRef)frame->data[3]
+                                            size: frameSize
+                                        rotation: rotation];
+    } else if (CVPixelBufferRef pixelBuffer = [self bufferFromFrame:frame]) {
+        [self.videoMTKView renderWithPixelBuffer: pixelBuffer
+                                            size: frameSize
+                                        rotation: rotation];
+    }
+}
+
+-(CVPixelBufferRef)bufferFromFrame:(const AVFrame*) frame {
+    CVReturn theError;;
+    if (!pixelBufferPool){
+        NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
+        [attributes setObject:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange] forKey:(NSString*)kCVPixelBufferPixelFormatTypeKey];
+        [attributes setObject:[NSNumber numberWithInt:frame->width] forKey: (NSString*)kCVPixelBufferWidthKey];
+        [attributes setObject:[NSNumber numberWithInt:frame->height] forKey: (NSString*)kCVPixelBufferHeightKey];
+        [attributes setObject:@(frame->linesize[0]) forKey:(NSString*)kCVPixelBufferBytesPerRowAlignmentKey];
+        [attributes setObject:[NSDictionary dictionary] forKey:(NSString*)kCVPixelBufferIOSurfacePropertiesKey];
+        theError = CVPixelBufferPoolCreate(kCFAllocatorDefault, NULL, (__bridge CFDictionaryRef) attributes, &self->_pixelBufferPool);
+        if (theError != kCVReturnSuccess){
+            NSLog(@"CVPixelBufferPoolCreate Failed");
+        }
+    }
+    if(!pixelBuffer) {
+        theError = CVPixelBufferPoolCreatePixelBuffer(NULL, pixelBufferPool, &pixelBuffer);
+        if(theError != kCVReturnSuccess){
+            NSLog(@"CVPixelBufferPoolCreatePixelBuffer Failed");
+        }
+    }
+    theError = CVPixelBufferLockBaseAddress(pixelBuffer, 0);
+    if (theError != kCVReturnSuccess) {
+        NSLog(@"lock error");
+    }
+    size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
+    size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
+    void* base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
+    memcpy(base, frame->data[0], bytePerRowY * frame->height);
+    base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
+    uint32_t size = frame->linesize[1] * frame->height / 2;
+    uint8_t* dstData = new uint8_t[2 * size];
+    uint8_t * firstData = new uint8_t[size];
+    memcpy(firstData, frame->data[1], size);
+    uint8_t * secondData  = new uint8_t[size];
+    memcpy(secondData, frame->data[2], size);
+    for (int i = 0; i < 2 * size; i++){
+        if (i % 2 == 0){
+            dstData[i] = firstData[i/2];
+        }else {
+            dstData[i] = secondData[i/2];
+        }
+    }
+    memcpy(base, dstData, bytesPerRowUV * frame->height/2);
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
+    free(dstData);
+    free(firstData);
+    free(secondData);
+    return pixelBuffer;
 }
 
 - (void) initFrame
@@ -655,8 +709,7 @@
     QObject::disconnect(self.messageConnection);
     [previewView.layer setContents:nil];
     [previewView setHidden: YES];
-    [videoView setLayer:[CALayer layer]];
-    [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
+    [self.videoMTKView fillWithBlack];
 
     [self.chatButton setHidden:YES];
     [self.chatButton setPressed:NO];

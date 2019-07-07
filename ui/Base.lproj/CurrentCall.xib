@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -45,6 +45,7 @@
                 <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
                 <outlet property="timeSpentLabel" destination="cIU-M7-xpN" id="9Rl-t3-gjY"/>
                 <outlet property="transferButton" destination="aHZ-qL-mYf" id="9id-Nt-M7i"/>
+                <outlet property="videoMTKView" destination="gQE-fN-JhY" id="qca-wq-idt"/>
                 <outlet property="videoView" destination="2wf-Py-l6B" id="dEF-Gx-w6x"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="VKn-lN-ijP"/>
             </connections>
@@ -73,6 +74,9 @@
                                     </view>
                                     <color key="fillColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 </box>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="gQE-fN-JhY" customClass="CallMTKView">
+                                    <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                                </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz">
                                     <rect key="frame" x="0.0" y="-10" width="746" height="72"/>
                                     <subviews>
@@ -120,6 +124,10 @@
                                                 <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L83-P5-9ao">
+                                            <rect key="frame" x="291" y="-12" width="163" height="96"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        </customView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="bg3-hB-nE8" secondAttribute="leading" id="LXG-QI-oPf"/>
@@ -485,7 +493,7 @@
                                         <constraint firstItem="anb-Y8-JQi" firstAttribute="centerY" secondItem="Kjq-iM-NBL" secondAttribute="centerY" id="zA4-c4-mEX"/>
                                     </constraints>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview">
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="NSImageView">
                                     <rect key="frame" x="551" y="20" width="175" height="120"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="BvU-kV-0uD"/>
@@ -669,6 +677,7 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="Usy-W5-TGp" secondAttribute="bottom" id="5mb-Be-9o1"/>
                                 <constraint firstItem="Usy-W5-TGp" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="9ZC-hX-N5k"/>
+                                <constraint firstItem="gQE-fN-JhY" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="9cl-8g-a1Q"/>
                                 <constraint firstAttribute="bottom" secondItem="Eoi-B8-iL6" secondAttribute="bottom" constant="20" id="9j2-HZ-hNX"/>
                                 <constraint firstItem="W4l-Be-bhM" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="De3-8O-mXx"/>
                                 <constraint firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" id="G79-Jv-EYw"/>
@@ -676,6 +685,7 @@
                                 <constraint firstAttribute="trailing" secondItem="6y6-RH-qOp" secondAttribute="trailing" constant="20" id="KTx-SN-RUg"/>
                                 <constraint firstItem="d0X-cW-Xgz" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="MKB-zm-C75"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N2u-0C-Y3z"/>
+                                <constraint firstItem="gQE-fN-JhY" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N5g-Mw-ag2"/>
                                 <constraint firstItem="se7-PJ-iwD" firstAttribute="width" secondItem="2wf-Py-l6B" secondAttribute="width" id="O1b-nk-1Y1"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="height" secondItem="2wf-Py-l6B" secondAttribute="height" id="O2u-BE-VPd"/>
                                 <constraint firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="Pj0-Ck-gtP"/>
@@ -683,11 +693,13 @@
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="575" id="aB1-HF-No8"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="bottom" secondItem="Usy-W5-TGp" secondAttribute="bottom" id="agL-I1-x42"/>
                                 <constraint firstItem="d0X-cW-Xgz" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" id="efy-70-qsJ"/>
+                                <constraint firstItem="gQE-fN-JhY" firstAttribute="bottom" secondItem="Usy-W5-TGp" secondAttribute="bottom" id="fwu-m8-3Pt"/>
                                 <constraint firstItem="se7-PJ-iwD" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="hts-ke-nkj"/>
                                 <constraint firstItem="se7-PJ-iwD" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="kpo-pf-qt5"/>
                                 <constraint firstItem="W4l-Be-bhM" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="lvd-la-SAZ"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="top" secondItem="Usy-W5-TGp" secondAttribute="top" id="mS7-0s-mzr"/>
                                 <constraint firstItem="se7-PJ-iwD" firstAttribute="height" secondItem="2wf-Py-l6B" secondAttribute="height" id="nkk-DO-Hod"/>
+                                <constraint firstItem="gQE-fN-JhY" firstAttribute="top" secondItem="Usy-W5-TGp" secondAttribute="top" id="pVh-ja-gEo"/>
                                 <constraint firstItem="Eoi-B8-iL6" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="sHw-xg-QAo"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="siE-fo-i7E"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="txG-gM-vYq"/>
@@ -1062,7 +1074,7 @@
         <userDefaultsController representsSharedInstance="YES" id="cb1-cg-dMu"/>
     </objects>
     <resources>
-        <image name="NSUser" width="128" height="128"/>
+        <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_accept" width="72" height="72"/>
         <image name="ic_action_add_participant" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>

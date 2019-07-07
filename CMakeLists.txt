@@ -167,6 +167,7 @@ SET(ringclient_CONTROLLERS
    src/AccountSettingsVC.h
    src/LeaveMessageVC.mm
    src/LeaveMessageVC.h
+   src/Shaders.metal
 )
 
 SET(ringclient_BACKENDS
@@ -212,6 +213,8 @@ SET(ringclient_VIEWS
    src/views/HoverButton.mm
    src/views/CenteredClipView.h
    src/views/CenteredClipView.mm
+   src/views/CallMTKView.h
+   src/views/CallMTKView.mm
 )
 
 SET(ringclient_OTHERS
