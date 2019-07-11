@@ -37,6 +37,7 @@
 #import <api/contact.h>
 #import <api/datatransfermodel.h>
 #import <media/recordingmodel.h>
+#import <api/avmodel.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -222,6 +223,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     NSResponder * viewNextResponder = [self nextResponder];
     [self setNextResponder: [conversationVC getMessagesView]];
     [[conversationVC getMessagesView] setNextResponder: viewNextResponder];
+    self.avModel->useAVFrame(YES);
 }
 
 - (void) connect
