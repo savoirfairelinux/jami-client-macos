@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ca48ce6_88f1ac07",
+        "filename": "src/views/CallMTKView.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2019-07-15T13:38:04Z",
+      "side": 1,
+      "message": "use M_PI (built-in constant for ?) ?",
+      "range": {
+        "startLine": 193,
+        "startChar": 33,
+        "endLine": 193,
+        "endChar": 37
+      },
+      "revId": "beabdf98038bc2f5a1ccb6e142b75c3a26c40657",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
