@@ -427,18 +427,6 @@ namespace Interfaces {
         Q_UNUSED(level)
         return QVariant();
     }
-    QVariant
-    ImageManipulationDelegate::historySortingCategoryIcon(const CategorizedHistoryModel::SortedProxy::Categories cat) const
-    {
-        Q_UNUSED(cat)
-        return QVariant();
-    }
-    QVariant
-    ImageManipulationDelegate::contactSortingCategoryIcon(const CategorizedContactModel::SortedProxy::Categories cat) const
-    {
-        Q_UNUSED(cat)
-        return QVariant();
-    }
 
     QVariant
     ImageManipulationDelegate::userActionIcon(const UserActionElement& state) const
