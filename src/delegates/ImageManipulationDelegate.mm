@@ -483,8 +483,6 @@ namespace Interfaces {
     QVariant ImageManipulationDelegate::decorationRole(const Account* acc)
     {
         Q_UNUSED(acc)
-        if (auto pro = ProfileModel::instance().selectedProfile())
-            return contactPhoto(pro->person(), decorationSize);
         return QVariant();
     }
 

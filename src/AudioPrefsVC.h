@@ -18,8 +18,9 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LrcModelsProtocol.h"
 
-@interface AudioPrefsVC : NSViewController <NSMenuDelegate, NSPathControlDelegate, NSOpenSavePanelDelegate> {
+@interface AudioPrefsVC : NSViewController <LrcModelsProtocol> {
 
 }
 

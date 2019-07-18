@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
  *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,203 +19,73 @@
  */
 #import "AudioPrefsVC.h"
 
-#import <audio/settings.h>
-#import <media/recordingmodel.h>
-#import <QUrl>
-#import <audio/inputdevicemodel.h>
-#import <audio/outputdevicemodel.h>
-#import <qitemselectionmodel.h>
-#import "utils.h"
+//LRC
+#import <api/avmodel.h>
 
 @interface AudioPrefsVC ()
 
-@property (assign) IBOutlet NSPathControl *recordingsPathControl;
 @property (assign) IBOutlet NSPopUpButton *outputDeviceList;
 @property (assign) IBOutlet NSPopUpButton *inputDeviceList;
-@property (assign) IBOutlet NSButton *alwaysRecordingButton;
-@property (assign) IBOutlet NSButton *muteDTMFButton;
-@property (assign) IBOutlet NSTextField *recordingHeaderTitle;
-@property (assign) IBOutlet NSTextField *recordingpathLabel;
-@property (assign) IBOutlet NSLayoutConstraint* audioMarginTopConstraint;
-@property (assign) IBOutlet NSLayoutConstraint* audioMarginBottomConstraint;
-
-
-
-
 @end
 
 @implementation AudioPrefsVC
-@synthesize recordingsPathControl, recordingHeaderTitle, recordingpathLabel;
 @synthesize outputDeviceList;
 @synthesize inputDeviceList;
-@synthesize alwaysRecordingButton;
-@synthesize muteDTMFButton;
-@synthesize audioMarginTopConstraint, audioMarginBottomConstraint;
+@synthesize avModel;
+QMetaObject::Connection audioDeviceEvent;
+
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil avModel:(lrc::api::AVModel*) avModel
+{
+    if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
+    {
+        self.avModel = avModel;
+    }
+    return self;
+}
 
 - (void)loadView
 {
     [super loadView];
+    [self connectdDeviceEvent];
+    [self addDevices];
+}
 
-    QModelIndex qInputIdx = Audio::Settings::instance().inputDeviceModel()->selectionModel()->currentIndex();
-    QModelIndex qOutputIdx = Audio::Settings::instance().outputDeviceModel()->selectionModel()->currentIndex();
-    
-    [self.outputDeviceList addItemWithTitle:
-            Audio::Settings::instance().outputDeviceModel()->data(qOutputIdx, Qt::DisplayRole).toString().toNSString()];
-
-    [self.inputDeviceList addItemWithTitle:
-            Audio::Settings::instance().inputDeviceModel()->data(qInputIdx, Qt::DisplayRole).toString().toNSString()];
-    [self.alwaysRecordingButton setState:
-            media::RecordingModel::instance().isAlwaysRecording() ? NSOnState:NSOffState];
-
-    [self.muteDTMFButton setState:
-            Audio::Settings::instance().areDTMFMuted()?NSOnState:NSOffState];
-    NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:media::RecordingModel::instance().recordPath().toNSString()];
-    [recordingsPathControl setPathComponentCells:pathComponentArray];
-
-    if (appSandboxed()) {
-        [alwaysRecordingButton setHidden:YES];
-        [recordingsPathControl setEnabled:NO];
-        [recordingsPathControl setHidden: YES];
-        [recordingHeaderTitle setHidden: YES];
-        [recordingpathLabel setHidden: YES];
-        audioMarginTopConstraint.constant = 10.0f;
-        audioMarginBottomConstraint.constant = 67.0f;
+-(void) addDevices {
+    [inputDeviceList removeAllItems];
+    [outputDeviceList removeAllItems];
+    auto inputDevices = avModel->getAudioInputDevices();
+    auto inputDevice = avModel->getInputDevice();
+    for (auto device : inputDevices) {
+        [inputDeviceList addItemWithTitle: @(device.c_str())];
     }
+    [inputDeviceList selectItemWithTitle:@(inputDevice.c_str())];
+    auto outputDevices = avModel->getAudioOutputDevices();
+    auto outputDevice = avModel->getOutputDevice();
+    for (auto device : outputDevices) {
+        [outputDeviceList addItemWithTitle: @(device.c_str())];
+    }
+    [outputDeviceList selectItemWithTitle:@(outputDevice.c_str())];
 }
 
-- (IBAction)toggleMuteDTMF:(NSButton *)sender
-{
-    Audio::Settings::instance().setDTMFMuted([sender state] == NSOnState);
-}
-
-- (IBAction)toggleAlwaysRecording:(NSButton *)sender
-{
-    media::RecordingModel::instance().setAlwaysRecording([sender state] == NSOnState);
-}
-
-- (IBAction)pathControlSingleClick:(id)sender {
-    // Select that chosen component of the path.
-    NSArray* pathComponentArray = [self pathComponentArrayWithCurrentUrl:[[self.recordingsPathControl clickedPathComponentCell] URL].path];
-    [recordingsPathControl setPathComponentCells:pathComponentArray];
- media::RecordingModel::instance().setRecordPath(QString::fromNSString([self.recordingsPathControl.URL path]));
+-(void)connectdDeviceEvent {
+    QObject::disconnect(audioDeviceEvent);
+    audioDeviceEvent = QObject::connect(avModel,
+                                   &lrc::api::AVModel::deviceEvent,
+                                   [=]() {
+                                       [self addDevices];
+                                   });
 }
 
 - (IBAction)chooseOutput:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Audio::Settings::instance().outputDeviceModel()->index(index, 0);
-    Audio::Settings::instance().outputDeviceModel()->selectionModel()->setCurrentIndex(
-                                                    qIdx, QItemSelectionModel::ClearAndSelect);
+    auto output = [self.outputDeviceList itemTitleAtIndex:index];
+    avModel->setOutputDevice([output UTF8String]);
 }
 
 - (IBAction)chooseInput:(id)sender {
     int index = [sender indexOfSelectedItem];
-    QModelIndex qIdx = Audio::Settings::instance().inputDeviceModel()->index(index, 0);
-    Audio::Settings::instance().inputDeviceModel()->selectionModel()->setCurrentIndex(
-                                                    qIdx, QItemSelectionModel::ClearAndSelect);
-}
-
-#pragma mark - NSPathControl delegate methods
-
-/*
- Assemble a set of custom cells to display into an array to pass to the path control.
- */
-- (NSArray *)pathComponentArrayWithCurrentUrl:(NSString *) url
-{
-
-    NSMutableArray *pathComponentArray = [[NSMutableArray alloc] init];
-
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NSURL* downloadURL = [fileManager URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-
-    NSPathComponentCell *componentCell;
-    componentCell = [self componentCellForType:kGenericFolderIcon withTitle:@"Downloads" URL:downloadURL];
-    [pathComponentArray addObject:componentCell];
-    NSString * downloads = [downloadURL path];
-    if([url isEqualToString:downloads]) {
-        return pathComponentArray;
-    }
-    if(![url isEqualToString:@""]) {
-        NSString * name = [url componentsSeparatedByString:@"/"].lastObject;
-        if(!name) {
-            return pathComponentArray;
-        }
-        componentCell = [self componentCellForType:kGenericFolderIcon withTitle:name URL:[NSURL URLWithString: url]];
-        [pathComponentArray addObject:componentCell];
-    }
-    return pathComponentArray;
-}
-
-/*
- This method is used by pathComponentArray to create a NSPathComponent cell based on icon, title and URL information.
- Each path component needs an icon, URL and title.
- */
-- (NSPathComponentCell *)componentCellForType:(OSType)withIconType withTitle:(NSString *)title URL:(NSURL *)url
-{
-    NSPathComponentCell *componentCell = [[NSPathComponentCell alloc] init];
-
-    NSImage *iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(withIconType)];
-    [componentCell setImage:iconImage];
-    [componentCell setURL:url];
-    [componentCell setTitle:title];
-
-    return componentCell;
-}
-
-/*
- Delegate method of NSPathControl to determine how the NSOpenPanel will look/behave.
- */
-- (void)pathControl:(NSPathControl *)pathControl willDisplayOpenPanel:(NSOpenPanel *)openPanel
-{
-    NSLog(@"willDisplayOpenPanel");
-    [openPanel setAllowsMultipleSelection:NO];
-    [openPanel setCanChooseDirectories:YES];
-    [openPanel setCanChooseFiles:NO];
-    [openPanel setResolvesAliases:YES];
-    [openPanel setTitle:NSLocalizedString(@"Choose a directory", @"Open panel title")];
-    [openPanel setPrompt:NSLocalizedString(@"Choose directory", @"Open panel prompt for 'Choose a directory'")];
-    [openPanel setDelegate:self];
-}
-
-- (void)pathControl:(NSPathControl *)pathControl willPopUpMenu:(NSMenu *)menu
-{
-
-}
-
-#pragma mark - NSOpenSavePanelDelegate delegate methods
-
-- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError
-{
-    [recordingsPathControl setURL:url];
-    return YES;
-}
-
-- (BOOL) panel:(id)sender shouldEnableURL:(NSURL*)url {
-    return YES;
-}
-
-#pragma mark - NSMenuDelegate methods
-
-- (BOOL)menu:(NSMenu *)menu updateItem:(NSMenuItem *)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel
-{
-    QModelIndex qIdx;
-
-    if (inputDeviceList.menu == menu) {
-        qIdx = Audio::Settings::instance().inputDeviceModel()->index(index);
-        [item setTitle:Audio::Settings::instance().inputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
-    } else {
-        qIdx = Audio::Settings::instance().outputDeviceModel()->index(index);
-        [item setTitle:Audio::Settings::instance().outputDeviceModel()->data(qIdx, Qt::DisplayRole).toString().toNSString()];
-    }
-
-    return YES;
-}
-
-- (NSInteger)numberOfItemsInMenu:(NSMenu *)menu
-{
-    if (inputDeviceList.menu == menu)
-        return Audio::Settings::instance().inputDeviceModel()->rowCount();
-    else
-        return Audio::Settings::instance().outputDeviceModel()->rowCount();
+    auto input = [self.inputDeviceList itemTitleAtIndex:index];
+    avModel->setInputDevice([input UTF8String]);
 }
 
 @end
