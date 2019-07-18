@@ -57,14 +57,18 @@ QMetaObject::Connection audioDeviceEvent;
     auto inputDevice = avModel->getInputDevice();
     for (auto device : inputDevices) {
         [inputDeviceList addItemWithTitle: @(device.c_str())];
+        if(device == inputDevice) {
+            [inputDeviceList selectItemWithTitle:@(inputDevice.c_str())];
+        }
     }
-    [inputDeviceList selectItemWithTitle:@(inputDevice.c_str())];
     auto outputDevices = avModel->getAudioOutputDevices();
     auto outputDevice = avModel->getOutputDevice();
     for (auto device : outputDevices) {
         [outputDeviceList addItemWithTitle: @(device.c_str())];
+        if(device == outputDevice) {
+            [outputDeviceList selectItemWithTitle:@(outputDevice.c_str())];
+        }
     }
-    [outputDeviceList selectItemWithTitle:@(outputDevice.c_str())];
 }
 
 -(void)connectdDeviceEvent {
@@ -72,7 +76,11 @@ QMetaObject::Connection audioDeviceEvent;
     audioDeviceEvent = QObject::connect(avModel,
                                    &lrc::api::AVModel::deviceEvent,
                                    [=]() {
-                                       [self addDevices];
+                                       dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                                                                    1 * NSEC_PER_SEC),
+                                                      dispatch_get_main_queue(), ^{
+                                                          [self addDevices];
+                                       });
                                    });
 }
 
