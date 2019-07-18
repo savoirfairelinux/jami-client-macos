@@ -350,6 +350,9 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     [self.dialpad.window makeKeyAndOrderFront:self];
 }
 
+-(std::vector<std::string>) getActiveCalls {
+    return lrc->activeCalls();
+}
 
 - (BOOL) checkForRingAccount
 {
@@ -362,39 +365,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     [appleEventManager setEventHandler:self
                            andSelector:@selector(handleGetURLEvent:withReplyEvent:)
                          forEventClass:kInternetEventClass andEventID:kAEGetURL];
-}
-
-/**
- * Recognized patterns:
- *   - ring:<hash>
- *   - ring://<hash>
- */
-- (void)handleGetURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
-{
-    NSString* query = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    NSURL* url = [[NSURL alloc] initWithString:query];
-    NSString* ringID = [url host];
-    if (!ringID) {
-        //not a valid NSURL, try to parse query directly
-        ringID = [query substringFromIndex:@"ring:".length];
-    }
-
-    // check for a valid ring hash
-    NSCharacterSet *hexSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789abcdefABCDEF"];
-    BOOL valid = [[ringID stringByTrimmingCharactersInSet:hexSet] isEqualToString:@""];
-
-    if(valid && ringID.length == 40) {
-        Call* c = CallModel::instance().dialingCall();
-        c->setDialNumber(QString::fromNSString([NSString stringWithFormat:@"ring:%@",ringID]));
-        c << Call::Action::ACCEPT;
-    } else {
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:@"Error"];
-        [alert setInformativeText:@"ringID cannot be read from this URL."];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        [alert runModal];
-    }
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag

@@ -29,7 +29,7 @@ namespace lrc {
     }
 }
 
-@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate, ChooseAccountDelegate, LrcModelsProtocol, CallViewControllerDelegate> {
+@interface RingWindowController : NSWindowController <NSSharingServicePickerDelegate, ChooseAccountDelegate, LrcModelsProtocol, CallViewControllerDelegate,NSWindowDelegate> {
     IBOutlet NSView *currentView;
 }
 

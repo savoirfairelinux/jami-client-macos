@@ -21,6 +21,7 @@
 
 #import "RingWindowController.h"
 #import "PreferencesWindowController.h"
+#import <string>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 
@@ -28,5 +29,6 @@
 - (void) showMainWindow;
 - (void) showDialpad;
 - (BOOL) checkForRingAccount;
+- (std::vector<std::string>) getActiveCalls;
 
 @end
