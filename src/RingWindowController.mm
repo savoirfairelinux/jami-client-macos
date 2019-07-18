@@ -26,7 +26,6 @@
 #import <QItemSelection>
 
 //LRC
-#import <AvailableAccountModel.h>
 #import <api/lrc.h>
 #import <api/account.h>
 #import <api/newaccountmodel.h>
@@ -444,49 +443,6 @@ typedef NS_ENUM(NSInteger, ViewState) {
         default:
             break;
     }
-}
-
-#pragma mark - Ring account migration
-
-- (void) migrateRingAccount:(Account*) acc
-{
-    self.migrateWC = [[MigrateRingAccountsWC alloc] initWithDelegate:self actionCode:1];
-    self.migrateWC.account = acc;
-#if MAC_OS_X_VERSION_MIN_REQUIRED > MAC_OS_X_VERSION_10_9
-    [self.window beginSheet:self.migrateWC.window completionHandler:nil];
-#else
-    [NSApp beginSheet: self.migrateWC.window
-       modalForWindow: self.window
-        modalDelegate: self
-       didEndSelector: nil
-          contextInfo: nil];
-#endif
-}
-
-// TODO: Reimplement as a blocking loop when new LRC models handle migration
-- (void)checkAccountsToMigrate
-{
-    auto ringList = AccountModel::instance().accountsToMigrate();
-    if (ringList.length() > 0){
-        Account* acc = ringList.value(0);
-        [self migrateRingAccount:acc];
-    } else {
-        // Fresh run, we need to make sure RingID appears
-        [shareButton sendActionOn:NSLeftMouseDownMask];
-
-        [self connect];
-        [self updateRingID];
-    }
-}
-
-- (void)migrationDidComplete
-{
-    [self checkAccountsToMigrate];
-}
-
-- (void)migrationDidCompleteWithError
-{
-    [self checkAccountsToMigrate];
 }
 
 - (void) selectAccount:(const lrc::api::account::Info&)accInfo currentRemoved:(BOOL) removed
