@@ -114,8 +114,6 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -w")
 
 #Files to compile
 SET(ringclient_CONTROLLERS
-   src/QNSTreeController.mm
-   src/QNSTreeController.h
    src/CurrentCallVC.mm
    src/CurrentCallVC.h
    src/GeneralPrefsVC.mm

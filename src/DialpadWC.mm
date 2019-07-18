@@ -19,12 +19,6 @@
 
 #import "DialpadWC.h"
 
-///Qt
-#import <QtCore/qitemselectionmodel.h>
-
-///LRC
-#import <callmodel.h>
-
 @interface DialpadWC ()
 
 @property (unsafe_unretained) IBOutlet NSTextField* composerField;

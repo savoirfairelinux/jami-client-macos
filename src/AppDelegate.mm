@@ -21,7 +21,6 @@
 #import "AppDelegate.h"
 
 //lrc
-#import <callmodel.h>
 #import <api/lrc.h>
 #import <api/newaccountmodel.h>
 #import <api/behaviorcontroller.h>

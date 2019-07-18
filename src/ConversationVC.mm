@@ -24,8 +24,8 @@
 #import <QPixmap>
 #import <QtMacExtras/qmacfunctions.h>
 #import <QuartzCore/QuartzCore.h>
-
-// LRC
+#import <QuickLook/QuickLook.h>
+#import <Quartz/Quartz.h>
 
 #import "views/IconButton.h"
 #import "views/HoverButton.h"
@@ -37,8 +37,6 @@
 #import "RingWindowController.h"
 #import "NSString+Extensions.h"
 #import "LeaveMessageVC.h"
-#import <QuickLook/QuickLook.h>
-#import <Quartz/Quartz.h>
 #import "LeaveMessageVC.h"
 
 @interface ConversationVC () <QLPreviewPanelDataSource, QLPreviewPanelDelegate>{

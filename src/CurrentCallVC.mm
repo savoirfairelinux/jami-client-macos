@@ -32,7 +32,6 @@ extern "C" {
 #import <QUrl>
 
 ///LRC
-#import <video/previewmanager.h>
 #import <video/renderer.h>
 #import <api/newcallmodel.h>
 #import <api/call.h>

@@ -21,7 +21,6 @@
 
 #import "RingWindowController.h"
 #import "PreferencesWindowController.h"
-#import <string>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSUserNotificationCenterDelegate>
 

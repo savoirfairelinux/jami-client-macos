@@ -35,7 +35,6 @@
 
 //LRC
 #import <person.h>
-#import <profilemodel.h>
 #import <profile.h>
 #import <contactmethod.h>
 #import <api/conversation.h>
@@ -425,18 +424,6 @@ namespace Interfaces {
     ImageManipulationDelegate::securityLevelIcon(const SecurityEvaluationModel::SecurityLevel level) const
     {
         Q_UNUSED(level)
-        return QVariant();
-    }
-    QVariant
-    ImageManipulationDelegate::historySortingCategoryIcon(const CategorizedHistoryModel::SortedProxy::Categories cat) const
-    {
-        Q_UNUSED(cat)
-        return QVariant();
-    }
-    QVariant
-    ImageManipulationDelegate::contactSortingCategoryIcon(const CategorizedContactModel::SortedProxy::Categories cat) const
-    {
-        Q_UNUSED(cat)
         return QVariant();
     }
 

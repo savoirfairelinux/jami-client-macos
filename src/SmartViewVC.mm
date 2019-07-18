@@ -27,8 +27,6 @@
 //Qt
 #import <QtMacExtras/qmacfunctions.h>
 #import <QPixmap>
-#import <QIdentityProxyModel>
-#import <QItemSelectionModel>
 
 //LRC
 #import <globalinstances.h>
