@@ -85,9 +85,6 @@ std::unique_ptr<lrc::api::Lrc> lrc;
 #else
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 #endif
-//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
-//     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSConstraintBasedLayoutLogUnsatisfiable"];
-//     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"__NSConstraintBasedLayoutLogUnsatisfiable"];
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 
@@ -103,6 +100,7 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     lrc = std::make_unique<lrc::api::Lrc>();
 
     if([self checkForRingAccount]) {
+        [self setRingtonePath];
         [self showMainWindow];
     } else {
         [self showWizard];
@@ -351,6 +349,19 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
 -(std::vector<std::string>) getActiveCalls {
     return lrc->activeCalls();
+}
+
+-(void)setRingtonePath {
+    std::vector<std::string> accounts = lrc->getAccountModel().getAccountList();
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    for (auto account: accounts) {
+        lrc::api::account::ConfProperties_t accountProperties = lrc->getAccountModel().getAccountConfig(account);
+        NSString *ringtonePath = @(accountProperties.Ringtone.ringtonePath.c_str());
+        if (![fileManager fileExistsAtPath: ringtonePath]) {
+            accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
+            lrc->getAccountModel().setAccountConfig(account, accountProperties);
+        }
+    }
 }
 
 - (BOOL) checkForRingAccount

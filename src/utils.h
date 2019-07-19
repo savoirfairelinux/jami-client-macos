@@ -31,6 +31,10 @@
 #import <api/contactmodel.h>
 #import <api/contact.h>
 
+//Qt
+#import <QtCore/QDir>
+#import <qapplication.h>
+
 static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     try {
@@ -99,6 +103,13 @@ static inline NSString* bestNameForConversation(const lrc::api::conversation::In
         NSLog(@"bestNameForConversation: getContact - out of range");
         return @"";
     }
+}
+
+static inline NSString* defaultRingtonePath() {
+    QDir ringtonesDir(QCoreApplication::applicationDirPath());
+    ringtonesDir.cdUp();
+    ringtonesDir.cd("Resources/ringtones/");
+    return [ringtonesDir.path().toNSString() stringByAppendingString:@"/default.opus"];
 }
 
 static inline lrc::api::profile::Type profileType(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
