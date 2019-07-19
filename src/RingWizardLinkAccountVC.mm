@@ -112,6 +112,9 @@
                                                return;
                                            }
                                           [self.delegate didLinkAccountWithSuccess:YES];
+                                          lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
+                                          accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
+                                          self.accountModel->setAccountConfig(accountID, accountProperties);
                                           [self registerDefaultPreferences];
                                           QObject::disconnect(accountCreated);
                                           QObject::disconnect(accountRemoved);

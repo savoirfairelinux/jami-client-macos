@@ -285,7 +285,9 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                               NSString *usernameString = self.registeredName;
                                               self.accountModel->registerName(accountID, [passwordString UTF8String], [usernameString UTF8String]);
                                           }
-
+                                          lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
+                                          accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
+                                          self.accountModel->setAccountConfig(accountID, accountProperties);
                                           [self registerDefaultPreferences];
                                           [self.delegate didCreateAccountWithSuccess:YES];
                                       });
