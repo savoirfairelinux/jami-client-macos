@@ -80,11 +80,12 @@ std::string currentVideoDevice;
     QObject::disconnect(previewStopped);
     QObject::disconnect(previewStarted);
     QObject::disconnect(deviceEvent);
-    if (!self.shouldHandlePreview) {
-        return;
+     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    if (![appDelegate getActiveCalls].size()) {
+        self.previewView.stopRendering = true;
+        avModel->stopPreview();
+        [previewView fillWithBlack];
     }
-    self.previewView.stopRendering = true;
-    avModel->stopPreview();
 }
 
 - (void)viewWillAppear {
