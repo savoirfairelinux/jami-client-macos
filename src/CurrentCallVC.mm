@@ -48,6 +48,7 @@ extern "C" {
 #import "views/IconButton.h"
 #import "utils.h"
 #import "views/CallMTKView.h"
+#import "Common.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -613,132 +614,15 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(CVPixelBufferRef) getBufferForPreviewFromFrame:(const AVFrame*)frame {
-    if(!frame || !frame->data[0] || !frame->data[1]) {
-        return nil;
-    }
-    CVReturn theError;
-    bool createPool = false;
-    if (!pixelBufferPoolPreview) {
-        createPool = true;
-    } else {
-        NSDictionary* atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetAttributes(pixelBufferPoolPreview);
-        if(!atributes)
-            atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPoolPreview);
-        int width = [[atributes objectForKey:(NSString*)kCVPixelBufferWidthKey] intValue];
-        int height = [[atributes objectForKey:(NSString*)kCVPixelBufferHeightKey] intValue];
-        if (width != frame->width || height != frame->height) {
-            createPool = true;
-        }
-    }
-    if (createPool) {
-        CVPixelBufferPoolRelease(pixelBufferPoolPreview);
-        CVPixelBufferRelease(pixelBufferPreview);
-        pixelBufferPreview = nil;
-        pixelBufferPoolPreview = nil;
-        NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
-        [attributes setObject:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange] forKey:(NSString*)kCVPixelBufferPixelFormatTypeKey];
-        [attributes setObject:[NSNumber numberWithInt:frame->width] forKey: (NSString*)kCVPixelBufferWidthKey];
-        [attributes setObject:[NSNumber numberWithInt:frame->height] forKey: (NSString*)kCVPixelBufferHeightKey];
-        [attributes setObject:@(frame->linesize[0]) forKey:(NSString*)kCVPixelBufferBytesPerRowAlignmentKey];
-        [attributes setObject:[NSDictionary dictionary] forKey:(NSString*)kCVPixelBufferIOSurfacePropertiesKey];
-        theError = CVPixelBufferPoolCreate(kCFAllocatorDefault, NULL, (__bridge CFDictionaryRef) attributes, &pixelBufferPoolPreview);
-        if (theError != kCVReturnSuccess) {
-            NSLog(@"CVPixelBufferPoolCreate Failed");
-            return nil;
-        }
-    }
-    if(!pixelBufferPreview) {
-        theError = CVPixelBufferPoolCreatePixelBuffer(NULL, pixelBufferPoolPreview, &pixelBufferPreview);
-        if(theError != kCVReturnSuccess) {
-            NSLog(@"CVPixelBufferPoolCreatePixelBuffer Failed");
-            return nil;
-        }
-    }
-    theError = CVPixelBufferLockBaseAddress(pixelBufferPreview, 0);
-    if (theError != kCVReturnSuccess) {
-        NSLog(@"lock error");
-        return nil;
-    }
-    size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBufferPreview, 0);
-    size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBufferPreview, 1);
-    void* base = CVPixelBufferGetBaseAddressOfPlane(pixelBufferPreview, 0);
-    memcpy(base, frame->data[0], bytePerRowY * frame->height);
-    base = CVPixelBufferGetBaseAddressOfPlane(pixelBufferPreview, 1);
-    memcpy(base, frame->data[1], bytesPerRowUV * frame->height/2);
-    CVPixelBufferUnlockBaseAddress(pixelBufferPreview, 0);
-    return pixelBufferPreview;
+    [Common fillPixelBuffr:&pixelBufferPreview fromFrame:frame bufferPool:&pixelBufferPoolPreview];
+    CVPixelBufferRef buffer  = pixelBufferPreview;
+    return buffer;
 }
 
 -(CVPixelBufferRef) getBufferForDistantViewFromFrame:(const AVFrame*)frame {
-    if(!frame || !frame->data[0] || !frame->data[1]) {
-        return nil;
-    }
-    CVReturn theError;
-    bool createPool = false;
-    if (!pixelBufferPoolDistantView){
-        createPool = true;
-    }
-    NSDictionary* atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPoolDistantView);
-    if(!atributes)
-        atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPoolDistantView);
-    int width = [[atributes objectForKey:(NSString*)kCVPixelBufferWidthKey] intValue];
-    int height = [[atributes objectForKey:(NSString*)kCVPixelBufferHeightKey] intValue];
-    if (width != frame->width || height != frame->height) {
-        createPool = true;
-    }
-    if (createPool) {
-        CVPixelBufferPoolRelease(pixelBufferPoolDistantView);
-        CVPixelBufferRelease(pixelBufferDistantView);
-        pixelBufferDistantView = nil;
-        pixelBufferPoolDistantView = nil;
-        NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
-        [attributes setObject:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange] forKey:(NSString*)kCVPixelBufferPixelFormatTypeKey];
-        [attributes setObject:[NSNumber numberWithInt:frame->width] forKey: (NSString*)kCVPixelBufferWidthKey];
-        [attributes setObject:[NSNumber numberWithInt:frame->height] forKey: (NSString*)kCVPixelBufferHeightKey];
-        [attributes setObject:@(frame->linesize[0]) forKey:(NSString*)kCVPixelBufferBytesPerRowAlignmentKey];
-        [attributes setObject:[NSDictionary dictionary] forKey:(NSString*)kCVPixelBufferIOSurfacePropertiesKey];
-        theError = CVPixelBufferPoolCreate(kCFAllocatorDefault, NULL, (__bridge CFDictionaryRef) attributes, &pixelBufferPoolDistantView);
-        if (theError != kCVReturnSuccess) {
-            return nil;
-            NSLog(@"CVPixelBufferPoolCreate Failed");
-        }
-    }
-    if(!pixelBufferDistantView) {
-        theError = CVPixelBufferPoolCreatePixelBuffer(NULL, pixelBufferPoolDistantView, &pixelBufferDistantView);
-        if(theError != kCVReturnSuccess) {
-            return nil;
-            NSLog(@"CVPixelBufferPoolCreatePixelBuffer Failed");
-        }
-    }
-    theError = CVPixelBufferLockBaseAddress(pixelBufferDistantView, 0);
-    if (theError != kCVReturnSuccess) {
-        return nil;
-        NSLog(@"lock error");
-    }
-    size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBufferDistantView, 0);
-    size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBufferDistantView, 1);
-    void* base = CVPixelBufferGetBaseAddressOfPlane(pixelBufferDistantView, 0);
-    memcpy(base, frame->data[0], bytePerRowY * frame->height);
-    base = CVPixelBufferGetBaseAddressOfPlane(pixelBufferDistantView, 1);
-    uint32_t size = frame->linesize[1] * frame->height / 2;
-    uint8_t* dstData = new uint8_t[2 * size];
-    uint8_t * firstData = new uint8_t[size];
-    memcpy(firstData, frame->data[1], size);
-    uint8_t * secondData  = new uint8_t[size];
-    memcpy(secondData, frame->data[2], size);
-    for (int i = 0; i < 2 * size; i++){
-        if (i % 2 == 0){
-            dstData[i] = firstData[i/2];
-        }else {
-            dstData[i] = secondData[i/2];
-        }
-    }
-    memcpy(base, dstData, bytesPerRowUV * frame->height/2);
-    CVPixelBufferUnlockBaseAddress(pixelBufferDistantView, 0);
-    free(dstData);
-    free(firstData);
-    free(secondData);
-    return pixelBufferDistantView;
+    [Common fillPixelBuffr:&pixelBufferDistantView fromFrame:frame bufferPool:&pixelBufferPoolDistantView];
+    CVPixelBufferRef buffer  = pixelBufferDistantView;
+    return buffer;
 }
 
 - (void) initFrame
