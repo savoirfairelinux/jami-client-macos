@@ -232,6 +232,8 @@ SET(ringclient_OTHERS
    src/AppDelegate.mm
    src/AppDelegate.h
    src/Constants.h
+   src/VideoCommon.h
+   src/VideoCommon.mm
    src/INDSequentialTextSelectionManager.mm
    src/INDSequentialTextSelectionManager.h
    src/delegates/ImageManipulationDelegate.mm
