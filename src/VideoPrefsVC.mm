@@ -20,6 +20,7 @@
 #import "VideoPrefsVC.h"
 #import "views/CallMTKView.h"
 #import "AppDelegate.h"
+#import "VideoCommon.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -28,7 +29,6 @@
 
 extern "C" {
 #import "libavutil/frame.h"
-#import "libavutil/display.h"
 }
 
 @interface VideoPrefsVC ()
@@ -234,61 +234,9 @@ std::string currentVideoDevice;
 }
 
 -(CVPixelBufferRef) getBufferForPreviewFromFrame:(const AVFrame*)frame {
-    if(!frame || !frame->data[0] || !frame->data[1]) {
-        return nil;
-    }
-    CVReturn theError;
-    bool createPool = false;
-    if (!pixelBufferPool) {
-        createPool = true;
-    } else {
-        NSDictionary* atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetAttributes(pixelBufferPool);
-        if(!atributes)
-            atributes = (__bridge NSDictionary*)CVPixelBufferPoolGetPixelBufferAttributes(pixelBufferPool);
-        int width = [[atributes objectForKey:(NSString*)kCVPixelBufferWidthKey] intValue];
-        int height = [[atributes objectForKey:(NSString*)kCVPixelBufferHeightKey] intValue];
-        if (width != frame->width || height != frame->height) {
-            createPool = true;
-        }
-    }
-    if (createPool) {
-        CVPixelBufferPoolRelease(pixelBufferPool);
-        CVPixelBufferRelease(pixelBuffer);
-        pixelBuffer = nil;
-        pixelBufferPool = nil;
-        NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
-        [attributes setObject:[NSNumber numberWithInt:kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange] forKey:(NSString*)kCVPixelBufferPixelFormatTypeKey];
-        [attributes setObject:[NSNumber numberWithInt:frame->width] forKey: (NSString*)kCVPixelBufferWidthKey];
-        [attributes setObject:[NSNumber numberWithInt:frame->height] forKey: (NSString*)kCVPixelBufferHeightKey];
-        [attributes setObject:@(frame->linesize[0]) forKey:(NSString*)kCVPixelBufferBytesPerRowAlignmentKey];
-        [attributes setObject:[NSDictionary dictionary] forKey:(NSString*)kCVPixelBufferIOSurfacePropertiesKey];
-        theError = CVPixelBufferPoolCreate(kCFAllocatorDefault, NULL, (__bridge CFDictionaryRef) attributes, &pixelBufferPool);
-        if (theError != kCVReturnSuccess) {
-            NSLog(@"CVPixelBufferPoolCreate Failed");
-            return nil;
-        }
-    }
-    if(!pixelBuffer) {
-        NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
-        theError = CVPixelBufferPoolCreatePixelBuffer(NULL, pixelBufferPool, &pixelBuffer);
-        if(theError != kCVReturnSuccess) {
-            NSLog(@"CVPixelBufferPoolCreatePixelBuffer Failed");
-            return nil;
-        }
-    }
-    theError = CVPixelBufferLockBaseAddress(pixelBuffer, 0);
-    if (theError != kCVReturnSuccess) {
-        NSLog(@"lock error");
-        return nil;
-    }
-    size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0);
-    size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 1);
-    void* base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
-    memcpy(base, frame->data[0], bytePerRowY * frame->height);
-    base = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1);
-    memcpy(base, frame->data[1], bytesPerRowUV * frame->height/2);
-    CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
-    return pixelBuffer;
+    [VideoCommon fillPixelBuffr:&pixelBuffer fromFrame:frame bufferPool:&pixelBufferPool];
+    CVPixelBufferRef buffer  = pixelBuffer;
+    return buffer;
 }
 
 -(void)addDevices {
