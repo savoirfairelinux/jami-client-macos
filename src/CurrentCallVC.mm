@@ -661,10 +661,32 @@ CVPixelBufferRef pixelBufferPreview;
     }
     size_t bytePerRowY = CVPixelBufferGetBytesPerRowOfPlane(pixelBufferPreview, 0);
     size_t bytesPerRowUV = CVPixelBufferGetBytesPerRowOfPlane(pixelBufferPreview, 1);
-    void* base = CVPixelBufferGetBaseAddressOfPlane(pixelBufferPreview, 0);
-    memcpy(base, frame->data[0], bytePerRowY * frame->height);
-    base = CVPixelBufferGetBaseAddressOfPlane(pixelBufferPreview, 1);
-    memcpy(base, frame->data[1], bytesPerRowUV * frame->height/2);
+    uint8_t*  base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBufferPreview, 0));
+    if (bytePerRowY == frame->linesize[0]) {
+        memcpy(base, frame->data[0], bytePerRowY * frame->height);
+    } else {
+        uint8_t* dest = base;
+        auto src = frame->data[0];
+        auto linesize = frame->linesize[0];
+        for (int i = 0; i < frame->height; i++) {
+            memcpy(dest, src, linesize);
+            dest = dest + bytePerRowY;
+            src = src + linesize;
+        }
+    }
+    base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBufferPreview, 1));
+    if (bytesPerRowUV == frame->linesize[0]) {
+        memcpy(base, frame->data[1], bytesPerRowUV * frame->height/2);
+    } else {
+        uint8_t* dest = base;
+        auto src = frame->data[1];
+        auto linesize = frame->linesize[0];
+        for (int i = 0; i < frame->height / 2 ; i++) {
+            memcpy(dest, src, linesize);
+            dest = dest + bytesPerRowUV;
+            src = src + linesize;
+        }
+    }
     CVPixelBufferUnlockBaseAddress(pixelBufferPreview, 0);
     return pixelBufferPreview;
 }
