@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4dc51cfe_cd6a7ef3",
+        "filename": "src/VideoCommon.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2019-07-25T18:24:50Z",
+      "side": 1,
+      "message": "*base++ \u003d *firstPlane++;\n*base++ \u003d *secondPlane++;",
+      "range": {
+        "startLine": 120,
+        "startChar": 8,
+        "endLine": 128,
+        "endChar": 9
+      },
+      "revId": "dc7a0a7a1a96de6cc7de488069b609da6961601f",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
