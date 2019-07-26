@@ -19,7 +19,6 @@
 #import "RingWindowController.h"
 #import <QuartzCore/QuartzCore.h>
 #include <qrencode.h>
-#include <memory>
 
 //LRC
 #import <api/lrc.h>
@@ -31,7 +30,6 @@
 #import <api/contactmodel.h>
 #import <api/contact.h>
 #import <api/datatransfermodel.h>
-#import <media/recordingmodel.h>
 #import <api/avmodel.h>
 
 // Ring
@@ -48,7 +46,6 @@
 #import "utils.h"
 #import "RingWizardWC.h"
 #import "AccountSettingsVC.h"
-#import "views/CallLayer.h"
 
 typedef NS_ENUM(NSInteger, ViewState) {
     SHOW_WELCOME_SCREEN = 0,
@@ -99,7 +96,6 @@ typedef NS_ENUM(NSInteger, ViewState) {
         self.behaviorController = behaviorController;
         self.avModel = avModel;
         self.avModel->useAVFrame(YES);
-        avModel->deactivateOldVideoModels();
     }
     return self;
 }
@@ -191,18 +187,9 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
     [conversationVC initFrame];
     [settingsVC initFrame];
-    @try {
-        [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
-    }
-    @catch (NSException *ex) {
-        NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
-    }
 
-    // Fresh run, we need to make sure RingID appears
-    [shareButton sendActionOn:NSLeftMouseDownMask];
+    [self checkAccountsToMigrate];
 
-    [self connect];
-    [self updateRingID];
     // set download folder (default - 'Documents')
     NSString* path = [[NSUserDefaults standardUserDefaults] stringForKey:Preferences::DownloadFolder];
     if (!path || path.length == 0) {
@@ -212,7 +199,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     self.dataTransferModel->downloadDirectory = std::string([path UTF8String]);
     if(appSandboxed()) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        media::RecordingModel::instance().setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
+        avModel->setRecordPath([[paths objectAtIndex:0] UTF8String]);
     }
     NSToolbar *tb = [[self window] toolbar];
     [tb setAllowsUserCustomization:NO];
@@ -279,6 +266,47 @@ typedef NS_ENUM(NSInteger, ViewState) {
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [self changeViewTo:LEAVE_MESSAGE];
                      });
+}
+
+#pragma mark - Ring account migration
+
+- (void) migrateRingAccount:(std::string) acc
+{
+    self.migrateWC = [[MigrateRingAccountsWC alloc] initWithDelegate:self actionCode:1];
+    self.migrateWC.accountModel = self.accountModel;
+    self.migrateWC.accountToMigrate = acc;
+    [self.window beginSheet:self.migrateWC.window completionHandler:nil];
+}
+
+- (void)checkAccountsToMigrate
+{
+    auto accounts = self.accountModel->getAccountList();
+    for (auto accountId: accounts) {
+        const lrc::api::account::Info& accountInfo = self.accountModel->getAccountInfo(accountId);
+        if (accountInfo.status == lrc::api::account::Status::ERROR_NEED_MIGRATION) {
+            [self migrateRingAccount:accountInfo.id];
+            return;
+        }
+    }
+    @try {
+        [smartViewVC setConversationModel: [chooseAccountVC selectedAccount].conversationModel.get()];
+    }
+    @catch (NSException *ex) {
+        NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
+    }
+    [shareButton sendActionOn:NSLeftMouseDownMask];
+    [self connect];
+    [self updateRingID];
+}
+
+- (void)migrationDidComplete
+{
+    [self checkAccountsToMigrate];
+}
+
+- (void)migrationDidCompleteWithError
+{
+    [self checkAccountsToMigrate];
 }
 
 /**

@@ -437,7 +437,7 @@ CVPixelBufferRef pixelBufferPreview;
     }
 }
 
--(void) setupConference:(Call*) c
+-(void) setupConference
 {
     [videoView setShouldAcceptInteractions:YES];
     [self.chatButton setHidden:NO];

@@ -135,8 +135,6 @@ SET(ringclient_CONTROLLERS
    src/AccAdvancedRingVC.h
    src/CertificateWC.mm
    src/CertificateWC.h
-   src/RestoreAccountWC.mm
-   src/RestoreAccountWC.h
    src/AudioPrefsVC.mm
    src/AudioPrefsVC.h
    src/VideoPrefsVC.mm
@@ -179,10 +177,6 @@ SET(ringclient_CONTROLLERS
    src/LeaveMessageVC.mm
    src/LeaveMessageVC.h
 )
-
-SET(ringclient_BACKENDS
-   src/backends/AddressBookBackend.mm
-   src/backends/AddressBookBackend.h)
 
 SET(ringclient_VIEWS
    src/views/CallView.mm
@@ -262,7 +256,6 @@ SET(ringclient_XIBS
    PreferencesWindow
    RingWizard
    CertificateWindow
-   RestoreAccountWindow
    ExportPasswordWindow
    MigrateRingAccountsWindow
    Conversation
@@ -416,7 +409,6 @@ ENDFOREACH()
 
 SET(TO_ADD
    ${ringclient_CONTROLLERS}
-   ${ringclient_BACKENDS}
    ${ringclient_VIEWS}
    ${ringclient_OTHERS}
    ${ringclient_XIBS_FOR_EXECUTABLE}
