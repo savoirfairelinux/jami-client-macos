@@ -27,6 +27,9 @@
 #import <video/renderer.h>
 #import <api/avmodel.h>
 
+//Qt
+#import <QSize>
+
 extern "C" {
 #import "libavutil/frame.h"
 }

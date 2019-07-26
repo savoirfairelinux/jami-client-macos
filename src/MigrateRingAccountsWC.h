@@ -19,13 +19,18 @@
 
 #import <Cocoa/Cocoa.h>
 
-//LRC
-#import <account.h>
-
-//RING
+//Jami
 #import "LoadingWCProtocol.h"
 #import "LoadingWCDelegate.h"
 #import "AbstractLoadingWC.h"
+
+#import "string"
+
+namespace lrc {
+    namespace api {
+        class NewAccountModel;
+    }
+}
 
 @protocol MigrateRingAccountsDelegate <LoadingWCDelegate>
 
@@ -57,6 +62,7 @@
  */
 @property (readonly) BOOL validatePasswords;
 
-@property Account* account;
+@property lrc::api::NewAccountModel* accountModel;
+@property std::string accountToMigrate;
 
 @end
