@@ -20,7 +20,7 @@
 #import "MigrateRingAccountsWC.h"
 
 //LRC
-#import <accountmodel.h>
+#import <api/newaccountmodel.h>
 
 //RING
 #import "views/ITProgressIndicator.h"
@@ -31,12 +31,14 @@
     __unsafe_unretained IBOutlet NSTextField* infoField;
     __unsafe_unretained IBOutlet NSTextField* errorField;
     __unsafe_unretained IBOutlet ITProgressIndicator* progressIndicator;
+    __unsafe_unretained IBOutlet NSImageView* profileImage;
+    __unsafe_unretained IBOutlet NSTextField* alias;
 }
 
 - (IBAction)onClickComplete:(id)sender;
 @end
 
-@implementation MigrateRingAccountsWC{
+@implementation MigrateRingAccountsWC {
     struct {
         unsigned int didComplete:1;
         unsigned int didCompleteWithError:1;
@@ -46,6 +48,8 @@
 NSTimer* errorTimer;
 QMetaObject::Connection stateChanged;
 
+@synthesize accountModel, accountToMigrate;
+
 #pragma mark - Initialise / Setters
 - (id)initWithDelegate:(id <MigrateRingAccountsDelegate>) del actionCode:(NSInteger) code
 {
@@ -54,6 +58,9 @@ QMetaObject::Connection stateChanged;
 
 - (void) awakeFromNib{
     [self setInfoMessageForAccount];
+    [profileImage setWantsLayer: YES];
+    profileImage.layer.cornerRadius = 40;
+    profileImage.layer.masksToBounds = YES;
 }
 
 - (void)setDelegate:(id <MigrateRingAccountsDelegate>)aDelegate
@@ -65,29 +72,42 @@ QMetaObject::Connection stateChanged;
     }
 }
 
-- (void) setAccount:(Account *)aAccount
-{
-    _account = aAccount;
-}
-
 - (void) setInfoMessageForAccount
 {
-    NSMutableAttributedString* infoMessage = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"The following account needs to be migrated to the new Ring account format:",@"Text shown to the user")];
+    const lrc::api::account::Info& accountInfo = self.accountModel->getAccountInfo(accountToMigrate);
+    NSData *imageData = [[NSData alloc]
+                         initWithBase64EncodedString: @(accountInfo.profileInfo.avatar.c_str())
+                         options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSImage *image = [[NSImage alloc] initWithData:imageData];
+    if (image) {
+        profileImage.image = image;
+    } else {
+        profileImage.image = [NSImage imageNamed:@"default_avatar_overlay.png"];
+        profileImage.layer.backgroundColor = [[NSColor grayColor] CGColor];
+    }
+    alias.stringValue = @(accountInfo.profileInfo.alias.c_str());
+
+    NSMutableAttributedString* infoMessage = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This account needs to be migrated",@"Text shown to the user")];
     [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-    [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Alias : ",@"Text shown to the user")]];
     const CGFloat fontSize = 13;
     NSDictionary *attrs = @{
                             NSFontAttributeName:[NSFont boldSystemFontOfSize:fontSize]
                             };
-    [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:self.account->alias().toNSString() attributes:attrs]];
-    [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-    [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"RingID : ",@"Text shown to the user")]];
-    [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:self.account->username().toNSString() attributes:attrs]];
+    auto registredName = accountInfo.registeredName;
+    if(!registredName.empty()) {
+        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Registered name: ",@"Text shown to the user")
+                                                                            attributes:attrs]];
+        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@(registredName.c_str()) attributes:attrs]];
+    } else {
+        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"ID: ",@"Text shown to the user")
+                                                                            attributes:attrs]];
+        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@(accountInfo.profileInfo.uri.c_str()) attributes:attrs]];
+
+    }
     [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
     [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.",@"Text shown to the user")]];
     [infoField setAttributedStringValue:infoMessage];
 }
-
 
 - (void) showError:(NSString*) errorMessage
 {
@@ -107,9 +127,10 @@ QMetaObject::Connection stateChanged;
 #pragma mark - Events Handlers
 - (IBAction)removeAccount:(id)sender
 {
-    AccountModel::instance().remove(self.account);
-    AccountModel::instance().save();
+    self.accountModel->removeAccount(accountToMigrate);
     [self cancelPressed:sender];
+    if (delegateRespondsTo.didComplete)
+        [((id<MigrateRingAccountsDelegate>)self.delegate) migrationDidComplete];
 }
 
 - (IBAction)startMigration:(NSButton *)sender
@@ -122,28 +143,21 @@ QMetaObject::Connection stateChanged;
                                                       target:self
                                                     selector:@selector(didCompleteWithError) userInfo:nil
                                                      repeats:NO];
-        stateChanged = QObject::connect(
-                                        self.account, &Account::stateChanged,
-                                        [=](Account::RegistrationState state){
-                                            switch(state){
-                                                case Account::RegistrationState::READY:
-                                                case Account::RegistrationState::TRYING:
-                                                case Account::RegistrationState::UNREGISTERED:{
-                                                    self.account<< Account::EditAction::RELOAD;
-                                                    QObject::disconnect(stateChanged);
-                                                    [self didComplete];
-                                                    break;
-                                                }
-                                                case Account::RegistrationState::ERROR:
-                                                case Account::RegistrationState::INITIALIZING:
-                                                case Account::RegistrationState::COUNT__:{
-                                                    //DO Nothing
-                                                    break;
-                                                }
+        stateChanged = QObject::connect(self.accountModel,
+                                        &lrc::api::NewAccountModel::migrationEnded,
+                                        [self](const std::string& accountId, bool ok) {
+                                            if (accountToMigrate != accountId) {
+                                                return;
+                                            }
+                                            if (ok) {
+                                                [self didComplete];
+                                            } else {
+                                                [self didCompleteWithError];
                                             }
                                         });
-        self.account->setArchivePassword(QString::fromNSString(self.password));
-        self.account->performAction(Account::EditAction::SAVE);
+        lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountToMigrate);
+        accountProperties.archivePassword = [self.password UTF8String];
+        self.accountModel->setAccountConfig(accountToMigrate, accountProperties);
     }
 }
 
@@ -158,7 +172,6 @@ QMetaObject::Connection stateChanged;
 {
     return [NSSet setWithObjects:@"password", @"passwordConfirmation", nil];
 }
-
 
 #pragma mark - Delegates
 - (void)didComplete
@@ -175,11 +188,9 @@ QMetaObject::Connection stateChanged;
         [((id<MigrateRingAccountsDelegate>)self.delegate) migrationDidComplete];
 }
 
-
 - (void)didCompleteWithError
 {
     [self showError:NSLocalizedString(@"Failed to migrate your account. You can retry by pressing Ok or delete your account.",@"Error message shown to user when it is impossible to migrate account")];
 }
-
 
 @end

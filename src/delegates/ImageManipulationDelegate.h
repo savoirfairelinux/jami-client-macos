@@ -39,7 +39,6 @@ namespace Interfaces {
         static constexpr int IMG_SIZE = 80;
 
         ImageManipulationDelegate();
-        QVariant contactPhoto(Person* c, const QSize& size, bool displayPresence = true) override;
         virtual QByteArray toByteArray(const QVariant& pxm) override;
         virtual QVariant personPhoto(const QByteArray& data, const QString& type = nil) override;
         QVariant conversationPhoto(const lrc::api::conversation::Info& conversation,
@@ -47,20 +46,10 @@ namespace Interfaces {
                                    const QSize& size = QSize(IMG_SIZE, IMG_SIZE),
                                    bool displayPresence = true) override;
 
-        QVariant callPhoto(Call* c, const QSize& size, bool displayPresence = true) override;
-        QVariant callPhoto(const ContactMethod* n, const QSize& size, bool displayPresence = true) override;
-
         /* TODO: the following methods return an empty QVariant/QByteArray */
         QVariant   numberCategoryIcon(const QVariant& p, const QSize& size, bool displayPresence = false, bool isPresent = false) override;
-        QVariant   securityIssueIcon(const QModelIndex& index) override;
-        QVariant   collectionIcon(const CollectionInterface* interface, PixmapManipulatorI::CollectionIconHint hint = PixmapManipulatorI::CollectionIconHint::NONE) const override;
-        QVariant   securityLevelIcon(const SecurityEvaluationModel::SecurityLevel level) const override;
         QVariant   userActionIcon(const UserActionElement& state) const override;
         QVariant   decorationRole(const QModelIndex& index) override;
-        QVariant   decorationRole(const Call* c) override;
-        QVariant   decorationRole(const ContactMethod* cm) override;
-        QVariant   decorationRole(const Person* p) override;
-        QVariant   decorationRole(const Account* acc) override;
 
     private:
         //Helper
