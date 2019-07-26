@@ -34,8 +34,9 @@
 //LRC
 #import <api/lrc.h>
 #import <api/newaccountmodel.h>
-#import <account.h>
+#import <api/account.h>
 #import <interfaces/pixmapmanipulatori.h>
+#import <namedirectory.h>
 
 #import "Constants.h"
 #import "views/NSImage+Extensions.h"
@@ -402,7 +403,8 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     registeredNameFound = QObject::connect(
                                            &NameDirectory::instance(),
                                            &NameDirectory::registeredNameFound,
-                                           [=] ( const Account* account, NameDirectory::LookupStatus status,  const QString& address, const QString& name) {
+                                           [=] (NameDirectory::LookupStatus status,
+                                                const QString& address, const QString& name) {
                                                NSLog(@"Name lookup ended");
                                                lookupQueued = NO;
                                                //If this is the username we are waiting for, we can disconnect.
@@ -456,7 +458,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                            });
 
     //Start the lookup in a second so that the UI dosen't seem to freeze
-    BOOL result = NameDirectory::instance().lookupName(nullptr, QString(), QString::fromNSString(usernameWaitingForLookupResult));
+    BOOL result = NameDirectory::instance().lookupName(QString(), QString::fromNSString(usernameWaitingForLookupResult));
 
 }
 

@@ -19,10 +19,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import <certificate.h>
-
 @interface CertificateWC : NSWindowController
 
-- (void) setCertificate:(Certificate*) cert;
 
 @end

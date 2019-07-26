@@ -25,11 +25,6 @@
     [super windowDidLoad];
 }
 
-- (void) setCertificate:(Certificate*) cert
-{
-    NSLog(@"CertificateWC loaded");
-}
-
 - (IBAction)closePanel:(id)sender
 {
     [NSApp endSheet:self.window];

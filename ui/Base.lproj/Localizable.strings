@@ -20,7 +20,7 @@
 "Block contact" = "Block contact";
 
 /* Text shown to the user */
-"Alias : " = "Alias : ";
+"Registered name: " = "Registered name: ";
 
 /* Error shown to the user */
 "An error occured during the export" = "An error occured during the export";
@@ -132,7 +132,7 @@
 "Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"ID: " = "ID : ";
 
 /* No comment provided by engineer. */
 "Share" = "Share";
@@ -153,7 +153,7 @@
 "The entered username is not available" = "The entered username is not available";
 
 /* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
+"This account needs to be migrated" = "This account needs to be migrated;
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "The password you entered does not unlock this account";
