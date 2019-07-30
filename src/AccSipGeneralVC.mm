@@ -182,10 +182,8 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 - (IBAction)enableAccount: (NSButton *)sender {
     const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
-    self.accountModel->enableAccount(self.selectedAccountID, !account.enabled);
+    self.accountModel->setAccountEnabled(self.selectedAccountID, !account.enabled);
     self.accountEnabled = account.enabled;
-    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
 }
 
 - (IBAction)removeAccount:(id)sender
