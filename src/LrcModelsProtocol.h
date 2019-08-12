@@ -29,6 +29,7 @@ namespace lrc {
 @protocol LrcModelsProtocol
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(const lrc::api::DataTransferModel*) dataTransferModel;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(const lrc::api::DataTransferModel*) dataTransferModel avModel:(const lrc::api::AVModel*) avModel;
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil avModel:(const lrc::api::AVModel*) avModel;
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(const lrc::api::NewAccountModel*) accountModel;
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel dataTransferModel:(const lrc::api::DataTransferModel*)dataTransferModel behaviourController:(const lrc::api::BehaviorController*) behaviorController;

@@ -10,6 +10,8 @@
                 <outlet property="checkIntervalPopUp" destination="RYP-3d-PCa" id="JNO-GR-CV8"/>
                 <outlet property="downloadFolder" destination="7bY-JW-z0U" id="ylD-Yb-I2N"/>
                 <outlet property="downloadFolderLabel" destination="IHD-1X-sid" id="XnP-ui-hIA"/>
+                <outlet property="recordingFolder" destination="l0r-7I-uAz" id="n6S-aL-eCL"/>
+                <outlet property="recordingFolderLabel" destination="AGg-t2-JTD" id="YyA-CY-PZ7"/>
                 <outlet property="sparkleContainer" destination="yVO-jk-ay3" id="zni-hI-88D"/>
                 <outlet property="startUpButton" destination="1Nr-L4-fcd" id="veu-Hi-c7L"/>
                 <outlet property="toggleAutomaticUpdateCheck" destination="MCd-PD-kd7" id="rSB-ac-Nm2"/>
@@ -19,11 +21,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="502" height="300"/>
+            <rect key="frame" x="0.0" y="0.0" width="514" height="348"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Oth-up-2k2">
-                    <rect key="frame" x="38" y="264" width="252" height="18"/>
+                    <rect key="frame" x="38" y="312" width="252" height="18"/>
                     <buttonCell key="cell" type="check" title="Enable notifications for incoming calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uCL-ye-tsv">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -33,7 +35,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="1Nr-L4-fcd">
-                    <rect key="frame" x="38" y="128" width="134" height="18"/>
+                    <rect key="frame" x="38" y="176" width="134" height="18"/>
                     <buttonCell key="cell" type="check" title="Launch on Startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="O2C-xR-mHF">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -44,7 +46,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Esb-Tu-Qdy">
-                    <rect key="frame" x="38" y="230" width="285" height="18"/>
+                    <rect key="frame" x="38" y="278" width="285" height="18"/>
                     <buttonCell key="cell" type="check" title="Enable notifications for incoming messages" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0jV-Q4-232">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -54,7 +56,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="amh-rw-Lc6">
-                    <rect key="frame" x="38" y="196" width="227" height="18"/>
+                    <rect key="frame" x="38" y="244" width="227" height="18"/>
                     <buttonCell key="cell" type="check" title="Enable notifications for invitations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Lww-Wb-yrf">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -64,7 +66,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bY-JW-z0U">
-                    <rect key="frame" x="141" y="84" width="82" height="32"/>
+                    <rect key="frame" x="143" y="132" width="82" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="d7f-Id-S7d"/>
                     </constraints>
@@ -77,15 +79,15 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHD-1X-sid">
-                    <rect key="frame" x="38" y="93" width="103" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Download folder" id="6Ye-pe-9WV">
+                    <rect key="frame" x="38" y="141" width="105" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Download folder" id="6Ye-pe-9WV">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="yVO-jk-ay3">
-                    <rect key="frame" x="20" y="12" width="462" height="61"/>
+                    <rect key="frame" x="20" y="21" width="474" height="61"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diX-uH-Ce8">
                             <rect key="frame" x="18" y="44" width="52" height="17"/>
@@ -136,7 +138,7 @@
                     </constraints>
                 </customView>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Is4-pD-LOT">
-                    <rect key="frame" x="56" y="237" width="423" height="18"/>
+                    <rect key="frame" x="38" y="210" width="423" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="419" id="iUi-lt-J9M"/>
                     </constraints>
@@ -148,8 +150,34 @@
                         <binding destination="Sz0-vm-i3t" name="value" keyPath="values.window_behaviour" id="ZSW-he-LAz"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AGg-t2-JTD">
+                    <rect key="frame" x="38" y="102" width="105" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Recording folder" id="ep4-QU-rGl">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l0r-7I-uAz">
+                    <rect key="frame" x="143" y="93" width="82" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="0wc-ch-P9H"/>
+                    </constraints>
+                    <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_folder" imagePosition="left" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Y8C-Uq-t9c">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="changeRecordingFolder:" target="-2" id="jFw-1N-iqU"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="yVO-jk-ay3" firstAttribute="top" secondItem="AGg-t2-JTD" secondAttribute="bottom" constant="20" id="7cn-9B-zTn"/>
+                <constraint firstItem="l0r-7I-uAz" firstAttribute="leading" secondItem="7bY-JW-z0U" secondAttribute="leading" id="AF0-iB-4eO"/>
+                <constraint firstItem="AGg-t2-JTD" firstAttribute="top" secondItem="7bY-JW-z0U" secondAttribute="bottom" constant="20" id="AWJ-ge-fmf"/>
+                <constraint firstItem="l0r-7I-uAz" firstAttribute="trailing" secondItem="7bY-JW-z0U" secondAttribute="trailing" id="CRP-uT-j5N"/>
+                <constraint firstItem="AGg-t2-JTD" firstAttribute="trailing" secondItem="IHD-1X-sid" secondAttribute="trailing" id="FcR-Sz-Ksu"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="Is4-pD-LOT" secondAttribute="leading" id="Fdb-2p-ULe"/>
                 <constraint firstItem="1Nr-L4-fcd" firstAttribute="top" secondItem="Is4-pD-LOT" secondAttribute="bottom" constant="20" id="IQl-Me-RRm"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="40" id="L3i-yX-aR1"/>
@@ -162,13 +190,14 @@
                 <constraint firstItem="7bY-JW-z0U" firstAttribute="centerY" secondItem="IHD-1X-sid" secondAttribute="centerY" id="aI1-uX-lQY"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="leading" secondItem="1Nr-L4-fcd" secondAttribute="leading" id="csu-Ug-9sD"/>
                 <constraint firstItem="Oth-up-2k2" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="dA1-zE-Xe8"/>
-                <constraint firstItem="yVO-jk-ay3" firstAttribute="top" secondItem="IHD-1X-sid" secondAttribute="bottom" constant="20" id="pNA-q8-Kbk"/>
                 <constraint firstItem="yVO-jk-ay3" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="qa3-OH-fvn"/>
+                <constraint firstItem="l0r-7I-uAz" firstAttribute="centerY" secondItem="AGg-t2-JTD" secondAttribute="centerY" id="qcv-MU-DpU"/>
+                <constraint firstItem="AGg-t2-JTD" firstAttribute="leading" secondItem="IHD-1X-sid" secondAttribute="leading" id="tWf-NB-ay1"/>
                 <constraint firstItem="amh-rw-Lc6" firstAttribute="top" secondItem="Esb-Tu-Qdy" secondAttribute="bottom" constant="20" id="tcE-4N-wrm"/>
                 <constraint firstAttribute="trailing" secondItem="yVO-jk-ay3" secondAttribute="trailing" constant="20" id="wig-B4-OtV"/>
                 <constraint firstItem="7bY-JW-z0U" firstAttribute="leading" secondItem="IHD-1X-sid" secondAttribute="trailing" constant="8" id="wji-Ac-kwB"/>
             </constraints>
-            <point key="canvasLocation" x="312" y="81"/>
+            <point key="canvasLocation" x="318" y="105"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="Sz0-vm-i3t"/>
         <customObject id="VEJ-ic-3Ub" customClass="SUUpdater"/>
