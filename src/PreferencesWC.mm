@@ -71,7 +71,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-     currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil dataTransferModel: self.dataTransferModel];
+    currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil dataTransferModel: self.dataTransferModel avModel: self.avModel];
 
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];

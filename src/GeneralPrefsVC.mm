@@ -20,6 +20,7 @@
 
 //lrc
 #import <api/datatransfermodel.h>
+#import <api/avmodel.h>
 
 #if ENABLE_SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -35,19 +36,22 @@
     __unsafe_unretained IBOutlet NSView* sparkleContainer;
     __unsafe_unretained IBOutlet NSButton *downloadFolder;
     __unsafe_unretained IBOutlet NSTextField *downloadFolderLabel;
+    __unsafe_unretained IBOutlet NSButton *recordingFolder;
+    __unsafe_unretained IBOutlet NSTextField *recordingFolderLabel;
 }
 @end
 
 @implementation GeneralPrefsVC
 
 @synthesize dataTransferModel;
+@synthesize avModel;
 
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(lrc::api::DataTransferModel*) dataTransferModel
-{
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(lrc::api::DataTransferModel*) dataTransferModel avModel:(lrc::api::AVModel*) avModel {
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         self.dataTransferModel = dataTransferModel;
+        self.avModel = avModel;
     }
     return self;
 }
@@ -70,10 +74,18 @@
         [downloadFolder setHidden:YES];
         [downloadFolder setEnabled:NO];
         [downloadFolderLabel setHidden: YES];
+        [recordingFolder setHidden:YES];
+        [recordingFolder setEnabled:NO];
+        [recordingFolderLabel setHidden:YES];
         return;
     }
     if (dataTransferModel) {
         downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+    }
+    if (avModel) {
+        auto name1 = avModel->getRecordPath();
+        auto name = @(avModel->getRecordPath().c_str());
+        recordingFolder.title = [@(avModel->getRecordPath().c_str()) lastPathComponent];
     }
 }
 
@@ -89,6 +101,20 @@
     NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
     dataTransferModel->downloadDirectory = std::string([path UTF8String]);
     downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+    [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
+}
+
+- (IBAction)changeRecordingFolder:(id)sender {
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
+    [panel setAllowsMultipleSelection:NO];
+    [panel setCanChooseDirectories:YES];
+    [panel setCanChooseFiles:NO];
+    panel.delegate = self;
+    if ([panel runModal] != NSFileHandlingPanelOKButton) return;
+    if ([[panel URLs] lastObject] == nil) return;
+    NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
+    avModel->setRecordPath([path UTF8String]);
+    recordingFolder.title = [@(avModel->getRecordPath().c_str()) lastPathComponent];
     [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
 }
 

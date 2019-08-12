@@ -200,6 +200,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
     if(appSandboxed()) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         avModel->setRecordPath([[paths objectAtIndex:0] UTF8String]);
+    } else if (avModel->getRecordPath().empty()) {
+        avModel->setRecordPath([NSHomeDirectory() UTF8String]);
     }
     NSToolbar *tb = [[self window] toolbar];
     [tb setAllowsUserCustomization:NO];
