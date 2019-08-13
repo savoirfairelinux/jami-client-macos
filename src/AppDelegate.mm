@@ -405,7 +405,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     }
     [self.wizard close];
     [self.ringWindowController close];
-    [[NSApplication sharedApplication] terminate:self];
+    lrc.reset();
 }
 
 #if ENABLE_SPARKLE
