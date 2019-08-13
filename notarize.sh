@@ -6,6 +6,7 @@ cd build-local
 REQUESTID=$(xmllint --xpath "/plist/dict[key='notarization-upload']/dict/key[.='RequestUUID']/following-sibling::string[1]/node()" UploadInfo.plist)
 echo "file uploaded for notarization"
 echo ${REQUESTID}
+sleep 60
 x=1
 while [ $x -le 15 ];
 do
