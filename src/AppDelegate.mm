@@ -113,10 +113,9 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     SCNetworkReachabilityRef reachabilityRef = NULL;
 
     void (^callbackBlock)(SCNetworkReachabilityFlags) = ^(SCNetworkReachabilityFlags flags) {
-        BOOL reachable = (flags & kSCNetworkReachabilityFlagsReachable) != 0;
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             lrc->connectivityChanged();
-        }];
+        });
     };
 
     SCNetworkReachabilityContext context = {
