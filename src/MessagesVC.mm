@@ -313,7 +313,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSString* fileName = @"incoming file";
 
     // First, view is created
-    if (type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER) {
+    if (!interaction.authorUri.empty()) {
         switch (status) {
             case lrc::api::interaction::Status::TRANSFER_CREATED:
             case lrc::api::interaction::Status::TRANSFER_AWAITING_HOST: {
@@ -341,7 +341,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 result = [tableView makeViewWithIdentifier:@"LeftFinishedFileView" owner:conversationView];
                 break;
         }
-    } else if (type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
+    } else {
         NSString* fileName = @"sent file";
         switch (status) {
             case lrc::api::interaction::Status::TRANSFER_CREATED:
@@ -471,8 +471,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 result = [tableView makeViewWithIdentifier:@"LeftMessageView" owner:self];
             }
             break;
-        case lrc::api::interaction::Type::INCOMING_DATA_TRANSFER:
-        case lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER:
+        case lrc::api::interaction::Type::DATA_TRANSFER:
             return [self configureViewforTransfer:interaction interactionID: it->first tableView:tableView];
             break;
         case lrc::api::interaction::Type::CONTACT:
@@ -503,7 +502,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             [result.messageStatus setHidden:NO];
             [result.sendingMessageIndicator startAnimation:nil];
             [result.messageFailed setHidden:YES];
-        } else if (interaction.status == lrc::api::interaction::Status::FAILED) {
+        } else if (interaction.status == lrc::api::interaction::Status::FAILURE) {
             [result.messageStatus setHidden:NO];
             [result.sendingMessageIndicator setHidden:YES];
             [result.messageFailed setHidden:NO];
@@ -582,7 +581,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
 
 
-    if(interaction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER || interaction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER) {
+    if(interaction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
 
         if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
             NSString* name =  @(interaction.body.c_str());
@@ -717,8 +716,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
     bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
     bool sequenceWillChange = [self sequenceChangedFrom:interaction to: nextInteraction];
-    if (previousInteraction.type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER ||
-        previousInteraction.type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER) {
+    if (previousInteraction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
         if(!sequenceWillChange) {
             return FIRST_WITH_TIME;
         }

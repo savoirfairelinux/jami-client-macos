@@ -495,8 +495,7 @@ NSInteger const REQUEST_SEG         = 1;
         NSString* lastInteractionSnippetFixedString = [[NSString stringWithUTF8String:lastInteractionSnippet.c_str()]
                                                        stringByReplacingOccurrencesOfString:@"🕽" withString:@""];
         lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString stringByReplacingOccurrencesOfString:@"📞" withString:@""];
-        if (conversation.interactions[lastUid].type == lrc::api::interaction::Type::OUTGOING_DATA_TRANSFER
-            || conversation.interactions[lastUid].type == lrc::api::interaction::Type::INCOMING_DATA_TRANSFER) {
+        if (conversation.interactions[lastUid].type == lrc::api::interaction::Type::DATA_TRANSFER) {
             lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString lastPathComponent];
         }
         [interactionSnippet setStringValue:lastInteractionSnippetFixedString];

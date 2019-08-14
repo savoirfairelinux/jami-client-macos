@@ -97,7 +97,19 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     [self beginObservingReachabilityStatus];
     NSActivityOptions options = NSActivitySuddenTerminationDisabled | NSActivityAutomaticTerminationDisabled | NSActivityBackground;
     self.activity = [[NSProcessInfo processInfo] beginActivityWithOptions:options reason:@"Receiving calls and messages"];
-    lrc = std::make_unique<lrc::api::Lrc>();
+  //  lrc = std::make_unique<lrc::api::Lrc>();
+    lrc = std::make_unique<lrc::api::Lrc>( [=] {
+        NSLog(@"will migrate");
+        [self showDialpad];
+    },
+                                          [=] {
+                                              NSLog(@"did migrate");
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [NSApp endSheet:self.dialpad.window];
+                                                  [self.dialpad.window orderOut:self];
+                                              });
+                                              
+                                          });
 
     if([self checkForRingAccount]) {
         [self setRingtonePath];
