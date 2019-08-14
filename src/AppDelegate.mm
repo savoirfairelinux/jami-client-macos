@@ -98,7 +98,6 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     NSActivityOptions options = NSActivitySuddenTerminationDisabled | NSActivityAutomaticTerminationDisabled | NSActivityBackground;
     self.activity = [[NSProcessInfo processInfo] beginActivityWithOptions:options reason:@"Receiving calls and messages"];
     lrc = std::make_unique<lrc::api::Lrc>();
-
     if([self checkForRingAccount]) {
         [self setRingtonePath];
         [self showMainWindow];
