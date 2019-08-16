@@ -144,13 +144,13 @@ std::string currentVideoDevice;
 
 - (IBAction)toggleHardwareAcceleration:(NSButton *)sender {
     bool enabled = [sender state]==NSOnState;
-    [self connectPreviewSignals];
     self.avModel->setDecodingAccelerated(enabled);
 }
 
 #pragma mark - signals
 
 - (void) connectPreviewSignals {
+    QObject::disconnect(previewStarted);
     [previewView fillWithBlack];
     previewStarted =
     QObject::connect(avModel,
