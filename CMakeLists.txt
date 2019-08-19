@@ -468,10 +468,18 @@ SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework Metal")
 SET(MACOSX_BUNDLE_NSMAIN_NIB_FILE "MainMenu")
 SET(MACOSX_BUNDLE_NSPRINCIPAL_CLASS "NSApplication")
 
+# If system version less than 10.14 do not add camera and microphone usage description
+# osx 10.14 corresponds Darwin 18.0 version
+IF(CMAKE_SYSTEM_VERSION VERSION_LESS "18.0.0")
+    SET(MACOSX_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in)
+ELSE()
+    SET(MACOSX_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo14.plist.in)
+ENDIF()
+
 # App store version should be sandboxed and using different bundle identifier
 IF("${RELEASE_TYPE}" STREQUAL "AppStore")
     SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
-        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
+        MACOSX_BUNDLE_INFO_PLIST ${MACOSX_PLIST}
         MACOSX_BUNDLE_GUI_IDENTIFIER "com.savoirfairelinux.ring.macos"
         XCODE_ATTRIBUTE_CODE_SIGN_ENTITLEMENTS "${CMAKE_CURRENT_LIST_DIR}/data/Jami.entitlements"
         MACOSX_BUNDLE_SHORT_VERSION_STRING "${RING_VERSION_NAME}"
@@ -484,7 +492,7 @@ IF("${RELEASE_TYPE}" STREQUAL "AppStore")
     )
 ELSE()
     SET_TARGET_PROPERTIES(${PROJ_NAME} PROPERTIES
-        MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MacOSXBundleInfo.plist.in
+        MACOSX_BUNDLE_INFO_PLIST ${MACOSX_PLIST}
         MACOSX_BUNDLE_GUI_IDENTIFIER "cx.ring"
         XCODE_ATTRIBUTE_CODE_SIGN_ENTITLEMENTS "${CMAKE_CURRENT_LIST_DIR}/data/HardenedRuntimeEntitlements/Jami.entitlements"
         MACOSX_BUNDLE_SHORT_VERSION_STRING "${RING_VERSION_NAME}"
