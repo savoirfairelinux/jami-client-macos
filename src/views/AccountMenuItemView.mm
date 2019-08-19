@@ -51,9 +51,11 @@
         self.accountAvatar.layer.masksToBounds = YES;
         [self.accountStatus setWantsLayer:YES];
         [self.accountAvatar.layer setBackgroundColor:[[NSColor disabledControlTextColor] CGColor]];
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
         if (@available(macOS 10.14, *)) {
             self.createNewAccountImage.contentTintColor = [NSColor clearColor];
         }
+#endif
     }
 }
 
