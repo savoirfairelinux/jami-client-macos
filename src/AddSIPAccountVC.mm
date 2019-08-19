@@ -116,6 +116,7 @@ NSTimer* timeoutTimer;
 - (IBAction)editPhoto:(id)sender
 {
     auto pictureTaker = [IKPictureTaker pictureTaker];
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
     if (@available(macOS 10.14, *)) {
         AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
@@ -132,6 +133,7 @@ NSTimer* timeoutTimer;
             }];
         }
     }
+#endif
     [pictureTaker beginPictureTakerSheetForWindow:[self.delegate window]
                                      withDelegate:self
                                    didEndSelector:@selector(pictureTakerDidEnd:returnCode:contextInfo:)

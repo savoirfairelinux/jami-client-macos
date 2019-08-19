@@ -156,6 +156,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 - (IBAction)editPhoto:(id)sender
 {
     auto pictureTaker = [IKPictureTaker pictureTaker];
+#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
     if (@available(macOS 10.14, *)) {
         AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
@@ -172,6 +173,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
             }];
         }
     }
+#endif
 
     [pictureTaker beginPictureTakerSheetForWindow:[self.view window]
                                      withDelegate:self
