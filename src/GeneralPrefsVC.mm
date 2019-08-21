@@ -32,12 +32,18 @@
 @interface GeneralPrefsVC () {
     __unsafe_unretained IBOutlet NSButton* startUpButton;
     __unsafe_unretained IBOutlet NSButton* toggleAutomaticUpdateCheck;
+    __unsafe_unretained IBOutlet NSButton* alwaysRecording;
+    __unsafe_unretained IBOutlet NSButton* recordPreview;
     __unsafe_unretained IBOutlet NSPopUpButton* checkIntervalPopUp;
-    __unsafe_unretained IBOutlet NSView* sparkleContainer;
+    __unsafe_unretained IBOutlet NSStackView* sparkleContainer;
     __unsafe_unretained IBOutlet NSButton *downloadFolder;
     __unsafe_unretained IBOutlet NSTextField *downloadFolderLabel;
     __unsafe_unretained IBOutlet NSButton *recordingFolder;
     __unsafe_unretained IBOutlet NSTextField *recordingFolderLabel;
+    __unsafe_unretained IBOutlet NSStackView *generalStackView;
+    __unsafe_unretained IBOutlet NSStackView *conversationStackView;
+    __unsafe_unretained IBOutlet NSStackView *recordingFolderStackView;
+    __unsafe_unretained IBOutlet NSSlider *qualitySlider;
 }
 @end
 
@@ -59,6 +65,7 @@
 - (void)loadView
 {
     [super loadView];
+    CGFloat heightToReduice = 0;
     [startUpButton setState:[self isLaunchAtStartup]];
 #if ENABLE_SPARKLE
     [sparkleContainer setHidden:NO];
@@ -69,24 +76,28 @@
     [checkIntervalPopUp bind:@"selectedTag" toObject:updater withKeyPath:@"updateCheckInterval" options:nil];
 #else
     [sparkleContainer setHidden:YES];
+    heightToReduice += (sparkleContainer.frame.size.height + 25);
 #endif
+    [alwaysRecording setState: avModel->getAlwaysRecord()];
+    [recordPreview setState: avModel->getRecordPreview()];
+    [qualitySlider setDoubleValue: (avModel->getRecordQuality() / 10000)];
     if (appSandboxed()) {
-        [downloadFolder setHidden:YES];
-        [downloadFolder setEnabled:NO];
-        [downloadFolderLabel setHidden: YES];
-        [recordingFolder setHidden:YES];
-        [recordingFolder setEnabled:NO];
-        [recordingFolderLabel setHidden:YES];
-        return;
+        [recordingFolderStackView setHidden:YES];
+        [conversationStackView setHidden:YES];
+        heightToReduice += (downloadFolder.frame.size.height + recordingFolder.frame.size.height + 25);
+    } else {
+        if (dataTransferModel) {
+            downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+        }
+        if (avModel) {
+            auto name1 = avModel->getRecordPath();
+            auto name = @(avModel->getRecordPath().c_str());
+            recordingFolder.title = [@(avModel->getRecordPath().c_str()) lastPathComponent];
+        }
     }
-    if (dataTransferModel) {
-        downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
-    }
-    if (avModel) {
-        auto name1 = avModel->getRecordPath();
-        auto name = @(avModel->getRecordPath().c_str());
-        recordingFolder.title = [@(avModel->getRecordPath().c_str()) lastPathComponent];
-    }
+    auto frame = self.view.frame;
+    frame.size.height -= heightToReduice;
+    self.view.frame = frame;
 }
 
 - (IBAction)changeDownloadFolder:(id)sender {
@@ -116,6 +127,18 @@
     avModel->setRecordPath([path UTF8String]);
     recordingFolder.title = [@(avModel->getRecordPath().c_str()) lastPathComponent];
     [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
+}
+
+- (IBAction)alwaysRecording:(id)sender {
+    avModel->setAlwaysRecord([sender state]);
+}
+
+- (IBAction)recordPreview:(id)sender {
+    avModel->setRecordPreview([sender state]);
+}
+
+- (IBAction)setRecordingQuality:(NSSlider*)sender {
+    avModel->setRecordQuality([sender doubleValue] * 10000);
 }
 
 #pragma mark - Startup API
