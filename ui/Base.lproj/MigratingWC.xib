@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MigratingWC">
+            <connections>
+                <outlet property="loadingSpiner" destination="bAm-R6-es6" id="qsO-tg-3kO"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES"/>
+            <rect key="contentRect" x="196" y="240" width="400" height="220"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <value key="minSize" type="size" width="400" height="220"/>
+            <value key="maxSize" type="size" width="400" height="220"/>
+            <value key="minFullScreenContentSize" type="size" width="400" height="220"/>
+            <value key="maxFullScreenContentSize" type="size" width="400" height="220"/>
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="220"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="39" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l6b-hC-VEJ">
+                        <rect key="frame" x="146" y="78" width="108" height="104"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jXS-ct-UXC">
+                                <rect key="frame" x="-2" y="71" width="112" height="33"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Migrating" id="3T2-F1-Toz">
+                                    <font key="font" metaFont="system" size="27"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="bAm-R6-es6">
+                                <rect key="frame" x="38" y="0.0" width="32" height="32"/>
+                            </progressIndicator>
+                        </subviews>
+                        <visibilityPriorities>
+                            <integer value="1000"/>
+                            <integer value="1000"/>
+                        </visibilityPriorities>
+                        <customSpacing>
+                            <real value="3.4028234663852886e+38"/>
+                            <real value="3.4028234663852886e+38"/>
+                        </customSpacing>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="l6b-hC-VEJ" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" constant="-20" id="Z1n-em-Wl9"/>
+                    <constraint firstItem="l6b-hC-VEJ" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="zyI-EI-Ykl"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+        </window>
+    </objects>
+</document>
