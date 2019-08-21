@@ -23,4 +23,9 @@
 
 @interface GeneralPrefsVC : NSViewController <LrcModelsProtocol, NSOpenSavePanelDelegate>
 
+/**
+ * KVO to video recording quality
+ */
+@property (nonatomic) int quality;
+
 @end
