@@ -1,21 +1,21 @@
-Ring Mac OSX
+Jami for macOS
 **********
 
-This is the official Mac port of Ring.
+This is the official Mac port of Jami.
 
 For more information about the ring project, see the following:
-- Main website: https://ring.cx/
-- Bug tracker: https://tuleap.ring.cx/projects/ring/
-- Repositories: https://gerrit-ring.savoirfairelinux.com
+- Main website: https://jami.net/
+- Bug tracker: https://git.jami.net
+- Repositories: https://review.jami.net
 
 | App | CI | Packaging
 | :-: | :-: | :-:
-| [![Download from ring.cx](https://img.shields.io/badge/download-cx.ring-blue.svg)](https://ring.cx/en/download/mac-osx) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-client-macosx)](https://test.savoirfairelinux.com/job/ring-client-macosx/) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-packaging-client-macosx)](https://test.savoirfairelinux.com/job/ring-packaging-client-macosx/)
+| [![Download from jami.net](https://img.shields.io/badge/download-cx.ring-blue.svg)](https://jami.net/download-jami-macos) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-client-macosx)](https://test.savoirfairelinux.com/job/ring-client-macosx/) | [![Build Status](https://test.savoirfairelinux.com/buildStatus/icon?job=ring-packaging-client-macosx)](https://test.savoirfairelinux.com/job/ring-packaging-client-macosx/)
 
 Requirements
 =============
 
-- Ring daemon
+- Jami daemon
 - libRingClient (Qt5 version)
 - Qt5 Core
 - Cocoa framework
@@ -25,7 +25,7 @@ Build instructions
 
 Build Sparkle framework (optional)
 ----------------------------------
-Ring can ship with the Sparkle framework to allow automatic app updates.
+Jami can ship with the Sparkle framework to allow automatic app updates.
 This can be disabled for your custom build by specifying -DENABLE_SPARKLE=false
 in the cmake phase.
 
