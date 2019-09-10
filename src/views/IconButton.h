@@ -57,6 +57,12 @@
 @property CGFloat imageInsets;
 
 /*
+ * Channging of image size when mouse is down
+ * default value : 0.0
+ */
+@property CGFloat imageIncreaseOnClick;
+
+/*
  * Add bluer effect behind button
  */
 
@@ -87,6 +93,12 @@
  */
 @property CGFloat fontSize;
 
+-(void)startBlinkAnimationfrom:(NSColor*)startColor
+                            to:(NSColor*)endColor
+                   scaleFactor:(CGFloat)scaleFactor
+                      duration:(CGFloat) duration;
 
+-(void)stopBlinkAnimation;
 
+@property BOOL animating;
 @end

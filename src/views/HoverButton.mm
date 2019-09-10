@@ -21,7 +21,6 @@
 #import "NSColor+RingTheme.h"
 
 @implementation HoverButton
-
 -(void) awakeFromNib {
     [super awakeFromNib];
     if(!self.hoverColor) {
@@ -31,6 +30,9 @@
         self.mouseOutsideColor = [NSColor clearColor];
     }
     self.bgColor = self.mouseOutsideColor;
+    if(self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
 }
 
 -(instancetype)initWithFrame:(NSRect)frameRect {
@@ -42,12 +44,25 @@
         self.mouseOutsideColor = [NSColor clearColor];
     }
     self.bgColor = self.mouseOutsideColor;
+    if(self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
     return self;
 }
 
 -(void)mouseEntered:(NSEvent *)theEvent {
+    if (self.animating) {
+        [self stopBlinkAnimation];
+        self.animating = true;
+    }
     if(self.isEnabled) {
         self.bgColor = self.hoverColor;
+    }
+    if(self.imageHoverColor) {
+        self.imageColor = self.imageHoverColor;
+    }
+    if (self.imageIncreaseOnHover) {
+        self.imageInsets -= self.imageIncreaseOnHover;
     }
     [super setNeedsDisplay:YES];
     [super mouseEntered:theEvent];
@@ -55,8 +70,29 @@
 
 -(void)mouseExited:(NSEvent *)theEvent {
     self.bgColor = self.mouseOutsideColor;
+    if (self.animating) {
+        [self startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1.0 duration: 1.5];
+    }
+    if(self.imagePressedColor && self.pressed) {
+        self.imageColor = self.imagePressedColor;
+    } else if ( self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
+    if (self.imageIncreaseOnHover) {
+        self.imageInsets += self.imageIncreaseOnHover;
+    }
     [super setNeedsDisplay:YES];
     [super mouseExited:theEvent];
+}
+
+-(void) setPressed:(BOOL)newVal
+{
+    if(self.imagePressedColor && newVal) {
+        self.imageColor = self.imagePressedColor;
+    } else if ( self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
+    [super setPressed:newVal];
 }
 
 - (void)ensureTrackingArea {
