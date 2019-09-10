@@ -66,6 +66,10 @@ return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 a
     return [NSColor colorWithCalibratedRed:204/255.0 green:51/255.0 blue:51/255.0 alpha:1];
 }
 
++ (NSColor*) buttonBlinkColorColor {
+    return [NSColor colorWithCalibratedRed:185/255.0 green:90/255.0 blue:35/255.0 alpha:1];
+}
+
 + (NSColor*) unregisteredColor
 {
     return [NSColor colorWithCalibratedRed:255/255.0 green:59/255.0 blue:40/255.0 alpha:1];

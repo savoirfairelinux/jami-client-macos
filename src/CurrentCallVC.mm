@@ -49,6 +49,7 @@ extern "C" {
 #import "utils.h"
 #import "views/CallMTKView.h"
 #import "VideoCommon.h"
+#import "views/GradientView.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -87,7 +88,7 @@ extern "C" {
 @property (unsafe_unretained) IBOutlet NSTextField* outgoingId;
 
 // Call Controls
-@property (unsafe_unretained) IBOutlet NSView* controlsPanel;
+@property (unsafe_unretained) IBOutlet GradientView* controlsPanel;
 
 @property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
@@ -175,18 +176,29 @@ CVPixelBufferRef pixelBufferPreview;
     accountInfo_ = account;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     auto currentCall = callModel->getCall(callUid_);
-    [muteVideoButton setHidden: currentCall.isAudioOnly ? YES: NO];
+    [self setUpButtons: currentCall isRecording: (callModel->isRecording(callUid_) || avModel->getAlwaysRecord())];
     callRecordButtonMarginLeft.constant = currentCall.isAudioOnly ? -40.0f: 10.0f;
     [previewView setHidden: YES];
     videoView.callId = callUid;
 }
 
+-(void) setUpButtons:(lrc::api::call::Info&)callInfo isRecording:(BOOL) isRecording {
+    muteAudioButton.image = callInfo.audioMuted ? [NSImage imageNamed:@"ic_action_mute_audio.png"] :
+    [NSImage imageNamed:@"ic_action_audio.png"];
+    muteVideoButton.image = callInfo.videoMuted ? [NSImage imageNamed:@"ic_action_mute_video.png"] :
+    [NSImage imageNamed:@"ic_action_video.png"];
+    [muteVideoButton setHidden: callInfo.isAudioOnly ? YES: NO];
+    if (isRecording) {
+        [recordOnOffButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1 duration: 1.5];
+        
+    } else {
+        [recordOnOffButton stopBlinkAnimation];
+    }
+}
+
 - (void)awakeFromNib
 {
     [self.view setWantsLayer:YES];
-    [controlsPanel setWantsLayer:YES];
-    [controlsPanel.layer setBackgroundColor:[NSColor clearColor].CGColor];
-    [controlsPanel.layer setFrame:controlsPanel.frame];
 
     renderConnections = [[RendererConnectionsHolder alloc] init];
 
@@ -281,8 +293,11 @@ CVPixelBufferRef pixelBufferPreview;
     [self setBackground];
 
     using Status = lrc::api::call::Status;
-    holdOnOffButton.image = currentCall.status == lrc::api::call::Status::PAUSED ?
-    [NSImage imageNamed:@"ic_action_holdoff.png"] : [NSImage imageNamed:@"ic_action_hold.png"];
+    if (currentCall.status == Status::PAUSED) {
+        [holdOnOffButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1.0 duration: 1.5];
+    } else {
+        [holdOnOffButton stopBlinkAnimation];
+    }
     switch (currentCall.status) {
         case Status::SEARCHING:
         case Status::CONNECTING:
@@ -853,7 +868,12 @@ CVPixelBufferRef pixelBufferPreview;
     auto* callModel = accountInfo_->callModel.get();
 
     callModel->toggleAudioRecord(callUid_);
-    [recordOnOffButton setPressed:!recordOnOffButton.isPressed];
+    if (callModel->isRecording(callUid_)) {
+        [recordOnOffButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1 duration: 1.5];
+        
+    } else {
+        [recordOnOffButton stopBlinkAnimation];
+    }
 }
 
 - (IBAction)toggleHold:(id)sender {
@@ -862,11 +882,6 @@ CVPixelBufferRef pixelBufferPreview;
 
     auto* callModel = accountInfo_->callModel.get();
     auto currentCall = callModel->getCall(callUid_);
-    if (currentCall.status != lrc::api::call::Status::PAUSED) {
-        holdOnOffButton.image = [NSImage imageNamed:@"ic_action_holdoff.png"];
-    } else {
-        holdOnOffButton.image = [NSImage imageNamed:@"ic_action_hold.png"];
-    }
 
     callModel->togglePause(callUid_);
 }
