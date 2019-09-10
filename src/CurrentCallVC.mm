@@ -49,6 +49,7 @@ extern "C" {
 #import "utils.h"
 #import "views/CallMTKView.h"
 #import "VideoCommon.h"
+#import "views/GradientView.h"
 
 @interface RendererConnectionsHolder : NSObject
 
@@ -87,7 +88,7 @@ extern "C" {
 @property (unsafe_unretained) IBOutlet NSTextField* outgoingId;
 
 // Call Controls
-@property (unsafe_unretained) IBOutlet NSView* controlsPanel;
+@property (unsafe_unretained) IBOutlet GradientView* controlsPanel;
 
 @property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
@@ -184,9 +185,6 @@ CVPixelBufferRef pixelBufferPreview;
 - (void)awakeFromNib
 {
     [self.view setWantsLayer:YES];
-    [controlsPanel setWantsLayer:YES];
-    [controlsPanel.layer setBackgroundColor:[NSColor clearColor].CGColor];
-    [controlsPanel.layer setFrame:controlsPanel.frame];
 
     renderConnections = [[RendererConnectionsHolder alloc] init];
 

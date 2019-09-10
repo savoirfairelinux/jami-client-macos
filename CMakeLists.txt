@@ -219,6 +219,8 @@ SET(ringclient_VIEWS
    src/views/CenteredClipView.mm
    src/views/CallMTKView.h
    src/views/CallMTKView.mm
+   src/views/GradientView.h
+   src/views/GradientView.mm
 )
 
 SET(ringclient_OTHERS
