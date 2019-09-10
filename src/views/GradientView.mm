@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,39 +16,22 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#import "IconButton.h"
 
-@interface HoverButton : IconButton {
-@private
+#import "GradientView.h"
 
-    NSTrackingArea *trackingArea;
+@implementation GradientView
+
+@synthesize startingColor, endingColor, angle;
+
+- (void)drawRect:(NSRect)dirtyRect {
+    [super drawRect:dirtyRect];
+    if (!startingColor || !endingColor || !angle) {
+        return;
+    }
+    NSGradient* aGradient = [[NSGradient alloc]
+                             initWithStartingColor: startingColor
+                             endingColor: endingColor];
+    [aGradient drawInRect: dirtyRect angle: angle];
 }
-/*
- * Background color of the button when mouse inside
- * default value : [NSColor ringBlue]
- */
-@property (nonatomic, strong) NSColor* hoverColor;
-
-/*
- * image color of the button when mouse inside
- */
-@property (nonatomic, strong) NSColor* imageHoverColor;
-
-/*
- * Image color of the button when mouse inside
- */
-@property (nonatomic, strong) NSColor* moiuseOutsideImageColor;
-
-/*
- * Background color of the button when mouse outside
- * default value : [NSColor clearColor];
- */
-@property (nonatomic, strong) NSColor* mouseOutsideColor;
-
-/*
- * Image coler when button pressed
- */
-
-@property (nonatomic, strong) NSColor* imagePressedColor;
 
 @end
