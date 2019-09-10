@@ -219,6 +219,8 @@ SET(ringclient_VIEWS
    src/views/CenteredClipView.mm
    src/views/CallMTKView.h
    src/views/CallMTKView.mm
+   src/views/GradientView.h
+   src/views/GradientView.mm
 )
 
 SET(ringclient_OTHERS
@@ -326,6 +328,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/qrcode.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/pending_contact_request.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_file_upload.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_record_stop.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES

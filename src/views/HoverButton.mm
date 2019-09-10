@@ -31,6 +31,9 @@
         self.mouseOutsideColor = [NSColor clearColor];
     }
     self.bgColor = self.mouseOutsideColor;
+    if(self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
 }
 
 -(instancetype)initWithFrame:(NSRect)frameRect {
@@ -42,6 +45,9 @@
         self.mouseOutsideColor = [NSColor clearColor];
     }
     self.bgColor = self.mouseOutsideColor;
+    if(self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
     return self;
 }
 
@@ -49,14 +55,32 @@
     if(self.isEnabled) {
         self.bgColor = self.hoverColor;
     }
+    if(self.imageHoverColor) {
+        self.imageColor = self.imageHoverColor;
+    }
     [super setNeedsDisplay:YES];
     [super mouseEntered:theEvent];
 }
 
 -(void)mouseExited:(NSEvent *)theEvent {
     self.bgColor = self.mouseOutsideColor;
+    if(self.imagePressedColor && self.pressed) {
+        self.imageColor = self.imagePressedColor;
+    } else if ( self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
     [super setNeedsDisplay:YES];
     [super mouseExited:theEvent];
+}
+
+-(void) setPressed:(BOOL)newVal
+{
+    if(self.imagePressedColor && newVal) {
+        self.imageColor = self.imagePressedColor;
+    } else if ( self.moiuseOutsideImageColor) {
+        self.imageColor = self.moiuseOutsideImageColor;
+    }
+    [super setPressed:newVal];
 }
 
 - (void)ensureTrackingArea {
