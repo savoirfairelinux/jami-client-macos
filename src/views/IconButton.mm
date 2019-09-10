@@ -18,14 +18,16 @@
  */
 
 #import "IconButton.h"
-
 #import "NSColor+RingTheme.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @interface IconButton()
 @property (nonatomic, strong) NSTrackingArea *trackingArea;
 @end
 
 @implementation IconButton
+NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
 @synthesize trackingArea;
 
 -(void) awakeFromNib {
@@ -39,6 +41,9 @@
 
     if (self.imageInsets == 0)
         self.imageInsets = 8.0f;
+    if (!self.imageIncreaseOnClick) {
+        self.imageIncreaseOnClick = 0;
+    }
 
     self.pressed = NO;
 
@@ -56,6 +61,9 @@
 
     if (self.imageInsets == 0)
         self.imageInsets = 8.0f;
+    if (!self.imageIncreaseOnClick) {
+        self.imageIncreaseOnClick = 0;
+    }
 
     self.pressed = NO;
     return self;
@@ -190,7 +198,8 @@
         [path addClip];
 
         [self setImagePosition:NSImageOverlaps];
-        auto rect = NSInsetRect(dirtyRect, self.imageInsets, self.imageInsets);
+        auto insets = self.mouseDown ? (self.imageInsets - self.imageIncreaseOnClick) : self.imageInsets;
+        auto rect = NSInsetRect(dirtyRect, self.imageInsets, insets);
 
         [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
                  fromRect:NSZeroRect
@@ -237,6 +246,48 @@
 
     self.mouseDown = FALSE;
     [self setNeedsDisplay:YES];
+}
+
+-(void)startBlinkAnimationfrom:(NSColor*)startColor
+                            to:(NSColor*)endColor
+                   scaleFactor:(CGFloat)scaleFactor
+                      duration:(CGFloat) duration {
+    CIFilter *filter = [CIFilter filterWithName:@"CIFalseColor"];
+    [filter setDefaults];
+    [filter setValue:[CIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0] forKey:@"inputColor0"];
+    [filter setValue:[CIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0] forKey:@"inputColor1"];
+    [filter setName: @"pulseFilter"];
+    [[self layer] setFilters:[NSArray arrayWithObject: filter]];
+    
+    CABasicAnimation* pulseAnimation = [CABasicAnimation animation];
+    pulseAnimation.keyPath = @"filters.pulseFilter.inputColor1";
+    pulseAnimation.fromValue =  [CIColor colorWithCGColor:[startColor CGColor]];
+    pulseAnimation.toValue = [CIColor colorWithCGColor:[endColor CGColor]];
+
+    auto currentOrigin = self.frame.origin;
+    auto currentSize = self.frame.size;
+    auto newSize = CGSizeMake(currentSize.width * scaleFactor, currentSize.height * scaleFactor);
+    auto newOrigin = CGPointMake(currentOrigin.x - (newSize.width - currentSize.width)  * 0.5, currentOrigin.y - (newSize.height - currentSize.height) * 0.5 );
+    CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+    positionAnimation.fromValue = [NSValue valueWithPoint:NSPointFromCGPoint(currentOrigin)];
+    positionAnimation.toValue = [NSValue valueWithPoint:NSPointFromCGPoint(newOrigin)];
+    CABasicAnimation *sizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+    sizeAnimation.fromValue = [NSValue valueWithSize:NSSizeFromCGSize(currentSize)];
+    sizeAnimation.toValue = [NSValue valueWithSize:NSSizeFromCGSize(newSize)];
+    CAAnimationGroup * group =[CAAnimationGroup animation];
+    group.removedOnCompletion=NO; group.fillMode=kCAFillModeForwards;
+    group.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionLinear];
+    group.animations =[NSArray arrayWithObjects: pulseAnimation, positionAnimation, sizeAnimation, nil];
+    group.duration =duration;
+    group.repeatCount = HUGE;
+    group.autoreverses = NO;
+    [self.layer addAnimation:group forKey:BLINK_ANIMATION_IDENTIFIER];
+    self.animating = true;
+}
+
+-(void)stopBlinkAnimation {
+    self.animating = false;
+    [self.layer removeAnimationForKey:BLINK_ANIMATION_IDENTIFIER];
 }
 
 @end
