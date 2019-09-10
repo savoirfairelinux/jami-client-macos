@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2017-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,39 +16,31 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
-#import "IconButton.h"
 
-@interface HoverButton : IconButton {
-@private
+#import <Cocoa/Cocoa.h>
 
-    NSTrackingArea *trackingArea;
-}
-/*
- * Background color of the button when mouse inside
- * default value : [NSColor ringBlue]
- */
-@property (nonatomic, strong) NSColor* hoverColor;
+
+@interface GradientView : NSView
 
 /*
- * image color of the button when mouse inside
+ * Padding
+ * default value : 8.0
  */
-@property (nonatomic, strong) NSColor* imageHoverColor;
+@property (nonatomic, strong) NSColor* startingColor;
 
 /*
- * Image color of the button when mouse inside
+ * Add bluer effect behind button
  */
-@property (nonatomic, strong) NSColor* moiuseOutsideImageColor;
+
+@property (nonatomic, strong) NSColor* endingColor;
 
 /*
- * Background color of the button when mouse outside
- * default value : [NSColor clearColor];
- */
-@property (nonatomic, strong) NSColor* mouseOutsideColor;
-
-/*
- * Image coler when button pressed
+ * Add bluer effect behind button
  */
 
-@property (nonatomic, strong) NSColor* imagePressedColor;
+@property int angle;
+
 
 @end
+
+
