@@ -30,9 +30,31 @@
 @property (nonatomic, strong) NSColor* hoverColor;
 
 /*
+ * image color of the button when mouse inside
+ */
+@property (nonatomic, strong) NSColor* imageHoverColor;
+
+/*
+ * Image color of the button when mouse inside
+ */
+@property (nonatomic, strong) NSColor* moiuseOutsideImageColor;
+
+/*
  * Background color of the button when mouse outside
  * default value : [NSColor clearColor];
  */
 @property (nonatomic, strong) NSColor* mouseOutsideColor;
+
+/*
+ * Image coler when button pressed
+ */
+
+@property (nonatomic, strong) NSColor* imagePressedColor;
+
+/*
+ * Value to increase image size when mouse entered
+ */
+
+@property CGFloat imageIncreaseOnHover;
 
 @end

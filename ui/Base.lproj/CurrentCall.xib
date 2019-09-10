@@ -7,9 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
             <connections>
-                <outlet property="addParticipantButton" destination="TIU-Vj-ODN" id="Aki-6Z-8OC"/>
-                <outlet property="advancedButton" destination="VVL-A4-r7n" id="1Dt-gW-6v1"/>
-                <outlet property="advancedPanel" destination="sqy-ob-lGY" id="eKk-Ud-YCL"/>
                 <outlet property="audioCallPersonId" destination="Qq2-Et-gep" id="Y06-bp-5tS"/>
                 <outlet property="audioCallPersonLabel" destination="Q9v-1a-PP9" id="QFR-mj-x5N"/>
                 <outlet property="audioCallPhoto" destination="8Fh-aW-uEi" id="BhG-tk-9Qv"/>
@@ -17,10 +14,9 @@
                 <outlet property="audioCallView" destination="peV-wm-HQm" id="0HQ-sT-s2e"/>
                 <outlet property="backgroundImage" destination="Usy-W5-TGp" id="EMW-vz-Zuc"/>
                 <outlet property="bluerBackgroundEffect" destination="CDQ-nt-oe4" id="xjH-MC-jHw"/>
-                <outlet property="callRecordButtonMarginLeft" destination="VAL-bQ-rJ8" id="TXy-m9-czc"/>
                 <outlet property="chatButton" destination="fmp-x4-Pef" id="ARt-dr-TRo"/>
                 <outlet property="chatVC" destination="LWe-df-dS6" id="SMR-T0-fYe"/>
-                <outlet property="controlsPanel" destination="Eoi-B8-iL6" id="4xn-3b-SNn"/>
+                <outlet property="controlsPanel" destination="wDi-X6-dgL" id="zs8-jw-wQ3"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
                 <outlet property="headerContainer" destination="d0X-cW-Xgz" id="7RM-kh-vCm"/>
                 <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
@@ -38,13 +34,11 @@
                 <outlet property="personPhoto" destination="X5k-sy-WtA" id="aMI-eo-QqK"/>
                 <outlet property="pickUpButton" destination="qgD-3D-nD5" id="mkD-IT-22E"/>
                 <outlet property="previewView" destination="6y6-RH-qOp" id="1PY-sd-mh4"/>
-                <outlet property="qualityButton" destination="B4i-m9-3Vo" id="LWI-qi-q3f"/>
                 <outlet property="recordOnOffButton" destination="QYT-0n-4sw" id="LpC-8i-BGz"/>
                 <outlet property="ringingPanel" destination="W4l-Be-bhM" id="aZ4-9D-wOd"/>
                 <outlet property="splitView" destination="GIJ-gB-FZo" id="PM0-az-Q8X"/>
                 <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
                 <outlet property="timeSpentLabel" destination="cIU-M7-xpN" id="9Rl-t3-gjY"/>
-                <outlet property="transferButton" destination="aHZ-qL-mYf" id="9id-Nt-M7i"/>
                 <outlet property="videoMTKView" destination="gQE-fN-JhY" id="qca-wq-idt"/>
                 <outlet property="videoView" destination="2wf-Py-l6B" id="dEF-Gx-w6x"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="VKn-lN-ijP"/>
@@ -53,32 +47,32 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView wantsLayer="YES" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="1118" height="62"/>
+            <rect key="frame" x="0.0" y="0.0" width="1118" height="805"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <splitView wantsLayer="YES" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIJ-gB-FZo">
-                    <rect key="frame" x="0.0" y="0.0" width="1118" height="62"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1118" height="805"/>
                     <subviews>
                         <customView id="2wf-Py-l6B" customClass="CallView">
-                            <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                            <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <subviews>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Usy-W5-TGp">
-                                    <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                 </customView>
                                 <box boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="CDQ-nt-oe4">
-                                    <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                     <view key="contentView" id="DWB-Kg-ugE">
-                                        <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </view>
                                     <color key="fillColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                 </box>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="gQE-fN-JhY" customClass="CallMTKView">
-                                    <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz">
-                                    <rect key="frame" x="0.0" y="-10" width="746" height="72"/>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz" customClass="GradientView">
+                                    <rect key="frame" x="0.0" y="733" width="746" height="72"/>
                                     <subviews>
                                         <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIU-M7-xpN">
                                             <rect key="frame" x="624" y="24" width="104" height="24"/>
@@ -143,12 +137,23 @@
                                         <constraint firstItem="bg3-hB-nE8" firstAttribute="leading" secondItem="X5k-sy-WtA" secondAttribute="trailing" constant="8" id="vAl-vr-79t"/>
                                         <constraint firstAttribute="centerY" secondItem="cIU-M7-xpN" secondAttribute="centerY" id="yvc-8B-cEu"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="angle">
+                                            <integer key="value" value="270"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
+                                            <color key="value" white="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="endingColor">
+                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </customView>
                                 <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peV-wm-HQm">
-                                    <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                     <subviews>
                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Fh-aW-uEi" userLabel="audio Avatar View">
-                                            <rect key="frame" x="313" y="58" width="120" height="120"/>
+                                            <rect key="frame" x="313" y="430" width="120" height="120"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="120" id="1nT-Hd-4gR"/>
                                                 <constraint firstAttribute="width" constant="120" id="OL0-Nm-ebx"/>
@@ -156,7 +161,7 @@
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="jQe-23-BMq"/>
                                         </imageView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9v-1a-PP9" userLabel="audio Person Label">
-                                            <rect key="frame" x="314" y="20" width="118" height="22"/>
+                                            <rect key="frame" x="314" y="392" width="118" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="81" id="tvn-e9-GfK"/>
                                             </constraints>
@@ -167,7 +172,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qq2-Et-gep" userLabel="audio Id">
-                                            <rect key="frame" x="341" y="-3" width="65" height="17"/>
+                                            <rect key="frame" x="341" y="369" width="65" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="person Id" id="hKi-Ay-ex5">
                                                 <font key="font" metaFont="systemLight" size="13"/>
                                                 <color key="textColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -175,7 +180,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kaT-aY-Hhw" userLabel="audio time">
-                                            <rect key="frame" x="321" y="-54" width="104" height="27"/>
+                                            <rect key="frame" x="321" y="318" width="104" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="JMR-Ku-aX2"/>
                                             </constraints>
@@ -200,114 +205,223 @@
                                         <constraint firstItem="kaT-aY-Hhw" firstAttribute="top" secondItem="Qq2-Et-gep" secondAttribute="bottom" constant="24" id="nyW-jT-A75"/>
                                     </constraints>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Eoi-B8-iL6" userLabel="Controls">
-                                    <rect key="frame" x="20" y="20" width="330" height="120"/>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="wDi-X6-dgL" customClass="GradientView">
+                                    <rect key="frame" x="0.0" y="0.0" width="746" height="80"/>
                                     <subviews>
-                                        <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sqy-ob-lGY" userLabel="Advanced Panel">
-                                            <rect key="frame" x="145" y="63" width="190" height="50"/>
+                                        <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Djs-L8-8Pe" userLabel="Controls">
+                                            <rect key="frame" x="241" y="20" width="264" height="44"/>
                                             <subviews>
-                                                <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B4i-m9-3Vo" userLabel="Quality Button" customClass="IconButton">
-                                                    <rect key="frame" x="0.0" y="10" width="40" height="40"/>
+                                                <button toolTip="Mute Audio" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="HoverButton">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="l6i-kt-7Tb"/>
-                                                        <constraint firstAttribute="width" constant="40" id="pm6-ew-zui"/>
+                                                        <constraint firstAttribute="width" constant="44" id="VhT-NE-Ler"/>
+                                                        <constraint firstAttribute="height" constant="44" id="WFp-nl-egQ"/>
                                                     </constraints>
-                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_quality" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="M8f-I2-Z0d">
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7wg-Q4-mbD">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.12894672927461137" green="0.12894672927461137" blue="0.12894672927461137" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                            <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="muteAudio:" target="-2" id="DBk-mG-FLj"/>
+                                                    </connections>
+                                                </button>
+                                                <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="HoverButton">
+                                                    <rect key="frame" x="44" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="Qiq-Nb-gHN"/>
+                                                        <constraint firstAttribute="width" constant="44" id="k3u-dD-eLF"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                            <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
+                                                    </connections>
+                                                </button>
+                                                <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="HoverButton">
+                                                    <rect key="frame" x="88" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="QlH-xq-7uO"/>
+                                                        <constraint firstAttribute="height" constant="44" id="Xzt-L0-evm"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                            <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
+                                                    </connections>
+                                                </button>
+                                                <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="HoverButton">
+                                                    <rect key="frame" x="132" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="MYx-uE-Bej"/>
+                                                        <constraint firstAttribute="height" constant="44" id="dmD-ga-Kwv"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                            <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
+                                                    </connections>
+                                                </button>
+                                                <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QYT-0n-4sw" userLabel="Record On Off Button" customClass="HoverButton">
+                                                    <rect key="frame" x="176" y="0.0" width="44" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="I7O-NK-0Cq"/>
+                                                        <constraint firstAttribute="width" constant="44" id="Jgi-MM-qiZ"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="LWc-BQ-h4g">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
                                                     </buttonCell>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                            <integer key="value" value="8"/>
+                                                            <integer key="value" value="6"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                            <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                            <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                            <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="toggleQualityView:" target="-2" id="Ny6-AQ-jmS"/>
-                                                    </connections>
-                                                </button>
-                                                <button toolTip="Add participant" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TIU-Vj-ODN" userLabel="Add Participant Button" customClass="IconButton">
-                                                    <rect key="frame" x="50" y="10" width="40" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="NH7-wn-OEA"/>
-                                                        <constraint firstAttribute="height" constant="40" id="P40-Nc-aDZ"/>
-                                                    </constraints>
-                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="fok-z6-iXg">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
-                                                    </buttonCell>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                            <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                            <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imagePressedColor">
+                                                            <color key="value" red="0.98594832420349121" green="0.0" blue="0.026950567960739136" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="4"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
+                                                            <integer key="value" value="4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="toggleAddParticipantView:" target="-2" id="tgk-Sv-aYr"/>
+                                                        <action selector="toggleRecording:" target="-2" id="zVh-ci-nzl"/>
                                                     </connections>
                                                 </button>
-                                                <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Szd-ad-xxI" userLabel="Dialpad Button" customClass="IconButton">
-                                                    <rect key="frame" x="100" y="10" width="40" height="40"/>
+                                                <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="HoverButton">
+                                                    <rect key="frame" x="220" y="0.0" width="44" height="44"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="QET-Bd-GvH"/>
-                                                        <constraint firstAttribute="height" constant="40" id="zon-xu-MYY"/>
+                                                        <constraint firstAttribute="width" constant="44" id="48U-1h-yAx"/>
+                                                        <constraint firstAttribute="height" constant="44" id="EDO-9c-ndD"/>
                                                     </constraints>
-                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_dialpad" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="Dhn-Uq-hcz">
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_chat" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="1fJ-X6-Rza">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
+                                                        <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                            <integer key="value" value="8"/>
+                                                            <integer key="value" value="6"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                            <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                            <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                            <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="showDialpad:" target="-2" id="n75-kN-ISS"/>
-                                                    </connections>
-                                                </button>
-                                                <button toolTip="Transfer" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aHZ-qL-mYf" userLabel="Transfer Button" customClass="IconButton">
-                                                    <rect key="frame" x="150" y="10" width="40" height="40"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="P3U-ub-4fz"/>
-                                                        <constraint firstAttribute="height" constant="40" id="ppO-DW-vNN"/>
-                                                    </constraints>
-                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_transfer" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="ZLa-4T-TX4">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
-                                                    </buttonCell>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                            <integer key="value" value="8"/>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                            <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="4"/>
                                                         </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                            <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
+                                                            <integer key="value" value="4"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="toggleTransferView:" target="-2" id="UzS-ti-Tf6"/>
+                                                        <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="50" id="lBZ-jM-VKt"/>
-                                            </constraints>
                                             <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
@@ -318,180 +432,27 @@
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
                                         </stackView>
-                                        <button toolTip="Mute Audio" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tQl-cT-0Lb" userLabel="Mute Audio" customClass="IconButton">
-                                            <rect key="frame" x="120" y="20" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="VhT-NE-Ler"/>
-                                                <constraint firstAttribute="height" constant="40" id="WFp-nl-egQ"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7wg-Q4-mbD">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="muteAudio:" target="-2" id="DBk-mG-FLj"/>
-                                            </connections>
-                                        </button>
-                                        <button hidden="YES" toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VVL-A4-r7n" customClass="IconButton">
-                                            <rect key="frame" x="220" y="20" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="WJY-rX-kLD"/>
-                                                <constraint firstAttribute="width" constant="40" id="jcJ-mm-2kQ"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_more" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7gG-ds-iaA">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </button>
-                                        <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QYT-0n-4sw" userLabel="Record On Off Button" customClass="IconButton">
-                                            <rect key="frame" x="220" y="20" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="I7O-NK-0Cq"/>
-                                                <constraint firstAttribute="width" constant="40" id="Jgi-MM-qiZ"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="LWc-BQ-h4g">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="10" name=".HelveticaNeueDeskInterface-Regular"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="toggleRecording:" target="-2" id="zVh-ci-nzl"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Hold" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="anb-Y8-JQi" userLabel="Hold" customClass="IconButton">
-                                            <rect key="frame" x="70" y="20" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="QlH-xq-7uO"/>
-                                                <constraint firstAttribute="height" constant="40" id="Xzt-L0-evm"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hold" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="7w5-d1-mNe">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="toggleHold:" target="-2" id="O18-nN-hHE"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="IconButton">
-                                            <rect key="frame" x="20" y="20" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="MYx-uE-Bej"/>
-                                                <constraint firstAttribute="height" constant="40" id="dmD-ga-Kwv"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.94509803921568625" green="0.16078431372549018" blue="0.0" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="hangUp:" target="-2" id="1Fj-b8-nfh"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="IconButton">
-                                            <rect key="frame" x="270" y="20" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="48U-1h-yAx"/>
-                                                <constraint firstAttribute="height" constant="40" id="EDO-9c-ndD"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_chat" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="1fJ-X6-Rza">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745098039217" green="0.70588235294117641" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431372549018" green="0.16078431372549018" blue="0.16078431372549018" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="toggleChat:" target="-2" id="7HN-HS-oqT"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Mute Video" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LVS-yZ-98V" userLabel="Mute Video" customClass="IconButton">
-                                            <rect key="frame" x="170" y="20" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="Qiq-Nb-gHN"/>
-                                                <constraint firstAttribute="width" constant="40" id="k3u-dD-eLF"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="sSe-V6-C7i">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
-                                                    <color key="value" red="0.16862745100000001" green="0.70588235290000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                                    <color key="value" red="0.16078431369999999" green="0.16078431369999999" blue="0.16078431369999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="sqy-ob-lGY" firstAttribute="centerX" secondItem="VVL-A4-r7n" secondAttribute="centerX" id="18o-Wc-tsO"/>
-                                        <constraint firstItem="fmp-x4-Pef" firstAttribute="leading" secondItem="QYT-0n-4sw" secondAttribute="trailing" constant="10" id="6yb-dh-Z9P"/>
-                                        <constraint firstItem="tQl-cT-0Lb" firstAttribute="leading" secondItem="anb-Y8-JQi" secondAttribute="trailing" constant="10" id="7MF-DQ-Nb8"/>
-                                        <constraint firstItem="LVS-yZ-98V" firstAttribute="centerY" secondItem="tQl-cT-0Lb" secondAttribute="centerY" id="AYj-Vt-7NL"/>
-                                        <constraint firstItem="VVL-A4-r7n" firstAttribute="leading" secondItem="LVS-yZ-98V" secondAttribute="trailing" constant="10" id="ERi-S1-WQC"/>
-                                        <constraint firstAttribute="bottom" secondItem="Kjq-iM-NBL" secondAttribute="bottom" constant="20" id="OcY-fg-QB8"/>
-                                        <constraint firstItem="Kjq-iM-NBL" firstAttribute="leading" secondItem="Eoi-B8-iL6" secondAttribute="leading" constant="20" id="Rwo-8h-nvA"/>
-                                        <constraint firstItem="fmp-x4-Pef" firstAttribute="centerY" secondItem="QYT-0n-4sw" secondAttribute="centerY" id="T0h-Qd-kNB"/>
-                                        <constraint firstItem="QYT-0n-4sw" firstAttribute="centerY" secondItem="LVS-yZ-98V" secondAttribute="centerY" id="TN3-Wq-1Bf"/>
-                                        <constraint firstItem="QYT-0n-4sw" firstAttribute="leading" secondItem="LVS-yZ-98V" secondAttribute="trailing" constant="10" id="VAL-bQ-rJ8"/>
-                                        <constraint firstItem="sqy-ob-lGY" firstAttribute="top" secondItem="Eoi-B8-iL6" secondAttribute="top" constant="7" id="X7H-uf-xCa"/>
-                                        <constraint firstItem="VVL-A4-r7n" firstAttribute="baseline" secondItem="LVS-yZ-98V" secondAttribute="baseline" id="lVY-Uc-rzo"/>
-                                        <constraint firstAttribute="width" constant="330" id="ne7-Zm-qqc"/>
-                                        <constraint firstItem="tQl-cT-0Lb" firstAttribute="centerY" secondItem="anb-Y8-JQi" secondAttribute="centerY" id="rZo-XU-yeF"/>
-                                        <constraint firstItem="anb-Y8-JQi" firstAttribute="leading" secondItem="Kjq-iM-NBL" secondAttribute="trailing" constant="10" id="t5V-qu-Ssk"/>
-                                        <constraint firstItem="LVS-yZ-98V" firstAttribute="leading" secondItem="tQl-cT-0Lb" secondAttribute="trailing" constant="10" id="v4N-af-SoV"/>
-                                        <constraint firstAttribute="height" constant="120" id="ynu-O5-MN8"/>
-                                        <constraint firstItem="anb-Y8-JQi" firstAttribute="centerY" secondItem="Kjq-iM-NBL" secondAttribute="centerY" id="zA4-c4-mEX"/>
+                                        <constraint firstAttribute="height" constant="80" id="5eV-Zj-LpN"/>
+                                        <constraint firstAttribute="bottom" secondItem="Djs-L8-8Pe" secondAttribute="bottom" constant="20" id="9sI-eh-XMc"/>
+                                        <constraint firstItem="Djs-L8-8Pe" firstAttribute="centerX" secondItem="wDi-X6-dgL" secondAttribute="centerX" priority="750" id="Qeg-xw-clk"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="startingColor">
+                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="endingColor">
+                                            <color key="value" white="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="angle">
+                                            <integer key="value" value="270"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="CallMTKView">
                                     <rect key="frame" x="551" y="20" width="175" height="120"/>
@@ -501,10 +462,10 @@
                                     </constraints>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="se7-PJ-iwD">
-                                    <rect key="frame" x="0.0" y="0.0" width="746" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nYS-zr-wbV" userLabel="Outgoing Person Label">
-                                            <rect key="frame" x="314" y="20" width="118" height="22"/>
+                                            <rect key="frame" x="314" y="392" width="118" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="81" id="GJV-Oh-m0p"/>
                                             </constraints>
@@ -515,14 +476,14 @@
                                             </textFieldCell>
                                         </textField>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="JwW-2h-DyZ" customClass="ITProgressIndicator">
-                                            <rect key="frame" x="309" y="54" width="128" height="128"/>
+                                            <rect key="frame" x="309" y="426" width="128" height="128"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="128" id="gpl-re-hHE"/>
                                                 <constraint firstAttribute="width" constant="128" id="nmo-HF-lhL"/>
                                             </constraints>
                                         </customView>
                                         <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yey-xg-Lzf" userLabel="Outgoing Id">
-                                            <rect key="frame" x="341" y="-3" width="65" height="17"/>
+                                            <rect key="frame" x="341" y="369" width="65" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" alignment="center" title="person Id" id="27H-gG-Hvo">
                                                 <font key="font" metaFont="systemLight" size="13"/>
                                                 <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -530,7 +491,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ff6-F4-zbn" userLabel="Outgoing State">
-                                            <rect key="frame" x="352" y="-45" width="42" height="18"/>
+                                            <rect key="frame" x="352" y="327" width="42" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="tka-qK-aZu"/>
                                             </constraints>
@@ -541,7 +502,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z3E-kv-Uwb" userLabel="Outgoing Avatar View">
-                                            <rect key="frame" x="313" y="58" width="120" height="120"/>
+                                            <rect key="frame" x="313" y="430" width="120" height="120"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="dRT-ka-car"/>
                                                 <constraint firstAttribute="height" constant="120" id="fVW-Pp-ecn"/>
@@ -549,7 +510,7 @@
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="iIZ-0v-tM8"/>
                                         </imageView>
                                         <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D0G-XT-lhI" userLabel="Outgoing Hang Up" customClass="IconButton">
-                                            <rect key="frame" x="345" y="-125" width="56" height="56"/>
+                                            <rect key="frame" x="345" y="247" width="56" height="56"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="56" id="FTZ-JO-UdI"/>
                                                 <constraint firstAttribute="width" constant="56" id="i20-DN-iit"/>
@@ -587,7 +548,7 @@
                                     </constraints>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="W4l-Be-bhM">
-                                    <rect key="frame" x="171" y="-119" width="404" height="300"/>
+                                    <rect key="frame" x="171" y="253" width="404" height="300"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qnn-D2-O1C">
                                             <rect key="frame" x="139" y="116" width="127" height="17"/>
@@ -675,10 +636,10 @@
                                 </customView>
                             </subviews>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="wDi-X6-dgL" secondAttribute="bottom" id="3TS-UW-Tqd"/>
                                 <constraint firstAttribute="bottom" secondItem="Usy-W5-TGp" secondAttribute="bottom" id="5mb-Be-9o1"/>
                                 <constraint firstItem="Usy-W5-TGp" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="9ZC-hX-N5k"/>
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="9cl-8g-a1Q"/>
-                                <constraint firstAttribute="bottom" secondItem="Eoi-B8-iL6" secondAttribute="bottom" constant="20" id="9j2-HZ-hNX"/>
                                 <constraint firstItem="W4l-Be-bhM" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="De3-8O-mXx"/>
                                 <constraint firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" id="G79-Jv-EYw"/>
                                 <constraint firstAttribute="bottom" secondItem="6y6-RH-qOp" secondAttribute="bottom" constant="20" id="HOt-7O-FU2"/>
@@ -700,25 +661,27 @@
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="top" secondItem="Usy-W5-TGp" secondAttribute="top" id="mS7-0s-mzr"/>
                                 <constraint firstItem="se7-PJ-iwD" firstAttribute="height" secondItem="2wf-Py-l6B" secondAttribute="height" id="nkk-DO-Hod"/>
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="top" secondItem="Usy-W5-TGp" secondAttribute="top" id="pVh-ja-gEo"/>
-                                <constraint firstItem="Eoi-B8-iL6" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="sHw-xg-QAo"/>
+                                <constraint firstAttribute="trailing" secondItem="wDi-X6-dgL" secondAttribute="trailing" id="qOj-sL-ZdP"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="siE-fo-i7E"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="txG-gM-vYq"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="width" secondItem="2wf-Py-l6B" secondAttribute="width" id="v68-K9-WVB"/>
+                                <constraint firstItem="6y6-RH-qOp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Djs-L8-8Pe" secondAttribute="trailing" constant="15" id="wnE-XJ-30V"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="xlx-0W-9hG"/>
+                                <constraint firstItem="wDi-X6-dgL" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" id="yRe-td-LPS"/>
                             </constraints>
                         </customView>
                         <customView wantsLayer="YES" id="TdD-3L-553">
-                            <rect key="frame" x="747" y="0.0" width="371" height="62"/>
+                            <rect key="frame" x="747" y="0.0" width="371" height="805"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
-                                    <rect key="frame" x="20" y="60" width="331" height="0.0"/>
+                                    <rect key="frame" x="20" y="60" width="331" height="743"/>
                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H2i-4W-Gvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="743"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="ZOj-5b-rnp">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="186"/>
+                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" viewBased="YES" id="ZOj-5b-rnp">
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="726"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -1051,10 +1014,11 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="GIJ-gB-FZo" secondAttribute="trailing" id="0em-qy-QDF"/>
                 <constraint firstItem="GIJ-gB-FZo" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="BMA-1U-7qS"/>
+                <constraint firstItem="2wf-Py-l6B" firstAttribute="height" secondItem="Hz6-mo-xeY" secondAttribute="height" id="D58-1R-Qr6"/>
                 <constraint firstAttribute="bottom" secondItem="GIJ-gB-FZo" secondAttribute="bottom" id="cSp-R2-2P7"/>
                 <constraint firstItem="GIJ-gB-FZo" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="gYP-xn-tdT"/>
             </constraints>
-            <point key="canvasLocation" x="1428" y="19.5"/>
+            <point key="canvasLocation" x="1273" y="251.5"/>
         </customView>
         <viewController id="LWe-df-dS6" customClass="ChatVC">
             <connections>
@@ -1076,19 +1040,14 @@
     <resources>
         <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_accept" width="72" height="72"/>
-        <image name="ic_action_add_participant" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>
         <image name="ic_action_cancel" width="72" height="72"/>
-        <image name="ic_action_chat" width="72" height="72"/>
+        <image name="ic_action_chat" width="100" height="100"/>
         <image name="ic_action_hangup" width="72" height="72"/>
         <image name="ic_action_hold" width="72" height="72"/>
-        <image name="ic_action_quality" width="72" height="72"/>
-        <image name="ic_action_record" width="54" height="54"/>
+        <image name="ic_action_record" width="100" height="100"/>
         <image name="ic_action_send" width="72" height="72"/>
-        <image name="ic_action_transfer" width="57.599998474121094" height="57.599998474121094"/>
         <image name="ic_action_video" width="72" height="72"/>
-        <image name="ic_dialpad" width="72" height="72"/>
         <image name="ic_file_upload" width="72" height="72"/>
-        <image name="ic_more" width="72" height="72"/>
     </resources>
 </document>

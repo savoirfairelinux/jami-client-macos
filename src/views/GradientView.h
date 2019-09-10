@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,28 +19,28 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSColor (RingTheme)
 
-+ (NSColor*) ringBlue;
-+ (NSColor*) ringLightBlue;
-+ (NSColor*) ringBlueWithAlpha:(CGFloat) a;
+@interface GradientView : NSView
 
-+ (NSColor*) ringDarkBlue;
+/*
+ * Padding
+ * default value : 8.0
+ */
+@property (nonatomic, strong) NSColor* startingColor;
 
-+ (NSColor*) ringGreyHighlight;
-+ (NSColor*) ringGreyLight;
-+ (NSColor*) ringDarkGrey;
-+ (NSColor*) errorColor;
-+ (NSColor*) greenSuccessColor;
-+ (NSColor*) errorTransferColor;
-+ (NSColor*) presenceColor;
-+ (NSColor*) unregisteredColor;
-+ (NSColor*) buttonBlinkColorColor;
+/*
+ * Add bluer effect behind button
+ */
 
-- (NSColor *)lightenColorByValue:(float)value;
-- (NSColor *)darkenColorByValue:(float)value;
-- (BOOL)isLightColor;
+@property (nonatomic, strong) NSColor* endingColor;
 
-+ (NSImage*) image:(NSImage*) img tintedWithColor:(NSColor *)tint;
+/*
+ * Add bluer effect behind button
+ */
+
+@property int angle;
+
 
 @end
+
+
