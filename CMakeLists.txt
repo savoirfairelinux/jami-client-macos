@@ -497,6 +497,7 @@ ELSE()
         XCODE_ATTRIBUTE_ENABLE_HARDENED_RUNTIME TRUE
     )
 ENDIF()
+set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym")
 # Make sure we can find the 'ibtool' program. If we can NOT find it we
 # skip generation of this project
 FIND_PROGRAM(IBTOOL ibtool HINTS "/usr/bin" "${OSX_DEVELOPER_ROOT}/usr/bin")
