@@ -14,7 +14,7 @@ security import certificates/certificates/distribution/Certificates.p12 -k $KEYC
 DELIVER_PASSWORD=$APPLE_PASSWORD fastlane sigh --app_identifier $BUNDLE_ID --username $APPLE_ACCOUNT --readonly true --platform macos --team_id $TEAM_ID
 security set-key-partition-list -S apple-tool:,apple:,productbuild: -s -k $KEYCHAIN_PASSWORD $KEYCHAIN_NAME > /dev/null 2>&1
 echo "start signing"
-macdeployqt ./Jami.app -codesign="${APP_CERTIFICATE}"
+macdeployqt ./Jami.app -no-strip -codesign="${APP_CERTIFICATE}"
 codesign --force --sign "${APP_CERTIFICATE}" --entitlements ../data/Jami.entitlements Jami.app
 codesign --verify Jami.app
 echo "create .pkg"
