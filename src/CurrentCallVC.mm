@@ -77,10 +77,7 @@ extern "C" {
 
 // Header info
 @property (unsafe_unretained) IBOutlet NSView* headerContainer;
-@property (unsafe_unretained) IBOutlet NSTextField* personLabel;
-@property (unsafe_unretained) IBOutlet NSTextField* stateLabel;
 @property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
-@property (unsafe_unretained) IBOutlet NSImageView* personPhoto;
 
 @property (unsafe_unretained) IBOutlet NSImageView* outgoingPhoto;
 @property (unsafe_unretained) IBOutlet NSTextField* outgoingPersonLabel;
@@ -143,7 +140,7 @@ extern "C" {
 
 @implementation CurrentCallVC
 lrc::api::AVModel* mediaModel;
-@synthesize personLabel, personPhoto, stateLabel, holdOnOffButton, hangUpButton,
+@synthesize holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
             incomingDisplayName, incomingPersonPhoto, previewView, splitView, loadingIndicator, ringingPanel,
@@ -260,7 +257,6 @@ CVPixelBufferRef pixelBufferPreview;
     auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
     if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
         NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
-        [personLabel setStringValue:bestName];
         [outgoingPersonLabel setStringValue:bestName];
         [audioCallPersonLabel setStringValue:bestName];
         NSString* ringID = bestIDForConversation(*convIt, *accountInfo_->conversationModel);
@@ -279,7 +275,6 @@ CVPixelBufferRef pixelBufferPreview;
                                                               selector:@selector(updateDurationLabel)
                                                               userInfo:nil
                                                                repeats:YES];
-    [stateLabel setStringValue:@(to_string(currentCall.status).c_str())];
     [outgoingStateLabel setStringValue:@(to_string(currentCall.status).c_str())];
 
     // Default values for this views
@@ -357,7 +352,6 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) setUpVideoCallView {
-    [self setupContactInfo:personPhoto];
     [timeSpentLabel setHidden:NO];
     [outgoingPhoto setHidden:YES];
     [headerContainer setHidden:NO];
@@ -680,9 +674,7 @@ CVPixelBufferRef pixelBufferPreview;
     [self.chatButton setPressed:NO];
     [self collapseRightView];
 
-    [personLabel setStringValue:@""];
     [timeSpentLabel setStringValue:@""];
-    [stateLabel setStringValue:@""];
     //audio view
     [audioCallTime setStringValue:@""];
     [audioCallPersonId setStringValue:@""];
@@ -758,7 +750,7 @@ CVPixelBufferRef pixelBufferPreview;
                              [self setBackground];
                              return;
                          }
-                         [personPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+                       //  [personPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
                      });
 }
 
