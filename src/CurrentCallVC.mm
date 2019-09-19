@@ -634,8 +634,10 @@ CVPixelBufferRef pixelBufferPreview;
     [self.view setHidden:YES];
     self.view.layer.position = self.view.frame.origin;
     [self collapseRightView];
-    self.testView = [[NSImageView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:self.testView];
+     previewView.frame = CGRectMake(534,20,175, 120);
+   // self.add
+  //  self.testView = [[NSImageView alloc] initWithFrame:self.view.frame];
+  // [self.view addSubview:previewView];
 }
 
 # pragma private IN/OUT animations
@@ -1032,4 +1034,20 @@ CVPixelBufferRef pixelBufferPreview;
     mediaModel->setInputFile(QUrl::fromLocalFile(uri.c_str()).toLocalFile().toStdString());
 }
 
+- (IBAction)hidePreview:(id)sender {
+    CGRect previewFrame = previewView.frame;
+    CGRect newPreviewFrame;
+    if (previewFrame.size.width < 175) {
+        newPreviewFrame = CGRectMake(534,20,175, 120);
+    } else {
+        newPreviewFrame = CGRectMake(670,20,40, 40);
+    }
+    //previewView.frame = newPreviewFrame;
+    
+    
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.duration = 2.f;
+        previewView.animator.frame = newPreviewFrame;
+    } completionHandler:nil];
+}
 @end

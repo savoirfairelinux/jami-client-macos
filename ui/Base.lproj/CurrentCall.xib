@@ -395,12 +395,41 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="CallMTKView">
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="CallMTKView">
                                     <rect key="frame" x="551" y="20" width="175" height="120"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="120" id="BvU-kV-0uD"/>
-                                        <constraint firstAttribute="width" constant="175" id="aEv-Tt-tSD"/>
-                                    </constraints>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <box ambiguous="YES" boxType="custom" borderType="none" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-xs-LVn">
+                                            <rect key="frame" x="150" y="95" width="25" height="25"/>
+                                            <view key="contentView" id="hya-Xj-6pU">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="M9f-aD-4Bp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSTouchBarExitFullScreenTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="DuU-Ub-wG6">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="hidePreview:" target="-2" id="vGI-Q7-HBO"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="M9f-aD-4Bp" firstAttribute="leading" secondItem="hya-Xj-6pU" secondAttribute="leading" id="FR6-Gn-q4m"/>
+                                                    <constraint firstItem="M9f-aD-4Bp" firstAttribute="top" secondItem="hya-Xj-6pU" secondAttribute="top" id="gYU-3k-8Pl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="M9f-aD-4Bp" secondAttribute="trailing" id="ohk-RJ-oML"/>
+                                                    <constraint firstAttribute="bottom" secondItem="M9f-aD-4Bp" secondAttribute="bottom" id="ur3-zt-X5W"/>
+                                                </constraints>
+                                            </view>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="7xl-aK-S0W"/>
+                                                <constraint firstAttribute="width" constant="25" id="CWb-qg-Tmq"/>
+                                            </constraints>
+                                            <color key="fillColor" red="0.99999600649999998" green="1" blue="1" alpha="0.32124892979452052" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </box>
+                                    </subviews>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="se7-PJ-iwD">
                                     <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
@@ -583,8 +612,6 @@
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="9cl-8g-a1Q"/>
                                 <constraint firstItem="W4l-Be-bhM" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="De3-8O-mXx"/>
                                 <constraint firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" id="G79-Jv-EYw"/>
-                                <constraint firstAttribute="bottom" secondItem="6y6-RH-qOp" secondAttribute="bottom" constant="20" id="HOt-7O-FU2"/>
-                                <constraint firstAttribute="trailing" secondItem="6y6-RH-qOp" secondAttribute="trailing" constant="20" id="KTx-SN-RUg"/>
                                 <constraint firstItem="d0X-cW-Xgz" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="MKB-zm-C75"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N2u-0C-Y3z"/>
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N5g-Mw-ag2"/>
@@ -606,7 +633,6 @@
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="siE-fo-i7E"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="txG-gM-vYq"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="width" secondItem="2wf-Py-l6B" secondAttribute="width" id="v68-K9-WVB"/>
-                                <constraint firstItem="6y6-RH-qOp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Djs-L8-8Pe" secondAttribute="trailing" constant="15" id="wnE-XJ-30V"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="xlx-0W-9hG"/>
                                 <constraint firstItem="wDi-X6-dgL" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" id="yRe-td-LPS"/>
                             </constraints>
@@ -979,6 +1005,7 @@
         <userDefaultsController representsSharedInstance="YES" id="cb1-cg-dMu"/>
     </objects>
     <resources>
+        <image name="NSTouchBarExitFullScreenTemplate" width="18" height="30"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_accept" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>
