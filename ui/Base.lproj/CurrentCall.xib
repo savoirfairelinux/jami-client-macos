@@ -30,14 +30,11 @@
                 <outlet property="outgoingPersonLabel" destination="nYS-zr-wbV" id="HoO-bD-XSy"/>
                 <outlet property="outgoingPhoto" destination="z3E-kv-Uwb" id="BLF-rf-EGC"/>
                 <outlet property="outgoingStateLabel" destination="Ff6-F4-zbn" id="RXJ-JL-cTf"/>
-                <outlet property="personLabel" destination="bg3-hB-nE8" id="t6l-1B-JxI"/>
-                <outlet property="personPhoto" destination="X5k-sy-WtA" id="aMI-eo-QqK"/>
                 <outlet property="pickUpButton" destination="qgD-3D-nD5" id="mkD-IT-22E"/>
                 <outlet property="previewView" destination="6y6-RH-qOp" id="1PY-sd-mh4"/>
                 <outlet property="recordOnOffButton" destination="QYT-0n-4sw" id="LpC-8i-BGz"/>
                 <outlet property="ringingPanel" destination="W4l-Be-bhM" id="aZ4-9D-wOd"/>
                 <outlet property="splitView" destination="GIJ-gB-FZo" id="PM0-az-Q8X"/>
-                <outlet property="stateLabel" destination="kFD-FB-vig" id="SSO-14-q2t"/>
                 <outlet property="timeSpentLabel" destination="cIU-M7-xpN" id="9Rl-t3-gjY"/>
                 <outlet property="videoMTKView" destination="gQE-fN-JhY" id="qca-wq-idt"/>
                 <outlet property="videoView" destination="2wf-Py-l6B" id="dEF-Gx-w6x"/>
@@ -88,53 +85,15 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
                                             </userDefinedRuntimeAttributes>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bg3-hB-nE8">
-                                            <rect key="frame" x="76" y="14" width="85" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="81" id="gT7-Wu-XtU"/>
-                                            </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" placeholderString="Person name" id="osk-LS-0Qg">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X5k-sy-WtA">
-                                            <rect key="frame" x="20" y="11" width="50" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="2tx-rb-idH"/>
-                                                <constraint firstAttribute="height" constant="50" id="B5W-X8-r0z"/>
-                                            </constraints>
-                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="dK5-Oj-aua"/>
-                                        </imageView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFD-FB-vig">
-                                            <rect key="frame" x="76" y="39" width="36" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="pft-oc-ZNh"/>
-                                            </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="State" id="ugy-uK-901">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="highlightColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L83-P5-9ao">
                                             <rect key="frame" x="291" y="-12" width="163" height="96"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         </customView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="bg3-hB-nE8" secondAttribute="leading" id="LXG-QI-oPf"/>
                                         <constraint firstItem="cIU-M7-xpN" firstAttribute="top" secondItem="d0X-cW-Xgz" secondAttribute="top" constant="24" id="Qc7-qp-qSV"/>
                                         <constraint firstAttribute="trailing" secondItem="cIU-M7-xpN" secondAttribute="trailing" constant="20" id="RXf-xZ-4f9"/>
-                                        <constraint firstItem="kFD-FB-vig" firstAttribute="leading" secondItem="X5k-sy-WtA" secondAttribute="trailing" constant="8" id="X4W-4Z-Czm"/>
-                                        <constraint firstItem="X5k-sy-WtA" firstAttribute="centerY" secondItem="d0X-cW-Xgz" secondAttribute="centerY" id="Xdf-qr-nzW"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="Xeq-Aa-f1W"/>
-                                        <constraint firstItem="kFD-FB-vig" firstAttribute="top" secondItem="bg3-hB-nE8" secondAttribute="bottom" constant="-42" id="Z06-5v-81Q"/>
-                                        <constraint firstItem="kFD-FB-vig" firstAttribute="top" secondItem="bg3-hB-nE8" secondAttribute="bottom" constant="-42" id="gRn-E6-o6O"/>
-                                        <constraint firstItem="X5k-sy-WtA" firstAttribute="leading" secondItem="d0X-cW-Xgz" secondAttribute="leading" constant="20" id="k2y-sc-P8r"/>
-                                        <constraint firstAttribute="bottom" secondItem="kFD-FB-vig" secondAttribute="bottom" constant="39" id="l71-7V-oLx"/>
-                                        <constraint firstItem="bg3-hB-nE8" firstAttribute="leading" secondItem="X5k-sy-WtA" secondAttribute="trailing" constant="8" id="vAl-vr-79t"/>
                                         <constraint firstAttribute="centerY" secondItem="cIU-M7-xpN" secondAttribute="centerY" id="yvc-8B-cEu"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
