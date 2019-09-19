@@ -431,14 +431,29 @@ typedef NS_ENUM(NSInteger, TagViews) {
     NSSavePanel* filePicker = [NSSavePanel savePanel];
     NSString* name  = [@(self.selectedAccountID.c_str()) stringByAppendingString: @".gz"];
     [filePicker setNameFieldStringValue: name];
-
-    if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
-        const char* fullPath = [[filePicker URL] fileSystemRepresentation];
-        if (self.accountModel->exportToFile(self.selectedAccountID, fullPath)) {
-            [self didCompleteExportWithPath:[filePicker URL]];
-        } else {
-            [self showAlertWithTitle: @"" andText: NSLocalizedString(@"An error occured during the backup", @"Backup error")];
+    if ([filePicker runModal] != NSFileHandlingPanelOKButton) {
+        return;
+    }
+    NSString *password = @"";
+    const char* fullPath = [[filePicker URL] fileSystemRepresentation];
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if(accountProperties.archiveHasPassword) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"OK"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert setMessageText: NSLocalizedString(@"Enter account password",
+                                                 @"Backup enter password")];
+        NSTextField *input = [[NSSecureTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 20)];
+        [alert setAccessoryView:input];
+        if ([alert runModal] != NSAlertFirstButtonReturn) {
+            return;
         }
+        password = [input stringValue];
+    }
+    if (self.accountModel->exportToFile(self.selectedAccountID, fullPath, [password UTF8String])) {
+        [self didCompleteExportWithPath:[filePicker URL]];
+    } else {
+        [self showAlertWithTitle: @"" andText: NSLocalizedString(@"An error occured during the backup", @"Backup error")];
     }
 }
 
