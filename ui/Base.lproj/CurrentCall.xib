@@ -19,10 +19,13 @@
                 <outlet property="controlsPanel" destination="wDi-X6-dgL" id="zs8-jw-wQ3"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
                 <outlet property="headerContainer" destination="d0X-cW-Xgz" id="7RM-kh-vCm"/>
+                <outlet property="hidePreviewBackground" destination="4xt-xs-LVn" id="7Y7-km-MhC"/>
+                <outlet property="hidePreviewButton" destination="M9f-aD-4Bp" id="sC4-zK-ZQ9"/>
                 <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
                 <outlet property="incomingDisplayName" destination="V2C-DZ-Ygi" id="g5l-my-5JW"/>
                 <outlet property="incomingPersonPhoto" destination="N3W-75-NuQ" id="7Gl-sn-6xL"/>
                 <outlet property="loadingIndicator" destination="JwW-2h-DyZ" id="EEb-50-oSJ"/>
+                <outlet property="movableBaseForView" destination="lgD-oV-ZDp" id="8H4-9m-i8p"/>
                 <outlet property="muteAudioButton" destination="tQl-cT-0Lb" id="qV4-Ef-UTx"/>
                 <outlet property="muteVideoButton" destination="LVS-yZ-98V" id="qQs-zP-wQ4"/>
                 <outlet property="outgoingId" destination="yey-xg-Lzf" id="45Y-9Q-7Se"/>
@@ -68,6 +71,45 @@
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="gQE-fN-JhY" customClass="CallMTKView">
                                     <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                 </customView>
+                                <customView autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgD-oV-ZDp" customClass="MovableView">
+                                    <rect key="frame" x="550" y="20" width="175" height="120"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <customView autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="CallMTKView">
+                                            <rect key="frame" x="0.0" y="0.0" width="175" height="120"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <box autoresizesSubviews="NO" fixedFrame="YES" boxType="custom" borderType="none" cornerRadius="3" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-xs-LVn">
+                                                    <rect key="frame" x="150" y="95" width="25" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                                    <view key="contentView" id="hya-Xj-6pU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="M9f-aD-4Bp">
+                                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSTouchBarExitFullScreenTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="DuU-Ub-wG6">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="hidePreview:" target="-2" id="vGI-Q7-HBO"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="M9f-aD-4Bp" firstAttribute="top" secondItem="hya-Xj-6pU" secondAttribute="top" id="4BQ-pr-wNv"/>
+                                                            <constraint firstAttribute="trailing" secondItem="M9f-aD-4Bp" secondAttribute="trailing" id="Iig-Gr-QPw"/>
+                                                            <constraint firstAttribute="bottom" secondItem="M9f-aD-4Bp" secondAttribute="bottom" id="J0I-74-3xH"/>
+                                                            <constraint firstItem="M9f-aD-4Bp" firstAttribute="leading" secondItem="hya-Xj-6pU" secondAttribute="leading" id="MCA-cM-aSb"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <color key="fillColor" red="0.99999600649999998" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </box>
+                                            </subviews>
+                                        </customView>
+                                    </subviews>
+                                </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz" customClass="GradientView">
                                     <rect key="frame" x="0.0" y="733" width="746" height="72"/>
                                     <subviews>
@@ -85,10 +127,6 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
                                             </userDefinedRuntimeAttributes>
                                         </textField>
-                                        <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L83-P5-9ao">
-                                            <rect key="frame" x="291" y="-12" width="163" height="96"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        </customView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="cIU-M7-xpN" firstAttribute="top" secondItem="d0X-cW-Xgz" secondAttribute="top" constant="24" id="Qc7-qp-qSV"/>
@@ -395,13 +433,6 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="CallMTKView">
-                                    <rect key="frame" x="551" y="20" width="175" height="120"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="120" id="BvU-kV-0uD"/>
-                                        <constraint firstAttribute="width" constant="175" id="aEv-Tt-tSD"/>
-                                    </constraints>
-                                </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="se7-PJ-iwD">
                                     <rect key="frame" x="0.0" y="0.0" width="746" height="805"/>
                                     <subviews>
@@ -583,8 +614,6 @@
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="9cl-8g-a1Q"/>
                                 <constraint firstItem="W4l-Be-bhM" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="De3-8O-mXx"/>
                                 <constraint firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" id="G79-Jv-EYw"/>
-                                <constraint firstAttribute="bottom" secondItem="6y6-RH-qOp" secondAttribute="bottom" constant="20" id="HOt-7O-FU2"/>
-                                <constraint firstAttribute="trailing" secondItem="6y6-RH-qOp" secondAttribute="trailing" constant="20" id="KTx-SN-RUg"/>
                                 <constraint firstItem="d0X-cW-Xgz" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="MKB-zm-C75"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N2u-0C-Y3z"/>
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N5g-Mw-ag2"/>
@@ -606,7 +635,6 @@
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerY" secondItem="2wf-Py-l6B" secondAttribute="centerY" id="siE-fo-i7E"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="centerX" secondItem="2wf-Py-l6B" secondAttribute="centerX" id="txG-gM-vYq"/>
                                 <constraint firstItem="peV-wm-HQm" firstAttribute="width" secondItem="2wf-Py-l6B" secondAttribute="width" id="v68-K9-WVB"/>
-                                <constraint firstItem="6y6-RH-qOp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Djs-L8-8Pe" secondAttribute="trailing" constant="15" id="wnE-XJ-30V"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="xlx-0W-9hG"/>
                                 <constraint firstItem="wDi-X6-dgL" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" id="yRe-td-LPS"/>
                             </constraints>
@@ -979,6 +1007,7 @@
         <userDefaultsController representsSharedInstance="YES" id="cb1-cg-dMu"/>
     </objects>
     <resources>
+        <image name="NSTouchBarExitFullScreenTemplate" width="18" height="30"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_accept" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>

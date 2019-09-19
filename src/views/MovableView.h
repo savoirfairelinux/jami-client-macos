@@ -16,30 +16,20 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+#import <Cocoa/Cocoa.h>
 
-#import "GradientView.h"
+@interface MovableView : NSView
 
-@implementation GradientView
+typedef enum {
+    TOP_LEFT = 1,
+    TOP_RIGHT,
+    BOTTOM_LEFT,
+    BOTTOM_RIGHT
+} ViewCorner;
 
-@synthesize startingColor, endingColor, angle;
+@property (nonatomic, strong) IBOutlet NSView* hostingView;
 
-- (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    if (!startingColor || !endingColor || !angle) {
-        return;
-    }
-    NSGradient* aGradient = [[NSGradient alloc]
-                             initWithStartingColor: startingColor
-                             endingColor: endingColor];
-    [aGradient drawInRect: dirtyRect angle: angle];
-}
-
-- (nullable NSView *)hitTest:(NSPoint)point {
-    NSView *view = [super hitTest:point];
-    if ([view isKindOfClass:[NSButton class]]) {
-        return view;
-    }
-    return nil;
-}
+@property (assign)BOOL movable;
+- (ViewCorner)closestCorner;
 
 @end
