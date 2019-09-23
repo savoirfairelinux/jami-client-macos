@@ -125,6 +125,8 @@ extern "C" {
 // Video
 @property (unsafe_unretained) IBOutlet CallView *videoView;
 @property (unsafe_unretained) IBOutlet CallMTKView *previewView;
+@property (unsafe_unretained) IBOutlet NSView* hidePreview;
+@property (unsafe_unretained) IBOutlet NSButton* hidePreviewButton;
 
 @property (unsafe_unretained) IBOutlet CallMTKView *videoMTKView;
 
@@ -140,12 +142,18 @@ extern "C" {
 
 @implementation CurrentCallVC
 lrc::api::AVModel* mediaModel;
+
+NSInteger const PREVIEW_WIDTH = 175;
+NSInteger const PREVIEW_HEIGHT = 120;
+NSInteger const HIDE_PREVIEW_BUTTON_MIN_SIZE = 25;
+NSInteger const HIDE_PREVIEW_BUTTON_MAX_SIZE = 35;
+
 @synthesize holdOnOffButton, hangUpButton,
             recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
             muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
             incomingDisplayName, incomingPersonPhoto, previewView, splitView, loadingIndicator, ringingPanel,
             outgoingPanel, outgoingPersonLabel, outgoingStateLabel, outgoingPhoto, outgoingId,
-            callRecordButtonMarginLeft, audioCallView, audioCallPhoto, audioCallTime, audioCallPersonLabel, audioCallPersonId, backgroundImage, bluerBackgroundEffect;
+            callRecordButtonMarginLeft, audioCallView, audioCallPhoto, audioCallTime, audioCallPersonLabel, audioCallPersonId, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreview;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -205,6 +213,7 @@ CVPixelBufferRef pixelBufferPreview;
     [loadingIndicator setInnerMargin:59];
 
     [self.videoView setCallDelegate:self];
+    [self.videoView addSubview:controlsPanel positioned:NSWindowAbove relativeTo:nil];
     CGColor* color = [[[NSColor blackColor] colorWithAlphaComponent:0.2] CGColor];
     [headerContainer.layer setBackgroundColor:color];
     [bluerBackgroundEffect setWantsLayer:YES];
@@ -315,6 +324,7 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::PAUSED:
             [self.videoMTKView fillWithBlack];
             [self.previewView fillWithBlack];
+            [hidePreview setHidden:YES];
             [bluerBackgroundEffect setHidden:NO];
             [backgroundImage setHidden:NO];
             [self.previewView setHidden: YES];
@@ -335,6 +345,7 @@ CVPixelBufferRef pixelBufferPreview;
             [previewView fillWithBlack];
             [self.videoMTKView fillWithBlack];
             [self.previewView setHidden: NO];
+            [hidePreview setHidden: YES];
             [self.videoMTKView setHidden: NO];
             if(currentCall.isAudioOnly) {
                 [self setUpAudioOnlyView];
@@ -512,6 +523,7 @@ CVPixelBufferRef pixelBufferPreview;
                                                   if(!renderer->isRendering()) {
                                                       return;
                                                   }
+                                                  [hidePreview setHidden: NO];
                                                   [self renderer: renderer renderFrameForPreviewView:previewView];
 
                                               } else {
@@ -634,10 +646,10 @@ CVPixelBufferRef pixelBufferPreview;
     [self.view setHidden:YES];
     self.view.layer.position = self.view.frame.origin;
     [self collapseRightView];
-     previewView.frame = CGRectMake(534,20,175, 120);
-   // self.add
-  //  self.testView = [[NSImageView alloc] initWithFrame:self.view.frame];
-  // [self.view addSubview:previewView];
+    previewView.frame = [self getPreviewMaximizedSize];
+    hidePreview.frame = [self getHidePreviewMinSize];
+    [previewView setAutoresizingMask: NSViewNotSizable | NSViewMinXMargin];
+    [hidePreview setAutoresizingMask: NSViewNotSizable | NSViewMinXMargin | NSViewMinYMargin| NSViewMaxXMargin | NSViewMaxYMargin];
 }
 
 # pragma private IN/OUT animations
@@ -1034,20 +1046,46 @@ CVPixelBufferRef pixelBufferPreview;
     mediaModel->setInputFile(QUrl::fromLocalFile(uri.c_str()).toLocalFile().toStdString());
 }
 
+-(CGRect) getPreviewMinimizedSize {
+    CGPoint origin = CGPointMake(self.videoView.frame.size.width - HIDE_PREVIEW_BUTTON_MAX_SIZE - 20, 20);
+    return CGRectMake(origin.x, origin.y, HIDE_PREVIEW_BUTTON_MAX_SIZE, HIDE_PREVIEW_BUTTON_MAX_SIZE);
+}
+
+-(CGRect) getPreviewMaximizedSize {
+    CGPoint origin = CGPointMake(self.videoView.frame.size.width - PREVIEW_WIDTH - 20, 20);
+    return CGRectMake(origin.x, origin.y, PREVIEW_WIDTH, PREVIEW_HEIGHT);
+}
+
+-(CGRect) getHidePreviewMinSize {
+    CGPoint origin = CGPointMake(self.previewView.frame.size.width - HIDE_PREVIEW_BUTTON_MIN_SIZE,
+                                 self.previewView.frame.size.height - HIDE_PREVIEW_BUTTON_MIN_SIZE);
+    return CGRectMake(origin.x, origin.y, HIDE_PREVIEW_BUTTON_MIN_SIZE, HIDE_PREVIEW_BUTTON_MIN_SIZE);
+}
+
+-(CGRect) getHidePreviewMaxSize {
+    CGPoint origin = CGPointMake(self.previewView.frame.size.width - HIDE_PREVIEW_BUTTON_MAX_SIZE,
+                                 self.previewView.frame.size.height - HIDE_PREVIEW_BUTTON_MAX_SIZE);
+    return CGRectMake(origin.x, origin.y, HIDE_PREVIEW_BUTTON_MAX_SIZE, HIDE_PREVIEW_BUTTON_MAX_SIZE);
+}
+
 - (IBAction)hidePreview:(id)sender {
     CGRect previewFrame = previewView.frame;
     CGRect newPreviewFrame;
-    if (previewFrame.size.width < 175) {
-        newPreviewFrame = CGRectMake(534,20,175, 120);
+    CGRect hidePreviewFrame;
+    if (previewFrame.size.width > HIDE_PREVIEW_BUTTON_MAX_SIZE) {
+        newPreviewFrame = [self getPreviewMinimizedSize];
+        hidePreviewFrame = [self getHidePreviewMaxSize];
+        hidePreviewButton.image = [NSImage imageNamed: NSImageNameTouchBarEnterFullScreenTemplate];
     } else {
-        newPreviewFrame = CGRectMake(670,20,40, 40);
+        newPreviewFrame = [self getPreviewMaximizedSize];
+        hidePreviewFrame = [self getHidePreviewMinSize];
+        hidePreviewButton.image = [NSImage imageNamed: NSImageNameTouchBarExitFullScreenTemplate];
     }
-    //previewView.frame = newPreviewFrame;
-    
-    
-    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-        context.duration = 2.f;
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
+        context.duration = 0.5f;
         previewView.animator.frame = newPreviewFrame;
-    } completionHandler:nil];
+        //hidePreview.animator.frame = hidePreviewFrame;
+    } completionHandler: nil];
+    hidePreview.frame = hidePreviewFrame;
 }
 @end

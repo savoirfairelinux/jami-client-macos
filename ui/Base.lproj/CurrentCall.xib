@@ -19,6 +19,8 @@
                 <outlet property="controlsPanel" destination="wDi-X6-dgL" id="zs8-jw-wQ3"/>
                 <outlet property="hangUpButton" destination="Kjq-iM-NBL" id="Puz-4L-Okl"/>
                 <outlet property="headerContainer" destination="d0X-cW-Xgz" id="7RM-kh-vCm"/>
+                <outlet property="hidePreview" destination="4xt-xs-LVn" id="FQD-Sf-hM4"/>
+                <outlet property="hidePreviewButton" destination="M9f-aD-4Bp" id="sC4-zK-ZQ9"/>
                 <outlet property="holdOnOffButton" destination="anb-Y8-JQi" id="HSl-pE-Kwg"/>
                 <outlet property="incomingDisplayName" destination="V2C-DZ-Ygi" id="g5l-my-5JW"/>
                 <outlet property="incomingPersonPhoto" destination="N3W-75-NuQ" id="7Gl-sn-6xL"/>
@@ -395,12 +397,13 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
-                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="CallMTKView">
+                                <customView autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-RH-qOp" userLabel="Preview" customClass="CallMTKView">
                                     <rect key="frame" x="551" y="20" width="175" height="120"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <box ambiguous="YES" boxType="custom" borderType="none" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-xs-LVn">
+                                        <box autoresizesSubviews="NO" fixedFrame="YES" boxType="custom" borderType="none" cornerRadius="3" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-xs-LVn">
                                             <rect key="frame" x="150" y="95" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                             <view key="contentView" id="hya-Xj-6pU">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -417,17 +420,13 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="M9f-aD-4Bp" firstAttribute="leading" secondItem="hya-Xj-6pU" secondAttribute="leading" id="FR6-Gn-q4m"/>
-                                                    <constraint firstItem="M9f-aD-4Bp" firstAttribute="top" secondItem="hya-Xj-6pU" secondAttribute="top" id="gYU-3k-8Pl"/>
-                                                    <constraint firstAttribute="trailing" secondItem="M9f-aD-4Bp" secondAttribute="trailing" id="ohk-RJ-oML"/>
-                                                    <constraint firstAttribute="bottom" secondItem="M9f-aD-4Bp" secondAttribute="bottom" id="ur3-zt-X5W"/>
+                                                    <constraint firstItem="M9f-aD-4Bp" firstAttribute="top" secondItem="hya-Xj-6pU" secondAttribute="top" id="4BQ-pr-wNv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="M9f-aD-4Bp" secondAttribute="trailing" id="Iig-Gr-QPw"/>
+                                                    <constraint firstAttribute="bottom" secondItem="M9f-aD-4Bp" secondAttribute="bottom" id="J0I-74-3xH"/>
+                                                    <constraint firstItem="M9f-aD-4Bp" firstAttribute="leading" secondItem="hya-Xj-6pU" secondAttribute="leading" id="MCA-cM-aSb"/>
                                                 </constraints>
                                             </view>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="25" id="7xl-aK-S0W"/>
-                                                <constraint firstAttribute="width" constant="25" id="CWb-qg-Tmq"/>
-                                            </constraints>
-                                            <color key="fillColor" red="0.99999600649999998" green="1" blue="1" alpha="0.32124892979452052" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="fillColor" red="0.99999600649999998" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </box>
                                     </subviews>
                                 </customView>
