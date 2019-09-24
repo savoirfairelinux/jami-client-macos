@@ -172,7 +172,7 @@ bool frameDisplayed = false;
     }
     NSSize frameSize = self.frame.size;
 
-    float viewRatio = (rotation == 90 || rotation == -90 || rotation == 180 || rotation == -180) ?
+    float viewRatio = (rotation == 90 || rotation == -90) ?
     frameSize.height/frameSize.width : frameSize.width/frameSize.height;
     float frameRatio = ((float)size.width)/((float)size.height);
     simd::float4x4 projectionMatrix;
