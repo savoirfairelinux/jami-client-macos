@@ -404,7 +404,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     for(int i = 0; i < width; ++i) {
         for(int j = 0; j < width; ++j) {
             if(*data & 1) {
-                CGContextSetFillColorWithColor(ctx, [NSColor labelColor].CGColor);
+                CGContextSetFillColorWithColor(ctx, [NSColor blackColor].CGColor);
                 rectDraw.origin = CGPointMake((j + qr_margin) * zoom,(i + qr_margin) * zoom);
                 CGContextAddRect(ctx, rectDraw);
                 CGContextFillPath(ctx);
