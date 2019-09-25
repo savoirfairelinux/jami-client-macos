@@ -10,7 +10,7 @@
                 <outlet property="alias" destination="q5O-af-3lp" id="gph-lh-sJZ"/>
                 <outlet property="errorContainer" destination="ty1-sj-tT6" id="eEy-Cr-yiw"/>
                 <outlet property="errorField" destination="G1N-th-ZtP" id="OZ1-F7-jN7"/>
-                <outlet property="finalContainer" destination="D9c-cc-43F" id="WCp-fn-u2t"/>
+                <outlet property="finalContainer" destination="D9c-cc-43F" id="MqY-nC-dhp"/>
                 <outlet property="infoField" destination="Qx0-KE-jEl" id="ACx-L8-XrX"/>
                 <outlet property="initialContainer" destination="xUT-yB-g8Q" id="RY9-PG-fGI"/>
                 <outlet property="passwordConfirmField" destination="fb6-6f-oqD" id="zo7-JA-tSY"/>
@@ -27,16 +27,16 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="508" height="408"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="508" height="417"/>
+                <rect key="frame" x="0.0" y="0.0" width="508" height="365"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="xUT-yB-g8Q" userLabel="Migration Container">
-                        <rect key="frame" x="20" y="20" width="468" height="387"/>
+                        <rect key="frame" x="20" y="20" width="468" height="335"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YR8-e7-f8B">
-                                <rect key="frame" x="-2" y="370" width="472" height="17"/>
+                                <rect key="frame" x="-2" y="318" width="472" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Account migration required" id="wmv-sA-Mlh">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +44,7 @@
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rd7-Mr-0Ba">
-                                <rect key="frame" x="194" y="270" width="80" height="80"/>
+                                <rect key="frame" x="194" y="218" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="TsS-Ox-Cp7"/>
                                     <constraint firstAttribute="height" constant="80" id="aHe-uA-JfI"/>
@@ -52,7 +52,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="z7T-Po-6wb"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q5O-af-3lp">
-                                <rect key="frame" x="230" y="231" width="8" height="19"/>
+                                <rect key="frame" x="230" y="179" width="8" height="19"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="tEj-uA-vQ3">
                                     <font key="font" metaFont="system" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -60,16 +60,15 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Qx0-KE-jEl">
-                                <rect key="frame" x="-2" y="126" width="472" height="85"/>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" placeholderString="RingID" id="859-10-HEb">
+                                <rect key="frame" x="-2" y="125" width="472" height="34"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="justified" title="To proceed with the migration, you need to enter a password that was used for this account." placeholderString="RingID" id="859-10-HEb">
                                     <font key="font" metaFont="system"/>
-                                    <string key="title">The following account needs to be migrated to the new Jami account format:\n Alias : \nID:\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If your not ready to choose a password, you may close Jami and resume the migration later.</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vej-Z8-dOm">
-                                <rect key="frame" x="105" y="87" width="355" height="22"/>
+                                <rect key="frame" x="105" y="86" width="307" height="22"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Password..." drawsBackground="YES" usesSingleLineMode="YES" id="xqz-Uz-hqU">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -133,7 +132,7 @@ DQ
                                 </connections>
                             </button>
                             <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fb6-6f-oqD" userLabel="Password confirmation">
-                                <rect key="frame" x="105" y="44" width="355" height="22"/>
+                                <rect key="frame" x="105" y="43" width="307" height="22"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Confirm your new password..." drawsBackground="YES" usesSingleLineMode="YES" id="KuO-oT-zhY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -183,10 +182,10 @@ DQ
                         </constraints>
                     </customView>
                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ty1-sj-tT6">
-                        <rect key="frame" x="20" y="20" width="468" height="387"/>
+                        <rect key="frame" x="20" y="20" width="468" height="335"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RfX-YR-bbB">
-                                <rect key="frame" x="-2" y="370" width="472" height="17"/>
+                                <rect key="frame" x="-2" y="318" width="472" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Account migration error" id="8K3-9Z-MKH">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -194,7 +193,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="G1N-th-ZtP">
-                                <rect key="frame" x="-2" y="334" width="472" height="17"/>
+                                <rect key="frame" x="-2" y="282" width="472" height="17"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" placeholderString="error label" id="e7n-Ev-bK7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -202,7 +201,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cxh-K7-1eh">
-                                <rect key="frame" x="394" y="-7" width="80" height="32"/>
+                                <rect key="frame" x="403" y="-7" width="71" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VN1-A3-RIh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -240,10 +239,10 @@ DQ
                         </constraints>
                     </customView>
                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D9c-cc-43F">
-                        <rect key="frame" x="20" y="20" width="468" height="387"/>
+                        <rect key="frame" x="20" y="20" width="468" height="335"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="suF-b1-Duk">
-                                <rect key="frame" x="-2" y="370" width="472" height="17"/>
+                                <rect key="frame" x="-2" y="318" width="472" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Account migration completed" id="1ob-x1-u74">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -264,7 +263,7 @@ DQ
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="wRp-RS-wdh">
-                                <rect key="frame" x="-2" y="333" width="472" height="17"/>
+                                <rect key="frame" x="-2" y="281" width="472" height="17"/>
                                 <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="left" title="Congratulations, your account has been migrated with Success." placeholderString="" id="C2l-rz-Gqt">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -284,7 +283,7 @@ DQ
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="IbM-NP-t4j">
-                        <rect key="frame" x="64" y="125" width="380" height="167"/>
+                        <rect key="frame" x="64" y="99" width="380" height="167"/>
                         <subviews>
                             <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LsP-hk-8Om" customClass="ITProgressIndicator">
                                 <rect key="frame" x="155" y="49" width="70" height="70"/>
