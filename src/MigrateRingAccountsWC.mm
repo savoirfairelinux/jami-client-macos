@@ -98,14 +98,14 @@ QMetaObject::Connection stateChanged;
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Registered name: ",@"Text shown to the user")
                                                                             attributes:attrs]];
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@(registredName.c_str()) attributes:attrs]];
-    } else {
+    } else if(!accountInfo.profileInfo.uri.empty()) {
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"ID: ",@"Text shown to the user")
                                                                             attributes:attrs]];
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@(accountInfo.profileInfo.uri.c_str()) attributes:attrs]];
 
     }
     [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-    [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If you are not ready to choose a password, you may close Ring and resume the migration later.",@"Text shown to the user")]];
+    [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"To proceed with the migration, you need to enter a password that was used for this account.",@"Text shown to the user")]];
     [infoField setAttributedStringValue:infoMessage];
 }
 
