@@ -80,10 +80,15 @@ extern "C" {
 @property (unsafe_unretained) IBOutlet NSView* headerContainer;
 @property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
 
-@property (unsafe_unretained) IBOutlet NSImageView* outgoingPhoto;
-@property (unsafe_unretained) IBOutlet NSTextField* outgoingPersonLabel;
-@property (unsafe_unretained) IBOutlet NSTextField* outgoingStateLabel;
-@property (unsafe_unretained) IBOutlet NSTextField* outgoingId;
+// info
+@property (unsafe_unretained) IBOutlet NSStackView* infoContainer;
+@property (unsafe_unretained) IBOutlet NSImageView* contactPhoto;
+@property (unsafe_unretained) IBOutlet NSTextField* contactNameLabel;
+@property (unsafe_unretained) IBOutlet NSTextField* callStateLabel;
+@property (unsafe_unretained) IBOutlet NSTextField* contactIdLabel;
+@property (unsafe_unretained) IBOutlet IconButton* cancelCallButton;
+@property (unsafe_unretained) IBOutlet IconButton* pickUpButton;
+@property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
 // Call Controls
 @property (unsafe_unretained) IBOutlet GradientView* controlsPanel;
@@ -91,37 +96,12 @@ extern "C" {
 @property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
 @property (unsafe_unretained) IBOutlet IconButton* recordOnOffButton;
-@property (unsafe_unretained) IBOutlet IconButton* pickUpButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteAudioButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteVideoButton;
 @property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
 @property (unsafe_unretained) IBOutlet IconButton* qualityButton;
-
-@property (unsafe_unretained) IBOutlet NSView* advancedPanel;
-@property (unsafe_unretained) IBOutlet IconButton* advancedButton;
-@property (assign) IBOutlet NSLayoutConstraint* callRecordButtonMarginLeft;
-
-@property (strong) NSPopover* addToContactPopover;
-@property (strong) NSPopover* brokerPopoverVC;
-@property (strong) IBOutlet ChatVC* chatVC;
-
-// Ringing call panel
-@property (unsafe_unretained) IBOutlet NSView* ringingPanel;
-@property (unsafe_unretained) IBOutlet NSImageView* incomingPersonPhoto;
-@property (unsafe_unretained) IBOutlet NSTextField* incomingDisplayName;
-
-// Outgoing call panel
-@property (unsafe_unretained) IBOutlet NSView* outgoingPanel;
-@property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
-
-// audio only view
-@property (unsafe_unretained) IBOutlet NSView* audioCallView;
-@property (unsafe_unretained) IBOutlet NSImageView* audioCallPhoto;
-@property (unsafe_unretained) IBOutlet NSTextField* audioCallTime;
-@property (unsafe_unretained) IBOutlet NSTextField* audioCallPersonLabel;
-@property (unsafe_unretained) IBOutlet NSTextField* audioCallPersonId;
 
 // Video
 @property (unsafe_unretained) IBOutlet CallView *videoView;
@@ -139,6 +119,8 @@ extern "C" {
 @property QMetaObject::Connection mediaAddedConnection;
 @property QMetaObject::Connection profileUpdatedConnection;
 
+@property (strong) IBOutlet ChatVC* chatVC;
+
 @end
 
 @implementation CurrentCallVC
@@ -150,12 +132,7 @@ NSInteger const HIDE_PREVIEW_BUTTON_MIN_SIZE = 25;
 NSInteger const HIDE_PREVIEW_BUTTON_MAX_SIZE = 35;
 NSInteger const PREVIEW_MARGIN = 20;
 
-@synthesize holdOnOffButton, hangUpButton,
-            recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel,
-            muteVideoButton, muteAudioButton, controlsPanel, advancedPanel, advancedButton, headerContainer, videoView,
-            incomingDisplayName, incomingPersonPhoto, previewView, splitView, loadingIndicator, ringingPanel,
-            outgoingPanel, outgoingPersonLabel, outgoingStateLabel, outgoingPhoto, outgoingId,
-            callRecordButtonMarginLeft, audioCallView, audioCallPhoto, audioCallTime, audioCallPersonLabel, audioCallPersonId, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView;
+@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -184,7 +161,6 @@ CVPixelBufferRef pixelBufferPreview;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     auto currentCall = callModel->getCall(callUid_);
     [self setUpButtons: currentCall isRecording: (callModel->isRecording(callUid_) || avModel->getAlwaysRecord())];
-    callRecordButtonMarginLeft.constant = currentCall.isAudioOnly ? -40.0f: 10.0f;
     [previewView setHidden: YES];
     videoView.callId = callUid;
     [self setUpPrewviewFrame];
@@ -206,16 +182,9 @@ CVPixelBufferRef pixelBufferPreview;
 - (void) setUpPrewviewFrame {
     CGPoint previewOrigin = CGPointMake(self.videoView.frame.size.width - PREVIEW_WIDTH - PREVIEW_MARGIN, PREVIEW_MARGIN);
     movableBaseForView.frame = CGRectMake(previewOrigin.x, previewOrigin.y, PREVIEW_WIDTH, PREVIEW_HEIGHT);
-    movableBaseForView.wantsLayer = YES;
-    movableBaseForView.layer.cornerRadius = 4;
-    movableBaseForView.layer.masksToBounds = true;
-    [movableBaseForView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
-    movableBaseForView.hostingView = self.videoView;
     self.movableBaseForView.movable = true;
     previewView.frame = movableBaseForView.bounds;
-    [previewView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
     hidePreviewBackground.frame = [self frameForExpendPreviewButton: false];;
-    [hidePreviewBackground setAutoresizingMask: NSViewNotSizable | NSViewMinXMargin | NSViewMinYMargin| NSViewMaxXMargin | NSViewMaxYMargin];
 }
 
 - (void)awakeFromNib
@@ -235,10 +204,15 @@ CVPixelBufferRef pixelBufferPreview;
     [headerContainer.layer setBackgroundColor:color];
     [bluerBackgroundEffect setWantsLayer:YES];
     bluerBackgroundEffect.alphaValue = 0.6;
-    [audioCallView setWantsLayer:YES];
-    [audioCallView.layer setBackgroundColor: [[NSColor clearColor] CGColor]];
     [backgroundImage setWantsLayer: YES];
     backgroundImage.layer.contentsGravity = kCAGravityResizeAspectFill;
+    movableBaseForView.wantsLayer = YES;
+    movableBaseForView.layer.cornerRadius = 4;
+    movableBaseForView.layer.masksToBounds = true;
+    movableBaseForView.hostingView = self.videoView;
+    [movableBaseForView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
+    [previewView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
+    [hidePreviewBackground setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
 }
 
 -(void) updateDurationLabel
@@ -250,11 +224,7 @@ CVPixelBufferRef pixelBufferPreview;
             if (callStatus != lrc::api::call::Status::ENDED &&
                 callStatus != lrc::api::call::Status::TERMINATING &&
                 callStatus != lrc::api::call::Status::INVALID) {
-                if(callModel->getCall(callUid_).isAudioOnly) {
-                    [audioCallTime setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
-                } else {
-                    [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
-                }
+                [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
                 return;
             }
         }
@@ -264,8 +234,6 @@ CVPixelBufferRef pixelBufferPreview;
     // we stop the refresh loop
     [refreshDurationTimer invalidate];
     refreshDurationTimer = nil;
-    [timeSpentLabel setHidden:YES];
-    [audioCallView setHidden:YES];
 }
 
 -(void) updateCall
@@ -283,33 +251,22 @@ CVPixelBufferRef pixelBufferPreview;
     auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
     if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
         NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
-        [outgoingPersonLabel setStringValue:bestName];
-        [audioCallPersonLabel setStringValue:bestName];
+        [contactNameLabel setStringValue:bestName];
         NSString* ringID = bestIDForConversation(*convIt, *accountInfo_->conversationModel);
         if([bestName isEqualToString:ringID]) {
             ringID = @"";
         }
-        [outgoingId setStringValue:ringID];
-        [audioCallPersonId setStringValue:ringID];
+        [contactIdLabel setStringValue:ringID];
     }
+    [self setupContactInfo:contactPhoto];
 
     [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
-    [audioCallTime setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
     if (refreshDurationTimer == nil)
         refreshDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                                 target:self
                                                               selector:@selector(updateDurationLabel)
                                                               userInfo:nil
                                                                repeats:YES];
-    [outgoingStateLabel setStringValue:@(to_string(currentCall.status).c_str())];
-
-    // Default values for this views
-    [loadingIndicator setHidden:YES];
-    [ringingPanel setHidden:YES];
-    [outgoingPanel setHidden:YES];
-    [controlsPanel setHidden:NO];
-    [headerContainer setHidden:NO];
-    [chatButton setHidden:NO];
     [self setBackground];
 
     using Status = lrc::api::call::Status;
@@ -318,41 +275,42 @@ CVPixelBufferRef pixelBufferPreview;
     } else {
         [holdOnOffButton stopBlinkAnimation];
     }
+    callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? @"wants to talk to you" : @(to_string(currentCall.status).c_str());
+    loadingIndicator.hidden = (currentCall.status == Status::SEARCHING ||
+                               currentCall.status == Status::CONNECTING ||
+                               currentCall.status == Status::OUTGOING_RINGING) ? NO : YES;
+    pickUpButton.hidden = (currentCall.status == Status::INCOMING_RINGING) ? NO : YES;
+    callStateLabel.hidden = (currentCall.status == Status::IN_PROGRESS) ? YES : NO;
+    cancelCallButton.hidden = (currentCall.status == Status::IN_PROGRESS ||
+                             currentCall.status == Status::PAUSED) ? YES : NO;
+
     switch (currentCall.status) {
         case Status::SEARCHING:
         case Status::CONNECTING:
-            [headerContainer setHidden:YES];
-            [outgoingPanel setHidden:NO];
-            [outgoingPhoto setHidden:NO];
-            [self setupContactInfo:outgoingPhoto];
-            [loadingIndicator setHidden:NO];
-            [controlsPanel setHidden:YES];
-            break;
-        case Status::INCOMING_RINGING:
-            [outgoingPhoto setHidden:YES];
-            [controlsPanel setHidden:YES];
-            [outgoingPanel setHidden:YES];
-            [self setupIncoming:callUid_];
-            break;
         case Status::OUTGOING_RINGING:
-            [controlsPanel setHidden:YES];
-            [outgoingPanel setHidden:NO];
-            [loadingIndicator setHidden:NO];
+        case Status::INCOMING_RINGING:
+            [infoContainer setHidden: NO];
             [headerContainer setHidden:YES];
+            [controlsPanel setHidden:YES];
             break;
         /*case Status::CONFERENCE:
             [self setupConference:currentCall];
             break;*/
         case Status::PAUSED:
-            [self.videoMTKView fillWithBlack];
-            [self.previewView fillWithBlack];
-            [hidePreviewBackground setHidden:YES];
-            [bluerBackgroundEffect setHidden:NO];
+            [infoContainer setHidden: NO];
+            [headerContainer setHidden:NO];
+            [controlsPanel setHidden:NO];
             [backgroundImage setHidden:NO];
-            [self.previewView setHidden: YES];
-            [self.videoMTKView setHidden: YES];
-            self.previewView.stopRendering = true;
-            self.videoMTKView.stopRendering = true;
+            [bluerBackgroundEffect setHidden:NO];
+            if(!currentCall.isAudioOnly) {
+                [self.videoMTKView fillWithBlack];
+                [self.previewView fillWithBlack];
+                [hidePreviewBackground setHidden:YES];
+                [self.previewView setHidden: YES];
+                [self.videoMTKView setHidden: YES];
+                self.previewView.stopRendering = true;
+                self.videoMTKView.stopRendering = true;
+            }
             break;
         case Status::INACTIVE:
             if(currentCall.isAudioOnly) {
@@ -362,13 +320,8 @@ CVPixelBufferRef pixelBufferPreview;
             }
             break;
         case Status::IN_PROGRESS:
-            self.previewView.stopRendering = false;
-            self.videoMTKView.stopRendering = false;
-            [previewView fillWithBlack];
-            [self.videoMTKView fillWithBlack];
-            [self.previewView setHidden: NO];
-            [hidePreviewBackground setHidden: YES];
-            [self.videoMTKView setHidden: NO];
+            [headerContainer setHidden:NO];
+            [controlsPanel setHidden:NO];
             if(currentCall.isAudioOnly) {
                 [self setUpAudioOnlyView];
             } else {
@@ -385,22 +338,23 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) setUpVideoCallView {
-    [timeSpentLabel setHidden:NO];
-    [outgoingPhoto setHidden:YES];
-    [headerContainer setHidden:NO];
+    self.previewView.stopRendering = false;
+    self.videoMTKView.stopRendering = false;
+    [previewView fillWithBlack];
+    [self.videoMTKView fillWithBlack];
     [previewView setHidden: NO];
     [self.videoMTKView setHidden:NO];
+    [hidePreviewBackground setHidden: YES];
     [bluerBackgroundEffect setHidden:YES];
     [backgroundImage setHidden:YES];
-    [audioCallView setHidden:YES];
 }
 
 -(void) setUpAudioOnlyView {
-    [audioCallView setHidden:NO];
-    [headerContainer setHidden:YES];
     [self.previewView setHidden: YES];
     [self.videoMTKView setHidden: YES];
-    [audioCallPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+    [hidePreviewBackground setHidden: YES];
+    [bluerBackgroundEffect setHidden:NO];
+    [backgroundImage setHidden:NO];
 }
 
 -(void) setBackground {
@@ -424,7 +378,13 @@ CVPixelBufferRef pixelBufferPreview;
         backgroundImage.layer.contents = bluredImage;
         [backgroundImage setHidden:NO];
     } else {
-        [bluerBackgroundEffect setFillColor:[NSColor ringDarkGrey]];
+        contactNameLabel.textColor = [NSColor darkGrayColor];
+        contactNameLabel.textColor = [NSColor darkGrayColor];
+        contactIdLabel.textColor = [NSColor darkGrayColor];
+        callStateLabel.textColor = [NSColor darkGrayColor];
+        backgroundImage.layer.contents = nil;
+        [bluerBackgroundEffect setFillColor:[NSColor ringGreyHighlight]];
+        [bluerBackgroundEffect setAlphaValue:1];
         [backgroundImage setHidden:YES];
     }
 }
@@ -448,29 +408,6 @@ CVPixelBufferRef pixelBufferPreview;
 -(void) setupContactInfo:(NSImageView*)imageView
 {
     [imageView setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
-}
-
--(void) setupIncoming:(const std::string&) callId
-{
-    if (accountInfo_ == nil)
-        return;
-
-    auto* callModel = accountInfo_->callModel.get();
-    if (not callModel->hasCall(callUid_)) {
-        return;
-    }
-
-    auto call = callModel->getCall(callUid_);
-    auto* convModel = accountInfo_->conversationModel.get();
-
-    [ringingPanel setHidden:NO];
-    [controlsPanel setHidden:YES];
-    [headerContainer setHidden:YES];
-    auto it = getConversationFromUid(convUid_, *convModel);
-    if (it != convModel->allFilteredConversations().end()) {
-        [incomingPersonPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
-        [incomingDisplayName setStringValue:bestNameForConversation(*it, *convModel)];
-    }
 }
 
 -(void) setupConference
@@ -702,25 +639,26 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::disconnect(renderConnections.stopped);
     QObject::disconnect(self.messageConnection);
 
-    [self.chatButton setHidden:YES];
     [self.chatButton setPressed:NO];
     [self collapseRightView];
 
     [timeSpentLabel setStringValue:@""];
-    //audio view
-    [audioCallTime setStringValue:@""];
-    [audioCallPersonId setStringValue:@""];
-    [audioCallPersonLabel setStringValue:@""];
-    [audioCallView setHidden:YES];
-    [audioCallPhoto setImage:nil];
+    [contactIdLabel setStringValue:@""];
+    [contactNameLabel setStringValue:@""];
+    [contactPhoto setImage:nil];
     //background view
     [bluerBackgroundEffect setHidden:NO];
+    [bluerBackgroundEffect setFillColor:[NSColor darkGrayColor]];
+    [bluerBackgroundEffect setAlphaValue:0.6];
     [backgroundImage setHidden:NO];
-    //outgoing view
-    [outgoingPersonLabel setStringValue:@""];
-    [outgoingStateLabel setStringValue:@""];
+    backgroundImage.layer.contents = nil;
     [self.previewView setHidden:YES];
     [self.videoMTKView setHidden:YES];
+
+    contactNameLabel.textColor = [NSColor highlightColor];
+    contactNameLabel.textColor = [NSColor highlightColor];
+    contactIdLabel.textColor = [NSColor highlightColor];
+    callStateLabel.textColor = [NSColor highlightColor];
 }
 
 -(void) setupCallView
@@ -774,14 +712,9 @@ CVPixelBufferRef pixelBufferPreview;
                          auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
                          if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
                              accountInfo_->conversationModel->makePermanent(convUid_);
-                         [incomingPersonPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
-                         [outgoingPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+                         [contactPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
                          [self.delegate conversationInfoUpdatedFor:convUid_];
-                         if(accountInfo_->callModel.get()->getCall(callUid_).isAudioOnly) {
-                         [audioCallPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
-                             [self setBackground];
-                             return;
-                         }
+                         [self setBackground];
                      });
 }
 
@@ -902,11 +835,6 @@ CVPixelBufferRef pixelBufferPreview;
     callModel->togglePause(callUid_);
 }
 
-- (IBAction)toggleAdvancedControls:(id)sender {
-    [advancedButton setPressed:!advancedButton.isPressed];
-    [advancedPanel setHidden:![advancedButton isPressed]];
-}
-
 - (IBAction)showDialpad:(id)sender {
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [appDelegate showDialpad];
@@ -959,7 +887,7 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 - (IBAction)toggleAddParticipantView:(id)sender {
-    
+
 }
 - (IBAction)hidePreview:(id)sender {
     CGRect previewFrame = previewView.frame;
@@ -981,39 +909,6 @@ CVPixelBufferRef pixelBufferPreview;
         previewView.animator.frame = newPreviewFrame;
     } completionHandler: nil];
     hidePreviewBackground.frame = bcHidePreviewFrame;
-}
-
-#pragma mark - NSPopOverDelegate
-
-- (void)popoverWillClose:(NSNotification *)notification
-{
-    if (_brokerPopoverVC != nullptr) {
-        [_brokerPopoverVC performClose:self];
-        _brokerPopoverVC = NULL;
-    }
-
-    if (self.addToContactPopover != nullptr) {
-        [self.addToContactPopover performClose:self];
-        self.addToContactPopover = NULL;
-    }
-
-    [self.transferButton setPressed:NO];
-    [self.addParticipantButton setState:NSOffState];
-}
-
-- (void)popoverDidClose:(NSNotification *)notification
-{
-    [videoView setCallDelegate:self];
-}
-
-#pragma mark - ContactLinkedDelegate
-
-- (void)contactLinked
-{
-    if (self.addToContactPopover != nullptr) {
-        [self.addToContactPopover performClose:self];
-        self.addToContactPopover = NULL;
-    }
 }
 
 #pragma mark - NSSplitViewDelegate
