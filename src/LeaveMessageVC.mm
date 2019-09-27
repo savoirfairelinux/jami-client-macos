@@ -81,7 +81,8 @@ lrc::api::ConversationModel* conversationModel;
 - (IBAction)recordMessage:(NSButton *)sender {
     if (!isRecording) {
         [self clearData];
-        std::string file_name = avModel->startLocalRecorder(true);
+        avModel->startPreview();
+        std::string file_name = avModel->startLocalRecorder(NO);
         if (file_name.empty()) {
             return;
         }
@@ -97,6 +98,7 @@ lrc::api::ConversationModel* conversationModel;
                                                                    repeats:YES];
     } else {
         avModel->stopLocalRecorder([filesToSend[@(conversationUid.c_str())] UTF8String]);
+        avModel->stopPreview();
         isRecording = false;
         recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
         [refreshDurationTimer invalidate];

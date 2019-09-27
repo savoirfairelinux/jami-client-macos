@@ -37,7 +37,6 @@
 #import "RingWindowController.h"
 #import "NSString+Extensions.h"
 #import "LeaveMessageVC.h"
-#import "LeaveMessageVC.h"
 
 @interface ConversationVC () <QLPreviewPanelDataSource, QLPreviewPanelDelegate>{
 
@@ -85,6 +84,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         [leaveMessageVC setAVModel: avModel];
         leaveMessageConversations = [[NSMutableArray alloc] init];
         leaveMessageVC.delegate = self;
+        [messagesViewVC setAVModel: avModel];
     }
     return self;
 }
