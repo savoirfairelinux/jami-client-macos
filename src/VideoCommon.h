@@ -19,6 +19,7 @@
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <video/renderer.h>
 
 struct AVFrame;
 
@@ -32,6 +33,10 @@ struct AVFrame;
 + (void) fillPixelBuffr:(CVPixelBufferRef *)pixelBuffer
               fromFrame:(const AVFrame*)frame
              bufferPool:(CVPixelBufferPoolRef *)pixelBufferPool;
++ (CGSize) fillPixelBuffr:(CVPixelBufferRef *)pixelBuffer
+             fromRenderer:(const lrc::api::video::Renderer*)renderer
+             bufferPool:(CVPixelBufferPoolRef *)pixelBufferPool;
+
 
 @end
 
