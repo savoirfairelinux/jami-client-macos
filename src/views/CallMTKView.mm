@@ -215,6 +215,7 @@ bool frameDisplayed = false;
     [commandEncoder endEncoding];
     [commandBuffer presentDrawable:drawable];
     [commandBuffer commit];
+    [self draw];
 }
 
 -(simd::float4x4) getScalingMatrix:(CGFloat) ratio axis:(char) axis {
