@@ -71,5 +71,6 @@ namespace lrc {
 -(void) showConversation:(NSString* )conversationId forAccount:(NSString*)accountId;
 -(void) showCall:(NSString* )callId forAccount:(NSString*)accountId forConversation:(NSString*)conversationId;
 -(void) showContactRequestFor:(NSString* )accountId contactUri:(NSString*)uri;
+-(void) updateRender;
 
 @end

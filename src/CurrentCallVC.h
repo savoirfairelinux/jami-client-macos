@@ -47,4 +47,8 @@ namespace lrc {
           conversation:(const std::string&)convUid
                account:(const lrc::api::account::Info*)account
                avModel:(lrc::api::AVModel *)avModel;
+
+-(void) stopRendering;
+-(void) startRendering;
+
 @end

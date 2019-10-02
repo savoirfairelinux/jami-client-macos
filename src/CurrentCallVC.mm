@@ -105,12 +105,12 @@ extern "C" {
 
 // Video
 @property (unsafe_unretained) IBOutlet CallView *videoView;
-@property (unsafe_unretained) IBOutlet CallMTKView *previewView;
+@property (unsafe_unretained) CallMTKView *previewView;
 @property (unsafe_unretained) IBOutlet MovableView *movableBaseForView;
-@property (unsafe_unretained) IBOutlet NSView* hidePreviewBackground;
-@property (unsafe_unretained) IBOutlet NSButton* hidePreviewButton;
+@property  NSView* hidePreviewBackground;
+@property NSButton* hidePreviewButton;
 
-@property (unsafe_unretained) IBOutlet CallMTKView *videoMTKView;
+@property (unsafe_unretained) CallMTKView *videoMTKView;
 
 @property RendererConnectionsHolder* renderConnections;
 @property QMetaObject::Connection videoStarted;
@@ -158,6 +158,7 @@ CVPixelBufferRef pixelBufferPreview;
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
+    [self configureVideo];
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     auto currentCall = callModel->getCall(callUid_);
     [self setUpButtons: currentCall isRecording: (callModel->isRecording(callUid_) || avModel->getAlwaysRecord())];
@@ -184,7 +185,7 @@ CVPixelBufferRef pixelBufferPreview;
     movableBaseForView.frame = CGRectMake(previewOrigin.x, previewOrigin.y, PREVIEW_WIDTH, PREVIEW_HEIGHT);
     self.movableBaseForView.movable = true;
     previewView.frame = movableBaseForView.bounds;
-    hidePreviewBackground.frame = [self frameForExpendPreviewButton: false];;
+    hidePreviewBackground.frame = [self frameForExpendPreviewButton: false];
 }
 
 - (void)awakeFromNib
@@ -214,6 +215,35 @@ CVPixelBufferRef pixelBufferPreview;
     [previewView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
     [hidePreviewBackground setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
 }
+
+-(void) removeVideo {
+    [self.previewView removeFromSuperview];
+    [self.videoMTKView removeFromSuperview];   
+    self.previewView = nil;
+    self.videoMTKView = nil;
+}
+
+-(void) configureVideo {
+    if(!self.videoMTKView) {
+        self.videoMTKView = [[CallMTKView alloc] initWithFrame: self.videoView.bounds];
+    }
+    [self.videoView addSubview:self.videoMTKView];
+    [self.videoMTKView setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+    if (!self.previewView) {
+         self.previewView = [[CallMTKView alloc] initWithFrame: self.movableBaseForView.bounds];
+        
+    }
+    [self.movableBaseForView addSubview:previewView];
+    [previewView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
+    [self.previewView addSubview:hidePreviewBackground];
+    hidePreviewBackground.frame = [self frameForExpendPreviewButton: false];
+    hidePreviewButton.frame = hidePreviewBackground.bounds;
+    [hidePreviewBackground addSubview:hidePreviewButton];
+    [self.videoView addSubview:movableBaseForView positioned:NSWindowAbove relativeTo:nil];
+    [self.videoView addSubview:controlsPanel positioned:NSWindowAbove relativeTo:nil];
+    [self.videoView addSubview:headerContainer positioned:NSWindowAbove relativeTo:nil];
+}
+
 
 -(void) updateDurationLabel
 {
@@ -479,7 +509,7 @@ CVPixelBufferRef pixelBufferPreview;
                                           [=](const std::string& id) {
                                               if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                                                   auto renderer = &mediaModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID);
-                                                  if(!renderer->isRendering()) {
+                                                  if(!renderer->isRendering() || !self.previewView) {
                                                       return;
                                                   }
                                                   [hidePreviewBackground setHidden: NO];
@@ -487,7 +517,7 @@ CVPixelBufferRef pixelBufferPreview;
 
                                               } else {
                                                   auto renderer = &mediaModel->getRenderer(id);
-                                                  if(!renderer->isRendering()) {
+                                                  if(!renderer->isRendering() || !self.videoMTKView) {
                                                       return;
                                                   }
                                                   [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
@@ -659,6 +689,7 @@ CVPixelBufferRef pixelBufferPreview;
     contactNameLabel.textColor = [NSColor highlightColor];
     contactIdLabel.textColor = [NSColor highlightColor];
     callStateLabel.textColor = [NSColor highlightColor];
+     [self removeVideo];
 }
 
 -(void) setupCallView
@@ -1000,6 +1031,73 @@ CVPixelBufferRef pixelBufferPreview;
     CGPoint origin = CGPointMake(self.previewView.frame.size.width - size,
                                  self.previewView.frame.size.height - size);
     return CGRectMake(origin.x, origin.y, size, size);
+}
+
+-(void) stopRendering {
+    [self removeVideo];
+       // [self.previewView removeFromSuperview];
+       // [self.videoMTKView removeFromSuperview];
+//    [self.previewView setHidden: YES];
+//    [self.videoMTKView setHidden: YES];
+  //  self.previewView.paused = YES;
+ //   self.videoMTKView.paused = YES;
+//    self.previewView.stopRendering = true;
+//    self.videoMTKView.stopRendering = true;
+//    QObject::disconnect(renderConnections.frameUpdated);
+//    QObject::disconnect(renderConnections.started);
+//    QObject::disconnect(renderConnections.stopped);
+    
+}
+
+-(void) startRendering {
+    [self configureVideo];
+ //   self.previewView.paused = NO;
+ //   self.videoMTKView.paused = NO;
+    //   [self.view setWantsLayer:YES];
+      //  [self.videoView  setWantsLayer:YES];
+   //  [self.previewView setWantsLayer:YES];
+   //  [self.videoMTKView setWantsLayer:YES];
+   // [self.view addSubview:self.previewView];
+   //  [self.view addSubview:self.videoMTKView];
+//    self.previewView.stopRendering = YES;
+//    self.videoMTKView.stopRendering = YES;
+//    [self.previewView setHidden: NO];
+//    [self.videoMTKView setHidden: NO];
+//    self.previewView.stopRendering = NO;
+//    self.videoMTKView.stopRendering = NO;
+//    [self connectVideoSignals];
+//    [self.view setWantsLayer:YES];
+//    [self.videoView  setWantsLayer:YES];
+//
+//  //  [self.videoView setCallDelegate:self];
+//  //  CGColor* color = [[[NSColor blackColor] colorWithAlphaComponent:0.2] CGColor];
+//  //  [headerContainer.layer setBackgroundColor:color];
+// //   [bluerBackgroundEffect setWantsLayer:YES];
+//    //bluerBackgroundEffect.alphaValue = 0.6;
+//    [backgroundImage setWantsLayer: YES];
+//   // backgroundImage.layer.contentsGravity = kCAGravityResizeAspectFill;
+//    movableBaseForView.wantsLayer = YES;
+//   // movableBaseForView.layer.cornerRadius = 4;
+//   // movableBaseForView.layer.masksToBounds = true;
+//   // movableBaseForView.hostingView = self.videoView;
+//    [movableBaseForView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
+//    [previewView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
+//    [hidePreviewBackground setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
+//    [self.previewView setupView];
+//    [self.videoMTKView setupView];
+//    self.previewView.stopRendering = NO;
+//    self.videoMTKView.stopRendering = NO;
+//    [previewView fillWithBlack];
+//    [self.videoMTKView fillWithBlack];
+//
+//  //  [previewView fillWithBlack];
+//  //  [self.videoMTKView fillWithBlack];
+//   // [self connectVideoSignals];
+//  //  [self.view setFrame:self.view.superview.bounds];
+//   // [self.view setHidden:YES];
+//   // self.view.layer.position = self.view.frame.origin;
+//    //[self collapseRightView];
+    
 }
 
 @end

@@ -597,7 +597,16 @@ typedef NS_ENUM(NSInteger, ViewState) {
 }
 
 - (BOOL)windowShouldClose:(id)sender {
-    [NSApp hide:nil];
-    return NO;
+    [currentCallVC stopRendering];
+    return YES;
 }
+
+-(void) updateRender {
+    auto* convInfo = [chooseAccountVC selectedAccount].conversationModel.get();
+    auto info = convInfo->filteredConversation(0);
+    if(!info.callId.empty()) {
+    [currentCallVC startRendering];
+    }
+}
+
 @end

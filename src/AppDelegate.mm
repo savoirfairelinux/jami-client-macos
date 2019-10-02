@@ -87,7 +87,7 @@ std::unique_ptr<lrc::api::Lrc> lrc;
 #endif
 
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
-
+    
     NSAppleEventManager* appleEventManager = [NSAppleEventManager sharedAppleEventManager];
     [appleEventManager setEventHandler:self andSelector:@selector(handleQuitEvent:withReplyEvent:) forEventClass:kCoreEventClass andEventID:kAEQuitApplication];
 
@@ -95,8 +95,9 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     queue = dispatch_queue_create("scNetworkReachability", DISPATCH_QUEUE_SERIAL);
     [self setScNetworkQueue:queue];
     [self beginObservingReachabilityStatus];
-    NSActivityOptions options = NSActivitySuddenTerminationDisabled | NSActivityAutomaticTerminationDisabled | NSActivityBackground;
+    NSActivityOptions options = NSActivitySuddenTerminationDisabled | NSActivityAutomaticTerminationDisabled;
     self.activity = [[NSProcessInfo processInfo] beginActivityWithOptions:options reason:@"Receiving calls and messages"];
+    
     lrc = std::make_unique<lrc::api::Lrc>();
     if([self checkForRingAccount]) {
         [self setRingtonePath];
@@ -335,6 +336,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     [[NSApplication sharedApplication] removeWindowsItem:self.wizard.window];
     self.wizard = nil;
     [self.ringWindowController.window makeKeyAndOrderFront:self];
+    [self.ringWindowController updateRender];
 }
 
 - (void) showDialpad

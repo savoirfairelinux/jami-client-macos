@@ -212,9 +212,25 @@ bool frameDisplayed = false;
     [commandEncoder setFragmentTexture:textureY atIndex: 1];
     [commandEncoder setFragmentTexture:textureCbCr atIndex:2];
     [commandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:4];
-    [commandEncoder endEncoding];
     [commandBuffer presentDrawable:drawable];
+    [commandEncoder endEncoding];
     [commandBuffer commit];
+    //[self draw];
+    //[commandBuffer waitUntilScheduled];
+   // [drawable present];
+   // [self drawRect:self.bounds];
+   // [commandBuffer presentDrawable:drawable];
+}
+
+//- (void)drawRect:(NSRect)dirtyRect {
+//     NSLog(@"drawRect");
+//}
+//
+-(void)draw {
+    [super draw];
+    
+    NSLog(@"draw");
+
 }
 
 -(simd::float4x4) getScalingMatrix:(CGFloat) ratio axis:(char) axis {
