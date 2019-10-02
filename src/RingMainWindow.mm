@@ -23,7 +23,7 @@
 
 - (void)close {
     [super close];
-    [[NSApplication sharedApplication] addWindowsItem:self title:@"Ring" filename:NO];
+    [[NSApplication sharedApplication] addWindowsItem:self title:@"Jami" filename:NO];
 }
 
 @end

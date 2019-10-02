@@ -596,8 +596,4 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
 
-- (BOOL)windowShouldClose:(id)sender {
-    [NSApp hide:nil];
-    return NO;
-}
 @end

@@ -132,9 +132,4 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     return (frame.size.height - contentRect.size.height);
 }
 
-- (BOOL)windowShouldClose:(id)sender {
-   [self.window orderOut:self];
-   return NO;
-}
-
 @end
