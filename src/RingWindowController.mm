@@ -178,7 +178,6 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [chooseAccountVC updateWithDelegate: self andModel:self.accountModel];
     settingsVC = [[AccountSettingsVC alloc] initWithNibName:@"AccountSettings" bundle:nil accountmodel:self.accountModel];
     [callView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    [[currentCallVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[conversationVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [[settingsVC view] setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
