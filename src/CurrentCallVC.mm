@@ -973,7 +973,7 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) switchToFile:(std::string)uri {
-    mediaModel->setInputFile(QUrl::fromLocalFile(uri.c_str()).toLocalFile().toStdString());
+    mediaModel->setInputFile(uri);
 }
 
 -(CGRect) getVideoPreviewCollapsedSize {

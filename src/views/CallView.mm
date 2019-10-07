@@ -147,8 +147,7 @@
     //check to see if we can accept the data
     return conforms;
 }
-#if 0
-// TODO: add file as a source
+
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
     /*------------------------------------------------------
@@ -156,17 +155,12 @@
      --------------------------------------------------------*/
     if ( [sender draggingSource] != self ) {
         NSURL* fileURL = [NSURL URLFromPasteboard: [sender draggingPasteboard]];
-        Call* call = [self getCurrentCall];
-        if (call == nullptr) return;
-        if (auto outVideo = call->firstMedia<media::Video>(media::Media::Direction::OUT)) {
-            outVideo->sourceModel()->setFile(QUrl::fromLocalFile(QString::fromUtf8([fileURL.path UTF8String])));
+        std::string name = [[@"file:///" stringByAppendingString: fileURL.path] UTF8String];
+        [self.callDelegate switchToFile: name];
             return YES;
-        }
     }
-
     return NO;
 }
-#endif
 
 - (void)showContextualMenu:(NSEvent *)theEvent {
 
@@ -182,14 +176,11 @@
                                  action:@selector(captureScreen:)
                           keyEquivalent:@""
                                 atIndex:contextualMenu.itemArray.count];
-//#if 0
-// TODO: add file as a source
     [contextualMenu addItem:[NSMenuItem separatorItem]];
     [contextualMenu insertItemWithTitle:NSLocalizedString(@"Choose file", @"Contextual menu entry")
                                  action:@selector(chooseFile:)
                           keyEquivalent:@""
                                 atIndex:contextualMenu.itemArray.count];
-//#endif
 
     [NSMenu popUpContextMenu:contextualMenu withEvent:theEvent forView:self];
 }
@@ -249,7 +240,8 @@
     [browsePanel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
             NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
-            [self.callDelegate switchToFile: [theDoc.path UTF8String]];
+            std::string name = [[@"file:///" stringByAppendingString: theDoc.path] UTF8String];
+            [self.callDelegate switchToFile: name];
         }
     }];
 }
