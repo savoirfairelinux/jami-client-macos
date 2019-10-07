@@ -28,7 +28,7 @@
 -(void) mouseIsMoving:(BOOL) move;
 -(void) screenShare;
 -(void) switchToDevice:(int)deviceID;
--(void) switchToFile:(std::string)uri;
+-(void) switchToFile:(QString)uri;
 -(QVector<QString>) getDeviceList;
 -(NSString *) getDefaultDeviceName;
 
