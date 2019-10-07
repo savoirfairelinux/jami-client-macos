@@ -19,8 +19,17 @@
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <video/renderer.h>
 
 struct AVFrame;
+
+@interface RendererConnectionsHolder : NSObject
+
+@property QMetaObject::Connection frameUpdated;
+@property QMetaObject::Connection started;
+@property QMetaObject::Connection stopped;
+
+@end
 
 @interface VideoCommon : NSObject
 
@@ -32,6 +41,10 @@ struct AVFrame;
 + (void) fillPixelBuffr:(CVPixelBufferRef *)pixelBuffer
               fromFrame:(const AVFrame*)frame
              bufferPool:(CVPixelBufferPoolRef *)pixelBufferPool;
++ (CGSize) fillPixelBuffr:(CVPixelBufferRef *)pixelBuffer
+             fromRenderer:(const lrc::api::video::Renderer*)renderer
+             bufferPool:(CVPixelBufferPoolRef *)pixelBufferPool;
+
 
 @end
 

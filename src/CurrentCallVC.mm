@@ -52,18 +52,6 @@ extern "C" {
 #import "views/GradientView.h"
 #import "views/MovableView.h"
 
-@interface RendererConnectionsHolder : NSObject
-
-@property QMetaObject::Connection frameUpdated;
-@property QMetaObject::Connection started;
-@property QMetaObject::Connection stopped;
-
-@end
-
-@implementation RendererConnectionsHolder
-
-@end
-
 @interface CurrentCallVC () <NSPopoverDelegate> {
     std::string convUid_;
     std::string callUid_;

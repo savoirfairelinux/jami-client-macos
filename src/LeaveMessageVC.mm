@@ -20,6 +20,7 @@
 #import "LeaveMessageVC.h"
 #import "views/NSColor+RingTheme.h"
 #import "utils.h"
+#import "NSString+Extensions.h"
 
 //lrc
 #import <api/avmodel.h>
@@ -51,7 +52,6 @@ bool isRecording = false;
 int recordingTime = 0;
 NSTimer* refreshDurationTimer;
 lrc::api::AVModel* avModel;
-std::string fileName;
 NSMutableDictionary *filesToSend;
 std::string conversationUid;
 lrc::api::ConversationModel* conversationModel;
@@ -103,7 +103,7 @@ lrc::api::ConversationModel* conversationModel;
         refreshDurationTimer = nil;
         [timerBox setHidden:YES];
         [sendBox setHidden: NO];
-        [sendFilename setStringValue:[self timeFormatted: recordingTime]];
+        [sendFilename setStringValue:[NSString formattedStringTimeFromSeconds: recordingTime]];
     }
 }
 
@@ -127,7 +127,7 @@ lrc::api::ConversationModel* conversationModel;
 - (void)clearData {
     recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
     recordingTime = 0;
-    [timerLabel setStringValue: [self timeFormatted: recordingTime]];
+    [timerLabel setStringValue: [NSString formattedStringTimeFromSeconds: recordingTime]];
     isRecording = false;
     [timerBox setHidden:YES];
     [sendBox setHidden: YES];
@@ -140,14 +140,14 @@ lrc::api::ConversationModel* conversationModel;
 - (void)viewWillHide {
     recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
     if(filesToSend[@(conversationUid.c_str())]) {
-        [sendFilename setStringValue:[self timeFormatted: recordingTime]];
+        [sendFilename setStringValue:[NSString formattedStringTimeFromSeconds: recordingTime]];
         [sendBox setHidden: NO];
     } else {
         [sendFilename setStringValue:@""];
         [sendBox setHidden: YES];
     }
     recordingTime = 0;
-    [timerLabel setStringValue: [self timeFormatted: recordingTime]];
+    [timerLabel setStringValue: [NSString formattedStringTimeFromSeconds: recordingTime]];
     isRecording = false;
     [timerBox setHidden:YES];
     [refreshDurationTimer invalidate];
@@ -190,14 +190,7 @@ lrc::api::ConversationModel* conversationModel;
 -(void) updateDurationLabel
 {
     recordingTime++;
-    [timerLabel setStringValue: [self timeFormatted: recordingTime]];
-}
-
-- (NSString *)timeFormatted:(int)totalSeconds
-{
-    int seconds = totalSeconds % 60;
-    int minutes = (totalSeconds / 60) % 60;
-    return [NSString stringWithFormat:@"%02d:%02d",minutes, seconds];
+    [timerLabel setStringValue: [NSString formattedStringTimeFromSeconds: recordingTime]];
 }
 
 @end
