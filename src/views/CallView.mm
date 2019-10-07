@@ -182,14 +182,14 @@
                                  action:@selector(captureScreen:)
                           keyEquivalent:@""
                                 atIndex:contextualMenu.itemArray.count];
-#if 0
+//#if 0
 // TODO: add file as a source
     [contextualMenu addItem:[NSMenuItem separatorItem]];
     [contextualMenu insertItemWithTitle:NSLocalizedString(@"Choose file", @"Contextual menu entry")
                                  action:@selector(chooseFile:)
                           keyEquivalent:@""
                                 atIndex:contextualMenu.itemArray.count];
-#endif
+//#endif
 
     [NSMenu popUpContextMenu:contextualMenu withEvent:theEvent forView:self];
 }
