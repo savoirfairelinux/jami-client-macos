@@ -199,7 +199,7 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
 
         [self setImagePosition:NSImageOverlaps];
         auto insets = self.mouseDown ? (self.imageInsets - self.imageIncreaseOnClick) : self.imageInsets;
-        auto rect = NSInsetRect(dirtyRect, self.imageInsets, insets);
+        auto rect = NSInsetRect(dirtyRect, insets, insets);
 
         [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
                  fromRect:NSZeroRect
