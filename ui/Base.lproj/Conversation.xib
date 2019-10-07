@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,13 +10,7 @@
                 <outlet property="addContactButton" destination="pGK-hO-X1Y" id="YeP-Gd-x6e"/>
                 <outlet property="conversationID" destination="SQT-Vf-Lhr" id="eab-vD-7X7"/>
                 <outlet property="conversationTitle" destination="ucx-6g-eJw" id="40T-pM-nix"/>
-                <outlet property="messageField" destination="bsk-Gj-qQ2" id="JYN-bF-ttw"/>
-                <outlet property="messagesBottomMargin" destination="EoS-be-aF2" id="B5I-H9-850"/>
                 <outlet property="messagesViewVC" destination="iH6-17-JsM" id="uxH-Ra-lSr"/>
-                <outlet property="sendButton" destination="UJf-cF-RAo" id="8PF-7G-w1d"/>
-                <outlet property="sendFileButton" destination="gwx-eT-PcN" id="BMw-53-phy"/>
-                <outlet property="sendPanel" destination="Rth-di-Tls" id="vCd-kM-DLc"/>
-                <outlet property="sendPanelHeight" destination="jJO-v2-Wuj" id="ybm-1d-scU"/>
                 <outlet property="titleCenteredConstraint" destination="uTp-kU-NmC" id="ccn-92-zaA"/>
                 <outlet property="titleTopConstraint" destination="32s-Wp-DE1" id="fms-Yu-vrn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
@@ -333,120 +327,182 @@
                 <customView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-di-Tls" customClass="SendMessagePanel">
                     <rect key="frame" x="49" y="0.0" width="700" height="60"/>
                     <subviews>
-                        <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
-                            <rect key="frame" x="53" y="21" width="557" height="18"/>
-                            <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </textFieldCell>
-                            <connections>
-                                <binding destination="iH6-17-JsM" name="value" keyPath="self.message" id="zK1-Ee-EWS">
-                                    <dictionary key="options">
-                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                        <string key="NSMultipleValuesPlaceholder">Send a message</string>
-                                        <string key="NSNoSelectionPlaceholder">Send a message</string>
-                                        <string key="NSNullPlaceholder">Send a message</string>
-                                    </dictionary>
-                                </binding>
-                                <outlet property="delegate" destination="iH6-17-JsM" id="2eZ-3e-XvP"/>
-                            </connections>
-                        </textField>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
-                            <rect key="frame" x="655" y="15" width="35" height="35"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="35" id="TmF-ip-m4C"/>
-                                <constraint firstAttribute="height" constant="35" id="rbQ-lE-sAq"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="s6a-eK-t3T">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                    <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                    <color key="value" red="0.23137254901960785" green="0.75686274509803919" blue="0.82745098039215681" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="buttonDisableColor">
-                                    <color key="value" red="0.78955939797794117" green="0.75686274509803919" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                    <integer key="value" value="4"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="sendMessage:" target="iH6-17-JsM" id="0bl-sw-Yiu"/>
-                                <binding destination="iH6-17-JsM" name="enabled" keyPath="self.message.length" id="N3M-08-gcO"/>
-                            </connections>
-                        </button>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-eT-PcN" customClass="HoverButton">
-                            <rect key="frame" x="10" y="15" width="35" height="35"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="35" id="C2W-wV-YvF"/>
-                                <constraint firstAttribute="width" constant="35" id="zZF-4P-pW9"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_file_upload" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="gfQ-c5-YPu">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                    <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                    <color key="value" red="0.23137254901960785" green="0.75686274509803919" blue="0.82745098039215681" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                    <integer key="value" value="4"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="sendFile:" target="iH6-17-JsM" id="k8G-4B-qru"/>
-                            </connections>
-                        </button>
-                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DwY-gP-tsk" userLabel="Emojy button" customClass="HoverButton">
-                            <rect key="frame" x="610" y="15" width="35" height="35"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="35" id="gfw-9e-hi8"/>
-                                <constraint firstAttribute="width" constant="35" id="pyh-h3-bCb"/>
-                            </constraints>
-                            <buttonCell key="cell" type="square" title="🙂" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="8sX-aI-9OG">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system" size="35"/>
-                            </buttonCell>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                    <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                    <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                    <integer key="value" value="0"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                    <integer key="value" value="25"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="openEmojy:" target="iH6-17-JsM" id="4R7-jL-ade"/>
-                            </connections>
-                        </button>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vd8-6U-eqB">
+                            <rect key="frame" x="0.0" y="0.0" width="700" height="60"/>
+                            <subviews>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-eT-PcN" customClass="HoverButton">
+                                    <rect key="frame" x="0.0" y="13" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="C2W-wV-YvF"/>
+                                        <constraint firstAttribute="width" constant="35" id="zZF-4P-pW9"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_file_upload" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="gfQ-c5-YPu">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                            <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                            <color key="value" red="0.23137254901960785" green="0.75686274509803919" blue="0.82745098039215681" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="sendFile:" target="iH6-17-JsM" id="k8G-4B-qru"/>
+                                    </connections>
+                                </button>
+                                <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
+                                    <rect key="frame" x="36" y="22" width="514" height="17"/>
+                                    <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="iH6-17-JsM" name="value" keyPath="self.message" id="zK1-Ee-EWS">
+                                            <dictionary key="options">
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                <string key="NSMultipleValuesPlaceholder">Send a message</string>
+                                                <string key="NSNoSelectionPlaceholder">Send a message</string>
+                                                <string key="NSNullPlaceholder">Send a message</string>
+                                            </dictionary>
+                                        </binding>
+                                        <outlet property="delegate" destination="iH6-17-JsM" id="2eZ-3e-XvP"/>
+                                    </connections>
+                                </textField>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gww-7y-sXo" customClass="HoverButton">
+                                    <rect key="frame" x="551" y="13" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="35" id="Zra-qu-Wv9"/>
+                                        <constraint firstAttribute="height" constant="35" id="xVA-RF-ov9"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="crE-WV-7wv">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="startVideoMessage:" target="iH6-17-JsM" id="2B7-ha-lQk"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wYE-S3-AzD" customClass="HoverButton">
+                                    <rect key="frame" x="589" y="13" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="2As-E1-3wN"/>
+                                        <constraint firstAttribute="width" constant="35" id="ThY-e2-Xwc"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1zm-4M-OeR">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="startAudioMessage:" target="iH6-17-JsM" id="L0n-5l-pav"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DwY-gP-tsk" userLabel="Emojy button" customClass="HoverButton">
+                                    <rect key="frame" x="627" y="13" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="gfw-9e-hi8"/>
+                                        <constraint firstAttribute="width" constant="35" id="pyh-h3-bCb"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" title="🙂" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="8sX-aI-9OG">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system" size="35"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                            <integer key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
+                                    <rect key="frame" x="665" y="13" width="35" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="35" id="TmF-ip-m4C"/>
+                                        <constraint firstAttribute="height" constant="35" id="rbQ-lE-sAq"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="s6a-eK-t3T">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                            <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                            <color key="value" red="0.23137254901960785" green="0.75686274509803919" blue="0.82745098039215681" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonDisableColor">
+                                            <color key="value" red="0.78955939797794117" green="0.75686274509803919" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="sendMessage:" target="iH6-17-JsM" id="0bl-sw-Yiu"/>
+                                        <binding destination="iH6-17-JsM" name="enabled" keyPath="self.message.length" id="N3M-08-gcO"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="DwY-gP-tsk" firstAttribute="bottom" secondItem="gwx-eT-PcN" secondAttribute="bottom" id="3pP-VM-DRP"/>
-                        <constraint firstItem="UJf-cF-RAo" firstAttribute="centerY" secondItem="gwx-eT-PcN" secondAttribute="centerY" id="8nV-yT-GCB"/>
-                        <constraint firstAttribute="bottom" secondItem="bsk-Gj-qQ2" secondAttribute="bottom" constant="21" id="DHo-dF-tw6"/>
-                        <constraint firstItem="bsk-Gj-qQ2" firstAttribute="top" secondItem="Rth-di-Tls" secondAttribute="top" constant="21" id="Enp-Pu-oco"/>
-                        <constraint firstItem="gwx-eT-PcN" firstAttribute="leading" secondItem="Rth-di-Tls" secondAttribute="leading" constant="10" id="QpN-IM-j7U"/>
-                        <constraint firstItem="DwY-gP-tsk" firstAttribute="leading" secondItem="bsk-Gj-qQ2" secondAttribute="trailing" constant="2" id="ZhQ-OF-0Mv"/>
-                        <constraint firstItem="UJf-cF-RAo" firstAttribute="leading" secondItem="DwY-gP-tsk" secondAttribute="trailing" constant="10" id="c73-d9-814"/>
+                        <constraint firstAttribute="trailing" secondItem="vd8-6U-eqB" secondAttribute="trailing" id="Ogp-Kv-ffd"/>
+                        <constraint firstItem="vd8-6U-eqB" firstAttribute="top" secondItem="Rth-di-Tls" secondAttribute="top" id="YEJ-yh-nMQ"/>
+                        <constraint firstItem="vd8-6U-eqB" firstAttribute="leading" secondItem="Rth-di-Tls" secondAttribute="leading" id="ZMf-E3-Ahx"/>
                         <constraint firstAttribute="height" constant="60" id="jJO-v2-Wuj"/>
-                        <constraint firstAttribute="trailing" secondItem="UJf-cF-RAo" secondAttribute="trailing" constant="10" id="kMD-0U-u83"/>
-                        <constraint firstItem="UJf-cF-RAo" firstAttribute="bottom" secondItem="bsk-Gj-qQ2" secondAttribute="bottom" constant="6" id="pe6-5Z-lLg"/>
-                        <constraint firstItem="bsk-Gj-qQ2" firstAttribute="leading" secondItem="gwx-eT-PcN" secondAttribute="trailing" constant="10" id="rOt-yj-p8K"/>
+                        <constraint firstAttribute="bottom" secondItem="vd8-6U-eqB" secondAttribute="bottom" id="tod-bR-LQO"/>
                     </constraints>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
@@ -580,12 +636,15 @@
                 <outlet property="conversationView" destination="bOO-CW-S21" id="Vzg-3J-K2b"/>
                 <outlet property="messageField" destination="bsk-Gj-qQ2" id="RD0-B6-fPN"/>
                 <outlet property="messagesBottomMargin" destination="EoS-be-aF2" id="pqG-cP-d8d"/>
-                <outlet property="sendFileButton" destination="gwx-eT-PcN" id="FOx-Vo-5y8"/>
+                <outlet property="recordAudioButton" destination="wYE-S3-AzD" id="nFg-ZY-Hss"/>
+                <outlet property="recordVideoButton" destination="Gww-7y-sXo" id="ebw-OA-zmv"/>
+                <outlet property="sendFileButton" destination="gwx-eT-PcN" id="09R-wC-t0r"/>
                 <outlet property="sendPanelHeight" destination="jJO-v2-Wuj" id="lYG-sU-eIr"/>
             </connections>
         </viewController>
     </objects>
     <resources>
+        <image name="ic_action_audio" width="36" height="36"/>
         <image name="ic_action_call" width="72" height="72"/>
         <image name="ic_action_cancel" width="72" height="72"/>
         <image name="ic_action_send" width="72" height="72"/>

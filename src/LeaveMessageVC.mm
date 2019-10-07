@@ -51,7 +51,6 @@ bool isRecording = false;
 int recordingTime = 0;
 NSTimer* refreshDurationTimer;
 lrc::api::AVModel* avModel;
-std::string fileName;
 NSMutableDictionary *filesToSend;
 std::string conversationUid;
 lrc::api::ConversationModel* conversationModel;

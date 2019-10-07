@@ -36,6 +36,9 @@
 #import "views/IconButton.h"
 #import <QuickLook/QuickLook.h>
 #import <Quartz/Quartz.h>
+#import <AVFoundation/AVFoundation.h>
+
+#import "RecordFileVC.h"
 
 
 @interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource> {
@@ -44,12 +47,17 @@
     __unsafe_unretained IBOutlet NSView* containerView;
     __unsafe_unretained IBOutlet NSTextField* messageField;
     __unsafe_unretained IBOutlet IconButton *sendFileButton;
+    __unsafe_unretained IBOutlet IconButton *recordVideoButton;
+    __unsafe_unretained IBOutlet IconButton *recordAudioButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sendPanelHeight;
     __unsafe_unretained IBOutlet NSLayoutConstraint* messagesBottomMargin;
+    
+     IBOutlet NSPopover *recordMessagePopover;
 
     std::string convUid_;
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
+    lrc::api::AVModel* avModel;
     QMetaObject::Connection newInteractionSignal_;
 
     // Both are needed to invalidate cached conversation as pointer
@@ -59,8 +67,9 @@
     QMetaObject::Connection interactionStatusUpdatedSignal_;
     NSString* previewImage;
     NSMutableDictionary *pendingMessagesToSend;
+    
+    RecordFileVC * recordingController;
 }
-
 
 @end
 
@@ -113,6 +122,14 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return self;
 }
 
+-(void) setAVModel: (lrc::api::AVModel*) avmodel {
+    avModel = avmodel;
+    if (recordingController == nil) {
+        recordingController = [[RecordFileVC alloc] initWithNibName:@"RecordFileVC" bundle:nil avModel: self->avModel];
+        recordingController.delegate = self;
+    }
+}
+
 - (void)setMessage:(NSString *)newValue {
     _message = [newValue removeEmptyLinesAtBorders];
 }
@@ -129,6 +146,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(filterChangedSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(newInteractionSignal_);
+    [self closeRecordingView];
 }
 
 -(void) scrollToBottom {
@@ -919,6 +937,49 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [messageField.window makeFirstResponder: messageField];
     [[messageField currentEditor] moveToEndOfLine:nil];
     [NSApp orderFrontCharacterPalette: messageField];
+}
+
+- (IBAction)startVideoMessage:(id)sender
+{
+    [self startRecording:NO];
+}
+
+- (IBAction)startAudioMessage:(id)sender
+{
+    [self startRecording:YES];
+}
+-(void) startRecording:(BOOL)isAudio {
+    if (recordingController == nil) {
+        recordingController = [[RecordFileVC alloc] initWithNibName:@"RecordFileVC" bundle:nil avModel: self->avModel];
+        recordingController.delegate = self;
+    }
+    if(recordMessagePopover != nil)
+    {
+        [self closeRecordingView];
+        return;
+    }
+    [recordingController prepareRecordingView: isAudio];
+    recordMessagePopover = [[NSPopover alloc] init];
+    [recordMessagePopover setContentSize: recordingController.view.frame.size];
+    [recordMessagePopover setContentViewController:recordingController];
+    [recordMessagePopover setAnimates:YES];
+    NSButton *anchorButton = isAudio ? recordAudioButton : recordVideoButton;
+    [recordMessagePopover showRelativeToRect: anchorButton.bounds
+                                      ofView: anchorButton
+                               preferredEdge: NSMaxYEdge];
+    
+}
+
+-(void) sendFile:(NSString *) name withFilePath:(NSString *) path {
+    convModel_->sendFile(convUid_, [path UTF8String], [name UTF8String]);
+}
+
+-(void) closeRecordingView {
+    if(recordMessagePopover != nil) {
+        recordingController.stopRecordingView;
+        [recordMessagePopover close];
+        recordMessagePopover = nil;
+    }
 }
 
 - (IBAction)sendFile:(id)sender {

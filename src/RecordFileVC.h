@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2015-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -18,24 +18,25 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <api/conversationmodel.h>
-#import <api/conversation.h>
-#import <api/avmodel.h>
-#import "RecordFileVC.h"
+#import "LrcModelsProtocol.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol RecordingViewDelegate <NSObject>
+-(void) closeRecordingView;
+-(void) sendFile:(NSString *) name withFilePath:(NSString *) path;
+@end
+
+@interface RecordFileVC : NSViewController <LrcModelsProtocol>
+@property (retain, nonatomic) id <RecordingViewDelegate> delegate;
+
+-(void) startPreview;
+
+-(void) prepareRecordingView:(BOOL)audioOnly;
+-(void) stopRecordingView;
 
 
-@interface MessagesVC : NSViewController <RecordingViewDelegate>
-
--(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
--(void)clearData;
-
-/**
- * Message contained in messageField TextField.
- * This is a KVO method to bind the text with the send Button
- * if message.length is > 0, button is enabled, otherwise disabled
- */
-@property (retain) NSString* message;
-
--(void) setAVModel: (lrc::api::AVModel*) avmodel;
 
 @end
+
+NS_ASSUME_NONNULL_END
