@@ -19,9 +19,17 @@
 
 #import "VideoCommon.h"
 
+#import <video/renderer.h>
+
+#import <QSize>
+
 extern "C" {
 #import <libavutil/frame.h>
 }
+
+@implementation RendererConnectionsHolder
+
+@end
 
 @implementation VideoCommon
 
@@ -120,4 +128,22 @@ extern "C" {
    }
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
 }
+
++ (CGSize) fillPixelBuffr:(CVPixelBufferRef &)pixelBuffer
+           fromRenderer:(const lrc::api::video::Renderer*)renderer
+             bufferPool:(CVPixelBufferPoolRef &)pixelBufferPool{
+    auto framePtr = renderer->currentAVFrame();
+    auto frame = framePtr.get();
+    if(!frame || !frame->width || !frame->height) {
+        return CGSizeZero;
+    }
+    auto frameSize = CGSizeMake(frame->width, frame->height);
+    if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
+        pixelBuffer = (CVPixelBufferRef)frame->data[3];
+        return frameSize;
+    }
+    [VideoCommon fillPixelBuffr:&pixelBuffer fromFrame:frame bufferPool:&pixelBufferPool];
+    return frameSize;
+}
+
 @end

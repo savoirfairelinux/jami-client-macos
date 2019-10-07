@@ -20,8 +20,11 @@
 #import <Cocoa/Cocoa.h>
 #import <api/conversationmodel.h>
 #import <api/conversation.h>
+#import <api/avmodel.h>
+#import "RecordFileVC.h"
 
-@interface MessagesVC : NSViewController
+
+@interface MessagesVC : NSViewController <RecordingViewDelegate>
 
 -(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
 -(void)clearData;
@@ -32,5 +35,7 @@
  * if message.length is > 0, button is enabled, otherwise disabled
  */
 @property (retain) NSString* message;
+
+-(void) setAVModel: (lrc::api::AVModel*) avmodel;
 
 @end

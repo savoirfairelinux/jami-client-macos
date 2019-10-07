@@ -201,3 +201,18 @@
 
 /* Backup enter password */
 "Enter account password" = "Enter account password";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
+
+/* Send button title */
+"Send" = "Send";
+
+/* Recording view explanation label */
+"Press to start recording" = "Press to start recording";
+
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
