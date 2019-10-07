@@ -176,6 +176,8 @@ SET(ringclient_CONTROLLERS
    src/AccountSettingsVC.h
    src/LeaveMessageVC.mm
    src/LeaveMessageVC.h
+   src/RecordFileVC.mm
+   src/RecordFileVC.h
 )
 
 SET(ringclient_VIEWS
@@ -274,6 +276,7 @@ SET(ringclient_XIBS
    AddSIPAccountVC
    AccountSettings
    LeaveMessageVC
+   RecordFileVC
 )
 
 # Icons
@@ -331,6 +334,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/pending_contact_request.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_file_upload.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_record_stop.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
