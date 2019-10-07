@@ -111,6 +111,8 @@ struct Uniforms {
     depthStateDescriptor.depthWriteEnabled = NO;
     depthState = [device newDepthStencilStateWithDescriptor:depthStateDescriptor];
     self.preferredFramesPerSecond = 30;
+    self.paused = YES;
+    self.enableSetNeedsDisplay = NO;
 }
 
 - (void)fillWithBlack {
