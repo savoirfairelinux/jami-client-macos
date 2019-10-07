@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2018-2019 Savoir-faire Linux Inc.
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
  *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -17,12 +17,19 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
+#import "LrcModelsProtocol.h"
 
-@interface NSString (Extensions)
+@protocol RecordingViewDelegate <NSObject>
+-(void) closeRecordingView;
+-(void) sendFile:(NSString *) name withFilePath:(NSString *) path;
+@end
 
-- (NSString *) removeAllNewLinesAtTheEnd;
-- (NSString *) removeEmptyLinesAtBorders;
-+ (NSString *) formattedStringTimeFromSeconds:(int) totalSeconds;
+@interface RecordFileVC : NSViewController <LrcModelsProtocol>
+
+@property (retain, nonatomic) id <RecordingViewDelegate> delegate;
+
+-(void) prepareRecordingView:(BOOL)audioOnly;
+-(void) stopRecordingView;
 
 @end
