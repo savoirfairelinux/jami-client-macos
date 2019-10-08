@@ -338,15 +338,15 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) setUpVideoCallView {
-    self.previewView.stopRendering = false;
-    self.videoMTKView.stopRendering = false;
     [previewView fillWithBlack];
     [self.videoMTKView fillWithBlack];
     [previewView setHidden: NO];
     [self.videoMTKView setHidden:NO];
-    [hidePreviewBackground setHidden: YES];
+    [hidePreviewBackground setHidden: self.previewView.stopRendering];
     [bluerBackgroundEffect setHidden:YES];
     [backgroundImage setHidden:YES];
+    self.previewView.stopRendering = false;
+    self.videoMTKView.stopRendering = false;
 }
 
 -(void) setUpAudioOnlyView {
