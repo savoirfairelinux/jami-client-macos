@@ -1,24 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWizardChooseVC">
             <connections>
-                <outlet property="buttonTopConstraint" destination="qRn-oO-10Y" id="3a1-dP-qLm"/>
-                <outlet property="createSIPAccount" destination="Ivs-g5-gQs" id="Xdt-qd-UCr"/>
+                <outlet property="connectToManager" destination="HjM-oT-VQj" id="QQQ-T1-GdO"/>
+                <outlet property="createSIPAccount" destination="NBt-Xw-PzN" id="d5d-i7-ZIW"/>
                 <outlet property="view" destination="uHQ-s7-X3y" id="1wM-Vd-wef"/>
+                <outlet property="viewBottomConstraint" destination="ieX-kW-7To" id="uAE-sO-elJ"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <userDefaultsController representsSharedInstance="YES" id="ck0-Ru-0YG"/>
         <view id="uHQ-s7-X3y">
-            <rect key="frame" x="0.0" y="0.0" width="525" height="168"/>
+            <rect key="frame" x="0.0" y="0.0" width="525" height="293"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zUs-ma-wCV">
+                    <rect key="frame" x="0.0" y="69" width="525" height="219"/>
+                    <subviews>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
+                            <rect key="frame" x="163" y="192" width="200" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="kX1-30-jfa"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" title="Create a Jami account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="createRingAccount:" target="-2" id="Mij-SG-JWQ"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-ql-oGP">
+                            <rect key="frame" x="163" y="153" width="200" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="OX0-Ne-mlD"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" title="Import from other device" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Z9K-mD-ucr">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="importFromDevice:" target="-2" id="xs4-1O-3Jl"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uHC-M1-ce5">
+                            <rect key="frame" x="163" y="114" width="200" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="rr1-jU-d3s"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" title="Import from archive backup" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rtw-Db-BWL">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="importFromArchive:" target="-2" id="BSN-e6-wPh"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lM8-ZM-KcF">
+                            <rect key="frame" x="225" y="78" width="76" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="U5S-qK-hhV"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" title="Advanced..." bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="vCj-67-PGK">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="expandAdwanced:" target="-2" id="4je-Ji-JXL"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HjM-oT-VQj">
+                            <rect key="frame" x="163" y="36" width="200" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="iKl-6P-vAW"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" title="Connect to account manager" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HGQ-Kd-WIw">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="connectToAccountManager:" target="-2" id="hRw-zp-0k7"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NBt-Xw-PzN">
+                            <rect key="frame" x="163" y="-3" width="200" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="5Wb-L4-VtH"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" title="Add s new SIP account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yBt-Bv-fi2">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="addSIPAccount:" target="-2" id="dq5-in-s0I"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="pcF-lX-ex4" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="33C-i1-fge"/>
+                        <constraint firstItem="pcF-lX-ex4" firstAttribute="trailing" secondItem="cpk-ql-oGP" secondAttribute="trailing" id="E7W-8d-RtY"/>
+                        <constraint firstItem="HjM-oT-VQj" firstAttribute="trailing" secondItem="cpk-ql-oGP" secondAttribute="trailing" id="G7v-fc-L2p"/>
+                        <constraint firstItem="NBt-Xw-PzN" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="O7G-tM-uTj"/>
+                        <constraint firstItem="uHC-M1-ce5" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="grO-GC-1mZ"/>
+                        <constraint firstItem="uHC-M1-ce5" firstAttribute="trailing" secondItem="cpk-ql-oGP" secondAttribute="trailing" id="j0C-M3-aRu"/>
+                        <constraint firstItem="HjM-oT-VQj" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="obP-v5-pam"/>
+                        <constraint firstItem="NBt-Xw-PzN" firstAttribute="trailing" secondItem="cpk-ql-oGP" secondAttribute="trailing" id="v60-ul-xbR"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="UXp-us-Mbl">
                     <rect key="frame" x="435" y="17" width="72" height="29"/>
                     <constraints>
@@ -30,7 +140,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="onCancel:" target="-2" id="VXk-Vg-8RL"/>
+                        <action selector="onCancel:" target="-2" id="uKt-WM-lT9"/>
                         <binding destination="-2" name="hidden" keyPath="self.isCancelable" id="BJD-kc-nuB">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSNegateBoolean</string>
@@ -38,73 +148,15 @@
                         </binding>
                     </connections>
                 </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
-                    <rect key="frame" x="160" y="131" width="205" height="29"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="kX1-30-jfa"/>
-                    </constraints>
-                    <buttonCell key="cell" type="bevel" title="Create a Jami account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="createRingAccount:" target="-2" id="Mij-SG-JWQ"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-ql-oGP">
-                    <rect key="frame" x="160" y="99" width="205" height="29"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="OX0-Ne-mlD"/>
-                    </constraints>
-                    <buttonCell key="cell" type="bevel" title="Link this device to an account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Z9K-mD-ucr">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="linkExistingRingAccount:" target="-2" id="q5v-67-9eC"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QmU-Ya-gnp">
-                    <rect key="frame" x="225" y="69" width="76" height="17"/>
-                    <buttonCell key="cell" type="bevel" title="Advanced..." bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="9cQ-dy-J3x">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="showCreateSIP:" target="-2" id="xh0-2Z-ldO"/>
-                        <binding destination="-2" name="hidden" keyPath="withAdvancedOptions" id="Wmq-2y-855">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </button>
-                <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ivs-g5-gQs">
-                    <rect key="frame" x="160" y="34" width="205" height="29"/>
-                    <buttonCell key="cell" type="bevel" title="Add a SIP Account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H7M-ZV-CGK">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="addSIPAccount:" target="-2" id="uNW-p8-OEU"/>
-                    </connections>
-                </button>
             </subviews>
             <constraints>
-                <constraint firstItem="cpk-ql-oGP" firstAttribute="top" secondItem="pcF-lX-ex4" secondAttribute="bottom" constant="8" id="5zS-8W-pRW"/>
                 <constraint firstAttribute="bottom" secondItem="UXp-us-Mbl" secondAttribute="bottom" constant="20" id="AII-Gc-Vvg"/>
-                <constraint firstItem="pcF-lX-ex4" firstAttribute="trailing" secondItem="cpk-ql-oGP" secondAttribute="trailing" id="HN8-pn-yp6"/>
-                <constraint firstItem="Ivs-g5-gQs" firstAttribute="centerX" secondItem="uHQ-s7-X3y" secondAttribute="centerX" id="IiU-uf-U3H"/>
-                <constraint firstItem="cpk-ql-oGP" firstAttribute="centerX" secondItem="uHQ-s7-X3y" secondAttribute="centerX" id="KMQ-q8-0Vy"/>
-                <constraint firstItem="QmU-Ya-gnp" firstAttribute="top" secondItem="cpk-ql-oGP" secondAttribute="bottom" constant="16" id="RWv-hw-jF6"/>
+                <constraint firstItem="zUs-ma-wCV" firstAttribute="top" secondItem="uHQ-s7-X3y" secondAttribute="top" constant="5" id="Bil-SW-kfB"/>
+                <constraint firstAttribute="trailing" secondItem="zUs-ma-wCV" secondAttribute="trailing" id="CIO-B9-XTp"/>
+                <constraint firstItem="UXp-us-Mbl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uHQ-s7-X3y" secondAttribute="leading" constant="20" symbolic="YES" id="Gyv-ic-n8e"/>
                 <constraint firstAttribute="trailing" secondItem="UXp-us-Mbl" secondAttribute="trailing" constant="20" id="aKC-JI-SVx"/>
-                <constraint firstItem="Ivs-g5-gQs" firstAttribute="top" secondItem="QmU-Ya-gnp" secondAttribute="bottom" constant="8" id="e3J-dh-QV8"/>
-                <constraint firstItem="pcF-lX-ex4" firstAttribute="centerX" secondItem="uHQ-s7-X3y" secondAttribute="centerX" id="iq8-Px-R61"/>
-                <constraint firstItem="QmU-Ya-gnp" firstAttribute="centerX" secondItem="uHQ-s7-X3y" secondAttribute="centerX" id="kyQ-sv-2I2"/>
-                <constraint firstItem="pcF-lX-ex4" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="n6m-l1-sty"/>
-                <constraint firstItem="UXp-us-Mbl" firstAttribute="top" secondItem="QmU-Ya-gnp" secondAttribute="bottom" constant="25" id="qRn-oO-10Y"/>
-                <constraint firstItem="Ivs-g5-gQs" firstAttribute="leading" secondItem="pcF-lX-ex4" secondAttribute="leading" id="rrB-3i-N0R"/>
-                <constraint firstItem="pcF-lX-ex4" firstAttribute="top" secondItem="uHQ-s7-X3y" secondAttribute="top" constant="10" id="v64-PJ-sTS"/>
+                <constraint firstItem="UXp-us-Mbl" firstAttribute="top" secondItem="zUs-ma-wCV" secondAttribute="bottom" constant="25" id="ieX-kW-7To"/>
+                <constraint firstItem="zUs-ma-wCV" firstAttribute="leading" secondItem="uHQ-s7-X3y" secondAttribute="leading" id="x6w-zu-UdN"/>
             </constraints>
             <point key="canvasLocation" x="-14.5" y="61"/>
         </view>

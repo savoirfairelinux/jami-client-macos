@@ -25,11 +25,16 @@
 - (void)showView:(NSView*)view;
 @end
 
+typedef NS_ENUM(NSInteger, IMPORT_TYPE) {
+    IMPORT_FROM_DEVICE = 0,
+    IMPORT_FROM_BACKUP = 1
+};
+
 @interface RingWizardLinkAccountVC : NSViewController <LrcModelsProtocol>
 @property (nonatomic, weak) NSWindowController <RingWizardLinkDelegate>* delegate;
 @property (nonatomic, weak) NSString* pinValue;
 @property (nonatomic, weak) NSString* passwordValue;
 @property NSURL* backupFile;
 
-- (void)show;
+- (void)showImportViewOfType:(IMPORT_TYPE)type;
 @end

@@ -517,7 +517,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 - (void) createNewAccount {
     [self changeViewTo:SHOW_WELCOME_SCREEN];
     wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: self.accountModel];
-    [wizard showChooseWithCancelButton: YES andAdvanced: YES];
+    [wizard showChooseWithCancelButton: YES];
     [self.window beginSheet:wizard.window completionHandler:nil];
 }
 
