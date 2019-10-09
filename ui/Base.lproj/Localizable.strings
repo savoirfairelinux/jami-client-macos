@@ -147,7 +147,7 @@
 "The entered username is available" = "The entered username is available";
 
 /* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.";
+"Invalid username" = "Invalid username";
 
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "The entered username is not available";
@@ -180,7 +180,10 @@
 "Select archive" = "Select archive";
 
 /* link account title */
-"Link to an account" = "Link to an account";
+"Import from backup" = "Import from backup";
+
+/* link account title */
+"Import from other device" = "Import from other device";
 
 /* Welcome title */
 "Welcome to Ring" = "Welcome to Jami";

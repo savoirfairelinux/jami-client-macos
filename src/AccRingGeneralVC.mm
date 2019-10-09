@@ -49,10 +49,12 @@
 @property (unsafe_unretained) IBOutlet NSTextField *displayNameField;
 @property (unsafe_unretained) IBOutlet NSTextField *ringIDField;
 @property (unsafe_unretained) IBOutlet NSTextField *registeredNameField;
+@property (unsafe_unretained) IBOutlet NSTextField *passwordField;
 @property (unsafe_unretained) IBOutlet RoundedTextField *accountStatus;
 @property (unsafe_unretained) IBOutlet NSButton *registerNameButton;
 @property (unsafe_unretained) IBOutlet NSButton* photoView;
 @property (unsafe_unretained) IBOutlet NSButton* passwordButton;
+@property (unsafe_unretained) IBOutlet NSButton* linkDeviceButton;
 @property (unsafe_unretained) IBOutlet NSButton* removeAccountButton;
 @property (unsafe_unretained) IBOutlet NSImageView* addProfilePhotoImage;
 @property (unsafe_unretained) IBOutlet NSTableView* devicesTableView;
@@ -90,7 +92,8 @@ QMetaObject::Connection accountStateChangedSignal;
 @synthesize delegate;
 @synthesize devicesTableView;
 @synthesize blockedContactsTableView;
-
+@synthesize linkDeviceButton;
+@synthesize passwordField;
 
 typedef NS_ENUM(NSInteger, TagViews) {
     DISPLAYNAME = 100,
@@ -165,6 +168,12 @@ typedef NS_ENUM(NSInteger, TagViews) {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     [passwordButton setTitle:accountProperties.archiveHasPassword ? @"Change password" : @"Create password"];
     self.accountEnabled = account.enabled;
+    
+    bool hideLocalAccountConfig = !accountProperties.managerUri.empty();
+    [registerNameButton setHidden:hideLocalAccountConfig];
+    [passwordButton setHidden:hideLocalAccountConfig];
+    [linkDeviceButton setHidden:hideLocalAccountConfig];
+    [passwordField setHidden:hideLocalAccountConfig];
 
     NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[removeAccountButton attributedTitle]];
     NSRange titleRange = NSMakeRange(0, [colorTitle length]);

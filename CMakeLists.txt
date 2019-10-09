@@ -176,6 +176,8 @@ SET(ringclient_CONTROLLERS
    src/AccountSettingsVC.h
    src/LeaveMessageVC.mm
    src/LeaveMessageVC.h
+   src/ConnectToAccManagerVC.mm
+   src/ConnectToAccManagerVC.h
 )
 
 SET(ringclient_VIEWS
@@ -274,6 +276,7 @@ SET(ringclient_XIBS
    AddSIPAccountVC
    AccountSettings
    LeaveMessageVC
+   ConnectToAccManagerVC
 )
 
 # Icons

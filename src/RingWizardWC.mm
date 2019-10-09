@@ -29,6 +29,7 @@
 #import "RingWizardNewAccountVC.h"
 #import "RingWizardLinkAccountVC.h"
 #import "RingWizardChooseVC.h"
+#import "ConnectToAccManagerVC.h"
 
 @interface RingWizardWC ()
 
@@ -43,8 +44,8 @@
     IBOutlet RingWizardLinkAccountVC* linkAccountWC;
     IBOutlet RingWizardChooseVC* chooseActiontWC;
     IBOutlet AddSIPAccountVC* addSIPAccountVC;
+    IBOutlet ConnectToAccManagerVC* connectToAccManagerVC;
     BOOL isCancelable;
-    BOOL withAdvanced;
 }
 
 @synthesize accountModel, ringImage, titleConstraint;
@@ -66,11 +67,13 @@
     chooseActiontWC = [[RingWizardChooseVC alloc] initWithNibName:@"RingWizardChoose" bundle:nil];
     linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil accountmodel:self.accountModel];
     addSIPAccountVC = [[AddSIPAccountVC alloc] initWithNibName:@"AddSIPAccountVC" bundle:nil accountmodel:self.accountModel];
+    connectToAccManagerVC = [[ConnectToAccManagerVC alloc] initWithNibName:@"ConnectToAccManagerVC" bundle:nil accountmodel:self.accountModel];
     [addSIPAccountVC setDelegate:self];
     [chooseActiontWC setDelegate:self];
     [linkAccountWC setDelegate:self];
     [newAccountWC setDelegate:self];
-    [self showChooseWithCancelButton:isCancelable andAdvanced: withAdvanced];
+    [connectToAccManagerVC setDelegate:self];
+    [self showChooseWithCancelButton:isCancelable];
 }
 
 - (void)removeSubviews
@@ -81,50 +84,15 @@
     }
 }
 
-#define headerHeight 70
-#define minHeight 140
-#define defaultMargin 5
 - (void)showView:(NSView*)view
 {
     [self removeSubviews];
-    NSRect frame = [self.container frame];
-    CGFloat height = minHeight;
-    float sizeFrame = MAX(height, view.frame.size.height);
-    frame.size.height = sizeFrame;
-    [view setFrame: frame];
-    [self.container setFrame:frame];
+    auto frame = view.frame;
     float titleBarHeight = self.window.frame.size.height -
     [NSWindow contentRectForFrameRect: self.window.frame styleMask:self.window.styleMask].size.height;
-    titleBarHeight = self.window.isSheet ? 0 : titleBarHeight;
-    float size = headerHeight + sizeFrame + titleBarHeight;
-    NSRect frameWindows = self.window.frame;
-    frameWindows.size.height = size;
-    [self.window setFrame:frameWindows display:YES animate:YES];
+        titleBarHeight = self.window.isSheet ? 0 : titleBarHeight;
+    [self.container setFrameSize:view.frame.size];
     [self.container addSubview:view];
-}
-
-- (void) updateFrame:(float) height {
-    float titleBarHeight = self.window.frame.size.height -
-    [NSWindow contentRectForFrameRect: self.window.frame styleMask:self.window.styleMask].size.height;
-    titleBarHeight = self.window.isSheet ? 0 : titleBarHeight;
-    float size = headerHeight + height + titleBarHeight;
-    NSRect frameWindows = self.window.frame;
-    frameWindows.size.height = size;
-    [self.window setFrame:frameWindows display:YES animate:YES];
-}
-
-- (void)showChooseWithCancelButton:(BOOL)showCancel andAdvanced:(BOOL)showAdvanced {
-    [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Jami",
-                                                        @"Welcome title")];
-    [ringImage setHidden: NO];
-    titleConstraint.constant = -26.5;
-    [self showView:chooseActiontWC.view];
-    [chooseActiontWC showCancelButton:showCancel];
-    [chooseActiontWC showAdvancedButton:showAdvanced];
-    isCancelable = showCancel;
-    withAdvanced = showAdvanced;
-    [chooseActiontWC updateFrame];
-    [self showView:chooseActiontWC.view];
 }
 
 - (void)showChooseWithCancelButton:(BOOL)showCancel
@@ -132,32 +100,35 @@
     [self.windowHeader setStringValue: NSLocalizedString(@"Welcome to Jami",
                                                          @"Welcome title")];
     [ringImage setHidden: NO];
-    titleConstraint.constant = -26.5;
-    [self showView:chooseActiontWC.view];
-    [chooseActiontWC showCancelButton:showCancel];
+    [chooseActiontWC showInitialwithCancell:showCancel];
     isCancelable = showCancel;
+    [self showView:chooseActiontWC.view];
 }
 
 - (void)showNewAccountVC
 {
     [self.windowHeader setStringValue: NSLocalizedString(@"Create a new account",
                                                          @"Welcome title")];
-    [chooseActiontWC showCancelButton: isCancelable];
     [ringImage setHidden: YES];
     titleConstraint.constant = 0;
+    [newAccountWC prepareViewToShow];
     [self showView: newAccountWC.view];
     [newAccountWC show];
 }
 
-- (void)showLinkAccountVC
+- (void)showImportWithType:(IMPORT_TYPE)type
 {
-    [self.windowHeader setStringValue: NSLocalizedString(@"Link to an account",
-                                                         @"link account title")];
+    auto header = type == IMPORT_FROM_DEVICE ?
+    NSLocalizedString(@"Import from other device",
+                      @"link account title") :
+    NSLocalizedString(@"Import from backup",
+                      @"link account title");
+
+    [self.windowHeader setStringValue: header];
     [ringImage setHidden: YES];
     titleConstraint.constant = 0;
-    [chooseActiontWC showCancelButton: isCancelable];
     [self showView: linkAccountWC.view];
-    [linkAccountWC show];
+    [linkAccountWC showImportViewOfType: type];
 }
 
 - (void)showSIPAccountVC
@@ -167,8 +138,17 @@
     [ringImage setHidden: YES];
     titleConstraint.constant = 0;
     [self showView: addSIPAccountVC.view];
-    [chooseActiontWC showAdvancedButton: NO];
     [addSIPAccountVC show];
+}
+
+- (void)showConnectToAccountManager
+{
+    [self.windowHeader setStringValue: NSLocalizedString(@"Sign In",
+                                                         @"Sign In")];
+    [ringImage setHidden: YES];
+    titleConstraint.constant = 0;
+    [self showView: connectToAccManagerVC.view];
+    [connectToAccManagerVC show];
 }
 
 # pragma NSWindowDelegate methods
@@ -187,18 +167,30 @@
 
 - (void)didCompleteWithAction:(WizardAction)action
 {
-    if (action == WIZARD_ACTION_LINK) {
-        [self showLinkAccountVC];
-    } else if (action == WIZARD_ACTION_NEW) {
-        [self showNewAccountVC];
-    } else if (action == WIZARD_ACTION_ADVANCED) {
-        [self showView:chooseActiontWC.view];
-    } else if (action == WIZARD_ACTION_SIP_ACCOUNT) {
-        [self showSIPAccountVC];
-    } else {
-        [self.window close];
-        [NSApp endSheet:self.window];
-        [[NSApplication sharedApplication] removeWindowsItem:self.window];
+    switch (action) {
+        case WIZARD_ACTION_IMPORT_FROM_DEVICE:
+            [self showImportWithType: IMPORT_FROM_DEVICE];
+            break;
+        case WIZARD_ACTION_IMPORT_FROM_ADCHIVE:
+            [self showImportWithType: IMPORT_FROM_BACKUP];
+            break;
+        case WIZARD_ACTION_NEW:
+            [self showNewAccountVC];
+            break;
+        case WIZARD_ACTION_ADVANCED:
+            [self showView:chooseActiontWC.view];
+            break;
+        case WIZARD_ACTION_SIP_ACCOUNT:
+            [self showSIPAccountVC];
+            break;
+        case WIZARD_ACTION_ACCOUNT_MANAGER:
+            [self showConnectToAccountManager];
+            break;
+        default:
+            [self.window close];
+            [NSApp endSheet:self.window];
+            [[NSApplication sharedApplication] removeWindowsItem:self.window];
+            break;
     }
 }
 
@@ -206,23 +198,23 @@
 
 - (void)didCreateAccountWithSuccess:(BOOL)success
 {
-    if (success) {
-        [self.window close];
-        [NSApp endSheet:self.window];
-        [[NSApplication sharedApplication] removeWindowsItem:self.window];
-        if (!isCancelable){
-            AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-            [appDelegate showMainWindow];
-        }
-    } else {
-        [self showChooseWithCancelButton: isCancelable andAdvanced: withAdvanced];
-    }
+    [self completedWithSuccess:success];
 }
 
 #pragma - WizardLinkAccountDelegate methods
 
 - (void)didLinkAccountWithSuccess:(BOOL)success
 {
+    [self completedWithSuccess:success];
+}
+
+#pragma - RingWizardAccManagerDelegate
+
+- (void)didSignInSuccess:(BOOL)success {
+    [self completedWithSuccess:success];
+}
+
+-(void) completedWithSuccess:(BOOL) success {
     if (success) {
         [self.window close];
         [NSApp endSheet:self.window];
@@ -232,7 +224,7 @@
             [appDelegate showMainWindow];
         }
     } else {
-        [self showChooseWithCancelButton: isCancelable andAdvanced: withAdvanced];
+        [self showChooseWithCancelButton: isCancelable];
     }
 }
 

@@ -50,7 +50,7 @@ NSTimer* timeoutTimer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setAutoresizingMask: NSViewHeightSizable];
+    [self.view setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
 }
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel {
@@ -67,6 +67,7 @@ NSTimer* timeoutTimer;
     photoView.layer.masksToBounds = YES;
     [photoView setBordered:YES];
     [addProfilePhotoImage setWantsLayer: YES];
+    [self.delegate showView:self.view];
 }
 
 - (IBAction)cancel:(id)sender
