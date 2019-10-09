@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Loïc Siret <loic.siret@savoirfairelinux.com>
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,26 +20,29 @@
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
 
-@protocol RingWizardNewDelegate <NSObject>
-- (void)didCreateAccountWithSuccess:(BOOL)success;
+@protocol RingWizardAccManagerDelegate <NSObject>
+- (void)didSignInSuccess:(BOOL)success;
 - (void)showView:(NSView*)view;
 @end
 
-@interface RingWizardNewAccountVC : NSViewController <LrcModelsProtocol>
 
-@property (nonatomic, weak)NSWindowController <RingWizardNewDelegate>* delegate;
+@interface ConnectToAccManagerVC: NSViewController <LrcModelsProtocol>
+@property (nonatomic, weak) NSWindowController <RingWizardAccManagerDelegate>* delegate;
 
-@property (nonatomic, weak)NSString* registeredName;
-@property (nonatomic, weak)NSString* password;
-@property (nonatomic, weak)NSString* repeatPassword;
-@property (readonly)BOOL isRepeatPasswordValid;
-@property (readonly)BOOL isPasswordValid;
-@property (assign)BOOL isUserNameAvailable;
+/*
+ * KVO value username
+ */
+@property (nonatomic, weak) NSString* username;
+/*
+ * KVO value password
+ */
+@property (nonatomic, weak) NSString* password;
+/*
+ * KVO value account manager
+ */
+@property (nonatomic, weak) NSString* accountManager;
 
-@property (readonly)BOOL userNameAvailableORNotBlockchain;
-@property (readonly)BOOL withBlockchain;
-@property (assign)NSInteger signUpBlockchainState;
 - (void)show;
 
-- (void)prepareViewToShow;
 @end
+

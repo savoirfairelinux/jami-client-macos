@@ -24,9 +24,11 @@
 typedef NS_ENUM(NSInteger, WizardAction) {
     WIZARD_ACTION_INVALID = -1,
     WIZARD_ACTION_NEW = 0,
-    WIZARD_ACTION_LINK = 1,
-    WIZARD_ACTION_ADVANCED = 2,
-    WIZARD_ACTION_SIP_ACCOUNT = 3
+    WIZARD_ACTION_IMPORT_FROM_DEVICE= 1,
+    WIZARD_ACTION_IMPORT_FROM_ADCHIVE= 2,
+    WIZARD_ACTION_ADVANCED = 3,
+    WIZARD_ACTION_SIP_ACCOUNT = 4,
+    WIZARD_ACTION_ACCOUNT_MANAGER = 5
 };
 
 @protocol RingWizardChooseDelegate <NSObject>
@@ -40,12 +42,8 @@ typedef NS_ENUM(NSInteger, WizardAction) {
 @property (weak, nonatomic) id <RingWizardChooseDelegate> delegate;
 
 @property BOOL isCancelable;
-@property BOOL withAdvancedOptions;
 
-- (void)showCancelButton:(BOOL)showCancel;
-
-- (void)showAdvancedButton:(BOOL)showAdvanced;
-- (void)updateFrame;
+- (void)showInitialwithCancell:(BOOL)showCancel;
 
 @end
 
