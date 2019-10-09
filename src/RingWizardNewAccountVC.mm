@@ -54,22 +54,21 @@
     __unsafe_unretained IBOutlet NSButton* photoView;
     __unsafe_unretained IBOutlet NSTextField* displayNameField;
     __unsafe_unretained IBOutlet NSTextField* registeredNameField;
+    __unsafe_unretained IBOutlet NSTextField* registeredNameError;
+    __unsafe_unretained IBOutlet NSTextField* passwordError;
     __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
     __unsafe_unretained IBOutlet NSSecureTextField* passwordRepeatField;
-    __unsafe_unretained IBOutlet NSImageView* passwordCheck;
-    __unsafe_unretained IBOutlet NSImageView* passwordRepeatCheck;
     __unsafe_unretained IBOutlet NSImageView* addProfilePhotoImage;
 
     __unsafe_unretained IBOutlet NSProgressIndicator* progressBar;
 
-    __unsafe_unretained IBOutlet NSImageView* ivLookupResult;
     __unsafe_unretained IBOutlet NSProgressIndicator* indicatorLookupResult;
 
     __unsafe_unretained IBOutlet NSPopover* helpBlockchainContainer;
     __unsafe_unretained IBOutlet NSPopover* helpPasswordContainer;
     __unsafe_unretained IBOutlet NSLayoutConstraint* buttonTopConstraint;
-    __unsafe_unretained IBOutlet NSBox* passwordBox;
     __unsafe_unretained IBOutlet NSButton* passwordButton;
+    __unsafe_unretained IBOutlet NSStackView* repeatPasswordView;
 
     QMetaObject::Connection registeredNameFound;
     QMetaObject::Connection accountCreated;
@@ -82,15 +81,14 @@
 
 NSInteger const DISPLAY_NAME_TAG                = 1;
 NSInteger const BLOCKCHAIN_NAME_TAG             = 2;
+NSInteger const PASSWORD_TAG                    = 3;
+NSInteger const REPEAT_PASSWORD_TAG             = 4;
 
 //ERROR CODE for textfields validations
 NSInteger const ERROR_PASSWORD_TOO_SHORT        = -1;
 NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 @synthesize accountModel;
-
-#define heightWithCancelAndAdvanced 468
-#define defaultHeight 408
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(lrc::api::NewAccountModel*) accountModel {
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
@@ -119,12 +117,18 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [helpPasswordContainer showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
+- (void)prepareViewToShow {
+    [self.view setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [creationView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [passwordField setHidden: YES];
+    [repeatPasswordView setHidden: YES];
+    buttonTopConstraint.constant = 35;
+}
+
 - (void)show
 {
     [displayNameField setTag:DISPLAY_NAME_TAG];
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
-    [displayNameField setStringValue: NSFullUserName()];
-    [self controlTextDidChange:[NSNotification notificationWithName:@"PlaceHolder" object:displayNameField]];
     [photoView setWantsLayer: YES];
     photoView.layer.cornerRadius = photoView.frame.size.width / 2;
     photoView.layer.masksToBounds = YES;
@@ -133,24 +137,10 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [addProfilePhotoImage setWantsLayer: YES];
     [photoView setBordered:YES];
     [passwordButton setState: NSControlStateValueOff];
-    NSRect viewFrame = creationView.frame;
-    viewFrame.size.height = defaultHeight;
-    creationView.frame = viewFrame;
-
-    buttonTopConstraint.constant = 25;
-    [passwordBox setHidden: YES];
     self.registeredName = @"";
     self.password = @"";
     self.repeatPassword = @"";
-
     [self display:creationView];
-}
-
-- (void)removeSubviews
-{
-    while ([self.view.subviews count] > 0){
-        [[self.view.subviews firstObject] removeFromSuperview];
-    }
 }
 
 - (void)display:(NSView *)view
@@ -211,7 +201,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (BOOL)isPasswordValid
 {
-    return self.password.length >= 6;
+    return self.password.length >= 6 || self.password.length == 0;
 }
 
 - (BOOL)isRepeatPasswordValid
@@ -222,22 +212,28 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 - (BOOL)validateRepeatPassword:(NSError **)error
 {
     if (!self.isRepeatPasswordValid){
+        passwordError.stringValue = NSLocalizedString(@"Passwords don't match",
+                                                      @"Indication for user");
         return [self produceError:error
                          withCode:ERROR_REPEAT_MISMATCH
                        andMessage:NSLocalizedString(@"Passwords don't match",
                                                     @"Indication for user")];
     }
+    passwordError.stringValue = @"";
     return YES;
 }
 
 - (BOOL)validatePassword:(NSError **)error
 {
-    if (!self.isRepeatPasswordValid){
+    if (!self.isPasswordValid){
+        passwordError.stringValue = NSLocalizedString(@"Password is too short",
+                                                      @"Indication for user");
         return [self produceError:error
                          withCode:ERROR_PASSWORD_TOO_SHORT
                        andMessage:NSLocalizedString(@"Password is too short",
                                                     @"Indication for user")];
     }
+    passwordError.stringValue = @"";
     return YES;
 }
 
@@ -248,23 +244,6 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (IBAction)createRingAccount:(id)sender
 {
-    NSError *error = nil;
-    if (![self validateUserInputPassword:&error]){
-        NSAlert* alert = [NSAlert alertWithMessageText:[error localizedDescription]
-                                         defaultButton:NSLocalizedString(@"Revise Input",
-                                                                         @"Button title")
-                                       alternateButton:nil
-                                           otherButton:nil
-                             informativeTextWithFormat:@"%@",error];
-
-        [alert beginSheetModalForWindow:passwordField.window
-                          modalDelegate:nil
-                         didEndSelector:NULL
-                            contextInfo:NULL];
-
-        return;
-    }
-
     QObject::disconnect(accountCreated);
     QObject::disconnect(accountRemoved);
     accountCreated = QObject::connect(self.accountModel,
@@ -346,22 +325,10 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (IBAction)togglePasswordButton:(NSButton *)sender
 {
-    NSRect viewFrame = creationView.frame;
-    if([sender state] == NSControlStateValueOn) {
-        viewFrame.size.height = heightWithCancelAndAdvanced;
-        [self.delegate updateFrame: heightWithCancelAndAdvanced];
-        creationView.frame = viewFrame;
-        buttonTopConstraint.constant = 85;
-        [passwordBox setHidden: NO];
-    } else {
-        buttonTopConstraint.priority = 100;
-        viewFrame.size.height = defaultHeight;
-        [self.delegate updateFrame: defaultHeight];
-        creationView.frame = viewFrame;
-        buttonTopConstraint.constant = 25;
-        buttonTopConstraint.priority = 999;
-        [passwordBox setHidden: YES];
-    }
+    [passwordField setHidden: !passwordField.hidden];
+    [repeatPasswordView setHidden: !repeatPasswordView.hidden];
+    buttonTopConstraint.constant = repeatPasswordView.hidden ? 35 : 25;
+    [self display:creationView];
 }
 
 - (BOOL)withBlockchain
@@ -376,9 +343,11 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (void)showLookUpAvailable:(BOOL)available andText:(NSString *)message
 {
-    [ivLookupResult setImage:[NSImage imageNamed:(available?@"ic_action_accept":@"ic_action_cancel")]] ;
-    [ivLookupResult setHidden:NO];
-    [ivLookupResult setToolTip:message];
+    if (registeredNameField.stringValue.length > 0) {
+        registeredNameError.stringValue = message;
+    }
+    [indicatorLookupResult setHidden:YES];
+    [indicatorLookupResult stopAnimation:nil];
 }
 
 - (void)onUsernameAvailabilityChangedWithNewAvailability:(BOOL)newAvailability
@@ -393,9 +362,11 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (void)showLookupSpinner
 {
-    [ivLookupResult setHidden:YES];
-    [indicatorLookupResult setHidden:NO];
-    [indicatorLookupResult startAnimation:nil];
+    registeredNameError.stringValue = @"";
+    if (registeredNameField.stringValue.length > 0) {
+        [indicatorLookupResult setHidden:NO];
+        [indicatorLookupResult startAnimation:nil];
+    }
 }
 
 - (BOOL)lookupUserName
@@ -433,14 +404,13 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                                    }
                                                    case NameDirectory::LookupStatus::NOT_FOUND:
                                                    {
-                                                       message = NSLocalizedString(@"The entered username is available",
-                                                                                   @"Text shown to user when his username is available to be registered");
+                                                       message = @"";
                                                        isAvailable = YES;
                                                        break;
                                                    }
                                                    case NameDirectory::LookupStatus::INVALID_NAME:
                                                    {
-                                                       message = NSLocalizedString(@"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters.",
+                                                       message = NSLocalizedString(@"Invalid username.",
                                                                                    @"Text shown to user when his username is invalid to be registered");
                                                        isAvailable = NO;
                                                        break;
@@ -469,11 +439,20 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 - (void)controlTextDidChange:(NSNotification *)notif
 {
     NSTextField* textField = [notif object];
+    if (textField.tag == PASSWORD_TAG) {
+        NSError *error = nil;
+        [self validatePassword: &error];
+        return;
+    }
+    if (textField.tag == REPEAT_PASSWORD_TAG) {
+        NSError *error = nil;
+        [self validateRepeatPassword: &error];
+        return;
+    }
     if (textField.tag != BLOCKCHAIN_NAME_TAG) {
         return;
     }
     NSString* alias = textField.stringValue;
-
     [self showLookupSpinner];
     [self onUsernameAvailabilityChangedWithNewAvailability:NO];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];

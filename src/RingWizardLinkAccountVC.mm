@@ -53,6 +53,8 @@
     __unsafe_unretained IBOutlet NSButton* linkButton;
     __unsafe_unretained IBOutlet NSPopover* helpPINContainer;
     __unsafe_unretained IBOutlet NSPopover* helpArchiveFileContainer;
+    __unsafe_unretained IBOutlet NSStackView* pinContainer;
+    __unsafe_unretained IBOutlet NSStackView* filePathContainer;
     NSString *fileButtonTitleBackup;
 
     QMetaObject::Connection accountCreated;
@@ -72,12 +74,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [initialContainer setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [loadingContainer setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [errorContainer setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
     fileButtonTitleBackup = NSLocalizedString(@"Select archive",
                                               @"export account button title");
 }
 
-- (void)show
+- (void)showImportViewOfType:(IMPORT_TYPE)type
 {
+    [pinContainer setHidden: type == IMPORT_FROM_BACKUP];
+    [filePathContainer setHidden: type == IMPORT_FROM_DEVICE];
     [self.delegate showView:initialContainer];
     [fileButton setTitle:fileButtonTitleBackup];
     backupFile = nil;
