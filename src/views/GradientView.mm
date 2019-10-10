@@ -34,12 +34,12 @@
     [aGradient drawInRect: dirtyRect angle: angle];
 }
 
-- (nullable NSView *)hitTest:(NSPoint)point {
-    NSView *view = [super hitTest:point];
-    if ([view isKindOfClass:[NSButton class]]) {
-        return view;
-    }
-    return nil;
-}
+//- (nullable NSView *)hitTest:(NSPoint)point {
+//    NSView *view = [super hitTest:point];
+//    if ([view isKindOfClass:[NSButton class]]) {
+//        return view;
+//    }
+//    return nil;
+//}
 
 @end

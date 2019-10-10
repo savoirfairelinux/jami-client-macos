@@ -66,58 +66,8 @@ BOOL movingToCorner;
     self.frame = CGRectMake(newOrigin.x, newOrigin.y, size.width, size.height);
 }
 
-- (void)viewDidMoveToWindow {
-    [self.window setAcceptsMouseMovedEvents:YES];
-
-    NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect | NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved);
-
-    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:self.frame
-                                                        options:options
-                                                          owner:self
-                                                       userInfo:nil];
-
-    [self addTrackingArea:area];
-}
-
-- (void)mouseEntered:(NSEvent *)event {
-    if (!movable || movingFromCorner) {
-        return;
-    }
-    CGPoint currentOrigin = self.frame.origin;
-    CGPoint cornerPoint = [self pointForCorner: self.closestCorner];
-    if (currentOrigin.x != cornerPoint.x || currentOrigin.y != cornerPoint.y) {
-        return;
-    }
-    movingFromCorner = true;
-    auto currentSize = self.frame.size;
-    CGPoint newOrigin = [self pointToMoveFromCorner: self.closestCorner];
-    auto currentFrame = self.frame;
-    auto newFrame = currentFrame;
-    newFrame.origin = newOrigin;
-    [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
-        context.duration = 0.1f;
-        context.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseOut];
-        self.animator.frame = newFrame;
-    } completionHandler:^{
-        movingFromCorner = false;
-    }];
-}
-
-- (void)mouseExited:(NSEvent *)event {
-    if(movingToCorner) {
-        return;
-    }
-    CGPoint currentOrigin = self.frame.origin;
-    CGPoint cornerPoint = [self pointToMoveFromCorner: self.closestCorner];
-    if ((currentOrigin.x != cornerPoint.x) || (currentOrigin.y != cornerPoint.y)) {
-        return;
-    }
-    movingToCorner = true;
-    [self moveToCornerWithDuration:0.1];
-}
-
 - (void)mouseUp:(NSEvent *)event {
-    [self moveToCornerWithDuration:0.3];
+    [self moveToCornerWithDuration:0.2];
 }
 
 -(void) moveToCornerWithDuration:(CGFloat) duration {
