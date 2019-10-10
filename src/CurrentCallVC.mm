@@ -66,6 +66,7 @@ extern "C" {
 
 // Header info
 @property (unsafe_unretained) IBOutlet NSView* headerContainer;
+@property (unsafe_unretained) IBOutlet NSView* headerGradientView;
 @property (unsafe_unretained) IBOutlet NSTextField* timeSpentLabel;
 
 // info
@@ -80,6 +81,7 @@ extern "C" {
 
 // Call Controls
 @property (unsafe_unretained) IBOutlet GradientView* controlsPanel;
+@property (unsafe_unretained) IBOutlet NSStackView* controlsStackView;
 
 @property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
@@ -117,10 +119,10 @@ lrc::api::AVModel* mediaModel;
 NSInteger const PREVIEW_WIDTH = 185;
 NSInteger const PREVIEW_HEIGHT = 130;
 NSInteger const HIDE_PREVIEW_BUTTON_MIN_SIZE = 25;
-NSInteger const HIDE_PREVIEW_BUTTON_MAX_SIZE = 35;
+NSInteger const HIDE_PREVIEW_BUTTON_MAX_SIZE = 26;
 NSInteger const PREVIEW_MARGIN = 20;
 
-@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton;
+@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -172,7 +174,9 @@ CVPixelBufferRef pixelBufferPreview;
     movableBaseForView.frame = CGRectMake(previewOrigin.x, previewOrigin.y, PREVIEW_WIDTH, PREVIEW_HEIGHT);
     self.movableBaseForView.movable = true;
     previewView.frame = movableBaseForView.bounds;
-    hidePreviewBackground.frame = [self frameForExpendPreviewButton: false];;
+    hidePreviewBackground.frame = [self frameForExpendPreviewButton: false];
+    hidePreviewBackground.alphaValue = 0.6;
+    hidePreviewButton.contentTintColor = [NSColor blackColor];
 }
 
 - (void)awakeFromNib
@@ -188,15 +192,22 @@ CVPixelBufferRef pixelBufferPreview;
     [loadingIndicator setInnerMargin:59];
 
     [self.videoView setCallDelegate:self];
-    CGColor* color = [[[NSColor blackColor] colorWithAlphaComponent:0.2] CGColor];
-    [headerContainer.layer setBackgroundColor:color];
     [bluerBackgroundEffect setWantsLayer:YES];
-    bluerBackgroundEffect.alphaValue = 0.6;
     [backgroundImage setWantsLayer: YES];
     backgroundImage.layer.contentsGravity = kCAGravityResizeAspectFill;
     movableBaseForView.wantsLayer = YES;
-    movableBaseForView.layer.cornerRadius = 4;
-    movableBaseForView.layer.masksToBounds = true;
+    movableBaseForView.shadow = [[NSShadow alloc] init];
+    movableBaseForView.layer.shadowOpacity = 0.6;
+    movableBaseForView.layer.shadowColor = [[NSColor blackColor] CGColor];
+    movableBaseForView.layer.shadowOffset = NSMakeSize(0, -3);
+    movableBaseForView.layer.shadowRadius = 10;
+    previewView.wantsLayer = YES;
+    previewView.layer.cornerRadius = 5;
+    previewView.layer.masksToBounds = true;
+    hidePreviewBackground.wantsLayer = YES;
+    hidePreviewBackground.layer.cornerRadius = 5;
+    hidePreviewBackground.layer.maskedCorners = kCALayerMinXMinYCorner;
+    hidePreviewBackground.layer.masksToBounds = true;
     movableBaseForView.hostingView = self.videoView;
     [movableBaseForView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
     [previewView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
@@ -279,7 +290,9 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::INCOMING_RINGING:
             [infoContainer setHidden: NO];
             [headerContainer setHidden:YES];
+            [headerGradientView setHidden:YES];
             [controlsPanel setHidden:YES];
+            [controlsStackView setHidden:YES];
             break;
         /*case Status::CONFERENCE:
             [self setupConference:currentCall];
@@ -287,7 +300,9 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::PAUSED:
             [infoContainer setHidden: NO];
             [headerContainer setHidden:NO];
+            [headerGradientView setHidden:NO];
             [controlsPanel setHidden:NO];
+            [controlsStackView setHidden:NO];
             [backgroundImage setHidden:NO];
             [bluerBackgroundEffect setHidden:NO];
             if(!currentCall.isAudioOnly) {
@@ -309,7 +324,9 @@ CVPixelBufferRef pixelBufferPreview;
             break;
         case Status::IN_PROGRESS:
             [headerContainer setHidden:NO];
+            [headerGradientView setHidden:NO];
             [controlsPanel setHidden:NO];
+            [controlsStackView setHidden:NO];
             if(currentCall.isAudioOnly) {
                 [self setUpAudioOnlyView];
             } else {
@@ -366,12 +383,12 @@ CVPixelBufferRef pixelBufferPreview;
         backgroundImage.layer.contents = bluredImage;
         [backgroundImage setHidden:NO];
     } else {
-        contactNameLabel.textColor = [NSColor darkGrayColor];
-        contactNameLabel.textColor = [NSColor darkGrayColor];
-        contactIdLabel.textColor = [NSColor darkGrayColor];
-        callStateLabel.textColor = [NSColor darkGrayColor];
+        contactNameLabel.textColor = [NSColor textColor];
+        contactNameLabel.textColor = [NSColor textColor];
+        contactIdLabel.textColor = [NSColor textColor];
+        callStateLabel.textColor = [NSColor textColor];
         backgroundImage.layer.contents = nil;
-        [bluerBackgroundEffect setFillColor:[NSColor ringGreyHighlight]];
+        [bluerBackgroundEffect setFillColor:[NSColor windowBackgroundColor]];
         [bluerBackgroundEffect setAlphaValue:1];
         [backgroundImage setHidden:YES];
     }
@@ -935,8 +952,10 @@ CVPixelBufferRef pixelBufferPreview;
 
 -(void) mouseIsMoving:(BOOL) move
 {
-    [[controlsPanel animator] setAlphaValue:move]; // fade out
+    [[controlsPanel animator] setAlphaValue:move];// fade out
+    [[controlsStackView animator] setAlphaValue:move];
     [[headerContainer animator] setAlphaValue:move];
+    [[headerGradientView animator] setAlphaValue:move];
 }
 
 - (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex
