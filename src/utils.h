@@ -105,6 +105,32 @@ static inline NSString* bestNameForConversation(const lrc::api::conversation::In
     }
 }
 
+
+static inline NSString* concatNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
+{
+    std::string returnString = "";
+    for (auto& c: conv.participants) {
+        try {
+            auto contact = model.owner.contactModel->getContact(c);
+            if (contact.profileInfo.alias.empty()) {
+                returnString = returnString + [bestIDForConversation(conv, model) UTF8String] + ",";
+            } else {
+                auto alias = contact.profileInfo.alias;
+                alias.erase(std::remove(alias.begin(), alias.end(), '\n'), alias.end());
+                alias.erase(std::remove(alias.begin(), alias.end(), '\r'), alias.end());
+                if(alias.length() == 0) {
+                    returnString = returnString + [bestIDForConversation(conv, model) UTF8String] + ",";
+                    continue;
+                }
+                returnString = returnString + alias;
+            }
+        } catch (std::out_of_range& e) {
+            NSLog(@"bestNameForConversation: getContact - out of range");
+        }
+    }
+    return @(returnString.c_str());
+}
+
 static inline NSString* defaultRingtonePath() {
     QDir ringtonesDir(QCoreApplication::applicationDirPath());
     ringtonesDir.cdUp();

@@ -223,6 +223,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                              [smartViewVC selectPendingList];
                          else
                              [smartViewVC selectConversationList];
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
@@ -241,6 +242,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                              [smartViewVC selectPendingList];
                          else
                              [smartViewVC selectConversationList];
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
 
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
@@ -539,6 +541,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 -(void) conversationInfoUpdatedFor:(const std::string&) conversationID {
     [smartViewVC reloadConversationWithUid:@(conversationID.c_str())];
+}
+
+-(void) callFiniched {
+    [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
 
 -(void) showConversation:(NSString* )conversationId forAccount:(NSString*)accountId {

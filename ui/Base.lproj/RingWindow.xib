@@ -145,8 +145,42 @@
                                                                                 </textFieldCell>
                                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                 <prototypeCellViews>
+                                                                                    <tableCellView identifier="CallCell" id="nvG-hU-lKg" userLabel="CallCell" customClass="ContextualTableCellView">
+                                                                                        <rect key="frame" x="1" y="1" width="321" height="50"/>
+                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                        <subviews>
+                                                                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="200" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sfz-V3-QhK">
+                                                                                                <rect key="frame" x="6" y="24" width="73" height="23"/>
+                                                                                                <constraints>
+                                                                                                    <constraint firstAttribute="height" constant="23" id="Knk-h9-HbW"/>
+                                                                                                </constraints>
+                                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="Call name" id="j0J-Xd-uth">
+                                                                                                    <font key="font" size="16" name="HelveticaNeue-Light"/>
+                                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                </textFieldCell>
+                                                                                            </textField>
+                                                                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="300" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sm2-al-NU0">
+                                                                                                <rect key="frame" x="6" y="3" width="40" height="20"/>
+                                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="details" id="mK5-kV-YOO">
+                                                                                                    <font key="font" size="13" name="HelveticaNeue-Light"/>
+                                                                                                    <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
+                                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                </textFieldCell>
+                                                                                            </textField>
+                                                                                        </subviews>
+                                                                                        <constraints>
+                                                                                            <constraint firstItem="Sm2-al-NU0" firstAttribute="top" secondItem="sfz-V3-QhK" secondAttribute="bottom" constant="1" id="4ta-Gr-B5A"/>
+                                                                                            <constraint firstItem="sfz-V3-QhK" firstAttribute="top" secondItem="nvG-hU-lKg" secondAttribute="top" constant="3" id="M4L-Af-Pfa"/>
+                                                                                            <constraint firstItem="sfz-V3-QhK" firstAttribute="leading" secondItem="nvG-hU-lKg" secondAttribute="leading" constant="8" id="O23-cp-x3m"/>
+                                                                                            <constraint firstItem="Sm2-al-NU0" firstAttribute="leading" secondItem="nvG-hU-lKg" secondAttribute="leading" constant="8" id="WJh-9X-RGV"/>
+                                                                                        </constraints>
+                                                                                        <connections>
+                                                                                            <outlet property="textField" destination="sfz-V3-QhK" id="0Ka-vn-gAW"/>
+                                                                                        </connections>
+                                                                                    </tableCellView>
                                                                                     <tableCellView identifier="MainCell" id="Z6G-mQ-L3J" userLabel="MainCell" customClass="ContextualTableCellView">
-                                                                                        <rect key="frame" x="1" y="1" width="321" height="60"/>
+                                                                                        <rect key="frame" x="1" y="53" width="321" height="60"/>
                                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
                                                                                             <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="nGn-jy-Iaf" userLabel="name">
@@ -331,40 +365,6 @@
                                                                                             <constraint firstItem="Fc5-KS-cim" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bZ6-1S-zx2" secondAttribute="trailing" constant="10" id="n2W-6I-lDK"/>
                                                                                             <constraint firstItem="xP1-ZW-WZ8" firstAttribute="centerY" secondItem="Fc5-KS-cim" secondAttribute="centerY" id="pPs-eg-ffp"/>
                                                                                         </constraints>
-                                                                                    </tableCellView>
-                                                                                    <tableCellView identifier="CallCell" id="nvG-hU-lKg" userLabel="CallCell" customClass="ContextualTableCellView">
-                                                                                        <rect key="frame" x="1" y="63" width="321" height="50"/>
-                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                                                        <subviews>
-                                                                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="200" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sfz-V3-QhK">
-                                                                                                <rect key="frame" x="6" y="24" width="73" height="23"/>
-                                                                                                <constraints>
-                                                                                                    <constraint firstAttribute="height" constant="23" id="Knk-h9-HbW"/>
-                                                                                                </constraints>
-                                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" placeholderString="Call name" id="j0J-Xd-uth">
-                                                                                                    <font key="font" size="16" name="HelveticaNeue-Light"/>
-                                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                </textFieldCell>
-                                                                                            </textField>
-                                                                                            <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="300" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sm2-al-NU0">
-                                                                                                <rect key="frame" x="6" y="3" width="40" height="20"/>
-                                                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="details" id="mK5-kV-YOO">
-                                                                                                    <font key="font" size="13" name="HelveticaNeue-Light"/>
-                                                                                                    <color key="textColor" name="windowFrameColor" catalog="System" colorSpace="catalog"/>
-                                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                </textFieldCell>
-                                                                                            </textField>
-                                                                                        </subviews>
-                                                                                        <constraints>
-                                                                                            <constraint firstItem="Sm2-al-NU0" firstAttribute="top" secondItem="sfz-V3-QhK" secondAttribute="bottom" constant="1" id="4ta-Gr-B5A"/>
-                                                                                            <constraint firstItem="sfz-V3-QhK" firstAttribute="top" secondItem="nvG-hU-lKg" secondAttribute="top" constant="3" id="M4L-Af-Pfa"/>
-                                                                                            <constraint firstItem="sfz-V3-QhK" firstAttribute="leading" secondItem="nvG-hU-lKg" secondAttribute="leading" constant="8" id="O23-cp-x3m"/>
-                                                                                            <constraint firstItem="Sm2-al-NU0" firstAttribute="leading" secondItem="nvG-hU-lKg" secondAttribute="leading" constant="8" id="WJh-9X-RGV"/>
-                                                                                        </constraints>
-                                                                                        <connections>
-                                                                                            <outlet property="textField" destination="sfz-V3-QhK" id="0Ka-vn-gAW"/>
-                                                                                        </connections>
                                                                                     </tableCellView>
                                                                                     <customView identifier="HoverRowView" id="f78-Ki-IyO" customClass="HoverTableRowView">
                                                                                         <rect key="frame" x="1" y="115" width="321" height="55"/>
