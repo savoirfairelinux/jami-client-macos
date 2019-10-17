@@ -207,6 +207,14 @@ NSInteger const REQUEST_SEG         = 1;
     }
 }
 
+-(void) reloadConversationWithURI:(NSString *)uri
+{
+    if (convModel_ == nil) {
+        return;
+    }
+    [smartView reloadData];
+}
+
 - (BOOL)setConversationModel:(lrc::api::ConversationModel *)conversationModel
 {
     if (convModel_ == conversationModel) {
@@ -487,6 +495,20 @@ NSInteger const REQUEST_SEG         = 1;
     [interactionSnippet setHidden:false];
 
     auto lastUid = conversation.lastMessageUid;
+    auto callId = conversation.confId.empty() ? conversation.callId : conversation.confId;
+    NSString *callInfo = @"";
+    if (!callId.empty()) {
+        if ([self chosenAccount].callModel.get()->hasCall(callId)) {
+        auto call = [self chosenAccount].callModel.get()->getCall(callId);
+            callInfo = (call.status == lrc::api::call::Status::IN_PROGRESS) ? @"Talking" :  @(to_string(call.status).c_str());
+        }
+    }
+    
+    if (callInfo.length > 0) {
+        [lastInteractionDate setStringValue: callInfo];
+        [interactionSnippet setHidden:true];
+        return result;
+    }
     if (conversation.interactions.find(lastUid) != conversation.interactions.end()) {
         // last interaction snippet
         std::string lastInteractionSnippet = conversation.interactions[lastUid].body;
