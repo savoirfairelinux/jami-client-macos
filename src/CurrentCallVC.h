@@ -23,6 +23,9 @@
 #import "views/CallView.h"
 #import <api/account.h>
 
+#import "ChooseContactVC.h"
+#import "CallInConferenceVC.h"
+
 namespace lrc {
     namespace api {
         class AVModel;
@@ -32,10 +35,11 @@ namespace lrc {
 @protocol CallViewControllerDelegate
 
 -(void) conversationInfoUpdatedFor:(const std::string&) conversationID;
+-(void) callFiniched;
 
 @end
 
-@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate> {
+@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate, ChooseContactVCDelegate, CallInConferenceVCDelegate> {
 
 }
 @property (retain, nonatomic) id <CallViewControllerDelegate> delegate;
