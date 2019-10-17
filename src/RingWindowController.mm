@@ -59,6 +59,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 @property (retain) MigrateRingAccountsWC* migrateWC;
 @property RingWizardWC* wizard;
+@property QMetaObject::Connection callState;
 
 @end
 
@@ -229,6 +230,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                                                account:accInfo
                                                avModel: avModel];
                          [self changeViewTo:SHOW_CALL_SCREEN];
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
 
                      });
 
@@ -241,13 +243,13 @@ typedef NS_ENUM(NSInteger, ViewState) {
                              [smartViewVC selectPendingList];
                          else
                              [smartViewVC selectConversationList];
-
                          [currentCallVC setCurrentCall:convInfo.callId
                                           conversation:convInfo.uid
                                                account:accInfo
                                                avModel: avModel];
                          [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
                          [self changeViewTo:SHOW_CALL_SCREEN];
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
                      });
 
     QObject::connect(self.behaviorController,
@@ -299,6 +301,25 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [shareButton sendActionOn:NSLeftMouseDownMask];
     [self connect];
     [self updateRingID];
+    [self connectCallSignalsForAccount];
+}
+
+- (void)connectCallSignalsForAccount
+{
+    @try {
+        auto& account = [chooseAccountVC selectedAccount];
+        QObject::disconnect(self.callState);
+        auto *callModel = account.callModel.get();
+        self.callState = QObject::connect(callModel,
+                                          &lrc::api::NewCallModel::callStatusChanged,
+                                          [self, callModel](const std::string callId) {
+                                              if (callModel->hasCall(callId)) {
+                                                  auto call = callModel->getCall(callId);
+                                                  [smartViewVC reloadConversationWithURI: @(call.peerUri.c_str())];
+                                              }
+                                          });
+    } @catch (NSException *ex) {
+    }
 }
 
 - (void)migrationDidComplete
@@ -479,6 +500,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [self updateRingID];
     [settingsVC setSelectedAccount:accInfo.id];
     [self changeViewTo: ([settingsVC.view isHidden] || removed)  ?  SHOW_WELCOME_SCREEN : SHOW_SETTINGS_SCREEN];
+    [self connectCallSignalsForAccount];
 }
 
 -(void)allAccountsDeleted
@@ -489,6 +511,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     qrcodeView.animator.alphaValue = 0.0;
     [centerYQRCodeConstraint.animator setConstant: 0];
     [centerYWelcomeContainerConstraint.animator setConstant: 0];
+    QObject::disconnect(self.callState);
     [self close];
     AppDelegate* delegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
     [delegate showWizard];
@@ -539,6 +562,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 -(void) conversationInfoUpdatedFor:(const std::string&) conversationID {
     [smartViewVC reloadConversationWithUid:@(conversationID.c_str())];
+}
+
+-(void) callFinished {
+    [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
 
 -(void) showConversation:(NSString* )conversationId forAccount:(NSString*)accountId {
