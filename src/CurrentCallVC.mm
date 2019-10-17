@@ -20,6 +20,7 @@
 extern "C" {
 #import "libavutil/frame.h"
 #import "libavutil/display.h"
+#import "libavutil/pixfmt.h"
 }
 
 #import <QuartzCore/QuartzCore.h>
@@ -51,6 +52,7 @@ extern "C" {
 #import "VideoCommon.h"
 #import "views/GradientView.h"
 #import "views/MovableView.h"
+#import "ChooseContactVC.h"
 
 @interface CurrentCallVC () <NSPopoverDelegate> {
     std::string convUid_;
@@ -108,6 +110,12 @@ extern "C" {
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection mediaAddedConnection;
 @property QMetaObject::Connection profileUpdatedConnection;
+@property QMetaObject::Connection addedToConfrenceConnection;
+
+//conference
+@property (unsafe_unretained) IBOutlet NSStackView *callingWidgetsContainer;
+
+@property (strong) NSPopover* brokerPopoverVC;
 
 @property (strong) IBOutlet ChatVC* chatVC;
 
@@ -115,13 +123,14 @@ extern "C" {
 
 @implementation CurrentCallVC
 lrc::api::AVModel* mediaModel;
+NSMutableDictionary *connectingCalls;
 
 NSInteger const PREVIEW_WIDTH = 185;
 NSInteger const PREVIEW_HEIGHT = 130;
 NSInteger const HIDE_PREVIEW_BUTTON_SIZE = 25;
 NSInteger const PREVIEW_MARGIN = 20;
 
-@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView;
+@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -153,6 +162,22 @@ CVPixelBufferRef pixelBufferPreview;
     [previewView setHidden: YES];
     videoView.callId = callUid;
     [self setUpPrewviewFrame];
+    QObject::disconnect(self.selectedCallChanged);
+    self.selectedCallChanged = QObject::connect(callModel,
+                                                &lrc::api::NewCallModel::callStatusChanged,
+                                                [self](const std::string callId) {
+                                                    [self updateCall];
+                                                });
+    QObject::disconnect(self.addedToConfrenceConnection);
+    self.addedToConfrenceConnection = QObject::connect(callModel,
+                                                &lrc::api::NewCallModel::callAddedToConference,
+                                                [self](const std::string callId, const std::string& confId) {
+                                                    [self updateCall];
+                                                });
+    connectingCalls = [[NSMutableDictionary alloc] init];
+    for (NSView *view in callingWidgetsContainer.subviews) {
+        view.removeFromSuperview;
+    }
 }
 
 -(void) setUpButtons:(lrc::api::call::Info&)callInfo isRecording:(BOOL) isRecording {
@@ -333,6 +358,8 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::CONNECTED:
             break;
         case Status::ENDED:
+            [self.delegate callFiniched];
+            break;
         case Status::TERMINATING:
         case Status::INVALID:
             break;
@@ -380,7 +407,6 @@ CVPixelBufferRef pixelBufferPreview;
         backgroundImage.layer.contents = bluredImage;
         [backgroundImage setHidden:NO];
     } else {
-        contactNameLabel.textColor = [NSColor textColor];
         contactNameLabel.textColor = [NSColor textColor];
         contactIdLabel.textColor = [NSColor textColor];
         callStateLabel.textColor = [NSColor textColor];
@@ -524,7 +550,7 @@ CVPixelBufferRef pixelBufferPreview;
                              }
                              [self renderer: renderer renderFrameForPreviewView:previewView];
 
-                         } else {
+                         } else if (id == callUid_) {
                              auto renderer = &mediaModel->getRenderer(id);
                              if(!renderer->isRendering()) {
                                  return;
@@ -661,6 +687,10 @@ CVPixelBufferRef pixelBufferPreview;
     contactNameLabel.textColor = [NSColor highlightColor];
     contactIdLabel.textColor = [NSColor highlightColor];
     callStateLabel.textColor = [NSColor highlightColor];
+    for (NSView *view in callingWidgetsContainer.subviews) {
+        view.removeFromSuperview;
+    }
+    connectingCalls = [[NSMutableDictionary alloc] init];
 }
 
 -(void) setupCallView
@@ -889,8 +919,69 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 - (IBAction)toggleAddParticipantView:(id)sender {
-
+    if (_brokerPopoverVC != nullptr) {
+        [_brokerPopoverVC performClose:self];
+        _brokerPopoverVC = NULL;
+    } else {
+        auto* contactSelectorVC = [[ChooseContactVC alloc] initWithNibName:@"ChooseContactVC" bundle:nil];
+        auto* convModel = accountInfo_->conversationModel.get();
+        [contactSelectorVC setConversationModel:convModel andCurrentConversation: convUid_];
+        contactSelectorVC.delegate = self;
+        _brokerPopoverVC = [[NSPopover alloc] init];
+        [_brokerPopoverVC setContentSize:contactSelectorVC.view.frame.size];
+        [_brokerPopoverVC setContentViewController:contactSelectorVC];
+        [_brokerPopoverVC setAnimates:YES];
+        [_brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [_brokerPopoverVC setDelegate:self];
+        [_brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
 }
+
+-(void)callToContact:(std::string)contactUri convUID:(std::string)convID {
+    if (_brokerPopoverVC != nullptr) {
+        [_brokerPopoverVC performClose:self];
+        _brokerPopoverVC = NULL;
+    }
+    auto* callModel = accountInfo_->callModel.get();
+    auto currentCall = callModel->getCall(callUid_);
+    auto* convModel = accountInfo_->conversationModel.get();
+    auto it = getConversationFromUid(convID, *convModel);
+    auto newCall = callModel->callAndAddParticipant(contactUri, callUid_, currentCall.isAudioOnly);
+    if (!connectingCalls[@(contactUri.c_str())]) {
+        CallInConferenceVC *callingView = [self callingViewForCallId:newCall];
+        connectingCalls[@(contactUri.c_str())] = callingView;
+        [self.callingWidgetsContainer addView:callingView.view inGravity:NSStackViewGravityBottom];
+        [self.callingWidgetsContainer updateConstraints];
+        [self.callingWidgetsContainer updateLayer];
+        [self.callingWidgetsContainer setNeedsDisplay:YES];
+    }
+}
+
+-(void)joinCall:(std::string)callId {
+    auto* callModel = accountInfo_->callModel.get();
+    auto currentCall = callModel->getCall(callUid_);
+    callModel->joinCalls(callUid_, callId);
+}
+
+-(CallInConferenceVC*) callingViewForCallId:(std::string)callId {
+    CallInConferenceVC *callView = [[CallInConferenceVC alloc]
+                                    initWithNibName:@"CallInConferenceVC"
+                                    bundle:nil
+                                    callId:callId
+                                    accountInfo:accountInfo_];
+    callView.delegate = self;
+    return callView;
+}
+
+-(void)removePreviewForContactUri:(std::string)uri {
+    NSViewController *callView = connectingCalls[@(uri.c_str())];
+    if (!callView) {
+        return;
+    }
+    [self.callingWidgetsContainer removeView:callView.view];
+    connectingCalls[@(uri.c_str())] = nil;
+}
+
 - (IBAction)hidePreview:(id)sender {
     CGRect previewFrame = previewView.frame;
     CGRect newPreviewFrame;//, bcHidePreviewFrame;
