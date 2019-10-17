@@ -282,7 +282,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(selectedUid_, *convModel_);
+    auto it = getConversationFromUid(uid, *convModel_);
     if (it != convModel_->allFilteredConversations().end()) {
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
         [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
