@@ -91,6 +91,10 @@
     [self.effect_view setMaterial: static_cast<NSVisualEffectMaterial>(6)];
 }
 
+-(void)setBlurType:(int)type {
+    [self.effect_view setMaterial: static_cast<NSVisualEffectMaterial>(type)];
+}
+
 - (void)setMouseInside:(BOOL)value {
     if (mouseInside != value) {
         mouseInside = value;

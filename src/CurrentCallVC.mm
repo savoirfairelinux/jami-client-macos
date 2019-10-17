@@ -55,6 +55,7 @@ extern "C" {
 @interface CurrentCallVC () <NSPopoverDelegate> {
     std::string convUid_;
     std::string callUid_;
+    std::string confUid_;
     const lrc::api::account::Info *accountInfo_;
     NSTimer* refreshDurationTimer;
 }
@@ -108,6 +109,12 @@ extern "C" {
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection mediaAddedConnection;
 @property QMetaObject::Connection profileUpdatedConnection;
+@property QMetaObject::Connection addedToConfrenceConnection;
+
+//conference
+@property (unsafe_unretained) IBOutlet NSStackView *callingWidgetsContainer;
+
+@property (strong) NSPopover* brokerPopoverVC;
 
 @property (strong) IBOutlet ChatVC* chatVC;
 
@@ -115,13 +122,14 @@ extern "C" {
 
 @implementation CurrentCallVC
 lrc::api::AVModel* mediaModel;
+NSMutableDictionary *connectingCalls;
 
 NSInteger const PREVIEW_WIDTH = 185;
 NSInteger const PREVIEW_HEIGHT = 130;
 NSInteger const HIDE_PREVIEW_BUTTON_SIZE = 25;
 NSInteger const PREVIEW_MARGIN = 20;
 
-@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView;
+@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -144,6 +152,15 @@ CVPixelBufferRef pixelBufferPreview;
         callUid_.clear();
         return;
     }
+   // if (convUid_ != convUid) {
+     //   [self.videoMTKView fillWithBlack];
+     //   [self.previewView fillWithBlack];
+//        [hidePreviewBackground setHidden:YES];
+//        [self.previewView setHidden: YES];
+//        [self.videoMTKView setHidden: YES];
+//        self.previewView.stopRendering = true;
+//        self.videoMTKView.stopRendering = true;
+  //  }
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
@@ -153,6 +170,21 @@ CVPixelBufferRef pixelBufferPreview;
     [previewView setHidden: YES];
     videoView.callId = callUid;
     [self setUpPrewviewFrame];
+    QObject::disconnect(self.selectedCallChanged);
+    self.selectedCallChanged = QObject::connect(callModel,
+                                                &lrc::api::NewCallModel::callStatusChanged,
+                                                [self](const std::string callId) {
+                                                    if (callId == callUid_ || callId == confUid_) {
+                                                        [self updateCall];
+                                                    }
+                                                });
+    QObject::disconnect(self.addedToConfrenceConnection);
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
+    confUid_ = convIt->confId;
+    connectingCalls = [[NSMutableDictionary alloc] init];
+    for (NSView *view in callingWidgetsContainer.subviews) {
+        view.removeFromSuperview;
+    }
 }
 
 -(void) setUpButtons:(lrc::api::call::Info&)callInfo isRecording:(BOOL) isRecording {
@@ -256,6 +288,8 @@ CVPixelBufferRef pixelBufferPreview;
     }
     [self setupContactInfo:contactPhoto];
 
+    confUid_ = convIt->confId;
+
     [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
     if (refreshDurationTimer == nil)
         refreshDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -333,6 +367,8 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::CONNECTED:
             break;
         case Status::ENDED:
+            [self.delegate callFinished];
+            break;
         case Status::TERMINATING:
         case Status::INVALID:
             break;
@@ -380,7 +416,6 @@ CVPixelBufferRef pixelBufferPreview;
         backgroundImage.layer.contents = bluredImage;
         [backgroundImage setHidden:NO];
     } else {
-        contactNameLabel.textColor = [NSColor textColor];
         contactNameLabel.textColor = [NSColor textColor];
         contactIdLabel.textColor = [NSColor textColor];
         callStateLabel.textColor = [NSColor textColor];
@@ -466,35 +501,36 @@ CVPixelBufferRef pixelBufferPreview;
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                              [self.previewView setHidden:NO];
                              self.previewView.stopRendering = false;
-                         } else {
+                         } else if (id == callUid_ || id == confUid_) {
                              [self mouseIsMoving: NO];
                              self.videoMTKView.stopRendering = false;
                              [self.videoMTKView setHidden:NO];
                              [bluerBackgroundEffect setHidden:YES];
                              [backgroundImage setHidden:YES];
                              [videoView setShouldAcceptInteractions:YES];
+                             renderConnections.frameUpdated =
+                             QObject::connect(mediaModel,
+                                              &lrc::api::AVModel::frameUpdated,
+                                              [=](const std::string& id) {
+                                                  if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+                                                      auto renderer = &mediaModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID);
+                                                      if(!renderer->isRendering()) {
+                                                          return;
+                                                      }
+                                                      [self renderer: renderer renderFrameForPreviewView:previewView];
+                                                      
+                                                  } else {
+                                                      auto renderer = &mediaModel->getRenderer(id);
+                                                      if (id == callUid_ || id == confUid_) {
+                                                          if(!renderer->isRendering()) {
+                                                              return;
+                                                          }
+                                                          [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
+                                                      }
+                                                  }
+                                              });
                          }
-                         QObject::disconnect(renderConnections.frameUpdated);
-                         renderConnections.frameUpdated =
-                         QObject::connect(mediaModel,
-                                          &lrc::api::AVModel::frameUpdated,
-                                          [=](const std::string& id) {
-                                              if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
-                                                  auto renderer = &mediaModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID);
-                                                  if(!renderer->isRendering()) {
-                                                      return;
-                                                  }
-                                                  [hidePreviewBackground setHidden: NO];
-                                                  [self renderer: renderer renderFrameForPreviewView:previewView];
-
-                                              } else {
-                                                  auto renderer = &mediaModel->getRenderer(id);
-                                                  if(!renderer->isRendering()) {
-                                                      return;
-                                                  }
-                                                  [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
-                                              }
-                                          });
+                         
                      });
     renderConnections.stopped =
     QObject::connect(mediaModel,
@@ -504,7 +540,7 @@ CVPixelBufferRef pixelBufferPreview;
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                              [self.previewView setHidden:YES];
                              self.previewView.stopRendering = true;
-                         } else {
+                         } else if (id == callUid_ || id == confUid_) {
                              [self mouseIsMoving: YES];
                              self.videoMTKView.stopRendering = true;
                              [self.videoMTKView setHidden:YES];
@@ -526,10 +562,12 @@ CVPixelBufferRef pixelBufferPreview;
 
                          } else {
                              auto renderer = &mediaModel->getRenderer(id);
+                             if (id == callUid_ || id == confUid_) {
                              if(!renderer->isRendering()) {
                                  return;
                              }
                              [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
+                             }
                          }
                      });
 }
@@ -661,6 +699,10 @@ CVPixelBufferRef pixelBufferPreview;
     contactNameLabel.textColor = [NSColor highlightColor];
     contactIdLabel.textColor = [NSColor highlightColor];
     callStateLabel.textColor = [NSColor highlightColor];
+    for (NSView *view in callingWidgetsContainer.subviews) {
+        view.removeFromSuperview;
+    }
+    connectingCalls = [[NSMutableDictionary alloc] init];
 }
 
 -(void) setupCallView
@@ -793,7 +835,10 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     auto* callModel = accountInfo_->callModel.get();
-    callModel->hangUp(callUid_);
+    
+    auto uid = confUid_.empty() ? callUid_ : confUid_;
+    
+    callModel->hangUp(uid);
 }
 
 - (IBAction)accept:(id)sender {
@@ -832,9 +877,11 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     auto* callModel = accountInfo_->callModel.get();
-    auto currentCall = callModel->getCall(callUid_);
+   // auto currentCall = callModel->getCall(callUid_);
+    
+    auto uid = confUid_.empty() ? callUid_ : confUid_;
 
-    callModel->togglePause(callUid_);
+    callModel->togglePause(uid);
 }
 
 - (IBAction)showDialpad:(id)sender {
@@ -889,8 +936,24 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 - (IBAction)toggleAddParticipantView:(id)sender {
-
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* contactSelectorVC = [[ChooseContactVC alloc] initWithNibName:@"ChooseContactVC" bundle:nil];
+        auto* convModel = accountInfo_->conversationModel.get();
+        [contactSelectorVC setConversationModel:convModel andCurrentConversation: convUid_];
+        contactSelectorVC.delegate = self;
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentSize:contactSelectorVC.view.frame.size];
+        [brokerPopoverVC setContentViewController:contactSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
 }
+
 - (IBAction)hidePreview:(id)sender {
     CGRect previewFrame = previewView.frame;
     CGRect newPreviewFrame;//, bcHidePreviewFrame;
@@ -1005,4 +1068,62 @@ CVPixelBufferRef pixelBufferPreview;
     return CGRectMake(origin.x, origin.y, HIDE_PREVIEW_BUTTON_SIZE, HIDE_PREVIEW_BUTTON_SIZE);
 }
 
+# pragma mark -ChooseContactVCDelegate
+
+-(void)callToContact:(std::string)contactUri convUID:(std::string)convID {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    }
+    auto* callModel = accountInfo_->callModel.get();
+    auto currentCall = callModel->getCall(callUid_);
+    auto* convModel = accountInfo_->conversationModel.get();
+    auto it = getConversationFromUid(convID, *convModel);
+    auto newCall = callModel->callAndAddParticipant(contactUri, callUid_, currentCall.isAudioOnly);
+    [self addPreviewForContactUri:contactUri call: newCall];
+}
+
+-(void)joinCall:(std::string)callId {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    }
+    auto* callModel = accountInfo_->callModel.get();
+   // auto currentCall = callModel->getCall(callUid_);
+    auto uid = confUid_.empty() ? callUid_ : confUid_;
+    callModel->joinCalls(uid, callId);
+}
+
+# pragma mark -CallInConferenceVCDelegate
+
+-(void)removePreviewForContactUri:(std::string)uri {
+    NSViewController *callView = connectingCalls[@(uri.c_str())];
+    if (!callView) {
+        return;
+    }
+    [self.callingWidgetsContainer removeView:callView.view];
+    connectingCalls[@(uri.c_str())] = nil;
+}
+
+-(void)addPreviewForContactUri:(std::string)uri call:(std::string)callId {
+    if (connectingCalls[@(uri.c_str())]) {
+        return;
+    }
+    CallInConferenceVC *callingView = [self callingViewForCallId: callId];
+    connectingCalls[@(uri.c_str())] = callingView;
+    [self.callingWidgetsContainer addView:callingView.view inGravity:NSStackViewGravityBottom];
+    [self.callingWidgetsContainer updateConstraints];
+    [self.callingWidgetsContainer updateLayer];
+    [self.callingWidgetsContainer setNeedsDisplay:YES];
+}
+
+-(CallInConferenceVC*) callingViewForCallId:(std::string)callId {
+    CallInConferenceVC *callView = [[CallInConferenceVC alloc]
+                                    initWithNibName:@"CallInConferenceVC"
+                                    bundle:nil
+                                    callId:callId
+                                    accountInfo:accountInfo_];
+    callView.delegate = self;
+    return callView;
+}
 @end
