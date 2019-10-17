@@ -51,6 +51,4 @@
  */
 @property (nonatomic) id <CallDelegate> callDelegate;
 
-@property std::string callId;
-
 @end

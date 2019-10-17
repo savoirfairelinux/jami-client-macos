@@ -10,6 +10,7 @@
                 <outlet property="backgroundImage" destination="Usy-W5-TGp" id="EMW-vz-Zuc"/>
                 <outlet property="bluerBackgroundEffect" destination="CDQ-nt-oe4" id="xjH-MC-jHw"/>
                 <outlet property="callStateLabel" destination="Ff6-F4-zbn" id="hWp-CY-ptB"/>
+                <outlet property="callingWidgetsContainer" destination="EEY-UB-RHG" id="01B-we-01s"/>
                 <outlet property="cancelCallButton" destination="2cB-dz-KYg" id="Apo-aW-vbA"/>
                 <outlet property="chatButton" destination="fmp-x4-Pef" id="ARt-dr-TRo"/>
                 <outlet property="chatVC" destination="LWe-df-dS6" id="SMR-T0-fYe"/>
@@ -271,6 +272,9 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
+                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EEY-UB-RHG">
+                                    <rect key="frame" x="20" y="20" width="0.0" height="0.0"/>
+                                </stackView>
                                 <customView autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgD-oV-ZDp" customClass="MovableView">
                                     <rect key="frame" x="550" y="20" width="175" height="120"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -304,7 +308,7 @@
                                                             <constraint firstItem="M9f-aD-4Bp" firstAttribute="leading" secondItem="hya-Xj-6pU" secondAttribute="leading" id="MCA-cM-aSb"/>
                                                         </constraints>
                                                     </view>
-                                                    <color key="fillColor" red="0.99999600649999998" green="1" blue="1" alpha="0.32341609589041098" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="fillColor" red="0.99999600649999998" green="1" blue="1" alpha="0.32000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </box>
                                             </subviews>
                                         </customView>
@@ -347,7 +351,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </customView>
                                 <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Djs-L8-8Pe" userLabel="Controls">
-                                    <rect key="frame" x="241" y="20" width="264" height="44"/>
+                                    <rect key="frame" x="219" y="20" width="308" height="44"/>
                                     <subviews>
                                         <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="HoverButton">
                                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -522,8 +526,42 @@
                                                 <action selector="toggleRecording:" target="-2" id="zVh-ci-nzl"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="HoverButton">
+                                        <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vhk-fx-6RW" userLabel="addParticipant" customClass="HoverButton">
                                             <rect key="frame" x="220" y="0.0" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="44" id="AvV-bR-uo5"/>
+                                                <constraint firstAttribute="height" constant="44" id="qRG-Re-3cS"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_add_participant" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="4wz-Ht-Lzp">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                    <color key="value" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                    <color key="value" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="toggleAddParticipantView:" target="-2" id="rhk-OI-z0Z"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="HoverButton">
+                                            <rect key="frame" x="264" y="0.0" width="44" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="48U-1h-yAx"/>
                                                 <constraint firstAttribute="height" constant="44" id="EDO-9c-ndD"/>
@@ -564,8 +602,10 @@
                                         <integer value="1000"/>
                                         <integer value="1000"/>
                                         <integer value="1000"/>
+                                        <integer value="1000"/>
                                     </visibilityPriorities>
                                     <customSpacing>
+                                        <real value="3.4028234663852886e+38"/>
                                         <real value="3.4028234663852886e+38"/>
                                         <real value="3.4028234663852886e+38"/>
                                         <real value="3.4028234663852886e+38"/>
@@ -578,11 +618,14 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="wDi-X6-dgL" secondAttribute="bottom" id="3TS-UW-Tqd"/>
                                 <constraint firstAttribute="bottom" secondItem="Usy-W5-TGp" secondAttribute="bottom" id="5mb-Be-9o1"/>
+                                <constraint firstItem="Djs-L8-8Pe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EEY-UB-RHG" secondAttribute="trailing" constant="20" id="6BR-Cc-ICI"/>
                                 <constraint firstItem="DfH-di-xs7" firstAttribute="bottom" secondItem="d0X-cW-Xgz" secondAttribute="bottom" id="6Wc-Tr-toW"/>
                                 <constraint firstItem="Usy-W5-TGp" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="9ZC-hX-N5k"/>
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="trailing" secondItem="Usy-W5-TGp" secondAttribute="trailing" id="9cl-8g-a1Q"/>
                                 <constraint firstItem="DfH-di-xs7" firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" id="DyH-rT-7Hi"/>
                                 <constraint firstAttribute="trailing" secondItem="d0X-cW-Xgz" secondAttribute="trailing" id="G79-Jv-EYw"/>
+                                <constraint firstItem="EEY-UB-RHG" firstAttribute="leading" secondItem="2wf-Py-l6B" secondAttribute="leading" constant="20" id="GyO-9Z-Val"/>
+                                <constraint firstAttribute="bottom" secondItem="EEY-UB-RHG" secondAttribute="bottom" constant="20" id="LsO-US-QH5"/>
                                 <constraint firstItem="d0X-cW-Xgz" firstAttribute="top" secondItem="2wf-Py-l6B" secondAttribute="top" id="MKB-zm-C75"/>
                                 <constraint firstItem="CDQ-nt-oe4" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N2u-0C-Y3z"/>
                                 <constraint firstItem="gQE-fN-JhY" firstAttribute="leading" secondItem="Usy-W5-TGp" secondAttribute="leading" id="N5g-Mw-ag2"/>
@@ -975,6 +1018,7 @@
     <resources>
         <image name="NSTouchBarExitFullScreenTemplate" width="18" height="30"/>
         <image name="ic_action_accept" width="72" height="72"/>
+        <image name="ic_action_add_participant" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>
         <image name="ic_action_cancel" width="72" height="72"/>
         <image name="ic_action_chat" width="100" height="100"/>
