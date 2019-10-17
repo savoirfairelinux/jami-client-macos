@@ -178,6 +178,10 @@ SET(ringclient_CONTROLLERS
    src/LeaveMessageVC.h
    src/RecordFileVC.mm
    src/RecordFileVC.h
+   src/ChooseContactVC.mm
+   src/ChooseContactVC.h
+   src/CallInConferenceVC.mm
+   src/CallInConferenceVC.h
 )
 
 SET(ringclient_VIEWS
@@ -277,6 +281,8 @@ SET(ringclient_XIBS
    AccountSettings
    LeaveMessageVC
    RecordFileVC
+   ChooseContactVC
+   CallInConferenceVC
 )
 
 # Icons
