@@ -56,6 +56,8 @@
 @property BOOL highlightable;
 - (void) drawSelection: (BOOL) isSelected;
 
+-(void)setBlurType:(int)type;
+
 @end
 
 // Used by the HoverTableRowView and the RingTableView
