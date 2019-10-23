@@ -39,4 +39,6 @@ namespace Preferences {
     NSString * const DownloadFolder = @"download_folder";
 }
 
+NSString * const SkipBackUpPage = @"always_skip_backup_page";
+
 const CGFloat MAX_IMAGE_SIZE = 1024;
