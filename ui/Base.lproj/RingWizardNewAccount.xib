@@ -514,11 +514,11 @@ Gw
         </popover>
         <userDefaultsController representsSharedInstance="YES" id="JOT-gS-qe2"/>
         <customView id="WWd-Hs-Pwi">
-            <rect key="frame" x="0.0" y="0.0" width="413" height="60"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1hK-Hw-cJh">
-                    <rect key="frame" x="35" y="-12" width="344" height="17"/>
+                    <rect key="frame" x="28" y="78" width="344" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="340" id="tHE-Zh-IYn"/>
                     </constraints>
@@ -529,7 +529,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="1rt-CR-Wpz">
-                    <rect key="frame" x="159" y="13" width="96" height="32"/>
+                    <rect key="frame" x="152" y="103" width="96" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="96" id="g01-Ci-luV"/>
                     </constraints>

@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2019 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,21 +18,19 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "RingWizardChooseVC.h"
-#import "RingWizardNewAccountVC.h"
-#import "RingWizardLinkAccountVC.h"
 #import "LrcModelsProtocol.h"
-#import "AddSIPAccountVC.h"
-#import "ConnectToAccManagerVC.h"
-#import "AccountBackupVC.h"
+#import <string>
 
-@interface RingWizardWC : NSWindowController <NSWindowDelegate, NSPathControlDelegate,
-    NSOpenSavePanelDelegate, RingWizardChooseDelegate, RingWizardNewDelegate,
-    RingWizardLinkDelegate, AddSIPAccountDelegate, RingWizardAccManagerDelegate, AccountBackupDelegate,
-LrcModelsProtocol>
-- (void)showChooseWithCancelButton:(BOOL)showCancel;
-- (void)showNewAccountVC;
-- (void)showLinkAccountVC;
-- (void)showSIPAccountVC;
-- (void)showConnectToAccountManager;
+@protocol AccountBackupDelegate <NSObject>
+-(void)completedWithSuccess:(BOOL) success;
+-(void)showView:(NSView*)view;
 @end
+
+@interface AccountBackupVC : NSViewController <LrcModelsProtocol>
+
+@property (retain, nonatomic) id <AccountBackupDelegate> delegate;
+@property std::string accountToBackup;
+-(void)show;
+
+@end
+

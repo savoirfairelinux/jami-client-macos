@@ -19,9 +19,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
+#import <string>
 
 @protocol RingWizardNewDelegate <NSObject>
-- (void)didCreateAccountWithSuccess:(BOOL)success;
+- (void)didCreateAccountWithSuccess:(BOOL)success accountId:(std::string)accountId;
 - (void)showView:(NSView*)view;
 @end
 
