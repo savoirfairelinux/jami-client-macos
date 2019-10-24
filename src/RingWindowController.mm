@@ -430,7 +430,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                 CGContextAddRect(ctx, rectDraw);
                 CGContextFillPath(ctx);
             } else {
-                CGContextSetFillColorWithColor(ctx, [NSColor windowBackgroundColor].CGColor);
+                CGContextSetFillColorWithColor(ctx, [NSColor clearColor].CGColor);
                 rectDraw.origin = CGPointMake((j + qr_margin) * zoom,(i + qr_margin) * zoom);
                 CGContextAddRect(ctx, rectDraw);
                 CGContextFillPath(ctx);

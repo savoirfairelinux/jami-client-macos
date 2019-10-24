@@ -7,7 +7,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RecordFileVC">
             <connections>
-                <outlet property="cancelButton" destination="Biq-yV-8LR" id="GbB-hm-BxD"/>
                 <outlet property="fileImage" destination="Zs4-l8-jAQ" id="0FQ-jC-aJq"/>
                 <outlet property="infoLabel" destination="MXV-85-UvC" id="0cS-e5-MJo"/>
                 <outlet property="previewView" destination="rRf-Sm-dXA" id="B7s-VU-mfu"/>
@@ -76,17 +75,17 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
                             <integer key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
                             <color key="value" red="0.82471948862075806" green="0.37392586469650269" blue="0.32938593626022339" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                            <color key="value" red="0.32584697008132935" green="0.32583719491958618" blue="0.32584273815155029" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
-                            <color key="value" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
-                            <color key="value" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="mouseOutsideColor">
-                            <color key="value" red="0.82352941176470584" green="0.33333333333333331" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                            <color key="value" red="0.32584697008132935" green="0.32583719491958618" blue="0.32584273815155029" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
