@@ -39,9 +39,9 @@
     __unsafe_unretained IBOutlet NSTextField* infoLabel;
     __unsafe_unretained IBOutlet NSBox* timerBox;
     __unsafe_unretained IBOutlet NSTextField* timerLabel;
-    __unsafe_unretained IBOutlet NSBox* sendBox;
-    __unsafe_unretained IBOutlet NSTextField* sendFilename;
+    __unsafe_unretained IBOutlet NSButton* sendButton;
     __unsafe_unretained IBOutlet NSButton* recordButton;
+    __unsafe_unretained IBOutlet NSButton* exitButton;
 }
 
 @end
@@ -62,6 +62,19 @@ lrc::api::ConversationModel* conversationModel;
     personPhoto.layer.masksToBounds =true;
     personPhoto.layer.cornerRadius = personPhoto.frame.size.width * 0.5;
     filesToSend = [[NSMutableDictionary alloc] init];
+    [self setButtonShadow:sendButton];
+    [self setButtonShadow:exitButton];
+    [self setButtonShadow:recordButton];
+}
+
+-(void) setButtonShadow:(NSButton*) button {
+    button.wantsLayer = YES;
+    button.layer.masksToBounds = NO;
+    button.shadow = [[NSShadow alloc] init];
+    button.layer.shadowOpacity = 0.8;
+    button.layer.shadowColor = [[NSColor grayColor] CGColor];
+    button.layer.shadowOffset = NSMakeSize(-0.5, 1);
+    button.layer.shadowRadius = 1;
 }
 
 -(void) setAVModel: (lrc::api::AVModel*) avmodel {
@@ -88,6 +101,7 @@ lrc::api::ConversationModel* conversationModel;
         filesToSend[@(conversationUid.c_str())] = @(file_name.c_str());
         isRecording = true;
         recordButton.image = [NSImage imageNamed:@"ic_stoprecord.png"];
+        recordButton.title = NSLocalizedString(@"Stop recording", @"Record message title");
         [timerBox setHidden:NO];
         if (refreshDurationTimer == nil)
             refreshDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -99,11 +113,11 @@ lrc::api::ConversationModel* conversationModel;
         avModel->stopLocalRecorder([filesToSend[@(conversationUid.c_str())] UTF8String]);
         isRecording = false;
         recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+        recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
         [refreshDurationTimer invalidate];
         refreshDurationTimer = nil;
         [timerBox setHidden:YES];
-        [sendBox setHidden: NO];
-        [sendFilename setStringValue:[NSString formattedStringTimeFromSeconds: recordingTime]];
+        [sendButton setHidden: NO];
     }
 }
 
@@ -126,25 +140,24 @@ lrc::api::ConversationModel* conversationModel;
 
 - (void)clearData {
     recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+    recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
     recordingTime = 0;
     [timerLabel setStringValue: [NSString formattedStringTimeFromSeconds: recordingTime]];
     isRecording = false;
     [timerBox setHidden:YES];
-    [sendBox setHidden: YES];
+    [sendButton setHidden: YES];
     [refreshDurationTimer invalidate];
     refreshDurationTimer = nil;
-    [sendFilename setStringValue:@""];
     [filesToSend removeObjectForKey: @(conversationUid.c_str())];
 }
 
 - (void)viewWillHide {
     recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+    recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
     if(filesToSend[@(conversationUid.c_str())]) {
-        [sendFilename setStringValue:[NSString formattedStringTimeFromSeconds: recordingTime]];
-        [sendBox setHidden: NO];
+        [sendButton setHidden: NO];
     } else {
-        [sendFilename setStringValue:@""];
-        [sendBox setHidden: YES];
+        [sendButton setHidden: YES];
     }
     recordingTime = 0;
     [timerLabel setStringValue: [NSString formattedStringTimeFromSeconds: recordingTime]];
@@ -182,7 +195,35 @@ lrc::api::ConversationModel* conversationModel;
         QVariant photo = imgManip.conversationPhoto(*it, conversationModel->owner, QSize(120, 120), NO);
         [personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
         NSString *name = bestNameForConversation(*it, *conversationModel);
-        [infoLabel setStringValue:name];
+        
+        NSFont *fontName = [NSFont systemFontOfSize: 20.0 weight: NSFontWeightSemibold];
+        NSFont *otherFont = [NSFont systemFontOfSize: 20.0 weight: NSFontWeightThin];
+        NSColor *color = [NSColor textColor];
+        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setLineBreakMode:NSLineBreakByWordWrapping];
+        [style setAlignment:NSCenterTextAlignment];
+        NSDictionary *nameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                   fontName, NSFontAttributeName,
+                                   style, NSParagraphStyleAttributeName,
+                                   color, NSForegroundColorAttributeName,
+                                   nil];
+        NSDictionary *otherAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    otherFont, NSFontAttributeName,
+                                    style, NSParagraphStyleAttributeName,
+                                    color, NSForegroundColorAttributeName,
+                                    nil];
+        NSAttributedString* attributedName = [[NSAttributedString alloc] initWithString:name attributes:nameAttrs];
+        NSString *str = [NSString stringWithFormat: @"%@%@\n%@",
+                          @" ",
+                          NSLocalizedString(@"appears to be busy.", @"Peer busy message"),
+                          NSLocalizedString(@"Would you like to leave a message?", @"Peer busy message")];
+        NSAttributedString* attributedOther= [[NSAttributedString alloc] initWithString: str attributes: otherAttrs];
+        NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+        [result appendAttributedString:attributedName];
+        [result appendAttributedString:attributedOther];
+        NSRange range = NSMakeRange(0, [result length]);
+        [result addAttribute:NSParagraphStyleAttributeName value:style range: range];
+        [infoLabel setAttributedStringValue: result];
     }
     [self show];
 }

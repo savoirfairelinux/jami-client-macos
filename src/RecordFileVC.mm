@@ -38,7 +38,6 @@
 @property (unsafe_unretained) IBOutlet NSTextField* infoLabel;
 
 @property (unsafe_unretained) IBOutlet HoverButton* recordOnOffButton;
-@property (unsafe_unretained) IBOutlet NSButton *cancelButton;
 @property (unsafe_unretained) IBOutlet NSButton *sendButton;
 @property (unsafe_unretained) IBOutlet HoverButton *fileImage;
 
