@@ -58,6 +58,10 @@
     if(self.isEnabled) {
         self.bgColor = self.hoverColor;
     }
+    
+    if (self.isDarkMode) {
+        self.bgColor = [NSColor ringDarkBlue];
+    }
     if(self.imageHoverColor) {
         self.imageColor = self.imageHoverColor;
     }

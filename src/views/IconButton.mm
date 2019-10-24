@@ -28,7 +28,8 @@
 
 @implementation IconButton
 NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
-@synthesize trackingArea;
+//BOOL isDarkMode = false;
+@synthesize trackingArea, isDarkMode;
 
 -(void) awakeFromNib {
     if (!self.bgColor) {
@@ -85,7 +86,7 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
 
     if (self.bgColor == [NSColor clearColor]) {
         backgroundColor = self.bgColor ;
-        backgroundStrokeColor = self.bgColor;
+        backgroundStrokeColor = self.borderColor ? self.borderColor : self.bgColor;
         if(!self.isEnabled) {
             if (self.buttonDisableColor) {
                 tintColor = self.buttonDisableColor;
@@ -96,39 +97,44 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
     }
     else if (!self.isEnabled) {
         backgroundColor = [self.bgColor colorWithAlphaComponent:0.7];
-        backgroundStrokeColor = [self.bgColor colorWithAlphaComponent:0.7];
+        backgroundStrokeColor = self.borderColor ? self.borderColor: [self.bgColor colorWithAlphaComponent:0.7];
         if (self.buttonDisableColor) {
             tintColor = self.buttonDisableColor;
         } else {
             tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
         }
     } else if (self.mouseDown || self.isPressed) {
-        if (self.highlightColor) {
+        if (self.highlightColor && !isDarkMode) {
             backgroundColor = self.highlightColor;
-            backgroundStrokeColor = [self.highlightColor darkenColorByValue:0.1];
+            backgroundStrokeColor = self.borderColor ? self.borderColor: [self.highlightColor darkenColorByValue:0.1];
         } else {
             backgroundColor = [self.bgColor darkenColorByValue:0.3];
-            backgroundStrokeColor = [self.bgColor darkenColorByValue:0.4];
+            backgroundStrokeColor = self.borderColor ? self.borderColor: [self.bgColor darkenColorByValue:0.4];
         }
     }
 
     else {
         backgroundColor = self.bgColor;
-        backgroundStrokeColor = [self.bgColor darkenColorByValue:0.1];
+        backgroundStrokeColor = self.borderColor ? self.borderColor: [self.bgColor darkenColorByValue:0.1];
+    }
+    
+    if (isDarkMode) {
+        backgroundStrokeColor = self.borderColor ? [NSColor whiteColor] : backgroundStrokeColor;
+        tintColor = [NSColor whiteColor];
     }
 
-    backgroundStrokeColor = NSColor.clearColor;
+    backgroundStrokeColor = [NSColor clearColor];
 
     //// Subframes
-    NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5,
-                              NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 0.5,
+    NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 1,
+                              NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 1,
                               floor(NSWidth(dirtyRect) * 0.96667) - floor(NSWidth(dirtyRect) * 0.03333),
                               floor(NSHeight(dirtyRect) * 0.96667) - floor(NSHeight(dirtyRect) * 0.03333));
 
     //// Group
     {
         //// Oval Drawing
-        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:dirtyRect
+        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:group
                                                                  xRadius:[self.cornerRadius floatValue]
                                                                  yRadius:[self.cornerRadius floatValue]];
         if(self.cornerColor) {
@@ -185,32 +191,35 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
             [bottomRightPath fill];
             return;
         }
-
+        
         [backgroundColor setFill];
         [ovalPath fill];
         [backgroundStrokeColor setStroke];
-        [ovalPath setLineWidth: 0.5];
+        [ovalPath setLineWidth: 1];
         [ovalPath stroke];
 
         [NSGraphicsContext saveGraphicsState];
 
-        NSBezierPath* path = [NSBezierPath bezierPathWithRect:dirtyRect];
-        [path addClip];
+       // NSBezierPath* path = [NSBezierPath bezierPathWithRect:dirtyRect];
+       // [path addClip];
 
-        [self setImagePosition:NSImageOverlaps];
         auto insets = self.mouseDown ? (self.imageInsets - self.imageIncreaseOnClick) : self.imageInsets;
         auto rect = NSInsetRect(dirtyRect, insets, insets);
+        if ([self title].length == 0) {
+            [self setImagePosition:NSImageOverlaps];
+            [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
+                                                                    fromRect:NSZeroRect
+                                                                   operation:NSCompositeSourceOver
+                                                                    fraction:1.0
+                                                              respectFlipped:YES
+                                                                       hints:nil];
+            
+            [NSGraphicsContext restoreGraphicsState];
+            return;
+        }
 
-        [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
-                 fromRect:NSZeroRect
-                operation:NSCompositeSourceOver
-                 fraction:1.0
-           respectFlipped:YES
-                    hints:nil];
-
-        [NSGraphicsContext restoreGraphicsState];
-
-        NSRect rect2;
+        NSRect rectText = rect;
+        NSRect rectImage = rect;
         NSDictionary *att = nil;
 
         NSMutableParagraphStyle *style =
@@ -219,21 +228,30 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
         [style setAlignment:NSCenterTextAlignment];
         att = [[NSDictionary alloc] initWithObjectsAndKeys:
                style, NSParagraphStyleAttributeName,
-               [NSColor whiteColor],
+               tintColor,
                NSForegroundColorAttributeName, nil];
         if(self.fontSize) {
             NSFont *font = [NSFont fontWithName:@"Helvetica Neue Light" size: self.fontSize];
             att = [[NSDictionary alloc] initWithObjectsAndKeys:
                    font,NSFontAttributeName,
                    style, NSParagraphStyleAttributeName,
-                   [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+                   tintColor, NSForegroundColorAttributeName, nil];
 
         }
-
-        rect.size = [[self title] sizeWithAttributes:att];
-        rect.origin.x = floor( NSMidX([self bounds]) - rect.size.width / 2 );
-        rect.origin.y = floor( NSMidY([self bounds]) - rect.size.height / 2 );
-        [[self title] drawInRect:rect withAttributes:att];
+        rectText.size = [[self title] sizeWithAttributes:att];
+        rectImage.size.width = rectImage.size.height;
+        rectText.origin.x = floor( NSMidX(rect) - (rectText.size.width / 2 - rectImage.size.width / 2));
+        rectImage.origin.x = rectText.origin.x - rectImage.size.width - insets;
+        rectText.origin.y = floor( NSMidY([self bounds]) - rectText.size.height / 2 );
+        [[self title] drawInRect:rectText withAttributes:att];
+        
+        [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rectImage
+                                                                fromRect:NSZeroRect
+                                                               operation:NSCompositeSourceOver
+                                                                fraction:1.0
+                                                          respectFlipped:YES
+                                                                   hints:nil];
+        [NSGraphicsContext restoreGraphicsState];
     }
 }
 
@@ -287,6 +305,24 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
 -(void)stopBlinkAnimation {
     self.animating = false;
     [self.layer removeAnimationForKey:BLINK_ANIMATION_IDENTIFIER];
+}
+
+-(void) viewDidChangeEffectiveAppearance {
+    BOOL mode = self.isDarkMode;
+    if (isDarkMode != mode) {
+        isDarkMode = mode;
+      //  [self setNeedsDisplay:YES];
+    }
+    [super viewDidChangeEffectiveAppearance];
+}
+
+-(BOOL)isDarkMode {
+    NSAppearance *appearance = NSAppearance.currentAppearance;
+    if (@available(*, macOS 10.14)) {
+        NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
+        return [interfaceStyle isEqualToString:@"Dark"];
+    }
+    return NO;
 }
 
 @end

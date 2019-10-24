@@ -89,6 +89,11 @@
 @property (nonatomic, strong) NSColor* cornerColor;
 
 /*
+ * Color of the button border
+ */
+@property (nonatomic, strong) NSColor* borderColor;
+
+/*
  * Font size of the button title.
  */
 @property CGFloat fontSize;
@@ -101,4 +106,5 @@
 -(void)stopBlinkAnimation;
 
 @property BOOL animating;
+@property BOOL isDarkMode;
 @end

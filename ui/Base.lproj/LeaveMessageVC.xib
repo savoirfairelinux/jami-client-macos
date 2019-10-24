@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
-        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LeaveMessageVC">
             <connections>
-                <outlet property="infoLabel" destination="oeJ-VI-uhE" id="9bG-8v-9PT"/>
+                <outlet property="exitButton" destination="n4n-gN-iyz" id="bq2-pq-CsQ"/>
+                <outlet property="infoLabel" destination="BFQ-Q6-8D6" id="rLR-Qd-Yfu"/>
                 <outlet property="personPhoto" destination="gFu-2j-j1g" id="NOO-yO-d5d"/>
-                <outlet property="recordButton" destination="cOl-pS-cP5" id="YsL-fB-biO"/>
-                <outlet property="sendBox" destination="MxH-aj-EXO" id="715-t9-z7D"/>
-                <outlet property="sendFilename" destination="Zj8-Dk-VI5" id="y15-gg-zgb"/>
+                <outlet property="recordButton" destination="dEq-nq-Ae8" id="tB1-Pb-lle"/>
+                <outlet property="sendButton" destination="QPc-lY-Gyu" id="bsa-IE-EqK"/>
                 <outlet property="timerBox" destination="WtB-WH-CJz" id="WyV-9R-KT0"/>
                 <outlet property="timerLabel" destination="1k9-gR-Qgh" id="Rch-wt-Q7U"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0ae-8W-gNO"/>
@@ -21,237 +20,301 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="798" height="658"/>
+            <rect key="frame" x="0.0" y="0.0" width="888" height="544"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box boxType="custom" borderType="none" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="TwL-yO-BXI">
-                    <rect key="frame" x="0.0" y="0.0" width="798" height="658"/>
+                    <rect key="frame" x="0.0" y="0.0" width="888" height="544"/>
                     <view key="contentView" id="RNM-sD-Phj">
-                        <rect key="frame" x="0.0" y="0.0" width="798" height="658"/>
+                        <rect key="frame" x="0.0" y="0.0" width="888" height="544"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <color key="borderColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cOl-pS-cP5" customClass="HoverButton">
-                    <rect key="frame" x="350" y="222" width="40" height="40"/>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="HyU-cT-Xbw">
+                    <rect key="frame" x="0.0" y="444" width="888" height="100"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="hiL-Mx-vuA"/>
-                        <constraint firstAttribute="height" constant="40" id="qPN-3f-Ko7"/>
+                        <constraint firstAttribute="height" constant="100" id="dpp-YY-Aai"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="hiW-Yq-71M">
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9Jg-9m-Xk4">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                            <integer key="value" value="6"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                            <color key="value" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                            <color key="value" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="recordMessage:" target="-2" id="AcE-mM-mr5"/>
-                    </connections>
                 </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0v7-mC-auu" customClass="HoverButton">
-                    <rect key="frame" x="400" y="222" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Ubr-IA-SO6"/>
-                        <constraint firstAttribute="width" constant="40" id="hhA-GJ-SQo"/>
-                    </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_exit" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="121-P0-aCH">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                            <integer key="value" value="6"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                            <color key="value" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                            <color key="value" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="cancel:" target="-2" id="dVf-0K-pdq"/>
-                    </connections>
-                </button>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gFu-2j-j1g">
-                    <rect key="frame" x="339" y="398" width="120" height="120"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="120" id="KMx-gW-5Jr"/>
-                        <constraint firstAttribute="width" constant="120" id="kGL-D8-QE0"/>
-                    </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="boQ-fa-nNO"/>
-                </imageView>
-                <box titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WtB-WH-CJz">
-                    <rect key="frame" x="305" y="118" width="188" height="86"/>
-                    <view key="contentView" id="tbn-BB-CbR">
-                        <rect key="frame" x="3" y="3" width="182" height="80"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-tU-YNA">
-                                <rect key="frame" x="58" y="53" width="66" height="17"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Recording" id="kIq-PG-Ymw">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1k9-gR-Qgh">
-                                <rect key="frame" x="49" y="8" width="84" height="35"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="00:00" id="78U-cA-2f2">
-                                    <font key="font" metaFont="system" size="29"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="1k9-gR-Qgh" firstAttribute="centerX" secondItem="tbn-BB-CbR" secondAttribute="centerX" id="ALD-VB-KGO"/>
-                            <constraint firstItem="CvL-tU-YNA" firstAttribute="top" secondItem="tbn-BB-CbR" secondAttribute="top" constant="10" id="Xxf-0h-14a"/>
-                            <constraint firstItem="CvL-tU-YNA" firstAttribute="centerX" secondItem="tbn-BB-CbR" secondAttribute="centerX" id="Ylf-xL-G77"/>
-                            <constraint firstItem="1k9-gR-Qgh" firstAttribute="top" secondItem="CvL-tU-YNA" secondAttribute="bottom" constant="10" id="gnT-ir-ivn"/>
-                        </constraints>
-                    </view>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="182" id="Wgv-cO-Eg5"/>
-                        <constraint firstAttribute="height" constant="80" id="dEB-5M-hAm"/>
-                    </constraints>
-                    <font key="titleFont" metaFont="cellTitle"/>
-                </box>
-                <box title="Box" titlePosition="noTitle" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MxH-aj-EXO">
-                    <rect key="frame" x="305" y="118" width="188" height="86"/>
-                    <view key="contentView" id="U9z-Rg-Zs3">
-                        <rect key="frame" x="3" y="3" width="182" height="80"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <box boxType="custom" borderType="bezel" cornerRadius="20" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Zlv-nH-Y9y">
-                                <rect key="frame" x="20" y="40" width="100" height="40"/>
-                                <view key="contentView" id="bxd-ht-hMm">
-                                    <rect key="frame" x="1" y="1" width="98" height="38"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="cgF-IG-blz">
+                    <rect key="frame" x="230" y="66" width="428" height="412"/>
+                    <subviews>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RrM-q3-ief">
+                            <rect key="frame" x="0.0" y="292" width="428" height="120"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gFu-2j-j1g">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="120" id="KMx-gW-5Jr"/>
+                                        <constraint firstAttribute="width" constant="120" id="kGL-D8-QE0"/>
+                                    </constraints>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSUser" id="boQ-fa-nNO"/>
+                                </imageView>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BFQ-Q6-8D6">
+                                    <rect key="frame" x="135" y="48" width="293" height="24"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" drawsBackground="YES" id="z57-wd-7By">
+                                        <font key="font" metaFont="systemLight" size="20"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="428" id="exh-8y-yGe"/>
+                            </constraints>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="gnL-jx-bda">
+                            <rect key="frame" x="199" y="247" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="4OT-ej-OZJ"/>
+                                <constraint firstAttribute="width" constant="30" id="IKD-QR-lCr"/>
+                            </constraints>
+                        </customView>
+                        <stackView distribution="equalCentering" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3UK-ut-Pdi">
+                            <rect key="frame" x="118" y="137" width="193" height="95"/>
+                            <subviews>
+                                <button toolTip="Record message" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dEq-nq-Ae8" userLabel="record" customClass="HoverButton">
+                                    <rect key="frame" x="0.0" y="55" width="193" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="yzl-pB-H0C"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" title="Record a message" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="left" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="zTC-Gf-lAV">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                            <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                            <color key="value" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="mouseOutsideColor">
+                                            <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="recordMessage:" target="-2" id="YrD-jQ-AL6"/>
+                                    </connections>
+                                </button>
+                                <button toolTip="Go to conversations" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n4n-gN-iyz" userLabel="exit" customClass="HoverButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="193" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="KzE-zQ-c1S"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" title="Go back to conversation" bezelStyle="shadowlessSquare" image="ic_exit" imagePosition="left" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="bZS-vY-gTC">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                            <color key="value" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="mouseOutsideColor">
+                                            <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="cancel:" target="-2" id="8Un-UM-6kl"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="n4n-gN-iyz" firstAttribute="trailing" secondItem="dEq-nq-Ae8" secondAttribute="trailing" id="5hs-O3-ywQ"/>
+                                <constraint firstItem="n4n-gN-iyz" firstAttribute="leading" secondItem="dEq-nq-Ae8" secondAttribute="leading" id="UC6-IQ-wVK"/>
+                            </constraints>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="E7i-f2-vTg">
+                            <rect key="frame" x="121" y="0.0" width="186" height="122"/>
+                            <subviews>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="JXb-8p-BnV">
+                                    <rect key="frame" x="0.0" y="92" width="186" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="QrO-iY-Lzp"/>
+                                    </constraints>
+                                </customView>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="yqC-dx-gC5">
+                                    <rect key="frame" x="0.0" y="0.0" width="186" height="84"/>
                                     <subviews>
-                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kSA-Cr-Pp3">
-                                            <rect key="frame" x="10" y="10" width="20" height="18"/>
+                                        <button toolTip="Record message" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QPc-lY-Gyu" userLabel="sendButton" customClass="HoverButton">
+                                            <rect key="frame" x="-3" y="44" width="193" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="YUW-eF-aaS"/>
+                                                <constraint firstAttribute="height" constant="40" id="mo8-Uk-1y5"/>
                                             </constraints>
-                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_audio_file" id="8ee-Km-Vp6"/>
-                                        </imageView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zj8-Dk-VI5">
-                                            <rect key="frame" x="38" y="11" width="62" height="17"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" id="Lml-tH-Au6">
+                                            <buttonCell key="cell" type="square" title="Send message" bezelStyle="shadowlessSquare" image="ic_audio_file" imagePosition="left" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="EeF-vv-Pc1">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                    <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                    <color key="value" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="mouseOutsideColor">
+                                                    <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="sendMessage:" target="-2" id="5Ix-Nd-vUo"/>
+                                            </connections>
+                                        </button>
+                                        <box boxType="custom" borderType="none" cornerRadius="18" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="WtB-WH-CJz">
+                                            <rect key="frame" x="0.0" y="0.0" width="186" height="84"/>
+                                            <view key="contentView" id="tbn-BB-CbR">
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="84"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-tU-YNA">
+                                                        <rect key="frame" x="60" y="57" width="66" height="17"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Recording" id="kIq-PG-Ymw">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1k9-gR-Qgh">
+                                                        <rect key="frame" x="52" y="12" width="82" height="35"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="00:00" id="78U-cA-2f2">
+                                                            <font key="font" metaFont="system" size="29"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="1k9-gR-Qgh" firstAttribute="centerX" secondItem="tbn-BB-CbR" secondAttribute="centerX" id="ALD-VB-KGO"/>
+                                                    <constraint firstItem="CvL-tU-YNA" firstAttribute="top" secondItem="tbn-BB-CbR" secondAttribute="top" constant="10" id="Xxf-0h-14a"/>
+                                                    <constraint firstItem="CvL-tU-YNA" firstAttribute="centerX" secondItem="tbn-BB-CbR" secondAttribute="centerX" id="Ylf-xL-G77"/>
+                                                    <constraint firstItem="1k9-gR-Qgh" firstAttribute="top" secondItem="CvL-tU-YNA" secondAttribute="bottom" constant="10" id="gnT-ir-ivn"/>
+                                                </constraints>
+                                            </view>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="186" id="Wgv-cO-Eg5"/>
+                                                <constraint firstAttribute="height" constant="84" id="dEB-5M-hAm"/>
+                                            </constraints>
+                                            <font key="titleFont" metaFont="cellTitle"/>
+                                        </box>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Zj8-Dk-VI5" firstAttribute="centerY" secondItem="bxd-ht-hMm" secondAttribute="centerY" id="Hpd-t9-NNA"/>
-                                        <constraint firstItem="kSA-Cr-Pp3" firstAttribute="centerY" secondItem="bxd-ht-hMm" secondAttribute="centerY" id="c4e-NF-hy4"/>
-                                        <constraint firstAttribute="trailing" secondItem="Zj8-Dk-VI5" secondAttribute="trailing" id="iWD-1w-N3k"/>
-                                        <constraint firstItem="kSA-Cr-Pp3" firstAttribute="leading" secondItem="bxd-ht-hMm" secondAttribute="leading" constant="10" id="ofV-eC-JpI"/>
-                                        <constraint firstItem="kSA-Cr-Pp3" firstAttribute="top" secondItem="bxd-ht-hMm" secondAttribute="top" constant="10" id="x9O-tw-81d"/>
-                                        <constraint firstItem="Zj8-Dk-VI5" firstAttribute="leading" secondItem="kSA-Cr-Pp3" secondAttribute="trailing" constant="10" id="zu8-7j-OP5"/>
+                                        <constraint firstItem="QPc-lY-Gyu" firstAttribute="top" secondItem="yqC-dx-gC5" secondAttribute="top" id="6TH-O2-YII"/>
+                                        <constraint firstItem="WtB-WH-CJz" firstAttribute="centerX" secondItem="yqC-dx-gC5" secondAttribute="centerX" id="mMQ-yk-NmM"/>
+                                        <constraint firstAttribute="height" constant="84" id="wgY-Vu-VI8"/>
+                                        <constraint firstItem="WtB-WH-CJz" firstAttribute="centerY" secondItem="yqC-dx-gC5" secondAttribute="centerY" id="yux-9K-XLW"/>
                                     </constraints>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Iyu-Nl-TpG"/>
-                                    <constraint firstAttribute="width" constant="100" id="cw3-NU-2Lj"/>
-                                </constraints>
-                                <color key="borderColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <color key="fillColor" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            </box>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XN4-Vb-UWd" customClass="HoverButton">
-                                <rect key="frame" x="131" y="40" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="LNf-7D-co7"/>
-                                    <constraint firstAttribute="width" constant="40" id="ouZ-f5-Vfs"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="9LO-UF-tss">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                        <integer key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                        <color key="value" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                        <color key="value" name="unemphasizedSelectedContentBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="sendMessage:" target="-2" id="4WL-7f-xpJ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="XN4-Vb-UWd" firstAttribute="top" secondItem="U9z-Rg-Zs3" secondAttribute="top" id="073-sZ-trD"/>
-                            <constraint firstItem="Zlv-nH-Y9y" firstAttribute="leading" secondItem="U9z-Rg-Zs3" secondAttribute="leading" constant="20" id="Xh6-x6-TnF"/>
-                            <constraint firstItem="Zlv-nH-Y9y" firstAttribute="top" secondItem="U9z-Rg-Zs3" secondAttribute="top" id="aot-Tv-9mi"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XN4-Vb-UWd" secondAttribute="trailing" constant="10" id="hUi-OE-cZU"/>
-                            <constraint firstItem="XN4-Vb-UWd" firstAttribute="leading" secondItem="Zlv-nH-Y9y" secondAttribute="trailing" constant="11" id="j7u-cW-AWB"/>
-                        </constraints>
-                    </view>
-                </box>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oeJ-VI-uhE">
-                    <rect key="frame" x="378" y="320" width="42" height="18"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Name" id="uol-7p-Y2J">
-                        <font key="font" metaFont="system" size="14"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dbY-HE-70Z">
-                    <rect key="frame" x="247" y="282" width="304" height="18"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Contact appears to be busy. Leave a message?" id="hnr-x5-xnb">
-                        <font key="font" metaFont="systemLight" size="14"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                                </customView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="yqC-dx-gC5" firstAttribute="centerX" secondItem="E7i-f2-vTg" secondAttribute="centerX" id="b0c-3K-lCy"/>
+                            </constraints>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="QPc-lY-Gyu" firstAttribute="leading" secondItem="n4n-gN-iyz" secondAttribute="leading" id="lLD-Ss-EeP"/>
+                        <constraint firstItem="RrM-q3-ief" firstAttribute="top" secondItem="cgF-IG-blz" secondAttribute="top" id="pLE-qi-NdM"/>
+                        <constraint firstItem="QPc-lY-Gyu" firstAttribute="trailing" secondItem="n4n-gN-iyz" secondAttribute="trailing" id="pl3-5L-4Vg"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
             </subviews>
             <constraints>
-                <constraint firstItem="cOl-pS-cP5" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" constant="-29" id="3kZ-xx-zfF"/>
-                <constraint firstItem="WtB-WH-CJz" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="4ia-YI-y5O"/>
-                <constraint firstItem="dbY-HE-70Z" firstAttribute="top" secondItem="oeJ-VI-uhE" secondAttribute="bottom" constant="20" id="725-UY-bsG"/>
-                <constraint firstItem="WtB-WH-CJz" firstAttribute="leading" secondItem="MxH-aj-EXO" secondAttribute="leading" id="DbY-VH-imQ"/>
-                <constraint firstItem="WtB-WH-CJz" firstAttribute="trailing" secondItem="MxH-aj-EXO" secondAttribute="trailing" id="E7l-KF-ph3"/>
+                <constraint firstItem="cgF-IG-blz" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="0Wv-Pc-Ool"/>
+                <constraint firstAttribute="trailing" secondItem="HyU-cT-Xbw" secondAttribute="trailing" id="FgZ-Iy-ex2"/>
                 <constraint firstAttribute="trailing" secondItem="TwL-yO-BXI" secondAttribute="trailing" id="Hi0-k1-dx9"/>
                 <constraint firstItem="TwL-yO-BXI" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Hle-nR-C5u"/>
-                <constraint firstItem="oeJ-VI-uhE" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="IBz-Qp-LpV"/>
                 <constraint firstItem="TwL-yO-BXI" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="LrF-0X-nHd"/>
-                <constraint firstItem="gFu-2j-j1g" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="MnV-YG-76G"/>
-                <constraint firstItem="WtB-WH-CJz" firstAttribute="bottom" secondItem="MxH-aj-EXO" secondAttribute="bottom" id="XO6-7p-v1a"/>
                 <constraint firstAttribute="bottom" secondItem="TwL-yO-BXI" secondAttribute="bottom" id="Yhm-GI-18S"/>
-                <constraint firstItem="WtB-WH-CJz" firstAttribute="top" secondItem="cOl-pS-cP5" secondAttribute="bottom" constant="20" id="ZlU-DX-nL3"/>
-                <constraint firstItem="0v7-mC-auu" firstAttribute="leading" secondItem="cOl-pS-cP5" secondAttribute="trailing" constant="10" id="afB-FF-Op0"/>
-                <constraint firstItem="cOl-pS-cP5" firstAttribute="top" secondItem="dbY-HE-70Z" secondAttribute="bottom" constant="20" id="bNl-00-Thl"/>
-                <constraint firstItem="0v7-mC-auu" firstAttribute="centerY" secondItem="cOl-pS-cP5" secondAttribute="centerY" id="hGt-wT-rrj"/>
-                <constraint firstItem="oeJ-VI-uhE" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="l8d-MQ-RwK"/>
-                <constraint firstItem="dbY-HE-70Z" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="orz-1K-VBk"/>
-                <constraint firstItem="oeJ-VI-uhE" firstAttribute="top" secondItem="gFu-2j-j1g" secondAttribute="bottom" constant="60" id="rlm-H5-Lp8"/>
-                <constraint firstItem="WtB-WH-CJz" firstAttribute="top" secondItem="MxH-aj-EXO" secondAttribute="top" id="vuA-zF-FBa"/>
+                <constraint firstItem="cgF-IG-blz" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="xHS-IO-fP1"/>
+                <constraint firstItem="HyU-cT-Xbw" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="yCi-te-I7S"/>
+                <constraint firstItem="HyU-cT-Xbw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="zdN-wD-wW2"/>
             </constraints>
         </customView>
     </objects>
     <resources>
         <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_audio" width="36" height="36"/>
-        <image name="ic_action_send" width="72" height="72"/>
-        <image name="ic_audio_file" width="75" height="75"/>
+        <image name="ic_audio_file" width="100" height="100"/>
         <image name="ic_exit" width="64" height="64"/>
     </resources>
 </document>
