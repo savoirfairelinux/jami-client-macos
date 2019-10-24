@@ -25,7 +25,7 @@
 }
 /*
  * Background color of the button when mouse inside
- * default value : [NSColor ringBlue]
+ * default value : [NSColor clearColor]
  */
 @property (nonatomic, strong) NSColor* hoverColor;
 
@@ -46,15 +46,53 @@
 @property (nonatomic, strong) NSColor* mouseOutsideColor;
 
 /*
- * Image coler when button pressed
- */
-
-@property (nonatomic, strong) NSColor* imagePressedColor;
-
-/*
  * Value to increase image size when mouse entered
  */
 
 @property CGFloat imageIncreaseOnHover;
+
+/*
+ * Background color of the button when mouse inside in light mode
+ * default value : [NSColor clearColor]
+ */
+@property (nonatomic, strong) NSColor* hoverLightColor;
+
+/*
+ * image color of the button when mouse inside in light mode
+ */
+@property (nonatomic, strong) NSColor* imageHoverLightColor;
+
+/*
+ * Image color of the button when mouse inside in light mode
+ */
+@property (nonatomic, strong) NSColor* moiuseOutsideImageLightColor;
+
+/*
+ * Background color of the button when mouse outside in light mode
+ * default value : [NSColor clearColor];
+ */
+@property (nonatomic, strong) NSColor* mouseOutsideLightColor;
+
+/*
+ * Background color of the button when mouse inside in dark mode
+ * default value : [NSColor clearColor]
+ */
+@property (nonatomic, strong) NSColor* hoverDarkColor;
+
+/*
+ * image color of the button when mouse inside in dark mode
+ */
+@property (nonatomic, strong) NSColor* imageHoverDarkColor;
+
+/*
+ * Image color of the button when mouse inside in dark mode
+ */
+@property (nonatomic, strong) NSColor* moiuseOutsideImageDarkColor;
+
+/*
+ * Background color of the button when mouse outside in dark mode
+ * default value : [NSColor clearColor];
+ */
+@property (nonatomic, strong) NSColor* mouseOutsideDarkColor;
 
 @end

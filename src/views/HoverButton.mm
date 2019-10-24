@@ -23,31 +23,45 @@
 @implementation HoverButton
 -(void) awakeFromNib {
     [super awakeFromNib];
-    if(!self.hoverColor) {
-        self.hoverColor = [NSColor ringBlue];
-    }
-    if(!self.mouseOutsideColor) {
-        self.mouseOutsideColor = [NSColor clearColor];
-    }
-    self.bgColor = self.mouseOutsideColor;
-    if(self.moiuseOutsideImageColor) {
-        self.imageColor = self.moiuseOutsideImageColor;
-    }
+    [self updateParameters];
 }
 
 -(instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame: frameRect];
-    if(!self.hoverColor) {
-        self.hoverColor = [NSColor ringBlue];
-    }
-    if(!self.mouseOutsideColor) {
-        self.mouseOutsideColor = [NSColor clearColor];
-    }
-    self.bgColor = self.mouseOutsideColor;
-    if(self.moiuseOutsideImageColor) {
-        self.imageColor = self.moiuseOutsideImageColor;
-    }
+    [self updateParameters];
     return self;
+}
+
+-(void)updateParameters {
+    if(!self.imageHoverLightColor) {
+        self.imageHoverLightColor = self.imageHoverColor ? self.imageHoverColor :  self.imageLightColor;
+    }
+    if(!self.imageHoverDarkColor) {
+        self.imageHoverDarkColor = self.imageDarkColor;
+    }
+    self.imageHoverColor = self.isDarkMode ? self.imageHoverDarkColor : self.imageHoverLightColor;
+ 
+    if(!self.hoverLightColor) {
+        self.hoverLightColor = self.hoverColor ? self.hoverColor :  self.bgColor;
+    }
+    if(!self.hoverDarkColor) {
+        self.hoverDarkColor = self.bgColor;
+    }
+    self.hoverColor = self.isDarkMode ? self.hoverDarkColor : self.hoverLightColor;
+    if(!self.mouseOutsideLightColor) {
+        self.mouseOutsideLightColor = self.mouseOutsideColor ? self.mouseOutsideColor : self.bgColor;
+    }
+    if(!self.mouseOutsideDarkColor) {
+        self.mouseOutsideDarkColor = self.bgColor;
+    }
+    self.mouseOutsideColor = self.isDarkMode ? self.mouseOutsideDarkColor : self.mouseOutsideLightColor;
+    if(self.moiuseOutsideImageLightColor) {
+        self.moiuseOutsideImageLightColor = self.moiuseOutsideImageColor ? self.moiuseOutsideImageColor : self.imageLightColor;
+    }
+    if(!self.moiuseOutsideImageDarkColor) {
+        self.moiuseOutsideImageDarkColor = self.imageDarkColor;
+    }
+    self.moiuseOutsideImageColor = self.isDarkMode ? self.moiuseOutsideImageDarkColor : self.moiuseOutsideImageLightColor;
 }
 
 -(void)mouseEntered:(NSEvent *)theEvent {
@@ -85,16 +99,6 @@
     [super mouseExited:theEvent];
 }
 
--(void) setPressed:(BOOL)newVal
-{
-    if(self.imagePressedColor && newVal) {
-        self.imageColor = self.imagePressedColor;
-    } else if ( self.moiuseOutsideImageColor) {
-        self.imageColor = self.moiuseOutsideImageColor;
-    }
-    [super setPressed:newVal];
-}
-
 - (void)ensureTrackingArea {
     if (trackingArea == nil) {
         trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
@@ -112,10 +116,12 @@
     }
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
-    [super drawRect:dirtyRect];
+-(void) onAppearanceChanged {
+    [super onAppearanceChanged];
+    self.imageHoverColor = self.isDarkMode ? self.imageHoverDarkColor : self.imageHoverLightColor;
+    self.hoverColor = self.isDarkMode ? self.hoverDarkColor : self.hoverLightColor;
+    self.mouseOutsideColor = self.isDarkMode ? self.mouseOutsideDarkColor : self.mouseOutsideLightColor;
+    self.moiuseOutsideImageColor = self.isDarkMode ? self.moiuseOutsideImageDarkColor : self.moiuseOutsideImageLightColor;
 }
-
 
 @end

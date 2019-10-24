@@ -28,36 +28,62 @@
 
 @implementation IconButton
 NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
-@synthesize trackingArea;
+@synthesize trackingArea, isDarkMode;
 
 -(void) awakeFromNib {
-    if (!self.bgColor) {
-        self.bgColor = [NSColor ringBlue];
-    }
-
-    if (!self.cornerRadius) {
-        self.cornerRadius = @(NSWidth(self.frame) / 2);
-    }
-
-    if (self.imageInsets == 0)
-        self.imageInsets = 8.0f;
-    if (!self.imageIncreaseOnClick) {
-        self.imageIncreaseOnClick = 0;
-    }
-
-    self.pressed = NO;
-
+    [self setParameters];
 }
 
 -(instancetype)initWithFrame:(NSRect)frameRect {
     self = [super initWithFrame: frameRect];
+    [self setParameters];
+    return self;
+}
+
+-(void) setParameters {
+    isDarkMode = self.checkIsDarkMode;
     if (!self.bgColor) {
-        self.bgColor = [NSColor ringBlue];
+        self.bgColor = [NSColor clearColor];
     }
+    if (!self.imageLightColor) {
+        self.imageLightColor = self.imageColor ? self.imageColor : [NSColor ringDarkBlue];
+    }
+    if (!self.imageDarkColor) {
+        self.imageDarkColor = [NSColor whiteColor];
+    }
+    self.imageColor = isDarkMode ? self.imageDarkColor : self.imageLightColor;
 
     if (!self.cornerRadius) {
         self.cornerRadius = @(NSWidth(self.frame) / 2);
     }
+    
+    if(!self.shouldDrawBorder) {
+        self.shouldDrawBorder = NO;
+    }
+
+    if (!self.buttonDisableColor) {
+        self.buttonDisableColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
+    }
+    
+    if (!self.highlightLightColor) {
+        self.highlightLightColor = self.highlightColor ? self.highlightColor : self.bgColor;
+    }
+
+    if (!self.highlightDarkColor) {
+        self.highlightDarkColor = self.bgColor;
+    }
+    
+    if(!self.imagePressedLightColor) {
+        self.imagePressedLightColor = self.imagePressedColor ? self.imagePressedColor : self.imageLightColor;
+    }
+
+    if(!self.imagePressedDarkColor) {
+        self.imagePressedDarkColor = self.imageDarkColor;
+    }
+
+    self.imagePressedColor = isDarkMode ? self.imagePressedDarkColor : self.imagePressedLightColor;
+
+    self.highlightColor = isDarkMode ? self.highlightDarkColor : self.highlightLightColor;
 
     if (self.imageInsets == 0)
         self.imageInsets = 8.0f;
@@ -66,7 +92,6 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
     }
 
     self.pressed = NO;
-    return self;
 }
 
 -(void) setPressed:(BOOL)newVal
@@ -79,56 +104,29 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
 {
     [super drawRect:dirtyRect];
 
-    NSColor* backgroundColor;
-    NSColor* backgroundStrokeColor;
-    NSColor* tintColor = self.imageColor ? self.imageColor : [NSColor whiteColor];
-
-    if (self.bgColor == [NSColor clearColor]) {
-        backgroundColor = self.bgColor ;
-        backgroundStrokeColor = self.bgColor;
-        if(!self.isEnabled) {
-            if (self.buttonDisableColor) {
-                tintColor = self.buttonDisableColor;
-            } else {
-                tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
-            }
-        }
-    }
-    else if (!self.isEnabled) {
-        backgroundColor = [self.bgColor colorWithAlphaComponent:0.7];
-        backgroundStrokeColor = [self.bgColor colorWithAlphaComponent:0.7];
-        if (self.buttonDisableColor) {
-            tintColor = self.buttonDisableColor;
-        } else {
-            tintColor = [[NSColor grayColor] colorWithAlphaComponent:0.3];
-        }
+    NSColor* backgroundColor = self.bgColor;
+    NSColor* tintColor = self.imageColor;
+    
+    if (!self.isEnabled) {
+        backgroundColor = (self.bgColor == [NSColor clearColor]) ? self.bgColor : [self.bgColor colorWithAlphaComponent:0.7];
+        tintColor = self.buttonDisableColor;
     } else if (self.mouseDown || self.isPressed) {
-        if (self.highlightColor) {
-            backgroundColor = self.highlightColor;
-            backgroundStrokeColor = [self.highlightColor darkenColorByValue:0.1];
-        } else {
-            backgroundColor = [self.bgColor darkenColorByValue:0.3];
-            backgroundStrokeColor = [self.bgColor darkenColorByValue:0.4];
-        }
+        backgroundColor = self.highlightColor;
+        tintColor = self.imagePressedColor;
     }
-
-    else {
-        backgroundColor = self.bgColor;
-        backgroundStrokeColor = [self.bgColor darkenColorByValue:0.1];
-    }
-
-    backgroundStrokeColor = NSColor.clearColor;
+    
+    NSColor* backgroundStrokeColor = self.shouldDrawBorder ? tintColor : backgroundColor;
 
     //// Subframes
-    NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 0.5,
-                              NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 0.5,
+    NSRect group = NSMakeRect(NSMinX(dirtyRect) + floor(NSWidth(dirtyRect) * 0.03333) + 1,
+                              NSMinY(dirtyRect) + floor(NSHeight(dirtyRect) * 0.03333) + 1,
                               floor(NSWidth(dirtyRect) * 0.96667) - floor(NSWidth(dirtyRect) * 0.03333),
                               floor(NSHeight(dirtyRect) * 0.96667) - floor(NSHeight(dirtyRect) * 0.03333));
 
     //// Group
     {
         //// Oval Drawing
-        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:dirtyRect
+        NSBezierPath* ovalPath = [NSBezierPath bezierPathWithRoundedRect:group
                                                                  xRadius:[self.cornerRadius floatValue]
                                                                  yRadius:[self.cornerRadius floatValue]];
         if(self.cornerColor) {
@@ -185,32 +183,35 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
             [bottomRightPath fill];
             return;
         }
-
+        
         [backgroundColor setFill];
         [ovalPath fill];
         [backgroundStrokeColor setStroke];
-        [ovalPath setLineWidth: 0.5];
+        [ovalPath setLineWidth: 1];
         [ovalPath stroke];
 
         [NSGraphicsContext saveGraphicsState];
 
-        NSBezierPath* path = [NSBezierPath bezierPathWithRect:dirtyRect];
+        NSBezierPath* path = [NSBezierPath bezierPathWithRect:group];
         [path addClip];
 
-        [self setImagePosition:NSImageOverlaps];
         auto insets = self.mouseDown ? (self.imageInsets - self.imageIncreaseOnClick) : self.imageInsets;
-        auto rect = NSInsetRect(dirtyRect, insets, insets);
+        auto rect = NSInsetRect(group, insets, insets);
+        if ([self title].length == 0) {
+            [self setImagePosition:NSImageOverlaps];
+            [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
+                                                                    fromRect:NSZeroRect
+                                                                   operation:NSCompositeSourceOver
+                                                                    fraction:1.0
+                                                              respectFlipped:YES
+                                                                       hints:nil];
+            
+            [NSGraphicsContext restoreGraphicsState];
+            return;
+        }
 
-        [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rect
-                 fromRect:NSZeroRect
-                operation:NSCompositeSourceOver
-                 fraction:1.0
-           respectFlipped:YES
-                    hints:nil];
-
-        [NSGraphicsContext restoreGraphicsState];
-
-        NSRect rect2;
+        NSRect rectText = rect;
+        NSRect rectImage = rect;
         NSDictionary *att = nil;
 
         NSMutableParagraphStyle *style =
@@ -219,21 +220,34 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
         [style setAlignment:NSCenterTextAlignment];
         att = [[NSDictionary alloc] initWithObjectsAndKeys:
                style, NSParagraphStyleAttributeName,
-               [NSColor whiteColor],
+               tintColor,
                NSForegroundColorAttributeName, nil];
         if(self.fontSize) {
             NSFont *font = [NSFont fontWithName:@"Helvetica Neue Light" size: self.fontSize];
             att = [[NSDictionary alloc] initWithObjectsAndKeys:
                    font,NSFontAttributeName,
                    style, NSParagraphStyleAttributeName,
-                   [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+                   tintColor, NSForegroundColorAttributeName, nil];
 
         }
-
-        rect.size = [[self title] sizeWithAttributes:att];
-        rect.origin.x = floor( NSMidX([self bounds]) - rect.size.width / 2 );
-        rect.origin.y = floor( NSMidY([self bounds]) - rect.size.height / 2 );
-        [[self title] drawInRect:rect withAttributes:att];
+        rectText.size = [[self title] sizeWithAttributes:att];
+        rectImage.size.width = rectImage.size.height;
+        if (self.image) {
+            rectText.origin.x = floor( NSMidX(rect) - (rectText.size.width / 2 - rectImage.size.width / 2));
+        } else {
+            rectText.origin.x = floor( NSMidX(rect) - (rectText.size.width / 2));
+        }
+        rectImage.origin.x = rectText.origin.x - rectImage.size.width - insets;
+        rectText.origin.y = floor( NSMidY([self bounds]) - rectText.size.height / 2 );
+        [[self title] drawInRect:rectText withAttributes:att];
+        
+        [[NSColor image:self.image tintedWithColor:tintColor] drawInRect:rectImage
+                                                                fromRect:NSZeroRect
+                                                               operation:NSCompositeSourceOver
+                                                                fraction:1.0
+                                                          respectFlipped:YES
+                                                                   hints:nil];
+        [NSGraphicsContext restoreGraphicsState];
     }
 }
 
@@ -287,6 +301,30 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
 -(void)stopBlinkAnimation {
     self.animating = false;
     [self.layer removeAnimationForKey:BLINK_ANIMATION_IDENTIFIER];
+}
+
+-(void) viewDidChangeEffectiveAppearance {
+    BOOL mode = self.checkIsDarkMode;
+    if (isDarkMode != mode) {
+        isDarkMode = mode;
+        [self onAppearanceChanged];
+    }
+    [super viewDidChangeEffectiveAppearance];
+}
+
+-(void) onAppearanceChanged {
+    self.imageColor = isDarkMode ? self.imageDarkColor : self.imageLightColor;
+    self.highlightColor = isDarkMode ? self.highlightDarkColor : self.highlightLightColor;
+    self.imagePressedColor = isDarkMode ? self.imagePressedDarkColor : self.imagePressedLightColor;
+}
+
+-(BOOL)checkIsDarkMode {
+    NSAppearance *appearance = NSAppearance.currentAppearance;
+    if (@available(*, macOS 10.14)) {
+        NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
+        return [interfaceStyle isEqualToString:@"Dark"];
+    }
+    return NO;
 }
 
 @end
