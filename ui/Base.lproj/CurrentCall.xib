@@ -159,6 +159,9 @@
                                                         <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
                                                             <color key="value" red="0.23529411764705882" green="0.6470588235294118" blue="0.16078431372549018" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="accept:" target="-2" id="INY-Fs-j5F"/>
@@ -180,6 +183,9 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
                                                             <integer key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
@@ -365,13 +371,10 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="6"/>
+                                                    <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" name="systemRedColor" catalog="System" colorSpace="catalog"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
                                                     <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -379,8 +382,8 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
                                                     <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
-                                                    <integer key="value" value="2"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -399,13 +402,10 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="6"/>
+                                                    <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
                                                     <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -413,8 +413,8 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
                                                     <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
-                                                    <integer key="value" value="2"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -433,12 +433,9 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="6"/>
+                                                    <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.12894672927461137" green="0.12894672927461137" blue="0.12894672927461137" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
@@ -447,8 +444,8 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
                                                     <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
-                                                    <integer key="value" value="2"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -467,13 +464,10 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="6"/>
+                                                    <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
                                                     <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -481,8 +475,8 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
                                                     <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
-                                                    <integer key="value" value="2"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -501,25 +495,19 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="6"/>
+                                                    <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
                                                     <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imagePressedColor">
-                                                    <color key="value" red="0.98594832420349121" green="0.0" blue="0.026950567960739136" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
                                                     <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
-                                                    <integer key="value" value="2"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -538,13 +526,10 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="6"/>
+                                                    <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" red="0.84313725490000002" green="0.84313725490000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
                                                     <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -552,8 +537,8 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
                                                     <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
-                                                    <integer key="value" value="2"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -572,13 +557,10 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="6"/>
+                                                    <integer key="value" value="4"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="moiuseOutsideImageColor">
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
                                                     <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -586,8 +568,8 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
                                                     <integer key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnClick">
-                                                    <integer key="value" value="2"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -876,7 +858,7 @@
                                     <rect key="frame" x="20" y="0.0" width="331" height="60"/>
                                     <subviews>
                                         <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jei-Xj-lgm">
-                                            <rect key="frame" x="53" y="21" width="233" height="18"/>
+                                            <rect key="frame" x="50" y="21" width="239" height="18"/>
                                             <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="d4g-hS-EMn">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -894,28 +876,34 @@
                                                 <outlet property="delegate" destination="loh-bZ-dDU" id="xu2-mX-kjl"/>
                                             </connections>
                                         </textField>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rqa-be-VIB" customClass="HoverButton">
-                                            <rect key="frame" x="286" y="15" width="35" height="35"/>
+                                        <button toolTip="Send" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rqa-be-VIB" customClass="HoverButton">
+                                            <rect key="frame" x="289" y="15" width="32" height="32"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="35" id="dSX-e7-1Vh"/>
-                                                <constraint firstAttribute="width" constant="35" id="kGU-D9-INQ"/>
+                                                <constraint firstAttribute="height" constant="32" id="dSX-e7-1Vh"/>
+                                                <constraint firstAttribute="width" constant="32" id="kGU-D9-INQ"/>
                                             </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="doF-7O-ikF">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                                    <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                    <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="buttonDisableColor">
                                                     <color key="value" red="0.78955939799999997" green="0.75686274509999996" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="4"/>
+                                                    <integer key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                    <integer key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
@@ -923,25 +911,31 @@
                                                 <binding destination="loh-bZ-dDU" name="enabled" keyPath="self.message.length" id="kt1-TU-lMw"/>
                                             </connections>
                                         </button>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ngO-WV-cXD" customClass="HoverButton">
-                                            <rect key="frame" x="10" y="15" width="35" height="35"/>
+                                        <button toolTip="Send a file" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ngO-WV-cXD" customClass="HoverButton">
+                                            <rect key="frame" x="10" y="15" width="32" height="32"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="35" id="jcX-bd-eeT"/>
-                                                <constraint firstAttribute="height" constant="35" id="ypC-5c-Ved"/>
+                                                <constraint firstAttribute="width" constant="32" id="jcX-bd-eeT"/>
+                                                <constraint firstAttribute="height" constant="32" id="ypC-5c-Ved"/>
                                             </constraints>
                                             <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_file_upload" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Lhu-KV-kCT">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                                    <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                    <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                                    <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="4"/>
+                                                    <integer key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                    <integer key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>

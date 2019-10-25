@@ -299,7 +299,7 @@
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Sn1-dJ-QCw">
                     <rect key="frame" x="0.0" y="770" width="798" height="5"/>
                 </box>
-                <button toolTip="Record" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ooq-vs-Xt1" customClass="HoverButton">
+                <button toolTip="Back" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ooq-vs-Xt1" customClass="HoverButton">
                     <rect key="frame" x="10" y="783" width="35" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="69o-49-0QB"/>
@@ -310,14 +310,23 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                            <color key="value" red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                             <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                            <integer key="value" value="4"/>
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                            <color key="value" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -327,28 +336,96 @@
                 <customView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-di-Tls" customClass="SendMessagePanel">
                     <rect key="frame" x="49" y="0.0" width="700" height="60"/>
                     <subviews>
-                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="3" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vd8-6U-eqB">
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vd8-6U-eqB">
                             <rect key="frame" x="0.0" y="0.0" width="700" height="60"/>
                             <subviews>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-eT-PcN" customClass="HoverButton">
-                                    <rect key="frame" x="0.0" y="13" width="35" height="35"/>
+                                <button toolTip="Record an audio message" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wYE-S3-AzD" customClass="HoverButton">
+                                    <rect key="frame" x="0.0" y="14" width="32" height="32"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="C2W-wV-YvF"/>
-                                        <constraint firstAttribute="width" constant="35" id="zZF-4P-pW9"/>
+                                        <constraint firstAttribute="height" constant="32" id="2As-E1-3wN"/>
+                                        <constraint firstAttribute="width" constant="32" id="ThY-e2-Xwc"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1zm-4M-OeR">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                            <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                            <color key="value" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="startAudioMessage:" target="iH6-17-JsM" id="L0n-5l-pav"/>
+                                    </connections>
+                                </button>
+                                <button toolTip="Record a video message" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B6d-Sc-UTp" customClass="HoverButton">
+                                    <rect key="frame" x="34" y="14" width="32" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="32" id="GRp-fA-Pkp"/>
+                                        <constraint firstAttribute="width" constant="32" id="f5f-YQ-2i3"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_camera" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="sjp-jf-vw1">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                            <color key="value" red="0.0" green="0.19215686269999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                            <color key="value" red="0.93725490196078431" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="startVideoMessage:" target="iH6-17-JsM" id="fde-s8-jSr"/>
+                                    </connections>
+                                </button>
+                                <button toolTip="Send a file" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-eT-PcN" customClass="HoverButton">
+                                    <rect key="frame" x="68" y="14" width="32" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="32" id="C2W-wV-YvF"/>
+                                        <constraint firstAttribute="width" constant="32" id="zZF-4P-pW9"/>
                                     </constraints>
                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_file_upload" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="gfQ-c5-YPu">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                            <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                            <color key="value" red="0.23137254901960785" green="0.75686274509803919" blue="0.82745098039215681" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                            <integer key="value" value="4"/>
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                            <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                            <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -356,7 +433,7 @@
                                     </connections>
                                 </button>
                                 <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
-                                    <rect key="frame" x="36" y="22" width="514" height="17"/>
+                                    <rect key="frame" x="100" y="22" width="526" height="17"/>
                                     <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -374,103 +451,70 @@
                                         <outlet property="delegate" destination="iH6-17-JsM" id="2eZ-3e-XvP"/>
                                     </connections>
                                 </textField>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gww-7y-sXo" customClass="HoverButton">
-                                    <rect key="frame" x="551" y="13" width="35" height="35"/>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZFq-T5-VFc">
+                                    <rect key="frame" x="626" y="29" width="2" height="2"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="35" id="Zra-qu-Wv9"/>
-                                        <constraint firstAttribute="height" constant="35" id="xVA-RF-ov9"/>
+                                        <constraint firstAttribute="height" constant="2" id="7Tq-Jm-qUj"/>
+                                        <constraint firstAttribute="width" constant="2" id="xq3-ac-NhL"/>
                                     </constraints>
-                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_camera" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="crE-WV-7wv">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                            <integer key="value" value="4"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="startVideoMessage:" target="iH6-17-JsM" id="2B7-ha-lQk"/>
-                                    </connections>
-                                </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wYE-S3-AzD" customClass="HoverButton">
-                                    <rect key="frame" x="589" y="13" width="35" height="35"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="2As-E1-3wN"/>
-                                        <constraint firstAttribute="width" constant="35" id="ThY-e2-Xwc"/>
-                                    </constraints>
-                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1zm-4M-OeR">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                            <integer key="value" value="4"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="startAudioMessage:" target="iH6-17-JsM" id="L0n-5l-pav"/>
-                                    </connections>
-                                </button>
+                                </customView>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DwY-gP-tsk" userLabel="Emojy button" customClass="HoverButton">
-                                    <rect key="frame" x="627" y="13" width="35" height="35"/>
+                                    <rect key="frame" x="630" y="14" width="32" height="32"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="gfw-9e-hi8"/>
-                                        <constraint firstAttribute="width" constant="35" id="pyh-h3-bCb"/>
+                                        <constraint firstAttribute="height" constant="32" id="gfw-9e-hi8"/>
+                                        <constraint firstAttribute="width" constant="32" id="pyh-h3-bCb"/>
                                     </constraints>
                                     <buttonCell key="cell" type="square" title="🙂" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="8sX-aI-9OG">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system" size="35"/>
                                     </buttonCell>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
                                             <integer key="value" value="0"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                             <integer key="value" value="25"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="textIncreaseOnHover">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
-                                    <rect key="frame" x="665" y="13" width="35" height="35"/>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="nEk-L2-09b">
+                                    <rect key="frame" x="664" y="29" width="2" height="2"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="35" id="TmF-ip-m4C"/>
-                                        <constraint firstAttribute="height" constant="35" id="rbQ-lE-sAq"/>
+                                        <constraint firstAttribute="width" constant="2" id="WrB-F9-XcK"/>
+                                        <constraint firstAttribute="height" constant="2" id="yH4-L4-7ou"/>
+                                    </constraints>
+                                </customView>
+                                <button toolTip="Send" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
+                                    <rect key="frame" x="668" y="14" width="32" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="32" id="TmF-ip-m4C"/>
+                                        <constraint firstAttribute="height" constant="32" id="rbQ-lE-sAq"/>
                                     </constraints>
                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="overlaps" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="s6a-eK-t3T">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                            <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                                            <color key="value" red="0.23137254901960785" green="0.75686274509803919" blue="0.82745098039215681" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
-                                        </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="buttonDisableColor">
                                             <color key="value" red="0.78955939797794117" green="0.75686274509803919" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                            <integer key="value" value="4"/>
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                            <integer key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                            <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                            <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -486,8 +530,12 @@
                                 <integer value="1000"/>
                                 <integer value="1000"/>
                                 <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
                             </visibilityPriorities>
                             <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
@@ -513,31 +561,117 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-d7-Erh" userLabel="Call Button" customClass="HoverButton">
-                    <rect key="frame" x="753" y="783" width="35" height="35"/>
+                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8t-r2-zdA">
+                    <rect key="frame" x="675" y="773" width="108" height="55"/>
+                    <subviews>
+                        <button toolTip="Add contact" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="pGK-hO-X1Y" userLabel="Add Contact Button" customClass="HoverButton">
+                            <rect key="frame" x="0.0" y="12" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="Cxh-SD-Ozq"/>
+                                <constraint firstAttribute="height" constant="32" id="UUq-am-hL7"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_person_add" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1oc-i4-1bh">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                    <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                    <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="addContact:" target="-2" id="9DI-Pm-X0I"/>
+                            </connections>
+                        </button>
+                        <button toolTip="Start audio call" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="RuH-fO-poy" userLabel="Audio Call Button" customClass="HoverButton">
+                            <rect key="frame" x="38" y="12" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="HyC-Bf-F7P"/>
+                                <constraint firstAttribute="height" constant="32" id="opT-rp-VwQ"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="f0E-8f-ly5">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                    <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                    <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="placeAudioCall:" target="-2" id="ycm-jI-2M5"/>
+                            </connections>
+                        </button>
+                        <button toolTip="Start video call" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="cFH-d7-Erh" userLabel="Call Button" customClass="HoverButton">
+                            <rect key="frame" x="76" y="12" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="4jd-jn-RY1"/>
+                                <constraint firstAttribute="height" constant="32" id="DMa-Lq-2Tk"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XOS-rh-WfH">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                    <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                    <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="placeCall:" target="-2" id="2h9-fM-gof"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" constant="35" id="4jd-jn-RY1"/>
-                        <constraint firstAttribute="height" constant="35" id="DMa-Lq-2Tk"/>
+                        <constraint firstAttribute="height" constant="55" id="mTY-MS-F9z"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_video" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="XOS-rh-WfH">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                            <color key="value" red="0.0" green="0.23137254901960785" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                            <color key="value" red="0.23137254901960785" green="0.75686274509803919" blue="0.82745098039215681" alpha="0.23410744863013699" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                            <integer key="value" value="4"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="placeCall:" target="-2" id="2h9-fM-gof"/>
-                    </connections>
-                </button>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQT-Vf-Lhr" userLabel="IdLabel">
                     <rect key="frame" x="53" y="783" width="4" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="rW7-RD-TBM">
@@ -546,84 +680,30 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="RuH-fO-poy" userLabel="Audio Call Button" customClass="HoverButton">
-                    <rect key="frame" x="708" y="783" width="35" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="HyC-Bf-F7P"/>
-                        <constraint firstAttribute="height" constant="35" id="opT-rp-VwQ"/>
-                    </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_call" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="f0E-8f-ly5">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23410744859999999" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                            <integer key="value" value="4"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="placeAudioCall:" target="-2" id="ycm-jI-2M5"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="pGK-hO-X1Y" userLabel="Add Contact Button" customClass="HoverButton">
-                    <rect key="frame" x="663" y="783" width="35" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="35" id="Cxh-SD-Ozq"/>
-                        <constraint firstAttribute="height" constant="35" id="UUq-am-hL7"/>
-                    </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_person_add" imagePosition="overlaps" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1oc-i4-1bh">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                            <color key="value" red="0.0" green="0.23137254900000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
-                            <color key="value" red="0.23137254900000001" green="0.75686274509999996" blue="0.82745098039999998" alpha="0.23410744859999999" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                            <integer key="value" value="4"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="addContact:" target="-2" id="9DI-Pm-X0I"/>
-                    </connections>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ooq-vs-Xt1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="1xM-Rt-OXn"/>
                 <constraint firstItem="ucx-6g-eJw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="32s-Wp-DE1"/>
-                <constraint firstItem="cFH-d7-Erh" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="5PE-Sd-Vwg"/>
                 <constraint firstItem="ucx-6g-eJw" firstAttribute="leading" secondItem="ooq-vs-Xt1" secondAttribute="trailing" constant="10" id="60g-Mw-Wax"/>
-                <constraint firstItem="cFH-d7-Erh" firstAttribute="leading" secondItem="RuH-fO-poy" secondAttribute="trailing" constant="10" id="7Hq-Yy-WfO"/>
+                <constraint firstItem="s8t-r2-zdA" firstAttribute="top" secondItem="fh9-Uo-8R1" secondAttribute="top" id="8pz-TS-qws"/>
                 <constraint firstAttribute="bottom" secondItem="Rth-di-Tls" secondAttribute="bottom" id="9nL-Hs-Oak"/>
+                <constraint firstItem="s8t-r2-zdA" firstAttribute="trailing" secondItem="fh9-Uo-8R1" secondAttribute="trailing" constant="-15" id="ATN-4X-HqG"/>
+                <constraint firstItem="s8t-r2-zdA" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="EYN-Be-aBV"/>
                 <constraint firstAttribute="trailing" secondItem="fh9-Uo-8R1" secondAttribute="trailing" id="EoD-2E-bhi"/>
                 <constraint firstAttribute="bottom" secondItem="EJD-f8-Xqd" secondAttribute="bottom" constant="60" id="EoS-be-aF2"/>
                 <constraint firstItem="ucx-6g-eJw" firstAttribute="leading" secondItem="SQT-Vf-Lhr" secondAttribute="leading" id="IQc-hc-YRD"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="L79-xO-12P"/>
-                <constraint firstItem="RuH-fO-poy" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="MS8-kk-8g8"/>
-                <constraint firstItem="cFH-d7-Erh" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="Tok-wc-chb"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="55" id="XkO-FA-l3J"/>
                 <constraint firstItem="Sn1-dJ-QCw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="55" id="aZT-2B-gv9"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="trailing" secondItem="Ez2-Rf-DZN" secondAttribute="trailing" id="b6d-Ue-Zl5"/>
-                <constraint firstAttribute="trailing" secondItem="cFH-d7-Erh" secondAttribute="trailing" constant="10" id="bWY-wj-6dr"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="bvr-Gv-Sgb"/>
                 <constraint firstItem="Sn1-dJ-QCw" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="dtD-1T-QlG"/>
                 <constraint firstItem="SQT-Vf-Lhr" firstAttribute="bottom" secondItem="ooq-vs-Xt1" secondAttribute="bottom" id="e8m-qq-0SV"/>
-                <constraint firstItem="RuH-fO-poy" firstAttribute="leading" secondItem="pGK-hO-X1Y" secondAttribute="trailing" constant="10" id="fCS-uv-8E2"/>
                 <constraint firstItem="fh9-Uo-8R1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="giR-tF-lUI"/>
                 <constraint firstAttribute="trailing" secondItem="EJD-f8-Xqd" secondAttribute="trailing" id="hSZ-8v-sis"/>
                 <constraint firstAttribute="bottom" secondItem="fh9-Uo-8R1" secondAttribute="bottom" id="hvC-OR-Ct0"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="Ez2-Rf-DZN" secondAttribute="leading" id="jyz-o7-MMh"/>
                 <constraint firstAttribute="trailing" secondItem="Sn1-dJ-QCw" secondAttribute="trailing" id="m05-gh-crH"/>
-                <constraint firstItem="pGK-hO-X1Y" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="nQE-VA-2DY"/>
                 <constraint firstItem="ucx-6g-eJw" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="uTp-kU-NmC" userLabel="centeredTitle"/>
                 <constraint firstItem="fh9-Uo-8R1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="wBu-2R-lEu"/>
             </constraints>
@@ -637,7 +717,7 @@
                 <outlet property="messageField" destination="bsk-Gj-qQ2" id="RD0-B6-fPN"/>
                 <outlet property="messagesBottomMargin" destination="EoS-be-aF2" id="pqG-cP-d8d"/>
                 <outlet property="recordAudioButton" destination="wYE-S3-AzD" id="nFg-ZY-Hss"/>
-                <outlet property="recordVideoButton" destination="Gww-7y-sXo" id="ebw-OA-zmv"/>
+                <outlet property="recordVideoButton" destination="B6d-Sc-UTp" id="QN0-e5-FU7"/>
                 <outlet property="sendFileButton" destination="gwx-eT-PcN" id="09R-wC-t0r"/>
                 <outlet property="sendPanelHeight" destination="jJO-v2-Wuj" id="lYG-sU-eIr"/>
             </connections>
@@ -650,7 +730,7 @@
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="ic_arrow_back" width="72" height="72"/>
-        <image name="ic_camera" width="100" height="100"/>
+        <image name="ic_camera" width="96" height="96"/>
         <image name="ic_file_upload" width="72" height="72"/>
         <image name="ic_person_add" width="48" height="48"/>
     </resources>
