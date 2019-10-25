@@ -2,20 +2,26 @@
 /* Class = "NSTextFieldCell"; title = "00:00"; ObjectID = "78U-cA-2f2"; */
 "78U-cA-2f2.title" = "00:00";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "MxH-aj-EXO"; */
-"MxH-aj-EXO.title" = "Box";
+/* Class = "NSButtonCell"; title = "Send message"; ObjectID = "Bjm-hd-lQU"; */
+"Bjm-hd-lQU.title" = "Send message";
+
+/* Class = "NSButtonCell"; title = "Go back to conversations"; ObjectID = "M07-cf-bjZ"; */
+"M07-cf-bjZ.title" = "Go back to conversations";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "TwL-yO-BXI"; */
 "TwL-yO-BXI.title" = "Box";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "Zlv-nH-Y9y"; */
-"Zlv-nH-Y9y.title" = "Box";
-
-/* Class = "NSTextFieldCell"; title = "Contact appears to be busy. Leave a message?"; ObjectID = "hnr-x5-xnb"; */
-"hnr-x5-xnb.title" = "Contact appears to be busy. Leave a message?";
+/* Class = "NSButton"; ibShadowedToolTip = "Record message"; ObjectID = "dEq-nq-Ae8"; */
+"dEq-nq-Ae8.ibShadowedToolTip" = "Record message";
 
 /* Class = "NSTextFieldCell"; title = "Recording"; ObjectID = "kIq-PG-Ymw"; */
 "kIq-PG-Ymw.title" = "Recording";
 
-/* Class = "NSTextFieldCell"; title = "Name"; ObjectID = "uol-7p-Y2J"; */
-"uol-7p-Y2J.title" = "Name";
+/* Class = "NSButton"; ibShadowedToolTip = "Record message"; ObjectID = "oFb-RQ-trc"; */
+"oFb-RQ-trc.ibShadowedToolTip" = "Record message";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Go to conversations"; ObjectID = "tf8-hV-8xd"; */
+"tf8-hV-8xd.ibShadowedToolTip" = "Go to conversations";
+
+/* Class = "NSButtonCell"; title = "Record a message"; ObjectID = "zTC-Gf-lAV"; */
+"zTC-Gf-lAV.title" = "Record a message";
