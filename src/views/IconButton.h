@@ -29,13 +29,13 @@
 
 /*
  * Background color of the button
- * default value : [NSColor ringBlue]
+ * default value : [NSColor clearColor]
  */
 @property (nonatomic, strong) NSColor* bgColor;
 
 /*
  * Background color of the button when highlighted
- * default value : view frame width / 2 (circle)
+ * default value bgColor
  */
 @property (nonatomic, strong) NSColor* highlightColor;
 
@@ -63,14 +63,8 @@
 @property CGFloat imageIncreaseOnClick;
 
 /*
- * Add bluer effect behind button
- */
-
-@property NSVisualEffectView* vibrantView;
-
-/*
  * Button image color
- * default value : [NSColor white];
+ * default value : [NSColor ringDarkBlue];
  */
 
 @property (nonatomic, strong) NSColor* imageColor;
@@ -87,7 +81,6 @@
  * and fill corner with cornerColor
  */
 @property (nonatomic, strong) NSColor* cornerColor;
-
 /*
  * Font size of the button title.
  */
@@ -101,4 +94,63 @@
 -(void)stopBlinkAnimation;
 
 @property BOOL animating;
+@property BOOL isDarkMode;
+
+/*
+ * Button image color when in dark mode
+ * default value : [NSColor whiteColor];
+ */
+
+@property (nonatomic, strong) NSColor* imageDarkColor;
+
+/*
+ * Button image color
+ * default value : [NSColor ringDarkBlue];
+ */
+
+@property (nonatomic, strong) NSColor* imageLightColor;
+
+/*
+ * Button highlight color when in dark mode
+ * default value : highlightColor;
+ */
+
+@property (nonatomic, strong) NSColor* highlightDarkColor;
+
+/*
+ * Button highlight color when in light mode
+ * default value : highlightColor;
+ */
+
+@property (nonatomic, strong) NSColor* highlightLightColor;
+
+/*
+ * Define if should draw boreder
+ * default value false;
+ */
+@property (atomic) BOOL shouldDrawBorder;
+
+/*
+ * Image coler when button pressed
+ * default value : imageColor;
+ */
+
+@property (nonatomic, strong) NSColor* imagePressedColor;
+
+/*
+ * Image coler when button pressed in dark mode
+ * default value : imagePressedColor;
+ */
+
+@property (nonatomic, strong) NSColor* imagePressedDarkColor;
+
+/*
+ * Image coler when button pressed in light mode
+ * default value : imagePressedColor;
+ */
+
+@property (nonatomic, strong) NSColor* imagePressedLightColor;
+
+-(void) onAppearanceChanged;
+
 @end
