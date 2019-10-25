@@ -15,6 +15,7 @@
                 <outlet property="blockedContactsTableView" destination="aau-IO-oSs" id="Vek-r1-CDK"/>
                 <outlet property="devicesTableView" destination="Zw2-AJ-V23" id="fdL-VK-1ao"/>
                 <outlet property="displayNameField" destination="n2O-cF-oZh" id="EaH-qO-DhI"/>
+                <outlet property="exportAccountButton" destination="vkG-1y-zOL" id="E8L-fu-2AU"/>
                 <outlet property="linkDeviceButton" destination="xuK-C2-qCq" id="Syf-y5-KnW"/>
                 <outlet property="passwordButton" destination="jn6-I2-q72" id="ElE-O6-kva"/>
                 <outlet property="passwordField" destination="jfs-pl-8Bb" id="RYs-Qw-rCE"/>

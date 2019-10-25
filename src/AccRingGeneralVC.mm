@@ -56,6 +56,7 @@
 @property (unsafe_unretained) IBOutlet NSButton* passwordButton;
 @property (unsafe_unretained) IBOutlet NSButton* linkDeviceButton;
 @property (unsafe_unretained) IBOutlet NSButton* removeAccountButton;
+@property (unsafe_unretained) IBOutlet NSButton* exportAccountButton;
 @property (unsafe_unretained) IBOutlet NSImageView* addProfilePhotoImage;
 @property (unsafe_unretained) IBOutlet NSTableView* devicesTableView;
 @property (unsafe_unretained) IBOutlet NSTableView* blockedContactsTableView;
@@ -94,6 +95,7 @@ QMetaObject::Connection accountStateChangedSignal;
 @synthesize blockedContactsTableView;
 @synthesize linkDeviceButton;
 @synthesize passwordField;
+@synthesize exportAccountButton;
 
 typedef NS_ENUM(NSInteger, TagViews) {
     DISPLAYNAME = 100,
@@ -174,6 +176,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [passwordButton setHidden:hideLocalAccountConfig];
     [linkDeviceButton setHidden:hideLocalAccountConfig];
     [passwordField setHidden:hideLocalAccountConfig];
+    [exportAccountButton setHidden: hideLocalAccountConfig];
 
     NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[removeAccountButton attributedTitle]];
     NSRange titleRange = NSMakeRange(0, [colorTitle length]);
