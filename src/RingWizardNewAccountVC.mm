@@ -120,6 +120,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 - (void)prepareViewToShow {
     [self.view setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
     [creationView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
+    [loadingView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
     [passwordField setHidden: YES];
     [repeatPasswordView setHidden: YES];
     buttonTopConstraint.constant = 35;
@@ -271,7 +272,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                           accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           [self registerDefaultPreferences];
-                                          [self.delegate didCreateAccountWithSuccess:YES];
+                                          [self.delegate didCreateAccountWithSuccess:YES accountId: accountToCreate];
                                       });
     //if account creation failed remove loading view
     accountRemoved = QObject::connect(self.accountModel,
@@ -282,7 +283,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                           }
                                           QObject::disconnect(accountCreated);
                                           QObject::disconnect(accountRemoved);
-                                          [self.delegate didCreateAccountWithSuccess:NO];
+                                          [self.delegate didCreateAccountWithSuccess:NO accountId: accountToCreate];
                                       });
     [self display:loadingView];
     [progressBar startAnimation:nil];
@@ -311,7 +312,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 
 - (IBAction)cancel:(id)sender
 {
-    [self.delegate didCreateAccountWithSuccess:NO];
+    [self.delegate didCreateAccountWithSuccess:NO accountId: accountToCreate];
 }
 
 #pragma mark - UserNameRegistration delegate methods
