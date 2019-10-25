@@ -26,10 +26,6 @@
 #import "Constants.h"
 #import "views/NSImage+Extensions.h"
 #import "views/NSColor+RingTheme.h"
-#import "RingWizardNewAccountVC.h"
-#import "RingWizardLinkAccountVC.h"
-#import "RingWizardChooseVC.h"
-#import "ConnectToAccManagerVC.h"
 
 @interface RingWizardWC ()
 
@@ -45,6 +41,7 @@
     IBOutlet RingWizardChooseVC* chooseActiontWC;
     IBOutlet AddSIPAccountVC* addSIPAccountVC;
     IBOutlet ConnectToAccManagerVC* connectToAccManagerVC;
+    IBOutlet AccountBackupVC* accountBackupVC;
     BOOL isCancelable;
 }
 
@@ -68,10 +65,12 @@
     linkAccountWC = [[RingWizardLinkAccountVC alloc] initWithNibName:@"RingWizardLinkAccount" bundle:nil accountmodel:self.accountModel];
     addSIPAccountVC = [[AddSIPAccountVC alloc] initWithNibName:@"AddSIPAccountVC" bundle:nil accountmodel:self.accountModel];
     connectToAccManagerVC = [[ConnectToAccManagerVC alloc] initWithNibName:@"ConnectToAccManagerVC" bundle:nil accountmodel:self.accountModel];
+    accountBackupVC = [[AccountBackupVC alloc] initWithNibName:@"AccountBackupVC" bundle:nil accountmodel:self.accountModel];
     [addSIPAccountVC setDelegate:self];
     [chooseActiontWC setDelegate:self];
     [linkAccountWC setDelegate:self];
     [newAccountWC setDelegate:self];
+    [accountBackupVC setDelegate:self];
     [connectToAccManagerVC setDelegate:self];
     [self showChooseWithCancelButton:isCancelable];
 }
@@ -192,9 +191,14 @@
 
 #pragma - WizardCreateAccountDelegate methods
 
-- (void)didCreateAccountWithSuccess:(BOOL)success
+- (void)didCreateAccountWithSuccess:(BOOL)success accountId:(std::string)accountId;
 {
-    [self completedWithSuccess:success];
+    BOOL skipBackup = [[NSUserDefaults standardUserDefaults] boolForKey: SkipBackUpPage];
+    if (skipBackup || !success) {
+        [self completedWithSuccess:success];
+        return;
+    }
+    [self showBackUpAccount: accountId];
 }
 
 #pragma - WizardLinkAccountDelegate methods
@@ -208,6 +212,16 @@
 
 - (void)didSignInSuccess:(BOOL)success {
     [self completedWithSuccess:success];
+}
+
+- (void)showBackUpAccount:(std::string)accountId{
+    [self.windowHeader setStringValue: NSLocalizedString(@"Backup your account",
+                                                         @"Backup account")];
+    [ringImage setHidden: YES];
+    titleConstraint.constant = 0;
+    accountBackupVC.accountToBackup = accountId;
+    [self showView: accountBackupVC.view];
+    [accountBackupVC show];
 }
 
 -(void) completedWithSuccess:(BOOL) success {

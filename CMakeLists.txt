@@ -184,6 +184,8 @@ SET(ringclient_CONTROLLERS
    src/CallInConferenceVC.h
    src/ConnectToAccManagerVC.mm
    src/ConnectToAccManagerVC.h
+   src/AccountBackupVC.mm
+   src/AccountBackupVC.h
 )
 
 SET(ringclient_VIEWS
@@ -286,6 +288,7 @@ SET(ringclient_XIBS
    ChooseContactVC
    CallInConferenceVC
    ConnectToAccManagerVC
+   AccountBackupVC
 )
 
 # Icons
