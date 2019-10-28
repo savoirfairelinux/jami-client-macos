@@ -345,7 +345,7 @@
                                         <constraint firstAttribute="height" constant="32" id="2As-E1-3wN"/>
                                         <constraint firstAttribute="width" constant="32" id="ThY-e2-Xwc"/>
                                     </constraints>
-                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1zm-4M-OeR">
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_audio_msg" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="1zm-4M-OeR">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -370,13 +370,20 @@
                                         <action selector="startAudioMessage:" target="iH6-17-JsM" id="L0n-5l-pav"/>
                                     </connections>
                                 </button>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="Pn0-gT-h4b">
+                                    <rect key="frame" x="34" y="29" width="4" height="2"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="2" id="BuD-em-HlZ"/>
+                                        <constraint firstAttribute="width" constant="4" id="vfD-J4-Kv5"/>
+                                    </constraints>
+                                </customView>
                                 <button toolTip="Record a video message" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B6d-Sc-UTp" customClass="HoverButton">
-                                    <rect key="frame" x="34" y="14" width="32" height="32"/>
+                                    <rect key="frame" x="40" y="14" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="GRp-fA-Pkp"/>
                                         <constraint firstAttribute="width" constant="32" id="f5f-YQ-2i3"/>
                                     </constraints>
-                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_camera" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="sjp-jf-vw1">
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_camera" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="sjp-jf-vw1">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -402,7 +409,7 @@
                                     </connections>
                                 </button>
                                 <button toolTip="Send a file" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-eT-PcN" customClass="HoverButton">
-                                    <rect key="frame" x="68" y="14" width="32" height="32"/>
+                                    <rect key="frame" x="74" y="14" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="C2W-wV-YvF"/>
                                         <constraint firstAttribute="width" constant="32" id="zZF-4P-pW9"/>
@@ -433,7 +440,7 @@
                                     </connections>
                                 </button>
                                 <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
-                                    <rect key="frame" x="100" y="22" width="526" height="17"/>
+                                    <rect key="frame" x="106" y="22" width="520" height="17"/>
                                     <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -532,8 +539,10 @@
                                 <integer value="1000"/>
                                 <integer value="1000"/>
                                 <integer value="1000"/>
+                                <integer value="1000"/>
                             </visibilityPriorities>
                             <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
@@ -724,13 +733,13 @@
         </viewController>
     </objects>
     <resources>
-        <image name="ic_action_audio" width="36" height="36"/>
         <image name="ic_action_call" width="72" height="72"/>
         <image name="ic_action_cancel" width="72" height="72"/>
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="ic_arrow_back" width="72" height="72"/>
-        <image name="ic_camera" width="96" height="96"/>
+        <image name="ic_audio_msg" width="18" height="18"/>
+        <image name="ic_camera" width="18" height="18"/>
         <image name="ic_file_upload" width="72" height="72"/>
         <image name="ic_person_add" width="48" height="48"/>
     </resources>

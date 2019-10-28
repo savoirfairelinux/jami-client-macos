@@ -973,9 +973,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(void) closeRecordingView {
     if(recordMessagePopover != nil) {
-        recordingController.stopRecordingView;
         [recordMessagePopover close];
         recordMessagePopover = nil;
+        recordingController.stopRecordingView;
     }
 }
 

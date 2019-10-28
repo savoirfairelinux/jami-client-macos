@@ -55,7 +55,7 @@
         self.mouseOutsideDarkColor = self.bgColor;
     }
     self.mouseOutsideColor = self.isDarkMode ? self.mouseOutsideDarkColor : self.mouseOutsideLightColor;
-    if(self.moiuseOutsideImageLightColor) {
+    if(!self.moiuseOutsideImageLightColor) {
         self.moiuseOutsideImageLightColor = self.moiuseOutsideImageColor ? self.moiuseOutsideImageColor : self.imageLightColor;
     }
     if(!self.moiuseOutsideImageDarkColor) {
@@ -92,7 +92,7 @@
     }
     if(self.imagePressedColor && self.pressed) {
         self.imageColor = self.imagePressedColor;
-    } else if ( self.moiuseOutsideImageColor) {
+    } else if (self.moiuseOutsideImageColor) {
         self.imageColor = self.moiuseOutsideImageColor;
     }
     if (self.imageIncreaseOnHover && self.enabled) {

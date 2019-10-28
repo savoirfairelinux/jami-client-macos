@@ -356,8 +356,8 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </customView>
-                                <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Djs-L8-8Pe" userLabel="Controls">
-                                    <rect key="frame" x="219" y="20" width="308" height="44"/>
+                                <stackView distribution="equalSpacing" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Djs-L8-8Pe" userLabel="Controls">
+                                    <rect key="frame" x="217" y="20" width="312" height="44"/>
                                     <subviews>
                                         <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="HoverButton">
                                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -545,8 +545,15 @@
                                                 <action selector="toggleAddParticipantView:" target="-2" id="rhk-OI-z0Z"/>
                                             </connections>
                                         </button>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="7oc-9E-B6q">
+                                            <rect key="frame" x="264" y="42" width="4" height="2"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="2" id="2MR-E5-npg"/>
+                                                <constraint firstAttribute="width" constant="4" id="naC-cq-rWg"/>
+                                            </constraints>
+                                        </customView>
                                         <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="HoverButton">
-                                            <rect key="frame" x="264" y="0.0" width="44" height="44"/>
+                                            <rect key="frame" x="268" y="0.0" width="44" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="48U-1h-yAx"/>
                                                 <constraint firstAttribute="height" constant="44" id="EDO-9c-ndD"/>
@@ -557,7 +564,7 @@
                                             </buttonCell>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="4"/>
+                                                    <integer key="value" value="6"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
                                                     <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
@@ -585,8 +592,10 @@
                                         <integer value="1000"/>
                                         <integer value="1000"/>
                                         <integer value="1000"/>
+                                        <integer value="1000"/>
                                     </visibilityPriorities>
                                     <customSpacing>
+                                        <real value="3.4028234663852886e+38"/>
                                         <real value="3.4028234663852886e+38"/>
                                         <real value="3.4028234663852886e+38"/>
                                         <real value="3.4028234663852886e+38"/>
@@ -1015,10 +1024,10 @@
         <image name="ic_action_add_participant" width="72" height="72"/>
         <image name="ic_action_audio" width="36" height="36"/>
         <image name="ic_action_cancel" width="72" height="72"/>
-        <image name="ic_action_chat" width="100" height="100"/>
+        <image name="ic_action_chat" width="36" height="36"/>
         <image name="ic_action_hangup" width="72" height="72"/>
         <image name="ic_action_hold" width="72" height="72"/>
-        <image name="ic_action_record" width="100" height="100"/>
+        <image name="ic_action_record" width="36" height="36"/>
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="ic_file_upload" width="72" height="72"/>

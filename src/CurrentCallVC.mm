@@ -347,6 +347,8 @@ CVPixelBufferRef pixelBufferPreview;
         [holdOnOffButton stopBlinkAnimation];
     }
 
+    [self setUpButtons: currentCall isRecording: (callModel->isRecording([self getcallID]) || mediaModel->getAlwaysRecord())];
+
     [videoView setShouldAcceptInteractions: currentCall.status == Status::IN_PROGRESS];
     callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? @"wants to talk to you" : @(to_string(currentCall.status).c_str());
     loadingIndicator.hidden = (currentCall.status == Status::SEARCHING ||
@@ -721,7 +723,6 @@ CVPixelBufferRef pixelBufferPreview;
     [self mouseIsMoving: YES];
     [loadingIndicator setAnimates:YES];
     auto currentCall = callModel->getCall([self getcallID]);
-    [self setUpButtons: currentCall isRecording: (callModel->isRecording([self getcallID]) || mediaModel->getAlwaysRecord())];
     [previewView setHidden: YES];
     [self setUpPreviewFrame];
     [self updatePendingCalls];
