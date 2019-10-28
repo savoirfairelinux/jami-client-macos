@@ -266,6 +266,7 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
                             to:(NSColor*)endColor
                    scaleFactor:(CGFloat)scaleFactor
                       duration:(CGFloat) duration {
+    [self setWantsLayer: YES];
     CIFilter *filter = [CIFilter filterWithName:@"CIFalseColor"];
     [filter setDefaults];
     [filter setValue:[CIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0] forKey:@"inputColor0"];

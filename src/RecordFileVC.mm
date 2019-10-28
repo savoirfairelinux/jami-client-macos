@@ -251,7 +251,6 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     [durationTimer invalidate];
     durationTimer = nil;
     [recordOnOffButton stopBlinkAnimation];
-    [self setInitialState];
 }
 
 -(void) disconnectVideo {
@@ -301,6 +300,8 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     timeLabel.textColor = color;
     infoLabel.textColor = color;
     NSString *title = NSLocalizedString(@"Send", @"Send button title");
+    NSString *info = NSLocalizedString(@"Press to start recording", @"Recording view explanation label");
+    infoLabel.stringValue = info;
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setAlignment:NSCenterTextAlignment];
     NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:color, NSForegroundColorAttributeName, style, NSParagraphStyleAttributeName, nil];
@@ -360,6 +361,9 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     [recordOnOffButton setHidden:YES];
     infoLabel.textColor = [NSColor textColor];
     [previewView setHidden:YES];
+    [sendButton setHidden:YES];
+    [fileImage setHidden:YES];
+    [timeLabel setStringValue: @""];
     [self.view setFrameSize: CGSizeMake(370, 160)];
 }
 
