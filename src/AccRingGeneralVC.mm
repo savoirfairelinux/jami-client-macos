@@ -157,7 +157,15 @@ typedef NS_ENUM(NSInteger, TagViews) {
     NSString* displayName = @(account.profileInfo.alias.c_str());
     [displayNameField setStringValue:displayName];
     [ringIDField setStringValue:@(account.profileInfo.uri.c_str())];
-    if(account.registeredName.empty()) {
+
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    bool hideLocalAccountConfig = !accountProperties.managerUri.empty();
+    [passwordButton setHidden:hideLocalAccountConfig];
+    [linkDeviceButton setHidden:hideLocalAccountConfig];
+    [passwordField setHidden:hideLocalAccountConfig];
+    [exportAccountButton setHidden: hideLocalAccountConfig];
+
+    if(account.registeredName.empty() && !hideLocalAccountConfig) {
         [registerNameButton setHidden:NO];
         buttonRegisterWidthConstraint.constant = 260.0;
     } else {
@@ -167,16 +175,8 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
     [registeredNameField setStringValue:@(account.registeredName.c_str())];
 
-    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     [passwordButton setTitle:accountProperties.archiveHasPassword ? @"Change password" : @"Create password"];
     self.accountEnabled = account.enabled;
-
-    bool hideLocalAccountConfig = !accountProperties.managerUri.empty();
-    [registerNameButton setHidden:hideLocalAccountConfig];
-    [passwordButton setHidden:hideLocalAccountConfig];
-    [linkDeviceButton setHidden:hideLocalAccountConfig];
-    [passwordField setHidden:hideLocalAccountConfig];
-    [exportAccountButton setHidden: hideLocalAccountConfig];
 
     NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[removeAccountButton attributedTitle]];
     NSRange titleRange = NSMakeRange(0, [colorTitle length]);
