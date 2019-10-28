@@ -30,6 +30,7 @@
 -(void) switchToDevice:(int)deviceID;
 -(void) switchToFile:(std::string)uri;
 -(std::vector<std::string>) getDeviceList;
+-(NSString *) getDefaultDeviceName;
 
 @end
 

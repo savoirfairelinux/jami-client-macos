@@ -29,6 +29,8 @@
 @end
 
 @implementation CallView
+
+NSString *currentDevice;
 @synthesize contextualMenu;
 @synthesize shouldAcceptInteractions;
 
@@ -173,6 +175,8 @@
     contextualMenu = [[NSMenu alloc] initWithTitle:@"Switch camera"];
 
     auto devices = [self.callDelegate getDeviceList];
+    
+    currentDevice = [self.callDelegate getDefaultDeviceName];
 
     for(int i = 0 ; i < devices.size() ; ++i) {
         std::string device = devices[i];
@@ -191,6 +195,10 @@
                                 atIndex:contextualMenu.itemArray.count];
 #endif
 
+    auto menuItem = [contextualMenu itemWithTitle:currentDevice];
+    if(menuItem) {
+        [menuItem setState: NSControlStateValueOn];
+    }
     [NSMenu popUpContextMenu:contextualMenu withEvent:theEvent forView:self];
 }
 
@@ -224,17 +232,26 @@
 
 - (void) switchInput:(NSMenuItem*) sender
 {
+    if([sender.title isEqualToString:currentDevice]) {
+        return;
+    }
     int index = [contextualMenu indexOfItem:sender];
     [self.callDelegate switchToDevice: index];
 }
 
 - (void) captureScreen:(NSMenuItem*) sender
 {
+    if([sender.title isEqualToString:currentDevice]) {
+        return;
+    }
     [self.callDelegate screenShare];
 }
 
 - (void) chooseFile:(NSMenuItem*) sender
 {
+    if([sender.title isEqualToString:currentDevice]) {
+        return;
+    }
     NSOpenPanel *browsePanel = [[NSOpenPanel alloc] init];
     [browsePanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
     [browsePanel setCanChooseFiles:YES];

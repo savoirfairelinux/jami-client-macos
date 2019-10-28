@@ -994,6 +994,18 @@ CVPixelBufferRef pixelBufferPreview;
     return mediaModel->getDevices();
 }
 
+-(NSString*) getDefaultDeviceName {
+    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
+    switch (type) {
+        case lrc::api::video::DeviceType::CAMERA:
+            return @(mediaModel->getCurrentRenderedDevice(callUid_).name.c_str());
+        case lrc::api::video::DeviceType::DISPLAY:
+            return NSLocalizedString(@"Share screen", @"Contextual menu entry");
+        default:
+            return @"";
+    }
+}
+
 -(void) switchToFile:(std::string)uri {
     mediaModel->setInputFile(QUrl::fromLocalFile(uri.c_str()).toLocalFile().toStdString());
 }
