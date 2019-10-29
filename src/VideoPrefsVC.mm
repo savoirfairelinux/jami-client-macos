@@ -102,6 +102,7 @@ std::string currentVideoDevice;
     int index = [sender indexOfSelectedItem];
     auto devices = avModel->getDevices();
     auto newDevice = devices.at(index);
+    auto deviceString = @(newDevice.c_str());
     avModel->setDefaultDevice(newDevice);
     [self devicesChanged];
     [self startPreview];
@@ -110,36 +111,38 @@ std::string currentVideoDevice;
 - (IBAction)chooseSize:(id)sender {
     int index = [sender indexOfSelectedItem];
     auto resolution = [[sizesList itemTitleAtIndex:index] UTF8String];
-    auto device = avModel->getDefaultDeviceName();
-    auto currentSettings = avModel->getDeviceSettings(device);
-    lrc::api::video::Settings settings{ "", avModel->getDefaultDeviceName(),
-        currentSettings.rate, resolution};
-    avModel->setDeviceSettings(settings);
-    [ratesList removeAllItems];
-    currentSettings = avModel->getDeviceSettings(device);
-    auto currentChannel = currentSettings.channel;
-    currentChannel = currentChannel.empty() ? "default" : currentChannel;
-    auto deviceCapabilities = avModel->getDeviceCapabilities(device);
-    auto channelCaps = deviceCapabilities.at(currentChannel);
-    for (auto [resolution, frameRateList] : channelCaps) {
-        for (auto rate : frameRateList) {
-            [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
+    auto device = avModel->getDefaultDevice();
+    try {
+        auto currentSettings = avModel->getDeviceSettings(device);
+        currentSettings.size = resolution;
+        avModel->setDeviceSettings(currentSettings);
+        [ratesList removeAllItems];
+        currentSettings = avModel->getDeviceSettings(device);
+        auto currentChannel = currentSettings.channel;
+        currentChannel = currentChannel.empty() ? "default" : currentChannel;
+        auto deviceCapabilities = avModel->getDeviceCapabilities(device);
+        auto channelCaps = deviceCapabilities.at(currentChannel);
+        for (auto [resolution, frameRateList] : channelCaps) {
+            for (auto rate : frameRateList) {
+                [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
+            }
         }
-    }
-    [self connectPreviewSignals];
-    [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
-    [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
+        [self connectPreviewSignals];
+        [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
+        [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
+    } catch (...) {}
 }
 
 - (IBAction)chooseRate:(id)sender {
     int index = [sender indexOfSelectedItem];
     auto rate = [[ratesList itemTitleAtIndex:index] floatValue];
-    auto device = avModel->getDefaultDeviceName();
-    auto currentSettings = avModel->getDeviceSettings(device);
-    lrc::api::video::Settings settings{ "", avModel->getDefaultDeviceName(),
-        rate, currentSettings.size};
-    [self connectPreviewSignals];
-    avModel->setDeviceSettings(settings);
+    auto device = avModel->getDefaultDevice();
+    try {
+        auto settings = avModel->getDeviceSettings(device);
+        settings.rate = rate;
+        [self connectPreviewSignals];
+        avModel->setDeviceSettings(settings);
+    } catch (...) {}
 }
 
 - (IBAction)toggleHardwareAcceleration:(NSButton *)sender {
@@ -196,7 +199,7 @@ std::string currentVideoDevice;
     deviceEvent = QObject::connect(avModel,
                                    &lrc::api::AVModel::deviceEvent,
                                    [=]() {
-                                       auto defaultDevice = avModel->getDefaultDeviceName();
+                                       auto defaultDevice = avModel->getDefaultDevice();
                                        bool updatePreview = avModel->getRenderer(lrc::api ::video::PREVIEW_RENDERER_ID).isRendering() && (defaultDevice != currentVideoDevice);
                                        if (updatePreview) {
                                            [previewView fillWithBlack];
@@ -245,15 +248,21 @@ std::string currentVideoDevice;
 -(void)addDevices {
     [videoDevicesList removeAllItems];
     auto devices = avModel->getDevices();
-    auto defaultDevice = avModel->getDefaultDeviceName();
+    auto defaultDevice = avModel->getDefaultDevice();
     if (devices.size() <= 0) {
         return;
     }
     for (auto device : devices) {
-        [videoDevicesList addItemWithTitle: @(device.c_str())];
+        try {
+            auto settings = avModel->getDeviceSettings(device);
+            [videoDevicesList addItemWithTitle: @(settings.name.c_str())];
+        } catch (...) {}
     }
     currentVideoDevice = defaultDevice;
-    [videoDevicesList selectItemWithTitle: @(defaultDevice.c_str())];
+    try {
+        auto settings = avModel->getDeviceSettings(defaultDevice);
+        [videoDevicesList selectItemWithTitle: @(settings.name.c_str())];
+    } catch (...) {}
     [self devicesChanged];
 }
 
@@ -272,23 +281,25 @@ std::string currentVideoDevice;
 -(void) devicesChanged {
     [sizesList removeAllItems];
     [ratesList removeAllItems];
-    auto device = avModel->getDefaultDeviceName();
+    auto device = avModel->getDefaultDevice();
     auto deviceCapabilities = avModel->getDeviceCapabilities(device);
-    auto currentSettings = avModel->getDeviceSettings(device);
     if (deviceCapabilities.size() <= 0) {
         return;
     }
-    auto currentChannel = currentSettings.channel;
-    currentChannel = currentChannel.empty() ? "default" : currentChannel;
-    auto channelCaps = deviceCapabilities.at(currentChannel);
-    for (auto [resolution, frameRateList] : channelCaps) {
-        [sizesList  addItemWithTitle: @(resolution.c_str())];
-        for (auto rate : frameRateList) {
-            [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
+    try {
+        auto currentSettings = avModel->getDeviceSettings(device);
+        auto currentChannel = currentSettings.channel;
+        currentChannel = currentChannel.empty() ? "default" : currentChannel;
+        auto channelCaps = deviceCapabilities.at(currentChannel);
+        for (auto [resolution, frameRateList] : channelCaps) {
+            [sizesList  addItemWithTitle: @(resolution.c_str())];
+            for (auto rate : frameRateList) {
+                [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
+            }
         }
-    }
-    [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
-    [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
+        [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
+        [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
+    } catch (...) {}
 }
 
 @end
