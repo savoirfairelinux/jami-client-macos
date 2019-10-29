@@ -486,6 +486,9 @@
                                             <integer key="value" value="4"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="openEmojy:" target="iH6-17-JsM" id="xVo-RH-KpB"/>
+                                    </connections>
                                 </button>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="nEk-L2-09b">
                                     <rect key="frame" x="664" y="29" width="2" height="2"/>
