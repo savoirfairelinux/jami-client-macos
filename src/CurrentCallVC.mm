@@ -992,14 +992,25 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(std::vector<std::string>) getDeviceList {
-    return mediaModel->getDevices();
+    std::vector<std::string> devicesVector;
+    for (auto device : mediaModel->getDevices()) {
+        try {
+            auto settings = mediaModel->getDeviceSettings(device);
+            devicesVector.emplace_back(settings.name);
+        } catch (...) {}
+    }
+    return devicesVector;
 }
 
 -(NSString*) getDefaultDeviceName {
     auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
     switch (type) {
         case lrc::api::video::DeviceType::CAMERA:
-            return @(mediaModel->getCurrentRenderedDevice(callUid_).name.c_str());
+            try {
+                auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
+                auto settings = mediaModel->getDeviceSettings(device);
+                return @(settings.name.c_str());
+            } catch (...) {}
         case lrc::api::video::DeviceType::DISPLAY:
             return NSLocalizedString(@"Share screen", @"Contextual menu entry");
         default:
