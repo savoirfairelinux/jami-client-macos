@@ -183,7 +183,7 @@ bool frameDisplayed = false;
         projectionMatrix = [self getScalingMatrix: ratio axis: 'y'];
     else
         projectionMatrix = [self getScalingMatrix: 1/ratio axis: 'x'];
-    float radians = (-rotation * M_PI) / 180;
+    float radians = (rotation * M_PI) / 180;
     simd::float4x4 rotationMatrix = [self getRotationMatrix:radians];
     Uniforms bytes = Uniforms{projectionMatrix: projectionMatrix, rotationMatrix: rotationMatrix};
     id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
