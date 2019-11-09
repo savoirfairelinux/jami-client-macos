@@ -523,19 +523,26 @@ NSInteger const REQUEST_SEG         = 1;
         [interactionSnippet setStringValue:lastInteractionSnippetFixedString];
 
         // last interaction date/time
-        std::time_t lastInteractionTimestamp = conversation.interactions[lastUid].timestamp;
-        std::time_t now = std::time(nullptr);
-        char interactionDay[64];
-        char nowDay[64];
-        std::strftime(interactionDay, sizeof(interactionDay), "%D", std::localtime(&lastInteractionTimestamp));
-        std::strftime(nowDay, sizeof(nowDay), "%D", std::localtime(&now));
-        if (std::string(interactionDay) == std::string(nowDay)) {
-            char interactionTime[64];
-            std::strftime(interactionTime, sizeof(interactionTime), "%R", std::localtime(&lastInteractionTimestamp));
-            [lastInteractionDate setStringValue:[NSString stringWithUTF8String:interactionTime]];
+        NSString *timeString = @"";
+        NSDate* msgTime = [NSDate dateWithTimeIntervalSince1970:conversation.interactions[lastUid].timestamp];
+        NSDate *today = [NSDate date];
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[[NSLocale currentLocale] localeIdentifier]]];
+        if ([[NSCalendar currentCalendar] compareDate:today
+                                               toDate:msgTime
+                                    toUnitGranularity:NSCalendarUnitYear]!= NSOrderedSame) {
+            timeString = [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterNoStyle];
+        } else if ([[NSCalendar currentCalendar] compareDate:today
+                                                      toDate:msgTime
+                                           toUnitGranularity:NSCalendarUnitDay]!= NSOrderedSame ||
+                   [[NSCalendar currentCalendar] compareDate:today
+                                                      toDate:msgTime
+                                           toUnitGranularity:NSCalendarUnitMonth]!= NSOrderedSame) {
+            timeString = [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
         } else {
-            [lastInteractionDate setStringValue:[NSString stringWithUTF8String:interactionDay]];
+            timeString = [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
         }
+        [lastInteractionDate setStringValue:timeString];
     }
 
     return result;

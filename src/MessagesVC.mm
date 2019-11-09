@@ -312,7 +312,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSTextField* timeField = [result viewWithTag:GENERIC_INT_TIME_TAG];
 
     // TODO: Fix symbol in LRC
-    NSString* fixedString = [text stringByReplacingOccurrencesOfString:@"🕽" withString:@"📞"];
+    NSString* fixedString = [[text stringByReplacingOccurrencesOfString:@"🕽" withString:@""] stringByReplacingOccurrencesOfString:@"📞"  withString:@""];
     [textField setStringValue:fixedString];
     [timeField setStringValue:time];
 
@@ -786,21 +786,17 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if ([[NSCalendar currentCalendar] compareDate:today
                                            toDate:msgTime
                                 toUnitGranularity:NSCalendarUnitYear]!= NSOrderedSame) {
-        return [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterMediumStyle timeStyle:NSDateFormatterMediumStyle];
+        return [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterMediumStyle];
     }
-
     if ([[NSCalendar currentCalendar] compareDate:today
                                            toDate:msgTime
                                 toUnitGranularity:NSCalendarUnitDay]!= NSOrderedSame ||
         [[NSCalendar currentCalendar] compareDate:today
                                            toDate:msgTime
                                 toUnitGranularity:NSCalendarUnitMonth]!= NSOrderedSame) {
-            [dateFormatter setDateFormat:@"MMM dd, HH:mm"];
-            return [dateFormatter stringFromDate:msgTime];
-        }
-
-    [dateFormatter setDateFormat:@"HH:mm"];
-    return [dateFormatter stringFromDate:msgTime];
+            return [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    }
+     return [NSDateFormatter localizedStringFromDate:msgTime dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
 }
 
 - (void) updateSendMessageHeight {

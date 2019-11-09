@@ -211,11 +211,6 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     [durationTimer invalidate];
     durationTimer = nil;
     [self setRecordedState];
-    if(isAudio) {
-        return;
-    }
-    std::string uri = [[@"file:///" stringByAppendingString: fileName] UTF8String];
-    avModel->setInputFile(uri);
 }
 
 -(void) startRecord {
