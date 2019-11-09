@@ -119,7 +119,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
         [view renderWithPixelBuffer: buffer
                                size: frameSize
                            rotation: 0
-                          fillFrame: false];
+                          fillFrame: true];
     }
 }
 

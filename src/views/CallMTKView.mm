@@ -179,23 +179,10 @@ bool frameDisplayed = false;
     float frameRatio = ((float)size.width)/((float)size.height);
     simd::float4x4 projectionMatrix;
     float ratio = viewRatio * (1/frameRatio);
-    if((viewRatio >= 1 && frameRatio >= 1) ||
-       (viewRatio < 1 && frameRatio < 1) ||
-       (ratio > 0.5 && ratio < 1.5) ) {
-        if (ratio <= 1.0 && ratio >= 0.5)
-            projectionMatrix = [self getScalingMatrix: 1/ratio axis: 'x'];
-        else if (ratio < 0.5)
-            projectionMatrix = [self getScalingMatrix: ratio axis: 'y'];
-        else if (ratio > 1 && ratio < 2)
-            projectionMatrix = [self getScalingMatrix: ratio axis: 'y'];
-        else
-            projectionMatrix = [self getScalingMatrix: 1/ratio axis: 'x'];
-    } else {
-        if (ratio < 1.0 && !fill || fill && ratio > 1.0)
-            projectionMatrix = [self getScalingMatrix: ratio axis: 'y'];
-        else
-            projectionMatrix = [self getScalingMatrix: 1/ratio axis: 'x'];
-    }
+    if (ratio < 1.0 && !fill || fill && ratio > 1.0)
+        projectionMatrix = [self getScalingMatrix: ratio axis: 'y'];
+    else
+        projectionMatrix = [self getScalingMatrix: 1/ratio axis: 'x'];
     float radians = (-rotation * M_PI) / 180;
     simd::float4x4 rotationMatrix = [self getRotationMatrix:radians];
     Uniforms bytes = Uniforms{projectionMatrix: projectionMatrix, rotationMatrix: rotationMatrix};

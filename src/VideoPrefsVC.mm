@@ -227,14 +227,14 @@ std::string currentVideoDevice;
             [view renderWithPixelBuffer:(CVPixelBufferRef)frame->data[3]
                                    size: frameSize
                                rotation: rotation
-                              fillFrame: false];
+                              fillFrame: true];
             return;
         }
         else if (CVPixelBufferRef pixBuffer = [self getBufferForPreviewFromFrame:frame]) {
             [view renderWithPixelBuffer: pixBuffer
                                    size: frameSize
                                rotation: rotation
-                              fillFrame: false];
+                              fillFrame: true];
         }
     }
 }
