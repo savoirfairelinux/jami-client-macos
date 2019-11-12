@@ -365,7 +365,7 @@
                                                 <constraint firstAttribute="width" constant="44" id="MYx-uE-Bej"/>
                                                 <constraint firstAttribute="height" constant="44" id="dmD-ga-Kwv"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_hangup" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_cancel" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="kR5-bV-2KY">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -514,7 +514,7 @@
                                                 <action selector="toggleRecording:" target="-2" id="zVh-ci-nzl"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vhk-fx-6RW" userLabel="addParticipant" customClass="HoverButton">
+                                        <button toolTip="add contact to call" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vhk-fx-6RW" userLabel="addParticipant" customClass="HoverButton">
                                             <rect key="frame" x="220" y="0.0" width="44" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="AvV-bR-uo5"/>
@@ -1025,7 +1025,6 @@
         <image name="ic_action_audio" width="36" height="36"/>
         <image name="ic_action_cancel" width="72" height="72"/>
         <image name="ic_action_chat" width="36" height="36"/>
-        <image name="ic_action_hangup" width="72" height="72"/>
         <image name="ic_action_hold" width="72" height="72"/>
         <image name="ic_action_record" width="36" height="36"/>
         <image name="ic_action_send" width="72" height="72"/>

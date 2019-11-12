@@ -227,6 +227,10 @@ NSString *currentDevice;
 {
     if([theEvent clickCount] == 2 && self.callDelegate) {
         [self.callDelegate callShouldToggleFullScreen];
+    } else if ([theEvent clickCount] == 1 &&
+               (theEvent.modifierFlags & NSControlKeyMask)
+               && shouldAcceptInteractions) {
+        [self performSelector:@selector(showContextualMenu:) withObject:theEvent];
     }
 }
 
