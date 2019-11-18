@@ -162,6 +162,7 @@ CVPixelBufferRef pixelBufferPreview;
     confUid_ = convIt->confId;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     [self connectSignals];
+    callModel->setCurrentCall([self getcallID]);
 }
 
 -(void) connectSignals {
@@ -330,6 +331,7 @@ CVPixelBufferRef pixelBufferPreview;
     [muteAudioButton setHidden:!confUid_.empty()];
     [muteVideoButton setHidden:!confUid_.empty()];
     [recordOnOffButton setHidden:!confUid_.empty()];
+    [holdOnOffButton setHidden:!confUid_.empty()];
 
     [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
     if (refreshDurationTimer == nil)
@@ -802,7 +804,7 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     auto* callModel = accountInfo_->callModel.get();
-    callModel->hangUp([self getcallID]);
+    callModel->hangUp(callUid_);
 }
 
 - (IBAction)accept:(id)sender {
@@ -915,7 +917,7 @@ CVPixelBufferRef pixelBufferPreview;
 
 - (IBAction)hidePreview:(id)sender {
     CGRect previewFrame = previewView.frame;
-    CGRect newPreviewFrame;//, bcHidePreviewFrame;
+    CGRect newPreviewFrame;
     if (previewFrame.size.width > HIDE_PREVIEW_BUTTON_SIZE) {
         self.movableBaseForView.movable = false;
         newPreviewFrame = self.getVideoPreviewCollapsedSize;

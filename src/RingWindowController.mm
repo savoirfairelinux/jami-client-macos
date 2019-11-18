@@ -310,6 +310,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         auto& account = [chooseAccountVC selectedAccount];
         QObject::disconnect(self.callState);
         auto *callModel = account.callModel.get();
+        callModel->doNotHoldConferences(YES);
         self.callState = QObject::connect(callModel,
                                           &lrc::api::NewCallModel::callStatusChanged,
                                           [self, callModel](const std::string callId) {
