@@ -509,6 +509,9 @@
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
                                                     <color key="value" red="0.84313725490196079" green="0.84313725490196079" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imagePressedColor">
+                                                    <color key="value" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="toggleRecording:" target="-2" id="zVh-ci-nzl"/>

@@ -266,6 +266,10 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
                             to:(NSColor*)endColor
                    scaleFactor:(CGFloat)scaleFactor
                       duration:(CGFloat) duration {
+    if(!@available(macOS 10.14, *)) {
+        self.pressed = true;
+        return;
+    }
     [self setWantsLayer: YES];
     CIFilter *filter = [CIFilter filterWithName:@"CIFalseColor"];
     [filter setDefaults];
@@ -300,6 +304,10 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
 }
 
 -(void)stopBlinkAnimation {
+    if(!@available(macOS 10.14, *)) {
+        self.pressed = false;
+        return;
+    }
     self.animating = false;
     [self.layer removeAnimationForKey:BLINK_ANIMATION_IDENTIFIER];
 }
