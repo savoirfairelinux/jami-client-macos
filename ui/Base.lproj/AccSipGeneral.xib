@@ -215,9 +215,6 @@
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z9N-MQ-FzB">
                             <rect key="frame" x="150" y="13" width="100" height="32"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="88" id="tow-r7-Hh6"/>
-                            </constraints>
                             <buttonCell key="cell" type="push" title="Advanced" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iEr-fN-5vD">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
