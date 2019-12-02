@@ -21,7 +21,7 @@
 #import "LrcModelsProtocol.h"
 
 @protocol AddSIPAccountDelegate <NSObject>
-- (void)didCreateAccountWithSuccess:(BOOL)success;
+- (void)completedWithSuccess:(BOOL)success;
 - (void)showView:(NSView*)view;
 @end
 

@@ -72,7 +72,7 @@ NSTimer* timeoutTimer;
 
 - (IBAction)cancel:(id)sender
 {
-    [self.delegate didCreateAccountWithSuccess: NO];
+    [self.delegate completedWithSuccess: NO];
 }
 
 - (IBAction)addAccount:(id)sender
@@ -98,7 +98,7 @@ NSTimer* timeoutTimer;
                                           }
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           QObject::disconnect(accountCreated);
-                                          [self.delegate didCreateAccountWithSuccess: YES];
+                                          [self.delegate completedWithSuccess: YES];
                                       });
     accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [displayName UTF8String], "", "", "", [userNameField.stringValue UTF8String]);
 
@@ -110,7 +110,7 @@ NSTimer* timeoutTimer;
 
 -(void) addingAccountTimeout {
     QObject::disconnect(accountCreated);
-    [self.delegate didCreateAccountWithSuccess: YES];
+    [self.delegate completedWithSuccess: YES];
 }
 
 
