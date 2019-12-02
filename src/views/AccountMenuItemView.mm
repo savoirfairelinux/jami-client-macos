@@ -22,6 +22,8 @@
 
 @implementation AccountMenuItemView
 
+NSTrackingArea *trackingArea;
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -29,6 +31,37 @@
         [self loadFromNib];
     }
     return self;
+}
+
+- (void) createTrackingArea
+{
+   NSTrackingAreaOptions options = (NSTrackingActiveAlways | NSTrackingInVisibleRect | NSTrackingMouseEnteredAndExited);
+
+    trackingArea = [[NSTrackingArea alloc] initWithRect: NSInsetRect(self.frame, 3, 3)
+                                                        options:options
+                                                          owner:self
+                                                       userInfo:nil];
+
+    [self addTrackingArea:trackingArea];
+    NSPoint mouseLocation = [[self window] mouseLocationOutsideOfEventStream];
+    mouseLocation = [self convertPoint: mouseLocation
+                              fromView: nil];
+
+    if (NSPointInRect(mouseLocation, [self bounds]))
+    {
+        [self mouseEntered: nil];
+    }
+    else
+    {
+        [self mouseExited: nil];
+    }
+}
+
+- (void) updateTrackingAreas
+{
+    [self removeTrackingArea:trackingArea];
+    [self createTrackingArea];
+    [super updateTrackingAreas];
 }
 
 - (void)loadFromNib
@@ -51,11 +84,8 @@
         self.accountAvatar.layer.masksToBounds = YES;
         [self.accountStatus setWantsLayer:YES];
         [self.accountAvatar.layer setBackgroundColor:[[NSColor disabledControlTextColor] CGColor]];
-#if __MAC_OS_X_VERSION_MAX_ALLOWED >= 101400
-        if (@available(macOS 10.14, *)) {
-            self.createNewAccountImage.contentTintColor = [NSColor clearColor];
-        }
-#endif
+        [self.backgroundView setFillColor:[NSColor windowBackgroundColor]];
+        [self createTrackingArea];
     }
 }
 
@@ -70,16 +100,14 @@
     [super mouseUp:theEvent];
 }
 
-- (void) drawRect: (NSRect) rect {
-    NSMenuItem *menuItem = ([self enclosingMenuItem]);
-    BOOL isHighlighted = [menuItem isHighlighted];
-    NSColor* highlightBackground = @available(macOS 10.14, *) ? [NSColor controlColor] : [NSColor whiteColor];
-    if (isHighlighted) {
-        [self.backgroundView setFillColor: highlightBackground];
-    } else {
-        [self.backgroundView setFillColor:[NSColor windowBackgroundColor]];
-    }
-    [super drawRect: rect];
+- (void)mouseExited:(NSEvent *)event {
+    [self.backgroundView setFillColor:[NSColor windowBackgroundColor]];
 }
+
+- (void)mouseEntered:(NSEvent *)event {
+    NSColor* highlightBackground = @available(macOS 10.14, *) ? [NSColor controlColor] : [NSColor whiteColor];
+    [self.backgroundView setFillColor: highlightBackground];
+}
+
 
 @end

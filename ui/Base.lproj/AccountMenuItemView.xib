@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -82,7 +82,7 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tLn-uH-gZ6">
-                    <rect key="frame" x="50" y="10" width="35" height="16"/>
+                    <rect key="frame" x="50" y="10" width="35" height="15"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Label" drawsBackground="YES" id="uPR-fc-nOP">
                         <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -96,7 +96,7 @@
                         <constraint firstAttribute="width" constant="20" id="QGs-sS-H6l"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSAddTemplate" id="9b9-Jo-NAF"/>
-                    <color key="contentTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <color key="contentTintColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0PP-Di-b7L">
                     <rect key="frame" x="240" y="30" width="35" height="20"/>
@@ -135,6 +135,7 @@
                 <constraint firstItem="0PP-Di-b7L" firstAttribute="top" secondItem="V91-eS-dUh" secondAttribute="top" id="yBS-XS-NWz"/>
                 <constraint firstItem="BkF-b3-tzE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="yKW-iG-nvv"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="154"/>
         </customView>
     </objects>
     <resources>
