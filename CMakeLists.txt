@@ -5,6 +5,7 @@ IF(POLICY CMP0022)
 ENDIF(POLICY CMP0022)
 
 SET(PROJ_NAME Jami)
+ADD_DEFINITIONS(-DENABLE_LIBWRAP=true)
 option(RELEASE_TYPE "RELEASE_TYPE" "website")
 
 # To build nighlies we need to update RING_VERSION with an optional command line arg
