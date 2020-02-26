@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,13 +28,13 @@
                             <rect key="frame" x="0.0" y="286" width="470" height="122"/>
                             <subviews>
                                 <stackView distribution="fill" orientation="vertical" alignment="trailing" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fc-oM-S8e">
-                                    <rect key="frame" x="121" y="0.0" width="229" height="122"/>
+                                    <rect key="frame" x="112" y="0.0" width="247" height="122"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m9S-Pr-8hc">
-                                            <rect key="frame" x="0.0" y="101" width="229" height="21"/>
+                                            <rect key="frame" x="0.0" y="101" width="247" height="21"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VWx-4c-7aF">
-                                                    <rect key="frame" x="-2" y="2" width="46" height="17"/>
+                                                    <rect key="frame" x="-2" y="3" width="46" height="16"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Device" id="170-NP-CSP">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -42,13 +42,13 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5L8-b6-N3k" userLabel="Devices">
-                                                    <rect key="frame" x="48" y="-3" width="184" height="25"/>
+                                                    <rect key="frame" x="48" y="-3" width="202" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="j4P-kB-KdU"/>
                                                     </constraints>
                                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="6Vf-hb-26C">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu"/>
+                                                        <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="zJ9-1a-cpr">
                                                             <connections>
                                                                 <outlet property="delegate" destination="-2" id="mF2-Zc-wNP"/>
@@ -70,10 +70,10 @@
                                             </customSpacing>
                                         </stackView>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rSf-PH-9Ug">
-                                            <rect key="frame" x="0.0" y="65" width="229" height="21"/>
+                                            <rect key="frame" x="0.0" y="65" width="247" height="21"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cDr-8B-RiJ">
-                                                    <rect key="frame" x="-2" y="2" width="46" height="17"/>
+                                                    <rect key="frame" x="-2" y="3" width="46" height="16"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Size" id="4bq-ls-mCp">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -81,13 +81,13 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aec-P9-KNS" userLabel="Sizes">
-                                                    <rect key="frame" x="48" y="-3" width="184" height="25"/>
+                                                    <rect key="frame" x="48" y="-3" width="202" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="qaU-o7-Vu1"/>
                                                     </constraints>
                                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="6ly-dX-MT4">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu"/>
+                                                        <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="ykd-50-las">
                                                             <connections>
                                                                 <outlet property="delegate" destination="-2" id="5cI-wH-0AT"/>
@@ -109,10 +109,10 @@
                                             </customSpacing>
                                         </stackView>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J6H-65-Ftu">
-                                            <rect key="frame" x="0.0" y="29" width="229" height="21"/>
+                                            <rect key="frame" x="0.0" y="29" width="247" height="21"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60X-MX-gun">
-                                                    <rect key="frame" x="-2" y="2" width="46" height="17"/>
+                                                    <rect key="frame" x="-2" y="3" width="46" height="16"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Rate" id="5Im-df-jdd">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -120,13 +120,13 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e3h-qA-wZ5" userLabel="Rates">
-                                                    <rect key="frame" x="48" y="-3" width="184" height="25"/>
+                                                    <rect key="frame" x="48" y="-3" width="202" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="kuH-jK-uRl"/>
                                                     </constraints>
                                                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="pDt-c4-Fhs">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu"/>
+                                                        <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="aKL-76-vSP">
                                                             <connections>
                                                                 <outlet property="delegate" destination="-2" id="5Gu-bg-y3C"/>
@@ -148,8 +148,8 @@
                                             </customSpacing>
                                         </stackView>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="1hl-Ib-SGY">
-                                            <rect key="frame" x="48" y="-2" width="183" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Enable hardware decoding" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="e7y-eV-Gsz">
+                                            <rect key="frame" x="48" y="-2" width="201" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Enable hardware acceleration" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="e7y-eV-Gsz">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
