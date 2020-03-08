@@ -60,7 +60,7 @@
     QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, newInteractionConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
 
     lrc::api::ConversationModel* convModel_;
-    std::string selectedUid_;
+    QString selectedUid_;
     lrc::api::profile::Type currentFilterType;
 
     __unsafe_unretained IBOutlet RingWindowController *delegate;
@@ -182,7 +182,7 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView reloadData];
     [smartView layoutSubtreeIfNeeded];
 
-    if (!selectedUid_.empty() && convModel_ != nil) {
+    if (!selectedUid_.isEmpty() && convModel_ != nil) {
         auto it = getConversationFromUid(selectedUid_, *convModel_);
         if (it != convModel_->allFilteredConversations().end()) {
             NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
@@ -199,7 +199,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(std::string([uid UTF8String]), *convModel_);
+    auto it = getConversationFromUid(QString::fromNSString(uid), *convModel_);
     if (it != convModel_->allFilteredConversations().end()) {
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
         [smartView reloadDataForRowIndexes:indexSet
@@ -238,17 +238,17 @@ NSInteger const REQUEST_SEG         = 1;
                                                             [self reloadData];
                                                         });
         modelUpdatedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationUpdated,
-                                                        [self] (const std::string& convUid){
-                                                            [self reloadConversationWithUid: [NSString stringWithUTF8String:convUid.c_str()]];
+                                                        [self] (const QString& convUid){
+                                                            [self reloadConversationWithUid: convUid.toNSString()];
                                                         });
         filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::filterChanged,
                                                         [self] (){
                                                             [self reloadData];
                                                         });
         newConversationConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newConversation,
-                                                        [self] (const std::string& convUid) {
+                                                        [self] (const QString& convUid) {
                                                             [self reloadData];
-                                                            [self updateConversationForNewContact:[NSString stringWithUTF8String:convUid.c_str()]];
+                                                            [self updateConversationForNewContact:convUid.toNSString()];
                                                         });
         conversationRemovedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationRemoved,
                                                         [self] (){
@@ -256,18 +256,18 @@ NSInteger const REQUEST_SEG         = 1;
                                                             [self reloadData];
                                                         });
         conversationClearedConnection = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationCleared,
-                                                        [self] (const std::string& convUid){
+                                                        [self] (const QString& convUid){
                                                             [self deselect];
                                                             [delegate listTypeChanged];
                                                         });
         interactionStatusUpdatedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
-                                                        [self] (const std::string& convUid) {
+                                                        [self] (const QString& convUid) {
                                                             if (convUid != selectedUid_)
                                                                 return;
-                                                            [self reloadConversationWithUid: [NSString stringWithUTF8String:convUid.c_str()]];
+                                                            [self reloadConversationWithUid: convUid.toNSString()];
                                                         });
         newInteractionConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
-                                                        [self](const std::string& convUid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
+                                                        [self](const QString& convUid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                                             if (convUid == selectedUid_) {
                                                                 convModel_->clearUnreadInteractions(convUid);
                                                             }
@@ -458,13 +458,9 @@ NSInteger const REQUEST_SEG         = 1;
     NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
     [presenceView setHidden:YES];
     if (!conversation.participants.empty()){
-        try {
-            auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
-            if (contact.isPresent) {
-                [presenceView setHidden:NO];
-            }
-        } catch (std::out_of_range& e) {
-            NSLog(@"viewForTableColumn: getContact - out of range");
+        auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
+        if (contact.isPresent) {
+            [presenceView setHidden:NO];
         }
     }
 
@@ -495,12 +491,12 @@ NSInteger const REQUEST_SEG         = 1;
     [interactionSnippet setHidden:false];
 
     auto lastUid = conversation.lastMessageUid;
-    auto callId = conversation.confId.empty() ? conversation.callId : conversation.confId;
+    auto callId = conversation.confId.isEmpty() ? conversation.callId : conversation.confId;
     NSString *callInfo = @"";
-    if (!callId.empty()) {
+    if (!callId.isEmpty()) {
         if ([self chosenAccount].callModel.get()->hasCall(callId)) {
         auto call = [self chosenAccount].callModel.get()->getCall(callId);
-            callInfo = (call.status == lrc::api::call::Status::IN_PROGRESS) ? @"Talking" :  @(to_string(call.status).c_str());
+            callInfo = (call.status == lrc::api::call::Status::IN_PROGRESS) ? @"Talking" :  to_string(call.status).toNSString();
         }
     }
     
@@ -511,10 +507,8 @@ NSInteger const REQUEST_SEG         = 1;
     }
     if (conversation.interactions.find(lastUid) != conversation.interactions.end()) {
         // last interaction snippet
-        std::string lastInteractionSnippet = conversation.interactions[lastUid].body;
-        std::stringstream ss(lastInteractionSnippet);
-        std::getline(ss, lastInteractionSnippet);
-        NSString* lastInteractionSnippetFixedString = [[NSString stringWithUTF8String:lastInteractionSnippet.c_str()]
+        auto lastInteractionSnippet = conversation.interactions[lastUid].body.trimmed().replace("\r","").replace("\n","");
+        NSString* lastInteractionSnippetFixedString = [lastInteractionSnippet.toNSString()
                                                        stringByReplacingOccurrencesOfString:@"🕽" withString:@""];
         lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString stringByReplacingOccurrencesOfString:@"📞" withString:@""];
         if (conversation.interactions[lastUid].type == lrc::api::interaction::Type::DATA_TRANSFER) {
@@ -581,7 +575,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto conv = convModel_->filteredConversation(row);
     auto& callId = conv.callId;
 
-    if (callId.empty())
+    if (callId.isEmpty())
         return;
 
     auto* callModel = convModel_->owner.callModel.get();
@@ -605,7 +599,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    convModel_->setFilter(std::string([[searchField stringValue] UTF8String]));
+    convModel_->setFilter(QString::fromNSString([searchField stringValue]));
 }
 
 -(const lrc::api::account::Info&) chosenAccount
@@ -624,12 +618,12 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
     [self clearSearchField];
-    auto uid = std::string([uId UTF8String]);
+    auto uid = QString::fromNSString(uId);
     auto it = getConversationFromUid(uid, *convModel_);
     if (it != convModel_->allFilteredConversations().end()) {
         @try {
             auto contact = convModel_->owner.contactModel->getContact(it->participants[0]);
-            if (!contact.profileInfo.uri.empty() && contact.profileInfo.uri.compare(selectedUid_) == 0) {
+            if (!contact.profileInfo.uri.isEmpty() && contact.profileInfo.uri.compare(selectedUid_) == 0) {
                 selectedUid_ = uid;
                 convModel_->selectConversation(uid);
             }
@@ -672,7 +666,7 @@ NSInteger const REQUEST_SEG         = 1;
     }
     @try {
         auto contact = convModel_->owner.contactModel->getContact(model.participants[0]);
-        if ((contact.profileInfo.uri.empty() && contact.profileInfo.type != lrc::api::profile::Type::SIP) || contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
+        if ((contact.profileInfo.uri.isEmpty() && contact.profileInfo.type != lrc::api::profile::Type::SIP) || contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
             return YES;
         }
         selectedUid_ = uid;
@@ -748,7 +742,7 @@ NSInteger const REQUEST_SEG         = 1;
 
         if (contact.profileInfo.type == lrc::api::profile::Type::SIP) {
             isSIP = true;
-        } else if (contact.profileInfo.uri.empty()) {
+        } else if (contact.profileInfo.uri.isEmpty()) {
             return nil;
         }
 
@@ -757,7 +751,7 @@ NSInteger const REQUEST_SEG         = 1;
         }
         auto conversationUD = conversation.uid;
         NSMenu *theMenu = [[NSMenu alloc] initWithTitle:@""];
-        NSString* conversationUID = @(conversationUD.c_str());
+        NSString* conversationUID = conversationUD.toNSString();
         NSMenuItem* separator = [NSMenuItem separatorItem];
         NSMenuItem* videoCallItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Place video call",
                                                                                         @"Contextual menu action")
@@ -805,7 +799,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
     NSString * convUId = (NSString*)menuObject;
-    std::string conversationID = std::string([convUId UTF8String]);
+    QString conversationID = QString::fromNSString(convUId);
     convModel_->makePermanent(conversationID);
 }
 
@@ -815,8 +809,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
     NSString * convUId = (NSString*)menuObject;
-    std::string conversationID = std::string([convUId UTF8String]);
-    //convModel_->clearHistory(conversationID);
+    QString conversationID = QString::fromNSString(convUId);
     convModel_->removeConversation(conversationID, true);
 }
 
@@ -826,7 +819,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
     NSString * convUId = (NSString*)menuObject;
-    std::string conversationID = std::string([convUId UTF8String]);
+    QString conversationID = QString::fromNSString(convUId);
     convModel_->placeAudioOnlyCall(conversationID);
 
 }
@@ -837,7 +830,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
     NSString * convUId = (NSString*)menuObject;
-    std::string conversationID = std::string([convUId UTF8String]);
+    QString conversationID = QString::fromNSString(convUId);
     convModel_->placeCall(conversationID);
 }
 
@@ -847,7 +840,7 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
     NSString * convUId = (NSString*)menuObject;
-    std::string conversationID = std::string([convUId UTF8String]);
+    QString conversationID = QString::fromNSString(convUId);
     convModel_->clearHistory(conversationID);
 }
 
@@ -862,7 +855,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto conv = convModel_->filteredConversation(row);
     auto& convID = conv.Info::uid;
 
-    if (convID.empty())
+    if (convID.isEmpty())
         return;
     convModel_->makePermanent(convID);
 }
@@ -878,7 +871,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto conv = convModel_->filteredConversation(row);
     auto& convID = conv.Info::uid;
 
-    if (convID.empty())
+    if (convID.isEmpty())
         return;
     convModel_->removeConversation(convID);
 }
@@ -894,7 +887,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto conv = convModel_->filteredConversation(row);
     auto& convID = conv.Info::uid;
 
-    if (convID.empty())
+    if (convID.isEmpty())
         return;
     convModel_->removeConversation(convID, true);
     [self deselect];

@@ -112,7 +112,7 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
     [self updateView];
 }
 
-- (void) setSelectedAccount:(std::string) account {
+- (void) setSelectedAccount:(const QString&) account {
     [super setSelectedAccount: account];
     [self updateView];
 }
@@ -159,7 +159,7 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
     [useCustomAddressButton setState:!accountProperties.publishedSameAsLocal];
     [customPortStepper setIntegerValue: accountProperties.publishedPort];
     [customPortField setIntegerValue: accountProperties.publishedPort];
-    [customAddressField setStringValue: @(accountProperties.publishedAddress.c_str())];
+    [customAddressField setStringValue: accountProperties.publishedAddress.toNSString()];
     [minAudioPortStepper setIntegerValue: accountProperties.Audio.audioPortMin];
     [minAudioRTPRange setIntegerValue: accountProperties.Audio.audioPortMin];
     [maxAudioPortStepper setIntegerValue: accountProperties.Audio.audioPortMax];

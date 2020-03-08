@@ -41,7 +41,7 @@
 
 QMetaObject::Connection accountCreatedSuccess;
 QMetaObject::Connection accountNotCreated;
-std::string accointId;
+QString accointId;
 
 @synthesize accountModel;
 
@@ -93,7 +93,7 @@ std::string accointId;
     QObject::disconnect(accountNotCreated);
     accountCreatedSuccess = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accointId) != 0) {
                                               return;
                                           }
@@ -106,14 +106,14 @@ std::string accointId;
                                       });
     accountNotCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountRemoved,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accointId) == 0) {
                                               [self showError];
                                           }
                                       });
     accountNotCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::invalidAccountDetected,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accointId) == 0) {
                                               [self showError];
                                           }

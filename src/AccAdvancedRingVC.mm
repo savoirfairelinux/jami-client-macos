@@ -43,9 +43,9 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
 -(void) updateView {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     [allowIncoming setState: accountProperties.allowIncoming];
-    [nameServerField setStringValue: @(accountProperties.RingNS.uri.c_str())];
-    [proxyServerField setStringValue:@(accountProperties.proxyServer.c_str())];
-    [bootstrapServerField setStringValue:@(accountProperties.hostname.c_str())];
+    [nameServerField setStringValue: accountProperties.RingNS.uri.toNSString()];
+    [proxyServerField setStringValue: accountProperties.proxyServer.toNSString()];
+    [bootstrapServerField setStringValue: accountProperties.hostname.toNSString()];
     [enableProxyButton setState: accountProperties.proxyEnabled];
     [proxyServerField setEditable:accountProperties.proxyEnabled];
 }
@@ -56,7 +56,7 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
     [self updateView];
 }
 
-- (void) setSelectedAccount:(std::string) account {
+- (void) setSelectedAccount:(const QString&) account {
     [super setSelectedAccount: account];
     [self updateView];
 }

@@ -191,7 +191,7 @@
 
 #pragma - WizardCreateAccountDelegate methods
 
-- (void)didCreateAccountWithSuccess:(BOOL)success accountId:(std::string)accountId;
+- (void)didCreateAccountWithSuccess:(BOOL)success accountId:(const QString&)accountId;
 {
     BOOL skipBackup = [[NSUserDefaults standardUserDefaults] boolForKey: SkipBackUpPage];
     if (skipBackup || !success) {
@@ -214,7 +214,7 @@
     [self completedWithSuccess:success];
 }
 
-- (void)showBackUpAccount:(std::string)accountId{
+- (void)showBackUpAccount:(const QString&)accountId{
     [self.windowHeader setStringValue: NSLocalizedString(@"Backup your account",
                                                          @"Backup account")];
     [ringImage setHidden: YES];

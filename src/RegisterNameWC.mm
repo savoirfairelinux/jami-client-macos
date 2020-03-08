@@ -227,7 +227,7 @@ NSInteger const PASSWORD_TAG             = 3;
     QObject::disconnect(registrationEnded);
     registrationEnded = QObject::connect(self.accountModel,
                                          &lrc::api::NewAccountModel::nameRegistrationEnded,
-                                         [self] (const std::string& accountId, lrc::api::account::RegisterNameStatus status, const std::string& name) {
+                                         [self] (const QString& accountId, lrc::api::account::RegisterNameStatus status, const QString& name) {
                                              if(accountId.compare(self.selectedAccountID) != 0) {
                                                  return;
                                              }

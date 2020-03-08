@@ -197,11 +197,11 @@ typedef NS_ENUM(NSInteger, ViewState) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         path = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     }
-    self.dataTransferModel->downloadDirectory = std::string([path UTF8String]);
+    self.dataTransferModel->downloadDirectory = QString::fromNSString(path);
     if(appSandboxed()) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         avModel->setRecordPath([[paths objectAtIndex:0] UTF8String]);
-    } else if (avModel->getRecordPath().empty()) {
+    } else if (avModel->getRecordPath().isEmpty()) {
         avModel->setRecordPath([NSHomeDirectory() UTF8String]);
     }
     NSToolbar *tb = [[self window] toolbar];
@@ -217,7 +217,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 {
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showCallView,
-                     [self](const std::string accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
                          auto* accInfo = &self.accountModel->getAccountInfo(accountId);
                          if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
@@ -236,7 +236,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showIncomingCallView,
-                     [self](const std::string accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
                          auto* accInfo = &self.accountModel->getAccountInfo(accountId);
                          if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
@@ -254,7 +254,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showChatView,
-                     [self](const std::string& accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info& convInfo){
                          auto& accInfo = self.accountModel->getAccountInfo(accountId);
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
@@ -263,7 +263,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                      });
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showLeaveMessageView,
-                     [self](const std::string& accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info& convInfo){
                          auto& accInfo = self.accountModel->getAccountInfo(accountId);
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
@@ -274,7 +274,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 #pragma mark - Ring account migration
 
-- (void) migrateRingAccount:(std::string) acc
+- (void) migrateRingAccount:(const QString&) acc
 {
     self.migrateWC = [[MigrateRingAccountsWC alloc] initWithDelegate:self actionCode:1];
     self.migrateWC.accountModel = self.accountModel;
@@ -312,10 +312,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
         auto *callModel = account.callModel.get();
         self.callState = QObject::connect(callModel,
                                           &lrc::api::NewCallModel::callStatusChanged,
-                                          [self, callModel](const std::string callId) {
+                                          [self, callModel](const QString& callId) {
                                               if (callModel->hasCall(callId)) {
                                                   auto call = callModel->getCall(callId);
-                                                  [smartViewVC reloadConversationWithURI: @(call.peerUri.c_str())];
+                                                  [smartViewVC reloadConversationWithURI: call.peerUri.toNSString()];
                                               }
                                           });
     } @catch (NSException *ex) {
@@ -354,15 +354,15 @@ typedef NS_ENUM(NSInteger, ViewState) {
         auto& registeredName = account.registeredName;
         auto& ringID = account.profileInfo.uri;
         NSString* uriToDisplay = nullptr;
-        if (!registeredName.empty()) {
-            uriToDisplay = @(registeredName.c_str());
+        if (!registeredName.isEmpty()) {
+            uriToDisplay = registeredName.toNSString();
             [explanationLabel setStringValue: NSLocalizedString(@"This is your Jami username. \nCopy and share it with your friends!", @"Explanation label when user have Jami username")];
         } else {
-            uriToDisplay = @(ringID.c_str());
+            uriToDisplay = ringID.toNSString();
             [explanationLabel setStringValue: NSLocalizedString(@"This is your ID. \nCopy and share it with your friends!", @"Explanation label when user have just ID")];
         }
         [ringIDLabel setStringValue:uriToDisplay];
-        [self drawQRCode:@(ringID.c_str())];
+        [self drawQRCode: ringID.toNSString()];
     }
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
@@ -560,8 +560,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 #pragma mark - CallViewControllerDelegate
 
--(void) conversationInfoUpdatedFor:(const std::string&) conversationID {
-    [smartViewVC reloadConversationWithUid:@(conversationID.c_str())];
+-(void) conversationInfoUpdatedFor:(const QString&) conversationID {
+    [smartViewVC reloadConversationWithUid:conversationID.toNSString()];
 }
 
 -(void) callFinished {

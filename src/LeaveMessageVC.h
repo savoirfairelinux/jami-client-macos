@@ -17,7 +17,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <Cocoa/Cocoa.h>
-#import <string>
+#import <qstring.h>
 
 namespace lrc {
     namespace api {
@@ -36,7 +36,7 @@ namespace lrc {
 
 @property (retain, nonatomic) id <LeaveMessageDelegate> delegate;
 
--(void)setConversationUID:(const std::string) convUid conversationModel:(lrc::api::ConversationModel*) convModel;
+-(void)setConversationUID:(const QString&)convUid conversationModel:(lrc::api::ConversationModel*) convModel;
 -(void) hide;
 -(void) initFrame;
 -(void) setAVModel: (const lrc::api::AVModel*) avmodel;

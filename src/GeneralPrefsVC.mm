@@ -89,12 +89,12 @@
         heightToReduice += (downloadFolder.frame.size.height + recordingFolder.frame.size.height + 25);
     } else {
         if (dataTransferModel) {
-            downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+            downloadFolder.title = [dataTransferModel->downloadDirectory.toNSString() lastPathComponent];
         }
         if (avModel) {
             auto name1 = avModel->getRecordPath();
-            auto name = @(avModel->getRecordPath().c_str());
-            recordingFolder.title = [@(avModel->getRecordPath().c_str()) lastPathComponent];
+            auto name = avModel->getRecordPath().toNSString();
+            recordingFolder.title = [avModel->getRecordPath().toNSString() lastPathComponent];
         }
     }
     auto frame = self.view.frame;
@@ -112,8 +112,8 @@
     if ([panel runModal] != NSFileHandlingPanelOKButton) return;
     if ([[panel URLs] lastObject] == nil) return;
     NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
-    dataTransferModel->downloadDirectory = std::string([path UTF8String]);
-    downloadFolder.title = [@(dataTransferModel->downloadDirectory.c_str()) lastPathComponent];
+    dataTransferModel->downloadDirectory = QString::fromNSString(path);
+    downloadFolder.title = [dataTransferModel->downloadDirectory.toNSString() lastPathComponent];
     [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
 }
 
@@ -127,7 +127,7 @@
     if ([[panel URLs] lastObject] == nil) return;
     NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
     avModel->setRecordPath([path UTF8String]);
-    recordingFolder.title = [@(avModel->getRecordPath().c_str()) lastPathComponent];
+    recordingFolder.title = [avModel->getRecordPath().toNSString() lastPathComponent];
     [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
 }
 

@@ -37,7 +37,7 @@
 
 @implementation AccountSettingsVC
 
-std::string selectedAccountID;
+QString selectedAccountID;
 NSViewController <AccountGeneralProtocol>* accountGeneralVC;
 NSViewController <AccountAdvancedProtocol>* accountAdvancedVC;
 AccRingGeneralVC* ringGeneralVC;
@@ -68,7 +68,7 @@ CGFloat const VIEW_INSET = 40;
     [self.view setHidden:YES];
 }
 
-- (void) setSelectedAccount:(std::string) account {
+- (void) setSelectedAccount:(const QString&) account {
     selectedAccountID = account;
     const auto& accountInfo = accountModel->getAccountInfo(selectedAccountID);
     if (accountInfo.profileInfo.type == lrc::api::profile::Type::RING) {

@@ -19,7 +19,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
-#import <string>
+#import <qstring.h>
 
 @protocol AccountBackupDelegate <NSObject>
 -(void)completedWithSuccess:(BOOL) success;
@@ -29,7 +29,7 @@
 @interface AccountBackupVC : NSViewController <LrcModelsProtocol>
 
 @property (retain, nonatomic) id <AccountBackupDelegate> delegate;
-@property std::string accountToBackup;
+@property QString accountToBackup;
 -(void)show;
 
 @end

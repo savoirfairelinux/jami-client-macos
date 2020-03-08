@@ -26,7 +26,7 @@
 
 @interface AccRingGeneralVC : NSViewController <NSTextFieldDelegate, LrcModelsProtocol, RegisterNameDelegate, AccountGeneralProtocol, NSTableViewDelegate, NSTableViewDataSource, PasswordChangeDelegate>
 
-- (void) setSelectedAccount:(std::string) account;
+- (void) setSelectedAccount:(const QString&) account;
 
 @property (assign)BOOL accountEnabled;
 

@@ -72,13 +72,13 @@ QMetaObject::Connection accountConnection;
     QObject::disconnect(accountConnection);
     accountConnection = QObject::connect(self.accountModel,
                                          &lrc::api::NewAccountModel::exportOnRingEnded,
-                                         [self] (const std::string &accountID, lrc::api::account::ExportOnRingStatus status, const std::string &pin){
+                                         [self] (const QString &accountID, lrc::api::account::ExportOnRingStatus status, const QString &pin){
                                              if(accountID.compare(self.selectedAccountID) != 0) {
                                                  return;
                                              }
                                              switch (status) {
                                                  case lrc::api::account::ExportOnRingStatus::SUCCESS: {
-                                                     NSString *nsPin = @(pin.c_str());
+                                                     NSString *nsPin = pin.toNSString();
                                                      NSLog(@"Export ended with Success, pin is %@",nsPin);
                                                      [resultField setAttributedStringValue:[self formatPinMessage:nsPin]];
                                                      [self showFinal];
@@ -102,7 +102,7 @@ QMetaObject::Connection accountConnection;
                                              }
                                               QObject::disconnect(accountConnection);
                                          });
-    self.accountModel->exportOnRing(self.selectedAccountID, [password UTF8String]);
+    self.accountModel->exportOnRing(self.selectedAccountID, QString::fromNSString(password));
 }
 
 //TODO: Move String formatting to a dedicated Utility Classes

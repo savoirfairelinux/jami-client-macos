@@ -59,7 +59,7 @@
 
     QMetaObject::Connection accountCreated;
     QMetaObject::Connection accountRemoved;
-    std::string accountToCreate;
+    QString accountToCreate;
 }
 
 @synthesize accountModel, backupFile;
@@ -115,7 +115,7 @@
     QObject::disconnect(accountRemoved);
     accountCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                            if(accountID.compare(accountToCreate) != 0) {
                                                return;
                                            }
@@ -130,14 +130,14 @@
     // account that is invalid will be removed, connect the signal to show error message
     accountRemoved = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountRemoved,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accountToCreate) == 0) {
                                               [self showError];
                                           }
                                       });
     accountRemoved = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::invalidAccountDetected,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accountToCreate) == 0) {
                                               [self showError];
                                           }

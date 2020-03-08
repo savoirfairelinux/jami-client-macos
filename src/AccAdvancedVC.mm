@@ -114,21 +114,21 @@ NS_ENUM(NSInteger, tablesViews) {
 
 -(void) update {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    [ringtoneSelectionButton setTitle: [@(accountProperties.Ringtone.ringtonePath.c_str()) lastPathComponent]];
+    [ringtoneSelectionButton setTitle: [accountProperties.Ringtone.ringtonePath.toNSString() lastPathComponent]];
     [enableRingtone setState :accountProperties.Ringtone.ringtoneEnabled];
     [autoAnswer setState: accountProperties.autoAnswer];
-    [selectPrivateKeyButton setTitle: [@(accountProperties.TLS.privateKeyFile.c_str()) lastPathComponent]];
-    [selectUserCertificateButton setTitle:[@(accountProperties.TLS.certificateFile.c_str()) lastPathComponent]];
-    [selectCACertificateButton setTitle: [@(accountProperties.TLS.certificateListFile.c_str()) lastPathComponent]];
+    [selectPrivateKeyButton setTitle: [accountProperties.TLS.privateKeyFile.toNSString() lastPathComponent]];
+    [selectUserCertificateButton setTitle:[accountProperties.TLS.certificateFile.toNSString() lastPathComponent]];
+    [selectCACertificateButton setTitle: [accountProperties.TLS.certificateListFile.toNSString() lastPathComponent]];
     [toggleUPnPButton setState:accountProperties.upnpEnabled];
     [useTURNButton setState:accountProperties.TURN.enable];
     [useSTUNButton setState:accountProperties.STUN.enable];
-    [privateKeyPaswordField setStringValue:@(accountProperties.TLS.password.c_str())];
-    [turnAddressField setStringValue:@(accountProperties.TURN.server.c_str())];
-    [turnUsernameField setStringValue:@(accountProperties.TURN.username.c_str())];
-    [turnPasswordField setStringValue:@(accountProperties.TURN.password.c_str())];
-    [turnRealmField setStringValue:@(accountProperties.TURN.realm.c_str())];
-    [stunAddressField setStringValue:@(accountProperties.STUN.server.c_str())];
+    [privateKeyPaswordField setStringValue:accountProperties.TLS.password.toNSString()];
+    [turnAddressField setStringValue:accountProperties.TURN.server.toNSString()];
+    [turnUsernameField setStringValue:accountProperties.TURN.username.toNSString()];
+    [turnPasswordField setStringValue:accountProperties.TURN.password.toNSString()];
+    [turnRealmField setStringValue:accountProperties.TURN.realm.toNSString()];
+    [stunAddressField setStringValue:accountProperties.STUN.server.toNSString()];
     [stunAddressField setEditable:accountProperties.STUN.enable];
     [turnAddressField setEditable:accountProperties.TURN.enable];
     [turnUsernameField setEditable:accountProperties.TURN.enable];
@@ -148,7 +148,7 @@ NS_ENUM(NSInteger, tablesViews) {
 
 #pragma mark - AccountAdvancedProtocol methods
 
-- (void) setSelectedAccount:(std::string) account {
+- (void) setSelectedAccount:(const QString&) account {
     self.selectedAccountID = account;
     [self update];
 }
@@ -293,12 +293,11 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-    auto codec = audioCodecs.begin();
-    std::advance(codec, row);
-    if (codec == audioCodecs.end()) {
+    if (audioCodecs.size() < row) {
         return;
     }
-    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->increasePriority(codec->id, false);
+    auto codec = audioCodecs[row];
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->increasePriority(codec.id, false);
     [audioCodecView reloadData];
     row = row == 0 ? row: row-1;
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
@@ -312,12 +311,11 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-    auto codec = audioCodecs.begin();
-    std::advance(codec, row);
-    if (codec == audioCodecs.end()) {
+    if (audioCodecs.size() < row) {
         return;
     }
-    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->decreasePriority(codec->id, false);
+    auto codec = audioCodecs[row];
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->decreasePriority(codec.id, false);
     [audioCodecView reloadData];
     row = (row == ([audioCodecView numberOfRows] - 1)) ? row: row+1;
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
@@ -331,12 +329,11 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-    auto codec = videoCodecs.begin();
-    std::advance(codec, row);
-    if (codec == videoCodecs.end()) {
+    if (videoCodecs.size() < row) {
         return;
     }
-    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->increasePriority(codec->id, YES);
+    auto codec = videoCodecs[row];
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->increasePriority(codec.id, YES);
     [videoCodecView reloadData];
     row = row == 0 ? row: row-1;
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
@@ -350,12 +347,11 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-    auto codec = videoCodecs.begin();
-    std::advance(codec, row);
-    if (codec == videoCodecs.end()) {
+    if (videoCodecs.size() < row) {
         return;
     }
-    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->decreasePriority(codec->id, YES);
+    auto codec = videoCodecs[row];
+    self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->decreasePriority(codec.id, YES);
     [videoCodecView reloadData];
     row = row == [videoCodecView numberOfRows] - 1 ? row: row+1;
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex: row];
@@ -381,10 +377,12 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-    auto codec = audioCodecs.begin();
-    std::advance(codec, row);
-    if (codec != audioCodecs.end() && codec->enabled != [sender state]) {
-        self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->enable(codec->id, [sender state]);
+    if (audioCodecs.size() < row) {
+        return;
+    }
+    auto codec = audioCodecs[row];
+    if (codec.enabled != [sender state]) {
+        self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->enable(codec.id, [sender state]);
     }
 }
 
@@ -395,10 +393,12 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-    auto codec = videoCodecs.begin();
-    std::advance(codec, row);
-    if (codec != videoCodecs.end() && codec->enabled != [sender state]) {
-        self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->enable(codec->id, [sender state]);
+    if (videoCodecs.size() < row) {
+        return;
+    }
+    auto codec = videoCodecs[row];
+    if (codec.enabled != [sender state]) {
+        self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->enable(codec.id, [sender state]);
     }
 }
 
@@ -411,16 +411,16 @@ NS_ENUM(NSInteger, tablesViews) {
         NSTextField* samplerateLabel = [audioCodecView viewWithTag: AUDIO_CODEC_SAMPLERATE_TAG];
         NSButton* codecEnableButton = [audioCodecView viewWithTag: AUDIO_CODEC_ENABLE_TAG];
         auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-        auto codec = audioCodecs.begin();
-        std::advance(codec, row);
-        if (codec != audioCodecs.end()) {
-            [nameLabel setStringValue: @(codec->name.c_str())];
-            [samplerateLabel setStringValue: [@(codec->samplerate.c_str()) stringByAppendingString:@" Hz"]];
-            [codecEnableButton setState:codec->enabled];
-            [codecEnableButton setAction:@selector(enableAudioCodec:)];
-            [codecEnableButton setTarget:self];
-            return audioCodecView;
+        if (audioCodecs.size() < row) {
+            return nil;
         }
+        auto codec = audioCodecs[row];
+        [nameLabel setStringValue: codec.name.toNSString()];
+        [samplerateLabel setStringValue: [codec.samplerate.toNSString() stringByAppendingString:@" Hz"]];
+        [codecEnableButton setState:codec.enabled];
+        [codecEnableButton setAction:@selector(enableAudioCodec:)];
+        [codecEnableButton setTarget:self];
+        return audioCodecView;
     } else if (tableView == videoCodecView) {
         NSTableCellView* videoCodecView = [tableView makeViewWithIdentifier:@"TableCellVideoCodecItem" owner:self];
         NSTextField* nameLabel = [videoCodecView viewWithTag: VIDEO_CODEC_NAME_TAG];
@@ -428,15 +428,15 @@ NS_ENUM(NSInteger, tablesViews) {
         nameLabel.textColor = [tableView isEnabled] ? [NSColor labelColor] : [NSColor lightGrayColor];
         [codecEnableButton setEnabled:[tableView isEnabled]];
         auto codecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-        auto codec = codecs.begin();
-        std::advance(codec, row);
-        if (codec != codecs.end()) {
-            [nameLabel setStringValue: @(codec->name.c_str())];
-            [codecEnableButton setState:codec->enabled];
-            [codecEnableButton setAction:@selector(enableVideoCodec:)];
-            [codecEnableButton setTarget:self];
-            return videoCodecView;
+        if (codecs.size() < row) {
+            return nil;
         }
+        auto codec = codecs[row];
+        [nameLabel setStringValue: codec.name.toNSString()];
+        [codecEnableButton setState:codec.enabled];
+        [codecEnableButton setAction:@selector(enableVideoCodec:)];
+        [codecEnableButton setTarget:self];
+        return videoCodecView;
     }
 }
 

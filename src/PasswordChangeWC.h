@@ -19,7 +19,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
-#include <string>
+#include <qstring.h>
 
 @protocol PasswordChangeDelegate
 
@@ -30,7 +30,7 @@
 @end
 
 @interface PasswordChangeWC : NSWindowController <NSTextFieldDelegate, LrcModelsProtocol>
-@property std::string selectedAccountID;
+@property QString selectedAccountID;
 @property (retain, nonatomic) id <PasswordChangeDelegate> delegate;
 
 @end

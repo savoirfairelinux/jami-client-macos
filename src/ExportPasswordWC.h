@@ -23,7 +23,7 @@
 #import "LoadingWCDelegate.h"
 #import "AbstractLoadingWC.h"
 #import "LrcModelsProtocol.h"
-#include <string>
+#include <qstring.h>
 
 @interface ExportPasswordWC : AbstractLoadingWC <LrcModelsProtocol>
 
@@ -33,6 +33,6 @@
  * if password.length is > 0, button is enabled, otherwise disabled
  */
 @property (retain) NSString* password;
-@property std::string selectedAccountID;
+@property QString selectedAccountID;
 
 @end

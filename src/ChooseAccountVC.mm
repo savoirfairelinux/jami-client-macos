@@ -62,14 +62,6 @@ NSMenu* accountsMenu;
 NSMenuItem* selectedMenuItem;
 NSMutableDictionary* menuItemsTags;
 
-//-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil model:(lrc::api::NewAccountModel*) accMdl delegate:(id <ChooseAccountDelegate> )mainWindow
-//{
-//    accMdl_ = accMdl;
-//    accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
-//    self.delegate = mainWindow;
-//    return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//}
-
 -(void) updateWithDelegate:(id <ChooseAccountDelegate> )mainWindow andModel:(lrc::api::NewAccountModel*) accMdl {
     accMdl_ = accMdl;
         accountSelectionManager_ = [[AccountSelectionManager alloc] initWithAccountModel:accMdl_];
@@ -99,7 +91,7 @@ NSMutableDictionary* menuItemsTags;
 
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountAdded,
-                     [self] (const std::string& accountID) {
+                     [self] (const QString& accountID) {
                          [self update];
                          @try {
                              auto& account = [self selectedAccount];
@@ -111,7 +103,7 @@ NSMutableDictionary* menuItemsTags;
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountRemoved,
-                     [self] (const std::string& accountID) {
+                     [self] (const QString& accountID) {
                          if ([self selectedAccount].id.compare(accountID) == 0) {
                              [accountSelectionManager_ clearSelectedAccount];
                          }
@@ -126,12 +118,12 @@ NSMutableDictionary* menuItemsTags;
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::profileUpdated,
-                     [self] (const std::string& accountID) {
+                     [self] (const QString& accountID) {
                          [self update];
                      });
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountStatusChanged,
-                     [self] (const std::string& accountID) {
+                     [self] (const QString& accountID) {
                          [self updateMenuItemForAccount:accountID];
                          if([self selectedAccount].id == accountID) {
                              // update account state
@@ -162,8 +154,8 @@ NSMutableDictionary* menuItemsTags;
     }
 }
 
--(void) updateMenuItemForAccount: (const std::string&) accountID {
-    NSMenuItem *item  =[accountsMenu itemWithTag:[menuItemsTags[@(accountID.c_str())] intValue]];
+-(void) updateMenuItemForAccount: (const QString&) accountID {
+    NSMenuItem *item  =[accountsMenu itemWithTag:[menuItemsTags[accountID.toNSString()] intValue]];
     if(!item) {return;}
     AccountMenuItemView *itemView =item.view;
     if(!itemView) {return;}
@@ -175,7 +167,7 @@ NSMutableDictionary* menuItemsTags;
 
     auto accList = accMdl_->getAccountList();
 
-    for (std::string accId : accList) {
+    for (auto accId : accList) {
         auto& account = accMdl_->getAccountInfo(accId);
 
         NSMenuItem* menuBarItem = [[NSMenuItem alloc]
@@ -186,7 +178,7 @@ NSMutableDictionary* menuItemsTags;
         AccountMenuItemView *itemView = [[AccountMenuItemView alloc] initWithFrame:CGRectZero];
         [self configureView:itemView forAccount:accId forMenuItem: menuBarItem];
         int itemTag = arc4random_uniform(1000);
-        menuItemsTags[@(accId.c_str())] = [NSNumber numberWithInt: itemTag];
+        menuItemsTags[accId.toNSString()] = [NSNumber numberWithInt: itemTag];
         [menuBarItem setTag:itemTag];
         [menuBarItem setView:itemView];
         [accountsMenu addItem:menuBarItem];
@@ -211,13 +203,13 @@ NSMutableDictionary* menuItemsTags;
     [accountStatus setHidden:accList.empty()];
 }
 
--(void) configureView: (AccountMenuItemView *) itemView forAccount:(const std::string&) accountId forMenuItem:(NSMenuItem *) item {
+-(void) configureView: (AccountMenuItemView *) itemView forAccount:(const QString&) accountId forMenuItem:(NSMenuItem *) item {
     auto& account = accMdl_->getAccountInfo(accountId);
     item.attributedTitle = [self attributedItemTitleForAccount:account];
-    [itemView.accountLabel setStringValue:@(account.profileInfo.alias.c_str())];
+    [itemView.accountLabel setStringValue:account.profileInfo.alias.toNSString()];
     NSString* userNameString = [self nameForAccount: account];
     [itemView.userNameLabel setStringValue:userNameString];
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(account.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
     NSImage *image = [[NSImage alloc] initWithData:imageData];
     if(image) {
         [itemView.accountAvatar setImage: image];
@@ -251,7 +243,7 @@ NSMutableDictionary* menuItemsTags;
         auto& account = [self selectedAccount];
         if(account.profileInfo.type == lrc::api::profile::Type::INVALID)
             return;
-        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(account.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
         NSImage *image = [[NSImage alloc] initWithData:imageData];
         if(image) {
             [profileImage setImage: image];
@@ -335,7 +327,7 @@ NSMutableDictionary* menuItemsTags;
         if(account.profileInfo.type == lrc::api::profile::Type::INVALID){
             return;
         }
-        [accountSelectionButton selectItemWithTag:[menuItemsTags[@(account.id.c_str())] intValue]];
+        [accountSelectionButton selectItemWithTag:[menuItemsTags[account.id.toNSString()] intValue]];
         [selectedAccountTitle setAttributedStringValue: accountSelectionButton.attributedTitle];
     }
     @catch (NSException *ex) {
@@ -393,12 +385,13 @@ NSMutableDictionary* menuItemsTags;
 
 - (void)selectAccount:(NSString*)accountID {
     auto accList = accMdl_->getAccountList();
-    if(std::find(accList.begin(), accList.end(), [accountID UTF8String]) != accList.end()) {
-        auto& account = accMdl_->getAccountInfo([accountID UTF8String]);
-        [accountSelectionManager_ setSavedAccount:account];
-        [self updatePhoto];
-        [self setPopUpButtonSelection];
+    if (!accList.contains(QString::fromNSString(accountID))) {
+        return;
     }
+    auto& account = accMdl_->getAccountInfo([accountID UTF8String]);
+    [accountSelectionManager_ setSavedAccount:account];
+    [self updatePhoto];
+    [self setPopUpButtonSelection];
 }
 
 @end

@@ -56,17 +56,17 @@ QMetaObject::Connection audioDeviceEvent;
     auto inputDevices = avModel->getAudioInputDevices();
     auto inputDevice = avModel->getInputDevice();
     for (auto device : inputDevices) {
-        [inputDeviceList addItemWithTitle: @(device.c_str())];
+        [inputDeviceList addItemWithTitle: device.toNSString()];
         if(device == inputDevice) {
-            [inputDeviceList selectItemWithTitle:@(inputDevice.c_str())];
+            [inputDeviceList selectItemWithTitle:inputDevice.toNSString()];
         }
     }
     auto outputDevices = avModel->getAudioOutputDevices();
     auto outputDevice = avModel->getOutputDevice();
     for (auto device : outputDevices) {
-        [outputDeviceList addItemWithTitle: @(device.c_str())];
+        [outputDeviceList addItemWithTitle: device.toNSString()];
         if(device == outputDevice) {
-            [outputDeviceList selectItemWithTitle:@(outputDevice.c_str())];
+            [outputDeviceList selectItemWithTitle:outputDevice.toNSString()];
         }
     }
 }

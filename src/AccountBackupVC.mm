@@ -70,7 +70,7 @@
 - (IBAction)exportAccount:(id)sender
 {
     NSSavePanel* filePicker = [NSSavePanel savePanel];
-    NSString* name  = [@(self.accountToBackup.c_str()) stringByAppendingString: @".gz"];
+    NSString* name  = [self.accountToBackup.toNSString() stringByAppendingString: @".gz"];
     [filePicker setNameFieldStringValue: name];
     if ([filePicker runModal] != NSFileHandlingPanelOKButton) {
         return;

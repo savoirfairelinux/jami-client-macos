@@ -24,7 +24,7 @@
 #import "LoadingWCDelegate.h"
 #import "AbstractLoadingWC.h"
 
-#import "string"
+#import "qstring.h"
 
 namespace lrc {
     namespace api {
@@ -63,6 +63,6 @@ namespace lrc {
 @property (readonly) BOOL validatePasswords;
 
 @property lrc::api::NewAccountModel* accountModel;
-@property std::string accountToMigrate;
+@property QString accountToMigrate;
 
 @end
