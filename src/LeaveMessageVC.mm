@@ -53,7 +53,7 @@ int recordingTime = 0;
 NSTimer* refreshDurationTimer;
 lrc::api::AVModel* avModel;
 NSMutableDictionary *filesToSend;
-std::string conversationUid;
+QString conversationUid;
 lrc::api::ConversationModel* conversationModel;
 
 - (void)loadView {
@@ -94,11 +94,11 @@ lrc::api::ConversationModel* conversationModel;
 - (IBAction)recordMessage:(NSButton *)sender {
     if (!isRecording) {
         [self clearData];
-        std::string file_name = avModel->startLocalRecorder(true);
-        if (file_name.empty()) {
+        QString file_name = avModel->startLocalRecorder(true);
+        if (file_name.isEmpty()) {
             return;
         }
-        filesToSend[@(conversationUid.c_str())] = @(file_name.c_str());
+        filesToSend[conversationUid.toNSString()] = file_name.toNSString();
         isRecording = true;
         recordButton.image = [NSImage imageNamed:@"ic_stoprecord.png"];
         recordButton.title = NSLocalizedString(@"Stop recording", @"Record message title");
@@ -110,7 +110,7 @@ lrc::api::ConversationModel* conversationModel;
                                                                   userInfo:nil
                                                                    repeats:YES];
     } else {
-        avModel->stopLocalRecorder([filesToSend[@(conversationUid.c_str())] UTF8String]);
+        avModel->stopLocalRecorder(QString::fromNSString(filesToSend[conversationUid.toNSString()]));
         isRecording = false;
         recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
         recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
@@ -122,13 +122,13 @@ lrc::api::ConversationModel* conversationModel;
 }
 
 - (IBAction)sendMessage:(NSButton *)sender {
-    NSArray* pathURL = [filesToSend[@(conversationUid.c_str())] componentsSeparatedByString: @"/"];
+    NSArray* pathURL = [filesToSend[conversationUid.toNSString()] componentsSeparatedByString: @"/"];
     if([pathURL count] < 1) {
         return;
     }
     NSString* name = [pathURL objectAtIndex: [pathURL count] - 1];
-    conversationModel->sendFile(conversationUid, [filesToSend[@(conversationUid.c_str())] UTF8String], [name UTF8String]);
-    [filesToSend removeObjectForKey: @(conversationUid.c_str())];
+    conversationModel->sendFile(conversationUid, QString::fromNSString(filesToSend[conversationUid.toNSString()]), QString::fromNSString(name));
+    [filesToSend removeObjectForKey: conversationUid.toNSString()];
     [self exit];
 }
 
@@ -148,13 +148,13 @@ lrc::api::ConversationModel* conversationModel;
     [sendButton setHidden: YES];
     [refreshDurationTimer invalidate];
     refreshDurationTimer = nil;
-    [filesToSend removeObjectForKey: @(conversationUid.c_str())];
+    [filesToSend removeObjectForKey: conversationUid.toNSString()];
 }
 
 - (void)viewWillHide {
     recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
     recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
-    if(filesToSend[@(conversationUid.c_str())]) {
+    if(filesToSend[conversationUid.toNSString()]) {
         [sendButton setHidden: NO];
     } else {
         [sendButton setHidden: YES];
@@ -182,7 +182,7 @@ lrc::api::ConversationModel* conversationModel;
     [self.view setHidden:NO];
 }
 
--(void)setConversationUID:(std::string) convUid conversationModel:(lrc::api::ConversationModel*) convModel {
+-(void)setConversationUID:(const QString&) convUid conversationModel:(lrc::api::ConversationModel*) convModel {
     conversationUid = convUid;
     conversationModel = convModel;
     [self updateView];

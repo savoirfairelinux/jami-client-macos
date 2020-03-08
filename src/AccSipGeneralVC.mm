@@ -26,6 +26,7 @@
 #import <QSize>
 #import <QtMacExtras/qmacfunctions.h>
 #import <QPixmap>
+#import <qstring.h>
 
 //LRC
 #import <api/lrc.h>
@@ -50,7 +51,7 @@
 @property (unsafe_unretained) IBOutlet NSTextField* serverField;
 @property (unsafe_unretained) IBOutlet NSButton* removeAccountButton;
 @property (unsafe_unretained) IBOutlet NSButton* editAccountButton;
-@property std::string selectedAccountID;
+@property QString selectedAccountID;
 
 @end
 
@@ -98,8 +99,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
         [addProfilePhotoImage setHidden:YES];
         auto imageToBytes = QByteArray::fromNSData([outputImage TIFFRepresentation]).toBase64();
-        std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
-        self.accountModel->setAvatar(self.selectedAccountID, imageToString);
+        self.accountModel->setAvatar(self.selectedAccountID, QString(imageToBytes));
     } else if(!photoView.image) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
@@ -117,14 +117,14 @@ typedef NS_ENUM(NSInteger, TagViews) {
      [self.delegate triggerAdvancedOptions];
 }
 
-- (void) setSelectedAccount:(std::string) account {
+- (void) setSelectedAccount:(const QString&) account {
     self.selectedAccountID = account;
     [self updateView];
 }
 
 -(void)updateView {
     const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(account.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
     NSImage *image = [[NSImage alloc] initWithData:imageData];
     if(image) {
         [photoView setBordered:NO];
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
     }
-    NSString* displayName = @(account.profileInfo.alias.c_str());
+    NSString* displayName = account.profileInfo.alias.toNSString();
     [displayNameField setStringValue:displayName];
 
     NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[removeAccountButton attributedTitle]];
@@ -143,11 +143,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [colorTitle addAttribute:NSForegroundColorAttributeName value:[NSColor errorColor] range:titleRange];
     [removeAccountButton setAttributedTitle:colorTitle];
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    [passwordField setStringValue: @(accountProperties.password.c_str())];
-    [proxyField setStringValue: @(accountProperties.routeset.c_str())];
-    [userNameField setStringValue: @(accountProperties.username.c_str())];
-    [serverField setStringValue: @(accountProperties.hostname.c_str())];
-    [voicemailField setStringValue: @(accountProperties.mailbox.c_str())];
+    [passwordField setStringValue: accountProperties.password.toNSString()];
+    [proxyField setStringValue: accountProperties.routeset.toNSString()];
+    [userNameField setStringValue: accountProperties.username.toNSString()];
+    [serverField setStringValue: accountProperties.hostname.toNSString()];
+    [voicemailField setStringValue: accountProperties.mailbox.toNSString()];
     self.accountEnabled = account.enabled;
 }
 
@@ -245,11 +245,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 -(void) saveAccount {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    accountProperties.hostname = [serverField.stringValue UTF8String];
-    accountProperties.password = [passwordField.stringValue UTF8String];
-    accountProperties.username = [userNameField.stringValue UTF8String];
-    accountProperties.routeset = [proxyField.stringValue UTF8String];
-    accountProperties.mailbox = [voicemailField.stringValue UTF8String];
+    accountProperties.hostname = QString::fromNSString(serverField.stringValue);
+    accountProperties.password = QString::fromNSString(passwordField.stringValue);
+    accountProperties.username = QString::fromNSString(userNameField.stringValue);
+    accountProperties.routeset = QString::fromNSString(proxyField.stringValue);
+    accountProperties.mailbox = QString::fromNSString(voicemailField.stringValue);
     self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
 }
 
@@ -264,7 +264,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     NSString* displayName = textField.stringValue;
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    self.accountModel->setAlias(self.selectedAccountID, [displayName UTF8String]);
+    self.accountModel->setAlias(self.selectedAccountID, QString::fromNSString(displayName));
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
 }

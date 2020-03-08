@@ -28,6 +28,6 @@
 - (void) showMainWindow;
 - (void) showDialpad;
 - (BOOL) checkForRingAccount;
-- (std::vector<std::string>) getActiveCalls;
+- (QVector<QString>) getActiveCalls;
 
 @end

@@ -17,7 +17,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <Cocoa/Cocoa.h>
-#import <string>
+#import <qstring.h>
 
 @protocol CallDelegate;
 @protocol CallDelegate
@@ -29,7 +29,7 @@
 -(void) screenShare;
 -(void) switchToDevice:(int)deviceID;
 -(void) switchToFile:(std::string)uri;
--(std::vector<std::string>) getDeviceList;
+-(QVector<QString>) getDeviceList;
 -(NSString *) getDefaultDeviceName;
 
 @end

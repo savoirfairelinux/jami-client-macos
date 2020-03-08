@@ -53,9 +53,9 @@ extern "C" {
 #import "views/MovableView.h"
 
 @interface CurrentCallVC () <NSPopoverDelegate> {
-    std::string convUid_;
-    std::string callUid_;
-    std::string confUid_;
+    QString convUid_;
+    QString callUid_;
+    QString confUid_;
     const lrc::api::account::Info *accountInfo_;
     NSTimer* refreshDurationTimer;
 }
@@ -139,8 +139,8 @@ CVPixelBufferRef pixelBufferPreview;
  * set info for chat view
  * connect signals
  */
--(void) setCurrentCall:(const std::string&)callUid
-          conversation:(const std::string&)convUid
+-(void) setCurrentCall:(const QString&)callUid
+          conversation:(const QString&)convUid
                account:(const lrc::api::account::Info*)account
                avModel:(lrc::api::AVModel *)avModel;
 {
@@ -172,7 +172,7 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::disconnect(self.callStateChanged);
     self.callStateChanged = QObject::connect(callModel,
                                              &lrc::api::NewCallModel::callStatusChanged,
-                                             [self](const std::string callId) {
+                                             [self](const QString& callId) {
                                                  if ([self isCurrentCall: callId]) {
                                                      [self updateCall];
                                                  }
@@ -181,7 +181,7 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::disconnect(self.messageConnection);
     self.messageConnection = QObject::connect(convModel,
                                               &lrc::api::ConversationModel::interactionStatusUpdated,
-                                              [self] (std::string convUid,
+                                              [self] (const QString& convUid,
                                                       uint64_t msgId,
                                                       lrc::api::interaction::Info msg) {
                                                   if (msg.type == lrc::api::interaction::Type::TEXT) {
@@ -196,7 +196,7 @@ CVPixelBufferRef pixelBufferPreview;
     self.profileUpdatedConnection =
     QObject::connect(accountInfo_->contactModel.get(),
                      &lrc::api::ContactModel::contactAdded,
-                     [self](const std::string &contactUri) {
+                     [self](const QString &contactUri) {
                          auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
                          if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
                              return;
@@ -219,7 +219,7 @@ CVPixelBufferRef pixelBufferPreview;
     for (NSView *view in callingWidgetsContainer.subviews) {
         view.removeFromSuperview;
     }
-    NSDictionary * calls = connectingCalls[@(callUid_.c_str())];
+    NSDictionary * calls = connectingCalls[callUid_.toNSString()];
     for (NSViewController * callView in calls.allValues) {
        [self.callingWidgetsContainer addView: callView.view inGravity:NSStackViewGravityBottom];
     }
@@ -291,7 +291,7 @@ CVPixelBufferRef pixelBufferPreview;
             if (callStatus != lrc::api::call::Status::ENDED &&
                 callStatus != lrc::api::call::Status::TERMINATING &&
                 callStatus != lrc::api::call::Status::INVALID) {
-                [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
+                [timeSpentLabel setStringValue:callModel->getFormattedCallDuration(callUid_).toNSString()];
                 return;
             }
         }
@@ -314,7 +314,7 @@ CVPixelBufferRef pixelBufferPreview;
     }
 
     auto currentCall = callModel->getCall(callUid_);
-    NSLog(@"\n status %@ \n",@(lrc::api::call::to_string(currentCall.status).c_str()));
+    NSLog(@"\n status %@ \n",lrc::api::call::to_string(currentCall.status).toNSString());
     auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
     if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
         NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
@@ -328,12 +328,12 @@ CVPixelBufferRef pixelBufferPreview;
     [self setupContactInfo:contactPhoto];
 
     confUid_ = convIt->confId;
-    [muteAudioButton setHidden:!confUid_.empty()];
-    [muteVideoButton setHidden:!confUid_.empty()];
-    [recordOnOffButton setHidden:!confUid_.empty()];
-    [holdOnOffButton setHidden:!confUid_.empty()];
+    [muteAudioButton setHidden:!confUid_.isEmpty()];
+    [muteVideoButton setHidden:!confUid_.isEmpty()];
+    [recordOnOffButton setHidden:!confUid_.isEmpty()];
+    [holdOnOffButton setHidden:!confUid_.isEmpty()];
 
-    [timeSpentLabel setStringValue:@(callModel->getFormattedCallDuration(callUid_).c_str())];
+    [timeSpentLabel setStringValue:callModel->getFormattedCallDuration(callUid_).toNSString()];
     if (refreshDurationTimer == nil)
         refreshDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                                 target:self
@@ -352,7 +352,7 @@ CVPixelBufferRef pixelBufferPreview;
     [self setUpButtons: currentCall isRecording: (callModel->isRecording([self getcallID]) || mediaModel->getAlwaysRecord())];
 
     [videoView setShouldAcceptInteractions: currentCall.status == Status::IN_PROGRESS];
-    callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? @"wants to talk to you" : @(to_string(currentCall.status).c_str());
+    callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? @"wants to talk to you" : to_string(currentCall.status).toNSString();
     loadingIndicator.hidden = (currentCall.status == Status::SEARCHING ||
                                currentCall.status == Status::CONNECTING ||
                                currentCall.status == Status::OUTGOING_RINGING) ? NO : YES;
@@ -425,7 +425,7 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::INVALID:
         case Status::PEER_BUSY:
         case Status::TIMEOUT:
-            connectingCalls[@(callUid_.c_str())] = nil;
+            connectingCalls[callUid_.toNSString()] = nil;
             //[self cleanUp];
             [self.delegate callFinished];
             break;
@@ -497,7 +497,7 @@ CVPixelBufferRef pixelBufferPreview;
         return QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
     }
     auto contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(contact.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:contact.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
     return [[NSImage alloc] initWithData:imageData];
 }
 
@@ -530,7 +530,7 @@ CVPixelBufferRef pixelBufferPreview;
     renderConnections.started =
     QObject::connect(mediaModel,
                      &lrc::api::AVModel::rendererStarted,
-                     [=](const std::string& id) {
+                     [=](const QString& id) {
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                              [self.previewView setHidden:NO];
                              [hidePreviewBackground setHidden: NO];
@@ -546,7 +546,7 @@ CVPixelBufferRef pixelBufferPreview;
     renderConnections.stopped =
     QObject::connect(mediaModel,
                      &lrc::api::AVModel::rendererStopped,
-                     [=](const std::string& id) {
+                     [=](const QString& id) {
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                              [self.previewView setHidden:YES];
                              self.previewView.stopRendering = true;
@@ -561,7 +561,7 @@ CVPixelBufferRef pixelBufferPreview;
     renderConnections.frameUpdated =
     QObject::connect(mediaModel,
                      &lrc::api::AVModel::frameUpdated,
-                     [=](const std::string& id) {
+                     [=](const QString& id) {
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                              auto renderer = &mediaModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID);
                              if(!renderer->isRendering()) {
@@ -993,12 +993,12 @@ CVPixelBufferRef pixelBufferPreview;
     mediaModel->switchInputTo(device);
 }
 
--(std::vector<std::string>) getDeviceList {
-    std::vector<std::string> devicesVector;
+-(QVector<QString>) getDeviceList {
+    QVector<QString> devicesVector;
     for (auto device : mediaModel->getDevices()) {
         try {
             auto settings = mediaModel->getDeviceSettings(device);
-            devicesVector.emplace_back(settings.name);
+            devicesVector.append(settings.name);
         } catch (...) {}
     }
     return devicesVector;
@@ -1011,7 +1011,7 @@ CVPixelBufferRef pixelBufferPreview;
             try {
                 auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
                 auto settings = mediaModel->getDeviceSettings(device);
-                return @(settings.name.c_str());
+                return settings.name.toNSString();
             } catch (...) {}
         case lrc::api::video::DeviceType::DISPLAY:
             return NSLocalizedString(@"Share screen", @"Contextual menu entry");
@@ -1020,8 +1020,8 @@ CVPixelBufferRef pixelBufferPreview;
     }
 }
 
--(void) switchToFile:(std::string)uri {
-    mediaModel->setInputFile(QUrl::fromLocalFile(uri.c_str()).toLocalFile().toStdString());
+-(void) switchToFile:(QString)uri {
+    mediaModel->setInputFile(uri);
 }
 
 -(CGRect) getVideoPreviewCollapsedSize {
@@ -1051,7 +1051,7 @@ CVPixelBufferRef pixelBufferPreview;
 
 # pragma mark -ChooseContactVCDelegate
 
--(void)callToContact:(std::string)contactUri convUID:(std::string)convID {
+-(void)callToContact:(const QString&)contactUri convUID:(const QString&)convID {
     if (brokerPopoverVC != nullptr) {
         [brokerPopoverVC performClose:self];
         brokerPopoverVC = NULL;
@@ -1065,7 +1065,7 @@ CVPixelBufferRef pixelBufferPreview;
     [self addPreviewForContactUri:contactUri call: newCall];
 }
 
--(void)joinCall:(std::string)callId {
+-(void)joinCall:(const QString&)callId {
     if (brokerPopoverVC != nullptr) {
         [brokerPopoverVC performClose:self];
         brokerPopoverVC = NULL;
@@ -1076,37 +1076,37 @@ CVPixelBufferRef pixelBufferPreview;
 
 # pragma mark -CallInConferenceVCDelegate
 
--(void)removePreviewForContactUri:(std::string)uri forCall:(std::string) callId {
-    NSMutableDictionary * calls = connectingCalls[@(callId.c_str())];
+-(void)removePreviewForContactUri:(const QString&)uri forCall:(const QString&) callId {
+    NSMutableDictionary * calls = connectingCalls[callId.toNSString()];
     if (!calls) {
         return;
     }
-    NSViewController *callView = calls[@(uri.c_str())];
+    NSViewController *callView = calls[uri.toNSString()];
     if (!callView) {
         return;
     }
-    calls[@(uri.c_str())] = nil;
+    calls[uri.toNSString()] = nil;
     [self.callingWidgetsContainer removeView:callView.view];
 }
 
--(void)addPreviewForContactUri:(std::string)uri call:(std::string)callId {
-    NSMutableDictionary *calls = connectingCalls[@(callUid_.c_str())];
+-(void)addPreviewForContactUri:(const QString&)uri call:(const QString&)callId {
+    NSMutableDictionary *calls = connectingCalls[callUid_.toNSString()];
     if (!calls) {
         calls = [[NSMutableDictionary alloc] init];
     }
-    if (calls[@(uri.c_str())]) {
+    if (calls[uri.toNSString()]) {
         return;
     }
     CallInConferenceVC *callingView = [self callingViewForCallId: callId];
-    calls[@(uri.c_str())] = callingView;
-    connectingCalls[@(callUid_.c_str())] = calls;
+    calls[uri.toNSString()] = callingView;
+    connectingCalls[callUid_.toNSString()] = calls;
     [self.callingWidgetsContainer addView:callingView.view inGravity:NSStackViewGravityBottom];
     [self.callingWidgetsContainer updateConstraints];
     [self.callingWidgetsContainer updateLayer];
     [self.callingWidgetsContainer setNeedsDisplay:YES];
 }
 
--(CallInConferenceVC*) callingViewForCallId:(std::string)callId {
+-(CallInConferenceVC*) callingViewForCallId:(const QString&)callId {
     CallInConferenceVC *callView = [[CallInConferenceVC alloc]
                                     initWithNibName:@"CallInConferenceVC"
                                     bundle:nil
@@ -1117,11 +1117,11 @@ CVPixelBufferRef pixelBufferPreview;
     return callView;
 }
 
--(std::string)getcallID {
-    return confUid_.empty() ? callUid_ : confUid_;
+-(const QString&)getcallID {
+    return confUid_.isEmpty() ? callUid_ : confUid_;
 }
 
--(bool)isCurrentCall:(std::string)callId {
+-(bool)isCurrentCall:(const QString&)callId {
     return (callId == confUid_ || callId == callUid_);
 }
 

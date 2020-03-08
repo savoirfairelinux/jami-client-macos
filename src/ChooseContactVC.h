@@ -18,11 +18,11 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#include <string>
+#include <qstring.h>
 
 @protocol ChooseContactVCDelegate <NSObject>
--(void)callToContact:(std::string)contactUri convUID:(std::string)convID;
--(void)joinCall:(std::string)callId;
+-(void)callToContact:(const QString&)contactUri convUID:(const QString&)convID;
+-(void)joinCall:(const QString&)callId;
 @end
 
 namespace lrc {
@@ -38,6 +38,6 @@ namespace lrc {
 @property (retain, nonatomic) id <ChooseContactVCDelegate> delegate;
 
 - (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
-      andCurrentConversation:(std::string)conversation;
+      andCurrentConversation:(const QString&)conversation;
 
 @end

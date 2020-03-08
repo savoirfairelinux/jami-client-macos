@@ -67,7 +67,7 @@
 
 @property AbstractLoadingWC* accountModal;
 @property PasswordChangeWC* passwordModal;
-@property std::string selectedAccountID;
+@property QString selectedAccountID;
 
 @end
 
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [self updateView];
 }
 
-- (void) setSelectedAccount:(std::string) account {
+- (void) setSelectedAccount:(const QString&) account {
     self.selectedAccountID = account;
     [self connectSignals];
     [self updateView];
@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 -(void) updateView {
     const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
 
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:@(account.profileInfo.avatar.c_str()) options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
     NSImage *image = [[NSImage alloc] initWithData:imageData];
     if(image) {
         [photoView setBordered:NO];
@@ -154,18 +154,18 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
     }
-    NSString* displayName = @(account.profileInfo.alias.c_str());
+    NSString* displayName = account.profileInfo.alias.toNSString();
     [displayNameField setStringValue:displayName];
-    [ringIDField setStringValue:@(account.profileInfo.uri.c_str())];
+    [ringIDField setStringValue: account.profileInfo.uri.toNSString()];
 
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    bool hideLocalAccountConfig = !accountProperties.managerUri.empty();
+    bool hideLocalAccountConfig = !accountProperties.managerUri.isEmpty();
     [passwordButton setHidden:hideLocalAccountConfig];
     [linkDeviceButton setHidden:hideLocalAccountConfig];
     [passwordField setHidden:hideLocalAccountConfig];
     [exportAccountButton setHidden: hideLocalAccountConfig];
 
-    if(account.registeredName.empty() && !hideLocalAccountConfig) {
+    if(account.registeredName.isEmpty() && !hideLocalAccountConfig) {
         [registerNameButton setHidden:NO];
         buttonRegisterWidthConstraint.constant = 260.0;
     } else {
@@ -173,7 +173,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [registerNameButton setHidden:YES];
     }
 
-    [registeredNameField setStringValue:@(account.registeredName.c_str())];
+    [registeredNameField setStringValue:account.registeredName.toNSString()];
 
     [passwordButton setTitle:accountProperties.archiveHasPassword ? @"Change password" : @"Create password"];
     self.accountEnabled = account.enabled;
@@ -196,12 +196,12 @@ typedef NS_ENUM(NSInteger, TagViews) {
     QObject::disconnect(accountStateChangedSignal);
     deviceAddedSignal = QObject::connect(&*(self.accountModel->getAccountInfo(self.selectedAccountID)).deviceModel,
                                          &lrc::api::NewDeviceModel::deviceAdded,
-                                         [self] (const std::string &id) {
+                                         [self] (const QString& id) {
                                              [devicesTableView reloadData];
                                          });
     deviceRevokedSignal = QObject::connect(&*(self.accountModel->getAccountInfo(self.selectedAccountID)).deviceModel,
                                            &lrc::api::NewDeviceModel::deviceRevoked,
-                                           [self] (const std::string &id, const lrc::api::NewDeviceModel::Status status) {
+                                           [self] (const QString& id, const lrc::api::NewDeviceModel::Status status) {
                                                switch (status) {
                                                    case lrc::api::NewDeviceModel::Status::SUCCESS:
                                                        [devicesTableView reloadData];
@@ -216,17 +216,17 @@ typedef NS_ENUM(NSInteger, TagViews) {
                                            });
     deviceUpdatedSignal = QObject::connect(&*(self.accountModel->getAccountInfo(self.selectedAccountID)).deviceModel,
                                            &lrc::api::NewDeviceModel::deviceUpdated,
-                                           [self] (const std::string &id) {
+                                           [self] (const QString& id) {
                                                [devicesTableView reloadData];
                                            });
     bannedContactsChangedSignal = QObject::connect(&*(self.accountModel->getAccountInfo(self.selectedAccountID)).contactModel,
                                                    &lrc::api::ContactModel::bannedStatusChanged,
-                                                   [self] (const std::string &contactUri, bool banned) {
+                                                   [self] (const QString& contactUri, bool banned) {
                                                        [blockedContactsTableView reloadData];
                                                    });
     accountStateChangedSignal = QObject::connect(self.accountModel,
                                                    &lrc::api::NewAccountModel::accountStatusChanged,
-                                                   [self] (const std::string& accountID) {
+                                                   [self] (const QString& accountID) {
                                                        if(accountID != self.selectedAccountID) {
                                                            return;
                                                        }
@@ -259,8 +259,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [photoView setBordered:NO];
         [addProfilePhotoImage setHidden:YES];
         auto imageToBytes = QByteArray::fromNSData([outputImage TIFFRepresentation]).toBase64();
-        std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
-        self.accountModel->setAvatar(self.selectedAccountID, imageToString);
+        self.accountModel->setAvatar(self.selectedAccountID, QString(imageToBytes));
     } else if(!photoView.image) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
@@ -297,7 +296,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     NSString* displayName = textField.stringValue;
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    self.accountModel->setAlias(self.selectedAccountID, [displayName UTF8String]);
+    self.accountModel->setAlias(self.selectedAccountID, QString::fromNSString(displayName));
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
 }
@@ -327,17 +326,15 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [revokeButton setAction:@selector(startDeviceRevocation:)];
         [revokeButton setTarget:self];
         auto devices = self.accountModel->getAccountInfo(self.selectedAccountID).deviceModel->getAllDevices();
-        auto device = devices.begin();
+        auto device = devices[row];
 
-        std::advance(device, row);
+        auto name = device.name;
+        auto deviceID = device.id;
 
-        auto name = device->name;
-        auto deviceID = device->id;
-
-        [nameLabel setStringValue: @(name.c_str())];
-        [idLabel setStringValue: @(deviceID.c_str())];
-        [revokeButton setHidden: device->isCurrent];
-        [editButton setHidden: !device->isCurrent];
+        [nameLabel setStringValue: name.toNSString()];
+        [idLabel setStringValue: deviceID.toNSString()];
+        [revokeButton setHidden: device.isCurrent];
+        [editButton setHidden: !device.isCurrent];
         return deviceView;
     } else if (tableView == blockedContactsTableView) {
         NSTableCellView* contactView = [tableView makeViewWithIdentifier:@"TableCellBannedContactItem" owner:self];
@@ -345,11 +342,14 @@ typedef NS_ENUM(NSInteger, TagViews) {
         NSTextField* idLabel = [contactView viewWithTag: BANNED_CONTACT_ID_TAG];
         NSButton* revokeButton = [contactView viewWithTag: UNBLOCK_CONTACT_TAG];
         auto contacts = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getBannedContacts();
-        auto contactID = contacts.begin();
-        std::advance(contactID, row);
-        [idLabel setStringValue: @(contactID->c_str())];
-        auto contact = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getContact([@(contactID->c_str()) UTF8String]);
-        [nameLabel setStringValue: bestNameForContact(contact)];
+        auto contactID = contacts[row];
+        [idLabel setStringValue: contactID.toNSString()];
+        try {
+            auto contact = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getContact(contactID);
+            [nameLabel setStringValue: bestNameForContact(contact)];
+        } catch (std::out_of_range& e) {
+            NSLog(@"contact out of range");
+        }
         [revokeButton setAction:@selector(unblockContact:)];
         [revokeButton setTarget:self];
         return contactView;
@@ -441,7 +441,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 - (IBAction)exportAccount:(id)sender
 {
     NSSavePanel* filePicker = [NSSavePanel savePanel];
-    NSString* name  = [@(self.selectedAccountID.c_str()) stringByAppendingString: @".gz"];
+    NSString* name  = [self.selectedAccountID.toNSString() stringByAppendingString: @".gz"];
     [filePicker setNameFieldStringValue: name];
     if ([filePicker runModal] != NSFileHandlingPanelOKButton) {
         return;
@@ -462,7 +462,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
         }
         password = [input stringValue];
     }
-    if (self.accountModel->exportToFile(self.selectedAccountID, fullPath, [password UTF8String])) {
+    if (self.accountModel->exportToFile(self.selectedAccountID, fullPath, QString::fromNSString(password))) {
         [self didCompleteExportWithPath:[filePicker URL]];
     } else {
         [self showAlertWithTitle: @"" andText: NSLocalizedString(@"An error occured during the backup", @"Backup error")];
@@ -518,12 +518,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
         return;
     }
     auto devices = self.accountModel->getAccountInfo(self.selectedAccountID).deviceModel->getAllDevices();
-    auto device = devices.begin();
-    std::advance(device, row);
-    if(device == devices.end()) {
+    if (devices.size() < row) {
         return;
     }
-    [self proceedDeviceRevokationAlert:device->id];
+    auto device = devices[row];
+    [self proceedDeviceRevokationAlert:device.id];
 }
 
 - (IBAction)unblockContact:(NSView*)sender
@@ -533,16 +532,16 @@ typedef NS_ENUM(NSInteger, TagViews) {
         return;
     }
     auto contacts = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getBannedContacts();
-    auto contactID = contacts.begin();
-    std::advance(contactID, row);
-    if(contactID == contacts.end()) {
-        return;
+    auto contactID = contacts[row];
+    try {
+        auto contact = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getContact(contactID);
+        if(!contact.isBanned) {
+            return;
+        }
+        self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->addContact(contact);
+    } catch (std::out_of_range& e) {
+        NSLog(@"contact out of range");
     }
-    auto contact = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getContact([@(contactID->c_str()) UTF8String]);
-    if(!contact.isBanned) {
-        return;
-    }
-    self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->addContact(contact);
 }
 
 - (IBAction)editDevice:(NSView*)sender
@@ -560,7 +559,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     NSTextField* nameLabel = [deviceView viewWithTag: DEVICE_NAME_TAG];
     NSButton* editButton = [deviceView viewWithTag: DEVICE_EDIT_TAG];
     if ([nameLabel isEditable]) {
-        self.accountModel->getAccountInfo(self.selectedAccountID).deviceModel->setCurrentDeviceName([nameLabel.stringValue UTF8String]);
+        self.accountModel->getAccountInfo(self.selectedAccountID).deviceModel->setCurrentDeviceName(QString::fromNSString(nameLabel.stringValue));
         [nameLabel setEditable:NO];
         [self.view.window makeFirstResponder:nil];
         editButton.image = [NSImage imageNamed:NSImageNameTouchBarComposeTemplate];
@@ -571,11 +570,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
     editButton.image = [NSImage imageNamed:NSImageNameTouchBarDownloadTemplate];
 }
 
--(void) revokeDeviceWithID: (std::string) deviceID password:(NSString *) password {
-    self.accountModel->getAccountInfo(self.selectedAccountID).deviceModel->revokeDevice(deviceID, [password UTF8String]);
+-(void) revokeDeviceWithID: (const QString&) deviceID password:(NSString *) password {
+    self.accountModel->getAccountInfo(self.selectedAccountID).deviceModel->revokeDevice(deviceID, QString::fromNSString(password));
 }
 
--(void) proceedDeviceRevokationAlert: (std::string) deviceID {
+-(void) proceedDeviceRevokationAlert: (const QString&) deviceID {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"OK"];
     [alert addButtonWithTitle:@"Cancel"];

@@ -59,7 +59,7 @@
 
     QMetaObject::Connection accountCreated;
     QMetaObject::Connection accountRemoved;
-    std::string accountToCreate;
+    QString accountToCreate;
 }
 
 @synthesize accountModel, backupFile;
@@ -115,13 +115,13 @@
     QObject::disconnect(accountRemoved);
     accountCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                            if(accountID.compare(accountToCreate) != 0) {
                                                return;
                                            }
                                           [self.delegate didLinkAccountWithSuccess:YES];
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
-                                          accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
+                                          accountProperties.Ringtone.ringtonePath = QString::fromNSString(defaultRingtonePath());
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           [self registerDefaultPreferences];
                                           QObject::disconnect(accountCreated);
@@ -130,14 +130,14 @@
     // account that is invalid will be removed, connect the signal to show error message
     accountRemoved = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountRemoved,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accountToCreate) == 0) {
                                               [self showError];
                                           }
                                       });
     accountRemoved = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::invalidAccountDetected,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accountToCreate) == 0) {
                                               [self showError];
                                           }
@@ -147,7 +147,11 @@
     NSString *pin = backupFile ? @"" : (self.pinValue ? self.pinValue : @"");
     NSString *archivePath = backupFile ? [backupFile path] : @"";
     NSString *pathword = self.passwordValue ? self.passwordValue : @"";
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, "",[archivePath UTF8String], [pathword UTF8String], [pin UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING,
+                                                          "",
+                                                          QString::fromNSString(archivePath),
+                                                          QString::fromNSString(pathword),
+                                                          QString::fromNSString(pin));
 }
 
 - (IBAction)dismissViewWithError:(id)sender

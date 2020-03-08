@@ -53,7 +53,7 @@
     __unsafe_unretained IBOutlet NSLayoutConstraint* messagesBottomMargin;
     IBOutlet NSPopover *recordMessagePopover;
 
-    std::string convUid_;
+    QString convUid_;
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
     lrc::api::AVModel* avModel;
@@ -133,8 +133,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(void) clearData {
-    if (!convUid_.empty()) {
-        pendingMessagesToSend[@(convUid_.c_str())] = messageField.stringValue;
+    if (!convUid_.isEmpty()) {
+        pendingMessagesToSend[convUid_.toNSString()] = messageField.stringValue;
     }
     cachedConv_ = nil;
     convUid_ = "";
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
 {
-    if (convModel_ == nil || convUid_.empty())
+    if (convModel_ == nil || convUid_.isEmpty())
         return nil;
 
     if (cachedConv_ != nil)
@@ -231,7 +231,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
 }
 
--(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model
+-(void)setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel *)model
 {
     if (convUid_ == convUid && convModel_ == model)
         return;
@@ -244,7 +244,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
-                                             [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
+                                             [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                                  if (uid != convUid_)
                                                      return;
                                                  cachedConv_ = nil;
@@ -252,7 +252,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                  [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
                                              });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
-                                                       [self](const std::string& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
+                                                       [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
                                                            if (uid != convUid_)
                                                                return;
                                                            cachedConv_ = nil;
@@ -275,8 +275,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                           [self](){
                                               cachedConv_ = nil;
                                           });
-    if (pendingMessagesToSend[@(convUid_.c_str())]) {
-        self.message = pendingMessagesToSend[@(convUid_.c_str())];
+    if (pendingMessagesToSend[convUid_.toNSString()]) {
+        self.message = pendingMessagesToSend[convUid_.toNSString()];
         [self updateSendMessageHeight];
     } else {
         self.message = @"";
@@ -300,7 +300,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     if (conv == nil)
         return;
-    [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
+    try {
+        [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
+    } catch (std::out_of_range& e) {
+        NSLog(@"contact out of range");
+    }
 }
 
 #pragma mark - configure cells
@@ -329,7 +333,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSString* fileName = @"incoming file";
 
     // First, view is created
-    if (!interaction.authorUri.empty()) {
+    if (!interaction.authorUri.isEmpty()) {
         switch (status) {
             case lrc::api::interaction::Status::TRANSFER_CREATED:
             case lrc::api::interaction::Status::TRANSFER_AWAITING_HOST: {
@@ -406,7 +410,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [result.openImagebutton setHidden:YES];
     [result.msgBackground setHidden:NO];
     [result invalidateImageConstraints];
-    NSString* name =  @(interaction.body.c_str());
+    NSString* name =  interaction.body.toNSString();
     if (name.length > 0) {
        fileName = [name lastPathComponent];
     }
@@ -494,7 +498,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         case lrc::api::interaction::Type::CALL: {
             NSDate* msgTime = [NSDate dateWithTimeIntervalSince1970:interaction.timestamp];
             NSString* timeString = [self timeForMessage: msgTime];
-            return [self makeGenericInteractionViewForTableView:tableView withText:@(interaction.body.c_str()) andTime:timeString];
+            return [self makeGenericInteractionViewForTableView:tableView withText:interaction.body.toNSString() andTime:timeString];
         }
         default:  // If interaction is not of a known type
             return nil;
@@ -532,7 +536,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [result setNeedsDisplay:YES];
     [result.timeBox setNeedsDisplay:YES];
 
-    NSString *text = @(interaction.body.c_str());
+    NSString *text = interaction.body.toNSString();
     text = [text removeEmptyLinesAtBorders];
 
     NSMutableAttributedString* msgAttString =
@@ -600,7 +604,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if(interaction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
 
         if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
-            NSString* name =  @(interaction.body.c_str());
+            NSString* name =  interaction.body.toNSString();
             NSImage* image = [self getImageForFilePath:name];
             if (([name rangeOfString:@"/"].location == NSNotFound)) {
                 image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
@@ -629,7 +633,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return 0;
     }
 
-    NSString *text = @(interaction.body.c_str());
+    NSString *text = interaction.body.toNSString();
     text = [text removeEmptyLinesAtBorders];
 
     CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
@@ -655,7 +659,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     lrc::api::datatransfer::Info info = {};
     convModel_->getTransferInfo(interactionId, info);
     double convertData = static_cast<double>(info.totalSize);
-    return @(info.path.c_str());
+    return info.path.toNSString();
 }
 
 -(NSImage*) getImageForFilePath: (NSString *) path {
@@ -864,9 +868,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 - (void)acceptIncomingFile:(id)sender {
     auto interId = [(IMTableCellView*)[[sender superview] superview] interaction];
     auto& inter = [self getCurrentConversation]->interactions.find(interId)->second;
-    if (convModel_ && !convUid_.empty()) {
+    if (convModel_ && !convUid_.isEmpty()) {
         NSSavePanel* filePicker = [NSSavePanel savePanel];
-        [filePicker setNameFieldStringValue:@(inter.body.c_str())];
+        [filePicker setNameFieldStringValue:inter.body.toNSString()];
 
         if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
             const char* fullPath = [[filePicker URL] fileSystemRepresentation];
@@ -877,7 +881,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (void)declineIncomingFile:(id)sender {
     auto inter = [(IMTableCellView*)[[sender superview] superview] interaction];
-    if (convModel_ && !convUid_.empty()) {
+    if (convModel_ && !convUid_.isEmpty()) {
         convModel_->cancelTransfer(convUid_, inter);
     }
 }
@@ -896,7 +900,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return;
     }
     auto& interaction = it->second;
-    NSString* name =  @(interaction.body.c_str());
+    NSString* name =  interaction.body.toNSString();
     if (([name rangeOfString:@"/"].location == NSNotFound)) {
         name = [self getDataTransferPath:interId];
     }
@@ -917,7 +921,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     text = [text stringByReplacingOccurrencesOfString: separatorString withString: @"\n"];
     if (text && text.length > 0) {
         auto* conv = [self getCurrentConversation];
-        convModel_->sendMessage(convUid_, std::string([text UTF8String]));
+        convModel_->sendMessage(convUid_, QString::fromNSString(text));
         self.message = @"";
         if(sendPanelHeight.constant != SEND_PANEL_DEFAULT_HEIGHT) {
             sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
@@ -964,7 +968,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(void) sendFile:(NSString *) name withFilePath:(NSString *) path {
-    convModel_->sendFile(convUid_, [path UTF8String], [name UTF8String]);
+    convModel_->sendFile(convUid_, QString::fromNSString(path), QString::fromNSString(name));
 }
 
 -(void) closeRecordingView {
@@ -988,7 +992,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             NSString* fileName = [url lastPathComponent];
             if (convModel_) {
                 auto* conv = [self getCurrentConversation];
-                convModel_->sendFile(convUid_, std::string(fullPath), std::string([fileName UTF8String]));
+                convModel_->sendFile(convUid_, QString::fromStdString(fullPath), QString::fromNSString(fileName));
             }
         }
     }

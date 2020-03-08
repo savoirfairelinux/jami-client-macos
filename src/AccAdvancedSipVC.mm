@@ -112,7 +112,7 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
     [self updateView];
 }
 
-- (void) setSelectedAccount:(std::string) account {
+- (void) setSelectedAccount:(const QString&) account {
     [super setSelectedAccount: account];
     [self updateView];
 }
@@ -159,7 +159,7 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
     [useCustomAddressButton setState:!accountProperties.publishedSameAsLocal];
     [customPortStepper setIntegerValue: accountProperties.publishedPort];
     [customPortField setIntegerValue: accountProperties.publishedPort];
-    [customAddressField setStringValue: @(accountProperties.publishedAddress.c_str())];
+    [customAddressField setStringValue: accountProperties.publishedAddress.toNSString()];
     [minAudioPortStepper setIntegerValue: accountProperties.Audio.audioPortMin];
     [minAudioRTPRange setIntegerValue: accountProperties.Audio.audioPortMin];
     [maxAudioPortStepper setIntegerValue: accountProperties.Audio.audioPortMax];
@@ -270,8 +270,8 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
 
     switch ([sender tag]) {
         case OUTGOING_TLS_SERVER_TAG:
-            if(accountProperties.TLS.serverName != [[sender stringValue] UTF8String]) {
-                accountProperties.TLS.serverName = [[sender stringValue] UTF8String];
+            if(accountProperties.TLS.serverName != QString::fromNSString([sender stringValue])) {
+                accountProperties.TLS.serverName = QString::fromNSString([sender stringValue]);
                 self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
             }
             return;
@@ -300,9 +300,9 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
             }
             return;
         case CUSTOM_ADDRESS_TAG:
-            if(accountProperties.publishedAddress != [[sender stringValue] UTF8String]) {
+            if(accountProperties.publishedAddress != QString::fromNSString([sender stringValue])) {
                 NSString *name = [sender stringValue];
-                accountProperties.publishedAddress = [[sender stringValue] UTF8String];
+                accountProperties.publishedAddress = QString::fromNSString([sender stringValue]);
                 self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
             }
             return;

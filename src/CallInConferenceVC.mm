@@ -28,7 +28,7 @@
 #import <api/contact.h>
 
 @interface CallInConferenceVC () {
-    std::string callUId;
+    QString callUId;
     const lrc::api::account::Info *accountInfo;
 }
 
@@ -44,7 +44,7 @@
 
 -(id) initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
-               callId:(const std::string)callId
+               callId:(const QString&)callId
           accountInfo:(const lrc::api::account::Info *)accInfo {
     if (self =  [self initWithNibName: nibNameOrNil bundle:nibBundleOrNil])
     {
@@ -59,25 +59,29 @@
     auto* callModel = accountInfo->callModel.get();
     auto currentCall = callModel->getCall(callUId);
     auto uri = currentCall.peerUri;
-    auto contact = accountInfo->contactModel->getContact(uri);
-    NSString *name = @(contact.profileInfo.alias.c_str());
-    name = [name removeEmptyLinesAtBorders];
-    if (name.length == 0) {
-        name = @(contact.registeredName.c_str());
+    try {
+        auto contact = accountInfo->contactModel->getContact(uri);
+        NSString *name = contact.profileInfo.alias.toNSString();
+        name = [name removeEmptyLinesAtBorders];
+        if (name.length == 0) {
+            name = contact.registeredName.toNSString();
+        }
+        name = [name removeEmptyLinesAtBorders];
+        if (name.length == 0) {
+            name = contact.profileInfo.uri.toNSString();
+        }
+        self.contactNameLabel.stringValue = [name removeEmptyLinesAtBorders];
+    } catch (std::out_of_range& e) {
+        return;
     }
-    name = [name removeEmptyLinesAtBorders];
-    if (name.length == 0) {
-        name = @(contact.profileInfo.uri.c_str());
-    }
-    self.contactNameLabel.stringValue = [name removeEmptyLinesAtBorders];
     QObject::disconnect(self.callStateChanged);
     self.callStateChanged = QObject::connect(callModel,
-                                                &lrc::api::NewCallModel::callStatusChanged,
-                                                [self](const std::string callId) {
-                                                    if (callId == callUId) {
-                                                        [self updateCall];
-                                                    }
-                                                });
+                                             &lrc::api::NewCallModel::callStatusChanged,
+                                             [self](const QString& callId) {
+        if (callId == callUId) {
+            [self updateCall];
+        }
+    });
 }
 
 -(void) updateCall
@@ -92,7 +96,7 @@
 
     auto currentCall = callModel->getCall(callUId);
     using Status = lrc::api::call::Status;
-    callStateLabel.stringValue = @(to_string(currentCall.status).c_str());
+    callStateLabel.stringValue = to_string(currentCall.status).toNSString();
     switch (currentCall.status) {
         case Status::IN_PROGRESS:
         case Status::ENDED:

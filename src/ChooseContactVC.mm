@@ -49,9 +49,9 @@
 @implementation ChooseContactVC
 
 lrc::api::ConversationModel* convModel;
-std::string currentConversation;
+QString currentConversation;
 
-std::map<lrc::api::ConferenceableItem, lrc::api::ConferenceableValue> values;
+QMap<lrc::api::ConferenceableItem, lrc::api::ConferenceableValue> values;
 
 // Tags for views
 NSInteger const IMAGE_TAG           = 100;
@@ -66,7 +66,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 
 - (void)controlTextDidChange:(NSNotification *) notification
 {
-    values = convModel->getConferenceableConversations(currentConversation, [searchField.stringValue UTF8String]);
+    values = convModel->getConferenceableConversations(currentConversation, QString::fromNSString(searchField.stringValue));
     [self reloadView];
 }
 
@@ -104,7 +104,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 }
 
 - (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
-      andCurrentConversation:(std::string)conversation
+      andCurrentConversation:(const QString&)conversation
 {
     convModel = conversationModel;
     if (convModel == nil) {
@@ -139,8 +139,15 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     }
     if (row == -1 || convModel == nil)
         return;
-
-    lrc::api::AccountConversation conversation = table == callsView ? values.find(lrc::api::ConferenceableItem::CALL)->second[row].front() : values.find(lrc::api::ConferenceableItem::CONTACT)->second[row].front();
+    QVector<QVector<lrc::api::AccountConversation>> conversations = table == callsView ? values.value(lrc::api::ConferenceableItem::CALL) : values.value(lrc::api::ConferenceableItem::CONTACT);
+    if (conversations.size() < row) {
+        return;
+    }
+    QVector<lrc::api::AccountConversation> participants = conversations[row];
+    if (participants.isEmpty()) {
+        return;
+    }
+    auto conversation = participants[0];
     auto accountID = conversation.accountId;
     auto convID = conversation.convId;
     auto convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
@@ -151,7 +158,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     }
 
     if (table == callsView) {
-        auto callID = conversationInfo->confId.empty() ? conversationInfo->callId : conversationInfo->confId;
+        auto callID = conversationInfo->confId.isEmpty() ? conversationInfo->callId : conversationInfo->confId;
         [self.delegate joinCall: callID];
     } else if (table == contactsView) {
         auto uid = conversationInfo->participants.front();
@@ -171,12 +178,17 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     if (convModel == nil)
         return nil;
 
-    std::vector<lrc::api::AccountConversation> conversations;
+    QVector<QVector<lrc::api::AccountConversation>> allConversations;
     if (tableView == callsView && convModel != nullptr) {
-        conversations = values.find(lrc::api::ConferenceableItem::CALL)->second[row];
+        allConversations = values.value(lrc::api::ConferenceableItem::CALL);
     } else if (tableView == contactsView && convModel != nullptr) {
-        conversations = values.find(lrc::api::ConferenceableItem::CONTACT)->second[row];
+        allConversations = values.value(lrc::api::ConferenceableItem::CONTACT);
     }
+    if (allConversations.size() < row) {
+        return nil;
+    }
+
+    QVector<lrc::api::AccountConversation> conversations = allConversations[row];
     if (conversations.size() < 1) {
         return nil;
     }
@@ -277,9 +289,9 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
         return 0;
     }
     if (tableView == contactsView) {
-        return values.count(lrc::api::ConferenceableItem::CONTACT) ? values.find(lrc::api::ConferenceableItem::CONTACT)->second.size() : 0;
+        return values.count(lrc::api::ConferenceableItem::CONTACT) ? values.value(lrc::api::ConferenceableItem::CONTACT).size() : 0;
     } else if (tableView == callsView) {
-        return values.count(lrc::api::ConferenceableItem::CALL) ? values.find(lrc::api::ConferenceableItem::CALL)->second.size() : 0;
+        return values.count(lrc::api::ConferenceableItem::CALL) ? values.value(lrc::api::ConferenceableItem::CALL).size() : 0;
     }
     return 0;
 }

@@ -21,7 +21,7 @@
 #import "AbstractLoadingWC.h"
 #import "LoadingWCDelegate.h"
 #import "LrcModelsProtocol.h"
-#include <string>
+#include <qstring.h>
 
 
 @protocol RegisterNameDelegate <LoadingWCDelegate>
@@ -45,6 +45,6 @@
 
 @property (assign)NSString* passwordString;
 
-@property std::string selectedAccountID;
+@property QString selectedAccountID;
 
 @end

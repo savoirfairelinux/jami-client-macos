@@ -18,7 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <string>
+#import <qstring.h>
 
 namespace lrc {
     namespace api {
@@ -36,7 +36,7 @@ namespace lrc {
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;
 
-- (void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
+- (void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel*)model;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow aVModel:(lrc::api::AVModel*) avModel;
 - (void) presentLeaveMessageView;

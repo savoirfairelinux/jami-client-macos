@@ -60,7 +60,7 @@
 
 -(IBAction)accept:(id)sender
 {
-    if (self.accountModel->changeAccountPassword(self.selectedAccountID, [[oldPassword stringValue] UTF8String], [[newPassword stringValue] UTF8String])) {
+    if (self.accountModel->changeAccountPassword(self.selectedAccountID, QString::fromNSString([oldPassword stringValue]), QString::fromNSString([newPassword stringValue]))) {
         lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
         BOOL haspassword = ![[newPassword stringValue] isEqualToString:@""];
         accountProperties.archiveHasPassword = haspassword;

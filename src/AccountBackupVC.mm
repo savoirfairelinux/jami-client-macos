@@ -70,7 +70,7 @@
 - (IBAction)exportAccount:(id)sender
 {
     NSSavePanel* filePicker = [NSSavePanel savePanel];
-    NSString* name  = [@(self.accountToBackup.c_str()) stringByAppendingString: @".gz"];
+    NSString* name  = [self.accountToBackup.toNSString() stringByAppendingString: @".gz"];
     [filePicker setNameFieldStringValue: name];
     if ([filePicker runModal] != NSFileHandlingPanelOKButton) {
         return;
@@ -91,7 +91,7 @@
         }
         password = [input stringValue];
     }
-    if (self.accountModel->exportToFile(self.accountToBackup, fullPath, [password UTF8String])) {
+    if (self.accountModel->exportToFile(self.accountToBackup, fullPath, QString::fromNSString(password))) {
         [self.delegate completedWithSuccess:YES];
     } else {
         [self.delegate showView: errorView];

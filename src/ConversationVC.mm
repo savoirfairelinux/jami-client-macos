@@ -52,7 +52,7 @@
     IBOutlet NSLayoutConstraint *titleCenteredConstraint;
     IBOutlet NSLayoutConstraint* titleTopConstraint;
 
-    std::string convUid_;
+    QString convUid_;
     const lrc::api::conversation::Info* cachedConv_;
     lrc::api::ConversationModel* convModel_;
 
@@ -107,7 +107,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
 {
-    if (convModel_ == nil || convUid_.empty())
+    if (convModel_ == nil || convUid_.isEmpty())
         return nil;
 
     if (cachedConv_ != nil)
@@ -123,7 +123,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     return cachedConv_;
 }
 
--(void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model {
+-(void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel *)model {
     if (convUid_ == convUid && convModel_ == model)
         return;
     [self clearData];
@@ -133,9 +133,9 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
     [messagesViewVC setConversationUid:convUid_ model:convModel_];
 
-    if (convUid_.empty() || convModel_ == nil)
+    if (convUid_.isEmpty() || convModel_ == nil)
         return;
-    if([leaveMessageConversations containsObject:@(convUid_.c_str())]) {
+    if([leaveMessageConversations containsObject:convUid_.toNSString()]) {
         [leaveMessageVC setConversationUID: convUid_ conversationModel: convModel_];
     } else {
         [leaveMessageVC hide];
@@ -181,7 +181,11 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     [titleCenteredConstraint setActive:hideBestId];
     [titleTopConstraint setActive:!hideBestId];
     auto accountType = convModel_->owner.profileInfo.type;
-    [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
+    try {
+        [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
+    } catch (std::out_of_range& e) {
+        NSLog(@"contact out of range");
+    }
 }
 
 - (void) initFrame
@@ -270,11 +274,11 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
 - (void) presentLeaveMessageView {
     [leaveMessageVC setConversationUID: convUid_ conversationModel: convModel_];
-    [leaveMessageConversations addObject:@(convUid_.c_str())];
+    [leaveMessageConversations addObject:convUid_.toNSString()];
 }
 
 -(void) messageCompleted {
-    [leaveMessageConversations removeObject:@(convUid_.c_str())];
+    [leaveMessageConversations removeObject:convUid_.toNSString()];
 }
 
 @end

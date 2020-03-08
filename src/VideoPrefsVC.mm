@@ -59,7 +59,7 @@ QMetaObject::Connection previewStopped;
 QMetaObject::Connection deviceEvent;
 CVPixelBufferPoolRef pixelBufferPool;
 CVPixelBufferRef pixelBuffer;
-std::string currentVideoDevice;
+QString currentVideoDevice;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil avModel:(lrc::api::AVModel*) avModel
 {
@@ -102,7 +102,7 @@ std::string currentVideoDevice;
     int index = [sender indexOfSelectedItem];
     auto devices = avModel->getDevices();
     auto newDevice = devices.at(index);
-    auto deviceString = @(newDevice.c_str());
+    auto deviceString = newDevice.toNSString();
     avModel->setDefaultDevice(newDevice);
     [self devicesChanged];
     [self startPreview];
@@ -110,7 +110,7 @@ std::string currentVideoDevice;
 
 - (IBAction)chooseSize:(id)sender {
     int index = [sender indexOfSelectedItem];
-    auto resolution = [[sizesList itemTitleAtIndex:index] UTF8String];
+    auto resolution = QString::fromNSString([sizesList itemTitleAtIndex:index]);
     auto device = avModel->getDefaultDevice();
     try {
         auto currentSettings = avModel->getDeviceSettings(device);
@@ -119,16 +119,16 @@ std::string currentVideoDevice;
         [ratesList removeAllItems];
         currentSettings = avModel->getDeviceSettings(device);
         auto currentChannel = currentSettings.channel;
-        currentChannel = currentChannel.empty() ? "default" : currentChannel;
+        currentChannel = currentChannel.isEmpty() ? "default" : currentChannel;
         auto deviceCapabilities = avModel->getDeviceCapabilities(device);
-        auto channelCaps = deviceCapabilities.at(currentChannel);
+        auto channelCaps = deviceCapabilities[currentChannel];
         for (auto [resolution, frameRateList] : channelCaps) {
             for (auto rate : frameRateList) {
                 [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
             }
         }
         [self connectPreviewSignals];
-        [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
+        [sizesList selectItemWithTitle: currentSettings.size.toNSString()];
         [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
     } catch (...) {}
 }
@@ -158,7 +158,7 @@ std::string currentVideoDevice;
     previewStarted =
     QObject::connect(avModel,
                      &lrc::api::AVModel::rendererStarted,
-                     [=](const std::string& id) {
+                     [=](const QString& id) {
                          if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
                              return;
                          }
@@ -169,7 +169,7 @@ std::string currentVideoDevice;
                         frameUpdated =
                          QObject::connect(avModel,
                                           &lrc::api::AVModel::frameUpdated,
-                                          [=](const std::string& id) {
+                                          [=](const QString& id) {
                                               if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
                                                   return;
                                               }
@@ -182,7 +182,7 @@ std::string currentVideoDevice;
                          });
                          previewStopped = QObject::connect(avModel,
                                                            &lrc::api::AVModel::rendererStopped,
-                                                           [=](const std::string& id) {
+                                                           [=](const QString& id) {
                                                                if (id != lrc::api::video
                                                                    ::PREVIEW_RENDERER_ID) {
                                                                    return;
@@ -255,13 +255,13 @@ std::string currentVideoDevice;
     for (auto device : devices) {
         try {
             auto settings = avModel->getDeviceSettings(device);
-            [videoDevicesList addItemWithTitle: @(settings.name.c_str())];
+            [videoDevicesList addItemWithTitle: settings.name.toNSString()];
         } catch (...) {}
     }
     currentVideoDevice = defaultDevice;
     try {
         auto settings = avModel->getDeviceSettings(defaultDevice);
-        [videoDevicesList selectItemWithTitle: @(settings.name.c_str())];
+        [videoDevicesList selectItemWithTitle: settings.name.toNSString()];
     } catch (...) {}
     [self devicesChanged];
 }
@@ -270,12 +270,13 @@ std::string currentVideoDevice;
     [self connectdDeviceEvent];
     [previewView fillWithBlack];
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    if (![appDelegate getActiveCalls].size()) {
+    auto calls = [appDelegate getActiveCalls];
+    if (calls.empty()) {
         self.previewView.stopRendering = false;
         [self connectPreviewSignals];
         avModel->stopPreview();
         avModel->startPreview();
-   }
+    }
 }
 
 -(void) devicesChanged {
@@ -289,15 +290,15 @@ std::string currentVideoDevice;
     try {
         auto currentSettings = avModel->getDeviceSettings(device);
         auto currentChannel = currentSettings.channel;
-        currentChannel = currentChannel.empty() ? "default" : currentChannel;
-        auto channelCaps = deviceCapabilities.at(currentChannel);
+        currentChannel = currentChannel.isEmpty() ? "default" : currentChannel;
+        auto channelCaps = deviceCapabilities[currentChannel];
         for (auto [resolution, frameRateList] : channelCaps) {
-            [sizesList  addItemWithTitle: @(resolution.c_str())];
+            [sizesList  addItemWithTitle: resolution.toNSString()];
             for (auto rate : frameRateList) {
                 [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
             }
         }
-        [sizesList selectItemWithTitle: @(currentSettings.size.c_str())];
+        [sizesList selectItemWithTitle: currentSettings.size.toNSString()];
         [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
     } catch (...) {}
 }

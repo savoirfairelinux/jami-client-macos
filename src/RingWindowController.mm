@@ -197,12 +197,12 @@ typedef NS_ENUM(NSInteger, ViewState) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         path = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     }
-    self.dataTransferModel->downloadDirectory = std::string([path UTF8String]);
+    self.dataTransferModel->downloadDirectory = QString::fromNSString(path);
     if(appSandboxed()) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        avModel->setRecordPath([[paths objectAtIndex:0] UTF8String]);
-    } else if (avModel->getRecordPath().empty()) {
-        avModel->setRecordPath([NSHomeDirectory() UTF8String]);
+        avModel->setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
+    } else if (avModel->getRecordPath().isEmpty()) {
+        avModel->setRecordPath(QString::fromNSString(NSHomeDirectory()));
     }
     NSToolbar *tb = [[self window] toolbar];
     [tb setAllowsUserCustomization:NO];
@@ -217,44 +217,51 @@ typedef NS_ENUM(NSInteger, ViewState) {
 {
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showCallView,
-                     [self](const std::string accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
-                         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
-                         if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
-                             [smartViewVC selectPendingList];
-                         else
-                             [smartViewVC selectConversationList];
+        auto* accInfo = &self.accountModel->getAccountInfo(accountId);
+        try {
+            if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
+                [smartViewVC selectPendingList];
+            else
+                [smartViewVC selectConversationList];
 
-                         [currentCallVC setCurrentCall:convInfo.callId
-                                          conversation:convInfo.uid
-                                               account:accInfo
-                                               avModel: avModel];
-                         [self changeViewTo:SHOW_CALL_SCREEN];
-                         [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
-
-                     });
+            [currentCallVC setCurrentCall:convInfo.callId
+                             conversation:convInfo.uid
+                                  account:accInfo
+                                  avModel: avModel];
+            [self changeViewTo:SHOW_CALL_SCREEN];
+            [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
+        } catch (std::out_of_range& e) {
+            NSLog(@"contact out of range");
+        }
+    });
 
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showIncomingCallView,
-                     [self](const std::string accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
-                         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
-                         if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
-                             [smartViewVC selectPendingList];
-                         else
-                             [smartViewVC selectConversationList];
-                         [currentCallVC setCurrentCall:convInfo.callId
-                                          conversation:convInfo.uid
-                                               account:accInfo
-                                               avModel: avModel];
-                         [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
-                         [self changeViewTo:SHOW_CALL_SCREEN];
-                         [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
-                     });
+        auto* accInfo = &self.accountModel->getAccountInfo(accountId);
+        try {
+            if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
+                [smartViewVC selectPendingList];
+            else
+                [smartViewVC selectConversationList];
+            [currentCallVC setCurrentCall:convInfo.callId
+                             conversation:convInfo.uid
+                                  account:accInfo
+                                  avModel: avModel];
+            [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
+            [self changeViewTo:SHOW_CALL_SCREEN];
+            [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
+        } catch (std::out_of_range& e) {
+            NSLog(@"contact out of range");
+        }
+    });
 
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showChatView,
-                     [self](const std::string& accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info& convInfo){
                          auto& accInfo = self.accountModel->getAccountInfo(accountId);
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
@@ -263,7 +270,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                      });
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showLeaveMessageView,
-                     [self](const std::string& accountId,
+                     [self](const QString& accountId,
                             const lrc::api::conversation::Info& convInfo){
                          auto& accInfo = self.accountModel->getAccountInfo(accountId);
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
@@ -274,7 +281,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 #pragma mark - Ring account migration
 
-- (void) migrateRingAccount:(std::string) acc
+- (void) migrateRingAccount:(const QString&) acc
 {
     self.migrateWC = [[MigrateRingAccountsWC alloc] initWithDelegate:self actionCode:1];
     self.migrateWC.accountModel = self.accountModel;
@@ -312,10 +319,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
         auto *callModel = account.callModel.get();
         self.callState = QObject::connect(callModel,
                                           &lrc::api::NewCallModel::callStatusChanged,
-                                          [self, callModel](const std::string callId) {
+                                          [self, callModel](const QString& callId) {
                                               if (callModel->hasCall(callId)) {
                                                   auto call = callModel->getCall(callId);
-                                                  [smartViewVC reloadConversationWithURI: @(call.peerUri.c_str())];
+                                                  [smartViewVC reloadConversationWithURI: call.peerUri.toNSString()];
                                               }
                                           });
     } @catch (NSException *ex) {
@@ -354,15 +361,15 @@ typedef NS_ENUM(NSInteger, ViewState) {
         auto& registeredName = account.registeredName;
         auto& ringID = account.profileInfo.uri;
         NSString* uriToDisplay = nullptr;
-        if (!registeredName.empty()) {
-            uriToDisplay = @(registeredName.c_str());
+        if (!registeredName.isEmpty()) {
+            uriToDisplay = registeredName.toNSString();
             [explanationLabel setStringValue: NSLocalizedString(@"This is your Jami username. \nCopy and share it with your friends!", @"Explanation label when user have Jami username")];
         } else {
-            uriToDisplay = @(ringID.c_str());
+            uriToDisplay = ringID.toNSString();
             [explanationLabel setStringValue: NSLocalizedString(@"This is your ID. \nCopy and share it with your friends!", @"Explanation label when user have just ID")];
         }
         [ringIDLabel setStringValue:uriToDisplay];
-        [self drawQRCode:@(ringID.c_str())];
+        [self drawQRCode: ringID.toNSString()];
     }
     @catch (NSException *ex) {
         NSLog(@"Caught exception %@: %@", [ex name], [ex reason]);
@@ -560,8 +567,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 #pragma mark - CallViewControllerDelegate
 
--(void) conversationInfoUpdatedFor:(const std::string&) conversationID {
-    [smartViewVC reloadConversationWithUid:@(conversationID.c_str())];
+-(void) conversationInfoUpdatedFor:(const QString&) conversationID {
+    [smartViewVC reloadConversationWithUid:conversationID.toNSString()];
 }
 
 -(void) callFinished {
@@ -569,29 +576,29 @@ typedef NS_ENUM(NSInteger, ViewState) {
 }
 
 -(void) showConversation:(NSString* )conversationId forAccount:(NSString*)accountId {
-    auto& accInfo = self.accountModel->getAccountInfo([accountId UTF8String]);
+    auto& accInfo = self.accountModel->getAccountInfo(QString::fromNSString(accountId));
     [chooseAccountVC selectAccount: accountId];
-    [settingsVC setSelectedAccount: [accountId UTF8String]];
+    [settingsVC setSelectedAccount: QString::fromNSString(accountId)];
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [smartViewVC selectConversationList];
     [self updateRingID];
-    auto convInfo = getConversationFromUid([conversationId UTF8String], *accInfo.conversationModel.get());
+    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
     auto convQueue = accInfo.conversationModel.get()->allFilteredConversations();
     if (convInfo != convQueue.end()) {
         [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];
         [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
-        accInfo.conversationModel.get()->clearUnreadInteractions([conversationId UTF8String]);
+        accInfo.conversationModel.get()->clearUnreadInteractions(QString::fromNSString(conversationId));
     }
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
 
 -(void) showCall:(NSString* )callId forAccount:(NSString*)accountId forConversation:(NSString*)conversationId {
-    auto& accInfo = self.accountModel->getAccountInfo([accountId UTF8String]);
+    auto& accInfo = self.accountModel->getAccountInfo(QString::fromNSString(accountId));
     [chooseAccountVC selectAccount: accountId];
     [settingsVC setSelectedAccount:accInfo.id];
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [self updateRingID];
-    auto convInfo = getConversationFromUid([conversationId UTF8String], *accInfo.conversationModel.get());
+    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
     auto convQueue = accInfo.conversationModel.get()->allFilteredConversations();
     if (convInfo != convQueue.end()) {
         if (accInfo.contactModel->getContact(convInfo->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
@@ -600,21 +607,21 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [smartViewVC selectConversationList];
         [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
     }
-    [currentCallVC setCurrentCall:[callId UTF8String]
-                     conversation:[conversationId UTF8String]
+    [currentCallVC setCurrentCall:QString::fromNSString(callId)
+                     conversation:QString::fromNSString(conversationId)
                           account:&accInfo
                           avModel:avModel];
     [self changeViewTo:SHOW_CALL_SCREEN];
 }
 
 -(void) showContactRequestFor:(NSString* )accountId contactUri:(NSString*)uri {
-    auto& accInfo = self.accountModel->getAccountInfo([accountId UTF8String]);
+    auto& accInfo = self.accountModel->getAccountInfo(QString::fromNSString(accountId));
     [chooseAccountVC selectAccount: accountId];
     [settingsVC setSelectedAccount:accInfo.id];
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [self updateRingID];
     [smartViewVC selectPendingList];
-    auto convInfo = getConversationFromURI([uri UTF8String], *accInfo.conversationModel.get());
+    auto convInfo = getConversationFromURI(QString::fromNSString(uri), *accInfo.conversationModel.get());
     auto convQueue = accInfo.conversationModel.get()->allFilteredConversations();
     if (convInfo != convQueue.end()) {
         [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];

@@ -19,7 +19,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
-#include <string>
+#include <qstring>
 
 @protocol AccountGeneralDelegate <NSObject>
 -(void) triggerAdvancedOptions;
@@ -29,13 +29,13 @@
 @protocol AccountGeneralProtocol
 @property (retain, nonatomic) id <AccountGeneralDelegate> delegate;
 - (IBAction)triggerAdwancedSettings: (NSButton *)sender;
-- (void) setSelectedAccount:(std::string) account;
+- (void) setSelectedAccount:(const QString&) account;
 @end
 
 @interface AccountSettingsVC : NSViewController <LrcModelsProtocol, AccountGeneralDelegate>
 - (void) initFrame;
-- (void) setSelectedAccount:(std::string) account;
+- (void) setSelectedAccount:(const QString&) account;
 - (void) show;
--(void) hide;
+- (void) hide;
 
 @end

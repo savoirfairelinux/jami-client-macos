@@ -44,7 +44,7 @@
 @implementation AddSIPAccountVC
 
 QMetaObject::Connection accountCreated;
-std::string accountToCreate;
+QString accountToCreate;
 NSTimer* timeoutTimer;
 @synthesize accountModel;
 
@@ -82,25 +82,24 @@ NSTimer* timeoutTimer;
     QObject::disconnect(accountCreated);
     accountCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
                                               auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
-                                              std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
-                                              self.accountModel->setAvatar(accountID, imageToString);
+                                              self.accountModel->setAvatar(accountID, QString(imageToBytes));
                                           }
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
                                           if(![serverField.stringValue isEqualToString:@""]) {
-                                              accountProperties.hostname = [serverField.stringValue UTF8String];
+                                              accountProperties.hostname = QString::fromNSString(serverField.stringValue);
                                           }
                                           if(![passwordField.stringValue isEqualToString:@""]) {
-                                              accountProperties.password = [passwordField.stringValue UTF8String];
+                                              accountProperties.password = QString::fromNSString(passwordField.stringValue);
                                           }
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           QObject::disconnect(accountCreated);
                                           [self.delegate completedWithSuccess: YES];
                                       });
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, [displayName UTF8String], "", "", "", [userNameField.stringValue UTF8String]);
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::SIP, QString::fromNSString(displayName), "", "", "", QString::fromNSString(userNameField.stringValue));
 
     timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                     target:self

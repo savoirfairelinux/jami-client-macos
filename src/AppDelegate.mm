@@ -151,7 +151,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 {
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::newTrustRequest,
-                     [self] (const std::string& accountId, const std::string& contactUri) {
+                     [self] (const QString& accountId, const QString& contactUri) {
                          BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ContactRequestNotifications];
                          if(!shouldNotify) {
                              return;
@@ -160,16 +160,16 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          auto contactModel = lrc->getAccountModel()
                          .getAccountInfo(accountId).contactModel.get();
                          NSString* name = contactModel->getContact(contactUri)
-                         .registeredName.empty() ?
-                         @(contactUri.c_str()) :
-                         @(contactModel->getContact(contactUri).registeredName.c_str());
+                         .registeredName.isEmpty() ?
+                         contactUri.toNSString():
+                         contactModel->getContact(contactUri).registeredName.toNSString();
                          NSString* localizedMessage =
                          NSLocalizedString(@"Send you a contact request",
                                            @"Notification message");
 
                          NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-                         userInfo[ACCOUNT_ID] = @(accountId.c_str());
-                         userInfo[CONTACT_URI] = @(contactUri.c_str());
+                         userInfo[ACCOUNT_ID] = accountId.toNSString();
+                         userInfo[CONTACT_URI] = contactUri.toNSString();
                          userInfo[NOTIFICATION_TYPE] = CONTACT_REQUEST_NOTIFICATION;
 
                          [notification setTitle: name];
@@ -183,7 +183,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::showIncomingCallView,
-                     [self] (const std::string& accountId, lrc::api::conversation::Info conversationInfo) {
+                     [self] (const QString& accountId, lrc::api::conversation::Info conversationInfo) {
                          BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::CallNotifications];
                          if(!shouldNotify) {
                              return;
@@ -201,9 +201,9 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          NSUserNotification* notification = [[NSUserNotification alloc] init];
 
                          NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-                         userInfo[ACCOUNT_ID] = @(accountId.c_str());
-                         userInfo[CALL_ID] = @(conversationInfo.callId.c_str());
-                         userInfo[CONVERSATION_ID] = @(conversationInfo.uid.c_str());
+                         userInfo[ACCOUNT_ID] = accountId.toNSString();
+                         userInfo[CALL_ID] = conversationInfo.callId.toNSString();
+                         userInfo[CONVERSATION_ID] = conversationInfo.uid.toNSString();
                          userInfo[NOTIFICATION_TYPE] = CALL_NOTIFICATION;
 
                          NSString* localizedTitle = [NSString stringWithFormat:
@@ -227,7 +227,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::newUnreadInteraction,
-                     [self] (const std::string& accountId, const std::string& conversation,
+                     [self] (const QString& accountId, const QString& conversation,
                              uint64_t interactionId, const lrc::api::interaction::Info& interaction) {
                          BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::MessagesNotifications];
                          if(!shouldNotify) {
@@ -236,10 +236,10 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          NSUserNotification* notification = [[NSUserNotification alloc] init];
 
                          NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-                         userInfo[ACCOUNT_ID] = @(accountId.c_str());
-                         userInfo[CONVERSATION_ID] = @(conversation.c_str());
+                         userInfo[ACCOUNT_ID] = accountId.toNSString();
+                         userInfo[CONVERSATION_ID] = conversation.toNSString();
                          userInfo[NOTIFICATION_TYPE] = MESSAGE_NOTIFICATION;
-                         NSString* name = @(interaction.authorUri.c_str());
+                         NSString* name = interaction.authorUri.toNSString();
                          auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
                          auto convQueue = lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get()->allFilteredConversations();
                          if (convIt != convQueue.end()) {
@@ -251,8 +251,8 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
                          [notification setTitle:localizedTitle];
                          [notification setSoundName:NSUserNotificationDefaultSoundName];
-                         [notification setSubtitle:@(interaction.body.c_str())];
-                         [notification setUserInfo: userInfo];
+                         [notification setSubtitle:interaction.body.toNSString()];
+                         [notification setUserInfo:userInfo];
 
                          [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
                      });
@@ -345,16 +345,16 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     [self.dialpad.window makeKeyAndOrderFront:self];
 }
 
--(std::vector<std::string>) getActiveCalls {
+-(QVector<QString>) getActiveCalls {
     return lrc->activeCalls();
 }
 
 -(void)setRingtonePath {
-    std::vector<std::string> accounts = lrc->getAccountModel().getAccountList();
+    QStringList accounts = lrc->getAccountModel().getAccountList();
     NSFileManager *fileManager = [NSFileManager defaultManager];
     for (auto account: accounts) {
         lrc::api::account::ConfProperties_t accountProperties = lrc->getAccountModel().getAccountConfig(account);
-        NSString *ringtonePath = @(accountProperties.Ringtone.ringtonePath.c_str());
+        NSString *ringtonePath = accountProperties.Ringtone.ringtonePath.toNSString();
         if (![fileManager fileExistsAtPath: ringtonePath]) {
             accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
             lrc->getAccountModel().setAccountConfig(account, accountProperties);

@@ -105,16 +105,16 @@ namespace Interfaces {
         return QPixmap::fromImage(image);
     }
 
-    char letterForDefaultUserPixmap(const lrc::api::contact::Info& contact)
+    QChar letterForDefaultUserPixmap(const lrc::api::contact::Info& contact)
     {
-        if (!contact.profileInfo.alias.empty()) {
-            return std::toupper(contact.profileInfo.alias.at(0));
+        if (!contact.profileInfo.alias.isEmpty()) {
+            return contact.profileInfo.alias.at(0).toUpper();
         } else if((contact.profileInfo.type == lrc::api::profile::Type::RING ||
                 contact.profileInfo.type == lrc::api::profile::Type::PENDING) &&
-                  !contact.registeredName.empty()) {
-            return std::toupper(contact.registeredName.at(0));
+                  !contact.registeredName.isEmpty()) {
+            return contact.registeredName.at(0).toUpper();
         } else {
-            return std::toupper(contact.profileInfo.uri.at(0));
+            return contact.profileInfo.uri.at(0).toUpper();
         }
     }
 
@@ -128,7 +128,7 @@ namespace Interfaces {
         try {
             auto contact = accountInfo.contactModel->getContact(conversation.participants[0]);
             auto& avatar = contact.profileInfo.avatar;
-            if (!avatar.empty()) {
+            if (!avatar.isEmpty()) {
                 QPixmap pxm;
                 const int radius = size.height() / 2;
 
@@ -145,7 +145,7 @@ namespace Interfaces {
                 }
                 */
 
-                auto contactPhoto = qvariant_cast<QPixmap>(personPhoto(QByteArray::fromStdString(avatar)));
+                auto contactPhoto = qvariant_cast<QPixmap>(personPhoto(avatar.toUtf8()));
                 contactPhoto = contactPhoto.scaled(size, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
 
                 QPixmap finalImg;
@@ -183,29 +183,27 @@ namespace Interfaces {
 
                 return pxm;
             } else {
-                char color = contact.profileInfo.uri.at(0);
-                contact.profileInfo.alias.erase(std::remove(contact.profileInfo.alias.begin(), contact.profileInfo.alias.end(), '\n'), contact.profileInfo.alias.end());
-                contact.profileInfo.alias.erase(std::remove(contact.profileInfo.alias.begin(), contact.profileInfo.alias.end(), ' '), contact.profileInfo.alias.end());
-                contact.profileInfo.alias.erase(std::remove(contact.profileInfo.alias.begin(), contact.profileInfo.alias.end(), '\r'), contact.profileInfo.alias.end());
-
-                if (!contact.profileInfo.alias.empty()) {
-                    return drawDefaultUserPixmap(size, color, std::toupper(contact.profileInfo.alias.at(0)));
+                if (contact.profileInfo.uri.isEmpty()) {
+                    return QVariant();
+                }
+                auto color = contact.profileInfo.uri.at(0);
+                auto trimmed = contact.profileInfo.alias.trimmed().replace("\r","").replace("\n","");
+                if (!trimmed.isEmpty()) {
+                    return drawDefaultUserPixmap(size, color.toLatin1(), trimmed.at(0).toUpper().toLatin1());
                 } else if((contact.profileInfo.type == lrc::api::profile::Type::RING ||
                            contact.profileInfo.type == lrc::api::profile::Type::PENDING) &&
-                          !contact.registeredName.empty()) {
-                    contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\n'), contact.registeredName.end());
-                    contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), ' '), contact.registeredName.end());
-                    contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\r'), contact.registeredName.end());
-                    if(!contact.registeredName.empty()) {
-                        return drawDefaultUserPixmap(size, color, std::toupper(contact.registeredName.at(0)));
+                          !contact.registeredName.isEmpty()) {
+                    trimmed = contact.registeredName.trimmed().replace("\r","").replace("\n","");
+                    if(!trimmed.isEmpty()) {
+                        return drawDefaultUserPixmap(size, color.toLatin1(), trimmed.at(0).toUpper().toLatin1());
                     } else {
-                        return drawDefaultUserPixmapUriOnly(size, color);
+                        return drawDefaultUserPixmapUriOnly(size, color.toLatin1());
                     }
                 } else {
-                    return drawDefaultUserPixmapUriOnly(size, color);
+                    return drawDefaultUserPixmapUriOnly(size, color.toLatin1());
                 }
             }
-        } catch (const std::out_of_range& e) {
+        } catch (...) {
             return QVariant();
         }
     }

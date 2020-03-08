@@ -27,7 +27,7 @@
 {
     IBOutlet MessagesVC* messagesViewVC;
 
-    std::string convUid_;
+    QString convUid_;
     lrc::api::ConversationModel* convModel_;
 }
 
@@ -41,7 +41,7 @@
 
 @synthesize messageField,sendButton;
 
--(void)setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel *)model
+-(void)setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel *)model
 {
     convUid_ = convUid;
     convModel_ = model;
@@ -62,7 +62,7 @@
     /* make sure there is text to send */
     NSString* text = self.message;
     if (text && text.length > 0) {
-        convModel_->sendMessage(convUid_, std::string([text UTF8String]));
+        convModel_->sendMessage(convUid_, QString::fromNSString(text));
         self.message = @"";
         [messageField setStringValue:@""];
     }

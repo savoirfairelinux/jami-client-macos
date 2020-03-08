@@ -76,7 +76,7 @@
 
     BOOL lookupQueued;
     NSString* usernameWaitingForLookupResult;
-    std::string accountToCreate;
+    QString accountToCreate;
 }
 
 NSInteger const DISPLAY_NAME_TAG                = 1;
@@ -249,7 +249,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     QObject::disconnect(accountRemoved);
     accountCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accountToCreate) != 0) {
                                               return;
                                           }
@@ -259,17 +259,18 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
                                               auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
-                                              std::string imageToString = std::string(imageToBytes.constData(), imageToBytes.length());
-                                              self.accountModel->setAvatar(accountID, imageToString);
+                                              self.accountModel->setAvatar(accountID, QString(imageToBytes));
                                           }
                                           //register username
                                           if (self.registeredName && ![self.registeredName isEqualToString:@""]) {
                                               NSString *passwordString = self.password ? self.password: @"";
                                               NSString *usernameString = self.registeredName;
-                                              self.accountModel->registerName(accountID, [passwordString UTF8String], [usernameString UTF8String]);
+                                              self.accountModel->registerName(accountID,
+                                                                              QString::fromNSString(passwordString),
+                                                                              QString::fromNSString(usernameString));
                                           }
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
-                                          accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
+                                          accountProperties.Ringtone.ringtonePath = QString::fromNSString(defaultRingtonePath());
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           [self registerDefaultPreferences];
                                           [self.delegate didCreateAccountWithSuccess:YES accountId: accountToCreate];
@@ -277,7 +278,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     //if account creation failed remove loading view
     accountRemoved = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountRemoved,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accountToCreate) != 0) {
                                               return;
                                           }
@@ -288,7 +289,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [self display:loadingView];
     [progressBar startAnimation:nil];
 
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, [displayNameField.stringValue UTF8String],"",[passwordField.stringValue UTF8String], "");
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, QString::fromNSString(displayNameField.stringValue),"",QString::fromNSString(passwordField.stringValue), "");
 }
 
 /**

@@ -18,7 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#include <string>
+#include <qstring.h>
 
 namespace lrc {
     namespace api {
@@ -29,17 +29,17 @@ namespace lrc {
 }
 
 @protocol CallInConferenceVCDelegate
--(void)removePreviewForContactUri:(std::string)uri forCall:(std::string) callId;
+-(void)removePreviewForContactUri:(const QString&)uri forCall:(const QString&) callId;
 @end
 
 @interface CallInConferenceVC: NSViewController
 
 -(id) initWithNibName:(NSString *)nibNameOrNil
                bundle:(NSBundle *)nibBundleOrNil
-               callId:(const std::string)callId
+               callId:(const QString&)callId
           accountInfo:(const lrc::api::account::Info *)accInfo;
 @property (retain, nonatomic) id <CallInConferenceVCDelegate> delegate;
-@property std::string initiatorCallId;
+@property QString initiatorCallId;
 
 @end
 

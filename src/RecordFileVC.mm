@@ -91,7 +91,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     renderConnections.frameUpdated =
     QObject::connect(avModel,
                      &lrc::api::AVModel::frameUpdated,
-                     [=](const std::string& id) {
+                     [=](const QString& id) {
                          if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
                              return;
                          }
@@ -206,7 +206,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
 }
 
 -(void) stopRecord {
-    avModel->stopLocalRecorder([fileName UTF8String]);
+    avModel->stopLocalRecorder(QString::fromNSString(fileName));
     recording = false;
     [durationTimer invalidate];
     durationTimer = nil;
@@ -219,11 +219,11 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
             avModel->startPreview();
         }
         [self setRecordingState];
-        std::string file_name = avModel->startLocalRecorder(isAudio);
-        if (file_name.empty()) {
+        QString file_name = avModel->startLocalRecorder(isAudio);
+        if (file_name.isEmpty()) {
             return;
         }
-        fileName = @(file_name.c_str());
+        fileName = file_name.toNSString();
         recording = true;
         if (durationTimer == nil)
             durationTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -253,7 +253,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     if (![appDelegate getActiveCalls].size()) {
         avModel->stopPreview();
         QObject::disconnect(renderConnections.frameUpdated);
-        avModel->stopLocalRecorder([fileName UTF8String]);
+        avModel->stopLocalRecorder(QString::fromNSString(fileName));
     }
 }
 

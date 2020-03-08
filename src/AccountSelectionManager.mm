@@ -64,7 +64,7 @@ NSString* const savedUserAccountKey = @"savedUserSelectedAccountKey";
         @throw noAccEx;
     } else {
         try {
-            return accMdl_->getAccountInfo(std::string([savedAccountId UTF8String]));
+            return accMdl_->getAccountInfo(QString::fromNSString(savedAccountId));
         } catch (std::out_of_range& e) {
             NSException* outOfRangeEx = [NSException
                                          exceptionWithName:@"outofrange"
@@ -81,7 +81,7 @@ NSString* const savedUserAccountKey = @"savedUserSelectedAccountKey";
     if (acc.profileInfo.type == lrc::api::profile::Type::INVALID)
         return;
 
-    [self saveAccountWithId:@(acc.id.c_str())];
+    [self saveAccountWithId: acc.id.toNSString()];
 }
 
 @end

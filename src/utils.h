@@ -39,13 +39,12 @@ static inline NSString* bestIDForConversation(const lrc::api::conversation::Info
 {
     try {
         auto contact = model.owner.contactModel->getContact(conv.participants[0]);
-        if (!contact.registeredName.empty()) {
-            contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\n'), contact.registeredName.end());
-            contact.registeredName.erase(std::remove(contact.registeredName.begin(), contact.registeredName.end(), '\r'), contact.registeredName.end());
-            return [@(contact.registeredName.c_str()) removeEmptyLinesAtBorders];
+        auto name = contact.registeredName.trimmed().replace("\r","").replace("\n","");
+        if (!name.isEmpty()) {
+            return [name.toNSString() removeEmptyLinesAtBorders];
         }
         else {
-            return [@(contact.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
+            return [contact.profileInfo.uri.trimmed().replace("\r","").replace("\n","").toNSString() removeEmptyLinesAtBorders];
         }
     } catch (std::out_of_range& e) {
         NSLog(@"bestIDForConversation: getContact - out of range");
@@ -55,50 +54,50 @@ static inline NSString* bestIDForConversation(const lrc::api::conversation::Info
 
 static inline NSString* bestIDForAccount(const lrc::api::account::Info& account)
 {
-    if (!account.registeredName.empty()) {
-        return [@(account.registeredName.c_str()) removeEmptyLinesAtBorders];
+    auto name = account.registeredName.trimmed().replace("\r","").replace("\n","");
+    if (!name.isEmpty()) {
+        return [name.toNSString() removeEmptyLinesAtBorders];
     }
-    return [@(account.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
+    return [account.profileInfo.uri.trimmed().replace("\r","").replace("\n","").toNSString() removeEmptyLinesAtBorders];
 }
 
 static inline NSString* bestNameForAccount(const lrc::api::account::Info& account)
 {
-    if (account.profileInfo.alias.empty()) {
+    if (account.profileInfo.alias.isEmpty()) {
         return bestIDForAccount(account);
     }
-    return @(account.profileInfo.alias.c_str());
+    return account.profileInfo.alias.toNSString();
 }
 
 static inline NSString* bestIDForContact(const lrc::api::contact::Info& contact)
 {
-    if (!contact.registeredName.empty()) {
-        return [@(contact.registeredName.c_str()) removeEmptyLinesAtBorders];
+    auto name = contact.registeredName.trimmed().replace("\r","").replace("\n","");
+    if (!name.isEmpty()) {
+        return [name.toNSString() removeEmptyLinesAtBorders];
     }
-    return [@(contact.profileInfo.uri.c_str()) removeEmptyLinesAtBorders];
+    return [contact.profileInfo.uri.trimmed().replace("\r","").replace("\n","").toNSString() removeEmptyLinesAtBorders];
 }
 
 static inline NSString* bestNameForContact(const lrc::api::contact::Info& contact)
 {
-    if (contact.profileInfo.alias.empty()) {
+    if (contact.profileInfo.alias.isEmpty()) {
         return bestIDForContact(contact);
     }
-    return @(contact.profileInfo.alias.c_str());
+    return contact.profileInfo.alias.toNSString();
 }
 
 static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     try {
         auto contact = model.owner.contactModel->getContact(conv.participants[0]);
-        if (contact.profileInfo.alias.empty()) {
+        if (contact.profileInfo.alias.isEmpty()) {
             return bestIDForConversation(conv, model);
         }
         auto alias = contact.profileInfo.alias;
-        alias.erase(std::remove(alias.begin(), alias.end(), '\n'), alias.end());
-        alias.erase(std::remove(alias.begin(), alias.end(), '\r'), alias.end());
         if(alias.length() == 0) {
             return bestIDForConversation(conv, model);
         }
-        return @(alias.c_str());
+        return [alias.toNSString() removeEmptyLinesAtBorders];
     } catch (std::out_of_range& e) {
         NSLog(@"bestNameForConversation: getContact - out of range");
         return @"";
@@ -130,7 +129,7 @@ static inline lrc::api::profile::Type profileType(const lrc::api::conversation::
  * @param model ConversationModel in which to do the lookup
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
-static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const std::string& uid, const lrc::api::ConversationModel& model) {
+static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const QString& uid, const lrc::api::ConversationModel& model) {
     return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
                         [&] (const lrc::api::conversation::Info& conv) {
                             return uid == conv.uid;
@@ -143,7 +142,7 @@ static inline lrc::api::ConversationModel::ConversationQueue::const_iterator get
  * @param model ConversationModel in which to do the lookup
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
-static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromURI(const std::string& uri, const lrc::api::ConversationModel& model) {
+static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromURI(const QString& uri, const lrc::api::ConversationModel& model) {
     return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
                         [&] (const lrc::api::conversation::Info& conv) {
                             return uri == conv.participants[0];

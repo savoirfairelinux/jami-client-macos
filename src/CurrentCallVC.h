@@ -34,7 +34,7 @@ namespace lrc {
 
 @protocol CallViewControllerDelegate
 
--(void) conversationInfoUpdatedFor:(const std::string&) conversationID;
+-(void) conversationInfoUpdatedFor:(const QString&) conversationID;
 -(void) callFinished;
 
 @end
@@ -47,8 +47,8 @@ namespace lrc {
 -(void) cleanUp;
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;
--(void) setCurrentCall:(const std::string&)callUid
-          conversation:(const std::string&)convUid
+-(void) setCurrentCall:(const QString&)callUid
+          conversation:(const QString&)convUid
                account:(const lrc::api::account::Info*)account
                avModel:(lrc::api::AVModel *)avModel;
 @end

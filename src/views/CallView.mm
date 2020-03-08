@@ -179,8 +179,8 @@ NSString *currentDevice;
     currentDevice = [self.callDelegate getDefaultDeviceName];
 
     for(int i = 0 ; i < devices.size() ; ++i) {
-        std::string device = devices[i];
-        [contextualMenu insertItemWithTitle:@(device.c_str()) action:@selector(switchInput:) keyEquivalent:@"" atIndex:i];
+        QString device = devices[i];
+        [contextualMenu insertItemWithTitle:device.toNSString() action:@selector(switchInput:) keyEquivalent:@"" atIndex:i];
     }
     [contextualMenu insertItemWithTitle:NSLocalizedString(@"Share screen", @"Contextual menu entry")
                                  action:@selector(captureScreen:)

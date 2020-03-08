@@ -41,7 +41,7 @@
 
 QMetaObject::Connection accountCreatedSuccess;
 QMetaObject::Connection accountNotCreated;
-std::string accointId;
+QString accointId;
 
 @synthesize accountModel;
 
@@ -93,27 +93,27 @@ std::string accointId;
     QObject::disconnect(accountNotCreated);
     accountCreatedSuccess = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountAdded,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accointId) != 0) {
                                               return;
                                           }
                                           [self.delegate didSignInSuccess:YES];
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
-                                          accountProperties.Ringtone.ringtonePath = [defaultRingtonePath() UTF8String];
+                                          accountProperties.Ringtone.ringtonePath = QString::fromNSString(defaultRingtonePath());
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           QObject::disconnect(accountCreatedSuccess);
                                           QObject::disconnect(accountNotCreated);
                                       });
     accountNotCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::accountRemoved,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accointId) == 0) {
                                               [self showError];
                                           }
                                       });
     accountNotCreated = QObject::connect(self.accountModel,
                                       &lrc::api::NewAccountModel::invalidAccountDetected,
-                                      [self] (const std::string& accountID) {
+                                      [self] (const QString& accountID) {
                                           if(accountID.compare(accointId) == 0) {
                                               [self showError];
                                           }
@@ -121,7 +121,7 @@ std::string accointId;
 
     [self showLoading];
 
-    accointId = self.accountModel->connectToAccountManager([userNameField.stringValue UTF8String], [passwordTextField.stringValue UTF8String], [accountManagerField.stringValue UTF8String]);
+    accointId = self.accountModel->connectToAccountManager(QString::fromNSString(userNameField.stringValue), QString::fromNSString(passwordTextField.stringValue), QString::fromNSString(accountManagerField.stringValue));
 }
 
 @end

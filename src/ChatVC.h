@@ -29,7 +29,7 @@
  */
 @property (retain) NSString* message;
 
-- (void) setConversationUid:(const std::string)convUid model:(lrc::api::ConversationModel*)model;
+- (void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel*)model;
 - (void) takeFocus;
 
 @end

@@ -76,7 +76,7 @@ QMetaObject::Connection stateChanged;
 {
     const lrc::api::account::Info& accountInfo = self.accountModel->getAccountInfo(accountToMigrate);
     NSData *imageData = [[NSData alloc]
-                         initWithBase64EncodedString: @(accountInfo.profileInfo.avatar.c_str())
+                         initWithBase64EncodedString: accountInfo.profileInfo.avatar.toNSString()
                          options:NSDataBase64DecodingIgnoreUnknownCharacters];
     NSImage *image = [[NSImage alloc] initWithData:imageData];
     if (image) {
@@ -85,7 +85,7 @@ QMetaObject::Connection stateChanged;
         profileImage.image = [NSImage imageNamed:@"default_avatar_overlay.png"];
         profileImage.layer.backgroundColor = [[NSColor grayColor] CGColor];
     }
-    alias.stringValue = @(accountInfo.profileInfo.alias.c_str());
+    alias.stringValue = accountInfo.profileInfo.alias.toNSString();
 
     NSMutableAttributedString* infoMessage = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This account needs to be migrated",@"Text shown to the user")];
     [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
@@ -94,14 +94,14 @@ QMetaObject::Connection stateChanged;
                             NSFontAttributeName:[NSFont boldSystemFontOfSize:fontSize]
                             };
     auto registredName = accountInfo.registeredName;
-    if(!registredName.empty()) {
+    if(!registredName.isEmpty()) {
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Registered name: ",@"Text shown to the user")
                                                                             attributes:attrs]];
-        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@(registredName.c_str()) attributes:attrs]];
-    } else if(!accountInfo.profileInfo.uri.empty()) {
+        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:registredName.toNSString() attributes:attrs]];
+    } else if(!accountInfo.profileInfo.uri.isEmpty()) {
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"ID: ",@"Text shown to the user")
                                                                             attributes:attrs]];
-        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@(accountInfo.profileInfo.uri.c_str()) attributes:attrs]];
+        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:accountInfo.profileInfo.uri.toNSString() attributes:attrs]];
 
     }
     [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
@@ -145,7 +145,7 @@ QMetaObject::Connection stateChanged;
                                                      repeats:NO];
         stateChanged = QObject::connect(self.accountModel,
                                         &lrc::api::NewAccountModel::migrationEnded,
-                                        [self](const std::string& accountId, bool ok) {
+                                        [self](const QString& accountId, bool ok) {
                                             if (accountToMigrate != accountId) {
                                                 return;
                                             }
@@ -156,7 +156,7 @@ QMetaObject::Connection stateChanged;
                                             }
                                         });
         lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountToMigrate);
-        accountProperties.archivePassword = [self.password UTF8String];
+        accountProperties.archivePassword = QString::fromNSString(self.password);
         self.accountModel->setAccountConfig(accountToMigrate, accountProperties);
     }
 }

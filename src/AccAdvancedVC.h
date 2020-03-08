@@ -21,15 +21,15 @@
 #import <Cocoa/Cocoa.h>
 
 #import "LrcModelsProtocol.h"
-#include <string>
+#include <qstring.h>
 
 @protocol AccountAdvancedProtocol
-- (void) setSelectedAccount:(std::string) account;
+- (void) setSelectedAccount:(const QString&) account;
 @end
 
 @interface AccAdvancedVC : NSViewController <NSTableViewDataSource, NSTableViewDelegate, AccountAdvancedProtocol, LrcModelsProtocol>
 
-@property std::string selectedAccountID;
+@property QString selectedAccountID;
 @property (unsafe_unretained) IBOutlet NSButton* selectCACertificateButton;
 @property (unsafe_unretained) IBOutlet NSButton* selectUserCertificateButton;
 @property (unsafe_unretained) IBOutlet NSButton* selectPrivateKeyButton;
