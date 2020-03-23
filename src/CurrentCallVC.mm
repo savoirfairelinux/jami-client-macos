@@ -244,7 +244,9 @@ CVPixelBufferRef pixelBufferPreview;
     self.movableBaseForView.movable = true;
     previewView.frame = movableBaseForView.bounds;
     hidePreviewBackground.frame = [self frameForExpendPreviewButton];
-    hidePreviewButton.contentTintColor = [NSColor blackColor];
+    if ([hidePreviewButton respondsToSelector:@selector(contentTintColor)]) {
+        hidePreviewButton.contentTintColor = [NSColor blackColor];
+    }
 }
 
 - (void)awakeFromNib
