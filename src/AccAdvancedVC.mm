@@ -293,7 +293,7 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-    if (audioCodecs.size() < row) {
+    if ((audioCodecs.size() - 1) < row) {
         return;
     }
     auto codec = audioCodecs[row];
@@ -311,7 +311,7 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-    if (audioCodecs.size() < row) {
+    if ((audioCodecs.size() - 1) < row) {
         return;
     }
     auto codec = audioCodecs[row];
@@ -329,7 +329,7 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-    if (videoCodecs.size() < row) {
+    if ((videoCodecs.size() - 1) < row) {
         return;
     }
     auto codec = videoCodecs[row];
@@ -347,7 +347,7 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-    if (videoCodecs.size() < row) {
+    if ((videoCodecs.size() - 1) < row) {
         return;
     }
     auto codec = videoCodecs[row];
@@ -377,7 +377,7 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-    if (audioCodecs.size() < row) {
+    if ((audioCodecs.size()-1) < row) {
         return;
     }
     auto codec = audioCodecs[row];
@@ -393,7 +393,7 @@ NS_ENUM(NSInteger, tablesViews) {
         return;
     }
     auto videoCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-    if (videoCodecs.size() < row) {
+    if ((videoCodecs.size()-1) < row) {
         return;
     }
     auto codec = videoCodecs[row];
@@ -406,12 +406,12 @@ NS_ENUM(NSInteger, tablesViews) {
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     if(tableView == audioCodecView) {
-        NSTableCellView* audioCodecView = [tableView makeViewWithIdentifier:@"TableCellAudioCodecItem" owner:self];
-        NSTextField* nameLabel = [audioCodecView viewWithTag: AUDIO_CODEC_NAME_TAG];
-        NSTextField* samplerateLabel = [audioCodecView viewWithTag: AUDIO_CODEC_SAMPLERATE_TAG];
-        NSButton* codecEnableButton = [audioCodecView viewWithTag: AUDIO_CODEC_ENABLE_TAG];
+        NSTableCellView* audioCodecCell = [tableView makeViewWithIdentifier:@"TableCellAudioCodecItem" owner:self];
+        NSTextField* nameLabel = [audioCodecCell viewWithTag: AUDIO_CODEC_NAME_TAG];
+        NSTextField* samplerateLabel = [audioCodecCell viewWithTag: AUDIO_CODEC_SAMPLERATE_TAG];
+        NSButton* codecEnableButton = [audioCodecCell viewWithTag: AUDIO_CODEC_ENABLE_TAG];
         auto audioCodecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getAudioCodecs();
-        if (audioCodecs.size() < row) {
+        if ((audioCodecs.size() - 1) < row) {
             return nil;
         }
         auto codec = audioCodecs[row];
@@ -420,15 +420,15 @@ NS_ENUM(NSInteger, tablesViews) {
         [codecEnableButton setState:codec.enabled];
         [codecEnableButton setAction:@selector(enableAudioCodec:)];
         [codecEnableButton setTarget:self];
-        return audioCodecView;
+        return audioCodecCell;
     } else if (tableView == videoCodecView) {
-        NSTableCellView* videoCodecView = [tableView makeViewWithIdentifier:@"TableCellVideoCodecItem" owner:self];
-        NSTextField* nameLabel = [videoCodecView viewWithTag: VIDEO_CODEC_NAME_TAG];
-        NSButton* codecEnableButton = [audioCodecView viewWithTag: VIDIO_CODEC_ENABLE_TAG];
+        NSTableCellView* videoCodecCell = [tableView makeViewWithIdentifier:@"TableCellVideoCodecItem" owner:self];
+        NSTextField* nameLabel = [videoCodecCell viewWithTag: VIDEO_CODEC_NAME_TAG];
+        NSButton* codecEnableButton = [videoCodecCell viewWithTag: VIDIO_CODEC_ENABLE_TAG];
         nameLabel.textColor = [tableView isEnabled] ? [NSColor labelColor] : [NSColor lightGrayColor];
         [codecEnableButton setEnabled:[tableView isEnabled]];
         auto codecs = self.accountModel->getAccountInfo(self.selectedAccountID).codecModel->getVideoCodecs();
-        if (codecs.size() < row) {
+        if ((codecs.size() - 1) < row) {
             return nil;
         }
         auto codec = codecs[row];
@@ -436,7 +436,7 @@ NS_ENUM(NSInteger, tablesViews) {
         [codecEnableButton setState:codec.enabled];
         [codecEnableButton setAction:@selector(enableVideoCodec:)];
         [codecEnableButton setTarget:self];
-        return videoCodecView;
+        return videoCodecCell;
     }
 }
 
