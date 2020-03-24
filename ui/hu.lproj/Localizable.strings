@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "Hálózati hiba történt az exportálás során";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "A fiók nincs jelszava";
+/* Button Action */
+"Accept" = "Elfogadás";
+
+/* Welcome title */
+"Add a SIP account" = "SIP fiók hozzáadása";
 
 /* Contextual menu action */
 "Add to contacts" = "Hozzáadás a kapcsolatokhoz";
 
-/* Contextual menu action */
-"Place video call" = "Videohívás";
-
-/* Contextual menu action */
-"Place audio call" = "Hanghívás";
-
-/* Contextual menu action */
-"Clear conversation" = "Társalgás törlése";
-
-/* Contextual menu action */
-"Block contact" = "Kapcsolat letiltása";
-
-/* Text shown to the user */
-"Alias : " = "Álnév:";
+/* Backup error */
+"An error occured during the backup" = "Hiba történt az biztonsági mentés során";
 
 /* Error shown to the user */
 "An error occured during the export" = "Hiba történt az exportálás során";
 
-/* Contextual menu entry */
-"Backup account" = "Fiók biztonsági mentése";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "Hívja a számot";
+"Block contact" = "Kapcsolat letiltása";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Figyelmeztetés! Ez a művelet eltávolítja ezt a fiókot az eszközön!\nMegjegyzés: ez a művelet nem vonható vissza. A regisztrált neved is elveszhet!";
 
 /* File transfer canceled label */
 "Canceled" = "Törölve";
 
-/* Open panel title */
-"Choose a CA list" = "CA lista kiválasztása";
-
-/* Open panel title */
-"Choose a certificate" = "Tanúsítvány kiválasztása";
-
-/* Open panel title */
-"Choose a directory" = "Könyvtár kiválasztása";
-
-/* Open panel title */
-"Choose a private key file" = "Személyes kulcsfájl kiválasztása";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "CA kiválasztása";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Könyvtár kiválasztása";
-
 /* Contextual menu entry */
 "Choose file" = "Fájl kiválasztása";
 
-/* Contextual menu entry */
-"Share screen" = "Képernyő megosztása";
+/* Contextual menu action */
+"Clear conversation" = "Beszélgetés törlése";
 
 /* No comment provided by engineer. */
 "Copy" = "Másolás";
 
-/* Contextual menu action */
-"Copy name" = "Másolás neve";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "Szám másolása";
+/* Welcome title */
+"Create a new account" = "Új fiók létrehozása";
 
-/* Contextual menu entry */
-"Create Jami Account" = "Jami fiók létrehozása";
-
-/* Contextual menu entry */
-"Create SIP Account" = "SIP fiók létrehozása";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "Sikertelen";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "A kikeresés meghiúsult";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Importálás biztonsági másolatból";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Bejövő hívás a következőtől: %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Bejövő üzenet a következőtől: %@";
 
-/* Message from {Name} */
-"Message from %@" = "Üzenet a következőtől: %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Érvénytelen felhasználónév";
 
-/* User label */
-"New SIP account" = "Új SIP fiók";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "Nincs elérhető fiókot";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Új fiók létrehozásához navigáljon a beállításokhoz";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "Nincs elérhető fiókot";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "A jelszavak nem egyeznek.";
@@ -109,36 +97,50 @@
 /* Indication for user */
 "Passwords don't match" = "A jelszók nem egyeznek";
 
-/* Button label */
-"Pause" = "Megállítás";
+/* Contextual menu action */
+"Place audio call" = "Hanghívás";
 
-/* Button label */
-"Play" = "Lejátszás";
+/* Contextual menu action */
+"Place video call" = "Videohívás";
+
+/* Recording view explanation label */
+"Press to start recording" = "Nyomja meg ezt a gombot a felvétel elindításához";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "Elutasítás";
-"Accept" = "Elfogadás";
-
-/* Contextual menu entry */
-"Remove value" = "Érték eltávolítása";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "A hash érték megjelenítéséhez nyissa meg újra a fiókot";
-
-/* Contextual menu entry */
-"Restore account" = "Fiók visszaállítása";
-
-/* Button title */
-"Revise Input" = "Bevitel módosítása";
 
 /* Text shown to the user */
-"ID : " = "Azonosító:";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Fiók eltávolítása";
+
+/* export account button title */
+"Select archive" = "Fiók archívum kiválasztása…";
+
+/* Send button title */
+"Send" = "Elküld";
+
+/* Notification message */
+"Send you a contact request" = "Kapcsolatfelvétel kérelme";
 
 /* No comment provided by engineer. */
 "Share" = "Megosztás ";
 
+/* Contextual menu entry */
+"Share screen" = "Képernyő megosztása";
+
+/* Sign In */
+"Sign In" = "Bejelentkezés";
+
+/* Record message title */
+"Stop recording" = "Felvétel leállítása";
+
 /* File transfer successful label */
-"Success" = "Siker";
+"Success" = "Sikeres";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Szöveges műveletek";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "A beírt felhasználónév elérhető";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Felhasználónév érvénytelen. Legalább 3 karakterből kell állnia, és csak kisbetűs alfanumerikus karaktereket tartalmazhat.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "A beírt felhasználónév nem érhető el";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "A fiók átvitel szükséges az új Jami fiók formátumra:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "A megadott jelszó nem oldja fel ezt a fiókot";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "Ez az Ön azonosítója.\nMásolja és ossza meg a barátaival!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "Ez az Ön Jami azonosítója.\nMásolja ki, és ossza meg barátaival!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön. Hozzon létre egy új fiókot az „Eszköz összekapcsolása egy fiókhoz” opcióval. A PIN-kódja 10 percig érvényes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Az áttelepítés folytatásához ki kell választania a fiókhoz tartozó jelszót. Ezt a jelszót fogja használni a fő kulcs titkosításához. Szükséges, hogy új eszközöket adjon hozzá a Jami fiókjához. Ha nem áll készen a jelszó kiválasztására, akkor bezárhatja a Jami-t és később folytathatja az áttelepítést.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "Ismeretlen";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "A fiók átvitelre a fiók exportálása előtt szükség van";
-
-/* Remove account alert title */
-"Remove account" = "Fiók eltávolítása";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Figyelmeztetés! Ez a művelet eltávolítja ezt a fiókot az eszközön!\nMegjegyzés: ez a művelet nem vonható vissza. A regisztrált neved is elveszhet!";
-
-/* export account button title */
-"Select archive" = "Fiók archívum kiválasztása…";
-
-/* link account title */
-"Link to an account" = "Fiók összekapcsolása";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "Isten hozott!";
-"Create a new account" = "Új fiók létrehozása";
-"Add a SIP account" = "SIP fiók hozzáadása";
+"Welcome to Jami" = "Üdvözli a Jami";
 
-/* Notification message */
-"Send you a contact request" = "Kapcsolatfelvétel kérelme";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "Ez az Ön Jami azonosítója.\nMásolja ki, és ossza meg barátaival!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "Ez az Ön azonosítója.\nMásolja és ossza meg a barátaival!";
-
-/* Backup error */
-"An error occured during the backup" = "Hiba történt az biztonsági mentés során";

@@ -30,13 +30,13 @@
 "8JD-11-wHZ.title" = "Kimenő TLS kiszolgálónév";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Item 1";
+"8bw-iH-XGl.title" = "1. elem";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "Kikötő";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "A31-3Y-z4R"; */
-"A31-3Y-z4R.title" = "Box";
+"A31-3Y-z4R.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
 "ELr-A7-mGE.title" = "Nyilvános cím";
@@ -57,22 +57,22 @@
 "Jfp-NE-ODd.title" = "SDP munkamenet targyalás (az ICE tartaléka)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
-"MBR-AC-HFq.title" = "Box";
+"MBR-AC-HFq.title" = "Doboz";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Item 3";
+"Mho-w1-ZPJ.title" = "3. elem";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
 "Nqr-gj-dOH.title" = "Egyéni csengőhang";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Item 2";
+"OEo-C7-vEh.title" = "2. elem";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
 "Ogj-NW-fZ9.title" = "Hang RTP-kikötő tartomány";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
-"Ppa-zn-w1X.title" = "Box";
+"Ppa-zn-w1X.title" = "Doboz";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
 "Qk8-tH-a0l.title" = "Engedélyezze a SDES kulcscsere szabályhalmazat";
@@ -96,7 +96,7 @@
 "Xxr-gl-ukE.title" = "Cím";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
-"Zuz-jy-rLn.title" = "Box";
+"Zuz-jy-rLn.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
 "aYs-wh-Hpr.title" = "TURN cím";
@@ -108,13 +108,13 @@
 "cN3-lC-dNM.title" = "Csak az SDP-tárgyalások során használatos ha az ICE nem támogatott";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
-"cwV-lc-jju.title" = "Box";
+"cwV-lc-jju.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
 "dtf-uk-n1B.title" = "Tárgyalási időtúllépés (másodperc)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
-"ekM-Cg-DEo.title" = "Box";
+"ekM-Cg-DEo.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
 "fjH-ej-gEr.title" = "Hálózati felület";
@@ -129,7 +129,7 @@
 "jgX-tQ-dIA.title" = "Szöveges cella";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
-"l86-cH-pp8.title" = "Box";
+"l86-cH-pp8.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "nh9-3y-CEI"; */
 "nh9-3y-CEI.title" = "Maximum";
@@ -156,7 +156,7 @@
 "wq6-KV-8X3.title" = "Maximum";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
-"wyZ-Hb-BNf.title" = "Box";
+"wyZ-Hb-BNf.title" = "Doboz";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "x93-zk-hAW"; */
 "x93-zk-hAW.title" = "UPnP";

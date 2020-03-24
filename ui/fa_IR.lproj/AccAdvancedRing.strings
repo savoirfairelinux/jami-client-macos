@@ -1,33 +1,33 @@
 
 /* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow call from untrusted peers";
+"1Xr-BO-Pu3.title" = "اجازه تماس به همتاهای ناشناخته";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "538-we-FTp"; */
-"538-we-FTp.title" = "Box";
+"538-we-FTp.title" = "صندوق";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "7eU-EP-4br"; */
-"7eU-EP-4br.title" = "Box";
+"7eU-EP-4br.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "نشانی TURN";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "تنظیمات تماس";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "پاسخگویی خودکار تماس‌ها";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
-"EyV-Io-d3f.title" = "Text Cell";
+"EyV-Io-d3f.title" = "سلول متنی";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
 "ID3-Sv-gYY.title" = "کارساز نام";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
-"K0z-NH-3Cq.title" = "Box";
+"K0z-NH-3Cq.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
 "LWs-a2-E7f.title" = "گواهی کاربر";
@@ -39,7 +39,7 @@
 "Qxp-I4-A7W.title" = "امنیت";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "فعال‌سازی پروکسی";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "رمزینه های تصویری";
@@ -48,7 +48,7 @@
 "XU0-bl-lDD.title" = "قلمرو TURN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "نشانی STUN";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "خود راه اندازی";
@@ -57,22 +57,22 @@
 "YcX-lE-8ug.title" = "گذرواژه کلید خصوصی";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
-"Ywo-5x-8kh.title" = "Box";
+"Ywo-5x-8kh.title" = "صندوق";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ZNe-H0-dJk"; */
-"ZNe-H0-dJk.title" = "Box";
+"ZNe-H0-dJk.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "ZqB-gt-yFt"; */
 "ZqB-gt-yFt.title" = "نشانی";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "eGX-gk-Zxp"; */
-"eGX-gk-Zxp.title" = "Box";
+"eGX-gk-Zxp.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
 "eMG-uY-bpH.title" = "نام کاربری TURN";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "g8T-u3-MS3"; */
-"g8T-u3-MS3.title" = "Text Cell";
+"g8T-u3-MS3.title" = "سلول متنی";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "gUl-Px-cIJ"; */
 "gUl-Px-cIJ.title" = "گذرواژه TURN";
@@ -93,13 +93,13 @@
 "soR-nF-ybe.title" = "کلید خصوصی";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
-"sy5-OH-wyB.title" = "Box";
+"sy5-OH-wyB.title" = "صندوق";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "vYi-gW-MrY"; */
-"vYi-gW-MrY.title" = "Box";
+"vYi-gW-MrY.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "پیکربندی OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "استفاده از TURN";

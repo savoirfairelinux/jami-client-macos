@@ -21,16 +21,16 @@
 "57.title" = "Jami";
 
 /* Class = "NSMenuItem"; title = "About Jami"; ObjectID = "58"; */
-"58.title" = "About Jami";
+"58.title" = "Jamiについて";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
 "129.title" = "Preferences…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
-"130.title" = "Services";
+"130.title" = "サービス";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Services";
+"131.title" = "サービス";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
 "134.title" = "Hide Jami";
@@ -42,7 +42,7 @@
 "145.title" = "Hide Others";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Show All";
+"150.title" = "全て表示";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
 "195.title" = "Stop Speaking";
@@ -54,10 +54,10 @@
 "197.title" = "コピー";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "Select All";
+"198.title" = "全て選択";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
-"199.title" = "Cut";
+"199.title" = "切り取り";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
 "200.title" = "Spelling and Grammar";
@@ -69,16 +69,16 @@
 "202.title" = "削除";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
-"203.title" = "Paste";
+"203.title" = "貼り付け";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
 "204.title" = "Show Spelling and Grammar";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Edit";
+"205.title" = "編集";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
-"207.title" = "Undo";
+"207.title" = "取り消し";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
 "208.title" = "Find Next";
@@ -99,13 +99,13 @@
 "213.title" = "Find Previous";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
-"215.title" = "Redo";
+"215.title" = "やり直し";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
 "216.title" = "Spelling and Grammar";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Edit";
+"217.title" = "編集";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
 "218.title" = "Find";
@@ -120,7 +120,7 @@
 "221.title" = "Use Selection for Find";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Zoom";
+"239.title" = "拡大";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
 "295.title" = "View";
@@ -183,10 +183,10 @@
 "485.title" = "Paste and Match Style";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
-"490.title" = "Help";
+"490.title" = "ヘルプ";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
-"491.title" = "Help";
+"491.title" = "ヘルプ";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
 "492.title" = "Jami Help";
@@ -195,19 +195,4 @@
 "534.title" = "Find and Replace…";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Check for Update...";
-
-/* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "表示";
-
-/* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "表示";
-
-/* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Show recent";
-
-/* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "Show contacts";
-
-/* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "Show call history";
+"593.title" = "アップデートを確認...";

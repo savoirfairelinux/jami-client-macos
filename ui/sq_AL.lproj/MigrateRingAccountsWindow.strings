@@ -2,17 +2,17 @@
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
 "1ob-x1-u74.title" = "Migrimi i llogarisë u plotësua";
 
-/* Class = "NSTextFieldCell"; placeholderString = "ID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "ID";
+/* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
+"859-10-HEb.placeholderString" = "RingID";
 
-/* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "Llogaria vijuese lypset të migrohet nën formatin e llogarisë së re Jami:\\n Alias : \\nID:\\n Që të vazhdohet me migrimin, duhet të zgjidhni për llogarinë tuaj një fjalëkalim. Ky fjalëkalim do të përdoret për të fshehtëzuar kyçin tuaj të përgjithshëm. Do të kërkohet për shtim pajisjesh të reja te llogaria juaj Jami. Nëse s’jeni gati të zgjidhni një fjalëkalim, mund ta mbyllni Jami-un dhe t’i riktheheni migrimit më vonë.";
+/* Class = "NSTextFieldCell"; title = "To proceed with the migration, you need to enter a password that was used for this account."; ObjectID = "859-10-HEb"; */
+"859-10-HEb.title" = "To proceed with the migration, you need to enter a password that was used for this account.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
 "8K3-9Z-MKH.title" = "Gabim migrimi llogarie";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Përgëzime, llogaria juaj u migrua me sukses";
+"C2l-rz-Gqt.title" = "Përgëzime, llogaria juaj u migrua me Sukses.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
 "ITE-yD-CTb.title" = "Fshije këtë llogari";
@@ -22,6 +22,9 @@
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "QkU-T8-Xi6"; */
+"QkU-T8-Xi6.title" = "Fshije këtë llogari";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Dritare";

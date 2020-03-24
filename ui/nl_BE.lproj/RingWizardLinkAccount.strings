@@ -1,10 +1,4 @@
 
-/* Class = "NSTextFieldCell"; title = "To link this device to another account, you have two possibilities:"; ObjectID = "06g-zM-5Qz"; */
-"06g-zM-5Qz.title" = "Om dit apparaat aan een andere account te koppelen heeft u twee mogelijkheden:";
-
-/* Class = "NSTextFieldCell"; title = "OR"; ObjectID = "1NY-Yu-wH1"; */
-"1NY-Yu-wH1.title" = "OF";
-
 /* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
 "2uK-1s-tk7.title" = "\tU kunt uw account importeren vanaf het andere apparaat, maar eerst heeft u een pincode nodig. \n\tGa om de pincode te genereren naar de accountbeheerinstellingen van een vorig apparaat, kies de Ring-account die u wilt gebruiken en selecteer ‘Een ander apparaat aan deze account koppelen’. U zult de pincode krijgen die u nodig heeft om dit proces te voltooien. De pincode is slechts 10 minuten geldig.";
 
@@ -15,25 +9,25 @@
 "8b8-bt-eAj.title" = "Koppelen";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
-"DyG-SJ-U1Q.title" = "Er is een fout opgetreden, controleer uw wachtwoord en pincode.";
+"DyG-SJ-U1Q.title" = "Er is een fout opgetreden, controleer uw paswoord en pincode.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
 "Pcj-BY-tou.title" = "Annuleren";
 
 /* Class = "NSTextFieldCell"; title = "Enter password"; ObjectID = "U2K-fu-INc"; */
-"U2K-fu-INc.title" = "Geef wachtwoord in";
+"U2K-fu-INc.title" = "Geef paswoord in";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "Wachtwoord…";
+"WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "Paswoord…";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedMultipleValuesPlaceholder" = "Wachtwoord…";
+"WlR-QM-tK4.ibShadowedMultipleValuesPlaceholder" = "Paswoord…";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedNoSelectionPlaceholder" = "Wachtwoord…";
+"WlR-QM-tK4.ibShadowedNoSelectionPlaceholder" = "Paswoord…";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "Wachtwoord…";
+"WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "Paswoord…";
 
 /* Class = "NSButtonCell"; title = "Select file"; ObjectID = "XJE-cy-nfQ"; */
 "XJE-cy-nfQ.title" = "Bestand selecteren";

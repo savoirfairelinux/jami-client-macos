@@ -1,42 +1,54 @@
 
-/* Class = "NSButtonCell"; title = "Keep my history for"; ObjectID = "3Pb-Ec-zl5"; */
-"3Pb-Ec-zl5.title" = "Зберігати історію протягом";
+/* Class = "NSButtonCell"; title = "Enable notifications for incoming messages"; ObjectID = "0jV-Q4-232"; */
+"0jV-Q4-232.title" = "Enable notifications for incoming messages";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "42E-UY-qlP"; */
 "42E-UY-qlP.title" = "Помісячно";
 
+/* Class = "NSTextFieldCell"; title = "Download folder"; ObjectID = "6Ye-pe-9WV"; */
+"6Ye-pe-9WV.title" = "Download folder";
+
+/* Class = "NSButtonCell"; title = "Always record calls"; ObjectID = "6zp-rh-brb"; */
+"6zp-rh-brb.title" = "Always record calls";
+
+/* Class = "NSTextFieldCell"; title = "System"; ObjectID = "8xm-Tc-NMN"; */
+"8xm-Tc-NMN.title" = "Система";
+
+/* Class = "NSTextFieldCell"; title = "  0"; ObjectID = "9sg-PF-ffw"; */
+"9sg-PF-ffw.title" = "  0";
+
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "AId-am-73Q"; */
 "AId-am-73Q.title" = "По тижням";
 
-/* Class = "NSTextFieldCell"; title = "30"; ObjectID = "JvS-c4-OeT"; */
-"JvS-c4-OeT.title" = "30";
+/* Class = "NSTextFieldCell"; title = "Quality(Kbps)"; ObjectID = "AOr-Cq-w57"; */
+"AOr-Cq-w57.title" = "Quality(Kbps)";
 
-/* Class = "NSTextField"; ibShadowedToolTip = "Profile"; ObjectID = "MV1-AC-qE7"; */
-"MV1-AC-qE7.ibShadowedToolTip" = "Профіль";
+/* Class = "NSTextFieldCell"; title = "Notifications"; ObjectID = "I0d-mx-KhT"; */
+"I0d-mx-KhT.title" = "Notifications";
+
+/* Class = "NSTextFieldCell"; title = "6000"; ObjectID = "JGj-TS-Hxl"; */
+"JGj-TS-Hxl.title" = "6000";
+
+/* Class = "NSButtonCell"; title = "Enable notifications for invitations"; ObjectID = "Lww-Wb-yrf"; */
+"Lww-Wb-yrf.title" = "Enable notifications for invitations";
 
 /* Class = "NSButtonCell"; title = "Launch on Startup"; ObjectID = "O2C-xR-mHF"; */
 "O2C-xR-mHF.title" = "Стартувати із системою";
 
-/* Class = "NSTextFieldCell"; title = "(Applied on application restart)"; ObjectID = "OTl-vx-S43"; */
-"OTl-vx-S43.title" = "(Буде змінено після перезапуску)";
-
-/* Class = "NSTextFieldCell"; title = "Behaviours"; ObjectID = "Rzy-Gh-3wQ"; */
-"Rzy-Gh-3wQ.title" = "Поведінка";
+/* Class = "NSTextFieldCell"; title = "Call recording"; ObjectID = "Qb8-tb-vJd"; */
+"Qb8-tb-vJd.title" = "Call recording";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
 "T3a-yx-ZaW.title" = "Автоматично перевіряти оновлення";
 
-/* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "Thg-oC-5Qw"; */
-"Thg-oC-5Qw.title" = "Профіль";
+/* Class = "NSTextFieldCell"; title = "Conversations"; ObjectID = "ZCU-sa-SEk"; */
+"ZCU-sa-SEk.title" = "Групові чати";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "cB6-4m-9MU"; */
 "cB6-4m-9MU.title" = "Поденно";
 
-/* Class = "NSButtonCell"; title = "Clear History"; ObjectID = "cd5-9L-Bbb"; */
-"cd5-9L-Bbb.title" = "Очистити історію";
-
-/* Class = "NSTextFieldCell"; title = "days"; ObjectID = "e5K-l0-Nfw"; */
-"e5K-l0-Nfw.title" = "днів";
+/* Class = "NSTextFieldCell"; title = "Record folder"; ObjectID = "ep4-QU-rGl"; */
+"ep4-QU-rGl.title" = "Record folder";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "mbu-TH-bs8"; */
 "mbu-TH-bs8.title" = "Почасово";
@@ -50,5 +62,5 @@
 /* Class = "NSButtonCell"; title = "Bring Jami to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
 "uYI-hA-JHk.title" = "Виводити Джамі на передній план у разі вхідного дзвінка.";
 
-/* Class = "NSTextFieldCell"; title = "This is shared with your contacts "; ObjectID = "vbU-2S-O58"; */
-"vbU-2S-O58.title" = "Його отримують ваші контакти";
+/* Class = "NSButtonCell"; title = "Record local video"; ObjectID = "y5x-4d-E26"; */
+"y5x-4d-E26.title" = "Record local video";

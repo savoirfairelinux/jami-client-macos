@@ -1,10 +1,4 @@
 
-/* Class = "NSTextFieldCell"; title = "To link this device to another account, you have two possibilities:"; ObjectID = "06g-zM-5Qz"; */
-"06g-zM-5Qz.title" = "Есть два способа привязать это устройство к аккаунту:";
-
-/* Class = "NSTextFieldCell"; title = "OR"; ObjectID = "1NY-Yu-wH1"; */
-"1NY-Yu-wH1.title" = "ИЛИ";
-
 /* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
 "2uK-1s-tk7.title" = "\tИмпортировать аккаунт с другого устройства (понадобится PIN-код). \n\tЧтобы сгенерировать PIN-код, задйтие в управление аккаунтами на старом устройстве, откройте аккаунт Jami и выберите \"Привязать другое устройство к этому аккаунту\". Вы получите PIN-код для привязки. PIN-код действителен в течении 10 минут.";
 

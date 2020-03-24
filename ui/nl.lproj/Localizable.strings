@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "Er trad een netwerkfout op tijdens het exporteren";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Account heeft geen wachtwoord";
+/* Button Action */
+"Accept" = "Accepteren";
+
+/* Welcome title */
+"Add a SIP account" = "Add a SIP account";
 
 /* Contextual menu action */
 "Add to contacts" = "Toevoegen aan contacten";
 
-/* Contextual menu action */
-"Place video call" = "Video-oproep plaatsen";
-
-/* Contextual menu action */
-"Place audio call" = "Audio-oproep plaatsen";
-
-/* Contextual menu action */
-"Clear conversation" = "Gesprek wissen";
-
-/* Contextual menu action */
-"Block contact" = "Contact blokkeren";
-
-/* Text shown to the user */
-"Alias : " = "Alias:";
+/* Backup error */
+"An error occured during the backup" = "Er trad een fout op tijdens het maken van de reservekopie";
 
 /* Error shown to the user */
 "An error occured during the export" = "Er trad een fout op tijdens het exporteren";
 
-/* Contextual menu entry */
-"Backup account" = "Reservekopie van account maken";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "Nummer bellen";
+"Block contact" = "Contact blokkeren";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
 /* File transfer canceled label */
 "Canceled" = "Geannuleerd";
 
-/* Open panel title */
-"Choose a CA list" = "Kies een CA-lijst";
-
-/* Open panel title */
-"Choose a certificate" = "Kies een certificaat";
-
-/* Open panel title */
-"Choose a directory" = "Kies een map";
-
-/* Open panel title */
-"Choose a private key file" = "Kies bestand met een persoonlijke sleutel";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Kies CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Kies map";
-
 /* Contextual menu entry */
 "Choose file" = "Kies bestand";
 
-/* Contextual menu entry */
-"Share screen" = "Share screen";
+/* Contextual menu action */
+"Clear conversation" = "Gesprek wissen";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopiëren";
 
-/* Contextual menu action */
-"Copy name" = "Naam kopiëren";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "Nummer kopiëren";
+/* Welcome title */
+"Create a new account" = "Nieuw account aanmaken";
 
-/* Contextual menu entry */
-"Create Jami Account" = "Jami-account aanmaken";
-
-/* Contextual menu entry */
-"Create SIP Account" = "SIP-account aanmaken";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "Mislukt";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Opzoeken mislukt";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Importeren uit back-up";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Inkomende oproep van %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Incoming message from %@";
 
-/* Message from {Name} */
-"Message from %@" = "Bericht van %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Ongeldige gebruikersnaam";
 
-/* User label */
-"New SIP account" = "Nieuwe SIP-account";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "Geen account beschikbaar";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Ga naar voorkeuren om een nieuwe account aan te maken";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "Geen account beschikbaar";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Wachtwoord en bevestiging komen niet overeen.";
@@ -109,33 +97,47 @@
 /* Indication for user */
 "Passwords don't match" = "Wachtwoorden komen niet overeen";
 
-/* Button label */
-"Pause" = "Pauze";
+/* Contextual menu action */
+"Place audio call" = "Audio-oproep plaatsen";
 
-/* Button label */
-"Play" = "Afspelen";
+/* Contextual menu action */
+"Place video call" = "Video-oproep plaatsen";
+
+/* Recording view explanation label */
+"Press to start recording" = "Press to start recording";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "Afwijzen";
-"Accept" = "Accepteren";
-
-/* Contextual menu entry */
-"Remove value" = "Waarde verwijderen";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Heropen de account om je hash te bekijken";
-
-/* Contextual menu entry */
-"Restore account" = "Account herstellen";
-
-/* Button title */
-"Revise Input" = "Invoer herzien";
 
 /* Text shown to the user */
-"ID : " = "ID:";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Account verwijderen";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* Send button title */
+"Send" = "Versturen";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
 
 /* No comment provided by engineer. */
 "Share" = "Delen";
+
+/* Contextual menu entry */
+"Share screen" = "Share screen";
+
+/* Sign In */
+"Sign In" = "Sign In";
+
+/* Record message title */
+"Stop recording" = "Opname beëindigen";
 
 /* File transfer successful label */
 "Success" = "Klaar";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "De ingevoerde gebruikersnaam is beschikbaar";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "De ingevoerde gebruikersnaam is ongeldig. De gebruikersnaam moet minstens 3 tekens lang zijn, en mag enkel kleine alfanumerieke tekens bevatten.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "De ingevoerde gebruikersnaam is niet beschikbaar";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Het wachtwoord dat u heeft ingevoerd ontgrendelt dit account niet";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "Onbekend";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "Je moet je account migreren vooraleer je deze kan exporteren";
-
-/* Remove account alert title */
-"Remove account" = "Account verwijderen";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-
-/* export account button title */
-"Select archive" = "Select archive";
-
-/* link account title */
-"Link to an account" = "Link to an account";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "Welkom bij Jami";
-"Create a new account" = "Nieuw account aanmaken";
-"Add a SIP account" = "Add a SIP account";
+"Welcome to Jami" = "Welkom bij Jami";
 
-/* Notification message */
-"Send you a contact request" = "Send you a contact request";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
-
-/* Backup error */
-"An error occured during the backup" = "Er trad een fout op tijdens het maken van de reservekopie";

@@ -1,12 +1,6 @@
 
-/* Class = "NSTextFieldCell"; title = "To link this device to another account, you have two possibilities:"; ObjectID = "06g-zM-5Qz"; */
-"06g-zM-5Qz.title" = "To link this device to another account, you have two possibilities:";
-
-/* Class = "NSTextFieldCell"; title = "OR"; ObjectID = "1NY-Yu-wH1"; */
-"1NY-Yu-wH1.title" = "OR";
-
 /* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
-"2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"2uK-1s-tk7.title" = "\tمی‌توانید حساب خود را از دستگاه دیگری وارد کنید، اما ابتدا باید کد پین (PIN) را بدست آورید.\n\tبرای تولید کد پین، به تنظیمات مدیریت حساب دستگاه قبلی بروید، حساب جامی را مورد استفاده را انتخاب و سپس \"پیوند دستگاه دیگری به این حساب\" را انتخاب کنید. برای تکمیل این فرم، پین لازم را دریافت خواهید کرد. پین فقط 10 دقیقه اعتبار دارد.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
 "3ik-rY-Gig.title" = "پین خود را وارد کنید";
@@ -36,13 +30,13 @@
 "WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "گذرواژه...";
 
 /* Class = "NSButtonCell"; title = "Select file"; ObjectID = "XJE-cy-nfQ"; */
-"XJE-cy-nfQ.title" = "Select file";
+"XJE-cy-nfQ.title" = "انتخاب فایل";
 
 /* Class = "NSTextFieldCell"; title = "Import archive file"; ObjectID = "kXa-FL-Enf"; */
-"kXa-FL-Enf.title" = "Import archive file";
+"kXa-FL-Enf.title" = "وارد کردن فایل بایگانی";
 
 /* Class = "NSTextFieldCell"; title = "\tYou can directly import your account from an archive file on your device."; ObjectID = "kfe-m7-MTT"; */
-"kfe-m7-MTT.title" = "\tYou can directly import your account from an archive file on your device.";
+"kfe-m7-MTT.title" = "\tمی‌توانید به طور مستقیم حساب خود را از یک فایل بایگانی در دستگاه خود وارد کنید.";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "t12-O0-kcf"; */
 "t12-O0-kcf.title" = "خب";
@@ -60,4 +54,4 @@
 "vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "پین";
 
 /* Class = "NSTextFieldCell"; title = "Linking..."; ObjectID = "zWn-4H-ODH"; */
-"zWn-4H-ODH.title" = "Linking...";
+"zWn-4H-ODH.title" = "در حال پیوند...";

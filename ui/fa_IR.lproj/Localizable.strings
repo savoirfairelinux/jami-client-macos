@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "یک خطای در ارتباط با شبکه  در زمان برون ریزی رخ داد.";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+/* Button Action */
+"Accept" = "پذیرش";
+
+/* Welcome title */
+"Add a SIP account" = "Add a SIP account";
 
 /* Contextual menu action */
 "Add to contacts" = "افزودن به مخاطبان";
 
-/* Contextual menu action */
-"Place video call" = "Place video call";
-
-/* Contextual menu action */
-"Place audio call" = "Place audio call";
-
-/* Contextual menu action */
-"Clear conversation" = "پاک کردن مکالمه";
-
-/* Contextual menu action */
-"Block contact" = "مسدودسازی مخاطب";
-
-/* Text shown to the user */
-"Alias : " = "Alias : ";
+/* Backup error */
+"An error occured during the backup" = "خطایی هنگام پشتیبان گیری رخ داده است";
 
 /* Error shown to the user */
 "An error occured during the export" = "یک خطا  در زمان برون ریزی رخ داد.";
 
-/* Contextual menu entry */
-"Backup account" = "حساب کاربری پشتیبان";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "شماره تماس";
+"Block contact" = "مسدودسازی مخاطب";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
 /* File transfer canceled label */
 "Canceled" = "لغو شده";
 
-/* Open panel title */
-"Choose a CA list" = "Choose a CA list";
-
-/* Open panel title */
-"Choose a certificate" = "یک گواهی انتخاب کنید";
-
-/* Open panel title */
-"Choose a directory" = "یک پوشه انتخاب کنید";
-
-/* Open panel title */
-"Choose a private key file" = "یک فایل کلید خصوصی انتخاب کنید";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "انتخاب CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "انتخاب پوشه";
-
 /* Contextual menu entry */
 "Choose file" = "انتخاب فایل";
 
-/* Contextual menu entry */
-"Share screen" = "Share screen";
+/* Contextual menu action */
+"Clear conversation" = "پاک کردن مکالمه";
 
 /* No comment provided by engineer. */
 "Copy" = "کپی";
 
-/* Contextual menu action */
-"Copy name" = "کپی نام";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "رونوشت از شماره";
+/* Welcome title */
+"Create a new account" = "ایجاد یک حساب جدید";
 
-/* Contextual menu entry */
-"Create Jami Account" = "ایجاد حساب جمی";
-
-/* Contextual menu entry */
-"Create SIP Account" = "ساخت حساب کاربری سیپ";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "انجام نشد";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Failed to perform lookup";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "وارد کردن از پشتیبان";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "تماس دریافتی از %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Incoming message from %@";
 
-/* Message from {Name} */
-"Message from %@" = "پیام از طرف %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "نام کاربری نامعتبر";
 
-/* User label */
-"New SIP account" = "حساب کاربری سیپ تازه";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "گذرواژه و تاییدیه‌اش همتا نیستند.";
@@ -109,36 +97,50 @@
 /* Indication for user */
 "Passwords don't match" = "گذرواژه‌ها یکسان نیستند";
 
-/* Button label */
-"Pause" = "مکث";
+/* Contextual menu action */
+"Place audio call" = "قرار تماس صوتی بگذار";
 
-/* Button label */
-"Play" = "پخش";
+/* Contextual menu action */
+"Place video call" = "قرار تماس ویدیویی بگذار";
+
+/* Recording view explanation label */
+"Press to start recording" = "برای شروع ضبط فشار دهید";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
-"Refuse" = "رد";
-"Accept" = "پذیرش";
-
-/* Contextual menu entry */
-"Remove value" = "Remove value";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
-
-/* Contextual menu entry */
-"Restore account" = "بازگردانی حساب کاربری";
-
-/* Button title */
-"Revise Input" = "Revise Input";
+"Refuse" = "رد کردن";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "حذف حساب";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* Send button title */
+"Send" = "ارسال";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
 
 /* No comment provided by engineer. */
 "Share" = "هم‌رسانی";
 
+/* Contextual menu entry */
+"Share screen" = "Share screen";
+
+/* Sign In */
+"Sign In" = "Sign In";
+
+/* Record message title */
+"Stop recording" = "توقف ضبط";
+
 /* File transfer successful label */
-"Success" = "با موفقیت انجام شد";
+"Success" = "موفق";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "نام کاربری وارد شده دردسترس است";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "نام‌کاربری وارد شده معتبر نیست. باید حداقل شامل ۳ کاراکتر و فقط حروف کوچک الفبای انگلیسی باشد.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "نام کاربری وارد شده در دسترس نیست";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "گذرواژه‌ای که وارد کردید قفل این حساب کاربری را باز نمی‌کند";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "ناشناخته";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "You have to migrate your account before exporting";
-
-/* Remove account alert title */
-"Remove account" = "Remove account";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-
-/* export account button title */
-"Select archive" = "Select archive";
-
-/* link account title */
-"Link to an account" = "Link to an account";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "به جمی خوش آمدید";
-"Create a new account" = "ایجاد یک حساب جدید";
-"Add a SIP account" = "Add a SIP account";
+"Welcome to Jami" = "به جمی خوش آمدید";
 
-/* Notification message */
-"Send you a contact request" = "Send you a contact request";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
-
-/* Backup error */
-"An error occured during the backup" = "خطایی هنگام پشتیبان گیری رخ داده است";

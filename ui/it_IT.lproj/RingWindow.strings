@@ -2,56 +2,50 @@
 /* Class = "NSTabViewItem"; label = "SmartView"; ObjectID = "0MO-4e-8mo"; */
 "0MO-4e-8mo.label" = "SmartView";
 
-/* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "3Bh-xR-4Vn"; */
-"3Bh-xR-4Vn.title" = "Testo";
+/* Class = "NSSegmentedCell"; 6T7-ip-Pun.ibShadowedLabels[0] = "Conversations"; ObjectID = "6T7-ip-Pun"; */
+"6T7-ip-Pun.ibShadowedLabels[0]" = "Conversazioni";
+
+/* Class = "NSSegmentedCell"; 6T7-ip-Pun.ibShadowedLabels[1] = "Requests"; ObjectID = "6T7-ip-Pun"; */
+"6T7-ip-Pun.ibShadowedLabels[1]" = "Richieste";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "Ap7-26-S6b"; */
 "Ap7-26-S6b.title" = "Cella di testo";
 
-/* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "BfK-c5-B1l"; */
-"BfK-c5-B1l.placeholderString" = "dettagli";
+/* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "DPK-hh-Aq5"; */
+"DPK-hh-Aq5.title" = "Elemento 2";
 
 /* Class = "NSWindow"; title = "Jami"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Jami";
 
-/* Class = "NSTextFieldCell"; placeholderString = "Contact Method"; ObjectID = "FlQ-Th-nfO"; */
-"FlQ-Th-nfO.placeholderString" = "Metodo di Contatto";
+/* Class = "NSButton"; ibShadowedToolTip = "Accept Invitation"; ObjectID = "Fc5-KS-cim"; */
+"Fc5-KS-cim.ibShadowedToolTip" = "Accept Invitation";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "GAa-pQ-t4g"; */
-"GAa-pQ-t4g.title" = "Cella di testo";
+/* Class = "NSButton"; ibShadowedToolTip = "Share account info"; ObjectID = "Oac-o7-2Ge"; */
+"Oac-o7-2Ge.ibShadowedToolTip" = "Share account info";
 
-/* Class = "NSBox"; title = "Title"; ObjectID = "Pav-Bw-GgK"; */
-"Pav-Bw-GgK.title" = "Titolo";
+/* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Oe5-Nj-cP3"; */
+"Oe5-Nj-cP3.title" = "Elemento 3";
 
-/* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "Q1F-xo-N3e"; */
-"Q1F-xo-N3e.placeholderString" = "Mostra ruolo";
+/* Class = "NSToolbarItem"; label = "Toolbar Item"; ObjectID = "XSp-w5-Fes"; */
+"XSp-w5-Fes.label" = "Toolbar Item";
 
-/* Class = "NSTextFieldCell"; placeholderString = "date"; ObjectID = "UKP-Et-CT0"; */
-"UKP-Et-CT0.placeholderString" = "Data";
+/* Class = "NSToolbarItem"; paletteLabel = "Toolbar Item"; ObjectID = "XSp-w5-Fes"; */
+"XSp-w5-Fes.paletteLabel" = "Toolbar Item";
 
-/* Class = "NSTabViewItem"; label = "History"; ObjectID = "Wi9-Zd-O1N"; */
-"Wi9-Zd-O1N.label" = "Cronologia";
+/* Class = "NSTextFieldCell"; title = "This is your ID.\nCopy and share it with your friends!"; ObjectID = "Xb9-UT-M2F"; */
+"Xb9-UT-M2F.title" = "Questo è il tuo ID.\nCopia e condividi con i tuoi amici!";
 
-/* Class = "NSTextFieldCell"; title = "This is your ID. Copy and share it with your friends!"; ObjectID = "Xb9-UT-M2F"; */
-"Xb9-UT-M2F.title" = "This is your ID. \n Copy and share it with your friends!";
+/* Class = "NSBox"; title = "Box"; ObjectID = "eVv-lu-T1Y"; */
+"eVv-lu-T1Y.title" = "Box";
 
-/* Class = "NSTabViewItem"; label = "Contacts"; ObjectID = "Zbi-X6-DLT"; */
-"Zbi-X6-DLT.label" = "Contatti";
+/* Class = "NSButton"; ibShadowedToolTip = "Show QRcode"; ObjectID = "eXV-BT-B6J"; */
+"eXV-BT-B6J.ibShadowedToolTip" = "Show QRcode";
 
-/* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "bgk-oz-u7n"; */
-"bgk-oz-u7n.placeholderString" = "Nome";
-
-/* Class = "NSTextFieldCell"; placeholderString = "Category"; ObjectID = "d5o-nL-fRP"; */
-"d5o-nL-fRP.placeholderString" = "Categoria";
+/* Class = "NSButton"; ibShadowedToolTip = "Ignore invitation"; ObjectID = "ejM-H2-aJX"; */
+"ejM-H2-aJX.ibShadowedToolTip" = "Ignore invitation";
 
 /* Class = "NSTextFieldCell"; title = "Jami is free software for universal communication which respects the freedoms and privacy of its users."; ObjectID = "eln-Vm-t0d"; */
 "eln-Vm-t0d.title" = "Jami è un software gratuito per la comunicazione universale che rispetta le libertà e la privacy dei suoi utenti.";
-
-/* Class = "NSTextFieldCell"; placeholderString = "Category"; ObjectID = "gaf-Za-tuc"; */
-"gaf-Za-tuc.placeholderString" = "Categoria";
-
-/* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "isD-c6-X5Q"; */
-"isD-c6-X5Q.placeholderString" = "dettagli";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Call name"; ObjectID = "j0J-Xd-uth"; */
 "j0J-Xd-uth.placeholderString" = "Nome chiamata";
@@ -59,11 +53,8 @@
 /* Class = "NSTextFieldCell"; placeholderString = "details"; ObjectID = "mK5-kV-YOO"; */
 "mK5-kV-YOO.placeholderString" = "dettagli";
 
-/* Class = "NSTextFieldCell"; placeholderString = "n"; ObjectID = "sGB-x7-gig"; */
-"sGB-x7-gig.placeholderString" = "n";
-
-/* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "uSw-g5-kte"; */
-"uSw-g5-kte.placeholderString" = "Mostra ruolo";
-
 /* Class = "NSSearchFieldCell"; placeholderString = "Search for new or existing contact"; ObjectID = "vvE-nM-kSl"; */
-"vvE-nM-kSl.placeholderString" = "Search for new or existing contact";
+"vvE-nM-kSl.placeholderString" = "Cerca contatti nuovi o esistenti";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Block contact"; ObjectID = "xP1-ZW-WZ8"; */
+"xP1-ZW-WZ8.ibShadowedToolTip" = "Blocca contatto";

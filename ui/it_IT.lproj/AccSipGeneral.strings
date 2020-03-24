@@ -3,7 +3,7 @@
 "688-Sx-Gvr.title" = "Proxy";
 
 /* Class = "NSTextFieldCell"; title = "User Name"; ObjectID = "Fj6-Q3-Gz3"; */
-"Fj6-Q3-Gz3.title" = "User Name";
+"Fj6-Q3-Gz3.title" = "Nome Utente";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "NlM-R9-ola"; */
 "NlM-R9-ola.title" = "Box";
@@ -12,13 +12,13 @@
 "R7s-DE-PiP.title" = "Segreteria telefonica";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "YAG-qB-4wH"; */
-"YAG-qB-4wH.placeholderString" = "Enter name";
+"YAG-qB-4wH.placeholderString" = "Inserisci nome";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "Yof-e7-IBF"; */
 "Yof-e7-IBF.title" = "Password";
 
 /* Class = "NSTextFieldCell"; title = "SIP Server"; ObjectID = "ZKc-70-TFH"; */
-"ZKc-70-TFH.title" = "SIP Server";
+"ZKc-70-TFH.title" = "Server SIP";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "eQt-bc-Eev"; */
 "eQt-bc-Eev.title" = "Account";
@@ -30,10 +30,10 @@
 "jdU-uZ-Rfy.title" = "Modifica l'account";
 
 /* Class = "NSButtonCell"; title = "enable"; ObjectID = "nW8-pd-fNj"; */
-"nW8-pd-fNj.title" = "enable";
+"nW8-pd-fNj.title" = "abilita";
 
 /* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "oE8-tN-SfC"; */
 "oE8-tN-SfC.title" = "Profilo";
 
 /* Class = "NSButtonCell"; title = "Remove Account"; ObjectID = "uFM-Am-0kz"; */
-"uFM-Am-0kz.title" = "Remove Account";
+"uFM-Am-0kz.title" = "Rimuovi l'account";

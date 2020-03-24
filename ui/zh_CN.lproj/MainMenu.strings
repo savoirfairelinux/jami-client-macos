@@ -33,10 +33,10 @@
 "131.title" = "服务";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Hide Jami";
+"134.title" = "隐藏Jami";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "Quit Jami";
+"136.title" = "退出Jami";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "隱藏其他";
@@ -189,25 +189,10 @@
 "491.title" = "帮助";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami Help";
+"492.title" = "Jami帮助";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "查找与替换…";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "检查更新…";
-
-/* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "显示";
-
-/* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "显示";
-
-/* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "显示最近记录";
-
-/* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "显示通讯录";
-
-/* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "显示通话记录";

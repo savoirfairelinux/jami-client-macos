@@ -1,24 +1,54 @@
 
+/* Class = "NSButtonCell"; title = "🙂"; ObjectID = "8sX-aI-9OG"; */
+"8sX-aI-9OG.title" = "🙂";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record a video message"; ObjectID = "B6d-Sc-UTp"; */
+"B6d-Sc-UTp.ibShadowedToolTip" = "Record a video message";
+
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "FgV-iF-gGQ"; */
 "FgV-iF-gGQ.title" = "文字單元";
-
-/* Class = "NSTextFieldCell"; placeholderString = "Title"; ObjectID = "HnC-1N-RmR"; */
-"HnC-1N-RmR.placeholderString" = "標題";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "Ilz-7v-2fr"; */
 "Ilz-7v-2fr.placeholderString" = "傳送訊息";
 
-/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
-"ZEx-5Y-rtp.ibShadowedIsNilPlaceholder" = "傳送訊息";
+/* Class = "NSButton"; ibShadowedToolTip = "Start audio call"; ObjectID = "RuH-fO-poy"; */
+"RuH-fO-poy.ibShadowedToolTip" = "開始音訊通話";
 
-/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
-"ZEx-5Y-rtp.ibShadowedMultipleValuesPlaceholder" = "傳送訊息";
+/* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "UJf-cF-RAo"; */
+"UJf-cF-RAo.ibShadowedToolTip" = "傳送";
 
-/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "ZEx-5Y-rtp"; */
-"ZEx-5Y-rtp.ibShadowedNoSelectionPlaceholder" = "傳送訊息";
+/* Class = "NSButton"; ibShadowedToolTip = "Start video call"; ObjectID = "cFH-d7-Erh"; */
+"cFH-d7-Erh.ibShadowedToolTip" = "開始視訊通話";
 
-/* Class = "NSTextFieldCell"; title = "Start the conversation!"; ObjectID = "bsl-nv-Wqq"; */
-"bsl-nv-Wqq.title" = "開始通話！";
+/* Class = "NSBox"; title = "Box"; ObjectID = "ciI-CA-tly"; */
+"ciI-CA-tly.title" = "Box";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "ooq-vs-Xt1"; */
-"ooq-vs-Xt1.ibShadowedToolTip" = "記錄";
+/* Class = "NSBox"; title = "Box"; ObjectID = "fh9-Uo-8R1"; */
+"fh9-Uo-8R1.title" = "Box";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "gwx-eT-PcN"; */
+"gwx-eT-PcN.ibShadowedToolTip" = "Send a file";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "hrX-ac-Quk"; */
+"hrX-ac-Quk.title" = "Box";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Back"; ObjectID = "ooq-vs-Xt1"; */
+"ooq-vs-Xt1.ibShadowedToolTip" = "前一個";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Add contact"; ObjectID = "pGK-hO-X1Y"; */
+"pGK-hO-X1Y.ibShadowedToolTip" = "Add contact";
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "pRL-vb-me9"; */
+"pRL-vb-me9.title" = "Box";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record an audio message"; ObjectID = "wYE-S3-AzD"; */
+"wYE-S3-AzD.ibShadowedToolTip" = "Record an audio message";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
+"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "傳送訊息";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
+"zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "傳送訊息";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
+"zK1-Ee-EWS.ibShadowedNoSelectionPlaceholder" = "傳送訊息";
