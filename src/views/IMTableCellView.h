@@ -38,6 +38,9 @@
 @property (nonatomic, strong) IBOutlet NSImageView* messageFailed;
 @property (nonatomic, strong) IBOutlet NSView* messageStatus;
 @property (nonatomic, strong) IBOutlet NSButton* openImagebutton;
+@property (nonatomic, strong) IBOutlet NSView* compozingIndicator1;
+@property (nonatomic, strong) IBOutlet NSView* compozingIndicator2;
+@property (nonatomic, strong) IBOutlet NSView* compozingIndicator3;
 
 
 - (uint64_t) interaction;
@@ -47,5 +50,7 @@
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
 - (void) updateImageConstraintWithMax: (CGFloat) maxDimension;
 - (void) invalidateImageConstraints;
-
+- (void) animateCompozingIndicator:(BOOL) animate;
+- (void) startBlinkAnimation:(NSView*) view withDelay:(CGFloat) delay;
+- (void) blinkAnimation: (NSView*) view;
 @end
