@@ -37,5 +37,6 @@
 @property (retain) NSString* message;
 
 -(void) setAVModel: (lrc::api::AVModel*) avmodel;
+-(void) checkIfcomposingMsg;
 
 @end

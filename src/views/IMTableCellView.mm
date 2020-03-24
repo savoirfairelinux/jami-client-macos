@@ -20,6 +20,7 @@
 
 #import "IMTableCellView.h"
 #import "NSColor+RingTheme.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation IMTableCellView {
@@ -36,6 +37,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 @synthesize progressIndicator;
 @synthesize statusLabel;
 @synthesize openImagebutton;
+@synthesize compozingIndicator2, compozingIndicator3, compozingIndicator1;
 
 - (void) setupDirection
 {
@@ -156,6 +158,44 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 - (uint64_t)interaction
 {
     return interaction;
+}
+
+- (void) animateCompozingIndicator: (BOOL) animate
+{
+    if (!animate) {
+        [[compozingIndicator1 layer] removeAllAnimations];
+        [[compozingIndicator2 layer] removeAllAnimations];
+        [[compozingIndicator3 layer] removeAllAnimations];
+        return;
+    }
+    [self startBlinkAnimation:compozingIndicator1 withDelay:0];
+    [self startBlinkAnimation:compozingIndicator2 withDelay:0.5];
+    [self startBlinkAnimation:compozingIndicator3 withDelay:1];
+}
+
+- (void) startBlinkAnimation:(NSView*) view withDelay:(CGFloat) delay {
+    [view setWantsLayer: YES];
+    view.layer.backgroundColor = [NSColor.ringDarkBlue CGColor];
+    view.layer.cornerRadius = 5;
+    view.layer.masksToBounds = true;
+    if (delay == 0) {
+        [self blinkAnimation:view];
+        return;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self blinkAnimation:view];
+    });
+}
+
+- (void) blinkAnimation:(NSView*) view {
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    [animation setFromValue:[NSNumber numberWithFloat:1.0]];
+    [animation setToValue:[NSNumber numberWithFloat:0.2]];
+    [animation setDuration:0.7];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+    [animation setAutoreverses:YES];
+    [animation setRepeatCount:HUGE_VALF];
+    [[view layer] addAnimation:animation forKey:@"opacity"];
 }
 
 @end
