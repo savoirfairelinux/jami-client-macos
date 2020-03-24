@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "Dışa aktarma esnasında bir ağ hatası oluştu";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+/* Button Action */
+"Accept" = "Kabul et";
+
+/* Welcome title */
+"Add a SIP account" = "Add a SIP account";
 
 /* Contextual menu action */
 "Add to contacts" = "Kişilere ekle";
 
-/* Contextual menu action */
-"Place video call" = "Görüntülü arama yeri";
-
-/* Contextual menu action */
-"Place audio call" = "Sesli arama yeri ";
-
-/* Contextual menu action */
-"Clear conversation" = "Clear conversation";
-
-/* Contextual menu action */
-"Block contact" = "Kişiyi engelle";
-
-/* Text shown to the user */
-"Alias : " = "Takma Ad :";
+/* Backup error */
+"An error occured during the backup" = "Yedekleme esnasında bir hata oluştu";
 
 /* Error shown to the user */
 "An error occured during the export" = "Dışa aktarma esnasında bir hata oluştu";
 
-/* Contextual menu entry */
-"Backup account" = "Hesabı yedekle";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "Telefon numarası";
+"Block contact" = "Kişiyi engelle";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
 /* File transfer canceled label */
 "Canceled" = "İptal edildi";
 
-/* Open panel title */
-"Choose a CA list" = "Bir onay kurumu listesi seç";
-
-/* Open panel title */
-"Choose a certificate" = "Bir sertifika seç";
-
-/* Open panel title */
-"Choose a directory" = "Bir dizin seç";
-
-/* Open panel title */
-"Choose a private key file" = "Bir özel anahtar dosyası seç";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Onay kurumu seç";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Dizin seç";
-
 /* Contextual menu entry */
 "Choose file" = "Dosya seç";
 
-/* Contextual menu entry */
-"Share screen" = "Share screen";
+/* Contextual menu action */
+"Clear conversation" = "Clear conversation";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopyala";
 
-/* Contextual menu action */
-"Copy name" = "Adı kopyala";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "Numarayı kopyala";
+/* Welcome title */
+"Create a new account" = "Yeni bir hesap oluştur";
 
-/* Contextual menu entry */
-"Create Jami Account" = "Jami hesabı oluştur";
-
-/* Contextual menu entry */
-"Create SIP Account" = "SİP Hesabı Oluştur";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "Başarısız";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Bakma başarısız";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Import from backup";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "%@'den gelen arama";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Incoming message from %@";
 
-/* Message from {Name} */
-"Message from %@" = "%@'den ileti";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Geçersiz kullanıcı adı";
 
-/* User label */
-"New SIP account" = "Yeni SIP hesabı";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Parola ve doğrulama uyuşmuyor";
@@ -109,33 +97,47 @@
 /* Indication for user */
 "Passwords don't match" = "Parolalar uyuşmuyor";
 
-/* Button label */
-"Pause" = "Duraklat";
+/* Contextual menu action */
+"Place audio call" = "Sesli arama yeri ";
 
-/* Button label */
-"Play" = "Oynat";
+/* Contextual menu action */
+"Place video call" = "Görüntülü arama yeri";
+
+/* Recording view explanation label */
+"Press to start recording" = "Press to start recording";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "Geri Çevir";
-"Accept" = "Kabul et";
-
-/* Contextual menu entry */
-"Remove value" = "Değeri kaldır";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Karıştırdığınız yerlere bakıp hesabı yeniden açın";
-
-/* Contextual menu entry */
-"Restore account" = "Hesabı geri yükle";
-
-/* Button title */
-"Revise Input" = "Girdiyi Gözden Geçirin";
 
 /* Text shown to the user */
-"ID : " = "Kimlik :";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Hesabı Kaldır";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* Send button title */
+"Send" = "Gönder";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
 
 /* No comment provided by engineer. */
 "Share" = "Paylaş";
+
+/* Contextual menu entry */
+"Share screen" = "Share screen";
+
+/* Sign In */
+"Sign In" = "Sign In";
+
+/* Record message title */
+"Stop recording" = "Kaydı durdur";
 
 /* File transfer successful label */
 "Success" = "Başarılı";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Girilen kullanıcı adı uygun";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Girilen kullanıcı adı geçersiz. En az 3 karakterli olmalı ve yalnızca abece sayısal karakterler içermelidir.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Girilen kullanıcı adı uygun değil";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Girdiğiniz parola bu hesabı açmaz";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "Bilinmeyen";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "Hesabı dışa aktarmadan önce taşımanız gerekir.";
-
-/* Remove account alert title */
-"Remove account" = "Hesabı Kaldır";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-
-/* export account button title */
-"Select archive" = "Select archive";
-
-/* link account title */
-"Link to an account" = "Link to an account";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "Jami'ye Hoşgeldiniz";
-"Create a new account" = "Yeni bir hesap oluştur";
-"Add a SIP account" = "Add a SIP account";
+"Welcome to Jami" = "Jami'ye Hoşgeldiniz";
 
-/* Notification message */
-"Send you a contact request" = "Send you a contact request";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
-
-/* Backup error */
-"An error occured during the backup" = "Yedekleme esnasında bir hata oluştu";

@@ -1,42 +1,75 @@
 
-/* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your ID which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "Zaškrtnutím tohoto nastavení si zaregistrujete jedinečné uživatelské jméno na síti Jami. Ostatní ho budou moci použít k navázání spojení, namísto obvyklého ID, které je 40 znaků dlouhé.";
+/* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your D which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
+"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your D which is 40 characters long.";
 
-/* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Povinné*";
+/* Class = "NSTextFieldCell"; placeholderString = "Password..."; ObjectID = "1TO-Ov-S8j"; */
+"1TO-Ov-S8j.placeholderString" = "Heslo…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedIsNilPlaceholder" = "Repeat password...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedMultipleValuesPlaceholder" = "Repeat password...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedNoSelectionPlaceholder" = "Repeat password...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedNotApplicablePlaceholder" = "Repeat password...";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
 "AG5-GR-bii.title" = "Zaregistrovat veřejné uživatelské jméno";
 
-/* Class = "NSTextFieldCell"; title = "Choose your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Zvolte si heslo";
+/* Class = "NSTextFieldCell"; placeholderString = "Repeat password"; ObjectID = "BCg-5V-Ek4"; */
+"BCg-5V-Ek4.placeholderString" = "Zopakujte heslo";
 
-/* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "BCg-5V-Ek4"; */
-"BCg-5V-Ek4.placeholderString" = "Povinné*";
+/* Class = "NSButtonCell"; title = "Choose password for enhance security"; ObjectID = "Cnw-4p-3Uc"; */
+"Cnw-4p-3Uc.title" = "Choose password for enhance security";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedIsNilPlaceholder" = "Heslo…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedMultipleValuesPlaceholder" = "Heslo…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedNoSelectionPlaceholder" = "Heslo…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedNotApplicablePlaceholder" = "Heslo…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedIsNilPlaceholder" = "Uživatelské jméno…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedMultipleValuesPlaceholder" = "Uživatelské jméno…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedNoSelectionPlaceholder" = "Uživatelské jméno…";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedNotApplicablePlaceholder" = "Uživatelské jméno…";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
 "YIN-YL-JBs.title" = "Jen chviličku…";
 
-/* Class = "NSTextFieldCell"; title = "Repeat your password"; ObjectID = "fEY-eO-HwI"; */
-"fEY-eO-HwI.title" = "Zopakujte své heslo";
+/* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
+"bdC-Uc-Qhs.placeholderString" = "Uživatelské jméno…";
 
-/* Class = "NSTextFieldCell"; placeholderString = "'Unknown' if empty..."; ObjectID = "gEy-ak-Cgq"; */
+/* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "gEy-ak-Cgq"; */
 "gEy-ak-Cgq.placeholderString" = "Zadejte jméno";
 
-/* Class = "NSTextFieldCell"; title = "Create your profile"; ObjectID = "gki-BR-jc3"; */
-"gki-BR-jc3.title" = "Vytvořit vlastní profil";
+/* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "gki-BR-jc3"; */
+"gki-BR-jc3.title" = "Profil";
 
-/* Class = "NSTextFieldCell"; title = "Create your account"; ObjectID = "qQl-Xn-c88"; */
-"qQl-Xn-c88.title" = "Vytvořit vlastní účet";
-
-/* Class = "NSTextFieldCell"; title = "Enter your full name"; ObjectID = "tzf-88-Yn5"; */
-"tzf-88-Yn5.title" = "Zadejte své celé jméno";
+/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "qQl-Xn-c88"; */
+"qQl-Xn-c88.title" = "Účet";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
 "v7f-52-GJA.title" = "Zrušit";
 
-/* Class = "NSTextFieldCell"; title = "Your password must be at least 6 characters. It will be used to encrypt your account data and to link new devices to your account."; ObjectID = "zUH-kc-cik"; */
-"zUH-kc-cik.title" = "Heslo musí mít alespoň 6 znaků. Bude použito k zašifrování dat vašeho účtu a pro připojování nových zařízení k účtu.";
+/* Class = "NSTextFieldCell"; title = "This password will be used to encrypt your account data and link new devices to your account. It is not mandatory but recommended to set one."; ObjectID = "zUH-kc-cik"; */
+"zUH-kc-cik.title" = "This password will be used to encrypt your account data and link new devices to your account. It is not mandatory but recommended to set one.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
 "zfA-n9-V4X.title" = "Vytvořit";

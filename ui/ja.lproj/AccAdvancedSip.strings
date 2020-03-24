@@ -24,7 +24,7 @@
 "6eH-la-JbF.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
-"72p-GY-gu6.title" = "Private key password";
+"72p-GY-gu6.title" = "秘密鍵のパスワード";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
 "8JD-11-wHZ.title" = "Outgoing TLS server name";
@@ -45,7 +45,7 @@
 "Gwi-Mp-NpZ.title" = "TURNを使用";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
-"HRM-FR-1sH.title" = "Use STUN";
+"HRM-FR-1sH.title" = "STUNを使用";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
 "HYt-sW-yd0.title" = "STUN address";
@@ -84,13 +84,13 @@
 "Vke-hs-iXz.title" = "Audio codecs";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
-"W9F-Nf-ehp.title" = "プライベートキー";
+"W9F-Nf-ehp.title" = "秘密鍵";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
 "WsS-1e-Epm.title" = "Verify answer certificates (client side)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
-"Xp3-bL-3Cs.title" = "User certificate";
+"Xp3-bL-3Cs.title" = "ユーザー証明書";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "Xxr-gl-ukE"; */
 "Xxr-gl-ukE.title" = "アドレス";
@@ -102,7 +102,7 @@
 "aYs-wh-Hpr.title" = "TURN address";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "CA certificate";
+"b2y-85-ZHK.title" = "CA証明書";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
 "cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";

@@ -30,7 +30,7 @@
 "K0z-NH-3Cq.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
-"LWs-a2-E7f.title" = "User certificate";
+"LWs-a2-E7f.title" = "ユーザー証明書";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Q4t-zo-brK"; */
 "Q4t-zo-brK.title" = "Audio codecs";
@@ -39,7 +39,7 @@
 "Qxp-I4-A7W.title" = "セキュリティ";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "プロキシを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "Video codecs";
@@ -54,7 +54,7 @@
 "YJM-iQ-0lE.title" = "ブートストラップ";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "YcX-lE-8ug"; */
-"YcX-lE-8ug.title" = "Private key password";
+"YcX-lE-8ug.title" = "秘密鍵のパスワード";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
 "Ywo-5x-8kh.title" = "Box";
@@ -78,10 +78,10 @@
 "gUl-Px-cIJ.title" = "TURNのパスワード";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "k7i-pK-JXp"; */
-"k7i-pK-JXp.title" = "CA certificate";
+"k7i-pK-JXp.title" = "CA証明書";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "nqX-Vu-UuA"; */
-"nqX-Vu-UuA.title" = "Use STUN";
+"nqX-Vu-UuA.title" = "STUNを使用";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
 "qFq-Yh-2JL.title" = "Custom ringtone";
@@ -90,7 +90,7 @@
 "sVe-iG-OCw.title" = "Connectivity";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
-"soR-nF-ybe.title" = "プライベートキー";
+"soR-nF-ybe.title" = "秘密鍵";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
 "sy5-OH-wyB.title" = "Box";

@@ -9,16 +9,16 @@
 "24s-we-pkD.title" = "امنیت";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
+"2rB-Bv-c9U.title" = "زمان انقضا ثبت‌نام (ثانیه)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
 "3Uq-Nb-J1A.title" = "تنظیمات تماس";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Fallback on RTP on encryption failure";
+"3rM-KT-bNf.title" = "بازگرداندن RTP در شکست رمزگذاری";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Auto answer calls";
+"3vs-TI-tkg.title" = "پاسخگویی خودکار تماس‌ها";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
 "6eH-la-JbF.title" = "قلمرو TURN";
@@ -30,13 +30,13 @@
 "8JD-11-wHZ.title" = "نام سرور TLS خروجی";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Item 1";
+"8bw-iH-XGl.title" = "مورد 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "پرت";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "A31-3Y-z4R"; */
-"A31-3Y-z4R.title" = "Box";
+"A31-3Y-z4R.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
 "ELr-A7-mGE.title" = "نشانی منتشر شده";
@@ -48,37 +48,37 @@
 "HRM-FR-1sH.title" = "استفاده از STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN address";
+"HYt-sW-yd0.title" = "نشانی STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "Require a certificate for incoming TLS connections";
+"JV8-cY-6vR.title" = "برای اتصال‌های TLS ورودی نیاز به یک گواهی دارید";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "SDP Session Negotiation (ICE Fallback)";
+"Jfp-NE-ODd.title" = "مذاکره جلسه SDP (عقبگرد ICE)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
-"MBR-AC-HFq.title" = "Box";
+"MBR-AC-HFq.title" = "صندوق";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Item 3";
+"Mho-w1-ZPJ.title" = "مورد 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
 "Nqr-gj-dOH.title" = "صدای زنگ سفارشی";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Item 2";
+"OEo-C7-vEh.title" = "مورد 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
 "Ogj-NW-fZ9.title" = "دامنه پورت صدا RTP";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
-"Ppa-zn-w1X.title" = "Box";
+"Ppa-zn-w1X.title" = "صندوق";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "فعال‌سازی SDES برای پروتکل تبادل کلید";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
-"RIj-rT-gSd.title" = "Text Cell";
+"RIj-rT-gSd.title" = "سلول متنی";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
 "Vke-hs-iXz.title" = "رمزینه های صوتی";
@@ -87,7 +87,7 @@
 "W9F-Nf-ehp.title" = "کلید خصوصی";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Verify answer certificates (client side)";
+"WsS-1e-Epm.title" = "تایید گواهی‌های پاسخ (سمت مشتری)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
 "Xp3-bL-3Cs.title" = "گواهی کاربر";
@@ -96,40 +96,40 @@
 "Xxr-gl-ukE.title" = "نشانی";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
-"Zuz-jy-rLn.title" = "Box";
+"Zuz-jy-rLn.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN address";
+"aYs-wh-Hpr.title" = "نشانی TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
 "b2y-85-ZHK.title" = "گواهی CA";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
+"cN3-lC-dNM.title" = "استفاده فقط در مورد مذاکره SDP، در مواردی که ICE پشتیبانی نمی‌شود";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
-"cwV-lc-jju.title" = "Box";
+"cwV-lc-jju.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Negotiation timeout (seconds)";
+"dtf-uk-n1B.title" = "مهلت مذاکره (ثانیه)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
-"ekM-Cg-DEo.title" = "Box";
+"ekM-Cg-DEo.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
 "fjH-ej-gEr.title" = "رابط شبکه";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
+"fyT-bU-m54.title" = "تایید گواهی‌های ورودی (سمت مشتری)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "رمزینه های تصویری";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
-"jgX-tQ-dIA.title" = "Text Cell";
+"jgX-tQ-dIA.title" = "سلول متنی";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
-"l86-cH-pp8.title" = "Box";
+"l86-cH-pp8.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "nh9-3y-CEI"; */
 "nh9-3y-CEI.title" = "بیشینه";
@@ -144,10 +144,10 @@
 "rMN-Wf-tmp.title" = "نام کاربری TURN";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
+"vCS-s8-mZI.title" = "رمزگذاری جریان‌های رسانه (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Encrypt negotiation (TLS)";
+"vZH-42-mUi.title" = "رمزگذاری مذاکره (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
 "vpo-fl-9TS.title" = "اتصال";
@@ -156,7 +156,7 @@
 "wq6-KV-8X3.title" = "بیشینه";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
-"wyZ-Hb-BNf.title" = "Box";
+"wyZ-Hb-BNf.title" = "صندوق";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "x93-zk-hAW"; */
 "x93-zk-hAW.title" = "UPnP";

@@ -12,16 +12,16 @@
 "2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Call settings";
+"3Uq-Nb-J1A.title" = "إعدادات الاتصال";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
 "3rM-KT-bNf.title" = "إلجأ إلى RTP عند فشل التشفير";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Auto answer calls";
+"3vs-TI-tkg.title" = "الرد الآلي على المكالمات ";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
-"6eH-la-JbF.title" = "TURN realm";
+"6eH-la-JbF.title" = "حقل بروتوكول TURN";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
 "72p-GY-gu6.title" = "كلمة سر المفتاح الخاص";
@@ -39,7 +39,7 @@
 "A31-3Y-z4R.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Published address";
+"ELr-A7-mGE.title" = "العنوان المنشور";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
 "Gwi-Mp-NpZ.title" = "إستعمل TURN";
@@ -48,7 +48,7 @@
 "HRM-FR-1sH.title" = "إستعمل STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN address";
+"HYt-sW-yd0.title" = "عنوان STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
 "JV8-cY-6vR.title" = "استلزم شهادة للإتصالات TLS الواردة";
@@ -63,7 +63,7 @@
 "Mho-w1-ZPJ.title" = "Item 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Custom ringtone";
+"Nqr-gj-dOH.title" = "نغمة مخصصة";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
 "OEo-C7-vEh.title" = "Item 2";
@@ -99,7 +99,7 @@
 "Zuz-jy-rLn.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN address";
+"aYs-wh-Hpr.title" = "عنوان بروتوكول TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
 "b2y-85-ZHK.title" = "شهادة CA";
@@ -117,10 +117,10 @@
 "ekM-Cg-DEo.title" = "صندوق";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Network interface";
+"fjH-ej-gEr.title" = "واجهة الشبكة";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
+"fyT-bU-m54.title" = "التحقق من الشهادات الواردة (من طرف الخادم)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "مرمّزات الفيديو";
@@ -138,19 +138,19 @@
 "nq0-Js-9Cr.title" = "الحد الأدنى";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Use custom address and port";
+"nuq-Wl-sfd.title" = "استخدام عنوان ونقطة عبور مخصصين";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "TURN username";
+"rMN-Wf-tmp.title" = "اسم المستخدم لبروتوكول TURN";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
+"vCS-s8-mZI.title" = "تشفير تدفقات وسائط الميديا(SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
 "vZH-42-mUi.title" = "تشفير التفاوض (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
-"vpo-fl-9TS.title" = "Connectivity";
+"vpo-fl-9TS.title" = "الاتصال";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
 "wq6-KV-8X3.title" = "الحد الاقصى";
@@ -159,10 +159,10 @@
 "wyZ-Hb-BNf.title" = "صندوق";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "x93-zk-hAW"; */
-"x93-zk-hAW.title" = "UPnP";
+"x93-zk-hAW.title" = "بروتوكول UPnP";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "xjL-Wb-7VN"; */
-"xjL-Wb-7VN.title" = "TURN password";
+"xjL-Wb-7VN.title" = "كلمة المرور لبروتوكول TURN";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
 "zBy-cW-KY3.title" = "أسلوب بروتوكول TLS";

@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "Ett nätverksfel inträffade under exporten";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Kontot har inget lösenord";
+/* Button Action */
+"Accept" = "Acceptera";
+
+/* Welcome title */
+"Add a SIP account" = "Lägg till ett SIP-konto";
 
 /* Contextual menu action */
 "Add to contacts" = "Lägg till i kontakter";
 
-/* Contextual menu action */
-"Place video call" = "Placera  videosamtal";
-
-/* Contextual menu action */
-"Place audio call" = "Placera röstsamtal";
-
-/* Contextual menu action */
-"Clear conversation" = "Rensa konversation";
-
-/* Contextual menu action */
-"Block contact" = "Blockera kontakt";
-
-/* Text shown to the user */
-"Alias : " = "Alias: ";
+/* Backup error */
+"An error occured during the backup" = "Ett fel inträffade vid säkerhetskopieringen";
 
 /* Error shown to the user */
 "An error occured during the export" = "Ett fel inträffade vid exporten";
 
-/* Contextual menu entry */
-"Backup account" = "Säkerhetskopiera konto";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "Ring upp nummer";
+"Block contact" = "Blockera kontakt";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Genom att klicka \"OK\" tar du bort kontot från denna enhet! Denna åtgärd kan inte ångras. Även ditt registrerade namn kan förloras.";
 
 /* File transfer canceled label */
 "Canceled" = "Avbruten";
 
-/* Open panel title */
-"Choose a CA list" = "Välj en CA-lista";
-
-/* Open panel title */
-"Choose a certificate" = "Välj ett certifikat";
-
-/* Open panel title */
-"Choose a directory" = "Välj en mapp";
-
-/* Open panel title */
-"Choose a private key file" = "Välj en privat nyckelfil";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Välj CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Välj mapp";
-
 /* Contextual menu entry */
 "Choose file" = "Välj fil";
 
-/* Contextual menu entry */
-"Share screen" = "Dela skärmen";
+/* Contextual menu action */
+"Clear conversation" = "Rensa konversation";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopiera";
 
-/* Contextual menu action */
-"Copy name" = "Kopiera namn";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "Kopiera nummer";
+/* Welcome title */
+"Create a new account" = "Skapa ett nytt konto";
 
-/* Contextual menu entry */
-"Create Jami Account" = "Skapa Jami-konto";
-
-/* Contextual menu entry */
-"Create SIP Account" = "Skapa SIP-konto";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "Misslyckades";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Kunde inte utföra uppslagning";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Importera från säkerhetskopia";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Inkommande samtal från %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Inkommande meddelande från %@";
 
-/* Message from {Name} */
-"Message from %@" = "Meddelande från %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Ogiltigt användarnamn";
 
-/* User label */
-"New SIP account" = "Nytt SIP-konto";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "Inget konto tillgängligt";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Gå till inställningarna för att skapa ett nytt konto";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "Inget konto tillgängligt";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Lösenord och bekräftelse stämmer inte.";
@@ -109,33 +97,47 @@
 /* Indication for user */
 "Passwords don't match" = "Lösenorden stämmer inte";
 
-/* Button label */
-"Pause" = "Paus";
+/* Contextual menu action */
+"Place audio call" = "Placera röstsamtal";
 
-/* Button label */
-"Play" = "Spela";
+/* Contextual menu action */
+"Place video call" = "Placera  videosamtal";
+
+/* Recording view explanation label */
+"Press to start recording" = "Press to start recording";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "Neka";
-"Accept" = "Acceptera";
-
-/* Contextual menu entry */
-"Remove value" = "Ta bort värde";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Återöppna kontot för att se ditt hashvärde";
-
-/* Contextual menu entry */
-"Restore account" = "Återställ konto";
-
-/* Button title */
-"Revise Input" = "Revidera indata";
 
 /* Text shown to the user */
-"ID : " = "ID: ";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Ta bort konto";
+
+/* export account button title */
+"Select archive" = "Välj arkiv";
+
+/* Send button title */
+"Send" = "Skicka";
+
+/* Notification message */
+"Send you a contact request" = "Skickar en kontaktförfrågan";
 
 /* No comment provided by engineer. */
 "Share" = "Dela";
+
+/* Contextual menu entry */
+"Share screen" = "Dela skärmen";
+
+/* Sign In */
+"Sign In" = "Sign In";
+
+/* Record message title */
+"Stop recording" = "Sluta spela in";
 
 /* File transfer successful label */
 "Success" = "Slutfört";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Angivet användarnamn är tillgängligt";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Användarnamnet är ogiltigt. Det måste ha minst 3 tecken och får endast innehålla små bokstäver.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Lösenordet är inte tillgängligt";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "Följande konto behöver migreras till det nya Jami-formatet:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Det angivna lösenordet låser inte upp detta konto";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "Detta är ditt ID.\nKopiera och dela det med dina vänner!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "Detta är ditt Jami-namn.\nKopiera och dela det med dina vänner!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "För att slutföra åtgärden, måste du nu öppna Jami på den nya enheten och välja alternativet \"Koppla den här enheten till ett konto\". PIN-koden är giltig i 10 minuter.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "För att gå vidare med migreringen, måste du välja ett lösenord för ditt konto. Detta lösenord kommer att användas för att kryptera din huvudnyckel. Huvudnyckeln krävs för att lägga till nya enheter till ditt Jami-konto. Om du inte är redo att välja ett lösenord, kan du stänga ner Jami och återuppta migreringen senare.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "Okänd";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "Du måste migrera ditt konto före exporten";
-
-/* Remove account alert title */
-"Remove account" = "Ta bort konto";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Genom att klicka \"OK\" tar du bort kontot från denna enhet! Denna åtgärd kan inte ångras. Även ditt registrerade namn kan förloras.";
-
-/* export account button title */
-"Select archive" = "Välj arkiv";
-
-/* link account title */
-"Link to an account" = "Koppla till ett konto";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "Välkommen till Jami!";
-"Create a new account" = "Skapa ett nytt konto";
-"Add a SIP account" = "Lägg till ett SIP-konto";
+"Welcome to Jami" = "Välkommen till Jami!";
 
-/* Notification message */
-"Send you a contact request" = "Skickar en kontaktförfrågan";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "Detta är ditt Jami-namn.\nKopiera och dela det med dina vänner!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "Detta är ditt ID.\nKopiera och dela det med dina vänner!";
-
-/* Backup error */
-"An error occured during the backup" = "Ett fel inträffade vid säkerhetskopieringen";

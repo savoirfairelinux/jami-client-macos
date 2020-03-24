@@ -1,27 +1,36 @@
 
-/* Class = "NSTextFieldCell"; placeholderString = "Mandatory*"; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "*所示必须填写";
-
 /* Class = "NSTextFieldCell"; title = "Other users can use it instead of your ID"; ObjectID = "9gi-0u-67t"; */
 "9gi-0u-67t.title" = "Other users can use it instead of your ID";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during your username registration"; ObjectID = "Aeh-tK-RjX"; */
 "Aeh-tK-RjX.title" = "An error occured during your username registration";
 
-/* Class = "NSTextFieldCell"; title = "Enter your password"; ObjectID = "B6x-jj-48R"; */
-"B6x-jj-48R.title" = "Enter your password";
-
 /* Class = "NSWindow"; title = "Window"; ObjectID = "JWw-7m-ywL"; */
 "JWw-7m-ywL.title" = "視窗";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Enter password..."; ObjectID = "JkL-9W-ex1"; */
+"JkL-9W-ex1.ibShadowedIsNilPlaceholder" = "Enter password...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Enter password..."; ObjectID = "JkL-9W-ex1"; */
+"JkL-9W-ex1.ibShadowedMultipleValuesPlaceholder" = "Enter password...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Enter password..."; ObjectID = "JkL-9W-ex1"; */
+"JkL-9W-ex1.ibShadowedNoSelectionPlaceholder" = "Enter password...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Enter password..."; ObjectID = "JkL-9W-ex1"; */
+"JkL-9W-ex1.ibShadowedNotApplicablePlaceholder" = "Enter password...";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
 "YIN-YL-JBs.title" = "請稍待片刻...";
 
-/* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
-"bdC-Uc-Qhs.placeholderString" = "Username...";
+/* Class = "NSTextFieldCell"; placeholderString = "Enter username..."; ObjectID = "bdC-Uc-Qhs"; */
+"bdC-Uc-Qhs.placeholderString" = "Enter username...";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "cbA-c2-LlV"; */
 "cbA-c2-LlV.title" = "取消";
+
+/* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "egF-LJ-khJ"; */
+"egF-LJ-khJ.title" = "密码";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "eoS-s7-b3w"; */
 "eoS-s7-b3w.title" = "取消";
@@ -32,5 +41,11 @@
 /* Class = "NSButtonCell"; title = "Register"; ObjectID = "lT3-Bh-MnL"; */
 "lT3-Bh-MnL.title" = "Register";
 
-/* Class = "NSTextFieldCell"; title = "Register a public username"; ObjectID = "tje-EZ-ZPI"; */
-"tje-EZ-ZPI.title" = "Register a public username";
+/* Class = "NSTextFieldCell"; title = "Username"; ObjectID = "lo5-ei-wHM"; */
+"lo5-ei-wHM.title" = "使用者名";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Enter password..."; ObjectID = "nFA-uz-WjI"; */
+"nFA-uz-WjI.placeholderString" = "Enter password...";
+
+/* Class = "NSTextFieldCell"; title = "Register a public username "; ObjectID = "tje-EZ-ZPI"; */
+"tje-EZ-ZPI.title" = "Register a public username ";

@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "Při vyvádění došlo k chybě sítě";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Account has no password";
+/* Button Action */
+"Accept" = "Přijmout";
+
+/* Welcome title */
+"Add a SIP account" = "Add a SIP account";
 
 /* Contextual menu action */
 "Add to contacts" = "Přidat do kontaktů";
 
-/* Contextual menu action */
-"Place video call" = "Place video call";
-
-/* Contextual menu action */
-"Place audio call" = "Place audio call";
-
-/* Contextual menu action */
-"Clear conversation" = "Clear conversation";
-
-/* Contextual menu action */
-"Block contact" = "Blokovat spojení";
-
-/* Text shown to the user */
-"Alias : " = "Přezdívka:";
+/* Backup error */
+"An error occured during the backup" = "Při zálohování došlo k chybě";
 
 /* Error shown to the user */
 "An error occured during the export" = "Při vyvádění došlo k chybě";
 
-/* Contextual menu entry */
-"Backup account" = "Zálohovat účet";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "Volat číslo";
+"Block contact" = "Blokovat spojení";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
 /* File transfer canceled label */
 "Canceled" = "Zrušeno";
 
-/* Open panel title */
-"Choose a CA list" = "Vyberte seznam CA";
-
-/* Open panel title */
-"Choose a certificate" = "Vyberte certifikát";
-
-/* Open panel title */
-"Choose a directory" = "Vyberte adresář";
-
-/* Open panel title */
-"Choose a private key file" = "Vyberte soubor se soukromým klíčem";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Vybrat CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Vybrat adresář";
-
 /* Contextual menu entry */
 "Choose file" = "Vybrat soubor";
 
-/* Contextual menu entry */
-"Share screen" = "Share screen";
+/* Contextual menu action */
+"Clear conversation" = "Clear conversation";
 
 /* No comment provided by engineer. */
 "Copy" = "Zkopírovat";
 
-/* Contextual menu action */
-"Copy name" = "Kopírovat název";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "Kopírovat číslo";
+/* Welcome title */
+"Create a new account" = "Create a new account";
 
-/* Contextual menu entry */
-"Create Jami Account" = "Vytvořit účet Jami";
-
-/* Contextual menu entry */
-"Create SIP Account" = "Vytvořit účet SIP";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "Hovor selhal";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Vyhledávání selhalo";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Import from backup";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Příchozí hovor od %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Incoming message from %@";
 
-/* Message from {Name} */
-"Message from %@" = "Zpráva od  %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Neplatné uživatelské jméno";
 
-/* User label */
-"New SIP account" = "Nový účet SIP";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Heslo a jeho potvrzení se neshodují";
@@ -109,33 +97,47 @@
 /* Indication for user */
 "Passwords don't match" = "Hesla se neshodují";
 
-/* Button label */
-"Pause" = "Pozastavit";
+/* Contextual menu action */
+"Place audio call" = "Place audio call";
 
-/* Button label */
-"Play" = "Přehrát";
+/* Contextual menu action */
+"Place video call" = "Place video call";
+
+/* Recording view explanation label */
+"Press to start recording" = "Press to start recording";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "Odmítnout";
-"Accept" = "Přijmout";
-
-/* Contextual menu entry */
-"Remove value" = "Odstranit hodnotu";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Znovuotevřít účet a podívat se na váš hash";
-
-/* Contextual menu entry */
-"Restore account" = "Obnovit účet";
-
-/* Button title */
-"Revise Input" = "Pozměnit vstup";
 
 /* Text shown to the user */
-"ID : " = "ID: ";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* Send button title */
+"Send" = "Odeslat";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
 
 /* No comment provided by engineer. */
 "Share" = "Sdílet";
+
+/* Contextual menu entry */
+"Share screen" = "Share screen";
+
+/* Sign In */
+"Sign In" = "Sign In";
+
+/* Record message title */
+"Stop recording" = "Zastavit nahrávání";
 
 /* File transfer successful label */
 "Success" = "Úspěch";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Zadané uživatelské jméno je dostupné";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Zadané uživatelské jméno je neplatné. Musí obsahovat alespoň 3 znaky a skládat se pouze z malých písmen a číslic.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Zadané uživatelské jméno není dostupné";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "The following account needs to be migrated to the new Jami account format:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Vámi zadané heslo neodemkne tento účet";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "Neznámé";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "Musíte převést svůj účet před vyvedením";
-
-/* Remove account alert title */
-"Remove account" = "Remove account";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
-
-/* export account button title */
-"Select archive" = "Select archive";
-
-/* link account title */
-"Link to an account" = "Link to an account";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "Vítejte v Jami";
-"Create a new account" = "Create a new account";
-"Add a SIP account" = "Add a SIP account";
+"Welcome to Jami" = "Vítejte v Jami";
 
-/* Notification message */
-"Send you a contact request" = "Send you a contact request";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
-
-/* Backup error */
-"An error occured during the backup" = "Při zálohování došlo k chybě";

@@ -12,7 +12,7 @@
 "24.title" = "Finestra";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
+"29.title" = "UnMenuPrincipale";
 
 /* Class = "NSMenuItem"; title = "Jami"; ObjectID = "56"; */
 "56.title" = "Jami";
@@ -33,10 +33,10 @@
 "131.title" = "Servizi";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Hide Jami";
+"134.title" = "Nascondi Jami";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "Quit Jami";
+"136.title" = "Chiudi Jami";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Nascondi Altri";
@@ -117,7 +117,7 @@
 "220.title" = "Trova";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Use Selection for Find";
+"221.title" = "Usa la selezione per cercare";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "Zoom";
@@ -177,7 +177,7 @@
 "465.title" = "Rendi minuscolo";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
-"466.title" = "Capitalize";
+"466.title" = "Capitalizza";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
 "485.title" = "Incolla e armonizza con lo stile";
@@ -189,25 +189,10 @@
 "491.title" = "Aiuto";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami Help";
+"492.title" = "Help Jami";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Trova e Sostituisci...";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Controlla Aggiornamenti...";
-
-/* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "Mostra";
-
-/* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "Mostra";
-
-/* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Mostra Recenti";
-
-/* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "Mostra contatti";
-
-/* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "Mostra la cronologia delle chiamate";

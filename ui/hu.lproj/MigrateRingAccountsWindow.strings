@@ -1,15 +1,15 @@
 
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
-"1ob-x1-u74.title" = "Fiók átvitel befejeződött";
+"1ob-x1-u74.title" = "Fiók áttelepítés befejeződött";
 
-/* Class = "NSTextFieldCell"; placeholderString = "ID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "Azonosító";
+/* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
+"859-10-HEb.placeholderString" = "Jami azonosító";
 
-/* Class = "NSTextFieldCell"; title = "The following account needs to be migrated to the new Ring account format:\\n Alias : \\nID:\\n To proceed the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Ring account. If your not ready to choose a password, you may close Ring and resume the migration later."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "A következő fiókot át kell telepíteni az új Jami fiókformátumra:\\nÁlnév: \\nAzonosító: \\nAz áttelepítés folytatásához ki kell választania a fiókhoz tartozó jelszót. Ezt a jelszót fogja használni a fő kulcs titkosításához. Szükséges, hogy új eszközöket adjon hozzá a Jami fiókjához. Ha nem áll készen a jelszó kiválasztására, akkor bezárhatja a Jami-t és később folytathatja az áttelepítést.";
+/* Class = "NSTextFieldCell"; title = "To proceed with the migration, you need to enter a password that was used for this account."; ObjectID = "859-10-HEb"; */
+"859-10-HEb.title" = "To proceed with the migration, you need to enter a password that was used for this account.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Fiók átvitel hiba";
+"8K3-9Z-MKH.title" = "Fiók áttelepítés hiba";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
 "C2l-rz-Gqt.title" = "A fiók sikeresen áttelepítést.";
@@ -22,6 +22,9 @@
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "Rendben";
+
+/* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "QkU-T8-Xi6"; */
+"QkU-T8-Xi6.title" = "Ez a fiók törlése";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Ablak";
@@ -36,13 +39,13 @@
 "e7n-Ev-bK7.placeholderString" = "hiba címke";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
-"rW5-Il-5YD.title" = "Átvitel";
+"rW5-Il-5YD.title" = "Áttelepítés";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "vwh-K9-3O9"; */
 "vwh-K9-3O9.title" = "Jelszó";
 
 /* Class = "NSTextFieldCell"; title = "Account migration required"; ObjectID = "wmv-sA-Mlh"; */
-"wmv-sA-Mlh.title" = "Fiók átvitel szükséges";
+"wmv-sA-Mlh.title" = "Fiók áttelepítés szükséges";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "xqz-Uz-hqU"; */
 "xqz-Uz-hqU.placeholderString" = "Jelszó…";
