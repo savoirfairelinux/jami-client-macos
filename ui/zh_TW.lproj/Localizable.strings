@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "當匯出時遇到網路錯誤";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "無密碼的帳號";
+/* Button Action */
+"Accept" = "接聽";
+
+/* Welcome title */
+"Add a SIP account" = "新增 SIP 帳號";
 
 /* Contextual menu action */
 "Add to contacts" = "加到聯絡人";
 
-/* Contextual menu action */
-"Place video call" = "撥出視訊通話";
-
-/* Contextual menu action */
-"Place audio call" = "開始語音通話";
-
-/* Contextual menu action */
-"Clear conversation" = "清除對話";
-
-/* Contextual menu action */
-"Block contact" = "阻擋連絡人";
-
-/* Text shown to the user */
-"Alias : " = "別名：";
+/* Backup error */
+"An error occured during the backup" = "在備份時遇到錯誤";
 
 /* Error shown to the user */
 "An error occured during the export" = "當匯出時遇到錯誤";
 
-/* Contextual menu entry */
-"Backup account" = "備份帳號";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "通話號碼";
+"Block contact" = "阻擋連絡人";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "點選「確定」後，您將會在此裝置上移除此帳號！此動作不可復原。同時，您已註冊的名稱也將會遺失。";
 
 /* File transfer canceled label */
 "Canceled" = "已取消";
 
-/* Open panel title */
-"Choose a CA list" = "選擇證書機構清單";
-
-/* Open panel title */
-"Choose a certificate" = "選擇證書";
-
-/* Open panel title */
-"Choose a directory" = "選擇目錄";
-
-/* Open panel title */
-"Choose a private key file" = "選擇私密金鑰檔案";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "選擇證書機構";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "選擇目錄";
-
 /* Contextual menu entry */
 "Choose file" = "選擇檔案";
 
-/* Contextual menu entry */
-"Share screen" = "分享畫面";
+/* Contextual menu action */
+"Clear conversation" = "清除對話";
 
 /* No comment provided by engineer. */
 "Copy" = "複製";
 
-/* Contextual menu action */
-"Copy name" = "複製名稱";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "複製號碼";
+/* Welcome title */
+"Create a new account" = "建立新帳號";
 
-/* Contextual menu entry */
-"Create Jami Account" = "建立 Jami 帳號";
-
-/* Contextual menu entry */
-"Create SIP Account" = "建立 SIP 帳號";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "失敗";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "查詢失敗";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "從備份匯入";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "來電從 %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "從 %@ 收到訊息";
 
-/* Message from {Name} */
-"Message from %@" = "訊息從 %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "無效的使用者名稱";
 
-/* User label */
-"New SIP account" = "新的 SIP 帳號";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "無可用帳號";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "到偏好設定以建立新帳號";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "無可用帳號";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "密碼與確認不相符。";
@@ -109,33 +97,47 @@
 /* Indication for user */
 "Passwords don't match" = "密碼不相符";
 
-/* Button label */
-"Pause" = "暫停";
+/* Contextual menu action */
+"Place audio call" = "開始語音通話";
 
-/* Button label */
-"Play" = "播放";
+/* Contextual menu action */
+"Place video call" = "撥出視訊通話";
+
+/* Recording view explanation label */
+"Press to start recording" = "按下以開始錄製";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "拒絕";
-"Accept" = "接聽";
-
-/* Contextual menu entry */
-"Remove value" = "移除值";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "重新開啟帳號以檢視您的雜湊值";
-
-/* Contextual menu entry */
-"Restore account" = "還原帳號";
-
-/* Button title */
-"Revise Input" = "修改輸入";
 
 /* Text shown to the user */
-"ID : " = "ID：";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "移除帳號";
+
+/* export account button title */
+"Select archive" = "選取歸檔";
+
+/* Send button title */
+"Send" = "傳送";
+
+/* Notification message */
+"Send you a contact request" = "傳送給您聯絡人請求";
 
 /* No comment provided by engineer. */
 "Share" = "分享";
+
+/* Contextual menu entry */
+"Share screen" = "分享畫面";
+
+/* Sign In */
+"Sign In" = "登入";
+
+/* Record message title */
+"Stop recording" = "停止錄製";
 
 /* File transfer successful label */
 "Success" = "成功";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "輸入的使用者名稱可用";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "輸入的使用者名稱無效。它必須有至少 3 個字元，且僅包含小寫字母與數字字元。";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "輸入的使用者名稱不可用";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "需要將以下的帳號導入為新的 Jami 帳號格式：";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "您輸入的密碼無法解鎖這個帳號";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "這是您的 ID。\n複製並與您的朋友分享！";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "這是您的 Jami 使用者名稱。\n複製並與您的朋友分享！";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "要完成這個過程，您需要在新的裝置上開啟 Jami 並選擇「連結這個裝置到一個帳號」。您的 PIN 碼在 10 分鐘內有效。";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "要繼續導入，您必須為您的帳號選擇密碼。這個密碼會用於加密的您的主金鑰。您在加入新裝置到您的 Jami 帳號時會需要它。若您還沒準備好選擇密碼，您可以關掉 Jami 並稍後再繼續導入。";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "未知";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "您必須在匯出前先導入您的帳號";
-
-/* Remove account alert title */
-"Remove account" = "移除帳號";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "點選「確定」後，您將會在此裝置上移除此帳號！此動作不可復原。同時，您已註冊的名稱也將會遺失。";
-
-/* export account button title */
-"Select archive" = "選取歸檔";
-
-/* link account title */
-"Link to an account" = "連結到帳號";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "歡迎來到 Jami";
-"Create a new account" = "建立新帳號";
-"Add a SIP account" = "新增 SIP 帳號";
+"Welcome to Jami" = "歡迎來到 Jami";
 
-/* Notification message */
-"Send you a contact request" = "傳送給您聯絡人請求";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "這是您的 Jami 使用者名稱。\n複製並與您的朋友分享！";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "這是您的 ID。\n複製並與您的朋友分享！";
-
-/* Backup error */
-"An error occured during the backup" = "在備份時遇到錯誤";

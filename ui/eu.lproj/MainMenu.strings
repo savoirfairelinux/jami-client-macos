@@ -9,7 +9,7 @@
 "23.title" = "Minimizatu";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
-"24.title" = "Window";
+"24.title" = "Leihoa";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
 "29.title" = "AMainMenu";
@@ -21,46 +21,46 @@
 "57.title" = "Jami";
 
 /* Class = "NSMenuItem"; title = "About Jami"; ObjectID = "58"; */
-"58.title" = "About Jami";
+"58.title" = "Jamiri buruz";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Preferences…";
+"129.title" = "Hobespena...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
-"130.title" = "Services";
+"130.title" = "Zerbitzuak";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Services";
+"131.title" = "Zerbitzuak";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Hide Jami";
+"134.title" = "Ezkutatu Jami";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "Quit Jami";
+"136.title" = "Itxi Jami";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "Hide Others";
+"145.title" = "Ezkutatu besteak";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Show All";
+"150.title" = "Erakutsi denak";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "Stop Speaking";
+"195.title" = "Utzi hitz egiteari";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "Start Speaking";
+"196.title" = "Hasi hitz egiten";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
-"197.title" = "Copy";
+"197.title" = "Kopiatu";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "Select All";
+"198.title" = "Hautatu denak";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
-"199.title" = "Cut";
+"199.title" = "Ebaki";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
-"200.title" = "Spelling and Grammar";
+"200.title" = "Ortografia eta gramatika";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
 "201.title" = "Check Document Now";
@@ -69,16 +69,16 @@
 "202.title" = "Eza";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
-"203.title" = "Paste";
+"203.title" = "Itsatsi";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Show Spelling and Grammar";
+"204.title" = "Erakutsi ortografia eta gramatika";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Edit";
+"205.title" = "Editatu";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
-"207.title" = "Undo";
+"207.title" = "Desegin";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
 "208.title" = "Find Next";
@@ -99,19 +99,19 @@
 "213.title" = "Find Previous";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
-"215.title" = "Redo";
+"215.title" = "Berregin";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
-"216.title" = "Spelling and Grammar";
+"216.title" = "Ortografia eta gramatika";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Edit";
+"217.title" = "Editatu";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
 "218.title" = "Find";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Check Spelling While Typing";
+"219.title" = "Egiaztatu ortografia idatzi ahala";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
 "220.title" = "Find";
@@ -123,10 +123,10 @@
 "239.title" = "Zoom";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "View";
+"295.title" = "Ikusi";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "View";
+"296.title" = "Ikusi";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
 "297.title" = "Show Toolbar";
@@ -135,7 +135,7 @@
 "298.title" = "Customize Toolbar…";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Check Grammar With Spelling";
+"346.title" = "Egiaztatu gramatika ortografiarekin bat";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
 "348.title" = "Substitutions";
@@ -162,7 +162,7 @@
 "452.title" = "Make Upper Case";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Correct Spelling Automatically";
+"454.title" = "Zuzendu ortografia automatikoki";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
 "457.title" = "Show Substitutions";
@@ -196,18 +196,3 @@
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "Check for Update...";
-
-/* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "Show";
-
-/* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "Show";
-
-/* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "Show recent";
-
-/* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "Show contacts";
-
-/* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "Show call history";

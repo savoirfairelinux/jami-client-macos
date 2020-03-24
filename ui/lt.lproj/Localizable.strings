@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "Eksportavimo metu, įvyko klaida";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Paskyra neturi slaptažodžio";
+/* Button Action */
+"Accept" = "Priimti";
+
+/* Welcome title */
+"Add a SIP account" = "Pridėti SIP paskyrą";
 
 /* Contextual menu action */
 "Add to contacts" = "Pridėti prie adresatų";
 
-/* Contextual menu action */
-"Place video call" = "Pradėti vaizdo skambutį";
-
-/* Contextual menu action */
-"Place audio call" = "Pradėti garso skambutį";
-
-/* Contextual menu action */
-"Clear conversation" = "Išvalyti pokalbį";
-
-/* Contextual menu action */
-"Block contact" = "Užblokuoti adresatą";
-
-/* Text shown to the user */
-"Alias : " = "Slapyvardis : ";
+/* Backup error */
+"An error occured during the backup" = "Atsarginės kopijos darymo metu įvyko klaida";
 
 /* Error shown to the user */
 "An error occured during the export" = "Eksportavimo metu, įvyko klaida";
 
-/* Contextual menu entry */
-"Backup account" = "Padaryti paskyros atsarginę kopiją";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "Call number";
+"Block contact" = "Užblokuoti adresatą";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Spustelėję \"Gerai\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
 
 /* File transfer canceled label */
 "Canceled" = "Atsisakyta";
 
-/* Open panel title */
-"Choose a CA list" = "Choose a CA list";
-
-/* Open panel title */
-"Choose a certificate" = "Choose a certificate";
-
-/* Open panel title */
-"Choose a directory" = "Pasirinkti katalogą";
-
-/* Open panel title */
-"Choose a private key file" = "Pasirinkti privačiojo rakto failą";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Choose CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Pasirinkti katalogą";
-
 /* Contextual menu entry */
 "Choose file" = "Pasirinkti failą";
 
-/* Contextual menu entry */
-"Share screen" = "Bendrinti ekraną";
+/* Contextual menu action */
+"Clear conversation" = "Išvalyti pokalbį";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopijuoti";
 
-/* Contextual menu action */
-"Copy name" = "Kopijuoti vardą";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "Kopijuoti numerį";
+/* Welcome title */
+"Create a new account" = "Sukurti naują paskyrą";
 
-/* Contextual menu entry */
-"Create Jami Account" = "Susikurti Jami paskyrą";
-
-/* Contextual menu entry */
-"Create SIP Account" = "Sukurti SIP paskyrą";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "Nepavyko";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Nepavyko atlikti informacijos paiešką";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Import from backup";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Gaunamasis skambutis nuo %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Incoming message from %@";
 
-/* Message from {Name} */
-"Message from %@" = "Žinutė nuo %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Neteisingas naudotojo vardas";
 
-/* User label */
-"New SIP account" = "Nauja SIP paskyra";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "Nėra prieinamų paskyrų";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "Nėra prieinamų paskyrų";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Slaptažodis ir jo patvirtinimas nesutampa.";
@@ -109,33 +97,47 @@
 /* Indication for user */
 "Passwords don't match" = "Slaptažodžiai nesutampa";
 
-/* Button label */
-"Pause" = "Pristabdyti";
+/* Contextual menu action */
+"Place audio call" = "Pradėti garso skambutį";
 
-/* Button label */
-"Play" = "Groti";
+/* Contextual menu action */
+"Place video call" = "Pradėti vaizdo skambutį";
+
+/* Recording view explanation label */
+"Press to start recording" = "Press to start recording";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "Atmesti";
-"Accept" = "Priimti";
-
-/* Contextual menu entry */
-"Remove value" = "Šalinti reikšmę";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Reopen account to see your hash";
-
-/* Contextual menu entry */
-"Restore account" = "Atkurti paskyrą";
-
-/* Button title */
-"Revise Input" = "Revise Input";
 
 /* Text shown to the user */
-"ID : " = "ID : ";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Šalinti paskyrą";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* Send button title */
+"Send" = "Siųsti";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
 
 /* No comment provided by engineer. */
 "Share" = "Bendrinti";
+
+/* Contextual menu entry */
+"Share screen" = "Bendrinti ekraną";
+
+/* Sign In */
+"Sign In" = "Prisijungti";
+
+/* Record message title */
+"Stop recording" = "Stop recording";
 
 /* File transfer successful label */
 "Success" = "Pavyko";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Įvestas naudotojo vardas yra prieinamas";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Įvestas naudotojo vardas yra neteisingas. Jame privalo būti bent 3 simboliai ir tik mažosios raidės ar skaitmenys.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Įvestas naudotojo vardas yra neprieinamas";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "Ši paskyra turi būti perkelta į naująjį Jami paskyros formatą:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Slaptažodis, kurį įrašėte, neatrakina šios paskyros";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "Tai yra jūsų ID. \nNukopijuokite jį ir dalinkitės juo su savo draugais!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "Tai yra jūsų Jami naudotojo vardas. \nNukopijuokite jį ir dalinkitės juo su savo draugais!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Norėdami užbaigti procesą, turite atverti Jami naujame įrenginyje ir pasirinkti parinktį \"Susieti šį įrenginį su paskyra\". Jūsų pin galioja 10 minučių.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Norėdami tęsti perkėlimą, privalote pasirinkti savo paskyrai slaptažodį. Šis slaptažodis bus naudojamas jūsų pagrindiniam raktui užšifruoti. Taip pat jis bus reikalingas pridedant naujus įrenginius į jūsų Jami paskyrą. Jeigu jūs nesate pasiruošę pasirinkti slaptažodį, tuomet galite užverti Jami ir pratęsti perkėlimą vėliau.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "Nežinomas";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "Prieš eksportuodami, turite perkelti savo paskyrą";
-
-/* Remove account alert title */
-"Remove account" = "Šalinti paskyrą";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Spustelėję \"Gerai\", pašalinsite šią paskyrą šiame įrenginyje! Šio veiksmo negalima bus atšaukti. Be to, galite prarasti savo registruotą vardą.";
-
-/* export account button title */
-"Select archive" = "Select archive";
-
-/* link account title */
-"Link to an account" = "Susieti su paskyra";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "Sveiki atvykę į Jami";
-"Create a new account" = "Sukurti naują paskyrą";
-"Add a SIP account" = "Pridėti SIP paskyrą";
+"Welcome to Jami" = "Sveiki atvykę į Jami";
 
-/* Notification message */
-"Send you a contact request" = "Send you a contact request";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "Tai yra jūsų Jami naudotojo vardas. \nNukopijuokite jį ir dalinkitės juo su savo draugais!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "Tai yra jūsų ID. \nNukopijuokite jį ir dalinkitės juo su savo draugais!";
-
-/* Backup error */
-"An error occured during the backup" = "Atsarginės kopijos darymo metu įvyko klaida";

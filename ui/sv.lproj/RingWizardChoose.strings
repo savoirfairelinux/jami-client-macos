@@ -1,9 +1,21 @@
 
+/* Class = "NSButtonCell"; title = "Connect to account manager"; ObjectID = "HGQ-Kd-WIw"; */
+"HGQ-Kd-WIw.title" = "Anslut till kontohanteraren";
+
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "YJ3-7G-cU1"; */
 "YJ3-7G-cU1.title" = "Avbryt";
 
-/* Class = "NSButtonCell"; title = "Link this device to an account"; ObjectID = "Z9K-mD-ucr"; */
-"Z9K-mD-ucr.title" = "Koppla denna enhet till ett konto";
+/* Class = "NSButtonCell"; title = "Import from other device"; ObjectID = "Z9K-mD-ucr"; */
+"Z9K-mD-ucr.title" = "Import from other device";
 
 /* Class = "NSButtonCell"; title = "Create a Jami account"; ObjectID = "k1T-a7-yZD"; */
 "k1T-a7-yZD.title" = "Skapa ett Jami-konto";
+
+/* Class = "NSButtonCell"; title = "Import from archive backup"; ObjectID = "rtw-Db-BWL"; */
+"rtw-Db-BWL.title" = "Importera från arkiverad säkerhetskopia";
+
+/* Class = "NSButtonCell"; title = "Advanced..."; ObjectID = "vCj-67-PGK"; */
+"vCj-67-PGK.title" = "Avancerat...";
+
+/* Class = "NSButtonCell"; title = "Add a new SIP account"; ObjectID = "yBt-Bv-fi2"; */
+"yBt-Bv-fi2.title" = "Lägg till nytt SIP-konto";

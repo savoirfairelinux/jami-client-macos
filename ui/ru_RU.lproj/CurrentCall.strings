@@ -2,26 +2,17 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "2cB-dz-KYg"; */
 "2cB-dz-KYg.ibShadowedToolTip" = "Завершить";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Join call"; ObjectID = "9e8-ji-QId"; */
-"9e8-ji-QId.ibShadowedToolTip" = "Подключить вызов";
+/* Class = "NSBox"; title = "Box"; ObjectID = "4xt-xs-LVn"; */
+"4xt-xs-LVn.title" = "Коробка";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Transfer"; ObjectID = "ChW-kg-Sja"; */
-"ChW-kg-Sja.ibShadowedToolTip" = "Перевод";
+/* Class = "NSBox"; title = "Box"; ObjectID = "DSf-SJ-l6k"; */
+"DSf-SJ-l6k.title" = "Коробка";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "D0G-XT-lhI"; */
-"D0G-XT-lhI.ibShadowedToolTip" = "Завершить";
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "GBy-HF-JeP"; */
+"GBy-HF-JeP.title" = "Label";
 
-/* Class = "NSTextFieldCell"; title = "URI"; ObjectID = "Dqv-um-UUk"; */
-"Dqv-um-UUk.title" = "URI";
-
-/* Class = "NSTextFieldCell"; placeholderString = "Incoming Display Name"; ObjectID = "EA3-Q5-Dyj"; */
-"EA3-Q5-Dyj.placeholderString" = "Incoming Display Name";
-
-/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "G0w-c3-9pJ"; */
-"G0w-c3-9pJ.ibShadowedToolTip" = "Запись";
-
-/* Class = "NSButtonCell"; title = "Answer"; ObjectID = "KPG-pB-gPm"; */
-"KPG-pB-gPm.title" = "Ответ";
+/* Class = "NSBox"; title = "Box"; ObjectID = "KCp-bZ-69S"; */
+"KCp-bZ-69S.title" = "Коробка";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
 "Kjq-iM-NBL.ibShadowedToolTip" = "Завершить";
@@ -29,53 +20,53 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
 "LVS-yZ-98V.ibShadowedToolTip" = "Отключить видео";
 
-/* Class = "NSTextFieldCell"; title = "Cancel"; ObjectID = "TlL-HO-5Ey"; */
-"TlL-HO-5Ey.title" = "Отмена";
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
+"NRc-5f-Ujc.ibShadowedMultipleValuesPlaceholder" = "Send a message";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "VVL-A4-r7n"; */
-"VVL-A4-r7n.ibShadowedToolTip" = "Запись";
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
+"NRc-5f-Ujc.ibShadowedNoSelectionPlaceholder" = "Send a message";
 
-/* Class = "NSTextFieldCell"; title = "wants to talk to you!"; ObjectID = "X0W-vv-xua"; */
-"X0W-vv-xua.title" = "wants to talk to you!";
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
+"NRc-5f-Ujc.ibShadowedNotApplicablePlaceholder" = "Send a message";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "QYT-0n-4sw"; */
+"QYT-0n-4sw.ibShadowedToolTip" = "Запись";
+
+/* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
+"Vhk-fx-6RW.ibShadowedToolTip" = "add contact to call";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
+"YGj-SP-ikj.title" = "Текстовое поле";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hold"; ObjectID = "anb-Y8-JQi"; */
 "anb-Y8-JQi.ibShadowedToolTip" = "Удержание";
 
+/* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "d4g-hS-EMn"; */
+"d4g-hS-EMn.placeholderString" = "Send a message";
+
+/* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "dPt-JY-yxV"; */
+"dPt-JY-yxV.placeholderString" = "Состояние";
+
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
 "fmp-x4-Pef.ibShadowedToolTip" = "Переключиться в чат";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Add participant"; ObjectID = "kIZ-mf-moM"; */
-"kIZ-mf-moM.ibShadowedToolTip" = "Add participant";
+/* Class = "NSTextFieldCell"; title = "person Id"; ObjectID = "hKi-Ay-ex5"; */
+"hKi-Ay-ex5.title" = "person Id";
 
-/* Class = "NSButtonCell"; title = "Button"; ObjectID = "kxH-yM-TLd"; */
-"kxH-yM-TLd.title" = "Кнопка";
+/* Class = "NSBox"; title = "Box"; ObjectID = "hfc-s5-yWK"; */
+"hfc-s5-yWK.title" = "Коробка";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "mc3-HV-hek"; */
-"mc3-HV-hek.ibShadowedToolTip" = "Завершить";
-
-/* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "oRa-pS-HN2"; */
-"oRa-pS-HN2.ibShadowedToolTip" = "Запись";
-
-/* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "osk-LS-0Qg"; */
-"osk-LS-0Qg.placeholderString" = "Имя персоны";
+/* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "ngO-WV-cXD"; */
+"ngO-WV-cXD.ibShadowedToolTip" = "Send a file";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
 "qgD-3D-nD5.ibShadowedToolTip" = "Поднять";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
+"rqa-be-VIB.ibShadowedToolTip" = "Отправть";
+
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
 "tQl-cT-0Lb.ibShadowedToolTip" = "Отключить звук";
 
-/* Class = "NSTextFieldCell"; title = "Ignore"; ObjectID = "tjM-py-p4V"; */
-"tjM-py-p4V.title" = "Игнорировать";
-
-/* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "ugy-uK-901"; */
-"ugy-uK-901.placeholderString" = "Состояние";
-
-/* Class = "NSTextFieldCell"; title = "Answer"; ObjectID = "wRO-X4-7IU"; */
-"wRO-X4-7IU.title" = "Ответ";
-
-/* Class = "NSTextFieldCell"; title = "wants to talk with you!"; ObjectID = "yZ6-1A-ZLT"; */
-"yZ6-1A-ZLT.title" = "wants to talk with you!";
-
-/* Class = "NSTextFieldCell"; placeholderString = "Time"; ObjectID = "zsO-T7-9yi"; */
-"zsO-T7-9yi.placeholderString" = "Время";
+/* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "ues-20-34k"; */
+"ues-20-34k.placeholderString" = "Имя персоны";

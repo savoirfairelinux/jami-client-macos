@@ -1,77 +1,56 @@
 
 "A network error occured during the export" = "Во время экспорта произошла ошибка сети";
 
-/* No password on this account text field placeholder */
-"Account has no password" = "Аккаунт не имеет пароля";
+/* Button Action */
+"Accept" = "Принять";
+
+/* Welcome title */
+"Add a SIP account" = "Добавить аккаунт SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "Добавить в контакты";
 
-/* Contextual menu action */
-"Place video call" = "Сделать видеозвонок";
-
-/* Contextual menu action */
-"Place audio call" = "Сделать аудиозвонок";
-
-/* Contextual menu action */
-"Clear conversation" = "Очистить разговор";
-
-/* Contextual menu action */
-"Block contact" = "Заблокировать контакт";
-
-/* Text shown to the user */
-"Alias : " = "Псевдоним:";
+/* Backup error */
+"An error occured during the backup" = "Во время создания резервной копии произошла ошибка";
 
 /* Error shown to the user */
 "An error occured during the export" = "Во время экспорта произошла ошибка";
 
-/* Contextual menu entry */
-"Backup account" = "Создать резервную копию аккаунта";
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Call number" = "Позвонить по номеру";
+"Block contact" = "Заблокировать контакт";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Нажатие \"ОК\" удалит данный аккаунт на данном устройстве! Это действие невозможно отменить. Также вы можете потерять зарегистрированное имя!";
 
 /* File transfer canceled label */
 "Canceled" = "Отменено";
 
-/* Open panel title */
-"Choose a CA list" = "Выбрать список CA";
-
-/* Open panel title */
-"Choose a certificate" = "Выбрать сертификат";
-
-/* Open panel title */
-"Choose a directory" = "Выбрать директорию";
-
-/* Open panel title */
-"Choose a private key file" = "Выбрать файл закрытого ключа";
-
-/* Open panel prompt for 'Choose a file' */
-"Choose CA" = "Выбрать CA";
-
-/* Open panel prompt for 'Choose a directory' */
-"Choose directory" = "Выбрать директорию";
-
 /* Contextual menu entry */
 "Choose file" = "Выбрать файл";
 
-/* Contextual menu entry */
-"Share screen" = "Транслировать экран";
+/* Contextual menu action */
+"Clear conversation" = "Очистить разговор";
 
 /* No comment provided by engineer. */
 "Copy" = "Копировать";
 
-/* Contextual menu action */
-"Copy name" = "Копировать имя";
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
 
-/* Contextual menu action */
-"Copy number" = "Копировать номер";
+/* Welcome title */
+"Create a new account" = "Создать новый аккаунт";
 
-/* Contextual menu entry */
-"Create Jami Account" = "Создать аккаунт Jami";
-
-/* Contextual menu entry */
-"Create SIP Account" = "Создать SIP Аккаунт";
+/* Backup enter password */
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
 "Failed" = "Сбой";
@@ -82,23 +61,32 @@
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Не удалось осуществить поиск";
 
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Импортировать из резервной копии";
+
+/* link account title */
+"Import from other device" = "Import from other device";
+
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Входящий вызов от %@";
 
 /* Incoming message from {Name} */
 "Incoming message from %@" = "Входящее сообщение от %@";
 
-/* Message from {Name} */
-"Message from %@" = "Сообщение от %@";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Недопустимое имя пользователя";
 
-/* User label */
-"New SIP account" = "Новый SIP аккаунт";
-
-/* Displayed as RingID when no accounts are available for selection */
-"No account available" = "Нет аккаунтов";
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Зайдите в настройки, чтобы создать аккаунт";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "Нет аккаунтов";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Пароль и подтверждение не совпадают.";
@@ -109,33 +97,47 @@
 /* Indication for user */
 "Passwords don't match" = "Пароли не совпадают";
 
-/* Button label */
-"Pause" = "Пауза";
+/* Contextual menu action */
+"Place audio call" = "Сделать аудиозвонок";
 
-/* Button label */
-"Play" = "Проиграть";
+/* Contextual menu action */
+"Place video call" = "Сделать видеозвонок";
+
+/* Recording view explanation label */
+"Press to start recording" = "Нажмите, чтобы начать запись";
+
+/* Record message title */
+"Record a message" = "Record a message";
 
 /* Button Action */
 "Refuse" = "Отказать";
-"Accept" = "Принять";
-
-/* Contextual menu entry */
-"Remove value" = "Удалить значение";
-
-/* Show advice to user */
-"Reopen account to see your hash" = "Откройте аккаунт повторно для просмотра вашего хеша";
-
-/* Contextual menu entry */
-"Restore account" = "Восстановить аккаунт";
-
-/* Button title */
-"Revise Input" = "Проверить Ввод";
 
 /* Text shown to the user */
-"ID : " = "ID:";
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Удаление учетной записи";
+
+/* export account button title */
+"Select archive" = "Выберите архив";
+
+/* Send button title */
+"Send" = "Отправить";
+
+/* Notification message */
+"Send you a contact request" = "Отправил Вам запрос на добавление в контакты";
 
 /* No comment provided by engineer. */
 "Share" = "Поделиться";
+
+/* Contextual menu entry */
+"Share screen" = "Транслировать экран";
+
+/* Sign In */
+"Sign In" = "Sign In";
+
+/* Record message title */
+"Stop recording" = "Остановить запись";
 
 /* File transfer successful label */
 "Success" = "Успешно";
@@ -146,55 +148,36 @@
 /* Text shown to user when his username is available to be registered */
 "The entered username is available" = "Указанное имя пользователя доступно";
 
-/* Text shown to user when his username is invalid to be registered */
-"The entered username is invalid. It must have at least 3 characters and contain only lowercase alphanumeric characters." = "Введенное имя пользователя недопустимо. Оно должно содержать не менее 3 символов и состоять из букв и цифр в нижнем регистре.";
-
 /* Text shown to user when his username is already registered */
 "The entered username is not available" = "Указанное имя пользователя недоступно";
 
-/* Text shown to the user */
-"The following account needs to be migrated to the new Jami account format:" = "Следующий аккаунт требуется преобразовать в новый формат аккаунта Jami:";
-
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Введенный пароль не подходит к этому аккаунту";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "Это ваш ID.\nСкопируйте и поделитесь им с Вашими друзьями!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "Это ваше имя пользователя Jami.\nСкопируйте и поделитесь им со своими друзьями!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Для завершения процесса вам нужно открыть Jami на новом устройстве и выбрать \"Привязать это устройство к аккаунту\". Ваш PIN действителен в течение 10 минут.";
 
 /* Text shown to the user */
-"To proceed with the migration, you must choose a password for your account. This password will be used to encrypt your master key. It will be required for adding new devices to your Jami account. If you are not ready to choose a password, you may close Jami and resume the migration later." = "Чтобы продолжить перенос, вам нужно выбрать пароль для вашего аккаунта. Этот пароль будет использован для шифрования вашего основного ключа. Он потребуется для добавления новых устройств к вашему аккаунту Jami. Если вы не готовы выбрать пароль, можете закрыть Jami и продолжить перенос позднее.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
-/* Name used when user leave field empty */
-"Unknown" = "Неизвестно";
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
 
-/* Error shown to user */
-"You have to migrate your account before exporting" = "Вам нужно перенести аккаунт перед экспортом";
-
-/* Remove account alert title */
-"Remove account" = "Удаление учетной записи";
-
-/* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Нажатие \"ОК\" удалит данный аккаунт на данном устройстве! Это действие невозможно отменить. Также вы можете потерять зарегистрированное имя!";
-
-/* export account button title */
-"Select archive" = "Выберите архив";
-
-/* link account title */
-"Link to an account" = "Привязать к аккаунту";
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Ring" = "Добро пожаловать в Jami";
-"Create a new account" = "Создать новый аккаунт";
-"Add a SIP account" = "Добавить аккаунт SIP";
+"Welcome to Jami" = "Добро пожаловать в Jami";
 
-/* Notification message */
-"Send you a contact request" = "Отправил Вам запрос на добавление в контакты";
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
 
-/* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "Это ваше имя пользователя Jami.\nСкопируйте и поделитесь им со своими друзьями!";
-
-/* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "Это ваш ID.\nСкопируйте и поделитесь им с Вашими друзьями!";
-
-/* Backup error */
-"An error occured during the backup" = "Во время создания резервной копии произошла ошибка";

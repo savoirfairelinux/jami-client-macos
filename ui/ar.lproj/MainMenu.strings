@@ -15,13 +15,13 @@
 "29.title" = "القائمة الرئيسية";
 
 /* Class = "NSMenuItem"; title = "Jami"; ObjectID = "56"; */
-"56.title" = "Jami";
+"56.title" = "جامي";
 
 /* Class = "NSMenu"; title = "Jami"; ObjectID = "57"; */
-"57.title" = "Jami";
+"57.title" = "جامي";
 
 /* Class = "NSMenuItem"; title = "About Jami"; ObjectID = "58"; */
-"58.title" = "About Jami";
+"58.title" = "حول جامي";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
 "129.title" = "تفضيلات Ring";
@@ -33,10 +33,10 @@
 "131.title" = "خدمات";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Hide Jami";
+"134.title" = "إخفاء جامي";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "Quit Jami";
+"136.title" = "الخروج من جامي";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "أخفي الآخرين";
@@ -189,25 +189,10 @@
 "491.title" = "مساعدة";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami Help";
+"492.title" = "المساعدة";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "أجد و غير...";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "إبحث عن تحديثات";
-
-/* Class = "NSMenuItem"; title = "Show"; ObjectID = "12w-Fz-Scs"; */
-"12w-Fz-Scs.title" = "إظهار";
-
-/* Class = "NSMenu"; title = "Show"; ObjectID = "1fJ-em-1ww"; */
-"1fJ-em-1ww.title" = "إظهار";
-
-/* Class = "NSMenuItem"; title = "Show recent"; ObjectID = "GTY-d8-NBf"; */
-"GTY-d8-NBf.title" = "إظهار الحديث";
-
-/* Class = "NSMenuItem"; title = "Show contacts"; ObjectID = "GU3-tt-2de"; */
-"GU3-tt-2de.title" = "إظهار جهات الإتصال";
-
-/* Class = "NSMenuItem"; title = "Show call history"; ObjectID = "Oco-m7-LtS"; */
-"Oco-m7-LtS.title" = "إظهار سجل المكالمات";

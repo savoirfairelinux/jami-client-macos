@@ -1,33 +1,33 @@
 
 /* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow call from untrusted peers";
+"1Xr-BO-Pu3.title" = "允许未被信任的用户来电";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "538-we-FTp"; */
-"538-we-FTp.title" = "Box";
+"538-we-FTp.title" = "盒子";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "7eU-EP-4br"; */
-"7eU-EP-4br.title" = "Box";
+"7eU-EP-4br.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "TURN地址";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "呼叫设置";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "自动接听来电";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Name server";
+"ID3-Sv-gYY.title" = "名称服务器";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
-"K0z-NH-3Cq.title" = "Box";
+"K0z-NH-3Cq.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
 "LWs-a2-E7f.title" = "用户证书";
@@ -39,16 +39,16 @@
 "Qxp-I4-A7W.title" = "安全";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "使用代理";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "视频编码";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
-"XU0-bl-lDD.title" = "TURN realm";
+"XU0-bl-lDD.title" = "TURN域";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "STUN地址";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "初始服务器";
@@ -57,16 +57,16 @@
 "YcX-lE-8ug.title" = "私钥密码";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
-"Ywo-5x-8kh.title" = "Box";
+"Ywo-5x-8kh.title" = "盒子";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ZNe-H0-dJk"; */
-"ZNe-H0-dJk.title" = "Box";
+"ZNe-H0-dJk.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "ZqB-gt-yFt"; */
 "ZqB-gt-yFt.title" = "地址：";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "eGX-gk-Zxp"; */
-"eGX-gk-Zxp.title" = "Box";
+"eGX-gk-Zxp.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
 "eMG-uY-bpH.title" = "TURN用户名";
@@ -84,22 +84,22 @@
 "nqX-Vu-UuA.title" = "使用STUN";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Custom ringtone";
+"qFq-Yh-2JL.title" = "自定义铃声";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Connectivity";
+"sVe-iG-OCw.title" = "连接性";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
 "soR-nF-ybe.title" = "私钥";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
-"sy5-OH-wyB.title" = "Box";
+"sy5-OH-wyB.title" = "盒子";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "vYi-gW-MrY"; */
-"vYi-gW-MrY.title" = "Box";
+"vYi-gW-MrY.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "OpenDHT配置";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "使用TURN";

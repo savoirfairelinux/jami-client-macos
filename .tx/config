@@ -73,12 +73,6 @@ source_file = ui/Base.lproj/Conversation.strings
 source_lang = en
 type = STRINGS
 
-[jami.osxBackupAccountWindow]
-file_filter = ui/<lang>.lproj/BackupAccountWindow.strings
-source_file = ui/Base.lproj/BackupAccountWindow.strings
-source_lang = en
-type = STRINGS
-
 [jami.osxExportPasswordWindow]
 file_filter = ui/<lang>.lproj/ExportPasswordWindow.strings
 source_file = ui/Base.lproj/ExportPasswordWindow.strings
@@ -154,6 +148,18 @@ type = STRINGS
 [jami.osxLeaveMessageVC]
 file_filter = ui/<lang>.lproj/LeaveMessageVC.strings
 source_file = ui/Base.lproj/LeaveMessageVC.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAccountBackupVC]
+file_filter = ui/<lang>.lproj/AccountBackupVC.strings
+source_file = ui/Base.lproj/AccountBackupVC.strings
+source_lang = en
+type = STRINGS
+
+[jami.osxAccountMenuItemView]
+file_filter = ui/<lang>.lproj/AccountMenuItemView.strings
+source_file = ui/Base.lproj/AccountMenuItemView.strings
 source_lang = en
 type = STRINGS
 
