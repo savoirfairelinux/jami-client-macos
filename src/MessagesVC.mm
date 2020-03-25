@@ -150,6 +150,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(filterChangedSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(newInteractionSignal_);
+    QObject::disconnect(peerComposingMsgSignal_);
     [self closeRecordingView];
 }
 

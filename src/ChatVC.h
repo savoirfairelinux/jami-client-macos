@@ -31,5 +31,6 @@
 
 - (void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel*)model;
 - (void) takeFocus;
+- (void) clearData;
 
 @end

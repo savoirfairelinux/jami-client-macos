@@ -58,6 +58,10 @@
     _message = [newValue removeEmptyLinesAtBorders];
 }
 
+- (void) clearData {
+    [messagesViewVC clearData];
+}
+
 - (IBAction)sendMessage:(id)sender {
     /* make sure there is text to send */
     NSString* text = self.message;
