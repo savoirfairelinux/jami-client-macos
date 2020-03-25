@@ -82,7 +82,7 @@ CGFloat   const TIME_BOX_HEIGHT           = 34;
 CGFloat   const MESSAGE_TEXT_PADDING      = 10;
 CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
 CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
-CGFloat   const HEIGHT_FOR_COMPOSING_INDICATOR = 50;
+CGFloat   const HEIGHT_FOR_COMPOSING_INDICATOR = 37;
 NSInteger const MEESAGE_MARGIN = 21;
 NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
 NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
@@ -190,14 +190,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return;
     }
     auto itIndex = distance(conv->interactions.begin(),it);
-    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:itIndex];
+    NSRange rangeToUpdate = NSMakeRange(itIndex, 2);
+    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndexesInRange:rangeToUpdate];
     //reload previous message to update bubbleview
     if (itIndex > 0) {
         auto previousIt = it;
         previousIt--;
         auto previousInteraction = previousIt->second;
         if (previousInteraction.type == lrc::api::interaction::Type::TEXT) {
-            NSRange range = NSMakeRange(itIndex - 1, 2);
+            NSRange range = NSMakeRange(itIndex - 1, 3);
             indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
         }
     }
@@ -275,9 +276,18 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             return;
         }
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:row];
+        if(peerComposingMessage) {
+            [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+        } else {
+            //whait for possible incoming message to avoid view jumping
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                if (!peerComposingMessage) {
+                    [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+                }
+            });
+        }
         [conversationView reloadDataForRowIndexes: indexSet
                                     columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-        [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
         CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
         NSRange range = [conversationView rowsInRect:visibleRect];
         NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
@@ -292,6 +302,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                  if (uid != convUid_)
                                                      return;
                                                  cachedConv_ = nil;
+                                                 peerComposingMessage = false;
                                                  [conversationView noteNumberOfRowsChanged];
                                                  [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
                                              });
@@ -526,9 +537,17 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (row == size) {
         //last row peer composing view
         result = [tableView makeViewWithIdentifier:@"PeerComposingMsgView" owner:conversationView];
-        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-        auto* conv = [self getCurrentConversation];
-        [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+        std::advance(it, row-1);
+        //if previous message not from peer display avatar
+        auto interaction = it->second;
+        bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+        [result.photoView setHidden: YES];
+        if(isOutgoing) {
+            auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+            auto* conv = [self getCurrentConversation];
+            [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+            [result.photoView setHidden: NO];
+        }
         CGFloat alpha = peerComposingMessage ? 1 : 0;
         result.alphaValue = 0;
         [result animateCompozingIndicator: NO];

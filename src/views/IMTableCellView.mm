@@ -175,7 +175,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 
 - (void) startBlinkAnimation:(NSView*) view withDelay:(CGFloat) delay {
     [view setWantsLayer: YES];
-    view.layer.backgroundColor = [NSColor.ringDarkBlue CGColor];
+    view.layer.backgroundColor = [self checkIsDarkMode] ? [NSColor.whiteColor CGColor] : [NSColor.ringDarkBlue CGColor];
     view.layer.cornerRadius = 5;
     view.layer.masksToBounds = true;
     if (delay == 0) {
@@ -196,6 +196,15 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [animation setAutoreverses:YES];
     [animation setRepeatCount:HUGE_VALF];
     [[view layer] addAnimation:animation forKey:@"opacity"];
+}
+
+-(BOOL)checkIsDarkMode {
+    NSAppearance *appearance = NSAppearance.currentAppearance;
+    if (@available(*, macOS 10.14)) {
+        NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
+        return [interfaceStyle isEqualToString:@"Dark"];
+    }
+    return NO;
 }
 
 @end
