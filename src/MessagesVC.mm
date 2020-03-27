@@ -535,6 +535,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto size = conv->interactions.size();
 
     if (row == size) {
+        if (size < 1) {
+            return [[NSView alloc] init];
+        }
         //last row peer composing view
         result = [tableView makeViewWithIdentifier:@"PeerComposingMsgView" owner:conversationView];
         std::advance(it, row-1);
