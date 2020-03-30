@@ -83,6 +83,7 @@ CGFloat   const MESSAGE_TEXT_PADDING      = 10;
 CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
 CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
 CGFloat   const HEIGHT_FOR_COMPOSING_INDICATOR = 37;
+CGFloat   const HEIGHT_DEFAULT = 1;
 NSInteger const MEESAGE_MARGIN = 21;
 NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
 NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
@@ -533,6 +534,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     IMTableCellView* result;
     auto it = conv->interactions.begin();
     auto size = conv->interactions.size();
+    if (row > size) {
+        return [[NSView alloc] init];
+    }
 
     if (row == size) {
         if (size < 1) {
@@ -541,15 +545,17 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         //last row peer composing view
         result = [tableView makeViewWithIdentifier:@"PeerComposingMsgView" owner:conversationView];
         std::advance(it, row-1);
-        //if previous message not from peer display avatar
-        auto interaction = it->second;
-        bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-        [result.photoView setHidden: YES];
-        if(isOutgoing) {
-            auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-            auto* conv = [self getCurrentConversation];
-            [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
-            [result.photoView setHidden: NO];
+        if (it != conv->interactions.end()) {
+            //if previous message not from peer display avatar
+            auto interaction = it->second;
+            bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+            [result.photoView setHidden: YES];
+            if(isOutgoing) {
+                auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+                auto* conv = [self getCurrentConversation];
+                [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+                [result.photoView setHidden: NO];
+            }
         }
         CGFloat alpha = peerComposingMessage ? 1 : 0;
         result.alphaValue = 0;
@@ -566,6 +572,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
 
     std::advance(it, row);
+
+    if (it == conv->interactions.end()) {
+        return [[NSView alloc] init];
+    }
 
     auto interaction = it->second;
     bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
@@ -675,7 +685,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto* conv = [self getCurrentConversation];
 
     if (conv == nil)
-        return 0;
+        return HEIGHT_DEFAULT;
+
+    if (row > conv->interactions.size()) {
+        return HEIGHT_DEFAULT;
+    }
 
     auto size = conv->interactions.size();
     if (row == size) {
@@ -689,6 +703,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto it = conv->interactions.begin();
 
     std::advance(it, row);
+
+    if (it == conv->interactions.end()) {
+        return HEIGHT_DEFAULT;
+    }
 
     auto interaction = it->second;
 
@@ -723,11 +741,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
         return GENERIC_CELL_HEIGHT;
-
-    // TODO Implement interactions other than messages
-    if(interaction.type != lrc::api::interaction::Type::TEXT) {
-        return 0;
-    }
 
     NSString *text = interaction.body.toNSString();
     text = [text removeEmptyLinesAtBorders];
@@ -785,6 +798,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return SINGLE_WITHOUT_TIME;
     auto it = conv->interactions.begin();
     std::advance(it, row);
+    if (it == conv->interactions.end()) {
+        return SINGLE_WITHOUT_TIME;
+    }
     auto interaction = it->second;
     if (interaction.type != lrc::api::interaction::Type::TEXT) {
         return SINGLE_WITH_TIME;
@@ -1018,6 +1034,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     text = [text stringByReplacingOccurrencesOfString: separatorString withString: @"\n"];
     if (text && text.length > 0) {
         auto* conv = [self getCurrentConversation];
+        if (conv == nil)
+            return;
         convModel_->sendMessage(convUid_, QString::fromNSString(text));
         self.message = @"";
         if(sendPanelHeight.constant != SEND_PANEL_DEFAULT_HEIGHT) {
