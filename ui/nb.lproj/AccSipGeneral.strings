@@ -3,22 +3,22 @@
 "688-Sx-Gvr.title" = "Mellomtjener";
 
 /* Class = "NSTextFieldCell"; title = "User Name"; ObjectID = "Fj6-Q3-Gz3"; */
-"Fj6-Q3-Gz3.title" = "User Name";
+"Fj6-Q3-Gz3.title" = "Brukernavn";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "NlM-R9-ola"; */
-"NlM-R9-ola.title" = "Box";
+"NlM-R9-ola.title" = "Boks";
 
 /* Class = "NSTextFieldCell"; title = "Voicemail"; ObjectID = "R7s-DE-PiP"; */
 "R7s-DE-PiP.title" = "Telefonsvarer";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "YAG-qB-4wH"; */
-"YAG-qB-4wH.placeholderString" = "Enter name";
+"YAG-qB-4wH.placeholderString" = "Skriv inn navn";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "Yof-e7-IBF"; */
 "Yof-e7-IBF.title" = "Passord";
 
 /* Class = "NSTextFieldCell"; title = "SIP Server"; ObjectID = "ZKc-70-TFH"; */
-"ZKc-70-TFH.title" = "SIP Server";
+"ZKc-70-TFH.title" = "SIP-server";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "eQt-bc-Eev"; */
 "eQt-bc-Eev.title" = "Konto";
@@ -30,10 +30,10 @@
 "jdU-uZ-Rfy.title" = "Rediger konto";
 
 /* Class = "NSButtonCell"; title = "enable"; ObjectID = "nW8-pd-fNj"; */
-"nW8-pd-fNj.title" = "enable";
+"nW8-pd-fNj.title" = "Aktiver";
 
 /* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "oE8-tN-SfC"; */
 "oE8-tN-SfC.title" = "Profil";
 
 /* Class = "NSButtonCell"; title = "Remove Account"; ObjectID = "uFM-Am-0kz"; */
-"uFM-Am-0kz.title" = "Remove Account";
+"uFM-Am-0kz.title" = "Fjern konto";

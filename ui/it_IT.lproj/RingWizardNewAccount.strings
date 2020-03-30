@@ -1,21 +1,21 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your D which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your D which is 40 characters long.";
+"0qE-Sz-hdc.title" = "Controllando questo, registrerai un nome utente univoco sulla rete Jami. Le persone possono usarlo per contattarti invece di usare la tua ID che è lunga 40 caratteri.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Password..."; ObjectID = "1TO-Ov-S8j"; */
 "1TO-Ov-S8j.placeholderString" = "Password...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedIsNilPlaceholder" = "Repeat password...";
+"93I-zf-xAk.ibShadowedIsNilPlaceholder" = "Ripeti la password...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedMultipleValuesPlaceholder" = "Repeat password...";
+"93I-zf-xAk.ibShadowedMultipleValuesPlaceholder" = "Ripeti la password...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedNoSelectionPlaceholder" = "Repeat password...";
+"93I-zf-xAk.ibShadowedNoSelectionPlaceholder" = "Ripeti la password...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedNotApplicablePlaceholder" = "Repeat password...";
+"93I-zf-xAk.ibShadowedNotApplicablePlaceholder" = "Ripeti la password...";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
 "AG5-GR-bii.title" = "Registra nome utente pubblico";
@@ -24,7 +24,7 @@
 "BCg-5V-Ek4.placeholderString" = "Ripeti la password";
 
 /* Class = "NSButtonCell"; title = "Choose password for enhance security"; ObjectID = "Cnw-4p-3Uc"; */
-"Cnw-4p-3Uc.title" = "Choose password for enhance security";
+"Cnw-4p-3Uc.title" = "Scegli la password per migliorare la sicurezza";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
 "JCg-IP-8cg.ibShadowedIsNilPlaceholder" = "Password...";
@@ -69,7 +69,7 @@
 "v7f-52-GJA.title" = "Annulla";
 
 /* Class = "NSTextFieldCell"; title = "This password will be used to encrypt your account data and link new devices to your account. It is not mandatory but recommended to set one."; ObjectID = "zUH-kc-cik"; */
-"zUH-kc-cik.title" = "This password will be used to encrypt your account data and link new devices to your account. It is not mandatory but recommended to set one.";
+"zUH-kc-cik.title" = "Questa password verrà utilizzata per crittografare i dati del tuo account e collegare nuovi dispositivi al tuo account. Non è obbligatorio ma si consiglia di impostarne uno.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
 "zfA-n9-V4X.title" = "Crea";

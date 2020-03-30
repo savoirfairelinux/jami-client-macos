@@ -3,7 +3,7 @@
 "8sX-aI-9OG.title" = "🙂";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record a video message"; ObjectID = "B6d-Sc-UTp"; */
-"B6d-Sc-UTp.ibShadowedToolTip" = "Record a video message";
+"B6d-Sc-UTp.ibShadowedToolTip" = "Envoyer un message vidéo";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "FgV-iF-gGQ"; */
 "FgV-iF-gGQ.title" = "Cellule de texte";
@@ -27,7 +27,7 @@
 "fh9-Uo-8R1.title" = "Boîte";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "gwx-eT-PcN"; */
-"gwx-eT-PcN.ibShadowedToolTip" = "Send a file";
+"gwx-eT-PcN.ibShadowedToolTip" = "Envoyez un fichier";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hrX-ac-Quk"; */
 "hrX-ac-Quk.title" = "Boîte";
@@ -36,13 +36,13 @@
 "ooq-vs-Xt1.ibShadowedToolTip" = "Précédent";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add contact"; ObjectID = "pGK-hO-X1Y"; */
-"pGK-hO-X1Y.ibShadowedToolTip" = "Add contact";
+"pGK-hO-X1Y.ibShadowedToolTip" = "Ajouter le contact";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "pRL-vb-me9"; */
 "pRL-vb-me9.title" = "Boîte";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record an audio message"; ObjectID = "wYE-S3-AzD"; */
-"wYE-S3-AzD.ibShadowedToolTip" = "Record an audio message";
+"wYE-S3-AzD.ibShadowedToolTip" = "Envoyer un message vocal";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
 "zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Envoyer un message";

@@ -6,19 +6,19 @@
 "859-10-HEb.placeholderString" = "RingID";
 
 /* Class = "NSTextFieldCell"; title = "To proceed with the migration, you need to enter a password that was used for this account."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "To proceed with the migration, you need to enter a password that was used for this account.";
+"859-10-HEb.title" = "Migrazioarekin jarraitzeko, kontu honekin erabilitako pasahitz bat sartu behar duzu.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Account migration error";
+"8K3-9Z-MKH.title" = "Kontuaren migrazioaren errorea";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Congratulations, your account has been migrated with Success.";
+"C2l-rz-Gqt.title" = "Zorionak zure kontua ongi migratu da.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
 "ITE-yD-CTb.title" = "Ezabatu kontu hau";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
-"KuO-oT-zhY.placeholderString" = "Confirm your new password...";
+"KuO-oT-zhY.placeholderString" = "Baieztatu pasahitz berria...";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "PT7-XI-WDR"; */
 "PT7-XI-WDR.title" = "Ados";
@@ -33,19 +33,19 @@
 "VN1-A3-RIh.title" = "Ados";
 
 /* Class = "NSTextFieldCell"; title = "Confirmation"; ObjectID = "aOa-1q-AZe"; */
-"aOa-1q-AZe.title" = "Confirmation";
+"aOa-1q-AZe.title" = "Baieztapena";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.placeholderString" = "error label";
+"e7n-Ev-bK7.placeholderString" = "errore etiketa";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
-"rW5-Il-5YD.title" = "Migrate";
+"rW5-Il-5YD.title" = "Migratu";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "vwh-K9-3O9"; */
 "vwh-K9-3O9.title" = "Pasahitza";
 
 /* Class = "NSTextFieldCell"; title = "Account migration required"; ObjectID = "wmv-sA-Mlh"; */
-"wmv-sA-Mlh.title" = "Account migration required";
+"wmv-sA-Mlh.title" = "Kontuaren migrazioa behar da";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "xqz-Uz-hqU"; */
 "xqz-Uz-hqU.placeholderString" = "Pasahitza...";
