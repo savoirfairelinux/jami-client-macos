@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[jami.localizablestrings]
+[jami.osxLocalizable]
 file_filter = ui/<lang>.lproj/Localizable.strings
 source_file = ui/Base.lproj/Localizable.strings
 source_lang = en

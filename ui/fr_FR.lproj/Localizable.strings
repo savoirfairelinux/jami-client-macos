@@ -5,7 +5,7 @@
 "Accept" = "Accepter";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Ajouter un compte SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "Ajouter dans les contacts";
@@ -17,40 +17,40 @@
 "An error occured during the export" = "Une erreur est survenue pendant l'export";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "semble occupé";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "L'accès au média son non autorisé";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Sauvegarder votre compte";
 
 /* Contextual menu action */
 "Block contact" = "Bloquer le contact";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "EN cliquant OK vous supprimerez ce compte sur l'appareil !\nCette action est irréversible et vous pourriez perdre votre nom d'enregistrement.";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "Annulé";
 
 /* Contextual menu entry */
 "Choose file" = "Choisir un fichier";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Effacer la conversation";
 
 /* No comment provided by engineer. */
 "Copy" = "Copier";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Impossible d'enregistrer un message pendant un appel";
 
 /* Welcome title */
-"Create a new account" = "Create a new account";
+"Create a new account" = "Créer un nouveau compte";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Entrer le mot de passe de votre compte";
 
 /* File transfer failed label */
 "Failed" = "Échec";
@@ -59,13 +59,13 @@
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Échec lors de la migration de votre compte. Vous pouvez réessayer en cliquant sur OK ou bien supprimer votre compte";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Échec de la recherche";
 
 /* Text shown to the user */
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importer à partir d'une sauvegarde.";
 
 /* link account title */
 "Import from other device" = "Importer à partir d'un autre appareil";
@@ -77,19 +77,19 @@
 "Incoming message from %@" = "Incoming message from %@";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username" = "Invalid username";
+"Invalid username" = "Nom d'utilisateur incorrect";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Nom d'utilisateur incorrect.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Se rendre dans les préférences afin de créer un nouveau compte";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Pas de compte disponible";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Le mot de passe et sa confirmation ne correspondent pas.";
 
 /* Indication for user */
 "Password is too short" = "Le mot de passe est trop court";
@@ -98,28 +98,28 @@
 "Passwords don't match" = "Les mots de passe saisis sont différents";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Faire un appel audio";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Faire un appel vidéo";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Appuyer pour démarrer l'enregistrement";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Enregistrer un message";
 
 /* Button Action */
 "Refuse" = "Refuser";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Nom enregistré:";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Supprimer le compte";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Sélectionner un fichier archive";
 
 /* Send button title */
 "Send" = "Envoyer";
@@ -131,13 +131,13 @@
 "Share" = "Partager";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Partager votre écran";
 
 /* Sign In */
 "Sign In" = "Sign In";
 
 /* Record message title */
-"Stop recording" = "Stop recording";
+"Stop recording" = "Arrêter l'enregistrement ";
 
 /* File transfer successful label */
 "Success" = "Success";
@@ -146,38 +146,38 @@
 "Text Actions" = "Text Actions";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Le nom d'utilisateur entré est disponible";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Le nom d'utilisateur entré n'est pas disponible";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Le mot-de-passe entré ne déverrouille pas ce compte.";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Votre compte doit être migré. ";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Ceci est votre identifiant Jami. Conservez et partagez-le avec vos amis !";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = " Ceci est votre nom d'utilisateur Jami. Copiez-le et partager-le à vos proches.";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pour compléter le processus, ouvrer Ring sur le nouvel appareil, et choisir l'option \"Lier cet appareil à un compte\". Le NIP est valide pendant 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Pour effectuer la migration, vous devez entrer le mot de passe que vous avez utilisé pour ce compte";
 
 /* File transfer peer unjoinable label */
 "Unjoinable" = "Unjoinable";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "L'accès au média vidéo non autorisé";
 
 /* Welcome title */
 "Welcome to Jami" = "Bienvenu sur Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Souhaitez-vous laisser un message?";
 

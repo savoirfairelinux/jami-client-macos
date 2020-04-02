@@ -50,7 +50,7 @@
 "Create a new account" = "Neues Konto erstellen";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Geben Sie ihr Kontopasswort ein";
 
 /* File transfer failed label */
 "Failed" = "Fehlgeschlagen";
@@ -68,7 +68,7 @@
 "Import from backup" = "Aus Backup importieren";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "Von anderem Gerät importieren";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Eingehender Anruf von %@";
@@ -134,7 +134,7 @@
 "Share screen" = "Share screen";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Einloggen";
 
 /* Record message title */
 "Stop recording" = "Aufnahme stoppen";
@@ -167,7 +167,7 @@
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Um mit der Migration fortzufahren, muss das für das Konto verwendete Passwort eingegeben werden.";
 
 /* File transfer peer unjoinable label */
 "Unjoinable" = "Unjoinable";

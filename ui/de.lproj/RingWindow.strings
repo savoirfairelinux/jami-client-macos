@@ -18,19 +18,19 @@
 "F0z-JX-Cv5.title" = "Jami";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Accept Invitation"; ObjectID = "Fc5-KS-cim"; */
-"Fc5-KS-cim.ibShadowedToolTip" = "Accept Invitation";
+"Fc5-KS-cim.ibShadowedToolTip" = "Einladung annehmen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Share account info"; ObjectID = "Oac-o7-2Ge"; */
-"Oac-o7-2Ge.ibShadowedToolTip" = "Share account info";
+"Oac-o7-2Ge.ibShadowedToolTip" = "Kontodetails teilen";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Oe5-Nj-cP3"; */
 "Oe5-Nj-cP3.title" = "Item 3";
 
 /* Class = "NSToolbarItem"; label = "Toolbar Item"; ObjectID = "XSp-w5-Fes"; */
-"XSp-w5-Fes.label" = "Toolbar Item";
+"XSp-w5-Fes.label" = "Menüpunkt";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Toolbar Item"; ObjectID = "XSp-w5-Fes"; */
-"XSp-w5-Fes.paletteLabel" = "Toolbar Item";
+"XSp-w5-Fes.paletteLabel" = "Menüpunkt";
 
 /* Class = "NSTextFieldCell"; title = "This is your ID.\nCopy and share it with your friends!"; ObjectID = "Xb9-UT-M2F"; */
 "Xb9-UT-M2F.title" = "Das ist Ihre Jami-ID.\nKopieren und teilen Sie diese mit Ihren Freunden!";
@@ -39,10 +39,10 @@
 "eVv-lu-T1Y.title" = "Box";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Show QRcode"; ObjectID = "eXV-BT-B6J"; */
-"eXV-BT-B6J.ibShadowedToolTip" = "Show QRcode";
+"eXV-BT-B6J.ibShadowedToolTip" = "QR-Code anzeigen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Ignore invitation"; ObjectID = "ejM-H2-aJX"; */
-"ejM-H2-aJX.ibShadowedToolTip" = "Ignore invitation";
+"ejM-H2-aJX.ibShadowedToolTip" = "Einladung ignorieren";
 
 /* Class = "NSTextFieldCell"; title = "Jami is free software for universal communication which respects the freedoms and privacy of its users."; ObjectID = "eln-Vm-t0d"; */
 "eln-Vm-t0d.title" = "Jami ist eine freie Software für universelle Kommunikation und respektiert die Freiheiten und Privatsphäre der Benutzer.";
