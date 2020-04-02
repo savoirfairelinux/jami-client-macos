@@ -1,0 +1,183 @@
+
+"A network error occured during the export" = "Houbo un problema na rede durante a exportación";
+
+/* Button Action */
+"Accept" = "Aceptar";
+
+/* Welcome title */
+"Add a SIP account" = "Add a SIP account";
+
+/* Contextual menu action */
+"Add to contacts" = "Engadir a contactos";
+
+/* Backup error */
+"An error occured during the backup" = "Algo fallou cando se facía a copia";
+
+/* Error shown to the user */
+"An error occured during the export" = "Algo fallou no proceso de exportación";
+
+/* Peer busy message */
+"appears to be busy." = "appears to be busy.";
+
+/* Error audio permission */
+"Audio permission not granted" = "Audio permission not granted";
+
+/* Backup account */
+"Backup your account" = "Backup your account";
+
+/* Contextual menu action */
+"Block contact" = "Bloquear contacto";
+
+/* Remove account alert message */
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+
+/* File transfer canceled label */
+"Canceled" = "Canceled";
+
+/* Contextual menu entry */
+"Choose file" = "Choose file";
+
+/* Contextual menu action */
+"Clear conversation" = "Clear conversation";
+
+/* No comment provided by engineer. */
+"Copy" = "Copiar";
+
+/* Recording view explanation label */
+"Could not record message during call" = "Could not record message during call";
+
+/* Welcome title */
+"Create a new account" = "Create a new account";
+
+/* Backup enter password */
+"Enter account password" = "Enter account password";
+
+/* File transfer failed label */
+"Failed" = "Fallou";
+
+/* Error message shown to user when it is impossible to migrate account */
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+
+/* Text shown to user when an error occur at registration */
+"Failed to perform lookup" = "Failed to perform lookup";
+
+/* Text shown to the user */
+"ID: " = "ID: ";
+
+/* link account title */
+"Import from backup" = "Import from backup";
+
+/* link account title */
+"Import from other device" = "Importar desde outro dispositivo";
+
+/* Incoming call from {Name} */
+"Incoming call from %@" = "Incoming call from %@";
+
+/* Incoming message from {Name} */
+"Incoming message from %@" = "Incoming message from %@";
+
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username" = "Nome de usuaria non válido";
+
+/* Text shown to user when his username is invalid to be registered */
+"Invalid username." = "Invalid username.";
+
+/* Allert message when no accounts are available */
+"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+
+/* Displayed as RingID when no accounts are available for selection */
+"No account available" = "No account available";
+
+/* Text show to the user when password didn't match */
+"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+
+/* Indication for user */
+"Password is too short" = "Password is too short";
+
+/* Indication for user */
+"Passwords don't match" = "Passwords don't match";
+
+/* Contextual menu action */
+"Place audio call" = "Facer chamada de audio";
+
+/* Contextual menu action */
+"Place video call" = "Facer chamada de vídeo";
+
+/* Recording view explanation label */
+"Press to start recording" = "Press to start recording";
+
+/* Record message title */
+"Record a message" = "Gravar unha mensaxe";
+
+/* Button Action */
+"Refuse" = "Rexeitar";
+
+/* Text shown to the user */
+"Registered name: " = "Registered name: ";
+
+/* Remove account alert title */
+"Remove account" = "Remove account";
+
+/* export account button title */
+"Select archive" = "Select archive";
+
+/* Send button title */
+"Send" = "Enviar";
+
+/* Notification message */
+"Send you a contact request" = "Send you a contact request";
+
+/* No comment provided by engineer. */
+"Share" = "Compartir";
+
+/* Contextual menu entry */
+"Share screen" = "Share screen";
+
+/* Sign In */
+"Sign In" = "Sign In";
+
+/* Record message title */
+"Stop recording" = "Stop recording";
+
+/* File transfer successful label */
+"Success" = "Feito";
+
+/* No comment provided by engineer. */
+"Text Actions" = "Text Actions";
+
+/* Text shown to user when his username is available to be registered */
+"The entered username is available" = "The entered username is available";
+
+/* Text shown to user when his username is already registered */
+"The entered username is not available" = "The entered username is not available";
+
+/* Error shown to the user */
+"The password you entered does not unlock this account" = "O contrasinal introducido non desbloquea esta conta";
+
+/* Text shown to the user */
+"This account needs to be migrated" = "This account needs to be migrated";
+
+/* Explanation label when user have just ID */
+"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+
+/* Explanation label when user have Jami username */
+"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+
+/* Title shown to user to concat with Pin */
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+
+/* Text shown to the user */
+"To proceed with the migration, you need to enter a password that was used for this account." = "Para realizar a migración, precisas introducir o contrasinal que se utilizou para esta conta.";
+
+/* File transfer peer unjoinable label */
+"Unjoinable" = "Unjoinable";
+
+/* Error video permission */
+"Video permission not granted" = "Video permission not granted";
+
+/* Welcome title */
+"Welcome to Jami" = "Benvida/o a Jami";
+
+/* Peer busy message */
+"Would you like to leave a message?" = "Would you like to leave a message?";
+

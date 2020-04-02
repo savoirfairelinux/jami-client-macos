@@ -1,0 +1,75 @@
+
+/* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your D which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
+"0qE-Sz-hdc.title" = "Ao marcar isto, rexistrarás un nome de usuaria único na rede Jami. Con el poderán contactar contigo no lugar de buscarte polo ID de 40 caracteres.";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Password..."; ObjectID = "1TO-Ov-S8j"; */
+"1TO-Ov-S8j.placeholderString" = "Contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedIsNilPlaceholder" = "Repite o contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedMultipleValuesPlaceholder" = "Repite o contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedNoSelectionPlaceholder" = "Repite o contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
+"93I-zf-xAk.ibShadowedNotApplicablePlaceholder" = "Repite o contrasinal...";
+
+/* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
+"AG5-GR-bii.title" = "Rexistrar nome de usuaria público";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Repeat password"; ObjectID = "BCg-5V-Ek4"; */
+"BCg-5V-Ek4.placeholderString" = "Repite contrasinal";
+
+/* Class = "NSButtonCell"; title = "Choose password for enhance security"; ObjectID = "Cnw-4p-3Uc"; */
+"Cnw-4p-3Uc.title" = "Escolle un contrasinal para maior seguridade";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedIsNilPlaceholder" = "Contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedMultipleValuesPlaceholder" = "Contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedNoSelectionPlaceholder" = "Contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
+"JCg-IP-8cg.ibShadowedNotApplicablePlaceholder" = "Contrasinal...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedIsNilPlaceholder" = "Nome de usuaria...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedMultipleValuesPlaceholder" = "Nome de usuaria...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedNoSelectionPlaceholder" = "Nome de usuaria...";
+
+/* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
+"UgM-Zo-2Dy.ibShadowedNotApplicablePlaceholder" = "Nome de usuaria...";
+
+/* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
+"YIN-YL-JBs.title" = "Agarda un momento...";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
+"bdC-Uc-Qhs.placeholderString" = "Nome de usuaria...";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "gEy-ak-Cgq"; */
+"gEy-ak-Cgq.placeholderString" = "Escribir nome";
+
+/* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "gki-BR-jc3"; */
+"gki-BR-jc3.title" = "Perfil";
+
+/* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "qQl-Xn-c88"; */
+"qQl-Xn-c88.title" = "Conta";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "v7f-52-GJA"; */
+"v7f-52-GJA.title" = "Cancelar";
+
+/* Class = "NSTextFieldCell"; title = "This password will be used to encrypt your account data and link new devices to your account. It is not mandatory but recommended to set one."; ObjectID = "zUH-kc-cik"; */
+"zUH-kc-cik.title" = "Este contrasinal será utilizado para cifrar os datos da túa conta e ligar novos dispositivos a túa conta. Non é obrigatorio pero é recomendable establecer un.";
+
+/* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
+"zfA-n9-V4X.title" = "Crear";
