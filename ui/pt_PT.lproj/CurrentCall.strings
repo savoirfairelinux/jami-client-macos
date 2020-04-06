@@ -9,7 +9,7 @@
 "DSf-SJ-l6k.title" = "Caixa";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "GBy-HF-JeP"; */
-"GBy-HF-JeP.title" = "Label";
+"GBy-HF-JeP.title" = "Etiqueta";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "KCp-bZ-69S"; */
 "KCp-bZ-69S.title" = "Caixa";
@@ -33,7 +33,7 @@
 "QYT-0n-4sw.ibShadowedToolTip" = "Gravar";
 
 /* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
-"Vhk-fx-6RW.ibShadowedToolTip" = "add contact to call";
+"Vhk-fx-6RW.ibShadowedToolTip" = "adicionar contacto à chamada";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
 "YGj-SP-ikj.title" = "Texto da Célula";
@@ -51,13 +51,13 @@
 "fmp-x4-Pef.ibShadowedToolTip" = "Alternar conversa";
 
 /* Class = "NSTextFieldCell"; title = "person Id"; ObjectID = "hKi-Ay-ex5"; */
-"hKi-Ay-ex5.title" = "person Id";
+"hKi-Ay-ex5.title" = "ID da pessoa";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hfc-s5-yWK"; */
 "hfc-s5-yWK.title" = "Caixa";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "ngO-WV-cXD"; */
-"ngO-WV-cXD.ibShadowedToolTip" = "Send a file";
+"ngO-WV-cXD.ibShadowedToolTip" = "Enviar um ficheiro";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
 "qgD-3D-nD5.ibShadowedToolTip" = "Atender";

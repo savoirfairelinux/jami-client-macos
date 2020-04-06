@@ -5,7 +5,7 @@
 "Accept" = "Kabul et";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Bir SIP hesabı ekle";
 
 /* Contextual menu action */
 "Add to contacts" = "Kişilere ekle";
@@ -17,13 +17,13 @@
 "An error occured during the export" = "Dışa aktarma esnasında bir hata oluştu";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "Meşgul görünüyor.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Ses izni verilmedi";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Hesabınızı yedekleyin";
 
 /* Contextual menu action */
 "Block contact" = "Kişiyi engelle";
@@ -44,7 +44,7 @@
 "Copy" = "Kopyala";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Çağrı sırasında ileti kaydedilemedi";
 
 /* Welcome title */
 "Create a new account" = "Yeni bir hesap oluştur";
@@ -62,25 +62,25 @@
 "Failed to perform lookup" = "Bakma başarısız";
 
 /* Text shown to the user */
-"ID: " = "ID: ";
+"ID: " = "Kimlik:";
 
 /* link account title */
 "Import from backup" = "Yedekten içe aktarın";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "Diğer bir aygıttan içe aktar";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "%@'den gelen arama";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "%@'den gelen ileti";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Geçersiz kullanıcı adı";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Geçersiz kullanıcı adı.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
@@ -113,13 +113,13 @@
 "Refuse" = "Geri Çevir";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Kayıtlı Ad:";
 
 /* Remove account alert title */
 "Remove account" = "Hesabı Kaldır";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Arşiv seçin";
 
 /* Send button title */
 "Send" = "Gönder";
@@ -131,10 +131,10 @@
 "Share" = "Paylaş";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Ekranı paylaş";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Oturum Aç";
 
 /* Record message title */
 "Stop recording" = "Kaydı durdur";
@@ -155,13 +155,13 @@
 "The password you entered does not unlock this account" = "Girdiğiniz parola bu hesabı açmaz";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Bu hesabın taşınması gerekli";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Bu sizin kimliğiniz.\nKopyalayın ve arkadaşlarınızla paylaşın!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Bu sizin Jami kullanıcı adınız.\nKopyalayın ve arkadaşlarınızla paylaşın!";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -170,14 +170,14 @@
 "To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Katılımı olanaksız";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Görüntü izni verilmedi";
 
 /* Welcome title */
 "Welcome to Jami" = "Jami'ye Hoşgeldiniz";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Bir ileti bırakmak ister misiniz?";
 
