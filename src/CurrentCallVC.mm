@@ -162,7 +162,6 @@ CVPixelBufferRef pixelBufferPreview;
     confUid_ = convIt->confId;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     [self connectSignals];
-    callModel->setCurrentCall([self getcallID]);
 }
 
 -(void) connectSignals {
@@ -410,6 +409,7 @@ CVPixelBufferRef pixelBufferPreview;
             }
             break;
         case Status::IN_PROGRESS:
+            callModel->setCurrentCall([self getcallID]);
             [headerContainer setHidden:NO];
             [headerGradientView setHidden:NO];
             [controlsPanel setHidden:NO];
