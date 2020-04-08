@@ -172,6 +172,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [self.window setMovableByWindowBackground:YES];
 
     self.window.titleVisibility = NSWindowTitleHidden;
+    self.window.titlebarAppearsTransparent = true;
 
     currentCallVC = [[CurrentCallVC alloc] initWithNibName:@"CurrentCall" bundle:nil];
     currentCallVC.delegate = self;
