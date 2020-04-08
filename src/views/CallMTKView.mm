@@ -139,6 +139,7 @@ struct Uniforms {
     [commandEncoder endEncoding];
     [commandBuffer presentDrawable:self.currentDrawable];
     [commandBuffer commit];
+    [self draw];
 }
 
 bool frameDisplayed = false;
