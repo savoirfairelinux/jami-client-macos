@@ -631,4 +631,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
 
+- (void)showHelp:(id)sender
+{
+    NSURL * helpFile = [NSURL URLWithString: @"https://jami.net/help/"];
+    [[NSWorkspace sharedWorkspace] openURL:helpFile];
+}
+
 @end
