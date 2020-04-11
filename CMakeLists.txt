@@ -254,6 +254,8 @@ SET(ringclient_OTHERS
    src/NSString+Extensions.mm
    src/RingMainWindow.h
    src/RingMainWindow.mm
+   src/MenuResponder.h
+   src/MenuResponder.mm
    src/Shader.metal
 )
 
