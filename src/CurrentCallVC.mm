@@ -51,6 +51,7 @@ extern "C" {
 #import "VideoCommon.h"
 #import "views/GradientView.h"
 #import "views/MovableView.h"
+#import "views/CallLayer.h"
 
 @interface CurrentCallVC () <NSPopoverDelegate> {
     QString convUid_;
@@ -134,6 +135,43 @@ CVPixelBufferPoolRef pixelBufferPoolDistantView;
 CVPixelBufferRef pixelBufferDistantView;
 CVPixelBufferPoolRef pixelBufferPoolPreview;
 CVPixelBufferRef pixelBufferPreview;
+
+
+- (void) ensureLayoutForCallStatus:(lrc::api::call::Status) status {
+
+    using Status = lrc::api::call::Status;
+
+    switch (status) {
+
+        case Status::IN_PROGRESS:
+
+            if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+
+                [videoView setLayer:[[CallLayer alloc] init]];
+
+            }
+
+            break;
+
+        default:
+
+            if ([videoView.layer isKindOfClass:[CallLayer class]]) {
+
+                [videoView setLayer:[CALayer layer]];
+
+                [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
+
+            }
+
+            break;
+
+    }
+
+    holdOnOffButton.image = status == lrc::api::call::Status::PAUSED ?
+
+    [NSImage imageNamed:@"ic_action_holdoff.png"] : [NSImage imageNamed:@"ic_action_hold.png"];
+
+}
 
 /* update call and conversation info
  * set info for chat view
@@ -362,6 +400,8 @@ CVPixelBufferRef pixelBufferPreview;
     cancelCallButton.hidden = (currentCall.status == Status::IN_PROGRESS ||
                              currentCall.status == Status::PAUSED) ? YES : NO;
     callingWidgetsContainer.hidden = (currentCall.status == Status::IN_PROGRESS) ? NO : YES;
+    
+    [self ensureLayoutForCallStatus:currentCall.status];
 
     switch (currentCall.status) {
         case Status::SEARCHING:
@@ -419,6 +459,11 @@ CVPixelBufferRef pixelBufferPreview;
             } else {
                 [self setUpVideoCallView];
             }
+             if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+
+                                         [videoView setLayer:[[CallLayer alloc] init]];
+
+                                     }
             break;
         case Status::CONNECTED:
             break;
@@ -432,6 +477,7 @@ CVPixelBufferRef pixelBufferPreview;
             [self.delegate callFinished];
             break;
     }
+    [self.videoMTKView setHidden:YES];
 }
 
 -(void) setUpVideoCallView {
@@ -538,9 +584,14 @@ CVPixelBufferRef pixelBufferPreview;
                              [hidePreviewBackground setHidden: NO];
                              self.previewView.stopRendering = false;
                          } else if ([self isCurrentCall: id]) {
+                             if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+
+                                                                     [videoView setLayer:[[CallLayer alloc] init]];
+
+                                                                 }
                              [self mouseIsMoving: NO];
                              self.videoMTKView.stopRendering = false;
-                             [self.videoMTKView setHidden:NO];
+                             [self.videoMTKView setHidden:YES];
                              [bluerBackgroundEffect setHidden:YES];
                              [backgroundImage setHidden:YES];
                          }
@@ -622,16 +673,27 @@ CVPixelBufferRef pixelBufferPreview;
             rotation = av_display_rotation_get(data);
         }
         if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
-            [view renderWithPixelBuffer: (CVPixelBufferRef)frame->data[3]
-                                   size: frameSize
-                               rotation: rotation
-                              fillFrame: false];
+            CallLayer* callLayer = (CallLayer*) videoView.layer;
+               // if ([callLayer respondsToSelector:@selector(setCurrentFrame:)]) {
+                    [callLayer setCurrentFrame:(CVPixelBufferRef)frame->data[3] width:frame->width height:frame->height];
+                  //  }
+                   // [callLayer (CVPixelBufferRef)frame->data[3]];
+                  //  if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
+                 //   [callLayer setVideoRunning:YES];6
+                  //      [view renderWithPixelBuffer: (CVPixelBufferRef)frame->data[3]
+              //  }
+          //  [view renderWithPixelBuffer: (CVPixelBufferRef)frame->data[3]
+                    //               size: frameSize
+                   //            rotation: rotation
+                  //            fillFrame: false];
         }
         if (CVPixelBufferRef pixelBuffer = [self getBufferForDistantViewFromFrame:frame]) {
-            [view renderWithPixelBuffer: pixelBuffer
-                                   size: frameSize
-                               rotation: rotation
-                              fillFrame: false];
+             CallLayer* callLayer = (CallLayer*) videoView.layer;
+             [callLayer setCurrentFrame:pixelBuffer width:frame->width height:frame->height];
+           // [view renderWithPixelBuffer: pixelBuffer
+                   //                size: frameSize
+                  //             rotation: rotation
+                     //         fillFrame: false];
         }
     }
 }
