@@ -843,6 +843,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto previousInteraction = previousIt->second;
     auto nextIt = it;
     nextIt++;
+    if (nextIt == conv->interactions.end()) {
+        return;
+    }
     auto nextInteraction = nextIt->second;
 
     bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
