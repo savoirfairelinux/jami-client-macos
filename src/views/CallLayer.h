@@ -25,6 +25,6 @@
 
 @property BOOL videoRunning;
 
-- (void) setCurrentFrame:(Video::Frame)framePtr;
+- (void) setCurrentFrame:(CVPixelBufferRef)framePtr width:(CGFloat)width height:(CGFloat)height;
 
 @end
