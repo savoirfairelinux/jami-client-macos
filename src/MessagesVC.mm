@@ -793,9 +793,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(MessageSequencing) computeSequencingFor:(NSInteger) row {
+    if (row >= conversationView.numberOfRows - 1) {
+        return SINGLE_WITHOUT_TIME;
+    }
     auto* conv = [self getCurrentConversation];
     if (conv == nil)
-    return SINGLE_WITHOUT_TIME;
+       return SINGLE_WITHOUT_TIME;
     auto it = conv->interactions.begin();
     std::advance(it, row);
     if (it == conv->interactions.end()) {
@@ -805,20 +808,24 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (interaction.type != lrc::api::interaction::Type::TEXT) {
         return SINGLE_WITH_TIME;
     }
+    // first message in comversation
     if (row == 0) {
         if (it == conv->interactions.end()) {
             return SINGLE_WITH_TIME;
         }
         auto nextIt = it;
         nextIt++;
+        if (nextIt == conv->interactions.end()) {
+            return SINGLE_WITH_TIME;
+        }
         auto nextInteraction = nextIt->second;
         if ([self sequenceChangedFrom:interaction to: nextInteraction]) {
             return SINGLE_WITH_TIME;
         }
         return FIRST_WITH_TIME;
     }
-
-    if (row == conversationView.numberOfRows - 1) {
+    // last message in comversation
+    if (row == conversationView.numberOfRows - 2) {
         if(it == conv->interactions.begin()) {
             return SINGLE_WITH_TIME;
         }
@@ -835,14 +842,19 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
         return SINGLE_WITH_TIME;
     }
+    // single message in comversation
     if(it == conv->interactions.begin() || it == conv->interactions.end()) {
         return SINGLE_WITH_TIME;
     }
+    // message in the middle of conversation
     auto previousIt = it;
     previousIt--;
     auto previousInteraction = previousIt->second;
     auto nextIt = it;
     nextIt++;
+    if (nextIt == conv->interactions.end()) {
+        return SINGLE_WITHOUT_TIME;
+    }
     auto nextInteraction = nextIt->second;
 
     bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
