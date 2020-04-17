@@ -41,6 +41,7 @@
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator1;
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator2;
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator3;
+@property (nonatomic, strong) IBOutlet NSBox* readStatusBox;
 
 
 - (uint64_t) interaction;

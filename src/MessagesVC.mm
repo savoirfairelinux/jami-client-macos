@@ -65,6 +65,7 @@
     QMetaObject::Connection filterChangedSignal_;
     QMetaObject::Connection interactionStatusUpdatedSignal_;
     QMetaObject::Connection peerComposingMsgSignal_;
+    QMetaObject::Connection lastDisplayedChanged_;
     NSString* previewImage;
     NSMutableDictionary *pendingMessagesToSend;
     RecordFileVC * recordingController;
@@ -152,6 +153,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
+    QObject::disconnect(lastDisplayedChanged_);
     [self closeRecordingView];
 }
 
@@ -255,6 +257,18 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
+    QObject::disconnect(lastDisplayedChanged_);
+    lastDisplayedChanged_ =
+    QObject::connect(convModel_,
+                     &lrc::api::ConversationModel::displayedInteractionChanged,
+                     [self](const QString &uid,
+                            const uint64_t &previousUid,
+                            const uint64_t &newdUid) {
+        if (uid != convUid_)
+            return;
+        [self reloadConversationForMessage:newdUid shouldUpdateHeight:NO];
+        [self reloadConversationForMessage:previousUid shouldUpdateHeight:NO];
+    });
 
     peerComposingMsgSignal_ = QObject::connect(convModel_,
                                                &lrc::api::ConversationModel::composingStatusChanged,
@@ -671,6 +685,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != FIRST_WITHOUT_TIME
                                 && sequence != FIRST_WITH_TIME) ? YES : NO;
     [result.photoView setHidden:!shouldDisplayAvatar];
+    [result.readStatusBox setHidden: !convModel_->isLastDisplayed(convUid_,it->first)];
     if (!isOutgoing && shouldDisplayAvatar) {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
