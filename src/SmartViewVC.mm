@@ -266,12 +266,13 @@ NSInteger const REQUEST_SEG         = 1;
                                                                 return;
                                                             [self reloadConversationWithUid: convUid.toNSString()];
                                                         });
-        newInteractionConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
-                                                        [self](const QString& convUid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                            if (convUid == selectedUid_) {
-                                                                convModel_->clearUnreadInteractions(convUid);
-                                                            }
-                                                        });
+         newInteractionConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
+                                                                [self](const QString& convUid, uint64_t interactionId, const lrc::api::interaction::Info& interaction) {
+                                                                    bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+                                                                    if (convUid == selectedUid_ && !isOutgoing && !interaction.isRead) {
+                                                                        convModel_->setInteractionRead(convUid, interactionId);
+                                                                    }
+                                                                });
         convModel_->setFilter(""); // Reset the filter
     }
     [searchField setStringValue:@""];

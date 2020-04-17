@@ -576,10 +576,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (it == conv->interactions.end()) {
         return [[NSView alloc] init];
     }
-
     auto interaction = it->second;
     bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-
     switch (interaction.type) {
         case lrc::api::interaction::Type::TEXT:
             if (isOutgoing) {
