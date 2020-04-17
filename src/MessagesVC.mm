@@ -671,6 +671,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != FIRST_WITHOUT_TIME
                                 && sequence != FIRST_WITH_TIME) ? YES : NO;
     [result.photoView setHidden:!shouldDisplayAvatar];
+    [result.readStatusBox setHidden: !convModel_->isLastDisplayed(convUid_,it->first)];
     if (!isOutgoing && shouldDisplayAvatar) {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
