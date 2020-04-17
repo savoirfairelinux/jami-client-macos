@@ -588,7 +588,6 @@ typedef NS_ENUM(NSInteger, ViewState) {
     if (convInfo != convQueue.end()) {
         [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];
         [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
-        accInfo.conversationModel.get()->clearUnreadInteractions(QString::fromNSString(conversationId));
     }
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }

@@ -504,6 +504,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSString* timeString = [self timeForMessage: msgTime];
     result.timeLabel.stringValue = timeString;
     bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+    if (!isOutgoing && !interaction.isRead) {
+        convModel_->setInteractionRead(convUid_, interactionID);
+    }
     if (!isOutgoing) {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         auto* conv = [self getCurrentConversation];
@@ -579,7 +582,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     auto interaction = it->second;
     bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-
+    if (!isOutgoing && !interaction.isRead) {
+        convModel_->setInteractionRead(convUid_, it->first);
+    }
     switch (interaction.type) {
         case lrc::api::interaction::Type::TEXT:
             if (isOutgoing) {

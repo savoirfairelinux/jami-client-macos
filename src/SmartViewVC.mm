@@ -57,7 +57,7 @@
     __strong IBOutlet NSLayoutConstraint *listTypeSelectorBottom;
     bool selectorIsPresent;
 
-    QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, newInteractionConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
+    QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
 
     lrc::api::ConversationModel* convModel_;
     QString selectedUid_;
@@ -230,7 +230,6 @@ NSInteger const REQUEST_SEG         = 1;
     QObject::disconnect(conversationRemovedConnection_);
     QObject::disconnect(conversationClearedConnection);
     QObject::disconnect(interactionStatusUpdatedConnection_);
-    QObject::disconnect(newInteractionConnection_);
     [self reloadData];
     if (convModel_ != nil) {
         modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
@@ -265,12 +264,6 @@ NSInteger const REQUEST_SEG         = 1;
                                                             if (convUid != selectedUid_)
                                                                 return;
                                                             [self reloadConversationWithUid: convUid.toNSString()];
-                                                        });
-        newInteractionConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
-                                                        [self](const QString& convUid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                            if (convUid == selectedUid_) {
-                                                                convModel_->clearUnreadInteractions(convUid);
-                                                            }
                                                         });
         convModel_->setFilter(""); // Reset the filter
     }
@@ -393,7 +386,6 @@ NSInteger const REQUEST_SEG         = 1;
     if (selectedUid_ != uid) {
         selectedUid_ = uid;
         convModel_->selectConversation(uid);
-        convModel_->clearUnreadInteractions(uid);
         [self reloadSelectorNotifications];
     }
 }
