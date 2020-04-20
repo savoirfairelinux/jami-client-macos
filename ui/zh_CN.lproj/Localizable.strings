@@ -5,7 +5,7 @@
 "Accept" = "接听";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "添加 SIP 账户";
 
 /* Contextual menu action */
 "Add to contacts" = "加入通讯录";
@@ -17,22 +17,22 @@
 "An error occured during the export" = "导出时发生错误";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "好像繁忙中。";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "未取得音频权限";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "备份您的账户";
 
 /* Contextual menu action */
 "Block contact" = "屏蔽联系人";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "点击“确认”将从此设备上删除该帐号！此操作无法撤销。同时，您也会失去已注册的用户名。";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "已取消";
 
 /* Contextual menu entry */
 "Choose file" = "选择文件";
@@ -44,13 +44,13 @@
 "Copy" = "复制";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "通话中无法录制信息";
 
 /* Welcome title */
 "Create a new account" = "新建帐户";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "输入账户密码";
 
 /* File transfer failed label */
 "Failed" = "失败";
@@ -68,25 +68,25 @@
 "Import from backup" = "从备份文件导入";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "从其他设备导入";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "来电：%@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "来自 %@ 的新信息";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "非法用户名";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "无效用户名。";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "前往偏好设置以创建新账户";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "没有可用账户";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "密码与确认密码不匹配。";
@@ -104,37 +104,37 @@
 "Place video call" = "发起视频通话";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "按下开始录音";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "录制信息";
 
 /* Button Action */
 "Refuse" = "拒接";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "已注册名称：";
 
 /* Remove account alert title */
 "Remove account" = "移除账户";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "选择归档";
 
 /* Send button title */
 "Send" = "发送";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "向您发送了添加联系人请求";
 
 /* No comment provided by engineer. */
 "Share" = "共享";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "共享屏幕";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "注册";
 
 /* Record message title */
 "Stop recording" = "停止录制";
@@ -155,29 +155,29 @@
 "The password you entered does not unlock this account" = "您输入的密码无法解锁该帐户";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "该账户需迁移";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "这是您的ID。\n复制并分享给您的朋友吧！";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "这是您的Jami用户名。\n复制并分享给您的朋友吧！";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "要完成该操作，您需在新设备上打开 Jami，在选项中选择“关联此设备到账户”进行设置。您的 PIN 码有效期为 10 分钟。";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "若要进行迁移，您需要输入此账户的密码。";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "无法加入";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "未取得视频权限";
 
 /* Welcome title */
 "Welcome to Jami" = "欢迎来到Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "您想要留言吗？";
 

@@ -1,15 +1,15 @@
 
 /* Class = "NSButtonCell"; title = "Export Account"; ObjectID = "1aj-MG-mHp"; */
-"1aj-MG-mHp.title" = "Export Account";
+"1aj-MG-mHp.title" = "Vie tunnus";
 
 /* Class = "NSTextFieldCell"; title = "Banned Contacts"; ObjectID = "6fI-98-VvQ"; */
-"6fI-98-VvQ.title" = "Banned Contacts";
+"6fI-98-VvQ.title" = "Estetyt yhteystiedot";
 
 /* Class = "NSButtonCell"; title = "Advanced"; ObjectID = "Hbq-nL-BhK"; */
 "Hbq-nL-BhK.title" = "Edistyneet asetukset";
 
 /* Class = "NSButtonCell"; title = "Enable"; ObjectID = "Op4-XO-WsE"; */
-"Op4-XO-WsE.title" = "Enable";
+"Op4-XO-WsE.title" = "Päällä";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "TYk-QK-iaT"; */
 "TYk-QK-iaT.title" = "Salasana:";
@@ -24,7 +24,7 @@
 "aQL-hX-CfA.title" = "Tekstilaatikko";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Unblock"; ObjectID = "bOY-mY-1Yo"; */
-"bOY-mY-1Yo.ibShadowedToolTip" = "Unblock";
+"bOY-mY-1Yo.ibShadowedToolTip" = "Poista esto";
 
 /* Class = "NSTextFieldCell"; title = "Username:"; ObjectID = "fPK-Zv-Uom"; */
 "fPK-Zv-Uom.title" = "Username:";
@@ -51,7 +51,7 @@
 "qx7-i1-3Na.title" = "Identifier:";
 
 /* Class = "NSButtonCell"; title = "Link another device"; ObjectID = "tWk-Od-BEQ"; */
-"tWk-Od-BEQ.title" = "Link another device";
+"tWk-Od-BEQ.title" = "Linkitä toinen laite";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "uLQ-MS-pZ7"; */
 "uLQ-MS-pZ7.title" = "Tunnus";

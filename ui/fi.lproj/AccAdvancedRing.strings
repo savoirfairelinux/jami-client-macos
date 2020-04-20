@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow call from untrusted peers";
+"1Xr-BO-Pu3.title" = "Salli puhelut tuntemattomilta";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -15,10 +15,10 @@
 "8mv-Ia-GM4.title" = "TURN address";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "Puheluasetukset";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "Vastaa puheluihin automaattisesti";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Tekstilaatikko";
@@ -69,7 +69,7 @@
 "eGX-gk-Zxp.title" = "Laatikko";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
-"eMG-uY-bpH.title" = "TURN username";
+"eMG-uY-bpH.title" = "TURN käyttäjänimi";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "g8T-u3-MS3"; */
 "g8T-u3-MS3.title" = "Tekstilaatikko";
@@ -84,7 +84,7 @@
 "nqX-Vu-UuA.title" = "Käytä STUNia";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Custom ringtone";
+"qFq-Yh-2JL.title" = "Oma soittoääni";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
 "sVe-iG-OCw.title" = "Yhteydet";
@@ -99,7 +99,7 @@
 "vYi-gW-MrY.title" = "Laatikko";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "OpenDHT-määritykset";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
-"zPJ-cO-neQ.title" = "Use TURN";
+"zPJ-cO-neQ.title" = "Käytä TURNia";

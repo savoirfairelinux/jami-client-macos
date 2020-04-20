@@ -29,7 +29,7 @@
 "Block contact" = "Kişiyi engelle";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "\"Tamam\" ı tıklayarak bu hesabı bu cihazdan kaldıracaksınız! Bu işlem geri alınamaz. Ayrıca, kayıtlı adınız kaybolabilir.";
 
 /* File transfer canceled label */
 "Canceled" = "İptal edildi";
@@ -38,7 +38,7 @@
 "Choose file" = "Dosya seç";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Konuşmayı temizle";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopyala";
@@ -83,10 +83,10 @@
 "Invalid username." = "Geçersiz kullanıcı adı.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Yeni bir hesap oluşturmak için tercihlere gidin";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Hesap yok";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Parola ve doğrulama uyuşmuyor";
@@ -125,7 +125,7 @@
 "Send" = "Gönder";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "İletişim isteği gönderin";
 
 /* No comment provided by engineer. */
 "Share" = "Paylaş";
@@ -164,10 +164,10 @@
 "This is your Jami username. \nCopy and share it with your friends!" = "Bu sizin Jami kullanıcı adınız.\nKopyalayın ve arkadaşlarınızla paylaşın!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "İşlemleri tamamlamak için yeni cihazda Jami'yi açmanız ve \"Bu cihazı bir hesaba bağla\" seçeneğini belirtmeniz gerekir. PIN kodunuz 10 dakika geçerlidir.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Taşıma işlemine devam etmek için bu hesap için kullanılan bir şifre girmeniz gerekiyor.";
 
 /* File transfer peer unjoinable label */
 "Unjoinable" = "Katılımı olanaksız";

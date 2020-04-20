@@ -9,7 +9,7 @@
 "DSf-SJ-l6k.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "GBy-HF-JeP"; */
-"GBy-HF-JeP.title" = "Label";
+"GBy-HF-JeP.title" = "标签";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "KCp-bZ-69S"; */
 "KCp-bZ-69S.title" = "盒子";
@@ -33,7 +33,7 @@
 "QYT-0n-4sw.ibShadowedToolTip" = "录制";
 
 /* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
-"Vhk-fx-6RW.ibShadowedToolTip" = "add contact to call";
+"Vhk-fx-6RW.ibShadowedToolTip" = "将联系人加到通话中";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
 "YGj-SP-ikj.title" = "Text Cell";
@@ -51,13 +51,13 @@
 "fmp-x4-Pef.ibShadowedToolTip" = "切换聊天栏";
 
 /* Class = "NSTextFieldCell"; title = "person Id"; ObjectID = "hKi-Ay-ex5"; */
-"hKi-Ay-ex5.title" = "person Id";
+"hKi-Ay-ex5.title" = "个人 ID";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hfc-s5-yWK"; */
 "hfc-s5-yWK.title" = "盒子";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "ngO-WV-cXD"; */
-"ngO-WV-cXD.ibShadowedToolTip" = "Send a file";
+"ngO-WV-cXD.ibShadowedToolTip" = "发送文件";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
 "qgD-3D-nD5.ibShadowedToolTip" = "接听";

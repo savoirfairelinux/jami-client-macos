@@ -5,7 +5,7 @@
 "Accept" = "Accepter";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Tilføj en SIP-konto";
 
 /* Contextual menu action */
 "Add to contacts" = "Tilføj til kontakt";
@@ -17,10 +17,10 @@
 "An error occured during the export" = "Der opstod en fejl under eksport";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "ser ud til at være optaget.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Lydtilladelse er ikke givet";
 
 /* Backup account */
 "Backup your account" = "Backup your account";
@@ -29,34 +29,34 @@
 "Block contact" = "Bloker kontakt";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Ved at klikke på \"OK\" fjerner du denne konto på denne enhed! Denne handling kan ikke fortrydes. Dit registrerede navn kan også gå tabt.";
 
 /* File transfer canceled label */
 "Canceled" = "Annulleret";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Vælg fil";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Ryd samtale";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopiér";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Kunne ikke optage beskeden under opkald";
 
 /* Welcome title */
 "Create a new account" = "Opret en ny konto";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Indtast password til kontoen";
 
 /* File transfer failed label */
 "Failed" = "Fejlede";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Kunne ikke migrere din konto. Du kan prøve igen ved at trykke på Ok eller slette din konto.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Failed to perform lookup";
@@ -107,7 +107,7 @@
 "Press to start recording" = "Press to start recording";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Optag meddelelse";
 
 /* Button Action */
 "Refuse" = "Afvis";

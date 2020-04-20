@@ -5,7 +5,7 @@
 "Accept" = "Accetta";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Aggiungi un account SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "Aggiungi alla rubrica";
@@ -17,19 +17,19 @@
 "An error occured during the export" = "Si è verificato un errore durante l'esportazione";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "sembra essere occupato.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Permesso audio non consentito";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Backup il tuo account";
 
 /* Contextual menu action */
 "Block contact" = "Blocca contatto";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Facendo clic su \"OK\" rimuoverai questo account su questo dispositivo! Questa azione non può essere annullata. Inoltre, il nome registrato potrebbe andare perso.";
 
 /* File transfer canceled label */
 "Canceled" = "Annullato";
@@ -44,13 +44,13 @@
 "Copy" = "Copia";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Impossibile registrare il messaggio durante la chiamata";
 
 /* Welcome title */
 "Create a new account" = "Crea un nuovo account";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Inserisci la password dell'account";
 
 /* File transfer failed label */
 "Failed" = "Errore";
@@ -74,19 +74,19 @@
 "Incoming call from %@" = "Chiamati in arrivo da %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Messaggio in arrivo da %@";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Nome utente non valido";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Nome utente non valido.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Passa alle preferenze per creare un nuovo account";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Nessun account disponibile";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Password e conferma non corrispondono";
@@ -113,25 +113,25 @@
 "Refuse" = "Rifiuto";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Nome registrato:";
 
 /* Remove account alert title */
 "Remove account" = "Rimuovi l'account";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Seleziona l'archivio";
 
 /* Send button title */
 "Send" = "Invia";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Invia una richiesta di contatto";
 
 /* No comment provided by engineer. */
 "Share" = "Condividi";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Condividi schermo";
 
 /* Sign In */
 "Sign In" = "Registrati";
@@ -155,29 +155,29 @@
 "The password you entered does not unlock this account" = "La password che hai inserito non sblocca questo account";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Questo account deve essere migrato";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Questo è il tuo ID\nCopialo e condividilo con i tuoi amici!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Questo è il tuo nome utente Jami. \nCopia e condividi con i tuoi amici!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Per completare il processo, devi aprire Jami sul nuovo dispositivo e scegliere l'opzione \"Collega questo dispositivo a un account\". Il tuo pin è valido per 10 minuti.";
 
 /* Text shown to the user */
 "To proceed with the migration, you need to enter a password that was used for this account." = "Per procedere con la migrazione, è necessario inserire una password utilizzata per questo account.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Peer non raggiungibile";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Autorizzazione video non concessa";
 
 /* Welcome title */
 "Welcome to Jami" = "Benvenuto in Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Vuoi lasciare un messaggio?";
 

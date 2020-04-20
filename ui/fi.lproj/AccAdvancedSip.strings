@@ -9,16 +9,16 @@
 "24s-we-pkD.title" = "Turvallisuus";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
+"2rB-Bv-c9U.title" = "Rekistöröinnin aikakatkaisu (sekunneissa)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Call settings";
+"3Uq-Nb-J1A.title" = "Puheluasetukset";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Fallback on RTP on encryption failure";
+"3rM-KT-bNf.title" = "Varavalinta RTP:n salausvirheestä";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Auto answer calls";
+"3vs-TI-tkg.title" = "Vastaa puheluihin automaattisesti";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
 "6eH-la-JbF.title" = "TURN realm";
@@ -27,7 +27,7 @@
 "72p-GY-gu6.title" = "Henkilökohtaisen salausavaimen salasana";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
-"8JD-11-wHZ.title" = "Outgoing TLS server name";
+"8JD-11-wHZ.title" = "Lähtevän TLS-palvelimen nimi";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
 "8bw-iH-XGl.title" = "Item 1";
@@ -39,10 +39,10 @@
 "A31-3Y-z4R.title" = "Laatikko";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Published address";
+"ELr-A7-mGE.title" = "Julkinen osoite";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
-"Gwi-Mp-NpZ.title" = "Use TURN";
+"Gwi-Mp-NpZ.title" = "Käytä TURNia";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
 "HRM-FR-1sH.title" = "Käytä STUNia";
@@ -54,7 +54,7 @@
 "JV8-cY-6vR.title" = "Vaadi saapuvilta TLS-yhteyksiltä sertifikaatti";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "SDP Session Negotiation (ICE Fallback)";
+"Jfp-NE-ODd.title" = "SDP-istunnon neuvottelut (ICE Fallback)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
 "MBR-AC-HFq.title" = "Laatikko";
@@ -63,7 +63,7 @@
 "Mho-w1-ZPJ.title" = "Item 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Custom ringtone";
+"Nqr-gj-dOH.title" = "Oma soittoääni";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
 "OEo-C7-vEh.title" = "Item 2";
@@ -75,7 +75,7 @@
 "Ppa-zn-w1X.title" = "Laatikko";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "Ota SDES-protokolla käyttöön avaimien vaihdossa";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Tekstilaatikko";
@@ -87,7 +87,7 @@
 "W9F-Nf-ehp.title" = "Henkilökohtainen salausavain";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Verify answer certificates (client side)";
+"WsS-1e-Epm.title" = "Vahvista varmenteet (asiakaspuoli)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
 "Xp3-bL-3Cs.title" = "Käyttäjäsertifikaatti";
@@ -117,7 +117,7 @@
 "ekM-Cg-DEo.title" = "Laatikko";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Network interface";
+"fjH-ej-gEr.title" = "Verkkoliitäntä";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
 "fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
@@ -138,10 +138,10 @@
 "nq0-Js-9Cr.title" = "Minimi";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Use custom address and port";
+"nuq-Wl-sfd.title" = "Käytä mukautettua osoitetta ja porttia";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "TURN username";
+"rMN-Wf-tmp.title" = "TURN käyttäjänimi";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
 "vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
@@ -165,4 +165,4 @@
 "xjL-Wb-7VN.title" = "TURN salasana";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLS protocol method";
+"zBy-cW-KY3.title" = "Menetelmä TLS-protokolla";
