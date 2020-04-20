@@ -47,6 +47,7 @@
 - (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed;
 - (void) setupForInteraction:(uint64_t)inter;
 - (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding;
+- (void) invalidateMessageConstraints;
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
 - (void) updateImageConstraintWithMax: (CGFloat) maxDimension;
 - (void) invalidateImageConstraints;
