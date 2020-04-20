@@ -78,6 +78,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 {
     [NSLayoutConstraint deactivateConstraints:[self.msgView constraints]];
     [NSLayoutConstraint deactivateConstraints:[self.timeBox constraints]];
+    self.translatesAutoresizingMaskIntoConstraints = false;
     NSString* formatWidth = [NSString stringWithFormat:@"H:|-%@-[msgView(==%@)]-%@-|",
                              MESSAGE_MARGIN,[NSString stringWithFormat:@"%f", width],
                              MESSAGE_MARGIN];
@@ -152,7 +153,12 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 }
 
 - (void) invalidateImageConstraints {
-[NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
+    [NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
+}
+
+- (void) invalidateMessageConstraints {
+    [NSLayoutConstraint deactivateConstraints:[self.msgView constraints]];
+    [NSLayoutConstraint deactivateConstraints:[self.timeBox constraints]];
 }
 
 - (uint64_t)interaction
@@ -205,6 +211,21 @@ NSString* const TIME_BOX_HEIGHT = @"34";
         return [interfaceStyle isEqualToString:@"Dark"];
     }
     return NO;
+}
+
+- (void)prepareForReuse {
+    [self invalidateMessageConstraints];
+    [self invalidateImageConstraints];
+    [super prepareForReuse];
+}
+
+- (void)setFrameSize:(NSSize)newSize
+{
+    if (newSize.height == 1) {
+        [self invalidateMessageConstraints];
+        [self invalidateImageConstraints];
+    }
+    [super setFrameSize: newSize];
 }
 
 @end
