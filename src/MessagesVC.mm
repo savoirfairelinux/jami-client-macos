@@ -83,7 +83,7 @@ CGFloat   const MESSAGE_TEXT_PADDING      = 10;
 CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
 CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
 CGFloat   const HEIGHT_FOR_COMPOSING_INDICATOR = 37;
-CGFloat   const HEIGHT_DEFAULT = 1;
+CGFloat   const HEIGHT_DEFAULT = 34;
 NSInteger const MEESAGE_MARGIN = 21;
 NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
 NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
@@ -191,6 +191,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return;
     }
     auto itIndex = distance(conv->interactions.begin(),it);
+    if (itIndex >= ([conversationView numberOfRows] - 1)) {
+        return;
+    }
     NSRange rangeToUpdate = NSMakeRange(itIndex, 2);
     NSIndexSet* indexSet = [NSIndexSet indexSetWithIndexesInRange:rangeToUpdate];
     //reload previous message to update bubbleview
@@ -525,15 +528,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-
     auto* conv = [self getCurrentConversation];
-
     if (conv == nil)
         return nil;
 
     IMTableCellView* result;
     auto it = conv->interactions.begin();
-    auto size = conv->interactions.size();
+    auto size = [conversationView numberOfRows] - 1;
     if (row > size) {
         return [[NSView alloc] init];
     }
@@ -644,7 +645,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime isTopPadding: shouldApplyPadding];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
-   // [result.msgView checkTextInDocument:nil];
 
     NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     NSArray *matches = [linkDetector matchesInString:result.msgView.string options:0 range:NSMakeRange(0, result.msgView.string.length)];
@@ -687,17 +687,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (conv == nil)
         return HEIGHT_DEFAULT;
 
-    if (row > conv->interactions.size()) {
-        return HEIGHT_DEFAULT;
-    }
-
-    auto size = conv->interactions.size();
-    if (row == size) {
+    auto size = [conversationView numberOfRows] - 1;
+    if (row >= size) {
         //last item peer composing view
         if (peerComposingMessage) {
             return HEIGHT_FOR_COMPOSING_INDICATOR;
         }
-        return 0.1;
+        return 1;
     }
 
     auto it = conv->interactions.begin();

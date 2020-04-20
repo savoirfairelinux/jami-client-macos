@@ -152,7 +152,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 }
 
 - (void) invalidateImageConstraints {
-[NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
+    [NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
 }
 
 - (uint64_t)interaction
@@ -205,6 +205,14 @@ NSString* const TIME_BOX_HEIGHT = @"34";
         return [interfaceStyle isEqualToString:@"Dark"];
     }
     return NO;
+}
+
+- (void)setFrameSize:(NSSize)newSize
+{
+    if (newSize.height == 1) {
+        return;
+    }
+    [super setFrameSize: newSize];
 }
 
 @end
