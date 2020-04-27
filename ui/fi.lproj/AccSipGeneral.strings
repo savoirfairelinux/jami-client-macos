@@ -3,7 +3,7 @@
 "688-Sx-Gvr.title" = "Välityspalvelin";
 
 /* Class = "NSTextFieldCell"; title = "User Name"; ObjectID = "Fj6-Q3-Gz3"; */
-"Fj6-Q3-Gz3.title" = "User Name";
+"Fj6-Q3-Gz3.title" = "Käyttäjänimi";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "NlM-R9-ola"; */
 "NlM-R9-ola.title" = "Laatikko";
@@ -18,7 +18,7 @@
 "Yof-e7-IBF.title" = "Salasana";
 
 /* Class = "NSTextFieldCell"; title = "SIP Server"; ObjectID = "ZKc-70-TFH"; */
-"ZKc-70-TFH.title" = "SIP Server";
+"ZKc-70-TFH.title" = "SIP-palvelin";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "eQt-bc-Eev"; */
 "eQt-bc-Eev.title" = "Tunnus";
@@ -27,13 +27,13 @@
 "iEr-fN-5vD.title" = "Edistyneet asetukset";
 
 /* Class = "NSButtonCell"; title = "Edit Account"; ObjectID = "jdU-uZ-Rfy"; */
-"jdU-uZ-Rfy.title" = "Edit Account";
+"jdU-uZ-Rfy.title" = "Muokkaa tunnusta";
 
 /* Class = "NSButtonCell"; title = "enable"; ObjectID = "nW8-pd-fNj"; */
-"nW8-pd-fNj.title" = "enable";
+"nW8-pd-fNj.title" = "käyttöön";
 
 /* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "oE8-tN-SfC"; */
 "oE8-tN-SfC.title" = "Profiili";
 
 /* Class = "NSButtonCell"; title = "Remove Account"; ObjectID = "uFM-Am-0kz"; */
-"uFM-Am-0kz.title" = "Remove Account";
+"uFM-Am-0kz.title" = "Poista tili";

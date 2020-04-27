@@ -18,7 +18,7 @@
 "WEo-a0-wVL.ibShadowedToolTip" = "Muokkaa nimeä";
 
 /* Class = "NSButtonCell"; title = "Remove Account"; ObjectID = "Yf6-8d-SNh"; */
-"Yf6-8d-SNh.title" = "Remove Account";
+"Yf6-8d-SNh.title" = "Poista tili";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "aQL-hX-CfA"; */
 "aQL-hX-CfA.title" = "Tekstilaatikko";
@@ -27,7 +27,7 @@
 "bOY-mY-1Yo.ibShadowedToolTip" = "Poista esto";
 
 /* Class = "NSTextFieldCell"; title = "Username:"; ObjectID = "fPK-Zv-Uom"; */
-"fPK-Zv-Uom.title" = "Username:";
+"fPK-Zv-Uom.title" = "Käyttäjänimi:";
 
 /* Class = "NSButtonCell"; title = "Register"; ObjectID = "gLp-qz-XYs"; */
 "gLp-qz-XYs.title" = "Rekistöröi";
@@ -39,16 +39,16 @@
 "kt0-P6-fdQ.placeholderString" = "Syötä nimesi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Revoke"; ObjectID = "lrB-j5-Mvy"; */
-"lrB-j5-Mvy.ibShadowedToolTip" = "Revoke";
+"lrB-j5-Mvy.ibShadowedToolTip" = "Peruuta";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "oVO-wj-fwQ"; */
 "oVO-wj-fwQ.title" = "Laatikko";
 
 /* Class = "NSTextFieldCell"; title = "Linked devices"; ObjectID = "oga-WC-4gb"; */
-"oga-WC-4gb.title" = "Linked devices";
+"oga-WC-4gb.title" = "Linkitetyt laitteet";
 
 /* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "qx7-i1-3Na"; */
-"qx7-i1-3Na.title" = "Identifier:";
+"qx7-i1-3Na.title" = "Tunniste:";
 
 /* Class = "NSButtonCell"; title = "Link another device"; ObjectID = "tWk-Od-BEQ"; */
 "tWk-Od-BEQ.title" = "Linkitä toinen laite";
