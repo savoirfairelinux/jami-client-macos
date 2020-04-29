@@ -52,6 +52,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     SHOW_CONVERSATION_SCREEN,
     SHOW_CALL_SCREEN,
     SHOW_SETTINGS_SCREEN,
+    HIDE_SETTINGS_SCREEN,
     LEAVE_MESSAGE,
 };
 
@@ -151,10 +152,6 @@ typedef NS_ENUM(NSInteger, ViewState) {
             @catch (NSException *ex) {
                 return;
             }
-            [welcomeContainer setHidden: YES];
-            [currentCallVC hideWithAnimation:false];
-            [currentCallVC.view removeFromSuperview];
-            [conversationVC hideWithAnimation:false];
             [smartViewVC.view setHidden: YES];
             [settingsVC show];
             break;
@@ -162,6 +159,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [conversationVC showWithAnimation: false];
             [currentCallVC hideWithAnimation: false];
             [conversationVC presentLeaveMessageView];
+        case HIDE_SETTINGS_SCREEN:
+            [self accountSettingsShouldOpen: NO];
+            [smartViewVC.view setHidden: NO];
+            [settingsVC hide];
         default:
             break;
     }
@@ -507,7 +508,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     // Welcome view informations are also updated
     [self updateRingID];
     [settingsVC setSelectedAccount:accInfo.id];
-    [self changeViewTo: ([settingsVC.view isHidden] || removed)  ?  SHOW_WELCOME_SCREEN : SHOW_SETTINGS_SCREEN];
+    [self changeViewTo: ([settingsVC.view isHidden] || removed) ? SHOW_WELCOME_SCREEN : SHOW_SETTINGS_SCREEN];
     [self connectCallSignalsForAccount];
 }
 
@@ -542,7 +543,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 - (IBAction)openAccountSettings:(NSButton *)sender
 {
-    [self changeViewTo: [settingsVC.view isHidden] ?  SHOW_SETTINGS_SCREEN : SHOW_WELCOME_SCREEN];
+    [self changeViewTo: [settingsVC.view isHidden] ? SHOW_SETTINGS_SCREEN : HIDE_SETTINGS_SCREEN];
 }
 
 - (void) createNewAccount {
