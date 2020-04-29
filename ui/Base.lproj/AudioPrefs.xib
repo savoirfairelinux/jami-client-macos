@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,13 +19,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6OQ-wD-f0s">
-                    <rect key="frame" x="0.0" y="63" width="400" height="57"/>
+                    <rect key="frame" x="20" y="63" width="360" height="57"/>
                     <subviews>
                         <stackView distribution="equalCentering" orientation="horizontal" alignment="centerY" spacing="14" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCX-Iy-LKs">
-                            <rect key="frame" x="122" y="36" width="157" height="21"/>
+                            <rect key="frame" x="102" y="36" width="157" height="21"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y73-M5-wnx">
-                                    <rect key="frame" x="-2" y="2" width="47" height="17"/>
+                                    <rect key="frame" x="-2" y="3" width="47" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Output" id="2gZ-Ab-XHf">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -61,10 +61,10 @@
                             </customSpacing>
                         </stackView>
                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="14" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vmI-cp-8lh">
-                            <rect key="frame" x="122" y="0.0" width="157" height="21"/>
+                            <rect key="frame" x="102" y="0.0" width="157" height="21"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wn2-fz-UW2">
-                                    <rect key="frame" x="-2" y="2" width="47" height="17"/>
+                                    <rect key="frame" x="-2" y="3" width="47" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Input" id="x1o-rT-jy6">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -116,8 +116,8 @@
                 </stackView>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="6OQ-wD-f0s" secondAttribute="trailing" id="68O-xI-oE7"/>
-                <constraint firstItem="6OQ-wD-f0s" firstAttribute="leading" secondItem="deY-JV-Rfe" secondAttribute="leading" id="Fox-sj-yEh"/>
+                <constraint firstAttribute="trailing" secondItem="6OQ-wD-f0s" secondAttribute="trailing" constant="20" id="68O-xI-oE7"/>
+                <constraint firstItem="6OQ-wD-f0s" firstAttribute="leading" secondItem="deY-JV-Rfe" secondAttribute="leading" constant="20" id="Fox-sj-yEh"/>
                 <constraint firstItem="6OQ-wD-f0s" firstAttribute="top" secondItem="deY-JV-Rfe" secondAttribute="top" constant="30" id="e93-O3-78V"/>
             </constraints>
             <point key="canvasLocation" x="170.5" y="41.5"/>
