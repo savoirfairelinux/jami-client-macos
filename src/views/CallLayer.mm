@@ -46,19 +46,29 @@ uniform sampler2D tex;
 
 void main()
 {
-    fragColor = texture(tex, texCoord);
+    mediump vec3 yuv;
+    lowp vec3 rgb;
+    yuv.x = (texture2D(tex_y, texCoord).r - (16.0/255.0));
+    yuv.yz = (texture2D(tex_u, texCoord).ra - vec2(0.5, 0.5));
+    rgb =   yuv*colorConversionMatrix;
+    gl_FragColor = vec4(1,0,0,1);//rgb,1);
 }
 )glsl";
+
+@interface CallLayer()
+
+@property lrc::api::video::Frame currentFrame;
+@property BOOL currentFrameDisplayed;
+@property NSLock* currentFrameLk;
+
+@end
 
 @implementation CallLayer
 
 // OpenGL handlers
-GLuint tex, vbo, vShader, fShader, sProg, vao;
+GLuint textureY, textureUV, textureUniformY, textureUniformUV, vbo, vShader, fShader, sProg, vao;
 
-// Last frame data and attributes
-Video::Frame currentFrame;
-BOOL currentFrameDisplayed;
-NSLock* currentFrameLk;
+@synthesize currentFrame, currentFrameDisplayed, currentFrameLk;
 
 - (id) init
 {
@@ -111,7 +121,10 @@ NSLock* currentFrameLk;
         glAttachShader(sProg, fShader);
         glBindFragDataLocation(sProg, 0, "fragColor");
         glLinkProgram(sProg);
-        glUseProgram(sProg);
+        //glUseProgram(sProg);
+        
+        //textureUniformY = glGetUniformLocation(sProg, "tex_y");
+        //textureUniformUV = glGetUniformLocation(sProg, "tex_u");
 
         // Vertices position attrib
         GLuint inPosAttrib = glGetAttribLocation(sProg, "in_Pos");
@@ -122,14 +135,27 @@ NSLock* currentFrameLk;
         GLuint inTexCoordAttrib = glGetAttribLocation(sProg, "in_TexCoord");
         glEnableVertexAttribArray(inTexCoordAttrib);
         glVertexAttribPointer(inTexCoordAttrib, 2, GL_FLOAT, GL_FALSE, 4*sizeof(GLfloat), (void*)(2*sizeof(GLfloat)));
-
-        // Texture
-        glGenTextures(1, &tex);
-        glBindTexture(GL_TEXTURE_2D, tex);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+        // Texturey
+//                glActiveTexture(GL_TEXTURE0);
+//                glGenTextures(1, &textureY);
+//                glBindTexture(GL_TEXTURE_2D, textureY);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+//                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+//
+//                // TextureUV
+//                 glActiveTexture(GL_TEXTURE1);
+//                 glGenTextures(1, &textureUV);
+//                 glBindTexture(GL_TEXTURE_2D, textureUV);
+//                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+//                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     }
 }
 
@@ -158,59 +184,122 @@ NSLock* currentFrameLk;
     return YES;
 }
 
-- (void)drawInOpenGLContext:(NSOpenGLContext *)context pixelFormat:(NSOpenGLPixelFormat *)pixelFormat forLayerTime:(CFTimeInterval)t displayTime:(const CVTimeStamp *)ts
+//- (void)drawInOpenGLContext:(NSOpenGLContext *)context pixelFormat:(NSOpenGLPixelFormat *)pixelFormat forLayerTime:(CFTimeInterval)t displayTime:(const CVTimeStamp *)ts
+//{
+//    GLenum errEnum;
+//    glBindTexture(GL_TEXTURE_2D, tex);
+//
+//    [currentFrameLk lock];
+//    if(!currentFrameDisplayed) {
+//        if(currentFrame.ptr) {
+//            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, currentFrame.width, currentFrame.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, currentFrame.ptr);
+//        }
+//        currentFrameDisplayed = YES;
+//    }
+//    // To ensure that we will not divide by zero
+//    if (currentFrame.ptr && currentFrame.width && currentFrame.height) {
+//        // Compute scaling factor to keep the original aspect ratio of the video
+//        CGSize viewSize = self.frame.size;
+//         if (viewSize.width > 200)  {
+//        auto len = viewSize.width/viewSize.height;
+//             }
+//        float viewRatio = viewSize.width/viewSize.height;
+//        float frameRatio = ((float)currentFrame.width)/((float)currentFrame.height);
+//        float ratio = viewRatio * (1/frameRatio);
+//
+//        GLint inScalingUniform = glGetUniformLocation(sProg, "in_Scaling");
+//
+//        float multiplier = MAX(frameRatio, ratio);
+//        if((viewRatio >= 1 && frameRatio >= 1) ||
+//           (viewRatio < 1 && frameRatio < 1) ||
+//           (ratio > 0.5 && ratio < 1.5) ) {
+//            if (ratio > 1.0)
+//                glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
+//            else
+//                glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
+//        } else {
+//            if (ratio < 1.0)
+//                glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
+//            else
+//                glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
+//
+//        }
+//    }
+//    [currentFrameLk unlock];
+//
+//    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+//    glClear(GL_COLOR_BUFFER_BIT);
+//
+//    if([self videoRunning])
+//        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+//}
+
+- (void) setCurrentFrame:(lrc::api::video::Frame)framePtr
 {
-    GLenum errEnum;
-    glBindTexture(GL_TEXTURE_2D, tex);
-
-    [currentFrameLk lock];
-    if(!currentFrameDisplayed) {
-        if(currentFrame.ptr) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, currentFrame.width, currentFrame.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, currentFrame.ptr);
-        }
-        currentFrameDisplayed = YES;
-    }
-    // To ensure that we will not divide by zero
-    if (currentFrame.ptr && currentFrame.width && currentFrame.height) {
-        // Compute scaling factor to keep the original aspect ratio of the video
-        CGSize viewSize = self.frame.size;
-        float viewRatio = viewSize.width/viewSize.height;
-        float frameRatio = ((float)currentFrame.width)/((float)currentFrame.height);
-        float ratio = viewRatio * (1/frameRatio);
-
-        GLint inScalingUniform = glGetUniformLocation(sProg, "in_Scaling");
-
-        float multiplier = MAX(frameRatio, ratio);
-        if((viewRatio >= 1 && frameRatio >= 1) ||
-           (viewRatio < 1 && frameRatio < 1) ||
-           (ratio > 0.5 && ratio < 1.5) ) {
-            if (ratio > 1.0)
-                glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
-            else
-                glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
-        } else {
-            if (ratio < 1.0)
-                glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
-            else
-                glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
-
-        }
-    }
-    [currentFrameLk unlock];
-
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    if([self videoRunning])
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+//    [currentFrameLk lock];
+//    currentFrame = framePtr;
+//    currentFrameDisplayed = NO;
+//    [currentFrameLk unlock];
 }
 
-- (void) setCurrentFrame:(Video::Frame)framePtr
-{
-    [currentFrameLk lock];
-    currentFrame = std::move(framePtr);
-    currentFrameDisplayed = NO;
-    [currentFrameLk unlock];
+-(void)renderWithPixelBuffer:(CVPixelBufferRef)buffer size:(CGSize)size rotation: (float)rotation fillFrame: (bool)fill {
+    GLenum errEnum;
+
+       [currentFrameLk lock];
+       if(!currentFrameDisplayed) {
+           if(currentFrame.ptr) {
+//               void *baseAddressY = CVPixelBufferGetBaseAddressOfPlane(buffer, 0);
+//                              void *baseAddressUV = CVPixelBufferGetBaseAddressOfPlane(buffer, 1);
+//                              glActiveTexture(GL_TEXTURE0);
+//                              glBindTexture(GL_TEXTURE_2D, textureY);
+//                              glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, size.width, size.height, 0, GL_RED, GL_UNSIGNED_BYTE, baseAddressY);
+//                              glUniform1i(textureUniformY, 0);
+//                              glActiveTexture(GL_TEXTURE1);
+//                              glBindTexture(GL_TEXTURE_2D, textureUV);
+//
+//                              glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, size.width, size.height, 0, GL_RED, GL_UNSIGNED_BYTE, baseAddressUV);
+//
+//                              glUniform1i(textureUniformUV, 1);
+           }
+           currentFrameDisplayed = YES;
+       }
+       // To ensure that we will not divide by zero
+       if (buffer && size.width && size.height) {
+           // Compute scaling factor to keep the original aspect ratio of the video
+           CGSize viewSize = self.frame.size;
+            if (viewSize.width > 200)  {
+           auto len = viewSize.width/viewSize.height;
+                }
+           float viewRatio = viewSize.width/viewSize.height;
+           float frameRatio = ((float)size.width)/((float)size.height);
+           float ratio = viewRatio * (1/frameRatio);
+
+           GLint inScalingUniform = glGetUniformLocation(sProg, "in_Scaling");
+
+           float multiplier = MAX(frameRatio, ratio);
+           if((viewRatio >= 1 && frameRatio >= 1) ||
+              (viewRatio < 1 && frameRatio < 1) ||
+              (ratio > 0.5 && ratio < 1.5) ) {
+               if (ratio > 1.0)
+                   glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
+               else
+                   glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
+           } else {
+               if (ratio < 1.0)
+                   glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
+               else
+                   glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
+
+           }
+       }
+       [currentFrameLk unlock];
+
+       glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+       glClear(GL_COLOR_BUFFER_BIT);
+
+//       if([self videoRunning])
+//           glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
 }
 
 @end
