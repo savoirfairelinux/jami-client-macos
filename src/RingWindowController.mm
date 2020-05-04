@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
-        self.avModel->useAVFrame(YES);
+        self.avModel->useAVFrame(metalSupported());
     }
     return self;
 }
@@ -132,7 +132,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [settingsVC hide];
             break;
         case SHOW_CALL_SCREEN:
-            self.avModel->useAVFrame(YES);
+            self.avModel->useAVFrame(metalSupported());
             [self accountSettingsShouldOpen: NO];
             if (![currentCallVC.view superview]) {
             [callView addSubview:[currentCallVC view] positioned:NSWindowAbove relativeTo:nil];

@@ -50,15 +50,20 @@ void main()
 }
 )glsl";
 
+@interface CallLayer()
+
+@property lrc::api::video::Frame currentFrame;
+@property BOOL currentFrameDisplayed;
+@property NSLock* currentFrameLk;
+
+@end
+
 @implementation CallLayer
 
 // OpenGL handlers
 GLuint tex, vbo, vShader, fShader, sProg, vao;
 
-// Last frame data and attributes
-Video::Frame currentFrame;
-BOOL currentFrameDisplayed;
-NSLock* currentFrameLk;
+@synthesize currentFrame, currentFrameDisplayed, currentFrameLk;
 
 - (id) init
 {
@@ -174,6 +179,9 @@ NSLock* currentFrameLk;
     if (currentFrame.ptr && currentFrame.width && currentFrame.height) {
         // Compute scaling factor to keep the original aspect ratio of the video
         CGSize viewSize = self.frame.size;
+         if (viewSize.width > 200)  {
+        auto len = viewSize.width/viewSize.height;
+             }
         float viewRatio = viewSize.width/viewSize.height;
         float frameRatio = ((float)currentFrame.width)/((float)currentFrame.height);
         float ratio = viewRatio * (1/frameRatio);
@@ -205,10 +213,10 @@ NSLock* currentFrameLk;
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-- (void) setCurrentFrame:(Video::Frame)framePtr
+- (void) setCurrentFrame:(lrc::api::video::Frame)framePtr
 {
-    [currentFrameLk lock];
-    currentFrame = std::move(framePtr);
+    [currentFrameLk lock];  
+    currentFrame = framePtr;
     currentFrameDisplayed = NO;
     [currentFrameLk unlock];
 }
