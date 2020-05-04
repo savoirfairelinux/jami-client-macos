@@ -270,7 +270,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     }
     [previewView fillWithBlack];
 
-    self.previewView.stopRendering = false;
+    self.previewView.videoRunning = true;
     [self connectPreviewSignals];
     avModel->stopPreview();
     avModel->startPreview();
