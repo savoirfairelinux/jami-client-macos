@@ -56,7 +56,7 @@ void main()
 GLuint tex, vbo, vShader, fShader, sProg, vao;
 
 // Last frame data and attributes
-Video::Frame currentFrame;
+lrc::api::video::Frame currentFrame;
 BOOL currentFrameDisplayed;
 NSLock* currentFrameLk;
 
@@ -205,10 +205,10 @@ NSLock* currentFrameLk;
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-- (void) setCurrentFrame:(Video::Frame)framePtr
+- (void) setCurrentFrame:(lrc::api::video::Frame)framePtr
 {
     [currentFrameLk lock];
-    currentFrame = std::move(framePtr);
+    currentFrame = framePtr;
     currentFrameDisplayed = NO;
     [currentFrameLk unlock];
 }

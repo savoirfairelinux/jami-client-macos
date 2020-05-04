@@ -51,6 +51,7 @@ extern "C" {
 #import "VideoCommon.h"
 #import "views/GradientView.h"
 #import "views/MovableView.h"
+#import "views/RenderView.h"
 
 @interface CurrentCallVC () <NSPopoverDelegate> {
     QString convUid_;
@@ -96,12 +97,12 @@ extern "C" {
 
 // Video
 @property (unsafe_unretained) IBOutlet CallView *videoView;
-@property (unsafe_unretained) IBOutlet CallMTKView *previewView;
+@property (unsafe_unretained) IBOutlet RenderView *previewView;
 @property (unsafe_unretained) IBOutlet MovableView *movableBaseForView;
 @property (unsafe_unretained) IBOutlet NSView* hidePreviewBackground;
 @property (unsafe_unretained) IBOutlet NSButton* hidePreviewButton;
 
-@property (unsafe_unretained) IBOutlet CallMTKView *videoMTKView;
+@property (unsafe_unretained) IBOutlet RenderView *videoMTKView;
 
 @property RendererConnectionsHolder* renderConnections;
 @property QMetaObject::Connection videoStarted;
@@ -378,8 +379,8 @@ CVPixelBufferRef pixelBufferPreview;
             [hidePreviewBackground setHidden:YES];
             [self.previewView setHidden: YES];
             [self.videoMTKView setHidden: YES];
-            self.previewView.stopRendering = true;
-            self.videoMTKView.stopRendering = true;
+            self.previewView.videoRunning = NO;
+            self.videoMTKView.videoRunning = NO;
             [backgroundImage setHidden:NO];
             [bluerBackgroundEffect setHidden:NO];
             break;
@@ -397,8 +398,8 @@ CVPixelBufferRef pixelBufferPreview;
                 [hidePreviewBackground setHidden:YES];
                 [self.previewView setHidden: YES];
                 [self.videoMTKView setHidden: YES];
-                self.previewView.stopRendering = true;
-                self.videoMTKView.stopRendering = true;
+                self.previewView.videoRunning = NO;
+                self.videoMTKView.videoRunning = NO;
             }
             break;
         case Status::INACTIVE:
@@ -439,11 +440,11 @@ CVPixelBufferRef pixelBufferPreview;
     [self.videoMTKView fillWithBlack];
     [previewView setHidden: NO];
     [self.videoMTKView setHidden:NO];
-    [hidePreviewBackground setHidden: self.previewView.stopRendering];
+    [hidePreviewBackground setHidden: !self.previewView.videoRunning];
     [bluerBackgroundEffect setHidden:YES];
     [backgroundImage setHidden:YES];
-    self.previewView.stopRendering = false;
-    self.videoMTKView.stopRendering = false;
+    self.previewView.videoRunning = true;
+    self.videoMTKView.videoRunning = true;
 }
 
 -(void) setUpAudioOnlyView {
@@ -536,10 +537,10 @@ CVPixelBufferRef pixelBufferPreview;
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                              [self.previewView setHidden:NO];
                              [hidePreviewBackground setHidden: NO];
-                             self.previewView.stopRendering = false;
+                             self.previewView.videoRunning = true;
                          } else if ([self isCurrentCall: id]) {
                              [self mouseIsMoving: NO];
-                             self.videoMTKView.stopRendering = false;
+                             self.videoMTKView.videoRunning = true;
                              [self.videoMTKView setHidden:NO];
                              [bluerBackgroundEffect setHidden:YES];
                              [backgroundImage setHidden:YES];
@@ -551,10 +552,10 @@ CVPixelBufferRef pixelBufferPreview;
                      [=](const QString& id) {
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
                              [self.previewView setHidden:YES];
-                             self.previewView.stopRendering = true;
+                             self.previewView.videoRunning = false;
                          } else if ([self isCurrentCall: id]) {
                              [self mouseIsMoving: YES];
-                             self.videoMTKView.stopRendering = true;
+                             self.videoMTKView.videoRunning = false;
                              [self.videoMTKView setHidden:YES];
                              [bluerBackgroundEffect setHidden:NO];
                              [backgroundImage setHidden:NO];
@@ -569,46 +570,27 @@ CVPixelBufferRef pixelBufferPreview;
                              if(!renderer->isRendering()) {
                                  return;
                              }
-                             [hidePreviewBackground setHidden: self.previewView.stopRendering];
-                             [self renderer: renderer renderFrameForPreviewView:previewView];
+                             [hidePreviewBackground setHidden: !self.previewView.videoRunning];
+                            // [self renderer: renderer renderFrameForView:previewView];
                          } else if ([self isCurrentCall: id]) {
                              auto renderer = &mediaModel->getRenderer(id);
                              if(!renderer->isRendering()) {
                                  return;
                              }
-                             [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
+                             [self renderer:renderer renderFrameForView: self.videoMTKView];
                          }
                      });
 }
 
--(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForPreviewView:(CallMTKView*) view
-{
-    @autoreleasepool {
-        auto framePtr = renderer->currentAVFrame();
-        auto frame = framePtr.get();
-        if(!frame || !frame->width || !frame->height) {
+-(void) renderer: (const lrc::api::video::Renderer*)renderer
+renderFrameForView:(RenderView*) view {
+    if (!metalSupported()) {
+        auto frame_ptr = renderer->currentFrame();
+        if (!frame_ptr.ptr)
             return;
-        }
-        auto frameSize = CGSizeMake(frame->width, frame->height);
-        auto rotation = 0;
-        if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
-            [view renderWithPixelBuffer:(CVPixelBufferRef)frame->data[3]
-                                   size: frameSize
-                               rotation: rotation
-                              fillFrame: true];
-            return;
-        }
-        else if (CVPixelBufferRef pixelBuffer = [self getBufferForPreviewFromFrame:frame]) {
-            [view renderWithPixelBuffer: pixelBuffer
-                                   size: frameSize
-                               rotation: rotation
-                              fillFrame: true];
-        }
+        [view setCurrentFrame:frame_ptr];
+        return;
     }
-}
-
--(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForDistantView:(CallMTKView*) view
-{
     @autoreleasepool {
         auto framePtr = renderer->currentAVFrame();
         auto frame = framePtr.get();
