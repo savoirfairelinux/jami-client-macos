@@ -19,6 +19,12 @@
 
 #import "CallLayer.h"
 #import <OpenGL/gl3.h>
+#import <VideoToolbox/VideoToolbox.h>
+
+extern "C" {
+#import "libavutil/frame.h"
+#import "libavutil/display.h"
+}
 
 static const GLchar* vShaderSrc = R"glsl(
 #version 150
@@ -42,23 +48,33 @@ static const GLchar* fShaderSrc = R"glsl(
 out vec4 fragColor;
 in vec2 texCoord;
 
-uniform sampler2D tex;
+uniform sampler2D tex_y, tex_uv;
 
 void main()
 {
-    fragColor = texture(tex, texCoord);
+     gl_FragColor = vec4(1,0,0,1);
 }
 )glsl";
+
+@interface CallLayer()
+
+@property BOOL currentFrameDisplayed;
+@property NSLock* currentFrameLk;
+
+@property CGFloat currentWidth;
+
+@property CGFloat currentHeight;
+
+@end
 
 @implementation CallLayer
 
 // OpenGL handlers
-GLuint tex, vbo, vShader, fShader, sProg, vao;
+GLuint textureY, textureUV, textureUniformY, textureUniformUV, vbo, vShader, fShader, sProg, vao;
 
-// Last frame data and attributes
-Video::Frame currentFrame;
-BOOL currentFrameDisplayed;
-NSLock* currentFrameLk;
+@synthesize currentFrameDisplayed, currentFrameLk, currentWidth, currentHeight;
+
+AVFrame currentFrame;
 
 - (id) init
 {
@@ -112,8 +128,10 @@ NSLock* currentFrameLk;
         glBindFragDataLocation(sProg, 0, "fragColor");
         glLinkProgram(sProg);
         glUseProgram(sProg);
-
-        // Vertices position attrib
+        textureUniformY = glGetUniformLocation(sProg, "tex_y");
+        textureUniformUV = glGetUniformLocation(sProg, "tex_uv");
+        
+         //Vertices position attrib
         GLuint inPosAttrib = glGetAttribLocation(sProg, "in_Pos");
         glEnableVertexAttribArray(inPosAttrib);
         glVertexAttribPointer(inPosAttrib, 2, GL_FLOAT, GL_FALSE, 4*sizeof(GLfloat), 0);
@@ -122,10 +140,18 @@ NSLock* currentFrameLk;
         GLuint inTexCoordAttrib = glGetAttribLocation(sProg, "in_TexCoord");
         glEnableVertexAttribArray(inTexCoordAttrib);
         glVertexAttribPointer(inTexCoordAttrib, 2, GL_FLOAT, GL_FALSE, 4*sizeof(GLfloat), (void*)(2*sizeof(GLfloat)));
-
-        // Texture
-        glGenTextures(1, &tex);
-        glBindTexture(GL_TEXTURE_2D, tex);
+        // TextureY
+        glActiveTexture(GL_TEXTURE0);
+        glGenTextures(1, &textureY);
+        glBindTexture(GL_TEXTURE_2D, textureY);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+        // TextureUV
+        glActiveTexture(GL_TEXTURE1);
+        glGenTextures(1, &textureUV);
+        glBindTexture(GL_TEXTURE_2D, textureUV);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -161,25 +187,34 @@ NSLock* currentFrameLk;
 - (void)drawInOpenGLContext:(NSOpenGLContext *)context pixelFormat:(NSOpenGLPixelFormat *)pixelFormat forLayerTime:(CFTimeInterval)t displayTime:(const CVTimeStamp *)ts
 {
     GLenum errEnum;
-    glBindTexture(GL_TEXTURE_2D, tex);
-
+    
     [currentFrameLk lock];
     if(!currentFrameDisplayed) {
-        if(currentFrame.ptr) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, currentFrame.width, currentFrame.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, currentFrame.ptr);
-        }
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureY);
+        const uint8_t* uploadPlane = currentFrame.data[0];
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, currentFrame.width, currentFrame.height, 0, GL_RED, GL_UNSIGNED_BYTE, uploadPlane);
+        glUniform1i(textureUniformY, 0);
+
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textureUV);
+        const uint8_t* uploadPlane1 = currentFrame.data[1];
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, currentWidth, currentHeight, 0, GL_RED, GL_UNSIGNED_BYTE, uploadPlane1);
+
+        glUniform1i(textureUniformUV, 1);
         currentFrameDisplayed = YES;
     }
-    // To ensure that we will not divide by zero
-    if (currentFrame.ptr && currentFrame.width && currentFrame.height) {
+    [currentFrameLk unlock];
+    
+    if (currentFrame.data[0] && currentFrame.width && currentFrame.height) {
         // Compute scaling factor to keep the original aspect ratio of the video
         CGSize viewSize = self.frame.size;
         float viewRatio = viewSize.width/viewSize.height;
         float frameRatio = ((float)currentFrame.width)/((float)currentFrame.height);
         float ratio = viewRatio * (1/frameRatio);
-
         GLint inScalingUniform = glGetUniformLocation(sProg, "in_Scaling");
-
         float multiplier = MAX(frameRatio, ratio);
         if((viewRatio >= 1 && frameRatio >= 1) ||
            (viewRatio < 1 && frameRatio < 1) ||
@@ -193,22 +228,27 @@ NSLock* currentFrameLk;
                 glUniform2f(inScalingUniform, 1.0, 1.0 * ratio);
             else
                 glUniform2f(inScalingUniform, 1.0/ratio, 1.0);
-
         }
     }
-    [currentFrameLk unlock];
-
+    
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-
+    
     if([self videoRunning])
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-- (void) setCurrentFrame:(Video::Frame)framePtr
+- (void) setCurrentFrame:(lrc::api::video::Frame)framePtr
+{
+}
+
+-(void)renderAVFrame:(std::unique_ptr<AVFrame, void(*)(AVFrame*)>)buffer
 {
     [currentFrameLk lock];
-    currentFrame = std::move(framePtr);
+        auto ptr = buffer.get();
+    if(ptr) {
+    currentFrame = *buffer.get();
+        }
     currentFrameDisplayed = NO;
     [currentFrameLk unlock];
 }

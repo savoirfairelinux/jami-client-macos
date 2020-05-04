@@ -23,8 +23,13 @@
 
 @interface CallLayer : NSOpenGLLayer
 
+class AVFrame;
+
 @property BOOL videoRunning;
 
-- (void) setCurrentFrame:(Video::Frame)framePtr;
+- (void) setCurrentFrame:(lrc::api::video::Frame)framePtr;
+-(void)renderWithPixelBuffer:(CVPixelBufferRef)buffer size:(CGSize)size rotation: (float)rotation fillFrame: (bool)fill;
+
+-(void)renderAVFrame:(std::unique_ptr<AVFrame, void(*)(AVFrame*)>)buffer;
 
 @end

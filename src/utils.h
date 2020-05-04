@@ -20,6 +20,7 @@
 #import <map>
 
 #import <Foundation/Foundation.h>
+#import <MetalKit/MetalKit.h>
 #import "NSString+Extensions.h"
 #import "views/NSColor+RingTheme.h"
 
@@ -197,4 +198,10 @@ static inline NSColor* colorForAccountStatus(const lrc::api::account::Status sta
             break;
     }
     return accountStatusColor;
+}
+
+static inline bool metalSupported()
+{
+    id<MTLDevice> device = MTLCreateSystemDefaultDevice();
+    return device == nil;
 }

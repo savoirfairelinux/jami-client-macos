@@ -19,10 +19,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <MetalKit/MetalKit.h>
+#import "RenderProtocol.h"
 
-@interface CallMTKView: MTKView
--(void)renderWithPixelBuffer:(CVPixelBufferRef)buffer size:(CGSize)size rotation: (float)rotation fillFrame: (bool)fill;
--(void)fillWithBlack;
--(void)setupView;
-@property bool stopRendering;
+@interface CallMTKView: MTKView <RenderProtocol>
 @end
