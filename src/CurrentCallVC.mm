@@ -51,6 +51,7 @@ extern "C" {
 #import "VideoCommon.h"
 #import "views/GradientView.h"
 #import "views/MovableView.h"
+#import "views/CallLayer.h"
 
 @interface CurrentCallVC () <NSPopoverDelegate> {
     QString convUid_;
@@ -162,6 +163,42 @@ CVPixelBufferRef pixelBufferPreview;
     confUid_ = convIt->confId;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     [self connectSignals];
+}
+
+- (void) ensureLayoutForCallStatus:(lrc::api::call::Status) status {
+
+    using Status = lrc::api::call::Status;
+
+    switch (status) {
+
+        case Status::IN_PROGRESS:
+
+            if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+
+                [videoView setLayer:[[CallLayer alloc] init]];
+
+            }
+
+            break;
+
+        default:
+
+            if ([videoView.layer isKindOfClass:[CallLayer class]]) {
+
+                [videoView setLayer:[CALayer layer]];
+
+                [videoView.layer setBackgroundColor:[[NSColor blackColor] CGColor]];
+
+            }
+
+            break;
+
+    }
+
+    holdOnOffButton.image = status == lrc::api::call::Status::PAUSED ?
+
+    [NSImage imageNamed:@"ic_action_holdoff.png"] : [NSImage imageNamed:@"ic_action_hold.png"];
+
 }
 
 -(void) connectSignals {
@@ -362,6 +399,7 @@ CVPixelBufferRef pixelBufferPreview;
     cancelCallButton.hidden = (currentCall.status == Status::IN_PROGRESS ||
                              currentCall.status == Status::PAUSED) ? YES : NO;
     callingWidgetsContainer.hidden = (currentCall.status == Status::IN_PROGRESS) ? NO : YES;
+    [self ensureLayoutForCallStatus:currentCall.status];
 
     switch (currentCall.status) {
         case Status::SEARCHING:
@@ -418,6 +456,9 @@ CVPixelBufferRef pixelBufferPreview;
                 [self setUpAudioOnlyView];
             } else {
                 [self setUpVideoCallView];
+                if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+                                                         [videoView setLayer:[[CallLayer alloc] init]];
+                                                     }
             }
             break;
         case Status::CONNECTED:
@@ -432,6 +473,7 @@ CVPixelBufferRef pixelBufferPreview;
             [self.delegate callFinished];
             break;
     }
+    [self.videoMTKView setHidden:YES];
 }
 
 -(void) setUpVideoCallView {
@@ -537,12 +579,18 @@ CVPixelBufferRef pixelBufferPreview;
                              [self.previewView setHidden:NO];
                              [hidePreviewBackground setHidden: NO];
                              self.previewView.stopRendering = false;
+                             
                          } else if ([self isCurrentCall: id]) {
                              [self mouseIsMoving: NO];
                              self.videoMTKView.stopRendering = false;
-                             [self.videoMTKView setHidden:NO];
+                             [self.videoMTKView setHidden:YES];
                              [bluerBackgroundEffect setHidden:YES];
                              [backgroundImage setHidden:YES];
+                                                       if (![videoView.layer isKindOfClass:[CallLayer class]]) {
+ 
+                                                                                                  [videoView setLayer:[[CallLayer alloc] init]];
+             
+                                                                                              }
                          }
                      });
     renderConnections.stopped =
@@ -576,7 +624,7 @@ CVPixelBufferRef pixelBufferPreview;
                              if(!renderer->isRendering()) {
                                  return;
                              }
-                             [self renderer:renderer renderFrameForDistantView: self.videoMTKView];
+                             [self renderer:renderer renderFrameForDistantView: self.videoView];
                          }
                      });
 }
@@ -607,33 +655,47 @@ CVPixelBufferRef pixelBufferPreview;
     }
 }
 
--(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForDistantView:(CallMTKView*) view
+-(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForDistantView:(CallView*) view
 {
-    @autoreleasepool {
-        auto framePtr = renderer->currentAVFrame();
-        auto frame = framePtr.get();
-        if(!frame || !frame->width || !frame->height)  {
+    auto frame_ptr = renderer->currentFrame();
+    if (!frame_ptr.ptr)
             return;
-        }
-        auto frameSize = CGSizeMake(frame->width, frame->height);
-        auto rotation = 0;
-        if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
-            const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
-            rotation = av_display_rotation_get(data);
-        }
-        if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
-            [view renderWithPixelBuffer: (CVPixelBufferRef)frame->data[3]
-                                   size: frameSize
-                               rotation: rotation
-                              fillFrame: false];
-        }
-        if (CVPixelBufferRef pixelBuffer = [self getBufferForDistantViewFromFrame:frame]) {
-            [view renderWithPixelBuffer: pixelBuffer
-                                   size: frameSize
-                               rotation: rotation
-                              fillFrame: false];
-        }
-    }
+
+        CallLayer* callLayer = (CallLayer*) view.layer;
+
+        if ([callLayer respondsToSelector:@selector(setCurrentFrame:)]) {
+            [callLayer setCurrentFrame:std::move(frame_ptr)];
+
+
+                       [callLayer setVideoRunning:YES];
+
+            }
+//    return;
+//    @autoreleasepool {
+//        auto framePtr = renderer->currentAVFrame();
+//        auto frame = framePtr.get();
+//        if(!frame || !frame->width || !frame->height)  {
+//            return;
+//        }
+//        auto frameSize = CGSizeMake(frame->width, frame->height);
+//        auto rotation = 0;
+//        if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
+//            const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
+//            rotation = av_display_rotation_get(data);
+//        }
+//        if (frame->data[3] != NULL && (CVPixelBufferRef)frame->data[3]) {
+//            [view renderWithPixelBuffer: (CVPixelBufferRef)frame->data[3]
+//                                   size: frameSize
+//                               rotation: rotation
+//                              fillFrame: false];
+//        }
+//        if (CVPixelBufferRef pixelBuffer = [self getBufferForDistantViewFromFrame:frame]) {
+//            [view renderWithPixelBuffer: pixelBuffer
+//                                   size: frameSize
+//                               rotation: rotation
+//                              fillFrame: false];
+//        }
+//    }
 }
 
 -(CVPixelBufferRef) getBufferForPreviewFromFrame:(const AVFrame*)frame {

@@ -25,6 +25,6 @@
 
 @property BOOL videoRunning;
 
-- (void) setCurrentFrame:(Video::Frame)framePtr;
+- (void) setCurrentFrame:(lrc::api::video::Frame)framePtr;
 
 @end
