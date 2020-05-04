@@ -42,23 +42,36 @@ static const GLchar* fShaderSrc = R"glsl(
 out vec4 fragColor;
 in vec2 texCoord;
 
-uniform sampler2D tex;
+uniform sampler2D tex_y, tex_uv;
 
 void main()
 {
-    fragColor = texture(tex, texCoord);
+    mediump vec3 yuv, rgb;
+    yuv.x = (texture(tex_y, texCoord).r);
+    yuv.yz = (texture(tex_uv, texCoord).rb - vec2(0.5, 0.5));
+    rgb = mat3( 1,       1,     1,
+                0, -.18732, 1.8556,
+                1.57481, -.46813, 0) * yuv;
+    fragColor = vec4(rgb, 1);
 }
 )glsl";
+
+@interface CallLayer()
+
+@property BOOL currentFrameDisplayed;
+@property NSLock* currentFrameLk;
+@property CGFloat currentWidth;
+@property CGFloat currentHeight;
+@property CVPixelBufferRef currentFrame;
+
+@end
 
 @implementation CallLayer
 
 // OpenGL handlers
-GLuint tex, vbo, vShader, fShader, sProg, vao;
+GLuint textureY, textureUV, textureUniformY, textureUniformUV, vbo, vShader, fShader, sProg, vao;
 
-// Last frame data and attributes
-Video::Frame currentFrame;
-BOOL currentFrameDisplayed;
-NSLock* currentFrameLk;
+@synthesize currentFrameDisplayed, currentFrameLk, currentWidth, currentHeight, currentFrame;
 
 - (id) init
 {
@@ -113,6 +126,22 @@ NSLock* currentFrameLk;
         glLinkProgram(sProg);
         glUseProgram(sProg);
 
+        textureUniformY = glGetUniformLocation(sProg, "tex_y");
+        textureUniformUV = glGetUniformLocation(sProg, "tex_uv");
+        
+        GLint params = -1;
+        GLchar ErrorLog[512] = { 0 };
+        GLint size = 0;
+        glGetProgramiv(sProg, GL_INFO_LOG_LENGTH, &params);
+        if(params > 0)
+        {
+            glGetProgramInfoLog(sProg, 512, &size, ErrorLog);
+            fprintf(stderr, "Prog Info Log: %s\n", ErrorLog);
+            //glGetProgramInfoLog(sProg, logLen, &logLen, log);
+            // Show any errors as appropriatetextureUniformUV == GL_INVALID_INDEX){
+            NSLog(@"textureUniformUV error");
+        }
+
         // Vertices position attrib
         GLuint inPosAttrib = glGetAttribLocation(sProg, "in_Pos");
         glEnableVertexAttribArray(inPosAttrib);
@@ -122,10 +151,19 @@ NSLock* currentFrameLk;
         GLuint inTexCoordAttrib = glGetAttribLocation(sProg, "in_TexCoord");
         glEnableVertexAttribArray(inTexCoordAttrib);
         glVertexAttribPointer(inTexCoordAttrib, 2, GL_FLOAT, GL_FALSE, 4*sizeof(GLfloat), (void*)(2*sizeof(GLfloat)));
-
-        // Texture
-        glGenTextures(1, &tex);
-        glBindTexture(GL_TEXTURE_2D, tex);
+        // Texturey
+        glActiveTexture(GL_TEXTURE0);
+        glGenTextures(1, &textureY);
+        glBindTexture(GL_TEXTURE_2D, textureY);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+        
+        // TextureUV
+        glActiveTexture(GL_TEXTURE1);
+        glGenTextures(1, &textureUV);
+        glBindTexture(GL_TEXTURE_2D, textureUV);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -160,22 +198,38 @@ NSLock* currentFrameLk;
 
 - (void)drawInOpenGLContext:(NSOpenGLContext *)context pixelFormat:(NSOpenGLPixelFormat *)pixelFormat forLayerTime:(CFTimeInterval)t displayTime:(const CVTimeStamp *)ts
 {
+    if(!currentFrame) {
+        return;
+    }
+        
     GLenum errEnum;
-    glBindTexture(GL_TEXTURE_2D, tex);
 
     [currentFrameLk lock];
     if(!currentFrameDisplayed) {
-        if(currentFrame.ptr) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, currentFrame.width, currentFrame.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, currentFrame.ptr);
-        }
+        CVPixelBufferLockBaseAddress(currentFrame, 0);
+        uint8_t* yplane = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(currentFrame, 0));
+        uint8_t* uvplane = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(currentFrame, 1));
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureY);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, currentWidth, currentHeight, 0, GL_RED, GL_UNSIGNED_BYTE, yplane);
+        glUniform1i(textureUniformY, 0);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textureUV);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, currentWidth, currentHeight * 0.5, 0, GL_RED, GL_UNSIGNED_BYTE, uvplane);
+        glUniform1i(textureUniformUV, 1);
+        CVPixelBufferUnlockBaseAddress(currentFrame, 0);
+
         currentFrameDisplayed = YES;
     }
     // To ensure that we will not divide by zero
-    if (currentFrame.ptr && currentFrame.width && currentFrame.height) {
+    if (currentWidth && currentHeight) {
         // Compute scaling factor to keep the original aspect ratio of the video
         CGSize viewSize = self.frame.size;
+         if (viewSize.width > 200)  {
+        auto len = viewSize.width/viewSize.height;
+             }
         float viewRatio = viewSize.width/viewSize.height;
-        float frameRatio = ((float)currentFrame.width)/((float)currentFrame.height);
+        float frameRatio = ((float)currentWidth)/((float)currentHeight);
         float ratio = viewRatio * (1/frameRatio);
 
         GLint inScalingUniform = glGetUniformLocation(sProg, "in_Scaling");
@@ -196,6 +250,8 @@ NSLock* currentFrameLk;
 
         }
     }
+
+    glFlush();
     [currentFrameLk unlock];
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -205,12 +261,31 @@ NSLock* currentFrameLk;
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-- (void) setCurrentFrame:(Video::Frame)framePtr
+- (void) setCurrentFrame:(lrc::api::video::Frame)framePtr
 {
+
+}
+
+-(void)renderWithPixelBuffer:(CVPixelBufferRef)buffer size:(CGSize)size rotation: (float)rotation fillFrame: (bool)fill {
     [currentFrameLk lock];
-    currentFrame = std::move(framePtr);
+    currentFrame = buffer;
+    currentWidth = size.width;
+    currentHeight = size.height;
     currentFrameDisplayed = NO;
     [currentFrameLk unlock];
+}
+
+-(void)renderAVFrame:(std::unique_ptr<AVFrame, void(*)(AVFrame*)>)buffer
+{
+//    [currentFrameLk lock];
+//    auto ptr = buffer.get();
+//    if(ptr) {
+//        currentFrame = buffer.get();
+//        ptrY = currentFrame->data[0];
+//        ptrUV = currentFrame->data[1];
+//    }
+//    currentFrameDisplayed = NO;
+//    [currentFrameLk unlock];
 }
 
 @end
