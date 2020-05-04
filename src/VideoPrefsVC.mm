@@ -85,7 +85,7 @@ QString currentVideoDevice;
     QObject::disconnect(deviceEvent);
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     if (![appDelegate getActiveCalls].size()) {
-        self.previewView.stopRendering = true;
+        self.previewView.videoRunning = false;
         avModel->stopPreview();
         [previewView fillWithBlack];
     }
@@ -162,7 +162,7 @@ QString currentVideoDevice;
                          if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
                              return;
                          }
-                        self.previewView.stopRendering = false;
+                        self.previewView.videoRunning = true;
                         QObject::disconnect(frameUpdated);
                         QObject::disconnect(previewStarted);
                         QObject::disconnect(previewStopped);
@@ -187,7 +187,7 @@ QString currentVideoDevice;
                                                                    ::PREVIEW_RENDERER_ID) {
                                                                    return;
                                                                }
-                                                               self.previewView.stopRendering = true;
+                                                               self.previewView.videoRunning = false;
                                                                QObject::disconnect(previewStopped);
                                                                QObject::disconnect(frameUpdated);
                          });
@@ -203,7 +203,7 @@ QString currentVideoDevice;
                                        bool updatePreview = avModel->getRenderer(lrc::api ::video::PREVIEW_RENDERER_ID).isRendering() && (defaultDevice != currentVideoDevice);
                                        if (updatePreview) {
                                            [previewView fillWithBlack];
-                                           self.previewView.stopRendering = true;
+                                           self.previewView.videoRunning = false;
                                            [self startPreview];
                                        }
                                        [self addDevices];
@@ -272,7 +272,7 @@ QString currentVideoDevice;
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     auto calls = [appDelegate getActiveCalls];
     if (calls.empty()) {
-        self.previewView.stopRendering = false;
+        self.previewView.videoRunning = true;
         [self connectPreviewSignals];
         avModel->stopPreview();
         avModel->startPreview();
