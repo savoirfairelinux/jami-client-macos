@@ -151,7 +151,7 @@ bool frameDisplayed = false;
     if(frameDisplayed) {
         return;
     }
-    if(_stopRendering) {
+    if(!self.videoRunning) {
         self.releaseDrawables;
         return;
     }
@@ -260,6 +260,9 @@ bool frameDisplayed = false;
         return NULL;
     }
     return texture;
+}
+
+-(void)setCurrentFrame:(lrc::api::video::Frame)framePtr {
 }
 
 @end
