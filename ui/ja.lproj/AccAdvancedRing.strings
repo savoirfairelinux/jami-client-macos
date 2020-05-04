@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow call from untrusted peers";
+"1Xr-BO-Pu3.title" = "信頼できないピアからの通話を許可する";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -12,19 +12,19 @@
 "7eU-EP-4br.title" = "ボックス";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "TURNアドレス";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "通話設定";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "自動応答";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "テキストセル";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Name server";
+"ID3-Sv-gYY.title" = "ネームサーバー";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
 "K0z-NH-3Cq.title" = "ボックス";
@@ -33,7 +33,7 @@
 "LWs-a2-E7f.title" = "ユーザー証明書";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Q4t-zo-brK"; */
-"Q4t-zo-brK.title" = "Audio codecs";
+"Q4t-zo-brK.title" = "音声コーデック";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "Qxp-I4-A7W"; */
 "Qxp-I4-A7W.title" = "セキュリティ";
@@ -42,13 +42,13 @@
 "VyP-8T-aNA.title" = "プロキシを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
-"Wrh-zD-uh5.title" = "Video codecs";
+"Wrh-zD-uh5.title" = "動画コーデック";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
-"XU0-bl-lDD.title" = "TURN realm";
+"XU0-bl-lDD.title" = "TURNレルム";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "STUNアドレス";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "ブートストラップ";
@@ -84,10 +84,10 @@
 "nqX-Vu-UuA.title" = "STUNを使用";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Custom ringtone";
+"qFq-Yh-2JL.title" = "カスタム着信音";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Connectivity";
+"sVe-iG-OCw.title" = "接続性";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
 "soR-nF-ybe.title" = "秘密鍵";
@@ -99,7 +99,7 @@
 "vYi-gW-MrY.title" = "ボックス";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "OpenDHT設定";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "TURNを使用";

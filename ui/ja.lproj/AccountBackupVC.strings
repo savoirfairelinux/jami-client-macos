@@ -3,16 +3,16 @@
 "73h-fa-4yX.title" = "スキップ";
 
 /* Class = "NSTextFieldCell"; title = "An error occured during the backup. Please check your credentials."; ObjectID = "7lU-Qy-WOb"; */
-"7lU-Qy-WOb.title" = "An error occured during the backup. Please check your credentials.";
+"7lU-Qy-WOb.title" = "バックアップ中にエラーが発生しました。ログイン情報を確認してください。";
 
 /* Class = "NSButtonCell"; title = "Never show me this again"; ObjectID = "PVF-bb-Yoi"; */
 "PVF-bb-Yoi.title" = "今後表示しない";
 
 /* Class = "NSTextFieldCell"; title = "This account only exists on this device. If you lost your device or uninstall the application, your account will be deleted. You can backup your account now or later."; ObjectID = "SUG-lC-TDL"; */
-"SUG-lC-TDL.title" = "This account only exists on this device. If you lost your device or uninstall the application, your account will be deleted. You can backup your account now or later.";
+"SUG-lC-TDL.title" = "このアカウントはこのデバイスにしか保存されていません。デバイスを失くすかアプリケーションをアンインストールすると、アカウントが削除されます。できる限り速やかにアカウントをバックアップしてください。";
 
 /* Class = "NSButtonCell"; title = "Export account"; ObjectID = "cod-s7-SPd"; */
-"cod-s7-SPd.title" = "Export account";
+"cod-s7-SPd.title" = "アカウントをエクスポート";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "ruw-Kp-tCz"; */
 "ruw-Kp-tCz.title" = "OK";

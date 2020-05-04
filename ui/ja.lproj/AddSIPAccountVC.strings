@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter SIP address"; ObjectID = "0UI-j5-0at"; */
-"0UI-j5-0at.placeholderString" = "Enter SIP address";
+"0UI-j5-0at.placeholderString" = "SIPアドレスを入力してください";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "Aem-zQ-Ya3"; */
 "Aem-zQ-Ya3.title" = "パスワード";
@@ -9,7 +9,7 @@
 "DBU-zJ-vj6.placeholderString" = "パスワードを入力してください";
 
 /* Class = "NSButtonCell"; title = "Done"; ObjectID = "DJz-do-CJo"; */
-"DJz-do-CJo.title" = "Done";
+"DJz-do-CJo.title" = "完了";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "O1S-KI-2LG"; */
 "O1S-KI-2LG.title" = "キャンセル";
@@ -27,7 +27,7 @@
 "fgN-nq-QdO.title" = "プロフィール";
 
 /* Class = "NSTextFieldCell"; title = "SIP Server"; ObjectID = "ubR-HD-O15"; */
-"ubR-HD-O15.title" = "SIP Server";
+"ubR-HD-O15.title" = "SIPサーバー";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "zAN-HT-1oE"; */
 "zAN-HT-1oE.title" = "アカウント";

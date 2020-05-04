@@ -3,7 +3,7 @@
 "8sX-aI-9OG.title" = "🙂";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record a video message"; ObjectID = "B6d-Sc-UTp"; */
-"B6d-Sc-UTp.ibShadowedToolTip" = "Record a video message";
+"B6d-Sc-UTp.ibShadowedToolTip" = "ビデオメッセージを録画";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "FgV-iF-gGQ"; */
 "FgV-iF-gGQ.title" = "テキストセル";
@@ -27,7 +27,7 @@
 "fh9-Uo-8R1.title" = "ボックス";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "gwx-eT-PcN"; */
-"gwx-eT-PcN.ibShadowedToolTip" = "Send a file";
+"gwx-eT-PcN.ibShadowedToolTip" = "ファイルを送信";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hrX-ac-Quk"; */
 "hrX-ac-Quk.title" = "ボックス";
@@ -36,13 +36,13 @@
 "ooq-vs-Xt1.ibShadowedToolTip" = "戻る";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add contact"; ObjectID = "pGK-hO-X1Y"; */
-"pGK-hO-X1Y.ibShadowedToolTip" = "Add contact";
+"pGK-hO-X1Y.ibShadowedToolTip" = "連絡先を追加";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "pRL-vb-me9"; */
 "pRL-vb-me9.title" = "ボックス";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record an audio message"; ObjectID = "wYE-S3-AzD"; */
-"wYE-S3-AzD.ibShadowedToolTip" = "Record an audio message";
+"wYE-S3-AzD.ibShadowedToolTip" = "音声メッセージを録音";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
 "zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "メッセージを送信";

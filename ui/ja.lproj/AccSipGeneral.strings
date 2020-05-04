@@ -9,7 +9,7 @@
 "NlM-R9-ola.title" = "ボックス";
 
 /* Class = "NSTextFieldCell"; title = "Voicemail"; ObjectID = "R7s-DE-PiP"; */
-"R7s-DE-PiP.title" = "Voicemail";
+"R7s-DE-PiP.title" = "ボイスメール";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "YAG-qB-4wH"; */
 "YAG-qB-4wH.placeholderString" = "名前を入力";
@@ -18,7 +18,7 @@
 "Yof-e7-IBF.title" = "パスワード";
 
 /* Class = "NSTextFieldCell"; title = "SIP Server"; ObjectID = "ZKc-70-TFH"; */
-"ZKc-70-TFH.title" = "SIP Server";
+"ZKc-70-TFH.title" = "SIPサーバー";
 
 /* Class = "NSTextFieldCell"; title = "Account"; ObjectID = "eQt-bc-Eev"; */
 "eQt-bc-Eev.title" = "アカウント";
@@ -27,7 +27,7 @@
 "iEr-fN-5vD.title" = "詳細";
 
 /* Class = "NSButtonCell"; title = "Edit Account"; ObjectID = "jdU-uZ-Rfy"; */
-"jdU-uZ-Rfy.title" = "Edit Account";
+"jdU-uZ-Rfy.title" = "アカウントを編集";
 
 /* Class = "NSButtonCell"; title = "enable"; ObjectID = "nW8-pd-fNj"; */
 "nW8-pd-fNj.title" = "有効化";
@@ -36,4 +36,4 @@
 "oE8-tN-SfC.title" = "プロフィール";
 
 /* Class = "NSButtonCell"; title = "Remove Account"; ObjectID = "uFM-Am-0kz"; */
-"uFM-Am-0kz.title" = "Remove Account";
+"uFM-Am-0kz.title" = "アカウントを削除";
