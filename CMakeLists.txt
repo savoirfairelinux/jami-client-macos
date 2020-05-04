@@ -234,6 +234,11 @@ SET(ringclient_VIEWS
    src/views/GradientView.mm
    src/views/MovableView.h
    src/views/MovableView.mm
+   src/views/CallOpenGLview.h
+   src/views/CallOpenGLview.mm
+   src/views/RenderView.h
+   src/views/RenderView.mm
+   src/views/RenderProtocol.h
 )
 
 SET(ringclient_OTHERS
