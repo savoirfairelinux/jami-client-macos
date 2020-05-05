@@ -27,12 +27,12 @@
 
 @interface MigrateRingAccountsWC() <NSTextFieldDelegate>{
     __unsafe_unretained IBOutlet NSSecureTextField* passwordField;
-    __unsafe_unretained IBOutlet NSSecureTextField* passwordConfirmField;
     __unsafe_unretained IBOutlet NSTextField* infoField;
     __unsafe_unretained IBOutlet NSTextField* errorField;
     __unsafe_unretained IBOutlet ITProgressIndicator* progressIndicator;
     __unsafe_unretained IBOutlet NSImageView* profileImage;
     __unsafe_unretained IBOutlet NSTextField* alias;
+    __strong IBOutlet NSLayoutConstraint *infoTopConstraints;
 }
 
 - (IBAction)onClickComplete:(id)sender;
@@ -83,9 +83,12 @@ QMetaObject::Connection stateChanged;
         profileImage.image = image;
     } else {
         profileImage.image = [NSImage imageNamed:@"default_avatar_overlay.png"];
+        profileImage.wantsLayer = YES;
         profileImage.layer.backgroundColor = [[NSColor grayColor] CGColor];
     }
     alias.stringValue = accountInfo.profileInfo.alias.toNSString();
+    infoTopConstraints.constant = accountInfo.profileInfo.alias.isEmpty() ? -20 : 20;
+
 
     NSMutableAttributedString* infoMessage = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"This account needs to be migrated",@"Text shown to the user")];
     [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
@@ -135,42 +138,26 @@ QMetaObject::Connection stateChanged;
 
 - (IBAction)startMigration:(NSButton *)sender
 {
-    if (![self validatePasswords]) {
-        [self showError:NSLocalizedString(@"Password and confirmation mismatch.",@"Text show to the user when password didn't match")];
-    } else {
-        [self showLoading];
-        errorTimer = [NSTimer scheduledTimerWithTimeInterval:30
-                                                      target:self
-                                                    selector:@selector(didCompleteWithError) userInfo:nil
-                                                     repeats:NO];
-        stateChanged = QObject::connect(self.accountModel,
-                                        &lrc::api::NewAccountModel::migrationEnded,
-                                        [self](const QString& accountId, bool ok) {
-                                            if (accountToMigrate != accountId) {
-                                                return;
-                                            }
-                                            if (ok) {
-                                                [self didComplete];
-                                            } else {
-                                                [self didCompleteWithError];
-                                            }
-                                        });
-        lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountToMigrate);
-        accountProperties.archivePassword = QString::fromNSString(self.password);
-        self.accountModel->setAccountConfig(accountToMigrate, accountProperties);
-    }
-}
-
-- (BOOL)validatePasswords
-{
-    BOOL result = (self.password.length != 0 && [self.password isEqualToString:self.passwordConfirmation]);
-    NSLog(@"ValidatesPasswords : %s", result ? "true" : "false");
-    return result;
-}
-
-+ (NSSet *)keyPathsForValuesAffectingValidatePasswords
-{
-    return [NSSet setWithObjects:@"password", @"passwordConfirmation", nil];
+    [self showLoading];
+    errorTimer = [NSTimer scheduledTimerWithTimeInterval:30
+                                                  target:self
+                                                selector:@selector(didCompleteWithError) userInfo:nil
+                                                 repeats:NO];
+    stateChanged = QObject::connect(self.accountModel,
+                                    &lrc::api::NewAccountModel::migrationEnded,
+                                    [self](const QString& accountId, bool ok) {
+        if (accountToMigrate != accountId) {
+            return;
+        }
+        if (ok) {
+            [self didComplete];
+        } else {
+            [self didCompleteWithError];
+        }
+    });
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountToMigrate);
+    accountProperties.archivePassword = QString::fromNSString(passwordField.stringValue);
+    self.accountModel->setAccountConfig(accountToMigrate, accountProperties);
 }
 
 #pragma mark - Delegates

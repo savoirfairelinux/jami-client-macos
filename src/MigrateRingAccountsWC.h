@@ -41,27 +41,6 @@ namespace lrc {
 
 @interface MigrateRingAccountsWC : AbstractLoadingWC <LoadingWCProtocol>
 
-/**
- * password string contained in passwordField.
- */
-@property (retain) NSString* password;
-
-/**
- * passwordConfirmation string contained in passwordConfirmationField.
- */
-@property (retain) NSString* passwordConfirmation;
-
-/**
- * computed properties calculated by password string contained in
- * passwordField and passwordCOnfirmation string contained
- * inpasswordConfirmationField
- * This is a KVO method to bind the text with the OK Button
- * if password.length is > 0 AND passwordConfirmation.length > 0
- * AND password isEqualsToString passwordCOnfirmationbutton is enabled,
- * otherwise disabled
- */
-@property (readonly) BOOL validatePasswords;
-
 @property lrc::api::NewAccountModel* accountModel;
 @property QString accountToMigrate;
 
