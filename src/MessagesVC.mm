@@ -1026,6 +1026,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         name = [self getDataTransferPath:interId];
     }
     previewImage = name;
+    if (!previewImage || previewImage.length <= 0) {
+        return;
+    }
     if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
         [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
     } else {
@@ -1178,7 +1181,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
-    return [NSURL fileURLWithPath:previewImage];
+    try {
+        return [NSURL fileURLWithPath: previewImage];
+    } catch (NSException *exception) {
+        nil;
+    }
 }
 
 @end
