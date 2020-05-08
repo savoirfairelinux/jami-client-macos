@@ -175,7 +175,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
     [registeredNameField setStringValue:account.registeredName.toNSString()];
 
-    [passwordButton setTitle:accountProperties.archiveHasPassword ? @"Change password" : @"Create password"];
+    NSString *title = accountProperties.archiveHasPassword ?
+    NSLocalizedString(@"Change password", @"Password button title") :
+    NSLocalizedString(@"Create password", @"Password button title");
+
+    [passwordButton setTitle:title];
     self.accountEnabled = account.enabled;
 
     NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[removeAccountButton attributedTitle]];
@@ -207,10 +211,10 @@ typedef NS_ENUM(NSInteger, TagViews) {
                                                        [devicesTableView reloadData];
                                                        break;
                                                    case lrc::api::NewDeviceModel::Status::WRONG_PASSWORD:
-                                                       [self showAlertWithTitle: @"" andText: @"Device revocation failed with error: Wrong password"];
+                                                       [self showAlertWithTitle: @"" andText: NSLocalizedString(@"Device revocation failed. Please check your password and try again.", @"Device revocation error")];
                                                        break;
                                                    case lrc::api::NewDeviceModel::Status::UNKNOWN_DEVICE:
-                                                       [self showAlertWithTitle: @"" andText: @"Device revocation failed with error: Unknown device"];
+                                                       [self showAlertWithTitle: @"" andText: NSLocalizedString(@"Device revocation failed", @"Device revocation error")];
                                                        break;
                                                }
                                            });
@@ -427,7 +431,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel",@"Button Action")];
     [alert setMessageText: NSLocalizedString(@"Remove account",
                                              @"Remove account alert title")];
     [alert setInformativeText:NSLocalizedString(@"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.",
@@ -452,7 +456,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     if(accountProperties.archiveHasPassword) {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
-        [alert addButtonWithTitle:@"Cancel"];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel",@"Button Action")];
         [alert setMessageText: NSLocalizedString(@"Enter account password",
                                                  @"Backup enter password")];
         NSTextField *input = [[NSSecureTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 20)];
@@ -577,13 +581,14 @@ typedef NS_ENUM(NSInteger, TagViews) {
 -(void) proceedDeviceRevokationAlert: (const QString&) deviceID {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert setMessageText:@"Revoke Device"];
-    [alert setInformativeText:@"Attention! This action could not be undone!"];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Button Action")];
+    [alert setMessageText:NSLocalizedString(@"Revoke Device", @"Device revocation title")];
+    [alert setInformativeText:NSLocalizedString(@"Attention! This action could not be undone!",
+                                                @"Device revocation message")];
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     if(accountProperties.archiveHasPassword) {
         NSSecureTextField *passwordText = [[NSSecureTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-        [passwordText setPlaceholderString:@"Enter password"];
+        [passwordText setPlaceholderString:NSLocalizedString(@"Enter account password", @"Backup enter password")];
         [alert setAccessoryView:passwordText];
         if ([alert runModal] == NSAlertFirstButtonReturn) {
             [self revokeDeviceWithID:deviceID password:[passwordText stringValue]];
@@ -606,7 +611,9 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 -(void) paswordCreatedWithSuccess:(BOOL) success
 {
-    [passwordButton setTitle: success ? @"Change password" : @"Create password"];
+    NSString *title = success ? NSLocalizedString(@"Change password", @"Password button title") :
+    NSLocalizedString(@"Create password", @"Password button title");
+    [passwordButton setTitle: title];
 }
 
 @end

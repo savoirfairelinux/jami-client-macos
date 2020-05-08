@@ -192,7 +192,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Button Action")];
     [alert setMessageText: NSLocalizedString(@"Remove account",
                                              @"Remove account alert title")];
     [alert setInformativeText:NSLocalizedString(@"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.",
@@ -236,10 +236,10 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [proxyField setBezelStyle:NSTextFieldSquareBezel];
         [voicemailField setBezelStyle:NSTextFieldSquareBezel];
         [userNameField becomeFirstResponder];
-        [editAccountButton setTitle:@"Done"];
+        [editAccountButton setTitle:NSLocalizedString(@"Done", @"Edit Sip Account Action")];
         return;
     }
-    [editAccountButton setTitle:@"Edit Account"];
+    [editAccountButton setTitle:NSLocalizedString(@"Edit Account", @"Edit Sip Account Action")];
     [self.view resignFirstResponder];
 }
 
