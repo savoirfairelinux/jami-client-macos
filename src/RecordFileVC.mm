@@ -21,8 +21,8 @@
 #import "AppDelegate.h"
 #import "VideoCommon.h"
 #import "views/HoverButton.h"
-#import "views/CallMTKView.h"
 #import "views/NSColor+RingTheme.h"
+#import "views/RenderingView.h"
 #import "NSString+Extensions.h"
 
 //lrc
@@ -32,7 +32,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface RecordFileVC ()
-@property (unsafe_unretained) IBOutlet CallMTKView* previewView;
+@property (unsafe_unretained) IBOutlet RenderingView* previewView;
 
 @property (unsafe_unretained) IBOutlet NSTextField* timeLabel;
 @property (unsafe_unretained) IBOutlet NSTextField* infoLabel;
@@ -106,7 +106,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
 
 #pragma mark - dispaly
 
--(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForView:(CallMTKView*) view
+-(void) renderer: (const lrc::api::video::Renderer*)renderer renderFrameForView:(RenderingView*) view
 {
     @autoreleasepool {
         const CGSize frameSize = [VideoCommon fillPixelBuffr:&pixBuf
@@ -270,7 +270,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     }
     [previewView fillWithBlack];
 
-    self.previewView.stopRendering = false;
+    self.previewView.videoRunning = true;
     [self connectPreviewSignals];
     avModel->stopPreview();
     avModel->startPreview();
