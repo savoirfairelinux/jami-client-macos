@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,11 +26,11 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="rRf-Sm-dXA" customClass="CallMTKView">
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="rRf-Sm-dXA" customClass="RenderingView">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
                 </customView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MXV-85-UvC">
-                    <rect key="frame" x="165" y="73" width="151" height="17"/>
+                    <rect key="frame" x="165" y="73" width="151" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Press to start recording" id="Dp1-8c-of5">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -54,7 +54,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZjD-ni-kiA">
-                    <rect key="frame" x="238" y="124" width="4" height="24"/>
+                    <rect key="frame" x="238" y="125" width="4" height="23"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" id="VXB-jT-wv2">
                         <font key="font" metaFont="system" size="20"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -93,7 +93,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Nv-0Z-3Lv">
-                    <rect key="frame" x="412" y="17" width="48" height="24"/>
+                    <rect key="frame" x="412" y="18" width="48" height="23"/>
                     <buttonCell key="cell" type="square" title="Send" bezelStyle="shadowlessSquare" alignment="center" inset="2" id="UXO-l1-POf">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="20"/>
@@ -157,6 +157,7 @@
                 <constraint firstAttribute="trailing" secondItem="rRf-Sm-dXA" secondAttribute="trailing" id="r9d-DV-Kle"/>
                 <constraint firstItem="rRf-Sm-dXA" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="vl5-VY-oXf"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="154"/>
         </customView>
     </objects>
     <resources>

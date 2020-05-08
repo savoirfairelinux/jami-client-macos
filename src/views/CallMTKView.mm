@@ -48,6 +48,7 @@ struct Uniforms {
     simd::float4x4 projectionMatrix;
     simd::float4x4 rotationMatrix;
 };
+@synthesize videoRunning;
 
 - (instancetype)initWithFrame:(NSRect)frame
 {
@@ -151,7 +152,7 @@ bool frameDisplayed = false;
     if(frameDisplayed) {
         return;
     }
-    if(_stopRendering) {
+    if(!self.videoRunning) {
         self.releaseDrawables;
         return;
     }
@@ -260,6 +261,9 @@ bool frameDisplayed = false;
         return NULL;
     }
     return texture;
+}
+
+-(void)setCurrentFrame:(lrc::api::video::Frame)framePtr {
 }
 
 @end
