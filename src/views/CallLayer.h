@@ -20,11 +20,9 @@
 #import <Cocoa/Cocoa.h>
 #import <QSize>
 #import <video/renderer.h>
+#import "VideoRendering.h"
 
-@interface CallLayer : NSOpenGLLayer
+@interface CallLayer : NSOpenGLLayer <VideoRendering>
 
-@property BOOL videoRunning;
-
-- (void) setCurrentFrame:(Video::Frame)framePtr;
 
 @end
