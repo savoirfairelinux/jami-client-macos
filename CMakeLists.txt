@@ -234,6 +234,9 @@ SET(ringclient_VIEWS
    src/views/GradientView.mm
    src/views/MovableView.h
    src/views/MovableView.mm
+   src/views/RenderingView.h
+   src/views/RenderingView.mm
+   src/views/VideoRendering.h
 )
 
 SET(ringclient_OTHERS
