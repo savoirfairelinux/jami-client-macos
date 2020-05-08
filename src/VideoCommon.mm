@@ -122,10 +122,27 @@ extern "C" {
         return;
     }
     base = static_cast<uint8_t*>(CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 1));
-    for(size_t i = 0; i < frame->height / 2 * bytesPerRowUV / 2; i++ ){
-        *base++ = frame->data[1][i];
-        *base++ = frame->data[2][i];
-   }
+    if (bytesPerRowUV == frame->linesize[1] * 2) {
+        for(size_t i = 0; i < frame->height / 2 * bytesPerRowUV / 2; i++ ) {
+            *base++ = frame->data[1][i];
+            *base++ = frame->data[2][i];
+        }
+    } else {
+        uint32_t size = frame->linesize[1] * frame->height / 2;
+        uint8_t* dstData = new uint8_t[2 * size];
+        for (int i = 0; i < 2 * size; i++){
+            if (i % 2 == 0){
+                dstData[i] = frame->data[1][i/2];
+            }else {
+                dstData[i] = frame->data[2][i/2];
+            }
+        }
+        [VideoCommon copyLineByLineSrc: dstData
+                                toDest: base
+                           srcLinesize: frame->linesize[1] * 2
+                          destLinesize: bytesPerRowUV
+                                height: frame->height/2];
+    }
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
 }
 
