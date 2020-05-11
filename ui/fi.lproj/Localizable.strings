@@ -4,6 +4,9 @@
 /* Button Action */
 "Accept" = "Hyväksy";
 
+/* Button Action */
+"Cancel" = "Peruuta";
+
 /* Welcome title */
 "Add a SIP account" = "Lisää SIP-tunnus";
 
@@ -180,4 +183,28 @@
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Haluaisitko jättää viestin?";
+
+/* Password button title */
+"Change password" = "Vaihda salasana";
+
+/* Password button title */
+"Create password" = "Create password";
+
+/* Device revocation title */
+"Revoke Device" = "Revoke Device";
+
+/* Device revocation message */
+"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+
+/* Device revocation error */
+"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+
+/* Device revocation error */
+"Device revocation failed" = "Device revocation failed";
+
+/* Edit Sip Account Action*/
+"Done" = "Valmis";
+
+/* Edit Sip Account Action */
+"Edit Account" = "Muokkaa tunnusta";
 

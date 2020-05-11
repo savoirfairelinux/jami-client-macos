@@ -4,6 +4,9 @@
 /* Button Action */
 "Accept" = "Accepter";
 
+/* Button Action */
+"Cancel" = "Annuler";
+
 /* Welcome title */
 "Add a SIP account" = "Ajouter un compte SIP";
 
@@ -180,4 +183,28 @@
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Souhaitez-vous laisser un message?";
+
+/* Password button title */
+"Change password" = "Changer mot de passe";
+
+/* Password button title */
+"Create password" = "Créer mot de passe";
+
+/* Device revocation title */
+"Revoke Device" = "Révoquer l'appareil";
+
+/* Device revocation message */
+"Attention! This action could not be undone!" = "Attention! Cette action ne peut pas être annulée!";
+
+/* Device revocation error */
+"Device revocation failed. Please check your password and try again." = "La révocation de l'appareil a échoué. Veuillez vérifier votre mot de passe et réessayer.";
+
+/* Device revocation error */
+"Device revocation failed" = "La révocation de l'appareil a échoué";
+
+/* Edit Sip Account Action*/
+"Done" = "Done";
+
+/* Edit Sip Account Action */
+"Edit Account" = "Edit Account";
 

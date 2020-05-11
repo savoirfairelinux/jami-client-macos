@@ -4,8 +4,11 @@
 /* Button Action */
 "Accept" = "受け入れ";
 
+/* Button Action */
+"Cancel" = "キャンセル";
+
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "SIPアカウントを追加";
 
 /* Contextual menu action */
 "Add to contacts" = "連絡先に追加";
@@ -23,10 +26,10 @@
 "Audio permission not granted" = "Audio permission not granted";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "アカウントをバックアップ";
 
 /* Contextual menu action */
-"Block contact" = "ブロックした連絡先";
+"Block contact" = "連絡先をブロック";
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
@@ -35,10 +38,10 @@
 "Canceled" = "キャンセルしました";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "ファイルの選択";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "会話履歴を削除";
 
 /* No comment provided by engineer. */
 "Copy" = "コピー";
@@ -47,10 +50,10 @@
 "Could not record message during call" = "Could not record message during call";
 
 /* Welcome title */
-"Create a new account" = "Create a new account";
+"Create a new account" = "新しいアカウントを作成";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "アカウントのパスワードを入力";
 
 /* File transfer failed label */
 "Failed" = "失敗しました";
@@ -68,13 +71,13 @@
 "Import from backup" = "バックアップからインポート";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "別のデバイスからインポート";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "%@ から着信";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "%@ からのメッセージ";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "無効なユーザー名";
@@ -98,10 +101,10 @@
 "Passwords don't match" = "パスワードが一致しません";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "音声通話を開始";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "ビデオ通話を開始";
 
 /* Recording view explanation label */
 "Press to start recording" = "Press to start recording";
@@ -113,13 +116,13 @@
 "Refuse" = "拒否";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "登録名:";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "アカウントを削除";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "アーカイブを選択";
 
 /* Send button title */
 "Send" = "送信";
@@ -131,13 +134,13 @@
 "Share" = "共有";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "画面を共有";
 
 /* Sign In */
 "Sign In" = "サインイン";
 
 /* Record message title */
-"Stop recording" = "Stop recording";
+"Stop recording" = "録音を停止";
 
 /* File transfer successful label */
 "Success" = "成功";
@@ -180,4 +183,28 @@
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Would you like to leave a message?";
+
+/* Password button title */
+"Change password" = "パスワードを変更";
+
+/* Password button title */
+"Create password" = "Create password";
+
+/* Device revocation title */
+"Revoke Device" = "Revoke Device";
+
+/* Device revocation message */
+"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+
+/* Device revocation error */
+"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+
+/* Device revocation error */
+"Device revocation failed" = "Device revocation failed";
+
+/* Edit Sip Account Action*/
+"Done" = "完了";
+
+/* Edit Sip Account Action */
+"Edit Account" = "アカウントを編集";
 

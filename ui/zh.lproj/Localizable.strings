@@ -4,6 +4,9 @@
 /* Button Action */
 "Accept" = "Accept";
 
+/* Button Action */
+"Cancel" = "取消";
+
 /* Welcome title */
 "Add a SIP account" = "Add a SIP account";
 
@@ -180,4 +183,28 @@
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Would you like to leave a message?";
+
+/* Password button title */
+"Change password" = "Change password";
+
+/* Password button title */
+"Create password" = "Create password";
+
+/* Device revocation title */
+"Revoke Device" = "Revoke Device";
+
+/* Device revocation message */
+"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+
+/* Device revocation error */
+"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+
+/* Device revocation error */
+"Device revocation failed" = "Device revocation failed";
+
+/* Edit Sip Account Action*/
+"Done" = "完成";
+
+/* Edit Sip Account Action */
+"Edit Account" = "Edit Account";
 
