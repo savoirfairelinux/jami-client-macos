@@ -1,6 +1,6 @@
 
-/* Class = "NSButtonCell"; title = "Allow call from untrusted peers"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow call from untrusted peers";
+/* Class = "NSButtonCell"; title = "Allow incoming calls from unknown contacts"; ObjectID = "1Xr-BO-Pu3"; */
+"1Xr-BO-Pu3.title" = "Allow incoming calls from unknown contacts";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -12,19 +12,19 @@
 "7eU-EP-4br.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "Adresse du serveur TURN";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "Paramètres appels";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "Réponse automatique aux appels";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Cellule de texte";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Name server";
+"ID3-Sv-gYY.title" = "Serveur de nom";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
 "K0z-NH-3Cq.title" = "Box";
@@ -39,7 +39,7 @@
 "Qxp-I4-A7W.title" = "Sécurité";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "Activer proxy";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "Vidéo codecs";
@@ -48,7 +48,7 @@
 "XU0-bl-lDD.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "Adresse du serveur STUN";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "Amorcer";
@@ -78,19 +78,19 @@
 "gUl-Px-cIJ.title" = "Mot de passe TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "k7i-pK-JXp"; */
-"k7i-pK-JXp.title" = "CA certificate";
+"k7i-pK-JXp.title" = "Autorité de Certification";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "nqX-Vu-UuA"; */
 "nqX-Vu-UuA.title" = "Utiliser STUN";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Custom ringtone";
+"qFq-Yh-2JL.title" = "Sonnerie personnalisée";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
 "sVe-iG-OCw.title" = "Connectivité";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
-"soR-nF-ybe.title" = "clé privée";
+"soR-nF-ybe.title" = "Clé privée";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
 "sy5-OH-wyB.title" = "Box";
@@ -99,7 +99,7 @@
 "vYi-gW-MrY.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "Configuration OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "Utiliser le TURN";

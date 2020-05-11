@@ -4,6 +4,9 @@
 /* Button Action */
 "Accept" = "Pranoje";
 
+/* Button Action */
+"Cancel" = "Anuloje";
+
 /* Welcome title */
 "Add a SIP account" = "Shtoni një llogari SIP";
 
@@ -180,4 +183,28 @@
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Do të donit të linit një mesazh?";
+
+/* Password button title */
+"Change password" = "Ndryshoni fjalëkalimin";
+
+/* Password button title */
+"Create password" = "Create password";
+
+/* Device revocation title */
+"Revoke Device" = "Revoke Device";
+
+/* Device revocation message */
+"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+
+/* Device revocation error */
+"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+
+/* Device revocation error */
+"Device revocation failed" = "Device revocation failed";
+
+/* Edit Sip Account Action*/
+"Done" = "U bë";
+
+/* Edit Sip Account Action */
+"Edit Account" = "Përpunoni Llogari";
 

@@ -18,7 +18,7 @@
 "F0z-JX-Cv5.title" = "Jami";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Accept Invitation"; ObjectID = "Fc5-KS-cim"; */
-"Fc5-KS-cim.ibShadowedToolTip" = "Accept Invitation";
+"Fc5-KS-cim.ibShadowedToolTip" = "招待を受け入れる";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Share account info"; ObjectID = "Oac-o7-2Ge"; */
 "Oac-o7-2Ge.ibShadowedToolTip" = "Share account info";
@@ -39,10 +39,10 @@
 "eVv-lu-T1Y.title" = "ボックス";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Show QRcode"; ObjectID = "eXV-BT-B6J"; */
-"eXV-BT-B6J.ibShadowedToolTip" = "Show QRcode";
+"eXV-BT-B6J.ibShadowedToolTip" = "QRコードを表示";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Ignore invitation"; ObjectID = "ejM-H2-aJX"; */
-"ejM-H2-aJX.ibShadowedToolTip" = "Ignore invitation";
+"ejM-H2-aJX.ibShadowedToolTip" = "招待を無視する";
 
 /* Class = "NSTextFieldCell"; title = "Jami is free software for universal communication which respects the freedoms and privacy of its users."; ObjectID = "eln-Vm-t0d"; */
 "eln-Vm-t0d.title" = "Jamiは、世界中のユーザーと繋がることができるユーザーの自由とプライバシーを尊重したフリーソフトウェアです。";
@@ -57,4 +57,4 @@
 "vvE-nM-kSl.placeholderString" = "Search for new or existing contact";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Block contact"; ObjectID = "xP1-ZW-WZ8"; */
-"xP1-ZW-WZ8.ibShadowedToolTip" = "ブロックした連絡先";
+"xP1-ZW-WZ8.ibShadowedToolTip" = "連絡先をブロック";
