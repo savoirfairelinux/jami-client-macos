@@ -638,7 +638,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     text = [text removeEmptyLinesAtBorders];
 
     NSMutableAttributedString* msgAttString =
-    [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:text]
+    [[NSMutableAttributedString alloc] initWithString:text
                                            attributes:[self messageAttributes]];
 
     CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
