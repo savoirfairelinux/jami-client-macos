@@ -188,19 +188,19 @@
 "Change password" = "Parolayı değiştir";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Parola oluştur";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Aygıtı iptal et";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Dikkat! Bu işlem geri alınamaz!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Aygıt iptali başarısız oldu. Lütfen parolanızı kontrol edip tekrar deneyin.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Aygıt iptali başarısız oldu";
 
 /* Edit Sip Account Action*/
 "Done" = "Tamam";

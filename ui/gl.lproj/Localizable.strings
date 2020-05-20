@@ -188,19 +188,19 @@
 "Change password" = "Cambiar contrasinal";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Crear contrasinal";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Revogar dispositivo";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Atención! Esto non ten volta!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Fallou a revogación do dispositivo. Comproba o contrasinal e volve a intentalo.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Fallou a revogación do dispositivo";
 
 /* Edit Sip Account Action*/
 "Done" = "Feito";

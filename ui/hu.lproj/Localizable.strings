@@ -188,19 +188,19 @@
 "Change password" = "Jelszó megváltoztatása";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Jelszó létrehozása";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Eszköz visszavonása";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Figyelmeztetés: Ez a művelet nem vonható vissza";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Az eszköz visszavonása sikertelen. Kérjük, ellenőrizze a jelszót és próbálja újra.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Az eszköz visszavonása sikertelen";
 
 /* Edit Sip Account Action*/
 "Done" = "Kész";

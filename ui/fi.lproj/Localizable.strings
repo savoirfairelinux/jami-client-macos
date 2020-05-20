@@ -188,19 +188,19 @@
 "Change password" = "Vaihda salasana";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Luo salasana";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Peruuta laite";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Huomio! Tätä toimintoa ei voi kumota!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Laitteen kumoaminen epäonnistui. Tarkista salasanasi ja yritä uudelleen.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Laitteen kumoaminen epäonnistui";
 
 /* Edit Sip Account Action*/
 "Done" = "Valmis";

@@ -188,19 +188,19 @@
 "Change password" = "變更密碼";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "建立密碼";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "撤銷裝置";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "注意！此動作無法復原！";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "撤銷裝置失敗。請檢查您的密碼並再試一次。";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "撤銷裝置失敗。";
 
 /* Edit Sip Account Action*/
 "Done" = "完成";

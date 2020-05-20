@@ -29,7 +29,7 @@
 "Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Block contact" = "Block contact";
+"Block contact" = "Bloqueja el contacte";
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
@@ -41,10 +41,10 @@
 "Choose file" = "Choose file";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Neteja la conversa";
 
 /* No comment provided by engineer. */
-"Copy" = "Copy";
+"Copy" = "Copia";
 
 /* Recording view explanation label */
 "Could not record message during call" = "Could not record message during call";
@@ -68,7 +68,7 @@
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importa des d'una còpia de seguretat";
 
 /* link account title */
 "Import from other device" = "Import from other device";
@@ -101,10 +101,10 @@
 "Passwords don't match" = "No coincideixen les contrasenyes";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Fes una trucada de veu";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Fes una video trucada";
 
 /* Recording view explanation label */
 "Press to start recording" = "Press to start recording";
@@ -119,7 +119,7 @@
 "Registered name: " = "Registered name: ";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Elimina el compte";
 
 /* export account button title */
 "Select archive" = "Select archive";
@@ -131,7 +131,7 @@
 "Send you a contact request" = "Send you a contact request";
 
 /* No comment provided by engineer. */
-"Share" = "Share";
+"Share" = "Comparteix";
 
 /* Contextual menu entry */
 "Share screen" = "Share screen";
@@ -140,7 +140,7 @@
 "Sign In" = "Sign In";
 
 /* Record message title */
-"Stop recording" = "Stop recording";
+"Stop recording" = "Para d'enregistrar.";
 
 /* File transfer successful label */
 "Success" = "Èxit";
@@ -179,13 +179,13 @@
 "Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Jami" = "Welcome to Jami";
+"Welcome to Jami" = "Benvingut a Jami";
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Would you like to leave a message?";
 
 /* Password button title */
-"Change password" = "Change password";
+"Change password" = "Canvia la contrasenya";
 
 /* Password button title */
 "Create password" = "Create password";

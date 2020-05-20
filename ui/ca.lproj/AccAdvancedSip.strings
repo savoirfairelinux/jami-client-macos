@@ -9,16 +9,16 @@
 "24s-we-pkD.title" = "Seguretat";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
+"2rB-Bv-c9U.title" = "Temps d'expiració del registre (segons)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Call settings";
+"3Uq-Nb-J1A.title" = "Preferències de trucada";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
 "3rM-KT-bNf.title" = "Feu servir RTP quan fracase el xifrat";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Auto answer calls";
+"3vs-TI-tkg.title" = "Respon trucades automàticament";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
 "6eH-la-JbF.title" = "TURN realm";
@@ -39,7 +39,7 @@
 "A31-3Y-z4R.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Published address";
+"ELr-A7-mGE.title" = "Adreça publicada";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
 "Gwi-Mp-NpZ.title" = "Utilitza TURN";
@@ -54,7 +54,7 @@
 "JV8-cY-6vR.title" = "Exigeix certificat per a les conexions TLS entrants";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "SDP Session Negotiation (ICE Fallback)";
+"Jfp-NE-ODd.title" = "Negociació de la sessió SDP (amb alternativa ICE)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
 "MBR-AC-HFq.title" = "Box";
@@ -63,7 +63,7 @@
 "Mho-w1-ZPJ.title" = "Item 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Custom ringtone";
+"Nqr-gj-dOH.title" = "To de trucada personalitzat";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
 "OEo-C7-vEh.title" = "Item 2";
@@ -75,13 +75,13 @@
 "Ppa-zn-w1X.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "Habilita SDES per al protocol d'intercanvi de claus";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Cel·la de text";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
-"Vke-hs-iXz.title" = "Audio codecs";
+"Vke-hs-iXz.title" = "Còdecs d'àudio";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
 "W9F-Nf-ehp.title" = "Clau privada";
@@ -117,13 +117,13 @@
 "ekM-Cg-DEo.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Network interface";
+"fjH-ej-gEr.title" = "Interfície de xarxa";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
 "fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
-"gJs-aX-7Ox.title" = "Video codecs";
+"gJs-aX-7Ox.title" = "Còdecs de vídeo";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
 "jgX-tQ-dIA.title" = "Cel·la de text";
@@ -138,7 +138,7 @@
 "nq0-Js-9Cr.title" = "Mín";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Use custom address and port";
+"nuq-Wl-sfd.title" = "Utilitza una adreça i port personalitzats";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
 "rMN-Wf-tmp.title" = "Usuari de TURN";
@@ -150,7 +150,7 @@
 "vZH-42-mUi.title" = "Negociació de xifrat (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
-"vpo-fl-9TS.title" = "Connectivity";
+"vpo-fl-9TS.title" = "Connectivitat";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
 "wq6-KV-8X3.title" = "Màx";
