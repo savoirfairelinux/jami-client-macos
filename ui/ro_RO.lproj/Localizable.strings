@@ -2,16 +2,16 @@
 "A network error occured during the export" = "A network error occured during the export";
 
 /* Button Action */
-"Accept" = "Acceptar";
+"Accept" = "Accept";
 
 /* Button Action */
-"Cancel" = "anullar";
+"Cancel" = "Cancel";
 
 /* Welcome title */
 "Add a SIP account" = "Add a SIP account";
 
 /* Contextual menu action */
-"Add to contacts" = "Add to contacts";
+"Add to contacts" = "Adaugă la contacte";
 
 /* Backup error */
 "An error occured during the backup" = "An error occured during the backup";
@@ -29,7 +29,7 @@
 "Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Block contact" = "Blocar contacte";
+"Block contact" = "Block contact";
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
@@ -56,7 +56,7 @@
 "Enter account password" = "Enter account password";
 
 /* File transfer failed label */
-"Failed" = "Failed";
+"Failed" = "Eșec";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -113,19 +113,19 @@
 "Record a message" = "Record a message";
 
 /* Button Action */
-"Refuse" = "Refusar";
+"Refuse" = "Refuse";
 
 /* Text shown to the user */
 "Registered name: " = "Registered name: ";
 
 /* Remove account alert title */
-"Remove account" = "Suprimir compte";
+"Remove account" = "Remove account";
 
 /* export account button title */
 "Select archive" = "Select archive";
 
 /* Send button title */
-"Send" = "Enviar";
+"Send" = "Send";
 
 /* Notification message */
 "Send you a contact request" = "Send you a contact request";
@@ -185,7 +185,7 @@
 "Would you like to leave a message?" = "Would you like to leave a message?";
 
 /* Password button title */
-"Change password" = "Cambiar senhal";
+"Change password" = "Change password";
 
 /* Password button title */
 "Create password" = "Create password";

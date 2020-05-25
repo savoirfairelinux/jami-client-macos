@@ -188,19 +188,19 @@
 "Change password" = "Cambiar contraseña";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Crear contraseña";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Anular Dispositivo";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "¡Atención! ¡Esta acción no se pudo deshacer!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "La anulación del dispositivo falló. Verifique su contraseña e intente nuevamente.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "La anulación del dispositivo falló";
 
 /* Edit Sip Account Action*/
 "Done" = "Hecho";

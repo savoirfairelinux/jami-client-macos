@@ -12,7 +12,7 @@
 "2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Call settings";
+"3Uq-Nb-J1A.title" = "Paramètres sonada";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
 "3rM-KT-bNf.title" = "Fallback on RTP on encryption failure";
@@ -42,10 +42,10 @@
 "ELr-A7-mGE.title" = "Published address";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
-"Gwi-Mp-NpZ.title" = "Use TURN";
+"Gwi-Mp-NpZ.title" = "Utilizar TURN";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
-"HRM-FR-1sH.title" = "Use STUN";
+"HRM-FR-1sH.title" = "Utilizar STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
 "HYt-sW-yd0.title" = "STUN address";
@@ -81,19 +81,19 @@
 "RIj-rT-gSd.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
-"Vke-hs-iXz.title" = "Audio codecs";
+"Vke-hs-iXz.title" = "Codecs àudio";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
-"W9F-Nf-ehp.title" = "Private key";
+"W9F-Nf-ehp.title" = "Clau privada";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
 "WsS-1e-Epm.title" = "Verify answer certificates (client side)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
-"Xp3-bL-3Cs.title" = "User certificate";
+"Xp3-bL-3Cs.title" = "Certificat utilizaire";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "Xxr-gl-ukE"; */
-"Xxr-gl-ukE.title" = "Address";
+"Xxr-gl-ukE.title" = "Adreça";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
 "Zuz-jy-rLn.title" = "Box";
@@ -102,7 +102,7 @@
 "aYs-wh-Hpr.title" = "TURN address";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "CA certificate";
+"b2y-85-ZHK.title" = "Certificat de CA";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
 "cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
@@ -123,7 +123,7 @@
 "fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
-"gJs-aX-7Ox.title" = "Video codecs";
+"gJs-aX-7Ox.title" = "Codecs vidèo";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
 "jgX-tQ-dIA.title" = "Text Cell";

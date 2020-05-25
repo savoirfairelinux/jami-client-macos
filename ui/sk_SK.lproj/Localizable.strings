@@ -8,7 +8,7 @@
 "Cancel" = "Zrušiť";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Pridať SIP účet";
 
 /* Contextual menu action */
 "Add to contacts" = "Pridať kontakt";
@@ -20,25 +20,25 @@
 "An error occured during the export" = "Počas exportu sa vyskytla chyba";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "pravdepodobne zaneprázdnený";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Nie sú udelené práva pre audio";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Zálohovať váš účet";
 
 /* Contextual menu action */
 "Block contact" = "Zablokovať kontakt";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Kliknutím na \"OK\" odstránite tento účet z tohto zariadenia! Táto operácia nemôže byť vrátená. Vaše registrované meno môže byť stratené. ";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "Zrušené";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Vybrať súbor";
 
 /* Contextual menu action */
 "Clear conversation" = "Vymazať konverzáciu";
@@ -47,97 +47,97 @@
 "Copy" = "Kopírovať";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Nebolo možné zaznamenať správu počas hovoru";
 
 /* Welcome title */
 "Create a new account" = "Vytvoriť nový účet";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Zadajte heslo k účtu";
 
 /* File transfer failed label */
 "Failed" = "Chyba";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migrácia vášho účtu zlyhala. Môžete to skúsiť znovu kliknutím na Ok alebo zmažte váš účet.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Vyhľadávanie zlyhalo";
 
 /* Text shown to the user */
-"ID: " = "ID: ";
+"ID: " = "ID:";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importovať zo zálohy";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "Importovať z iného zariadenia";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Prichádzajúci hovor od %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Prichádzajúca správa od %@";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Neplatné používateľské meno";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Neplatné používateľské meno.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Choďte do nastavení, aby ste vytvorili nový účet";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Žiadny dostupný účet";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Heslo a jeho potvrdenie sa nezhodujú.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Heslo je príliš krátke";
 
 /* Indication for user */
 "Passwords don't match" = "Heslá sa nezhodujú";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Uskutočniť audio hovor";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Uskutočniť video hovor";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Kliknite pre začatie nahrávania";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Nahrať správu";
 
 /* Button Action */
 "Refuse" = "Odmietnuť";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Registrované meno:";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Odstrániť účet";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Vybrať archív";
 
 /* Send button title */
 "Send" = "Poslať";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Posiela vám žiadosť o kontakt";
 
 /* No comment provided by engineer. */
 "Share" = "Zdieľať";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Zdieľať obrazovku";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Prihlásiť sa";
 
 /* Record message title */
 "Stop recording" = "Ukončiť zaznamenávanie";
@@ -146,61 +146,61 @@
 "Success" = "Úspech";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "Textové operácie";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Zadané používateľské meno je dostupné";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Zadané používateľské meno nie je dostupné";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Heslo, ktoré ste zadali, neodomyká tento účet";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Váš účet musí byť migrovaný";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Toto je vaše ID.\nSkopírujte ho a zdieľajte s vašimi priateľmi!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Toto je vaše Jami používateľské meno.\nSkopírujte ho a zdieľajte s vašimi priateľmi!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Na dokončenie procesu je potrebné otvoriť aplikáciu Jami na novom zariadení a zvoliť možnosť \"Prepojiť toto zariadenie s účtom\". Váš PIN bude funkčný po dobu 10 minút.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Pre pokračovanie v migrácii prosím zadajte heslo použité pre tento účet.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Nepripojitený";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Nie sú udelené práva pre video";
 
 /* Welcome title */
 "Welcome to Jami" = "Vitajte v Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Chceli by ste zanechať správu?";
 
 /* Password button title */
 "Change password" = "Zmeniť heslo";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Vytvoriť heslo";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Odobrať zariadenie";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Upozornenie! Túto operáciu nie je možné vrátiť.";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Odobratie zariadenia zlyhalo. Skontrolujte prosím vaše heslo a skúste znovu. ";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Odobratie zariadenia zlyhalo";
 
 /* Edit Sip Account Action*/
 "Done" = "Hotovo";
