@@ -9,16 +9,16 @@
 "FgV-iF-gGQ.title" = "Cellule de texte";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "Ilz-7v-2fr"; */
-"Ilz-7v-2fr.placeholderString" = "Send a message";
+"Ilz-7v-2fr.placeholderString" = "Envoyer un message";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Start audio call"; ObjectID = "RuH-fO-poy"; */
-"RuH-fO-poy.ibShadowedToolTip" = "Start audio call";
+"RuH-fO-poy.ibShadowedToolTip" = "Démarrer appel audio";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "UJf-cF-RAo"; */
 "UJf-cF-RAo.ibShadowedToolTip" = "Envoyer";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Start video call"; ObjectID = "cFH-d7-Erh"; */
-"cFH-d7-Erh.ibShadowedToolTip" = "Start video call";
+"cFH-d7-Erh.ibShadowedToolTip" = "Démarrer appel video";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ciI-CA-tly"; */
 "ciI-CA-tly.title" = "Box";
@@ -45,10 +45,10 @@
 "wYE-S3-AzD.ibShadowedToolTip" = "Enregistrer un message audio";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Send a message";
+"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Envoyer un message";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "Send a message";
+"zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "Envoyer un message";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedNoSelectionPlaceholder" = "Send a message";
+"zK1-Ee-EWS.ibShadowedNoSelectionPlaceholder" = "Envoyer un message";
