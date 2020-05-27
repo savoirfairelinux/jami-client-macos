@@ -174,3 +174,9 @@ file_filter = ui/<lang>.lproj/PasswordChange.strings
 source_file = ui/Base.lproj/PasswordChange.strings
 source_lang = en
 type = STRINGS
+
+[jami.osxConnectToAccManagerVC]
+file_filter = ui/<lang>.lproj/ConnectToAccManagerVC.strings
+source_file = ui/Base.lproj/ConnectToAccManagerVC.strings
+source_lang = en
+type = STRINGS
