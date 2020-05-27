@@ -42,7 +42,7 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
 
 -(void) updateView {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    [allowIncoming setState: accountProperties.allowIncoming];
+    [allowIncoming setState: accountProperties.DHT.PublicInCalls];
     [nameServerField setStringValue: accountProperties.RingNS.uri.toNSString()];
     [proxyServerField setStringValue: accountProperties.proxyServer.toNSString()];
     [bootstrapServerField setStringValue: accountProperties.hostname.toNSString()];
@@ -65,8 +65,8 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
 
 - (IBAction)allowCallFromUnknownPeer:(id)sender {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    if(accountProperties.allowIncoming != [sender state]) {
-        accountProperties.allowIncoming = [sender state];
+    if(accountProperties.DHT.PublicInCalls != [sender state]) {
+        accountProperties.DHT.PublicInCalls = [sender state];
         self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
     }
 }
