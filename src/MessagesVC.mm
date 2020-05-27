@@ -990,13 +990,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto interId = [(IMTableCellView*)[[sender superview] superview] interaction];
     auto& inter = [self getCurrentConversation]->interactions.find(interId)->second;
     if (convModel_ && !convUid_.isEmpty()) {
-        NSSavePanel* filePicker = [NSSavePanel savePanel];
-        [filePicker setNameFieldStringValue:inter.body.toNSString()];
-
-        if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
-            const char* fullPath = [[filePicker URL] fileSystemRepresentation];
-            convModel_->acceptTransfer(convUid_, interId, fullPath);
-        }
+        convModel_->acceptTransfer(convUid_, interId);
     }
 }
 
