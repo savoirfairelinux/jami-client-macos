@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,8 +34,8 @@
                         <rect key="frame" x="0.0" y="248" width="450" height="70"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EpY-Kl-fNa">
-                                <rect key="frame" x="86" y="17" width="225" height="36"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Welcome to Jami" id="2mM-yx-BfM">
+                                <rect key="frame" x="86" y="18" width="225" height="35"/>
+                                <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Welcome to Jami" id="2mM-yx-BfM">
                                     <font key="font" metaFont="system" size="30"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -52,10 +52,12 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="P7h-tj-klA" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" id="82u-TT-jdV"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EpY-Kl-fNa" secondAttribute="trailing" constant="20" id="Vfa-nu-FdG"/>
                             <constraint firstAttribute="height" constant="70" id="bnc-Ui-EBV"/>
                             <constraint firstItem="P7h-tj-klA" firstAttribute="leading" secondItem="EpY-Kl-fNa" secondAttribute="trailing" constant="8" symbolic="YES" id="ckf-Wb-pkP"/>
                             <constraint firstItem="EpY-Kl-fNa" firstAttribute="centerX" secondItem="9ok-Ga-Q8u" secondAttribute="centerX" constant="-26.5" id="fkS-G9-SzY"/>
                             <constraint firstItem="EpY-Kl-fNa" firstAttribute="centerY" secondItem="9ok-Ga-Q8u" secondAttribute="centerY" id="i1N-4g-yOy"/>
+                            <constraint firstItem="EpY-Kl-fNa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9ok-Ga-Q8u" secondAttribute="leading" constant="20" id="mRT-p0-lc0"/>
                         </constraints>
                     </customView>
                     <view translatesAutoresizingMaskIntoConstraints="NO" id="T98-k1-e6X">
