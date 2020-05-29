@@ -680,82 +680,84 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    double someWidth = tableView.frame.size.width * 0.7;
+    try {
+        double someWidth = tableView.frame.size.width * 0.7;
 
-    auto* conv = [self getCurrentConversation];
+        auto* conv = [self getCurrentConversation];
 
-    if (conv == nil)
-        return HEIGHT_DEFAULT;
+        if (conv == nil)
+            return HEIGHT_DEFAULT;
 
-    auto size = [conversationView numberOfRows] - 1;
-    if (row >= size) {
-        //last item peer composing view
-        if (peerComposingMessage) {
-            return HEIGHT_FOR_COMPOSING_INDICATOR;
+        auto size = [conversationView numberOfRows] - 1;
+        if (row >= size) {
+            //last item peer composing view
+            if (peerComposingMessage) {
+                return HEIGHT_FOR_COMPOSING_INDICATOR;
+            }
+            return 1;
         }
+
+        auto it = conv->interactions.begin();
+
+        std::advance(it, row);
+
+        if (it == conv->interactions.end()) {
+            return HEIGHT_DEFAULT;
+        }
+
+        auto interaction = it->second;
+
+        MessageSequencing sequence = [self computeSequencingFor:row];
+
+        bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
+
+        if(interaction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
+            if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
+                NSString* name =  interaction.body.toNSString();
+                NSImage* image = [self getImageForFilePath:name];
+                if (([name rangeOfString:@"/"].location == NSNotFound)) {
+                    image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
+                }
+                if (image != nil) {
+                    CGFloat widthScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.width;
+                    CGFloat heightScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.height;
+                    CGFloat heigt = 0;
+                    if((widthScaleFactor >= 1) && (heightScaleFactor >= 1)) {
+                        heigt = image.size.height;
+                    } else {
+                        CGFloat scale = MIN(widthScaleFactor, heightScaleFactor);
+                        heigt = image.size.height * scale;
+                    }
+                    return heigt + TIME_BOX_HEIGHT;
+                }
+            }
+            return BUBBLE_HEIGHT_FOR_TRANSFERED_FILE + TIME_BOX_HEIGHT;
+        }
+
+        if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
+            return GENERIC_CELL_HEIGHT;
+
+        NSString *text = interaction.body.toNSString();
+        text = [text removeEmptyLinesAtBorders];
+
+        CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
+        CGFloat singleLignMessageHeight = 15;
+
+        bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
+
+        if (shouldDisplayTime) {
+            return MAX(messageSize.height + TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2,
+                       TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2 + singleLignMessageHeight);
+        }
+        if(shouldApplyPadding) {
+            return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2 + 15,
+                       singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2 + 15);
+        }
+        return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2,
+                   singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2);
+    } catch (std::out_of_range& e) {
         return 1;
     }
-
-    auto it = conv->interactions.begin();
-
-    std::advance(it, row);
-
-    if (it == conv->interactions.end()) {
-        return HEIGHT_DEFAULT;
-    }
-
-    auto interaction = it->second;
-
-    MessageSequencing sequence = [self computeSequencingFor:row];
-
-    bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
-
-
-    if(interaction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
-
-        if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
-            NSString* name =  interaction.body.toNSString();
-            NSImage* image = [self getImageForFilePath:name];
-            if (([name rangeOfString:@"/"].location == NSNotFound)) {
-                image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
-            }
-            if (image != nil) {
-                CGFloat widthScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.width;
-                CGFloat heightScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.height;
-                CGFloat heigt = 0;
-                if((widthScaleFactor >= 1) && (heightScaleFactor >= 1)) {
-                    heigt = image.size.height;
-                } else {
-                    CGFloat scale = MIN(widthScaleFactor, heightScaleFactor);
-                    heigt = image.size.height * scale;
-                }
-                return heigt + TIME_BOX_HEIGHT;
-            }
-        }
-        return BUBBLE_HEIGHT_FOR_TRANSFERED_FILE + TIME_BOX_HEIGHT;
-    }
-
-    if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
-        return GENERIC_CELL_HEIGHT;
-
-    NSString *text = interaction.body.toNSString();
-    text = [text removeEmptyLinesAtBorders];
-
-    CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
-    CGFloat singleLignMessageHeight = 15;
-
-    bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
-
-    if (shouldDisplayTime) {
-        return MAX(messageSize.height + TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2,
-                   TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2 + singleLignMessageHeight);
-    }
-    if(shouldApplyPadding) {
-        return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2 + 15,
-                   singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2 + 15);
-    }
-    return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2,
-               singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2);
 }
 
 #pragma mark - message view parameters
@@ -789,93 +791,97 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(MessageSequencing) computeSequencingFor:(NSInteger) row {
-    if (row >= conversationView.numberOfRows - 1) {
-        return SINGLE_WITHOUT_TIME;
-    }
-    auto* conv = [self getCurrentConversation];
-    if (conv == nil)
-       return SINGLE_WITHOUT_TIME;
-    auto it = conv->interactions.begin();
-    std::advance(it, row);
-    if (it == conv->interactions.end()) {
-        return SINGLE_WITHOUT_TIME;
-    }
-    auto interaction = it->second;
-    if (interaction.type != lrc::api::interaction::Type::TEXT) {
-        return SINGLE_WITH_TIME;
-    }
-    // first message in comversation
-    if (row == 0) {
+    try {
+        if (row >= conversationView.numberOfRows - 1) {
+            return SINGLE_WITHOUT_TIME;
+        }
+        auto* conv = [self getCurrentConversation];
+        if (conv == nil)
+            return SINGLE_WITHOUT_TIME;
+        auto it = conv->interactions.begin();
+        std::advance(it, row);
         if (it == conv->interactions.end()) {
+            return SINGLE_WITHOUT_TIME;
+        }
+        auto interaction = it->second;
+        if (interaction.type != lrc::api::interaction::Type::TEXT) {
             return SINGLE_WITH_TIME;
         }
-        auto nextIt = it;
-        nextIt++;
-        if (nextIt == conv->interactions.end()) {
+        // first message in comversation
+        if (row == 0) {
+            if (it == conv->interactions.end()) {
+                return SINGLE_WITH_TIME;
+            }
+            auto nextIt = it;
+            nextIt++;
+            if (nextIt == conv->interactions.end()) {
+                return SINGLE_WITH_TIME;
+            }
+            auto nextInteraction = nextIt->second;
+            if ([self sequenceChangedFrom:interaction to: nextInteraction]) {
+                return SINGLE_WITH_TIME;
+            }
+            return FIRST_WITH_TIME;
+        }
+        // last message in comversation
+        if (row == conversationView.numberOfRows - 2) {
+            if(it == conv->interactions.begin()) {
+                return SINGLE_WITH_TIME;
+            }
+            auto previousIt = it;
+            previousIt--;
+            auto previousInteraction = previousIt->second;
+            bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
+            bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
+            if (!timeChanged && !authorChanged) {
+                return LAST_IN_SEQUENCE;
+            }
+            if (!timeChanged && authorChanged) {
+                return SINGLE_WITHOUT_TIME;
+            }
             return SINGLE_WITH_TIME;
         }
-        auto nextInteraction = nextIt->second;
-        if ([self sequenceChangedFrom:interaction to: nextInteraction]) {
+        // single message in comversation
+        if(it == conv->interactions.begin() || it == conv->interactions.end()) {
             return SINGLE_WITH_TIME;
         }
-        return FIRST_WITH_TIME;
-    }
-    // last message in comversation
-    if (row == conversationView.numberOfRows - 2) {
-        if(it == conv->interactions.begin()) {
-            return SINGLE_WITH_TIME;
-        }
+        // message in the middle of conversation
         auto previousIt = it;
         previousIt--;
         auto previousInteraction = previousIt->second;
-        bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
-        bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
-        if (!timeChanged && !authorChanged) {
-            return LAST_IN_SEQUENCE;
-        }
-        if (!timeChanged && authorChanged) {
+        auto nextIt = it;
+        nextIt++;
+        if (nextIt == conv->interactions.end()) {
             return SINGLE_WITHOUT_TIME;
         }
-        return SINGLE_WITH_TIME;
-    }
-    // single message in comversation
-    if(it == conv->interactions.begin() || it == conv->interactions.end()) {
-        return SINGLE_WITH_TIME;
-    }
-    // message in the middle of conversation
-    auto previousIt = it;
-    previousIt--;
-    auto previousInteraction = previousIt->second;
-    auto nextIt = it;
-    nextIt++;
-    if (nextIt == conv->interactions.end()) {
+        auto nextInteraction = nextIt->second;
+
+        bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
+        bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
+        bool sequenceWillChange = [self sequenceChangedFrom:interaction to: nextInteraction];
+        if (previousInteraction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
+            if(!sequenceWillChange) {
+                return FIRST_WITH_TIME;
+            }
+            return SINGLE_WITH_TIME;
+        }
+        if (!sequenceWillChange) {
+            if (!timeChanged && !authorChanged) {
+                return MIDDLE_IN_SEQUENCE;
+            }
+            if (timeChanged) {
+                return FIRST_WITH_TIME;
+            }
+            return FIRST_WITHOUT_TIME;
+        } if (!timeChanged && !authorChanged) {
+            return LAST_IN_SEQUENCE;
+        } if (timeChanged) {
+            return SINGLE_WITH_TIME;
+        }
+        return SINGLE_WITHOUT_TIME;
+    } catch (std::out_of_range& e) {
         return SINGLE_WITHOUT_TIME;
     }
-    auto nextInteraction = nextIt->second;
-
-    bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
-    bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
-    bool sequenceWillChange = [self sequenceChangedFrom:interaction to: nextInteraction];
-    if (previousInteraction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
-        if(!sequenceWillChange) {
-            return FIRST_WITH_TIME;
-        }
-        return SINGLE_WITH_TIME;
-    }
-    if (!sequenceWillChange) {
-        if (!timeChanged && !authorChanged) {
-            return MIDDLE_IN_SEQUENCE;
-        }
-        if (timeChanged) {
-            return FIRST_WITH_TIME;
-        }
-        return FIRST_WITHOUT_TIME;
-    } if (!timeChanged && !authorChanged) {
-        return LAST_IN_SEQUENCE;
-    } if (timeChanged) {
-        return SINGLE_WITH_TIME;
-    }
-    return SINGLE_WITHOUT_TIME;
 }
 
 -(bool) sequenceChangedFrom:(lrc::api::interaction::Info) firstInteraction to:(lrc::api::interaction::Info) secondInteraction {
