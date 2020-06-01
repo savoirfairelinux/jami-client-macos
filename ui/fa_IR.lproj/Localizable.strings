@@ -188,19 +188,19 @@
 "Change password" = "تغییر گذرواژه";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "ایجاد گذرواژه";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "ابطال دستگاه";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "توجه! این کار قابل بازگشت نیست.";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "ابطال دستگاه انجام نشد. لطفا گذرواژه خود را بررسی و دوباره امتحان کنید.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "ابطال دستگاه ناموفق بود";
 
 /* Edit Sip Account Action*/
 "Done" = "انجام شد";

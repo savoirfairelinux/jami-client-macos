@@ -1,11 +1,11 @@
 
-"A network error occured during the export" = "A network error occured during the export";
+"A network error occured during the export" = "O eroare de rețea a apărut în timpul exportării";
 
 /* Button Action */
 "Accept" = "Acceptă";
 
 /* Button Action */
-"Cancel" = "Cancel";
+"Cancel" = "Renunță";
 
 /* Welcome title */
 "Add a SIP account" = "Add a SIP account";
@@ -17,7 +17,7 @@
 "An error occured during the backup" = "An error occured during the backup";
 
 /* Error shown to the user */
-"An error occured during the export" = "An error occured during the export";
+"An error occured during the export" = "O eroare a apărut în timpul exportării";
 
 /* Peer busy message */
 "appears to be busy." = "appears to be busy.";
@@ -44,7 +44,7 @@
 "Clear conversation" = "Clear conversation";
 
 /* No comment provided by engineer. */
-"Copy" = "Copy";
+"Copy" = "Copiază";
 
 /* Recording view explanation label */
 "Could not record message during call" = "Could not record message during call";
@@ -155,7 +155,7 @@
 "The entered username is not available" = "The entered username is not available";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
+"The password you entered does not unlock this account" = "Parola introdusă nu deblochează acest cont";
 
 /* Text shown to the user */
 "This account needs to be migrated" = "This account needs to be migrated";
