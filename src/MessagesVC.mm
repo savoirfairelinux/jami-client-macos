@@ -113,9 +113,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [conversationView registerNib:cellNib forIdentifier:@"RightOngoingFileView"];
     [conversationView registerNib:cellNib forIdentifier:@"RightFinishedFileView"];
     [conversationView registerNib:cellNib forIdentifier:@"PeerComposingMsgView"];
+    [conversationView registerNib:cellNib forIdentifier:@"EmptyCell"];
     [[conversationView.enclosingScrollView contentView] setCopiesOnScroll:NO];
     [messageField setFocusRingType:NSFocusRingTypeNone];
     [conversationView setWantsLayer:YES];
+    //conversationView.usesAutomaticRowHeights = YES;
+   // conversationView.rowHeight = 20;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -181,7 +184,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return cachedConv_;
 }
 
--(void) reloadConversationForMessage:(uint64_t) uid shouldUpdateHeight:(bool)update {
+-(void) reloadConversationForMessage:(uint64_t) uid insertRow:(bool)insert updateRowView:(bool)update  {
     auto* conv = [self getCurrentConversation];
 
     if (conv == nil)
@@ -191,6 +194,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return;
     }
     auto itIndex = distance(conv->interactions.begin(),it);
+    if (insert) {
+        NSRange insertRange = NSMakeRange(itIndex, 1);
+        NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
+        [conversationView insertRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
+        [conversationView noteNumberOfRowsChanged];
+    }
     if (itIndex >= ([conversationView numberOfRows] - 1)) {
         return;
     }
@@ -206,8 +215,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
         }
     }
+
+
     if (update) {
-        [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+        NSRange insertRange = NSMakeRange(itIndex, 1);
+        NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
+        [conversationView removeRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
+        [conversationView insertRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
     }
     [conversationView reloadDataForRowIndexes: indexSet
                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
@@ -216,7 +230,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
     NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
     if (([conversationView numberOfRows] > 0) &&
-        lastvisibleRow > ([conversationView numberOfRows] - 3)) {
+        lastvisibleRow > ([conversationView numberOfRows] - 4)) {
         [conversationView scrollToEndOfDocument:nil];
     }
 }
@@ -239,6 +253,46 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [conversationView reloadDataForRowIndexes: indexSet
                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
     if (update) {
+        [conversationView scrollToEndOfDocument:nil];
+    }
+}
+-(void)updateTypingIndicator:(BOOL)isComposing
+{
+    bool shouldUpdate = isComposing != peerComposingMessage;
+    if (!shouldUpdate) {
+        return;
+    }
+    // reload and update height for composing indicator
+    peerComposingMessage = isComposing;
+    auto* conv = [self getCurrentConversation];
+    if (conv == nil)
+        return;
+    auto row = [conversationView numberOfRows] - 1;
+    if (row < 0) {
+        return;
+    }
+    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:row];
+    if (peerComposingMessage ) {
+        [conversationView unhideRowsAtIndexes:indexSet withAnimation:(NSTableViewAnimationEffectFade)];
+    } else {
+        //  whait for possible incoming message to avoid view jumping
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            if (!peerComposingMessage) {
+                auto row = [conversationView numberOfRows] - 1;
+                if (row < 0) {
+                    return;
+                }
+                [conversationView hideRowsAtIndexes:indexSet withAnimation:(NSTableViewAnimationEffectNone)];
+            }
+
+        });
+    }
+    CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
+    NSRange range = [conversationView rowsInRect:visibleRect];
+    NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
+    NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
+    if (([conversationView numberOfRows] > 0) &&
+        lastvisibleRow > ([conversationView numberOfRows] - 4)) {
         [conversationView scrollToEndOfDocument:nil];
     }
 }
@@ -266,6 +320,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                       bool isComposing) {
         if (uid != convUid_)
             return;
+         [self updateTypingIndicator: isComposing];
+        return;
         bool shouldUpdate = isComposing != peerComposingMessage;
         if (!shouldUpdate) {
             return;
@@ -279,48 +335,118 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         if (row < 0) {
             return;
         }
+     //   dispatch_async(dispatch_get_main_queue(), ^{
+     //   [conversationView reloadData];
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:row];
-        if(peerComposingMessage) {
-            [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
-        } else {
-            //whait for possible incoming message to avoid view jumping
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                if (!peerComposingMessage) {
-                    [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
-                }
-            });
-        }
-        [conversationView reloadDataForRowIndexes: indexSet
-                                    columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-        CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
-        NSRange range = [conversationView rowsInRect:visibleRect];
-        NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
-        NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
-        if (([conversationView numberOfRows] > 0) &&
-            lastvisibleRow > ([conversationView numberOfRows] - 3)) {
+        if (peerComposingMessage ) {
+        [conversationView unhideRowsAtIndexes:indexSet withAnimation:(NSTableViewAnimationEffectFade)];
+            } else {
+               //  whait for possible incoming message to avoid view jumping
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                                if (!peerComposingMessage) {
+                                    auto row = [conversationView numberOfRows] - 1;
+                                           if (row < 0) {
+                                               return;
+                                           }
+                              [conversationView hideRowsAtIndexes:indexSet withAnimation:(NSTableViewAnimationEffectNone)];
+                                }
+
+                });
+                 }
+            // [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+
+//        auto rowView = [conversationView viewAtColumn:0 row:row makeIfNecessary:NO];
+//        [rowView setNeedsUpdateConstraints:YES];
+//        [rowView updateConstraintsForSubtreeIfNeeded];
+//        [rowView layoutSubtreeIfNeeded];
+//        [rowView setNeedsDisplay:YES];
+      //  [conversationView noteNumberOfRowsChanged];
+
+//        NSRange insertRange = NSMakeRange(row, 1);
+//              NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
+//              [conversationView removeRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
+//              [conversationView insertRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
+//        if(peerComposingMessage) {
+//             [conversationView noteNumberOfRowsChanged];
+//            //[conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+//        } else {
+//            //whait for possible incoming message to avoid view jumping
+//          //  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//               // if (!peerComposingMessage) {
+//             [conversationView noteNumberOfRowsChanged];
+                  //  [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+//              //  }
+//           // });
+//        }
+//                [conversationView reloadDataForRowIndexes: indexSet
+//                                                  columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+       // [conversationView removeRowsAtIndexes:indexSet withAnimation:(NSTableViewAnimationEffectNone)];
+       // [conversationView noteNumberOfRowsChanged];
+//        row = [conversationView numberOfRows] - 1;
+//              if (row < 0) {
+//                  return;
+//              }
+           //   [conversationView reloadData];
+            // indexSet = [NSIndexSet indexSetWithIndex:row];
+       // [conversationView insertRowsAtIndexes:indexSet //withAnimation:(NSTableViewAnimationEffectNone)];
+       // [conversationView noteNumberOfRowsChanged];
+//        [conversationView reloadDataForRowIndexes: indexSet
+//                                    columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+//        auto rowView = [conversationView viewAtColumn:0 row:row makeIfNecessary:NO];
+//               [rowView setNeedsUpdateConstraints:YES];
+//               [rowView updateConstraintsForSubtreeIfNeeded];
+//               [rowView layoutSubtreeIfNeeded];
+//               [rowView setNeedsDisplay:YES];
+//        [conversationView setNeedsUpdateConstraints:YES];
+//        [conversationView updateConstraintsForSubtreeIfNeeded];
+//        [conversationView layoutSubtreeIfNeeded];
+//        [conversationView setNeedsDisplay:YES];
+        
+        // [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+//        [conversationView reloadDataForRowIndexes: indexSet
+//                                    columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+//        [conversationView reloadDataForRowIndexes: indexSet
+//                                          columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+        //[conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+      //  conversationView.enclosingScrollView.automaticallyAdjustsContentInsets = NO;
+      //  conversationView.enclosingScrollView.contentInsets = NSEdgeInsetsMake(-30, 0, 0, 0);
+//        CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
+//        NSRange range = [conversationView rowsInRect:visibleRect];
+//        NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
+//        NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
+//        if (([conversationView numberOfRows] > 0) &&
+//            lastvisibleRow > ([conversationView numberOfRows] - 4)) {
             [conversationView scrollToEndOfDocument:nil];
-        }
+//        }
+         //   });
     });
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
                                              [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                 if (uid != convUid_)
-                                                     return;
-                                                 cachedConv_ = nil;
-                                                 peerComposingMessage = false;
-                                                 [conversationView noteNumberOfRowsChanged];
-                                                 [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
-                                             });
+        if (uid != convUid_)
+            return;
+        cachedConv_ = nil;
+        [self updateTypingIndicator: false];
+        //peerComposingMessage = false;
+       //  dispatch_async(dispatch_get_main_queue(), ^{
+       // [conversationView noteNumberOfRowsChanged];
+        [self reloadConversationForMessage:interactionId insertRow: YES updateRowView: NO];
+          //   });
+    });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
                                                        [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                           if (uid != convUid_)
-                                                               return;
-                                                           cachedConv_ = nil;
-                                                           bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-                                                           if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
-                                                               convModel_->refreshFilter();
-                                                           }
-                                                           [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
-                                                       });
+        if (uid != convUid_)
+            return;
+        cachedConv_ = nil;
+        bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+        if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
+            convModel_->refreshFilter();
+        }
+
+        bool updateView = interaction.type == lrc::api::interaction::Type::DATA_TRANSFER;
+      //  dispatch_async(dispatch_get_main_queue(), ^{
+        [self reloadConversationForMessage:interactionId insertRow: NO updateRowView: updateView];
+         //   });
+    });
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
@@ -347,6 +473,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
     conversationView.alphaValue = 0.0;
     [conversationView reloadData];
+    auto row = [conversationView numberOfRows] - 1;
+    if (row > 0) {
+        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:row];
+        [conversationView hideRowsAtIndexes:indexSet withAnimation:(NSTableViewAnimationEffectFade)];
+    }
     [conversationView scrollToEndOfDocument:nil];
     CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
     fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
@@ -380,6 +511,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [timeField setStringValue:time];
 
     return result;
+}
+
+- (void)didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
+    NSLog(@"Height: %g", rowView.fittingSize.height);
 }
 
 -(NSTableCellView*) configureViewforTransfer:(lrc::api::interaction::Info)interaction interactionID: (uint64_t) interactionID tableView:(NSTableView*)tableView
@@ -466,6 +601,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             break;
     }
     result.transferedImage.image = nil;
+    [result.imageContainer setHidden:YES];
     [result.openImagebutton setHidden:YES];
     [result.msgBackground setHidden:NO];
     [result invalidateImageConstraints];
@@ -494,6 +630,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         if (([name rangeOfString:@"/"].location == NSNotFound)) {
             image = [self getImageForFilePath:[self getDataTransferPath:interactionID]];
         }
+        [result.imageContainer setHidden:image == nil];
         if(image != nil) {
             result.transferedImage.image = image;
             [result updateImageConstraintWithMax: MAX_TRANSFERED_IMAGE_SIZE];
@@ -526,6 +663,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return NO;
 }
 
+- (void)tableViewColumnDidResize:(NSNotification *)notification {
+    NSRange insertRange = NSMakeRange(0, conversationView.numberOfRows);
+           NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
+    [conversationView noteHeightOfRowsWithIndexesChanged:insertRangeSet];
+
+}
+
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
     auto* conv = [self getCurrentConversation];
@@ -539,36 +683,35 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return [[NSView alloc] init];
     }
 
+    if ([tableView.hiddenRowIndexes containsIndexes:[NSIndexSet indexSetWithIndex:row]] && row == size) {
+         return nil;
+     }
+
     if (row == size) {
         if (size < 1) {
-            return [[NSView alloc] init];
+            return nil;
         }
         //last row peer composing view
+//        if (!peerComposingMessage) {
+//            return [tableView makeViewWithIdentifier:@"EmptyCell" owner:conversationView];
+//        }
         result = [tableView makeViewWithIdentifier:@"PeerComposingMsgView" owner:conversationView];
-        std::advance(it, row-1);
-        if (it != conv->interactions.end()) {
-            //if previous message not from peer display avatar
-            auto interaction = it->second;
-            bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-            [result.photoView setHidden: YES];
-            if(isOutgoing) {
-                auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-                auto* conv = [self getCurrentConversation];
-                [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
-                [result.photoView setHidden: NO];
-            }
-        }
-        CGFloat alpha = peerComposingMessage ? 1 : 0;
-        result.alphaValue = 0;
-        [result animateCompozingIndicator: NO];
-        if (alpha == 1) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                if (peerComposingMessage) {
-                    result.alphaValue  = alpha;
-                    [result animateCompozingIndicator: YES];
-                }
-            });
-        }
+      //  CGFloat size = peerComposingMessage ? 30 : 30;
+       // [result updateImageConstraintWithMax: size];
+       // std::advance(it, row-1);
+       // CGFloat alpha = peerComposingMessage ? 1 : 0;
+       // [result.composingIndicatorContainer setHidden: peerComposingMessage];
+       // [result.composingIndicatorContainer setNeedsDisplay:YES];
+       // result.alphaValue = 0;
+       // [result animateCompozingIndicator: NO];
+      //  if (alpha == 1) {
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//                if (peerComposingMessage) {
+                    //result.alphaValue  = alpha;
+                    [result animateCompozingIndicator: peerComposingMessage];
+//                }
+//            });
+       // }
         return result;
     }
 
@@ -645,6 +788,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime isTopPadding: shouldApplyPadding];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
+    [result.msgView setNeedsDisplay:YES];
 
     NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     NSArray *matches = [linkDetector matchesInString:result.msgView.string options:0 range:NSMakeRange(0, result.msgView.string.length)];
@@ -680,6 +824,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
+
     try {
         double someWidth = tableView.frame.size.width * 0.7;
 
@@ -690,11 +835,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
         auto size = [conversationView numberOfRows] - 1;
         if (row >= size) {
-            //last item peer composing view
-            if (peerComposingMessage) {
-                return HEIGHT_FOR_COMPOSING_INDICATOR;
-            }
-            return 1;
+            return 34;
         }
 
         auto it = conv->interactions.begin();
@@ -993,7 +1134,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 #pragma mark - Actions
 
 - (void)acceptIncomingFile:(id)sender {
-    auto interId = [(IMTableCellView*)[[sender superview] superview] interaction];
+    auto interId = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
     auto& inter = [self getCurrentConversation]->interactions.find(interId)->second;
     if (convModel_ && !convUid_.isEmpty()) {
         convModel_->acceptTransfer(convUid_, interId);
@@ -1001,9 +1142,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void)declineIncomingFile:(id)sender {
-    auto inter = [(IMTableCellView*)[[sender superview] superview] interaction];
+    auto interId = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
     if (convModel_ && !convUid_.isEmpty()) {
-        convModel_->cancelTransfer(convUid_, inter);
+        convModel_->cancelTransfer(convUid_, interId);
     }
 }
 

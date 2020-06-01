@@ -41,6 +41,12 @@
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator1;
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator2;
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator3;
+@property (assign) IBOutlet NSLayoutConstraint* messageWidthConstraint;
+@property (assign) IBOutlet NSLayoutConstraint* messageHeightConstraint;
+@property (assign) IBOutlet NSLayoutConstraint* imageWidthConstraint;
+@property (assign) IBOutlet NSLayoutConstraint* imageHeightConstraint;
+@property (nonatomic, strong) IBOutlet NSView* imageContainer;
+@property (nonatomic, strong) IBOutlet NSView* composingIndicatorContainer;
 
 
 - (uint64_t) interaction;
