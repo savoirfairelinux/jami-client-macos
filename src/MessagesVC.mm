@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return cachedConv_;
 }
 
--(void) reloadConversationForMessage:(uint64_t) uid shouldUpdateHeight:(bool)update {
+-(void) reloadConversationForMessage:(uint64_t) uid insertRow:(bool)insert updateRowView:(bool)update  {
     auto* conv = [self getCurrentConversation];
 
     if (conv == nil)
@@ -191,6 +191,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return;
     }
     auto itIndex = distance(conv->interactions.begin(),it);
+    if (insert) {
+        NSRange insertRange = NSMakeRange(itIndex, 1);
+        NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
+        [conversationView insertRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
+        [conversationView noteNumberOfRowsChanged];
+    }
     if (itIndex >= ([conversationView numberOfRows] - 1)) {
         return;
     }
@@ -207,7 +213,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
     }
     if (update) {
-        [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+        NSRange insertRange = NSMakeRange(itIndex, 1);
+        NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
+        [conversationView removeRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
+        [conversationView insertRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
     }
     [conversationView reloadDataForRowIndexes: indexSet
                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
@@ -216,7 +225,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
     NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
     if (([conversationView numberOfRows] > 0) &&
-        lastvisibleRow > ([conversationView numberOfRows] - 3)) {
+        lastvisibleRow > ([conversationView numberOfRows] - 4)) {
         [conversationView scrollToEndOfDocument:nil];
     }
 }
@@ -303,24 +312,26 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     });
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
                                              [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                 if (uid != convUid_)
-                                                     return;
-                                                 cachedConv_ = nil;
-                                                 peerComposingMessage = false;
-                                                 [conversationView noteNumberOfRowsChanged];
-                                                 [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
-                                             });
+        if (uid != convUid_)
+            return;
+        cachedConv_ = nil;
+        peerComposingMessage = false;
+        [conversationView noteNumberOfRowsChanged];
+        [self reloadConversationForMessage:interactionId insertRow: YES updateRowView: NO];
+    });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
                                                        [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                           if (uid != convUid_)
-                                                               return;
-                                                           cachedConv_ = nil;
-                                                           bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-                                                           if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
-                                                               convModel_->refreshFilter();
-                                                           }
-                                                           [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
-                                                       });
+        if (uid != convUid_)
+            return;
+        cachedConv_ = nil;
+        bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+        if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
+            convModel_->refreshFilter();
+        }
+
+        bool updateView = interaction.type == lrc::api::interaction::Type::DATA_TRANSFER;
+        [self reloadConversationForMessage:interactionId insertRow: NO updateRowView: updateView];
+    });
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
@@ -466,6 +477,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             break;
     }
     result.transferedImage.image = nil;
+    [result.imageContainer setHidden:YES];
     [result.openImagebutton setHidden:YES];
     [result.msgBackground setHidden:NO];
     [result invalidateImageConstraints];
@@ -494,6 +506,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         if (([name rangeOfString:@"/"].location == NSNotFound)) {
             image = [self getImageForFilePath:[self getDataTransferPath:interactionID]];
         }
+        [result.imageContainer setHidden:image == nil];
         if(image != nil) {
             result.transferedImage.image = image;
             [result updateImageConstraintWithMax: MAX_TRANSFERED_IMAGE_SIZE];
@@ -645,6 +658,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     [result updateMessageConstraint:messageSize.width  andHeight:messageSize.height timeIsVisible:shouldDisplayTime isTopPadding: shouldApplyPadding];
     [[result.msgView textStorage] appendAttributedString:msgAttString];
+    [result.msgView setNeedsDisplay:YES];
 
     NSDataDetector *linkDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     NSArray *matches = [linkDetector matchesInString:result.msgView.string options:0 range:NSMakeRange(0, result.msgView.string.length)];
@@ -678,87 +692,88 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return result;
 }
 
-- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
-{
-    try {
-        double someWidth = tableView.frame.size.width * 0.7;
-
-        auto* conv = [self getCurrentConversation];
-
-        if (conv == nil)
-            return HEIGHT_DEFAULT;
-
-        auto size = [conversationView numberOfRows] - 1;
-        if (row >= size) {
-            //last item peer composing view
-            if (peerComposingMessage) {
-                return HEIGHT_FOR_COMPOSING_INDICATOR;
-            }
-            return 1;
-        }
-
-        auto it = conv->interactions.begin();
-
-        std::advance(it, row);
-
-        if (it == conv->interactions.end()) {
-            return HEIGHT_DEFAULT;
-        }
-
-        auto interaction = it->second;
-
-        MessageSequencing sequence = [self computeSequencingFor:row];
-
-        bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
-
-        if(interaction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
-            if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
-                NSString* name =  interaction.body.toNSString();
-                NSImage* image = [self getImageForFilePath:name];
-                if (([name rangeOfString:@"/"].location == NSNotFound)) {
-                    image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
-                }
-                if (image != nil) {
-                    CGFloat widthScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.width;
-                    CGFloat heightScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.height;
-                    CGFloat heigt = 0;
-                    if((widthScaleFactor >= 1) && (heightScaleFactor >= 1)) {
-                        heigt = image.size.height;
-                    } else {
-                        CGFloat scale = MIN(widthScaleFactor, heightScaleFactor);
-                        heigt = image.size.height * scale;
-                    }
-                    return heigt + TIME_BOX_HEIGHT;
-                }
-            }
-            return BUBBLE_HEIGHT_FOR_TRANSFERED_FILE + TIME_BOX_HEIGHT;
-        }
-
-        if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
-            return GENERIC_CELL_HEIGHT;
-
-        NSString *text = interaction.body.toNSString();
-        text = [text removeEmptyLinesAtBorders];
-
-        CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
-        CGFloat singleLignMessageHeight = 15;
-
-        bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
-
-        if (shouldDisplayTime) {
-            return MAX(messageSize.height + TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2,
-                       TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2 + singleLignMessageHeight);
-        }
-        if(shouldApplyPadding) {
-            return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2 + 15,
-                       singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2 + 15);
-        }
-        return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2,
-                   singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2);
-    } catch (std::out_of_range& e) {
-        return 1;
-    }
-}
+//- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+//{
+//    return 100;
+//    try {
+//        double someWidth = tableView.frame.size.width * 0.7;
+//
+//        auto* conv = [self getCurrentConversation];
+//
+//        if (conv == nil)
+//            return HEIGHT_DEFAULT;
+//
+//        auto size = [conversationView numberOfRows] - 1;
+//        if (row >= size) {
+//            //last item peer composing view
+//            if (peerComposingMessage) {
+//                return HEIGHT_FOR_COMPOSING_INDICATOR;
+//            }
+//            return 1;
+//        }
+//
+//        auto it = conv->interactions.begin();
+//
+//        std::advance(it, row);
+//
+//        if (it == conv->interactions.end()) {
+//            return HEIGHT_DEFAULT;
+//        }
+//
+//        auto interaction = it->second;
+//
+//        MessageSequencing sequence = [self computeSequencingFor:row];
+//
+//        bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
+//
+//        if(interaction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
+//            if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
+//                NSString* name =  interaction.body.toNSString();
+//                NSImage* image = [self getImageForFilePath:name];
+//                if (([name rangeOfString:@"/"].location == NSNotFound)) {
+//                    image = [self getImageForFilePath:[self getDataTransferPath:it->first]];
+//                }
+//                if (image != nil) {
+//                    CGFloat widthScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.width;
+//                    CGFloat heightScaleFactor = MAX_TRANSFERED_IMAGE_SIZE / image.size.height;
+//                    CGFloat heigt = 0;
+//                    if((widthScaleFactor >= 1) && (heightScaleFactor >= 1)) {
+//                        heigt = image.size.height;
+//                    } else {
+//                        CGFloat scale = MIN(widthScaleFactor, heightScaleFactor);
+//                        heigt = image.size.height * scale;
+//                    }
+//                    return heigt + TIME_BOX_HEIGHT;
+//                }
+//            }
+//            return BUBBLE_HEIGHT_FOR_TRANSFERED_FILE + TIME_BOX_HEIGHT;
+//        }
+//
+//        if(interaction.type == lrc::api::interaction::Type::CONTACT || interaction.type == lrc::api::interaction::Type::CALL)
+//            return GENERIC_CELL_HEIGHT;
+//
+//        NSString *text = interaction.body.toNSString();
+//        text = [text removeEmptyLinesAtBorders];
+//
+//        CGSize messageSize = [self sizeFor: text maxWidth:tableView.frame.size.width * 0.7];
+//        CGFloat singleLignMessageHeight = 15;
+//
+//        bool shouldApplyPadding = (sequence == FIRST_WITHOUT_TIME || sequence == SINGLE_WITHOUT_TIME) ? YES : NO;
+//
+//        if (shouldDisplayTime) {
+//            return MAX(messageSize.height + TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2,
+//                       TIME_BOX_HEIGHT + MESSAGE_TEXT_PADDING * 2 + singleLignMessageHeight);
+//        }
+//        if(shouldApplyPadding) {
+//            return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2 + 15,
+//                       singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2 + 15);
+//        }
+//        return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2,
+//                   singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2);
+//    } catch (std::out_of_range& e) {
+//        return 1;
+//    }
+//}
 
 #pragma mark - message view parameters
 
@@ -993,7 +1008,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 #pragma mark - Actions
 
 - (void)acceptIncomingFile:(id)sender {
-    auto interId = [(IMTableCellView*)[[sender superview] superview] interaction];
+    auto interId = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
     auto& inter = [self getCurrentConversation]->interactions.find(interId)->second;
     if (convModel_ && !convUid_.isEmpty()) {
         convModel_->acceptTransfer(convUid_, interId);
@@ -1001,9 +1016,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void)declineIncomingFile:(id)sender {
-    auto inter = [(IMTableCellView*)[[sender superview] superview] interaction];
+    auto interId = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
     if (convModel_ && !convUid_.isEmpty()) {
-        convModel_->cancelTransfer(convUid_, inter);
+        convModel_->cancelTransfer(convUid_, interId);
     }
 }
 
