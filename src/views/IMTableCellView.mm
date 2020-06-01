@@ -60,10 +60,12 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [self.msgView setString:@""];
     [self.msgView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.msgBackground setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
     [self.msgView setEditable:NO];
     acceptButton.image = [NSColor image: [NSImage imageNamed:@"ic_file_upload.png"] tintedWithColor:[NSColor greenSuccessColor]];
     declineButton.image = [NSColor image: [NSImage imageNamed:@"ic_action_cancel.png"] tintedWithColor:[NSColor redColor]];
     msgView.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
+    transferedImage.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
 }
 
 - (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed {
@@ -76,63 +78,69 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 
 - (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding
 {
-    [NSLayoutConstraint deactivateConstraints:[self.msgView constraints]];
-    [NSLayoutConstraint deactivateConstraints:[self.timeBox constraints]];
-    NSString* formatWidth = [NSString stringWithFormat:@"H:|-%@-[msgView(==%@)]-%@-|",
-                             MESSAGE_MARGIN,[NSString stringWithFormat:@"%f", width],
-                             MESSAGE_MARGIN];
-    NSString* formatHeight = [NSString stringWithFormat:@"V:[msgView(==%@)]",
-                              [NSString stringWithFormat:@"%f", height]];
-
-    NSArray* constraintsMessageHorizontal = [NSLayoutConstraint
-                                             constraintsWithVisualFormat:formatWidth
-                                             options:NSLayoutFormatAlignAllCenterY
-                                             metrics:nil                                                                          views:NSDictionaryOfVariableBindings(msgView)];
-    NSArray* constraintsMessageVertical = [NSLayoutConstraint
-                                           constraintsWithVisualFormat:formatHeight
-                                           options:0
-                                           metrics:nil                                                                          views:NSDictionaryOfVariableBindings(msgView)];
-
-    NSLayoutConstraint* centerMessageConstraint =[NSLayoutConstraint constraintWithItem:msgView
-                                                                              attribute:NSLayoutAttributeCenterY
-                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                 toItem:msgView.superview
-                                                                              attribute:NSLayoutAttributeCenterY
-                                                                             multiplier:1.f constant:0.f];
-
-    NSString* formatTime = [NSString stringWithFormat:@"V:[timeBox(%@)]", TIME_BOX_HEIGHT];
-    [self.timeBox setHidden:NO];
-    if (!visible) {
-        formatTime = padding ? [NSString stringWithFormat:@"V:[timeBox(15)]"] : [NSString stringWithFormat:@"V:[timeBox(1)]"];
-        [self.timeBox setHidden:YES];
-    }
-    NSArray* constraintsVerticalTimeBox = [NSLayoutConstraint
-                                           constraintsWithVisualFormat:formatTime
-                                           options:0
-                                           metrics:nil                                                                          views:NSDictionaryOfVariableBindings(timeBox)];
-    NSArray* constraints = [[[constraintsMessageHorizontal arrayByAddingObjectsFromArray:constraintsMessageVertical]
-                             arrayByAddingObject:centerMessageConstraint] arrayByAddingObjectsFromArray:constraintsVerticalTimeBox];
-    [NSLayoutConstraint activateConstraints:constraints];
+    self.messageWidthConstraint.constant = width;
+    self.messageHeightConstraint.constant = height;
+//    [NSLayoutConstraint deactivateConstraints:[self.msgView constraints]];
+//   // [NSLayoutConstraint deactivateConstraints:[self.timeBox constraints]];
+//    NSString* formatWidth = [NSString stringWithFormat:@"H:|-%@-[msgView(==%@)]-%@-|",
+//                             MESSAGE_MARGIN,[NSString stringWithFormat:@"%f", width],
+//                             MESSAGE_MARGIN];
+////    NSString* formatHeight = [NSString stringWithFormat:@"V:[msgView(==%@)]",
+////                              [NSString stringWithFormat:@"%f", height]];
+//
+//    NSArray* constraintsMessageHorizontal = [NSLayoutConstraint
+//                                             constraintsWithVisualFormat:formatWidth
+//                                             options:NSLayoutFormatAlignAllCenterY
+//                                             metrics:nil                                                                          views:NSDictionaryOfVariableBindings(msgView)];
+////    NSArray* constraintsMessageVertical = [NSLayoutConstraint
+////                                           constraintsWithVisualFormat:formatHeight
+////                                           options:0
+////                                           metrics:nil                                                                          views:NSDictionaryOfVariableBindings(msgView)];
+//
+//    NSLayoutConstraint* centerMessageConstraint =[NSLayoutConstraint constraintWithItem:msgView
+//                                                                              attribute:NSLayoutAttributeCenterY
+//                                                                              relatedBy:NSLayoutRelationEqual
+//                                                                                 toItem:msgView.superview
+//                                                                              attribute:NSLayoutAttributeCenterY
+//                                                                             multiplier:1.f constant:0.f];
+//
+//   // NSString* formatTime = [NSString stringWithFormat:@"V:[timeBox(%@)]", TIME_BOX_HEIGHT];
+    [self.timeBox setHidden:!visible];
+////    if (!visible) {
+////        formatTime = padding ? [NSString stringWithFormat:@"V:[timeBox(15)]"] : [NSString stringWithFormat:@"V:[timeBox(1)]"];
+//        [self.timeBox setHidden:YES];
+//  //  }
+////    NSArray* constraintsVerticalTimeBox = [NSLayoutConstraint
+////                                           constraintsWithVisualFormat:formatTime
+////                                           options:0
+////                                           metrics:nil                                                                          views:NSDictionaryOfVariableBindings(timeBox)];
+//    NSArray* constraints = [constraintsMessageHorizontal //arrayByAddingObjectsFromArray:constraintsMessageVertical]
+//                             arrayByAddingObject:centerMessageConstraint]; //arrayByAddingObjectsFromArray:constraintsVerticalTimeBox];
+//    [NSLayoutConstraint activateConstraints:constraints];
     //update message frame immediatly
     [self.msgView setNeedsDisplay:YES];
 }
 
 - (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height {
-    [NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
+    self.imageWidthConstraint.constant = width;
+    self.imageHeightConstraint.constant = height;
     [self.msgBackground setHidden:YES];
-    NSString* formatHeight = [NSString stringWithFormat:@"V:[transferedImage(==%@)]",[NSString stringWithFormat:@"%f", height]];
-    NSString* formatWidth = [NSString stringWithFormat:
-                             @"H:[transferedImage(==%@)]",[NSString stringWithFormat:@"%f", width]];
-    NSArray* constraintsHorizontal = [NSLayoutConstraint
-                                      constraintsWithVisualFormat:formatWidth
-                                      options:0
-                                      metrics:nil                                                                          views:NSDictionaryOfVariableBindings(transferedImage)];
-    NSArray* constraintsVertical = [NSLayoutConstraint
-                                    constraintsWithVisualFormat:formatHeight
-                                    options:0
-                                    metrics:nil                                                                          views:NSDictionaryOfVariableBindings(transferedImage)];
-    NSArray* constraints =[constraintsHorizontal arrayByAddingObjectsFromArray:constraintsVertical] ;
-    [NSLayoutConstraint activateConstraints:constraintsHorizontal];
+    [self.transferedImage setNeedsDisplay:YES];
+//    [NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
+//    [self.msgBackground setHidden:YES];
+//    NSString* formatHeight = [NSString stringWithFormat:@"V:[transferedImage(==%@)]",[NSString stringWithFormat:@"%f", height]];
+//    NSString* formatWidth = [NSString stringWithFormat:
+//                             @"H:[transferedImage(==%@)]",[NSString stringWithFormat:@"%f", width]];
+//    NSArray* constraintsHorizontal = [NSLayoutConstraint
+//                                      constraintsWithVisualFormat:formatWidth
+//                                      options:0
+//                                      metrics:nil                                                                          views:NSDictionaryOfVariableBindings(transferedImage)];
+//    NSArray* constraintsVertical = [NSLayoutConstraint
+//                                    constraintsWithVisualFormat:formatHeight
+//                                    options:0
+//                                    metrics:nil                                                                          views:NSDictionaryOfVariableBindings(transferedImage)];
+//    NSArray* constraints =[constraintsHorizontal arrayByAddingObjectsFromArray:constraintsVertical] ;
+//    [NSLayoutConstraint activateConstraints:constraintsHorizontal];
 }
 
 - (void) updateImageConstraintWithMax: (CGFloat) maxDimension {
@@ -152,7 +160,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 }
 
 - (void) invalidateImageConstraints {
-    [NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
+   // [NSLayoutConstraint deactivateConstraints:[self.transferedImage constraints]];
 }
 
 - (uint64_t)interaction
