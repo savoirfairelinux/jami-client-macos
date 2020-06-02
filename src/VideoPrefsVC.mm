@@ -261,7 +261,9 @@ QString currentVideoDevice;
     currentVideoDevice = defaultDevice;
     try {
         auto settings = avModel->getDeviceSettings(defaultDevice);
-        [videoDevicesList selectItemWithTitle: settings.name.toNSString()];
+        NSString *name = settings.name.toNSString();
+        name = [name stringByReplacingOccurrencesOfString:@" " withString:@" "];
+        [videoDevicesList selectItemWithTitle: name];
     } catch (...) {}
     [self devicesChanged];
 }
