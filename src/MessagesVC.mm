@@ -65,6 +65,7 @@
     QMetaObject::Connection filterChangedSignal_;
     QMetaObject::Connection interactionStatusUpdatedSignal_;
     QMetaObject::Connection peerComposingMsgSignal_;
+    QMetaObject::Connection lastDisplayedChanged_;
     NSString* previewImage;
     NSMutableDictionary *pendingMessagesToSend;
     RecordFileVC * recordingController;
@@ -82,7 +83,8 @@ CGFloat   const TIME_BOX_HEIGHT           = 34;
 CGFloat   const MESSAGE_TEXT_PADDING      = 10;
 CGFloat   const MAX_TRANSFERED_IMAGE_SIZE = 250;
 CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
-CGFloat   const HEIGHT_FOR_COMPOSING_INDICATOR = 37;
+CGFloat   const DEFAULT_ROW_HEIGHT = 10;
+CGFloat   const HEIGHT_FOR_COMPOSING_INDICATOR = 46;
 CGFloat   const HEIGHT_DEFAULT = 34;
 NSInteger const MEESAGE_MARGIN = 21;
 NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
@@ -152,6 +154,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
+    QObject::disconnect(lastDisplayedChanged_);
     [self closeRecordingView];
 }
 
@@ -160,9 +163,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSRange range = [conversationView rowsInRect:visibleRect];
     NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
     NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
-    if (([conversationView numberOfRows] > 0) &&
-        lastvisibleRow > ([conversationView numberOfRows] - 3)) {
-        [conversationView scrollToEndOfDocument:nil];
+    NSInteger numberOfRows = [conversationView numberOfRows];
+    if ((numberOfRows > 0) &&
+        lastvisibleRow > (numberOfRows - 5)) {
+        [conversationView scrollRowToVisible:numberOfRows - 1];
     }
 }
 
@@ -181,9 +185,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return cachedConv_;
 }
 
--(void) reloadConversationForMessage:(uint64_t) uid shouldUpdateHeight:(bool)update {
+-(void) reloadConversationForMessage:(uint64_t) uid updateSize:(BOOL) update {
     auto* conv = [self getCurrentConversation];
-
     if (conv == nil)
         return;
     auto it = conv->interactions.find(uid);
@@ -207,40 +210,14 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
     }
     if (update) {
-        [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+        NSRange insertRange = NSMakeRange(itIndex, 1);
+        NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
+        [conversationView removeRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
+        [conversationView insertRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
     }
     [conversationView reloadDataForRowIndexes: indexSet
                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
-    NSRange range = [conversationView rowsInRect:visibleRect];
-    NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
-    NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
-    if (([conversationView numberOfRows] > 0) &&
-        lastvisibleRow > ([conversationView numberOfRows] - 3)) {
-        [conversationView scrollToEndOfDocument:nil];
-    }
-}
-
--(void) reloadConversationForMessage:(uint64_t) uid shouldUpdateHeight:(bool)update updateConversation:(bool) updateConversation {
-    auto* conv = [self getCurrentConversation];
-
-    if (conv == nil)
-        return;
-    auto it = distance(conv->interactions.begin(),conv->interactions.find(uid));
-    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:it];
-    //reload previous message to update bubbleview
-    if (it > 0) {
-        NSRange range = NSMakeRange(it - 1, it);
-        indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-    }
-    if (update) {
-        [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
-    }
-    [conversationView reloadDataForRowIndexes: indexSet
-                                columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    if (update) {
-        [conversationView scrollToEndOfDocument:nil];
-    }
+    [self scrollToBottom];
 }
 
 -(void)setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel *)model
@@ -258,6 +235,19 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
+    QObject::disconnect(lastDisplayedChanged_);
+    lastDisplayedChanged_ =
+    QObject::connect(convModel_,
+                     &lrc::api::ConversationModel::displayedInteractionChanged,
+                     [self](const QString &uid,
+                            const QString &participantURI,
+                            const uint64_t &previousUid,
+                            const uint64_t &newdUid) {
+        if (uid != convUid_)
+            return;
+        [self reloadConversationForMessage:newdUid updateSize: NO];
+        [self reloadConversationForMessage:previousUid updateSize: NO];
+    });
 
     peerComposingMsgSignal_ = QObject::connect(convModel_,
                                                &lrc::api::ConversationModel::composingStatusChanged,
@@ -279,48 +269,46 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         if (row < 0) {
             return;
         }
-        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:row];
         if(peerComposingMessage) {
+            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:row];
+            [conversationView reloadDataForRowIndexes: indexSet
+                                                       columnIndexes:[NSIndexSet indexSetWithIndex:0]];
             [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+            [self scrollToBottom];
         } else {
             //whait for possible incoming message to avoid view jumping
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                if (!peerComposingMessage) {
-                    [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
-                }
+                auto row = [conversationView numberOfRows] - 1;
+                NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:row];
+                [conversationView noteHeightOfRowsWithIndexesChanged:indexSet];
+                [conversationView reloadDataForRowIndexes: indexSet
+                                            columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+                [self scrollToBottom];
             });
-        }
-        [conversationView reloadDataForRowIndexes: indexSet
-                                    columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-        CGRect visibleRect = [conversationView enclosingScrollView].contentView.visibleRect;
-        NSRange range = [conversationView rowsInRect:visibleRect];
-        NSIndexSet* visibleIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
-        NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
-        if (([conversationView numberOfRows] > 0) &&
-            lastvisibleRow > ([conversationView numberOfRows] - 3)) {
-            [conversationView scrollToEndOfDocument:nil];
         }
     });
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
                                              [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                 if (uid != convUid_)
-                                                     return;
-                                                 cachedConv_ = nil;
-                                                 peerComposingMessage = false;
-                                                 [conversationView noteNumberOfRowsChanged];
-                                                 [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
-                                             });
+        if (uid != convUid_)
+            return;
+        cachedConv_ = nil;
+        peerComposingMessage = false;
+        [conversationView noteNumberOfRowsChanged];
+        [self reloadConversationForMessage:interactionId updateSize: YES];
+        [self scrollToBottom];
+    });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
                                                        [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
-                                                           if (uid != convUid_)
-                                                               return;
-                                                           cachedConv_ = nil;
-                                                           bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-                                                           if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
-                                                               convModel_->refreshFilter();
-                                                           }
-                                                           [self reloadConversationForMessage:interactionId shouldUpdateHeight:YES];
-                                                       });
+        if (uid != convUid_)
+            return;
+        cachedConv_ = nil;
+        bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
+        if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
+            convModel_->refreshFilter();
+        }
+        [self reloadConversationForMessage:interactionId updateSize: interaction.type == lrc::api::interaction::Type::DATA_TRANSFER];
+        [self scrollToBottom];
+    });
 
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
@@ -468,7 +456,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     result.transferedImage.image = nil;
     [result.openImagebutton setHidden:YES];
     [result.msgBackground setHidden:NO];
-    [result invalidateImageConstraints];
     NSString* name =  interaction.body.toNSString();
     if (name.length > 0) {
        fileName = [name lastPathComponent];
@@ -541,26 +528,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     if (row == size) {
         if (size < 1) {
-            return [[NSView alloc] init];
+            return nil;
         }
         //last row peer composing view
         result = [tableView makeViewWithIdentifier:@"PeerComposingMsgView" owner:conversationView];
-        std::advance(it, row-1);
-        if (it != conv->interactions.end()) {
-            //if previous message not from peer display avatar
-            auto interaction = it->second;
-            bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-            [result.photoView setHidden: YES];
-            if(isOutgoing) {
-                auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-                auto* conv = [self getCurrentConversation];
-                [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
-                [result.photoView setHidden: NO];
-            }
-        }
-        CGFloat alpha = peerComposingMessage ? 1 : 0;
         result.alphaValue = 0;
         [result animateCompozingIndicator: NO];
+        CGFloat alpha = peerComposingMessage ? 1 : 0;
+        CGFloat height = peerComposingMessage ? HEIGHT_FOR_COMPOSING_INDICATOR : DEFAULT_ROW_HEIGHT;
+        [result updateHeightConstraints: height];
         if (alpha == 1) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 if (peerComposingMessage) {
@@ -671,9 +647,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != FIRST_WITHOUT_TIME
                                 && sequence != FIRST_WITH_TIME) ? YES : NO;
     [result.photoView setHidden:!shouldDisplayAvatar];
+    auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+    auto image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)));
+    BOOL showIndicator = convModel_->isLastDisplayed(convUid_, it->first, conv->participants.front());
+    [result.readIndicator setHidden: !showIndicator];
+    [result.readIndicator setImage:image];
     if (!isOutgoing && shouldDisplayAvatar) {
-        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-        [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+        [result.photoView setImage:image];
     }
     return result;
 }
@@ -690,11 +670,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
         auto size = [conversationView numberOfRows] - 1;
         if (row >= size) {
-            //last item peer composing view
-            if (peerComposingMessage) {
-                return HEIGHT_FOR_COMPOSING_INDICATOR;
-            }
-            return 1;
+            //return DEFAULT_ROW_HEIGHT;
+            return peerComposingMessage ? HEIGHT_FOR_COMPOSING_INDICATOR : DEFAULT_ROW_HEIGHT;
         }
 
         auto it = conv->interactions.begin();
@@ -756,7 +733,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return MAX(messageSize.height + MESSAGE_TEXT_PADDING * 2,
                    singleLignMessageHeight + MESSAGE_TEXT_PADDING * 2);
     } catch (std::out_of_range& e) {
-        return 1;
+        return DEFAULT_ROW_HEIGHT;
     }
 }
 
@@ -993,7 +970,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 #pragma mark - Actions
 
 - (void)acceptIncomingFile:(id)sender {
-    auto interId = [(IMTableCellView*)[[sender superview] superview] interaction];
+    auto interId = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
     auto& inter = [self getCurrentConversation]->interactions.find(interId)->second;
     if (convModel_ && !convUid_.isEmpty()) {
         convModel_->acceptTransfer(convUid_, interId);
@@ -1001,7 +978,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void)declineIncomingFile:(id)sender {
-    auto inter = [(IMTableCellView*)[[sender superview] superview] interaction];
+    auto inter = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
     if (convModel_ && !convUid_.isEmpty()) {
         convModel_->cancelTransfer(convUid_, inter);
     }
@@ -1009,10 +986,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (void)imagePreview:(id)sender {
     uint64_t interId;
-    if ([[sender superview] isKindOfClass:[IMTableCellView class]]) {
-        interId = [(IMTableCellView*)[sender superview] interaction];
-    } else if ([[[sender superview] superview] isKindOfClass:[IMTableCellView class]]) {
-        interId = [(IMTableCellView*)[[sender superview] superview] interaction];
+    if ([[[[[[sender superview] superview] superview] superview] superview] isKindOfClass:[IMTableCellView class]]) {
+        interId = [(IMTableCellView*)[[[[[sender superview] superview] superview] superview] superview] interaction];
+    } else if ([[[[[sender superview] superview] superview] superview] isKindOfClass:[IMTableCellView class]]) {
+        interId = [(IMTableCellView*)[[[[sender superview] superview] superview] superview] interaction];
     } else {
         return;
     }
