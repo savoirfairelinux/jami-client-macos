@@ -41,15 +41,17 @@
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator1;
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator2;
 @property (nonatomic, strong) IBOutlet NSView* compozingIndicator3;
-
+@property (assign) IBOutlet NSLayoutConstraint* messageWidthConstraint;
+@property (assign) IBOutlet NSLayoutConstraint* messageHeightConstraint;
+@property (nonatomic, strong) IBOutlet NSView* imageContainer;
 
 - (uint64_t) interaction;
 - (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed;
 - (void) setupForInteraction:(uint64_t)inter;
 - (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding;
-- (void) updateImageConstraint: (CGFloat) width andHeight: (CGFloat) height;
+- (void)updateWidthConstraints:(CGFloat)width;
+- (void)updateHeightConstraints:(CGFloat)height;
 - (void) updateImageConstraintWithMax: (CGFloat) maxDimension;
-- (void) invalidateImageConstraints;
 - (void) animateCompozingIndicator:(BOOL) animate;
 - (void) startBlinkAnimation:(NSView*) view withDelay:(CGFloat) delay;
 - (void) blinkAnimation: (NSView*) view;
