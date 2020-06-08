@@ -8,121 +8,121 @@
 "Cancel" = "Renunță";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Adaugă un cont SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "Adaugă la contacte";
 
 /* Backup error */
-"An error occured during the backup" = "An error occured during the backup";
+"An error occured during the backup" = "A apărut o eroare în timpul copiei de rezervă";
 
 /* Error shown to the user */
 "An error occured during the export" = "O eroare a apărut în timpul exportării";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "pare ocupat";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Permisiunea Audio nu este dată";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Fă o copie de rezervă a contului";
 
 /* Contextual menu action */
 "Block contact" = "Blochează contactul";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Făcînd clic pe \"OK\" vei elimina acest cont de pe acest dispozitiv! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înregistrat.";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "Anulat";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Alege fișierul";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Șterge conversația";
 
 /* No comment provided by engineer. */
 "Copy" = "Copiază";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Nu poți înregistra mesajul în timpul apelului";
 
 /* Welcome title */
-"Create a new account" = "Create a new account";
+"Create a new account" = "Creează un cont nou";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Introdu parola contului";
 
 /* File transfer failed label */
 "Failed" = "Eșec";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migrarea contului tău nu a reușit. Poți încerca din nou apăsînd Ok sau șterge acest cont.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Căutarea nu a reușit";
 
 /* Text shown to the user */
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importă de la o copie de rezervă";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "Importă de la alt dispozitiv";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "Incoming call from %@";
+"Incoming call from %@" = "Apel primit de la %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Mesaj primit de la %@";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username" = "Invalid username";
+"Invalid username" = "Numele de utilizator este greșit";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Numele de utilizator este greșit.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Du-te la Preferințe pentru a crea un cont nou";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Niciun cont disponibil";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Parola și confirmarea nu corespund.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Parola e prea scurtă";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Parolele nu corespund";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Fă apel audio";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Fă apel video";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Apasă pentru a începe înregistrarea";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Înregistreză un mesaj";
 
 /* Button Action */
 "Refuse" = "Refuză";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Nume înregistrat:";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Elimină contul";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Selectează arhiva";
 
 /* Send button title */
 "Send" = "Trimite";
@@ -143,7 +143,7 @@
 "Stop recording" = "Stop recording";
 
 /* File transfer successful label */
-"Success" = "Success";
+"Success" = "Succes";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -179,19 +179,19 @@
 "Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Jami" = "Welcome to Jami";
+"Welcome to Jami" = "Bine ai venit pe Jami";
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Would you like to leave a message?";
 
 /* Password button title */
-"Change password" = "Change password";
+"Change password" = "Schimbă parola";
 
 /* Password button title */
 "Create password" = "Create password";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Deconectează Dispozitivul";
 
 /* Device revocation message */
 "Attention! This action could not be undone!" = "Attention! This action could not be undone!";
@@ -203,8 +203,8 @@
 "Device revocation failed" = "Device revocation failed";
 
 /* Edit Sip Account Action*/
-"Done" = "Done";
+"Done" = "Făcut";
 
 /* Edit Sip Account Action */
-"Edit Account" = "Edit Account";
+"Edit Account" = "Modifică Cont";
 

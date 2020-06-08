@@ -3,166 +3,166 @@
 "0Fh-Sz-TMo.title" = "Min";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "0cb-ib-oHd"; */
-"0cb-ib-oHd.title" = "Intervalo para puertos de video RTP";
+"0cb-ib-oHd.title" = "Interval Video RTP Port";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "24s-we-pkD"; */
-"24s-we-pkD.title" = "Seguridad";
+"24s-we-pkD.title" = "Protecție";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Tiempo de espera para expiración de registración (segundos)";
+"2rB-Bv-c9U.title" = "Întîrziere maximă de înregistrare (secunde)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Ajustes de llamada";
+"3Uq-Nb-J1A.title" = "Reglări apel";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Repliegar en RTP en caso de fallo de cifrado";
+"3rM-KT-bNf.title" = "Folosește RTP cînd cifrarea eșuează";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Responder llamadas automáticamente";
+"3vs-TI-tkg.title" = "Răspunde automat la apeluri";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
-"6eH-la-JbF.title" = "Reino TURN";
+"6eH-la-JbF.title" = "Domeniul TURN";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
-"72p-GY-gu6.title" = "Contraseña de clave privada";
+"72p-GY-gu6.title" = "Parola cheii private";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
-"8JD-11-wHZ.title" = "Nombre del servidor TLS saliente";
+"8JD-11-wHZ.title" = "Numele serverului TLS de expediere";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Objeto 1";
+"8bw-iH-XGl.title" = "Elementul 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
-"9p9-GR-XKU.title" = "Puerto";
+"9p9-GR-XKU.title" = "Port";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "A31-3Y-z4R"; */
-"A31-3Y-z4R.title" = "Caja";
+"A31-3Y-z4R.title" = "Cutie";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Dirección publicada";
+"ELr-A7-mGE.title" = "Adresa publică";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
-"Gwi-Mp-NpZ.title" = "Usar TURN";
+"Gwi-Mp-NpZ.title" = "Folosește TURN";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
-"HRM-FR-1sH.title" = "Usar STUN";
+"HRM-FR-1sH.title" = "Folosește STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "Dirección STUN";
+"HYt-sW-yd0.title" = "Adresă STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "Requerir un certificado para las conexiones TLS entrantes";
+"JV8-cY-6vR.title" = "Solicită un certificat pentru conexiunile TLS primite";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "Negociación de sesión SDP (repliegue a ICE)";
+"Jfp-NE-ODd.title" = "Negociere Sesiune SDP (folosește ICE în caz de eșec)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
-"MBR-AC-HFq.title" = "Caja";
+"MBR-AC-HFq.title" = "Cutie";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Objeto 3";
+"Mho-w1-ZPJ.title" = "Elementul 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
-"Nqr-gj-dOH.title" = "Tono de llamada personalizado";
+"Nqr-gj-dOH.title" = "Sonerie personalizată";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Objeto 2";
+"OEo-C7-vEh.title" = "Elementul 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
-"Ogj-NW-fZ9.title" = "Intervalo para puertos de audio RTP";
+"Ogj-NW-fZ9.title" = "Interval Audio RTP Port";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
-"Ppa-zn-w1X.title" = "Caja";
+"Ppa-zn-w1X.title" = "Cutie";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Habilitar SDES para el protocolo de intercambio de claves";
+"Qk8-tH-a0l.title" = "Activează SDES pentru protocolul de schimbat chei";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
-"RIj-rT-gSd.title" = "Celda de texto";
+"RIj-rT-gSd.title" = "Celulă de Text";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
-"Vke-hs-iXz.title" = "Códecs de Audio";
+"Vke-hs-iXz.title" = "Codec audio";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
-"W9F-Nf-ehp.title" = "Clave privada";
+"W9F-Nf-ehp.title" = "Cheie privată";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Verificar certificados de respuesta (lado del cliente)";
+"WsS-1e-Epm.title" = "Verifică certificatele de răspuns (partea clientului)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
-"Xp3-bL-3Cs.title" = "Certificado de usuario";
+"Xp3-bL-3Cs.title" = "Certificat de utilizator";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "Xxr-gl-ukE"; */
-"Xxr-gl-ukE.title" = "Dirección";
+"Xxr-gl-ukE.title" = "Adresă";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
-"Zuz-jy-rLn.title" = "Caja";
+"Zuz-jy-rLn.title" = "Cutie";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "Dirección TURN";
+"aYs-wh-Hpr.title" = "Adresă TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "Certificado CA";
+"b2y-85-ZHK.title" = "Certificat CA";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Sólo usado durante la negociación de SDP en caso de que ICE no sea soportado.";
+"cN3-lC-dNM.title" = "Folosește numai în timpul negocierii SDP în caz că ICE nu este acceptat";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
-"cwV-lc-jju.title" = "Caja";
+"cwV-lc-jju.title" = "Cutie";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Tiempo de espera de negociación (segundos)";
+"dtf-uk-n1B.title" = "Timp de negociere (secunde)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
-"ekM-Cg-DEo.title" = "Caja";
+"ekM-Cg-DEo.title" = "Cutie";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Interfaz de red";
+"fjH-ej-gEr.title" = "Interfață de rețea";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verificar los certificados entrantes (del lado del servidor)";
+"fyT-bU-m54.title" = "Verifică certificatele primite (partea server)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
-"gJs-aX-7Ox.title" = "Códecs de Video";
+"gJs-aX-7Ox.title" = "Codec video";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
-"jgX-tQ-dIA.title" = "Celda de texto";
+"jgX-tQ-dIA.title" = "Celulă de Text";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
-"l86-cH-pp8.title" = "Caja";
+"l86-cH-pp8.title" = "Cutie";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "nh9-3y-CEI"; */
-"nh9-3y-CEI.title" = "Máx";
+"nh9-3y-CEI.title" = "Max";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "nq0-Js-9Cr"; */
 "nq0-Js-9Cr.title" = "Min";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Usar dirección y puerto personalizados";
+"nuq-Wl-sfd.title" = "Folosește adresă și port personalizate";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "Usuario TURN";
+"rMN-Wf-tmp.title" = "Nume de utilizator TURN";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Cifrar los flujos de medios (SRTP)";
+"vCS-s8-mZI.title" = "Cifrează fluxurile media (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Cifrar negociación (TLS)";
+"vZH-42-mUi.title" = "Cifrează negocierea (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
-"vpo-fl-9TS.title" = "Conectividad";
+"vpo-fl-9TS.title" = "Conectare";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
-"wq6-KV-8X3.title" = "Máx";
+"wq6-KV-8X3.title" = "Max";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
-"wyZ-Hb-BNf.title" = "Caja";
+"wyZ-Hb-BNf.title" = "Cutie";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "x93-zk-hAW"; */
 "x93-zk-hAW.title" = "UPnP";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "xjL-Wb-7VN"; */
-"xjL-Wb-7VN.title" = "Contraseña TURN";
+"xjL-Wb-7VN.title" = "Parolă TURN";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "Protocolo TLS";
+"zBy-cW-KY3.title" = "Metoda protocolului TLS";

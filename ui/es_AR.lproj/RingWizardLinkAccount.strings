@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
-"2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"2uK-1s-tk7.title" = "\tPodés importar tu cuenta desde otro dispositivo, pero primero tenés que obtener un código PIN.\n\t Para generar el código PIN, podés ir a la administración de cuentas en un dispositivo anterior, elegir la cuenta Jami a usar y seleccionar \"Vincular otro dispositivo a esta cuenta\". Recibirás el PIN necesario para completar este formulario. El PIN solo es válido por 10 minutos.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
 "3ik-rY-Gig.title" = "Ingresá tu PIN";
@@ -30,13 +30,13 @@
 "WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "Contraseña...";
 
 /* Class = "NSButtonCell"; title = "Select file"; ObjectID = "XJE-cy-nfQ"; */
-"XJE-cy-nfQ.title" = "Select file";
+"XJE-cy-nfQ.title" = "Seleccionar archivo";
 
 /* Class = "NSTextFieldCell"; title = "Import archive file"; ObjectID = "kXa-FL-Enf"; */
-"kXa-FL-Enf.title" = "Import archive file";
+"kXa-FL-Enf.title" = "Importar archivo almacenado";
 
 /* Class = "NSTextFieldCell"; title = "\tYou can directly import your account from an archive file on your device."; ObjectID = "kfe-m7-MTT"; */
-"kfe-m7-MTT.title" = "\tYou can directly import your account from an archive file on your device.";
+"kfe-m7-MTT.title" = "\tPodés importar tu cuenta directamente desde un archivo de almacenado en tu dispositivo.";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "t12-O0-kcf"; */
 "t12-O0-kcf.title" = "Ok";
@@ -54,4 +54,4 @@
 "vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "PIN";
 
 /* Class = "NSTextFieldCell"; title = "Linking..."; ObjectID = "zWn-4H-ODH"; */
-"zWn-4H-ODH.title" = "Linking...";
+"zWn-4H-ODH.title" = "Vinculando...";

@@ -3,7 +3,7 @@
 "0qE-Sz-hdc.title" = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your D which is 40 characters long.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Password..."; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Password...";
+"1TO-Ov-S8j.placeholderString" = "Parolă...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
 "93I-zf-xAk.ibShadowedIsNilPlaceholder" = "Repeat password...";
@@ -18,7 +18,7 @@
 "93I-zf-xAk.ibShadowedNotApplicablePlaceholder" = "Repeat password...";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
-"AG5-GR-bii.title" = "Register public username";
+"AG5-GR-bii.title" = "Înregistrează nume de utilizator public";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Repeat password"; ObjectID = "BCg-5V-Ek4"; */
 "BCg-5V-Ek4.placeholderString" = "Repeat password";
@@ -27,16 +27,16 @@
 "Cnw-4p-3Uc.title" = "Choose password for enhance security";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedIsNilPlaceholder" = "Password...";
+"JCg-IP-8cg.ibShadowedIsNilPlaceholder" = "Parolă...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedMultipleValuesPlaceholder" = "Password...";
+"JCg-IP-8cg.ibShadowedMultipleValuesPlaceholder" = "Parolă...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedNoSelectionPlaceholder" = "Password...";
+"JCg-IP-8cg.ibShadowedNoSelectionPlaceholder" = "Parolă...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedNotApplicablePlaceholder" = "Password...";
+"JCg-IP-8cg.ibShadowedNotApplicablePlaceholder" = "Parolă...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
 "UgM-Zo-2Dy.ibShadowedIsNilPlaceholder" = "Username...";
@@ -57,7 +57,7 @@
 "bdC-Uc-Qhs.placeholderString" = "Username...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "gEy-ak-Cgq"; */
-"gEy-ak-Cgq.placeholderString" = "Enter name";
+"gEy-ak-Cgq.placeholderString" = "Introdu nume";
 
 /* Class = "NSTextFieldCell"; title = "Profile"; ObjectID = "gki-BR-jc3"; */
 "gki-BR-jc3.title" = "Profil";
@@ -72,4 +72,4 @@
 "zUH-kc-cik.title" = "This password will be used to encrypt your account data and link new devices to your account. It is not mandatory but recommended to set one.";
 
 /* Class = "NSButtonCell"; title = "Create"; ObjectID = "zfA-n9-V4X"; */
-"zfA-n9-V4X.title" = "Create";
+"zfA-n9-V4X.title" = "Creează";
