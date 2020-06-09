@@ -174,8 +174,8 @@
                                                             <outlet property="timeLabel" destination="B6E-x2-crl" id="gUo-fj-mp5"/>
                                                         </connections>
                                                     </tableCellView>
-                                                    <tableCellView identifier="RightMessageView" misplaced="YES" id="Kuf-56-7Og" userLabel="IMTableCellView" customClass="IMTableCellView">
-                                                        <rect key="frame" x="1" y="91" width="697" height="88"/>
+                                                    <tableCellView identifier="RightMessageView" id="Kuf-56-7Og" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                        <rect key="frame" x="1" y="91" width="742" height="88"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hV-26-r5V">
@@ -647,6 +647,10 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="bsk-Gj-qQ2" secondAttribute="bottom" constant="22" id="NS2-QC-6a7"/>
+                                <constraint firstItem="bsk-Gj-qQ2" firstAttribute="top" relation="lessThanOrEqual" secondItem="vd8-6U-eqB" secondAttribute="top" constant="22" id="OcQ-tU-QQx"/>
+                            </constraints>
                             <visibilityPriorities>
                                 <integer value="1000"/>
                                 <integer value="1000"/>
