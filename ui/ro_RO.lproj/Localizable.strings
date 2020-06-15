@@ -59,7 +59,7 @@
 "Failed" = "Eșec";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migrarea contului tău nu a reușit. Poți încerca din nou apăsînd Ok sau șterge acest cont.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Transferul contului tău nu a reușit. Poți încerca din nou apăsînd Ok sau șterge acest cont.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Căutarea nu a reușit";
@@ -92,13 +92,13 @@
 "No account available" = "Niciun cont disponibil";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Parola și confirmarea nu corespund.";
+"Password and confirmation mismatch." = "Parola și confirmarea nu sînt la fel.";
 
 /* Indication for user */
 "Password is too short" = "Parola e prea scurtă";
 
 /* Indication for user */
-"Passwords don't match" = "Parolele nu corespund";
+"Passwords don't match" = "Parolele nu se potrivesc";
 
 /* Contextual menu action */
 "Place audio call" = "Fă apel audio";
@@ -122,85 +122,85 @@
 "Remove account" = "Elimină contul";
 
 /* export account button title */
-"Select archive" = "Selectează arhiva";
+"Select archive" = "Alege arhiva";
 
 /* Send button title */
 "Send" = "Trimite";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Trimite o cerere de contact";
 
 /* No comment provided by engineer. */
 "Share" = "Distribuie";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Distribuie ecranul";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Autentificare";
 
 /* Record message title */
-"Stop recording" = "Stop recording";
+"Stop recording" = "Oprește înregistrarea";
 
 /* File transfer successful label */
 "Success" = "Succes";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "Opțiuni Text";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Numele de utilizator introdus e disponibil";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Numele de utilizator introdus nu e disponibil";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Parola introdusă nu deblochează acest cont";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Acest cont trebuie transferat";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Acesta e ID-ul tău. \nCopiază-l și distribuie-l prietenilor!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Acesta e numele tău de utilizator Jami. \nCopiază-l și distribuie-l prietenilor!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pentru a completa procesul, trebuie să deschizi Jami pe noul dispozitiv și să alegi opțiunea \"Conectează acest dispozitiv la un cont\".Codul tău PIN este valabil 10 minute.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Pentru a continua transferul, trebuie să introduci o parolă care a fost folosită pentru acest cont.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Inaccesibil";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Permisiunea Video nu este dată";
 
 /* Welcome title */
 "Welcome to Jami" = "Bine ai venit pe Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Vrei să lași un mesaj?";
 
 /* Password button title */
 "Change password" = "Schimbă parola";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Creează parola";
 
 /* Device revocation title */
 "Revoke Device" = "Deconectează Dispozitivul";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Atenție! Această acțiune este ireversibilă!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Deconectarea dispozitivului a eșuat. Verifică parola și încearcă din nou.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Deconectarea dispozitivului a eșuat";
 
 /* Edit Sip Account Action*/
 "Done" = "Făcut";
