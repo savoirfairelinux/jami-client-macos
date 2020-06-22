@@ -21,22 +21,22 @@
 "57.title" = "Jami";
 
 /* Class = "NSMenuItem"; title = "About Jami"; ObjectID = "58"; */
-"58.title" = "About Jami";
+"58.title" = "A prepaus de Jami";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Preferences…";
+"129.title" = "Preferéncias…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
-"130.title" = "Services";
+"130.title" = "Servicis";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Services";
+"131.title" = "Servicis";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Hide Jami";
+"134.title" = "Amagar Jami";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "Quit Jami";
+"136.title" = "Quitar Jami";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
 "145.title" = "Hide Others";
@@ -51,13 +51,13 @@
 "196.title" = "Start Speaking";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
-"197.title" = "Copy";
+"197.title" = "Copiar";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "Select All";
+"198.title" = "Tot seleccionar";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
-"199.title" = "Cut";
+"199.title" = "Talhar";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
 "200.title" = "Spelling and Grammar";
@@ -69,22 +69,22 @@
 "202.title" = "Suprimir";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
-"203.title" = "Paste";
+"203.title" = "Pegar";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
 "204.title" = "Show Spelling and Grammar";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "Edit";
+"205.title" = "Modificar";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
-"207.title" = "Undo";
+"207.title" = "Anullar";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Find Next";
+"208.title" = "Trobar seguent";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
-"209.title" = "Find…";
+"209.title" = "Trobar...";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "210"; */
 "210.title" = "Jump to Selection";
@@ -105,7 +105,7 @@
 "216.title" = "Spelling and Grammar";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "Edit";
+"217.title" = "Modificar";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
 "218.title" = "Find";
@@ -183,10 +183,10 @@
 "485.title" = "Paste and Match Style";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
-"490.title" = "Help";
+"490.title" = "Ajuda";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
-"491.title" = "Help";
+"491.title" = "Ajuda";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
 "492.title" = "Jami Help";
