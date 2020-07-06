@@ -50,7 +50,7 @@
 "Could not record message during call" = "通话中无法录制信息";
 
 /* Welcome title */
-"Create a new account" = "新建帐户";
+"Create a new account" = "新建账户";
 
 /* Backup enter password */
 "Enter account password" = "输入账户密码";
@@ -59,7 +59,7 @@
 "Failed" = "失败";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "帐户迁移失败。请点击“确定”重试，或删除您的帐户。";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "账户迁移失败。请点击“确定”重试，或删除您的账户。";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "无法进行查找";
@@ -155,7 +155,7 @@
 "The entered username is not available" = "该用户名不可用";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "您输入的密码无法解锁该帐户";
+"The password you entered does not unlock this account" = "您输入的密码无法解锁该账户";
 
 /* Text shown to the user */
 "This account needs to be migrated" = "该账户需迁移";
@@ -188,23 +188,23 @@
 "Change password" = "更改密码";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "创建密码";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "吊销设备";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "注意！此操作无法取消！";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "设备吊销失败。请检查您的密码并重试。";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "设备吊销失败";
 
 /* Edit Sip Account Action*/
-"Done" = "已完成";
+"Done" = "完成";
 
 /* Edit Sip Account Action */
-"Edit Account" = "编辑帐户";
+"Edit Account" = "编辑账户";
 

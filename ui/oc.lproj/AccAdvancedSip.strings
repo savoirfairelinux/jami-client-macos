@@ -24,7 +24,7 @@
 "6eH-la-JbF.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
-"72p-GY-gu6.title" = "Private key password";
+"72p-GY-gu6.title" = "Senhal de clau privada";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
 "8JD-11-wHZ.title" = "Outgoing TLS server name";
@@ -147,7 +147,7 @@
 "vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Encrypt negotiation (TLS)";
+"vZH-42-mUi.title" = "Negociacion chiframent (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
 "vpo-fl-9TS.title" = "Connectivitat";
@@ -165,4 +165,4 @@
 "xjL-Wb-7VN.title" = "TURN password";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLS protocol method";
+"zBy-cW-KY3.title" = "metòde de protocòl TLS";

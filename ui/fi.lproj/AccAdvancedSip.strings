@@ -51,7 +51,7 @@
 "HYt-sW-yd0.title" = "STUN osoite";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "Vaadi saapuvilta TLS-yhteyksiltä sertifikaatti";
+"JV8-cY-6vR.title" = "Vaadi saapuvilta TLS-yhteyksiltä varmenne";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
 "Jfp-NE-ODd.title" = "SDP-istunnon neuvottelut (ICE Fallback)";
@@ -90,7 +90,7 @@
 "WsS-1e-Epm.title" = "Vahvista varmenteet (asiakaspuoli)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
-"Xp3-bL-3Cs.title" = "Käyttäjäsertifikaatti";
+"Xp3-bL-3Cs.title" = "Käyttäjävarmenne";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "Xxr-gl-ukE"; */
 "Xxr-gl-ukE.title" = "Osoite";
@@ -102,7 +102,7 @@
 "aYs-wh-Hpr.title" = "TURN osoite";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "CA-sertifikaatti";
+"b2y-85-ZHK.title" = "CA-varmenne";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
 "cN3-lC-dNM.title" = "Käytetään vain SDP-neuvotteluissa, jos ICE ei ole tuettu.";
@@ -120,7 +120,7 @@
 "fjH-ej-gEr.title" = "Verkkoliitäntä";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Varmenna saapuvat sertifikaatit (palvelinpuoli)";
+"fyT-bU-m54.title" = "Vahvista saapuvat varmenteet (palvelinpuoli)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "Videokoodekit";
