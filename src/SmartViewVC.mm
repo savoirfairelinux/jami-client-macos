@@ -57,7 +57,7 @@
     __strong IBOutlet NSLayoutConstraint *listTypeSelectorBottom;
     bool selectorIsPresent;
 
-    QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, newInteractionConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
+    QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, newInteractionConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection, profileUpdatedConnection;
 
     lrc::api::ConversationModel* convModel_;
     QString selectedUid_;
@@ -231,6 +231,7 @@ NSInteger const REQUEST_SEG         = 1;
     QObject::disconnect(conversationClearedConnection);
     QObject::disconnect(interactionStatusUpdatedConnection_);
     QObject::disconnect(newInteractionConnection_);
+    QObject::disconnect(profileUpdatedConnection);
     [self reloadData];
     if (convModel_ != nil) {
         modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
@@ -241,6 +242,12 @@ NSInteger const REQUEST_SEG         = 1;
                                                         [self] (const QString& convUid){
                                                             [self reloadConversationWithUid: convUid.toNSString()];
                                                         });
+        profileUpdatedConnection =
+        QObject::connect(convModel_->owner.contactModel.get(),
+                         &lrc::api::ContactModel::contactAdded,
+                         [self](const QString &contactUri) {
+            [self reloadData];
+                                                                  });
         filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::filterChanged,
                                                         [self] (){
                                                             [self reloadData];
