@@ -1010,6 +1010,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (!previewImage || previewImage.length <= 0) {
         return;
     }
+    [self addToResponderChain];
     if ([QLPreviewPanel sharedPreviewPanelExists] && [[QLPreviewPanel sharedPreviewPanel] isVisible]) {
         [[QLPreviewPanel sharedPreviewPanel] orderOut:nil];
     } else {
@@ -1150,6 +1151,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (void)endPreviewPanelControl:(QLPreviewPanel *)panel {
     panel.dataSource = nil;
+    [self removeFromResponderChain];
 }
 
 -(BOOL)acceptsPreviewPanelControl:(QLPreviewPanel *)panel
@@ -1162,10 +1164,30 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (id <QLPreviewItem>)previewPanel:(QLPreviewPanel *)panel previewItemAtIndex:(NSInteger)index {
+    if (previewImage == nil) {
+        return nil;
+    }
     try {
         return [NSURL fileURLWithPath: previewImage];
     } catch (NSException *exception) {
         nil;
+    }
+}
+
+- (void)addToResponderChain {
+    if (conversationView.window &&
+        ![[conversationView.window nextResponder] isEqual:self]) {
+        NSResponder * aNextResponder = [conversationView.window nextResponder];
+        [conversationView.window setNextResponder:self];
+    }
+}
+
+
+- (void)removeFromResponderChain {
+    if (conversationView.window &&
+        [[conversationView.window nextResponder] isEqual:self]) {
+        NSResponder * aNextResponder = [conversationView.window nextResponder];
+        [conversationView.window setNextResponder:[self nextResponder]];
     }
 }
 
