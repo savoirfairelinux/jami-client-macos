@@ -9,16 +9,16 @@
 "FgV-iF-gGQ.title" = "Celulă de Text";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "Ilz-7v-2fr"; */
-"Ilz-7v-2fr.placeholderString" = "Send a message";
+"Ilz-7v-2fr.placeholderString" = "Trimite un mesaj";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Start audio call"; ObjectID = "RuH-fO-poy"; */
-"RuH-fO-poy.ibShadowedToolTip" = "Start audio call";
+"RuH-fO-poy.ibShadowedToolTip" = "Începe un apel audio";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "UJf-cF-RAo"; */
 "UJf-cF-RAo.ibShadowedToolTip" = "Trimite";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Start video call"; ObjectID = "cFH-d7-Erh"; */
-"cFH-d7-Erh.ibShadowedToolTip" = "Start video call";
+"cFH-d7-Erh.ibShadowedToolTip" = "Începe un apel video";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ciI-CA-tly"; */
 "ciI-CA-tly.title" = "Cutie";
@@ -27,7 +27,7 @@
 "fh9-Uo-8R1.title" = "Cutie";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "gwx-eT-PcN"; */
-"gwx-eT-PcN.ibShadowedToolTip" = "Send a file";
+"gwx-eT-PcN.ibShadowedToolTip" = "Trimite un fișier";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hrX-ac-Quk"; */
 "hrX-ac-Quk.title" = "Cutie";
@@ -36,7 +36,7 @@
 "ooq-vs-Xt1.ibShadowedToolTip" = "Înapoi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add contact"; ObjectID = "pGK-hO-X1Y"; */
-"pGK-hO-X1Y.ibShadowedToolTip" = "Add contact";
+"pGK-hO-X1Y.ibShadowedToolTip" = "Adaugă contactul";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "pRL-vb-me9"; */
 "pRL-vb-me9.title" = "Cutie";
@@ -45,10 +45,10 @@
 "wYE-S3-AzD.ibShadowedToolTip" = "Înregistreză un mesaj audio";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Send a message";
+"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Trimite un mesaj";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "Send a message";
+"zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "Trimite un mesaj";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedNoSelectionPlaceholder" = "Send a message";
+"zK1-Ee-EWS.ibShadowedNoSelectionPlaceholder" = "Trimite un mesaj";

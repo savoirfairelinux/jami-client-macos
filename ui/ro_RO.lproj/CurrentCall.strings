@@ -18,22 +18,22 @@
 "Kjq-iM-NBL.ibShadowedToolTip" = "Închide";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
-"LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
+"LVS-yZ-98V.ibShadowedToolTip" = "Video fără sonor";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
-"NRc-5f-Ujc.ibShadowedMultipleValuesPlaceholder" = "Send a message";
+"NRc-5f-Ujc.ibShadowedMultipleValuesPlaceholder" = "Trimite un mesaj";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
-"NRc-5f-Ujc.ibShadowedNoSelectionPlaceholder" = "Send a message";
+"NRc-5f-Ujc.ibShadowedNoSelectionPlaceholder" = "Trimite un mesaj";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
-"NRc-5f-Ujc.ibShadowedNotApplicablePlaceholder" = "Send a message";
+"NRc-5f-Ujc.ibShadowedNotApplicablePlaceholder" = "Trimite un mesaj";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Record"; ObjectID = "QYT-0n-4sw"; */
 "QYT-0n-4sw.ibShadowedToolTip" = "Înregistrează";
 
 /* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
-"Vhk-fx-6RW.ibShadowedToolTip" = "add contact to call";
+"Vhk-fx-6RW.ibShadowedToolTip" = "adaugă contact de apelat";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
 "YGj-SP-ikj.title" = "Celulă de Text";
@@ -42,31 +42,31 @@
 "anb-Y8-JQi.ibShadowedToolTip" = "Așteptare";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Send a message"; ObjectID = "d4g-hS-EMn"; */
-"d4g-hS-EMn.placeholderString" = "Send a message";
+"d4g-hS-EMn.placeholderString" = "Trimite un mesaj";
 
 /* Class = "NSTextFieldCell"; placeholderString = "State"; ObjectID = "dPt-JY-yxV"; */
-"dPt-JY-yxV.placeholderString" = "State";
+"dPt-JY-yxV.placeholderString" = "Stare";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
+"fmp-x4-Pef.ibShadowedToolTip" = "Act/Dez discuția";
 
 /* Class = "NSTextFieldCell"; title = "person Id"; ObjectID = "hKi-Ay-ex5"; */
-"hKi-Ay-ex5.title" = "person Id";
+"hKi-Ay-ex5.title" = "ID-ul persoanei";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hfc-s5-yWK"; */
 "hfc-s5-yWK.title" = "Cutie";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "ngO-WV-cXD"; */
-"ngO-WV-cXD.ibShadowedToolTip" = "Send a file";
+"ngO-WV-cXD.ibShadowedToolTip" = "Trimite un fișier";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Pick up";
+"qgD-3D-nD5.ibShadowedToolTip" = "Răspunde";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
 "rqa-be-VIB.ibShadowedToolTip" = "Trimite";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
-"tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
+"tQl-cT-0Lb.ibShadowedToolTip" = "Fără Sonor";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "ues-20-34k"; */
-"ues-20-34k.placeholderString" = "Person name";
+"ues-20-34k.placeholderString" = "Numele persoanei";
