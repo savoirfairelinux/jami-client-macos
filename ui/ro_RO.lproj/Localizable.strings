@@ -32,7 +32,7 @@
 "Block contact" = "Blochează contactul";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Făcînd clic pe \"OK\" vei elimina acest cont de pe acest dispozitiv! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înregistrat.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Făcînd clic pe \"OK\" vei elimina acest cont de pe acest dispozitiv! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 
 /* File transfer canceled label */
 "Canceled" = "Anulat";
@@ -116,7 +116,7 @@
 "Refuse" = "Refuză";
 
 /* Text shown to the user */
-"Registered name: " = "Nume înregistrat:";
+"Registered name: " = "Nume înscris:";
 
 /* Remove account alert title */
 "Remove account" = "Elimină contul";
@@ -191,7 +191,7 @@
 "Create password" = "Creează parola";
 
 /* Device revocation title */
-"Revoke Device" = "Deconectează Dispozitivul";
+"Revoke Device" = "Elimină Dispozitivul";
 
 /* Device revocation message */
 "Attention! This action could not be undone!" = "Atenție! Această acțiune este ireversibilă!";

@@ -3,7 +3,7 @@
 "0Fh-Sz-TMo.title" = "最小";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "0cb-ib-oHd"; */
-"0cb-ib-oHd.title" = "视频RTP端口范围";
+"0cb-ib-oHd.title" = "视频 RTP 端口范围";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "24s-we-pkD"; */
 "24s-we-pkD.title" = "安全";
@@ -15,22 +15,22 @@
 "3Uq-Nb-J1A.title" = "呼叫设置";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "若加密失败，使用RTP";
+"3rM-KT-bNf.title" = "若加密失败，使用 RTP";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
 "3vs-TI-tkg.title" = "自动接听来电";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
-"6eH-la-JbF.title" = "TURN域";
+"6eH-la-JbF.title" = "TURN 域";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
 "72p-GY-gu6.title" = "私钥密码";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
-"8JD-11-wHZ.title" = "TLS发送服务器地址";
+"8JD-11-wHZ.title" = "TLS 发送服务器地址";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "项目1";
+"8bw-iH-XGl.title" = "项目 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "端口";
@@ -42,19 +42,19 @@
 "ELr-A7-mGE.title" = "公开地址";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
-"Gwi-Mp-NpZ.title" = "使用TURN";
+"Gwi-Mp-NpZ.title" = "使用 TURN";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
-"HRM-FR-1sH.title" = "使用STUN";
+"HRM-FR-1sH.title" = "使用 STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN地址";
+"HYt-sW-yd0.title" = "STUN 地址";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "收到的TLS连接需要提供证书";
+"JV8-cY-6vR.title" = "收到的 TLS 连接需要提供证书";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "SDP协议握手（当ICE协议不受支持）";
+"Jfp-NE-ODd.title" = "SDP 协议握手（当 ICE 协议不受支持）";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
 "MBR-AC-HFq.title" = "盒子";
@@ -69,16 +69,16 @@
 "OEo-C7-vEh.title" = "项目 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
-"Ogj-NW-fZ9.title" = "音频RTP端口范围";
+"Ogj-NW-fZ9.title" = "音频 RTP 端口范围";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
 "Ppa-zn-w1X.title" = "盒子";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "对密钥交换协议启用SDES";
+"Qk8-tH-a0l.title" = "对密钥交换协议启用 SDES";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
-"RIj-rT-gSd.title" = "Text Cell";
+"RIj-rT-gSd.title" = "文字气泡";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
 "Vke-hs-iXz.title" = "音频编码";
@@ -99,13 +99,13 @@
 "Zuz-jy-rLn.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN地址";
+"aYs-wh-Hpr.title" = "TURN 地址";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
 "b2y-85-ZHK.title" = "颁发机构证书";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "仅当SDP协商期间在不支持ICE的情况下使用";
+"cN3-lC-dNM.title" = "仅当 SDP 协商期间在不支持 ICE 的情况下使用";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "盒子";
@@ -126,7 +126,7 @@
 "gJs-aX-7Ox.title" = "视频编码";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
-"jgX-tQ-dIA.title" = "Text Cell";
+"jgX-tQ-dIA.title" = "文字气泡";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
 "l86-cH-pp8.title" = "盒子";
@@ -141,10 +141,10 @@
 "nuq-Wl-sfd.title" = "使用自定义地址地址与端口";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "TURN用户名";
+"rMN-Wf-tmp.title" = "TURN 用户名";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "加密流媒体（SRTP）";
+"vCS-s8-mZI.title" = "加密流媒体 (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
 "vZH-42-mUi.title" = "密钥协商（TLS）";
@@ -162,7 +162,7 @@
 "x93-zk-hAW.title" = "UPnP";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "xjL-Wb-7VN"; */
-"xjL-Wb-7VN.title" = "TURN密码";
+"xjL-Wb-7VN.title" = "TURN 密码";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLS协议方法";
+"zBy-cW-KY3.title" = "TLS 协议方法";

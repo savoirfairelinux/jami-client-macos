@@ -12,7 +12,7 @@
 "7eU-EP-4br.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN地址";
+"8mv-Ia-GM4.title" = "TURN 地址";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "呼叫设置";
@@ -21,7 +21,7 @@
 "DSe-Cs-oD6.title" = "自动接听来电";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
-"EyV-Io-d3f.title" = "Text Cell";
+"EyV-Io-d3f.title" = "文字气泡";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
 "ID3-Sv-gYY.title" = "名称服务器";
@@ -45,10 +45,10 @@
 "Wrh-zD-uh5.title" = "视频编码";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
-"XU0-bl-lDD.title" = "TURN域";
+"XU0-bl-lDD.title" = "TURN 域";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN地址";
+"YE4-ry-u07.title" = "STUN 地址";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "初始服务器";
@@ -69,13 +69,13 @@
 "eGX-gk-Zxp.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
-"eMG-uY-bpH.title" = "TURN用户名";
+"eMG-uY-bpH.title" = "TURN 用户名";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "g8T-u3-MS3"; */
-"g8T-u3-MS3.title" = "Text Cell";
+"g8T-u3-MS3.title" = "文字气泡";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "gUl-Px-cIJ"; */
-"gUl-Px-cIJ.title" = "TURN密码";
+"gUl-Px-cIJ.title" = "TURN 密码";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "k7i-pK-JXp"; */
 "k7i-pK-JXp.title" = "颁发机构证书";
@@ -99,7 +99,7 @@
 "vYi-gW-MrY.title" = "盒子";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT配置";
+"xJT-ij-69q.title" = "OpenDHT 配置";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
-"zPJ-cO-neQ.title" = "使用TURN";
+"zPJ-cO-neQ.title" = "使用 TURN";
