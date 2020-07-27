@@ -23,7 +23,7 @@
 "appears to be busy." = "pare ocupat";
 
 /* Error audio permission */
-"Audio permission not granted" = "Permisiunea Audio nu este dată";
+"Audio permission not granted" = "Nu ai permis accesul la Audio";
 
 /* Backup account */
 "Backup your account" = "Fă o copie de rezervă a contului";
@@ -176,7 +176,7 @@
 "Unjoinable" = "Inaccesibil";
 
 /* Error video permission */
-"Video permission not granted" = "Permisiunea Video nu este dată";
+"Video permission not granted" = "Nu ai permis accesul la Video";
 
 /* Welcome title */
 "Welcome to Jami" = "Bine ai venit pe Jami";
@@ -197,10 +197,10 @@
 "Attention! This action could not be undone!" = "Atenție! Această acțiune este ireversibilă!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Deconectarea dispozitivului a eșuat. Verifică parola și încearcă din nou.";
+"Device revocation failed. Please check your password and try again." = "Eliminarea dispozitivului a eșuat. Verifică parola și încearcă din nou.";
 
 /* Device revocation error */
-"Device revocation failed" = "Deconectarea dispozitivului a eșuat";
+"Device revocation failed" = "Eliminarea dispozitivului a eșuat";
 
 /* Edit Sip Account Action*/
 "Done" = "Făcut";
