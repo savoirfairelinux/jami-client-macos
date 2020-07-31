@@ -96,7 +96,10 @@ namespace Interfaces {
     {
         QImage image;
         //For now, ENCODING is only base64 and image type PNG or JPG
-        const bool ret = image.loadFromData(QByteArray::fromBase64(data),type.toLatin1());
+        bool ret = image.loadFromData(QByteArray::fromBase64(data),type.toLatin1());
+        if (!ret) {
+            ret = image.loadFromData(QByteArray::fromBase64(data), 0);
+        }
         if (!ret) {
             qDebug() << "vCard image loading failed";
             return QVariant();
