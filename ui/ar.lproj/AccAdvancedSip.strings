@@ -9,7 +9,7 @@
 "24s-we-pkD.title" = "تأمين";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
+"2rB-Bv-c9U.title" = "إنقضاء فترة تسجيل (ثواني)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
 "3Uq-Nb-J1A.title" = "إعدادات الاتصال";
@@ -30,7 +30,7 @@
 "8JD-11-wHZ.title" = "اسم خادم TLS الصادر";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Item 1";
+"8bw-iH-XGl.title" = "بند 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "نقطة عبور ( port )";
@@ -60,13 +60,13 @@
 "MBR-AC-HFq.title" = "صندوق";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Item 3";
+"Mho-w1-ZPJ.title" = "بند 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
 "Nqr-gj-dOH.title" = "نغمة مخصصة";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Item 2";
+"OEo-C7-vEh.title" = "بند 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
 "Ogj-NW-fZ9.title" = "نطاق المنفذ RTP الصوتي";
@@ -75,7 +75,7 @@
 "Ppa-zn-w1X.title" = "صندوق";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "تمكين SDES في نظام تبادل المفاتيح";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "خلية نص";
@@ -105,7 +105,7 @@
 "b2y-85-ZHK.title" = "شهادة CA";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
+"cN3-lC-dNM.title" = "يستخدم فقط  اثناء محادثات SDP في حالة اذا كان  ICE غير مدعم";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "صندوق";

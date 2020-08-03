@@ -24,7 +24,7 @@
 "58.title" = "حول جامي";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "تفضيلات Ring";
+"129.title" = "تفضيلات...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "خدمات";
@@ -36,58 +36,58 @@
 "134.title" = "إخفاء جامي";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
-"136.title" = "الخروج من جامي";
+"136.title" = "المغادرة من جامي";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "أخفي الآخرين";
+"145.title" = "إخفاء الآخرين";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "أظهر الكل";
+"150.title" = "إظهار الكل";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "توقف عن الكلام";
+"195.title" = "التوقف عن التحدث";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "إبدأ فالكلام";
+"196.title" = "البدء بالتحدث";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
-"197.title" = "إنسخ";
+"197.title" = "نسخ";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "إختار الكل";
+"198.title" = "إختيار الكل";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
-"199.title" = "إقطع";
+"199.title" = "إقطتاع";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
 "200.title" = "التدقيق الإملائي والنحوي";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
-"201.title" = "إفحص الوثيقة الآن";
+"201.title" = "فحص المستند الآن";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
-"202.title" = "إحذف";
+"202.title" = "حذف";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "203"; */
-"203.title" = "ألصق";
+"203.title" = "لصق";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "إعرض التدقيق الإملائي والنحوي";
+"204.title" = "عرض التدقيق الإملائي والنحوي";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
-"205.title" = "صحح";
+"205.title" = "تصحيح";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "207"; */
-"207.title" = "ألغي";
+"207.title" = "تراجع";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "أجد التالي";
+"208.title" = "إيجاد التالي";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
-"209.title" = "أجد...";
+"209.title" = "إيجاد...";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "210"; */
-"210.title" = "إنتقل إلى الإختيار";
+"210.title" = "إنتقال للإختيار";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
 "211.title" = "الخطاب";
@@ -96,52 +96,52 @@
 "212.title" = "الخطاب";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
-"213.title" = "أجد السابق";
+"213.title" = "إيجاد السابق";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
-"215.title" = "أعيد";
+"215.title" = "إعادة مرة اخرى";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
 "216.title" = "التدقيق الإملائي والنحوي";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
-"217.title" = "صحح";
+"217.title" = "تصحيح";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
-"218.title" = "أجد";
+"218.title" = "إيجاد";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
 "219.title" = "التدقيق الإملائي أثناء الكتابة";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
-"220.title" = "أجد";
+"220.title" = "إيجاد";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
 "221.title" = "إستخدم الإختيار للإيجاد";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "تضخيم";
+"239.title" = "تكبير";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "العرض";
+"295.title" = "عرض";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "العرض";
+"296.title" = "عرض";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "شريط الأدوات";
+"297.title" = "رؤية شريط الأدوات";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "عدل شريط الأدوات";
+"298.title" = "تخصيص شريط الأدوات...";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
 "346.title" = "التدقيق النحوي مع التدقيق الإملائي";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "التبديلات";
+"348.title" = "تبديلات";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "التبديلات";
+"349.title" = "تبديلات";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
 "350.title" = "نسخ/لصق ذكي";
@@ -159,28 +159,28 @@
 "451.title" = "تحويلات";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "حول إلى حروف كبيرة";
+"452.title" = "عمل احرف كبيرة";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "تصحيح الإملاء تلقائي";
+"454.title" = "تصحيح الإملاء تلقائيا";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
-"457.title" = "أظهر التبديلات";
+"457.title" = "أظهار التبديلات";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "مطات ذكية";
+"460.title" = "إنطلاقات ذكية";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "تعويض نص";
+"462.title" = "تبديل النص بأخر";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "حول إلى حروف صغيرة";
+"465.title" = "عمل حروف صغيرة";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
-"466.title" = "حول إلى حروف كبيرة";
+"466.title" = "بحروف كبيرة";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "ألصق و ماثل الأسلوب";
+"485.title" = "لصق مع تطابق الشكل";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
 "490.title" = "مساعدة";
@@ -189,10 +189,10 @@
 "491.title" = "مساعدة";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "المساعدة";
+"492.title" = "مساعدة جامي";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
-"534.title" = "أجد و غير...";
+"534.title" = "إيجاد مع تغيير...";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "إبحث عن تحديثات";
+"593.title" = "بحث عن تحديثات...";
