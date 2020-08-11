@@ -51,13 +51,18 @@
 
     //UI elements
     __unsafe_unretained IBOutlet RingTableView* smartView;
+    __unsafe_unretained IBOutlet RingTableView* searchResultsView;
     __unsafe_unretained IBOutlet NSSearchField* searchField;
+    __unsafe_unretained IBOutlet NSTextField* searchStatus;
+    __unsafe_unretained IBOutlet NSTextField* contactsHeader;
+    __unsafe_unretained IBOutlet NSTextField* searchResultHeader;
     __strong IBOutlet NSSegmentedControl *listTypeSelector;
     __strong IBOutlet NSLayoutConstraint *listTypeSelectorHeight;
     __strong IBOutlet NSLayoutConstraint *listTypeSelectorBottom;
     bool selectorIsPresent;
 
-    QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, newInteractionConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection;
+    QMetaObject::Connection modelSortedConnection_, modelUpdatedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, newInteractionConnection_, interactionStatusUpdatedConnection_, conversationClearedConnection, searchStatusChangedConnection_,
+    searchResultUpdated_;
 
     lrc::api::ConversationModel* convModel_;
     QString selectedUid_;
@@ -101,6 +106,9 @@ NSInteger const REQUEST_SEG         = 1;
 
     [smartView setContextMenuDelegate:self];
     [smartView setShortcutsDelegate:self];
+
+    [searchResultsView setContextMenuDelegate:self];
+    [searchResultsView setShortcutsDelegate:self];
 
     [smartView setDataSource: self];
     currentFilterType = lrc::api::profile::Type::RING;
@@ -151,8 +159,18 @@ NSInteger const REQUEST_SEG         = 1;
     [totalInvites setIntValue:totalRequests];
 }
 
+-(void) reloadSearchResults
+{
+    bool hide = convModel_->getAllSearchResults().size() == 0;
+    [searchResultHeader setHidden: convModel_->getAllSearchResults().size() == 0];
+    [searchResultsView reloadData];
+    [searchResultsView layoutSubtreeIfNeeded];
+}
+
+
 -(void) reloadData
 {
+    [contactsHeader setHidden: convModel_->allFilteredConversations().empty() || searchField.stringValue.length == 0];
     [smartView deselectAll:nil];
     if (convModel_ == nil)
         return;
@@ -183,7 +201,7 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView layoutSubtreeIfNeeded];
 
     if (!selectedUid_.isEmpty() && convModel_ != nil) {
-        auto it = getConversationFromUid(selectedUid_, *convModel_);
+        auto it = getConversationFromUid(selectedUid_, *convModel_, false);
         if (it != convModel_->allFilteredConversations().end()) {
             NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
             [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
@@ -199,11 +217,15 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(QString::fromNSString(uid), *convModel_);
+    auto it = getConversationFromUid(QString::fromNSString(uid), *convModel_, true);
     if (it != convModel_->allFilteredConversations().end()) {
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
         [smartView reloadDataForRowIndexes:indexSet
                              columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+    } else if (it != convModel_->getAllSearchResults().end()) {
+        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->getAllSearchResults().begin())];
+        [searchResultsView reloadDataForRowIndexes:indexSet
+                                     columnIndexes:[NSIndexSet indexSetWithIndex:0]];
     }
 }
 
@@ -231,16 +253,30 @@ NSInteger const REQUEST_SEG         = 1;
     QObject::disconnect(conversationClearedConnection);
     QObject::disconnect(interactionStatusUpdatedConnection_);
     QObject::disconnect(newInteractionConnection_);
+    QObject::disconnect(searchStatusChangedConnection_);
+    QObject::disconnect(searchResultUpdated_);
     [self reloadData];
+    [self reloadSearchResults];
+
     if (convModel_ != nil) {
         modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
                                                         [self] (){
                                                             [self reloadData];
                                                         });
+        searchStatusChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::searchStatusChanged,
+                                                          [self](const QString &status) {
+            [searchStatus setHidden:status.isEmpty()];
+            auto statusString = status.toNSString();
+            [searchStatus setStringValue: statusString];
+                                                          });
         modelUpdatedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationUpdated,
                                                         [self] (const QString& convUid){
                                                             [self reloadConversationWithUid: convUid.toNSString()];
                                                         });
+        searchResultUpdated_ = QObject::connect(convModel_, &lrc::api::ConversationModel::searchResultUpdated,
+                                                               [self] (){
+                                                                   [self reloadSearchResults];
+                                                               });
         filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::filterChanged,
                                                         [self] (){
                                                             [self reloadData];
@@ -290,10 +326,14 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(selectedUid_, *convModel_);
+    auto it = getConversationFromUid(selectedUid_, *convModel_, true);
     if (it != convModel_->allFilteredConversations().end()) {
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
         [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
+        selectedUid_ = uid;
+    } else if (it != convModel_->getAllSearchResults().end()) {
+        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->getAllSearchResults().begin())];
+        [searchResultsView selectRowIndexes:indexSet byExtendingSelection:NO];
         selectedUid_ = uid;
     }
 }
@@ -377,11 +417,19 @@ NSInteger const REQUEST_SEG         = 1;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     NSInteger row = [notification.object selectedRow];
-    NSInteger rows = [smartView numberOfRows];
+    NSInteger rows = notification.object == smartView ? [smartView numberOfRows] : [searchResultsView numberOfRows];
+
+    if (notification.object == smartView) {
 
     for (int i = 0; i< rows; i++) {
         HoverTableRowView* cellRowView = [smartView rowViewAtRow:i makeIfNecessary: NO];
         [cellRowView drawSelection: (i == row)];
+    } } else {
+        for (int i = 0; i< rows; i++) {
+               HoverTableRowView* cellRowView = [searchResultsView rowViewAtRow:i makeIfNecessary: NO];
+               [cellRowView drawSelection: (i == row)];
+           }
+
     }
 
     if (row == -1)
@@ -389,7 +437,11 @@ NSInteger const REQUEST_SEG         = 1;
     if (convModel_ == nil)
         return;
 
-    auto uid = convModel_->filteredConversation(row).uid;
+    auto uid = notification.object == smartView ? convModel_->filteredConversation(row).uid : convModel_->searchResultForRow(row).uid;
+    NSLog(@"uid, %@", uid.toNSString());
+    NSLog(@"selectedUid_,  %@", selectedUid_.toNSString());
+    qDebug() << uid;
+    qDebug() << selectedUid_;
     if (selectedUid_ != uid) {
         selectedUid_ = uid;
         convModel_->selectConversation(uid);
@@ -408,10 +460,13 @@ NSInteger const REQUEST_SEG         = 1;
     if (convModel_ == nil)
         return nil;
 
-    auto conversation = convModel_->filteredConversation(row);
+    bool isSearching = tableView == searchResultsView;
+
+    auto conversation = tableView == searchResultsView ? convModel_->searchResultForRow(row) : convModel_->filteredConversation(row);
     NSTableCellView* result;
 
     result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
+     try {
 
     NSTextField* unreadCount = [result viewWithTag:NOTIFICATONS_TAG];
     [unreadCount setHidden:(conversation.unreadMessages == 0)];
@@ -542,8 +597,12 @@ NSInteger const REQUEST_SEG         = 1;
         }
         [lastInteractionDate setStringValue:timeString];
     }
+        } catch (std::out_of_range& e) {
+                   NSLog(@"contact out of range");
+               }
 
     return result;
+
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
@@ -559,6 +618,10 @@ NSInteger const REQUEST_SEG         = 1;
         return convModel_->allFilteredConversations().size();
     }
 
+    if (tableView == searchResultsView && convModel_ != nullptr) {
+        [[[searchResultsView superview] superview] setHidden: convModel_->getAllSearchResults().size() == 0];
+        return convModel_->getAllSearchResults().size();
+    }
     return 0;
 }
 
@@ -623,7 +686,7 @@ NSInteger const REQUEST_SEG         = 1;
     }
     [self clearSearchField];
     auto uid = QString::fromNSString(uId);
-    auto it = getConversationFromUid(uid, *convModel_);
+    auto it = getConversationFromUid(uid, *convModel_, false);
     if (it != convModel_->allFilteredConversations().end()) {
         @try {
             auto contact = convModel_->owner.contactModel->getContact(it->participants[0]);
@@ -660,10 +723,11 @@ NSInteger const REQUEST_SEG         = 1;
         [self displayErrorModalWithTitle:NSLocalizedString(@"No account available", @"Displayed as RingID when no accounts are available for selection") WithMessage:NSLocalizedString(@"Navigate to preferences to create a new account", @"Allert message when no accounts are available")];
         return NO;
     }
-    if (convModel_->allFilteredConversations().size() <= 0) {
-        return YES;
+    if (convModel_->getAllSearchResults().size() <= 0 && convModel_->allFilteredConversations().size() <= 0) {
+        return;
     }
-    auto model = convModel_->filteredConversation(0);
+    bool hasSearchResult = convModel_->getAllSearchResults().size() > 0;
+    auto model = hasSearchResult ? convModel_->searchResultForRow(0) : convModel_->filteredConversation(0);
     auto uid = model.uid;
     if (selectedUid_ == uid) {
         return YES;
@@ -723,12 +787,13 @@ NSInteger const REQUEST_SEG         = 1;
 
 #pragma mark - ContextMenuDelegate
 
-- (NSMenu*) contextualMenuForRow:(int) index
+- (NSMenu*) contextualMenuForRow:(int) index table:(NSTableView*) table
 {
     if (convModel_ == nil)
         return nil;
 
-    auto conversation = convModel_->filteredConversation(NSInteger(index));
+    auto conversation = table == smartView ? convModel_->filteredConversation(NSInteger(index)) :
+    convModel_->searchResultForRow(NSInteger(index));
 
     @try {
         auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
