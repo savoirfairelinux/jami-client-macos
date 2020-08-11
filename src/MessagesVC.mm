@@ -177,10 +177,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     if (cachedConv_ != nil)
         return cachedConv_;
-
-    auto it = getConversationFromUid(convUid_, *convModel_);
-    if (it != convModel_->allFilteredConversations().end())
-        cachedConv_ = &(*it);
+    auto it = getConversationFromUid(convUid_, *convModel_, true);
+       if (conversationExists(it, *convModel_, true))
+           cachedConv_ = &(*it);
 
     return cachedConv_;
 }

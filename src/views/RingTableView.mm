@@ -29,7 +29,7 @@
     NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
     int rowIdx = [self rowAtPoint:pt];
     if (self.contextMenuDelegate && rowIdx >= 0) {
-        return [self.contextMenuDelegate contextualMenuForRow:rowIdx];
+        return [self.contextMenuDelegate contextualMenuForRow:rowIdx table: self];
     }
     return nil;
 }

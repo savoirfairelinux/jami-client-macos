@@ -113,11 +113,8 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     if (cachedConv_ != nil)
         return cachedConv_;
 
-    auto convQueue = convModel_->allFilteredConversations();
-
-    auto it = getConversationFromUid(convUid_, *convModel_);
-
-    if (it != convQueue.end())
+    auto it = getConversationFromUid(convUid_, *convModel_, true);
+    if (conversationExists(it, *convModel_, true))
         cachedConv_ = &(*it);
 
     return cachedConv_;
@@ -170,7 +167,13 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         return;
 
     // Setup UI elements according to new conversation
+    NSLog(@"account info, %@", conv->accountId.toNSString());
+    NSLog(@"conv info, %@", conv->uid.toNSString());
+    NSLog(@"paricipant info, %@", conv->participants[0].toNSString());
     NSString* bestName = bestNameForConversation(*conv, *convModel_);
+    NSLog(@"account info, %@", conv->accountId.toNSString());
+    NSLog(@"conv info, %@", conv->uid.toNSString());
+    NSLog(@"paricipant info, %@", conv->participants[0].toNSString());
     NSString* bestId = bestIDForConversation(*conv, *convModel_);
     [conversationTitle setStringValue: bestName];
     [conversationID setStringValue: bestId];

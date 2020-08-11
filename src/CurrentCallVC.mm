@@ -159,7 +159,7 @@ CVPixelBufferRef pixelBufferPreview;
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel, true);
     confUid_ = convIt->confId;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     [self connectSignals];
@@ -197,7 +197,7 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::connect(accountInfo_->contactModel.get(),
                      &lrc::api::ContactModel::contactAdded,
                      [self](const QString &contactUri) {
-                         auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+                         auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get(), false);
                          if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
                              return;
                          }
@@ -317,7 +317,7 @@ CVPixelBufferRef pixelBufferPreview;
 
     auto currentCall = callModel->getCall(callUid_);
     NSLog(@"\n status %@ \n",lrc::api::call::to_string(currentCall.status).toNSString());
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel, true);
     if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
         NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
         [contactNameLabel setStringValue:bestName];
@@ -456,8 +456,6 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) setBackground {
-    auto* convModel = accountInfo_->conversationModel.get();
-    auto it = getConversationFromUid(convUid_, *convModel);
     NSImage *image= [self getContactImageOfSize:120.0 withDefaultAvatar:NO];
     if(image) {
         CIImage * ciImage = [[CIImage alloc] initWithData:[image TIFFRepresentation]];
@@ -490,7 +488,7 @@ CVPixelBufferRef pixelBufferPreview;
 
 -(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault {
     auto* convModel = accountInfo_->conversationModel.get();
-    auto convIt = getConversationFromUid(convUid_, *convModel);
+    auto convIt = getConversationFromUid(convUid_, *convModel, false);
     if (convIt == convModel->allFilteredConversations().end()) {
         return nil;
     }
@@ -817,8 +815,16 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     // If we accept a conversation with a non trusted contact, we first accept it
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
-    if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get(), true);
+    if (!conversationExists(convIt,*accountInfo_->conversationModel.get(), true)) {
+        return;
+    }
+
+    if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
+        auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
+        if (contact.profileInfo.type == lrc::api::profile::Type::PENDING)
+            accountInfo_->conversationModel->makePermanent(convUid_);
+    } else {
         auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
         if (contact.profileInfo.type == lrc::api::profile::Type::PENDING)
             accountInfo_->conversationModel->makePermanent(convUid_);

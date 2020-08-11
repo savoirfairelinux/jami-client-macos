@@ -38,6 +38,10 @@
 static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     try {
+        NSLog(@"account info, %@", conv.accountId.toNSString());
+        NSLog(@"conv info, %@", conv.uid.toNSString());
+        NSLog(@"paricipant info, %@", conv.participants[0].toNSString());
+        qDebug() << conv.participants[0];
         auto contact = model.owner.contactModel->getContact(conv.participants[0]);
         auto name = contact.registeredName.trimmed().replace("\r","").replace("\n","");
         if (!name.isEmpty()) {
@@ -89,6 +93,11 @@ static inline NSString* bestNameForContact(const lrc::api::contact::Info& contac
 static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     try {
+        //NSLog(@"info, %@", conv.toNSString());
+        NSLog(@"account info, %@", conv.accountId.toNSString());
+        NSLog(@"conv info, %@", conv.uid.toNSString());
+        NSLog(@"paricipant info, %@", conv.participants[0].toNSString());
+        qDebug() << conv.participants[0];
         auto contact = model.owner.contactModel->getContact(conv.participants[0]);
         if (contact.profileInfo.alias.isEmpty()) {
             return bestIDForConversation(conv, model);
@@ -127,13 +136,33 @@ static inline lrc::api::profile::Type profileType(const lrc::api::conversation::
  * the iterator is invalid thus it needs to be checked by caller.
  * @param uid UID of conversation being searched
  * @param model ConversationModel in which to do the lookup
+ * @param includeSearchResult include search result
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
-static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const QString& uid, const lrc::api::ConversationModel& model) {
-    return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
+static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const QString& uid, const lrc::api::ConversationModel& model, bool includeSearchResult) {
+    auto result = std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
                         [&] (const lrc::api::conversation::Info& conv) {
                             return uid == conv.uid;
                         });
+    if (!includeSearchResult || (result != model.allFilteredConversations().end())) {
+        return result;
+    }
+    return std::find_if(model.getAllSearchResults().begin(), model.getAllSearchResults().end(),
+    [&] (const lrc::api::conversation::Info& conv) {
+        return uid == conv.uid;
+    });
+}
+
+/**
+ * This function true if conversation exists
+ * the iterator is invalid thus it needs to be checked by caller.
+ * @param conversation iterator pointing to a Conversation::Info in ConversationModel
+ * @param model ConversationModel in which to do the lookup
+ * @param includeSearchResult include search result
+ * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
+ */
+static inline bool conversationExists(lrc::api::ConversationModel::ConversationQueue::const_iterator conversation, const lrc::api::ConversationModel& model, bool includeSearchResult) {
+    return includeSearchResult ? (conversation != model.allFilteredConversations().end() || conversation != model.getAllSearchResults().end()) : conversation != model.allFilteredConversations().end();
 }
 
 /**
