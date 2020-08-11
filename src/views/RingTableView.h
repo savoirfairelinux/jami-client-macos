@@ -24,7 +24,7 @@
 
 @required
 
-- (NSMenu*) contextualMenuForRow:(int) index;
+- (NSMenu*) contextualMenuForRow:(int) index table:(NSTableView*) table;
 
 @end
 
