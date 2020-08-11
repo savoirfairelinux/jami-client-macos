@@ -152,110 +152,114 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::newTrustRequest,
                      [self] (const QString& accountId, const QString& contactUri) {
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ContactRequestNotifications];
-                         if(!shouldNotify) {
-                             return;
-                         }
-                         NSUserNotification* notification = [[NSUserNotification alloc] init];
-                         auto contactModel = lrc->getAccountModel()
-                         .getAccountInfo(accountId).contactModel.get();
-                         NSString* name = contactModel->getContact(contactUri)
-                         .registeredName.isEmpty() ?
-                         contactUri.toNSString():
-                         contactModel->getContact(contactUri).registeredName.toNSString();
-                         NSString* localizedMessage =
-                         NSLocalizedString(@"Send you a contact request",
-                                           @"Notification message");
+        BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::ContactRequestNotifications];
+        if(!shouldNotify) {
+            return;
+        }
+        NSUserNotification* notification = [[NSUserNotification alloc] init];
+        auto contactModel = lrc->getAccountModel()
+        .getAccountInfo(accountId).contactModel.get();
+        NSString* name = contactModel->getContact(contactUri)
+        .registeredName.isEmpty() ?
+        contactUri.toNSString():
+        contactModel->getContact(contactUri).registeredName.toNSString();
+        NSString* localizedMessage =
+        NSLocalizedString(@"Send you a contact request",
+                          @"Notification message");
 
-                         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-                         userInfo[ACCOUNT_ID] = accountId.toNSString();
-                         userInfo[CONTACT_URI] = contactUri.toNSString();
-                         userInfo[NOTIFICATION_TYPE] = CONTACT_REQUEST_NOTIFICATION;
+        NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+        userInfo[ACCOUNT_ID] = accountId.toNSString();
+        userInfo[CONTACT_URI] = contactUri.toNSString();
+        userInfo[NOTIFICATION_TYPE] = CONTACT_REQUEST_NOTIFICATION;
 
-                         [notification setTitle: name];
-                         notification.informativeText = localizedMessage;
-                         [notification setSoundName:NSUserNotificationDefaultSoundName];
-                         [notification setUserInfo: userInfo];
+        [notification setTitle: name];
+        notification.informativeText = localizedMessage;
+        [notification setSoundName:NSUserNotificationDefaultSoundName];
+        [notification setUserInfo: userInfo];
 
-                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
 
-                     });
+    });
 
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::showIncomingCallView,
                      [self] (const QString& accountId, lrc::api::conversation::Info conversationInfo) {
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::CallNotifications];
-                         if(!shouldNotify) {
-                             return;
-                         }
-                         bool isIncoming = false;
-                         auto callModel = lrc->getAccountModel()
-                         .getAccountInfo(accountId).callModel.get();
-                         if(callModel->hasCall(conversationInfo.callId)) {
-                             isIncoming = !callModel->getCall(conversationInfo.callId).isOutgoing;
-                         }
-                         if(!isIncoming) {
-                             return;
-                         }
-                         NSString* name = bestIDForConversation(conversationInfo, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
-                         NSUserNotification* notification = [[NSUserNotification alloc] init];
+        BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::CallNotifications];
+        if(!shouldNotify) {
+            return;
+        }
+        bool isIncoming = false;
+        auto callModel = lrc->getAccountModel()
+        .getAccountInfo(accountId).callModel.get();
+        if(callModel->hasCall(conversationInfo.callId)) {
+            isIncoming = !callModel->getCall(conversationInfo.callId).isOutgoing;
+        }
+        if(!isIncoming) {
+            return;
+        }
+        NSString* name = bestIDForConversation(conversationInfo, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
+        NSUserNotification* notification = [[NSUserNotification alloc] init];
 
-                         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-                         userInfo[ACCOUNT_ID] = accountId.toNSString();
-                         userInfo[CALL_ID] = conversationInfo.callId.toNSString();
-                         userInfo[CONVERSATION_ID] = conversationInfo.uid.toNSString();
-                         userInfo[NOTIFICATION_TYPE] = CALL_NOTIFICATION;
+        NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+        userInfo[ACCOUNT_ID] = accountId.toNSString();
+        userInfo[CALL_ID] = conversationInfo.callId.toNSString();
+        userInfo[CONVERSATION_ID] = conversationInfo.uid.toNSString();
+        userInfo[NOTIFICATION_TYPE] = CALL_NOTIFICATION;
 
-                         NSString* localizedTitle = [NSString stringWithFormat:
-                                                     NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"),
-                                                     name];
-                         // try to activate action button
-                         @try {
-                             [notification setValue:@YES forKey:@"_showsButtons"];
-                         }
-                         @catch (NSException *exception) {
-                             NSLog(@"Action button not activable on notification");
-                         }
-                         [notification setUserInfo: userInfo];
-                         [notification setOtherButtonTitle:NSLocalizedString(@"Refuse", @"Button Action")];
-                         [notification setActionButtonTitle:NSLocalizedString(@"Accept", @"Button Action")];
-                         [notification setTitle:localizedTitle];
-                         [notification setSoundName:NSUserNotificationDefaultSoundName];
+        NSString* localizedTitle = [NSString stringWithFormat:
+                                    NSLocalizedString(@"Incoming call from %@", @"Incoming call from {Name}"),
+                                    name];
+        // try to activate action button
+        @try {
+            [notification setValue:@YES forKey:@"_showsButtons"];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Action button not activable on notification");
+        }
+        [notification setUserInfo: userInfo];
+        [notification setOtherButtonTitle:NSLocalizedString(@"Refuse", @"Button Action")];
+        [notification setActionButtonTitle:NSLocalizedString(@"Accept", @"Button Action")];
+        [notification setTitle:localizedTitle];
+        [notification setSoundName:NSUserNotificationDefaultSoundName];
 
-                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-                     });
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+    });
 
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::newUnreadInteraction,
                      [self] (const QString& accountId, const QString& conversation,
                              uint64_t interactionId, const lrc::api::interaction::Info& interaction) {
-                         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::MessagesNotifications];
-                         if(!shouldNotify) {
-                             return;
-                         }
-                         NSUserNotification* notification = [[NSUserNotification alloc] init];
+        BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::MessagesNotifications];
+        if(!shouldNotify) {
+            return;
+        }
+        NSUserNotification* notification = [[NSUserNotification alloc] init];
 
-                         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-                         userInfo[ACCOUNT_ID] = accountId.toNSString();
-                         userInfo[CONVERSATION_ID] = conversation.toNSString();
-                         userInfo[NOTIFICATION_TYPE] = MESSAGE_NOTIFICATION;
-                         NSString* name = interaction.authorUri.toNSString();
-                         auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
-                         auto convQueue = lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get()->allFilteredConversations();
-                         if (convIt != convQueue.end()) {
-                             name = bestIDForConversation(*convIt, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
-                         }
-                         NSString* localizedTitle = [NSString stringWithFormat:
-                                                     NSLocalizedString(@"Incoming message from %@",@"Incoming message from {Name}"),
-                                                     name];
+        NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+        userInfo[ACCOUNT_ID] = accountId.toNSString();
+        userInfo[CONVERSATION_ID] = conversation.toNSString();
+        userInfo[NOTIFICATION_TYPE] = MESSAGE_NOTIFICATION;
+        NSString* name = interaction.authorUri.toNSString();
+        auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel()
+                                             .getAccountInfo(accountId)
+                                             .conversationModel.get(), false);
+        auto convQueue = lrc->getAccountModel()
+        .getAccountInfo(accountId)
+        .conversationModel.get()->allFilteredConversations();
+        if (convIt != convQueue.end()) {
+            name = bestIDForConversation(*convIt, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
+        }
+        NSString* localizedTitle = [NSString stringWithFormat:
+                                    NSLocalizedString(@"Incoming message from %@",@"Incoming message from {Name}"),
+                                    name];
 
-                         [notification setTitle:localizedTitle];
-                         [notification setSoundName:NSUserNotificationDefaultSoundName];
-                         [notification setSubtitle:interaction.body.toNSString()];
-                         [notification setUserInfo:userInfo];
+        [notification setTitle:localizedTitle];
+        [notification setSoundName:NSUserNotificationDefaultSoundName];
+        [notification setSubtitle:interaction.body.toNSString()];
+        [notification setUserInfo:userInfo];
 
-                         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-                     });
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+    });
 }
 
 - (void)userNotificationCenter:(NSUserNotificationCenter *)center didDismissAlert:(NSUserNotification *)alert {

@@ -151,7 +151,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     auto accountID = conversation.accountId;
     auto convID = conversation.convId;
     auto convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-    auto conversationInfo = getConversationFromUid(convID, *convMod);
+    auto conversationInfo = getConversationFromUid(convID, *convMod, false);
     auto convQueue = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get()->allFilteredConversations();
     if (conversationInfo == convQueue.end()) {
         return;
@@ -212,7 +212,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
             auto accountID = conversation.accountId;
             auto convID = conversation.convId;
             auto *convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-            auto *conversationInfo = &(*getConversationFromUid(convID, *convMod));
+            auto *conversationInfo = &(*getConversationFromUid(convID, *convMod, false));
             if (displayNameString.length > 0) {
                 displayNameString = [displayNameString stringByAppendingString:@", "];
             }
@@ -232,7 +232,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     auto accountID = conversation.accountId;
     auto convID = conversation.convId;
     auto *convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-    auto *conversationInfo = &(*getConversationFromUid(convID, *convMod));
+    auto *conversationInfo = &(*getConversationFromUid(convID, *convMod, false));
     if (conversationInfo->participants.empty()) {
         return nil;
     }
