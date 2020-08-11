@@ -818,7 +818,7 @@ CVPixelBufferRef pixelBufferPreview;
 
     // If we accept a conversation with a non trusted contact, we first accept it
     auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
-    if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
+    if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
         auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
         if (contact.profileInfo.type == lrc::api::profile::Type::PENDING)
             accountInfo_->conversationModel->makePermanent(convUid_);

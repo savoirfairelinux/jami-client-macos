@@ -240,11 +240,11 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                          userInfo[CONVERSATION_ID] = conversation.toNSString();
                          userInfo[NOTIFICATION_TYPE] = MESSAGE_NOTIFICATION;
                          NSString* name = interaction.authorUri.toNSString();
-                         auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
-                         auto convQueue = lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get()->allFilteredConversations();
-                         if (convIt != convQueue.end()) {
-                             name = bestIDForConversation(*convIt, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
-                         }
+                         auto& convIt = lrc->getAccountModel()
+                                             .getAccountInfo(accountId)
+                                             .conversationModel
+                                             .get()->getConversationForUID(conversation);
+                        name = bestIDForConversation(convIt, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
                          NSString* localizedTitle = [NSString stringWithFormat:
                                                      NSLocalizedString(@"Incoming message from %@",@"Incoming message from {Name}"),
                                                      name];

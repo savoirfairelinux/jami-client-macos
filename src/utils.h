@@ -38,6 +38,10 @@
 static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     try {
+        NSLog(@"account info, %@", conv.accountId.toNSString());
+        NSLog(@"conv info, %@", conv.uid.toNSString());
+        NSLog(@"paricipant info, %@", conv.participants[0].toNSString());
+        qDebug() << conv.participants[0];
         auto contact = model.owner.contactModel->getContact(conv.participants[0]);
         auto name = contact.registeredName.trimmed().replace("\r","").replace("\n","");
         if (!name.isEmpty()) {
@@ -89,6 +93,11 @@ static inline NSString* bestNameForContact(const lrc::api::contact::Info& contac
 static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     try {
+        //NSLog(@"info, %@", conv.toNSString());
+        NSLog(@"account info, %@", conv.accountId.toNSString());
+        NSLog(@"conv info, %@", conv.uid.toNSString());
+        NSLog(@"paricipant info, %@", conv.participants[0].toNSString());
+        qDebug() << conv.participants[0];
         auto contact = model.owner.contactModel->getContact(conv.participants[0]);
         if (contact.profileInfo.alias.isEmpty()) {
             return bestIDForConversation(conv, model);
