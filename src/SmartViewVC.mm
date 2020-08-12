@@ -769,26 +769,29 @@ NSInteger const REQUEST_SEG         = 1;
         [audioCallItem setRepresentedObject: conversationUID];
         [theMenu addItem:videoCallItem];
         [theMenu addItem:audioCallItem];
-        if (isSIP == false) {
-            [theMenu addItem:separator];
-            NSMenuItem* clearConversationItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear conversation", @"Contextual menu action")
-                                                                           action:@selector(clearConversation:)
-                                                                    keyEquivalent:@""];
-            [clearConversationItem setRepresentedObject: conversationUID];
-            [theMenu addItem:clearConversationItem];
-            if(isRingContact) {
-                NSMenuItem* blockContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Block contact", @"Contextual menu action")
-                                                                          action:@selector(blockContact:)
-                                                                   keyEquivalent:@""];
-                [blockContactItem setRepresentedObject: conversationUID];
-                [theMenu addItem:blockContactItem];
-            } else {
-                NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
-                                                                        action:@selector(addContact:)
-                                                                 keyEquivalent:@"A"];
-                [addContactItem setRepresentedObject: conversationUID];
-                [theMenu addItem:addContactItem];
-            }
+        [theMenu addItem:separator];
+        NSMenuItem* clearConversationItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear conversation", @"Contextual menu action")
+                                                                       action:@selector(clearConversation:)
+                                                                keyEquivalent:@""];
+        [clearConversationItem setRepresentedObject: conversationUID];
+        [theMenu addItem:clearConversationItem];
+        NSMenuItem* removeContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Remove conversation", @"Contextual menu action")
+                                                                   action:@selector(removeContact:)
+                                                            keyEquivalent:@""];
+        [removeContactItem setRepresentedObject: conversationUID];
+        [theMenu addItem:removeContactItem];
+        if(isRingContact) {
+            NSMenuItem* blockContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Block contact", @"Contextual menu action")
+                                                                      action:@selector(blockContact:)
+                                                               keyEquivalent:@""];
+            [blockContactItem setRepresentedObject: conversationUID];
+            [theMenu addItem:blockContactItem];
+        } else if (isSIP == false) {
+            NSMenuItem* addContactItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Add to contacts", @"Contextual menu action")
+                                                                    action:@selector(addContact:)
+                                                             keyEquivalent:@"A"];
+            [addContactItem setRepresentedObject: conversationUID];
+            [theMenu addItem:addContactItem];
         }
         return theMenu;
     }
@@ -815,6 +818,16 @@ NSInteger const REQUEST_SEG         = 1;
     NSString * convUId = (NSString*)menuObject;
     QString conversationID = QString::fromNSString(convUId);
     convModel_->removeConversation(conversationID, true);
+}
+
+- (void) removeContact: (NSMenuItem* ) item  {
+    auto menuObject = item.representedObject;
+    if(menuObject == nil) {
+        return;
+    }
+    NSString * convUId = (NSString*)menuObject;
+    QString conversationID = QString::fromNSString(convUId);
+    convModel_->removeConversation(conversationID, false);
 }
 
 - (void) audioCall: (NSMenuItem* ) item  {
