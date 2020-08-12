@@ -98,8 +98,14 @@ typedef NS_ENUM(NSInteger, ViewState) {
         self.behaviorController = behaviorController;
         self.avModel = avModel;
         self.avModel->useAVFrame(YES);
+        [NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(themeChanged:) name:@"AppleInterfaceThemeChangedNotification" object: nil];
     }
     return self;
+}
+
+-(void) deinit {
+    [NSDistributedNotificationCenter.defaultCenter removeObserver:self];
+
 }
 
 - (NSApplicationPresentationOptions)window:(NSWindow *)window willUseFullScreenPresentationOptions:(NSApplicationPresentationOptions)proposedOptions
@@ -171,6 +177,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 - (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setMovableByWindowBackground:YES];
+    [qrcodeView setWantsLayer: YES];
 
     self.window.titleVisibility = NSWindowTitleHidden;
     self.window.titlebarAppearsTransparent = true;
@@ -467,6 +474,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
  */
 - (void) showQRCode:(BOOL) show
 {
+    [self updateQRCodeBackground];
     static const NSInteger offset = 110;
     [NSAnimationContext beginGrouping];
     NSAnimationContext.currentContext.duration = 0.5;
@@ -475,6 +483,23 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [centerYQRCodeConstraint.animator setConstant: show ? offset : 0];
     [centerYWelcomeContainerConstraint.animator setConstant:show ? -offset : 0];
     [NSAnimationContext endGrouping];
+}
+
+-(void)themeChanged:(NSNotification *) notification {
+    if (qrcodeView.animator.alphaValue == 1) {
+        [self updateQRCodeBackground];
+    }
+}
+
+-(void)updateQRCodeBackground {
+    if (@available(*, macOS 10.14)) {
+        NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
+        if ([interfaceStyle isEqualToString:@"Dark"]) {
+            qrcodeView.layer.backgroundColor = [[NSColor whiteColor] CGColor];
+        } else {
+            qrcodeView.layer.backgroundColor = [[NSColor clearColor] CGColor];
+        }
+    }
 }
 
 - (IBAction)openPreferences:(id)sender
@@ -631,5 +656,25 @@ typedef NS_ENUM(NSInteger, ViewState) {
     }
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
+
+//-(void) viewDidChangeEffectiveAppearance {
+//    if (qrcodeView.animator.alphaValue == 1) {
+//        if (@available(*, macOS 10.14)) {
+//            NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
+//            if ([interfaceStyle isEqualToString:@"Dark"]) {
+//                qrcodeView.layer.backgroundColor = [[NSColor whiteColor] CGColor];
+//            } else {
+//                qrcodeView.layer.backgroundColor = [[NSColor clearColor] CGColor];
+//            }
+//        }
+//    }
+//
+//    //[super viewDidChangeEffectiveAppearance];
+//}
+
+//-(void) updateLayer {
+//    [super updateLayer];
+//
+//}
 
 @end
