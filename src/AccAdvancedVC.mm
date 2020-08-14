@@ -30,6 +30,8 @@
 
 @property (unsafe_unretained) IBOutlet NSButton* ringtoneSelectionButton;
 @property (unsafe_unretained) IBOutlet NSButton* enableRingtone;
+@property (unsafe_unretained) IBOutlet NSButton* toggleAccountDiscoveryButton;
+@property (unsafe_unretained) IBOutlet NSButton* togglePeersDiscoveryButton;
 @property (unsafe_unretained) IBOutlet NSButton* autoAnswer;
 @property (unsafe_unretained) IBOutlet NSButton* toggleUPnPButton;
 @property (unsafe_unretained) IBOutlet NSButton* useTURNButton;
@@ -50,7 +52,7 @@
 
 @synthesize audioCodecView, videoCodecView;
 @synthesize privateKeyPaswordField, turnAddressField, turnUsernameField, turnPasswordField, turnRealmField, stunAddressField;
-@synthesize ringtoneSelectionButton, selectCACertificateButton, selectUserCertificateButton, selectPrivateKeyButton;
+@synthesize ringtoneSelectionButton, selectCACertificateButton, selectUserCertificateButton, selectPrivateKeyButton, toggleAccountDiscoveryButton, togglePeersDiscoveryButton;
 @synthesize enableRingtone, toggleVideoButton, autoAnswer, toggleUPnPButton, useTURNButton, useSTUNButton, disableVideoButton;
 @synthesize accountModel;
 
@@ -139,6 +141,8 @@ NS_ENUM(NSInteger, tablesViews) {
     [videoCodecView setEnabled:accountProperties.Video.videoEnabled];
     [audioCodecView reloadData];
     [videoCodecView reloadData];
+    [toggleAccountDiscoveryButton setState:accountProperties.accountPublish];
+    [togglePeersDiscoveryButton setState:accountProperties.accountDiscovery];
 }
 
 - (void)viewDidLoad {
@@ -159,6 +163,22 @@ NS_ENUM(NSInteger, tablesViews) {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     if( accountProperties.autoAnswer != [sender state]) {
         accountProperties.autoAnswer = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+    }
+}
+
+- (IBAction)toggleAccountDiscovery:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if( accountProperties.accountPublish != [sender state]) {
+        accountProperties.accountPublish = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+    }
+}
+
+- (IBAction)togglePeersDiscovery:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if( accountProperties.accountDiscovery != [sender state]) {
+        accountProperties.accountDiscovery = [sender state];
         self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
     }
 }
