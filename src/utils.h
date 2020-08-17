@@ -89,6 +89,7 @@ static inline NSString* bestNameForContact(const lrc::api::contact::Info& contac
 static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
 {
     try {
+        qDebug() << "bestNameForConversation" << conv.participants[0];
         auto contact = model.owner.contactModel->getContact(conv.participants[0]);
         if (contact.profileInfo.alias.isEmpty()) {
             return bestIDForConversation(conv, model);
@@ -131,17 +132,72 @@ static inline lrc::api::profile::Type profileType(const lrc::api::conversation::
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
 static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const QString& uid, const lrc::api::ConversationModel& model, bool includeSearchResult) {
-    auto result = std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
-                        [&] (const lrc::api::conversation::Info& conv) {
-                            return uid == conv.uid;
-                        });
-    if (!includeSearchResult || (result != model.allFilteredConversations().end())) {
-        return result;
+     NSLog(@"***get conv from uuid%@", uid.toNSString());
+    if(!includeSearchResult) {
+        return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
+        [&] (const lrc::api::conversation::Info& conv) {
+            return uid == conv.uid;
+        });
+    } else {
+        if (std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
+        [&] (const lrc::api::conversation::Info& conv) {
+            return uid == conv.uid;
+        }) != model.allFilteredConversations().end()) {
+            NSLog(@"***conv id in contact lis, %@", uid.toNSString());
+                           qDebug() << "****conv id in contact list includeSearchResult" << uid;
+            return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
+                   [&] (const lrc::api::conversation::Info& conv) {
+                NSLog(@"***conv id in contact lis, %@", conv.uid.toNSString());
+                qDebug() << "****conv id in contact list includeSearchResult" << conv.uid;
+                       return uid == conv.uid;
+                   });
+        } else {
+//            for (auto result in model.getAllSearchResults()) {
+//                NSLog(@"***one of conv id in search lis, %@", result.uid.toNSString());
+//
+//            }
+
+            for (unsigned int i = 0; i < model.getAllSearchResults().size(); ++i) {
+                NSLog(@"***one of conv id in search lis, %@", model.getAllSearchResults().at(i).uid.toNSString());
+                  // if (model.getAllSearchResults().at(i).uid == uid) return i;
+            }
+            NSLog(@"***conv id in search lis, %@", uid.toNSString());
+                                      qDebug() << "****conv id in search list includeSearchResult" << uid;
+            return std::find_if(model.getAllSearchResults().begin(), model.getAllSearchResults().end(),
+            [&] (const lrc::api::conversation::Info& conv) {
+                NSLog(@"***conv id in search lis, %@", conv.uid.toNSString());
+                qDebug() << "****conv id in search list includeSearchResult" << conv.uid;
+                return uid == conv.uid;
+            });
+        }
+
+        qDebug() << "****** result not find";
+        NSLog(@"***conv id in search lis, %@", uid.toNSString());
     }
-    return std::find_if(model.getAllSearchResults().begin(), model.getAllSearchResults().end(),
-    [&] (const lrc::api::conversation::Info& conv) {
-        return uid == conv.uid;
-    });
+//    auto result = std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
+//                        [&] (const lrc::api::conversation::Info& conv) {
+//                            return uid == conv.uid;
+//                        });
+//    if (!includeSearchResult || (result != model.allFilteredConversations().end())) {
+//        return result;
+//    }
+//    return std::find_if(model.getAllSearchResults().begin(), model.getAllSearchResults().end(),
+//    [&] (const lrc::api::conversation::Info& conv) {
+//        return uid == conv.uid;
+//    });
+}
+
+static inline int getindexOfConversationFromUid(const QString& uid, const lrc::api::ConversationModel& model, bool includeSearchResult) {
+    for (unsigned int i = 0; i < model.allFilteredConversations().size(); ++i) {
+           if (model.allFilteredConversations().at(i).uid == uid) return i;
+    }
+    if (!includeSearchResult) {
+        return -1;
+    }
+    for (unsigned int i = 0; i < model.getAllSearchResults().size(); ++i) {
+           if (model.getAllSearchResults().at(i).uid == uid) return i;
+    }
+    return -1;
 }
 
 /**
@@ -153,7 +209,19 @@ static inline lrc::api::ConversationModel::ConversationQueue::const_iterator get
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
 static inline bool conversationExists(lrc::api::ConversationModel::ConversationQueue::const_iterator conversation, const lrc::api::ConversationModel& model, bool includeSearchResult) {
-    return includeSearchResult ? (conversation != model.allFilteredConversations().end() || conversation != model.getAllSearchResults().end()) : conversation != model.allFilteredConversations().end();
+    if (includeSearchResult){
+        if (conversation != model.allFilteredConversations().end()) {
+            return true;
+        }
+        if (conversation != model.getAllSearchResults().end()) {
+            return true;
+        }
+    }
+    if (conversation != model.allFilteredConversations().end()) {
+               return true;
+           }
+    return false;
+   // return includeSearchResult ? (conversation != model.allFilteredConversations().end() || conversation != model.getAllSearchResults().end()) : conversation != model.allFilteredConversations().end();
 }
 
 /**

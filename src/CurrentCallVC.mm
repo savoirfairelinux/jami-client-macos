@@ -158,8 +158,10 @@ CVPixelBufferRef pixelBufferPreview;
     }
     callUid_ = callUid;
     convUid_ = convUid;
+    qDebug() << convUid_;
+    qDebug() << callUid_;
     accountInfo_ = account;
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel, true);
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel, false);
     if (!conversationExists(convIt, *accountInfo_->conversationModel.get(), true)) {
         return;
     }
@@ -321,6 +323,7 @@ CVPixelBufferRef pixelBufferPreview;
     auto currentCall = callModel->getCall(callUid_);
     NSLog(@"\n status %@ \n",lrc::api::call::to_string(currentCall.status).toNSString());
     auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel, true);
+  //  qDebug() << "conv id" << convIt->uid;
     if (conversationExists(convIt, *accountInfo_->conversationModel, true)) {
         NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
         [contactNameLabel setStringValue:bestName];
