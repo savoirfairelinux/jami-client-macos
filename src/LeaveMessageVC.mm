@@ -189,7 +189,7 @@ lrc::api::ConversationModel* conversationModel;
 }
 
 -(void) updateView {
-    auto it = getConversationFromUid(conversationUid, *conversationModel, false);
+    auto it = getConversationFromUid(conversationUid, *conversationModel);
     if (it != conversationModel->allFilteredConversations().end()) {
         auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         QVariant photo = imgManip.conversationPhoto(*it, conversationModel->owner, QSize(120, 120), NO);

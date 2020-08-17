@@ -203,7 +203,7 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView layoutSubtreeIfNeeded];
 
     if (!selectedUid_.isEmpty() && convModel_ != nil) {
-        auto it = getConversationFromUid(selectedUid_, *convModel_, false);
+        auto it = getConversationFromUid(selectedUid_, *convModel_);
         if (it != convModel_->allFilteredConversations().end()) {
             NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
             [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
@@ -219,12 +219,16 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(QString::fromNSString(uid), *convModel_, true);
+    auto it = getConversationFromUid(QString::fromNSString(uid), *convModel_);
     if (it != convModel_->allFilteredConversations().end()) {
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
         [smartView reloadDataForRowIndexes:indexSet
                              columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    } else if (it != convModel_->getAllSearchResults().end()) {
+    } else {
+        it = getSearchResultFromUid(QString::fromNSString(uid), *convModel_);
+        if (it == convModel_->getAllSearchResults().end()) {
+            return;
+        }
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->getAllSearchResults().begin())];
         [searchResultsView reloadDataForRowIndexes:indexSet
                                      columnIndexes:[NSIndexSet indexSetWithIndex:0]];
@@ -328,12 +332,16 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(uid, *convModel_, true);
+    auto it = getConversationFromUid(uid, *convModel_);
     if (it != convModel_->allFilteredConversations().end()) {
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
         [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
         selectedUid_ = uid;
-    } else if (it != convModel_->getAllSearchResults().end()) {
+    } else {
+        it = getSearchResultFromUid(uid, *convModel_);
+        if (it == convModel_->getAllSearchResults().end()) {
+            return;
+        }
         NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->getAllSearchResults().begin())];
         [searchResultsView selectRowIndexes:indexSet byExtendingSelection:NO];
         selectedUid_ = uid;
@@ -682,7 +690,7 @@ NSInteger const REQUEST_SEG         = 1;
     }
     [self clearSearchField];
     auto uid = QString::fromNSString(uId);
-    auto it = getConversationFromUid(uid, *convModel_, false);
+    auto it = getConversationFromUid(uid, *convModel_);
     if (it != convModel_->allFilteredConversations().end()) {
         @try {
             auto contact = convModel_->owner.contactModel->getContact(it->participants[0]);

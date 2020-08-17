@@ -609,8 +609,11 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [smartViewVC selectConversationList];
     [self updateRingID];
-    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get(), true);
-    if (conversationExists(convInfo, *accInfo.conversationModel.get(), true)) {
+    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
+    if (!conversationExists(convInfo, *accInfo.conversationModel.get())) {
+        convInfo = getSearchResultFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
+    }
+    if (conversationExists(convInfo, *accInfo.conversationModel.get()) || searchResultExists(convInfo, *accInfo.conversationModel.get())) {
         [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];
         [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
         accInfo.conversationModel.get()->clearUnreadInteractions(QString::fromNSString(conversationId));
@@ -624,8 +627,11 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [settingsVC setSelectedAccount:accInfo.id];
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [self updateRingID];
-    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get(), true);
-    if (conversationExists(convInfo, *accInfo.conversationModel.get(), true)) {
+    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
+    if (!conversationExists(convInfo, *accInfo.conversationModel.get())) {
+        convInfo = getSearchResultFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
+    }
+    if (conversationExists(convInfo, *accInfo.conversationModel.get()) || searchResultExists(convInfo, *accInfo.conversationModel.get())) {
         if (accInfo.contactModel->getContact(convInfo->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
             [smartViewVC selectPendingList];
         else

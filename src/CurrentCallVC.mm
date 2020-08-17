@@ -159,9 +159,12 @@ CVPixelBufferRef pixelBufferPreview;
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel, true);
-    if (!conversationExists(convIt, *accountInfo_->conversationModel.get(), true)) {
-        return;
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
+    if (!conversationExists(convIt, *accountInfo_->conversationModel)) {
+        convIt = getSearchResultFromUid(convUid_, *accountInfo_->conversationModel);
+        if (!searchResultExists(convIt, *accountInfo_->conversationModel)) {
+            return;
+        }
     }
     confUid_ = convIt->confId;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
@@ -200,7 +203,7 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::connect(accountInfo_->contactModel.get(),
                      &lrc::api::ContactModel::contactAdded,
                      [self](const QString &contactUri) {
-                         auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get(), false);
+                         auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
                          if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
                              return;
                          }
@@ -320,16 +323,20 @@ CVPixelBufferRef pixelBufferPreview;
 
     auto currentCall = callModel->getCall(callUid_);
     NSLog(@"\n status %@ \n",lrc::api::call::to_string(currentCall.status).toNSString());
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel, true);
-    if (conversationExists(convIt, *accountInfo_->conversationModel, true)) {
-        NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
-        [contactNameLabel setStringValue:bestName];
-        NSString* ringID = bestIDForConversation(*convIt, *accountInfo_->conversationModel);
-        if([bestName isEqualToString:ringID]) {
-            ringID = @"";
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
+    if (!conversationExists(convIt, *accountInfo_->conversationModel)) {
+        convIt = getSearchResultFromUid(convUid_, *accountInfo_->conversationModel);
+        if (!searchResultExists(convIt, *accountInfo_->conversationModel)) {
+            return;
         }
-        [contactIdLabel setStringValue:ringID];
     }
+    NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
+    [contactNameLabel setStringValue:bestName];
+    NSString* ringID = bestIDForConversation(*convIt, *accountInfo_->conversationModel);
+    if([bestName isEqualToString:ringID]) {
+        ringID = @"";
+    }
+    [contactIdLabel setStringValue:ringID];
     [self setupContactInfo:contactPhoto];
 
     confUid_ = convIt->confId;
@@ -491,7 +498,7 @@ CVPixelBufferRef pixelBufferPreview;
 
 -(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault {
     auto* convModel = accountInfo_->conversationModel.get();
-    auto convIt = getConversationFromUid(convUid_, *convModel, false);
+    auto convIt = getConversationFromUid(convUid_, *convModel);
     if (convIt == convModel->allFilteredConversations().end()) {
         return nil;
     }
@@ -818,8 +825,8 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     // If we accept a conversation with a non trusted contact, we first accept it
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get(), true);
-    if (!conversationExists(convIt,*accountInfo_->conversationModel.get(), true)) {
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+    if (!conversationExists(convIt,*accountInfo_->conversationModel.get())) {
         return;
     }
 
