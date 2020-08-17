@@ -242,7 +242,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
         NSString* name = interaction.authorUri.toNSString();
         auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel()
                                              .getAccountInfo(accountId)
-                                             .conversationModel.get(), false);
+                                             .conversationModel.get());
         auto convQueue = lrc->getAccountModel()
         .getAccountInfo(accountId)
         .conversationModel.get()->allFilteredConversations();
