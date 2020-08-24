@@ -31,6 +31,9 @@
 /* Contextual menu action */
 "Block contact" = "Estä yhteystieto";
 
+/* Contextual menu action */
+"Remove conversation" = "Poista keskustelu";
+
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Painamalla \"OK\"-painiketta poistat tämän tunnuksen tästä laitteesta! Tätä toimintoa ei voi kumota. Rekisteröity nimesi voi myös kadota.";
 
