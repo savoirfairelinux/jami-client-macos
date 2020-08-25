@@ -29,5 +29,6 @@
 - (void) showDialpad;
 - (BOOL) checkForRingAccount;
 - (QVector<QString>) getActiveCalls;
+-(QVector<QString>)getConferenceSubcalls:(QString)confId;
 
 @end
