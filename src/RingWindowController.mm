@@ -598,6 +598,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [smartViewVC reloadConversationWithUid:conversationID.toNSString()];
 }
 
+-(void) chooseConversation:(const lrc::api::conversation::Info&)conv model:(lrc::api::ConversationModel*)model{
+    [smartViewVC selectConversation: conv model:model];
+}
+
 -(void) callFinished {
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }

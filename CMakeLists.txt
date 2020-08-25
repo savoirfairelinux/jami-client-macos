@@ -237,6 +237,8 @@ SET(ringclient_VIEWS
    src/views/RenderingView.h
    src/views/RenderingView.mm
    src/views/VideoRendering.h
+   src/views/ConferenceOverlayView.h
+   src/views/ConferenceOverlayView.mm
 )
 
 SET(ringclient_OTHERS
