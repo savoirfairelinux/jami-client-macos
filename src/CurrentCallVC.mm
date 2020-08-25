@@ -109,6 +109,7 @@ extern "C" {
 @property QMetaObject::Connection callStateChanged;
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection profileUpdatedConnection;
+@property QMetaObject::Connection participantsChangedConnection;
 
 //conference
 @property (unsafe_unretained) IBOutlet NSStackView *callingWidgetsContainer;
@@ -122,6 +123,8 @@ extern "C" {
 @implementation CurrentCallVC
 lrc::api::AVModel* mediaModel;
 NSMutableDictionary *connectingCalls;
+NSMutableDictionary *participantsOverlays;
+NSSize framesize;
 
 NSInteger const PREVIEW_WIDTH = 185;
 NSInteger const PREVIEW_HEIGHT = 130;
@@ -165,18 +168,83 @@ CVPixelBufferRef pixelBufferPreview;
     [self connectSignals];
 }
 
+-(void)updateConferenceOverlays:(QString)callID {
+    auto* callModel = accountInfo_->callModel.get();
+    auto call = callModel->getCall(callID);
+    using Status = lrc::api::call::Status;
+    switch (call.status) {
+        case Status::ENDED:
+        case Status::TERMINATING:
+        case Status::INVALID:
+        case Status::PEER_BUSY:
+        case Status::TIMEOUT:
+            [participantsOverlays[call.peerUri.toNSString()] removeFromSuperview];
+            participantsOverlays[call.peerUri.toNSString()] = nil;
+            [self updateCall];
+            break;
+    }
+}
+
+-(void)switchToNextConferenceCall {
+    auto* callModel = accountInfo_->callModel.get();
+    if (!callModel->hasCall(confUid_)) {
+        return;
+    }
+    AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    auto activeCalls = [appDelegate getActiveCalls];
+    if (activeCalls.isEmpty()) {
+        return;
+    }
+    auto subcalls = [appDelegate getConferenceSubcalls: confUid_];
+    QString callId;
+    if (subcalls.isEmpty()) {
+        for(auto subcall: activeCalls) {
+            if(subcall != callUid_) {
+                callId = subcall;
+            }
+        }
+    } else {
+        for(auto subcall: subcalls) {
+            if(subcall != callUid_) {
+                callId = subcall;
+            }
+        }
+    }
+    if (!callModel->hasCall(callId)) {
+        return;
+    }
+    auto callToSwitch = callModel->getCall(callId);
+    auto convIt = getConversationFromURI(callToSwitch.peerUri, *accountInfo_->conversationModel);
+    if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
+        return;
+    }
+    [self.delegate chooseConversation: *convIt model:accountInfo_->conversationModel.get()];
+}
+
 -(void) connectSignals {
     auto* callModel = accountInfo_->callModel.get();
     auto* convModel = accountInfo_->conversationModel.get();
+    QObject::disconnect(self.participantsChangedConnection);
+    self.participantsChangedConnection = QObject::connect(callModel,
+                                                          &lrc::api::NewCallModel::onParticipantsChanged,
+                                                          [self](const QString& confId) {
+        auto* callModel = accountInfo_->callModel.get();
+        if (!callModel->hasCall(confId)) {
+            return;
+        }
+        [self updateConference];
+    });
     //monitor for updated call state
     QObject::disconnect(self.callStateChanged);
     self.callStateChanged = QObject::connect(callModel,
                                              &lrc::api::NewCallModel::callStatusChanged,
                                              [self](const QString& callId) {
-                                                 if ([self isCurrentCall: callId]) {
-                                                     [self updateCall];
-                                                 }
-                                             });
+        if ([self isCurrentCall: callId]) {
+            [self updateCall];
+        } else {
+            [self updateConferenceOverlays: callId];
+        }
+    });
     /* monitor media for messaging text messaging */
     QObject::disconnect(self.messageConnection);
     self.messageConnection = QObject::connect(convModel,
@@ -282,6 +350,7 @@ CVPixelBufferRef pixelBufferPreview;
     [movableBaseForView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
     [previewView setAutoresizingMask: NSViewNotSizable | NSViewMaxXMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMinYMargin];
     connectingCalls = [[NSMutableDictionary alloc] init];
+    participantsOverlays = [[NSMutableDictionary alloc] init];
 }
 
 -(void) updateDurationLabel
@@ -303,6 +372,65 @@ CVPixelBufferRef pixelBufferPreview;
     // we stop the refresh loop
     [refreshDurationTimer invalidate];
     refreshDurationTimer = nil;
+}
+
+-(void) updateConference
+{
+    if (confUid_.isEmpty()) {
+        for (ConferenceOverlayView* overlay: [participantsOverlays allValues]) {
+            [overlay removeFromSuperview];
+        }
+        participantsOverlays = [[NSMutableDictionary alloc] init];
+        return;
+    }
+    auto* callModel = accountInfo_->callModel.get();
+    if (!callModel->hasCall(confUid_)) {
+        return;
+    }
+    auto& call = callModel->getCall(confUid_);
+    auto participants = call.participantsInfos;
+    if (participants.size() < 3) {
+        for (ConferenceOverlayView* overlay: [participantsOverlays allValues]) {
+            [overlay removeFromSuperview];
+        }
+        participantsOverlays = [[NSMutableDictionary alloc] init];
+        return;
+    }
+    for (auto participant: participants) {
+        ConferenceParticipant conferenceParticipant;//[[ConferenceParticipant alloc] init];
+        conferenceParticipant.x = participant["x"].toFloat();
+        conferenceParticipant.y = participant["y"].toFloat();
+        conferenceParticipant.width = participant["w"].toFloat();
+        conferenceParticipant.hight = participant["h"].toFloat();
+        conferenceParticipant.uri = participant["uri"].toNSString();
+        conferenceParticipant.active = participant["active"] == "true";
+        conferenceParticipant.isLocal = false;
+        conferenceParticipant.bestName = participant["uri"].toNSString();
+
+        NSString* uri = participant["uri"].toNSString();
+        if (accountInfo_->profileInfo.uri == participant["uri"]) {
+            conferenceParticipant.isLocal = true;
+            conferenceParticipant.bestName = NSLocalizedString(@"Me", @"Conference name");
+        } else {
+            try {
+                auto contact = accountInfo_->contactModel->getContact(participant["uri"]);
+                conferenceParticipant.bestName = bestNameForContact(contact);
+            } catch (...) {}
+        }
+        if (participantsOverlays[uri] != nil) {
+            ConferenceOverlayView* overlay = participantsOverlays[conferenceParticipant.uri];
+            overlay.framesize = framesize;
+            [overlay updateViewWithParticipant: conferenceParticipant];
+        } else {
+            ConferenceOverlayView* overlay = [[ConferenceOverlayView alloc] init];
+            overlay.framesize = framesize;
+            overlay.delegate = self;
+            [overlay configureView];
+            [self.distantView addSubview:overlay];
+            participantsOverlays[uri] = overlay;
+            [overlay updateViewWithParticipant: conferenceParticipant];
+        }
+    }
 }
 
 -(void) updateCall
@@ -332,6 +460,8 @@ CVPixelBufferRef pixelBufferPreview;
     [muteVideoButton setHidden:!confUid_.isEmpty()];
     [recordOnOffButton setHidden:!confUid_.isEmpty()];
     [holdOnOffButton setHidden:!confUid_.isEmpty()];
+    [movableBaseForView setHidden:!confUid_.isEmpty()];
+    [self updateConference];
 
     [timeSpentLabel setStringValue:callModel->getFormattedCallDuration(callUid_).toNSString()];
     if (refreshDurationTimer == nil)
@@ -427,8 +557,8 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::PEER_BUSY:
         case Status::TIMEOUT:
             connectingCalls[callUid_.toNSString()] = nil;
-            //[self cleanUp];
             [self.delegate callFinished];
+            [self switchToNextConferenceCall];
             break;
     }
 }
@@ -586,6 +716,7 @@ CVPixelBufferRef pixelBufferPreview;
             return;
         }
         auto frameSize = CGSizeMake(frame->width, frame->height);
+        framesize = frameSize;
         auto rotation = 0;
         if (auto matrix = av_frame_get_side_data(frame, AV_FRAME_DATA_DISPLAYMATRIX)) {
             const int32_t* data = reinterpret_cast<int32_t*>(matrix->data);
@@ -967,6 +1098,9 @@ CVPixelBufferRef pixelBufferPreview;
 
         [self.splitView enterFullScreenMode:[NSScreen mainScreen]  withOptions:opts];
     }
+    for (ConferenceOverlayView* participant: [participantsOverlays allValues]) {
+        [participant sizeChanged];
+    }
 }
 
 -(void) mouseIsMoving:(BOOL) move
@@ -1124,6 +1258,100 @@ CVPixelBufferRef pixelBufferPreview;
 
 -(bool)isCurrentCall:(const QString&)callId {
     return (callId == confUid_ || callId == callUid_);
+}
+
+#pragma mark ConferenceLayoutDelegate
+
+-(void)hangUpParticipant:(NSString*)uri {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
+
+    auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
+    auto callId = convIt->callId;
+    if (not callModel->hasCall(callId)){
+        return;
+    }
+    callModel->hangUp(callId);
+}
+
+-(void)minimizeParticipant {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
+    if  (not callModel->hasCall(confUid_)){
+        return;
+    }
+    try {
+        auto call = callModel->getCall(confUid_);
+        switch (call.layout) {
+            case lrc::api::call::Layout::GRID:
+                break;
+            case lrc::api::call::Layout::ONE_WITH_SMALL:
+                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::GRID);
+                break;
+            case lrc::api::call::Layout::ONE:
+                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::ONE_WITH_SMALL);
+                break;
+        };
+    } catch (...) {}
+}
+
+-(int)getCurrentLayout {
+    auto* callModel = accountInfo_->callModel.get();
+    if (not callModel->hasCall(confUid_)){
+        return -1;
+    }
+    return static_cast<int>(callModel->getCall(confUid_).layout);
+}
+
+-(BOOL)isMasterCall {
+    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
+    if (convIt->uid.isEmpty()) {
+        return true;
+    }
+    auto* callModel = accountInfo_->callModel.get();
+    if (!convIt->confId.isEmpty() && callModel->hasCall(convIt->confId)) {
+        return true;
+    } else {
+        auto call = callModel->getCall(convIt->callId);
+        return call.participantsInfos.size() == 0;
+    }
+}
+
+-(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive {
+    if (accountInfo_ == nil)
+        return;
+    NSLog(@"result %@", uri);
+    auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
+    QString callId;
+    BOOL localVideo = accountInfo_->profileInfo.uri == QString::fromNSString(uri);
+    if (localVideo) {
+        auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
+        callId = convIt->callId;
+    }
+    auto* callModel = accountInfo_->callModel.get();
+    if (not callModel->hasCall(callId) || not callModel->hasCall(confUid_)){
+        return;
+    }
+    try {
+        auto call = callModel->getCall(confUid_);
+        switch (call.layout) {
+            case lrc::api::call::Layout::GRID:
+                callModel->setActiveParticipant(confUid_, callId);
+                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::ONE_WITH_SMALL);
+                break;
+            case lrc::api::call::Layout::ONE_WITH_SMALL:
+                callModel->setActiveParticipant(confUid_, callId);
+                callModel->setConferenceLayout(confUid_,
+                                               isActive ? lrc::api::call::Layout::ONE : lrc::api::call::Layout::ONE_WITH_SMALL);
+                break;
+            case lrc::api::call::Layout::ONE:
+                callModel->setActiveParticipant(confUid_, callId);
+                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::GRID);
+                break;
+        };
+    } catch (...) {}
 }
 
 #pragma mark Popover delegate
