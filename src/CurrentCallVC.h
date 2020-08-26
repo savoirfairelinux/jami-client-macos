@@ -25,6 +25,7 @@
 
 #import "ChooseContactVC.h"
 #import "CallInConferenceVC.h"
+#import "views/ConferenceOverlayView.h"
 
 namespace lrc {
     namespace api {
@@ -35,11 +36,12 @@ namespace lrc {
 @protocol CallViewControllerDelegate
 
 -(void) conversationInfoUpdatedFor:(const QString&) conversationID;
+-(void) chooseConversation:(const lrc::api::conversation::Info&)conv model:(lrc::api::ConversationModel*)model;
 -(void) callFinished;
 
 @end
 
-@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate, ChooseContactVCDelegate, CallInConferenceVCDelegate> {
+@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate, ChooseContactVCDelegate, CallInConferenceVCDelegate, ConferenceLayoutDelegate> {
 
 }
 @property (retain, nonatomic) id <CallViewControllerDelegate> delegate;
