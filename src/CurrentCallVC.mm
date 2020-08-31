@@ -162,8 +162,8 @@ CVPixelBufferRef pixelBufferPreview;
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
-    confUid_ = convIt->confId;
+    auto convIt = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    confUid_ = convIt.confId;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     [self connectSignals];
 }
@@ -190,9 +190,9 @@ CVPixelBufferRef pixelBufferPreview;
     }
 }
 
--(void)switchToNextConferenceCall {
+-(void)switchToNextConferenceCall:(QString)confId {
     auto* callModel = accountInfo_->callModel.get();
-    if (!callModel->hasCall(confUid_)) {
+    if (!callModel->hasCall(confId)) {
         return;
     }
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
@@ -200,7 +200,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (activeCalls.isEmpty()) {
         return;
     }
-    auto subcalls = [appDelegate getConferenceSubcalls: confUid_];
+    auto subcalls = [appDelegate getConferenceSubcalls: confId];
     QString callId;
     if (subcalls.isEmpty()) {
         for(auto subcall: activeCalls) {
@@ -448,18 +448,18 @@ CVPixelBufferRef pixelBufferPreview;
     }
 
     auto currentCall = callModel->getCall(callUid_);
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
-    if (conversationExists(convIt, *accountInfo_->conversationModel)) {
-        NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
+    auto convIt = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    if (!convIt.uid.isEmpty()) {
+        NSString* bestName = bestNameForConversation(convIt, *accountInfo_->conversationModel);
         [contactNameLabel setStringValue:bestName];
-        NSString* ringID = bestIDForConversation(*convIt, *accountInfo_->conversationModel);
+        NSString* ringID = bestIDForConversation(convIt, *accountInfo_->conversationModel);
         if([bestName isEqualToString:ringID]) {
             ringID = @"";
         }
         [contactIdLabel setStringValue:ringID];
     }
     [self setupContactInfo:contactPhoto];
-    confUid_ = convIt->confId;
+    confUid_ = convIt.confId;
     [muteAudioButton setHidden:!confUid_.isEmpty()];
     [muteVideoButton setHidden:!confUid_.isEmpty()];
     [recordOnOffButton setHidden:!confUid_.isEmpty()];
@@ -563,7 +563,7 @@ CVPixelBufferRef pixelBufferPreview;
             connectingCalls[callUid_.toNSString()] = nil;
             [self removeConferenceLayout ];
             [self.delegate callFinished];
-            [self switchToNextConferenceCall];
+            [self switchToNextConferenceCall: confUid_];
             break;
     }
 }
