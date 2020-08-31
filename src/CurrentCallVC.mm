@@ -162,8 +162,11 @@ CVPixelBufferRef pixelBufferPreview;
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
-    confUid_ = convIt->confId;
+    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    if (conv.uid.isEmpty()) {
+        return;
+    }
+    confUid_ = conv.confId;
     [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
     [self connectSignals];
 }
@@ -190,17 +193,14 @@ CVPixelBufferRef pixelBufferPreview;
     }
 }
 
--(void)switchToNextConferenceCall {
+-(void)switchToNextConferenceCall:(QString)confId {
     auto* callModel = accountInfo_->callModel.get();
-    if (!callModel->hasCall(confUid_)) {
-        return;
-    }
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     auto activeCalls = [appDelegate getActiveCalls];
     if (activeCalls.isEmpty()) {
         return;
     }
-    auto subcalls = [appDelegate getConferenceSubcalls: confUid_];
+    auto subcalls = [appDelegate getConferenceSubcalls: confId];
     QString callId;
     if (subcalls.isEmpty()) {
         for(auto subcall: activeCalls) {
@@ -271,21 +271,17 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::connect(accountInfo_->contactModel.get(),
                      &lrc::api::ContactModel::contactAdded,
                      [self](const QString &contactUri) {
-                         auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
-                         if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
-                             return;
-                         }
-                         if (convIt->participants.empty()) {
-                             return;
-
-                         }
-                         auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
-                         if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
-                             accountInfo_->conversationModel->makePermanent(convUid_);
-                         [contactPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
-                         [self.delegate conversationInfoUpdatedFor:convUid_];
-                         [self setBackground];
-                     });
+        auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+        if (conv.uid.isEmpty() || conv.participants.empty()) {
+            return;
+        }
+        auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
+        if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
+            accountInfo_->conversationModel->makePermanent(convUid_);
+        [contactPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
+        [self.delegate conversationInfoUpdatedFor:convUid_];
+        [self setBackground];
+    });
     [self connectVideoSignals];
 }
 
@@ -448,18 +444,18 @@ CVPixelBufferRef pixelBufferPreview;
     }
 
     auto currentCall = callModel->getCall(callUid_);
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
-    if (conversationExists(convIt, *accountInfo_->conversationModel)) {
-        NSString* bestName = bestNameForConversation(*convIt, *accountInfo_->conversationModel);
+    auto convIt = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    if (!convIt.uid.isEmpty()) {
+        NSString* bestName = bestNameForConversation(convIt, *accountInfo_->conversationModel);
         [contactNameLabel setStringValue:bestName];
-        NSString* ringID = bestIDForConversation(*convIt, *accountInfo_->conversationModel);
+        NSString* ringID = bestIDForConversation(convIt, *accountInfo_->conversationModel);
         if([bestName isEqualToString:ringID]) {
             ringID = @"";
         }
         [contactIdLabel setStringValue:ringID];
     }
     [self setupContactInfo:contactPhoto];
-    confUid_ = convIt->confId;
+    confUid_ = convIt.confId;
     [muteAudioButton setHidden:!confUid_.isEmpty()];
     [muteVideoButton setHidden:!confUid_.isEmpty()];
     [recordOnOffButton setHidden:!confUid_.isEmpty()];
@@ -563,7 +559,7 @@ CVPixelBufferRef pixelBufferPreview;
             connectingCalls[callUid_.toNSString()] = nil;
             [self removeConferenceLayout ];
             [self.delegate callFinished];
-            [self switchToNextConferenceCall];
+            [self switchToNextConferenceCall: confUid_];
             break;
     }
 }
@@ -621,16 +617,16 @@ CVPixelBufferRef pixelBufferPreview;
 
 -(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault {
     auto* convModel = accountInfo_->conversationModel.get();
-    auto convIt = getConversationFromUid(convUid_, *convModel);
-    if (convIt == convModel->allFilteredConversations().end()) {
-        return nil;
+    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    if (conv.uid.isEmpty() || conv.participants.empty()) {
+        return;
     }
     if(shouldDrawDefault) {
         auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-        QVariant photo = imgManip.conversationPhoto(*convIt, *accountInfo_, QSize(size, size), NO);
+        QVariant photo = imgManip.conversationPhoto(conv, *accountInfo_, QSize(size, size), NO);
         return QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
     }
-    auto contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
+    auto contact = accountInfo_->contactModel->getContact(conv.participants[0]);
     NSData *imageData = [[NSData alloc] initWithBase64EncodedString:contact.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
     return [[NSImage alloc] initWithData:imageData];
 }
@@ -949,15 +945,16 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     // If we accept a conversation with a non trusted contact, we first accept it
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
-    if (convIt != accountInfo_->conversationModel->allFilteredConversations().end()) {
-        auto& contact = accountInfo_->contactModel->getContact(convIt->participants[0]);
-        if (contact.profileInfo.type == lrc::api::profile::Type::PENDING)
-            accountInfo_->conversationModel->makePermanent(convUid_);
+    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    if (conv.uid.isEmpty() || conv.participants.empty()) {
+        return;
+    }
+    auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
+    if (contact.profileInfo.type == lrc::api::profile::Type::PENDING) {
+        accountInfo_->conversationModel->makePermanent(convUid_);
     }
 
     auto* callModel = accountInfo_->callModel.get();
-
     callModel->accept(callUid_);
 }
 
@@ -1311,15 +1308,16 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(BOOL)isMasterCall {
-    auto convIt = getConversationFromUid(convUid_, *accountInfo_->conversationModel);
-    if (convIt->uid.isEmpty()) {
-        return true;
+    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    if (conv.uid.isEmpty()) {
+        return false;
     }
+
     auto* callModel = accountInfo_->callModel.get();
-    if (!convIt->confId.isEmpty() && callModel->hasCall(convIt->confId)) {
+    if (!conv.confId.isEmpty() && callModel->hasCall(conv.confId)) {
         return true;
     } else {
-        auto call = callModel->getCall(convIt->callId);
+        auto call = callModel->getCall(conv.callId);
         return call.participantsInfos.size() == 0;
     }
 }
