@@ -31,6 +31,9 @@
 /* Contextual menu action */
 "Block contact" = "屏蔽联系人";
 
+/* Contextual menu action */
+"Remove conversation" = "移除会话";
+
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "点击“确认”将从此设备上删除该帐号！此操作无法撤销。同时，您也会失去已注册的用户名。";
 
@@ -207,4 +210,16 @@
 
 /* Edit Sip Account Action */
 "Edit Account" = "编辑账户";
+
+/* Conference action */
+"Minimize participant" = "Minimize participant";
+
+/* Conference action */
+"Maximize participant" = "Maximize participant";
+
+/* Conference action */
+"Hangup" = "挂断";
+
+/* Conference name */
+"Me" = "我";
 

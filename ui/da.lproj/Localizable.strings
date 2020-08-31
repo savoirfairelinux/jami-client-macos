@@ -31,6 +31,9 @@
 /* Contextual menu action */
 "Block contact" = "Bloker kontakt";
 
+/* Contextual menu action */
+"Remove conversation" = "Remove conversation";
+
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Ved at klikke på \"OK\" fjerner du denne konto på denne enhed! Denne handling kan ikke fortrydes. Dit registrerede navn kan også gå tabt.";
 
@@ -207,4 +210,16 @@
 
 /* Edit Sip Account Action */
 "Edit Account" = "Rediger konto";
+
+/* Conference action */
+"Minimize participant" = "Minimize participant";
+
+/* Conference action */
+"Maximize participant" = "Maximize participant";
+
+/* Conference action */
+"Hangup" = "Læg på";
+
+/* Conference name */
+"Me" = "Mig";
 

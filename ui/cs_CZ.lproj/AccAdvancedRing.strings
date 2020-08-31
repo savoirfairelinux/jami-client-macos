@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow incoming calls from unknown contacts"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow incoming calls from unknown contacts";
+"1Xr-BO-Pu3.title" = "Povolit příchozí hovory od neznámých kontatků";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -16,6 +16,15 @@
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "Nastavení volání";
+
+/* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
+"Va3-Un-lCL.title" = "Discovery settings";
+
+/* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
+"rdZ-JB-96s.title" = "Make this account discoverable on local network";
+
+/* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
+"n3E-PI-JHj.title" = "Discover peers on local network";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Automaticky přijímat hovory";

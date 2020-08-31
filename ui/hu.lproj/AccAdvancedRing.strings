@@ -17,6 +17,15 @@
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "Hívás beállítások";
 
+/* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
+"Va3-Un-lCL.title" = "Felderítési beállítások";
+
+/* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
+"rdZ-JB-96s.title" = "Tegye ezt a fiókot felderíthetővé a helyi hálózaton";
+
+/* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
+"n3E-PI-JHj.title" = "Felderezze fel társait a helyi hálózaton";
+
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Hívások önműködő fogadása";
 
