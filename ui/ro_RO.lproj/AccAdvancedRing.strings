@@ -17,8 +17,17 @@
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "Reglările apelului";
 
+/* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
+"Va3-Un-lCL.title" = "Reglări de vizibilitate";
+
+/* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
+"rdZ-JB-96s.title" = "Fă acest cont vizibil în rețeaua locală";
+
+/* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
+"n3E-PI-JHj.title" = "Descoperă utilizatori în rețeaua locală";
+
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Răspunde automat la apeluri";
+"DSe-Cs-oD6.title" = "Răspuns automat la apeluri";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Celulă de Text";

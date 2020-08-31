@@ -31,6 +31,9 @@
 /* Contextual menu action */
 "Block contact" = "Zablokovať kontakt";
 
+/* Contextual menu action */
+"Remove conversation" = "Odstrániť konverzáciu";
+
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Kliknutím na \"OK\" odstránite tento účet z tohto zariadenia! Táto operácia nemôže byť vrátená. Vaše registrované meno môže byť stratené. ";
 
@@ -207,4 +210,16 @@
 
 /* Edit Sip Account Action */
 "Edit Account" = "Upraviť účet";
+
+/* Conference action */
+"Minimize participant" = "Minimize participant";
+
+/* Conference action */
+"Maximize participant" = "Maximize participant";
+
+/* Conference action */
+"Hangup" = "Zložiť";
+
+/* Conference name */
+"Me" = "Ja";
 

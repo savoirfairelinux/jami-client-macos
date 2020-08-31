@@ -17,6 +17,15 @@
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "Rregullime për thirrjet";
 
+/* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
+"Va3-Un-lCL.title" = "Rregullime pikasjeje";
+
+/* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
+"rdZ-JB-96s.title" = "Bëje këtë llogari të zbulueshme në rrjet vendor";
+
+/* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
+"n3E-PI-JHj.title" = "Zbuloni ortakë në rrjet vendor";
+
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Vetëpërgjigju thirrjeve";
 

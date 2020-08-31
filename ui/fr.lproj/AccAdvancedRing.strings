@@ -17,6 +17,15 @@
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "Paramètres d'appel";
 
+/* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
+"Va3-Un-lCL.title" = "Paramètres de découverte";
+
+/* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
+"rdZ-JB-96s.title" = "Rendre ce compte visible sur un réseau local";
+
+/* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
+"n3E-PI-JHj.title" = "Découvrir des pairs sur le réseau local";
+
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Répondre automatiquement aux appels";
 
