@@ -18,13 +18,13 @@
 "3rM-KT-bNf.title" = "Titkosításhiba esetén RTP használata";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Hívások önműködő fogadása";
+"3vs-TI-tkg.title" = "Önműködő hívásfogadása";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
 "6eH-la-JbF.title" = "TURN tartomány";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
-"72p-GY-gu6.title" = "Személyes kulcs jelszó";
+"72p-GY-gu6.title" = "Titkos kulcs jelszava";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
 "8JD-11-wHZ.title" = "Kimenő TLS kiszolgálónév";
@@ -54,7 +54,7 @@
 "JV8-cY-6vR.title" = "Tanúsítvány megkövetelése a bejövő TLS kapcsolatokhoz";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "SDP munkamenet targyalás (az ICE tartaléka)";
+"Jfp-NE-ODd.title" = "SDP munkamenet egyeztetés (az ICE tartaléka)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
 "MBR-AC-HFq.title" = "Doboz";
@@ -75,7 +75,7 @@
 "Ppa-zn-w1X.title" = "Doboz";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Engedélyezze a SDES kulcscsere szabályhalmazat";
+"Qk8-tH-a0l.title" = "SDES-kulcscsere engedélyezése";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Szöveges cella";
@@ -84,10 +84,10 @@
 "Vke-hs-iXz.title" = "Hangcodekek";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
-"W9F-Nf-ehp.title" = "Személyes kulcs";
+"W9F-Nf-ehp.title" = "Titkos kulcs";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Válasz tanúsítványok ellenőrzése (ügyfél oldalon)";
+"WsS-1e-Epm.title" = "Válasz tanúsítványok ellenőrzése (ügyféloldali)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
 "Xp3-bL-3Cs.title" = "Felhasználói tanúsítvány";
@@ -102,25 +102,25 @@
 "aYs-wh-Hpr.title" = "TURN cím";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "CA tanúsítvány";
+"b2y-85-ZHK.title" = "Hitelesítésszolgáltatói tanúsítvány";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Csak az SDP-tárgyalások során használatos ha az ICE nem támogatott";
+"cN3-lC-dNM.title" = "Csak az SDP-egyeztetés során használatos ha az ICE nem támogatott";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Tárgyalási időtúllépés (másodperc)";
+"dtf-uk-n1B.title" = "Időtúllépés az egyeztetésnél (másodperc)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Hálózati felület";
+"fjH-ej-gEr.title" = "Hálózati illesztőfelület";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "A bejövő tanúsítványok ellenőrzése (kiszolgálóoldali)";
+"fyT-bU-m54.title" = "Bejövő tanúsítványok ellenőrzése (kiszolgálóoldali)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "Videócodekek";
@@ -147,7 +147,7 @@
 "vCS-s8-mZI.title" = "Média-adatfolyamok titkosítása (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Titkosítási tárgyalás (TLS)";
+"vZH-42-mUi.title" = "Titkosítási egyeztetés (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
 "vpo-fl-9TS.title" = "Kapcsolódás";

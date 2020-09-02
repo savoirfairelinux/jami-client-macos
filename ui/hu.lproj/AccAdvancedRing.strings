@@ -27,7 +27,7 @@
 "n3E-PI-JHj.title" = "Felderezze fel társait a helyi hálózaton";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Hívások önműködő fogadása";
+"DSe-Cs-oD6.title" = "Önműködő hívásfogadása";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Szöveges cella";
@@ -63,7 +63,7 @@
 "YJM-iQ-0lE.title" = "Bootstrap";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "YcX-lE-8ug"; */
-"YcX-lE-8ug.title" = "Személyes kulcs jelszó";
+"YcX-lE-8ug.title" = "Titkos kulcs jelszava";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
 "Ywo-5x-8kh.title" = "Doboz";
@@ -87,7 +87,7 @@
 "gUl-Px-cIJ.title" = "TURN jelszó";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "k7i-pK-JXp"; */
-"k7i-pK-JXp.title" = "CA tanúsítvány";
+"k7i-pK-JXp.title" = "Hitelesítésszolgáltatói tanúsítvány";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "nqX-Vu-UuA"; */
 "nqX-Vu-UuA.title" = "STUN használata";
@@ -99,7 +99,7 @@
 "sVe-iG-OCw.title" = "Kapcsolódás";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
-"soR-nF-ybe.title" = "Személyes kulcs";
+"soR-nF-ybe.title" = "Titkos kulcs";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
 "sy5-OH-wyB.title" = "Doboz";

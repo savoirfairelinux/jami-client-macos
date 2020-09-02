@@ -3,7 +3,7 @@
 "0Fh-Sz-TMo.title" = "Min";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "0cb-ib-oHd"; */
-"0cb-ib-oHd.title" = "Interval Video RTP Port";
+"0cb-ib-oHd.title" = "Interval Port RTP Video";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "24s-we-pkD"; */
 "24s-we-pkD.title" = "Protecție";
@@ -69,13 +69,13 @@
 "OEo-C7-vEh.title" = "Elementul 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
-"Ogj-NW-fZ9.title" = "Interval Audio RTP Port";
+"Ogj-NW-fZ9.title" = "Interval Port RTP Audio";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
 "Ppa-zn-w1X.title" = "Cutie";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Activează SDES pentru protocolul de schimbat chei";
+"Qk8-tH-a0l.title" = "Activează SDES ca protocol pentru schimbul de chei";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Celulă de Text";
@@ -144,7 +144,7 @@
 "rMN-Wf-tmp.title" = "Nume de utilizator TURN";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Cifrează fluxurile media (SRTP)";
+"vCS-s8-mZI.title" = "Cifrează fluxurile Media (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
 "vZH-42-mUi.title" = "Cifrează negocierea (TLS)";
