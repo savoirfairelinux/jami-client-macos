@@ -151,18 +151,17 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     auto accountID = conversation.accountId;
     auto convID = conversation.convId;
     auto convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-    auto conversationInfo = getConversationFromUid(convID, *convMod);
-    auto convQueue = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get()->allFilteredConversations();
-    if (conversationInfo == convQueue.end()) {
+    auto conversationInfo = convMod->getConversationForUID(convID);
+    if (conversationInfo.uid.isEmpty()) {
         return;
     }
 
     if (table == callsView) {
-        auto callID = conversationInfo->confId.isEmpty() ? conversationInfo->callId : conversationInfo->confId;
+        auto callID = conversationInfo.confId.isEmpty() ? conversationInfo.callId : conversationInfo.confId;
         [self.delegate joinCall: callID];
     } else if (table == contactsView) {
-        auto uid = conversationInfo->participants.front();
-        [self.delegate callToContact:uid convUID:convModel->filteredConversation(row).uid];
+        auto uid = conversationInfo.participants.front();
+        [self.delegate callToContact:uid convUID: convID];
     }
 }
 
@@ -212,11 +211,14 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
             auto accountID = conversation.accountId;
             auto convID = conversation.convId;
             auto *convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-            auto *conversationInfo = &(*getConversationFromUid(convID, *convMod));
+            auto conversationInfo = convMod->getConversationForUID(convID);
+            if (conversationInfo.uid.isEmpty()) {
+                return nil;
+            }
             if (displayNameString.length > 0) {
                 displayNameString = [displayNameString stringByAppendingString:@", "];
             }
-            displayNameString = [displayNameString stringByAppendingString: bestNameForConversation(*conversationInfo, *convMod)];
+            displayNameString = [displayNameString stringByAppendingString: bestNameForConversation(conversationInfo, *convMod)];
         }
         [displayName setStringValue:displayNameString];
         [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
@@ -232,12 +234,12 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     auto accountID = conversation.accountId;
     auto convID = conversation.convId;
     auto *convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-    auto *conversationInfo = &(*getConversationFromUid(convID, *convMod));
-    if (conversationInfo->participants.empty()) {
+    auto conversationInfo = convMod->getConversationForUID(convID);
+    if (conversationInfo.uid.isEmpty() || conversationInfo.participants.empty()) {
         return nil;
     }
-    NSString* displayNameString = bestNameForConversation(*conversationInfo, *convMod);
-    NSString* displayIDString = bestIDForConversation(*conversationInfo, *convMod);
+    NSString* displayNameString = bestNameForConversation(conversationInfo, *convMod);
+    NSString* displayIDString = bestIDForConversation(conversationInfo, *convMod);
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
         [displayName setStringValue:displayIDString];
         [displayRingID setHidden:YES];
@@ -247,7 +249,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
         [displayRingID setHidden:NO];
     }
     auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-    NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conversationInfo, convMod->owner)));
+    NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversationInfo, convMod->owner)));
     if(image) {
         [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
         NSArray* constraints = [NSLayoutConstraint
@@ -266,7 +268,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     [photoView setHidden: NO];
     [photoView setImage: image];
     try {
-        auto contact = convModel->owner.contactModel->getContact(conversationInfo->participants[0]);
+        auto contact = convModel->owner.contactModel->getContact(conversationInfo.participants[0]);
         if (contact.isPresent) {
             [presenceView setHidden:NO];
         }
