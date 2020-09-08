@@ -189,6 +189,20 @@ CGFloat const controlSize = 40;
     [super mouseExited:theEvent];
 }
 
+-(void)mouseUp:(NSEvent *)theEvent
+{
+    [super mouseUp:theEvent];
+    if ([theEvent clickCount] == 1) {
+        [self performSelector:@selector(singleTap) withObject:nil afterDelay:[NSEvent doubleClickInterval]];
+    } else if (theEvent.clickCount == 2) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(singleTap) object:nil];
+    }
+}
+
+- (void)singleTap {
+    [self.delegate maximizeParticipant:self.participant.uri active: self.participant.active];
+}
+
 - (void)ensureTrackingArea {
     if (trackingArea == nil) {
         trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
