@@ -189,6 +189,11 @@ CGFloat const controlSize = 40;
     [super mouseExited:theEvent];
 }
 
+-(void)mouseDown:(NSEvent *)theEvent
+{
+    [self.delegate maximizeParticipant:self.participant.uri active: self.participant.active];
+}
+
 - (void)ensureTrackingArea {
     if (trackingArea == nil) {
         trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
