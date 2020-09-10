@@ -85,6 +85,8 @@ NSTrackingArea *trackingArea;
         [self.accountStatus setWantsLayer:YES];
         [self.accountAvatar.layer setBackgroundColor:[[NSColor disabledControlTextColor] CGColor]];
         [self.backgroundView setFillColor:[NSColor windowBackgroundColor]];
+        NSColor *color = [self checkIsDarkMode] ? [NSColor lightGrayColor] : [NSColor darkGrayColor];
+        self.rendezVousIndicator.image = [NSColor image: [NSImage imageNamed:@"ic_group.png"] tintedWithColor: color];
         [self createTrackingArea];
     }
 }
@@ -107,6 +109,21 @@ NSTrackingArea *trackingArea;
 - (void)mouseEntered:(NSEvent *)event {
     NSColor* highlightBackground = @available(macOS 10.14, *) ? [NSColor controlColor] : [NSColor whiteColor];
     [self.backgroundView setFillColor: highlightBackground];
+}
+
+-(void) viewDidChangeEffectiveAppearance {
+    NSColor *color = [self checkIsDarkMode] ? [NSColor lightGrayColor] : [NSColor darkGrayColor];
+    self.rendezVousIndicator.image = [NSColor image: [NSImage imageNamed:@"ic_group.png"] tintedWithColor: color];
+    [super viewDidChangeEffectiveAppearance];
+}
+
+-(BOOL)checkIsDarkMode {
+    NSAppearance *appearance = NSAppearance.currentAppearance;
+    if (@available(*, macOS 10.14)) {
+        NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
+        return [interfaceStyle isEqualToString:@"Dark"];
+    }
+    return NO;
 }
 
 

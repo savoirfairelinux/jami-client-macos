@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,7 +30,7 @@
             <rect key="contentRect" x="196" y="240" width="1053" height="658"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" autoresizesSubviews="NO" misplaced="YES" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="1053" height="577"/>
+                <rect key="frame" x="0.0" y="0.0" width="1053" height="658"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YgH-CN-tkB" userLabel="Left Panel">
@@ -795,10 +795,19 @@
                                             <action selector="openAccountSettings:" target="-2" id="slP-fe-WpZ"/>
                                         </connections>
                                     </button>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2yq-RD-b57">
+                                        <rect key="frame" x="83" y="520" width="20" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="1of-Yk-cii"/>
+                                            <constraint firstAttribute="height" constant="15" id="L2Z-Hy-OVI"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="yWN-EL-f5K"/>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="xXW-iq-GcP" secondAttribute="bottom" id="6Go-Jc-uHI"/>
                                     <constraint firstItem="6ek-bf-c5r" firstAttribute="centerY" secondItem="ztj-Lo-KjI" secondAttribute="centerY" id="7VR-it-jGk"/>
+                                    <constraint firstItem="2yq-RD-b57" firstAttribute="leading" secondItem="V1L-TB-Wng" secondAttribute="leading" id="F1M-Td-Hkd"/>
                                     <constraint firstItem="PoQ-x4-ES3" firstAttribute="top" secondItem="anW-mG-aee" secondAttribute="bottom" constant="10" id="FzA-Ba-WIt"/>
                                     <constraint firstItem="anW-mG-aee" firstAttribute="top" secondItem="0xt-Yr-Jqx" secondAttribute="top" constant="35" id="GET-v2-CBd"/>
                                     <constraint firstAttribute="trailing" secondItem="6ek-bf-c5r" secondAttribute="trailing" constant="13" id="GhG-h3-Ynv"/>
@@ -811,6 +820,7 @@
                                     <constraint firstItem="PoQ-x4-ES3" firstAttribute="leading" secondItem="0xt-Yr-Jqx" secondAttribute="leading" constant="13" id="XzG-Pl-DF1"/>
                                     <constraint firstItem="tBR-mv-w66" firstAttribute="leading" secondItem="3Nq-Rz-Etg" secondAttribute="leading" constant="257" id="aNt-lE-9XG"/>
                                     <constraint firstItem="6ek-bf-c5r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="V1L-TB-Wng" secondAttribute="trailing" constant="20" id="acC-II-m6u"/>
+                                    <constraint firstItem="2yq-RD-b57" firstAttribute="top" secondItem="HIH-Ex-m3b" secondAttribute="bottom" constant="2" id="cEM-3H-cea"/>
                                     <constraint firstItem="xXW-iq-GcP" firstAttribute="top" secondItem="3Nq-Rz-Etg" secondAttribute="bottom" priority="999" constant="8" id="dFh-ij-z52"/>
                                     <constraint firstItem="xXW-iq-GcP" firstAttribute="leading" secondItem="0xt-Yr-Jqx" secondAttribute="leading" id="gEe-iR-Ygm"/>
                                     <constraint firstItem="tBR-mv-w66" firstAttribute="top" secondItem="3Nq-Rz-Etg" secondAttribute="top" constant="-4" id="lxv-3f-EsK"/>
@@ -1034,6 +1044,7 @@ Copy and share it with your friends!</string>
                 <outlet property="accountSelectionButton" destination="V1L-TB-Wng" id="lkm-Xs-Uby"/>
                 <outlet property="accountStatus" destination="0Rh-O4-gug" id="bm4-tU-5i9"/>
                 <outlet property="profileImage" destination="ztj-Lo-KjI" id="YA7-2b-b9W"/>
+                <outlet property="rendezVousIndicator" destination="2yq-RD-b57" id="hg0-qn-6dc"/>
                 <outlet property="selectedAccountTitle" destination="HIH-Ex-m3b" id="5Rz-UQ-9kp"/>
                 <outlet property="view" destination="anW-mG-aee" id="zig-fd-PDl"/>
             </connections>

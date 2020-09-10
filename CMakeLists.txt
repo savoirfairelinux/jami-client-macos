@@ -356,6 +356,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_file_upload.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_record_stop.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_msg.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_group.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES

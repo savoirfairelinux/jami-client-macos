@@ -34,6 +34,7 @@ extern "C" {
 ///LRC
 #import <video/renderer.h>
 #import <api/newcallmodel.h>
+#import <api/newaccountmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
 #import <api/avmodel.h>
@@ -167,7 +168,7 @@ CVPixelBufferRef pixelBufferPreview;
         return;
     }
     confUid_ = conv.confId;
-    [self.chatVC setConversationUid:convUid model:account->conversationModel.get()];
+    [self.chatVC setConversationUid:convUid model: account->conversationModel.get()];
     [self connectSignals];
 }
 
@@ -491,6 +492,8 @@ CVPixelBufferRef pixelBufferPreview;
     cancelCallButton.hidden = (currentCall.status == Status::IN_PROGRESS ||
                              currentCall.status == Status::PAUSED) ? YES : NO;
     callingWidgetsContainer.hidden = (currentCall.status == Status::IN_PROGRESS) ? NO : YES;
+    lrc::api::account::ConfProperties_t accountProperties = accountInfo_->accountModel->getAccountConfig(accountInfo_->id);
+
 
     switch (currentCall.status) {
         case Status::SEARCHING:
@@ -557,10 +560,15 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::PEER_BUSY:
         case Status::TIMEOUT:
             connectingCalls[callUid_.toNSString()] = nil;
-            [self removeConferenceLayout ];
             [self.delegate callFinished];
-            [self switchToNextConferenceCall: confUid_];
+            if (!accountProperties.isRendezVous) {
+                [self removeConferenceLayout];
+                [self switchToNextConferenceCall: confUid_];
+            }
             break;
+    }
+    if (accountProperties.isRendezVous) {
+        [controlsStackView setHidden:YES];
     }
 }
 
