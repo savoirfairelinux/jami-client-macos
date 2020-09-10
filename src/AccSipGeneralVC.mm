@@ -124,16 +124,18 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 -(void)updateView {
     const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    NSImage *image = [[NSImage alloc] initWithData:imageData];
-    if(image) {
-        [photoView setBordered:NO];
-        [photoView setImage: [image roundCorners: image.size.height * 0.5]];
-        [addProfilePhotoImage setHidden:YES];
-    } else {
-        [photoView setImage:nil];
-        [photoView setBordered:YES];
-        [addProfilePhotoImage setHidden:NO];
+    @autoreleasepool {
+        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSImage *image = [[NSImage alloc] initWithData:imageData];
+        if(image) {
+            [photoView setBordered:NO];
+            [photoView setImage: [image roundCorners: image.size.height * 0.5]];
+            [addProfilePhotoImage setHidden:YES];
+        } else {
+            [photoView setImage:nil];
+            [photoView setBordered:YES];
+            [addProfilePhotoImage setHidden:NO];
+        }
     }
     NSString* displayName = account.profileInfo.alias.toNSString();
     [displayNameField setStringValue:displayName];

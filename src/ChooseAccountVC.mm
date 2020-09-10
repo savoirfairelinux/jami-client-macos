@@ -215,12 +215,14 @@ NSMutableDictionary* menuItemsTags;
     [itemView.accountLabel setStringValue:account.profileInfo.alias.toNSString()];
     NSString* userNameString = [self nameForAccount: account];
     [itemView.userNameLabel setStringValue:userNameString];
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    NSImage *image = [[NSImage alloc] initWithData:imageData];
-    if(image) {
-        [itemView.accountAvatar setImage: image];
-    } else {
-        [itemView.accountAvatar setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
+    @autoreleasepool {
+        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSImage *image = [[NSImage alloc] initWithData:imageData];
+        if(image) {
+            [itemView.accountAvatar setImage: image];
+        } else {
+            [itemView.accountAvatar setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
+        }
     }
     itemView.accountStatus.bgColor = colorForAccountStatus(account.status);
     switch (account.profileInfo.type) {
@@ -250,12 +252,14 @@ NSMutableDictionary* menuItemsTags;
         auto& account = [self selectedAccount];
         if(account.profileInfo.type == lrc::api::profile::Type::INVALID)
             return;
-        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        NSImage *image = [[NSImage alloc] initWithData:imageData];
-        if(image) {
-            [profileImage setImage: image];
-        } else {
-            [profileImage setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
+        @autoreleasepool {
+            NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            NSImage *image = [[NSImage alloc] initWithData:imageData];
+            if(image) {
+                [profileImage setImage: image];
+            } else {
+                [profileImage setImage: [NSImage imageNamed:@"default_avatar_overlay.png"]];
+            }
         }
         accountStatus.bgColor = colorForAccountStatus(account.status);
         [accountStatus setNeedsDisplay: YES];

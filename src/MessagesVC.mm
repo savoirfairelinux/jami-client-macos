@@ -499,9 +499,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     result.timeLabel.stringValue = timeString;
     bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
     if (!isOutgoing) {
-        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-        auto* conv = [self getCurrentConversation];
-        [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+        @autoreleasepool {
+            auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+            auto* conv = [self getCurrentConversation];
+            [result.photoView setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)))];
+        }
     }
     return result;
 }
@@ -652,13 +654,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != FIRST_WITHOUT_TIME
                                 && sequence != FIRST_WITH_TIME) ? YES : NO;
     [result.photoView setHidden:!shouldDisplayAvatar];
-    auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-    auto image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)));
     BOOL showIndicator = convModel_->isLastDisplayed(convUid_, it->first, conv->participants.front());
     [result.readIndicator setHidden: !showIndicator];
-    [result.readIndicator setImage:image];
-    if (!isOutgoing && shouldDisplayAvatar) {
-        [result.photoView setImage:image];
+    @autoreleasepool {
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        auto image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)));
+        [result.readIndicator setImage:image];
+        if (!isOutgoing && shouldDisplayAvatar) {
+            [result.photoView setImage:image];
+        }
     }
     return result;
 }
