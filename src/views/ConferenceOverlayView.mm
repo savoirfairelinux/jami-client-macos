@@ -126,6 +126,7 @@ CGFloat const controlSize = 40;
     [self.superview layoutSubtreeIfNeeded];
     CGSize viewSize = self.superview.frame.size;
     if (viewSize.width == 0 || viewSize.height == 0 || self.framesize.width == 0 || self.framesize.height == 0 || self.participant.width == 0 || self.participant.hight == 0) {
+        self.frame = CGRectZero;
         return;
     }
     CGFloat viewRatio = viewSize.width / viewSize.height;
