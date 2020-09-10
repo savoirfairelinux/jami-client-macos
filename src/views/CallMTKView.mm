@@ -117,30 +117,15 @@ struct Uniforms {
 }
 
 - (void)fillWithBlack {
-    NSUInteger width = self.frame.size.width;
-    NSUInteger height = self.frame.size.height;
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    uint8_t *rawData = (uint8_t *)calloc(height * width * 4, sizeof(uint8_t));
-    NSUInteger bytesPerPixel = 4;
-    NSUInteger bytesPerRow = bytesPerPixel * width;
-    NSUInteger bitsPerComponent = 8;
-    MTLTextureDescriptor *textureDescriptor =
-    [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
-                                                       width:width
-                                                      height:height
-                                                   mipmapped:YES];
-    textureDescriptor.usage = MTLTextureUsageRenderTarget;
-    id<MTLTexture> texture = [self.device newTextureWithDescriptor:textureDescriptor];
-    MTLRegion region = MTLRegionMake2D(0, 0, width, height);
-    [texture replaceRegion:region mipmapLevel:0 withBytes:rawData bytesPerRow:bytesPerRow];
+    self.clearColor = MTLClearColorMake(0, 0, 0, 0);
     id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
-    MTLRenderPassDescriptor *renderPass = self.currentRenderPassDescriptor;
-    id<MTLRenderCommandEncoder> commandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPass];
-    [commandEncoder setFragmentTexture:texture atIndex:0];
-    [commandEncoder endEncoding];
-    [commandBuffer presentDrawable:self.currentDrawable];
+    MTLRenderPassDescriptor *renderPassDescriptor = self.currentRenderPassDescriptor;
+    id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
+    [renderEncoder endEncoding];
+    id<CAMetalDrawable> drawable = self.currentDrawable;
+    [commandBuffer presentDrawable:drawable];
     [commandBuffer commit];
-    [self draw];
+    [commandBuffer waitUntilScheduled];
 }
 
 bool frameDisplayed = false;
