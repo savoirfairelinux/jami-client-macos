@@ -595,23 +595,24 @@ CVPixelBufferRef pixelBufferPreview;
 -(void) setBackground {
     NSImage *image= [self getContactImageOfSize:120.0 withDefaultAvatar:NO];
     if(image) {
-        CIImage * ciImage = [[CIImage alloc] initWithData:[image TIFFRepresentation]];
-        CIContext *context = [[CIContext alloc] init];
-        CIFilter *clamp = [CIFilter filterWithName:@"CIAffineClamp"];
-        [clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
-        [clamp setValue:ciImage forKey: kCIInputImageKey];
-        CIFilter* bluerFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
-        [bluerFilter setDefaults];
-        [bluerFilter setValue:[NSNumber numberWithFloat: 9] forKey:@"inputRadius"];
-        [bluerFilter setValue:[clamp valueForKey:kCIOutputImageKey] forKey: kCIInputImageKey];
-        CIImage *result = [bluerFilter valueForKey:kCIOutputImageKey];
-        CGRect extent = [result extent];
-        CGImageRef cgImage = [context createCGImage:result fromRect: [ciImage extent]];
-        NSImage *bluredImage = [[NSImage alloc] initWithCGImage:cgImage size:NSSizeFromCGSize(CGSizeMake(image.size.width, image.size.height))];
-        backgroundImage.layer.contents = bluredImage;
-        [backgroundImage setHidden:NO];
-        [bluerBackgroundEffect setFillColor:[NSColor darkGrayColor]];
-        [bluerBackgroundEffect setAlphaValue:0.6];
+        @autoreleasepool {
+            CIImage * ciImage = [[CIImage alloc] initWithData:[image TIFFRepresentation]];
+            CIFilter *clamp = [CIFilter filterWithName:@"CIAffineClamp"];
+            [clamp setValue:[NSAffineTransform transform] forKey:@"inputTransform"];
+            [clamp setValue:ciImage forKey: kCIInputImageKey];
+            CIFilter* bluerFilter = [CIFilter filterWithName:@"CIGaussianBlur"];
+            [bluerFilter setDefaults];
+            [bluerFilter setValue:[NSNumber numberWithFloat: 9] forKey:@"inputRadius"];
+            [bluerFilter setValue:[clamp valueForKey:kCIOutputImageKey] forKey: kCIInputImageKey];
+            CIImage *result = [bluerFilter valueForKey:kCIOutputImageKey];
+            CIContext *context = [CIContext contextWithOptions:nil];
+            CGImageRef cgImage = [context createCGImage:result fromRect: [ciImage extent]];
+            NSImage *bluredImage = [[NSImage alloc] initWithCGImage:cgImage size:NSSizeFromCGSize(CGSizeMake(image.size.width, image.size.height))];
+            backgroundImage.layer.contents = bluredImage;
+            [backgroundImage setHidden:NO];
+            [bluerBackgroundEffect setFillColor:[NSColor darkGrayColor]];
+            [bluerBackgroundEffect setAlphaValue:0.6];
+        }
     } else {
         contactNameLabel.textColor = [NSColor textColor];
         contactIdLabel.textColor = [NSColor textColor];
@@ -624,19 +625,21 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault {
-    auto* convModel = accountInfo_->conversationModel.get();
-    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
-    if (conv.uid.isEmpty() || conv.participants.empty()) {
-        return nil;
+    @autoreleasepool {
+        auto* convModel = accountInfo_->conversationModel.get();
+        auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+        if (conv.uid.isEmpty() || conv.participants.empty()) {
+            return nil;
+        }
+        if(shouldDrawDefault) {
+            auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+            QVariant photo = imgManip.conversationPhoto(conv, *accountInfo_, QSize(size, size), NO);
+            return QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
+        }
+        auto contact = accountInfo_->contactModel->getContact(conv.participants[0]);
+        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:contact.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        return [[NSImage alloc] initWithData:imageData];
     }
-    if(shouldDrawDefault) {
-        auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-        QVariant photo = imgManip.conversationPhoto(conv, *accountInfo_, QSize(size, size), NO);
-        return QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
-    }
-    auto contact = accountInfo_->contactModel->getContact(conv.participants[0]);
-    NSData *imageData = [[NSData alloc] initWithBase64EncodedString:contact.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    return [[NSImage alloc] initWithData:imageData];
 }
 
 -(void) setupContactInfo:(NSImageView*)imageView

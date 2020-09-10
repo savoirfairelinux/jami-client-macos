@@ -496,24 +496,26 @@ NSInteger const REQUEST_SEG         = 1;
         [displayRingID setStringValue:displayIDString];
         [displayRingID setHidden:NO];
     }
-    auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-    NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, convModel_->owner)));
-    if(image) {
-        [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
-        NSArray* constraints = [NSLayoutConstraint
-                                constraintsWithVisualFormat:@"H:[photoView(54)]"
-                                options:0
-                                metrics:nil                                                                          views:NSDictionaryOfVariableBindings(photoView)];
-        [NSLayoutConstraint activateConstraints:constraints];
-    } else {
-        [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
-        NSArray* constraints = [NSLayoutConstraint
-                                constraintsWithVisualFormat:@"H:[photoView(0)]"
-                                options:0
-                                metrics:nil                                                                          views:NSDictionaryOfVariableBindings(photoView)];
-        [NSLayoutConstraint activateConstraints:constraints];
+    @autoreleasepool {
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, convModel_->owner)));
+        if(image) {
+            [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
+            NSArray* constraints = [NSLayoutConstraint
+                                    constraintsWithVisualFormat:@"H:[photoView(54)]"
+                                    options:0
+                                    metrics:nil                                                                          views:NSDictionaryOfVariableBindings(photoView)];
+            [NSLayoutConstraint activateConstraints:constraints];
+        } else {
+            [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
+            NSArray* constraints = [NSLayoutConstraint
+                                    constraintsWithVisualFormat:@"H:[photoView(0)]"
+                                    options:0
+                                    metrics:nil                                                                          views:NSDictionaryOfVariableBindings(photoView)];
+            [NSLayoutConstraint activateConstraints:constraints];
+        }
+        [photoView setImage: image];
     }
-    [photoView setImage: image];
 
     NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
     [presenceView setHidden:YES];
