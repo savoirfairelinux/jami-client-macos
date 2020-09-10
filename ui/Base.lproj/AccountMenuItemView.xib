@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,6 +15,7 @@
                 <outlet property="containerView" destination="Hz6-mo-xeY" id="t5f-yD-zPi"/>
                 <outlet property="createNewAccount" destination="BkF-b3-tzE" id="fcw-Qc-dRy"/>
                 <outlet property="createNewAccountImage" destination="IyH-ia-I3z" id="4uD-jE-Svj"/>
+                <outlet property="rendezVousIndicator" destination="kKO-1B-QJK" id="irM-Fu-ZFu"/>
                 <outlet property="userNameLabel" destination="tLn-uH-gZ6" id="pGG-sb-IlW"/>
             </connections>
         </customObject>
@@ -84,7 +85,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tLn-uH-gZ6">
                     <rect key="frame" x="50" y="10" width="35" height="15"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Label" drawsBackground="YES" id="uPR-fc-nOP">
-                        <font key="font" metaFont="cellTitle"/>
+                        <font key="font" metaFont="label" size="12"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </textFieldCell>
@@ -104,11 +105,19 @@
                         <constraint firstAttribute="height" constant="20" id="8mL-jo-3Kb"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" drawsBackground="YES" id="gOS-aC-TGo">
-                        <font key="font" metaFont="cellTitle"/>
+                        <font key="font" metaFont="label" size="12"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </textFieldCell>
                 </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kKO-1B-QJK">
+                    <rect key="frame" x="250" y="8" width="25" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="VSP-HC-jbY"/>
+                        <constraint firstAttribute="height" constant="20" id="Y1X-sD-SI8"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="VeT-DQ-gnU"/>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="BkF-b3-tzE" secondAttribute="trailing" id="4zr-zt-tNR"/>
@@ -116,6 +125,7 @@
                 <constraint firstAttribute="bottom" secondItem="BkF-b3-tzE" secondAttribute="bottom" id="Erj-JK-1Jc"/>
                 <constraint firstAttribute="trailing" secondItem="0PP-Di-b7L" secondAttribute="trailing" constant="5" id="GU6-yw-2Nu"/>
                 <constraint firstItem="BkF-b3-tzE" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="M0t-ie-V4X"/>
+                <constraint firstAttribute="trailing" secondItem="kKO-1B-QJK" secondAttribute="trailing" constant="5" id="M5p-wX-3uG"/>
                 <constraint firstItem="TdK-5g-ddU" firstAttribute="trailing" secondItem="XKc-lc-K67" secondAttribute="trailing" id="NU8-DL-jhB"/>
                 <constraint firstItem="0PP-Di-b7L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tLn-uH-gZ6" secondAttribute="trailing" constant="20" id="Nb4-Z8-9Ul"/>
                 <constraint firstItem="TdK-5g-ddU" firstAttribute="bottom" secondItem="XKc-lc-K67" secondAttribute="bottom" id="PGs-u9-1qr"/>
@@ -127,6 +137,7 @@
                 <constraint firstItem="XKc-lc-K67" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="5" id="TUF-fx-zE7"/>
                 <constraint firstItem="tLn-uH-gZ6" firstAttribute="leading" secondItem="V91-eS-dUh" secondAttribute="leading" id="WcF-NN-pmz"/>
                 <constraint firstItem="ZIZ-jd-eLK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="X9L-7K-HGm"/>
+                <constraint firstItem="kKO-1B-QJK" firstAttribute="centerY" secondItem="tLn-uH-gZ6" secondAttribute="centerY" id="Ya0-ML-RbE"/>
                 <constraint firstItem="0PP-Di-b7L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="V91-eS-dUh" secondAttribute="trailing" constant="20" id="ZH1-rk-GX6"/>
                 <constraint firstItem="IyH-ia-I3z" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="hQd-Pw-y4Q"/>
                 <constraint firstItem="XKc-lc-K67" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="ipM-Ca-Man"/>

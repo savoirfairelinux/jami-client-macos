@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,6 +27,7 @@
                 <outlet property="togglePeersDiscoveryButton" destination="vCh-8x-HcZ" id="tzX-y7-gCB"/>
                 <outlet property="toggleUPnPButton" destination="VJ3-C0-3ir" id="0N8-LY-Ift"/>
                 <outlet property="toggleVideoButton" destination="fIl-oJ-Wgd" id="7kB-v1-op2"/>
+                <outlet property="togleRendezVous" destination="YQr-hN-cWA" id="26K-4H-guD"/>
                 <outlet property="turnAddressField" destination="JeL-QA-0kk" id="6Il-CO-H86"/>
                 <outlet property="turnPasswordField" destination="V1s-ND-hrq" id="l27-SA-6wr"/>
                 <outlet property="turnRealmField" destination="uVQ-Lb-Eb8" id="Aec-qt-8yF"/>
@@ -40,11 +41,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="620" height="1440"/>
+            <rect key="frame" x="0.0" y="0.0" width="620" height="1468"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="IaB-ij-6CA">
-                    <rect key="frame" x="0.0" y="1324" width="620" height="116"/>
+                    <rect key="frame" x="0.0" y="1352" width="620" height="116"/>
                     <view key="contentView" id="jpc-BS-IzV">
                         <rect key="frame" x="1" y="1" width="618" height="114"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -108,76 +109,113 @@
                     <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ZNe-H0-dJk">
-                    <rect key="frame" x="0.0" y="1159" width="620" height="145"/>
+                    <rect key="frame" x="0.0" y="1159" width="620" height="173"/>
                     <view key="contentView" id="KaI-8h-Y8q">
-                        <rect key="frame" x="1" y="1" width="618" height="143"/>
+                        <rect key="frame" x="1" y="1" width="618" height="171"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="COO-Od-fza">
-                                <rect key="frame" x="38" y="76" width="291" height="18"/>
-                                <buttonCell key="cell" type="check" title="Allow incoming calls from unknown contacts" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1Xr-BO-Pu3">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="allowCallFromUnknownPeer:" target="-2" id="aMN-9g-3ED"/>
-                                </connections>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dqM-tx-ynx">
-                                <rect key="frame" x="18" y="107" width="83" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Call settings" id="BIS-Ft-yJn">
-                                    <font key="font" metaFont="systemSemibold" size="13"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7AV-dG-fCE">
-                                <rect key="frame" x="38" y="18" width="123" height="18"/>
-                                <buttonCell key="cell" type="check" title="Custom ringtone" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qFq-Yh-2JL">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="autoEnableRingtone:" target="-2" id="MKv-hu-txN"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-SR-qaS">
-                                <rect key="frame" x="163" y="10" width="58" height="32"/>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSTouchBarFolderTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pA7-mc-7MH">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="systemLight" size="13"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="selectFile:" target="-2" id="5Sj-oW-f3r"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iwx-oz-bCK">
-                                <rect key="frame" x="38" y="47" width="128" height="18"/>
-                                <buttonCell key="cell" type="check" title="Auto answer calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="DSe-Cs-oD6">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="autoAnswerCall:" target="-2" id="YmC-hg-0U7"/>
-                                </connections>
-                            </button>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="13" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hmV-yq-CBz">
+                                <rect key="frame" x="20" y="20" width="578" height="131"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dqM-tx-ynx">
+                                        <rect key="frame" x="-2" y="115" width="83" height="16"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Call settings" id="BIS-Ft-yJn">
+                                            <font key="font" metaFont="systemSemibold" size="13"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="COO-Od-fza">
+                                        <rect key="frame" x="18" y="86" width="291" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Allow incoming calls from unknown contacts" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1Xr-BO-Pu3">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="allowCallFromUnknownPeer:" target="-2" id="aMN-9g-3ED"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iwx-oz-bCK">
+                                        <rect key="frame" x="18" y="59" width="128" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Auto answer calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="DSe-Cs-oD6">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="autoAnswerCall:" target="-2" id="YmC-hg-0U7"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YQr-hN-cWA">
+                                        <rect key="frame" x="18" y="32" width="438" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Enable rendez-vous mode: turn your account into a conference room" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2cZ-SI-nbz">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="enableRendezVous:" target="-2" id="jBr-CE-f2m"/>
+                                        </connections>
+                                    </button>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fw9-zn-sgJ">
+                                        <rect key="frame" x="20" y="0.0" width="175" height="21"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7AV-dG-fCE">
+                                                <rect key="frame" x="-2" y="2" width="123" height="18"/>
+                                                <buttonCell key="cell" type="check" title="Custom ringtone" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="qFq-Yh-2JL">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="autoEnableRingtone:" target="-2" id="MKv-hu-txN"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-SR-qaS">
+                                                <rect key="frame" x="123" y="-7" width="58" height="32"/>
+                                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSTouchBarFolderTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pA7-mc-7MH">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="systemLight" size="13"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="selectFile:" target="-2" id="5Sj-oW-f3r"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fw9-zn-sgJ" firstAttribute="leading" secondItem="COO-Od-fza" secondAttribute="leading" id="9wU-yi-llZ"/>
+                                    <constraint firstItem="Iwx-oz-bCK" firstAttribute="leading" secondItem="COO-Od-fza" secondAttribute="leading" id="IsR-Ou-dbG"/>
+                                    <constraint firstItem="fw9-zn-sgJ" firstAttribute="leading" secondItem="YQr-hN-cWA" secondAttribute="leading" id="WkU-Gd-m3L"/>
+                                    <constraint firstItem="COO-Od-fza" firstAttribute="leading" secondItem="hmV-yq-CBz" secondAttribute="leading" constant="20" id="YSh-sa-RkS"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="dqM-tx-ynx" firstAttribute="leading" secondItem="KaI-8h-Y8q" secondAttribute="leading" constant="20" id="31p-Fn-db7"/>
-                            <constraint firstItem="dqM-tx-ynx" firstAttribute="top" secondItem="KaI-8h-Y8q" secondAttribute="top" constant="20" id="90y-tP-vM5"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="COO-Od-fza" secondAttribute="trailing" constant="20" symbolic="YES" id="B9g-7D-Tlf"/>
-                            <constraint firstItem="COO-Od-fza" firstAttribute="leading" secondItem="KaI-8h-Y8q" secondAttribute="leading" constant="40" id="Cgb-g6-ZGk"/>
-                            <constraint firstItem="7AV-dG-fCE" firstAttribute="top" secondItem="Iwx-oz-bCK" secondAttribute="bottom" constant="15" id="EvV-Qa-VpP"/>
-                            <constraint firstAttribute="bottom" secondItem="7AV-dG-fCE" secondAttribute="bottom" constant="20" id="K5t-Fk-LvR"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qcu-SR-qaS" secondAttribute="trailing" constant="20" symbolic="YES" id="QaP-yF-zUh"/>
-                            <constraint firstItem="7AV-dG-fCE" firstAttribute="leading" secondItem="COO-Od-fza" secondAttribute="leading" id="RjG-CT-kSp"/>
-                            <constraint firstItem="Iwx-oz-bCK" firstAttribute="leading" secondItem="COO-Od-fza" secondAttribute="leading" id="W4s-NX-qJd"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dqM-tx-ynx" secondAttribute="trailing" constant="20" symbolic="YES" id="Y28-cZ-Suk"/>
-                            <constraint firstItem="Iwx-oz-bCK" firstAttribute="top" secondItem="COO-Od-fza" secondAttribute="bottom" constant="15" id="gzO-Nh-Lb9"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Iwx-oz-bCK" secondAttribute="trailing" constant="20" symbolic="YES" id="h7J-d7-EhW"/>
-                            <constraint firstItem="Qcu-SR-qaS" firstAttribute="centerY" secondItem="7AV-dG-fCE" secondAttribute="centerY" id="mdp-K6-Pdh"/>
-                            <constraint firstItem="COO-Od-fza" firstAttribute="top" secondItem="dqM-tx-ynx" secondAttribute="bottom" constant="15" id="nxr-d7-AEs"/>
-                            <constraint firstItem="Qcu-SR-qaS" firstAttribute="leading" secondItem="7AV-dG-fCE" secondAttribute="trailing" constant="10" id="uWm-Da-7Z3"/>
+                            <constraint firstAttribute="bottom" secondItem="hmV-yq-CBz" secondAttribute="bottom" constant="20" id="Scn-sb-PVL"/>
+                            <constraint firstItem="hmV-yq-CBz" firstAttribute="leading" secondItem="KaI-8h-Y8q" secondAttribute="leading" constant="20" id="XT8-lg-wv0"/>
+                            <constraint firstAttribute="trailing" secondItem="hmV-yq-CBz" secondAttribute="trailing" constant="20" id="dG4-2p-yTw"/>
+                            <constraint firstItem="hmV-yq-CBz" firstAttribute="top" secondItem="KaI-8h-Y8q" secondAttribute="top" constant="20" id="y9r-RD-lkU"/>
                         </constraints>
                     </view>
                     <color key="borderColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>

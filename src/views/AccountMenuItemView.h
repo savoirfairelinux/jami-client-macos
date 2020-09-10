@@ -31,5 +31,6 @@
 @property (nonatomic, strong) IBOutlet RoundedTextField* accountStatus;
 @property (nonatomic, strong) IBOutlet NSButton* createNewAccount;
 @property (nonatomic, strong) IBOutlet NSImageView* createNewAccountImage;
+@property (nonatomic, strong) IBOutlet NSImageView* rendezVousIndicator;
 
 @end

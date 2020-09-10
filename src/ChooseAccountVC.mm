@@ -53,6 +53,7 @@
     __unsafe_unretained IBOutlet RoundedTextField* accountStatus;
     __unsafe_unretained IBOutlet NSTextField* selectedAccountTitle;
     __unsafe_unretained IBOutlet NSPopUpButton* accountSelectionButton;
+    __unsafe_unretained IBOutlet NSImageView* rendezVousIndicator;
     lrc::api::NewAccountModel* accMdl_;
     AccountSelectionManager* accountSelectionManager_;
 }
@@ -86,8 +87,9 @@ NSMutableDictionary* menuItemsTags;
     accountSelectionButton.menu = accountsMenu;
     [accountSelectionButton setAutoenablesItems:NO];
     menuItemsTags = [[NSMutableDictionary alloc] init];
+    rendezVousIndicator.image = [NSColor image: [NSImage imageNamed:@"ic_group.png"] tintedWithColor: [NSColor textColor]];
+    [NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(themeChanged:) name:@"AppleInterfaceThemeChangedNotification" object: nil];
     [self update];
-
 
     QObject::connect(accMdl_,
                      &lrc::api::NewAccountModel::accountAdded,
@@ -133,6 +135,9 @@ NSMutableDictionary* menuItemsTags;
                      });
 }
 
+-(void)themeChanged:(NSNotification *) notification {
+    rendezVousIndicator.image = [NSColor image: [NSImage imageNamed:@"ic_group.png"] tintedWithColor: [NSColor textColor]];
+}
 
 -(const lrc::api::account::Info&) selectedAccount
 {
@@ -195,6 +200,7 @@ NSMutableDictionary* menuItemsTags;
     [itemView.accountTypeLabel setHidden:YES];
     [itemView.userNameLabel setHidden:YES];
     [itemView.accountLabel setHidden:YES];
+    [itemView.rendezVousIndicator setHidden:YES];
     [itemView.createNewAccount setAction:@selector(createNewAccount:)];
     [itemView.createNewAccount setTarget:self];
     [menuBarItem setView: itemView];
@@ -229,8 +235,9 @@ NSMutableDictionary* menuItemsTags;
     }
     [itemView.createNewAccount setHidden:YES];
     [itemView.createNewAccountImage setHidden:YES];
+    lrc::api::account::ConfProperties_t accountProperties = account.accountModel->getAccountConfig(accountId);
+    [itemView.rendezVousIndicator setHidden: !accountProperties.isRendezVous];
 }
-
 
 - (void)createNewAccount:(id)sender {
     [accountSelectionButton.menu cancelTrackingWithoutAnimation];
@@ -328,6 +335,8 @@ NSMutableDictionary* menuItemsTags;
             return;
         }
         [accountSelectionButton selectItemWithTag:[menuItemsTags[account.id.toNSString()] intValue]];
+        lrc::api::account::ConfProperties_t accountProperties = account.accountModel->getAccountConfig(account.id);
+        [rendezVousIndicator setHidden: !accountProperties.isRendezVous];
         [selectedAccountTitle setAttributedStringValue: accountSelectionButton.attributedTitle];
     }
     @catch (NSException *ex) {
@@ -347,6 +356,8 @@ NSMutableDictionary* menuItemsTags;
     [accountSelectionManager_ setSavedAccount:account];
     [self.delegate selectAccount:account currentRemoved: NO];
     [self updatePhoto];
+    lrc::api::account::ConfProperties_t accountProperties = account.accountModel->getAccountConfig(account.id);
+    [rendezVousIndicator setHidden: !accountProperties.isRendezVous];
     [selectedAccountTitle setAttributedStringValue: accountSelectionButton.attributedTitle];
 }
 
