@@ -52,6 +52,8 @@
     __unsafe_unretained IBOutlet NSView* creationView;
 
     __unsafe_unretained IBOutlet NSButton* photoView;
+    __unsafe_unretained IBOutlet NSButton* registerInfoButton;
+    __unsafe_unretained IBOutlet NSButton* enableUsername;
     __unsafe_unretained IBOutlet NSTextField* displayNameField;
     __unsafe_unretained IBOutlet NSTextField* registeredNameField;
     __unsafe_unretained IBOutlet NSTextField* registeredNameError;
@@ -69,6 +71,7 @@
     __unsafe_unretained IBOutlet NSLayoutConstraint* buttonTopConstraint;
     __unsafe_unretained IBOutlet NSButton* passwordButton;
     __unsafe_unretained IBOutlet NSStackView* repeatPasswordView;
+    __unsafe_unretained IBOutlet NSStackView* passwordButtonContainer;
 
     QMetaObject::Connection registeredNameFound;
     QMetaObject::Connection accountCreated;
@@ -87,6 +90,8 @@ NSInteger const REPEAT_PASSWORD_TAG             = 4;
 //ERROR CODE for textfields validations
 NSInteger const ERROR_PASSWORD_TOO_SHORT        = -1;
 NSInteger const ERROR_REPEAT_MISMATCH           = -2;
+
+BOOL isRendevous = false;
 
 @synthesize accountModel;
 
@@ -117,17 +122,23 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
     [helpPasswordContainer showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxYEdge];
 }
 
-- (void)prepareViewToShow {
+- (void)prepareViewToShow:(BOOL)isRendevousAccount {
+    isRendevous = isRendevousAccount;
     [self.view setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
     [creationView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
     [loadingView setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
     [passwordField setHidden: YES];
     [repeatPasswordView setHidden: YES];
-    buttonTopConstraint.constant = 35;
+    buttonTopConstraint.constant = isRendevous ? 15 : 25;
 }
 
-- (void)show
-{
+- (void)show {
+    NSString *buttonTitle = isRendevous ?
+    NSLocalizedString(@"Choose a name for your rendezvous", @"Choose registered name for rendezvous") :
+    NSLocalizedString(@"Choose a username for your account", @"Choose registered name for account");
+    [enableUsername setTitle:buttonTitle];
+    [passwordButtonContainer setHidden: isRendevous];
+    [registerInfoButton setHidden: isRendevous];
     [displayNameField setTag:DISPLAY_NAME_TAG];
     [registeredNameField setTag:BLOCKCHAIN_NAME_TAG];
     [photoView setWantsLayer: YES];
@@ -271,6 +282,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
                                           }
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
                                           accountProperties.Ringtone.ringtonePath = QString::fromNSString(defaultRingtonePath());
+                                          accountProperties.isRendezVous = isRendevous;
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           [self registerDefaultPreferences];
                                           [self.delegate didCreateAccountWithSuccess:YES accountId: accountToCreate];
@@ -329,7 +341,7 @@ NSInteger const ERROR_REPEAT_MISMATCH           = -2;
 {
     [passwordField setHidden: !passwordField.hidden];
     [repeatPasswordView setHidden: !repeatPasswordView.hidden];
-    buttonTopConstraint.constant = repeatPasswordView.hidden ? 35 : 25;
+    buttonTopConstraint.constant = repeatPasswordView.hidden ? 25 : 15;
     [self display:creationView];
 }
 

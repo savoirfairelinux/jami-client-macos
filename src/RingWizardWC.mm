@@ -100,13 +100,15 @@
     [self showView:chooseActiontWC.view];
 }
 
-- (void)showNewAccountVC
+- (void)showNewAccountVC:(BOOL) isRendezvous
 {
-    [self.windowHeader setStringValue: NSLocalizedString(@"Create a new account",
-                                                         @"Welcome title")];
+    NSString* title = isRendezvous ? NSLocalizedString(@"Create rendezvous",
+    @"Create rendezvous title") : NSLocalizedString(@"Create a new account",
+                                          @"Welcome title");
+    [self.windowHeader setStringValue: title];
     [ringImage setHidden: YES];
     titleConstraint.constant = 0;
-    [newAccountWC prepareViewToShow];
+    [newAccountWC prepareViewToShow: isRendezvous];
     [self showView: newAccountWC.view];
     [newAccountWC show];
 }
@@ -170,7 +172,7 @@
             [self showImportWithType: IMPORT_FROM_BACKUP];
             break;
         case WIZARD_ACTION_NEW:
-            [self showNewAccountVC];
+            [self showNewAccountVC: false];
             break;
         case WIZARD_ACTION_ADVANCED:
             [self showView:chooseActiontWC.view];
@@ -180,6 +182,9 @@
             break;
         case WIZARD_ACTION_ACCOUNT_MANAGER:
             [self showConnectToAccountManager];
+            break;
+        case WIZARD_ACTION_RENDEZVOUS:
+            [self showNewAccountVC: true];
             break;
         default:
             [self.window close];

@@ -42,5 +42,5 @@
 @property (assign)NSInteger signUpBlockchainState;
 - (void)show;
 
-- (void)prepareViewToShow;
+- (void)prepareViewToShow:(BOOL)isRendevousAccount;
 @end

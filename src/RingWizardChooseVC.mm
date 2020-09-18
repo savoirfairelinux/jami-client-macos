@@ -48,6 +48,13 @@ __unsafe_unretained IBOutlet NSLayoutConstraint* viewBottomConstraint;
     }
 }
 
+- (IBAction)createRendezvousAccount:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(didCompleteWithAction:)]){
+        [delegate didCompleteWithAction:WizardAction::WIZARD_ACTION_RENDEZVOUS];
+    }
+}
+
 - (IBAction)importFromArchive:(id)sender
 {
     if ([self.delegate respondsToSelector:@selector(didCompleteWithAction:)]){

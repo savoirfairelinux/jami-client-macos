@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,14 +17,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <userDefaultsController representsSharedInstance="YES" id="ck0-Ru-0YG"/>
         <view id="uHQ-s7-X3y">
-            <rect key="frame" x="0.0" y="0.0" width="525" height="293"/>
+            <rect key="frame" x="0.0" y="0.0" width="525" height="332"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zUs-ma-wCV">
-                    <rect key="frame" x="0.0" y="69" width="525" height="219"/>
+                    <rect key="frame" x="0.0" y="69" width="525" height="258"/>
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
-                            <rect key="frame" x="163" y="192" width="200" height="29"/>
+                            <rect key="frame" x="163" y="231" width="200" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="kX1-30-jfa"/>
                             </constraints>
@@ -34,6 +34,19 @@
                             </buttonCell>
                             <connections>
                                 <action selector="createRingAccount:" target="-2" id="Mij-SG-JWQ"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nn9-La-V34">
+                            <rect key="frame" x="163" y="192" width="200" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="Bre-De-DSA"/>
+                            </constraints>
+                            <buttonCell key="cell" type="bevel" title="Create rendezvous" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YDj-ss-AYE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="createRendezvousAccount:" target="-2" id="WbA-Oh-4tZ"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-ql-oGP">
@@ -104,7 +117,9 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="pcF-lX-ex4" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="33C-i1-fge"/>
+                        <constraint firstItem="nn9-La-V34" firstAttribute="leading" secondItem="pcF-lX-ex4" secondAttribute="leading" id="9v2-0B-OP1"/>
                         <constraint firstItem="pcF-lX-ex4" firstAttribute="trailing" secondItem="cpk-ql-oGP" secondAttribute="trailing" id="E7W-8d-RtY"/>
+                        <constraint firstItem="nn9-La-V34" firstAttribute="trailing" secondItem="pcF-lX-ex4" secondAttribute="trailing" id="G5u-ak-cuV"/>
                         <constraint firstItem="HjM-oT-VQj" firstAttribute="trailing" secondItem="cpk-ql-oGP" secondAttribute="trailing" id="G7v-fc-L2p"/>
                         <constraint firstItem="NBt-Xw-PzN" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="O7G-tM-uTj"/>
                         <constraint firstItem="uHC-M1-ce5" firstAttribute="leading" secondItem="cpk-ql-oGP" secondAttribute="leading" id="grO-GC-1mZ"/>
@@ -119,8 +134,10 @@
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
+                        <integer value="1000"/>
                     </visibilityPriorities>
                     <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
