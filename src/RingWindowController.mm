@@ -251,6 +251,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
                      [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
+        lrc::api::account::ConfProperties_t accountProperties = accInfo->accountModel->getAccountConfig(accInfo->id);
+        if (accountProperties.isRendezVous) {
+            return;
+        }
         try {
             if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                 [smartViewVC selectPendingList];
