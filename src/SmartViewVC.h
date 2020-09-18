@@ -18,6 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#include <qstring.h>
 
 namespace lrc {
     namespace api {
@@ -67,5 +68,6 @@ namespace lrc {
 
 -(void) reloadConversationWithUid:(NSString *)uid;
 -(void) reloadConversationWithURI:(NSString *)uri;
+-(QString)getSelectedUID;
 
 @end

@@ -34,7 +34,6 @@ extern "C" {
 ///LRC
 #import <video/renderer.h>
 #import <api/newcallmodel.h>
-#import <api/newaccountmodel.h>
 #import <api/call.h>
 #import <api/conversationmodel.h>
 #import <api/avmodel.h>
@@ -492,9 +491,6 @@ CVPixelBufferRef pixelBufferPreview;
     cancelCallButton.hidden = (currentCall.status == Status::IN_PROGRESS ||
                              currentCall.status == Status::PAUSED) ? YES : NO;
     callingWidgetsContainer.hidden = (currentCall.status == Status::IN_PROGRESS) ? NO : YES;
-    lrc::api::account::ConfProperties_t accountProperties = accountInfo_->accountModel->getAccountConfig(accountInfo_->id);
-
-
     switch (currentCall.status) {
         case Status::SEARCHING:
         case Status::CONNECTING:
@@ -561,14 +557,9 @@ CVPixelBufferRef pixelBufferPreview;
         case Status::TIMEOUT:
             connectingCalls[callUid_.toNSString()] = nil;
             [self.delegate callFinished];
-            if (!accountProperties.isRendezVous) {
-                [self removeConferenceLayout];
-                [self switchToNextConferenceCall: confUid_];
-            }
+            [self removeConferenceLayout];
+            [self switchToNextConferenceCall: confUid_];
             break;
-    }
-    if (accountProperties.isRendezVous) {
-        [controlsStackView setHidden:YES];
     }
 }
 
@@ -1327,10 +1318,11 @@ CVPixelBufferRef pixelBufferPreview;
     auto* callModel = accountInfo_->callModel.get();
     if (!conv.confId.isEmpty() && callModel->hasCall(conv.confId)) {
         return true;
-    } else {
-        auto call = callModel->getCall(conv.callId);
-        return call.participantsInfos.size() == 0;
+    } else if (!callModel->hasCall(conv.callId)) {
+        return false;
     }
+    auto call = callModel->getCall(conv.callId);
+    return call.participantsInfos.size() == 0;
 }
 
 -(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive {

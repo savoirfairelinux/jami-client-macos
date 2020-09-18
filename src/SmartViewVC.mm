@@ -320,6 +320,11 @@ NSInteger const REQUEST_SEG         = 1;
     return true;
 }
 
+-(QString)getSelectedUID {
+    return selectedUid_;
+}
+
+
 -(void)selectConversation:(const lrc::api::conversation::Info&)conv model:(lrc::api::ConversationModel*)model;
 {
     auto& uid = conv.uid;
