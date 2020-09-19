@@ -1,5 +1,5 @@
 
-"A network error occured during the export" = "Tiedonviennissä tapahtui verkkoyhteysvirhe";
+"A network error occured during the export" = "Verkkovirhe viennin aikana";
 
 /* Button Action */
 "Accept" = "Hyväksy";
@@ -14,10 +14,10 @@
 "Add to contacts" = "Lisää yhteystietoihin";
 
 /* Backup error */
-"An error occured during the backup" = "Varmuuskopion aikana tapahtui virhe.";
+"An error occured during the backup" = "Virhe varmuuskopioinnin aikana";
 
 /* Error shown to the user */
-"An error occured during the export" = "Tiedonviennissä tapahtui virhe";
+"An error occured during the export" = "Viennin aikana tapahtui virhe";
 
 /* Peer busy message */
 "appears to be busy." = "näyttää olevan kiireinen.";
@@ -54,6 +54,9 @@
 
 /* Welcome title */
 "Create a new account" = "Uuden tilin luominen";
+
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
 
 /* Backup enter password */
 "Enter account password" = "Syötä käyttäjätunnuksen salasana";
@@ -212,10 +215,10 @@
 "Edit Account" = "Muokkaa tunnusta";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Pienennä osallistuja";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Laajenna osallistuja";
 
 /* Conference action */
 "Hangup" = "Katkaistu";
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Minä";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Valitse tilillesi käyttäjänimi";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

@@ -18,13 +18,13 @@
 "BIS-Ft-yJn.title" = "Nastavení volání";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
-"Va3-Un-lCL.title" = "Discovery settings";
+"Va3-Un-lCL.title" = "Nastavení zjišťování";
 
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
-"rdZ-JB-96s.title" = "Make this account discoverable on local network";
+"rdZ-JB-96s.title" = "Povolit zjištění tohoto účtu v místní síti";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
-"n3E-PI-JHj.title" = "Discover peers on local network";
+"n3E-PI-JHj.title" = "Zjišťovat klienty na místní síti";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Automaticky přijímat hovory";
@@ -93,7 +93,7 @@
 "nqX-Vu-UuA.title" = "Použít STUN";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Vlastní vyzvánění";
+"qFq-Yh-2JL.title" = "Vlastní vyzváněcí tón";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
 "sVe-iG-OCw.title" = "Připojení";

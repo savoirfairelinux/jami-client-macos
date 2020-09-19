@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "Új fiók létrehozása";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "Adja meg a fiók jelszavát";
 
@@ -170,7 +173,7 @@
 "This is your Jami username. \nCopy and share it with your friends!" = "Ez az Ön Jami azonosítója.\nMásolja ki, és ossza meg barátaival!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön. Hozzon létre egy új fiókot az „Eszköz összekapcsolása egy fiókhoz” opcióval. A PIN-kódja 10 percig érvényes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "A folyamat befejezéséhez meg kell nyitnia a Jami-t az új eszközön. Hozzon létre egy új fiókot az „Eszköz összekapcsolása fiókhoz” opcióval. A PIN-kódja 10 percig érvényes.";
 
 /* Text shown to the user */
 "To proceed with the migration, you need to enter a password that was used for this account." = "Adja meg a fiók jelszavát az áttelepítés folytatásához";
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Én";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Válassz egy felhasználónevet fiókja";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

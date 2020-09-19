@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "Создать новый аккаунт";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "Введите пароль вашего аккаунта";
 
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Я";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Выберите имя пользователя для вашей учётной записи";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

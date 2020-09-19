@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "Crear una cuenta";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "Introduce la contraseña de la cuenta";
 
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Yo";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Elija un nombre de usuario para su cuenta";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

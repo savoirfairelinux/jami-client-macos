@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "新建账户";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "输入账户密码";
 
@@ -212,10 +215,10 @@
 "Edit Account" = "编辑账户";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "最小化参与者";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "最大化参与者";
 
 /* Conference action */
 "Hangup" = "挂断";
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "我";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "为您的账户创建一个用户名";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

@@ -8,7 +8,7 @@
 "Cancel" = "Zrušit";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Přidat účet SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "Přidat do kontaktů";
@@ -20,13 +20,13 @@
 "An error occured during the export" = "Při exportování došlo k chybě";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "Zdá se, že kontakt je zaneprázdněn.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Oprávnění zvuku nebyla udělena.";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Zálohujte svůj účet.";
 
 /* Contextual menu action */
 "Block contact" = "Blokovat spojení";
@@ -35,7 +35,7 @@
 "Remove conversation" = "Odstranit konverzaci";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Kliknutím na „OK“ odstraníte tento účet na tomto zařízení! Tento krok nelze vrátit zpět. Vámi zaregistrované jméno může být ztraceno!";
 
 /* File transfer canceled label */
 "Canceled" = "Zrušeno";
@@ -44,19 +44,22 @@
 "Choose file" = "Vybrat soubor";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Vyprázdnit konverzaci";
 
 /* No comment provided by engineer. */
 "Copy" = "Zkopírovat";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Nebylo možné nahrát zprávu během hovoru.";
 
 /* Welcome title */
 "Create a new account" = "Vytvořit nový účet";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Zadejte heslo k účtu.";
 
 /* File transfer failed label */
 "Failed" = "Hovor selhal";
@@ -80,19 +83,19 @@
 "Incoming call from %@" = "Příchozí hovor od %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Příchozí zpráva od %@";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Neplatné uživatelské jméno";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Neplatné uživatelské jméno";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Přejděte do předvoleb pro vytvoření nového účtu.";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Není dostupný žádný účet.";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Heslo a jeho potvrzení se neshodují";
@@ -104,43 +107,43 @@
 "Passwords don't match" = "Hesla se neshodují";
 
 /* Contextual menu action */
-"Place audio call" = "Uskutečnit hlasový hovor";
+"Place audio call" = "Uskutečnit audio hovor";
 
 /* Contextual menu action */
 "Place video call" = "Uskutečnit video hovor";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Stiskněte pro začátek nahrávání.";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Nahrát zprávu";
 
 /* Button Action */
 "Refuse" = "Odmítnout";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Registrované jméno";
 
 /* Remove account alert title */
 "Remove account" = "Odstranit účet";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Vybrat archiv";
 
 /* Send button title */
 "Send" = "Odeslat";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Poslat vám žádost o kontakt";
 
 /* No comment provided by engineer. */
 "Share" = "Sdílet";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Sdílet obrazovku";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Přidat se";
 
 /* Record message title */
 "Stop recording" = "Zastavit nahrávání";
@@ -161,49 +164,49 @@
 "The password you entered does not unlock this account" = "Vámi zadané heslo neodemkne tento účet";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Tento účet musí být převeden.";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Toto je vaše ID.\nZkopírujte je a sdílejte je se svými přáteli!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Toto je vaše uživatelské jméno pro Jami.\nZkopírujte je a sdílejte je se svými přáteli!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pro dokončení tohoto postupu otevřete Jami na novém zařízení a vyberte volbu „Připojit toto zařízení k účtu“. Váš PIN zůstává platný 10 minut.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Pro převedení je potřeba zadat heslo k tomuto účtu.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Nepřipojitelný";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Oprávnění videa nebyla udělena.";
 
 /* Welcome title */
 "Welcome to Jami" = "Vítejte v Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Přejete si nechat zprávu_";
 
 /* Password button title */
 "Change password" = "Změnit heslo";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Vytvořit heslo";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Odebrat zařízení";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Pozor! Tento krok nelze vrátit zpět.";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Odebrání zařízení selhalo. Prosím zkontrolujte své heslo a zkuste to znovu.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Odebrání zařízení selhalo.";
 
 /* Edit Sip Account Action*/
 "Done" = "Hotovo";
@@ -212,10 +215,10 @@
 "Edit Account" = "Upravit účet";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Minimalizovat účastníka";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Maximalizovat účastníka";
 
 /* Conference action */
 "Hangup" = "Zavěsit";
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Já";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Zvolte si uživatelské jméno ke svému účtu";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

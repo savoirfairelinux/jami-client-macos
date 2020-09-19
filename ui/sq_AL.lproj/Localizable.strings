@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "Krijoni një llogari të re";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "Jepni fjalëkalim llogarie";
 
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Unë";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Zgjidhni një emër përdoruesi për llogarinë tuaj";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

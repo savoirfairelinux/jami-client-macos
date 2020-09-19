@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "建立新帳號";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "輸入帳號密碼";
 
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "我";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "為您的帳號選擇一個使用者名稱";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

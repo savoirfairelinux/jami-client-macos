@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "0Fh-Sz-TMo"; */
-"0Fh-Sz-TMo.title" = "Minimum";
+"0Fh-Sz-TMo.title" = "Legkisebb";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "0cb-ib-oHd"; */
 "0cb-ib-oHd.title" = "Videó RTP-kikötő tartomány";
@@ -15,7 +15,7 @@
 "3Uq-Nb-J1A.title" = "Hívás beállítások";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Titkosításhiba esetén RTP használata";
+"3rM-KT-bNf.title" = "RTP visszatérése a megtitkosításhibásodásakor";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
 "3vs-TI-tkg.title" = "Önműködő hívásfogadása";
@@ -132,10 +132,10 @@
 "l86-cH-pp8.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "nh9-3y-CEI"; */
-"nh9-3y-CEI.title" = "Maximum";
+"nh9-3y-CEI.title" = "Legfeljebb";
 
 /* Class = "NSTextFieldCell"; title = "Min"; ObjectID = "nq0-Js-9Cr"; */
-"nq0-Js-9Cr.title" = "Minimum";
+"nq0-Js-9Cr.title" = "Legkisebb";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
 "nuq-Wl-sfd.title" = "Használjon egyéni címet és kikötőt";
@@ -153,7 +153,7 @@
 "vpo-fl-9TS.title" = "Kapcsolódás";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
-"wq6-KV-8X3.title" = "Maximum";
+"wq6-KV-8X3.title" = "Legfeljebb";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
 "wyZ-Hb-BNf.title" = "Doboz";

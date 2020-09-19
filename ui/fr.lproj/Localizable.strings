@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "Créer un nouveau compte";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "Entrer le mot de passe de votre compte";
 
@@ -212,10 +215,10 @@
 "Edit Account" = "Éditer le compte";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Minimiser les participants";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Maximiser les participants";
 
 /* Conference action */
 "Hangup" = "Raccrocher";
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Moi";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Choisissez un nom d'utilisateur pour votre compte";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

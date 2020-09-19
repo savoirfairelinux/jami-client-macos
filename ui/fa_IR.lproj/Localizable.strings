@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "ایجاد یک حساب جدید";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "گذرواژه حساب را وارد کنید";
 
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "من";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "یک نام کاربری برای حساب خود انتخاب کنید";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

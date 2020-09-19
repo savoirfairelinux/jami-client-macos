@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "Creează un cont nou";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "Introdu parola contului";
 
@@ -83,10 +86,10 @@
 "Incoming message from %@" = "Mesaj primit de la %@";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username" = "Numele de utilizator este greșit";
+"Invalid username" = "Nume greșit";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Numele de utilizator este greșit.";
+"Invalid username." = "Nume greșit.";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Du-te la Preferințe pentru a crea un cont nou";
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Eu";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Alege un nume de utilizator pentru contul tău";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";

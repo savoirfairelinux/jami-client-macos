@@ -55,6 +55,9 @@
 /* Welcome title */
 "Create a new account" = "Yeni bir hesap oluştur";
 
+/* Create rendezvous title */
+"Create rendezvous" = "Create rendezvous";
+
 /* Backup enter password */
 "Enter account password" = "Hesap parolanızı girin";
 
@@ -223,3 +226,8 @@
 /* Conference name */
 "Me" = "Ben";
 
+/* Choose registered name for account */
+"Choose a username for your account" = "Choose a username for your account";
+
+/* Choose registered name for rendezvous */
+"Choose a name for your rendezvous" = "Choose a name for your rendezvous";
