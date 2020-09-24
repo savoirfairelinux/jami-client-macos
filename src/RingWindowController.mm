@@ -251,8 +251,9 @@ typedef NS_ENUM(NSInteger, ViewState) {
                      [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
+        auto callModel = accInfo->callModel.get();
         lrc::api::account::ConfProperties_t accountProperties = accInfo->accountModel->getAccountConfig(accInfo->id);
-        if (accountProperties.isRendezVous) {
+        if (accountProperties.isRendezVous && (!callModel->hasCall(convInfo.callId) || !callModel->getCall(convInfo.callId).isOutgoing)) {
             if ([smartViewVC getSelectedUID] == convInfo.uid) {
                 [smartViewVC deselect];
                 [conversationVC hideWithAnimation:false];
