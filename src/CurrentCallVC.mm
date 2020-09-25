@@ -1328,17 +1328,10 @@ CVPixelBufferRef pixelBufferPreview;
 -(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive {
     if (accountInfo_ == nil)
         return;
-    auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
-    QString callId;
     BOOL localVideo = accountInfo_->profileInfo.uri == QString::fromNSString(uri);
-    if (!localVideo) {
-        auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
-        callId = convIt->callId;
-    }
     auto* callModel = accountInfo_->callModel.get();
-    if ((not callModel->hasCall(callId) || not callModel->hasCall(confUid_)) && !localVideo){
+    if (not callModel->hasCall(confUid_) && !localVideo)
         return;
-    }
     try {
         auto call = callModel->getCall(confUid_);
         switch (call.layout) {
