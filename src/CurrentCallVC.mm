@@ -1328,31 +1328,24 @@ CVPixelBufferRef pixelBufferPreview;
 -(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive {
     if (accountInfo_ == nil)
         return;
-    auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
-    QString callId;
     BOOL localVideo = accountInfo_->profileInfo.uri == QString::fromNSString(uri);
-    if (!localVideo) {
-        auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
-        callId = convIt->callId;
-    }
     auto* callModel = accountInfo_->callModel.get();
-    if ((not callModel->hasCall(callId) || not callModel->hasCall(confUid_)) && !localVideo){
+    if (not callModel->hasCall(confUid_) && !localVideo)
         return;
-    }
     try {
         auto call = callModel->getCall(confUid_);
         switch (call.layout) {
             case lrc::api::call::Layout::GRID:
-                callModel->setActiveParticipant(confUid_, callId);
+                callModel->setActiveParticipant(confUid_, QString::fromNSString(uri));
                 callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::ONE_WITH_SMALL);
                 break;
             case lrc::api::call::Layout::ONE_WITH_SMALL:
-                callModel->setActiveParticipant(confUid_, callId);
+                callModel->setActiveParticipant(confUid_, QString::fromNSString(uri));
                 callModel->setConferenceLayout(confUid_,
                                                isActive ? lrc::api::call::Layout::ONE : lrc::api::call::Layout::ONE_WITH_SMALL);
                 break;
             case lrc::api::call::Layout::ONE:
-                callModel->setActiveParticipant(confUid_, callId);
+                callModel->setActiveParticipant(confUid_, QString::fromNSString(uri));
                 callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::GRID);
                 break;
         };
