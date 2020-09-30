@@ -121,6 +121,9 @@ CGFloat const controlSize = 40;
 }
 
 - (void)sizeChanged {
+    if (self.superview == nil) {
+        return;
+    }
     NSArray* constraints = [NSArray arrayWithObjects: self.widthConstraint, self.heightConstraint, self.centerXConstraint, self.centerYConstraint, nil];
     [self.superview removeConstraints: constraints];
     [self.superview layoutSubtreeIfNeeded];
