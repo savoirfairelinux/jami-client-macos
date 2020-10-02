@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive;
 -(int)getCurrentLayout;
 -(BOOL)isMasterCall;
+-(BOOL)isCallModerator;
 @end
 
 struct ConferenceParticipant {
