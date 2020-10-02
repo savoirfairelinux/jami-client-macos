@@ -134,7 +134,7 @@ BOOL isRendevous = false;
 
 - (void)show {
     NSString *buttonTitle = isRendevous ?
-    NSLocalizedString(@"Choose a name for your rendezvous", @"Choose registered name for rendezvous") :
+    NSLocalizedString(@"Choose a name for your rendezvous point", @"Choose registered name for rendezvous") :
     NSLocalizedString(@"Choose a username for your account", @"Choose registered name for account");
     [enableUsername setTitle:buttonTitle];
     [passwordButtonContainer setHidden: isRendevous];

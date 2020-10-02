@@ -146,8 +146,8 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YQr-hN-cWA">
-                                        <rect key="frame" x="18" y="32" width="438" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Enable rendez-vous mode: turn your account into a conference room" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2cZ-SI-nbz">
+                                        <rect key="frame" x="18" y="32" width="430" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Enable rendezvous point: turn your account into a conference room" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2cZ-SI-nbz">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>

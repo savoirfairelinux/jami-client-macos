@@ -102,7 +102,7 @@
 
 - (void)showNewAccountVC:(BOOL) isRendezvous
 {
-    NSString* title = isRendezvous ? NSLocalizedString(@"Create rendezvous",
+    NSString* title = isRendezvous ? NSLocalizedString(@"Create a rendezvous point",
     @"Create rendezvous title") : NSLocalizedString(@"Create a new account",
                                           @"Welcome title");
     [self.windowHeader setStringValue: title];
