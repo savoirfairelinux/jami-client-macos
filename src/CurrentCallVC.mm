@@ -1283,19 +1283,20 @@ CVPixelBufferRef pixelBufferPreview;
     if (accountInfo_ == nil)
         return;
     auto* callModel = accountInfo_->callModel.get();
-    if (not callModel->hasCall(confUid_)) {
+    auto confId = [self getcallID];
+    if (not callModel->hasCall(confId)) {
         return;
     }
     try {
-        auto call = callModel->getCall(confUid_);
+        auto call = callModel->getCall(confId);
         switch (call.layout) {
             case lrc::api::call::Layout::GRID:
                 break;
             case lrc::api::call::Layout::ONE_WITH_SMALL:
-                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::GRID);
+                callModel->setConferenceLayout(confId, lrc::api::call::Layout::GRID);
                 break;
             case lrc::api::call::Layout::ONE:
-                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::ONE_WITH_SMALL);
+                callModel->setConferenceLayout(confId, lrc::api::call::Layout::ONE_WITH_SMALL);
                 break;
         };
     } catch (...) {}
@@ -1303,10 +1304,11 @@ CVPixelBufferRef pixelBufferPreview;
 
 -(int)getCurrentLayout {
     auto* callModel = accountInfo_->callModel.get();
-    if (not callModel->hasCall(confUid_)){
+    auto confId = [self getcallID];
+    if (not callModel->hasCall(confId)){
         return -1;
     }
-    return static_cast<int>(callModel->getCall(confUid_).layout);
+    return static_cast<int>(callModel->getCall(confId).layout);
 }
 
 -(BOOL)isMasterCall {
@@ -1314,39 +1316,62 @@ CVPixelBufferRef pixelBufferPreview;
     if (conv.uid.isEmpty()) {
         return false;
     }
-
     auto* callModel = accountInfo_->callModel.get();
-    if (!conv.confId.isEmpty() && callModel->hasCall(conv.confId)) {
-        return true;
-    } else if (!callModel->hasCall(conv.callId)) {
-        return false;
-    }
-    auto call = callModel->getCall(conv.callId);
-    return call.participantsInfos.size() == 0;
+    try {
+        auto call = callModel->getCall(conv.callId);
+        if (call.participantsInfos.size() == 0) {
+            return true;
+        }
+        return !conv.confId.isEmpty() && callModel->hasCall(conv.confId);
+    } catch (...) {}
+    return true;
 }
+
+-(BOOL)isCallModerator {
+    if (accountInfo_ == nil)
+        return false;
+    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    if (conv.uid.isEmpty())
+        return false;
+    auto* callModel = accountInfo_->callModel.get();
+    try {
+        auto call = callModel->getCall(conv.callId);
+        if (call.participantsInfos.size() == 0) {
+            return true;
+        }
+        for (const auto& participant : call.participantsInfos) {
+            if (participant["uri"] == accountInfo_->profileInfo.uri) {
+                return participant["isModerator"] == "true";
+            }
+        }
+    } catch (...) {}
+    return true;
+}
+
 
 -(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive {
     if (accountInfo_ == nil)
         return;
     BOOL localVideo = accountInfo_->profileInfo.uri == QString::fromNSString(uri);
     auto* callModel = accountInfo_->callModel.get();
-    if (not callModel->hasCall(confUid_) && !localVideo)
+    auto confId = [self getcallID];
+    if (not callModel->hasCall(confId) && !localVideo)
         return;
     try {
-        auto call = callModel->getCall(confUid_);
+        auto call = callModel->getCall(confId);
         switch (call.layout) {
             case lrc::api::call::Layout::GRID:
-                callModel->setActiveParticipant(confUid_, QString::fromNSString(uri));
-                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::ONE_WITH_SMALL);
+                callModel->setActiveParticipant(confId, QString::fromNSString(uri));
+                callModel->setConferenceLayout(confId, lrc::api::call::Layout::ONE_WITH_SMALL);
                 break;
             case lrc::api::call::Layout::ONE_WITH_SMALL:
-                callModel->setActiveParticipant(confUid_, QString::fromNSString(uri));
-                callModel->setConferenceLayout(confUid_,
+                callModel->setActiveParticipant(confId, QString::fromNSString(uri));
+                callModel->setConferenceLayout(confId,
                                                isActive ? lrc::api::call::Layout::ONE : lrc::api::call::Layout::ONE_WITH_SMALL);
                 break;
             case lrc::api::call::Layout::ONE:
-                callModel->setActiveParticipant(confUid_, QString::fromNSString(uri));
-                callModel->setConferenceLayout(confUid_, lrc::api::call::Layout::GRID);
+                callModel->setActiveParticipant(confId, QString::fromNSString(uri));
+                callModel->setConferenceLayout(confId, lrc::api::call::Layout::GRID);
                 break;
         };
     } catch (...) {}

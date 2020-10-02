@@ -48,7 +48,7 @@ CGFloat const controlSize = 40;
     [self.gradientView.heightAnchor constraintEqualToConstant: controlSize].active = true;
     [self.gradientView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = true;
     [self.gradientView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;
-    if ([self.delegate isMasterCall]) {
+    if ([self.delegate isMasterCall] || [self.delegate isCallModerator]) {
         self.settingsButton = [[IconButton alloc] init];
         self.settingsButton.transparent = true;
         self.settingsButton.title = @"";
@@ -87,6 +87,7 @@ CGFloat const controlSize = 40;
     int layout = [self.delegate getCurrentLayout];
     if (layout < 0)
         return;
+    BOOL showHangUp = !self.participant.isLocal && ![self.delegate isCallModerator];
     BOOL showMaximized = layout != 2;
     BOOL showMinimized = !(layout == 0 || (layout == 1 && !self.participant.active));
     contextualMenu = [[NSMenu alloc] initWithTitle:@""];
@@ -100,7 +101,7 @@ CGFloat const controlSize = 40;
         [menuItem setTarget:self];
         [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
     }
-    if (!self.participant.isLocal) {
+    if (showHangUp) {
         NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Hangup", @"Conference action") action:@selector(finishCall:) keyEquivalent:@""];
         [menuItem setTarget:self];
         [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
