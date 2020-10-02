@@ -48,26 +48,26 @@ CGFloat const controlSize = 40;
     [self.gradientView.heightAnchor constraintEqualToConstant: controlSize].active = true;
     [self.gradientView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = true;
     [self.gradientView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;
-    if ([self.delegate isMasterCall]) {
-        self.settingsButton = [[IconButton alloc] init];
-        self.settingsButton.transparent = true;
-        self.settingsButton.title = @"";
-        NSImage* settingsImage = [NSImage imageNamed: @"ic_more.png"];
-        [self.settingsButton setImage:settingsImage];
-        self.settingsButton.bgColor = [NSColor clearColor];
-        self.settingsButton.imageColor = [NSColor whiteColor];
-        self.settingsButton.imagePressedColor = [NSColor lightGrayColor];
-        self.settingsButton.imageInsets = margin;
-        self.settingsButton.translatesAutoresizingMaskIntoConstraints = false;
-        [self.gradientView addSubview:self.settingsButton];
+    self.settingsButton = [[IconButton alloc] init];
+    self.settingsButton.transparent = true;
+    self.settingsButton.title = @"";
+    NSImage* settingsImage = [NSImage imageNamed: @"ic_more.png"];
+    [self.settingsButton setImage:settingsImage];
+    self.settingsButton.bgColor = [NSColor clearColor];
+    self.settingsButton.imageColor = [NSColor whiteColor];
+    self.settingsButton.imagePressedColor = [NSColor lightGrayColor];
+    self.settingsButton.imageInsets = margin;
+    self.settingsButton.translatesAutoresizingMaskIntoConstraints = false;
+    [self.gradientView addSubview:self.settingsButton];
 
-        [self.settingsButton.widthAnchor constraintEqualToConstant: controlSize].active = TRUE;
-        [self.settingsButton.heightAnchor constraintEqualToConstant: controlSize].active = true;
-        [self.settingsButton.trailingAnchor constraintEqualToAnchor: self.gradientView.trailingAnchor].active = true;
-        [self.settingsButton.bottomAnchor constraintEqualToAnchor:self.gradientView.bottomAnchor].active = true;
-        [self.settingsButton setAction:@selector(triggerMenu:)];
-        [self.settingsButton setTarget:self];
-    }
+    [self.settingsButton.widthAnchor constraintEqualToConstant: controlSize].active = TRUE;
+    [self.settingsButton.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    [self.settingsButton.trailingAnchor constraintEqualToAnchor: self.gradientView.trailingAnchor].active = true;
+    [self.settingsButton.bottomAnchor constraintEqualToAnchor:self.gradientView.bottomAnchor].active = true;
+    [self.settingsButton setAction:@selector(triggerMenu:)];
+    [self.settingsButton setTarget:self];
+    BOOL showSettings = [self.delegate isMasterCall] || [self.delegate isCallModerator];
+    [self.settingsButton setHidden: !showSettings];
     self.usernameLabel = [[NSTextView alloc] init];
     self.usernameLabel.textColor = [NSColor whiteColor];
     self.usernameLabel.editable = NO;
@@ -87,6 +87,7 @@ CGFloat const controlSize = 40;
     int layout = [self.delegate getCurrentLayout];
     if (layout < 0)
         return;
+    BOOL showHangUp = !self.participant.isLocal && [self.delegate isMasterCall];
     BOOL showMaximized = layout != 2;
     BOOL showMinimized = !(layout == 0 || (layout == 1 && !self.participant.active));
     contextualMenu = [[NSMenu alloc] initWithTitle:@""];
@@ -100,7 +101,7 @@ CGFloat const controlSize = 40;
         [menuItem setTarget:self];
         [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
     }
-    if (!self.participant.isLocal) {
+    if (showHangUp) {
         NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Hangup", @"Conference action") action:@selector(finishCall:) keyEquivalent:@""];
         [menuItem setTarget:self];
         [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
@@ -179,6 +180,8 @@ CGFloat const controlSize = 40;
 
 - (void)updateViewWithParticipant:(ConferenceParticipant) participant {
     self.participant = participant;
+    BOOL showSettings = [self.delegate isMasterCall] || [self.delegate isCallModerator];
+    [self.settingsButton setHidden: !showSettings];
     [self sizeChanged];
     self.usernameLabel.string = self.participant.bestName;
 }
