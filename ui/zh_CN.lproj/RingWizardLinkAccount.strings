@@ -3,13 +3,13 @@
 "2uK-1s-tk7.title" = "\t您可从另一个设备导入您的账户，但首先您需要获取 PIN 码。\n\t要生成 PIN 码：需前往先前设备的账户管理设置中选择您要使用的 Jami 账户，然后选择“关联另一个设备到此账户”。您会得到填写本栏所需的 PIN 码。PIN 码有效期为 10 分钟。";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
-"3ik-rY-Gig.title" = "输入您的PIN";
+"3ik-rY-Gig.title" = "输入您的 PIN";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
 "8b8-bt-eAj.title" = "连接";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
-"DyG-SJ-U1Q.title" = "发生错误，请检查您的密码和PIN。";
+"DyG-SJ-U1Q.title" = "发生错误，请检查您的密码和 PIN。";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
 "Pcj-BY-tou.title" = "取消";
