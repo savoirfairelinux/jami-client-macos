@@ -8,7 +8,7 @@
 "Cancel" = "Cancelar";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Adicionar uma conta SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "Adicionar aos contatos";
@@ -32,7 +32,7 @@
 "Block contact" = "Bloquear contato";
 
 /* Contextual menu action */
-"Remove conversation" = "Remove conversation";
+"Remove conversation" = "Excluir uma conversa";
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
@@ -56,7 +56,7 @@
 "Create a new account" = "Criar nova conta";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "Criar um ponto de encontro";
 
 /* Backup enter password */
 "Enter account password" = "Enter account password";
@@ -74,7 +74,7 @@
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importar de um backup";
 
 /* link account title */
 "Import from other device" = "Importar de outro dispositivo";
@@ -125,7 +125,7 @@
 "Registered name: " = "Registered name: ";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Excluir a conta";
 
 /* export account button title */
 "Select archive" = "Select archive";
