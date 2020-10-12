@@ -20,13 +20,13 @@
 "An error occured during the export" = "  Ocorreu um erro durante a exportação ";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "parece estar ocupado.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Permissão de áudio não concedida";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Faça um backup da sua conta";
 
 /* Contextual menu action */
 "Block contact" = "Bloquear contato";
@@ -35,7 +35,7 @@
 "Remove conversation" = "Excluir uma conversa";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Ao clicar em \"OK\", você excluirá esta conta neste dispositivo! Esta ação não pode ser desfeita. Além disso, seu nome registrado pode ser perdido.";
 
 /* File transfer canceled label */
 "Canceled" = "Cancelada";
@@ -50,7 +50,7 @@
 "Copy" = "Copiar";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Não foi possível gravar uma mensagem durante a chamada";
 
 /* Welcome title */
 "Create a new account" = "Criar nova conta";
@@ -59,7 +59,7 @@
 "Create a rendezvous point" = "Criar um ponto de encontro";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Digite a senha da conta";
 
 /* File transfer failed label */
 "Failed" = "Falhou";
@@ -83,19 +83,19 @@
 "Incoming call from %@" = "Chamada de %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Mensagem recebida de %@";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Nome de usuário inválido";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Nome de usuário inválido.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Vá até as preferências para criar uma nova conta";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Não há conta disponível";
 
 /* Text show to the user when password didn't match */
 "Password and confirmation mismatch." = "Senhas não correspondem.";
@@ -113,37 +113,37 @@
 "Place video call" = "Fazer videochamada";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Pressione para começar a gravar";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Gravar uma mensagem";
 
 /* Button Action */
 "Refuse" = "Recusar";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Nome registrado:";
 
 /* Remove account alert title */
 "Remove account" = "Excluir a conta";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Selecionar um arquivo";
 
 /* Send button title */
 "Send" = "Enviar";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Um pedido de contato";
 
 /* No comment provided by engineer. */
 "Share" = "Compartilhar";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Compartilhar a tela";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Acessar";
 
 /* Record message title */
 "Stop recording" = "Pare de gravar";
@@ -164,49 +164,49 @@
 "The password you entered does not unlock this account" = "A senha informada não desbloqueia esta conta";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Esta conta precisa ser migrada";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Esta é sua identificação. \nCopie-o e compartilhe com seus amigos!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Este é seu nome de usuário de Jami. \nCopie-o e compartilhe com seus amigos!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Para completar o processo, você precisa abrir o Jami no novo dispositivo e escolher a opção \"Vincular este dispositivo a uma conta\". Seu Pin é válido por 10 minutos.";
 
 /* Text shown to the user */
 "To proceed with the migration, you need to enter a password that was used for this account." = "Para prosseguir com a migração, você precisa digitar uma senha que foi usada para esta conta.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Inacessível";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Permissão de vídeo não concedida";
 
 /* Welcome title */
 "Welcome to Jami" = "Bem-vindo ao Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Gostaria de deixar uma mensagem?";
 
 /* Password button title */
 "Change password" = "Mudar senha";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Criar uma senha";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Revogar o dispositivo";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Atenção! Esta ação não poderia ser desfeita!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "A revogação do dispositivo falhou. Por favor, verifique sua senha e tente novamente.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "A revogação do dispositivo falhou";
 
 /* Edit Sip Account Action*/
 "Done" = "Feito";
@@ -215,10 +215,10 @@
 "Edit Account" = "Editar Conta";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Minimizar o participante";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Maximizar o participante";
 
 /* Conference action */
 "Hangup" = "Desligar";
@@ -230,4 +230,4 @@
 "Choose a username for your account" = "Escolha nome de usuário para sua conta";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "Escolha um nome para seu ponto de encontro";
