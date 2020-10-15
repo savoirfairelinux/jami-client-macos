@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -174,8 +174,8 @@
                                                             <outlet property="timeLabel" destination="B6E-x2-crl" id="gUo-fj-mp5"/>
                                                         </connections>
                                                     </tableCellView>
-                                                    <tableCellView identifier="RightMessageView" id="Kuf-56-7Og" userLabel="IMTableCellView" customClass="IMTableCellView">
-                                                        <rect key="frame" x="1" y="91" width="742" height="88"/>
+                                                    <tableCellView identifier="RightMessageView" misplaced="YES" id="Kuf-56-7Og" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                        <rect key="frame" x="1" y="91" width="697" height="88"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hV-26-r5V">
@@ -555,7 +555,7 @@
                                 </button>
                                 <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
                                     <rect key="frame" x="106" y="22" width="520" height="16"/>
-                                    <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="Ilz-7v-2fr">
+                                    <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Type a message" id="Ilz-7v-2fr">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
