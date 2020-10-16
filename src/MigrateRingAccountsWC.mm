@@ -96,11 +96,11 @@ QMetaObject::Connection stateChanged;
     NSDictionary *attrs = @{
                             NSFontAttributeName:[NSFont boldSystemFontOfSize:fontSize]
                             };
-    auto registredName = accountInfo.registeredName;
-    if(!registredName.isEmpty()) {
+    auto registeredName = accountInfo.registeredName;
+    if(!registeredName.isEmpty()) {
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Registered name: ",@"Text shown to the user")
                                                                             attributes:attrs]];
-        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:registredName.toNSString() attributes:attrs]];
+        [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:registeredName.toNSString() attributes:attrs]];
     } else if(!accountInfo.profileInfo.uri.isEmpty()) {
         [infoMessage appendAttributedString:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"ID: ",@"Text shown to the user")
                                                                             attributes:attrs]];
