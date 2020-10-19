@@ -44,8 +44,8 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Record an audio message"; ObjectID = "wYE-S3-AzD"; */
 "wYE-S3-AzD.ibShadowedToolTip" = "Record an audio message";
 
-/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Eine Nachricht senden";
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Type a message"; ObjectID = "zK1-Ee-EWS"; */
+"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Type a message";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
 "zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "Eine Nachricht senden";

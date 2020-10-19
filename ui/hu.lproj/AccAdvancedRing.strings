@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow incoming calls from unknown contacts"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Az ismeretlen kapcsolatoktól érkező bejövő hívások engedélyezése ";
+"1Xr-BO-Pu3.title" = "Az ismeretlen kapcsolatoktól érkező bejövő hívások engedélyezése";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -108,7 +108,10 @@
 "vYi-gW-MrY.title" = "Doboz";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT beállítások";
+"xJT-ij-69q.title" = "OpenDHT-beállítások";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "TURN használata";
+
+/* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
+"2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";

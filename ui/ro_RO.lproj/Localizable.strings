@@ -35,7 +35,7 @@
 "Remove conversation" = "Șterge conversația";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Făcînd clic pe \"OK\" vei elimina acest cont de pe acest dispozitiv! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Făcînd clic pe \"OK\" vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 
 /* File transfer canceled label */
 "Canceled" = "Anulat";
@@ -77,7 +77,7 @@
 "Import from backup" = "Importă dintr-o copie de rezervă";
 
 /* link account title */
-"Import from other device" = "Importă din alt dispozitiv";
+"Import from other device" = "Importă din alt aparat";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Apel primit de la %@";
@@ -173,7 +173,7 @@
 "This is your Jami username. \nCopy and share it with your friends!" = "Acesta e numele tău de utilizator Jami. \nCopiază-l și distribuie-l prietenilor!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pentru a completa procesul, trebuie să deschizi Jami pe noul dispozitiv și să alegi opțiunea \"Asociază acest dispozitiv unui cont\".Codul tău PIN este valabil 10 minute.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea \"Asociază acest aparat unui cont\".Codul tău PIN este valabil 10 minute.";
 
 /* Text shown to the user */
 "To proceed with the migration, you need to enter a password that was used for this account." = "Pentru a continua transferul, trebuie să introduci o parolă care a fost folosită pentru acest cont.";
@@ -197,16 +197,16 @@
 "Create password" = "Creează parola";
 
 /* Device revocation title */
-"Revoke Device" = "Elimină Dispozitivul";
+"Revoke Device" = "Elimină Aparatul";
 
 /* Device revocation message */
 "Attention! This action could not be undone!" = "Atenție! Această acțiune este ireversibilă!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Eliminarea dispozitivului a eșuat. Verifică parola și încearcă din nou.";
+"Device revocation failed. Please check your password and try again." = "Eliminarea aparatului a eșuat. Verifică parola și încearcă din nou.";
 
 /* Device revocation error */
-"Device revocation failed" = "Eliminarea dispozitivului a eșuat";
+"Device revocation failed" = "Eliminarea aparatului a eșuat";
 
 /* Edit Sip Account Action*/
 "Done" = "Făcut";

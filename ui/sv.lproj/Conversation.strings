@@ -12,13 +12,13 @@
 "Ilz-7v-2fr.placeholderString" = "Skicka ett meddelande";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Start audio call"; ObjectID = "RuH-fO-poy"; */
-"RuH-fO-poy.ibShadowedToolTip" = "Start audio call";
+"RuH-fO-poy.ibShadowedToolTip" = "Starta ljudsamtal";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "UJf-cF-RAo"; */
 "UJf-cF-RAo.ibShadowedToolTip" = "Skicka";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Start video call"; ObjectID = "cFH-d7-Erh"; */
-"cFH-d7-Erh.ibShadowedToolTip" = "Start video call";
+"cFH-d7-Erh.ibShadowedToolTip" = "Starta videosamtal";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ciI-CA-tly"; */
 "ciI-CA-tly.title" = "Ruta";
@@ -44,8 +44,8 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Record an audio message"; ObjectID = "wYE-S3-AzD"; */
 "wYE-S3-AzD.ibShadowedToolTip" = "Record an audio message";
 
-/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Skicka ett meddelande";
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Type a message"; ObjectID = "zK1-Ee-EWS"; */
+"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Skriv ett meddelande";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
 "zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "Skicka ett meddelande";

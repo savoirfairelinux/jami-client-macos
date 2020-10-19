@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow incoming calls from unknown contacts"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow incoming calls from unknown contacts";
+"1Xr-BO-Pu3.title" = "ਅਣਜਾਣ ਸੰਪਰਕਾਂ ਤੋਂ ਕਾਲਾਂ ਆਉਣ ਦਿਓ";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -15,7 +15,7 @@
 "8mv-Ia-GM4.title" = "TURN address";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "ਕਾਲ ਸੈਟਿੰਗਾਂ";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
 "Va3-Un-lCL.title" = "Discovery settings";
@@ -112,3 +112,6 @@
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "TURN ਵਰਤੋ";
+
+/* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
+"2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";

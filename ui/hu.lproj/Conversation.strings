@@ -18,7 +18,7 @@
 "UJf-cF-RAo.ibShadowedToolTip" = "Elküld";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Start video call"; ObjectID = "cFH-d7-Erh"; */
-"cFH-d7-Erh.ibShadowedToolTip" = "Videóhívás indítása";
+"cFH-d7-Erh.ibShadowedToolTip" = "Videohívás indítása";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ciI-CA-tly"; */
 "ciI-CA-tly.title" = "Doboz";
@@ -44,8 +44,8 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Record an audio message"; ObjectID = "wYE-S3-AzD"; */
 "wYE-S3-AzD.ibShadowedToolTip" = "Hangüzenet felvétele";
 
-/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
-"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Üzenet küldése";
+/* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Type a message"; ObjectID = "zK1-Ee-EWS"; */
+"zK1-Ee-EWS.ibShadowedIsNilPlaceholder" = "Üzenet írása";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "zK1-Ee-EWS"; */
 "zK1-Ee-EWS.ibShadowedMultipleValuesPlaceholder" = "Üzenet küldése";

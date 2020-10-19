@@ -53,7 +53,7 @@
 "Could not record message during call" = "Could not record message during call";
 
 /* Welcome title */
-"Create a new account" = "Create a new account";
+"Create a new account" = "Crear un compte nòu";
 
 /* Create rendezvous title */
 "Create a rendezvous point" = "Create a rendezvous point";
@@ -107,10 +107,10 @@
 "Passwords don't match" = "Passwords don't match";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "Lançar sonada";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "Lançar una visioconferéncia";
 
 /* Recording view explanation label */
 "Press to start recording" = "Press to start recording";
@@ -170,7 +170,7 @@
 "This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Aquò es vòstre nom d’utilizaire Jami.\nCopiatz e partejatz-lo amb vòstres amics !";
 
 /* Title shown to user to concat with Pin */
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
@@ -188,7 +188,7 @@
 "Welcome to Jami" = "Welcome to Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Volètz daissar un messatge ?";
 
 /* Password button title */
 "Change password" = "Cambiar senhal";
@@ -212,7 +212,7 @@
 "Done" = "Done";
 
 /* Edit Sip Account Action */
-"Edit Account" = "Edit Account";
+"Edit Account" = "Modificar compte";
 
 /* Conference action */
 "Minimize participant" = "Minimize participant";
