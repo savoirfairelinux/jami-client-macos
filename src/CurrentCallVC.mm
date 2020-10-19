@@ -162,10 +162,11 @@ CVPixelBufferRef pixelBufferPreview;
     callUid_ = callUid;
     convUid_ = convUid;
     accountInfo_ = account;
-    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
-    if (conv.uid.isEmpty()) {
+    auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+    if (!convOpt.has_value()) {
         return;
     }
+    lrc::api::conversation::Info& conv = convOpt.value();
     confUid_ = conv.confId;
     [self.chatVC setConversationUid:convUid model: account->conversationModel.get()];
     [self connectSignals];
@@ -218,12 +219,12 @@ CVPixelBufferRef pixelBufferPreview;
     if (!callModel->hasCall(callId)) {
         return;
     }
-    auto callToSwitch = callModel->getCall(callId);
-    auto convIt = getConversationFromURI(callToSwitch.peerUri, *accountInfo_->conversationModel);
-    if (convIt == accountInfo_->conversationModel->allFilteredConversations().end()) {
+    auto convOpt = getConversationFromCallId(callId, *accountInfo_->conversationModel);
+    if (!convOpt.has_value()) {
         return;
     }
-    [self.delegate chooseConversation: *convIt model:accountInfo_->conversationModel.get()];
+    lrc::api::conversation::Info& conversation = convOpt.value();
+    [self.delegate chooseConversation: conversation model:accountInfo_->conversationModel.get()];
 }
 
 -(void) connectSignals {
@@ -271,10 +272,11 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::connect(accountInfo_->contactModel.get(),
                      &lrc::api::ContactModel::contactAdded,
                      [self](const QString &contactUri) {
-        auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
-        if (conv.uid.isEmpty() || conv.participants.empty()) {
+        auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+        if (!convOpt.has_value()) {
             return;
         }
+        lrc::api::conversation::Info& conv = convOpt.value();
         auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
         if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
             accountInfo_->conversationModel->makePermanent(convUid_);
@@ -444,18 +446,20 @@ CVPixelBufferRef pixelBufferPreview;
     }
 
     auto currentCall = callModel->getCall(callUid_);
-    auto convIt = accountInfo_->conversationModel->getConversationForUID(convUid_);
-    if (!convIt.uid.isEmpty()) {
-        NSString* bestName = bestNameForConversation(convIt, *accountInfo_->conversationModel);
-        [contactNameLabel setStringValue:bestName];
-        NSString* ringID = bestIDForConversation(convIt, *accountInfo_->conversationModel);
-        if([bestName isEqualToString:ringID]) {
-            ringID = @"";
-        }
-        [contactIdLabel setStringValue:ringID];
+    auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+    if (!convOpt.has_value()) {
+        return;
     }
+    lrc::api::conversation::Info& conversation = convOpt.value();
+    NSString* bestName = bestNameForConversation(conversation, *accountInfo_->conversationModel);
+    [contactNameLabel setStringValue:bestName];
+    NSString* ringID = bestIDForConversation(conversation, *accountInfo_->conversationModel);
+    if([bestName isEqualToString:ringID]) {
+        ringID = @"";
+    }
+    [contactIdLabel setStringValue:ringID];
     [self setupContactInfo:contactPhoto];
-    confUid_ = convIt.confId;
+    confUid_ = conversation.confId;
     [muteAudioButton setHidden:!confUid_.isEmpty()];
     [muteVideoButton setHidden:!confUid_.isEmpty()];
     [recordOnOffButton setHidden:!confUid_.isEmpty()];
@@ -620,7 +624,11 @@ CVPixelBufferRef pixelBufferPreview;
 -(NSImage *) getContactImageOfSize: (double) size withDefaultAvatar:(BOOL) shouldDrawDefault {
     @autoreleasepool {
         auto* convModel = accountInfo_->conversationModel.get();
-        auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+        auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+        if (!convOpt.has_value()) {
+            return nil;
+        }
+        lrc::api::conversation::Info& conv = convOpt.value();
         if (conv.uid.isEmpty() || conv.participants.empty()) {
             return nil;
         }
@@ -957,7 +965,11 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     // If we accept a conversation with a non trusted contact, we first accept it
-    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
+    auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+    if (!convOpt.has_value()) {
+        return;
+    }
+    lrc::api::conversation::Info& conv = convOpt.value();
     if (conv.uid.isEmpty() || conv.participants.empty()) {
         return;
     }
@@ -1281,8 +1293,12 @@ CVPixelBufferRef pixelBufferPreview;
         return;
     auto* callModel = accountInfo_->callModel.get();
 
-    auto convIt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
-    auto callId = convIt->callId;
+    auto convOpt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
+    if (!convOpt.has_value()) {
+        return;
+    }
+    lrc::api::conversation::Info& conversation = convOpt.value();
+    auto callId = conversation.callId;
     if (not callModel->hasCall(callId)){
         return;
     }
@@ -1322,10 +1338,10 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(BOOL)isMasterCall {
-    auto conv = accountInfo_->conversationModel->getConversationForUID(convUid_);
-    if (conv.uid.isEmpty()) {
+    auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+    if (!convOpt.has_value())
         return false;
-    }
+    lrc::api::conversation::Info& conv = convOpt.value();
     auto* callModel = accountInfo_->callModel.get();
     try {
         auto call = callModel->getCall(conv.callId);

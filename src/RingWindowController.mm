@@ -244,10 +244,14 @@ typedef NS_ENUM(NSInteger, ViewState) {
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showCallView,
                      [self](const QString& accountId,
-                            const lrc::api::conversation::Info convInfo){
+                            const QString& convUid){
         AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
         [appDelegate disableScreenSleep];
         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
+        auto convModel = accInfo->conversationModel.get();
+        auto convOpt = getConversationFromUid(convUid, *convModel);
+        if (!convOpt.has_value()) { return; }
+        lrc::api::conversation::Info& convInfo = convOpt.value();
         try {
             if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                 [smartViewVC selectPendingList];
@@ -268,14 +272,18 @@ typedef NS_ENUM(NSInteger, ViewState) {
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showIncomingCallView,
                      [self](const QString& accountId,
-                            const lrc::api::conversation::Info convInfo){
+                            const QString& convUid){
         AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
         [appDelegate disableScreenSleep];
         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
+        auto convModel = accInfo->conversationModel.get();
+        auto convOpt = getConversationFromUid(convUid, *convModel);
+        if (!convOpt.has_value()) { return; }
+        lrc::api::conversation::Info& convInfo = convOpt.value();
         auto callModel = accInfo->callModel.get();
         lrc::api::account::ConfProperties_t accountProperties = accInfo->accountModel->getAccountConfig(accInfo->id);
         if (accountProperties.isRendezVous && (!callModel->hasCall(convInfo.callId) || !callModel->getCall(convInfo.callId).isOutgoing)) {
-            if ([smartViewVC getSelectedUID] == convInfo.uid) {
+            if ([smartViewVC getSelectedUID] == convUid) {
                 [smartViewVC deselect];
                 [conversationVC hideWithAnimation:false];
                 [welcomeContainer setHidden:NO];
@@ -302,8 +310,12 @@ typedef NS_ENUM(NSInteger, ViewState) {
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showChatView,
                      [self](const QString& accountId,
-                            const lrc::api::conversation::Info& convInfo){
+                            const QString& convUid) {
                          auto& accInfo = self.accountModel->getAccountInfo(accountId);
+                         auto convModel = accInfo.conversationModel.get();
+                         auto convOpt = getConversationFromUid(convUid, *convModel);
+                         if (!convOpt.has_value()) { return; }
+                         lrc::api::conversation::Info& convInfo = convOpt.value();
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [self changeViewTo:SHOW_CONVERSATION_SCREEN];
@@ -311,8 +323,12 @@ typedef NS_ENUM(NSInteger, ViewState) {
     QObject::connect(self.behaviorController,
                      &lrc::api::BehaviorController::showLeaveMessageView,
                      [self](const QString& accountId,
-                            const lrc::api::conversation::Info& convInfo){
+                            const QString& convUid) {
                          auto& accInfo = self.accountModel->getAccountInfo(accountId);
+                         auto convModel = accInfo.conversationModel.get();
+                         auto convOpt = getConversationFromUid(convUid, *convModel);
+                         if (!convOpt.has_value()) { return; }
+                         lrc::api::conversation::Info& convInfo = convOpt.value();
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [self changeViewTo:LEAVE_MESSAGE];
@@ -642,15 +658,13 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [smartViewVC selectConversationList];
     [self updateRingID];
-    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
-    if (!conversationExists(convInfo, *accInfo.conversationModel.get())) {
-        convInfo = getSearchResultFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
-        if (!searchResultExists(convInfo, *accInfo.conversationModel.get())) {
-            return;
-        }
+    auto convOpt = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
+    if (!convOpt.has_value()) {
+        return;
     }
-    [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];
-    [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
+    lrc::api::conversation::Info& convInfo = convOpt.value();
+    [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+    [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
     accInfo.conversationModel.get()->clearUnreadInteractions(QString::fromNSString(conversationId));
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
@@ -661,20 +675,18 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [settingsVC setSelectedAccount:accInfo.id];
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [self updateRingID];
-    auto convInfo = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
-    if (!conversationExists(convInfo, *accInfo.conversationModel.get())) {
-        convInfo = getSearchResultFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
-        if (!searchResultExists(convInfo, *accInfo.conversationModel.get())) {
-            return;
-        }
+    auto convOpt = getConversationFromUid(QString::fromNSString(conversationId), *accInfo.conversationModel.get());
+    if (!convOpt.has_value()) {
+        return;
     }
-    if (accInfo.contactModel->getContact(convInfo->participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING) {
+    lrc::api::conversation::Info& convInfo = convOpt.value();
+    if (accInfo.contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING) {
         [smartViewVC selectPendingList];
     }
     else {
         [smartViewVC selectConversationList];
     }
-    [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
+    [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
     [currentCallVC setCurrentCall:QString::fromNSString(callId)
                      conversation:QString::fromNSString(conversationId)
                           account:&accInfo
@@ -689,11 +701,11 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [smartViewVC setConversationModel:accInfo.conversationModel.get()];
     [self updateRingID];
     [smartViewVC selectPendingList];
-    auto convInfo = getConversationFromURI(QString::fromNSString(uri), *accInfo.conversationModel.get());
-    auto convQueue = accInfo.conversationModel.get()->allFilteredConversations();
-    if (convInfo != convQueue.end()) {
-        [conversationVC setConversationUid:convInfo->uid model:accInfo.conversationModel.get()];
-        [smartViewVC selectConversation: *convInfo model:accInfo.conversationModel.get()];
+    auto convOpt = getConversationFromURI(QString::fromNSString(uri), *accInfo.conversationModel.get());
+    if (convOpt.has_value()) {
+        lrc::api::conversation::Info& conversation = convOpt.value();
+        [conversationVC setConversationUid:conversation.uid model:accInfo.conversationModel.get()];
+        [smartViewVC selectConversation: conversation model:accInfo.conversationModel.get()];
     }
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
 }
