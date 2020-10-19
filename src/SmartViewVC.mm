@@ -133,8 +133,11 @@ NSInteger const REQUEST_SEG         = 1;
     if (convModel_ == nil)
         return;
 
-    auto conv = sender == searchResultsView ? convModel_->searchResultForRow(row) : convModel_->filteredConversation(row);
-    convModel_->placeCall(conv.uid);
+    auto convOpt = sender == searchResultsView ? convModel_->searchResultForRow(row) : convModel_->filteredConversation(row);
+    if (!convOpt.has_value())
+        return;
+   // lrc::api::conversation::Info& conversation = convOpt.value();
+    convModel_->placeCall(convOpt->get().uid);
 }
 
 -(void) reloadSelectorNotifications
@@ -150,10 +153,10 @@ NSInteger const REQUEST_SEG         = 1;
 
     auto ringConversations = convModel_->getFilteredConversations(lrc::api::profile::Type::RING);
     int totalUnreadMessages = 0;
-    std::for_each(ringConversations.begin(), ringConversations.end(),
-        [&totalUnreadMessages, self] (const auto& conversation) {
-            totalUnreadMessages += convModel_->getNumberOfUnreadMessagesFor(conversation.uid);
-        });
+    std::for_each(ringConversations.get().begin(), ringConversations.get().end(),
+                  [&totalUnreadMessages, self] (const auto& conversation) {
+            totalUnreadMessages += convModel_->getNumberOfUnreadMessagesFor(conversation.get().uid);
+    });
     [totalMsgsCount setHidden:(totalUnreadMessages == 0)];
     [totalMsgsCount setIntValue:totalUnreadMessages];
 
@@ -172,7 +175,7 @@ NSInteger const REQUEST_SEG         = 1;
 
 -(void) reloadData
 {
-    [contactsHeader setHidden: convModel_->allFilteredConversations().empty() || searchField.stringValue.length == 0];
+    [contactsHeader setHidden: convModel_->allFilteredConversations().get().empty() || searchField.stringValue.length == 0];
     [smartView deselectAll:nil];
     if (convModel_ == nil)
         return;
@@ -203,9 +206,9 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView layoutSubtreeIfNeeded];
 
     if (!selectedUid_.isEmpty() && convModel_ != nil) {
-        auto it = getConversationFromUid(selectedUid_, *convModel_);
-        if (it != convModel_->allFilteredConversations().end()) {
-            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
+        auto index = getFilteredConversationIndexFromUid(selectedUid_, *convModel_);
+        if (index >= 0) {
+            NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(index)];
             [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
         }
     }
@@ -219,20 +222,20 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(QString::fromNSString(uid), *convModel_);
-    if (it != convModel_->allFilteredConversations().end()) {
-        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
+    auto index = getFilteredConversationIndexFromUid(QString::fromNSString(uid), *convModel_);
+    if (index >= 0) {
+        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(index)];
         [smartView reloadDataForRowIndexes:indexSet
                              columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    } else {
-        it = getSearchResultFromUid(QString::fromNSString(uid), *convModel_);
-        if (it == convModel_->getAllSearchResults().end()) {
-            return;
-        }
-        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->getAllSearchResults().begin())];
-        [searchResultsView reloadDataForRowIndexes:indexSet
-                                     columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+        return;
     }
+    index = getSearchResultIndexFromUid(QString::fromNSString(uid), *convModel_);
+    if (index < 0) {
+        return;
+    }
+    NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(index)];
+    [searchResultsView reloadDataForRowIndexes:indexSet
+                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
 }
 
 -(void) reloadConversationWithURI:(NSString *)uri
@@ -265,7 +268,7 @@ NSInteger const REQUEST_SEG         = 1;
     [self reloadSearchResults];
 
     if (convModel_ != nil) {
-        modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
+        modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelChanged,
                                                         [self] (){
                                                             [self reloadData];
                                                         });
@@ -337,17 +340,17 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto it = getConversationFromUid(uid, *convModel_);
-    if (it != convModel_->allFilteredConversations().end()) {
-        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->allFilteredConversations().begin())];
+    auto index = getFilteredConversationIndexFromUid(uid, *convModel_);
+    if (index >= 0) {
+        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:index];
         [smartView selectRowIndexes:indexSet byExtendingSelection:NO];
         selectedUid_ = uid;
     } else {
-        it = getSearchResultFromUid(uid, *convModel_);
-        if (it == convModel_->getAllSearchResults().end()) {
+        index = getSearchResultIndexFromUid(uid, *convModel_);
+        if (index < 0) {
             return;
         }
-        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(it - convModel_->getAllSearchResults().begin())];
+        NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:(index)];
         [searchResultsView selectRowIndexes:indexSet byExtendingSelection:NO];
         selectedUid_ = uid;
     }
@@ -452,11 +455,14 @@ NSInteger const REQUEST_SEG         = 1;
     if (convModel_ == nil)
         return;
 
-    auto uid = notification.object == smartView ? convModel_->filteredConversation(row).uid : convModel_->searchResultForRow(row).uid;
-    if (selectedUid_ != uid) {
-        selectedUid_ = uid;
-        convModel_->selectConversation(uid);
-        convModel_->clearUnreadInteractions(uid);
+    auto convOpt = notification.object == smartView ? convModel_->filteredConversation(row) : convModel_->searchResultForRow(row);
+    if (!convOpt.has_value())
+        return;
+    lrc::api::conversation::Info& conversation = convOpt.value();
+    if (selectedUid_ != conversation.uid && !conversation.uid.isEmpty()) {
+        selectedUid_ = conversation.uid;
+        convModel_->selectConversation(selectedUid_);
+        convModel_->clearUnreadInteractions(selectedUid_);
         [self reloadSelectorNotifications];
     }
 }
@@ -473,7 +479,10 @@ NSInteger const REQUEST_SEG         = 1;
 
     bool isSearching = tableView == searchResultsView;
 
-    auto conversation = isSearching ? convModel_->searchResultForRow(row) : convModel_->filteredConversation(row);
+    auto convOpt = isSearching ? convModel_->searchResultForRow(row) : convModel_->filteredConversation(row);
+    if (!convOpt.has_value())
+        return nil;
+    lrc::api::conversation::Info& conversation = convOpt.value();
     NSTableCellView* result;
 
     result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
@@ -642,24 +651,6 @@ NSInteger const REQUEST_SEG         = 1;
     [self placeCall:nil];
 }
 
-- (IBAction)hangUpClickedAtRow:(id)sender {
-    NSInteger row = [smartView rowForView:sender];
-
-    if (row == -1)
-        return;
-    if (convModel_ == nil)
-        return;
-
-    auto conv = convModel_->filteredConversation(row);
-    auto& callId = conv.callId;
-
-    if (callId.isEmpty())
-        return;
-
-    auto* callModel = convModel_->owner.callModel.get();
-    callModel->hangUp(callId);
-}
-
 - (void) displayErrorModalWithTitle:(NSString*) title WithMessage:(NSString*) message
 {
     NSAlert* alert = [NSAlert alertWithMessageText:title
@@ -697,17 +688,18 @@ NSInteger const REQUEST_SEG         = 1;
     }
     [self clearSearchField];
     auto uid = QString::fromNSString(uId);
-    auto it = getConversationFromUid(uid, *convModel_);
-    if (it != convModel_->allFilteredConversations().end()) {
-        @try {
-            auto contact = convModel_->owner.contactModel->getContact(it->participants[0]);
-            if (!contact.profileInfo.uri.isEmpty() && contact.profileInfo.uri.compare(selectedUid_) == 0) {
-                selectedUid_ = uid;
-                convModel_->selectConversation(uid);
-            }
-        } @catch (NSException *exception) {
-            return;
+    auto convOpt = getConversationFromUid(uid, *convModel_);
+    if (!convOpt.has_value())
+        return;
+    lrc::api::conversation::Info& conversation = convOpt.value();
+    @try {
+        auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
+        if (!contact.profileInfo.uri.isEmpty() && contact.profileInfo.uri.compare(selectedUid_) == 0) {
+            selectedUid_ = uid;
+            convModel_->selectConversation(uid);
         }
+    } @catch (NSException *exception) {
+        return;
     }
 }
 
@@ -738,13 +730,17 @@ NSInteger const REQUEST_SEG         = 1;
         return YES;
     }
     bool hasSearchResult = convModel_->getAllSearchResults().size() > 0;
-    auto model = hasSearchResult ? convModel_->searchResultForRow(0) : convModel_->filteredConversation(0);
-    auto uid = model.uid;
+    auto convOpt = hasSearchResult ? convModel_->searchResultForRow(0) : convModel_->filteredConversation(0);
+    if (!convOpt.has_value())
+        return NO;
+    lrc::api::conversation::Info& conversation = convOpt.value();
+    auto uid = conversation.uid;
+
     if (selectedUid_ == uid) {
         return YES;
     }
     @try {
-        auto contact = convModel_->owner.contactModel->getContact(model.participants[0]);
+        auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
         if ((contact.profileInfo.uri.isEmpty() && contact.profileInfo.type != lrc::api::profile::Type::SIP) || contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
             return YES;
         }
@@ -789,11 +785,10 @@ NSInteger const REQUEST_SEG         = 1;
 {
     if ([smartView selectedRow] == -1)
         return;
-    if (convModel_ == nil)
-        return ;
-
-    auto uid = convModel_->filteredConversation([smartView selectedRow]).uid;
-    convModel_->makePermanent(uid);
+    auto convID = [self conversationUIDFrom: [smartView selectedRow]];
+    if (convID.isEmpty())
+        return;
+    convModel_->makePermanent(convID);
 }
 
 #pragma mark - ContextMenuDelegate
@@ -803,8 +798,11 @@ NSInteger const REQUEST_SEG         = 1;
     if (convModel_ == nil)
         return nil;
 
-    auto conversation = table == smartView ? convModel_->filteredConversation(NSInteger(index)) :
+    auto convOpt = table == smartView ? convModel_->filteredConversation(NSInteger(index)) :
     convModel_->searchResultForRow(NSInteger(index));
+    if (!convOpt.has_value())
+        return;
+    lrc::api::conversation::Info& conversation = convOpt.value();
 
     @try {
         auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
@@ -939,15 +937,7 @@ NSInteger const REQUEST_SEG         = 1;
 
 - (void)acceptInvitation:(id)sender {
     NSInteger row = [smartView rowForView:sender];
-
-    if (row == -1)
-        return;
-    if (convModel_ == nil)
-        return;
-
-    auto conv = convModel_->filteredConversation(row);
-    auto& convID = conv.Info::uid;
-
+    auto convID = [self conversationUIDFrom: row];
     if (convID.isEmpty())
         return;
     convModel_->makePermanent(convID);
@@ -955,15 +945,7 @@ NSInteger const REQUEST_SEG         = 1;
 
 - (void)refuseInvitation:(id)sender {
     NSInteger row = [smartView rowForView:sender];
-
-    if (row == -1)
-        return;
-    if (convModel_ == nil)
-        return;
-
-    auto conv = convModel_->filteredConversation(row);
-    auto& convID = conv.Info::uid;
-
+    auto convID = [self conversationUIDFrom: row];
     if (convID.isEmpty())
         return;
     convModel_->removeConversation(convID);
@@ -971,20 +953,25 @@ NSInteger const REQUEST_SEG         = 1;
 
 - (void)blockPendingContact:(id)sender {
     NSInteger row = [smartView rowForView:sender];
-
-    if (row == -1)
-        return;
-    if (convModel_ == nil)
-        return;
-
-    auto conv = convModel_->filteredConversation(row);
-    auto& convID = conv.Info::uid;
-
+    auto convID = [self conversationUIDFrom: row];
     if (convID.isEmpty())
         return;
     convModel_->removeConversation(convID, true);
     [self deselect];
     [delegate listTypeChanged];
+}
+// return convUid for given row if exists. Otherwise return an empty string
+- (QString)conversationUIDFrom:(int)row {
+    if (row == -1)
+        return "";
+    if (convModel_ == nil)
+        return "";
+    auto convRef = convModel_->filteredConversation(row);
+    if (!convRef.has_value())
+        return "";
+    lrc::api::conversation::Info& conversation = convRef.value();
+    auto& convID = conversation.Info::uid;
+    return convID;
 }
 
 @end

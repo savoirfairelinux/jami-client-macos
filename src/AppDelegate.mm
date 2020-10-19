@@ -183,27 +183,31 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::showIncomingCallView,
-                     [self] (const QString& accountId, lrc::api::conversation::Info conversationInfo) {
+                     [self] (const QString& accountId,
+                             const QString& convUid) {
         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::CallNotifications];
         if(!shouldNotify) {
             return;
         }
+        auto convModel = lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get();
+        auto conversationOpt = getConversationFromUid(convUid, *convModel);
+        if (!conversationOpt.has_value()) { return; }
+        lrc::api::conversation::Info& conversation = conversationOpt.value();
         bool isIncoming = false;
-        auto callModel = lrc->getAccountModel()
-        .getAccountInfo(accountId).callModel.get();
-        if(callModel->hasCall(conversationInfo.callId)) {
-            isIncoming = !callModel->getCall(conversationInfo.callId).isOutgoing;
+        auto callModel = lrc->getAccountModel().getAccountInfo(accountId).callModel.get();
+        if(callModel->hasCall(conversation.callId)) {
+            isIncoming = !callModel->getCall(conversation.callId).isOutgoing;
         }
         if(!isIncoming) {
             return;
         }
-        NSString* name = bestIDForConversation(conversationInfo, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
+        NSString* name = bestIDForConversation(conversation, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
         NSUserNotification* notification = [[NSUserNotification alloc] init];
 
         NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
         userInfo[ACCOUNT_ID] = accountId.toNSString();
-        userInfo[CALL_ID] = conversationInfo.callId.toNSString();
-        userInfo[CONVERSATION_ID] = conversationInfo.uid.toNSString();
+        userInfo[CALL_ID] = conversation.callId.toNSString();
+        userInfo[CONVERSATION_ID] = conversation.uid.toNSString();
         userInfo[NOTIFICATION_TYPE] = CALL_NOTIFICATION;
 
         NSString* localizedTitle = [NSString stringWithFormat:
@@ -240,14 +244,12 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
         userInfo[CONVERSATION_ID] = conversation.toNSString();
         userInfo[NOTIFICATION_TYPE] = MESSAGE_NOTIFICATION;
         NSString* name = interaction.authorUri.toNSString();
-        auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel()
+        auto convOpt = getConversationFromUid(conversation, *lrc->getAccountModel()
                                              .getAccountInfo(accountId)
                                              .conversationModel.get());
-        auto convQueue = lrc->getAccountModel()
-        .getAccountInfo(accountId)
-        .conversationModel.get()->allFilteredConversations();
-        if (convIt != convQueue.end()) {
-            name = bestIDForConversation(*convIt, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
+        if (convOpt.has_value()) {
+            lrc::api::conversation::Info& conversation = convOpt.value();
+            name = bestIDForConversation(conversation, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
         }
         NSString* localizedTitle = [NSString stringWithFormat:
                                     NSLocalizedString(@"Incoming message from %@",@"Incoming message from {Name}"),
