@@ -178,13 +178,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (cachedConv_ != nil)
         return cachedConv_;
     auto it = getConversationFromUid(convUid_, *convModel_);
-    if (conversationExists(it, *convModel_)) {
-        cachedConv_ = &(*it);
-    } else {
-        it = getSearchResultFromUid(convUid_, *convModel_);
-        if (searchResultExists(it, *convModel_)) {
-            cachedConv_ = &(*it);
-        }
+    if (it.has_value()) {
+        lrc::api::conversation::Info& conversation = it.value();
+        cachedConv_ = &conversation;
     }
     return cachedConv_;
 }
@@ -318,7 +314,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     // after a reordering.
     QObject::disconnect(modelSortedSignal_);
     QObject::disconnect(filterChangedSignal_);
-    modelSortedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
+    modelSortedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelChanged,
                                           [self](){
                                               cachedConv_ = nil;
                                           });

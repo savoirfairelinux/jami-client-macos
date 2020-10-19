@@ -129,13 +129,20 @@ static inline lrc::api::profile::Type profileType(const lrc::api::conversation::
  * @param model ConversationModel in which to do the lookup
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
-static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromUid(const QString& uid, const lrc::api::ConversationModel& model) {
-    return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
-                        [&] (const lrc::api::conversation::Info& conv) {
-        return uid == conv.uid;
-    });
+static inline OptRef<lrc::api::conversation::Info> getConversationFromUid(const QString& uid, lrc::api::ConversationModel& model) {
+    return model.getConversationForUid(uid);
 }
 
+static inline int getFilteredConversationIndexFromUid(const QString& uid, const lrc::api::ConversationModel& model) {
+    auto it = std::find_if(model.allFilteredConversations().get().begin(), model.allFilteredConversations().get().end(),
+                       [&] (const lrc::api::conversation::Info& conv) {
+        return uid == conv.uid;
+    });
+    if (it->get().uid.isEmpty()) {
+        return -1;
+    }
+    auto idx = std::distance(model.allFilteredConversations().get().begin(), it);
+}
 /**
 * This function return an iterator pointing to a Conversation::Info in ConversationModel given its uid. If not found
 * the iterator is invalid thus it needs to be checked by caller.
@@ -143,33 +150,15 @@ static inline lrc::api::ConversationModel::ConversationQueue::const_iterator get
 * @param model ConversationModel in which to do the lookup
 * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
 */
-static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getSearchResultFromUid(const QString& uid, const lrc::api::ConversationModel& model) {
-    return std::find_if(model.getAllSearchResults().begin(), model.getAllSearchResults().end(),
+static inline int getSearchResultIndexFromUid(const QString& uid, const lrc::api::ConversationModel& model) {
+    auto it = std::find_if(model.getAllSearchResults().begin(), model.getAllSearchResults().end(),
                         [&] (const lrc::api::conversation::Info& conv) {
         return uid == conv.uid;
     });
-}
-
-/**
- * This function true if conversation exists
- * the iterator is invalid thus it needs to be checked by caller.
- * @param conversation iterator pointing to a Conversation::Info in ConversationModel
- * @param model ConversationModel in which to do the lookup
- * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
- */
-static inline bool conversationExists(lrc::api::ConversationModel::ConversationQueue::const_iterator conversation, const lrc::api::ConversationModel& model) {
-    return conversation != model.allFilteredConversations().end();
-}
-
-/**
- * This function true if conversation exists
- * the iterator is invalid thus it needs to be checked by caller.
- * @param conversation iterator pointing to a Conversation::Info in ConversationModel
- * @param model ConversationModel in which to do the lookup
- * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
- */
-static inline bool searchResultExists(lrc::api::ConversationModel::ConversationQueue::const_iterator conversation, const lrc::api::ConversationModel& model) {
-    return conversation != model.getAllSearchResults().end();
+    if (it->uid.isEmpty()) {
+        return -1;
+    }
+    auto idx = std::distance(model.getAllSearchResults().begin(), it);
 }
 
 /**
@@ -178,11 +167,8 @@ static inline bool searchResultExists(lrc::api::ConversationModel::ConversationQ
  * @param model ConversationModel in which to do the lookup
  * @return iterator pointing to corresponding Conversation if any. Points to past-the-end element otherwise.
  */
-static inline lrc::api::ConversationModel::ConversationQueue::const_iterator getConversationFromURI(const QString& uri, const lrc::api::ConversationModel& model) {
-    return std::find_if(model.allFilteredConversations().begin(), model.allFilteredConversations().end(),
-                        [&] (const lrc::api::conversation::Info& conv) {
-                            return uri == conv.participants[0];
-                        });
+static inline OptRef<lrc::api::conversation::Info> getConversationFromURI(const QString& uri, lrc::api::ConversationModel& model) {
+    return model.getConversationForPeerUri(uri);
 }
 
 static inline bool isUrlAccessibleFromSandbox(NSURL* url)

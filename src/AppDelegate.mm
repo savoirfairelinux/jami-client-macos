@@ -183,14 +183,18 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
 
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::showIncomingCallView,
-                     [self] (const QString& accountId, lrc::api::conversation::Info conversationInfo) {
+                     [self] (const QString& accountId,
+                             const QString& convUid) {
         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::CallNotifications];
         if(!shouldNotify) {
             return;
         }
+        auto convModel = lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get();
+        auto convRef = getConversationFromUid(convUid, *convModel);
+        if (!convRef.has_value()) { return; }
+        lrc::api::conversation::Info& conversationInfo = convRef.value();
         bool isIncoming = false;
-        auto callModel = lrc->getAccountModel()
-        .getAccountInfo(accountId).callModel.get();
+        auto callModel = lrc->getAccountModel().getAccountInfo(accountId).callModel.get();
         if(callModel->hasCall(conversationInfo.callId)) {
             isIncoming = !callModel->getCall(conversationInfo.callId).isOutgoing;
         }
@@ -243,11 +247,9 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
         auto convIt = getConversationFromUid(conversation, *lrc->getAccountModel()
                                              .getAccountInfo(accountId)
                                              .conversationModel.get());
-        auto convQueue = lrc->getAccountModel()
-        .getAccountInfo(accountId)
-        .conversationModel.get()->allFilteredConversations();
-        if (convIt != convQueue.end()) {
-            name = bestIDForConversation(*convIt, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
+        if (convIt.has_value()) {
+            lrc::api::conversation::Info& convInfo = convIt.value();
+            name = bestIDForConversation(convInfo, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
         }
         NSString* localizedTitle = [NSString stringWithFormat:
                                     NSLocalizedString(@"Incoming message from %@",@"Incoming message from {Name}"),

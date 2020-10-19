@@ -22,7 +22,7 @@ ENDIF()
 MESSAGE("Building Ring version - " ${RING_VERSION_NAME} " " ${RING_VERSION})
 SET(PROJ_COPYRIGHT " © 2015-2019 Savoir-faire Linux \n GPLv3 https://www.gnu.org/copyleft/gpl.html")
 
-SET(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD 17)
 
 ADD_DEFINITIONS("-stdlib=libc++ -fobjc-arc")
 

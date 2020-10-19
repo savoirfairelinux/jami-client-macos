@@ -114,15 +114,10 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         return cachedConv_;
 
     auto it = getConversationFromUid(convUid_, *convModel_);
-    if (conversationExists(it, *convModel_)) {
-        cachedConv_ = &(*it);
-    } else {
-        it = getSearchResultFromUid(convUid_, *convModel_);
-        if (searchResultExists(it, *convModel_)) {
-            cachedConv_ = &(*it);
-        }
+    if (it.has_value()) {
+        lrc::api::conversation::Info& value = it.value();
+        cachedConv_ = &value;
     }
-
     return cachedConv_;
 }
 
@@ -150,7 +145,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     QObject::disconnect(filterChangedConnection_);
     QObject::disconnect(newConversationConnection_);
     QObject::disconnect(conversationRemovedConnection_);
-    modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelSorted,
+    modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelChanged,
                                           [self](){
                                               cachedConv_ = nil;
                                           });

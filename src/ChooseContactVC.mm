@@ -151,16 +151,16 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     auto accountID = conversation.accountId;
     auto convID = conversation.convId;
     auto convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-    auto conversationInfo = convMod->getConversationForUID(convID);
-    if (conversationInfo.uid.isEmpty()) {
+    auto conversationInfo = convMod->getConversationForUid(convID);
+    if (!conversationInfo.has_value()) {
         return;
     }
-
+    lrc::api::conversation::Info& conv = conversationInfo.value();
     if (table == callsView) {
-        auto callID = conversationInfo.confId.isEmpty() ? conversationInfo.callId : conversationInfo.confId;
+        auto callID = conv.confId.isEmpty() ? conv.callId : conv.confId;
         [self.delegate joinCall: callID];
     } else if (table == contactsView) {
-        auto uid = conversationInfo.participants.front();
+        auto uid = conv.participants.front();
         [self.delegate callToContact:uid convUID: convID];
     }
 }
@@ -210,15 +210,16 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
         for (auto conversation : conversations) {
             auto accountID = conversation.accountId;
             auto convID = conversation.convId;
-            auto *convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-            auto conversationInfo = convMod->getConversationForUID(convID);
-            if (conversationInfo.uid.isEmpty()) {
+            auto convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
+            auto conversationInfo = getConversationFromUid(convID, *convMod);
+            if (!conversationInfo.has_value()) {
                 return nil;
             }
             if (displayNameString.length > 0) {
                 displayNameString = [displayNameString stringByAppendingString:@", "];
             }
-            displayNameString = [displayNameString stringByAppendingString: bestNameForConversation(conversationInfo, *convMod)];
+            lrc::api::conversation::Info& conv = conversationInfo.value();
+            displayNameString = [displayNameString stringByAppendingString: bestNameForConversation(conv, *convMod)];
         }
         [displayName setStringValue:displayNameString];
         [NSLayoutConstraint deactivateConstraints:[photoView constraints]];
@@ -233,11 +234,12 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     lrc::api::AccountConversation conversation = conversations.front();
     auto accountID = conversation.accountId;
     auto convID = conversation.convId;
-    auto *convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
-    auto conversationInfo = convMod->getConversationForUID(convID);
-    if (conversationInfo.uid.isEmpty() || conversationInfo.participants.empty()) {
+    auto convMod = convModel->owner.accountModel->getAccountInfo(accountID).conversationModel.get();
+    auto conversationRef = getConversationFromUid(convID, *convMod);
+    if (!conversationRef.has_value()) {
         return nil;
     }
+    lrc::api::conversation::Info& conversationInfo = conversationRef.value();
     NSString* displayNameString = bestNameForConversation(conversationInfo, *convMod);
     NSString* displayIDString = bestIDForConversation(conversationInfo, *convMod);
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
