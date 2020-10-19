@@ -189,44 +189,47 @@ lrc::api::ConversationModel* conversationModel;
 }
 
 -(void) updateView {
-    auto it = getConversationFromUid(conversationUid, *conversationModel);
-    if (it != conversationModel->allFilteredConversations().end()) {
-        @autoreleasepool {
-            auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-            QVariant photo = imgManip.conversationPhoto(*it, conversationModel->owner, QSize(120, 120), NO);
-            [personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
-        }
-        NSString *name = bestNameForConversation(*it, *conversationModel);
-
-        NSFont *fontName = [NSFont systemFontOfSize: 20.0 weight: NSFontWeightSemibold];
-        NSFont *otherFont = [NSFont systemFontOfSize: 20.0 weight: NSFontWeightThin];
-        NSColor *color = [NSColor textColor];
-        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-        [style setLineBreakMode:NSLineBreakByWordWrapping];
-        [style setAlignment:NSCenterTextAlignment];
-        NSDictionary *nameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   fontName, NSFontAttributeName,
-                                   style, NSParagraphStyleAttributeName,
-                                   color, NSForegroundColorAttributeName,
-                                   nil];
-        NSDictionary *otherAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    otherFont, NSFontAttributeName,
-                                    style, NSParagraphStyleAttributeName,
-                                    color, NSForegroundColorAttributeName,
-                                    nil];
-        NSAttributedString* attributedName = [[NSAttributedString alloc] initWithString:name attributes:nameAttrs];
-        NSString *str = [NSString stringWithFormat: @"%@%@\n%@",
-                          @" ",
-                          NSLocalizedString(@"appears to be busy.", @"Peer busy message"),
-                          NSLocalizedString(@"Would you like to leave a message?", @"Peer busy message")];
-        NSAttributedString* attributedOther= [[NSAttributedString alloc] initWithString: str attributes: otherAttrs];
-        NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
-        [result appendAttributedString:attributedName];
-        [result appendAttributedString:attributedOther];
-        NSRange range = NSMakeRange(0, [result length]);
-        [result addAttribute:NSParagraphStyleAttributeName value:style range: range];
-        [infoLabel setAttributedStringValue: result];
+    auto convOpt = getConversationFromUid(conversationUid, *conversationModel);
+    if (!convOpt.has_value()) {
+        [self show];
+        return;
     }
+    lrc::api::conversation::Info& conversation = convOpt.value();
+    @autoreleasepool {
+        auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        QVariant photo = imgManip.conversationPhoto(conversation, conversationModel->owner, QSize(120, 120), NO);
+        [personPhoto setImage:QtMac::toNSImage(qvariant_cast<QPixmap>(photo))];
+    }
+    NSString *name = bestNameForConversation(conversation, *conversationModel);
+
+    NSFont *fontName = [NSFont systemFontOfSize: 20.0 weight: NSFontWeightSemibold];
+    NSFont *otherFont = [NSFont systemFontOfSize: 20.0 weight: NSFontWeightThin];
+    NSColor *color = [NSColor textColor];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [style setLineBreakMode:NSLineBreakByWordWrapping];
+    [style setAlignment:NSCenterTextAlignment];
+    NSDictionary *nameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                               fontName, NSFontAttributeName,
+                               style, NSParagraphStyleAttributeName,
+                               color, NSForegroundColorAttributeName,
+                               nil];
+    NSDictionary *otherAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                otherFont, NSFontAttributeName,
+                                style, NSParagraphStyleAttributeName,
+                                color, NSForegroundColorAttributeName,
+                                nil];
+    NSAttributedString* attributedName = [[NSAttributedString alloc] initWithString:name attributes:nameAttrs];
+    NSString *str = [NSString stringWithFormat: @"%@%@\n%@",
+                     @" ",
+                     NSLocalizedString(@"appears to be busy.", @"Peer busy message"),
+                     NSLocalizedString(@"Would you like to leave a message?", @"Peer busy message")];
+    NSAttributedString* attributedOther= [[NSAttributedString alloc] initWithString: str attributes: otherAttrs];
+    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+    [result appendAttributedString:attributedName];
+    [result appendAttributedString:attributedOther];
+    NSRange range = NSMakeRange(0, [result length]);
+    [result addAttribute:NSParagraphStyleAttributeName value:style range: range];
+    [infoLabel setAttributedStringValue: result];
     [self show];
 }
 
