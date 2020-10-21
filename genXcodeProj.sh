@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../install/lrc/lib/cmake/LibRingClient/
+cd ../install/lrc
 export CMAKE_PREFIX_PATH=$(brew --prefix qt5)
 export CMAKELRCPATH=`pwd`
 cd -
