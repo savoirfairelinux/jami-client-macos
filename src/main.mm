@@ -43,16 +43,18 @@ int main(int argc, const char *argv[]) {
 
     dir.cdUp();
 
-    //We need to check if primary language is an English variant (en, en-CA etc...) before installing a translator
-    NSString* lang = [[NSLocale preferredLanguages] objectAtIndex:0];
-    if (![lang rangeOfString:@"en"].location != NSNotFound) {
-        QTranslator translator;
-        if (translator.load(QLocale::system(), "lrc", "_", dir.absolutePath()+"/Resources/QtTranslations")) {
-            app->installTranslator(&translator);
-        } else {
-            NSLog(@"Couldn't load qt translator");
-        }
+    const auto localeName = QLocale::system().name();
+    const auto localeLang = locale_name.split('_')[0];
+    auto langPath = dir.absolutePath() + "/Contents/Resources/QtTranslations/lrc_" + locale_lang + ".qm";
+    auto localePath = dir.absolutePath() + "/Contents/Resources/QtTranslations/lrc_" + locale_name +".qm";
+    QTranslator lrcTranslatorLang;
+    QTranslator lrcTranslatorName;
+    if (locale_name != locale_lang) {
+        if (lrcTranslatorLang.load(langPath))
+            app->installTranslator(&lrcTranslatorLang);
     }
+    if (lrcTranslatorName.load(localePath))
+        app->installTranslator(&lrcTranslatorName);
 
     GlobalInstances::setPixmapManipulator(std::unique_ptr<Interfaces::ImageManipulationDelegate>(new Interfaces::ImageManipulationDelegate()));
 
