@@ -15,7 +15,7 @@
 "C2l-rz-Gqt.title" = "Congratulations, your account has been migrated with Success.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
-"ITE-yD-CTb.title" = "Удалить этот аккаунт";
+"ITE-yD-CTb.title" = "Delete this account";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Confirm your new password..."; ObjectID = "KuO-oT-zhY"; */
 "KuO-oT-zhY.placeholderString" = "Confirm your new password...";
@@ -24,10 +24,10 @@
 "PT7-XI-WDR.title" = "OK";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "QkU-T8-Xi6"; */
-"QkU-T8-Xi6.title" = "Удалить этот аккаунт";
+"QkU-T8-Xi6.title" = "Delete this account";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Окно";
+"QvC-M9-y7g.title" = "Вікно";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "VN1-A3-RIh"; */
 "VN1-A3-RIh.title" = "OK";
@@ -36,7 +36,7 @@
 "aOa-1q-AZe.title" = "Confirmation";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.placeholderString" = "метка ошибки";
+"e7n-Ev-bK7.placeholderString" = "error label";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
 "rW5-Il-5YD.title" = "Migrate";
@@ -45,7 +45,7 @@
 "vwh-K9-3O9.title" = "Пароль";
 
 /* Class = "NSTextFieldCell"; title = "Account migration required"; ObjectID = "wmv-sA-Mlh"; */
-"wmv-sA-Mlh.title" = "Необходим перенос аккаунта";
+"wmv-sA-Mlh.title" = "Account migration required";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "xqz-Uz-hqU"; */
 "xqz-Uz-hqU.placeholderString" = "Пароль...";

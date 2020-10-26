@@ -18,13 +18,13 @@
 "BIS-Ft-yJn.title" = "Настройки вызовов";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
-"Va3-Un-lCL.title" = "Discovery settings";
+"Va3-Un-lCL.title" = "Настройки поиска";
 
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
-"rdZ-JB-96s.title" = "Make this account discoverable on local network";
+"rdZ-JB-96s.title" = "Сделать эту учетную запись доступной для обнаружения в локальной сети";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
-"n3E-PI-JHj.title" = "Discover peers on local network";
+"n3E-PI-JHj.title" = "Обнаружение участников в локальной сети";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Автоматически принимать входящие вызовы";
@@ -114,4 +114,4 @@
 "zPJ-cO-neQ.title" = "Использовать TURN ";
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
-"2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";
+"2cZ-SI-nbz.title" = "Включить точку встречи: превратите свою учетную запись в конференц-зал.";

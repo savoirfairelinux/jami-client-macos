@@ -3,19 +3,19 @@
 "2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
-"3ik-rY-Gig.title" = "Введите ваш PIN";
+"3ik-rY-Gig.title" = "Enter your PIN";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
-"8b8-bt-eAj.title" = "Ссылка";
+"8b8-bt-eAj.title" = "Link";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
 "DyG-SJ-U1Q.title" = "An error occured, please check your password and pin.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
-"Pcj-BY-tou.title" = "Отмена";
+"Pcj-BY-tou.title" = "Cancel";
 
 /* Class = "NSTextFieldCell"; title = "Enter password"; ObjectID = "U2K-fu-INc"; */
-"U2K-fu-INc.title" = "Введите пароль";
+"U2K-fu-INc.title" = "Enter password";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
 "WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "Пароль...";
