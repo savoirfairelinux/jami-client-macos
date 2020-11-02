@@ -56,7 +56,7 @@
 "Create a new account" = "Neues Konto erstellen";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "Treffpunkt erstellen";
 
 /* Backup enter password */
 "Enter account password" = "Geben Sie ihr Kontopasswort ein";
@@ -71,7 +71,7 @@
 "Failed to perform lookup" = "Fehler beim Nachschlagen";
 
 /* Text shown to the user */
-"ID: " = "ID : ";
+"ID: " = "ID: ";
 
 /* link account title */
 "Import from backup" = "Aus Backup importieren";
@@ -215,10 +215,10 @@
 "Edit Account" = "Konto bearbeiten";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Teilnehmer minimieren";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Teilnehmer maximieren";
 
 /* Conference action */
 "Hangup" = "Auflegen";
@@ -230,4 +230,4 @@
 "Choose a username for your account" = "Benutzernamen für dein Konto wählen";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "Namen für deinen Treffpunkt wählen";
