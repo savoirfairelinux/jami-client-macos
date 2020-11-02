@@ -1124,12 +1124,12 @@ CVPixelBufferRef pixelBufferPreview;
     NSScreen *mainScreen = [NSScreen mainScreen];
     NSRect screenFrame = mainScreen.frame;
     QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
-    mediaModel->setDisplay(0, screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
+    mediaModel->setDisplay(0, screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height, [self getcallID]);
 }
 -(void) switchToDevice:(int)deviceID {
     auto devices = mediaModel->getDevices();
     auto device = devices[deviceID];
-    mediaModel->switchInputTo(device);
+    mediaModel->switchInputTo(device, [self getcallID]);
 }
 
 -(QVector<QString>) getDeviceList {
@@ -1160,7 +1160,7 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) switchToFile:(QString)uri {
-    mediaModel->setInputFile(uri);
+    mediaModel->setInputFile(uri, [self getcallID]);
 }
 
 -(CGRect) getVideoPreviewCollapsedSize {
