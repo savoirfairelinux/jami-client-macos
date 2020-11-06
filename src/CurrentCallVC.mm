@@ -559,6 +559,8 @@ CVPixelBufferRef pixelBufferPreview;
             [self.delegate callFinished];
             [self removeConferenceLayout];
             [self switchToNextConferenceCall: confUid_];
+            AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+            [appDelegate restoreScreenSleep];
             break;
     }
 }
