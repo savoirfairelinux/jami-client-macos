@@ -228,6 +228,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
                      &lrc::api::BehaviorController::showCallView,
                      [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
+        AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+        [appDelegate disableScreenSleep];
         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
         try {
             if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
@@ -250,6 +252,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
                      &lrc::api::BehaviorController::showIncomingCallView,
                      [self](const QString& accountId,
                             const lrc::api::conversation::Info convInfo){
+        AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+        [appDelegate disableScreenSleep];
         auto* accInfo = &self.accountModel->getAccountInfo(accountId);
         auto callModel = accInfo->callModel.get();
         lrc::api::account::ConfProperties_t accountProperties = accInfo->accountModel->getAccountConfig(accInfo->id);

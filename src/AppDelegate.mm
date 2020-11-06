@@ -17,6 +17,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 #import <SystemConfiguration/SystemConfiguration.h>
+#import <CoreFoundation/CoreFoundation.h>
+#import <IOKit/pwr_mgt/IOPMLib.h>
 
 #import "AppDelegate.h"
 
@@ -62,6 +64,8 @@ NSString * const CONVERSATION_ID = @"conversation_id_notification_info";
 NSString * const CONTACT_URI = @"contact_uri_notification_info";
 NSString * const NOTIFICATION_TYPE = @"contact_type_notification_info";
 
+IOPMAssertionID assertionID = 0;
+BOOL sleepDisabled = false;
 
 @implementation AppDelegate {
 
@@ -139,6 +143,25 @@ std::unique_ptr<lrc::api::Lrc> lrc;
     if (SCNetworkReachabilitySetDispatchQueue([self currentReachability], NULL) ){
         SCNetworkReachabilitySetCallback([self currentReachability], NULL, NULL);
     }
+}
+
+- (void) disableScreenSleep
+{
+    if (sleepDisabled) {
+        return;
+    }
+    CFStringRef reasonForActivity= CFSTR("Prevent display sleep during calls");
+    sleepDisabled = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep, kIOPMAssertionLevelOn, reasonForActivity, &assertionID) == kIOReturnSuccess;
+}
+
+- (void) restoreScreenSleep {
+    auto calls = [self getActiveCalls];
+
+    if (!sleepDisabled || !calls.empty()) {
+        return;
+    }
+    IOPMAssertionRelease(assertionID);
+    sleepDisabled = false;
 }
 
 static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNetworkConnectionFlags flags, void* info)
