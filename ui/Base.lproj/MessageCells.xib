@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,13 +22,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-S9-kZz">
-                                        <rect key="frame" x="196" y="9" width="8" height="16"/>
+                                        <rect key="frame" x="196" y="10" width="8" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="250" constant="20" id="h3Y-F2-Nvs"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="vn0-ue-s4d">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="font" metaFont="systemLight" size="12"/>
+                                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -60,7 +60,7 @@
                                             <rect key="frame" x="20" y="0.0" width="210" height="90"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fco-P1-jYX">
-                                                    <rect key="frame" x="0.0" y="40" width="114" height="50"/>
+                                                    <rect key="frame" x="0.0" y="40" width="104" height="50"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KEd-qS-Nsi">
                                                             <rect key="frame" x="0.0" y="15" width="30" height="20"/>
@@ -71,10 +71,10 @@
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="Jpz-4x-jYM"/>
                                                         </imageView>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZA5-7h-yNn">
-                                                            <rect key="frame" x="35" y="17" width="79" height="17"/>
+                                                            <rect key="frame" x="35" y="18" width="69" height="15"/>
                                                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="DmW-13-1QZ">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu" size="14"/>
+                                                                <font key="font" metaFont="systemLight" size="12"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
@@ -113,7 +113,7 @@
                                                             </constraints>
                                                             <buttonCell key="cell" type="roundRect" title="Accept" bezelStyle="roundedRect" image="ic_file_upload" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="tBq-Qe-bEm">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="label" size="12"/>
+                                                                <font key="font" metaFont="systemLight" size="12"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rGw-yF-hxm">
@@ -123,7 +123,7 @@
                                                             </constraints>
                                                             <buttonCell key="cell" type="roundRect" title="Refuse" bezelStyle="roundedRect" image="ic_action_cancel" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="QGs-MO-mVi">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="label" size="12"/>
+                                                                <font key="font" metaFont="systemLight" size="12"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
@@ -223,13 +223,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JUf-er-n2R">
-                                        <rect key="frame" x="128" y="9" width="8" height="16"/>
+                                        <rect key="frame" x="128" y="10" width="8" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="250" constant="20" id="c90-0g-OVN"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="xYI-Og-qqV">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="font" metaFont="systemLight" size="12"/>
+                                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -264,7 +264,7 @@
                                                     <rect key="frame" x="20" y="0.0" width="210" height="90"/>
                                                     <subviews>
                                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eWr-rt-cAZ">
-                                                            <rect key="frame" x="0.0" y="40" width="114" height="50"/>
+                                                            <rect key="frame" x="0.0" y="40" width="104" height="50"/>
                                                             <subviews>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gXD-VF-3Sl">
                                                                     <rect key="frame" x="0.0" y="15" width="30" height="20"/>
@@ -275,10 +275,10 @@
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="yjj-R0-GLl"/>
                                                                 </imageView>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NbG-jg-Rsk">
-                                                                    <rect key="frame" x="35" y="17" width="79" height="17"/>
+                                                                    <rect key="frame" x="35" y="18" width="69" height="15"/>
                                                                     <buttonCell key="cell" type="square" title="Round Rect" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="8CE-a4-Ayu">
                                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                        <font key="font" metaFont="menu" size="14"/>
+                                                                        <font key="font" metaFont="systemLight" size="12"/>
                                                                     </buttonCell>
                                                                 </button>
                                                             </subviews>
@@ -309,7 +309,7 @@
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldC-Xq-oV5">
                                                             <rect key="frame" x="-2" y="10" width="54" height="19"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="Mey-Zj-Gqc">
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="system" size="12"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -458,13 +458,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sRg-94-yH1">
-                                        <rect key="frame" x="196" y="9" width="8" height="16"/>
+                                        <rect key="frame" x="196" y="10" width="8" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="250" constant="20" id="mLV-uI-q6J"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="pfw-fC-4Xm">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="font" metaFont="systemLight" size="12"/>
+                                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -496,7 +496,7 @@
                                             <rect key="frame" x="20" y="0.0" width="210" height="90"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBX-Ap-tom">
-                                                    <rect key="frame" x="0.0" y="40" width="114" height="50"/>
+                                                    <rect key="frame" x="0.0" y="40" width="104" height="50"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wu8-Ho-MOI">
                                                             <rect key="frame" x="0.0" y="15" width="30" height="20"/>
@@ -507,10 +507,10 @@
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="q2e-Jw-ifg"/>
                                                         </imageView>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tUr-hG-Ef4">
-                                                            <rect key="frame" x="35" y="17" width="79" height="17"/>
+                                                            <rect key="frame" x="35" y="18" width="69" height="15"/>
                                                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="Oo1-gq-aPY">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu" size="14"/>
+                                                                <font key="font" metaFont="systemLight" size="12"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
@@ -556,7 +556,7 @@
                                                             </constraints>
                                                             <buttonCell key="cell" type="roundRect" title="Cancel" bezelStyle="roundedRect" image="ic_action_cancel" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="1c6-BK-hfV">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="label" size="12"/>
+                                                                <font key="font" metaFont="systemLight" size="12"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
@@ -658,13 +658,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2IY-Tt-uAF">
-                                        <rect key="frame" x="196" y="9" width="8" height="16"/>
+                                        <rect key="frame" x="196" y="10" width="8" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="250" constant="20" id="nTF-Xv-8ok"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="fU3-Ej-fOu">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="font" metaFont="systemLight" size="12"/>
+                                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -685,7 +685,7 @@
                                     <rect key="frame" x="20" y="0.0" width="210" height="90"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gfs-3T-2Z5">
-                                            <rect key="frame" x="0.0" y="40" width="119" height="50"/>
+                                            <rect key="frame" x="0.0" y="40" width="109" height="50"/>
                                             <subviews>
                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sUr-U8-vgf">
                                                     <rect key="frame" x="0.0" y="15" width="30" height="20"/>
@@ -696,10 +696,10 @@
                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="1qg-9v-1DA"/>
                                                 </imageView>
                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WnO-2x-32a">
-                                                    <rect key="frame" x="40" y="17" width="79" height="17"/>
+                                                    <rect key="frame" x="40" y="18" width="69" height="15"/>
                                                     <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="fu2-X7-GW8">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu" size="14"/>
+                                                        <font key="font" metaFont="systemLight" size="12"/>
                                                     </buttonCell>
                                                 </button>
                                             </subviews>
@@ -747,7 +747,7 @@
                                                             </constraints>
                                                             <buttonCell key="cell" type="roundRect" title="Cancel" bezelStyle="roundedRect" image="ic_action_cancel" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="9Oq-TB-quZ">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="label" size="12"/>
+                                                                <font key="font" metaFont="systemLight" size="12"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
@@ -850,13 +850,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Od3-Cq-LmR">
-                                        <rect key="frame" x="196" y="9" width="8" height="16"/>
+                                        <rect key="frame" x="196" y="9" width="8" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" priority="250" constant="20" id="RoH-7v-RcD"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="gyp-Xg-CZc">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="font" metaFont="systemLight" size="14"/>
+                                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -880,7 +880,7 @@
                                             <rect key="frame" x="20" y="0.0" width="210" height="90"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bc0-ZM-Z54">
-                                                    <rect key="frame" x="0.0" y="40" width="119" height="50"/>
+                                                    <rect key="frame" x="0.0" y="40" width="109" height="50"/>
                                                     <subviews>
                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gyB-QF-uEW">
                                                             <rect key="frame" x="0.0" y="15" width="30" height="20"/>
@@ -891,10 +891,10 @@
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_attachment" id="yAd-of-sXU"/>
                                                         </imageView>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jRP-c4-heJ">
-                                                            <rect key="frame" x="40" y="17" width="79" height="17"/>
+                                                            <rect key="frame" x="40" y="18" width="69" height="15"/>
                                                             <buttonCell key="cell" type="roundRect" title="Round Rect" bezelStyle="roundedRect" alignment="center" imageScaling="proportionallyDown" inset="2" id="3i8-bi-EQN">
                                                                 <behavior key="behavior" lightByContents="YES"/>
-                                                                <font key="font" metaFont="menu" size="14"/>
+                                                                <font key="font" metaFont="systemLight" size="12"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
@@ -926,7 +926,7 @@
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-Hi-Zl2">
                                                     <rect key="frame" x="-2" y="10" width="54" height="19"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="vDa-rM-ULY">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" metaFont="system" size="12"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
