@@ -110,7 +110,16 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView setDataSource: self];
     currentFilterType = lrc::api::profile::Type::RING;
     selectorIsPresent = true;
-
+    NSFont *fontName = [NSFont systemFontOfSize: 12.0 weight: NSFontWeightLight];
+    NSColor *color = [NSColor labelColor];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSDictionary *nameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                               fontName, NSFontAttributeName,
+                               style, NSParagraphStyleAttributeName,
+                               color, NSForegroundColorAttributeName,
+                               nil];
+    NSAttributedString* attributedName = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Search for new or existing contact", @"search bar placeholder") attributes:nameAttrs];
+    searchField.placeholderAttributedString = attributedName;
     smartView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
 
     [searchResultsView setContextMenuDelegate:self];
@@ -494,13 +503,14 @@ NSInteger const REQUEST_SEG         = 1;
     NSString* displayIDString = bestIDForConversation(conversation, *convModel_);
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
         [displayName setStringValue:displayIDString];
-        [displayRingID setHidden:YES];
+       // [displayRingID setHidden:YES];
     }
     else {
         [displayName setStringValue:displayNameString];
         [displayRingID setStringValue:displayIDString];
-        [displayRingID setHidden:NO];
+       // [displayRingID setHidden:NO];
     }
+    [displayRingID setHidden:YES];
     @autoreleasepool {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, convModel_->owner)));

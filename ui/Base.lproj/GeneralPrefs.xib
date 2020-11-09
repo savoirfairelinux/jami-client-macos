@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,44 +34,44 @@
                     <rect key="frame" x="20" y="30" width="576" height="386"/>
                     <subviews>
                         <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="icG-wm-SaO" userLabel="NotificationSV">
-                            <rect key="frame" x="0.0" y="314" width="384" height="72"/>
+                            <rect key="frame" x="0.0" y="314" width="399" height="72"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RTc-Bf-fOh">
-                                    <rect key="frame" x="-2" y="55" width="97" height="17"/>
+                                    <rect key="frame" x="-2" y="55" width="99" height="17"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Notifications" id="I0d-mx-KhT">
-                                        <font key="font" metaFont="systemBold"/>
+                                        <font key="font" metaFont="systemMedium" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bEX-Xt-sSY" userLabel="NotificationsOptionSV">
-                                    <rect key="frame" x="103" y="0.0" width="281" height="72"/>
+                                    <rect key="frame" x="105" y="0.0" width="294" height="72"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Oth-up-2k2">
-                                            <rect key="frame" x="-2" y="56" width="252" height="18"/>
+                                            <rect key="frame" x="-2" y="56" width="262" height="18"/>
                                             <buttonCell key="cell" type="check" title="Enable notifications for incoming calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uCL-ye-tsv">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_call_notifications" id="ATK-nw-aIW"/>
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Esb-Tu-Qdy">
-                                            <rect key="frame" x="-2" y="27" width="285" height="18"/>
+                                            <rect key="frame" x="-2" y="27" width="298" height="18"/>
                                             <buttonCell key="cell" type="check" title="Enable notifications for incoming messages" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0jV-Q4-232">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_messages_notifications" id="iOY-gd-hFa"/>
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="amh-rw-Lc6">
-                                            <rect key="frame" x="-2" y="-2" width="227" height="18"/>
+                                            <rect key="frame" x="-2" y="-2" width="236" height="18"/>
                                             <buttonCell key="cell" type="check" title="Enable notifications for invitations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Lww-Wb-yrf">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <binding destination="Sz0-vm-i3t" name="value" keyPath="values.enable_invitations_notifications" id="dc9-OG-CTZ"/>
@@ -100,34 +100,34 @@
                             </customSpacing>
                         </stackView>
                         <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d7j-DO-iGz" userLabel="SystemSV">
-                            <rect key="frame" x="0.0" y="246" width="380" height="43"/>
+                            <rect key="frame" x="0.0" y="246" width="395" height="43"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kb4-Bg-OAn">
-                                    <rect key="frame" x="-2" y="26" width="97" height="17"/>
+                                    <rect key="frame" x="-2" y="26" width="99" height="17"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="System" id="8xm-Tc-NMN">
-                                        <font key="font" metaFont="systemBold"/>
+                                        <font key="font" metaFont="systemMedium" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VDq-KE-O0C" userLabel="behaviourSV">
-                                    <rect key="frame" x="103" y="0.0" width="277" height="43"/>
+                                    <rect key="frame" x="105" y="0.0" width="290" height="43"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="Is4-pD-LOT">
-                                            <rect key="frame" x="-2" y="27" width="281" height="18"/>
+                                            <rect key="frame" x="-2" y="27" width="294" height="18"/>
                                             <buttonCell key="cell" type="check" title="Bring Jami to foreground on incoming calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uYI-hA-JHk">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <binding destination="Sz0-vm-i3t" name="value" keyPath="values.window_behaviour" id="ZSW-he-LAz"/>
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="1Nr-L4-fcd">
-                                            <rect key="frame" x="-2" y="-2" width="134" height="18"/>
+                                            <rect key="frame" x="-2" y="-2" width="140" height="18"/>
                                             <buttonCell key="cell" type="check" title="Launch on Startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="O2C-xR-mHF">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="toggleLaunchAtStartup:" target="-2" id="Rky-YK-2yk"/>
@@ -154,32 +154,32 @@
                             </customSpacing>
                         </stackView>
                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="edh-vU-EH0" userLabel="ConversationSV">
-                            <rect key="frame" x="0.0" y="200" width="280" height="21"/>
+                            <rect key="frame" x="0.0" y="200" width="268" height="21"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fjx-R1-YSW">
-                                    <rect key="frame" x="-2" y="2" width="97" height="17"/>
+                                    <rect key="frame" x="-2" y="2" width="99" height="17"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Conversations" id="ZCU-sa-SEk">
-                                        <font key="font" metaFont="systemBold"/>
+                                        <font key="font" metaFont="systemMedium" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1hI-rV-eqy" userLabel="DownloadST">
-                                    <rect key="frame" x="103" y="0.0" width="177" height="21"/>
+                                    <rect key="frame" x="105" y="0.0" width="163" height="21"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHD-1X-sid">
-                                            <rect key="frame" x="-2" y="2" width="103" height="17"/>
+                                            <rect key="frame" x="-2" y="2" width="109" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Download folder" id="6Ye-pe-9WV">
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7bY-JW-z0U">
-                                            <rect key="frame" x="101" y="-7" width="82" height="32"/>
+                                            <rect key="frame" x="107" y="-7" width="62" height="32"/>
                                             <buttonCell key="cell" type="push" bezelStyle="rounded" image="ic_folder" imagePosition="left" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DVe-a5-SU0">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="changeDownloadFolder:" target="-2" id="7UI-HT-B4J"/>
@@ -206,57 +206,57 @@
                             </customSpacing>
                         </stackView>
                         <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mwk-bH-RFF" userLabel="CallRecordingStackView">
-                            <rect key="frame" x="0.0" y="46" width="447" height="129"/>
+                            <rect key="frame" x="0.0" y="46" width="452" height="129"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qv4-ca-8Hk">
-                                    <rect key="frame" x="-2" y="112" width="97" height="17"/>
+                                    <rect key="frame" x="-2" y="112" width="99" height="17"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Call recording" id="Qb8-tb-vJd">
-                                        <font key="font" metaFont="systemBold"/>
+                                        <font key="font" metaFont="systemMedium" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pug-kr-QhZ" userLabel="RecordingOptionsStackView">
-                                    <rect key="frame" x="103" y="0.0" width="344" height="129"/>
+                                    <rect key="frame" x="105" y="0.0" width="347" height="129"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="fOY-TU-ypx">
-                                            <rect key="frame" x="-2" y="113" width="139" height="18"/>
+                                            <rect key="frame" x="-2" y="113" width="144" height="18"/>
                                             <buttonCell key="cell" type="check" title="Always record calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6zp-rh-brb">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="alwaysRecording:" target="-2" id="UbR-Em-1XH"/>
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="H87-5E-fJj">
-                                            <rect key="frame" x="-2" y="84" width="134" height="18"/>
+                                            <rect key="frame" x="-2" y="84" width="140" height="18"/>
                                             <buttonCell key="cell" type="check" title="Record local video" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="y5x-4d-E26">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                             <connections>
                                                 <action selector="recordPreview:" target="-2" id="X6E-Vb-LYT"/>
                                             </connections>
                                         </button>
                                         <stackView distribution="equalSpacing" orientation="horizontal" alignment="firstBaseline" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Khz-DU-Tde" userLabel="QualityStackView">
-                                            <rect key="frame" x="0.0" y="36" width="344" height="35"/>
+                                            <rect key="frame" x="0.0" y="36" width="347" height="35"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JSi-NS-RUp">
-                                                    <rect key="frame" x="-2" y="18" width="88" height="17"/>
+                                                    <rect key="frame" x="-2" y="18" width="91" height="17"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Quality(Kbps)" id="AOr-Cq-w57">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" metaFont="systemLight" size="14"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nn9-Oa-KI4">
-                                                    <rect key="frame" x="86" y="18" width="42" height="17"/>
+                                                    <rect key="frame" x="89" y="18" width="42" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="38" id="lSE-Bv-Mpj"/>
                                                     </constraints>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="Hzi-Y0-vha">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" metaFont="systemLight" size="14"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -265,7 +265,7 @@
                                                     </connections>
                                                 </textField>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUg-Ud-2HA">
-                                                    <rect key="frame" x="130" y="0.0" width="214" height="35"/>
+                                                    <rect key="frame" x="133" y="0.0" width="214" height="35"/>
                                                     <subviews>
                                                         <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Q6a-vJ-Apt">
                                                             <rect key="frame" x="-2" y="13" width="218" height="24"/>
@@ -299,7 +299,7 @@
                                                                 </textField>
                                                             </subviews>
                                                             <visibilityPriorities>
-                                                                <real value="1000"/>
+                                                                <integer value="1000"/>
                                                                 <integer value="1000"/>
                                                             </visibilityPriorities>
                                                             <customSpacing>
@@ -337,7 +337,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="21"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AGg-t2-JTD">
-                                                    <rect key="frame" x="-2" y="4" width="86" height="17"/>
+                                                    <rect key="frame" x="-2" y="5" width="86" height="16"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Record folder" id="ep4-QU-rGl">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -392,31 +392,31 @@
                             </customSpacing>
                         </stackView>
                         <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uml-aD-2RF" userLabel="UpdateSV">
-                            <rect key="frame" x="0.0" y="0.0" width="418" height="21"/>
+                            <rect key="frame" x="0.0" y="0.0" width="433" height="21"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diX-uH-Ce8">
-                                    <rect key="frame" x="-2" y="2" width="97" height="17"/>
+                                    <rect key="frame" x="-2" y="2" width="99" height="17"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Update" id="r4u-t3-gBc">
-                                        <font key="font" metaFont="systemBold"/>
+                                        <font key="font" metaFont="systemMedium" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ne6-Sz-sy8">
-                                    <rect key="frame" x="103" y="0.0" width="315" height="21"/>
+                                    <rect key="frame" x="105" y="0.0" width="328" height="21"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="MCd-PD-kd7">
-                                            <rect key="frame" x="-2" y="2" width="217" height="18"/>
+                                            <rect key="frame" x="-2" y="2" width="227" height="18"/>
                                             <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="T3a-yx-ZaW">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                             </buttonCell>
                                         </button>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RYP-3d-PCa" userLabel="Update interval">
-                                            <rect key="frame" x="231" y="-3" width="87" height="25"/>
+                                            <rect key="frame" x="241" y="-3" width="90" height="25"/>
                                             <popUpButtonCell key="cell" type="push" title="Monthly" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2629800" imageScaling="proportionallyDown" inset="2" selectedItem="42E-UY-qlP" id="tTF-gp-Rti">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="menu"/>
+                                                <font key="font" metaFont="systemLight" size="14"/>
                                                 <menu key="menu" id="GJ4-0X-PTn">
                                                     <items>
                                                         <menuItem title="Hourly" tag="3600" id="mbu-TH-bs8"/>

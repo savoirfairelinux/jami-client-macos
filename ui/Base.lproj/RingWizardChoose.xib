@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,91 +24,91 @@
                     <rect key="frame" x="0.0" y="69" width="525" height="258"/>
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
-                            <rect key="frame" x="163" y="231" width="200" height="29"/>
+                            <rect key="frame" x="158" y="231" width="210" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="kX1-30-jfa"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" title="Create a Jami account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="k1T-a7-yZD">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="createRingAccount:" target="-2" id="Mij-SG-JWQ"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nn9-La-V34">
-                            <rect key="frame" x="163" y="192" width="200" height="29"/>
+                            <rect key="frame" x="158" y="192" width="210" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="Bre-De-DSA"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" title="Create a rendezvous point" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YDj-ss-AYE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="createRendezvousAccount:" target="-2" id="WbA-Oh-4tZ"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-ql-oGP">
-                            <rect key="frame" x="163" y="153" width="200" height="29"/>
+                            <rect key="frame" x="158" y="153" width="210" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="OX0-Ne-mlD"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" title="Import from other device" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Z9K-mD-ucr">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="importFromDevice:" target="-2" id="xs4-1O-3Jl"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uHC-M1-ce5">
-                            <rect key="frame" x="163" y="114" width="200" height="29"/>
+                            <rect key="frame" x="158" y="114" width="210" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="rr1-jU-d3s"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" title="Import from archive backup" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rtw-Db-BWL">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="importFromArchive:" target="-2" id="BSN-e6-wPh"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lM8-ZM-KcF">
-                            <rect key="frame" x="225" y="78" width="76" height="24"/>
+                            <rect key="frame" x="223" y="78" width="80" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="U5S-qK-hhV"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" title="Advanced..." bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="vCj-67-PGK">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="expandAdwanced:" target="-2" id="4je-Ji-JXL"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HjM-oT-VQj">
-                            <rect key="frame" x="163" y="36" width="200" height="29"/>
+                            <rect key="frame" x="158" y="36" width="210" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="iKl-6P-vAW"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" title="Connect to account manager" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HGQ-Kd-WIw">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="connectToAccountManager:" target="-2" id="hRw-zp-0k7"/>
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NBt-Xw-PzN">
-                            <rect key="frame" x="163" y="-3" width="200" height="29"/>
+                            <rect key="frame" x="158" y="-3" width="210" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="5Wb-L4-VtH"/>
                             </constraints>
                             <buttonCell key="cell" type="bevel" title="Add a new SIP account" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yBt-Bv-fi2">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="addSIPAccount:" target="-2" id="dq5-in-s0I"/>
@@ -154,7 +154,7 @@
                     </constraints>
                     <buttonCell key="cell" type="bevel" title="Cancel" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YJ3-7G-cU1">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                     </buttonCell>
                     <connections>
                         <action selector="onCancel:" target="-2" id="uKt-WM-lT9"/>

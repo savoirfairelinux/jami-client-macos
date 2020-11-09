@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,17 +25,17 @@
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d0m-IT-qJ0">
                             <rect key="frame" x="0.0" y="29" width="360" height="51"/>
                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" drawsBackground="YES" id="SUG-lC-TDL">
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                                 <string key="title">This account only exists on this device. If you lost your device or uninstall the application, your account will be deleted. You can backup your account now or later.</string>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </textFieldCell>
                         </textField>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eTj-Rr-qu8">
-                            <rect key="frame" x="-2" y="-2" width="178" height="18"/>
+                            <rect key="frame" x="-2" y="-2" width="185" height="18"/>
                             <buttonCell key="cell" type="check" title="Never show me this again" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="PVF-bb-Yoi">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="systemLight" size="14"/>
                             </buttonCell>
                             <connections>
                                 <action selector="alwaysSkipBackup:" target="-2" id="qkJ-7P-ZJ1"/>
@@ -55,10 +55,10 @@
                     </customSpacing>
                 </stackView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lxh-2V-y2g">
-                    <rect key="frame" x="186" y="13" width="133" height="32"/>
+                    <rect key="frame" x="180" y="13" width="138" height="32"/>
                     <buttonCell key="cell" type="push" title="Export account" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cod-s7-SPd">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
 Gw
 </string>
@@ -68,10 +68,10 @@ Gw
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c5s-Hc-WfE">
-                    <rect key="frame" x="319" y="13" width="67" height="32"/>
+                    <rect key="frame" x="318" y="13" width="68" height="32"/>
                     <buttonCell key="cell" type="push" title="Skip" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="73h-fa-4yX">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -91,6 +91,7 @@ DQ
                 <constraint firstAttribute="trailing" secondItem="c5s-Hc-WfE" secondAttribute="trailing" constant="20" id="qMr-tz-3hx"/>
                 <constraint firstAttribute="trailing" secondItem="SoC-Ko-34A" secondAttribute="trailing" constant="20" id="teq-1L-Hey"/>
             </constraints>
+            <point key="canvasLocation" x="-55" y="136"/>
         </customView>
         <customView id="OnL-bH-yod">
             <rect key="frame" x="0.0" y="0.0" width="340" height="200"/>
@@ -102,7 +103,7 @@ DQ
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="guH-rw-fQT">
-                    <rect key="frame" x="-2" y="66" width="404" height="34"/>
+                    <rect key="frame" x="-2" y="66" width="404" height="32"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="An error occured during the backup. Please check your credentials." id="7lU-Qy-WOb">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

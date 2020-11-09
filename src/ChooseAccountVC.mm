@@ -286,13 +286,13 @@ NSMutableDictionary* menuItemsTags;
 - (NSAttributedString*) attributedItemTitleForAccount:(const lrc::api::account::Info&) account {
     NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    NSFont *fontAlias = [NSFont fontWithName:@"Helvetica Neue Light" size:16.0];
-    NSFont *fontUserName = [NSFont fontWithName:@"Helvetica Neue Light" size:13.0];
-    NSColor *colorAlias = [NSColor textColor];
+    NSFont *fontAlias = [NSFont systemFontOfSize: 18 weight: NSFontWeightMedium];
+    NSFont *fontUserName = [NSFont systemFontOfSize: 14 weight: NSFontWeightLight];
+    NSColor *colorAlias = [NSColor labelColor];
     NSColor *colorAUserName = [NSColor labelColor];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
-    paragraphStyle.lineSpacing = 3;
+    paragraphStyle.lineSpacing = 2;
     NSDictionary *aliasAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                 fontAlias,NSFontAttributeName,
                                 colorAlias,NSForegroundColorAttributeName,
