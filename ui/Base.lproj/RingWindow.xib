@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -357,14 +357,99 @@
                                                                                                 <rect key="frame" x="1" y="1" width="321" height="60"/>
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                 <subviews>
-                                                                                                    <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="nGn-jy-Iaf" userLabel="name">
-                                                                                                        <rect key="frame" x="76" y="31" width="4" height="18"/>
-                                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" state="on" drawsBackground="YES" id="1N9-Ii-83s">
-                                                                                                            <font key="font" size="16" name="HelveticaNeue-Light"/>
-                                                                                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                        </textFieldCell>
-                                                                                                    </textField>
+                                                                                                    <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WiM-zb-dGf">
+                                                                                                        <rect key="frame" x="74" y="12" width="237" height="36"/>
+                                                                                                        <subviews>
+                                                                                                            <stackView distribution="fill" orientation="horizontal" alignment="bottom" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A9r-69-Gl2">
+                                                                                                                <rect key="frame" x="0.0" y="19" width="223" height="17"/>
+                                                                                                                <subviews>
+                                                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="C4e-Zv-Py0" userLabel="name">
+                                                                                                                        <rect key="frame" x="-2" y="0.0" width="54" height="17"/>
+                                                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" id="eUk-dr-opb">
+                                                                                                                            <font key="font" size="14" name="HelveticaNeue-Medium"/>
+                                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                                                        </textFieldCell>
+                                                                                                                    </textField>
+                                                                                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="UM0-xz-fEQ">
+                                                                                                                        <rect key="frame" x="60" y="0.0" width="163" height="10"/>
+                                                                                                                        <constraints>
+                                                                                                                            <constraint firstAttribute="height" constant="10" id="f3F-q5-JrF"/>
+                                                                                                                        </constraints>
+                                                                                                                    </customView>
+                                                                                                                    <textField hidden="YES" verticalHuggingPriority="750" tag="800" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="epi-ZP-as5" userLabel="Last Interaction Date">
+                                                                                                                        <rect key="frame" x="0.0" y="2" width="40" height="15"/>
+                                                                                                                        <constraints>
+                                                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="asz-gD-lug"/>
+                                                                                                                        </constraints>
+                                                                                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" drawsBackground="YES" id="BfK-c5-B1l">
+                                                                                                                            <font key="font" size="12" name="HelveticaNeue-Light"/>
+                                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                        </textFieldCell>
+                                                                                                                    </textField>
+                                                                                                                </subviews>
+                                                                                                                <visibilityPriorities>
+                                                                                                                    <integer value="1000"/>
+                                                                                                                    <integer value="1000"/>
+                                                                                                                    <integer value="1000"/>
+                                                                                                                </visibilityPriorities>
+                                                                                                                <customSpacing>
+                                                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                                                </customSpacing>
+                                                                                                            </stackView>
+                                                                                                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXA-kC-7Bv">
+                                                                                                                <rect key="frame" x="0.0" y="0.0" width="223" height="15"/>
+                                                                                                                <subviews>
+                                                                                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="3vQ-et-yIO" userLabel="jamiId">
+                                                                                                                        <rect key="frame" x="-2" y="0.0" width="54" height="15"/>
+                                                                                                                        <textFieldCell key="cell" lineBreakMode="clipping" id="rzA-1C-XLH">
+                                                                                                                            <font key="font" size="12" name="HelveticaNeue-Light"/>
+                                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                                                        </textFieldCell>
+                                                                                                                    </textField>
+                                                                                                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Zja-3v-Jpj">
+                                                                                                                        <rect key="frame" x="60" y="5" width="163" height="10"/>
+                                                                                                                        <constraints>
+                                                                                                                            <constraint firstAttribute="height" constant="10" id="QN8-Ef-J1V"/>
+                                                                                                                        </constraints>
+                                                                                                                    </customView>
+                                                                                                                    <textField hidden="YES" horizontalHuggingPriority="999" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" tag="900" translatesAutoresizingMaskIntoConstraints="NO" id="mic-52-RIa" userLabel="Last Interaction Snippet">
+                                                                                                                        <rect key="frame" x="0.0" y="0.0" width="140" height="15"/>
+                                                                                                                        <constraints>
+                                                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="W0d-p1-O4L"/>
+                                                                                                                        </constraints>
+                                                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" drawsBackground="YES" id="VBS-Iu-q1M">
+                                                                                                                            <font key="font" size="12" name="HelveticaNeue-Light"/>
+                                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                                                        </textFieldCell>
+                                                                                                                    </textField>
+                                                                                                                </subviews>
+                                                                                                                <visibilityPriorities>
+                                                                                                                    <integer value="1000"/>
+                                                                                                                    <integer value="1000"/>
+                                                                                                                    <integer value="1000"/>
+                                                                                                                </visibilityPriorities>
+                                                                                                                <customSpacing>
+                                                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                                                    <real value="3.4028234663852886e+38"/>
+                                                                                                                </customSpacing>
+                                                                                                            </stackView>
+                                                                                                        </subviews>
+                                                                                                        <visibilityPriorities>
+                                                                                                            <integer value="1000"/>
+                                                                                                            <integer value="1000"/>
+                                                                                                        </visibilityPriorities>
+                                                                                                        <customSpacing>
+                                                                                                            <real value="3.4028234663852886e+38"/>
+                                                                                                            <real value="3.4028234663852886e+38"/>
+                                                                                                        </customSpacing>
+                                                                                                    </stackView>
                                                                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="sHH-wj-oHs">
                                                                                                         <rect key="frame" x="10" y="6" width="54" height="48"/>
                                                                                                         <constraints>
@@ -393,14 +478,6 @@
                                                                                                             </userDefinedRuntimeAttribute>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </textField>
-                                                                                                    <textField horizontalHuggingPriority="999" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="bZ6-1S-zx2" userLabel="ringId">
-                                                                                                        <rect key="frame" x="76" y="11" width="4" height="16"/>
-                                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" state="on" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="zp2-mv-NHW">
-                                                                                                            <font key="font" size="13" name="HelveticaNeue-Light"/>
-                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                        </textFieldCell>
-                                                                                                    </textField>
                                                                                                     <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" tag="500" translatesAutoresizingMaskIntoConstraints="NO" id="YkV-D4-ddd" userLabel="PresenceIndicator" customClass="RoundedTextField">
                                                                                                         <rect key="frame" x="51" y="6" width="14" height="14"/>
                                                                                                         <constraints>
@@ -423,28 +500,6 @@
                                                                                                                 <real key="value" value="1.5"/>
                                                                                                             </userDefinedRuntimeAttribute>
                                                                                                         </userDefinedRuntimeAttributes>
-                                                                                                    </textField>
-                                                                                                    <textField hidden="YES" verticalHuggingPriority="750" tag="800" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="epi-ZP-as5" userLabel="Last Interaction Date">
-                                                                                                        <rect key="frame" x="271" y="31" width="40" height="16"/>
-                                                                                                        <constraints>
-                                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="asz-gD-lug"/>
-                                                                                                        </constraints>
-                                                                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" drawsBackground="YES" id="BfK-c5-B1l">
-                                                                                                            <font key="font" size="13" name="HelveticaNeue-Light"/>
-                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                        </textFieldCell>
-                                                                                                    </textField>
-                                                                                                    <textField hidden="YES" horizontalHuggingPriority="999" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="900" translatesAutoresizingMaskIntoConstraints="NO" id="mic-52-RIa" userLabel="Last Interaction Snippet">
-                                                                                                        <rect key="frame" x="171" y="11" width="140" height="16"/>
-                                                                                                        <constraints>
-                                                                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="W0d-p1-O4L"/>
-                                                                                                        </constraints>
-                                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" drawsBackground="YES" id="VBS-Iu-q1M">
-                                                                                                            <font key="font" size="13" name="HelveticaNeue-Light"/>
-                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                                        </textFieldCell>
                                                                                                     </textField>
                                                                                                     <button toolTip="Accept Invitation" verticalHuggingPriority="750" tag="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Fc5-KS-cim" userLabel="Add Contact Button" customClass="HoverButton">
                                                                                                         <rect key="frame" x="209" y="6" width="30" height="30"/>
@@ -541,29 +596,21 @@
                                                                                                     </button>
                                                                                                 </subviews>
                                                                                                 <constraints>
-                                                                                                    <constraint firstItem="Fc5-KS-cim" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nGn-jy-Iaf" secondAttribute="trailing" constant="20" id="1o4-o6-O5A"/>
-                                                                                                    <constraint firstItem="mic-52-RIa" firstAttribute="bottom" secondItem="bZ6-1S-zx2" secondAttribute="bottom" id="2Un-R4-P4v"/>
                                                                                                     <constraint firstItem="sHH-wj-oHs" firstAttribute="leading" secondItem="Z6G-mQ-L3J" secondAttribute="leading" constant="10" id="CGt-hN-ulS"/>
                                                                                                     <constraint firstItem="ejM-H2-aJX" firstAttribute="leading" secondItem="Fc5-KS-cim" secondAttribute="trailing" constant="5" id="CqZ-iW-bob"/>
-                                                                                                    <constraint firstItem="epi-ZP-as5" firstAttribute="bottom" secondItem="nGn-jy-Iaf" secondAttribute="bottom" id="HHQ-bo-vTi"/>
                                                                                                     <constraint firstItem="YkV-D4-ddd" firstAttribute="trailing" secondItem="sHH-wj-oHs" secondAttribute="trailing" constant="-1.5" id="HSa-sm-3vp"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="xP1-ZW-WZ8" secondAttribute="bottom" constant="6" id="Jy0-tu-Huy"/>
                                                                                                     <constraint firstItem="sHH-wj-oHs" firstAttribute="top" secondItem="Z6G-mQ-L3J" secondAttribute="top" constant="6" id="KMX-Ru-AEa"/>
+                                                                                                    <constraint firstAttribute="trailing" secondItem="WiM-zb-dGf" secondAttribute="trailing" constant="10" id="KSA-Ji-TJP"/>
                                                                                                     <constraint firstItem="MYe-rn-qOP" firstAttribute="top" secondItem="sHH-wj-oHs" secondAttribute="top" id="Kub-qp-hhR"/>
                                                                                                     <constraint firstItem="MYe-rn-qOP" firstAttribute="trailing" secondItem="sHH-wj-oHs" secondAttribute="trailing" id="Mv6-W1-pJW"/>
+                                                                                                    <constraint firstItem="WiM-zb-dGf" firstAttribute="leading" secondItem="sHH-wj-oHs" secondAttribute="trailing" constant="10" id="Pkw-xQ-qxp"/>
                                                                                                     <constraint firstItem="ejM-H2-aJX" firstAttribute="centerY" secondItem="Fc5-KS-cim" secondAttribute="centerY" id="QvI-kL-sx8"/>
-                                                                                                    <constraint firstItem="bZ6-1S-zx2" firstAttribute="leading" secondItem="nGn-jy-Iaf" secondAttribute="leading" id="REo-ld-Jxd"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="sHH-wj-oHs" secondAttribute="bottom" constant="6" id="SJ6-9t-r0l"/>
                                                                                                     <constraint firstItem="YkV-D4-ddd" firstAttribute="bottom" secondItem="sHH-wj-oHs" secondAttribute="bottom" id="TGB-Iw-hdK"/>
-                                                                                                    <constraint firstItem="nGn-jy-Iaf" firstAttribute="leading" secondItem="sHH-wj-oHs" secondAttribute="trailing" constant="12" id="VlW-Wk-aeC"/>
-                                                                                                    <constraint firstAttribute="trailing" secondItem="epi-ZP-as5" secondAttribute="trailing" constant="10" id="XEf-2m-loK"/>
-                                                                                                    <constraint firstItem="nGn-jy-Iaf" firstAttribute="top" secondItem="Z6G-mQ-L3J" secondAttribute="top" constant="11" id="b6T-Jb-wdK"/>
+                                                                                                    <constraint firstItem="WiM-zb-dGf" firstAttribute="centerY" secondItem="Z6G-mQ-L3J" secondAttribute="centerY" id="VHc-va-Fle"/>
                                                                                                     <constraint firstItem="xP1-ZW-WZ8" firstAttribute="leading" secondItem="ejM-H2-aJX" secondAttribute="trailing" constant="5" id="d5E-z8-brF"/>
-                                                                                                    <constraint firstAttribute="bottom" secondItem="bZ6-1S-zx2" secondAttribute="bottom" constant="11" id="heC-Eb-J2U"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="xP1-ZW-WZ8" secondAttribute="trailing" constant="12" id="jjq-30-NU1"/>
-                                                                                                    <constraint firstItem="mic-52-RIa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bZ6-1S-zx2" secondAttribute="trailing" constant="10" id="kHp-c8-vEc"/>
-                                                                                                    <constraint firstAttribute="trailing" secondItem="mic-52-RIa" secondAttribute="trailing" constant="10" id="l5e-5o-lAk"/>
-                                                                                                    <constraint firstItem="Fc5-KS-cim" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bZ6-1S-zx2" secondAttribute="trailing" constant="10" id="n2W-6I-lDK"/>
                                                                                                     <constraint firstItem="xP1-ZW-WZ8" firstAttribute="centerY" secondItem="Fc5-KS-cim" secondAttribute="centerY" id="pPs-eg-ffp"/>
                                                                                                 </constraints>
                                                                                             </tableCellView>
@@ -707,7 +754,7 @@
                                                             <rect key="frame" x="81" y="26" width="15" height="23"/>
                                                             <popUpButtonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" transparent="YES" inset="2" arrowPosition="noArrow" selectedItem="6VL-DN-Xpm" id="lsj-R0-ZSF">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" metaFont="menu"/>
                                                                 <menu key="menu" id="ITi-wC-nfo">
                                                                     <items>
                                                                         <menuItem state="on" id="6VL-DN-Xpm">
