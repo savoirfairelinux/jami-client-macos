@@ -45,8 +45,8 @@ int main(int argc, const char *argv[]) {
 
     const auto localeName = QLocale::system().name();
     const auto localeLang = localeName.split('_')[0];
-    auto langPath = dir.absolutePath() + "/Contents/Resources/QtTranslations/lrc_" + localeLang + ".qm";
-    auto localePath = dir.absolutePath() + "/Contents/Resources/QtTranslations/lrc_" + localeName +".qm";
+    auto langPath = dir.absolutePath() + "/Resources/QtTranslations/lrc_" + localeLang + ".qm";
+    auto localePath = dir.absolutePath() + "/Resources/QtTranslations/lrc_" + localeName +".qm";
     QTranslator lrcTranslatorLang;
     QTranslator lrcTranslatorLocale;
     if (localeName != localeLang) {
