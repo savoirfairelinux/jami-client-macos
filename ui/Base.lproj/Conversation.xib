@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,8 +11,6 @@
                 <outlet property="conversationID" destination="SQT-Vf-Lhr" id="eab-vD-7X7"/>
                 <outlet property="conversationTitle" destination="ucx-6g-eJw" id="40T-pM-nix"/>
                 <outlet property="messagesViewVC" destination="iH6-17-JsM" id="uxH-Ra-lSr"/>
-                <outlet property="titleCenteredConstraint" destination="uTp-kU-NmC" id="ccn-92-zaA"/>
-                <outlet property="titleTopConstraint" destination="32s-Wp-DE1" id="fms-Yu-vrn"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -683,14 +681,35 @@
                         <constraint firstAttribute="bottom" secondItem="vd8-6U-eqB" secondAttribute="bottom" id="tod-bR-LQO"/>
                     </constraints>
                 </customView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
-                    <rect key="frame" x="53" y="531" width="4" height="45"/>
-                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" id="HnC-1N-RmR">
-                        <font key="font" metaFont="system" size="18"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mor-Vl-Fr5">
+                    <rect key="frame" x="55" y="536" width="50" height="36"/>
+                    <subviews>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucx-6g-eJw">
+                            <rect key="frame" x="-2" y="19" width="54" height="17"/>
+                            <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" id="HnC-1N-RmR">
+                                <font key="font" metaFont="systemMedium" size="14"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQT-Vf-Lhr" userLabel="IdLabel">
+                            <rect key="frame" x="-2" y="0.0" width="54" height="15"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="rW7-RD-TBM">
+                                <font key="font" metaFont="systemLight" size="12"/>
+                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8t-r2-zdA">
                     <rect key="frame" x="675" y="526" width="108" height="55"/>
                     <subviews>
@@ -802,39 +821,28 @@
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SQT-Vf-Lhr" userLabel="IdLabel">
-                    <rect key="frame" x="53" y="536" width="4" height="15"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="rW7-RD-TBM">
-                        <font key="font" metaFont="systemLight" size="12"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="ooq-vs-Xt1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="1xM-Rt-OXn"/>
-                <constraint firstItem="ucx-6g-eJw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="32s-Wp-DE1"/>
-                <constraint firstItem="ucx-6g-eJw" firstAttribute="leading" secondItem="ooq-vs-Xt1" secondAttribute="trailing" constant="10" id="60g-Mw-Wax"/>
+                <constraint firstItem="mor-Vl-Fr5" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="2Fg-cF-xMY"/>
                 <constraint firstItem="s8t-r2-zdA" firstAttribute="top" secondItem="fh9-Uo-8R1" secondAttribute="top" id="8pz-TS-qws"/>
                 <constraint firstAttribute="bottom" secondItem="Rth-di-Tls" secondAttribute="bottom" id="9nL-Hs-Oak"/>
                 <constraint firstItem="s8t-r2-zdA" firstAttribute="trailing" secondItem="fh9-Uo-8R1" secondAttribute="trailing" constant="-15" id="ATN-4X-HqG"/>
                 <constraint firstItem="s8t-r2-zdA" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="EYN-Be-aBV"/>
                 <constraint firstAttribute="trailing" secondItem="fh9-Uo-8R1" secondAttribute="trailing" id="EoD-2E-bhi"/>
                 <constraint firstAttribute="bottom" secondItem="EJD-f8-Xqd" secondAttribute="bottom" constant="60" id="EoS-be-aF2"/>
-                <constraint firstItem="ucx-6g-eJw" firstAttribute="leading" secondItem="SQT-Vf-Lhr" secondAttribute="leading" id="IQc-hc-YRD"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="L79-xO-12P"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="55" id="XkO-FA-l3J"/>
                 <constraint firstItem="Sn1-dJ-QCw" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="55" id="aZT-2B-gv9"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="trailing" secondItem="Ez2-Rf-DZN" secondAttribute="trailing" id="b6d-Ue-Zl5"/>
                 <constraint firstItem="EJD-f8-Xqd" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="bvr-Gv-Sgb"/>
+                <constraint firstItem="mor-Vl-Fr5" firstAttribute="leading" secondItem="ooq-vs-Xt1" secondAttribute="trailing" constant="10" id="cH2-Ig-fSg"/>
                 <constraint firstItem="Sn1-dJ-QCw" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="dtD-1T-QlG"/>
-                <constraint firstItem="SQT-Vf-Lhr" firstAttribute="bottom" secondItem="ooq-vs-Xt1" secondAttribute="bottom" id="e8m-qq-0SV"/>
                 <constraint firstItem="fh9-Uo-8R1" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="giR-tF-lUI"/>
                 <constraint firstAttribute="trailing" secondItem="EJD-f8-Xqd" secondAttribute="trailing" id="hSZ-8v-sis"/>
                 <constraint firstAttribute="bottom" secondItem="fh9-Uo-8R1" secondAttribute="bottom" id="hvC-OR-Ct0"/>
                 <constraint firstItem="Rth-di-Tls" firstAttribute="leading" secondItem="Ez2-Rf-DZN" secondAttribute="leading" id="jyz-o7-MMh"/>
                 <constraint firstAttribute="trailing" secondItem="Sn1-dJ-QCw" secondAttribute="trailing" id="m05-gh-crH"/>
-                <constraint firstItem="ucx-6g-eJw" firstAttribute="centerY" secondItem="ooq-vs-Xt1" secondAttribute="centerY" id="uTp-kU-NmC" userLabel="centeredTitle"/>
                 <constraint firstItem="fh9-Uo-8R1" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="wBu-2R-lEu"/>
             </constraints>
             <point key="canvasLocation" x="514" y="475"/>
