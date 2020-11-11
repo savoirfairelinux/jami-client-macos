@@ -98,7 +98,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
         outputImage = [outputImage imageResizeInsideMax: newSize];
         [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
         [addProfilePhotoImage setHidden:YES];
-        auto imageToBytes = QByteArray::fromNSData([outputImage TIFFRepresentation]).toBase64();
+        NSData* imageData = [outputImage TIFFRepresentation];
+        NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData: imageData];
+        NSDictionary *imageProps = [[NSDictionary alloc] init];
+        imageData = [imageRep representationUsingType:NSPNGFileType properties:imageProps];
+        auto imageToBytes = QByteArray::fromNSData(imageData).toBase64();
         self.accountModel->setAvatar(self.selectedAccountID, QString(imageToBytes));
     } else if(!photoView.image) {
         [photoView setBordered:YES];
