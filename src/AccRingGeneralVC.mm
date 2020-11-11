@@ -253,7 +253,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
                 returnCode:(NSInteger) code
                contextInfo:(void*) contextInfo
 {
-    //do nothing when editing canceled 
+    //do nothing when editing canceled
     if (code == 0) {
         return;
     }
@@ -264,8 +264,12 @@ typedef NS_ENUM(NSInteger, TagViews) {
         [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
         [photoView setBordered:NO];
         [addProfilePhotoImage setHidden:YES];
-        auto imageToBytes = QByteArray::fromNSData([outputImage TIFFRepresentation]).toBase64();
-        self.accountModel->setAvatar(self.selectedAccountID, QString(imageToBytes));
+        NSData* imageData = [outputImage TIFFRepresentation];
+        NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData: imageData];
+        NSDictionary *properties = [[NSDictionary alloc] init];
+        imageData = [imageRep representationUsingType:NSPNGFileType properties: properties];
+        NSString * dataString = [imageData base64EncodedStringWithOptions:0];
+        self.accountModel->setAvatar(self.selectedAccountID, QString::fromNSString(dataString));
     } else if(!photoView.image) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
