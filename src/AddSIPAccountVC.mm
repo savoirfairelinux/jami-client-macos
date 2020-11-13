@@ -85,12 +85,8 @@ NSTimer* timeoutTimer;
                                       [self] (const QString& accountID) {
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
-                                              NSData* imageData = [avatarImage TIFFRepresentation];
-                                              NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData: imageData];
-                                              NSDictionary *properties = [[NSDictionary alloc] init];
-                                              imageData = [imageRep representationUsingType:NSPNGFileType properties: properties];
-                                              NSString * dataString = [imageData base64EncodedStringWithOptions:0];
-                                              self.accountModel->setAvatar(accountID, QString::fromNSString(dataString));
+                                              auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
+                                              self.accountModel->setAvatar(accountID, QString(imageToBytes));
                                           }
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
                                           if(![serverField.stringValue isEqualToString:@""]) {

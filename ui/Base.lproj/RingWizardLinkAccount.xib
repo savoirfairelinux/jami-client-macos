@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -49,9 +49,9 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hwa-xK-TuM">
-                    <rect key="frame" x="-2" y="-3" width="342" height="38"/>
+                    <rect key="frame" x="-2" y="1" width="342" height="34"/>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="An error occured, please check your password and pin." id="DyG-SJ-U1Q">
-                        <font key="font" metaFont="system" size="15"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -63,7 +63,7 @@
                     </constraints>
                     <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="t12-O0-kcf">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -95,7 +95,7 @@ DQ
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJh-69-hJQ">
                                     <rect key="frame" x="-2" y="0.0" width="76" height="25"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="right" title="Import archive file" id="kXa-FL-Enf">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="systemLight" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -104,7 +104,7 @@ DQ
                                     <rect key="frame" x="74" y="-5" width="262" height="32"/>
                                     <buttonCell key="cell" type="push" title="Select file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XJE-cy-nfQ">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="systemLight" size="14"/>
                                     </buttonCell>
                                     <connections>
                                         <action selector="pickBackupFile:" target="-2" id="Qzv-2L-2Ez"/>
@@ -141,7 +141,7 @@ DQ
                                 <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nms-13-N3F">
                                     <rect key="frame" x="-2" y="0.0" width="76" height="25"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="right" title="Enter your PIN" id="3ik-rY-Gig">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="systemLight" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -152,7 +152,7 @@ DQ
                                         <constraint firstAttribute="width" constant="250" id="kcJ-06-hbr"/>
                                     </constraints>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="" bezelStyle="round" id="5pW-QD-iHi">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="systemLight" size="14"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -200,7 +200,7 @@ DQ
                                 <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-mP-zJd">
                                     <rect key="frame" x="-2" y="0.0" width="76" height="25"/>
                                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="right" title="Enter password" id="U2K-fu-INc">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="systemLight" size="14"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -208,7 +208,7 @@ DQ
                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VeW-tY-k3K" customClass="NSSecureTextField">
                                     <rect key="frame" x="80" y="2" width="250" height="22"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" placeholderString="" bezelStyle="round" id="9k8-c8-GFI" customClass="NSSecureTextFieldCell">
-                                        <font key="font" metaFont="system"/>
+                                        <font key="font" metaFont="systemLight" size="14"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -263,10 +263,10 @@ DQ
                     </customSpacing>
                 </stackView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oxG-mq-q2J">
-                    <rect key="frame" x="238" y="13" width="82" height="32"/>
+                    <rect key="frame" x="235" y="13" width="84" height="32"/>
                     <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Pcj-BY-tou">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
 Gw
 </string>
@@ -276,10 +276,10 @@ Gw
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xmI-fH-GpH">
-                    <rect key="frame" x="320" y="13" width="65" height="32"/>
+                    <rect key="frame" x="319" y="13" width="66" height="32"/>
                     <buttonCell key="cell" type="push" title="Link" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8b8-bt-eAj">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                         <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -313,7 +313,7 @@ DQ
                         <constraint firstAttribute="width" constant="340" id="Obs-3i-AVf"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" alignment="center" title="Linking..." id="zWn-4H-ODH">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemLight" size="14"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -333,14 +333,14 @@ DQ
             </constraints>
             <point key="canvasLocation" x="139" y="-39"/>
         </customView>
-        <customView id="3h3-dd-sYm">
-            <rect key="frame" x="0.0" y="0.0" width="350" height="138"/>
+        <customView misplaced="YES" id="3h3-dd-sYm">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="160"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Hbu-B5-EjR">
-                    <rect key="frame" x="18" y="20" width="314" height="98"/>
+                    <rect key="frame" x="18" y="20" width="314" height="105"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="justified" id="2uK-1s-tk7">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="systemLight" size="12"/>
                         <string key="title">	You can import your account from the another device, but first, you need to obtain a PIN code. 
 	To generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select "Link another device to this account". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -357,13 +357,13 @@ DQ
             <point key="canvasLocation" x="-651" y="802.5"/>
         </customView>
         <customView id="TUh-Kb-Ooa">
-            <rect key="frame" x="0.0" y="0.0" width="348" height="68"/>
+            <rect key="frame" x="0.0" y="0.0" width="348" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="DCW-q4-nx3">
-                    <rect key="frame" x="18" y="20" width="312" height="28"/>
+                    <rect key="frame" x="18" y="20" width="312" height="30"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="kfe-m7-MTT">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="systemLight" size="12"/>
                         <string key="title">	You can directly import your account from an archive file on your device.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

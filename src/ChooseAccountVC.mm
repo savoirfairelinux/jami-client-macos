@@ -212,9 +212,12 @@ NSMutableDictionary* menuItemsTags;
 -(void) configureView: (AccountMenuItemView *) itemView forAccount:(const QString&) accountId forMenuItem:(NSMenuItem *) item {
     auto& account = accMdl_->getAccountInfo(accountId);
     item.attributedTitle = [self attributedItemTitleForAccount:account];
-    [itemView.accountLabel setStringValue:account.profileInfo.alias.toNSString()];
-    NSString* userNameString = [self nameForAccount: account];
-    [itemView.userNameLabel setStringValue:userNameString];
+    auto profileName = bestNameForAccount(account);
+    auto registeredName = [self nameForAccount: account];
+    [itemView.accountLabel setStringValue: profileName];
+    if (![profileName isEqualTo:registeredName]) {
+        [itemView.userNameLabel setStringValue:registeredName];
+    }
     @autoreleasepool {
         NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
         NSImage *image = [[NSImage alloc] initWithData:imageData];
@@ -286,13 +289,13 @@ NSMutableDictionary* menuItemsTags;
 - (NSAttributedString*) attributedItemTitleForAccount:(const lrc::api::account::Info&) account {
     NSString* alias = bestNameForAccount(account);
     NSString* userNameString = [self nameForAccount: account];
-    NSFont *fontAlias = [NSFont fontWithName:@"Helvetica Neue Light" size:16.0];
-    NSFont *fontUserName = [NSFont fontWithName:@"Helvetica Neue Light" size:13.0];
-    NSColor *colorAlias = [NSColor textColor];
+    NSFont *fontAlias = [NSFont systemFontOfSize: 18 weight: NSFontWeightMedium];
+    NSFont *fontUserName = [NSFont systemFontOfSize: 14 weight: NSFontWeightLight];
+    NSColor *colorAlias = [NSColor labelColor];
     NSColor *colorAUserName = [NSColor labelColor];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
-    paragraphStyle.lineSpacing = 3;
+    paragraphStyle.lineSpacing = 2;
     NSDictionary *aliasAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
                                 fontAlias,NSFontAttributeName,
                                 colorAlias,NSForegroundColorAttributeName,
