@@ -73,6 +73,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     __unsafe_unretained IBOutlet NSView* callView;
     __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
     __unsafe_unretained IBOutlet NSTextField* explanationLabel;
+    __unsafe_unretained IBOutlet NSTextField* jamiLabel;
     __unsafe_unretained IBOutlet NSButton* shareButton;
     __unsafe_unretained IBOutlet NSImageView* qrcodeView;
 
@@ -220,6 +221,24 @@ typedef NS_ENUM(NSInteger, ViewState) {
     NSResponder * viewNextResponder = [self nextResponder];
     [self setNextResponder: [conversationVC getMessagesView]];
     [[conversationVC getMessagesView] setNextResponder: viewNextResponder];
+    [self setWelcomeText];
+}
+
+-(void) setWelcomeText {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 2;
+    paragraphStyle.alignment = NSCenterTextAlignment;
+    NSString* explanationText = explanationLabel.stringValue;
+    NSMutableAttributedString *explanationString = [[NSMutableAttributedString alloc] initWithString:explanationText];
+    [explanationString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, explanationText.length)];
+
+    explanationLabel.attributedStringValue = explanationString;
+
+    NSString* jamiText = jamiLabel.stringValue;
+    NSMutableAttributedString *jamiString = [[NSMutableAttributedString alloc] initWithString:jamiText];
+    [jamiString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, jamiText.length)];
+
+    jamiLabel.attributedStringValue = jamiString;
 }
 
 - (void) connect

@@ -81,7 +81,6 @@
 NSInteger const IMAGE_TAG           = 100;
 NSInteger const DISPLAYNAME_TAG     = 200;
 NSInteger const NOTIFICATONS_TAG    = 300;
-NSInteger const RING_ID_LABEL       = 400;
 NSInteger const PRESENCE_TAG        = 500;
 NSInteger const TOTALMSGS_TAG       = 600;
 NSInteger const TOTALINVITES_TAG    = 700;
@@ -110,7 +109,16 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView setDataSource: self];
     currentFilterType = lrc::api::profile::Type::RING;
     selectorIsPresent = true;
-
+    NSFont *searchBarFont = [NSFont systemFontOfSize: 12.0 weight: NSFontWeightLight];
+    NSColor *color = [NSColor secondaryLabelColor];
+    NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    NSDictionary *searchBarAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    searchBarFont, NSFontAttributeName,
+                                    style, NSParagraphStyleAttributeName,
+                                    color, NSForegroundColorAttributeName,
+                                    nil];
+    NSAttributedString* attributedName = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Search for new or existing contact", @"search bar placeholder") attributes: searchBarAttrs];
+    searchField.placeholderAttributedString = attributedName;
     smartView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
 
     [searchResultsView setContextMenuDelegate:self];
@@ -482,11 +490,9 @@ NSInteger const REQUEST_SEG         = 1;
     [unreadCount setHidden:(conversation.unreadMessages == 0)];
     [unreadCount setIntValue:conversation.unreadMessages];
     NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
-    NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
     NSTextField* lastInteractionDate = [result viewWithTag:DATE_TAG];
     NSTextField* interactionSnippet = [result viewWithTag:SNIPPET_TAG];
     [displayName setStringValue:@""];
-    [displayRingID setStringValue:@""];
     [lastInteractionDate setStringValue:@""];
     [interactionSnippet setStringValue:@""];
     NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
@@ -494,12 +500,9 @@ NSInteger const REQUEST_SEG         = 1;
     NSString* displayIDString = bestIDForConversation(conversation, *convModel_);
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {
         [displayName setStringValue:displayIDString];
-        [displayRingID setHidden:YES];
     }
     else {
         [displayName setStringValue:displayNameString];
-        [displayRingID setStringValue:displayIDString];
-        [displayRingID setHidden:NO];
     }
     @autoreleasepool {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
