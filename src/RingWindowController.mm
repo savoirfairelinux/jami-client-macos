@@ -66,8 +66,6 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 @implementation RingWindowController {
 
-    __unsafe_unretained IBOutlet NSLayoutConstraint* centerYQRCodeConstraint;
-    __unsafe_unretained IBOutlet NSLayoutConstraint* centerYWelcomeContainerConstraint;
     IBOutlet NSLayoutConstraint* ringLabelTrailingConstraint;
     __unsafe_unretained IBOutlet NSView* welcomeContainer;
     __unsafe_unretained IBOutlet NSView* callView;
@@ -431,10 +429,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 }
 
 - (IBAction)toggleQRCode:(id)sender {
-    // Toggle pressed state of QRCode button
-  //  [sender setPressed:![sender isPressed]];
-    bool show = qrcodeView.animator.alphaValue == 0.0f ? YES: NO;
-    [self showQRCode: show];
+    [self showQRCode: qrcodeView.isHidden];
 }
 
 /**
@@ -508,18 +503,21 @@ typedef NS_ENUM(NSInteger, ViewState) {
 - (void) showQRCode:(BOOL) show
 {
     [self updateQRCodeBackground];
-    static const NSInteger offset = 110;
-    [NSAnimationContext beginGrouping];
-    NSAnimationContext.currentContext.duration = 0.5;
-    [[NSAnimationContext currentContext] setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
-    qrcodeView.animator.alphaValue = show ? 1.0 : 0.0;
-    [centerYQRCodeConstraint.animator setConstant: show ? offset : 0];
-    [centerYWelcomeContainerConstraint.animator setConstant:show ? -offset : 0];
-    [NSAnimationContext endGrouping];
+    [qrcodeView setHidden: !show];
+    qrcodeView.layer.opacity = 0.0;
+
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext * _Nonnull context) {
+        context.duration = 0.2;
+        context.allowsImplicitAnimation = YES;
+        context.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseOut];
+        [self.window layoutIfNeeded];
+    } completionHandler: ^{
+        qrcodeView.layer.opacity = 1.0;
+    }];
 }
 
 -(void)themeChanged:(NSNotification *) notification {
-    if (qrcodeView.animator.alphaValue == 1) {
+    if (!qrcodeView.isHidden) {
         [self updateQRCodeBackground];
     }
 }
@@ -575,9 +573,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [smartViewVC clearConversationModel];
     [self changeViewTo:SHOW_WELCOME_SCREEN];
     [self updateRingID];
-    qrcodeView.animator.alphaValue = 0.0;
-    [centerYQRCodeConstraint.animator setConstant: 0];
-    [centerYWelcomeContainerConstraint.animator setConstant: 0];
+    [qrcodeView setHidden: YES];
     QObject::disconnect(self.callState);
     [self close];
     AppDelegate* delegate = (AppDelegate*)[[NSApplication sharedApplication] delegate];
