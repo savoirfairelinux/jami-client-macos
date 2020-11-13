@@ -7,9 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="RingWindowController">
             <connections>
-                <outlet property="callView" destination="tSW-YT-asL" id="NRy-rM-XW4"/>
-                <outlet property="centerYQRCodeConstraint" destination="16A-gO-qJA" id="n19-pY-QTQ"/>
-                <outlet property="centerYWelcomeContainerConstraint" destination="Duk-XW-qcv" id="Jg8-0V-Khf"/>
+                <outlet property="callView" destination="4A1-a4-pUL" id="qoz-Pc-Oli"/>
                 <outlet property="chooseAccountVC" destination="TbU-3l-q8n" id="3VE-q3-kc6"/>
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="explanationLabel" destination="kFj-Sh-o5u" id="br5-P4-3yq"/>
@@ -18,7 +16,7 @@
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
                 <outlet property="smartViewVC" destination="jrf-42-1l2" id="GMC-aw-6ro"/>
-                <outlet property="welcomeContainer" destination="D6e-KX-8gC" id="zV3-38-ClK"/>
+                <outlet property="welcomeContainer" destination="mTA-Xh-4Vz" id="UbC-4m-Ak8"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="Dtg-mG-RBq"/>
             </connections>
         </customObject>
@@ -46,7 +44,7 @@
                                             <constraint firstAttribute="height" constant="30" id="J1e-nJ-0oz"/>
                                         </constraints>
                                         <searchFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search for new or existing contact" bezelStyle="round" id="vvE-nM-kSl">
-                                            <font key="font" metaFont="system" size="12"/>
+                                            <font key="font" metaFont="cellTitle"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
@@ -450,14 +448,6 @@
                                                                                                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXA-kC-7Bv">
                                                                                                                 <rect key="frame" x="0.0" y="0.0" width="273" height="30"/>
                                                                                                                 <subviews>
-                                                                                                                    <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="3vQ-et-yIO" userLabel="jamiId">
-                                                                                                                        <rect key="frame" x="-2" y="15" width="54" height="15"/>
-                                                                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="left" id="rzA-1C-XLH">
-                                                                                                                            <font key="font" metaFont="systemLight" size="12"/>
-                                                                                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                                                                        </textFieldCell>
-                                                                                                                    </textField>
                                                                                                                     <textField hidden="YES" horizontalHuggingPriority="999" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="751" tag="900" translatesAutoresizingMaskIntoConstraints="NO" id="mic-52-RIa" userLabel="Last Interaction Snippet">
                                                                                                                         <rect key="frame" x="-2" y="15" width="144" height="15"/>
                                                                                                                         <constraints>
@@ -588,10 +578,8 @@
                                                                                                                     <integer value="1000"/>
                                                                                                                     <integer value="1000"/>
                                                                                                                     <integer value="1000"/>
-                                                                                                                    <integer value="1000"/>
                                                                                                                 </visibilityPriorities>
                                                                                                                 <customSpacing>
-                                                                                                                    <real value="3.4028234663852886e+38"/>
                                                                                                                     <real value="3.4028234663852886e+38"/>
                                                                                                                     <real value="3.4028234663852886e+38"/>
                                                                                                                     <real value="3.4028234663852886e+38"/>
@@ -913,175 +901,191 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-MB-mlx" userLabel="HomeView">
                         <rect key="frame" x="324" y="0.0" width="729" height="618"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="6bh-ow-nJO">
-                                <rect key="frame" x="0.0" y="0.0" width="729" height="172"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="172" id="hCN-uz-Nmc"/>
-                                </constraints>
-                            </customView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
-                                <rect key="frame" x="265" y="209" width="200" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="RCZ-Wt-iKD"/>
-                                    <constraint firstAttribute="height" constant="200" id="tSn-OT-Zn8"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="mYG-HR-6oh"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="alphaValue">
-                                        <integer key="value" value="0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="D6e-KX-8gC">
-                                <rect key="frame" x="105" y="149" width="520" height="320"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mTA-Xh-4Vz">
+                                <rect key="frame" x="165" y="170" width="400" height="278"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
-                                        <rect key="frame" x="143" y="97" width="233" height="34"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="Xb9-UT-M2F">
-                                            <font key="font" metaFont="systemLight" size="14"/>
-                                            <string key="title">This is your ID.
+                                    <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vsR-Ps-Rnq">
+                                        <rect key="frame" x="12" y="0.0" width="375" height="278"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
+                                                <rect key="frame" x="75" y="203" width="225" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="mWM-v0-n2w"/>
+                                                    <constraint firstAttribute="width" constant="225" id="paw-4z-Zbv"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
+                                            </imageView>
+                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
+                                                <rect key="frame" x="-2" y="149" width="379" height="34"/>
+                                                <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Jami is free software for universal communication which respects the freedoms and privacy of its users." id="eln-Vm-t0d">
+                                                    <font key="font" metaFont="systemMedium" size="14"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
+                                                <rect key="frame" x="71" y="95" width="233" height="34"/>
+                                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="Xb9-UT-M2F">
+                                                    <font key="font" metaFont="systemLight" size="14"/>
+                                                    <string key="title">This is your ID.
 Copy and share it with your friends!</string>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="r7A-Pi-WHz"/>
-                                        </connections>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID">
-                                        <rect key="frame" x="256" y="60" width="8" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="qCF-Zf-vZg">
-                                            <font key="font" metaFont="systemMedium" size="14"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f62-JV-dgr">
-                                        <rect key="frame" x="147" y="225" width="225" height="75"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                                <connections>
+                                                    <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="r7A-Pi-WHz"/>
+                                                </connections>
+                                            </textField>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JN3-vO-zcd" userLabel="Ring ID">
+                                                <rect key="frame" x="184" y="58" width="8" height="17"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" id="qCF-Zf-vZg">
+                                                    <font key="font" metaFont="systemMedium" size="14"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NTy-WY-FD0">
+                                                <rect key="frame" x="147" y="0.0" width="82" height="38"/>
+                                                <subviews>
+                                                    <button toolTip="Show QRcode" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="HoverButton">
+                                                        <rect key="frame" x="0.0" y="3" width="32" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="32" id="FrZ-2C-m7y"/>
+                                                            <constraint firstAttribute="height" constant="32" id="tSo-l1-mnZ"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="qrcode" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vvm-Gy-Tbh">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                                <integer key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                                                <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                                <integer key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                                <color key="value" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="toggleQRCode:" target="-2" id="jZa-65-o5C"/>
+                                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="aWO-1T-QfL"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button toolTip="Share account info" translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge" customClass="HoverButton">
+                                                        <rect key="frame" x="52" y="0.0" width="30" height="38"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="fnM-Dp-xQa"/>
+                                                            <constraint firstAttribute="height" constant="38" id="jXA-ZW-tFp"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSShareTemplate" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="Z08-dU-5EN">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                                <integer key="value" value="4"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                                                <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                                <integer key="value" value="2"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                                <color key="value" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
+                                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="CUd-nb-MzH"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-JL-MY4">
+                                        <rect key="frame" x="0.0" y="78" width="200" height="200"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="mWM-v0-n2w"/>
-                                            <constraint firstAttribute="width" constant="225" id="paw-4z-Zbv"/>
+                                            <constraint firstAttribute="width" constant="200" id="RCZ-Wt-iKD"/>
+                                            <constraint firstAttribute="height" constant="200" id="tSn-OT-Zn8"/>
                                         </constraints>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="symbol_name" id="9ti-Q4-TAv"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="mYG-HR-6oh"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="alphaValue">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <button toolTip="Share account info" translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge" customClass="HoverButton">
-                                        <rect key="frame" x="264" y="5" width="30" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="fnM-Dp-xQa"/>
-                                            <constraint firstAttribute="height" constant="38" id="jXA-ZW-tFp"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSShareTemplate" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="Z08-dU-5EN">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                                <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
-                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
-                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
-                                                <color key="value" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="shareRingID:" target="-2" id="8bY-RW-cQS"/>
-                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="CUd-nb-MzH"/>
-                                        </connections>
-                                    </button>
-                                    <button toolTip="Show QRcode" translatesAutoresizingMaskIntoConstraints="NO" id="eXV-BT-B6J" customClass="HoverButton">
-                                        <rect key="frame" x="224" y="8" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="FrZ-2C-m7y"/>
-                                            <constraint firstAttribute="height" constant="32" id="tSo-l1-mnZ"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="qrcode" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vvm-Gy-Tbh">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
-                                                <color key="value" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
-                                                <integer key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
-                                                <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
-                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
-                                                <color key="value" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="toggleQRCode:" target="-2" id="jZa-65-o5C"/>
-                                            <binding destination="-2" name="hidden" keyPath="self.notRingAccount" id="aWO-1T-QfL"/>
-                                        </connections>
-                                    </button>
-                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJ1-xk-v5e">
-                                        <rect key="frame" x="70" y="151" width="379" height="34"/>
-                                        <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Jami is free software for universal communication which respects the freedoms and privacy of its users." id="eln-Vm-t0d">
-                                            <font key="font" metaFont="systemMedium" size="14"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="f62-JV-dgr" firstAttribute="top" secondItem="D6e-KX-8gC" secondAttribute="top" constant="20" id="0b6-u8-yQg"/>
-                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" constant="-20" id="GCY-if-25J"/>
-                                    <constraint firstItem="VJ1-xk-v5e" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="ID9-YU-lFv"/>
-                                    <constraint firstAttribute="height" constant="320" id="PLl-IK-oQA"/>
-                                    <constraint firstItem="eXV-BT-B6J" firstAttribute="top" secondItem="JN3-vO-zcd" secondAttribute="bottom" constant="20" id="S1e-It-dha"/>
-                                    <constraint firstItem="f62-JV-dgr" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="VTp-M2-i33"/>
-                                    <constraint firstItem="JN3-vO-zcd" firstAttribute="top" secondItem="kFj-Sh-o5u" secondAttribute="bottom" constant="20" id="WdR-8q-Lkl"/>
-                                    <constraint firstItem="kFj-Sh-o5u" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="X8P-ae-ug3"/>
-                                    <constraint firstItem="Oac-o7-2Ge" firstAttribute="leading" secondItem="eXV-BT-B6J" secondAttribute="trailing" constant="8" id="eN6-s3-z6X"/>
-                                    <constraint firstItem="Oac-o7-2Ge" firstAttribute="centerY" secondItem="eXV-BT-B6J" secondAttribute="centerY" id="luh-LH-oXu"/>
-                                    <constraint firstAttribute="width" constant="520" id="nXn-Wh-VAi"/>
-                                    <constraint firstItem="kFj-Sh-o5u" firstAttribute="top" secondItem="VJ1-xk-v5e" secondAttribute="bottom" constant="20" id="wQ0-UB-Yo2"/>
-                                    <constraint firstItem="JN3-vO-zcd" firstAttribute="centerX" secondItem="D6e-KX-8gC" secondAttribute="centerX" id="zBy-e3-F7X"/>
-                                    <constraint firstItem="VJ1-xk-v5e" firstAttribute="top" secondItem="f62-JV-dgr" secondAttribute="bottom" constant="40" id="zNb-f8-m6q"/>
+                                    <constraint firstAttribute="width" constant="400" id="mvi-Qm-qnI"/>
                                 </constraints>
-                            </customView>
-                            <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="tSW-YT-asL">
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="4A1-a4-pUL">
                                 <rect key="frame" x="0.0" y="0.0" width="729" height="618"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="340" id="5yo-rb-X1O"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="ccX-uq-zuj"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="Igi-28-Z3Y"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="340" id="lep-Og-eax"/>
                                 </constraints>
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="dZR-JL-MY4" firstAttribute="centerY" secondItem="Fzg-MB-mlx" secondAttribute="centerY" id="16A-gO-qJA"/>
-                            <constraint firstItem="D6e-KX-8gC" firstAttribute="centerY" secondItem="Fzg-MB-mlx" secondAttribute="centerY" id="Duk-XW-qcv"/>
-                            <constraint firstAttribute="trailing" secondItem="6bh-ow-nJO" secondAttribute="trailing" id="Gvo-f0-tFP"/>
-                            <constraint firstAttribute="bottom" secondItem="6bh-ow-nJO" secondAttribute="bottom" id="Low-Vl-6Rc"/>
-                            <constraint firstAttribute="bottom" secondItem="tSW-YT-asL" secondAttribute="bottom" id="OW1-T7-eV8"/>
-                            <constraint firstAttribute="trailing" secondItem="tSW-YT-asL" secondAttribute="trailing" id="Vm1-Ql-lxQ"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dZR-JL-MY4" secondAttribute="bottom" constant="8" id="XdW-61-RbL"/>
-                            <constraint firstItem="D6e-KX-8gC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Fzg-MB-mlx" secondAttribute="top" constant="40" id="cwV-ZJ-bld"/>
-                            <constraint firstItem="dZR-JL-MY4" firstAttribute="centerX" secondItem="Fzg-MB-mlx" secondAttribute="centerX" id="ejM-RR-NBl"/>
-                            <constraint firstItem="D6e-KX-8gC" firstAttribute="centerX" secondItem="Fzg-MB-mlx" secondAttribute="centerX" id="fjr-1a-hEA"/>
-                            <constraint firstItem="tSW-YT-asL" firstAttribute="top" secondItem="Fzg-MB-mlx" secondAttribute="top" id="kVw-UP-9a7"/>
-                            <constraint firstItem="tSW-YT-asL" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="mCN-Pw-WJE"/>
-                            <constraint firstItem="6bh-ow-nJO" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="w6e-6J-3XH"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="500" id="3La-8L-cQQ"/>
+                            <constraint firstItem="mTA-Xh-4Vz" firstAttribute="centerX" secondItem="Fzg-MB-mlx" secondAttribute="centerX" id="3ub-vx-AWK"/>
+                            <constraint firstItem="4A1-a4-pUL" firstAttribute="top" secondItem="Fzg-MB-mlx" secondAttribute="top" id="6rW-M0-hBT"/>
+                            <constraint firstAttribute="bottom" secondItem="4A1-a4-pUL" secondAttribute="bottom" id="Mcw-WU-gsV"/>
+                            <constraint firstItem="mTA-Xh-4Vz" firstAttribute="centerY" secondItem="Fzg-MB-mlx" secondAttribute="centerY" id="QTO-hU-3Pk"/>
+                            <constraint firstItem="4A1-a4-pUL" firstAttribute="leading" secondItem="Fzg-MB-mlx" secondAttribute="leading" id="dfs-TZ-5ya"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="500" id="fOw-zX-8er"/>
+                            <constraint firstAttribute="trailing" secondItem="4A1-a4-pUL" secondAttribute="trailing" id="xxk-ia-f4G"/>
                         </constraints>
                     </customView>
                 </subviews>
