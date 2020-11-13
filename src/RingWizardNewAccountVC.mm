@@ -269,12 +269,8 @@ BOOL isRendevous = false;
                                           //set account avatar
                                           if([photoView image]) {
                                               NSImage *avatarImage = [photoView image];
-                                              NSData* imageData = [avatarImage TIFFRepresentation];
-                                              NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData: imageData];
-                                              NSDictionary *properties = [[NSDictionary alloc] init];
-                                              imageData = [imageRep representationUsingType:NSPNGFileType properties: properties];
-                                              NSString * dataString = [imageData base64EncodedStringWithOptions:0];
-                                              self.accountModel->setAvatar(accountID, QString::fromNSString(dataString));
+                                              auto imageToBytes = QByteArray::fromNSData([avatarImage TIFFRepresentation]).toBase64();
+                                              self.accountModel->setAvatar(accountID, QString(imageToBytes));
                                           }
                                           //register username
                                           if (self.registeredName && ![self.registeredName isEqualToString:@""]) {

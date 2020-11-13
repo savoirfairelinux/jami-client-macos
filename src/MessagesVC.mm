@@ -464,7 +464,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (name.length > 0) {
        fileName = [name lastPathComponent];
     }
-    NSFont *nameFont = [NSFont userFontOfSize:14.0];
+    NSFont *nameFont = [NSFont systemFontOfSize: 14 weight: NSFontWeightLight];
     NSColor *nameColor = [NSColor textColor];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -954,8 +954,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 - (NSMutableDictionary*) messageAttributes
 {
     NSMutableDictionary* attrs = [NSMutableDictionary dictionary];
+    NSFont *font = [NSFont systemFontOfSize: 12 weight: NSFontWeightLight];
     attrs[NSForegroundColorAttributeName] = [NSColor labelColor];
     attrs[NSParagraphStyleAttributeName] = [self paragraphStyle];
+    attrs[NSFontAttributeName] = font;
     return attrs;
 }
 
