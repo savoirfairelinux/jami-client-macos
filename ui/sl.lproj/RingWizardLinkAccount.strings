@@ -1,45 +1,45 @@
 
 /* Class = "NSTextFieldCell"; title = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes."; ObjectID = "2uK-1s-tk7"; */
-"2uK-1s-tk7.title" = "\tYou can import your account from the another device, but first, you need to obtain a PIN code. \n\tTo generate the PIN code, go to the account management setting of a previous device, choose the Jami account to use and select \"Link another device to this account\". You will get the necessary PIN to complete this form. The PIN is only valid for 10 minutes.";
+"2uK-1s-tk7.title" = "\tSvoj račun lahko uvozite z druge naprave, vendar morate najprej pridobiti PIN kodo.\n\tZa generiranje PIN kode pojdite v nastavitve računa obstoječe naprave, izberite Jami račun in izberite \"Poveži drugo napravo s tem računom\". Dobili boste potreben PIN za vnos v ta obrazec. PIN velja 10 minut.";
 
 /* Class = "NSTextFieldCell"; title = "Enter your PIN"; ObjectID = "3ik-rY-Gig"; */
-"3ik-rY-Gig.title" = "Enter your PIN";
+"3ik-rY-Gig.title" = "Vnesite PIN";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
-"8b8-bt-eAj.title" = "Link";
+"8b8-bt-eAj.title" = "Poveži";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
-"DyG-SJ-U1Q.title" = "An error occured, please check your password and pin.";
+"DyG-SJ-U1Q.title" = "Zgodila se je napaka. Preverite geslo in PIN.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Pcj-BY-tou"; */
 "Pcj-BY-tou.title" = "Prekliči";
 
 /* Class = "NSTextFieldCell"; title = "Enter password"; ObjectID = "U2K-fu-INc"; */
-"U2K-fu-INc.title" = "Vnesi geslo";
+"U2K-fu-INc.title" = "Vnesite geslo";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "Password...";
+"WlR-QM-tK4.ibShadowedIsNilPlaceholder" = "Geslo...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedMultipleValuesPlaceholder" = "Password...";
+"WlR-QM-tK4.ibShadowedMultipleValuesPlaceholder" = "Geslo...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedNoSelectionPlaceholder" = "Password...";
+"WlR-QM-tK4.ibShadowedNoSelectionPlaceholder" = "Geslo...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Password..."; ObjectID = "WlR-QM-tK4"; */
-"WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "Password...";
+"WlR-QM-tK4.ibShadowedNotApplicablePlaceholder" = "Geslo...";
 
 /* Class = "NSButtonCell"; title = "Select file"; ObjectID = "XJE-cy-nfQ"; */
-"XJE-cy-nfQ.title" = "Select file";
+"XJE-cy-nfQ.title" = "Izberi datoteko";
 
 /* Class = "NSTextFieldCell"; title = "Import archive file"; ObjectID = "kXa-FL-Enf"; */
-"kXa-FL-Enf.title" = "Import archive file";
+"kXa-FL-Enf.title" = "Uvozi arhivsko datoteko";
 
 /* Class = "NSTextFieldCell"; title = "\tYou can directly import your account from an archive file on your device."; ObjectID = "kfe-m7-MTT"; */
-"kfe-m7-MTT.title" = "\tYou can directly import your account from an archive file on your device.";
+"kfe-m7-MTT.title" = "\tSvoj račun lahko neposredno uvozite iz arhivske datoteka na svoji napravi.";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "t12-O0-kcf"; */
-"t12-O0-kcf.title" = "OK";
+"t12-O0-kcf.title" = "V redu";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "PIN"; ObjectID = "vVf-hg-sWk"; */
 "vVf-hg-sWk.ibShadowedIsNilPlaceholder" = "PIN";
@@ -54,4 +54,4 @@
 "vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "PIN";
 
 /* Class = "NSTextFieldCell"; title = "Linking..."; ObjectID = "zWn-4H-ODH"; */
-"zWn-4H-ODH.title" = "Linking...";
+"zWn-4H-ODH.title" = "Povezovanje...";

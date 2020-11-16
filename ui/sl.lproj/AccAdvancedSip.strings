@@ -12,16 +12,16 @@
 "2rB-Bv-c9U.title" = "Časovna omejitev prijave (sek)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
-"3Uq-Nb-J1A.title" = "Nastavitve Klicev";
+"3Uq-Nb-J1A.title" = "Nastavitve klicanja";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Fallback on RTP on encryption failure";
+"3rM-KT-bNf.title" = "Uporabi pomožni RTP v primeru napake šifriranja";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
-"3vs-TI-tkg.title" = "Samodejno odgovori klice";
+"3vs-TI-tkg.title" = "Samodejno odgovori na klice";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
-"6eH-la-JbF.title" = "TURN Območje";
+"6eH-la-JbF.title" = "TURN področje";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
 "72p-GY-gu6.title" = "Geslo zasebnega ključa";
@@ -30,16 +30,16 @@
 "8JD-11-wHZ.title" = "Odhodno ime TLS strežnika";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "Element 1";
+"8bw-iH-XGl.title" = "Predmet 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "Vrata";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "A31-3Y-z4R"; */
-"A31-3Y-z4R.title" = "Box";
+"A31-3Y-z4R.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
-"ELr-A7-mGE.title" = "Objavi naslov";
+"ELr-A7-mGE.title" = "Objavljeni naslov";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
 "Gwi-Mp-NpZ.title" = "Uporabi TURN";
@@ -54,40 +54,40 @@
 "JV8-cY-6vR.title" = "Zahtevaj certifikat za dohodne TLS povezave";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
-"Jfp-NE-ODd.title" = "Dogovarjanje seje SDP (ICE Fallback)";
+"Jfp-NE-ODd.title" = "Usklajevanje SDP seje (ICE Fallback)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
-"MBR-AC-HFq.title" = "Box";
+"MBR-AC-HFq.title" = "Škatla";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
-"Mho-w1-ZPJ.title" = "Element 3";
+"Mho-w1-ZPJ.title" = "Predmet 3";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "Nqr-gj-dOH"; */
 "Nqr-gj-dOH.title" = "Zvonjenje po meri";
 
 /* Class = "NSMenuItem"; title = "Item 2"; ObjectID = "OEo-C7-vEh"; */
-"OEo-C7-vEh.title" = "Element 2";
+"OEo-C7-vEh.title" = "Predmet 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
 "Ogj-NW-fZ9.title" = "Območje vrat RTP za zvok";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
-"Ppa-zn-w1X.title" = "Box";
+"Ppa-zn-w1X.title" = "Škatla";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
+"Qk8-tH-a0l.title" = "Vklopi SDES kot protokol za izmenjavo ključa";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Besedilna celica";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
-"Vke-hs-iXz.title" = "Avdio kodeki";
+"Vke-hs-iXz.title" = "Zvočni kodeki";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "W9F-Nf-ehp"; */
 "W9F-Nf-ehp.title" = "Zasebni ključ";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Verify answer certificates (client side)";
+"WsS-1e-Epm.title" = "Preveri odhodne certifikate (odjemalec)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
 "Xp3-bL-3Cs.title" = "Osebni certifikat";
@@ -96,31 +96,31 @@
 "Xxr-gl-ukE.title" = "Naslov";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
-"Zuz-jy-rLn.title" = "Box";
+"Zuz-jy-rLn.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
 "aYs-wh-Hpr.title" = "TURN naslov";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "CA Certifikat";
+"b2y-85-ZHK.title" = "CA certifikat";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
+"cN3-lC-dNM.title" = "Se uporablja le med usklajevanjem SDP, v primeru ICE pa ni podprt.";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
-"cwV-lc-jju.title" = "Box";
+"cwV-lc-jju.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
 "dtf-uk-n1B.title" = "Čas usklajevanja (sek)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
-"ekM-Cg-DEo.title" = "Box";
+"ekM-Cg-DEo.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
-"fjH-ej-gEr.title" = "Mrežni vmesnik";
+"fjH-ej-gEr.title" = "Omrežni vmesnik";
 
 /* Class = "NSButtonCell"; title = "Verify incoming sertificates (server side)"; ObjectID = "fyT-bU-m54"; */
-"fyT-bU-m54.title" = "Verify incoming sertificates (server side)";
+"fyT-bU-m54.title" = "Preveri dohodne certifikate (strežnika)";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "gJs-aX-7Ox"; */
 "gJs-aX-7Ox.title" = "Video kodeki";
@@ -129,7 +129,7 @@
 "jgX-tQ-dIA.title" = "Besedilna celica";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
-"l86-cH-pp8.title" = "Box";
+"l86-cH-pp8.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "nh9-3y-CEI"; */
 "nh9-3y-CEI.title" = "Max";
@@ -144,10 +144,10 @@
 "rMN-Wf-tmp.title" = "TURN uporabnik";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
+"vCS-s8-mZI.title" = "Šifriaj pretok medijev (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Encrypt negotiation (TLS)";
+"vZH-42-mUi.title" = "Šifriranje usklajevanja (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
 "vpo-fl-9TS.title" = "Povezljivost";
@@ -156,7 +156,7 @@
 "wq6-KV-8X3.title" = "Max";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
-"wyZ-Hb-BNf.title" = "Box";
+"wyZ-Hb-BNf.title" = "Škatla";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "x93-zk-hAW"; */
 "x93-zk-hAW.title" = "UPnP";

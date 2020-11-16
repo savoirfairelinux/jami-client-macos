@@ -8,7 +8,7 @@
 "Cancel" = "Avbryt";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Legg til SIP konto";
 
 /* Contextual menu action */
 "Add to contacts" = "Legg til kontakter";
@@ -20,13 +20,13 @@
 "An error occured during the export" = "En feil inntraff under eksport";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "ser ut til å være opptatt.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Lydtilgang ikke innvilget";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Sikkerhetskopier din konto";
 
 /* Contextual menu action */
 "Block contact" = "Blokker kontakt";
@@ -35,7 +35,7 @@
 "Remove conversation" = "Fjern samtale";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Ved å klikke \"OK\" vil du fjerne denne kontoen fra denne enheten! Denne handlingen kan ikke angres. I tillegg, kan ditt registrerte navn gå tapt.";
 
 /* File transfer canceled label */
 "Canceled" = "Avbrutt";
@@ -44,22 +44,22 @@
 "Choose file" = "Velg fil";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "Slett samtalen";
 
 /* No comment provided by engineer. */
 "Copy" = "Kopier";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Kunne ikke spille inn beskjed under samtale";
 
 /* Welcome title */
 "Create a new account" = "Opprett ny konto";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "Opprett møteplass";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Tast inn konto passord";
 
 /* File transfer failed label */
 "Failed" = "Mislyktes";
@@ -71,10 +71,10 @@
 "Failed to perform lookup" = "Klarte ikke å utføre oppslag";
 
 /* Text shown to the user */
-"ID: " = "ID: ";
+"ID: " = "ID:";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importer fra sikkerhetskopi";
 
 /* link account title */
 "Import from other device" = "Importer fra andre enheter";
@@ -83,16 +83,16 @@
 "Incoming call from %@" = "Innkommende samtale fra %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Innkommende melding fra %@";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Ugyldig brukernavn";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Ugyldig brukernavn.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Naviger til innstillinger for å opprette en ny konto";
 
 /* Displayed as RingID when no accounts are available for selection */
 "No account available" = "Ingen konto tilgjengelig";
@@ -113,37 +113,37 @@
 "Place video call" = "Opprett videosamtale";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Trykk for å starte opptak";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Spill inn en beskjed";
 
 /* Button Action */
 "Refuse" = "Avslå";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Registrert navn:";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Slett konto";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Velg arkiv";
 
 /* Send button title */
 "Send" = "Send";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "Send deg en kontakt forespørsel";
 
 /* No comment provided by engineer. */
 "Share" = "Del";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Del skjerm";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Logg på";
 
 /* Record message title */
 "Stop recording" = "Stopp opptak";
@@ -164,49 +164,49 @@
 "The password you entered does not unlock this account" = "Passordet du skrev inn låser ikke opp denne kontoen";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "Denne kontoen behøver å bli migrert";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "Dette er din ID. \nKopier og del denne med dine venner!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "Dette er ditt Jami brukernavn. \nKopier og del dette med dine venner!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "For å fullføre prosessen, må du åpne Jami på den nye enheten og velge opsjonen \"Koble denne enheten til en konto\". Din pin er gyldig i 10 minutter.";
 
 /* Text shown to the user */
 "To proceed with the migration, you need to enter a password that was used for this account." = "For å fortsette med overføringen, må du oppgi et passord som ble brukt for denne kontoen.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "usammenføybar";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Video tilgang ikke innvilget";
 
 /* Welcome title */
 "Welcome to Jami" = "Velkommen til Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Ønsker du å legge igjen en melding?";
 
 /* Password button title */
 "Change password" = "Endre passord";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Opprett passord";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Tilbakekall enhet";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Merk! Denne handlingen kan ikke angres!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Tilbakekalling av enhet feilet. Vennligst kontroll ditt passord og forsøk igjen.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Tilbakekalling av enhet feilet";
 
 /* Edit Sip Account Action*/
 "Done" = "Ferdig";
@@ -215,10 +215,10 @@
 "Edit Account" = "Rediger konto";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Minimer deltaker";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Maksimer deltaker";
 
 /* Conference action */
 "Hangup" = "Legg på";
@@ -227,7 +227,10 @@
 "Me" = "Meg";
 
 /* Choose registered name for account */
-"Choose a username for your account" = "Choose a username for your account";
+"Choose a username for your account" = "Velg brukernavn for din konto";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "Velg et navn for din møteplass";
+
+/* search bar placeholder */
+"Search for new or existing contact" = "Søk etter ny eller eksisterende kontakt";

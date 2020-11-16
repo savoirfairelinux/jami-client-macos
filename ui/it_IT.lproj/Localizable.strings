@@ -56,7 +56,7 @@
 "Create a new account" = "Crea un nuovo account";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "Crea un rendezvous point";
 
 /* Backup enter password */
 "Enter account password" = "Inserisci la password dell'account";
@@ -215,10 +215,10 @@
 "Edit Account" = "Modifica l'account";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Riduci a icona il partecipante";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Massimizza partecipante";
 
 /* Conference action */
 "Hangup" = "Aggancia";
@@ -230,4 +230,7 @@
 "Choose a username for your account" = "Scegli un nome utente per il tuo account";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "Scegli un nome per il tuo rendezvous point";
+
+/* search bar placeholder */
+"Search for new or existing contact" = "Cerca contatti nuovi o esistenti";

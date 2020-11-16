@@ -3,22 +3,22 @@
 "2cB-dz-KYg.ibShadowedToolTip" = "Prekini";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "4xt-xs-LVn"; */
-"4xt-xs-LVn.title" = "Box";
+"4xt-xs-LVn.title" = "Škatla";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DSf-SJ-l6k"; */
-"DSf-SJ-l6k.title" = "Box";
+"DSf-SJ-l6k.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "GBy-HF-JeP"; */
-"GBy-HF-JeP.title" = "Label";
+"GBy-HF-JeP.title" = "Oznaka";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "KCp-bZ-69S"; */
-"KCp-bZ-69S.title" = "Box";
+"KCp-bZ-69S.title" = "Škatla";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Hang up"; ObjectID = "Kjq-iM-NBL"; */
 "Kjq-iM-NBL.ibShadowedToolTip" = "Prekini";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
-"LVS-yZ-98V.ibShadowedToolTip" = "Izključi video";
+"LVS-yZ-98V.ibShadowedToolTip" = "Zatemnitev videa";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
 "NRc-5f-Ujc.ibShadowedMultipleValuesPlaceholder" = "Pošlji sporočilo";
@@ -33,7 +33,7 @@
 "QYT-0n-4sw.ibShadowedToolTip" = "Snemaj";
 
 /* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
-"Vhk-fx-6RW.ibShadowedToolTip" = "add contact to call";
+"Vhk-fx-6RW.ibShadowedToolTip" = "Dodaj osebo h klicu";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
 "YGj-SP-ikj.title" = "Besedilna celica";
@@ -48,25 +48,25 @@
 "dPt-JY-yxV.placeholderString" = "Stanje";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
+"fmp-x4-Pef.ibShadowedToolTip" = "Preklopi klepet";
 
 /* Class = "NSTextFieldCell"; title = "person Id"; ObjectID = "hKi-Ay-ex5"; */
-"hKi-Ay-ex5.title" = "person Id";
+"hKi-Ay-ex5.title" = "Id osebe";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hfc-s5-yWK"; */
-"hfc-s5-yWK.title" = "Box";
+"hfc-s5-yWK.title" = "Škatla";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "ngO-WV-cXD"; */
-"ngO-WV-cXD.ibShadowedToolTip" = "Send a file";
+"ngO-WV-cXD.ibShadowedToolTip" = "Pošlji datoteko";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Pick up";
+"qgD-3D-nD5.ibShadowedToolTip" = "Prevzemi";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
 "rqa-be-VIB.ibShadowedToolTip" = "Pošlji";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
-"tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
+"tQl-cT-0Lb.ibShadowedToolTip" = "Utišaj zvok";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "ues-20-34k"; */
-"ues-20-34k.placeholderString" = "Person name";
+"ues-20-34k.placeholderString" = "Ime osebe";
