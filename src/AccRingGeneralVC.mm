@@ -297,15 +297,15 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 #pragma mark - NSTextFieldDelegate delegate methods
 
-- (void)controlTextDidChange:(NSNotification *)notif
+-(void)controlTextDidEndEditing:(NSNotification *)notification
 {
-    NSTextField* textField = [notif object];
+    NSTextField* textField = [notification object];
     if (textField.tag != DISPLAYNAME) {
         return;
     }
+
     NSString* displayName = textField.stringValue;
 
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
     self.accountModel->setAlias(self.selectedAccountID, QString::fromNSString(displayName));
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
@@ -423,6 +423,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [self.view.window beginSheet: passwordWC.window completionHandler:nil];
 }
 - (IBAction)triggerAdwancedSettings: (NSButton *)sender {
+    [self.view.window makeFirstResponder:nil];
     [self.delegate triggerAdvancedOptions];
 }
 

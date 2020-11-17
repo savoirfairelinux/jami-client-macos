@@ -354,11 +354,9 @@ NSString *TLS_PROTOCOL_TLSv1_2 = @"TLSv1_2";
 
 #pragma mark - NSTextFieldDelegate methods
 
--(void)controlTextDidChange:(NSNotification *)notif
+-(void)controlTextDidEndEditing:(NSNotification *)notif
 {
     NSTextField *textField = [notif object];
-    NSRange test = [[textField currentEditor] selectedRange];
-
     [self valueDidChange:textField];
 }
 
