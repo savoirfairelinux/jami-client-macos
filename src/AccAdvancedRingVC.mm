@@ -122,11 +122,9 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
 
 #pragma mark - NSTextFieldDelegate methods
 
--(void)controlTextDidChange:(NSNotification *)notif
+-(void)controlTextDidEndEditing:(NSNotification *)notif
 {
     NSTextField *textField = [notif object];
-    NSRange test = [[textField currentEditor] selectedRange];
-
     [self valueDidChange:textField];
 }
 
