@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Account migration completed"; ObjectID = "1ob-x1-u74"; */
-"1ob-x1-u74.title" = "Flytting av konto fullført";
+"1ob-x1-u74.title" = "Overføring av konto fullført";
 
 /* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
 "859-10-HEb.placeholderString" = "RingID";
@@ -9,10 +9,10 @@
 "859-10-HEb.title" = "For å fortsette med overføringen, må du oppgi et passord som ble brukt for denne kontoen.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
-"8K3-9Z-MKH.title" = "Feil ved flytting av konto";
+"8K3-9Z-MKH.title" = "Konto overføringsfeil";
 
 /* Class = "NSTextFieldCell"; title = "Congratulations, your account has been migrated with Success."; ObjectID = "C2l-rz-Gqt"; */
-"C2l-rz-Gqt.title" = "Gratulerer, din konto er migrert.";
+"C2l-rz-Gqt.title" = "Gratulerer, din konto har blitt overført.";
 
 /* Class = "NSButtonCell"; title = "Delete this account"; ObjectID = "ITE-yD-CTb"; */
 "ITE-yD-CTb.title" = "Slett denne kontoen";
@@ -27,7 +27,7 @@
 "QkU-T8-Xi6.title" = "Slett denne kontoen";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "vindu";
+"QvC-M9-y7g.title" = "Vindu";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "VN1-A3-RIh"; */
 "VN1-A3-RIh.title" = "OK";
@@ -36,16 +36,16 @@
 "aOa-1q-AZe.title" = "Bekreftelse";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.placeholderString" = "Feiletikett";
+"e7n-Ev-bK7.placeholderString" = "feiletikett";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
-"rW5-Il-5YD.title" = "Flytt";
+"rW5-Il-5YD.title" = "Overfør";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "vwh-K9-3O9"; */
 "vwh-K9-3O9.title" = "Passord";
 
 /* Class = "NSTextFieldCell"; title = "Account migration required"; ObjectID = "wmv-sA-Mlh"; */
-"wmv-sA-Mlh.title" = "Krever kontomigrering";
+"wmv-sA-Mlh.title" = "Krever kontooverføring";
 
 /* Class = "NSSecureTextFieldCell"; placeholderString = "Password..."; ObjectID = "xqz-Uz-hqU"; */
 "xqz-Uz-hqU.placeholderString" = "Passord…";

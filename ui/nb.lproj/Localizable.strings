@@ -1,5 +1,5 @@
 
-"A network error occured during the export" = "En nettverksfeil inntraff under eksport";
+"A network error occured during the export" = "En nettverksfeil oppstod ved eksport";
 
 /* Button Action */
 "Accept" = "Aksepter";
@@ -14,10 +14,10 @@
 "Add to contacts" = "Legg til kontakter";
 
 /* Backup error */
-"An error occured during the backup" = "En feil inntraff under sikkerhetskopiering";
+"An error occured during the backup" = "En feil oppstod ved sikkerhetskopiering";
 
 /* Error shown to the user */
-"An error occured during the export" = "En feil inntraff under eksport";
+"An error occured during the export" = "En feil oppstod ved eksport";
 
 /* Peer busy message */
 "appears to be busy." = "ser ut til å være opptatt.";
@@ -32,10 +32,10 @@
 "Block contact" = "Blokker kontakt";
 
 /* Contextual menu action */
-"Remove conversation" = "Fjern samtale";
+"Remove conversation" = "Slett samtale";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Ved å klikke \"OK\" vil du fjerne denne kontoen fra denne enheten! Denne handlingen kan ikke angres. I tillegg, kan ditt registrerte navn gå tapt.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Ved å klikke \"OK\" vil du slette denne kontoen fra denne enheten! Denne handlingen kan ikke angres. I tillegg, kan ditt registrerte navn gå tapt.";
 
 /* File transfer canceled label */
 "Canceled" = "Avbrutt";
@@ -107,10 +107,10 @@
 "Passwords don't match" = "Passordene er ikke like";
 
 /* Contextual menu action */
-"Place audio call" = "Opprett talesamtale";
+"Place audio call" = "Ny lydsamtale";
 
 /* Contextual menu action */
-"Place video call" = "Opprett videosamtale";
+"Place video call" = "Ny videosamtale";
 
 /* Recording view explanation label */
 "Press to start recording" = "Trykk for å starte opptak";
@@ -155,16 +155,16 @@
 "Text Actions" = "Teksthandlinger";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "Innskrevet brukernavn er tilgjengelig";
+"The entered username is available" = "Innstastet brukernavn er tilgjengelig";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "Innskrevet brukernavn er ikke tilgjengelig";
+"The entered username is not available" = "Inntastet brukernavn er ikke tilgjengelig";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "Passordet du skrev inn låser ikke opp denne kontoen";
+"The password you entered does not unlock this account" = "Passordet du tastet inn låser ikke opp denne kontoen";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "Denne kontoen behøver å bli migrert";
+"This account needs to be migrated" = "Denne kontoen behøver å bli overført";
 
 /* Explanation label when user have just ID */
 "This is your ID. \nCopy and share it with your friends!" = "Dette er din ID. \nKopier og del denne med dine venner!";
@@ -173,7 +173,7 @@
 "This is your Jami username. \nCopy and share it with your friends!" = "Dette er ditt Jami brukernavn. \nKopier og del dette med dine venner!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "For å fullføre prosessen, må du åpne Jami på den nye enheten og velge opsjonen \"Koble denne enheten til en konto\". Din pin er gyldig i 10 minutter.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "For å fullføre prosessen, må du åpne Jami på den nye enheten og velge opsjonen \"Tilknytt denne enheten til en konto\". Din pin er gyldig i 10 minutter.";
 
 /* Text shown to the user */
 "To proceed with the migration, you need to enter a password that was used for this account." = "For å fortsette med overføringen, må du oppgi et passord som ble brukt for denne kontoen.";
@@ -203,7 +203,7 @@
 "Attention! This action could not be undone!" = "Merk! Denne handlingen kan ikke angres!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Tilbakekalling av enhet feilet. Vennligst kontroll ditt passord og forsøk igjen.";
+"Device revocation failed. Please check your password and try again." = "Tilbakekalling av enhet feilet. Vennligst kontroller ditt passord og prøv igjen.";
 
 /* Device revocation error */
 "Device revocation failed" = "Tilbakekalling av enhet feilet";

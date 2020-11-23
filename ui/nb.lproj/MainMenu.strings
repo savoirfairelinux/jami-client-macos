@@ -1,15 +1,15 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Bring alle til forgrunnen";
+"5.title" = "Hent frem alle";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
-"19.title" = "vindu";
+"19.title" = "Vindu";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
 "23.title" = "Minimer";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
-"24.title" = "vindu";
+"24.title" = "Vindu";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
 "29.title" = "AHovedMeny";
@@ -63,7 +63,7 @@
 "200.title" = "Staving og gramatikk";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
-"201.title" = "Sjekk dokument nå";
+"201.title" = "Kontroller dokumentet nå";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
 "202.title" = "Slett";
@@ -81,7 +81,7 @@
 "207.title" = "Angre";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Find neste";
+"208.title" = "Finn neste";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
 "209.title" = "Finn…";
@@ -99,7 +99,7 @@
 "213.title" = "Finn forrige";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
-"215.title" = "Gjenta";
+"215.title" = "Gjør om";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
 "216.title" = "Staving og gramatikk";
@@ -117,10 +117,10 @@
 "220.title" = "Finn";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Bruk valg for å finne";
+"221.title" = "Bruk utvalg for å finne";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Forstørrelse";
+"239.title" = "Forstørr";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
 "295.title" = "Vis";
@@ -129,13 +129,13 @@
 "296.title" = "Vis";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "Vis verktøyslinje";
+"297.title" = "Vis verktøylinje";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "Tilpass menylinjen…";
+"298.title" = "Tilpass verktøylinjen…";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Sjekk staving med kontroll";
+"346.title" = "Kontroller grammatikk med stavekontroll";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
 "348.title" = "Erstatninger";
@@ -159,7 +159,7 @@
 "451.title" = "Transformasjoner";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Endre til store versaler";
+"452.title" = "Endre til store bokstaver";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
 "454.title" = "Korriger staving automatisk";
@@ -174,7 +174,7 @@
 "462.title" = "Teksterstatning";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Endre til små versaler";
+"465.title" = "Endre til små bokstaver";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
 "466.title" = "Stor forbokstav";
