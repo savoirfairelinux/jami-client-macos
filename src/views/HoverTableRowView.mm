@@ -141,7 +141,7 @@
         [super drawBackgroundInRect:dirtyRect];
     }
 
-    if ((self.mouseInside) && self.highlightable) {
+    if ((self.mouseInside || self.selected) && self.highlightable) {
         [self.effect_view setHidden:NO];
     }
 }
