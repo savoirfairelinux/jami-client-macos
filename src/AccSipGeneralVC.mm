@@ -92,21 +92,33 @@ typedef NS_ENUM(NSInteger, TagViews) {
         return;
     }
     if (auto outputImage = [picker outputImage]) {
-        [photoView setBordered:NO];
-        auto image = [picker inputImage];
-        CGFloat newSize = MIN(MIN(image.size.height, image.size.width), MAX_IMAGE_SIZE);
-        outputImage = [outputImage imageResizeInsideMax: newSize];
-        [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
-        [addProfilePhotoImage setHidden:YES];
         NSData* imageData = [outputImage TIFFRepresentation];
         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData: imageData];
         NSDictionary *properties = [[NSDictionary alloc] init];
         imageData = [imageRep representationUsingType:NSPNGFileType properties: properties];
         NSString * dataString = [imageData base64EncodedStringWithOptions:0];
         self.accountModel->setAvatar(self.selectedAccountID, QString::fromNSString(dataString));
+        [self updateAvatar];
     } else if(!photoView.image) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];
+    }
+}
+
+-(void)updateAvatar {
+    const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
+    @autoreleasepool {
+        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        NSImage *image = [[NSImage alloc] initWithData:imageData];
+        if(image) {
+            [photoView setBordered:NO];
+            [photoView setImage: [image roundCorners: image.size.height * 0.5]];
+            [addProfilePhotoImage setHidden:YES];
+        } else {
+            [photoView setImage:nil];
+            [photoView setBordered:YES];
+            [addProfilePhotoImage setHidden:NO];
+        }
     }
 }
 
@@ -129,19 +141,7 @@ typedef NS_ENUM(NSInteger, TagViews) {
 
 -(void)updateView {
     const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
-    @autoreleasepool {
-        NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
-        NSImage *image = [[NSImage alloc] initWithData:imageData];
-        if(image) {
-            [photoView setBordered:NO];
-            [photoView setImage: [image roundCorners: image.size.height * 0.5]];
-            [addProfilePhotoImage setHidden:YES];
-        } else {
-            [photoView setImage:nil];
-            [photoView setBordered:YES];
-            [addProfilePhotoImage setHidden:NO];
-        }
-    }
+    [self updateAvatar];
     NSString* displayName = account.profileInfo.alias.toNSString();
     [displayNameField setStringValue:displayName];
 
