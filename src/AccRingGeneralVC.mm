@@ -140,9 +140,8 @@ typedef NS_ENUM(NSInteger, TagViews) {
     [self hideBannedContacts];
 }
 
--(void) updateView {
+-(void)updateAvatar {
     const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
-
     @autoreleasepool {
         NSData *imageData = [[NSData alloc] initWithBase64EncodedString:account.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
         NSImage *image = [[NSImage alloc] initWithData:imageData];
@@ -156,6 +155,11 @@ typedef NS_ENUM(NSInteger, TagViews) {
             [addProfilePhotoImage setHidden:NO];
         }
     }
+}
+
+-(void) updateView {
+    const auto& account = accountModel->getAccountInfo(self.selectedAccountID);
+    [self updateAvatar];
     NSString* displayName = account.profileInfo.alias.toNSString();
     [displayNameField setStringValue:displayName];
     [ringIDField setStringValue: account.profileInfo.uri.toNSString()];
@@ -258,18 +262,13 @@ typedef NS_ENUM(NSInteger, TagViews) {
         return;
     }
     if (auto outputImage = [picker outputImage]) {
-        auto image = [picker inputImage];
-        CGFloat newSize = MIN(MIN(image.size.height, image.size.width), MAX_IMAGE_SIZE);
-        outputImage = [outputImage imageResizeInsideMax: newSize];
-        [photoView setImage: [outputImage roundCorners: outputImage.size.height * 0.5]];
-        [photoView setBordered:NO];
-        [addProfilePhotoImage setHidden:YES];
         NSData* imageData = [outputImage TIFFRepresentation];
         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData: imageData];
         NSDictionary *properties = [[NSDictionary alloc] init];
         imageData = [imageRep representationUsingType:NSPNGFileType properties: properties];
         NSString * dataString = [imageData base64EncodedStringWithOptions:0];
         self.accountModel->setAvatar(self.selectedAccountID, QString::fromNSString(dataString));
+        [self updateAvatar];
     } else if(!photoView.image) {
         [photoView setBordered:YES];
         [addProfilePhotoImage setHidden:NO];

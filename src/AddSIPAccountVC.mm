@@ -155,9 +155,6 @@ NSTimer* timeoutTimer;
     }
     if (auto outputImage = [picker outputImage]) {
         [photoView setBordered:NO];
-        auto image = [picker inputImage];
-        CGFloat newSize = MIN(MIN(image.size.height, image.size.width), MAX_IMAGE_SIZE);
-        outputImage = [outputImage imageResizeInsideMax: newSize];
         [photoView setImage:outputImage];
         [addProfilePhotoImage setHidden:YES];
     } else if(!photoView.image) {
