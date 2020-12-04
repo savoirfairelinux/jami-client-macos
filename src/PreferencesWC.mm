@@ -72,9 +72,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
     currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil dataTransferModel: self.dataTransferModel avModel: self.avModel];
-
-    [self resizeWindowWithFrame:currentVC.view.frame];
-    [prefsContainer addSubview:currentVC.view];
+    [self addCurrentVC];
 }
 
 - (IBAction)displayAudio:(NSToolbarItem *)sender
@@ -82,8 +80,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
     currentVC = [[AudioPrefsVC alloc] initWithNibName:@"AudioPrefs" bundle:nil avModel: self.avModel];
-    [self resizeWindowWithFrame:currentVC.view.frame];
-    [prefsContainer addSubview:currentVC.view];
+    [self addCurrentVC];
 }
 
 - (IBAction)displayVideo:(NSToolbarItem *)sender
@@ -91,8 +88,25 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
     currentVC = [[VideoPrefsVC alloc] initWithNibName:@"VideoPrefs" bundle:nil avModel: self.avModel];
+    [self addCurrentVC];
+}
+
+-(void) addCurrentVC {
     [self resizeWindowWithFrame:currentVC.view.frame];
     [prefsContainer addSubview:currentVC.view];
+    currentVC.view.translatesAutoresizingMaskIntoConstraints = false;
+    [NSLayoutConstraint constraintWithItem:currentVC.view
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual toItem: prefsContainer
+                                 attribute:NSLayoutAttributeCenterX
+                                multiplier:1 constant:0].active = YES;
+    [NSLayoutConstraint constraintWithItem:currentVC.view
+                                 attribute:NSLayoutAttributeTop
+                                 relatedBy:NSLayoutRelationEqual
+                                    toItem:prefsContainer
+                                 attribute:NSLayoutAttributeTop
+                                multiplier:1
+                                  constant:0].active = YES;
 }
 
 - (void) resizeWindowWithFrame:(NSRect)fr
@@ -101,7 +115,9 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     frame.origin.y += frame.size.height;
     frame.origin.y -= NSHeight(fr) + [self toolBarHeight] + [self titleBarHeight];
     frame.size.height = NSHeight(fr) + [self toolBarHeight];
-    frame.size.width = NSWidth(fr);
+    if (frame.size.width < NSWidth(fr)) {
+        frame.size.width = NSWidth(fr);
+    }
     frame = [NSWindow frameRectForContentRect:frame
                                          styleMask:[self.window styleMask]];
 
