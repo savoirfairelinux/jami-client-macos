@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,17 +15,17 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="deY-JV-Rfe">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="216"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6OQ-wD-f0s">
-                    <rect key="frame" x="20" y="63" width="360" height="57"/>
+                    <rect key="frame" x="20" y="25" width="360" height="166"/>
                     <subviews>
-                        <stackView distribution="equalCentering" orientation="horizontal" alignment="centerY" spacing="14" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCX-Iy-LKs">
-                            <rect key="frame" x="102" y="36" width="157" height="21"/>
+                        <stackView distribution="equalCentering" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCX-Iy-LKs">
+                            <rect key="frame" x="104" y="146" width="153" height="20"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y73-M5-wnx">
-                                    <rect key="frame" x="-2" y="3" width="47" height="16"/>
+                                    <rect key="frame" x="-2" y="2" width="47" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Output" id="2gZ-Ab-XHf">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -33,7 +33,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9SA-9E-IzQ" userLabel="Outputs">
-                                    <rect key="frame" x="55" y="-3" width="105" height="25"/>
+                                    <rect key="frame" x="50" y="-4" width="107" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="sdt-1V-qeL"/>
                                     </constraints>
@@ -60,11 +60,11 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
-                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="14" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vmI-cp-8lh">
-                            <rect key="frame" x="102" y="0.0" width="157" height="21"/>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vmI-cp-8lh">
+                            <rect key="frame" x="104" y="111" width="153" height="20"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wn2-fz-UW2">
-                                    <rect key="frame" x="-2" y="3" width="47" height="16"/>
+                                    <rect key="frame" x="-2" y="2" width="47" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Input" id="x1o-rT-jy6">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -72,7 +72,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bK9-uH-jDb" userLabel="Inputs">
-                                    <rect key="frame" x="55" y="-3" width="105" height="25"/>
+                                    <rect key="frame" x="50" y="-4" width="107" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Sr2-HE-Wv7"/>
                                     </constraints>
@@ -99,17 +99,23 @@
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Sld-i2-1FY">
+                            <rect key="frame" x="99" y="0.0" width="163" height="96"/>
+                        </customView>
                     </subviews>
                     <constraints>
                         <constraint firstItem="wn2-fz-UW2" firstAttribute="trailing" secondItem="Y73-M5-wnx" secondAttribute="trailing" id="2vm-nh-jOx"/>
+                        <constraint firstItem="wCX-Iy-LKs" firstAttribute="top" secondItem="6OQ-wD-f0s" secondAttribute="top" id="WLr-qG-E2V"/>
                         <constraint firstItem="wn2-fz-UW2" firstAttribute="leading" secondItem="Y73-M5-wnx" secondAttribute="leading" id="cWK-va-QC3"/>
                         <constraint firstItem="bK9-uH-jDb" firstAttribute="leading" secondItem="9SA-9E-IzQ" secondAttribute="leading" id="gIx-Aw-W1s"/>
                     </constraints>
                     <visibilityPriorities>
                         <integer value="1000"/>
                         <integer value="1000"/>
+                        <integer value="1000"/>
                     </visibilityPriorities>
                     <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
@@ -118,7 +124,8 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6OQ-wD-f0s" secondAttribute="trailing" constant="20" id="68O-xI-oE7"/>
                 <constraint firstItem="6OQ-wD-f0s" firstAttribute="leading" secondItem="deY-JV-Rfe" secondAttribute="leading" constant="20" id="Fox-sj-yEh"/>
-                <constraint firstItem="6OQ-wD-f0s" firstAttribute="top" secondItem="deY-JV-Rfe" secondAttribute="top" constant="30" id="e93-O3-78V"/>
+                <constraint firstAttribute="bottom" secondItem="6OQ-wD-f0s" secondAttribute="bottom" constant="25" id="JUM-x4-fZx"/>
+                <constraint firstItem="6OQ-wD-f0s" firstAttribute="top" secondItem="deY-JV-Rfe" secondAttribute="top" constant="25" id="e93-O3-78V"/>
             </constraints>
             <point key="canvasLocation" x="170.5" y="41.5"/>
         </customView>
