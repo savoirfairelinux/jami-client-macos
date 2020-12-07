@@ -21,10 +21,10 @@
 #import "IMTableCellView.h"
 #import "NSColor+RingTheme.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import <qstring.h>
 
 @implementation IMTableCellView {
-    uint64_t interaction;
+    QString interaction;
 }
 
 NSString* const MESSAGE_MARGIN = @"10";
@@ -53,7 +53,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     }
 }
 
-- (void) setupForInteraction:(uint64_t)inter
+- (void) setupForInteraction:(const QString&)inter
 {
     interaction = inter;
     [self setupDirection];
@@ -67,7 +67,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     msgView.layerContentsRedrawPolicy = NSViewLayerContentsRedrawOnSetNeedsDisplay;
 }
 
-- (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed {
+- (void) setupForInteraction:(const QString&)inter isFailed:(bool) failed {
     [self setupForInteraction:inter];
 }
 
@@ -105,7 +105,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     [self updateWidthConstraints: size.width];
 }
 
-- (uint64_t)interaction
+- (QString&)interaction
 {
     return interaction;
 }

@@ -255,7 +255,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     QObject::connect(&lrc->getBehaviorController(),
                      &lrc::api::BehaviorController::newUnreadInteraction,
                      [self] (const QString& accountId, const QString& conversation,
-                             uint64_t interactionId, const lrc::api::interaction::Info& interaction) {
+                             const QString& interactionId, const lrc::api::interaction::Info& interaction) {
         BOOL shouldNotify = [[NSUserDefaults standardUserDefaults] boolForKey:Preferences::MessagesNotifications];
         if(!shouldNotify) {
             return;

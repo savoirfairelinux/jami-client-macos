@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return cachedConv_;
 }
 
--(void) reloadConversationForMessage:(uint64_t) uid updateSize:(BOOL) update {
+-(void) reloadConversationForMessage:(const QString&) uid updateSize:(BOOL) update {
     auto* conv = [self getCurrentConversation];
     if (conv == nil)
         return;
@@ -275,8 +275,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                      &lrc::api::ConversationModel::displayedInteractionChanged,
                      [self](const QString &uid,
                             const QString &participantURI,
-                            const uint64_t &previousUid,
-                            const uint64_t &newdUid) {
+                            const QString &previousUid,
+                            const QString &newdUid) {
         if (uid != convUid_)
             return;
         [self reloadConversationForMessage:newdUid updateSize: NO];
@@ -322,7 +322,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
     });
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
-                                             [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
+                                             [self](const QString& uid, QString& interactionId, const lrc::api::interaction::Info& interaction){
         if (uid != convUid_)
             return;
         cachedConv_ = nil;
@@ -332,7 +332,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         [self scrollToBottom];
     });
     interactionStatusUpdatedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
-                                                       [self](const QString& uid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
+                                                       [self](const QString& uid, const QString&  interactionId, const lrc::api::interaction::Info& interaction){
         if (uid != convUid_)
             return;
         cachedConv_ = nil;
@@ -430,7 +430,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return result;
 }
 
--(NSTableCellView*) configureViewforTransfer:(lrc::api::interaction::Info)interaction interactionID: (uint64_t) interactionID tableView:(NSTableView*)tableView
+-(NSTableCellView*) configureViewforTransfer:(lrc::api::interaction::Info)interaction interactionID: (const QString&) interactionID tableView:(NSTableView*)tableView
 {
     IMTableCellView* result;
 
@@ -920,7 +920,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 #pragma mark - message view parameters
 
--(NSString *) getDataTransferPath:(uint64_t)interactionId {
+-(NSString *) getDataTransferPath:(const QString&)interactionId {
     lrc::api::datatransfer::Info info = {};
     convModel_->getTransferInfo(interactionId, info);
     double convertData = static_cast<double>(info.totalSize);
