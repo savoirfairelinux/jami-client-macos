@@ -20,6 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MessageBubbleView.h"
+#import <qstring.h>
 
 @interface IMTableCellView : NSTableCellView
 
@@ -45,9 +46,9 @@
 @property (assign) IBOutlet NSLayoutConstraint* messageHeightConstraint;
 @property (nonatomic, strong) IBOutlet NSImageView* readIndicator;
 
-- (uint64_t) interaction;
-- (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed;
-- (void) setupForInteraction:(uint64_t)inter;
+- (QString&) interaction;
+- (void) setupForInteraction:(const QString&)inter isFailed:(bool) failed;
+- (void) setupForInteraction:(const QString&)inter;
 - (void) updateMessageConstraint:(CGFloat) width andHeight: (CGFloat) height timeIsVisible: (bool) visible isTopPadding: (bool) padding;
 - (void)updateWidthConstraints:(CGFloat)width;
 - (void)updateHeightConstraints:(CGFloat)height;
