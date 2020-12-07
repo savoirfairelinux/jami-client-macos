@@ -257,7 +257,7 @@ CVPixelBufferRef pixelBufferPreview;
     self.messageConnection = QObject::connect(convModel,
                                               &lrc::api::ConversationModel::interactionStatusUpdated,
                                               [self] (const QString& convUid,
-                                                      uint64_t msgId,
+                                                      const QString& msgId,
                                                       lrc::api::interaction::Info msg) {
                                                   if (msg.type == lrc::api::interaction::Type::TEXT) {
                                                       if(not [[self splitView] isSubviewCollapsed:[[[self splitView] subviews] objectAtIndex: 1]]){
