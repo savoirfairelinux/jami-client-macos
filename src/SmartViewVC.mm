@@ -311,13 +311,13 @@ NSInteger const REQUEST_SEG         = 1;
                                                             [delegate listTypeChanged];
                                                         });
         interactionStatusUpdatedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionStatusUpdated,
-                                                        [self] (const QString& convUid) {
+                                                        [self] (const QString& convUid, const QString& interactionId) {
                                                             if (convUid != selectedUid_)
                                                                 return;
                                                             [self reloadConversationWithUid: convUid.toNSString()];
                                                         });
         newInteractionConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
-                                                        [self](const QString& convUid, uint64_t interactionId, const lrc::api::interaction::Info& interaction){
+                                                        [self](const QString& convUid, QString& interactionId, const lrc::api::interaction::Info& interaction){
                                                             if (convUid == selectedUid_) {
                                                                 convModel_->clearUnreadInteractions(convUid);
                                                             }
