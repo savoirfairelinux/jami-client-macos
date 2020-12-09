@@ -666,15 +666,19 @@ CVPixelBufferRef pixelBufferPreview;
                      &lrc::api::AVModel::rendererStarted,
                      [=](const QString& id) {
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
-                             [self.previewView setHidden:NO];
-                             [hidePreviewBackground setHidden: NO];
-                             self.previewView.videoRunning = true;
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self.previewView setHidden:NO];
+                                 [hidePreviewBackground setHidden: NO];
+                                 self.previewView.videoRunning = true;
+                             });
                          } else if ([self isCurrentCall: id]) {
-                             [self mouseIsMoving: NO];
-                             self.distantView.videoRunning = true;
-                             [self.distantView setHidden:NO];
-                             [bluerBackgroundEffect setHidden:YES];
-                             [backgroundImage setHidden:YES];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self mouseIsMoving: NO];
+                                 self.distantView.videoRunning = true;
+                                 [self.distantView setHidden:NO];
+                                 [bluerBackgroundEffect setHidden:YES];
+                                 [backgroundImage setHidden:YES];
+                             });
                          }
                      });
     renderConnections.stopped =
@@ -682,14 +686,18 @@ CVPixelBufferRef pixelBufferPreview;
                      &lrc::api::AVModel::rendererStopped,
                      [=](const QString& id) {
                          if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
-                             [self.previewView setHidden:YES];
-                             self.previewView.videoRunning = false;
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self.previewView setHidden:YES];
+                                 self.previewView.videoRunning = false;
+                             });
                          } else if ([self isCurrentCall: id]) {
-                             [self mouseIsMoving: YES];
-                             self.distantView.videoRunning = false;
-                             [self.distantView setHidden:YES];
-                             [bluerBackgroundEffect setHidden:NO];
-                             [backgroundImage setHidden:NO];
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self mouseIsMoving: YES];
+                                 self.distantView.videoRunning = false;
+                                 [self.distantView setHidden:YES];
+                                 [bluerBackgroundEffect setHidden:NO];
+                                 [backgroundImage setHidden:NO];
+                             });
                          }
                      });
     renderConnections.frameUpdated =
