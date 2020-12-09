@@ -19,6 +19,6 @@ codesign --force --sign "${APP_CERTIFICATE}" --entitlements ../data/Jami.entitle
 codesign --verify Jami.app
 echo "create .pkg"
 productbuild --component Jami.app/ /Applications --sign "${INSTALLER_CERTIFICATE}" --product Jami.app/Contents/Info.plist Jami.pkg
-/Applications/Xcode.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool  --validate-app  --type osx -f Jami.pkg -u $APPLE_ACCOUNT --password $APPLE_PASSWORD
+/Applications/Xcode.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool  --validate-app  --type osx -f Jami.pkg -u $APPLE_ACCOUNT --password $ALTOOL_PASSWORD
 echo "start deploying"
-/Applications/Xcode.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool  --upload-app  --type osx -f Jami.pkg -u $APPLE_ACCOUNT --password $APPLE_PASSWORD
+/Applications/Xcode.app/Contents/SharedFrameworks/ContentDeliveryServices.framework/Versions/A/Frameworks/AppStoreService.framework/Versions/A/Support/altool  --upload-app  --type osx -f Jami.pkg -u $APPLE_ACCOUNT --password $ALTOOL_PASSWORD
