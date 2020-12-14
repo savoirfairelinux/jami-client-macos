@@ -143,7 +143,6 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     } else {
         [leaveMessageVC hide];
     }
-
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
     QObject::disconnect(modelSortedConnection_);
@@ -195,6 +194,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     } catch (std::out_of_range& e) {
         NSLog(@"contact out of range");
     }
+    convModel_->loadConversationMessages(convUid_, "", 40);
 }
 
 - (void) initFrame
