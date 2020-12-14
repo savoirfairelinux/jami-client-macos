@@ -143,7 +143,6 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     } else {
         [leaveMessageVC hide];
     }
-
     // Signals tracking changes in conversation list, we need them as cached conversation can be invalid
     // after a reordering.
     QObject::disconnect(modelSortedConnection_);
@@ -173,13 +172,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         return;
 
     // Setup UI elements according to new conversation
-    NSLog(@"account info, %@", conv->accountId.toNSString());
-    NSLog(@"conv info, %@", conv->uid.toNSString());
-    NSLog(@"paricipant info, %@", conv->participants[0].toNSString());
     NSString* bestName = bestNameForConversation(*conv, *convModel_);
-    NSLog(@"account info, %@", conv->accountId.toNSString());
-    NSLog(@"conv info, %@", conv->uid.toNSString());
-    NSLog(@"paricipant info, %@", conv->participants[0].toNSString());
     NSString* bestId = bestIDForConversation(*conv, *convModel_);
     [conversationTitle setStringValue: bestName];
     [conversationID setStringValue: bestId];
@@ -194,6 +187,9 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
     } catch (std::out_of_range& e) {
         NSLog(@"contact out of range");
+    }
+    if (conv->interactions.size() < 2) {
+         convModel_->loadConversationMessages(convUid_, 40);
     }
 }
 
