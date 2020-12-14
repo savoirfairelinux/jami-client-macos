@@ -3,7 +3,7 @@
 "0Fh-Sz-TMo.title" = "Min";
 
 /* Class = "NSTextFieldCell"; title = "Video RTP port Range"; ObjectID = "0cb-ib-oHd"; */
-"0cb-ib-oHd.title" = "Video RTP port Range";
+"0cb-ib-oHd.title" = "Video-Port RTP-Bereich";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "24s-we-pkD"; */
 "24s-we-pkD.title" = "Sicherheit";
@@ -15,7 +15,7 @@
 "3Uq-Nb-J1A.title" = "Anruf-Einstellungen";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Fallback on RTP on encryption failure";
+"3rM-KT-bNf.title" = "RTP benutzen, wenn Verschlüsselung nicht funktioniert";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
 "3vs-TI-tkg.title" = "Auto answer calls";
@@ -24,10 +24,10 @@
 "6eH-la-JbF.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
-"72p-GY-gu6.title" = "Private key password";
+"72p-GY-gu6.title" = "Kennwort für privaten Schlüssel";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
-"8JD-11-wHZ.title" = "Outgoing TLS server name";
+"8JD-11-wHZ.title" = "TLS-Servername (ausgehend)";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
 "8bw-iH-XGl.title" = "Item 1";
@@ -45,13 +45,13 @@
 "Gwi-Mp-NpZ.title" = "TURN benutzen";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
-"HRM-FR-1sH.title" = "Use STUN";
+"HRM-FR-1sH.title" = "STUN benutzen";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
 "HYt-sW-yd0.title" = "STUN address";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "Require a certificate for incoming TLS connections";
+"JV8-cY-6vR.title" = "Eingehende TLS-Verbindung soll ein Zertifikat benötigen";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
 "Jfp-NE-ODd.title" = "SDP Session Negotiation (ICE Fallback)";
@@ -69,7 +69,7 @@
 "OEo-C7-vEh.title" = "Item 2";
 
 /* Class = "NSTextFieldCell"; title = "Audio RTP port Range"; ObjectID = "Ogj-NW-fZ9"; */
-"Ogj-NW-fZ9.title" = "Audio RTP port Range";
+"Ogj-NW-fZ9.title" = "Audio-Port RTP-Bereich";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
 "Ppa-zn-w1X.title" = "Feld";
@@ -87,13 +87,13 @@
 "W9F-Nf-ehp.title" = "Privater Schlüssel";
 
 /* Class = "NSButtonCell"; title = "Verify answer certificates (client side)"; ObjectID = "WsS-1e-Epm"; */
-"WsS-1e-Epm.title" = "Verify answer certificates (client side)";
+"WsS-1e-Epm.title" = "Bestätigen Sie die Antwort-Zertifikate (Clientseitig)";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "Xp3-bL-3Cs"; */
 "Xp3-bL-3Cs.title" = "Benutzer-Zertifikat";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "Xxr-gl-ukE"; */
-"Xxr-gl-ukE.title" = "Address";
+"Xxr-gl-ukE.title" = "Adresse";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
 "Zuz-jy-rLn.title" = "Feld";
@@ -111,7 +111,7 @@
 "cwV-lc-jju.title" = "Feld";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Negotiation timeout (seconds)";
+"dtf-uk-n1B.title" = "Timeout für Verbindungsaushandlung (Sek.)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "Feld";
@@ -147,7 +147,7 @@
 "vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Encrypt negotiation (TLS)";
+"vZH-42-mUi.title" = "Aushandlung der Verbindung verschlüsseln (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
 "vpo-fl-9TS.title" = "Verbindung";
@@ -165,4 +165,4 @@
 "xjL-Wb-7VN.title" = "TURN-Kennwort";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLS protocol method";
+"zBy-cW-KY3.title" = "TLS-Protokoll";

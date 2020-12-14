@@ -33,19 +33,19 @@
 "Lww-Wb-yrf.title" = "Enable notifications for invitations";
 
 /* Class = "NSButtonCell"; title = "Launch on Startup"; ObjectID = "O2C-xR-mHF"; */
-"O2C-xR-mHF.title" = "Launch on Startup";
+"O2C-xR-mHF.title" = "Beim Hochlauf starten";
 
 /* Class = "NSTextFieldCell"; title = "Call recording"; ObjectID = "Qb8-tb-vJd"; */
 "Qb8-tb-vJd.title" = "Call recording";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
-"T3a-yx-ZaW.title" = "Automatically check for updates";
+"T3a-yx-ZaW.title" = "Automatisch nach Updates suchen";
 
 /* Class = "NSTextFieldCell"; title = "Conversations"; ObjectID = "ZCU-sa-SEk"; */
 "ZCU-sa-SEk.title" = "Gespräche";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "cB6-4m-9MU"; */
-"cB6-4m-9MU.title" = "Daily";
+"cB6-4m-9MU.title" = "Täglich";
 
 /* Class = "NSTextFieldCell"; title = "Record folder"; ObjectID = "ep4-QU-rGl"; */
 "ep4-QU-rGl.title" = "Record folder";
@@ -60,7 +60,7 @@
 "uCL-ye-tsv.title" = "Benachrichtigungen für eingehende Anrufe aktivieren.";
 
 /* Class = "NSButtonCell"; title = "Bring Jami to foreground on incoming calls"; ObjectID = "uYI-hA-JHk"; */
-"uYI-hA-JHk.title" = "Bring Jami to foreground on incoming calls";
+"uYI-hA-JHk.title" = "Jami in den Vordergrund verschieben, wenn ein Anruf eingeht";
 
 /* Class = "NSButtonCell"; title = "Record local video"; ObjectID = "y5x-4d-E26"; */
 "y5x-4d-E26.title" = "Record local video";

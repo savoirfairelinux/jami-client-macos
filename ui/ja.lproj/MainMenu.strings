@@ -45,10 +45,10 @@
 "150.title" = "全て表示";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
-"195.title" = "Stop Speaking";
+"195.title" = "会話を停止";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "196"; */
-"196.title" = "Start Speaking";
+"196.title" = "会話を開始";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "197"; */
 "197.title" = "コピー";
@@ -60,10 +60,10 @@
 "199.title" = "切り取り";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
-"200.title" = "Spelling and Grammar";
+"200.title" = "綴りと文法";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
-"201.title" = "Check Document Now";
+"201.title" = "いますぐ文書を確認";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
 "202.title" = "削除";
@@ -72,7 +72,7 @@
 "203.title" = "貼り付け";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Show Spelling and Grammar";
+"204.title" = "綴りと文法を表示";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
 "205.title" = "編集";
@@ -81,43 +81,43 @@
 "207.title" = "取り消し";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Find Next";
+"208.title" = "次を検索";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
-"209.title" = "Find…";
+"209.title" = "検索...";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "210"; */
-"210.title" = "Jump to Selection";
+"210.title" = "選択へ飛ぶ";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
-"211.title" = "Speech";
+"211.title" = "会話";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "212"; */
-"212.title" = "Speech";
+"212.title" = "会話";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
-"213.title" = "Find Previous";
+"213.title" = "前を検索";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
 "215.title" = "やり直し";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
-"216.title" = "Spelling and Grammar";
+"216.title" = "綴りと文法";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
 "217.title" = "編集";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "218"; */
-"218.title" = "Find";
+"218.title" = "検索";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Check Spelling While Typing";
+"219.title" = "入力中に綴りを確認";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
-"220.title" = "Find";
+"220.title" = "検索";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Use Selection for Find";
+"221.title" = "選択して検索する";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "拡大";
@@ -129,58 +129,58 @@
 "296.title" = "表示";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "Show Toolbar";
+"297.title" = "ツールバーを表示";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "Customize Toolbar…";
+"298.title" = "ツールバーを調整";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Check Grammar With Spelling";
+"346.title" = "綴りと一緒に文法を確認";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "Substitutions";
+"348.title" = "代用";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "Substitutions";
+"349.title" = "代用";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
-"350.title" = "Smart Copy/Paste";
+"350.title" = "多機能複写・貼り付け";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Smart Quotes";
+"351.title" = "多機能引用符";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
-"354.title" = "Smart Links";
+"354.title" = "多機能リンク";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
-"450.title" = "Transformations";
+"450.title" = "変形";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "451"; */
-"451.title" = "Transformations";
+"451.title" = "変形";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Make Upper Case";
+"452.title" = "大文字にする";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Correct Spelling Automatically";
+"454.title" = "綴りを自動的に修正";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
-"457.title" = "Show Substitutions";
+"457.title" = "代用を表示";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Smart Dashes";
+"460.title" = "多機能ダッシュ";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "Text Replacement";
+"462.title" = "文章置換";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Make Lower Case";
+"465.title" = "小文字にする";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
-"466.title" = "Capitalize";
+"466.title" = "先頭を大文字にする";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "Paste and Match Style";
+"485.title" = "様式に合わせて貼り付け";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
 "490.title" = "ヘルプ";
@@ -189,10 +189,10 @@
 "491.title" = "ヘルプ";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami Help";
+"492.title" = "Jamiの解説";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
-"534.title" = "Find and Replace…";
+"534.title" = "検索と置換";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
 "593.title" = "アップデートを確認...";
