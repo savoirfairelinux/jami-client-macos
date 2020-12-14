@@ -56,6 +56,7 @@
     QString convUid_;
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
+    lrc::api::conversation::Info cachedConv;
     lrc::api::AVModel* avModel;
     QMetaObject::Connection newInteractionSignal_;
 
@@ -66,6 +67,7 @@
     QMetaObject::Connection interactionStatusUpdatedSignal_;
     QMetaObject::Connection peerComposingMsgSignal_;
     QMetaObject::Connection lastDisplayedChanged_;
+    QMetaObject::Connection newMessages_;
     NSString* previewImage;
     NSMutableDictionary *pendingMessagesToSend;
     RecordFileVC * recordingController;
@@ -155,6 +157,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
     QObject::disconnect(lastDisplayedChanged_);
+    QObject::disconnect(newMessages_);
     [self closeRecordingView];
 }
 
@@ -177,15 +180,21 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     if (cachedConv_ != nil)
         return cachedConv_;
-    auto it = getConversationFromUid(convUid_, *convModel_);
-    if (conversationExists(it, *convModel_)) {
-        cachedConv_ = &(*it);
-    } else {
-        it = getSearchResultFromUid(convUid_, *convModel_);
-        if (searchResultExists(it, *convModel_)) {
-            cachedConv_ = &(*it);
-        }
+    cachedConv = convModel_->getConversationForUID(convUid_);
+    if (cachedConv.uid.isEmpty()) {
+        NSLog(@"conv.uid.isEmpty");
+        return nil;
     }
+    qDebug() << "%^%&conv id" << cachedConv.uid;
+    cachedConv_ = &cachedConv;
+//    if (conversationExists(it, *convModel_)) {
+//        cachedConv_ = &(*it);
+//    } else {
+//        it = getSearchResultFromUid(convUid_, *convModel_);
+//        if (searchResultExists(it, *convModel_)) {
+//            cachedConv_ = &(*it);
+//        }
+//    }
     return cachedConv_;
 }
 
@@ -240,6 +249,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
     QObject::disconnect(lastDisplayedChanged_);
+    QObject::disconnect(newMessages_);
     lastDisplayedChanged_ =
     QObject::connect(convModel_,
                      &lrc::api::ConversationModel::displayedInteractionChanged,
@@ -251,6 +261,18 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             return;
         [self reloadConversationForMessage:newdUid updateSize: NO];
         [self reloadConversationForMessage:previousUid updateSize: NO];
+    });
+    
+    newMessages_ =
+    QObject::connect(convModel_,
+                     &lrc::api::ConversationModel::newMessagesAvailable,
+                     [self](const QString &accountId,
+                            const QString &conversationId) {
+        if (conversationId != convUid_)
+            return;
+        cachedConv_ = nil;
+        [conversationView reloadData];
+        [self scrollToBottom];
     });
 
     peerComposingMsgSignal_ = QObject::connect(convModel_,
@@ -654,8 +676,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != FIRST_WITHOUT_TIME
                                 && sequence != FIRST_WITH_TIME) ? YES : NO;
     [result.photoView setHidden:!shouldDisplayAvatar];
-    BOOL showIndicator = convModel_->isLastDisplayed(convUid_, it->first, conv->participants.front());
-    [result.readIndicator setHidden: !showIndicator];
+   // BOOL showIndicator = convModel_->isLastDisplayed(convUid_, it->first, conv->participants.front());
+    [result.readIndicator setHidden: YES];
     @autoreleasepool {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         auto image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner)));
@@ -677,7 +699,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         if (conv == nil)
             return HEIGHT_DEFAULT;
 
-        auto size = [conversationView numberOfRows] - 1;
+        NSInteger size = [conversationView numberOfRows] - 1;
+        NSInteger size1 = conv->interactions.size();
 
         if (row > size || row > conv->interactions.size()) {
             return HEIGHT_DEFAULT;
@@ -693,6 +716,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         if (it == conv->interactions.end()) {
             return HEIGHT_DEFAULT;
         }
+        
 
         auto interaction = it->second;
 
@@ -940,11 +964,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    auto* conv = [self getCurrentConversation];
+    auto conv = [self getCurrentConversation];
 
     // return conversation +1 view for composing indicator
-    if (conv)
-        return conv->interactions.size() + 1;
+    if (conv) {
+        qDebug() << "***** conversationId current" << convUid_;
+        qDebug() << "***** conversationId" << conv->uid;
+        NSInteger size = conv->interactions.size() + 1;
+        return size;
+    }
     else
         return 0;
 }
