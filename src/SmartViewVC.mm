@@ -183,7 +183,6 @@ NSInteger const REQUEST_SEG         = 1;
     [searchResultsView layoutSubtreeIfNeeded];
 }
 
-
 -(void) reloadData
 {
     [contactsHeader setHidden: convModel_->allFilteredConversations().get().empty() || searchField.stringValue.length == 0];
@@ -276,6 +275,7 @@ NSInteger const REQUEST_SEG         = 1;
     QObject::disconnect(newInteractionConnection_);
     QObject::disconnect(searchStatusChangedConnection_);
     QObject::disconnect(searchResultUpdated_);
+    convModel_->setFilter(currentFilterType);
     [self reloadData];
     [self reloadSearchResults];
 
