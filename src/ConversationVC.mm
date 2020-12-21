@@ -44,6 +44,8 @@
     __unsafe_unretained IBOutlet NSTextField *conversationID;
     __unsafe_unretained IBOutlet HoverButton *addContactButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
+    __unsafe_unretained IBOutlet NSProgressIndicator* loadingindicator;
+    __unsafe_unretained IBOutlet NSView* loadingindicatorContainer;
 
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
@@ -61,7 +63,7 @@
 
     // All those connections are needed to invalidate cached conversation as pointer
     // may not be referencing the same conversation anymore
-    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
+    QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_, creatingConversationEventConnection_;
 }
 
 @end
@@ -103,6 +105,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     QObject::disconnect(filterChangedConnection_);
     QObject::disconnect(newConversationConnection_);
     QObject::disconnect(conversationRemovedConnection_);
+    QObject::disconnect(creatingConversationEventConnection_);
 }
 
 -(const lrc::api::conversation::Info*) getCurrentConversation
@@ -145,6 +148,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     QObject::disconnect(filterChangedConnection_);
     QObject::disconnect(newConversationConnection_);
     QObject::disconnect(conversationRemovedConnection_);
+    QObject::disconnect(creatingConversationEventConnection_);
     modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelChanged,
                                           [self](){
                                               cachedConv_ = nil;
@@ -161,6 +165,18 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
                                                 [self](){
                                                     cachedConv_ = nil;
                                                 });
+    creatingConversationEventConnection_ =  QObject::connect(convModel_, &lrc::api::ConversationModel::creatingConversationEvent,
+                                                             [self](const QString& accountId, const QString& conversationId, const QString& participantURI, int status) {
+        if (conversationId != convUid_ && participantURI != convUid_) {
+            return;
+        }
+        [loadingindicatorContainer setHidden:status != 0];
+        if (status == 0) {
+            [loadingindicator startAnimation:nil];
+        } else {
+            [loadingindicator stopAnimation:nil];
+        }
+    });
 
     auto* conv = [self getCurrentConversation];
 
@@ -168,13 +184,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         return;
 
     // Setup UI elements according to new conversation
-    NSLog(@"account info, %@", conv->accountId.toNSString());
-    NSLog(@"conv info, %@", conv->uid.toNSString());
-    NSLog(@"paricipant info, %@", conv->participants[0].toNSString());
     NSString* bestName = bestNameForConversation(*conv, *convModel_);
-    NSLog(@"account info, %@", conv->accountId.toNSString());
-    NSLog(@"conv info, %@", conv->uid.toNSString());
-    NSLog(@"paricipant info, %@", conv->participants[0].toNSString());
     NSString* bestId = bestIDForConversation(*conv, *convModel_);
     [conversationTitle setStringValue: bestName];
     [conversationID setStringValue: bestId];
@@ -189,6 +199,9 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
     } catch (std::out_of_range& e) {
         NSLog(@"contact out of range");
+    }
+    if (!conv->allMessagesLoaded) {
+        convModel_->loadConversationMessages(convUid_, 0);
     }
 }
 
