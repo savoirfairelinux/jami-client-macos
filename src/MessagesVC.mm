@@ -59,6 +59,7 @@
     QString convUid_;
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
+    std::vector<std::pair<QString, lrc::api::interaction::Info >> messages;
     lrc::api::AVModel* avModel;
     QMetaObject::Connection newInteractionSignal_;
 
@@ -69,6 +70,7 @@
     QMetaObject::Connection interactionStatusUpdatedSignal_;
     QMetaObject::Connection peerComposingMsgSignal_;
     QMetaObject::Connection lastDisplayedChanged_;
+    QMetaObject::Connection newMessages_;
     NSString* previewImage;
     NSMutableDictionary *pendingMessagesToSend;
     RecordFileVC * recordingController;
@@ -156,6 +158,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     cachedConv_ = nil;
     convUid_ = "";
     convModel_ = nil;
+    messages = {};
 
     QObject::disconnect(modelSortedSignal_);
     QObject::disconnect(filterChangedSignal_);
@@ -163,6 +166,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
     QObject::disconnect(lastDisplayedChanged_);
+    QObject::disconnect(newMessages_);
     [self closeRecordingView];
 }
 
@@ -194,31 +198,24 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(void) reloadConversationForMessage:(const QString&) uid updateSize:(BOOL) update {
-    auto* conv = [self getCurrentConversation];
-    if (conv == nil)
-        return;
-    auto it = conv->interactions.find(uid);
-    if (it == conv->interactions.end()) {
+    auto index = [self indexOfIntercation: uid];
+    if (index < 0) {
         return;
     }
-    auto itIndex = distance(conv->interactions.begin(),it);
-    if (itIndex >= ([conversationView numberOfRows] - 1) || itIndex >= conv->interactions.size()) {
-        return;
-    }
-    NSRange rangeToUpdate = NSMakeRange(itIndex, 2);
+    auto it = messages.at(index);
+    NSRange rangeToUpdate = NSMakeRange(index, 2);
     NSIndexSet* indexSet = [NSIndexSet indexSetWithIndexesInRange:rangeToUpdate];
     //reload previous message to update bubbleview
-    if (itIndex > 0) {
+    if (index > 0) {
         auto previousIt = it;
-        previousIt--;
-        auto previousInteraction = previousIt->second;
+        auto previousInteraction = messages.at(index-1).second;
         if (previousInteraction.type == lrc::api::interaction::Type::TEXT) {
-            NSRange range = NSMakeRange(itIndex - 1, 3);
+            NSRange range = NSMakeRange(index - 1, 3);
             indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
         }
     }
     if (update) {
-        NSRange insertRange = NSMakeRange(itIndex, 1);
+        NSRange insertRange = NSMakeRange(index, 1);
         NSIndexSet* insertRangeSet = [NSIndexSet indexSetWithIndexesInRange:insertRange];
         [conversationView removeRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
         [conversationView insertRowsAtIndexes:insertRangeSet withAnimation:(NSTableViewAnimationEffectNone)];
@@ -238,12 +235,14 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     convModel_ = model;
     peerComposingMessage = false;
     composingMessage = false;
+    [self reloadMessages];
 
     // Signal triggered when messages are received or their status updated
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
     QObject::disconnect(lastDisplayedChanged_);
+    QObject::disconnect(newMessages_);
     lastDisplayedChanged_ =
     QObject::connect(convModel_,
                      &lrc::api::ConversationModel::displayedInteractionChanged,
@@ -255,6 +254,27 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             return;
         [self reloadConversationForMessage:newdUid updateSize: NO];
         [self reloadConversationForMessage:previousUid updateSize: NO];
+    });
+
+    newMessages_ =
+    QObject::connect(convModel_,
+                     &lrc::api::ConversationModel::newMessagesAvailable,
+                     [self](const QString &accountId,
+                            const QString &conversationId) {
+        if (conversationId != convUid_)
+            return;
+        cachedConv_ = nil;
+        [self reloadMessages];
+        conversationView.alphaValue = 0.0;
+        [conversationView reloadData];
+        [conversationView scrollToEndOfDocument:nil];
+        CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
+        fadeIn.toValue = [NSNumber numberWithFloat:1.0];
+        fadeIn.duration = 0.4f;
+
+        [conversationView.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
+        conversationView.alphaValue = 1;
     });
 
     peerComposingMsgSignal_ = QObject::connect(convModel_,
@@ -296,10 +316,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
     });
     newInteractionSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newInteraction,
-                                             [self](const QString& uid, QString& interactionId, const lrc::api::interaction::Info& interaction){
-        if (uid != convUid_)
+                                             [self](const QString& uid, QString& interactionId, const lrc::api::interaction::Info& interaction) {
+        bool transferForOtherDevice = interaction.type == lrc::api::interaction::Type::DATA_TRANSFER && interaction.body.isEmpty() && lrc::api::interaction::isOutgoing(interaction);
+        if (uid != convUid_ || interaction.type ==  lrc::api::interaction::Type::MERGE || transferForOtherDevice)
             return;
         cachedConv_ = nil;
+        messages.push_back(std::make_pair(interactionId, interaction));
         peerComposingMessage = false;
         [conversationView noteNumberOfRowsChanged];
         [self reloadConversationForMessage:interactionId updateSize: YES];
@@ -309,11 +331,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                        [self](const QString& uid, const QString&  interactionId, const lrc::api::interaction::Info& interaction){
         if (uid != convUid_)
             return;
-        cachedConv_ = nil;
-        bool isOutgoing = lrc::api::interaction::isOutgoing(interaction);
-        if (interaction.type == lrc::api::interaction::Type::TEXT && isOutgoing) {
-            convModel_->refreshFilter();
+        auto index = [self indexOfIntercation: interactionId];
+        if (index < 0) {
+            return;
         }
+        cachedConv_ = nil;
+        messages.at(index).second = interaction;
         [self reloadConversationForMessage:interactionId updateSize: interaction.type == lrc::api::interaction::Type::DATA_TRANSFER];
         [self scrollToBottom];
     });
@@ -371,6 +394,26 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                nil];
     NSAttributedString* attributedPlaceholder = [[NSAttributedString alloc] initWithString: placeholder attributes:nameAttrs];
     messageView.placeholderAttributedString = attributedPlaceholder;
+}
+
+-(void)reloadMessages {
+    auto* conv = [self getCurrentConversation];
+    messages = {};
+    for (auto& interaction : conv->interactions) {
+        bool transferForOtherDevice = interaction.second.type == lrc::api::interaction::Type::DATA_TRANSFER && interaction.second.body.isEmpty() && lrc::api::interaction::isOutgoing(interaction.second);
+        if (interaction.second.type != lrc::api::interaction::Type::MERGE && !transferForOtherDevice) {
+            messages.push_back(std::make_pair(interaction.first, interaction.second));
+        }
+    }
+}
+
+-(int)indexOfIntercation:(const QString&)uid {
+    for (int i = 0; i < messages.size(); i++) {
+        if (messages.at(i).first == uid) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 #pragma mark - configure cells
@@ -541,10 +584,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return nil;
 
     IMTableCellView* result;
-    auto it = conv->interactions.begin();
+    auto it = messages.begin();
     auto size = [conversationView numberOfRows] - 1;
 
-    if (row > size || row > conv->interactions.size()) {
+    if (row > size || row > messages.size()) {
         return [[NSView alloc] init];
     }
 
@@ -572,7 +615,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     std::advance(it, row);
 
-    if (it == conv->interactions.end()) {
+    if (it == messages.end()) {
         return [[NSView alloc] init];
     }
 
@@ -687,30 +730,24 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     try {
         double someWidth = tableView.frame.size.width * 0.7;
 
-        auto* conv = [self getCurrentConversation];
-
-        if (conv == nil)
-            return HEIGHT_DEFAULT;
-
         auto size = [conversationView numberOfRows] - 1;
 
-        if (row > size || row > conv->interactions.size()) {
+        if (row > size || row > messages.size()) {
             return HEIGHT_DEFAULT;
         }
         if (row == size) {
             return peerComposingMessage ? HEIGHT_FOR_COMPOSING_INDICATOR : DEFAULT_ROW_HEIGHT;
         }
 
-        auto it = conv->interactions.begin();
+        auto it = messages.begin();
 
         std::advance(it, row);
 
-        if (it == conv->interactions.end()) {
+        if (it == messages.end()) {
             return HEIGHT_DEFAULT;
         }
 
         auto interaction = it->second;
-
         MessageSequencing sequence = [self computeSequencingFor:row];
 
         bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
@@ -768,7 +805,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(NSString *) getDataTransferPath:(const QString&)interactionId {
     lrc::api::datatransfer::Info info = {};
-    convModel_->getTransferInfo(interactionId, info);
+    convModel_->getTransferInfo(convUid_, interactionId, info);
     double convertData = static_cast<double>(info.totalSize);
     return info.path.toNSString();
 }
@@ -796,15 +833,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(MessageSequencing) computeSequencingFor:(NSInteger) row {
     try {
-        auto* conv = [self getCurrentConversation];
-        if (row >= conversationView.numberOfRows - 1 || row >= conv->interactions.size()) {
+        if (row >= conversationView.numberOfRows - 1 || row >= messages.size()) {
             return SINGLE_WITHOUT_TIME;
         }
-        if (conv == nil)
-            return SINGLE_WITHOUT_TIME;
-        auto it = conv->interactions.begin();
+        auto it = messages.begin();
         std::advance(it, row);
-        if (it == conv->interactions.end()) {
+        if (it == messages.end()) {
             return SINGLE_WITHOUT_TIME;
         }
         auto interaction = it->second;
@@ -813,12 +847,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
         // first message in comversation
         if (row == 0) {
-            if (it == conv->interactions.end() || conv->interactions.size() < 2) {
+            if (it == messages.end() || messages.size() < 2) {
                 return SINGLE_WITH_TIME;
             }
             auto nextIt = it;
             nextIt++;
-            if (nextIt == conv->interactions.end()) {
+            if (nextIt == messages.end()) {
                 return SINGLE_WITH_TIME;
             }
             auto nextInteraction = nextIt->second;
@@ -828,12 +862,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             return FIRST_WITH_TIME;
         }
         // last message in comversation
-        if (row == conv->interactions.size() - 1) {
-            if(it == conv->interactions.begin()) {
+        if (row == messages.size() - 1) {
+            if(it == messages.begin()) {
                 return SINGLE_WITH_TIME;
             }
             auto previousIt = it;
-            previousIt--;
+            std::advance(previousIt, -1);
             auto previousInteraction = previousIt->second;
             bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
             bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
@@ -846,16 +880,17 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             return SINGLE_WITH_TIME;
         }
         // single message in comversation
-        if(it == conv->interactions.begin() || it == conv->interactions.end()) {
+        if(it == messages.begin() || it == messages.end()) {
             return SINGLE_WITH_TIME;
         }
         // message in the middle of conversation
         auto previousIt = it;
-        previousIt--;
+        std::advance(previousIt, -1);
+       // previousIt--;
         auto previousInteraction = previousIt->second;
         auto nextIt = it;
         nextIt++;
-        if (nextIt == conv->interactions.end()) {
+        if (nextIt == messages.end()) {
             return SINGLE_WITHOUT_TIME;
         }
         auto nextInteraction = nextIt->second;
@@ -976,8 +1011,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto* conv = [self getCurrentConversation];
 
     // return conversation +1 view for composing indicator
-    if (conv)
-        return conv->interactions.size() + 1;
+    if (conv) {
+        return messages.size() + 1;
+    }
     else
         return 0;
 }
@@ -1018,16 +1054,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (void)acceptIncomingFile:(id)sender {
     auto interId = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
-    auto& inter = [self getCurrentConversation]->interactions.find(interId)->second;
     if (convModel_ && !convUid_.isEmpty()) {
         convModel_->acceptTransfer(convUid_, interId);
     }
 }
 
 - (void)declineIncomingFile:(id)sender {
-    auto inter = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
+    auto interId = [(IMTableCellView*)[[[[[[sender superview] superview] superview] superview] superview] superview] interaction];
     if (convModel_ && !convUid_.isEmpty()) {
-        convModel_->cancelTransfer(convUid_, inter);
+        convModel_->cancelTransfer(convUid_, interId);
     }
 }
 
@@ -1040,11 +1075,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     } else {
         return;
     }
-    auto it = [self getCurrentConversation]->interactions.find(interId);
-    if (it == [self getCurrentConversation]->interactions.end()) {
+    auto index = [self indexOfIntercation: interId];
+    if (index < 0) {
         return;
     }
-    auto& interaction = it->second;
+    auto it = messages.at(index);
+    auto& interaction = it.second;
     NSString* name =  interaction.body.toNSString();
     if (([name rangeOfString:@"/"].location == NSNotFound)) {
         name = [self getDataTransferPath:interId];
@@ -1151,7 +1187,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             const char* fullPath = [url fileSystemRepresentation];
             NSString* fileName = [url lastPathComponent];
             if (convModel_) {
-                auto* conv = [self getCurrentConversation];
                 convModel_->sendFile(convUid_, QString::fromStdString(fullPath), QString::fromNSString(fileName));
             }
         }
