@@ -1,6 +1,6 @@
 
 /* Class = "NSTextFieldCell"; placeholderString = "Display Role"; ObjectID = "Jcn-cg-rbR"; */
-"Jcn-cg-rbR.placeholderString" = "Display Role";
+"Jcn-cg-rbR.placeholderString" = "役職を表示";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "M4f-N4-msh"; */
 "M4f-N4-msh.title" = "テキストセル";
@@ -9,7 +9,7 @@
 "a9R-r5-K3w.placeholderString" = "問い合わせ方法";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Last name..."; ObjectID = "cGT-nu-sPa"; */
-"cGT-nu-sPa.placeholderString" = "Last name...";
+"cGT-nu-sPa.placeholderString" = "苗字...";
 
 /* Class = "NSButtonCell"; title = "Add new contact"; ObjectID = "had-9Y-eza"; */
 "had-9Y-eza.title" = "新しい連絡先を追加";
@@ -21,4 +21,4 @@
 "v7b-de-MVd.title" = "新しい連絡先";
 
 /* Class = "NSTextFieldCell"; placeholderString = "First name..."; ObjectID = "vyb-95-XaF"; */
-"vyb-95-XaF.placeholderString" = "First name...";
+"vyb-95-XaF.placeholderString" = "名前...";

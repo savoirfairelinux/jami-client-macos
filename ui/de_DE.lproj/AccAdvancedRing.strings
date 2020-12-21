@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Allow incoming calls from unknown contacts"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow incoming calls from unknown contacts";
+"1Xr-BO-Pu3.title" = "Anrufe von unbekannten zulassen";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
@@ -12,28 +12,28 @@
 "7eU-EP-4br.title" = "Feld";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "TURN-Adresse";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "Anruf-Einstellungen";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
-"Va3-Un-lCL.title" = "Discovery settings";
+"Va3-Un-lCL.title" = "Entdeckungs-Einstellungen";
 
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
-"rdZ-JB-96s.title" = "Make this account discoverable on local network";
+"rdZ-JB-96s.title" = "Dieses Konto im lokalen Netzwerk sichtbar machen";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
-"n3E-PI-JHj.title" = "Discover peers on local network";
+"n3E-PI-JHj.title" = "Ansprechpartner im lokalen Netzwerk finden";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "Automatische Anrufannahme";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Textzelle";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Name server";
+"ID3-Sv-gYY.title" = "Name-Server";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
 "K0z-NH-3Cq.title" = "Feld";
@@ -48,22 +48,22 @@
 "Qxp-I4-A7W.title" = "Sicherheit";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "Proxy einschalten";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "Video-Codecs";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
-"XU0-bl-lDD.title" = "TURN realm";
+"XU0-bl-lDD.title" = "TURN-Bereich";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "STUN-Adresse";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "Bootstrap";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "YcX-lE-8ug"; */
-"YcX-lE-8ug.title" = "Private key password";
+"YcX-lE-8ug.title" = "Kennwort für privaten Schlüssel";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
 "Ywo-5x-8kh.title" = "Feld";
@@ -72,7 +72,7 @@
 "ZNe-H0-dJk.title" = "Feld";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "ZqB-gt-yFt"; */
-"ZqB-gt-yFt.title" = "Address";
+"ZqB-gt-yFt.title" = "Adresse";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "eGX-gk-Zxp"; */
 "eGX-gk-Zxp.title" = "Feld";
@@ -90,7 +90,7 @@
 "k7i-pK-JXp.title" = "CA-Zertifikat";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "nqX-Vu-UuA"; */
-"nqX-Vu-UuA.title" = "Use STUN";
+"nqX-Vu-UuA.title" = "STUN benutzen";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
 "qFq-Yh-2JL.title" = "Eigener Klingelton";
@@ -108,10 +108,10 @@
 "vYi-gW-MrY.title" = "Feld";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "Konfiguration von OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "TURN benutzen";
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
-"2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";
+"2cZ-SI-nbz.title" = "Rendezvous-Treffpunkt einrichten: verwandeln Sie Ihr Konto in eine Konferenz";

@@ -77,7 +77,7 @@
 "Import from backup" = "Import from backup";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "Importer fra en anden enhed";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Incoming call from %@";
@@ -176,7 +176,7 @@
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "For at fortsætte migreringen bliver du nødt til at skrive adgangskoden, som blev brugt til denne konto.";
 
 /* File transfer peer unjoinable label */
 "Unjoinable" = "Unjoinable";
@@ -185,7 +185,7 @@
 "Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Jami" = "Welcome to Jami";
+"Welcome to Jami" = "Velkommen til Jami";
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Would you like to leave a message?";

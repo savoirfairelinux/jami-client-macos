@@ -1,23 +1,23 @@
 
-"A network error occured during the export" = "エクスポート中にネットワークエラーが発生しました";
+"A network error occured during the export" = "A network error occured during the export";
 
 /* Button Action */
-"Accept" = "受け入れ";
+"Accept" = "Accept";
 
 /* Button Action */
-"Cancel" = "キャンセル";
+"Cancel" = "Cancel";
 
 /* Welcome title */
-"Add a SIP account" = "SIPアカウントを追加";
+"Add a SIP account" = "Add a SIP account";
 
 /* Contextual menu action */
-"Add to contacts" = "連絡先に追加";
+"Add to contacts" = "Add to contacts";
 
 /* Backup error */
-"An error occured during the backup" = "バックアップの保存中にエラーが発生しました";
+"An error occured during the backup" = "An error occured during the backup";
 
 /* Error shown to the user */
-"An error occured during the export" = "エクスポート中にエラーが発生しました";
+"An error occured during the export" = "An error occured during the export";
 
 /* Peer busy message */
 "appears to be busy." = "appears to be busy.";
@@ -26,43 +26,43 @@
 "Audio permission not granted" = "Audio permission not granted";
 
 /* Backup account */
-"Backup your account" = "アカウントをバックアップ";
+"Backup your account" = "Backup your account";
 
 /* Contextual menu action */
-"Block contact" = "連絡先をブロック";
+"Block contact" = "Block contact";
 
 /* Contextual menu action */
-"Remove conversation" = "会話を削除";
+"Remove conversation" = "Remove conversation";
 
 /* Remove account alert message */
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
 /* File transfer canceled label */
-"Canceled" = "キャンセルしました";
+"Canceled" = "Canceled";
 
 /* Contextual menu entry */
-"Choose file" = "ファイルの選択";
+"Choose file" = "Choose file";
 
 /* Contextual menu action */
-"Clear conversation" = "会話履歴を削除";
+"Clear conversation" = "Clear conversation";
 
 /* No comment provided by engineer. */
-"Copy" = "コピー";
+"Copy" = "Copy";
 
 /* Recording view explanation label */
 "Could not record message during call" = "Could not record message during call";
 
 /* Welcome title */
-"Create a new account" = "新しいアカウントを作成";
+"Create a new account" = "Create a new account";
 
 /* Create rendezvous title */
 "Create a rendezvous point" = "Create a rendezvous point";
 
 /* Backup enter password */
-"Enter account password" = "アカウントのパスワードを入力";
+"Enter account password" = "Enter account password";
 
 /* File transfer failed label */
-"Failed" = "失敗しました";
+"Failed" = "Failed";
 
 /* Error message shown to user when it is impossible to migrate account */
 "Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
@@ -74,19 +74,19 @@
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "バックアップからインポート";
+"Import from backup" = "Import from backup";
 
 /* link account title */
-"Import from other device" = "別のデバイスからインポート";
+"Import from other device" = "Import from other device";
 
 /* Incoming call from {Name} */
-"Incoming call from %@" = "%@ から着信";
+"Incoming call from %@" = "Incoming call from %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "%@ からのメッセージ";
+"Incoming message from %@" = "Incoming message from %@";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username" = "無効なユーザー名";
+"Invalid username" = "Invalid username";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username." = "Invalid username.";
@@ -98,58 +98,58 @@
 "No account available" = "No account available";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "確認のパスワードと一致しません。";
+"Password and confirmation mismatch." = "Password and confirmation mismatch.";
 
 /* Indication for user */
-"Password is too short" = "パスワードが短すぎます";
+"Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "パスワードが一致しません";
+"Passwords don't match" = "Passwords don't match";
 
 /* Contextual menu action */
-"Place audio call" = "音声通話を開始";
+"Place audio call" = "Place audio call";
 
 /* Contextual menu action */
-"Place video call" = "ビデオ通話を開始";
+"Place video call" = "Place video call";
 
 /* Recording view explanation label */
 "Press to start recording" = "Press to start recording";
 
 /* Record message title */
-"Record a message" = "メッセージを記録";
+"Record a message" = "Record a message";
 
 /* Button Action */
-"Refuse" = "拒否";
+"Refuse" = "Refuse";
 
 /* Text shown to the user */
-"Registered name: " = "登録名:";
+"Registered name: " = "Registered name: ";
 
 /* Remove account alert title */
-"Remove account" = "アカウントを削除";
+"Remove account" = "Remove account";
 
 /* export account button title */
-"Select archive" = "アーカイブを選択";
+"Select archive" = "Select archive";
 
 /* Send button title */
-"Send" = "送信";
+"Send" = "Send";
 
 /* Notification message */
 "Send you a contact request" = "Send you a contact request";
 
 /* No comment provided by engineer. */
-"Share" = "共有";
+"Share" = "Share";
 
 /* Contextual menu entry */
-"Share screen" = "画面を共有";
+"Share screen" = "Share screen";
 
 /* Sign In */
-"Sign In" = "サインイン";
+"Sign In" = "Sign In";
 
 /* Record message title */
-"Stop recording" = "録音を停止";
+"Stop recording" = "Stop recording";
 
 /* File transfer successful label */
-"Success" = "成功";
+"Success" = "Success";
 
 /* No comment provided by engineer. */
 "Text Actions" = "Text Actions";
@@ -161,7 +161,7 @@
 "The entered username is not available" = "The entered username is not available";
 
 /* Error shown to the user */
-"The password you entered does not unlock this account" = "入力したパスワードではこのアカウントのロックを解除できません";
+"The password you entered does not unlock this account" = "The password you entered does not unlock this account";
 
 /* Text shown to the user */
 "This account needs to be migrated" = "This account needs to be migrated";
@@ -185,13 +185,13 @@
 "Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Jami" = "Jamiへようこそ";
+"Welcome to Jami" = "Welcome to Jami";
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Would you like to leave a message?";
 
 /* Password button title */
-"Change password" = "パスワードを変更";
+"Change password" = "Change password";
 
 /* Password button title */
 "Create password" = "Create password";
@@ -209,10 +209,10 @@
 "Device revocation failed" = "Device revocation failed";
 
 /* Edit Sip Account Action*/
-"Done" = "完了";
+"Done" = "Done";
 
 /* Edit Sip Account Action */
-"Edit Account" = "アカウントを編集";
+"Edit Account" = "Edit Account";
 
 /* Conference action */
 "Minimize participant" = "Minimize participant";
@@ -221,16 +221,16 @@
 "Maximize participant" = "Maximize participant";
 
 /* Conference action */
-"Hangup" = "受話";
+"Hangup" = "Hangup";
 
 /* Conference name */
-"Me" = "自分";
+"Me" = "Me";
 
 /* Choose registered name for account */
-"Choose a username for your account" = "アカウントのユーザー名を選択";
+"Choose a username for your account" = "Choose a username for your account";
 
 /* Choose registered name for rendezvous */
 "Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
 
 /* search bar placeholder */
-"Search for new or existing contact" = "新規・既存の連絡先を検索";
+"Search for new or existing contact" = "Search for new or existing contact";

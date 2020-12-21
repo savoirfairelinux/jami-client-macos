@@ -9,7 +9,7 @@
 "DSf-SJ-l6k.title" = "Feld";
 
 /* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "GBy-HF-JeP"; */
-"GBy-HF-JeP.title" = "Label";
+"GBy-HF-JeP.title" = "Bezeichner";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "KCp-bZ-69S"; */
 "KCp-bZ-69S.title" = "Feld";
@@ -18,7 +18,7 @@
 "Kjq-iM-NBL.ibShadowedToolTip" = "Auflegen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
-"LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
+"LVS-yZ-98V.ibShadowedToolTip" = "Video abschalten";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
 "NRc-5f-Ujc.ibShadowedMultipleValuesPlaceholder" = "Eine Nachricht senden";
@@ -33,7 +33,7 @@
 "QYT-0n-4sw.ibShadowedToolTip" = "Aufzeichnen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
-"Vhk-fx-6RW.ibShadowedToolTip" = "add contact to call";
+"Vhk-fx-6RW.ibShadowedToolTip" = "einen Kontakt zum Anruf hinzufügen";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
 "YGj-SP-ikj.title" = "Textzelle";
@@ -48,25 +48,25 @@
 "dPt-JY-yxV.placeholderString" = "Stand";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Toggle chat"; ObjectID = "fmp-x4-Pef"; */
-"fmp-x4-Pef.ibShadowedToolTip" = "Toggle chat";
+"fmp-x4-Pef.ibShadowedToolTip" = "Chat umschalten";
 
 /* Class = "NSTextFieldCell"; title = "person Id"; ObjectID = "hKi-Ay-ex5"; */
-"hKi-Ay-ex5.title" = "person Id";
+"hKi-Ay-ex5.title" = "ID der Person";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hfc-s5-yWK"; */
 "hfc-s5-yWK.title" = "Feld";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "ngO-WV-cXD"; */
-"ngO-WV-cXD.ibShadowedToolTip" = "Send a file";
+"ngO-WV-cXD.ibShadowedToolTip" = "Eine Datei senden";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Pick up";
+"qgD-3D-nD5.ibShadowedToolTip" = "Annehmen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
 "rqa-be-VIB.ibShadowedToolTip" = "Senden";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
-"tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
+"tQl-cT-0Lb.ibShadowedToolTip" = "Audio abschalten";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "ues-20-34k"; */
-"ues-20-34k.placeholderString" = "Person name";
+"ues-20-34k.placeholderString" = "Name der Person";
