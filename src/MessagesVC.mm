@@ -56,6 +56,7 @@
     QString convUid_;
     lrc::api::ConversationModel* convModel_;
     const lrc::api::conversation::Info* cachedConv_;
+    lrc::api::conversation::Info cachedConv;
     lrc::api::AVModel* avModel;
     QMetaObject::Connection newInteractionSignal_;
 
@@ -66,6 +67,7 @@
     QMetaObject::Connection interactionStatusUpdatedSignal_;
     QMetaObject::Connection peerComposingMsgSignal_;
     QMetaObject::Connection lastDisplayedChanged_;
+    QMetaObject::Connection newMessages_;
     NSString* previewImage;
     NSMutableDictionary *pendingMessagesToSend;
     RecordFileVC * recordingController;
@@ -155,6 +157,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(newInteractionSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
     QObject::disconnect(lastDisplayedChanged_);
+    QObject::disconnect(newMessages_);
     [self closeRecordingView];
 }
 
@@ -177,15 +180,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
     if (cachedConv_ != nil)
         return cachedConv_;
-    auto it = getConversationFromUid(convUid_, *convModel_);
-    if (conversationExists(it, *convModel_)) {
-        cachedConv_ = &(*it);
-    } else {
-        it = getSearchResultFromUid(convUid_, *convModel_);
-        if (searchResultExists(it, *convModel_)) {
-            cachedConv_ = &(*it);
-        }
+    cachedConv = convModel_->getConversationForUID(convUid_);
+    if (cachedConv.uid.isEmpty()) {
+        NSLog(@"conv.uid.isEmpty");
+        return nil;
     }
+    cachedConv_ = &cachedConv;
     return cachedConv_;
 }
 
@@ -197,7 +197,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (it == conv->interactions.end()) {
         return;
     }
-    auto itIndex = distance(conv->interactions.begin(),it);
+    auto itIndex = std::distance(conv->interactions.begin(),it);
     if (itIndex >= ([conversationView numberOfRows] - 1) || itIndex >= conv->interactions.size()) {
         return;
     }
@@ -206,7 +206,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     //reload previous message to update bubbleview
     if (itIndex > 0) {
         auto previousIt = it;
-        previousIt--;
+        std::advance(it, -1);
         auto previousInteraction = previousIt->second;
         if (previousInteraction.type == lrc::api::interaction::Type::TEXT) {
             NSRange range = NSMakeRange(itIndex - 1, 3);
@@ -240,6 +240,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     QObject::disconnect(interactionStatusUpdatedSignal_);
     QObject::disconnect(peerComposingMsgSignal_);
     QObject::disconnect(lastDisplayedChanged_);
+    QObject::disconnect(newMessages_);
     lastDisplayedChanged_ =
     QObject::connect(convModel_,
                      &lrc::api::ConversationModel::displayedInteractionChanged,
@@ -251,6 +252,25 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             return;
         [self reloadConversationForMessage:newdUid updateSize: NO];
         [self reloadConversationForMessage:previousUid updateSize: NO];
+    });
+    
+    newMessages_ =
+    QObject::connect(convModel_,
+                     &lrc::api::ConversationModel::newMessagesAvailable,
+                     [self](const QString &accountId,
+                            const QString &conversationId) {
+        if (conversationId != convUid_)
+            return;
+        conversationView.alphaValue = 0.0;
+        [conversationView reloadData];
+        [conversationView scrollToEndOfDocument:nil];
+        CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
+        fadeIn.toValue = [NSNumber numberWithFloat:1.0];
+        fadeIn.duration = 0.4f;
+
+        [conversationView.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
+        conversationView.alphaValue = 1;
     });
 
     peerComposingMsgSignal_ = QObject::connect(convModel_,
@@ -818,7 +838,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 return SINGLE_WITH_TIME;
             }
             auto previousIt = it;
-            previousIt--;
+            std::advance(previousIt, -1);
             auto previousInteraction = previousIt->second;
             bool timeChanged = [self sequenceTimeChangedFrom:interaction to:previousInteraction];
             bool authorChanged = [self sequenceAuthorChangedFrom:interaction to:previousInteraction];
@@ -836,7 +856,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
         // message in the middle of conversation
         auto previousIt = it;
-        previousIt--;
+        std::advance(previousIt, -1);
+       // previousIt--;
         auto previousInteraction = previousIt->second;
         auto nextIt = it;
         nextIt++;
@@ -943,8 +964,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto* conv = [self getCurrentConversation];
 
     // return conversation +1 view for composing indicator
-    if (conv)
-        return conv->interactions.size() + 1;
+    if (conv) {
+        NSInteger size = conv->interactions.size() + 1;
+        return size;
+    }
     else
         return 0;
 }
