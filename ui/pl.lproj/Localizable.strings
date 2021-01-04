@@ -8,7 +8,7 @@
 "Cancel" = "Anuluj";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "Dodaj konto SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "Dodaj do kontaków";
@@ -56,7 +56,7 @@
 "Create a new account" = "Utwórz nowe konto";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "Utwórz spotkanie";
 
 /* Backup enter password */
 "Enter account password" = "Enter account password";
@@ -74,10 +74,10 @@
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importuj z kopii zapasowej";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "Importuj z innego urządzenia";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Połączenie przychodzące od %@";
@@ -140,7 +140,7 @@
 "Share" = "Podziel się";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Udostępnij ekran";
 
 /* Sign In */
 "Sign In" = "Sign In";
@@ -227,10 +227,10 @@
 "Me" = "Ja";
 
 /* Choose registered name for account */
-"Choose a username for your account" = "Choose a username for your account";
+"Choose a username for your account" = "Wybierz nazwę użytkownika dla swojego konta";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "Wybierz nazwę dla swojego punktu spotkania";
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Szukaj nowego lub istniejącego kontaktu";
