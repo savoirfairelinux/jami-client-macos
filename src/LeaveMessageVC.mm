@@ -194,7 +194,7 @@ lrc::api::ConversationModel* conversationModel;
         [self show];
         return;
     }
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     @autoreleasepool {
         auto& imgManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
         QVariant photo = imgManip.conversationPhoto(conversation, conversationModel->owner, QSize(120, 120), NO);

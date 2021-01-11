@@ -179,7 +179,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         return cachedConv_;
     auto convOpt = getConversationFromUid(convUid_, *convModel_);
     if (convOpt.has_value()) {
-        lrc::api::conversation::Info& conversation = convOpt.value();
+        lrc::api::conversation::Info& conversation = *convOpt;
         cachedConv_ = &conversation;
     }
     return cachedConv_;

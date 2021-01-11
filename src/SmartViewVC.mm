@@ -144,7 +144,6 @@ NSInteger const REQUEST_SEG         = 1;
     auto convOpt = sender == searchResultsView ? convModel_->searchResultForRow(row) : convModel_->filteredConversation(row);
     if (!convOpt.has_value())
         return;
-   // lrc::api::conversation::Info& conversation = convOpt.value();
     convModel_->placeCall(convOpt->get().uid);
 }
 
@@ -466,7 +465,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto convOpt = notification.object == smartView ? convModel_->filteredConversation(row) : convModel_->searchResultForRow(row);
     if (!convOpt.has_value())
         return;
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     if (selectedUid_ != conversation.uid && !conversation.uid.isEmpty()) {
         selectedUid_ = conversation.uid;
         convModel_->selectConversation(selectedUid_);
@@ -490,7 +489,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto convOpt = isSearching ? convModel_->searchResultForRow(row) : convModel_->filteredConversation(row);
     if (!convOpt.has_value())
         return nil;
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     NSTableCellView* result;
 
     result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
@@ -694,7 +693,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto convOpt = getConversationFromUid(uid, *convModel_);
     if (!convOpt.has_value())
         return;
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     @try {
         auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
         if (!contact.profileInfo.uri.isEmpty() && contact.profileInfo.uri.compare(selectedUid_) == 0) {
@@ -736,7 +735,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto convOpt = hasSearchResult ? convModel_->searchResultForRow(0) : convModel_->filteredConversation(0);
     if (!convOpt.has_value())
         return NO;
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     auto uid = conversation.uid;
 
     if (selectedUid_ == uid) {
@@ -805,7 +804,7 @@ NSInteger const REQUEST_SEG         = 1;
     convModel_->searchResultForRow(NSInteger(index));
     if (!convOpt.has_value())
         return nil;
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
 
     @try {
         auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
@@ -972,7 +971,7 @@ NSInteger const REQUEST_SEG         = 1;
     auto convRef = convModel_->filteredConversation(row);
     if (!convRef.has_value())
         return "";
-    lrc::api::conversation::Info& conversation = convRef.value();
+    lrc::api::conversation::Info& conversation = *convRef;
     auto& convID = conversation.Info::uid;
     return convID;
 }

@@ -115,7 +115,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
     auto convOpt = getConversationFromUid(convUid_, *convModel_);
     if (convOpt.has_value()) {
-        lrc::api::conversation::Info& conversation = convOpt.value();
+        lrc::api::conversation::Info& conversation = *convOpt;
         cachedConv_ = &conversation;
     }
     return cachedConv_;

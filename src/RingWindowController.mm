@@ -251,7 +251,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         auto convModel = accInfo->conversationModel.get();
         auto convOpt = getConversationFromUid(convUid, *convModel);
         if (!convOpt.has_value()) { return; }
-        lrc::api::conversation::Info& convInfo = convOpt.value();
+        lrc::api::conversation::Info& convInfo = *convOpt;
         try {
             if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                 [smartViewVC selectPendingList];
@@ -279,7 +279,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         auto convModel = accInfo->conversationModel.get();
         auto convOpt = getConversationFromUid(convUid, *convModel);
         if (!convOpt.has_value()) { return; }
-        lrc::api::conversation::Info& convInfo = convOpt.value();
+        lrc::api::conversation::Info& convInfo = *convOpt;
         auto callModel = accInfo->callModel.get();
         lrc::api::account::ConfProperties_t accountProperties = accInfo->accountModel->getAccountConfig(accInfo->id);
         if (accountProperties.isRendezVous && (!callModel->hasCall(convInfo.callId) || !callModel->getCall(convInfo.callId).isOutgoing)) {
@@ -315,7 +315,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                          auto convModel = accInfo.conversationModel.get();
                          auto convOpt = getConversationFromUid(convUid, *convModel);
                          if (!convOpt.has_value()) { return; }
-                         lrc::api::conversation::Info& convInfo = convOpt.value();
+                         lrc::api::conversation::Info& convInfo = *convOpt;
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [self changeViewTo:SHOW_CONVERSATION_SCREEN];
@@ -328,7 +328,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                          auto convModel = accInfo.conversationModel.get();
                          auto convOpt = getConversationFromUid(convUid, *convModel);
                          if (!convOpt.has_value()) { return; }
-                         lrc::api::conversation::Info& convInfo = convOpt.value();
+                         lrc::api::conversation::Info& convInfo = *convOpt;
                          [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [self changeViewTo:LEAVE_MESSAGE];
@@ -662,7 +662,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     if (!convOpt.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& convInfo = convOpt.value();
+    lrc::api::conversation::Info& convInfo = *convOpt;
     [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
     [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
     accInfo.conversationModel.get()->clearUnreadInteractions(QString::fromNSString(conversationId));
@@ -679,7 +679,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     if (!convOpt.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& convInfo = convOpt.value();
+    lrc::api::conversation::Info& convInfo = *convOpt;
     if (accInfo.contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING) {
         [smartViewVC selectPendingList];
     }
@@ -703,7 +703,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [smartViewVC selectPendingList];
     auto convOpt = getConversationFromURI(QString::fromNSString(uri), *accInfo.conversationModel.get());
     if (convOpt.has_value()) {
-        lrc::api::conversation::Info& conversation = convOpt.value();
+        lrc::api::conversation::Info& conversation = *convOpt;
         [conversationVC setConversationUid:conversation.uid model:accInfo.conversationModel.get()];
         [smartViewVC selectConversation: conversation model:accInfo.conversationModel.get()];
     }
