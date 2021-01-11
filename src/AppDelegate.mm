@@ -215,7 +215,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
         auto convModel = lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get();
         auto conversationOpt = getConversationFromUid(convUid, *convModel);
         if (!conversationOpt.has_value()) { return; }
-        lrc::api::conversation::Info& conversation = conversationOpt.value();
+        lrc::api::conversation::Info& conversation = *conversationOpt;
         bool isIncoming = false;
         auto callModel = lrc->getAccountModel().getAccountInfo(accountId).callModel.get();
         if(callModel->hasCall(conversation.callId)) {
@@ -271,7 +271,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
                                              .getAccountInfo(accountId)
                                              .conversationModel.get());
         if (convOpt.has_value()) {
-            lrc::api::conversation::Info& conversation = convOpt.value();
+            lrc::api::conversation::Info& conversation = *convOpt;
             name = bestIDForConversation(conversation, *lrc->getAccountModel().getAccountInfo(accountId).conversationModel.get());
         }
         NSString* localizedTitle = [NSString stringWithFormat:

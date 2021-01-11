@@ -155,7 +155,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     if (!conversationInfo.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& conv = conversationInfo.value();
+    lrc::api::conversation::Info& conv = *conversationInfo;
     if (table == callsView) {
         auto callID = conv.confId.isEmpty() ? conv.callId : conv.confId;
         [self.delegate joinCall: callID];
@@ -218,7 +218,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
             if (displayNameString.length > 0) {
                 displayNameString = [displayNameString stringByAppendingString:@", "];
             }
-            lrc::api::conversation::Info& conv = conversationOpt.value();
+            lrc::api::conversation::Info& conv = *conversationOpt;
             displayNameString = [displayNameString stringByAppendingString: bestNameForConversation(conv, *convMod)];
         }
         [displayName setStringValue:displayNameString];
@@ -239,7 +239,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     if (!convOpt.has_value()) {
         return nil;
     }
-    lrc::api::conversation::Info& conversationInfo = convOpt.value();
+    lrc::api::conversation::Info& conversationInfo = *convOpt;
     NSString* displayNameString = bestNameForConversation(conversationInfo, *convMod);
     NSString* displayIDString = bestIDForConversation(conversationInfo, *convMod);
     if(displayNameString.length == 0 || [displayNameString isEqualToString:displayIDString]) {

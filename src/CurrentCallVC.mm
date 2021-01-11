@@ -166,7 +166,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (!convOpt.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& conv = convOpt.value();
+    lrc::api::conversation::Info& conv = *convOpt;
     confUid_ = conv.confId;
     [self.chatVC setConversationUid:convUid model: account->conversationModel.get()];
     [self connectSignals];
@@ -223,7 +223,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (!convOpt.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     [self.delegate chooseConversation: conversation model:accountInfo_->conversationModel.get()];
 }
 
@@ -276,7 +276,7 @@ CVPixelBufferRef pixelBufferPreview;
         if (!convOpt.has_value()) {
             return;
         }
-        lrc::api::conversation::Info& conv = convOpt.value();
+        lrc::api::conversation::Info& conv = *convOpt;
         auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
         if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
             accountInfo_->conversationModel->makePermanent(convUid_);
@@ -450,7 +450,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (!convOpt.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     NSString* bestName = bestNameForConversation(conversation, *accountInfo_->conversationModel);
     [contactNameLabel setStringValue:bestName];
     NSString* ringID = bestIDForConversation(conversation, *accountInfo_->conversationModel);
@@ -628,7 +628,7 @@ CVPixelBufferRef pixelBufferPreview;
         if (!convOpt.has_value()) {
             return nil;
         }
-        lrc::api::conversation::Info& conv = convOpt.value();
+        lrc::api::conversation::Info& conv = *convOpt;
         if (conv.uid.isEmpty() || conv.participants.empty()) {
             return nil;
         }
@@ -969,7 +969,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (!convOpt.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& conv = convOpt.value();
+    lrc::api::conversation::Info& conv = *convOpt;
     if (conv.uid.isEmpty() || conv.participants.empty()) {
         return;
     }
@@ -1297,7 +1297,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (!convOpt.has_value()) {
         return;
     }
-    lrc::api::conversation::Info& conversation = convOpt.value();
+    lrc::api::conversation::Info& conversation = *convOpt;
     auto callId = conversation.callId;
     if (not callModel->hasCall(callId)){
         return;
@@ -1341,7 +1341,7 @@ CVPixelBufferRef pixelBufferPreview;
     auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
     if (!convOpt.has_value())
         return false;
-    lrc::api::conversation::Info& conv = convOpt.value();
+    lrc::api::conversation::Info& conv = *convOpt;
     auto* callModel = accountInfo_->callModel.get();
     try {
         auto call = callModel->getCall(conv.callId);
