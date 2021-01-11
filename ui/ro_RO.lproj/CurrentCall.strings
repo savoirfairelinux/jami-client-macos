@@ -18,7 +18,7 @@
 "Kjq-iM-NBL.ibShadowedToolTip" = "Închide";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
-"LVS-yZ-98V.ibShadowedToolTip" = "Video fără sonor";
+"LVS-yZ-98V.ibShadowedToolTip" = "Stop video";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
 "NRc-5f-Ujc.ibShadowedMultipleValuesPlaceholder" = "Trimite un mesaj";
@@ -66,7 +66,7 @@
 "rqa-be-VIB.ibShadowedToolTip" = "Trimite";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
-"tQl-cT-0Lb.ibShadowedToolTip" = "Fără Sonor";
+"tQl-cT-0Lb.ibShadowedToolTip" = "Mut";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "ues-20-34k"; */
 "ues-20-34k.placeholderString" = "Numele persoanei";

@@ -35,7 +35,7 @@
 "Remove conversation" = "Konuşma sil";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "\"Tamam\" ı tıklayarak bu hesabı bu cihazdan kaldıracaksınız! Bu işlem geri alınamaz. Ayrıca, kayıtlı adınız kaybolabilir.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "\"Kaldır\"a tıklayarak bu aygıttaki bu hesabı kaldıracaksınız! Bu eylem geri alınamaz. Ayrıca kayıtlı adınız yitebilir.";
 
 /* File transfer canceled label */
 "Canceled" = "İptal edildi";
@@ -173,10 +173,10 @@
 "This is your Jami username. \nCopy and share it with your friends!" = "Bu sizin Jami kullanıcı adınız.\nKopyalayın ve arkadaşlarınızla paylaşın!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "İşlemleri tamamlamak için yeni cihazda Jami'yi açmanız ve \"Bu cihazı bir hesaba bağla\" seçeneğini belirtmeniz gerekir. PIN kodunuz 10 dakika geçerlidir.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Süreci tamamlamak için yeni aygıtta Jami'yi açmanız ve \"Bu aygıtı hesaba bağla\"yı seçmelisiniz. Pininiz 10 dakikalığına geçerlidir.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "Taşıma işlemine devam etmek için bu hesap için kullanılan bir şifre girmeniz gerekiyor.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Taşıma işlemini sürdürmek için bu hesapta kullanılan parolayı girmelisiniz.";
 
 /* File transfer peer unjoinable label */
 "Unjoinable" = "Katılımı olanaksız";
@@ -197,7 +197,7 @@
 "Create password" = "Parola oluştur";
 
 /* Device revocation title */
-"Revoke Device" = "Aygıtı iptal et";
+"Revoke Device" = "Aygıtı Kaldır";
 
 /* Device revocation message */
 "Attention! This action could not be undone!" = "Dikkat! Bu işlem geri alınamaz!";
@@ -233,4 +233,4 @@
 "Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
 
 /* search bar placeholder */
-"Search for new or existing contact" = "Yeni veya mevcut kişiyi arayın";
+"Search for new or existing contact" = "Yeni veya var olan kişiyi ara";

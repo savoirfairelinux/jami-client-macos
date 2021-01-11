@@ -6,7 +6,7 @@
 "3ik-rY-Gig.title" = "输入您的 PIN";
 
 /* Class = "NSButtonCell"; title = "Link"; ObjectID = "8b8-bt-eAj"; */
-"8b8-bt-eAj.title" = "连接";
+"8b8-bt-eAj.title" = "关联";
 
 /* Class = "NSTextFieldCell"; title = "An error occured, please check your password and pin."; ObjectID = "DyG-SJ-U1Q"; */
 "DyG-SJ-U1Q.title" = "发生错误，请检查您的密码和 PIN。";
@@ -54,4 +54,4 @@
 "vVf-hg-sWk.ibShadowedNotApplicablePlaceholder" = "PIN";
 
 /* Class = "NSTextFieldCell"; title = "Linking..."; ObjectID = "zWn-4H-ODH"; */
-"zWn-4H-ODH.title" = "关联中...";
+"zWn-4H-ODH.title" = "正在关联...";

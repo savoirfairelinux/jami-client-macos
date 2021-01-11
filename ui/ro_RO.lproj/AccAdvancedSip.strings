@@ -48,7 +48,7 @@
 "HRM-FR-1sH.title" = "Folosește STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "Adresă STUN";
+"HYt-sW-yd0.title" = "Adresa STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
 "JV8-cY-6vR.title" = "Solicită un certificat pentru conexiunile TLS primite";
@@ -93,13 +93,13 @@
 "Xp3-bL-3Cs.title" = "Certificat de utilizator";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "Xxr-gl-ukE"; */
-"Xxr-gl-ukE.title" = "Adresă";
+"Xxr-gl-ukE.title" = "Adresa";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
 "Zuz-jy-rLn.title" = "Cutie";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "Adresă TURN";
+"aYs-wh-Hpr.title" = "Adresa TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
 "b2y-85-ZHK.title" = "Certificat CA";

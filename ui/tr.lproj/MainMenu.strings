@@ -24,7 +24,7 @@
 "58.title" = "Jami Hakkında";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Seçenekler...";
+"129.title" = "Tercihler…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Hizmetler";
@@ -33,7 +33,7 @@
 "131.title" = "Hizmetler";
 
 /* Class = "NSMenuItem"; title = "Hide Jami"; ObjectID = "134"; */
-"134.title" = "Jami'yi gizle";
+"134.title" = "Jami'yi Gizle";
 
 /* Class = "NSMenuItem"; title = "Quit Jami"; ObjectID = "136"; */
 "136.title" = "Jami'den Çık";
@@ -138,10 +138,10 @@
 "346.title" = "Dil Bilgisini Yazım Denetimi ile Denetle";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
-"348.title" = "Yerine koyma";
+"348.title" = "Yerine Geçişler";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "349"; */
-"349.title" = "Yerine koyma";
+"349.title" = "Yerine Geçişler";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
 "350.title" = "Akıllı Kopyala/Yapıştır";
@@ -195,4 +195,4 @@
 "534.title" = "Bul ve Değiştir...";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Güncellemeleri denetle";
+"593.title" = "Güncellemeleri Denetle...";
