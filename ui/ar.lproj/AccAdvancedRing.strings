@@ -18,13 +18,13 @@
 "BIS-Ft-yJn.title" = "إعدادات الاتصال";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
-"Va3-Un-lCL.title" = "Discovery settings";
+"Va3-Un-lCL.title" = "إعدادات الاكتشاف";
 
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
-"rdZ-JB-96s.title" = "Make this account discoverable on local network";
+"rdZ-JB-96s.title" = "اجعل هذا الحساب قابلاً للاكتشاف على الشبكة المحلية";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
-"n3E-PI-JHj.title" = "Discover peers on local network";
+"n3E-PI-JHj.title" = "اكتشف أقرانك على الشبكة المحلية";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "الرد الآلي على المكالمات ";
@@ -114,4 +114,4 @@
 "zPJ-cO-neQ.title" = "إستعمل TURN";
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
-"2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";
+"2cZ-SI-nbz.title" = "تمكين نقطة الاجتماع: حوّل حسابك إلى غرفة اجتماعات";

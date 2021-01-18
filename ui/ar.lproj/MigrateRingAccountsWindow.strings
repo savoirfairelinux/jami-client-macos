@@ -3,10 +3,10 @@
 "1ob-x1-u74.title" = "اكتمل ترحيل الحساب";
 
 /* Class = "NSTextFieldCell"; placeholderString = "RingID"; ObjectID = "859-10-HEb"; */
-"859-10-HEb.placeholderString" = "RingID";
+"859-10-HEb.placeholderString" = "معرف Ring ID";
 
 /* Class = "NSTextFieldCell"; title = "To proceed with the migration, you need to enter a password that was used for this account."; ObjectID = "859-10-HEb"; */
-"859-10-HEb.title" = "To proceed with the migration, you need to enter a password that was used for this account.";
+"859-10-HEb.title" = "لمتابعة الترحيل، عليك إدخال كلمة مرور تم استخدامها لهذا الحساب.";
 
 /* Class = "NSTextFieldCell"; title = "Account migration error"; ObjectID = "8K3-9Z-MKH"; */
 "8K3-9Z-MKH.title" = "خطأ في ترحيل الحساب";
@@ -36,7 +36,7 @@
 "aOa-1q-AZe.title" = "تأكيد";
 
 /* Class = "NSTextFieldCell"; placeholderString = "error label"; ObjectID = "e7n-Ev-bK7"; */
-"e7n-Ev-bK7.placeholderString" = "error label";
+"e7n-Ev-bK7.placeholderString" = "خطأ تسمية";
 
 /* Class = "NSButtonCell"; title = "Migrate"; ObjectID = "rW5-Il-5YD"; */
 "rW5-Il-5YD.title" = "ترحيل";

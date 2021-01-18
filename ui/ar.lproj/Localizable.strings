@@ -8,7 +8,7 @@
 "Cancel" = "ألغِ";
 
 /* Welcome title */
-"Add a SIP account" = "Add a SIP account";
+"Add a SIP account" = "إضافة حساب SIP";
 
 /* Contextual menu action */
 "Add to contacts" = "أضف إلى الاتصالات المعروفة";
@@ -20,193 +20,193 @@
 "An error occured during the export" = "حدث خطأ أثناء التصدير";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "يبدو أن جهة الاتصال مشغولة.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "لم يتم منح إذن الصوت";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "النسخ الإحتياطى لحسابك";
 
 /* Contextual menu action */
 "Block contact" = "حظر جهة إتصال";
 
 /* Contextual menu action */
-"Remove conversation" = "Remove conversation";
+"Remove conversation" = "إزالة المحادثة";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "بالنقر فوق \"موافق\"، ستقوم بإزالة هذا الحساب على هذا الجهاز! لا يمكن التراجع عن هذا الإجراء. كما يمكن فقدان اسمك المسجل.";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "تم الإلغاء";
 
 /* Contextual menu entry */
 "Choose file" = "إختار ملف";
 
 /* Contextual menu action */
-"Clear conversation" = "Clear conversation";
+"Clear conversation" = "مسح المحادثة";
 
 /* No comment provided by engineer. */
 "Copy" = "إنسخ";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "تعذر تسجيل الرسالة أثناء المكالمة";
 
 /* Welcome title */
 "Create a new account" = "أنشىء حساب جديد";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "إنشاء نقطة اجتماع";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "أدخل كلمة مرور الحساب";
 
 /* File transfer failed label */
 "Failed" = "فشل";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "فشل ترحيل حسابك. يمكنك إعادة المحاولة بالضغط على موافق أو حذف حسابك.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "فشل إجراء البحث";
 
 /* Text shown to the user */
-"ID: " = "ID: ";
+"ID: " = "المعرفID:";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "استيراد من النسخ الاحتياطي";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "استيراد من جهاز آخر";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "مكالمة قادمة من %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "رسالة واردة من %@";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username" = "Invalid username";
+"Invalid username" = "اسم مستخدم غير صالح";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "اسم مسخدم غير صالح";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "انتقل إلى التفضيلات لإنشاء حساب جديد";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "لا يوجد حساب متوفر";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "عدم تطابق كلمة المرور والتأكيد.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "كلمة المرور قصيرة جدًا";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "كلمتا المرور غير متطابقتين";
 
 /* Contextual menu action */
-"Place audio call" = "Place audio call";
+"Place audio call" = "إجراء مكالمة صوتية";
 
 /* Contextual menu action */
-"Place video call" = "Place video call";
+"Place video call" = "إجراء مكالمة فيديو";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "اضغط لبدء التسجيل";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "تسجيل رسالة";
 
 /* Button Action */
 "Refuse" = "أرفض";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "الاسم المسجل:";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "إزالة الحساب";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "حدد أرشيف";
 
 /* Send button title */
 "Send" = "أرسل";
 
 /* Notification message */
-"Send you a contact request" = "Send you a contact request";
+"Send you a contact request" = "أرسل طلب جهة اتصال إليك";
 
 /* No comment provided by engineer. */
 "Share" = "مشاركة";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "مشاركة الشاشة";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "تسجيل الدخول";
 
 /* Record message title */
-"Stop recording" = "Stop recording";
+"Stop recording" = "إيقاف التسجيل";
 
 /* File transfer successful label */
 "Success" = "نجاح";
 
 /* No comment provided by engineer. */
-"Text Actions" = "Text Actions";
+"Text Actions" = "إجراءات النص";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "اسم المستخدم الذي تم إدخاله متوفر";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "اسم المستخدم الذي تم إدخاله غير متوفر";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "كلمة المرور التي أدخلتها لا تفتح هذا الحساب";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "يجب ترحيل هذا الحساب";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "هذا هو المعرّفID الخاص بك. \nانسخه وشاركه مع أصدقائك!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "هذا هو اسم مستخدم چامى الخاص بك. \nانسخه وشاركه مع أصدقائك!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "لإكمال عمليات المعالجة، عليك فتح چامى على الجهاز الجديد واختيار الخيار \"ربط هذا الجهاز بحساب\". رقم التعريف الشخصي الخاص بك صالح لمدة 10 دقائق.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "لمتابعة الترحيل، عليك إدخال كلمة مرور تم استخدامها لهذا الحساب.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "غير قابل للضم";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "لم يتم منح إذن الفيديو";
 
 /* Welcome title */
 "Welcome to Jami" = "مرحبا بك في جامي";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "هل ترغب في ترك رسالة؟";
 
 /* Password button title */
 "Change password" = "تغيير كلمة المرور";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "إنشاء كلمة مرور";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "إبطال الجهاز";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "تنبيه! تعذر التراجع عن هذا الإجراء!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "فشل إلغاء الجهاز. يرجى التحقق من كلمة المرور والمحاولة مرة أخرى.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "فشل إلغاء الجهاز";
 
 /* Edit Sip Account Action*/
 "Done" = "منجز";
@@ -215,10 +215,10 @@
 "Edit Account" = "تعديل الحساب";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "تقليل عدد المشاركين";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "زيادة عدد المشاركين";
 
 /* Conference action */
 "Hangup" = "إنهاء المكالمة";
@@ -230,7 +230,7 @@
 "Choose a username for your account" = "إختار إسم مستخدم لحسابك";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "اختر اسماً لنقطة الاجتماع";
 
 /* search bar placeholder */
 "Search for new or existing contact" = "البحث عن جهة اتصال جديدة أو موجودة";
