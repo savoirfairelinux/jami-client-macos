@@ -239,7 +239,7 @@ CVPixelBufferRef pixelBufferPreview;
             return;
         }
         if ([self isCurrentCall: confId]) {
-            [self updateConference: confId];
+            [self updateConference];
         }
     });
     //monitor for updated call state
@@ -385,8 +385,9 @@ CVPixelBufferRef pixelBufferPreview;
     participantsOverlays = [[NSMutableDictionary alloc] init];
 }
 
--(void)updateConference:(QString)confId
+-(void)updateConference
 {
+    auto confId = [self getcallID];
     if (confId.isEmpty()) {
         [self removeConferenceLayout];
         return;
@@ -400,6 +401,7 @@ CVPixelBufferRef pixelBufferPreview;
         [self removeConferenceLayout];
         return;
     }
+    NSMutableArray* participantUrs = [[NSMutableArray alloc] init];
     for (auto participant: participants) {
         ConferenceParticipant conferenceParticipant;
         conferenceParticipant.x = participant["x"].toFloat();
@@ -407,6 +409,7 @@ CVPixelBufferRef pixelBufferPreview;
         conferenceParticipant.width = participant["w"].toFloat();
         conferenceParticipant.hight = participant["h"].toFloat();
         conferenceParticipant.uri = participant["uri"].toNSString();
+        [participantUrs addObject:participant["uri"].toNSString()];
         conferenceParticipant.active = participant["active"] == "true";
         conferenceParticipant.isLocal = false;
         conferenceParticipant.bestName = participant["uri"].toNSString();
@@ -431,6 +434,13 @@ CVPixelBufferRef pixelBufferPreview;
             [self.distantView addSubview: overlay];
             participantsOverlays[conferenceParticipant.uri] = overlay;
             [overlay updateViewWithParticipant: conferenceParticipant];
+        }
+    }
+    auto keys = [participantsOverlays allKeys];
+    for (auto key : keys) {
+        if (![participantUrs containsObject:key]) {
+            [participantsOverlays[key] removeFromSuperview];
+            participantsOverlays[key] = nil;
         }
     }
 }
@@ -465,7 +475,7 @@ CVPixelBufferRef pixelBufferPreview;
     [recordOnOffButton setHidden:!confUid_.isEmpty()];
     [holdOnOffButton setHidden:!confUid_.isEmpty()];
     [movableBaseForView setHidden:!confUid_.isEmpty()];
-    [self updateConference: confUid_];
+    [self updateConference];
 
     [timeSpentLabel setStringValue:callModel->getFormattedCallDuration(callUid_).toNSString()];
     if (refreshDurationTimer == nil)
