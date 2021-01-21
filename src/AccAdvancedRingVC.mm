@@ -30,6 +30,7 @@
     __unsafe_unretained IBOutlet NSTextField *proxyServerField;
     __unsafe_unretained IBOutlet NSTextField *bootstrapServerField;
     __unsafe_unretained IBOutlet NSButton *enableProxyButton;
+    __unsafe_unretained IBOutlet NSButton *enableLocalModeratorButton;
     __unsafe_unretained IBOutlet NSButton *togleRendezVous;
 }
 @end
@@ -50,6 +51,7 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
     [enableProxyButton setState: accountProperties.proxyEnabled];
     [proxyServerField setEditable:accountProperties.proxyEnabled];
     [togleRendezVous setState: accountProperties.isRendezVous];
+    [enableLocalModeratorButton setState: self.accountModel->isLocalModeratorsEnabled(self.selectedAccountID)];
 }
 
 -(void) viewDidLoad {
@@ -79,6 +81,10 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
         accountProperties.isRendezVous = [sender state];
         self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
     }
+}
+
+- (IBAction)enableLocalModerators:(id)sender {
+    self.accountModel->enableLocalModerators(self.selectedAccountID, [sender state]);
 }
 
 - (IBAction)enableProxy:(id)sender {

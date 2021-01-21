@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
                 <outlet property="autoAnswer" destination="Iwx-oz-bCK" id="S7Q-0z-hev"/>
                 <outlet property="bootstrapServerField" destination="BlY-KQ-RvO" id="nCJ-Mb-Sat"/>
                 <outlet property="disableVideoButton" destination="Qhu-T5-27z" id="BEo-fv-nZZ"/>
+                <outlet property="enableLocalModeratorButton" destination="O9P-aL-w6c" id="3fc-DD-XO1"/>
                 <outlet property="enableProxyButton" destination="6EV-sb-gfv" id="Vhu-Pz-u1R"/>
                 <outlet property="enableRingtone" destination="7AV-dG-fCE" id="HAp-MT-hfo"/>
                 <outlet property="nameServerField" destination="fLH-ZX-eWQ" id="l5X-Bl-92a"/>
@@ -41,11 +42,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="620" height="1468"/>
+            <rect key="frame" x="0.0" y="0.0" width="620" height="1495"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="IaB-ij-6CA">
-                    <rect key="frame" x="0.0" y="1352" width="620" height="116"/>
+                    <rect key="frame" x="0.0" y="1379" width="620" height="116"/>
                     <view key="contentView" id="jpc-BS-IzV">
                         <rect key="frame" x="1" y="1" width="618" height="114"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,16 +110,16 @@
                     <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <box boxType="custom" borderType="bezel" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="ZNe-H0-dJk">
-                    <rect key="frame" x="0.0" y="1159" width="620" height="173"/>
+                    <rect key="frame" x="0.0" y="1159" width="620" height="200"/>
                     <view key="contentView" id="KaI-8h-Y8q">
-                        <rect key="frame" x="1" y="1" width="618" height="171"/>
+                        <rect key="frame" x="1" y="1" width="618" height="198"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="13" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hmV-yq-CBz">
-                                <rect key="frame" x="20" y="20" width="578" height="131"/>
+                                <rect key="frame" x="20" y="20" width="578" height="158"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dqM-tx-ynx">
-                                        <rect key="frame" x="-2" y="115" width="83" height="16"/>
+                                        <rect key="frame" x="-2" y="142" width="83" height="16"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Call settings" id="BIS-Ft-yJn">
                                             <font key="font" metaFont="systemSemibold" size="13"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -126,7 +127,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="COO-Od-fza">
-                                        <rect key="frame" x="18" y="86" width="291" height="18"/>
+                                        <rect key="frame" x="18" y="113" width="291" height="18"/>
                                         <buttonCell key="cell" type="check" title="Allow incoming calls from unknown contacts" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1Xr-BO-Pu3">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -136,7 +137,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iwx-oz-bCK">
-                                        <rect key="frame" x="18" y="59" width="128" height="18"/>
+                                        <rect key="frame" x="18" y="86" width="128" height="18"/>
                                         <buttonCell key="cell" type="check" title="Auto answer calls" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="DSe-Cs-oD6">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -146,7 +147,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YQr-hN-cWA">
-                                        <rect key="frame" x="18" y="32" width="430" height="18"/>
+                                        <rect key="frame" x="18" y="59" width="430" height="18"/>
                                         <buttonCell key="cell" type="check" title="Enable rendezvous point: turn your account into a conference room" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2cZ-SI-nbz">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -156,7 +157,7 @@
                                         </connections>
                                     </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fw9-zn-sgJ">
-                                        <rect key="frame" x="20" y="0.0" width="175" height="21"/>
+                                        <rect key="frame" x="20" y="27" width="175" height="21"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7AV-dG-fCE">
                                                 <rect key="frame" x="-2" y="2" width="123" height="18"/>
@@ -188,12 +189,23 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O9P-aL-w6c">
+                                        <rect key="frame" x="18" y="-2" width="168" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Enable local moderators" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="BCQ-xd-1zb">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="enableLocalModerators:" target="-2" id="SQD-lV-ZHv"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fw9-zn-sgJ" firstAttribute="leading" secondItem="COO-Od-fza" secondAttribute="leading" id="9wU-yi-llZ"/>
                                     <constraint firstItem="Iwx-oz-bCK" firstAttribute="leading" secondItem="COO-Od-fza" secondAttribute="leading" id="IsR-Ou-dbG"/>
                                     <constraint firstItem="fw9-zn-sgJ" firstAttribute="leading" secondItem="YQr-hN-cWA" secondAttribute="leading" id="WkU-Gd-m3L"/>
                                     <constraint firstItem="COO-Od-fza" firstAttribute="leading" secondItem="hmV-yq-CBz" secondAttribute="leading" constant="20" id="YSh-sa-RkS"/>
+                                    <constraint firstItem="O9P-aL-w6c" firstAttribute="leading" secondItem="COO-Od-fza" secondAttribute="leading" id="pGv-FK-E7k"/>
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
@@ -201,8 +213,10 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
