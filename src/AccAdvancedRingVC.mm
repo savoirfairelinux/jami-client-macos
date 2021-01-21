@@ -30,6 +30,7 @@
     __unsafe_unretained IBOutlet NSTextField *proxyServerField;
     __unsafe_unretained IBOutlet NSTextField *bootstrapServerField;
     __unsafe_unretained IBOutlet NSButton *enableProxyButton;
+    __unsafe_unretained IBOutlet NSButton *enableLocalModeratorButton;
     __unsafe_unretained IBOutlet NSButton *togleRendezVous;
 }
 @end
@@ -50,6 +51,7 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
     [enableProxyButton setState: accountProperties.proxyEnabled];
     [proxyServerField setEditable:accountProperties.proxyEnabled];
     [togleRendezVous setState: accountProperties.isRendezVous];
+    [enableLocalModeratorButton setState: self.accountModel->isLocalModeratorsEnabled(self.selectedAccountID)];
 }
 
 -(void) viewDidLoad {
@@ -66,16 +68,20 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
 #pragma mark - Actions
 
 - (IBAction)allowCallFromUnknownPeer:(id)sender {
-    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
-    if(accountProperties.DHT.PublicInCalls != [sender state]) {
-        accountProperties.DHT.PublicInCalls = [sender state];
-        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
-    }
+    self.accountModel->enableLocalModerators(self.selectedAccountID, [sender state]);
 }
 
 - (IBAction)enableRendezVous:(id)sender {
     lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
     if(accountProperties.isRendezVous != [sender state]) {
+        accountProperties.isRendezVous = [sender state];
+        self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
+    }
+}
+
+- (IBAction)enableLocalModerators:(id)sender {
+    lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(self.selectedAccountID);
+    if(accountProperties.lo != [sender state]) {
         accountProperties.isRendezVous = [sender state];
         self.accountModel->setAccountConfig(self.selectedAccountID, accountProperties);
     }
