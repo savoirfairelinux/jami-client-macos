@@ -20,7 +20,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AccAdvancedVC.h"
+#import "ChooseContactVC.h"
 
-@interface AccAdvancedRingVC : AccAdvancedVC <NSTextFieldDelegate>
+@interface AccAdvancedRingVC : AccAdvancedVC <NSTextFieldDelegate, ChooseContactVCDelegate, NSPopoverDelegate>
 
 @end

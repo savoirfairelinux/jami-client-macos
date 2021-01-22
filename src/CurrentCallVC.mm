@@ -1071,7 +1071,7 @@ CVPixelBufferRef pixelBufferPreview;
     } else {
         auto* contactSelectorVC = [[ChooseContactVC alloc] initWithNibName:@"ChooseContactVC" bundle:nil];
         auto* convModel = accountInfo_->conversationModel.get();
-        [contactSelectorVC setConversationModel:convModel andCurrentConversation: convUid_];
+        [contactSelectorVC setUpForConference:convModel andCurrentConversation:convUid_];
         contactSelectorVC.delegate = self;
         brokerPopoverVC = [[NSPopover alloc] init];
         [brokerPopoverVC setContentSize:contactSelectorVC.view.frame.size];
