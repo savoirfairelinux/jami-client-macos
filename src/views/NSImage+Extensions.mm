@@ -88,7 +88,6 @@
     CFRelease(croppedImage);
 
     return finalImage;
-
 }
 
 @end

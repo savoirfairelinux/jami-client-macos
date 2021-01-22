@@ -18,6 +18,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <api/contact.h>
+#import <api/lrc.h>
 
 @interface NSImage (Extensions)
 
