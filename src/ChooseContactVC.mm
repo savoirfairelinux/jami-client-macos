@@ -28,6 +28,8 @@
 #import <api/conversationmodel.h>
 #import <api/account.h>
 #import <api/newaccountmodel.h>
+#import <api/contactmodel.h>
+#import <api/contact.h>
 
 //Qt
 #import <QtMacExtras/qmacfunctions.h>
@@ -49,9 +51,13 @@
 @implementation ChooseContactVC
 
 lrc::api::ConversationModel* convModel;
+lrc::api::NewAccountModel* accountModel;
 QString currentConversation;
+QString accountId;
+ContactPickerType type;
 
 QMap<lrc::api::ConferenceableItem, lrc::api::ConferenceableValue> values;
+QList<lrc::api::contact::Info> contacts;
 
 // Tags for views
 NSInteger const IMAGE_TAG           = 100;
@@ -64,8 +70,42 @@ NSInteger const MINIMUM_TABLE_SIZE = 0;
 NSInteger const NORMAL_TABLE_SIZE = 120;
 NSInteger const MAXIMUM_TABLE_SIZE = 240;
 
+- (void)setUpCpntactPickerwithModel:(lrc::api::NewAccountModel *) newaccountModel andAccountId:(const QString&)account{
+    accountId = account;
+    accountModel = newaccountModel;
+    type = FROM_CONTACT;
+    [self updateModerators];
+    [self reloadView];
+}
+
+- (void)setUpForConference:(lrc::api::ConversationModel *)conversationModel
+      andCurrentConversation:(const QString&)conversation
+{
+    type = FROM_CONFERENCABLE_ITEM;
+    convModel = conversationModel;
+    if (convModel == nil) {
+        return;
+    }
+    currentConversation = conversation;
+    values = convModel->getConferenceableConversations(currentConversation, "");
+    [self reloadView];
+}
+
 - (void)controlTextDidChange:(NSNotification *) notification
 {
+    if (type == FROM_CONTACT) {
+        auto allContacts = accountModel->getAccountInfo(accountId).contactModel->getAllContacts();
+        auto moderators = accountModel->getDefaultModerators(accountId);
+        contacts.clear();
+        auto filter = QString::fromNSString(searchField.stringValue);
+        for (auto contact : allContacts.values()) {
+            if ((contact.registeredName.contains(filter) || contact.profileInfo.alias.contains(filter)) && !moderators.contains(contact.profileInfo.uri)) {
+                contacts.append(contact);
+            }
+        }
+        [self reloadView];
+        return;
+    }
     values = convModel->getConferenceableConversations(currentConversation, QString::fromNSString(searchField.stringValue));
     [self reloadView];
 }
@@ -74,6 +114,13 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 {
     [callsView reloadData];
     [contactsView reloadData];
+    if (type == FROM_CONTACT) {
+        [callsContainer setHidden: YES];
+        contactsViewHeightConstraint.constant = MAXIMUM_TABLE_SIZE + 35;
+        calsViewHeightConstraint.constant = 0;
+        [contactsLabel setHidden: YES];
+        return;
+    }
     auto callsSize = [callsView numberOfRows] * ROW_HEIGHT;
     auto contactsSize = [contactsView numberOfRows] * ROW_HEIGHT;
     if (callsSize >= NORMAL_TABLE_SIZE) {
@@ -103,16 +150,15 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     [self reloadView];
 }
 
-- (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
-      andCurrentConversation:(const QString&)conversation
-{
-    convModel = conversationModel;
-    if (convModel == nil) {
-        return;
+-(void) updateModerators {
+    auto allContacts = accountModel->getAccountInfo(accountId).contactModel->getAllContacts();
+    auto moderators = accountModel->getDefaultModerators(accountId);
+    for (auto moderator : moderators) {
+        if (allContacts.find(moderator) != allContacts.end()) {
+            allContacts.remove(moderator);
+        }
     }
-    currentConversation = conversation;
-    values = convModel->getConferenceableConversations(currentConversation, "");
-    [self reloadView];
+    contacts = allContacts.values();
 }
 
 #pragma mark - NSTableViewDelegate methods
@@ -137,6 +183,10 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
         HoverTableRowView* cellRowView = [table rowViewAtRow:i makeIfNecessary: NO];
         [cellRowView drawSelection: (i == row)];
     }
+    if (type == FROM_CONTACT) {
+        [self chooseContactForRow:row];
+        return;
+    }
     if (row == -1 || convModel == nil)
         return;
     QVector<QVector<lrc::api::AccountConversation>> conversations = table == callsView ? values.value(lrc::api::ConferenceableItem::CALL) : values.value(lrc::api::ConferenceableItem::CONTACT);
@@ -158,10 +208,27 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     lrc::api::conversation::Info& conv = *conversationInfo;
     if (table == callsView) {
         auto callID = conv.confId.isEmpty() ? conv.callId : conv.confId;
-        [self.delegate joinCall: callID];
+        if ([self.delegate respondsToSelector: @selector(joinCall:)]) {
+            [self.delegate joinCall: callID];
+        }
     } else if (table == contactsView) {
         auto uid = conv.participants.front();
-        [self.delegate callToContact:uid convUID: convID];
+        if ([self.delegate respondsToSelector: @selector(joinCall:)]) {
+            [self.delegate callToContact:uid convUID: convID];
+        }
+    }
+}
+
+-(void)chooseContactForRow:(NSInteger) row {
+    if (row < 0 ||  row >= contacts.size()) {
+        return;
+    }
+    auto contact = contacts[row];
+    if ([self.delegate respondsToSelector: @selector(contactChosen:)]) {
+        [self.delegate contactChosen: contact.profileInfo.uri];
+        [self updateModerators];
+        NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndex:row];
+        [contactsView removeRowsAtIndexes:indexes withAnimation: NSTableViewAnimationSlideUp];
     }
 }
 
@@ -172,8 +239,40 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     return howerRow;
 }
 
+-(NSView *)configureContactRowForRow:(NSInteger)row tableView:(NSTableView*)tableView {
+    if (tableView != contactsView || row < 0 ||  row >= contacts.size()) {
+        return nil;
+    }
+    NSTableCellView* result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
+
+    NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
+    NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
+    NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
+    NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
+    [presenceView setHidden:YES];
+    auto contact = contacts[row];
+
+    auto convOpt = getConversationFromURI(contact.profileInfo.uri, *accountModel->getAccountInfo(accountId).conversationModel);
+    if (convOpt.has_value()) {
+        lrc::api::conversation::Info& conversation = *convOpt;
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, accountModel->getAccountInfo(accountId))));
+        if(image) {
+            photoView.wantsLayer = YES;
+            photoView.layer.cornerRadius = photoView.frame.size.width * 0.5;
+        [photoView setImage:image];
+        }
+    }
+    [displayRingID setStringValue: bestIDForContact(contact)];
+    [displayName setStringValue: bestNameForContact(contact)];
+    return result;
+}
+
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
+    if (type == FROM_CONTACT) {
+        return [self configureContactRowForRow:row tableView: tableView];
+    }
     if (convModel == nil)
         return nil;
 
@@ -289,6 +388,9 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
+    if (type == FROM_CONTACT) {
+        return contacts.size();
+    }
     if(!convModel) {
         return 0;
     }
