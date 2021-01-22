@@ -20,9 +20,15 @@
 #import <Cocoa/Cocoa.h>
 #include <qstring.h>
 
+typedef enum {
+    FROM_CONTACT = 1,
+    FROM_CONFERENCABLE_ITEM
+} ContactPickerType;
+
 @protocol ChooseContactVCDelegate <NSObject>
 -(void)callToContact:(const QString&)contactUri convUID:(const QString&)convID;
 -(void)joinCall:(const QString&)callId;
+-(void)chosenContact:(const QString&)contactUri;
 @end
 
 namespace lrc {
@@ -31,13 +37,20 @@ namespace lrc {
         namespace conversation {
             struct Info;
         }
+        class ContactModel;
+    class NewAccountModel;
     }
 }
 
 @interface ChooseContactVC: NSViewController
 @property (retain, nonatomic) id <ChooseContactVCDelegate> delegate;
 
+//-(id) initWithNibName:(NSString *)nibNameOrNil
+//               bundle:(NSBundle *)nibBundleOrNil
+//                 type:(ContactPickerType)pickerType;
+
 - (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
       andCurrentConversation:(const QString&)conversation;
+- (void)setContactModel:(lrc::api::ContactModel *)contactModel andAccountId:(const QString&)account andAccountModel:(lrc::api::NewAccountModel *) newaccountModel;
 
 @end

@@ -28,6 +28,8 @@
 #import <api/conversationmodel.h>
 #import <api/account.h>
 #import <api/newaccountmodel.h>
+#import <api/contactmodel.h>
+#import <api/contact.h>
 
 //Qt
 #import <QtMacExtras/qmacfunctions.h>
@@ -49,9 +51,14 @@
 @implementation ChooseContactVC
 
 lrc::api::ConversationModel* convModel;
+lrc::api::NewAccountModel* accountModel;
+lrc::api::ContactModel* contModel;
 QString currentConversation;
+QString accountId;
+ContactPickerType type;
 
 QMap<lrc::api::ConferenceableItem, lrc::api::ConferenceableValue> values;
+QList<lrc::api::contact::Info> contacts;
 
 // Tags for views
 NSInteger const IMAGE_TAG           = 100;
@@ -64,8 +71,43 @@ NSInteger const MINIMUM_TABLE_SIZE = 0;
 NSInteger const NORMAL_TABLE_SIZE = 120;
 NSInteger const MAXIMUM_TABLE_SIZE = 240;
 
+
+//-(id)initWithNibName:(NSString *)nibNameOrNil
+//               bundle:(NSBundle *)nibBundleOrNil
+//                 type:(ContactPickerType)pickerType {
+//    if (self =  [self initWithNibName: nibNameOrNil bundle:nibBundleOrNil])
+//    {
+//        type = pickerType;
+//    }
+//    return self;
+//}
+
+- (void)setContactModel:(lrc::api::ContactModel *)contactModel andAccountId:(const QString&)account andAccountModel:(lrc::api::NewAccountModel *) newaccountModel {
+    accountId = account;
+    accountModel = newaccountModel;
+    type = FROM_CONTACT;
+    contModel = contactModel;
+    //NSAssert(type == FROM_CONTACT, @"set contact model requers Contact picker be FROM_CONTACT type");
+    [self updateModerators];
+    [self reloadView];
+}
+
+-(void) updateModerators {
+    auto allContacts = contModel->getAllContacts();
+    auto moderators = accountModel->getDefaultModerators(accountId);
+    for (auto moderator : moderators) {
+        if (allContacts.find(moderator) != allContacts.end()) {
+            allContacts.remove(moderator);
+        }
+    }
+    contacts = allContacts.values();
+}
+
 - (void)controlTextDidChange:(NSNotification *) notification
 {
+    if (type == FROM_CONTACT) {
+        return;
+    }
     values = convModel->getConferenceableConversations(currentConversation, QString::fromNSString(searchField.stringValue));
     [self reloadView];
 }
@@ -74,6 +116,13 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 {
     [callsView reloadData];
     [contactsView reloadData];
+    if (type == FROM_CONTACT) {
+        [callsContainer setHidden: YES];
+        contactsViewHeightConstraint.constant = MAXIMUM_TABLE_SIZE + 35;
+        calsViewHeightConstraint.constant = 0;
+        [contactsLabel setHidden: YES];
+        return;
+    }
     auto callsSize = [callsView numberOfRows] * ROW_HEIGHT;
     auto contactsSize = [contactsView numberOfRows] * ROW_HEIGHT;
     if (callsSize >= NORMAL_TABLE_SIZE) {
@@ -106,6 +155,8 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 - (void)setConversationModel:(lrc::api::ConversationModel *)conversationModel
       andCurrentConversation:(const QString&)conversation
 {
+    type = FROM_CONFERENCABLE_ITEM;
+   // NSAssert(type == FROM_CONFERENCABLE_ITEM, @"set conversation requers Contact picker be FROM_CONFERENCABLE_ITEM type");
     convModel = conversationModel;
     if (convModel == nil) {
         return;
@@ -137,6 +188,10 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
         HoverTableRowView* cellRowView = [table rowViewAtRow:i makeIfNecessary: NO];
         [cellRowView drawSelection: (i == row)];
     }
+    if (type == FROM_CONTACT) {
+        [self chooseContactForRow:row];
+        return;
+    }
     if (row == -1 || convModel == nil)
         return;
     QVector<QVector<lrc::api::AccountConversation>> conversations = table == callsView ? values.value(lrc::api::ConferenceableItem::CALL) : values.value(lrc::api::ConferenceableItem::CONTACT);
@@ -165,6 +220,18 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     }
 }
 
+-(void)chooseContactForRow:(NSInteger) row {
+    if (row < 0 ||  row >= contacts.size()) {
+        return;
+    }
+    auto contact = contacts[row];
+    [self.delegate chosenContact: contact.profileInfo.uri];
+    NSIndexSet *indexes = [[NSIndexSet alloc] initWithIndex:row];
+    [contactsView removeRowsAtIndexes:indexes withAnimation: NSTableViewAnimationSlideUp];
+    [self updateModerators];
+    [contactsView noteNumberOfRowsChanged];
+}
+
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row
 {
     HoverTableRowView *howerRow = [tableView makeViewWithIdentifier:@"HoverRowView" owner:nil];
@@ -172,8 +239,40 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     return howerRow;
 }
 
+-(NSView *)configureContactRowForRow:(NSInteger)row tableView:(NSTableView*)tableView {
+    if (tableView != contactsView || row < 0 ||  row >= contacts.size()) {
+        return nil;
+    }
+    NSTableCellView* result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
+
+    NSTextField* displayName = [result viewWithTag:DISPLAYNAME_TAG];
+    NSTextField* displayRingID = [result viewWithTag:RING_ID_LABEL];
+    NSImageView* photoView = [result viewWithTag:IMAGE_TAG];
+    NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
+    [presenceView setHidden:YES];
+    auto contact = contacts[row];
+
+    auto convOpt = getConversationFromURI(contact.profileInfo.uri, *accountModel->getAccountInfo(accountId).conversationModel);
+    if (convOpt.has_value()) {
+        lrc::api::conversation::Info& conversation = *convOpt;
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, accountModel->getAccountInfo(accountId))));
+        if(image) {
+            photoView.wantsLayer = YES;
+            photoView.layer.cornerRadius = photoView.frame.size.width * 0.5;
+        [photoView setImage:image];
+        }
+    }
+    [displayRingID setStringValue: bestIDForContact(contact)];
+    [displayName setStringValue: bestNameForContact(contact)];
+    return result;
+}
+
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
+    if (type == FROM_CONTACT) {
+        return [self configureContactRowForRow:row tableView: tableView];
+    }
     if (convModel == nil)
         return nil;
 
@@ -289,6 +388,9 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
+    if (type == FROM_CONTACT) {
+        return contacts.size();
+    }
     if(!convModel) {
         return 0;
     }
