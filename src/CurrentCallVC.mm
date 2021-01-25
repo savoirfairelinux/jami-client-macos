@@ -422,6 +422,10 @@ CVPixelBufferRef pixelBufferPreview;
                 conferenceParticipant.bestName = bestNameForContact(contact);
             } catch (...) {}
         }
+        conferenceParticipant.videoMuted = participant["videoMuted"] == "true";
+        conferenceParticipant.audioLocalMuted = participant["audioLocalMuted"] == "true";
+        conferenceParticipant.audioModeratorMuted = participant["audioModeratorMuted"] == "true";
+        conferenceParticipant.isModerator = participant["isModerator"] == "true";
         if (participantsOverlays[conferenceParticipant.uri] != nil) {
             ConferenceOverlayView* overlay = participantsOverlays[conferenceParticipant.uri];
             overlay.framesize = framesize;
@@ -1370,6 +1374,23 @@ CVPixelBufferRef pixelBufferPreview;
     return callModel->isModerator([self getcallID]);
 }
 
+-(BOOL)isParticipantHost:(NSString*)uri {
+    if (accountInfo_ == nil)
+        return false;
+    if ([self isMasterCall] && accountInfo_->profileInfo.uri == QString::fromNSString(uri)) {
+        return true;
+    }
+    auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+    if (!convOpt.has_value())
+        return false;
+    lrc::api::conversation::Info& conv = *convOpt;
+    auto* callModel = accountInfo_->callModel.get();
+    try {
+        auto call = callModel->getCall(conv.callId);
+        return call.peerUri.remove("ring:") == QString::fromNSString(uri);
+    } catch (...) {}
+    return true;
+}
 
 -(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive {
     if (accountInfo_ == nil)
@@ -1397,6 +1418,20 @@ CVPixelBufferRef pixelBufferPreview;
                 break;
         };
     } catch (...) {}
+}
+
+-(void)muteParticipantAudio:(NSString*)uri state:(BOOL)state {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
+    callModel->muteParticipant([self getcallID], QString::fromNSString(uri), state);
+}
+
+-(void)setModerator:(NSString*)uri state:(BOOL)state {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
+    callModel->setModerator([self getcallID], QString::fromNSString(uri), state);
 }
 
 #pragma mark Popover delegate

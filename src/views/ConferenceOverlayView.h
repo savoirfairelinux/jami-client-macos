@@ -27,9 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)hangUpParticipant:(NSString*)uri;
 -(void)minimizeParticipant;
 -(void)maximizeParticipant:(NSString*)uri active:(BOOL)isActive;
+-(void)muteParticipantAudio:(NSString*)uri state:(BOOL)state;
+-(void)setModerator:(NSString*)uri state:(BOOL)state;
 -(int)getCurrentLayout;
 -(BOOL)isMasterCall;
 -(BOOL)isCallModerator;
+-(BOOL)isParticipantHost:(NSString*)uri;
 @end
 
 struct ConferenceParticipant {
@@ -41,6 +44,10 @@ struct ConferenceParticipant {
     NSString* bestName;
     bool active;
     bool isLocal;
+    bool isModerator;
+    bool audioLocalMuted;
+    bool audioModeratorMuted;
+    bool videoMuted;
 };
 
 @interface ConferenceOverlayView: NSView {
