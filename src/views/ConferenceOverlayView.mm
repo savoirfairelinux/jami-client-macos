@@ -87,7 +87,8 @@ CGFloat const controlSize = 40;
     int layout = [self.delegate getCurrentLayout];
     if (layout < 0)
         return;
-    BOOL showHangUp = !self.participant.isLocal && [self.delegate isMasterCall];
+    BOOL showConferenceHostOnly = !self.participant.isLocal && [self.delegate isMasterCall];
+    BOOL showHangup = !self.participant.isLocal && [self.delegate isParticipantHost:self.participant.uri];
     BOOL showMaximized = layout != 2;
     BOOL showMinimized = !(layout == 0 || (layout == 1 && !self.participant.active));
     contextualMenu = [[NSMenu alloc] initWithTitle:@""];
@@ -101,7 +102,17 @@ CGFloat const controlSize = 40;
         [menuItem setTarget:self];
         [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
     }
-    if (showHangUp) {
+    if (showConferenceHostOnly) {
+        auto setModeratorTitle = self.participant.isModerator ? NSLocalizedString(@"Unset moderator", @"Conference action") : NSLocalizedString(@"Set moderator", @"Conference action");
+        NSMenuItem *menuItemModerator = [[NSMenuItem alloc] initWithTitle: setModeratorTitle action:@selector(setModerator:) keyEquivalent:@""];
+        [menuItemModerator setTarget:self];
+        [contextualMenu insertItem:menuItemModerator atIndex:contextualMenu.itemArray.count];
+    }
+    auto audioTitle = self.participant.audioModeratorMuted ? NSLocalizedString(@"Unmute audio", @"Conference action") : NSLocalizedString(@"Mute audio", @"Conference action");
+    NSMenuItem *menuItemAudio = [[NSMenuItem alloc] initWithTitle: audioTitle action:@selector(muteAudio:) keyEquivalent:@""];
+    [menuItemAudio setTarget:self];
+    [contextualMenu insertItem:menuItemAudio atIndex:contextualMenu.itemArray.count];
+    if (showHangup) {
         NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Hangup", @"Conference action") action:@selector(finishCall:) keyEquivalent:@""];
         [menuItem setTarget:self];
         [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
@@ -118,7 +129,15 @@ CGFloat const controlSize = 40;
 }
 
 - (void)finishCall:(NSMenuItem*) sender {
-    [self.delegate hangUpParticipant:self.participant.uri];
+    [self.delegate hangUpParticipant: self.participant.uri];
+}
+
+- (void)muteAudio:(NSMenuItem*) sender {
+    [self.delegate muteParticipantAudio: self.participant.uri state: !self.participant.audioModeratorMuted];
+}
+
+- (void)setModerator:(NSMenuItem*) sender {
+    [self.delegate setModerator:self.participant.uri state: !self.participant.isModerator];
 }
 
 - (void)sizeChanged {
