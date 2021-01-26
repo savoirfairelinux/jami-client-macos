@@ -62,10 +62,6 @@ add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
                     COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
                     COMMENT "Creating Shader.metallib")
 
-                    add_custom_target(
-    shader ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib
-    )
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -357,7 +353,13 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_record_stop.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_msg.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_group.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png)
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_muted.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_unmuted.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_maximize.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_minimize.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_hangup.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_star.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)

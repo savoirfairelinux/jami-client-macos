@@ -60,11 +60,25 @@ struct ConferenceParticipant {
 @property (nonatomic, weak) NSLayoutConstraint* heightConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* centerXConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* centerYConstraint;
-@property GradientView* gradientView;
-@property IconButton* settingsButton;
+@property NSView* gradientView;
+@property NSStackView* states;
+@property NSStackView* buttonsContainer;
+@property NSStackView* infoContainer;
 @property NSTextView* usernameLabel;
-@property NSMenu *contextualMenu;
 @property (retain, nonatomic) id <ConferenceLayoutDelegate> delegate;
+
+//actions
+@property IconButton* maximize;
+@property IconButton* minimize;
+@property IconButton* hangup;
+@property IconButton* setModerator;
+@property IconButton* muteAudio;
+
+//state
+@property IconButton* moderatorState;
+@property IconButton* audioState;
+@property IconButton* hostState;
+
 
 - (void)configureView;
 - (void)updateViewWithParticipant:(ConferenceParticipant) participant;

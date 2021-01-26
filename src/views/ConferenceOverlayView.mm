@@ -22,8 +22,8 @@
 @implementation ConferenceOverlayView
 @synthesize contextualMenu;
 
-CGFloat const margin = 6;
-CGFloat const controlSize = 40;
+CGFloat const margin = 2;
+CGFloat const controlSize = 25;
 
 - (instancetype)initWithFrame:(NSRect)frame
 {
@@ -32,111 +32,138 @@ CGFloat const controlSize = 40;
         self.translatesAutoresizingMaskIntoConstraints = false;
         [self setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMaxXMargin];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sizeChanged) name:NSWindowDidResizeNotification object:nil];
-        self.alphaValue = 0;
+        [self addViews];
     }
     return self;
 }
 
-- (void)configureView {
-    self.gradientView = [[GradientView alloc] init];
-    self.gradientView.startingColor = [NSColor clearColor];
-    self.gradientView.endingColor = [NSColor blackColor];
-    self.gradientView.angle = 270;
+- (void)addViews {
+    self.gradientView = [[NSView alloc] init];
+    [self.gradientView setWantsLayer:  YES];
+    self.gradientView.layer.backgroundColor = [[NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.6] CGColor];
     self.gradientView.translatesAutoresizingMaskIntoConstraints = false;
     [self addSubview: self.gradientView];
+    self.gradientView.hidden = true;
+    
+    //participat state
+    self.audioState = [self getActionbutton];
+    NSImage* audioImage = [NSImage imageNamed: @"ic_moderator_audio_muted.png"];
+    [self.audioState setImage: audioImage];
+    
+    self.moderatorState = [self getActionbutton];
+    NSImage* moderatorImage = [NSImage imageNamed: @"ic_moderator.png"];
+    [self.moderatorState setImage: moderatorImage];
+    
+    self.hostState = [self getActionbutton];
+    NSImage* hostImage = [NSImage imageNamed: @"ic_star.png"];
+    [self.hostState setImage: hostImage];
+    
+    NSArray *statesViews = [NSArray arrayWithObjects: self.hostState, self.moderatorState, self.audioState, nil];
+    self.states = [NSStackView stackViewWithViews: statesViews];
+    [self addSubview: self.states];
+    
+    //actions
+    self.maximize = [self getActionbutton];
+    NSImage* maximizeImage = [NSImage imageNamed: @"ic_moderator_maximize.png"];
+    [self.maximize setImage: maximizeImage];
+    [self.maximize setAction:@selector(maximize:)];
+    [self.maximize setTarget:self];
+
+    self.minimize = [self getActionbutton];
+    NSImage* minimizeImage = [NSImage imageNamed: @"ic_moderator_minimize.png"];
+    [self.minimize setImage: minimizeImage];
+    [self.minimize setAction:@selector(minimize:)];
+    [self.minimize setTarget:self];
+    
+    self.hangup = [self getActionbutton];
+    NSImage* hangupImage = [NSImage imageNamed: @"ic_moderator_hangup.png"];
+    [self.hangup setImage: hangupImage];
+    [self.hangup setAction:@selector(finishCall:)];
+    [self.hangup setTarget:self];
+
+    self.setModerator = [self getActionbutton];
+    NSImage* setModeratorImage = [NSImage imageNamed: @"ic_moderator.png"];
+    [self.setModerator setImage: setModeratorImage];
+    [self.setModerator setAction:@selector(setModerator:)];
+    [self.setModerator setTarget:self];
+    
+    self.muteAudio = [self getActionbutton];
+    NSImage* muteAudioImage = [NSImage imageNamed: @"ic_moderator_audio_muted.png"];
+    [self.muteAudio setImage: muteAudioImage];
+    [self.muteAudio setAction:@selector(muteAudio:)];
+    [self.muteAudio setTarget:self];
+    
+    NSArray *actions = [NSArray arrayWithObjects: self.setModerator, self.muteAudio, self.maximize, self.minimize, self.hangup, nil];
+    self.buttonsContainer = [NSStackView stackViewWithViews: actions];
+    self.buttonsContainer.orientation = NSUserInterfaceLayoutOrientationHorizontal;
+    self.buttonsContainer.spacing = 5;
+    
+    self.usernameLabel = [[NSTextView alloc] init];
+    self.usernameLabel.alignment = NSTextAlignmentCenter;
+    self.usernameLabel.textColor = [NSColor whiteColor];
+    self.usernameLabel.editable = false;
+    self.usernameLabel.drawsBackground = false;
+    self.usernameLabel.font = [NSFont userFontOfSize: 13.0];
+    self.usernameLabel.translatesAutoresizingMaskIntoConstraints = false;
+    [self.usernameLabel.heightAnchor constraintEqualToConstant: 20].active = true;
+    [self.usernameLabel.widthAnchor constraintGreaterThanOrEqualToConstant: 60].active = true;
+    self.usernameLabel.textContainer.maximumNumberOfLines = 1;
+    
+    NSArray* infoItems = [NSArray arrayWithObjects: self.usernameLabel, self.buttonsContainer, nil];
+    
+    self.infoContainer = [NSStackView stackViewWithViews: infoItems];
+    self.infoContainer.orientation = NSUserInterfaceLayoutOrientationVertical;
+    self.infoContainer.spacing = 0;
+    self.infoContainer.distribution = NSStackViewDistributionFillEqually;
+    self.infoContainer.alignment = NSLayoutAttributeCenterX;
+    [self.gradientView addSubview: self.infoContainer];
+}
+
+- (IconButton*) getActionbutton {
+    IconButton* button = [[IconButton alloc] init];
+    button.transparent = true;
+    [button.widthAnchor constraintEqualToConstant: controlSize].active = true;
+    [button.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    button.title = @"";
+    button.buttonDisableColor = [NSColor lightGrayColor];
+    button.bgColor = [NSColor clearColor];
+    button.imageColor = [NSColor whiteColor];
+    button.imagePressedColor = [NSColor lightGrayColor];
+    button.imageInsets = margin;
+    button.translatesAutoresizingMaskIntoConstraints = false;
+    return button;
+}
+
+- (void)configureView {
     [self.gradientView.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier: 1].active = TRUE;
-    [self.gradientView.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    [self.gradientView.topAnchor constraintEqualToAnchor:self.topAnchor].active = true;
     [self.gradientView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = true;
     [self.gradientView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;
-    self.settingsButton = [[IconButton alloc] init];
-    self.settingsButton.transparent = true;
-    self.settingsButton.title = @"";
-    NSImage* settingsImage = [NSImage imageNamed: @"ic_more.png"];
-    [self.settingsButton setImage:settingsImage];
-    self.settingsButton.bgColor = [NSColor clearColor];
-    self.settingsButton.imageColor = [NSColor whiteColor];
-    self.settingsButton.imagePressedColor = [NSColor lightGrayColor];
-    self.settingsButton.imageInsets = margin;
-    self.settingsButton.translatesAutoresizingMaskIntoConstraints = false;
-    [self.gradientView addSubview:self.settingsButton];
-
-    [self.settingsButton.widthAnchor constraintEqualToConstant: controlSize].active = TRUE;
-    [self.settingsButton.heightAnchor constraintEqualToConstant: controlSize].active = true;
-    [self.settingsButton.trailingAnchor constraintEqualToAnchor: self.gradientView.trailingAnchor].active = true;
-    [self.settingsButton.bottomAnchor constraintEqualToAnchor:self.gradientView.bottomAnchor].active = true;
-    [self.settingsButton setAction:@selector(triggerMenu:)];
-    [self.settingsButton setTarget:self];
-    BOOL showSettings = [self.delegate isMasterCall] || [self.delegate isCallModerator];
-    [self.settingsButton setHidden: !showSettings];
-    self.usernameLabel = [[NSTextView alloc] init];
-    self.usernameLabel.textColor = [NSColor whiteColor];
-    self.usernameLabel.editable = NO;
-    self.usernameLabel.drawsBackground = NO;
-    self.usernameLabel.backgroundColor = [NSColor clearColor];
-    self.usernameLabel.font = [NSFont userFontOfSize: 14.0];
-    self.usernameLabel.translatesAutoresizingMaskIntoConstraints = false;
-    self.usernameLabel.textContainer.maximumNumberOfLines = 1;
-    [self.gradientView addSubview:self.usernameLabel];
-
-    [self.usernameLabel.leadingAnchor constraintEqualToAnchor: self.gradientView.leadingAnchor constant: margin * 2].active = true;
-    [self.usernameLabel.trailingAnchor constraintEqualToAnchor: self.gradientView.trailingAnchor constant: -(controlSize + margin)].active = true;
-    [self.usernameLabel.bottomAnchor constraintEqualToAnchor:self.gradientView.bottomAnchor constant: - margin * 2].active = true;
+    
+    [self.states.topAnchor constraintEqualToAnchor:self.topAnchor].active = true;
+    [self.states.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = true;
+    
+    [self.infoContainer.centerYAnchor constraintEqualToAnchor:self.centerYAnchor constant:1].active = true;
+    [self.infoContainer.centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:1].active = true;
 }
 
-- (IBAction)triggerMenu:(id)sender {
-    int layout = [self.delegate getCurrentLayout];
-    if (layout < 0)
-        return;
-    BOOL showConferenceHostOnly = !self.participant.isLocal && [self.delegate isMasterCall];
-    BOOL showHangup = !self.participant.isLocal && [self.delegate isParticipantHost:self.participant.uri];
-    BOOL showMaximized = layout != 2;
-    BOOL showMinimized = !(layout == 0 || (layout == 1 && !self.participant.active));
-    contextualMenu = [[NSMenu alloc] initWithTitle:@""];
-    if (showMinimized) {
-        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Minimize participant", @"Conference action") action:@selector(minimize:) keyEquivalent:@""];
-        [menuItem setTarget:self];
-        [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
-    }
-    if (showMaximized) {
-        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Maximize participant", @"Conference action") action:@selector(maximize:) keyEquivalent:@""];
-        [menuItem setTarget:self];
-        [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
-    }
-    if (showConferenceHostOnly) {
-        auto setModeratorTitle = self.participant.isModerator ? NSLocalizedString(@"Unset moderator", @"Conference action") : NSLocalizedString(@"Set moderator", @"Conference action");
-        NSMenuItem *menuItemModerator = [[NSMenuItem alloc] initWithTitle: setModeratorTitle action:@selector(setModerator:) keyEquivalent:@""];
-        [menuItemModerator setTarget:self];
-        [contextualMenu insertItem:menuItemModerator atIndex:contextualMenu.itemArray.count];
-    }
-    auto audioTitle = self.participant.audioModeratorMuted ? NSLocalizedString(@"Unmute audio", @"Conference action") : NSLocalizedString(@"Mute audio", @"Conference action");
-    NSMenuItem *menuItemAudio = [[NSMenuItem alloc] initWithTitle: audioTitle action:@selector(muteAudio:) keyEquivalent:@""];
-    [menuItemAudio setTarget:self];
-    [contextualMenu insertItem:menuItemAudio atIndex:contextualMenu.itemArray.count];
-    if (showHangup) {
-        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Hangup", @"Conference action") action:@selector(finishCall:) keyEquivalent:@""];
-        [menuItem setTarget:self];
-        [contextualMenu insertItem:menuItem atIndex:contextualMenu.itemArray.count];
-    }
-    [contextualMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
-}
-
-- (void)minimize:(NSMenuItem*) sender {
+- (IBAction)minimize:(id) sender {
     [self.delegate minimizeParticipant];
 }
 
-- (void)maximize:(NSMenuItem*) sender {
+- (IBAction)maximize:(id) sender {
     [self.delegate maximizeParticipant:self.participant.uri active: self.participant.active];
 }
 
-- (void)finishCall:(NSMenuItem*) sender {
+- (IBAction)finishCall:(id) sender {
     [self.delegate hangUpParticipant: self.participant.uri];
 }
 
-- (void)muteAudio:(NSMenuItem*) sender {
+- (IBAction)muteAudio:(id) sender {
     [self.delegate muteParticipantAudio: self.participant.uri state: !self.participant.audioModeratorMuted];
 }
 
-- (void)setModerator:(NSMenuItem*) sender {
+- (IBAction)setModerator:(id) sender {
     [self.delegate setModerator:self.participant.uri state: !self.participant.isModerator];
 }
 
@@ -193,25 +220,51 @@ CGFloat const controlSize = 40;
     self.centerXConstraint.active = YES;
     self.centerYConstraint.active = YES;
     [self layoutSubtreeIfNeeded];
-    CGFloat width = self.frame.size.width;
-    self.usernameLabel.hidden = width < 150;
 }
 
 - (void)updateViewWithParticipant:(ConferenceParticipant) participant {
+    bool sizeChanged = self.participant.width != participant.width || self.participant.hight != participant.hight
+    || self.participant.x != participant.x || self.participant.y != participant.y;
     self.participant = participant;
-    BOOL showSettings = [self.delegate isMasterCall] || [self.delegate isCallModerator];
-    [self.settingsButton setHidden: !showSettings];
-    [self sizeChanged];
+    [self updateButtonsState];
+    if (sizeChanged) {
+        [self sizeChanged];
+    }
     self.usernameLabel.string = self.participant.bestName;
 }
 
+-(void) updateButtonsState {
+    self.audioState.hidden = !self.participant.audioModeratorMuted;
+    self.moderatorState.hidden = !self.participant.isModerator || [self.delegate isParticipantHost: self.participant.uri];
+    self.hostState.hidden = ![self.delegate isParticipantHost: self.participant.uri];
+    bool couldManageConference = [self.delegate isMasterCall] || [self.delegate isCallModerator];
+    self.buttonsContainer.hidden = !couldManageConference;
+    if (!couldManageConference) {
+        return;
+    }
+    int layout = [self.delegate getCurrentLayout];
+    if (layout < 0)
+        return;
+    BOOL showConferenceHostOnly = !self.participant.isLocal && [self.delegate isMasterCall];
+    BOOL hangupEnabled = ![self.delegate isParticipantHost: self.participant.uri];
+    BOOL showMaximized = layout != 2;
+    BOOL showMinimized = !(layout == 0 || (layout == 1 && !self.participant.active));
+    self.setModerator.enabled = showConferenceHostOnly;
+    self.hangup.enabled = hangupEnabled;
+    self.minimize.hidden = !showMinimized;
+    self.maximize.hidden = !showMaximized;
+    NSImage* muteAudioImage = self.participant.audioModeratorMuted ? [NSImage imageNamed: @"ic_moderator_audio_muted.png"] :
+    [NSImage imageNamed: @"ic_moderator_audio_unmuted.png"];
+    [self.muteAudio setImage: muteAudioImage];
+}
+
 -(void)mouseEntered:(NSEvent *)theEvent {
-    self.alphaValue = 1;
+    self.gradientView.hidden = NO;
     [super mouseEntered:theEvent];
 }
 
 -(void)mouseExited:(NSEvent *)theEvent {
-    self.alphaValue = 0;
+    self.gradientView.hidden = YES;
     [super mouseExited:theEvent];
 }
 
