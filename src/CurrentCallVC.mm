@@ -1306,17 +1306,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (accountInfo_ == nil)
         return;
     auto* callModel = accountInfo_->callModel.get();
-
-    auto convOpt = getConversationFromURI(QString::fromNSString(uri), *accountInfo_->conversationModel);
-    if (!convOpt.has_value()) {
-        return;
-    }
-    lrc::api::conversation::Info& conversation = *convOpt;
-    auto callId = conversation.callId;
-    if (not callModel->hasCall(callId)){
-        return;
-    }
-    callModel->hangUp(callId);
+    callModel->hangupParticipant([self getcallID], QString::fromNSString(uri));
 }
 
 -(void)minimizeParticipant {
@@ -1377,7 +1367,7 @@ CVPixelBufferRef pixelBufferPreview;
 -(BOOL)isParticipantHost:(NSString*)uri {
     if (accountInfo_ == nil)
         return false;
-    if ([self isMasterCall]) {
+    if ([self isMasterCall] ) {
         return accountInfo_->profileInfo.uri == QString::fromNSString(uri);
     }
     auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
