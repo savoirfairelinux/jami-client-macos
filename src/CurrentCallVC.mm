@@ -1377,8 +1377,8 @@ CVPixelBufferRef pixelBufferPreview;
 -(BOOL)isParticipantHost:(NSString*)uri {
     if (accountInfo_ == nil)
         return false;
-    if ([self isMasterCall] && accountInfo_->profileInfo.uri == QString::fromNSString(uri)) {
-        return true;
+    if ([self isMasterCall] ) {
+        return accountInfo_->profileInfo.uri == QString::fromNSString(uri);
     }
     auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
     if (!convOpt.has_value())
