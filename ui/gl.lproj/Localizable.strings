@@ -221,7 +221,19 @@
 "Maximize participant" = "Maximize participant";
 
 /* Conference action */
-"Hangup" = "Hangup";
+"Hangup" = "Colgar";
+
+/* Conference action */
+"Mute audio" = "Acalar audio";
+
+/* Conference action */
+"Set moderator" = "Set moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Unset moderator";
 
 /* Conference name */
 "Me" = "Eu";

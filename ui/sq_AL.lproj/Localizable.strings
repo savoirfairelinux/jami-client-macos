@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Mbylle";
 
+/* Conference action */
+"Mute audio" = "Mbylli zërin";
+
+/* Conference action */
+"Set moderator" = "Caktoni moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Hiqe nga moderator";
+
 /* Conference name */
 "Me" = "Unë";
 

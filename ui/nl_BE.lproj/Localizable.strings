@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Ophangen";
 
+/* Conference action */
+"Mute audio" = "Geluid dempen";
+
+/* Conference action */
+"Set moderator" = "Set moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Unset moderator";
+
 /* Conference name */
 "Me" = "Ik";
 

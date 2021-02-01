@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Hívás befejezése";
 
+/* Conference action */
+"Mute audio" = "Hang elnémítása";
+
+/* Conference action */
+"Set moderator" = "Moderátor beállítása";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Moderátor megszüntetése";
+
 /* Conference name */
 "Me" = "Én";
 

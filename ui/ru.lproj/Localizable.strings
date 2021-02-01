@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Повесить трубку";
 
+/* Conference action */
+"Mute audio" = "Отключить звук";
+
+/* Conference action */
+"Set moderator" = "Set moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Unset moderator";
+
 /* Conference name */
 "Me" = "Я";
 

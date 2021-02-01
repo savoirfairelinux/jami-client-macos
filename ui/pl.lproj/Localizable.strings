@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Odłoż słuchawkę";
 
+/* Conference action */
+"Mute audio" = "Wyłącz dźwięk";
+
+/* Conference action */
+"Set moderator" = "Zaznacz moderatora";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Odznacz moderatora";
+
 /* Conference name */
 "Me" = "Ja";
 

@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Katkaistu";
 
+/* Conference action */
+"Mute audio" = "Vaimenna ääni";
+
+/* Conference action */
+"Set moderator" = "Aseta valvoja";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Poista valvoja";
+
 /* Conference name */
 "Me" = "Minä";
 

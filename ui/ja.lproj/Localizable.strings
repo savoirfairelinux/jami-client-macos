@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "受話";
 
+/* Conference action */
+"Mute audio" = "音声オフ";
+
+/* Conference action */
+"Set moderator" = "Set moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Unset moderator";
+
 /* Conference name */
 "Me" = "自分";
 

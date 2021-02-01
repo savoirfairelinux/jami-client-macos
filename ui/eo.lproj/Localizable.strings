@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Finigi vokon";
 
+/* Conference action */
+"Mute audio" = "Silentigi aŭdion";
+
+/* Conference action */
+"Set moderator" = "Set moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Unset moderator";
+
 /* Conference name */
 "Me" = "Mi";
 

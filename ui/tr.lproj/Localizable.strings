@@ -56,7 +56,7 @@
 "Create a new account" = "Yeni bir hesap oluştur";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "Bir buluşma noktası oluştur";
 
 /* Backup enter password */
 "Enter account password" = "Hesap parolanızı girin";
@@ -223,14 +223,26 @@
 /* Conference action */
 "Hangup" = "Kapat";
 
+/* Conference action */
+"Mute audio" = "Sesi kapat";
+
+/* Conference action */
+"Set moderator" = "Oturum başkanı ayarla";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Oturum başkanı ayarını kaldır";
+
 /* Conference name */
 "Me" = "Ben";
 
 /* Choose registered name for account */
-"Choose a username for your account" = "Choose a username for your account";
+"Choose a username for your account" = "Hesabınız için bir kullanıcı adı seçin";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "Buluşma noktanız için bir ad seçin";
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Yeni veya var olan kişiyi ara";

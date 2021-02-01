@@ -23,6 +23,9 @@
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
 "rdZ-JB-96s.title" = "Rendre ce compte visible sur un réseau local";
 
+/* Class = "NSButtonCell"; title = "Enable local moderators"; ObjectID = "BCQ-xd-1zb"; */
+"BCQ-xd-1zb.title" = "Activer les modérateur locaux";
+
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
 "n3E-PI-JHj.title" = "Découvrir des pairs sur le réseau local";
 
@@ -115,3 +118,9 @@
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
 "2cZ-SI-nbz.title" = "Transformer votre compte en un point de Rendez-vous";
+
+/* Class = "NSButtonCell"; title = "Add default moderator"; ObjectID = "RKw-pg-2N8"; */
+"RKw-pg-2N8.title" = "Ajouter un modérateur par défaut";
+
+/* Class = "NSTextFieldCell"; title = "You do not have default moderators"; ObjectID = "g2o-3r-Dx7"; */
+"g2o-3r-Dx7.title" = "You do not have default moderators";

@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Închide";
 
+/* Conference action */
+"Mute audio" = "Mut";
+
+/* Conference action */
+"Set moderator" = "Pune un moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Elimină moderatorul";
+
 /* Conference name */
 "Me" = "Eu";
 

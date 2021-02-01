@@ -223,6 +223,18 @@
 /* Conference action */
 "Hangup" = "Legg på";
 
+/* Conference action */
+"Mute audio" = "Koble ut lyden";
+
+/* Conference action */
+"Set moderator" = "Aktiver moderator";
+
+/* Conference action */
+"Unmute audio" = "Unmute audio";
+
+/* Conference action */
+"Unset moderator" = "Deaktiver moderator";
+
 /* Conference name */
 "Me" = "Meg";
 
