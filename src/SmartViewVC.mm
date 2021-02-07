@@ -258,6 +258,7 @@ NSInteger const REQUEST_SEG         = 1;
     if (convModel_ == conversationModel) {
         return false;
     }
+    [searchStatus setHidden: true];
 
     convModel_ = conversationModel;
     selectedUid_.clear(); // Clear selected conversation as the selected account is being changed
