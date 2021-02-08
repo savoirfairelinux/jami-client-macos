@@ -306,7 +306,6 @@ NSInteger const REQUEST_SEG         = 1;
         conversationRemovedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationRemoved,
                                                         [self] (){
                                                             [delegate listTypeChanged];
-                                                            [self reloadData];
                                                         });
         conversationClearedConnection = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationCleared,
                                                         [self] (const QString& convUid){
@@ -491,6 +490,9 @@ NSInteger const REQUEST_SEG         = 1;
     if (!convOpt.has_value())
         return nil;
     lrc::api::conversation::Info& conversation = *convOpt;
+    if (conversation.participants.size() == 0) {
+        return nil;
+    }
     NSTableCellView* result;
 
     result = [tableView makeViewWithIdentifier:@"MainCell" owner:tableView];
@@ -536,15 +538,13 @@ NSInteger const REQUEST_SEG         = 1;
 
     NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
     [presenceView setHidden:YES];
-    if (!conversation.participants.empty()){
-        try {
-            auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
-            if (contact.isPresent) {
-                [presenceView setHidden:NO];
-            }
-        } catch (std::out_of_range& e) {
-            NSLog(@"contact out of range");
+    try {
+        auto contact = convModel_->owner.contactModel->getContact(conversation.participants.front());
+        if (contact.isPresent) {
+            [presenceView setHidden:NO];
         }
+    } catch (std::out_of_range& e) {
+        NSLog(@"contact out of range");
     }
 
     NSButton* addContactButton = [result viewWithTag:ADD_BUTTON_TAG];
