@@ -41,7 +41,7 @@
 "Canceled" = "Canceled";
 
 /* Contextual menu entry */
-"Choose file" = "Choose file";
+"Choose file" = "Elegir archivo";
 
 /* Contextual menu action */
 "Clear conversation" = "Clear conversation";
@@ -74,7 +74,7 @@
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "Import from backup";
+"Import from backup" = "Importar desde un respaldo";
 
 /* link account title */
 "Import from other device" = "Import from other device";
@@ -86,7 +86,7 @@
 "Incoming message from %@" = "Incoming message from %@";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username" = "Invalid username";
+"Invalid username" = "Nombre de usuario no válido";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username." = "Invalid username.";
@@ -104,7 +104,7 @@
 "Password is too short" = "Password is too short";
 
 /* Indication for user */
-"Passwords don't match" = "Passwords don't match";
+"Passwords don't match" = "Las contraseñas no concuerdan";
 
 /* Contextual menu action */
 "Place audio call" = "Hacer llamada de voz";
@@ -125,7 +125,7 @@
 "Registered name: " = "Registered name: ";
 
 /* Remove account alert title */
-"Remove account" = "Remove account";
+"Remove account" = "Eliminar cuenta";
 
 /* export account button title */
 "Select archive" = "Select archive";
@@ -146,7 +146,7 @@
 "Sign In" = "Sign In";
 
 /* Record message title */
-"Stop recording" = "Stop recording";
+"Stop recording" = "Parar grabación";
 
 /* File transfer successful label */
 "Success" = "Success";
@@ -191,7 +191,7 @@
 "Would you like to leave a message?" = "Would you like to leave a message?";
 
 /* Password button title */
-"Change password" = "Change password";
+"Change password" = "Cambiar contraseña";
 
 /* Password button title */
 "Create password" = "Create password";
@@ -221,10 +221,10 @@
 "Maximize participant" = "Maximize participant";
 
 /* Conference action */
-"Hangup" = "Hangup";
+"Hangup" = "Colgar";
 
 /* Conference action */
-"Mute audio" = "Mute audio";
+"Mute audio" = "Silenciar micrófono";
 
 /* Conference action */
 "Set moderator" = "Set moderator";
