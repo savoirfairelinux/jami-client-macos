@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -65,7 +65,7 @@
                                     <color key="fillColor" red="0.120510533452034" green="0.12050692737102509" blue="0.12050899863243103" alpha="1" colorSpace="calibratedRGB"/>
                                 </box>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-LA-yn0">
-                                    <rect key="frame" x="302" y="640" width="142" height="305"/>
+                                    <rect key="frame" x="302" y="796" width="142" height="305"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="s4L-Ke-9Jm">
                                             <rect key="frame" x="7" y="177" width="128" height="128"/>
@@ -647,13 +647,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
-                                    <rect key="frame" x="20" y="60" width="331" height="1522"/>
+                                    <rect key="frame" x="20" y="60" width="331" height="1834"/>
                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H2i-4W-Gvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="1522"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="1834"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="ZOj-5b-rnp">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="1522"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="1834"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -967,102 +967,138 @@
                                 <customView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="aw5-Hc-Bc7" customClass="SendMessagePanel">
                                     <rect key="frame" x="20" y="0.0" width="331" height="60"/>
                                     <subviews>
-                                        <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jei-Xj-lgm">
-                                            <rect key="frame" x="50" y="21" width="239" height="18"/>
-                                            <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Send a message" id="d4g-hS-EMn">
-                                                <font key="font" metaFont="system" size="14"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                            <connections>
-                                                <binding destination="loh-bZ-dDU" name="value" keyPath="self.message" id="NRc-5f-Ujc">
-                                                    <dictionary key="options">
-                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                        <string key="NSMultipleValuesPlaceholder">Send a message</string>
-                                                        <string key="NSNoSelectionPlaceholder">Send a message</string>
-                                                        <string key="NSNotApplicablePlaceholder">Send a message</string>
-                                                    </dictionary>
-                                                </binding>
-                                                <outlet property="delegate" destination="loh-bZ-dDU" id="xu2-mX-kjl"/>
-                                            </connections>
-                                        </textField>
-                                        <button toolTip="Send" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rqa-be-VIB" customClass="HoverButton">
-                                            <rect key="frame" x="289" y="15" width="32" height="32"/>
+                                        <stackView distribution="fill" orientation="horizontal" alignment="bottom" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8X-PS-u8Y">
+                                            <rect key="frame" x="0.0" y="13" width="331" height="47"/>
+                                            <subviews>
+                                                <button toolTip="Send a file" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ngO-WV-cXD" customClass="HoverButton">
+                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="jcX-bd-eeT"/>
+                                                        <constraint firstAttribute="height" constant="32" id="ypC-5c-Ved"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_file_upload" imagePosition="only" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Lhu-KV-kCT">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                            <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="sendFile:" target="loh-bZ-dDU" id="oUe-cN-5PE"/>
+                                                    </connections>
+                                                </button>
+                                                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tzl-2b-IZc">
+                                                    <rect key="frame" x="34" y="8" width="263" height="17"/>
+                                                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="qZU-cu-zC8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="263" height="17"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" spellingCorrection="YES" grammarChecking="YES" smartInsertDelete="YES" id="Qs4-0k-em5">
+                                                                <rect key="frame" x="0.0" y="0.0" width="263" height="17"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <size key="minSize" width="263" height="17"/>
+                                                                <size key="maxSize" width="516" height="10000000"/>
+                                                                <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                <connections>
+                                                                    <binding destination="loh-bZ-dDU" name="value" keyPath="message" id="MeB-eO-odT">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                            <string key="NSMultipleValuesPlaceholder">Type a message</string>
+                                                                            <string key="NSNoSelectionPlaceholder">Type a message</string>
+                                                                            <string key="NSNotApplicablePlaceholder">Type a message</string>
+                                                                            <string key="NSNullPlaceholder">Type a message</string>
+                                                                        </dictionary>
+                                                                    </binding>
+                                                                    <outlet property="delegate" destination="loh-bZ-dDU" id="Map-Ba-ruy"/>
+                                                                </connections>
+                                                            </textView>
+                                                        </subviews>
+                                                    </clipView>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="UHv-h7-b8P"/>
+                                                    </constraints>
+                                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="olg-Wg-4sK">
+                                                        <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="NbW-e6-o7h">
+                                                        <rect key="frame" x="247" y="0.0" width="16" height="17"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                </scrollView>
+                                                <button toolTip="Send" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rqa-be-VIB" customClass="HoverButton">
+                                                    <rect key="frame" x="299" y="0.0" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="dSX-e7-1Vh"/>
+                                                        <constraint firstAttribute="width" constant="32" id="kGU-D9-INQ"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="only" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="doF-7O-ikF">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                            <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="buttonDisableColor">
+                                                            <color key="value" red="0.78955939799999997" green="0.75686274509999996" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                                            <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="sendMessage:" target="loh-bZ-dDU" id="Wte-g6-INP"/>
+                                                        <binding destination="loh-bZ-dDU" name="enabled" keyPath="self.message.length" id="kt1-TU-lMw"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="dSX-e7-1Vh"/>
-                                                <constraint firstAttribute="width" constant="32" id="kGU-D9-INQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Tzl-2b-IZc" secondAttribute="bottom" constant="8" id="PHW-LS-WPE"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_send" imagePosition="only" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="doF-7O-ikF">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
-                                                    <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
-                                                    <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="buttonDisableColor">
-                                                    <color key="value" red="0.78955939799999997" green="0.75686274509999996" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
-                                                    <integer key="value" value="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
-                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="sendMessage:" target="loh-bZ-dDU" id="Wte-g6-INP"/>
-                                                <binding destination="loh-bZ-dDU" name="enabled" keyPath="self.message.length" id="kt1-TU-lMw"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="Send a file" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ngO-WV-cXD" customClass="HoverButton">
-                                            <rect key="frame" x="10" y="15" width="32" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="32" id="jcX-bd-eeT"/>
-                                                <constraint firstAttribute="height" constant="32" id="ypC-5c-Ved"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_file_upload" imagePosition="only" alignment="center" enabled="NO" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Lhu-KV-kCT">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
-                                                    <color key="value" red="0.0" green="0.19215686274509802" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
-                                                    <color key="value" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
-                                                    <integer key="value" value="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
-                                                    <integer key="value" value="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
-                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="sendFile:" target="loh-bZ-dDU" id="oUe-cN-5PE"/>
-                                            </connections>
-                                        </button>
+                                            <visibilityPriorities>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
+                                            </visibilityPriorities>
+                                            <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
+                                            </customSpacing>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Jei-Xj-lgm" firstAttribute="leading" secondItem="ngO-WV-cXD" secondAttribute="trailing" constant="10" id="6eA-9X-dqE"/>
-                                        <constraint firstAttribute="trailing" secondItem="rqa-be-VIB" secondAttribute="trailing" constant="10" id="EFk-l8-6Qg"/>
+                                        <constraint firstAttribute="trailing" secondItem="Y8X-PS-u8Y" secondAttribute="trailing" id="ItW-mV-yvn"/>
+                                        <constraint firstItem="Y8X-PS-u8Y" firstAttribute="top" secondItem="aw5-Hc-Bc7" secondAttribute="top" id="Naj-bD-Dfw"/>
+                                        <constraint firstAttribute="bottom" secondItem="Y8X-PS-u8Y" secondAttribute="bottom" constant="13" id="YX5-tR-BAf"/>
                                         <constraint firstAttribute="height" constant="60" id="ZSy-MQ-Zse"/>
-                                        <constraint firstItem="rqa-be-VIB" firstAttribute="bottom" secondItem="Jei-Xj-lgm" secondAttribute="bottom" constant="6" id="gEA-tD-W6J"/>
-                                        <constraint firstAttribute="bottom" secondItem="Jei-Xj-lgm" secondAttribute="bottom" constant="21" id="hO9-vH-7Gd"/>
-                                        <constraint firstItem="rqa-be-VIB" firstAttribute="leading" secondItem="Jei-Xj-lgm" secondAttribute="trailing" constant="2" id="hTm-mv-rUN"/>
-                                        <constraint firstItem="ngO-WV-cXD" firstAttribute="leading" secondItem="aw5-Hc-Bc7" secondAttribute="leading" constant="10" id="wTC-Pb-bv5"/>
-                                        <constraint firstItem="rqa-be-VIB" firstAttribute="centerY" secondItem="ngO-WV-cXD" secondAttribute="centerY" id="x5m-XD-p3T"/>
-                                        <constraint firstItem="Jei-Xj-lgm" firstAttribute="top" secondItem="aw5-Hc-Bc7" secondAttribute="top" constant="21" id="xzo-Cv-lRs"/>
+                                        <constraint firstItem="Y8X-PS-u8Y" firstAttribute="leading" secondItem="aw5-Hc-Bc7" secondAttribute="leading" id="qox-AC-1gQ"/>
                                     </constraints>
                                 </customView>
                             </subviews>
@@ -1111,10 +1147,12 @@
         <viewController id="loh-bZ-dDU" customClass="MessagesVC">
             <connections>
                 <outlet property="conversationView" destination="ZOj-5b-rnp" id="tNP-aq-xvD"/>
-                <outlet property="messageField" destination="Jei-Xj-lgm" id="aiJ-sN-5oQ"/>
+                <outlet property="messageHeight" destination="UHv-h7-b8P" id="cjl-cO-wjW"/>
+                <outlet property="messageView" destination="Qs4-0k-em5" id="jJb-IJ-mfZ"/>
                 <outlet property="messagesBottomMargin" destination="ui2-7v-Ded" id="N6V-6x-eaF"/>
                 <outlet property="sendFileButton" destination="ngO-WV-cXD" id="yCj-Wf-mqd"/>
                 <outlet property="sendPanelHeight" destination="ZSy-MQ-Zse" id="apr-JO-fz7"/>
+                <outlet property="textBottomConstraint" destination="PHW-LS-WPE" id="Rej-1V-4V9"/>
             </connections>
         </viewController>
         <userDefaultsController representsSharedInstance="YES" id="cb1-cg-dMu"/>
