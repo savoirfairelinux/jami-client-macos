@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -448,11 +448,11 @@
                 <customView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-di-Tls" customClass="SendMessagePanel">
                     <rect key="frame" x="49" y="0.0" width="700" height="60"/>
                     <subviews>
-                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vd8-6U-eqB">
-                            <rect key="frame" x="0.0" y="0.0" width="700" height="60"/>
+                        <stackView distribution="fill" orientation="horizontal" alignment="bottom" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vd8-6U-eqB">
+                            <rect key="frame" x="0.0" y="13" width="700" height="47"/>
                             <subviews>
                                 <button toolTip="Record an audio message" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wYE-S3-AzD" customClass="HoverButton">
-                                    <rect key="frame" x="0.0" y="14" width="32" height="32"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="2As-E1-3wN"/>
                                         <constraint firstAttribute="width" constant="32" id="ThY-e2-Xwc"/>
@@ -483,14 +483,14 @@
                                     </connections>
                                 </button>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="Pn0-gT-h4b">
-                                    <rect key="frame" x="34" y="29" width="4" height="2"/>
+                                    <rect key="frame" x="34" y="0.0" width="4" height="2"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="2" id="BuD-em-HlZ"/>
                                         <constraint firstAttribute="width" constant="4" id="vfD-J4-Kv5"/>
                                     </constraints>
                                 </customView>
                                 <button toolTip="Record a video message" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B6d-Sc-UTp" customClass="HoverButton">
-                                    <rect key="frame" x="40" y="14" width="32" height="32"/>
+                                    <rect key="frame" x="40" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="GRp-fA-Pkp"/>
                                         <constraint firstAttribute="width" constant="32" id="f5f-YQ-2i3"/>
@@ -521,7 +521,7 @@
                                     </connections>
                                 </button>
                                 <button toolTip="Send a file" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gwx-eT-PcN" customClass="HoverButton">
-                                    <rect key="frame" x="74" y="14" width="32" height="32"/>
+                                    <rect key="frame" x="74" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="C2W-wV-YvF"/>
                                         <constraint firstAttribute="width" constant="32" id="zZF-4P-pW9"/>
@@ -551,34 +551,48 @@
                                         <action selector="sendFile:" target="iH6-17-JsM" id="k8G-4B-qru"/>
                                     </connections>
                                 </button>
-                                <textField verticalCompressionResistancePriority="1000" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bsk-Gj-qQ2">
-                                    <rect key="frame" x="106" y="22" width="520" height="17"/>
-                                    <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" placeholderString="Type a message" id="Ilz-7v-2fr">
-                                        <font key="font" metaFont="system" size="14"/>
-                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    </textFieldCell>
-                                    <connections>
-                                        <binding destination="iH6-17-JsM" name="value" keyPath="self.message" id="zK1-Ee-EWS">
-                                            <dictionary key="options">
-                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                <string key="NSMultipleValuesPlaceholder">Send a message</string>
-                                                <string key="NSNoSelectionPlaceholder">Send a message</string>
-                                                <string key="NSNullPlaceholder">Send a message</string>
-                                            </dictionary>
-                                        </binding>
-                                        <outlet property="delegate" destination="iH6-17-JsM" id="2eZ-3e-XvP"/>
-                                    </connections>
-                                </textField>
+                                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kj1-xH-mW1">
+                                    <rect key="frame" x="108" y="8" width="516" height="17"/>
+                                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="HA1-6F-fX0">
+                                        <rect key="frame" x="0.0" y="0.0" width="516" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" spellingCorrection="YES" grammarChecking="YES" smartInsertDelete="YES" id="rQj-9q-WQ6">
+                                                <rect key="frame" x="0.0" y="0.0" width="516" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <size key="minSize" width="516" height="17"/>
+                                                <size key="maxSize" width="516" height="10000000"/>
+                                                <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <connections>
+                                                    <binding destination="iH6-17-JsM" name="value" keyPath="message" id="WVj-MY-rIk"/>
+                                                    <outlet property="delegate" destination="iH6-17-JsM" id="PLt-0w-LEu"/>
+                                                </connections>
+                                            </textView>
+                                        </subviews>
+                                    </clipView>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="63s-7r-u1p"/>
+                                    </constraints>
+                                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="8Zv-ZP-x0v">
+                                        <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </scroller>
+                                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="7m1-CT-ZHh">
+                                        <rect key="frame" x="500" y="0.0" width="16" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </scroller>
+                                </scrollView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZFq-T5-VFc">
-                                    <rect key="frame" x="626" y="29" width="2" height="2"/>
+                                    <rect key="frame" x="626" y="0.0" width="2" height="2"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="2" id="7Tq-Jm-qUj"/>
                                         <constraint firstAttribute="width" constant="2" id="xq3-ac-NhL"/>
                                     </constraints>
                                 </customView>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DwY-gP-tsk" userLabel="Emojy button" customClass="HoverButton">
-                                    <rect key="frame" x="630" y="14" width="32" height="32"/>
+                                    <rect key="frame" x="630" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="gfw-9e-hi8"/>
                                         <constraint firstAttribute="width" constant="32" id="pyh-h3-bCb"/>
@@ -603,14 +617,14 @@
                                     </connections>
                                 </button>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="nEk-L2-09b">
-                                    <rect key="frame" x="664" y="29" width="2" height="2"/>
+                                    <rect key="frame" x="664" y="0.0" width="2" height="2"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="2" id="WrB-F9-XcK"/>
                                         <constraint firstAttribute="height" constant="2" id="yH4-L4-7ou"/>
                                     </constraints>
                                 </customView>
                                 <button toolTip="Send" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UJf-cF-RAo" customClass="HoverButton">
-                                    <rect key="frame" x="668" y="14" width="32" height="32"/>
+                                    <rect key="frame" x="668" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="TmF-ip-m4C"/>
                                         <constraint firstAttribute="height" constant="32" id="rbQ-lE-sAq"/>
@@ -646,8 +660,7 @@
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="bsk-Gj-qQ2" secondAttribute="bottom" constant="22" id="NS2-QC-6a7"/>
-                                <constraint firstItem="bsk-Gj-qQ2" firstAttribute="top" relation="lessThanOrEqual" secondItem="vd8-6U-eqB" secondAttribute="top" constant="22" id="OcQ-tU-QQx"/>
+                                <constraint firstAttribute="bottom" secondItem="Kj1-xH-mW1" secondAttribute="bottom" priority="750" constant="8" id="RjG-Fw-tmj"/>
                             </constraints>
                             <visibilityPriorities>
                                 <integer value="1000"/>
@@ -674,11 +687,11 @@
                         </stackView>
                     </subviews>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="vd8-6U-eqB" secondAttribute="bottom" constant="13" id="DcQ-Y3-RHp"/>
                         <constraint firstAttribute="trailing" secondItem="vd8-6U-eqB" secondAttribute="trailing" id="Ogp-Kv-ffd"/>
                         <constraint firstItem="vd8-6U-eqB" firstAttribute="top" secondItem="Rth-di-Tls" secondAttribute="top" id="YEJ-yh-nMQ"/>
                         <constraint firstItem="vd8-6U-eqB" firstAttribute="leading" secondItem="Rth-di-Tls" secondAttribute="leading" id="ZMf-E3-Ahx"/>
                         <constraint firstAttribute="height" constant="60" id="jJO-v2-Wuj"/>
-                        <constraint firstAttribute="bottom" secondItem="vd8-6U-eqB" secondAttribute="bottom" id="tod-bR-LQO"/>
                     </constraints>
                 </customView>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mor-Vl-Fr5">
@@ -852,12 +865,14 @@
             <connections>
                 <outlet property="containerView" destination="EJD-f8-Xqd" id="hoF-D3-hw1"/>
                 <outlet property="conversationView" destination="bOO-CW-S21" id="Vzg-3J-K2b"/>
-                <outlet property="messageField" destination="bsk-Gj-qQ2" id="RD0-B6-fPN"/>
+                <outlet property="messageHeight" destination="63s-7r-u1p" id="wdg-1A-pSU"/>
+                <outlet property="messageView" destination="rQj-9q-WQ6" id="rci-Hq-5Tr"/>
                 <outlet property="messagesBottomMargin" destination="EoS-be-aF2" id="pqG-cP-d8d"/>
                 <outlet property="recordAudioButton" destination="wYE-S3-AzD" id="nFg-ZY-Hss"/>
                 <outlet property="recordVideoButton" destination="B6d-Sc-UTp" id="QN0-e5-FU7"/>
                 <outlet property="sendFileButton" destination="gwx-eT-PcN" id="09R-wC-t0r"/>
                 <outlet property="sendPanelHeight" destination="jJO-v2-Wuj" id="lYG-sU-eIr"/>
+                <outlet property="textBottomConstraint" destination="RjG-Fw-tmj" id="Yrr-1n-Mgm"/>
             </connections>
         </viewController>
     </objects>
