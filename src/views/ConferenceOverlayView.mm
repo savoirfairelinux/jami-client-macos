@@ -265,7 +265,8 @@ CGFloat const minHeight = 80;
 }
 
 -(void) updateButtonsState {
-    self.audioState.hidden = !self.participant.audioModeratorMuted;
+    bool audioMuted = self.participant.audioModeratorMuted || self.participant.audioLocalMuted;
+    self.audioState.hidden = !audioMuted;
     self.moderatorState.hidden = !self.participant.isModerator || [self.delegate isParticipantHost: self.participant.uri];
     self.hostState.hidden = ![self.delegate isParticipantHost: self.participant.uri];
     self.cusp.hidden = (self.audioState.hidden && self.moderatorState.hidden && self.hostState.hidden);
@@ -294,9 +295,10 @@ CGFloat const minHeight = 80;
     self.hangup.enabled = hangupEnabled;
     self.minimize.hidden = !showMinimized;
     self.maximize.hidden = !showMaximized;
-    NSImage* muteAudioImage = self.participant.audioModeratorMuted ? [NSImage imageNamed: @"ic_moderator_audio_muted.png"] :
+    NSImage* muteAudioImage = audioMuted ? [NSImage imageNamed: @"ic_moderator_audio_muted.png"] :
     [NSImage imageNamed: @"ic_moderator_audio_unmuted.png"];
     [self.muteAudio setImage: muteAudioImage];
+    self.muteAudio.enabled = !self.participant.audioLocalMuted;
 }
 
 -(void)mouseEntered:(NSEvent *)theEvent {
