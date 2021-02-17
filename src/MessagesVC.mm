@@ -41,16 +41,18 @@
 #import "RecordFileVC.h"
 
 
-@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource> {
+@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource, NSTextViewDelegate> {
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
     __unsafe_unretained IBOutlet NSView* containerView;
-    __unsafe_unretained IBOutlet NSTextField* messageField;
+    __unsafe_unretained IBOutlet NSTextView* messageView;
     __unsafe_unretained IBOutlet IconButton *sendFileButton;
     __unsafe_unretained IBOutlet IconButton *recordVideoButton;
     __unsafe_unretained IBOutlet IconButton *recordAudioButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sendPanelHeight;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* messageHeight;
     __unsafe_unretained IBOutlet NSLayoutConstraint* messagesBottomMargin;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* textBottomConstraint;
     IBOutlet NSPopover *recordMessagePopover;
 
     QString convUid_;
@@ -86,9 +88,14 @@ CGFloat   const BUBBLE_HEIGHT_FOR_TRANSFERED_FILE = 87;
 CGFloat   const DEFAULT_ROW_HEIGHT = 10;
 CGFloat   const HEIGHT_FOR_COMPOSING_INDICATOR = 46;
 CGFloat   const HEIGHT_DEFAULT = 34;
-NSInteger const MEESAGE_MARGIN = 21;
 NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
-NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
+NSInteger const SEND_PANEL_MAX_HEIGHT = 116;
+NSInteger const SEND_PANEL_BOTTOM_MARGIN = 13;
+NSInteger const MESSAGE_VIEW_DEFAULT_HEIGHT = 17;
+NSInteger const BOTTOM_MARGIN = 8;
+NSInteger const BOTTOM_MARGIN_MIN = 0;
+NSInteger const TOP_MARGIN = 20;
+NSInteger const TOP_MARGIN_MIN = 14;
 
 BOOL peerComposingMessage = false;
 BOOL composingMessage = false;
@@ -116,7 +123,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [conversationView registerNib:cellNib forIdentifier:@"RightFinishedFileView"];
     [conversationView registerNib:cellNib forIdentifier:@"PeerComposingMsgView"];
     [[conversationView.enclosingScrollView contentView] setCopiesOnScroll:NO];
-    [messageField setFocusRingType:NSFocusRingTypeNone];
+    [messageView setFont: [NSFont systemFontOfSize: 14 weight: NSFontWeightLight]];
     [conversationView setWantsLayer:YES];
 }
 
@@ -143,7 +150,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(void) clearData {
     if (!convUid_.isEmpty()) {
-        pendingMessagesToSend[convUid_.toNSString()] = messageField.stringValue;
+        pendingMessagesToSend[convUid_.toNSString()] = self.message;
     }
     cachedConv_ = nil;
     convUid_ = "";
@@ -323,15 +330,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                               cachedConv_ = nil;
                                           });
     if (pendingMessagesToSend[convUid_.toNSString()]) {
+        NSString *mess = pendingMessagesToSend[convUid_.toNSString()];
         self.message = pendingMessagesToSend[convUid_.toNSString()];
         [self updateSendMessageHeight];
     } else {
         self.message = @"";
-        if(messagesBottomMargin.constant != SEND_PANEL_DEFAULT_HEIGHT) {
-            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
-            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
-            [self scrollToBottom];
-        }
+        [self resetSendMessagePanelToDefaultSize];
     }
     conversationView.alphaValue = 0.0;
     [conversationView reloadData];
@@ -915,20 +919,28 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void) updateSendMessageHeight {
-    NSAttributedString *msgAttString = messageField.attributedStringValue;
-    NSRect frame = NSMakeRect(0, 0, messageField.frame.size.width, msgAttString.size.height);
+    NSAttributedString *msgAttString = messageView.attributedString;
+    if (!msgAttString) {
+        return;
+    }
+    NSRect frame = NSMakeRect(0, 0, messageView.frame.size.width, msgAttString.size.height);
     NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
     [[tv textStorage] setAttributedString:msgAttString];
     [tv sizeToFit];
-    CGFloat height = tv.frame.size.height + MEESAGE_MARGIN * 2;
-    CGFloat newHeight = MIN(SEND_PANEL_MAX_HEIGHT, MAX(SEND_PANEL_DEFAULT_HEIGHT, height));
-    if(messagesBottomMargin.constant == newHeight) {
+    auto top = tv.frame.size.height > MESSAGE_VIEW_DEFAULT_HEIGHT ? TOP_MARGIN_MIN : TOP_MARGIN;
+    auto bottom = tv.frame.size.height > MESSAGE_VIEW_DEFAULT_HEIGHT ? BOTTOM_MARGIN_MIN : BOTTOM_MARGIN;
+    CGFloat heightWithMargins = tv.frame.size.height + top + bottom + SEND_PANEL_BOTTOM_MARGIN;
+    CGFloat newSendPanelHeight = MIN(SEND_PANEL_MAX_HEIGHT, MAX(SEND_PANEL_DEFAULT_HEIGHT, heightWithMargins));
+    CGFloat msgHeight = MAX(MESSAGE_VIEW_DEFAULT_HEIGHT, MIN(SEND_PANEL_MAX_HEIGHT - SEND_PANEL_BOTTOM_MARGIN - top, tv.frame.size.height));
+    if (messageHeight.constant == msgHeight) {
         return;
     }
-    messagesBottomMargin.constant = newHeight;
+    messagesBottomMargin.constant = newSendPanelHeight;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self scrollToBottom];
-        sendPanelHeight.constant = newHeight;
+        messageHeight.constant = msgHeight;
+        textBottomConstraint.constant = bottom;
+        sendPanelHeight.constant = newSendPanelHeight;
     });
 }
 
@@ -1037,11 +1049,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             return;
         convModel_->sendMessage(convUid_, QString::fromNSString(text));
         self.message = @"";
-        if(sendPanelHeight.constant != SEND_PANEL_DEFAULT_HEIGHT) {
-            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
-            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
-            [self scrollToBottom];
-        }
+        [self resetSendMessagePanelToDefaultSize];
         if (composingMessage) {
             composingMessage = false;
             convModel_->setIsComposing(convUid_, composingMessage);
@@ -1049,10 +1057,19 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
 }
 
+-(void) resetSendMessagePanelToDefaultSize {
+    if(messageHeight.constant != MESSAGE_VIEW_DEFAULT_HEIGHT) {
+        sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
+        messageHeight.constant = MESSAGE_VIEW_DEFAULT_HEIGHT;
+        messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
+        textBottomConstraint.constant = BOTTOM_MARGIN;
+        [self scrollToBottom];
+    }
+}
+
 - (IBAction)openEmojy:(id)sender {
-    [messageField.window makeFirstResponder: messageField];
-    [[messageField currentEditor] moveToEndOfLine:nil];
-    [NSApp orderFrontCharacterPalette: messageField];
+    [messageView.window makeFirstResponder: messageView];
+    [NSApp orderFrontCharacterPalette: messageView];
 }
 
 - (IBAction)startVideoMessage:(id)sender
@@ -1117,31 +1134,27 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 
-#pragma mark - NSTextFieldDelegate
+#pragma mark - NSTextViewDelegate
 
-- (BOOL)control:(NSControl *)control textView:(NSTextView *)fieldEditor doCommandBySelector:(SEL)commandSelector
-{
+- (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
     if (commandSelector == @selector(insertNewline:)) {
         if(self.message.length > 0) {
             [self sendMessage: nil];
-        } else if(messagesBottomMargin.constant != SEND_PANEL_DEFAULT_HEIGHT) {
-            sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
-            messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
-            [self scrollToBottom];
+            return YES;
         }
+        [self resetSendMessagePanelToDefaultSize];
         return YES;
     }
     return NO;
 }
 
-- (void)controlTextDidChange:(NSNotification *)aNotification {
-    [self checkIfcomposingMsg];
-    [self updateSendMessageHeight];
+-(void) textDidChange:(NSNotification *)notification {
+    [self checkIfComposingMsg];
 }
 
-- (void) checkIfcomposingMsg {
+- (void) checkIfComposingMsg {
     [self updateSendMessageHeight];
-    BOOL haveText = [messageField.stringValue removeEmptyLinesAtBorders].length != 0;
+    BOOL haveText = [messageView.string removeEmptyLinesAtBorders].length != 0;
     if (haveText != composingMessage) {
         composingMessage = haveText;
         convModel_->setIsComposing(convUid_, composingMessage);
