@@ -43,18 +43,18 @@
             path = [[NSBezierPath alloc] init];
             NSPoint bottomLeft = dirtyRect.origin;
             NSPoint topLeft = CGPointMake(dirtyRect.origin.x, dirtyRect.size.height);
-            NSPoint topRight = CGPointMake(dirtyRect.size.width, dirtyRect.size.height);
-            NSPoint bottomRight = CGPointMake(dirtyRect.size.width * 0.5, dirtyRect.origin.y);
-            NSPoint middle = CGPointMake(dirtyRect.size.width, dirtyRect.size.height * 0.5);
-            NSPoint controlPoint1 = CGPointMake(dirtyRect.size.width * 0.96, dirtyRect.size.height * 0.01);
-            NSPoint controlPoint2 = CGPointMake(dirtyRect.size.width * 0.98, dirtyRect.size.height * 0.2);
+            NSPoint topRight = CGPointMake(dirtyRect.size.width * 0.5, dirtyRect.size.height);
+            NSPoint bottomRight = CGPointMake(dirtyRect.size.width, dirtyRect.origin.y);
+            NSPoint middle = CGPointMake(dirtyRect.size.width, dirtyRect.size.height * 0.4);
+            NSPoint controlPoint1 = CGPointMake(dirtyRect.size.width, dirtyRect.size.height * 0.6);
+            NSPoint controlPoint2 = CGPointMake(dirtyRect.size.width * 1.1, dirtyRect.size.height * 1.01);
             [path setLineWidth:1.0];
             [path moveToPoint:topLeft];
             [path lineToPoint:bottomLeft];
             
             [path lineToPoint:bottomRight];
-            [path curveToPoint:middle controlPoint1:controlPoint1 controlPoint2:controlPoint2];
-            [path lineToPoint:topRight];
+            [path lineToPoint:middle];
+            [path curveToPoint: topRight controlPoint1:controlPoint1 controlPoint2:controlPoint2];
             [path closePath];
             break;
         }
@@ -68,7 +68,7 @@
             [path setLineWidth:1.0];
             [path moveToPoint:topLeft];
             [path lineToPoint:bottomLeft];
-            
+
             [path curveToPoint:topRight controlPoint1:controlPoint1 controlPoint2:controlPoint2];
             [path closePath];
             break;

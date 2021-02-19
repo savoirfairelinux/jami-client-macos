@@ -66,8 +66,9 @@ struct ConferenceParticipant {
 @property NSStackView* states;
 @property NSStackView* buttonsContainer;
 @property NSStackView* infoContainer;
-@property NSTextView* usernameLabel;
+@property NSTextField* usernameLabel;
 @property (retain, nonatomic) id <ConferenceLayoutDelegate> delegate;
+@property (nonatomic, weak) NSTimer* timeoutTimer;
 
 //actions
 @property IconButton* maximize;
@@ -80,7 +81,6 @@ struct ConferenceParticipant {
 @property CustomBackgroundView* moderatorState;
 @property CustomBackgroundView* audioState;
 @property CustomBackgroundView* hostState;
-@property CustomBackgroundView* cusp;
 
 
 - (void)configureView;
