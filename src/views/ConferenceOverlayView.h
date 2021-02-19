@@ -80,7 +80,6 @@ struct ConferenceParticipant {
 @property CustomBackgroundView* moderatorState;
 @property CustomBackgroundView* audioState;
 @property CustomBackgroundView* hostState;
-@property CustomBackgroundView* cusp;
 
 
 - (void)configureView;
