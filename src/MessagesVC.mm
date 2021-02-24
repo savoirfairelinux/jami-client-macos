@@ -91,7 +91,7 @@ CGFloat   const HEIGHT_DEFAULT = 34;
 NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
 NSInteger const SEND_PANEL_MAX_HEIGHT = 167;
 NSInteger const SEND_PANEL_BOTTOM_MARGIN = 13;
-NSInteger const MESSAGE_VIEW_DEFAULT_HEIGHT = 17;
+NSInteger MESSAGE_VIEW_DEFAULT_HEIGHT = 17;
 NSInteger const BOTTOM_MARGIN = 8;
 NSInteger const BOTTOM_MARGIN_MIN = 0;
 NSInteger const TOP_MARGIN = 20;
@@ -920,19 +920,30 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (void) updateSendMessageHeight {
     NSAttributedString *msgAttString = messageView.attributedString;
-    if (!msgAttString) {
+    if (!msgAttString || msgAttString.length == 0) {
+        [self resetSendMessagePanelToDefaultSize];
         return;
     }
     NSRect frame = NSMakeRect(0, 0, messageView.frame.size.width, msgAttString.size.height);
     NSTextView *tv = [[NSTextView alloc] initWithFrame:frame];
     [[tv textStorage] setAttributedString:msgAttString];
     [tv sizeToFit];
+    // check the height of one line and update default line height if it does not match
+    NSAttributedString *firstLetter = [msgAttString attributedSubstringFromRange:NSMakeRange(0, 1)];
+    auto lineHeight = firstLetter.size.height;
+    // we do not want to update constraints if number of lines does not change. Save difference between actual line height
+    // and default height and use it after to check messageHeight.constant
+    auto accuracy = abs(lineHeight - MESSAGE_VIEW_DEFAULT_HEIGHT);
+    if (MESSAGE_VIEW_DEFAULT_HEIGHT != lineHeight) {
+        MESSAGE_VIEW_DEFAULT_HEIGHT = lineHeight;
+    }
+    // top and bottom margins change for single line and multiline. MESSAGE_VIEW_DEFAULT_HEIGHT is the height of one line
     auto top = tv.frame.size.height > MESSAGE_VIEW_DEFAULT_HEIGHT ? TOP_MARGIN_MIN : TOP_MARGIN;
     auto bottom = tv.frame.size.height > MESSAGE_VIEW_DEFAULT_HEIGHT ? BOTTOM_MARGIN_MIN : BOTTOM_MARGIN;
     CGFloat heightWithMargins = tv.frame.size.height + top + bottom + SEND_PANEL_BOTTOM_MARGIN;
     CGFloat newSendPanelHeight = MIN(SEND_PANEL_MAX_HEIGHT, MAX(SEND_PANEL_DEFAULT_HEIGHT, heightWithMargins));
     CGFloat msgHeight = MAX(MESSAGE_VIEW_DEFAULT_HEIGHT, MIN(SEND_PANEL_MAX_HEIGHT - SEND_PANEL_BOTTOM_MARGIN - top, tv.frame.size.height));
-    if (messageHeight.constant == msgHeight) {
+    if (abs(messageHeight.constant - msgHeight) <= accuracy) {
         return;
     }
     messagesBottomMargin.constant = newSendPanelHeight;
