@@ -337,6 +337,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         self.message = @"";
         [self resetSendMessagePanelToDefaultSize];
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [messageView.window makeFirstResponder: messageView];
+    });
     conversationView.alphaValue = 0.0;
     [conversationView reloadData];
     [conversationView scrollToEndOfDocument:nil];
@@ -931,12 +934,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     // check the height of one line and update default line height if it does not match
     NSAttributedString *firstLetter = [msgAttString attributedSubstringFromRange:NSMakeRange(0, 1)];
     auto lineHeight = firstLetter.size.height;
-    // we do not want to update constraints if number of lines does not change. Save difference between actual line height
-    // and default height and use it after to check messageHeight.constant
+    // we do not want to update constraints if number of lines does not change. Save difference between actual line height and default height and use it after to check messageHeight.constant
     auto accuracy = abs(lineHeight - MESSAGE_VIEW_DEFAULT_HEIGHT);
-    if (MESSAGE_VIEW_DEFAULT_HEIGHT != lineHeight) {
-        MESSAGE_VIEW_DEFAULT_HEIGHT = lineHeight;
-    }
     // top and bottom margins change for single line and multiline. MESSAGE_VIEW_DEFAULT_HEIGHT is the height of one line
     auto top = tv.frame.size.height > MESSAGE_VIEW_DEFAULT_HEIGHT ? TOP_MARGIN_MIN : TOP_MARGIN;
     auto bottom = tv.frame.size.height > MESSAGE_VIEW_DEFAULT_HEIGHT ? BOTTOM_MARGIN_MIN : BOTTOM_MARGIN;
@@ -945,6 +944,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     CGFloat msgHeight = MAX(MESSAGE_VIEW_DEFAULT_HEIGHT, MIN(SEND_PANEL_MAX_HEIGHT - SEND_PANEL_BOTTOM_MARGIN - top, tv.frame.size.height));
     if (abs(messageHeight.constant - msgHeight) <= accuracy) {
         return;
+    }
+    if (MESSAGE_VIEW_DEFAULT_HEIGHT != lineHeight) {
+        MESSAGE_VIEW_DEFAULT_HEIGHT = lineHeight;
     }
     messagesBottomMargin.constant = newSendPanelHeight;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
