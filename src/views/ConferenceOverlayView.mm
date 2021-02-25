@@ -22,10 +22,17 @@
 
 @implementation ConferenceOverlayView
 
-CGFloat const margin = 2;
-CGFloat const controlSize = 25;
-CGFloat const minWidth = 140;
-CGFloat const minHeight = 80;
+CGFloat const buttonMargin = 2;
+CGFloat const margin = 10;
+CGFloat const controlSize = 20;
+CGFloat const controlSizeMin = 18;
+CGFloat const minWidthConst = 120;
+CGFloat const minHeightConst = 70;
+CGFloat const cornerRadius = 6;
+CGFloat const stackViewSpacing = 5;
+
+CGFloat minHeight = 80;
+CGFloat minWidth = 140;
 
 - (instancetype)initWithFrame:(NSRect)frame
 {
@@ -33,12 +40,124 @@ CGFloat const minHeight = 80;
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = false;
         [self setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable | NSViewMinYMargin | NSViewMaxYMargin | NSViewMinXMargin | NSViewMaxXMargin];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sizeChanged) name:NSWindowDidResizeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewSizeChanged) name:NSWindowDidResizeNotification object:nil];
         self.wantsLayer = true;
         self.layer.masksToBounds = false;
+        self.fullViewOverlay = false;
         [self addViews];
     }
     return self;
+}
+
+- (void)setMinButtonsSize {
+    NSArray* buttons = self.buttonsContainer.arrangedSubviews;
+    for (NSView * button in buttons) {
+        [button removeConstraints:button.constraints];
+        [button.widthAnchor constraintEqualToConstant: controlSizeMin].active = true;
+        [button.heightAnchor constraintEqualToConstant: controlSizeMin].active = true;
+    }
+    NSArray* views = self.states.arrangedSubviews;
+    for (NSView * state in views) {
+        [state removeConstraints: state.constraints];
+        [state.widthAnchor constraintEqualToConstant: controlSizeMin].active = true;
+        [state.heightAnchor constraintEqualToConstant: controlSizeMin].active = true;
+    }
+}
+
+- (void)setMaxButtonsSize {
+    NSArray* buttons = self.buttonsContainer.arrangedSubviews;
+    for (NSView * button in buttons) {
+        [button removeConstraints:button.constraints];
+        [button.widthAnchor constraintEqualToConstant: controlSize].active = true;
+        [button.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    }
+    NSArray* views = self.states.arrangedSubviews;
+    for (NSView * state in views) {
+        [state removeConstraints: state.constraints];
+        [state.widthAnchor constraintEqualToConstant: controlSize].active = true;
+        [state.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    }
+}
+
+-(CGFloat)getButtonsWidth {
+    if (self.buttonsContainer.isHidden) {
+        return 0;
+    }
+    NSArray* buttons = self.buttonsContainer.arrangedSubviews;
+    CGFloat buttonsWidth = 0;
+    for (NSView * button in buttons) {
+        if (!button.isHidden) {
+            buttonsWidth += (button.frame.size.width + stackViewSpacing);
+        }
+    }
+    return buttonsWidth;
+}
+
+- (void)updateInfoSize {
+    auto viewSize = self.frame.size;
+    if (self.frame.size.width == 0 || self.frame.size.height == 0) {
+        return;
+    }
+    if (self.frame.size.width < minWidthConst || self.frame.size.height < minHeightConst) {
+        [self setMinButtonsSize];
+        self.usernameLabel.font = [NSFont userFontOfSize: 11.0];
+    } else {
+        [self setMaxButtonsSize];
+        self.usernameLabel.font = [NSFont userFontOfSize: 12.0];
+    }
+    [self.usernameLabel sizeToFit];
+    auto labelFrame = self.usernameLabel.frame;
+    auto buttonsWidth = [self getButtonsWidth];
+    // not moderatator
+    if (buttonsWidth == 0) {
+        if (labelFrame.size.width > (viewSize.width - stackViewSpacing * 2)) {
+            if (viewSize.width < minWidthConst) {
+                minWidth = viewSize.width + margin;
+                minHeight = viewSize.height + margin;
+                labelFrame.size.width = minWidth - margin * 2;
+                self.minWidthConstraint.constant = minWidth;
+                self.minHeightConstraint.constant = minHeight;
+            } else {
+                labelFrame.size.width = viewSize.width - margin * 2;
+            }
+        }
+        self.fullViewOverlay = false;
+        [self.usernameLabel sizeToFit];
+        self.nameLabelWidth.constant = labelFrame.size.width;
+        return;
+    }
+    [self.usernameLabel sizeToFit];
+    labelFrame = self.usernameLabel.frame;
+    auto buttonsSize = self.buttonsContainer.frame.size;
+    if ((labelFrame.size.width + (margin * 2)) > viewSize.width) {
+        labelFrame.size.width = viewSize.width - margin * 2;
+    }
+    self.nameLabelWidth.constant = labelFrame.size.width;
+    if ((labelFrame.size.width + buttonsSize.width) < (viewSize.width - stackViewSpacing * 2)) {
+        self.infoContainer.orientation = NSUserInterfaceLayoutOrientationHorizontal;
+        self.infoContainer.alignment = NSLayoutAttributeCenterY;
+        self.infoContainer.spacing = stackViewSpacing * 3;
+    } else {
+        self.infoContainer.orientation = NSUserInterfaceLayoutOrientationVertical;
+        self.infoContainer.spacing = stackViewSpacing;
+        self.infoContainer.alignment = NSLayoutAttributeLeft;
+    }
+    auto deltaH = viewSize.height - self.backgroundView.frame.size.height;
+    self.fullViewOverlay = (deltaH < 30);
+    if (self.fullViewOverlay) {
+        minWidth = viewSize.width + margin;
+        minHeight = viewSize.height + margin;
+        self.minWidthConstraint.constant = minWidth;
+        self.minHeightConstraint.constant = minHeight;
+        self.infoContainer.orientation = NSUserInterfaceLayoutOrientationVertical;
+        self.infoContainer.spacing = stackViewSpacing;
+        self.infoContainer.alignment = NSLayoutAttributeCenterX;
+    }
+}
+
+- (void)viewSizeChanged {
+    [self sizeChanged];
+    [self updateInfoSize];
 }
 
 - (void)addViews {
@@ -49,47 +168,37 @@ CGFloat const minHeight = 80;
     [self addSubview: self.increasedBackgroundView];
     self.increasedBackgroundView.hidden = true;
     self.increasedBackgroundView.layer.masksToBounds = true;
-    self.increasedBackgroundView.layer.cornerRadius = 6;
-    
+    self.increasedBackgroundView.layer.cornerRadius = cornerRadius;
+
     self.backgroundView = [[NSView alloc] init];
     [self.backgroundView setWantsLayer:  YES];
     self.backgroundView.layer.backgroundColor = [[NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.6] CGColor];
     self.backgroundView.translatesAutoresizingMaskIntoConstraints = false;
     [self addSubview: self.backgroundView];
     self.backgroundView.hidden = true;
-    
+    self.backgroundView.wantsLayer = true;
+    self.backgroundView.layer.cornerRadius = cornerRadius;
+    self.backgroundView.layer.maskedCorners = kCALayerMaxXMinYCorner;
+
     //participat state
-    self.audioState = [[CustomBackgroundView alloc] init];
-    self.audioState.backgroundType = RECTANGLE_WITH_ROUNDED_RIGHT_CORNER;
-    [self.audioState.widthAnchor constraintEqualToConstant: controlSize].active = true;
-    [self.audioState.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    self.audioState = [self getStateView];
     NSImage* audioImage = [NSImage imageNamed: @"ic_moderator_audio_muted.png"];
     self.audioState.image = audioImage;
-    
-    self.moderatorState = [[CustomBackgroundView alloc] init];
-    self.moderatorState.backgroundType = RECTANGLE;
-    [self.moderatorState.widthAnchor constraintEqualToConstant: controlSize].active = true;
-    [self.moderatorState.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    self.audioState.layer.cornerRadius = cornerRadius;
+
+    self.moderatorState = [self getStateView];
     NSImage* moderatorImage = [NSImage imageNamed: @"ic_moderator.png"];
     self.moderatorState.image = moderatorImage;
-    
-    self.hostState = [[CustomBackgroundView alloc] init];
-    self.hostState.backgroundType = RECTANGLE;
-    [self.hostState.widthAnchor constraintEqualToConstant: controlSize].active = true;
-    [self.hostState.heightAnchor constraintEqualToConstant: controlSize].active = true;
+
+    self.hostState = [self getStateView];
     NSImage* hostImage = [NSImage imageNamed: @"ic_star.png"];
     self.hostState.image = hostImage;
-    
-    self.cusp = [[CustomBackgroundView alloc] init];
-    self.cusp.backgroundType = CUSP;
-    [self.cusp.widthAnchor constraintEqualToConstant: 6].active = true;
-    [self.cusp.heightAnchor constraintEqualToConstant: controlSize].active = true;
-    
-    NSArray *statesViews = [NSArray arrayWithObjects: self.hostState, self.moderatorState, self.audioState, self.cusp, nil];
+
+    NSArray *statesViews = [NSArray arrayWithObjects: self.hostState, self.moderatorState, self.audioState, nil];
     self.states = [NSStackView stackViewWithViews: statesViews];
     self.states.spacing = 0;
     [self addSubview: self.states];
-    
+
     //actions
     self.maximize = [self getActionbutton];
     NSImage* maximizeImage = [NSImage imageNamed: @"ic_moderator_maximize.png"];
@@ -102,7 +211,7 @@ CGFloat const minHeight = 80;
     [self.minimize setImage: minimizeImage];
     [self.minimize setAction:@selector(minimize:)];
     [self.minimize setTarget:self];
-    
+
     self.hangup = [self getActionbutton];
     NSImage* hangupImage = [NSImage imageNamed: @"ic_moderator_hangup.png"];
     [self.hangup setImage: hangupImage];
@@ -114,36 +223,39 @@ CGFloat const minHeight = 80;
     [self.setModerator setImage: setModeratorImage];
     [self.setModerator setAction:@selector(setModerator:)];
     [self.setModerator setTarget:self];
-    
+
     self.muteAudio = [self getActionbutton];
     NSImage* muteAudioImage = [NSImage imageNamed: @"ic_moderator_audio_muted.png"];
     [self.muteAudio setImage: muteAudioImage];
     [self.muteAudio setAction:@selector(muteAudio:)];
     [self.muteAudio setTarget:self];
-    
+
     NSArray *actions = [NSArray arrayWithObjects: self.setModerator, self.muteAudio, self.maximize, self.minimize, self.hangup, nil];
     self.buttonsContainer = [NSStackView stackViewWithViews: actions];
     self.buttonsContainer.orientation = NSUserInterfaceLayoutOrientationHorizontal;
-    self.buttonsContainer.spacing = 5;
-    
-    self.usernameLabel = [[NSTextView alloc] init];
-    self.usernameLabel.alignment = NSTextAlignmentCenter;
+    self.buttonsContainer.spacing = stackViewSpacing;
+
+    self.usernameLabel = [[NSTextField alloc] init];
+    self.usernameLabel.alignment = NSTextAlignmentLeft;
     self.usernameLabel.textColor = [NSColor whiteColor];
     self.usernameLabel.editable = false;
+    self.usernameLabel.bordered = false;
     self.usernameLabel.drawsBackground = false;
-    self.usernameLabel.font = [NSFont userFontOfSize: 13.0];
-    self.usernameLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.usernameLabel.heightAnchor constraintEqualToConstant: 20].active = true;
-    [self.usernameLabel.widthAnchor constraintGreaterThanOrEqualToConstant: 60].active = true;
-    self.usernameLabel.textContainer.maximumNumberOfLines = 1;
-    
+    self.usernameLabel.font = [NSFont userFontOfSize: 12.0];
+    self.usernameLabel.translatesAutoresizingMaskIntoConstraints = true;
+    [self.usernameLabel.heightAnchor constraintEqualToConstant: 15].active = true;
+    self.nameLabelWidth = [self.usernameLabel.widthAnchor constraintEqualToConstant: 10];
+    self.nameLabelWidth.active = true;
+    self.usernameLabel.maximumNumberOfLines = 1;
+    self.usernameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+    self.usernameLabel.layer.masksToBounds = true;
+
     NSArray* infoItems = [NSArray arrayWithObjects: self.usernameLabel, self.buttonsContainer, nil];
-    
+
     self.infoContainer = [NSStackView stackViewWithViews: infoItems];
-    self.infoContainer.orientation = NSUserInterfaceLayoutOrientationVertical;
-    self.infoContainer.spacing = 0;
-    self.infoContainer.distribution = NSStackViewDistributionFillEqually;
-    self.infoContainer.alignment = NSLayoutAttributeCenterX;
+    self.infoContainer.orientation = NSUserInterfaceLayoutOrientationHorizontal;
+    self.infoContainer.spacing = stackViewSpacing * 3;
+    self.infoContainer.alignment = NSLayoutAttributeCenterY;
     [self.backgroundView addSubview: self.infoContainer];
 }
 
@@ -157,27 +269,39 @@ CGFloat const minHeight = 80;
     button.bgColor = [NSColor clearColor];
     button.imageColor = [NSColor whiteColor];
     button.imagePressedColor = [NSColor lightGrayColor];
-    button.imageInsets = margin;
+    button.imageInsets = buttonMargin;
     button.translatesAutoresizingMaskIntoConstraints = false;
     return button;
 }
 
+- (CustomBackgroundView*) getStateView {
+    CustomBackgroundView *state = [[CustomBackgroundView alloc] init];
+    state.wantsLayer = true;
+    state.layer.cornerRadius = 0;
+    state.layer.maskedCorners = kCALayerMaxXMaxYCorner;
+    state.layer.backgroundColor = [[NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.6] CGColor];
+    [state.widthAnchor constraintEqualToConstant: controlSize].active = true;
+    [state.heightAnchor constraintEqualToConstant: controlSize].active = true;
+    return state;
+}
+
 - (void)configureView {
-    [self.backgroundView.widthAnchor constraintEqualToAnchor:self.widthAnchor multiplier: 1].active = TRUE;
     [self.backgroundView.topAnchor constraintEqualToAnchor:self.topAnchor].active = true;
-    [self.backgroundView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor].active = true;
-    [self.backgroundView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;
-    
-    [self.states.topAnchor constraintEqualToAnchor:self.topAnchor].active = true;
+    [self.backgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = true;
+    [self.backgroundView.leadingAnchor constraintEqualToAnchor:self.infoContainer.leadingAnchor constant: -stackViewSpacing * 2].active = true;
+    [self.backgroundView.trailingAnchor constraintEqualToAnchor:self.infoContainer.trailingAnchor constant: stackViewSpacing * 2].active = true;
+    [self.infoContainer.topAnchor constraintEqualToAnchor:self.backgroundView.topAnchor constant: stackViewSpacing].active = true;
+    [self.backgroundView.heightAnchor constraintEqualToAnchor:self.infoContainer.heightAnchor constant: stackViewSpacing * 2].active = true;
+
+    [self.states.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = true;
     [self.states.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = true;
-    
-    [self.infoContainer.centerYAnchor constraintEqualToAnchor:self.centerYAnchor constant:1].active = true;
-    [self.infoContainer.centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:1].active = true;
-    
+
     [self.increasedBackgroundView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor constant:1].active = true;
     [self.increasedBackgroundView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor constant:1].active = true;
-    [self.increasedBackgroundView.widthAnchor constraintEqualToConstant:minWidth].active = true;
-    [self.increasedBackgroundView.heightAnchor constraintEqualToConstant:minHeight].active = true;
+    self.minWidthConstraint = [self.increasedBackgroundView.widthAnchor constraintEqualToConstant:minWidth];
+    self.minHeightConstraint = [self.increasedBackgroundView.heightAnchor constraintEqualToConstant:minHeight];
+    self.minWidthConstraint.active = true;
+    self.minHeightConstraint.active = true;
 }
 
 - (IBAction)minimize:(id) sender {
@@ -259,9 +383,10 @@ CGFloat const minHeight = 80;
     bool sizeChanged = self.participant.width != participant.width || self.participant.hight != participant.hight
     || self.participant.x != participant.x || self.participant.y != participant.y;
     self.participant = participant;
-    [self updateButtonsState];
     [self sizeChanged];
-    self.usernameLabel.string = self.participant.bestName;
+    self.usernameLabel.stringValue = self.participant.bestName;
+    [self updateButtonsState];
+    [self updateInfoSize];
 }
 
 -(void) updateButtonsState {
@@ -269,15 +394,12 @@ CGFloat const minHeight = 80;
     self.audioState.hidden = !audioMuted;
     self.moderatorState.hidden = !self.participant.isModerator || [self.delegate isParticipantHost: self.participant.uri];
     self.hostState.hidden = ![self.delegate isParticipantHost: self.participant.uri];
-    self.cusp.hidden = (self.audioState.hidden && self.moderatorState.hidden && self.hostState.hidden);
-    BackgroundType type = self.audioState.hidden ? RECTANGLE_WITH_ROUNDED_RIGHT_CORNER : RECTANGLE;
-    if (!self.moderatorState.hidden && self.moderatorState.backgroundType != type) {
-        self.moderatorState.backgroundType = type;
-        [self.moderatorState setNeedsDisplay:YES];
+    auto radius = self.audioState.hidden ? cornerRadius : 0;
+    if (!self.moderatorState.hidden) {
+        self.moderatorState.layer.cornerRadius = radius;
     }
-    if (!self.hostState.hidden && self.hostState.backgroundType != type) {
-        self.hostState.backgroundType = type;
-        [self.hostState setNeedsDisplay:YES];
+    if (!self.hostState.hidden) {
+        self.hostState.layer.cornerRadius = radius;
     }
     bool couldManageConference = [self.delegate isMasterCall] || [self.delegate isCallModerator];
     self.buttonsContainer.hidden = !couldManageConference;
@@ -302,20 +424,49 @@ CGFloat const minHeight = 80;
 }
 
 -(void)mouseEntered:(NSEvent *)theEvent {
-    self.backgroundView.hidden = NO;
-    auto size1 = self.frame.size;
-    if (size1.width < minWidth && size1.height < minHeight) {
-        self.increasedBackgroundView.hidden = false;
-        self.backgroundView.layer.backgroundColor = [[NSColor clearColor] CGColor];
-    }
+    [self showOverlay];
+    self.mouseInside = true;
     [super mouseEntered:theEvent];
 }
 
 -(void)mouseExited:(NSEvent *)theEvent {
+    [self hideOverlay];
+    self.mouseInside = false;
+    [super mouseExited:theEvent];
+}
+
+-(void) hideOverlay {
     self.backgroundView.hidden = YES;
     self.increasedBackgroundView.hidden = true;
     self.backgroundView.layer.backgroundColor = [[NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.6] CGColor];
-    [super mouseExited:theEvent];
+    self.states.hidden = false;
+    self.timeoutTimer.invalidate;
+    self.timeoutTimer = nil;
+}
+
+-(void) showOverlay {
+    self.backgroundView.hidden = NO;
+    auto labelFrame = self.usernameLabel.frame;
+    auto viewSize = self.frame.size;
+    if (self.fullViewOverlay) {
+        self.increasedBackgroundView.hidden = false;
+        self.backgroundView.layer.backgroundColor = [[NSColor clearColor] CGColor];
+        self.states.hidden = true;
+    }
+    self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval: 5
+                                                    target:self
+                                                  selector:@selector(hideOverlay) userInfo:nil
+                                                   repeats:NO];
+}
+
+- (void)mouseMoved:(NSEvent *)event {
+    [super mouseMoved: event];
+    if (!self.backgroundView.hidden) {
+        return;
+    }
+    if (self.mouseInside) {
+        [self showOverlay];
+    }
 }
 
 -(void)mouseUp:(NSEvent *)theEvent
@@ -337,7 +488,7 @@ CGFloat const minHeight = 80;
         trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
                                                     options:NSTrackingInVisibleRect
                         | NSTrackingActiveAlways
-                        | NSTrackingMouseEnteredAndExited owner:self userInfo:nil];
+                        | NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved owner:self userInfo:nil];
     }
 }
 

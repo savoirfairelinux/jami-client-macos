@@ -61,14 +61,22 @@ struct ConferenceParticipant {
 @property (nonatomic, weak) NSLayoutConstraint* heightConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* centerXConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* centerYConstraint;
+@property (nonatomic, weak) NSLayoutConstraint* nameLabelWidth;
+
+@property (nonatomic, weak) NSLayoutConstraint* minWidthConstraint;
+@property (nonatomic, weak) NSLayoutConstraint* minHeightConstraint;
+@property (nonatomic, weak) NSLayoutConstraint* backgroundBottomConstraint;
+@property (nonatomic, weak) NSLayoutConstraint* backgroundTrailingConstraint;
 @property NSView* backgroundView;
 @property NSView* increasedBackgroundView;
 @property NSStackView* states;
 @property NSStackView* buttonsContainer;
 @property NSStackView* infoContainer;
-@property NSTextView* usernameLabel;
+@property NSTextField* usernameLabel;
 @property (retain, nonatomic) id <ConferenceLayoutDelegate> delegate;
-
+@property (nonatomic, weak) NSTimer* timeoutTimer;
+@property BOOL mouseInside;
+@property BOOL fullViewOverlay;
 //actions
 @property IconButton* maximize;
 @property IconButton* minimize;
@@ -80,12 +88,11 @@ struct ConferenceParticipant {
 @property CustomBackgroundView* moderatorState;
 @property CustomBackgroundView* audioState;
 @property CustomBackgroundView* hostState;
-@property CustomBackgroundView* cusp;
 
 
 - (void)configureView;
 - (void)updateViewWithParticipant:(ConferenceParticipant) participant;
-- (void)sizeChanged;
+- (void)viewSizeChanged;
 
 @end
 
