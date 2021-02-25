@@ -1139,7 +1139,7 @@ CVPixelBufferRef pixelBufferPreview;
         [self.splitView enterFullScreenMode:[NSScreen mainScreen]  withOptions:opts];
     }
     for (ConferenceOverlayView* participant: [participantsOverlays allValues]) {
-        [participant sizeChanged];
+        [participant viewSizeChanged];
     }
 }
 
