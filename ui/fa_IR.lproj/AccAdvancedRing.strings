@@ -18,16 +18,16 @@
 "BIS-Ft-yJn.title" = "تنظیمات تماس";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
-"Va3-Un-lCL.title" = "Discovery settings";
+"Va3-Un-lCL.title" = "تنظیمات حالت کاوش";
 
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
-"rdZ-JB-96s.title" = "Make this account discoverable on local network";
+"rdZ-JB-96s.title" = "این حساب را در شبکه محلی قابل کشف کنید";
 
 /* Class = "NSButtonCell"; title = "Enable local moderators"; ObjectID = "BCQ-xd-1zb"; */
-"BCQ-xd-1zb.title" = "Enable local moderators";
+"BCQ-xd-1zb.title" = "فعال‌سازی مدیران محلی";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
-"n3E-PI-JHj.title" = "Discover peers on local network";
+"n3E-PI-JHj.title" = "کاوش همتایان در شبکه محلی";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "پاسخگویی خودکار تماس‌ها";
@@ -117,10 +117,10 @@
 "zPJ-cO-neQ.title" = "استفاده از TURN";
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
-"2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";
+"2cZ-SI-nbz.title" = "فعال‌سازی نقطه قرار ملاقات: حساب خود را به یک اتاق کنفرانس تبدیل کنید";
 
 /* Class = "NSButtonCell"; title = "Add default moderator"; ObjectID = "RKw-pg-2N8"; */
-"RKw-pg-2N8.title" = "Add default moderator";
+"RKw-pg-2N8.title" = "افزودن مدیر پیش‌فرض";
 
 /* Class = "NSTextFieldCell"; title = "You do not have default moderators"; ObjectID = "g2o-3r-Dx7"; */
-"g2o-3r-Dx7.title" = "You do not have default moderators";
+"g2o-3r-Dx7.title" = "شما مدیر پیش‌فرض ندارید";
