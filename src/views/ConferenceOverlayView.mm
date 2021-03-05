@@ -120,6 +120,10 @@ CGFloat minWidth = 140;
             minHeight = viewSize.height + margin;
             self.minWidthConstraint.constant = minWidth;
             self.minHeightConstraint.constant = minHeight;
+            auto overWidth = (minWidth - viewSize.width) * 0.5;
+            self.infoLeadingConstraint.constant = overWidth - stackViewSpacing * 2;
+        } else {
+            self.infoLeadingConstraint.constant = -stackViewSpacing * 2;
         }
         [self.usernameLabel sizeToFit];
         self.nameLabelWidth.constant = labelFrame.size.width;
@@ -130,7 +134,7 @@ CGFloat minWidth = 140;
         labelFrame.size.width = viewSize.width - margin * 2;
     }
     self.nameLabelWidth.constant = labelFrame.size.width;
-    if ((labelFrame.size.width + buttonsSize.width) < (viewSize.width - stackViewSpacing * 2)) {
+    if ((labelFrame.size.width + buttonsWidth + margin * 2) < (viewSize.width - stackViewSpacing * 2)) {
         self.infoContainer.orientation = NSUserInterfaceLayoutOrientationHorizontal;
         self.infoContainer.alignment = NSLayoutAttributeCenterY;
         self.infoContainer.spacing = stackViewSpacing * 3;
@@ -139,16 +143,20 @@ CGFloat minWidth = 140;
         self.infoContainer.spacing = stackViewSpacing;
         self.infoContainer.alignment = NSLayoutAttributeLeft;
     }
+    [self.superview layoutSubtreeIfNeeded];
     auto deltaH = viewSize.height - self.backgroundView.frame.size.height;
     self.fullViewOverlay = (deltaH < 30);
     if (self.fullViewOverlay) {
-        minWidth = viewSize.width + margin;
+        minWidth = MAX((viewSize.width + margin), (buttonsWidth + margin * 2));
         minHeight = viewSize.height + margin;
         self.minWidthConstraint.constant = minWidth;
         self.minHeightConstraint.constant = minHeight;
         self.infoContainer.orientation = NSUserInterfaceLayoutOrientationVertical;
         self.infoContainer.spacing = stackViewSpacing;
-        self.infoContainer.alignment = NSLayoutAttributeCenterX;
+        auto overWidth = (minWidth - viewSize.width) * 0.5;
+        self.infoLeadingConstraint.constant = overWidth - stackViewSpacing * 2;
+    } else {
+        self.infoLeadingConstraint.constant = -stackViewSpacing * 2;
     }
 }
 
@@ -162,7 +170,6 @@ CGFloat minWidth = 140;
     [self.increasedBackgroundView setWantsLayer:  YES];
     self.increasedBackgroundView.layer.backgroundColor = [[NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.8] CGColor];
     self.increasedBackgroundView.translatesAutoresizingMaskIntoConstraints = false;
-    [self addSubview: self.increasedBackgroundView];
     self.increasedBackgroundView.hidden = true;
     self.increasedBackgroundView.layer.masksToBounds = true;
     self.increasedBackgroundView.layer.cornerRadius = cornerRadius;
@@ -171,7 +178,6 @@ CGFloat minWidth = 140;
     [self.backgroundView setWantsLayer:  YES];
     self.backgroundView.layer.backgroundColor = [[NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.6] CGColor];
     self.backgroundView.translatesAutoresizingMaskIntoConstraints = false;
-    [self addSubview: self.backgroundView];
     self.backgroundView.hidden = true;
     self.backgroundView.wantsLayer = true;
     self.backgroundView.layer.cornerRadius = cornerRadius;
@@ -195,6 +201,8 @@ CGFloat minWidth = 140;
     self.states = [NSStackView stackViewWithViews: statesViews];
     self.states.spacing = 0;
     [self addSubview: self.states];
+    [self addSubview: self.increasedBackgroundView];
+    [self addSubview: self.backgroundView];
 
     //actions
     self.maximize = [self getActionbutton];
@@ -285,7 +293,8 @@ CGFloat minWidth = 140;
 - (void)configureView {
     [self.backgroundView.topAnchor constraintEqualToAnchor:self.topAnchor].active = true;
     [self.backgroundView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor].active = true;
-    [self.backgroundView.leadingAnchor constraintEqualToAnchor:self.infoContainer.leadingAnchor constant: -stackViewSpacing * 2].active = true;
+    self.infoLeadingConstraint = [self.backgroundView.leadingAnchor constraintEqualToAnchor:self.infoContainer.leadingAnchor constant: -stackViewSpacing * 2];
+    self.infoLeadingConstraint.active = true;
     [self.backgroundView.trailingAnchor constraintEqualToAnchor:self.infoContainer.trailingAnchor constant: stackViewSpacing * 2].active = true;
     [self.infoContainer.topAnchor constraintEqualToAnchor:self.backgroundView.topAnchor constant: stackViewSpacing].active = true;
     [self.backgroundView.heightAnchor constraintEqualToAnchor:self.infoContainer.heightAnchor constant: stackViewSpacing * 2].active = true;

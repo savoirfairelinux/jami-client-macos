@@ -62,6 +62,7 @@ struct ConferenceParticipant {
 @property (nonatomic, weak) NSLayoutConstraint* centerXConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* centerYConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* nameLabelWidth;
+@property (nonatomic, weak) NSLayoutConstraint* infoLeadingConstraint;
 
 @property (nonatomic, weak) NSLayoutConstraint* minWidthConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* minHeightConstraint;
