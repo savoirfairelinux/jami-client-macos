@@ -173,7 +173,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSInteger numberOfRows = [conversationView numberOfRows];
     if ((numberOfRows > 0) &&
         lastvisibleRow > (numberOfRows - 5)) {
-        [conversationView scrollRowToVisible:numberOfRows - 1];
+        [conversationView scrollToEndOfDocument: nil];
     }
 }
 
