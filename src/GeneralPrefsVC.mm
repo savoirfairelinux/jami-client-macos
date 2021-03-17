@@ -21,6 +21,7 @@
 //lrc
 #import <api/datatransfermodel.h>
 #import <api/avmodel.h>
+#import <api/newaccountmodel.h>
 
 #if ENABLE_SPARKLE
 #import <Sparkle/Sparkle.h>
@@ -28,6 +29,7 @@
 
 #import "Constants.h"
 #import "utils.h"
+#import "AppDelegate.h"
 
 @interface GeneralPrefsVC () {
     __unsafe_unretained IBOutlet NSButton* startUpButton;
@@ -50,14 +52,14 @@
 
 @implementation GeneralPrefsVC
 
-@synthesize dataTransferModel;
 @synthesize avModel;
+@synthesize accountModel;
 
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(lrc::api::DataTransferModel*) dataTransferModel avModel:(lrc::api::AVModel*) avModel {
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*) accountModel avModel: (lrc::api::AVModel*)avModel {
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
-        self.dataTransferModel = dataTransferModel;
+        self.accountModel = accountModel;
         self.avModel = avModel;
     }
     return self;
@@ -88,8 +90,11 @@
         [conversationStackView setHidden:YES];
         heightToReduice += (downloadFolder.frame.size.height + recordingFolder.frame.size.height + 25);
     } else {
-        if (dataTransferModel) {
-            downloadFolder.title = [dataTransferModel->downloadDirectory.toNSString() lastPathComponent];
+        if (accountModel) {
+           // AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+            //[appDelegate setDownloadDirectory: QString::fromNSString(path)];
+            //self.accountModel->downloadDirectory = QString::fromNSString(path);
+            downloadFolder.title = [self.accountModel->downloadDirectory.toNSString() lastPathComponent];
         }
         if (avModel) {
             auto name1 = avModel->getRecordPath();
@@ -112,8 +117,11 @@
     if ([panel runModal] != NSFileHandlingPanelOKButton) return;
     if ([[panel URLs] lastObject] == nil) return;
     NSString * path = [[[[panel URLs] lastObject] path] stringByAppendingString:@"/"];
-    dataTransferModel->downloadDirectory = QString::fromNSString(path);
-    downloadFolder.title = [dataTransferModel->downloadDirectory.toNSString() lastPathComponent];
+   // AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+   // self.accountModel->downloadDirectory = QString::fromNSString(path);
+   // [appDelegate setDownloadDirectory: QString::fromNSString(path)];
+   // dataTransferModel->downloadDirectory = QString::fromNSString(path);
+   // downloadFolder.title = [self.accountModel->downloadDirectory.toNSString() lastPathComponent];
     [[NSUserDefaults standardUserDefaults] setObject:path forKey:Preferences::DownloadFolder];
 }
 
