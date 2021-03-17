@@ -147,7 +147,7 @@
     NSString *pin = backupFile ? @"" : (self.pinValue ? self.pinValue : @"");
     NSString *archivePath = backupFile ? [backupFile path] : @"";
     NSString *pathword = self.passwordValue ? self.passwordValue : @"";
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING,
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::JAMI,
                                                           "",
                                                           QString::fromNSString(archivePath),
                                                           QString::fromNSString(pathword),

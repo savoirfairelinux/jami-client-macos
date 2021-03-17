@@ -24,7 +24,7 @@
 
 //Qt
 #import <QSize>
-#import <QtMacExtras/qmacfunctions.h>
+//#import <QtMacExtras/qmacfunctions.h>
 #import <QPixmap>
 #import <qstring.h>
 
