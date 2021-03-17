@@ -283,8 +283,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                                [self](const QString &uid,
                                                       const QString &contactUri,
                                                       bool isComposing) {
-        if (uid != convUid_)
-            return;
+//        if (uid != convUid_)
+//            return;
         bool shouldUpdate = isComposing != peerComposingMessage;
         if (!shouldUpdate) {
             return;
@@ -598,7 +598,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
             }
             break;
         case lrc::api::interaction::Type::DATA_TRANSFER:
-            return [self configureViewforTransfer:interaction interactionID: it->first tableView:tableView];
+            if (!interaction.body.isEmpty()) {
+                return [self configureViewforTransfer:interaction interactionID: it->first tableView:tableView];
+            } else {
+                return nil;
+            }
             break;
         case lrc::api::interaction::Type::CONTACT:
         case lrc::api::interaction::Type::CALL: {
@@ -728,6 +732,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         bool shouldDisplayTime = (sequence == FIRST_WITH_TIME || sequence == SINGLE_WITH_TIME) ? YES : NO;
 
         if(interaction.type == lrc::api::interaction::Type::DATA_TRANSFER) {
+            if (interaction.body.isEmpty()) {
+                return 1;
+            }
             if( interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED) {
                 NSString* name =  interaction.body.toNSString();
                 NSImage* image = [self getImageForFilePath:name];

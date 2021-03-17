@@ -66,7 +66,7 @@
 
     lrc::api::ConversationModel* convModel_;
     QString selectedUid_;
-    lrc::api::profile::Type currentFilterType;
+    lrc::api::FilterType currentFilterType;
 
     __unsafe_unretained IBOutlet RingWindowController *delegate;
 }
@@ -107,7 +107,7 @@ NSInteger const REQUEST_SEG         = 1;
     [smartView setShortcutsDelegate:self];
 
     [smartView setDataSource: self];
-    currentFilterType = lrc::api::profile::Type::RING;
+    currentFilterType = lrc::api::FilterType::JAMI;
     selectorIsPresent = true;
     NSFont *searchBarFont = [NSFont systemFontOfSize: 12.0 weight: NSFontWeightLight];
     NSColor *color = [NSColor secondaryLabelColor];
@@ -158,16 +158,16 @@ NSInteger const REQUEST_SEG         = 1;
         return;
     }
 
-    auto ringConversations = convModel_->getFilteredConversations(lrc::api::profile::Type::RING);
+    auto ringConversations = convModel_->getFilteredConversations(lrc::api::FilterType::JAMI);
     int totalUnreadMessages = 0;
     std::for_each(ringConversations.get().begin(), ringConversations.get().end(),
                   [&totalUnreadMessages, self] (const auto& conversation) {
-            totalUnreadMessages += convModel_->getNumberOfUnreadMessagesFor(conversation.get().uid);
+        totalUnreadMessages += conversation.get().unreadMessages;
     });
     [totalMsgsCount setHidden:(totalUnreadMessages == 0)];
     [totalMsgsCount setIntValue:totalUnreadMessages];
 
-    auto totalRequests = [self chosenAccount].contactModel->pendingRequestCount();
+    auto totalRequests = [self chosenAccount].conversationModel->pendingRequestCount();
     [totalInvites setHidden:(totalRequests == 0)];
     [totalInvites setIntValue:totalRequests];
 }
@@ -189,8 +189,8 @@ NSInteger const REQUEST_SEG         = 1;
 
     [self reloadSelectorNotifications];
 
-    if (!convModel_->owner.contactModel->hasPendingRequests()) {
-        if (currentFilterType == lrc::api::profile::Type::PENDING) {
+    if (!convModel_->owner.conversationModel->hasPendingRequests()) {
+        if (currentFilterType == lrc::api::FilterType::REQUEST) {
             [self selectConversationList];
         }
         if (selectorIsPresent) {
@@ -299,13 +299,13 @@ NSInteger const REQUEST_SEG         = 1;
                                                         });
         newConversationConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newConversation,
                                                         [self] (const QString& convUid) {
-                                                            [self reloadData];
+            [self reloadData];
                                                             [self updateConversationForNewContact:convUid.toNSString()];
                                                         });
         conversationRemovedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationRemoved,
                                                         [self] (){
                                                             [delegate listTypeChanged];
-                                                            [self reloadData];
+                                                            [smartView noteNumberOfRowsChanged];
                                                         });
         conversationClearedConnection = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationCleared,
                                                         [self] (const QString& convUid){
@@ -385,17 +385,17 @@ NSInteger const REQUEST_SEG         = 1;
     NSInteger selectedItem = [sender selectedSegment];
     switch (selectedItem) {
         case CONVERSATION_SEG:
-            if (currentFilterType != lrc::api::profile::Type::RING) {
-                convModel_->setFilter(lrc::api::profile::Type::RING);
+            if (currentFilterType != lrc::api::FilterType::JAMI) {
+                 convModel_->setFilter(lrc::api::FilterType::JAMI);
                 [delegate listTypeChanged];
-                currentFilterType = lrc::api::profile::Type::RING;
+                currentFilterType = lrc::api::FilterType::JAMI;
             }
             break;
         case REQUEST_SEG:
-            if (currentFilterType != lrc::api::profile::Type::PENDING) {
-                convModel_->setFilter(lrc::api::profile::Type::PENDING);
+            if (currentFilterType != lrc::api::FilterType::REQUEST) {
+                convModel_->setFilter(lrc::api::FilterType::REQUEST);
                 [delegate listTypeChanged];
-                currentFilterType = lrc::api::profile::Type::PENDING;
+                currentFilterType = lrc::api::FilterType::REQUEST;
             }
             break;
         default:
@@ -405,25 +405,25 @@ NSInteger const REQUEST_SEG         = 1;
 
 -(void) selectConversationList
 {
-    if (currentFilterType == lrc::api::profile::Type::RING)
+    if (currentFilterType == lrc::api::FilterType::JAMI)
         return;
     [listTypeSelector setSelectedSegment:CONVERSATION_SEG];
 
     // Do not invert order of the next two lines or stack overflow
     // may happen on -(void) reloadData call if filter is currently set to PENDING
-    currentFilterType = lrc::api::profile::Type::RING;
-    convModel_->setFilter(lrc::api::profile::Type::RING);
+    currentFilterType = lrc::api::FilterType::JAMI;
+    convModel_->setFilter(lrc::api::FilterType::JAMI);
     convModel_->setFilter("");
 }
 
 -(void) selectPendingList
 {
-    if (currentFilterType == lrc::api::profile::Type::PENDING)
+    if (currentFilterType == lrc::api::FilterType::REQUEST)
         return;
     [listTypeSelector setSelectedSegment:REQUEST_SEG];
 
-    currentFilterType = lrc::api::profile::Type::PENDING;
-    convModel_->setFilter(lrc::api::profile::Type::PENDING);
+    currentFilterType = lrc::api::FilterType::REQUEST;
+    convModel_->setFilter(lrc::api::FilterType::REQUEST);
     convModel_->setFilter("");
 }
 
@@ -826,7 +826,7 @@ NSInteger const REQUEST_SEG         = 1;
             return nil;
         }
 
-        else if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.isTrusted == true) {
+        else if (contact.profileInfo.type == lrc::api::profile::Type::JAMI && contact.isTrusted == true) {
             isRingContact = true;
         }
         auto conversationUD = conversation.uid;

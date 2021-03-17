@@ -22,7 +22,7 @@
 
 #import <qstring.h>
 #import <QPixmap>
-#import <QtMacExtras/qmacfunctions.h>
+//#import <QtMacExtras/qmacfunctions.h>
 #import <QuartzCore/QuartzCore.h>
 #import <QuickLook/QuickLook.h>
 #import <Quartz/Quartz.h>
