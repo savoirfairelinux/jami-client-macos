@@ -566,13 +566,9 @@
                                                 <size key="maxSize" width="516" height="10000000"/>
                                                 <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <connections>
-                                                    <binding destination="iH6-17-JsM" name="value" keyPath="message" id="nua-kp-nn8">
+                                                    <binding destination="iH6-17-JsM" name="value" keyPath="message" id="EMX-UL-FhZ">
                                                         <dictionary key="options">
                                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                            <string key="NSMultipleValuesPlaceholder">Type a message</string>
-                                                            <string key="NSNoSelectionPlaceholder">Type a message</string>
-                                                            <string key="NSNotApplicablePlaceholder">Type a message</string>
-                                                            <string key="NSNullPlaceholder">Type a message</string>
                                                         </dictionary>
                                                     </binding>
                                                     <outlet property="delegate" destination="iH6-17-JsM" id="PLt-0w-LEu"/>

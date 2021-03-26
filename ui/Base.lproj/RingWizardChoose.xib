@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="69" width="525" height="258"/>
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pcF-lX-ex4">
-                            <rect key="frame" x="163" y="231" width="200" height="29"/>
+                            <rect key="frame" x="167" y="231" width="192" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="kX1-30-jfa"/>
                             </constraints>
@@ -37,7 +37,7 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nn9-La-V34">
-                            <rect key="frame" x="163" y="192" width="200" height="29"/>
+                            <rect key="frame" x="167" y="192" width="192" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="Bre-De-DSA"/>
                             </constraints>
@@ -50,7 +50,7 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-ql-oGP">
-                            <rect key="frame" x="163" y="153" width="200" height="29"/>
+                            <rect key="frame" x="167" y="153" width="192" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="OX0-Ne-mlD"/>
                             </constraints>
@@ -63,7 +63,7 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uHC-M1-ce5">
-                            <rect key="frame" x="163" y="114" width="200" height="29"/>
+                            <rect key="frame" x="167" y="114" width="192" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="rr1-jU-d3s"/>
                             </constraints>
@@ -89,11 +89,11 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HjM-oT-VQj">
-                            <rect key="frame" x="163" y="36" width="200" height="29"/>
+                            <rect key="frame" x="167" y="36" width="192" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="iKl-6P-vAW"/>
                             </constraints>
-                            <buttonCell key="cell" type="bevel" title="Connect to account manager" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HGQ-Kd-WIw">
+                            <buttonCell key="cell" type="bevel" title="Connect to a JAMS server" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HGQ-Kd-WIw">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -102,7 +102,7 @@
                             </connections>
                         </button>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NBt-Xw-PzN">
-                            <rect key="frame" x="163" y="-3" width="200" height="29"/>
+                            <rect key="frame" x="167" y="-3" width="192" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="5Wb-L4-VtH"/>
                             </constraints>

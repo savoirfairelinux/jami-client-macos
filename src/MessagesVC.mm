@@ -34,6 +34,7 @@
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
 #import "views/IconButton.h"
+#import "views/TextViewWithPlaceholder.h"
 #import <QuickLook/QuickLook.h>
 #import <Quartz/Quartz.h>
 #import <AVFoundation/AVFoundation.h>
@@ -45,7 +46,7 @@
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
     __unsafe_unretained IBOutlet NSView* containerView;
-    __unsafe_unretained IBOutlet NSTextView* messageView;
+    __unsafe_unretained IBOutlet TextViewWithPlaceholder* messageView;
     __unsafe_unretained IBOutlet IconButton *sendFileButton;
     __unsafe_unretained IBOutlet IconButton *recordVideoButton;
     __unsafe_unretained IBOutlet IconButton *recordAudioButton;
@@ -359,6 +360,17 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     } catch (std::out_of_range& e) {
         NSLog(@"contact out of range");
     }
+    NSString* name = bestNameForConversation(*conv, *convModel_);
+    NSString *placeholder = [NSString stringWithFormat:@"%@%@", @"Write to ", name];
+
+    NSFont *fontName = [NSFont systemFontOfSize: 14.0 weight: NSFontWeightRegular];
+    NSColor *color = [NSColor tertiaryLabelColor];
+    NSDictionary *nameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                               fontName, NSFontAttributeName,
+                               color, NSForegroundColorAttributeName,
+                               nil];
+    NSAttributedString* attributedPlaceholder = [[NSAttributedString alloc] initWithString: placeholder attributes:nameAttrs];
+    messageView.placeholderAttributedString = attributedPlaceholder;
 }
 
 #pragma mark - configure cells

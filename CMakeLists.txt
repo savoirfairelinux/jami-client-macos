@@ -242,6 +242,8 @@ SET(ringclient_VIEWS
    src/views/ConferenceOverlayView.mm
    src/views/CustomBackgroundView.h
    src/views/CustomBackgroundView.mm
+   src/views/TextViewWithPlaceholder.h
+   src/views/TextViewWithPlaceholder.mm
 )
 
 SET(ringclient_OTHERS
