@@ -147,8 +147,9 @@ CGFloat minWidth = 140;
     auto deltaH = viewSize.height - self.backgroundView.frame.size.height;
     self.fullViewOverlay = (deltaH < 30);
     if (self.fullViewOverlay) {
-        minWidth = MAX((viewSize.width + margin), (buttonsWidth + margin * 2));
-        minHeight = viewSize.height + margin;
+        minWidth = MAX((viewSize.width + margin), (buttonsWidth + margin));
+        self.nameLabelWidth.constant = minWidth - margin * 2;
+        minHeight = MAX((viewSize.height + margin), (self.infoContainer.frame.size.height + margin));
         self.minWidthConstraint.constant = minWidth;
         self.minHeightConstraint.constant = minHeight;
         self.infoContainer.orientation = NSUserInterfaceLayoutOrientationVertical;
@@ -182,6 +183,7 @@ CGFloat minWidth = 140;
     self.backgroundView.wantsLayer = true;
     self.backgroundView.layer.cornerRadius = cornerRadius;
     self.backgroundView.layer.maskedCorners = kCALayerMaxXMinYCorner;
+    self.backgroundView.layer.masksToBounds = false;
 
     //participat state
     self.audioState = [self getStateView];
