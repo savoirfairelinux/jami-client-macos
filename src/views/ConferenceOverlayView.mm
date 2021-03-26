@@ -26,7 +26,7 @@ CGFloat const buttonMargin = 2;
 CGFloat const margin = 10;
 CGFloat const controlSize = 20;
 CGFloat const controlSizeMin = 18;
-CGFloat const minWidthConst = 120;
+CGFloat const minWidthConst = 100;
 CGFloat const minHeightConst = 70;
 CGFloat const cornerRadius = 6;
 CGFloat const stackViewSpacing = 5;
@@ -147,10 +147,12 @@ CGFloat minWidth = 140;
     auto deltaH = viewSize.height - self.backgroundView.frame.size.height;
     self.fullViewOverlay = (deltaH < 30);
     if (self.fullViewOverlay) {
-        minWidth = MAX((viewSize.width + margin), (buttonsWidth + margin * 2));
-        minHeight = viewSize.height + margin;
+        minWidth = MAX(MAX((viewSize.width + margin), (buttonsWidth + margin)), minWidthConst);
+        self.nameLabelWidth.constant = minWidth - margin * 2;
+        minHeight = MAX((viewSize.height + margin * 2), (self.infoContainer.frame.size.height + margin * 2));
         self.minWidthConstraint.constant = minWidth;
         self.minHeightConstraint.constant = minHeight;
+        self.nameLabelWidth.constant = minWidth - margin * 2;
         self.infoContainer.orientation = NSUserInterfaceLayoutOrientationVertical;
         self.infoContainer.spacing = stackViewSpacing;
         auto overWidth = (minWidth - viewSize.width) * 0.5;
@@ -182,20 +184,24 @@ CGFloat minWidth = 140;
     self.backgroundView.wantsLayer = true;
     self.backgroundView.layer.cornerRadius = cornerRadius;
     self.backgroundView.layer.maskedCorners = kCALayerMaxXMinYCorner;
+    self.backgroundView.layer.masksToBounds = false;
 
     //participat state
     self.audioState = [self getStateView];
     NSImage* audioImage = [NSImage imageNamed: @"ic_moderator_audio_muted.png"];
     self.audioState.image = audioImage;
     self.audioState.layer.cornerRadius = cornerRadius;
+    self.audioState.toolTip = NSLocalizedString(@"Audio muted", @"conference state tooltip Audio muted");
 
     self.moderatorState = [self getStateView];
     NSImage* moderatorImage = [NSImage imageNamed: @"ic_moderator.png"];
     self.moderatorState.image = moderatorImage;
+    self.moderatorState.toolTip = NSLocalizedString(@"Moderator", @"conference state tooltip moderator");
 
     self.hostState = [self getStateView];
     NSImage* hostImage = [NSImage imageNamed: @"ic_star.png"];
     self.hostState.image = hostImage;
+    self.hostState.toolTip = NSLocalizedString(@"Conference host", @"conference state tooltip Host");
 
     NSArray *statesViews = [NSArray arrayWithObjects: self.hostState, self.moderatorState, self.audioState, nil];
     self.states = [NSStackView stackViewWithViews: statesViews];
@@ -207,30 +213,35 @@ CGFloat minWidth = 140;
     //actions
     self.maximize = [self getActionbutton];
     NSImage* maximizeImage = [NSImage imageNamed: @"ic_moderator_maximize.png"];
+    self.maximize.toolTip = NSLocalizedString(@"Expand", @"conference tooltip Expand");
     [self.maximize setImage: maximizeImage];
     [self.maximize setAction:@selector(maximize:)];
     [self.maximize setTarget:self];
 
     self.minimize = [self getActionbutton];
     NSImage* minimizeImage = [NSImage imageNamed: @"ic_moderator_minimize.png"];
+    self.minimize.toolTip = NSLocalizedString(@"Minimize", @"conference tooltip Minimize");
     [self.minimize setImage: minimizeImage];
     [self.minimize setAction:@selector(minimize:)];
     [self.minimize setTarget:self];
 
     self.hangup = [self getActionbutton];
     NSImage* hangupImage = [NSImage imageNamed: @"ic_moderator_hangup.png"];
+    self.hangup.toolTip = NSLocalizedString(@"Hangup", @"conference tooltip Hangup");
     [self.hangup setImage: hangupImage];
     [self.hangup setAction:@selector(finishCall:)];
     [self.hangup setTarget:self];
 
     self.setModerator = [self getActionbutton];
     NSImage* setModeratorImage = [NSImage imageNamed: @"ic_moderator.png"];
+    self.setModerator.toolTip = NSLocalizedString(@"Set moderator", @"conference tooltip Set moderator");
     [self.setModerator setImage: setModeratorImage];
     [self.setModerator setAction:@selector(setModerator:)];
     [self.setModerator setTarget:self];
 
     self.muteAudio = [self getActionbutton];
     NSImage* muteAudioImage = [NSImage imageNamed: @"ic_moderator_audio_muted.png"];
+    self.muteAudio.toolTip = NSLocalizedString(@"Mute audio", @"conference tooltip Mute audio");
     [self.muteAudio setImage: muteAudioImage];
     [self.muteAudio setAction:@selector(muteAudio:)];
     [self.muteAudio setTarget:self];
@@ -419,14 +430,14 @@ CGFloat minWidth = 140;
     BOOL hangupEnabled = ![self.delegate isParticipantHost: self.participant.uri];
     BOOL showMaximized = layout != 2;
     BOOL showMinimized = !(layout == 0 || (layout == 1 && !self.participant.active));
-    self.setModerator.enabled = showConferenceHostOnly;
-    self.hangup.enabled = hangupEnabled;
+    self.setModerator.hidden = !showConferenceHostOnly;
+    self.hangup.hidden = !hangupEnabled;
     self.minimize.hidden = !showMinimized;
     self.maximize.hidden = !showMaximized;
     NSImage* muteAudioImage = audioMuted ? [NSImage imageNamed: @"ic_moderator_audio_muted.png"] :
     [NSImage imageNamed: @"ic_moderator_audio_unmuted.png"];
     [self.muteAudio setImage: muteAudioImage];
-    self.muteAudio.enabled = !self.participant.audioLocalMuted;
+    self.muteAudio.hidden = self.participant.audioLocalMuted;
 }
 
 -(void)mouseEntered:(NSEvent *)theEvent {
