@@ -297,7 +297,7 @@ NSInteger const REQUEST_SEG         = 1;
                                                         });
         newConversationConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::newConversation,
                                                         [self] (const QString& convUid) {
-            [self reloadData];
+            [smartView noteNumberOfRowsChanged];
                                                             [self updateConversationForNewContact:convUid.toNSString()];
                                                         });
         conversationRemovedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::conversationRemoved,
@@ -536,7 +536,7 @@ NSInteger const REQUEST_SEG         = 1;
     NSView* presenceView = [result viewWithTag:PRESENCE_TAG];
     [presenceView setHidden:YES];
     try {
-        auto contact = convModel_->owner.contactModel->getContact(conversation.participants.front());
+        auto contact = convModel_->owner.contactModel->getContact(convModel_->peersForConversation(conversation.uid)[0]);
         if (contact.isPresent) {
             [presenceView setHidden:NO];
         }
@@ -676,8 +676,9 @@ NSInteger const REQUEST_SEG         = 1;
     if (!convOpt.has_value())
         return;
     lrc::api::conversation::Info& conversation = *convOpt;
-    if (conversation.participants.size() > 0) {
-        if (conversation.participants[0] == selectedUid_) {
+    auto& peers = convModel_->peersForConversation(conversation.uid);
+    if (peers.size() == 1) {
+        if (peers[0] == selectedUid_) {
             selectedUid_ = uid;
             convModel_->selectConversation(uid);
         }
@@ -720,8 +721,12 @@ NSInteger const REQUEST_SEG         = 1;
     if (selectedUid_ == uid) {
         return YES;
     }
+    auto& peers = convModel_->peersForConversation(conversation.uid);
+    if (peers.size() != 1) {
+        return NO;
+    }
     try {
-        auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
+        auto contact = convModel_->owner.contactModel->getContact(peers)[0]);
         if ((contact.profileInfo.uri.isEmpty() && contact.profileInfo.type != lrc::api::profile::Type::SIP) || contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
             return YES;
         }
@@ -784,9 +789,12 @@ NSInteger const REQUEST_SEG         = 1;
     if (!convOpt.has_value())
         return nil;
     lrc::api::conversation::Info& conversation = *convOpt;
-
+    auto& peers = convModel_->peersForConversation(conversation.uid);
+    if (peers.size() != 1) {
+        return nil;
+    }
     try {
-        auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
+        auto contact = convModel_->owner.contactModel->getContact(peers[0]);
         if (contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
             return nil;
         }
