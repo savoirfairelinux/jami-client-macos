@@ -241,7 +241,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     [titleTopConstraint setActive:!hideBestId];
     auto accountType = convModel_->owner.profileInfo.type;
     try {
-        [addContactButton setHidden:((convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
+        [addContactButton setHidden:((convModel_->owner.contactModel->getContact(convModel_->peersForConversation(conv->uid)[0]).profileInfo.type != lrc::api::profile::Type::TEMPORARY) || accountType == lrc::api::profile::Type::SIP)];
     } catch (std::out_of_range& e) {
         [addContactButton setHidden: true];
         NSLog(@"contact out of range");
