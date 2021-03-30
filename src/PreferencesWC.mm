@@ -55,12 +55,11 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [tb setAllowsUserCustomization:NO];
 }
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel dataTransferModel:(lrc::api::DataTransferModel*)dataTransferModel behaviourController:(lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel behaviourController:(lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
         self.accountModel = accountModel;
-        self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
     }
@@ -71,7 +70,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil dataTransferModel: self.dataTransferModel avModel: self.avModel];
+    currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil accountModel:self.accountModel avModel:self.avModel];
     [self addCurrentVC];
 }
 

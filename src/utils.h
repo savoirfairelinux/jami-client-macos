@@ -35,10 +35,10 @@
 #import <QtCore/QDir>
 #import <qapplication.h>
 
-static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
+static inline NSString* bestIDForConversation(const lrc::api::conversation::Info& conv, lrc::api::ConversationModel& model)
 {
     try {
-        auto contact = model.owner.contactModel->getContact(conv.participants[0]);
+        auto contact = model.owner.contactModel->getContact(model.peersForConversation(conv.uid)[0]);
         auto name = contact.registeredName.trimmed().replace("\r","").replace("\n","");
         if (!name.isEmpty()) {
             return [name.toNSString() removeEmptyLinesAtBorders];
@@ -86,10 +86,10 @@ static inline NSString* bestNameForContact(const lrc::api::contact::Info& contac
     return contact.profileInfo.alias.toNSString();
 }
 
-static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
+static inline NSString* bestNameForConversation(const lrc::api::conversation::Info& conv, lrc::api::ConversationModel& model)
 {
     try {
-        auto contact = model.owner.contactModel->getContact(conv.participants[0]);
+        auto contact = model.owner.contactModel->getContact(model.peersForConversation(conv.uid)[0]);
         if (contact.profileInfo.alias.isEmpty()) {
             return bestIDForConversation(conv, model);
         }
@@ -111,13 +111,13 @@ static inline NSString* defaultRingtonePath() {
     return [ringtonesDir.path().toNSString() stringByAppendingString:@"/default.opus"];
 }
 
-static inline lrc::api::profile::Type profileType(const lrc::api::conversation::Info& conv, const lrc::api::ConversationModel& model)
+static inline lrc::api::profile::Type profileType(const lrc::api::conversation::Info& conv,  lrc::api::ConversationModel& model)
 {
-    @try {
-        auto contact = model.owner.contactModel->getContact(conv.participants[0]);
+    try {
+        auto& peers = model.peersForConversation(conv.uid);
+        const auto contact = model.owner.contactModel->getContact(peers[0]);
         return contact.profileInfo.type;
-    }
-    @catch (NSException *exception) {
+    } catch (std::out_of_range& e) {
         lrc::api::profile::Type::INVALID;
     }
 }
