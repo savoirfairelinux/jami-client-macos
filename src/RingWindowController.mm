@@ -252,7 +252,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         if (!convOpt.has_value()) { return; }
         lrc::api::conversation::Info& convInfo = *convOpt;
         try {
-            if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
+            if (accInfo->contactModel->getContact(convModel->peersForConversation(convInfo.uid)[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                 [smartViewVC selectPendingList];
             else
                 [smartViewVC selectConversationList];
@@ -290,7 +290,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
             return;
         }
         try {
-            if (accInfo->contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
+            if (accInfo->contactModel->getContact(convModel->peersForConversation(convInfo.uid)[0]).profileInfo.type == lrc::api::profile::Type::PENDING)
                 [smartViewVC selectPendingList];
             else
                 [smartViewVC selectConversationList];
@@ -679,7 +679,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         return;
     }
     lrc::api::conversation::Info& convInfo = *convOpt;
-    if (accInfo.contactModel->getContact(convInfo.participants[0]).profileInfo.type == lrc::api::profile::Type::PENDING) {
+    if (accInfo.contactModel->getContact(accInfo.conversationModel->peersForConversation(convInfo.uid)[0]).profileInfo.type == lrc::api::profile::Type::PENDING) {
         [smartViewVC selectPendingList];
     }
     else {

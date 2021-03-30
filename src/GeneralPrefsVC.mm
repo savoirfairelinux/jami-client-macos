@@ -54,7 +54,7 @@
 @synthesize avModel;
 @synthesize accountModel;
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*) accountModel avModel: (lrc::api::AVModel*)avModel {
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*) accountModel avModel: (lrc::api::AVModel*)avModel {
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         self.accountModel = accountModel;
