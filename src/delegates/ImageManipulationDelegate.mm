@@ -37,6 +37,7 @@
 #import <api/conversation.h>
 #import <api/account.h>
 #import <api/contactmodel.h>
+#import <api/conversationmodel.h>
 #import <api/contact.h>
 #import <api/profile.h>
 
@@ -129,7 +130,8 @@ namespace Interfaces {
         Q_UNUSED(displayPresence)
 
         try {
-            auto contact = accountInfo.contactModel->getContact(conversation.participants[0]);
+            auto contact = accountInfo.contactModel->getContact(accountInfo.conversationModel->peersForConversation(conversation.uid)[0]);
+//            auto contact = accountInfo.contactModel->getContact(accountInfo.conversationModel.peersForConversation(conversation.uid)[0]);
             auto& avatar = contact.profileInfo.avatar;
             if (!avatar.isEmpty()) {
                 QPixmap pxm;

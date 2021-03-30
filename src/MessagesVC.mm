@@ -413,7 +413,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [conversationView.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
     conversationView.alphaValue = 1;
     try {
-        [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
+        [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(convModel_->peersForConversation(conv->uid)[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
     } catch (std::out_of_range& e) {
         NSLog(@"contact out of range");
     }
@@ -866,7 +866,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     bool shouldDisplayAvatar = (sequence != MIDDLE_IN_SEQUENCE && sequence != FIRST_WITHOUT_TIME
                                 && sequence != FIRST_WITH_TIME) ? YES : NO;
     [result.photoView setHidden:!shouldDisplayAvatar];
-    BOOL showIndicator = convModel_->isLastDisplayed(convUid_, it->first, conv->participants.front());
+    BOOL showIndicator = convModel_->isLastDisplayed(convUid_, it->first, convModel_->peersForConversation(conv->uid)[0]);
     [result.readIndicator setHidden: !showIndicator];
     @autoreleasepool {
         auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
