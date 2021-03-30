@@ -277,7 +277,7 @@ CVPixelBufferRef pixelBufferPreview;
             return;
         }
         lrc::api::conversation::Info& conv = *convOpt;
-        auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
+        auto& contact = accountInfo_->contactModel->getContact(accountInfo_->conversationModel->peersForConversation(conv.uid)[0]);
         if (contact.profileInfo.type == lrc::api::profile::Type::JAMI && contact.profileInfo.uri == contactUri)
             accountInfo_->conversationModel->makePermanent(convUid_);
         [contactPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
@@ -651,7 +651,7 @@ CVPixelBufferRef pixelBufferPreview;
             QVariant photo = imgManip.conversationPhoto(conv, *accountInfo_, QSize(size, size), NO);
             return QtMac::toNSImage(qvariant_cast<QPixmap>(photo));
         }
-        auto contact = accountInfo_->contactModel->getContact(conv.participants[0]);
+        auto contact = accountInfo_->contactModel->getContact(accountInfo_->conversationModel->peersForConversation(conv.uid)[0]);
         NSData *imageData = [[NSData alloc] initWithBase64EncodedString:contact.profileInfo.avatar.toNSString() options:NSDataBase64DecodingIgnoreUnknownCharacters];
         return [[NSImage alloc] initWithData:imageData];
     }
@@ -987,7 +987,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (conv.uid.isEmpty() || conv.participants.empty()) {
         return;
     }
-    auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
+    auto& contact = accountInfo_->contactModel->getContact(accountInfo_->conversationModel->peersForConversation(conv.uid)[0]);
     if (contact.profileInfo.type == lrc::api::profile::Type::PENDING) {
         accountInfo_->conversationModel->makePermanent(convUid_);
     }
