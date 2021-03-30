@@ -212,7 +212,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
             [self.delegate joinCall: callID];
         }
     } else if (table == contactsView) {
-        auto uid = conv.participants.front();
+        auto uid = convModel->peersForConversation(conv.uid)[0];
         if ([self.delegate respondsToSelector: @selector(joinCall:)]) {
             [self.delegate callToContact:uid convUID: convID];
         }
@@ -369,7 +369,7 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
     [photoView setHidden: NO];
     [photoView setImage: image];
     try {
-        auto contact = convModel->owner.contactModel->getContact(conversationInfo.participants[0]);
+        auto contact = convModel->owner.contactModel->getContact(convModel->peersForConversation(conversationInfo.uid)[0]);
         if (contact.isPresent) {
             [presenceView setHidden:NO];
         }
