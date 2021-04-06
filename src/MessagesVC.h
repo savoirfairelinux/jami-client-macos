@@ -36,6 +36,8 @@
  */
 @property (retain) NSString* message;
 
+@property (nonatomic, weak) NSView* containerView;
+
 -(void) setAVModel: (lrc::api::AVModel*) avmodel;
 -(void) checkIfcomposingMsg;
 

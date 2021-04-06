@@ -246,3 +246,15 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Search for new or existing contact";
+
+/* Synchronization label for conversation {Name} */
+"We are waiting for %@ connects to synchronize the conversation." = "We are waiting for %@ connects to synchronize the conversation.";
+
+/* Incoming conversation request title */
+"Hello, \nWould you like to join the conversation?" = "Hello, \nWould you like to join the conversation?";
+
+/* Invitation request from {Name} */
+"%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
+
+/* Synchronization explanation label */
+"You have accepted the conversation request." = "You have accepted the conversation request.";

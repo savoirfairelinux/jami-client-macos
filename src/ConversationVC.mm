@@ -19,13 +19,16 @@
  */
 
 #import "ConversationVC.h"
+#import "delegates/ImageManipulationDelegate.h"
 
 #import <qstring.h>
 #import <QPixmap>
-//#import <QtMacExtras/qmacfunctions.h>
+#import <QtMacExtras/qmacfunctions.h>
 #import <QuartzCore/QuartzCore.h>
 #import <QuickLook/QuickLook.h>
 #import <Quartz/Quartz.h>
+
+#import <globalinstances.h>
 
 #import "views/IconButton.h"
 #import "views/HoverButton.h"
@@ -44,8 +47,24 @@
     __unsafe_unretained IBOutlet NSTextField *conversationID;
     __unsafe_unretained IBOutlet HoverButton *addContactButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
-    __unsafe_unretained IBOutlet NSProgressIndicator* loadingindicator;
-    __unsafe_unretained IBOutlet NSView* loadingindicatorContainer;
+    __unsafe_unretained IBOutlet NSStackView* controls;
+    __unsafe_unretained IBOutlet NSButton *placeAudioCall;
+    __unsafe_unretained IBOutlet NSButton *placeVideoCall;
+    __unsafe_unretained IBOutlet NSButton *recordVideo;
+    __unsafe_unretained IBOutlet NSButton *recordAudio;
+    __unsafe_unretained IBOutlet NSButton *sendFile;
+    __unsafe_unretained IBOutlet NSButton *emoji;
+    // invitation view
+    __unsafe_unretained IBOutlet NSView* invitationView;
+    __unsafe_unretained IBOutlet NSImageView* invitationAvatar;
+    __unsafe_unretained IBOutlet NSTextField *invitationTitle;
+    __unsafe_unretained IBOutlet NSTextField *syncLabel;
+    __unsafe_unretained IBOutlet NSTextField *invitationLabel;
+    __unsafe_unretained IBOutlet NSView *invitationBox;
+    __unsafe_unretained IBOutlet NSButton *invitationBlock;
+    __unsafe_unretained IBOutlet NSButton *invitationRefuse;
+    __unsafe_unretained IBOutlet NSButton *invitationAccept;
+    __unsafe_unretained IBOutlet NSStackView* invitationControls;
 
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
@@ -87,8 +106,33 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         leaveMessageConversations = [[NSMutableArray alloc] init];
         leaveMessageVC.delegate = self;
         [messagesViewVC setAVModel: avModel];
+        //setup the invitation view
+        invitationView.wantsLayer = true;
+        invitationView.layer.backgroundColor = [[NSColor windowBackgroundColor] CGColor];
+        NSString *invitationText = NSLocalizedString(@"Hello, \nWould you like to join the conversation?", @"Incoming conversation request title");
+        [self setInvitationText: invitationText];
+        invitationBox.wantsLayer = true;
+        invitationBox.layer.cornerRadius = 20.0;
+        invitationBox.layer.backgroundColor = [[[NSColor controlColor] colorWithAlphaComponent: 0.7] CGColor];
+        invitationBox.shadow = [[NSShadow alloc] init];
+        invitationBox.layer.shadowOpacity = 0.2;
+        invitationBox.layer.shadowColor = [[NSColor colorWithRed:0 green:0 blue:0 alpha:0.3] CGColor];
+        invitationBox.layer.shadowOffset = NSMakeSize(0, -3);
+        invitationBox.layer.shadowRadius = 10;
     }
     return self;
+}
+
+- (void)setInvitationText:(NSString*)text
+{
+    NSFont *font = [NSFont systemFontOfSize: 18 weight: NSFontWeightMedium];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing: 4.0];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+
+    NSDictionary *attrDic = [NSDictionary dictionaryWithObjectsAndKeys: font, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, [NSColor controlTextColor], NSForegroundColorAttributeName, nil];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString: text attributes:attrDic];
+    [invitationTitle setAttributedStringValue: attrString];
 }
 
 -(NSViewController*) getMessagesView {
@@ -152,6 +196,15 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelChanged,
                                           [self](){
                                               cachedConv_ = nil;
+        auto* conv = [self getCurrentConversation];
+
+        if (conv == nil)
+            return;
+            if (conv->isRequest) {
+                [self setUpInvitationView: conv->needsSyncing];
+            } else {
+                [self setUpConversationView];
+            }
                                           });
     filterChangedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::filterChanged,
                                             [self](){
@@ -167,15 +220,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
                                                 });
     creatingConversationEventConnection_ =  QObject::connect(convModel_, &lrc::api::ConversationModel::creatingConversationEvent,
                                                              [self](const QString& accountId, const QString& conversationId, const QString& participantURI, int status) {
-        if (conversationId != convUid_ && participantURI != convUid_) {
-            return;
-        }
-        [loadingindicatorContainer setHidden:status != 0];
-        if (status == 0) {
-            [loadingindicator startAnimation:nil];
-        } else {
-            [loadingindicator stopAnimation:nil];
-        }
+
     });
 
     auto* conv = [self getCurrentConversation];
@@ -203,7 +248,63 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     if (!conv->allMessagesLoaded) {
         convModel_->loadConversationMessages(convUid_, 0);
     }
+    NSString *invitationText = [NSString stringWithFormat:
+                                NSLocalizedString(@"%@ has sent you a request for a conversation.",@"Invitation request from {Name}"),
+                                bestName];
+    invitationLabel.stringValue = invitationText;
+    @autoreleasepool {
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        auto image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner, QSize(110, 110))));
+        [invitationAvatar setImage:image];
+    }
+    NSString *syncTitle = [NSString stringWithFormat:
+                           NSLocalizedString(@"We are waiting for %@ connects to synchronize the conversation.",@"Synchronization label for conversation {Name}"),
+                           bestName];
+    syncLabel.stringValue = syncTitle;
+    if (conv->isRequest) {
+        [self setUpInvitationView: conv->needsSyncing];
+    } else {
+        [self setUpConversationView];
+    }
 }
+
+- (void) setUpInvitationView: (bool) needSync {
+    messagesViewVC.containerView.hidden = true;
+    invitationView.hidden = false;
+    controls.hidden = true;
+    invitationBlock.enabled = !needSync;
+    invitationRefuse.enabled = !needSync;
+    invitationAccept.enabled = !needSync;
+    invitationControls.hidden = needSync;
+    invitationLabel.hidden = !needSync;
+    syncLabel.hidden = needSync;
+    NSString *invitationText = NSLocalizedString(@"Hello, \nWould you like to join the conversation?", @"Incoming conversation request title");
+    NSString *syncText = NSLocalizedString(@"You have accepted the conversation request.", @"Synchronization explanation label");
+    [self setInvitationText: needSync ? syncText : invitationText];
+    placeAudioCall.enabled = false;
+    placeVideoCall.enabled = false;
+    recordVideo.enabled = false;
+    recordAudio.enabled = false;
+    sendFile.enabled = false;
+    emoji.enabled = false;
+    addContactButton.enabled = false;
+}
+- (void) setUpConversationView {
+    messagesViewVC.containerView.hidden = false;
+    invitationView.hidden = true;
+    controls.hidden = false;
+    invitationBlock.enabled = false;
+    invitationRefuse.enabled = false;
+    invitationAccept.enabled = false;
+    placeAudioCall.enabled = true;
+    placeVideoCall.enabled = true;
+    addContactButton.enabled = true;
+    recordVideo.enabled = true;
+    recordAudio.enabled = true;
+    sendFile.enabled = true;
+    emoji.enabled = true;
+}
+
 
 - (void) initFrame
 {
@@ -296,6 +397,18 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
 -(void) messageCompleted {
     [leaveMessageConversations removeObject:convUid_.toNSString()];
+}
+
+- (IBAction) acceptInvitation:(id)sender {
+    convModel_->makePermanent(convUid_);
+}
+
+- (IBAction) refuseInvitation:(id)sender {
+    convModel_->removeConversation(convUid_);
+}
+
+- (IBAction) blockInvitation:(id)sender {
+    convModel_->removeConversation(convUid_, true);
 }
 
 @end
