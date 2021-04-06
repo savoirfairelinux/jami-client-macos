@@ -44,7 +44,6 @@
 @interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource, NSTextViewDelegate> {
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
-    __unsafe_unretained IBOutlet NSView* containerView;
     __unsafe_unretained IBOutlet NSTextView* messageView;
     __unsafe_unretained IBOutlet IconButton *sendFileButton;
     __unsafe_unretained IBOutlet IconButton *recordVideoButton;
