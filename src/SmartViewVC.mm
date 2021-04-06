@@ -86,9 +86,6 @@ NSInteger const TOTALMSGS_TAG       = 600;
 NSInteger const TOTALINVITES_TAG    = 700;
 NSInteger const DATE_TAG            = 800;
 NSInteger const SNIPPET_TAG         = 900;
-NSInteger const ADD_BUTTON_TAG            = 1000;
-NSInteger const REFUSE_BUTTON_TAG         = 1100;
-NSInteger const BLOCK_BUTTON_TAG          = 1200;
 
 // Segment indices for smartlist selector
 NSInteger const CONVERSATION_SEG    = 0;
@@ -548,25 +545,9 @@ NSInteger const REQUEST_SEG         = 1;
         NSLog(@"contact out of range");
     }
 
-    NSButton* addContactButton = [result viewWithTag:ADD_BUTTON_TAG];
-    NSButton* refuseContactButton = [result viewWithTag:REFUSE_BUTTON_TAG];
-    NSButton* blockContactButton = [result viewWithTag:BLOCK_BUTTON_TAG];
-    [addContactButton setHidden:YES];
-    [refuseContactButton setHidden:YES];
-    [blockContactButton setHidden:YES];
-
-    if (profileType(conversation, *convModel_) == lrc::api::profile::Type::PENDING) {
+    if (conversation.isRequest) {
         [lastInteractionDate setHidden:true];
         [interactionSnippet setHidden:true];
-        [addContactButton setHidden:NO];
-        [refuseContactButton setHidden:NO];
-        [blockContactButton setHidden:NO];
-        [addContactButton setAction:@selector(acceptInvitation:)];
-        [addContactButton setTarget:self];
-        [refuseContactButton setAction:@selector(refuseInvitation:)];
-        [refuseContactButton setTarget:self];
-        [blockContactButton setAction:@selector(blockPendingContact:)];
-        [blockContactButton setTarget:self];
         return result;
     }
 

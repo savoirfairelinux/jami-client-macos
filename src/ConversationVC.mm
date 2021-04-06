@@ -19,13 +19,16 @@
  */
 
 #import "ConversationVC.h"
+#import "delegates/ImageManipulationDelegate.h"
 
 #import <qstring.h>
 #import <QPixmap>
-//#import <QtMacExtras/qmacfunctions.h>
+#import <QtMacExtras/qmacfunctions.h>
 #import <QuartzCore/QuartzCore.h>
 #import <QuickLook/QuickLook.h>
 #import <Quartz/Quartz.h>
+
+#import <globalinstances.h>
 
 #import "views/IconButton.h"
 #import "views/HoverButton.h"
@@ -44,8 +47,18 @@
     __unsafe_unretained IBOutlet NSTextField *conversationID;
     __unsafe_unretained IBOutlet HoverButton *addContactButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sentContactRequestWidth;
-    __unsafe_unretained IBOutlet NSProgressIndicator* loadingindicator;
-    __unsafe_unretained IBOutlet NSView* loadingindicatorContainer;
+    __unsafe_unretained IBOutlet NSStackView* controls;
+    // invitation view
+    __unsafe_unretained IBOutlet NSView* invitationView;
+    __unsafe_unretained IBOutlet NSImageView* invitationAvatar;
+    __unsafe_unretained IBOutlet NSTextField *invitationTitle;
+    __unsafe_unretained IBOutlet NSTextField *syncLabel;
+    __unsafe_unretained IBOutlet NSTextField *invitationLabel;
+    __unsafe_unretained IBOutlet NSView *invitationBox;
+    __unsafe_unretained IBOutlet NSButton *invitationBlock;
+    __unsafe_unretained IBOutlet NSButton *invitationRefuse;
+    __unsafe_unretained IBOutlet NSButton *invitationAccept;
+    __unsafe_unretained IBOutlet NSStackView* invitationControls;
 
     __unsafe_unretained IBOutlet NSButton* sentContactRequestButton;
     IBOutlet MessagesVC* messagesViewVC;
@@ -87,8 +100,32 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         leaveMessageConversations = [[NSMutableArray alloc] init];
         leaveMessageVC.delegate = self;
         [messagesViewVC setAVModel: avModel];
+        invitationView.wantsLayer = true;
+        invitationView.layer.backgroundColor = [[NSColor windowBackgroundColor] CGColor];
+        NSString *invitationTitle = [NSString stringWithFormat:@"%@\r%@", @"Hello,",@"Would you like to join the conversation?"];
+        [self setInvitationTitle: invitationTitle];
+        invitationBox.wantsLayer = true;
+        invitationBox.layer.cornerRadius = 20.0;
+        invitationBox.layer.backgroundColor = [[[NSColor controlColor] colorWithAlphaComponent: 0.7] CGColor];
+        invitationBox.shadow = [[NSShadow alloc] init];
+        invitationBox.layer.shadowOpacity = 0.2;
+        invitationBox.layer.shadowColor = [[NSColor colorWithRed:0 green:0 blue:0 alpha:0.3] CGColor];
+        invitationBox.layer.shadowOffset = NSMakeSize(0, -3);
+        invitationBox.layer.shadowRadius = 10;
     }
     return self;
+}
+
+- (void)setInvitationTitle:(NSString*)title
+{
+    NSFont *font = [NSFont systemFontOfSize: 18 weight: NSFontWeightMedium];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing: 4.0];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+
+    NSDictionary *attrDic = [NSDictionary dictionaryWithObjectsAndKeys: font, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, [NSColor controlTextColor], NSForegroundColorAttributeName, nil];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString: title attributes:attrDic];
+    [invitationTitle setAttributedStringValue:attrString];
 }
 
 -(NSViewController*) getMessagesView {
@@ -167,15 +204,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
                                                 });
     creatingConversationEventConnection_ =  QObject::connect(convModel_, &lrc::api::ConversationModel::creatingConversationEvent,
                                                              [self](const QString& accountId, const QString& conversationId, const QString& participantURI, int status) {
-        if (conversationId != convUid_ && participantURI != convUid_) {
-            return;
-        }
-        [loadingindicatorContainer setHidden:status != 0];
-        if (status == 0) {
-            [loadingindicator startAnimation:nil];
-        } else {
-            [loadingindicator stopAnimation:nil];
-        }
+
     });
 
     auto* conv = [self getCurrentConversation];
@@ -203,7 +232,43 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     if (!conv->allMessagesLoaded) {
         convModel_->loadConversationMessages(convUid_, 0);
     }
+    NSString *invitationText = [NSString stringWithFormat:@"%@%@",bestName, @" has sent you a request for a conversation."];
+    invitationLabel.stringValue = invitationText;
+    @autoreleasepool {
+        auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+        auto image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(*conv, convModel_->owner, QSize(110, 110))));
+        [invitationAvatar setImage:image];
+    }
+    NSString *syncTitle = [NSString stringWithFormat:@"%@%@%@", @"We are waiting for ", bestName, @" connects to synchronize the conversation."];
+    syncLabel.stringValue = syncTitle;
+//    if (conv->isRequest) {
+        [self setUpInvitationView: conv->needsSyncing];
+//    } else {
+//        [self setUpConversationView];
+//    }
 }
+
+- (void) setUpInvitationView: (bool) needSync {
+    invitationView.hidden = false;
+    controls.hidden = true;
+    invitationBlock.enabled = needSync;
+    invitationRefuse.enabled = needSync;
+    invitationAccept.enabled = needSync;
+    invitationControls.hidden = needSync;
+    invitationLabel.hidden = needSync;
+    syncLabel.hidden = needSync;
+    NSString *invitationTitle = [NSString stringWithFormat:@"%@\r%@", @"Hello,",@"Would you like to join the conversation?"];
+    NSString *syncTitle = @"You have accepted the conversation request.";
+    [self setInvitationTitle: !needSync ? syncTitle : invitationTitle];
+}
+- (void) setUpConversationView {
+    invitationView.hidden = true;
+    controls.hidden = false;
+    invitationBlock.enabled = false;
+    invitationRefuse.enabled = false;
+    invitationAccept.enabled = false;
+}
+
 
 - (void) initFrame
 {
