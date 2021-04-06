@@ -86,9 +86,6 @@ NSInteger const TOTALMSGS_TAG       = 600;
 NSInteger const TOTALINVITES_TAG    = 700;
 NSInteger const DATE_TAG            = 800;
 NSInteger const SNIPPET_TAG         = 900;
-NSInteger const ADD_BUTTON_TAG            = 1000;
-NSInteger const REFUSE_BUTTON_TAG         = 1100;
-NSInteger const BLOCK_BUTTON_TAG          = 1200;
 
 // Segment indices for smartlist selector
 NSInteger const CONVERSATION_SEG    = 0;
@@ -547,25 +544,9 @@ NSInteger const REQUEST_SEG         = 1;
         NSLog(@"contact out of range");
     }
 
-    NSButton* addContactButton = [result viewWithTag:ADD_BUTTON_TAG];
-    NSButton* refuseContactButton = [result viewWithTag:REFUSE_BUTTON_TAG];
-    NSButton* blockContactButton = [result viewWithTag:BLOCK_BUTTON_TAG];
-    [addContactButton setHidden:YES];
-    [refuseContactButton setHidden:YES];
-    [blockContactButton setHidden:YES];
-
-    if (profileType(conversation, *convModel_) == lrc::api::profile::Type::PENDING) {
+    if (conversation.isRequest) {
         [lastInteractionDate setHidden:true];
         [interactionSnippet setHidden:true];
-        [addContactButton setHidden:NO];
-        [refuseContactButton setHidden:NO];
-        [blockContactButton setHidden:NO];
-        [addContactButton setAction:@selector(acceptInvitation:)];
-        [addContactButton setTarget:self];
-        [refuseContactButton setAction:@selector(refuseInvitation:)];
-        [refuseContactButton setTarget:self];
-        [blockContactButton setAction:@selector(blockPendingContact:)];
-        [blockContactButton setTarget:self];
         return result;
     }
 
@@ -695,14 +676,11 @@ NSInteger const REQUEST_SEG         = 1;
     if (!convOpt.has_value())
         return;
     lrc::api::conversation::Info& conversation = *convOpt;
-    @try {
-        auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
-        if (!contact.profileInfo.uri.isEmpty() && contact.profileInfo.uri.compare(selectedUid_) == 0) {
+    if (conversation.participants.size() > 0) {
+        if (conversation.participants[0] == selectedUid_) {
             selectedUid_ = uid;
             convModel_->selectConversation(uid);
         }
-    } @catch (NSException *exception) {
-        return;
     }
 }
 
@@ -742,7 +720,7 @@ NSInteger const REQUEST_SEG         = 1;
     if (selectedUid_ == uid) {
         return YES;
     }
-    @try {
+    try {
         auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
         if ((contact.profileInfo.uri.isEmpty() && contact.profileInfo.type != lrc::api::profile::Type::SIP) || contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
             return YES;
@@ -751,7 +729,7 @@ NSInteger const REQUEST_SEG         = 1;
         convModel_->selectConversation(uid);
         [self.view.window makeFirstResponder: smartView];
         return YES;
-    } @catch (NSException *exception) {
+    } catch (std::out_of_range& e) {
         return YES;
     }
 }
@@ -807,7 +785,7 @@ NSInteger const REQUEST_SEG         = 1;
         return nil;
     lrc::api::conversation::Info& conversation = *convOpt;
 
-    @try {
+    try {
         auto contact = convModel_->owner.contactModel->getContact(conversation.participants[0]);
         if (contact.profileInfo.type == lrc::api::profile::Type::INVALID) {
             return nil;
@@ -872,7 +850,7 @@ NSInteger const REQUEST_SEG         = 1;
         }
         return theMenu;
     }
-    @catch (NSException *exception) {
+    catch (std::out_of_range& e) {
         return nil;
     }
 }
