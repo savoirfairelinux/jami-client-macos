@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +17,7 @@
         <window title="Jami Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="C1T-wE-wxb">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="469" y="334" width="653" height="383"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="33Y-I6-Ofh">
                 <rect key="frame" x="0.0" y="0.0" width="653" height="383"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,27 +40,44 @@
                     <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="KmD-NW-2Sc"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="6aq-4y-T31"/>
                     <toolbarItem implicitItemIdentifier="A53BED01-97D4-496F-9806-EB216CF9D2D9" explicitItemIdentifier="VideoPrefsIdentifer" label="Video" paletteLabel="Video" tag="-1" image="video" selectable="YES" id="jLi-an-TR2">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
                         <connections>
                             <action selector="displayVideo:" target="-2" id="UAi-6C-AQw"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="E53EE3E8-C5D3-49F8-A231-B8FC691E37CE" explicitItemIdentifier="AudioPrefsIdentifer" label="Audio" paletteLabel="Audio" tag="-1" image="audio" selectable="YES" id="iuJ-eu-b7f">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
                         <connections>
                             <action selector="displayAudio:" target="-2" id="bbf-3M-NFB"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="EE8B14A6-94EE-47DC-8E40-437D3207D41B" explicitItemIdentifier="GeneralPrefsIdentifier" label="General" paletteLabel="General" tag="-1" image="general" selectable="YES" id="GQi-nL-0Ey">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
                         <connections>
                             <action selector="displayGeneral:" target="-2" id="mCA-4c-06H"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="627205FE-1164-4992-8C29-54EB6409DF24" label="Advanced" paletteLabel="Advanced" tag="-1" image="NSAdvanced" id="Qza-fj-d45"/>
+                    <toolbarItem implicitItemIdentifier="627205FE-1164-4992-8C29-54EB6409DF24" label="Advanced" paletteLabel="Advanced" tag="-1" image="NSAdvanced" id="Qza-fj-d45">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aIF-RX-dpX"/>
+                    <toolbarItem implicitItemIdentifier="8FE54A8C-2FC0-42B8-B234-011662AD0A28" explicitItemIdentifier="PluginPrefsIdentifier" label="Plugins" paletteLabel="Plugins" tag="-1" image="symbol_blue" selectable="YES" id="zzE-XA-cFn">
+                        <size key="minSize" width="22" height="22"/>
+                        <size key="maxSize" width="22" height="22"/>
+                        <connections>
+                            <action selector="displayPlugins:" target="-2" id="pluginprefaction"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="GQi-nL-0Ey"/>
                     <toolbarItem reference="iuJ-eu-b7f"/>
                     <toolbarItem reference="jLi-an-TR2"/>
+                    <toolbarItem reference="zzE-XA-cFn"/>
                     <toolbarItem reference="aIF-RX-dpX"/>
                 </defaultToolbarItems>
             </toolbar>
@@ -68,11 +86,14 @@
             </connections>
             <point key="canvasLocation" x="449.5" y="181.5"/>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="4wX-Ep-Yxj"/>
     </objects>
     <resources>
-        <image name="NSAdvanced" width="128" height="128"/>
+        <image name="NSAdvanced" width="32" height="32"/>
         <image name="audio" width="36" height="36"/>
         <image name="general" width="36" height="36"/>
+        <image name="puzzlepiece.fill" catalog="system" width="22" height="15"/>
+        <image name="symbol_blue" width="512" height="512"/>
         <image name="video" width="36" height="36"/>
     </resources>
 </document>
