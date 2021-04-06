@@ -32,6 +32,11 @@ namespace lrc {
 
 @interface ConversationVC : NSViewController <LeaveMessageDelegate>
 
+/**
+ * KVO to switch between request/conversation view
+ */
+@property (assign)BOOL isRequest;
+
 -(void) initFrame;
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;
