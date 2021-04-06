@@ -42,7 +42,6 @@
  * if message.length is > 0, button is enabled, otherwise disabled
  */
 @property (retain) NSString* message;
-
 /**
  * This is a KVO method to bind the pending files collection view visibility
  */
@@ -52,6 +51,7 @@
  * This is a KVO method to bind the enable state of send button
  */
 @property BOOL enableSendButton;
+@property (nonatomic, weak) NSView* containerView;
 
 -(void) setAVModel: (lrc::api::AVModel*) avmodel;
 -(void) checkIfcomposingMsg;
