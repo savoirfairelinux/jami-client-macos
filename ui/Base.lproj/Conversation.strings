@@ -55,3 +55,12 @@
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Type a message"; ObjectID = "rQj-9q-WQ6"; */
 "rQj-9q-WQ6.ibShadowedIsNilPlaceholder" = "Type a message";
+
+/* Class = "NSButtonCell"; title = "BLOCK"; ObjectID = "HSp-y7-w6n"; */
+"HSp-y7-w6n.title" = "BLOCK";
+
+/* Class = "NSButtonCell"; title = "REFUSE"; ObjectID = "pIg-Hr-SJn"; */
+"pIg-Hr-SJn.title" = "REFUSE";
+
+/* Class = "NSButtonCell"; title = "ACCEPT"; ObjectID = "xiC-2C-Zf4"; */
+"xiC-2C-Zf4.title" = "ACCEPT";
