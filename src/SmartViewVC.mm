@@ -176,7 +176,6 @@ NSInteger const REQUEST_SEG         = 1;
     [searchResultsView layoutSubtreeIfNeeded];
 }
 
-
 -(void) reloadData
 {
     [contactsHeader setHidden: convModel_->allFilteredConversations().get().empty() || searchField.stringValue.length == 0];
@@ -269,6 +268,7 @@ NSInteger const REQUEST_SEG         = 1;
     QObject::disconnect(newInteractionConnection_);
     QObject::disconnect(searchStatusChangedConnection_);
     QObject::disconnect(searchResultUpdated_);
+    convModel_->setFilter(currentFilterType);
     [self reloadData];
     [self reloadSearchResults];
 
@@ -410,7 +410,7 @@ NSInteger const REQUEST_SEG         = 1;
     // Do not invert order of the next two lines or stack overflow
     // may happen on -(void) reloadData call if filter is currently set to PENDING
     currentFilterType = lrc::api::FilterType::JAMI;
-    convModel_->setFilter(lrc::api::FilterType::JAMI);
+    convModel_->setFilter(currentFilterType);
     convModel_->setFilter("");
 }
 
@@ -421,7 +421,7 @@ NSInteger const REQUEST_SEG         = 1;
     [listTypeSelector setSelectedSegment:REQUEST_SEG];
 
     currentFilterType = lrc::api::FilterType::REQUEST;
-    convModel_->setFilter(lrc::api::FilterType::REQUEST);
+    convModel_->setFilter(currentFilterType);
     convModel_->setFilter("");
 }
 
