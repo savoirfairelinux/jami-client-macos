@@ -34,6 +34,8 @@ namespace lrc {
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(const lrc::api::NewAccountModel*) accountModel;
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel dataTransferModel:(const lrc::api::DataTransferModel*)dataTransferModel behaviourController:(const lrc::api::BehaviorController*) behaviorController;
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel dataTransferModel:(const lrc::api::DataTransferModel*)dataTransferModel behaviourController:(const lrc::api::BehaviorController*) behaviorController avModel: (const lrc::api::AVModel*)avModel;
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel avModel: ( lrc::api::AVModel*)avModel;
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel behaviourController:(const lrc::api::BehaviorController*) behaviorController avModel: (const lrc::api::AVModel*)avModel;
 
 @property lrc::api::DataTransferModel* dataTransferModel;
 @property lrc::api::NewAccountModel* accountModel;
