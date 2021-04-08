@@ -31,6 +31,7 @@
 #import <api/contact.h>
 #import <api/datatransfermodel.h>
 #import <api/avmodel.h>
+#import <api/pluginmodel.h>
 
 // Ring
 #import "AppDelegate.h"
@@ -85,10 +86,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
     IBOutlet ChooseAccountVC* chooseAccountVC;
 }
 
-@synthesize dataTransferModel, accountModel, behaviorController, avModel;
+@synthesize dataTransferModel, accountModel, behaviorController, avModel, pluginModel;
 @synthesize wizard;
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel pluginModel: (lrc::api::PluginModel*)pluginModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
@@ -96,6 +97,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
+        self.pluginModel = pluginModel;
         self.avModel->useAVFrame(YES);
         [NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(themeChanged:) name:@"AppleInterfaceThemeChangedNotification" object: nil];
     }
@@ -556,7 +558,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         return;
     }
 
-    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName: @"PreferencesWindow" bundle: nil accountModel:self.accountModel dataTransferModel:self.dataTransferModel behaviourController:self.behaviorController avModel: self.avModel];
+    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName: @"PreferencesWindow" bundle: nil accountModel:self.accountModel  dataTransferModel:self.dataTransferModel behaviourController:self.behaviorController avModel: self.avModel pluginModel: self.pluginModel];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
 }
 
