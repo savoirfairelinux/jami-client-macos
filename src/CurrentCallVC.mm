@@ -278,8 +278,6 @@ CVPixelBufferRef pixelBufferPreview;
         }
         lrc::api::conversation::Info& conv = *convOpt;
         auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
-        if (contact.profileInfo.type == lrc::api::profile::Type::RING && contact.profileInfo.uri == contactUri)
-            accountInfo_->conversationModel->makePermanent(convUid_);
         [contactPhoto setImage: [self getContactImageOfSize:120.0 withDefaultAvatar:YES]];
         [self.delegate conversationInfoUpdatedFor:convUid_];
         [self setBackground];

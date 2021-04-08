@@ -232,7 +232,7 @@ NSMutableDictionary* menuItemsTags;
         case lrc::api::profile::Type::SIP:
             [itemView.accountTypeLabel setStringValue:@"SIP"];
             break;
-        case lrc::api::profile::Type::RING:
+        case lrc::api::profile::Type::JAMI:
             [itemView.accountTypeLabel setStringValue:@"Jami"];
             break;
         default:

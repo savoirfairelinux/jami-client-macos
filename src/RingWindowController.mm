@@ -85,15 +85,14 @@ typedef NS_ENUM(NSInteger, ViewState) {
     IBOutlet ChooseAccountVC* chooseAccountVC;
 }
 
-@synthesize dataTransferModel, accountModel, behaviorController, avModel;
+@synthesize accountModel, behaviorController, avModel;
 @synthesize wizard;
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel dataTransferModel:( lrc::api::DataTransferModel*)dataTransferModel behaviourController:( lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:( lrc::api::NewAccountModel*)accountModel behaviourController:( lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
         self.accountModel = accountModel;
-        self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
         self.avModel->useAVFrame(YES);
@@ -205,7 +204,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         path = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
     }
-    self.dataTransferModel->downloadDirectory = QString::fromNSString(path);
+    self.accountModel->downloadDirectory = QString::fromNSString(path);
     if(appSandboxed()) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         avModel->setRecordPath(QString::fromNSString([paths objectAtIndex:0]));
@@ -406,7 +405,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
         [ringIDLabel setStringValue:@""];
 
-        if(account.profileInfo.type != lrc::api::profile::Type::RING) {
+        if(account.profileInfo.type != lrc::api::profile::Type::JAMI) {
             self.notRingAccount = YES;
             self.isSIPAccount = YES;
             return;
@@ -556,7 +555,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         return;
     }
 
-    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName: @"PreferencesWindow" bundle: nil accountModel:self.accountModel dataTransferModel:self.dataTransferModel behaviourController:self.behaviorController avModel: self.avModel];
+    preferencesWC = [[PreferencesWC alloc] initWithWindowNibName: @"PreferencesWindow" bundle: nil accountModel:self.accountModel behaviourController:self.behaviorController avModel: self.avModel];
     [preferencesWC.window makeKeyAndOrderFront:preferencesWC.window];
 }
 
