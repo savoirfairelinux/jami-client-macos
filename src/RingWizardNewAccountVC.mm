@@ -302,7 +302,7 @@ BOOL isRendevous = false;
     [self display:loadingView];
     [progressBar startAnimation:nil];
 
-    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::RING, QString::fromNSString(displayNameField.stringValue),"",QString::fromNSString(passwordField.stringValue), "");
+    accountToCreate = self.accountModel->createNewAccount(lrc::api::profile::Type::JAMI, QString::fromNSString(displayNameField.stringValue),"",QString::fromNSString(passwordField.stringValue), "");
 }
 
 /**
