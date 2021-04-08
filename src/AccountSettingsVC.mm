@@ -71,7 +71,7 @@ CGFloat const VIEW_INSET = 40;
 - (void) setSelectedAccount:(const QString&) account {
     selectedAccountID = account;
     const auto& accountInfo = accountModel->getAccountInfo(selectedAccountID);
-    if (accountInfo.profileInfo.type == lrc::api::profile::Type::RING) {
+    if (accountInfo.profileInfo.type == lrc::api::profile::Type::JAMI) {
         accountGeneralVC = ringGeneralVC;
         accountGeneralVC.delegate = self;
         accountAdvancedVC = ringAdvancedVC;
