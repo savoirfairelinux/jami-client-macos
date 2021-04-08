@@ -34,7 +34,7 @@
     NSViewController *currentVC;
 }
 
-@synthesize dataTransferModel, accountModel, behaviorController, avModel, pluginModel;
+@synthesize accountModel, behaviorController, avModel, pluginModel;
 
 // Identifiers used in PreferencesWindow.xib for tabs
 static auto const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
@@ -57,12 +57,11 @@ static auto const kPluginPrefsIdentifer    = @"PluginPrefsIdentifer";
     [tb setAllowsUserCustomization:NO];
 }
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel dataTransferModel:(lrc::api::DataTransferModel*)dataTransferModel behaviourController:(lrc::api::BehaviorController*)behaviorController avModel: (lrc::api::AVModel*)avModel pluginModel: (lrc::api::PluginModel*)pluginModel
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel  behaviourController:(lrc::api::BehaviorController*)behaviorController avModel: (lrc::api::AVModel*)avModel pluginModel: (lrc::api::PluginModel*)pluginModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
         self.accountModel = accountModel;
-        self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
         self.pluginModel = pluginModel;
@@ -74,7 +73,7 @@ static auto const kPluginPrefsIdentifer    = @"PluginPrefsIdentifer";
 {
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil dataTransferModel: self.dataTransferModel avModel: self.avModel];
+    currentVC = [[GeneralPrefsVC alloc] initWithNibName:@"GeneralPrefs" bundle:nil accountModel: self.accountModel avModel: self.avModel];
     [self addCurrentVC];
 }
 

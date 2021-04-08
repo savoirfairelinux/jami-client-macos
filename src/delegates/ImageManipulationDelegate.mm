@@ -112,7 +112,7 @@ namespace Interfaces {
     {
         if (!contact.profileInfo.alias.isEmpty()) {
             return contact.profileInfo.alias.at(0).toUpper();
-        } else if((contact.profileInfo.type == lrc::api::profile::Type::RING ||
+        } else if((contact.profileInfo.type == lrc::api::profile::Type::JAMI ||
                 contact.profileInfo.type == lrc::api::profile::Type::PENDING) &&
                   !contact.registeredName.isEmpty()) {
             return contact.registeredName.at(0).toUpper();
@@ -193,7 +193,7 @@ namespace Interfaces {
                 auto trimmed = contact.profileInfo.alias.trimmed().replace("\r","").replace("\n","");
                 if (!trimmed.isEmpty()) {
                     return drawDefaultUserPixmap(size, color.toLatin1(), trimmed.at(0).toUpper().toLatin1());
-                } else if((contact.profileInfo.type == lrc::api::profile::Type::RING ||
+                } else if((contact.profileInfo.type == lrc::api::profile::Type::JAMI ||
                            contact.profileInfo.type == lrc::api::profile::Type::PENDING) &&
                           !contact.registeredName.isEmpty()) {
                     trimmed = contact.registeredName.trimmed().replace("\r","").replace("\n","");
