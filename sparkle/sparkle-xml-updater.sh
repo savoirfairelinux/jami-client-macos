@@ -37,7 +37,7 @@ cat << EOFILE > ${REPO_FOLDER}/${SPARKLE_FILE}
             <title>Ring nightly $(date "+%Y/%m/%d %H:%M")</title>
             <pubDate>$DATE_RFC2822</pubDate>
             <enclosure url="${REPO_URL}/$(basename ${PACKAGE})" sparkle:version="$(date +%Y%m%d)" sparkle:shortVersionString="nightly-$(date "+%Y%m%d")" length="$PACKAGE_SIZE" type="application/octet-stream" sparkle:dsaSignature="$(./sign_update.sh ${PACKAGE} ${DSA_KEY})" />
-            <sparkle:minimumSystemVersion>10.7</sparkle:minimumSystemVersion>
+            <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
         </item>
 $(echo -e "${ITEMS}")
     </channel>
