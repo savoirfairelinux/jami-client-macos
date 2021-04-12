@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "جستجو برای مخاطب جدید یا موجود";
+
+/* conference tooltip Minimize */
+"Minimize" = "کمینه کردن";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "قطع صدا";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "به صحبت تلفنی خاتمه دادن";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "تعیین مدیر";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

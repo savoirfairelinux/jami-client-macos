@@ -239,10 +239,35 @@
 "Me" = "Ik";
 
 /* Choose registered name for account */
-"Choose a username for your account" = "Choose a username for your account";
+"Choose a username for your account" = "Kies een unieke naam waarop men u kan zoeken";
 
 /* Choose registered name for rendezvous */
 "Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Zoeken naar nieuw of bestaand contact";
+
+/* conference tooltip Minimize */
+"Minimize" = "Minimaliseren";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Geluid dempen";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Ophangen";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Set moderator";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

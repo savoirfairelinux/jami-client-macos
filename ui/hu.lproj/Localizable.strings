@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Keressen új vagy meglévő kapcsolatok között";
+
+/* conference tooltip Minimize */
+"Minimize" = "Kis méret";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Hang elnémítása";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Hívás befejezése";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Moderátor beállítása";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

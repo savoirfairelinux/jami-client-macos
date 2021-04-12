@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "搜索已有联系人或新联系人";
+
+/* conference tooltip Minimize */
+"Minimize" = "最小化";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "静音";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "挂断";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "设置管理员";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

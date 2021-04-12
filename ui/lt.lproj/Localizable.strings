@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Ieškoti naujo ar esamo adresato";
+
+/* conference tooltip Minimize */
+"Minimize" = "Suskleisti";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Nutildyti garsą";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Padėti ragelį";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Set moderator";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

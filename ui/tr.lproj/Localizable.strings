@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Yeni veya var olan kişiyi ara";
+
+/* conference tooltip Minimize */
+"Minimize" = "En küçük";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Sesi kapat";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Kapat";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Oturum başkanı ayarla";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

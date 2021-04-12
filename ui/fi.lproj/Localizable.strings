@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Etsi uusi tai olemassaoleva yhteystieto";
+
+/* conference tooltip Minimize */
+"Minimize" = "Pienennä";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Vaimenna ääni";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Katkaistu";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Aseta valvoja";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

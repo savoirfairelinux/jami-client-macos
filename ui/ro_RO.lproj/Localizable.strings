@@ -98,7 +98,7 @@
 "No account available" = "Niciun cont disponibil";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Parola și confirmarea nu sînt la fel.";
+"Password and confirmation mismatch." = "Parola și confirmarea nu se potrivesc.";
 
 /* Indication for user */
 "Password is too short" = "Parola e prea scurtă";
@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Caută un contact nou sau existent";
+
+/* conference tooltip Minimize */
+"Minimize" = "Micșorează";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Mut";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Închide";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Pune un moderator";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

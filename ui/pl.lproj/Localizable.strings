@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Szukaj nowego lub istniejącego kontaktu";
+
+/* conference tooltip Minimize */
+"Minimize" = "Zminimalizuj";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Wyłącz dźwięk";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Odłoż słuchawkę";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Zaznacz moderatora";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

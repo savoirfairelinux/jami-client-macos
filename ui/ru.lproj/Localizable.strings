@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Поиск нового или существующего контакта";
+
+/* conference tooltip Minimize */
+"Minimize" = "Свернуть";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Отключить звук";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Повесить трубку";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Установить модератора";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+
