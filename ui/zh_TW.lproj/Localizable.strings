@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "搜尋新的或既有的聯絡人";
+
+/* conference tooltip Minimize */
+"Minimize" = "最小化";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "靜音";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "掛斷";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "設定主持人";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

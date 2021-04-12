@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Søk etter ny eller eksisterende kontakt";
+
+/* conference tooltip Minimize */
+"Minimize" = "Minimer";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "Koble ut lyden";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "Legg på";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Aktiver moderator";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+

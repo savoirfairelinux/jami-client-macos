@@ -246,3 +246,28 @@
 
 /* search bar placeholder */
 "Search for new or existing contact" = "新規・既存の連絡先を検索";
+
+/* conference tooltip Minimize */
+"Minimize" = "最小化";
+
+/* conference tooltip Expand */
+"Expand" = "Expand";
+
+/* conference tooltip mute Mute audio */
+"Mute audio" = "音声オフ";
+
+/* conference tooltip mute Hangup */
+"Hangup" = "受話";
+
+/* conference tooltip mute Set moderator */
+"Set moderator" = "Set moderator";
+
+/* conference state tooltip Audio muted */
+"Audio muted" = "Audio muted";
+
+/* conference state tooltip Host */
+"Conference host" = "Conference host";
+
+/* conference state tooltip moderator */
+"Moderator" = "Moderator";
+
