@@ -93,6 +93,10 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     return messagesViewVC;
 }
 
+-(void)callFinished {
+    [messagesViewVC callFinished];
+}
+
 -(void) clearData {
     cachedConv_ = nil;
     convUid_ = "";
