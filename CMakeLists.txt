@@ -347,7 +347,6 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_made.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_transfer.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_add_participant.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_merge_calls.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/default_user_icon.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_send.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png
@@ -371,7 +370,8 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_unmuted.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_maximize.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_minimize.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_hangup.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_star.png)
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_star.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_file.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)
