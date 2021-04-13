@@ -62,11 +62,6 @@ add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
                     COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
                     COMMENT "Creating Shader.metallib")
 
-                  add_custom_target(
-    shader ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib
-    )
-
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -244,6 +239,10 @@ SET(ringclient_VIEWS
    src/views/CustomBackgroundView.mm
    src/views/TextViewWithPlaceholder.h
    src/views/TextViewWithPlaceholder.mm
+   src/views/FileToSendCollectionItem.h
+   src/views/FileToSendCollectionItem.mm
+   src/views/DraggingDestinationView.h
+   src/views/DraggingDestinationView.mm
 )
 
 SET(ringclient_OTHERS
@@ -302,6 +301,7 @@ SET(ringclient_XIBS
    CallInConferenceVC
    ConnectToAccManagerVC
    AccountBackupVC
+   FileToSendCollectionItem
 )
 
 # Icons

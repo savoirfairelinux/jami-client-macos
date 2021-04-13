@@ -840,7 +840,7 @@ CVPixelBufferRef pixelBufferPreview;
     [right setFrame:rightFrame];
     [splitView display];
 
-    [self.chatVC takeFocus];
+    //[self.chatVC takeFocus];
 }
 
 -(void) cleanUp
