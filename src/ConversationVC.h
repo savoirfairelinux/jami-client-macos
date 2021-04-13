@@ -43,4 +43,6 @@ namespace lrc {
 
 -(NSViewController*) getMessagesView;
 
+-(void)callFinished;
+
 @end

@@ -30,6 +30,7 @@
 #import "views/IMTableCellView.h"
 #import "views/MessageBubbleView.h"
 #import "views/NSImage+Extensions.h"
+#import "views/FileToSendCollectionItem.h"
 #import "delegates/ImageManipulationDelegate.h"
 #import "utils.h"
 #import "views/NSColor+RingTheme.h"
@@ -41,10 +42,14 @@
 
 #import "RecordFileVC.h"
 
+@implementation PendingFile
+@end
 
-@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource, NSTextViewDelegate> {
+@interface MessagesVC () <NSTableViewDelegate, NSTableViewDataSource, QLPreviewPanelDataSource, NSTextViewDelegate, NSCollectionViewDataSource> {
 
     __unsafe_unretained IBOutlet NSTableView* conversationView;
+    __unsafe_unretained IBOutlet DraggingDestinationView* draggingDestinationView;
+    __unsafe_unretained IBOutlet NSCollectionView* pendingFilesCollectionView;
     __unsafe_unretained IBOutlet NSView* containerView;
     __unsafe_unretained IBOutlet TextViewWithPlaceholder* messageView;
     __unsafe_unretained IBOutlet IconButton *sendFileButton;
@@ -52,7 +57,6 @@
     __unsafe_unretained IBOutlet IconButton *recordAudioButton;
     __unsafe_unretained IBOutlet NSLayoutConstraint* sendPanelHeight;
     __unsafe_unretained IBOutlet NSLayoutConstraint* messageHeight;
-    __unsafe_unretained IBOutlet NSLayoutConstraint* messagesBottomMargin;
     __unsafe_unretained IBOutlet NSLayoutConstraint* textBottomConstraint;
     IBOutlet NSPopover *recordMessagePopover;
 
@@ -71,7 +75,7 @@
     QMetaObject::Connection lastDisplayedChanged_;
     NSString* previewImage;
     NSMutableDictionary *pendingMessagesToSend;
-    RecordFileVC * recordingController;
+    RecordFileVC* recordingController;
 }
 
 @end
@@ -126,6 +130,25 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [[conversationView.enclosingScrollView contentView] setCopiesOnScroll:NO];
     [messageView setFont: [NSFont systemFontOfSize: 14 weight: NSFontWeightLight]];
     [conversationView setWantsLayer:YES];
+    draggingDestinationView.draggingDestinationDelegate = self;
+}
+
+-(void)callFinished {
+    [self reloadPendingFiles];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [conversationView scrollToEndOfDocument:nil];
+        [messageView.window makeFirstResponder: messageView];
+    });
+}
+
++(NSMutableDictionary*)pendingFiles
+{
+    static NSMutableDictionary* files = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        files = [[NSMutableDictionary alloc] init];
+    });
+    return files;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -341,25 +364,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [messageView.window makeFirstResponder: messageView];
     });
-    conversationView.alphaValue = 0.0;
-    [conversationView reloadData];
-    [conversationView scrollToEndOfDocument:nil];
-    CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
-    fadeIn.toValue = [NSNumber numberWithFloat:1.0];
-    fadeIn.duration = 0.4f;
-
-    [conversationView.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
-    conversationView.alphaValue = 1;
     auto* conv = [self getCurrentConversation];
 
     if (conv == nil)
         return;
-    try {
-        [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
-    } catch (std::out_of_range& e) {
-        NSLog(@"contact out of range");
-    }
     NSString* name = bestNameForConversation(*conv, *convModel_);
     NSString *placeholder = [NSString stringWithFormat:@"%@%@", @"Write to ", name];
 
@@ -371,6 +379,22 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                nil];
     NSAttributedString* attributedPlaceholder = [[NSAttributedString alloc] initWithString: placeholder attributes:nameAttrs];
     messageView.placeholderAttributedString = attributedPlaceholder;
+    [self reloadPendingFiles];
+    conversationView.alphaValue = 0.0;
+    [conversationView reloadData];
+    [conversationView scrollToEndOfDocument:nil];
+    CABasicAnimation *fadeIn = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeIn.fromValue = [NSNumber numberWithFloat:0.0];
+    fadeIn.toValue = [NSNumber numberWithFloat:1.0];
+    fadeIn.duration = 0.4f;
+
+    [conversationView.layer addAnimation:fadeIn forKey:fadeIn.keyPath];
+    conversationView.alphaValue = 1;
+    try {
+        [sendFileButton setEnabled:(convModel_->owner.contactModel->getContact(conv->participants[0]).profileInfo.type != lrc::api::profile::Type::SIP)];
+    } catch (std::out_of_range& e) {
+        NSLog(@"contact out of range");
+    }
 }
 
 #pragma mark - configure cells
@@ -960,7 +984,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (MESSAGE_VIEW_DEFAULT_HEIGHT != lineHeight) {
         MESSAGE_VIEW_DEFAULT_HEIGHT = lineHeight;
     }
-    messagesBottomMargin.constant = newSendPanelHeight;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self scrollToBottom];
         messageHeight.constant = msgHeight;
@@ -1068,6 +1091,14 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     unichar separatorChar = NSLineSeparatorCharacter;
     NSString *separatorString = [NSString stringWithCharacters:&separatorChar length:1];
     text = [text stringByReplacingOccurrencesOfString: separatorString withString: @"\n"];
+    // send files
+    NSMutableArray* files = [MessagesVC pendingFiles][convUid_.toNSString()];
+    for (PendingFile* file : files) {
+        convModel_->sendFile(convUid_, QString::fromNSString(file.fileUrl.path), QString::fromNSString(file.name));
+    }
+    [MessagesVC.pendingFiles removeObjectForKey: convUid_.toNSString()];
+    [self reloadPendingFiles];
+
     if (text && text.length > 0) {
         auto* conv = [self getCurrentConversation];
         if (conv == nil)
@@ -1086,7 +1117,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if(messageHeight.constant != MESSAGE_VIEW_DEFAULT_HEIGHT) {
         sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
         messageHeight.constant = MESSAGE_VIEW_DEFAULT_HEIGHT;
-        messagesBottomMargin.constant = SEND_PANEL_DEFAULT_HEIGHT;
         textBottomConstraint.constant = BOTTOM_MARGIN;
         [self scrollToBottom];
     }
@@ -1143,18 +1173,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSOpenPanel* filePicker = [NSOpenPanel openPanel];
     [filePicker setCanChooseFiles:YES];
     [filePicker setCanChooseDirectories:NO];
-    [filePicker setAllowsMultipleSelection:NO];
+    [filePicker setAllowsMultipleSelection:YES];
 
     if ([filePicker runModal] == NSFileHandlingPanelOKButton) {
-        if ([[filePicker URLs] count] == 1) {
-            NSURL* url = [[filePicker URLs] objectAtIndex:0];
-            const char* fullPath = [url fileSystemRepresentation];
-            NSString* fileName = [url lastPathComponent];
-            if (convModel_) {
-                auto* conv = [self getCurrentConversation];
-                convModel_->sendFile(convUid_, QString::fromStdString(fullPath), QString::fromNSString(fileName));
-            }
-        }
+        [self filesDragged: [filePicker URLs]];
     }
 }
 
@@ -1163,7 +1185,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 - (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
     if (commandSelector == @selector(insertNewline:)) {
-        if(self.message.length > 0) {
+        if(self.message.length > 0 || [(NSMutableArray*)MessagesVC. pendingFiles[convUid_.toNSString()] count] > 0) {
             [self sendMessage: nil];
             return YES;
         }
@@ -1173,8 +1195,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return NO;
 }
 
--(void) textDidChange:(NSNotification *)notification {
+-(void)textDidChange:(NSNotification *)notification {
     [self checkIfComposingMsg];
+    self.enableSendButton = self.message.length > 0 || [(NSMutableArray*)MessagesVC. pendingFiles[convUid_.toNSString()] count] > 0;
 }
 
 - (void) checkIfComposingMsg {
@@ -1226,13 +1249,86 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
 }
 
-
 - (void)removeFromResponderChain {
     if (conversationView.window &&
         [[conversationView.window nextResponder] isEqual:self]) {
         NSResponder * aNextResponder = [conversationView.window nextResponder];
         [conversationView.window setNextResponder:[self nextResponder]];
     }
+}
+
+#pragma mark - NSCollectionViewDataSource
+
+- (NSInteger)collectionView:(NSCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [(NSMutableArray*)MessagesVC.pendingFiles[convUid_.toNSString()] count];
+}
+- (NSCollectionViewItem*)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
+    FileToSendCollectionItem* fileCell = [collectionView makeItemWithIdentifier:@"FileToSendCollectionItem" forIndexPath:indexPath];
+    PendingFile* file = MessagesVC.pendingFiles[convUid_.toNSString()][indexPath.item];
+    fileCell.filePreview.image = file.preview;
+    fileCell.fileName.stringValue = file.name;
+    fileCell.fileName.toolTip = file.name;
+    fileCell.fileSize.stringValue = file.size;
+    [fileCell.closeButton setAction:@selector(removePendingFile:)];
+    fileCell.closeButton.tag = indexPath.item;
+    [fileCell.closeButton setTarget:self];
+    return fileCell;
+}
+
+#pragma mark - DraggingDestinationDelegate
+
+-(void)filesDragged:(NSArray*)urls {
+    [self prepareFilesToSend: urls];
+}
+
+-(NSString*)convertBytedToString:(double)bytes {
+    if (bytes <= 1000) {
+        return [NSString stringWithFormat:@"%.2f%@", bytes, @" B"];
+    } else if (bytes <= 1e6) {
+        return [NSString stringWithFormat:@"%.2f%@",(bytes * 1e-3), @" KB"];
+    } else if (bytes <= 1e9) {
+       return [NSString stringWithFormat:@"%.2f%@",(bytes * 1e-6), @" MB"];
+    }
+    return [NSString stringWithFormat:@"%.2f%@",(bytes * 1e-9), @" GB"];
+}
+
+-(void)prepareFilesToSend:(NSArray*)urls {
+    NSMutableArray* files = [[NSMutableArray alloc] init];
+    NSMutableArray* existingFiles = MessagesVC.pendingFiles[convUid_.toNSString()];
+    [files addObjectsFromArray: existingFiles];
+    for (NSURL* url : urls) {
+        NSString* filePath = [url path];
+        NSImage* preview = [[NSImage alloc] initWithContentsOfFile: filePath];
+        NSString* name = [url lastPathComponent];
+        NSData* documentBytes = [[NSData alloc] initWithContentsOfFile: filePath];
+        PendingFile* file = [[PendingFile alloc] init];
+        file.name = name;
+        file.size = [self convertBytedToString: documentBytes.length];
+        file.preview = preview;
+        file.fileUrl = url;
+        [files addObject: file];
+    }
+    MessagesVC.pendingFiles[convUid_.toNSString()] = files;
+    [self reloadPendingFiles];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self scrollToBottom];
+    });
+}
+
+- (void)removePendingFile:(id)sender {
+    NSButton* closeButton = (NSButton*)sender;
+    NSInteger index = closeButton.tag;
+    if(index < 0) {
+        return;
+    }
+    [MessagesVC.pendingFiles[convUid_.toNSString()] removeObjectAtIndex:index];
+    [self reloadPendingFiles];
+}
+
+- (void)reloadPendingFiles {
+    self.hideFilesCollection = [(NSMutableArray*)MessagesVC .pendingFiles[convUid_.toNSString()] count]== 0;
+    self.enableSendButton = self.message.length > 0 || [(NSMutableArray*)MessagesVC. pendingFiles[convUid_.toNSString()] count] > 0;
+    [pendingFilesCollectionView reloadData];
 }
 
 @end
