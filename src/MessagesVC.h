@@ -22,9 +22,16 @@
 #import <api/conversation.h>
 #import <api/avmodel.h>
 #import "RecordFileVC.h"
+#import "views/DraggingDestinationView.h"
 
+@interface PendingFile: NSObject
+@property (retain) NSString* name;
+@property (retain) NSString* size;
+@property (retain) NSImage* preview;
+@property (retain) NSURL* fileUrl;
+@end
 
-@interface MessagesVC : NSViewController <RecordingViewDelegate>
+@interface MessagesVC : NSViewController <RecordingViewDelegate, DraggingDestinationDelegate>
 
 -(void)setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel*)model;
 -(void)clearData;
@@ -36,7 +43,21 @@
  */
 @property (retain) NSString* message;
 
+/**
+ * This is a KVO method to bind the pending files collection view visibility
+ */
+@property BOOL hideFilesCollection;
+
+/**
+ * This is a KVO method to bind the enable state of send button
+ */
+@property BOOL enableSendButton;
+
 -(void) setAVModel: (lrc::api::AVModel*) avmodel;
 -(void) checkIfcomposingMsg;
+
++ (NSMutableDictionary *) pendingFiles;
+
+-(void)callFinished;
 
 @end
