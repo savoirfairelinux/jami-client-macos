@@ -649,6 +649,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
 
 -(void) callFinished {
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
+    [conversationVC callFinished];
 }
 
 -(void) showConversation:(NSString* )conversationId forAccount:(NSString*)accountId {
