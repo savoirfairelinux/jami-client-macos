@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +12,7 @@
                 <outlet property="currentView" destination="se5-gp-TjO" id="Sae-7F-MB3"/>
                 <outlet property="explanationLabel" destination="kFj-Sh-o5u" id="br5-P4-3yq"/>
                 <outlet property="jamiLabel" destination="VJ1-xk-v5e" id="Vfa-Lg-vf4"/>
+                <outlet property="logoView" destination="f62-JV-dgr" id="xSW-GA-R9O"/>
                 <outlet property="qrcodeView" destination="dZR-JL-MY4" id="6Jf-42-qwY"/>
                 <outlet property="ringIDLabel" destination="JN3-vO-zcd" id="WHd-L7-6od"/>
                 <outlet property="shareButton" destination="Oac-o7-2Ge" id="b0D-xr-PCx"/>
@@ -27,7 +28,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="1053" height="658"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1097"/>
             <view key="contentView" autoresizesSubviews="NO" misplaced="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="1053" height="658"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -262,7 +263,7 @@
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="200" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BUY-T7-3oD">
-                                                                                                        <rect key="frame" x="6" y="24" width="70" height="23"/>
+                                                                                                        <rect key="frame" x="6" y="24" width="69" height="23"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="height" constant="23" id="LqQ-2w-I2h"/>
                                                                                                         </constraints>
@@ -369,7 +370,7 @@
                                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                 <subviews>
                                                                                                     <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="200" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sfz-V3-QhK">
-                                                                                                        <rect key="frame" x="6" y="24" width="70" height="23"/>
+                                                                                                        <rect key="frame" x="6" y="24" width="69" height="23"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="height" constant="23" id="Knk-h9-HbW"/>
                                                                                                         </constraints>
@@ -763,7 +764,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </textField>
                                                         <popUpButton imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1L-TB-Wng">
-                                                            <rect key="frame" x="78" y="28" width="11" height="19"/>
+                                                            <rect key="frame" x="81" y="26" width="15" height="23"/>
                                                             <popUpButtonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" lineBreakMode="truncatingTail" state="on" transparent="YES" inset="2" arrowPosition="noArrow" selectedItem="6VL-DN-Xpm" id="lsj-R0-ZSF">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="menu"/>
@@ -782,7 +783,7 @@
                                                             </connections>
                                                         </popUpButton>
                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HIH-Ex-m3b">
-                                                            <rect key="frame" x="83" y="28" width="6" height="19"/>
+                                                            <rect key="frame" x="83" y="28" width="11" height="19"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" drawsBackground="YES" id="fr3-uY-Dl0">
                                                                 <font key="font" metaFont="system" size="16"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -840,7 +841,7 @@
                                         </constraints>
                                     </customView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ek-bf-c5r">
-                                        <rect key="frame" x="286" y="531" width="25.5" height="31"/>
+                                        <rect key="frame" x="286" y="534" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Rm3-rA-bdL"/>
                                             <constraint firstAttribute="width" constant="25" id="WVr-io-Cyo"/>
@@ -924,7 +925,7 @@
                                                 </textFieldCell>
                                             </textField>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kFj-Sh-o5u">
-                                                <rect key="frame" x="68" y="95" width="234" height="34"/>
+                                                <rect key="frame" x="68" y="95" width="233" height="34"/>
                                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="Xb9-UT-M2F">
                                                     <font key="font" metaFont="systemLight" size="14"/>
                                                     <string key="title">This is your ID.
@@ -983,7 +984,7 @@ Copy and share it with your friends!</string>
                                                         </connections>
                                                     </button>
                                                     <button toolTip="Share account info" translatesAutoresizingMaskIntoConstraints="NO" id="Oac-o7-2Ge" customClass="HoverButton">
-                                                        <rect key="frame" x="52" y="-3" width="30.5" height="46"/>
+                                                        <rect key="frame" x="52" y="0.0" width="30" height="38"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="fnM-Dp-xQa"/>
                                                             <constraint firstAttribute="height" constant="38" id="jXA-ZW-tFp"/>
@@ -1147,8 +1148,8 @@ Copy and share it with your friends!</string>
         <userDefaultsController representsSharedInstance="YES" id="nz5-E9-8bl"/>
     </objects>
     <resources>
-        <image name="NSActionTemplate" width="15" height="15"/>
-        <image name="NSShareTemplate" width="15" height="17"/>
+        <image name="NSActionTemplate" width="14" height="14"/>
+        <image name="NSShareTemplate" width="11" height="16"/>
         <image name="NSUser" width="32" height="32"/>
         <image name="ic_action_block" width="72" height="72"/>
         <image name="ic_action_cancel" width="72" height="72"/>

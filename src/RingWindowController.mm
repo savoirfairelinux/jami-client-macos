@@ -69,6 +69,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     IBOutlet NSLayoutConstraint* ringLabelTrailingConstraint;
     __unsafe_unretained IBOutlet NSView* welcomeContainer;
     __unsafe_unretained IBOutlet NSView* callView;
+    __unsafe_unretained IBOutlet NSImageView* logoView;
     __unsafe_unretained IBOutlet NSTextField* ringIDLabel;
     __unsafe_unretained IBOutlet NSTextField* explanationLabel;
     __unsafe_unretained IBOutlet NSTextField* jamiLabel;
@@ -536,16 +537,22 @@ typedef NS_ENUM(NSInteger, ViewState) {
     if (!qrcodeView.isHidden) {
         [self updateQRCodeBackground];
     }
+    logoView.image = [self isDarkMode] ? [NSImage imageNamed:@"logo_white.png"] : [NSImage imageNamed:@"symbol_name.png"];
+}
+
+-(BOOL)isDarkMode {
+    if (@available(*, macOS 10.14)) {
+        NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
+        return [interfaceStyle isEqualToString:@"Dark"];
+    }
+    return false;
 }
 
 -(void)updateQRCodeBackground {
-    if (@available(*, macOS 10.14)) {
-        NSString *interfaceStyle = [NSUserDefaults.standardUserDefaults valueForKey:@"AppleInterfaceStyle"];
-        if ([interfaceStyle isEqualToString:@"Dark"]) {
-            qrcodeView.layer.backgroundColor = [[NSColor whiteColor] CGColor];
-        } else {
-            qrcodeView.layer.backgroundColor = [[NSColor clearColor] CGColor];
-        }
+    if ([self isDarkMode]) {
+        qrcodeView.layer.backgroundColor = [[NSColor whiteColor] CGColor];
+    } else {
+        qrcodeView.layer.backgroundColor = [[NSColor clearColor] CGColor];
     }
 }
 

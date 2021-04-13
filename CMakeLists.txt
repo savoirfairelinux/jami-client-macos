@@ -325,6 +325,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/background-light.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background-dark.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_blue.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background_tile.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/logo_white.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_more.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_dialpad.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
