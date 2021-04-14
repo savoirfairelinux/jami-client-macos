@@ -221,6 +221,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [self setNextResponder: [conversationVC getMessagesView]];
     [[conversationVC getMessagesView] setNextResponder: viewNextResponder];
     [self setWelcomeText];
+    logoView.image = [self isDarkMode] ? [NSImage imageNamed:@"logo_white.png"] : [NSImage imageNamed:@"symbol_name.png"];
 }
 
 -(void) setWelcomeText {
