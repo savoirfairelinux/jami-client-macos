@@ -60,13 +60,29 @@
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
-    highlight = true;
+    NSArray* classArray = [NSArray arrayWithObject:[NSURL class]];
+    NSArray* arrayOfURLs = [[sender draggingPasteboard] readObjectsForClasses:classArray options:nil];
+    NSMutableArray* files = [self filteredFilesURLSFrom: arrayOfURLs];
+    highlight = files.count > 0;
     [self setNeedsDisplay: true];
-    return NSDragOperationCopy;
+    return files.count > 0 ? NSDragOperationCopy : NSDragOperationNone;
+}
+
+-(NSArray*)filteredFilesURLSFrom:(NSArray*)urls {
+    NSMutableArray* files = [[NSMutableArray alloc] init];
+    for (NSURL* url : urls) {
+        BOOL isDir = NO;
+        BOOL isFile = [[NSFileManager defaultManager] fileExistsAtPath:url.path isDirectory:&isDir];
+        if (isFile && !isDir) {
+            [files addObject: url];
+        }
+    }
+    return files;
 }
 
 - (void)draggingExited:(id <NSDraggingInfo>)sender
 {
+    
     highlight = false;
     [self setNeedsDisplay: true];
 }
@@ -82,8 +98,9 @@
 {
     NSArray* classArray = [NSArray arrayWithObject:[NSURL class]];
     NSArray* arrayOfURLs = [[sender draggingPasteboard] readObjectsForClasses:classArray options:nil];
-    [self.draggingDestinationDelegate filesDragged: arrayOfURLs];
-    return true;
+    NSMutableArray* files = [self filteredFilesURLSFrom: arrayOfURLs];
+    [self.draggingDestinationDelegate filesDragged: files];
+    return files.count > 0;
 }
 
 @end
