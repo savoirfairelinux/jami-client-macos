@@ -125,6 +125,8 @@ NSInteger const REQUEST_SEG         = 1;
     [searchResultsView setShortcutsDelegate:self];
     [searchResultsView setDoubleAction:@selector(placeCall:)];
     searchResultsView.selectionHighlightStyle = NSTableViewSelectionHighlightStyleNone;
+    smartView.style = NSTableViewStyleFullWidth;
+    searchResultsView.style = NSTableViewStyleFullWidth;
 }
 
 - (void)placeCall:(id)sender

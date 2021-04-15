@@ -147,6 +147,8 @@ NSInteger const MAXIMUM_TABLE_SIZE = 240;
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    contactsView.style = NSTableViewStyleFullWidth;
+    callsView.style = NSTableViewStyleFullWidth;
     [self reloadView];
 }
 
