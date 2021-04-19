@@ -251,7 +251,7 @@
 "Minimize" = "Minimizza";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Espandi";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Silenzia audio";
@@ -263,11 +263,14 @@
 "Set moderator" = "Imposta moderatore";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "Audio disattivato";
 
 /* conference state tooltip Host */
-"Conference host" = "Conference host";
+"Conference host" = "Host della conferenza";
 
 /* conference state tooltip moderator */
-"Moderator" = "Moderator";
+"Moderator" = "Moderatore";
+
+/* drop files */
+"Drop files to send" = "Drop files to send";
 

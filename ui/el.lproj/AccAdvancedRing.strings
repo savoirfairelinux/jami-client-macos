@@ -1,21 +1,21 @@
 
 /* Class = "NSButtonCell"; title = "Allow incoming calls from unknown contacts"; ObjectID = "1Xr-BO-Pu3"; */
-"1Xr-BO-Pu3.title" = "Allow incoming calls from unknown contacts";
+"1Xr-BO-Pu3.title" = "Να επιτρέπονται κλήσεις από άγνωστες επαφές";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "25Q-c1-ld3"; */
 "25Q-c1-ld3.title" = "UPnP";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "538-we-FTp"; */
-"538-we-FTp.title" = "Box";
+"538-we-FTp.title" = "Κουτί";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "7eU-EP-4br"; */
-"7eU-EP-4br.title" = "Box";
+"7eU-EP-4br.title" = "Κουτί";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "Διεύθυνση TURN";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
-"BIS-Ft-yJn.title" = "Call settings";
+"BIS-Ft-yJn.title" = "Ρυθμίσεις κλήσης";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
 "Va3-Un-lCL.title" = "Discovery settings";
@@ -30,7 +30,7 @@
 "n3E-PI-JHj.title" = "Discover peers on local network";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
-"DSe-Cs-oD6.title" = "Auto answer calls";
+"DSe-Cs-oD6.title" = "Αυτόματη απάντηση κλήσεων";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "EyV-Io-d3f"; */
 "EyV-Io-d3f.title" = "Text Cell";
@@ -39,13 +39,13 @@
 "ID3-Sv-gYY.title" = "Name server";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
-"K0z-NH-3Cq.title" = "Box";
+"K0z-NH-3Cq.title" = "Κουτί";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
 "LWs-a2-E7f.title" = "Πιστοποιητικό χρήστη";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Q4t-zo-brK"; */
-"Q4t-zo-brK.title" = "Audio codecs";
+"Q4t-zo-brK.title" = "Κωδικοποιητές ήχου";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "Qxp-I4-A7W"; */
 "Qxp-I4-A7W.title" = "Ασφάλεια";
@@ -54,13 +54,13 @@
 "VyP-8T-aNA.title" = "Enable proxy";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
-"Wrh-zD-uh5.title" = "Video codecs";
+"Wrh-zD-uh5.title" = "Κωδικοποιητές βίντεο";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "XU0-bl-lDD"; */
 "XU0-bl-lDD.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "Διεύθυνση STUN";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "Bootstrap";
@@ -69,25 +69,25 @@
 "YcX-lE-8ug.title" = "Συνθηματικό ιδιωτικού κλειδιού";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
-"Ywo-5x-8kh.title" = "Box";
+"Ywo-5x-8kh.title" = "Κουτί";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ZNe-H0-dJk"; */
-"ZNe-H0-dJk.title" = "Box";
+"ZNe-H0-dJk.title" = "Κουτί";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "ZqB-gt-yFt"; */
 "ZqB-gt-yFt.title" = "Διεύθυνση";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "eGX-gk-Zxp"; */
-"eGX-gk-Zxp.title" = "Box";
+"eGX-gk-Zxp.title" = "Κουτί";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
-"eMG-uY-bpH.title" = "TURN username";
+"eMG-uY-bpH.title" = "Όνομα χρήστη TURN";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "g8T-u3-MS3"; */
 "g8T-u3-MS3.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "gUl-Px-cIJ"; */
-"gUl-Px-cIJ.title" = "TURN password";
+"gUl-Px-cIJ.title" = "Κωδικός TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "k7i-pK-JXp"; */
 "k7i-pK-JXp.title" = "Πιστοποιητικό CA";
@@ -99,19 +99,19 @@
 "qFq-Yh-2JL.title" = "Custom ringtone";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Connectivity";
+"sVe-iG-OCw.title" = "Συνδεσιμότητα";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
 "soR-nF-ybe.title" = "Ιδιωτικό κλειδί";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
-"sy5-OH-wyB.title" = "Box";
+"sy5-OH-wyB.title" = "Κουτί";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "vYi-gW-MrY"; */
-"vYi-gW-MrY.title" = "Box";
+"vYi-gW-MrY.title" = "Κουτί";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "Ρύθμιση OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
 "zPJ-cO-neQ.title" = "Χρήση TURN";

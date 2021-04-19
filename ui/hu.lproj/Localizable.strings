@@ -251,7 +251,7 @@
 "Minimize" = "Kis méret";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Kibontás";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Hang elnémítása";
@@ -263,11 +263,14 @@
 "Set moderator" = "Moderátor beállítása";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "Hang elnémítva";
 
 /* conference state tooltip Host */
-"Conference host" = "Conference host";
+"Conference host" = "Konferencia házigazdája";
 
 /* conference state tooltip moderator */
-"Moderator" = "Moderator";
+"Moderator" = "Moderátor";
+
+/* drop files */
+"Drop files to send" = "Drop files to send";
 

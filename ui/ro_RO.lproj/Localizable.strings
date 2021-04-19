@@ -5,7 +5,7 @@
 "Accept" = "Acceptă";
 
 /* Button Action */
-"Cancel" = "Renunță";
+"Cancel" = "Anulează";
 
 /* Welcome title */
 "Add a SIP account" = "Adaugă un cont SIP";
@@ -173,7 +173,7 @@
 "This is your Jami username. \nCopy and share it with your friends!" = "Acesta e numele tău de utilizator Jami. \nCopiază-l și distribuie-l prietenilor!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea \"Asociază acest aparat unui cont\".Codul tău PIN este valabil 10 minute.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Pentru a completa procesul, trebuie să deschizi Jami în noul aparat și să alegi opțiunea „Asociază acest aparat unui cont”. Codul tău PIN este valabil 10 minute.";
 
 /* Text shown to the user */
 "To proceed with the migration, you need to enter a password that was used for this account." = "Pentru a continua transferul, trebuie să introduci o parolă care a fost folosită pentru acest cont.";
@@ -197,7 +197,7 @@
 "Create password" = "Creează parola";
 
 /* Device revocation title */
-"Revoke Device" = "Elimină Aparatul";
+"Revoke Device" = "Elimină aparatul";
 
 /* Device revocation message */
 "Attention! This action could not be undone!" = "Atenție! Această acțiune este ireversibilă!";
@@ -212,7 +212,7 @@
 "Done" = "Făcut";
 
 /* Edit Sip Account Action */
-"Edit Account" = "Modifică Cont";
+"Edit Account" = "Modifică contul";
 
 /* Conference action */
 "Minimize participant" = "Micșorează participantul";
@@ -251,7 +251,7 @@
 "Minimize" = "Micșorează";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Mărește";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Mut";
@@ -263,11 +263,14 @@
 "Set moderator" = "Pune un moderator";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "Mut";
 
 /* conference state tooltip Host */
-"Conference host" = "Conference host";
+"Conference host" = "Gazda conferinței";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
+
+/* drop files */
+"Drop files to send" = "Drop files to send";
 

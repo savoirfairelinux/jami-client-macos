@@ -251,7 +251,7 @@
 "Minimize" = "Pienennä";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Laajenna";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Vaimenna ääni";
@@ -263,11 +263,14 @@
 "Set moderator" = "Aseta valvoja";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "Ääni mykistetty";
 
 /* conference state tooltip Host */
-"Conference host" = "Conference host";
+"Conference host" = "Kokouksen isäntä";
 
 /* conference state tooltip moderator */
-"Moderator" = "Moderator";
+"Moderator" = "Valvoja";
+
+/* drop files */
+"Drop files to send" = "Drop files to send";
 

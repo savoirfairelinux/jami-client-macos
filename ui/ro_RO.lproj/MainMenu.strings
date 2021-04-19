@@ -1,6 +1,6 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Adu Totul la Vedere";
+"5.title" = "Adu totul la vedere";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
 "19.title" = "Fereastră";
@@ -42,7 +42,7 @@
 "145.title" = "Ascunde Altele";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Arată Tot";
+"150.title" = "Arată tot";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "195"; */
 "195.title" = "Termină convorbirea";
@@ -54,7 +54,7 @@
 "197.title" = "Copiază";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "198"; */
-"198.title" = "Selectează Tot";
+"198.title" = "Selectează tot";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "199"; */
 "199.title" = "Taie";
@@ -63,7 +63,7 @@
 "200.title" = "Ortografie și Gramatică";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
-"201.title" = "Verifică Documentul Acum";
+"201.title" = "Verifică documentul acum";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
 "202.title" = "Șterge";
@@ -81,13 +81,13 @@
 "207.title" = "Anulează";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "208"; */
-"208.title" = "Caută Următorul";
+"208.title" = "Caută următorul";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "209"; */
 "209.title" = "Caută...";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "210"; */
-"210.title" = "Saltă la Selecție";
+"210.title" = "Saltă la selecție";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "211"; */
 "211.title" = "Discurs";
@@ -96,7 +96,7 @@
 "212.title" = "Discurs";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "213"; */
-"213.title" = "Caută Precedentul";
+"213.title" = "Caută precedentul";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "215"; */
 "215.title" = "Refă";
@@ -111,13 +111,13 @@
 "218.title" = "Caută";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Controlează Ortografia cînd Scrii";
+"219.title" = "Controlează ortografia cînd scrii";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
 "220.title" = "Caută";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "221"; */
-"221.title" = "Folosește Selecția pentru Căutare";
+"221.title" = "Folosește selecția pentru căutare";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
 "239.title" = "Zoom";
@@ -129,10 +129,10 @@
 "296.title" = "Vizualizare";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
-"297.title" = "Arată Bara de Unelte";
+"297.title" = "Arată banda cu unelte";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "Personalizează Bara de Unelte";
+"298.title" = "Personalizează banda cu unelte";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
 "346.title" = "Verifică Gramatica cu Ortografia";
@@ -144,10 +144,10 @@
 "349.title" = "Înlocuiri";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "350"; */
-"350.title" = "Copiază/Lipește Inteligent";
+"350.title" = "Copiază/Lipește inteligent";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "351"; */
-"351.title" = "Ghilimele Inteligente";
+"351.title" = "Ghilimele inteligente";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "354"; */
 "354.title" = "Asocieri inteligente";
@@ -159,28 +159,28 @@
 "451.title" = "Transformări";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
-"452.title" = "Fă Majuscule";
+"452.title" = "Fă majuscule";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "454"; */
-"454.title" = "Corectează Automat Ortografia";
+"454.title" = "Corectează automat ortografia";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "457"; */
-"457.title" = "Arată Înlocuirile";
+"457.title" = "Arată înlocuirile";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "460"; */
-"460.title" = "Liniuță Inteligentă";
+"460.title" = "Liniuță inteligentă";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "462"; */
-"462.title" = "Înlocuirea Textului";
+"462.title" = "Înlocuirea textului";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "465"; */
-"465.title" = "Fă Minuscule";
+"465.title" = "Fă minuscule";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "466"; */
 "466.title" = "Majusculă";
 
 /* Class = "NSMenuItem"; title = "Paste and Match Style"; ObjectID = "485"; */
-"485.title" = "Lipește și Potrivește Stilului";
+"485.title" = "Lipește și potrivește stilului";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
 "490.title" = "Ajutor";
@@ -189,10 +189,10 @@
 "491.title" = "Ajutor";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami Ajutor";
+"492.title" = "Ajutor pentru Jami";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
-"534.title" = "Caută și Înlocuiește…";
+"534.title" = "Caută și înlocuiește…";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Caută Actualizări...";
+"593.title" = "Caută actualizări...";

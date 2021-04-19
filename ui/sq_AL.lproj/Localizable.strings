@@ -251,7 +251,7 @@
 "Minimize" = "Minimizoje";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Zgjeroje";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Mbylli zërin";
@@ -263,11 +263,14 @@
 "Set moderator" = "Caktoni moderator";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "U mbyll zëri";
 
 /* conference state tooltip Host */
-"Conference host" = "Conference host";
+"Conference host" = "Strehë konference";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
+
+/* drop files */
+"Drop files to send" = "Drop files to send";
 
