@@ -137,6 +137,8 @@ SET(ringclient_CONTROLLERS
    src/AudioPrefsVC.h
    src/VideoPrefsVC.mm
    src/VideoPrefsVC.h
+   src/PluginPrefsVC.mm
+   src/PluginPrefsVC.h
    src/GeneralPrefsVC.h
    src/ChatVC.mm
    src/ChatVC.h
@@ -280,6 +282,7 @@ SET(ringclient_XIBS
    AccAdvancedRing
    AudioPrefs
    VideoPrefs
+   PluginPrefs
    PreferencesWindow
    RingWizard
    CertificateWindow
@@ -363,6 +366,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_record_stop.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_msg.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_group.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_muted.png
