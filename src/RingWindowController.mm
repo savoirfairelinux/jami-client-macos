@@ -265,9 +265,10 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [currentCallVC setCurrentCall:convInfo.callId
                              conversation:convInfo.uid
                                   account:accInfo
-                                  avModel: avModel];
+                                  avModel: avModel
+                              pluginModel: self.pluginModel];
             [self changeViewTo:SHOW_CALL_SCREEN];
-            [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
+            [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get() pluginModel:pluginModel];
         } catch (std::out_of_range& e) {
             NSLog(@"contact out of range");
         }
@@ -302,10 +303,11 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [currentCallVC setCurrentCall:convInfo.callId
                              conversation:convInfo.uid
                                   account:accInfo
-                                  avModel: avModel];
+                                  avModel: avModel
+                              pluginModel:self.pluginModel];
             [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
             [self changeViewTo:SHOW_CALL_SCREEN];
-            [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
+            [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get() pluginModel:pluginModel];
         } catch (std::out_of_range& e) {
             NSLog(@"contact out of range");
         }
@@ -320,7 +322,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                          auto convOpt = getConversationFromUid(convUid, *convModel);
                          if (!convOpt.has_value()) { return; }
                          lrc::api::conversation::Info& convInfo = *convOpt;
-                         [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get() pluginModel:pluginModel];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [self changeViewTo:SHOW_CONVERSATION_SCREEN];
                      });
@@ -333,7 +335,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
                          auto convOpt = getConversationFromUid(convUid, *convModel);
                          if (!convOpt.has_value()) { return; }
                          lrc::api::conversation::Info& convInfo = *convOpt;
-                         [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+                         [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get() pluginModel:pluginModel];
                          [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
                          [self changeViewTo:LEAVE_MESSAGE];
                      });
@@ -674,7 +676,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
         return;
     }
     lrc::api::conversation::Info& convInfo = *convOpt;
-    [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get()];
+    [conversationVC setConversationUid:convInfo.uid model:accInfo.conversationModel.get() pluginModel:pluginModel];
     [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
     accInfo.conversationModel.get()->clearUnreadInteractions(QString::fromNSString(conversationId));
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
@@ -701,7 +703,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [currentCallVC setCurrentCall:QString::fromNSString(callId)
                      conversation:QString::fromNSString(conversationId)
                           account:&accInfo
-                          avModel:avModel];
+                          avModel:avModel
+                      pluginModel:self.pluginModel];
     [self changeViewTo:SHOW_CALL_SCREEN];
 }
 
@@ -715,7 +718,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     auto convOpt = getConversationFromURI(QString::fromNSString(uri), *accInfo.conversationModel.get());
     if (convOpt.has_value()) {
         lrc::api::conversation::Info& conversation = *convOpt;
-        [conversationVC setConversationUid:conversation.uid model:accInfo.conversationModel.get()];
+        [conversationVC setConversationUid:conversation.uid model:accInfo.conversationModel.get() pluginModel:pluginModel];
         [smartViewVC selectConversation: conversation model:accInfo.conversationModel.get()];
     }
     [self changeViewTo:SHOW_CONVERSATION_SCREEN];
