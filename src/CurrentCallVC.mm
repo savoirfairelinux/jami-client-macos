@@ -37,6 +37,7 @@ extern "C" {
 #import <api/call.h>
 #import <api/conversationmodel.h>
 #import <api/avmodel.h>
+#import <api/pluginmodel.h>
 #import <globalinstances.h>
 
 #import "AppDelegate.h"
@@ -58,6 +59,7 @@ extern "C" {
     QString callUid_;
     QString confUid_;
     const lrc::api::account::Info *accountInfo_;
+    lrc::api::PluginModel *pluginModel_;
     NSTimer* refreshDurationTimer;
 }
 
@@ -92,6 +94,7 @@ extern "C" {
 @property (unsafe_unretained) IBOutlet IconButton* muteVideoButton;
 @property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
+@property (unsafe_unretained) IBOutlet IconButton* pluginButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
 @property (unsafe_unretained) IBOutlet IconButton* qualityButton;
 
@@ -122,6 +125,7 @@ extern "C" {
 
 @implementation CurrentCallVC
 lrc::api::AVModel* mediaModel;
+lrc::api::PluginModel* pluginModel_;
 NSMutableDictionary *connectingCalls;
 NSMutableDictionary *participantsOverlays;
 NSSize framesize;
@@ -131,7 +135,7 @@ NSInteger const PREVIEW_HEIGHT = 130;
 NSInteger const HIDE_PREVIEW_BUTTON_SIZE = 25;
 NSInteger const PREVIEW_MARGIN = 20;
 
-@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC;
+@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, pluginButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -146,12 +150,14 @@ CVPixelBufferRef pixelBufferPreview;
 -(void) setCurrentCall:(const QString&)callUid
           conversation:(const QString&)convUid
                account:(const lrc::api::account::Info*)account
-               avModel:(lrc::api::AVModel *)avModel;
+               avModel:(lrc::api::AVModel *)avModel
+           pluginModel:(lrc::api::PluginModel *)pluginModel;
 {
     if(account == nil)
         return;
 
     mediaModel = avModel;
+    pluginModel_ = pluginModel;
     auto* callModel = account->callModel.get();
 
     if (not callModel->hasCall(callUid)){
@@ -187,7 +193,7 @@ CVPixelBufferRef pixelBufferPreview;
                 participantsOverlays[call.peerUri.toNSString()] = nil;
                 if (![self isCurrentCall: callID]) {
                     [self updateCall];
-                    [self setCurrentCall: callUid_ conversation:convUid_ account:accountInfo_ avModel:mediaModel];
+                    [self setCurrentCall: callUid_ conversation:convUid_ account:accountInfo_ avModel:mediaModel pluginModel:pluginModel_];
                 }
             }
             break;
@@ -853,6 +859,7 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::disconnect(self.messageConnection);
 
     [self.chatButton setPressed:NO];
+    [self.pluginButton setPressed:NO];
     [self collapseRightView];
 
     [timeSpentLabel setStringValue:@""];
@@ -1087,6 +1094,24 @@ CVPixelBufferRef pixelBufferPreview;
     }
 }
 
+- (IBAction)choosePlugin:(id)sender {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* pluginHandlerSelectorVC = [[ChoosePluginHandlerVC alloc] initWithNibName:@"ChoosePluginHandlerVC" bundle:nil];
+        pluginHandlerSelectorVC.pluginModel = pluginModel_;
+        [pluginHandlerSelectorVC setupForCall: [self getcallID]];
+        pluginHandlerSelectorVC.delegate = self;
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentViewController:pluginHandlerSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
+}
+
 - (IBAction)hidePreview:(id)sender {
     CGRect previewFrame = previewView.frame;
     CGRect newPreviewFrame;
@@ -1247,6 +1272,19 @@ CVPixelBufferRef pixelBufferPreview;
     }
     auto* callModel = accountInfo_->callModel.get();
     callModel->joinCalls([self getcallID], callId);
+}
+
+# pragma mark -ChoosePluginHandlerVCDelegate
+
+-(void)setHandlerType:(const PluginPickerType)handlerType {
+    self.handlerType = handlerType;
+}
+
+-(void) selectHandler:(const QString)handlerPtr activateInCall:(const QString &)callId {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    }
 }
 
 # pragma mark -CallInConferenceVCDelegate

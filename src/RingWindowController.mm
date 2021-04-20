@@ -265,7 +265,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [currentCallVC setCurrentCall:convInfo.callId
                              conversation:convInfo.uid
                                   account:accInfo
-                                  avModel: avModel];
+                                  avModel: avModel
+                              pluginModel: self.pluginModel];
             [self changeViewTo:SHOW_CALL_SCREEN];
             [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
         } catch (std::out_of_range& e) {
@@ -302,7 +303,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
             [currentCallVC setCurrentCall:convInfo.callId
                              conversation:convInfo.uid
                                   account:accInfo
-                                  avModel: avModel];
+                                  avModel: avModel
+                              pluginModel:self.pluginModel];
             [smartViewVC selectConversation: convInfo model:accInfo->conversationModel.get()];
             [self changeViewTo:SHOW_CALL_SCREEN];
             [conversationVC setConversationUid:convInfo.uid model:accInfo->conversationModel.get()];
@@ -701,7 +703,8 @@ typedef NS_ENUM(NSInteger, ViewState) {
     [currentCallVC setCurrentCall:QString::fromNSString(callId)
                      conversation:QString::fromNSString(conversationId)
                           account:&accInfo
-                          avModel:avModel];
+                          avModel:avModel
+                      pluginModel:self.pluginModel];
     [self changeViewTo:SHOW_CALL_SCREEN];
 }
 

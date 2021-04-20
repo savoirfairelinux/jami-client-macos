@@ -180,6 +180,8 @@ SET(ringclient_CONTROLLERS
    src/RecordFileVC.h
    src/ChooseContactVC.mm
    src/ChooseContactVC.h
+   src/ChoosePluginHandlerVC.mm
+   src/ChoosePluginHandlerVC.h
    src/CallInConferenceVC.mm
    src/CallInConferenceVC.h
    src/ConnectToAccManagerVC.mm
@@ -302,6 +304,7 @@ SET(ringclient_XIBS
    LeaveMessageVC
    RecordFileVC
    ChooseContactVC
+   ChoosePluginHandlerVC
    CallInConferenceVC
    ConnectToAccManagerVC
    AccountBackupVC
