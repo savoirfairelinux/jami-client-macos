@@ -49,7 +49,7 @@ extern "C" {
               fromFrame:(const AVFrame*)frame
              bufferPool:(CVPixelBufferPoolRef &)pixelBufferPool {
 
-    if(!frame || !frame->data[0] || !frame->data[1]) {
+    if(!frame || (frame->data[0] && frame->data[1] && frame->data[2] && frame->data[3])) {
         return;
     }
     CVReturn theError;
