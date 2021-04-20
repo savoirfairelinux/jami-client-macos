@@ -11,6 +11,7 @@
                 <outlet property="conversationID" destination="SQT-Vf-Lhr" id="eab-vD-7X7"/>
                 <outlet property="conversationTitle" destination="ucx-6g-eJw" id="40T-pM-nix"/>
                 <outlet property="messagesViewVC" destination="iH6-17-JsM" id="uxH-Ra-lSr"/>
+                <outlet property="pluginButton" destination="FvO-Yj-ry0" id="35Y-R2-Gwa"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -44,7 +45,7 @@
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                         <tableColumns>
-                                            <tableColumn width="697" minWidth="40" maxWidth="1000" id="hwp-Th-i2d">
+                                            <tableColumn width="668" minWidth="40" maxWidth="1000" id="hwp-Th-i2d">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -56,8 +57,8 @@
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                 <prototypeCellViews>
-                                                    <tableCellView identifier="LeftMessageView" id="tMT-xX-A4E" userLabel="IMTableCellView" customClass="IMTableCellView">
-                                                        <rect key="frame" x="1" y="1" width="697" height="88"/>
+                                                    <tableCellView identifier="LeftMessageView" misplaced="YES" id="tMT-xX-A4E" userLabel="IMTableCellView" customClass="IMTableCellView">
+                                                        <rect key="frame" x="1" y="1" width="668" height="88"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MJb-Bw-bKU">
@@ -180,7 +181,7 @@
                                                         </connections>
                                                     </tableCellView>
                                                     <tableCellView identifier="RightMessageView" misplaced="YES" id="Kuf-56-7Og" userLabel="IMTableCellView" customClass="IMTableCellView">
-                                                        <rect key="frame" x="1" y="91" width="697" height="88"/>
+                                                        <rect key="frame" x="1" y="91" width="668" height="88"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hV-26-r5V">
@@ -336,11 +337,11 @@
                                                         </connections>
                                                     </tableCellView>
                                                     <tableCellView identifier="GenericInteractionView" misplaced="YES" id="pNa-Do-cpO" userLabel="GenericInteractionView">
-                                                        <rect key="frame" x="1" y="181" width="697" height="57"/>
+                                                        <rect key="frame" x="1" y="181" width="668" height="57"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cNK-fF-Lpr">
-                                                                <rect key="frame" x="0.0" y="0.0" width="697" height="55"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="668" height="55"/>
                                                                 <subviews>
                                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="vU3-4K-kQn">
                                                                         <rect key="frame" x="267" y="50" width="163" height="5"/>
@@ -349,7 +350,7 @@
                                                                         </constraints>
                                                                     </customView>
                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="WSh-d6-EpR">
-                                                                        <rect key="frame" x="345" y="30" width="8" height="15"/>
+                                                                        <rect key="frame" x="330" y="30" width="8" height="15"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="t8v-wm-DsX">
                                                                             <font key="font" metaFont="systemLight" size="12"/>
                                                                             <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -357,7 +358,7 @@
                                                                         </textFieldCell>
                                                                     </textField>
                                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="35p-WS-DUv" userLabel="ContactInteractionLabel">
-                                                                        <rect key="frame" x="322" y="10" width="54" height="15"/>
+                                                                        <rect key="frame" x="307" y="10" width="54" height="15"/>
                                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="jRF-Jm-tK5">
                                                                             <font key="font" metaFont="systemLight" size="12"/>
                                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -803,7 +804,7 @@
                     </customSpacing>
                 </stackView>
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8t-r2-zdA">
-                    <rect key="frame" x="715" y="611" width="108" height="55"/>
+                    <rect key="frame" x="677" y="611" width="146" height="55"/>
                     <subviews>
                         <button toolTip="Add contact" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="pGK-hO-X1Y" userLabel="Add Contact Button" customClass="HoverButton">
                             <rect key="frame" x="0.0" y="12" width="32" height="32"/>
@@ -898,6 +899,37 @@
                                 <action selector="placeCall:" target="-2" id="2h9-fM-gof"/>
                             </connections>
                         </button>
+                        <button toolTip="edit plugins" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="FvO-Yj-ry0" userLabel="Plugin Button" customClass="HoverButton">
+                            <rect key="frame" x="114" y="12" width="32" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="32" id="B7P-48-oIL"/>
+                                <constraint firstAttribute="height" constant="32" id="Iyk-BL-wAk"/>
+                            </constraints>
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_plugin" imagePosition="only" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="GE6-FH-XHE">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <connections>
+                                    <action selector="choosePlugin:" target="-2" id="6jG-fE-Jbo"/>
+                                </connections>
+                            </buttonCell>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverDarkColor">
+                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                    <color key="value" red="0.0" green="0.19215686269999999" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                    <integer key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                    <color key="value" red="0.9360984564" green="0.93607044220000002" blue="0.93608629700000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="mTY-MS-F9z"/>
@@ -906,8 +938,10 @@
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
+                        <integer value="1000"/>
                     </visibilityPriorities>
                     <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
@@ -974,5 +1008,6 @@
         <image name="ic_camera" width="72" height="72"/>
         <image name="ic_file_upload" width="72" height="72"/>
         <image name="ic_person_add" width="48" height="48"/>
+        <image name="ic_plugin" width="32" height="32"/>
     </resources>
 </document>

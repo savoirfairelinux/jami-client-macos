@@ -70,6 +70,7 @@ NS_ENUM(NSInteger, tablesViews1) {
 - (IBAction)toggleEnablePluginsButton:(NSButton *)sender {
     bool enabled = [sender state]==NSOnState;
     self.pluginModel->setPluginsEnabled(enabled);
+    self.pluginModel->chatHandlerStatusUpdated(false);
     [self update];
 }
 
@@ -83,6 +84,7 @@ NS_ENUM(NSInteger, tablesViews1) {
     if ([[panel URLs] lastObject] == nil) return;
     NSString * path = [[[panel URLs] lastObject] path];
     bool status = self.pluginModel->installPlugin(QString::fromNSString(path), true);
+    self.pluginModel->chatHandlerStatusUpdated(false);
     [self update];
 }
 
@@ -102,6 +104,7 @@ NS_ENUM(NSInteger, tablesViews1) {
         self.pluginModel->unloadPlugin(plugin);
     } else
         self.pluginModel->loadPlugin(plugin);
+    self.pluginModel->chatHandlerStatusUpdated(false);
     [self update];
 }
 

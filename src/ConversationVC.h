@@ -19,11 +19,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import <qstring.h>
+#import "ChoosePluginHandlerVC.h"
 
 namespace lrc {
     namespace api {
         class AVModel;
         class ConversationModel;
+        class PluginModel;
     }
 }
 @class RingWindowController;
@@ -36,7 +38,7 @@ namespace lrc {
 -(void) showWithAnimation:(BOOL)animate;
 -(void) hideWithAnimation:(BOOL)animate;
 
-- (void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel*)model;
+- (void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel*)model pluginModel:(lrc::api::PluginModel*)pluginModel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow aVModel:(lrc::api::AVModel*) avModel;
 - (void) presentLeaveMessageView;
