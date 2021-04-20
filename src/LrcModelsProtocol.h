@@ -23,6 +23,7 @@ namespace lrc {
         class NewAccountModel;
         class BehaviorController;
         class AVModel;
+        class PluginModel;
     }
 }
 
@@ -30,14 +31,17 @@ namespace lrc {
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(const lrc::api::DataTransferModel*) dataTransferModel;
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil dataTransferModel:(const lrc::api::DataTransferModel*) dataTransferModel avModel:(const lrc::api::AVModel*) avModel;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil pluginModel:(const lrc::api::PluginModel*) pluginModel;
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil avModel:(const lrc::api::AVModel*) avModel;
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountmodel:(const lrc::api::NewAccountModel*) accountModel;
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel dataTransferModel:(const lrc::api::DataTransferModel*)dataTransferModel behaviourController:(const lrc::api::BehaviorController*) behaviorController;
 -(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel dataTransferModel:(const lrc::api::DataTransferModel*)dataTransferModel behaviourController:(const lrc::api::BehaviorController*) behaviorController avModel: (const lrc::api::AVModel*)avModel;
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(const lrc::api::NewAccountModel*)accountModel dataTransferModel:(const lrc::api::DataTransferModel*)dataTransferModel behaviourController:(const lrc::api::BehaviorController*) behaviorController avModel: (const lrc::api::AVModel*)avModel pluginModel: (const lrc::api::PluginModel*)pluginModel;
 
 @property lrc::api::DataTransferModel* dataTransferModel;
 @property lrc::api::NewAccountModel* accountModel;
 @property lrc::api::BehaviorController* behaviorController;
 @property lrc::api::AVModel* avModel;
+@property lrc::api::PluginModel* pluginModel;
 
 @end
