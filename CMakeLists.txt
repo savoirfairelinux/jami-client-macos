@@ -137,6 +137,8 @@ SET(ringclient_CONTROLLERS
    src/AudioPrefsVC.h
    src/VideoPrefsVC.mm
    src/VideoPrefsVC.h
+   src/PluginPrefsVC.mm
+   src/PluginPrefsVC.h
    src/GeneralPrefsVC.h
    src/ChatVC.mm
    src/ChatVC.h
@@ -280,6 +282,7 @@ SET(ringclient_XIBS
    AccAdvancedRing
    AudioPrefs
    VideoPrefs
+   PluginPrefs
    PreferencesWindow
    RingWizard
    CertificateWindow
