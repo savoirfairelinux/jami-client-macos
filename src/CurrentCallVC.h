@@ -24,12 +24,14 @@
 #import <api/account.h>
 
 #import "ChooseContactVC.h"
+#import "ChoosePluginHandlerVC.h"
 #import "CallInConferenceVC.h"
 #import "views/ConferenceOverlayView.h"
 
 namespace lrc {
     namespace api {
         class AVModel;
+        class PluginModel;
     }
 }
 
@@ -41,7 +43,7 @@ namespace lrc {
 
 @end
 
-@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate, ChooseContactVCDelegate, CallInConferenceVCDelegate, ConferenceLayoutDelegate> {
+@interface CurrentCallVC : NSViewController <NSSplitViewDelegate, CallDelegate, ChooseContactVCDelegate, CallInConferenceVCDelegate, ConferenceLayoutDelegate, ChoosePluginHandlerDelegate> {
 
 }
 @property (retain, nonatomic) id <CallViewControllerDelegate> delegate;
@@ -52,5 +54,6 @@ namespace lrc {
 -(void) setCurrentCall:(const QString&)callUid
           conversation:(const QString&)convUid
                account:(const lrc::api::account::Info*)account
-               avModel:(lrc::api::AVModel *)avModel;
+               avModel:(lrc::api::AVModel *)avModel
+           pluginModel:(lrc::api::PluginModel*)pluginModel;
 @end
