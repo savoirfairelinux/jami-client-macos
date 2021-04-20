@@ -38,7 +38,9 @@
 #import "NSString+Extensions.h"
 #import "LeaveMessageVC.h"
 
-@interface ConversationVC () <QLPreviewPanelDataSource, QLPreviewPanelDelegate>{
+#import <api/pluginmodel.h>
+
+@interface ConversationVC () <QLPreviewPanelDataSource, QLPreviewPanelDelegate, NSPopoverDelegate>{
 
     __unsafe_unretained IBOutlet NSTextField* conversationTitle;
     __unsafe_unretained IBOutlet NSTextField *conversationID;
@@ -55,6 +57,7 @@
     QString convUid_;
     const lrc::api::conversation::Info* cachedConv_;
     lrc::api::ConversationModel* convModel_;
+    lrc::api::PluginModel* pluginModel_;
 
     RingWindowController* delegate;
     NSMutableArray* leaveMessageConversations;
@@ -64,13 +67,20 @@
     QMetaObject::Connection modelSortedConnection_, filterChangedConnection_, newConversationConnection_, conversationRemovedConnection_;
 }
 
+@property (unsafe_unretained) IBOutlet IconButton* pluginButton;
+@property QMetaObject::Connection pluginButtonVisibilityChange;
+@property (strong) NSPopover* brokerPopoverVC;
+
 @end
 
 NSInteger const MEESAGE_MARGIN = 21;
 NSInteger const SEND_PANEL_DEFAULT_HEIGHT = 60;
 NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 
+
 @implementation ConversationVC
+
+@synthesize pluginButton, brokerPopoverVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil delegate:(RingWindowController*) mainWindow aVModel:(lrc::api::AVModel*) avModel
 {
@@ -125,15 +135,19 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     return cachedConv_;
 }
 
--(void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel *)model {
+-(void) setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel *)model pluginModel:(lrc::api::PluginModel*)pluginModel{
     if (convUid_ == convUid && convModel_ == model)
         return;
     [self clearData];
     cachedConv_ = nil;
     convUid_ = convUid;
     convModel_ = model;
+    pluginModel_ = pluginModel;
 
     [messagesViewVC setConversationUid:convUid_ model:convModel_];
+    
+    if (!pluginModel_->getPluginsEnabled() || pluginModel_->getChatHandlers().size() <= 0)
+        [pluginButton setHidden:YES];
 
     if (convUid_.isEmpty() || convModel_ == nil)
         return;
@@ -149,6 +163,16 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     QObject::disconnect(filterChangedConnection_);
     QObject::disconnect(newConversationConnection_);
     QObject::disconnect(conversationRemovedConnection_);
+    QObject::disconnect(self.pluginButtonVisibilityChange);
+    self.pluginButtonVisibilityChange == QObject::connect(pluginModel_,
+                                                          &lrc::api::PluginModel::chatHandlerStatusUpdated,
+                                                          [self](bool status) { // this should not be used
+        if(pluginModel_->getPluginsEnabled() && pluginModel_->getChatHandlers().size() != 0)
+            [pluginButton setHidden:NO];
+        else
+            [pluginButton setHidden:YES];
+    });
+
     modelSortedConnection_ = QObject::connect(convModel_, &lrc::api::ConversationModel::modelChanged,
                                           [self](){
                                               cachedConv_ = nil;
@@ -225,6 +249,25 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     [delegate rightPanelClosed];
     [self hideWithAnimation:false];
     [messagesViewVC clearData];
+}
+
+- (IBAction)choosePlugin:(id)sender {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* pluginHandlerSelectorVC = [[ChoosePluginHandlerVC alloc] initWithNibName:@"ChoosePluginHandlerVC" bundle:nil];
+        pluginHandlerSelectorVC.pluginModel = pluginModel_;
+        auto* conv = [self getCurrentConversation];
+        [pluginHandlerSelectorVC setupForChat:conv->participants.first() accountID:conv->accountId];
+        pluginHandlerSelectorVC.delegate = self;
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentViewController:pluginHandlerSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
 }
 
 # pragma mark private IN/OUT animations
