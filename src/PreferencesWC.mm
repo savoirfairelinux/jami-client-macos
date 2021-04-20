@@ -25,6 +25,7 @@
 #import "GeneralPrefsVC.h"
 #import "AudioPrefsVC.h"
 #import "VideoPrefsVC.h"
+#import "PluginPrefsVC.h"
 #import "views/NSColor+RingTheme.h"
 
 @implementation PreferencesWC {
@@ -33,12 +34,13 @@
     NSViewController *currentVC;
 }
 
-@synthesize dataTransferModel, accountModel, behaviorController, avModel;
+@synthesize dataTransferModel, accountModel, behaviorController, avModel, pluginModel;
 
 // Identifiers used in PreferencesWindow.xib for tabs
 static auto const kGeneralPrefsIdentifier = @"GeneralPrefsIdentifier";
 static auto const kAudioPrefsIdentifer    = @"AudioPrefsIdentifer";
 static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
+static auto const kPluginPrefsIdentifer    = @"PluginPrefsIdentifer";
 
 - (void)windowDidLoad
 {
@@ -55,7 +57,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [tb setAllowsUserCustomization:NO];
 }
 
--(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel dataTransferModel:(lrc::api::DataTransferModel*)dataTransferModel behaviourController:(lrc::api::BehaviorController*) behaviorController avModel: (lrc::api::AVModel*)avModel
+-(id) initWithWindowNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil accountModel:(lrc::api::NewAccountModel*)accountModel dataTransferModel:(lrc::api::DataTransferModel*)dataTransferModel behaviourController:(lrc::api::BehaviorController*)behaviorController avModel: (lrc::api::AVModel*)avModel pluginModel: (lrc::api::PluginModel*)pluginModel
 {
     if (self =  [self initWithWindowNibName:nibNameOrNil])
     {
@@ -63,6 +65,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
         self.dataTransferModel = dataTransferModel;
         self.behaviorController = behaviorController;
         self.avModel = avModel;
+        self.pluginModel = pluginModel;
     }
     return self;
 }
@@ -88,6 +91,14 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [[prefsContainer subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
     currentVC = [[VideoPrefsVC alloc] initWithNibName:@"VideoPrefs" bundle:nil avModel: self.avModel];
+    [self addCurrentVC];
+}
+
+- (IBAction)displayPlugins:(NSToolbarItem *)sender
+{
+    [[prefsContainer subviews]
+     makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    currentVC = [[PluginPrefsVC alloc] initWithNibName:@"PluginPrefs" bundle:nil pluginModel: self.pluginModel];
     [self addCurrentVC];
 }
 
