@@ -37,6 +37,7 @@ NSString* const TIME_BOX_HEIGHT = @"34";
 @synthesize progressIndicator;
 @synthesize statusLabel;
 @synthesize openImagebutton;
+@synthesize openFileButton;
 @synthesize compozingIndicator2, compozingIndicator3, compozingIndicator1;
 
 - (void) setupDirection

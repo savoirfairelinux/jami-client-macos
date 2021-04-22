@@ -465,8 +465,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 break;
             case lrc::api::interaction::Status::TRANSFER_FINISHED:
                 result = [tableView makeViewWithIdentifier:@"RightFinishedFileView" owner:conversationView];
-                [result.transferedFileName setAction:@selector(imagePreview:)];
-                [result.transferedFileName setTarget:self];
                 [result.transferedFileName.cell setHighlightsBy:NSContentsCellMask];
                 break;
             case lrc::api::interaction::Status::TRANSFER_CANCELED:
@@ -498,6 +496,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
     result.transferedImage.image = nil;
     [result.openImagebutton setHidden:YES];
+    [result.openFileButton setHidden:YES];
     [result.msgBackground setHidden:NO];
     NSString* name =  interaction.body.toNSString();
     if (name.length > 0) {
@@ -520,16 +519,25 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                                   paragraphStyle,NSParagraphStyleAttributeName, nil];
         NSAttributedString* alternativeString = [[NSAttributedString alloc] initWithString:fileName attributes:alternativeNametAttr];
         result.transferedFileName.attributedAlternateTitle = alternativeString;
+        NSString* path = name;
         NSImage* image = [self getImageForFilePath:name];
         if (([name rangeOfString:@"/"].location == NSNotFound)) {
-            image = [self getImageForFilePath:[self getDataTransferPath:interactionID]];
+            path = [self getDataTransferPath:interactionID];
+            image = [self getImageForFilePath: path];
         }
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
+        BOOL isDir = false;
+        BOOL fileExists = ([fileManager fileExistsAtPath: path isDirectory:&isDir] && !isDir);
         if(image != nil) {
             result.transferedImage.image = image;
             [result updateImageConstraintWithMax: MAX_TRANSFERED_IMAGE_SIZE];
             [result.openImagebutton setAction:@selector(imagePreview:)];
             [result.openImagebutton setTarget:self];
             [result.openImagebutton setHidden:NO];
+        } else if (fileExists) {
+            [result.openFileButton setAction:@selector(filePreview:)];
+            [result.openFileButton setTarget:self];
+            [result.openFileButton setHidden:NO];
         }
     }
     [result setupForInteraction:interactionID];
@@ -1054,7 +1062,15 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
 }
 
+- (void)filePreview:(id)sender {
+    [self preview: sender isImage: false];
+}
+
 - (void)imagePreview:(id)sender {
+    [self preview: sender isImage: true];
+}
+
+- (void)preview:(id)sender isImage:(BOOL)isImage {
     uint64_t interId;
     if ([[[[[[sender superview] superview] superview] superview] superview] isKindOfClass:[IMTableCellView class]]) {
         interId = [(IMTableCellView*)[[[[[sender superview] superview] superview] superview] superview] interaction];
@@ -1074,6 +1090,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
     previewImage = name;
     if (!previewImage || previewImage.length <= 0) {
+        return;
+    }
+    if (!isImage) {
+        [[NSWorkspace sharedWorkspace] selectFile: name inFileViewerRootedAtPath:nil];
         return;
     }
     [self addToResponderChain];
