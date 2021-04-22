@@ -369,16 +369,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     if (conv == nil)
         return;
     NSString* name = bestNameForConversation(*conv, *convModel_);
-    NSString *placeholder = [NSString stringWithFormat:@"%@%@", @"Write to ", name];
-
-    NSFont *fontName = [NSFont systemFontOfSize: 14.0 weight: NSFontWeightRegular];
-    NSColor *color = [NSColor tertiaryLabelColor];
-    NSDictionary *nameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                               fontName, NSFontAttributeName,
-                               color, NSForegroundColorAttributeName,
-                               nil];
-    NSAttributedString* attributedPlaceholder = [[NSAttributedString alloc] initWithString: placeholder attributes:nameAttrs];
-    messageView.placeholderAttributedString = attributedPlaceholder;
+    [self updatePlaceholder];
     [self reloadPendingFiles];
     conversationView.alphaValue = 0.0;
     [conversationView reloadData];
@@ -395,6 +386,24 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     } catch (std::out_of_range& e) {
         NSLog(@"contact out of range");
     }
+}
+
+-(void)updatePlaceholder {
+    auto* conv = [self getCurrentConversation];
+
+    if (conv == nil)
+        return;
+    NSString* name = bestNameForConversation(*conv, *convModel_);
+    NSString *placeholder = [NSString stringWithFormat:@"%@%@", @"Write to ", name];
+
+    NSFont *fontName = [NSFont systemFontOfSize: 14.0 weight: NSFontWeightRegular];
+    NSColor *color = [NSColor tertiaryLabelColor];
+    NSDictionary *nameAttrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                               fontName, NSFontAttributeName,
+                               color, NSForegroundColorAttributeName,
+                               nil];
+    NSAttributedString* attributedPlaceholder = [[NSAttributedString alloc] initWithString: placeholder attributes:nameAttrs];
+    messageView.placeholderAttributedString = attributedPlaceholder;
 }
 
 #pragma mark - configure cells
@@ -1114,6 +1123,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(void) resetSendMessagePanelToDefaultSize {
+    [self updatePlaceholder];
     if(messageHeight.constant != MESSAGE_VIEW_DEFAULT_HEIGHT) {
         sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
         messageHeight.constant = MESSAGE_VIEW_DEFAULT_HEIGHT;
@@ -1197,6 +1207,9 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(void)textDidChange:(NSNotification *)notification {
     [self checkIfComposingMsg];
+    if (self.message.length) {
+        [self updatePlaceholder];
+    }
     self.enableSendButton = self.message.length > 0 || [(NSMutableArray*)MessagesVC. pendingFiles[convUid_.toNSString()] count] > 0;
 }
 
@@ -1265,6 +1278,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 - (NSCollectionViewItem*)collectionView:(NSCollectionView *)collectionView itemForRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath {
     FileToSendCollectionItem* fileCell = [collectionView makeItemWithIdentifier:@"FileToSendCollectionItem" forIndexPath:indexPath];
     PendingFile* file = MessagesVC.pendingFiles[convUid_.toNSString()][indexPath.item];
+    fileCell.placeholderPreview.hidden = file.preview != nil;
     fileCell.filePreview.image = file.preview;
     fileCell.fileName.stringValue = file.name;
     fileCell.fileName.toolTip = file.name;
