@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -309,7 +309,7 @@
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ldC-Xq-oV5">
                                                             <rect key="frame" x="-2" y="10" width="54" height="19"/>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="Mey-Zj-Gqc">
-                                                                <font key="font" metaFont="system" size="12"/>
+                                                                <font key="font" metaFont="cellTitle"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -336,10 +336,41 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ylg-FY-rNT" customClass="HoverButton">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="90"/>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="FsB-v6-24a">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="cornerColor">
+                                                            <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                            <color key="value" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverDarkColor">
+                                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="highlightDarkColor">
+                                                            <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="ylg-FY-rNT" secondAttribute="bottom" id="Cdw-wa-A3b"/>
                                                 <constraint firstAttribute="height" constant="90" id="HRW-qi-DP5"/>
                                                 <constraint firstAttribute="bottom" secondItem="d6w-Hc-mr1" secondAttribute="bottom" id="JSa-SG-5gz"/>
+                                                <constraint firstItem="ylg-FY-rNT" firstAttribute="leading" secondItem="rfH-MI-dNw" secondAttribute="leading" id="SPO-WT-pKf"/>
+                                                <constraint firstItem="ylg-FY-rNT" firstAttribute="top" secondItem="rfH-MI-dNw" secondAttribute="top" id="XOH-U8-8jR"/>
+                                                <constraint firstAttribute="trailing" secondItem="ylg-FY-rNT" secondAttribute="trailing" id="brA-jN-yCX"/>
                                                 <constraint firstAttribute="width" constant="250" id="e3b-nY-oeV"/>
                                                 <constraint firstAttribute="trailing" secondItem="d6w-Hc-mr1" secondAttribute="trailing" constant="20" id="gJ6-dn-WP1"/>
                                                 <constraint firstItem="d6w-Hc-mr1" firstAttribute="leading" secondItem="rfH-MI-dNw" secondAttribute="leading" constant="20" id="iyv-tW-3bI"/>
@@ -434,6 +465,7 @@
                 <outlet property="messageHeightConstraint" destination="T9c-E0-C70" id="WCn-Tk-40j"/>
                 <outlet property="messageWidthConstraint" destination="MT9-ny-Mrs" id="0T4-rQ-JVu"/>
                 <outlet property="msgBackground" destination="rfH-MI-dNw" id="AJp-Zq-XG8"/>
+                <outlet property="openFileButton" destination="ylg-FY-rNT" id="dAB-iK-DP1"/>
                 <outlet property="openImagebutton" destination="7XH-9N-c5g" id="6re-SE-3gr"/>
                 <outlet property="photoView" destination="BPl-0q-GSo" id="6XR-pb-GjY"/>
                 <outlet property="statusLabel" destination="ldC-Xq-oV5" id="qmg-YD-p6y"/>
@@ -836,8 +868,8 @@
             </connections>
             <point key="canvasLocation" x="139" y="750"/>
         </tableCellView>
-        <tableCellView identifier="RightFinishedFileView" id="rmZ-yh-rX1" userLabel="IMTableCellView" customClass="IMTableCellView">
-            <rect key="frame" x="0.0" y="0.0" width="700" height="129"/>
+        <tableCellView identifier="RightFinishedFileView" misplaced="YES" id="rmZ-yh-rX1" userLabel="IMTableCellView" customClass="IMTableCellView">
+            <rect key="frame" x="0.0" y="0.0" width="700" height="135"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HCV-dK-X40">
@@ -926,7 +958,7 @@
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eHR-Hi-Zl2">
                                                     <rect key="frame" x="-2" y="10" width="54" height="19"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" id="vDa-rM-ULY">
-                                                        <font key="font" metaFont="system" size="12"/>
+                                                        <font key="font" metaFont="cellTitle"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -954,11 +986,42 @@
                                                 <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
                                         </stackView>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-Aj-6e2" customClass="HoverButton">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="90"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="TbW-cZ-RPC">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="cornerColor">
+                                                    <color key="value" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverDarkColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="highlightDarkColor">
+                                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="1qv-Aj-6e2" firstAttribute="leading" secondItem="uQv-aG-QZp" secondAttribute="leading" id="4tR-NN-PFX"/>
                                         <constraint firstAttribute="height" constant="90" id="77H-cp-4YI"/>
                                         <constraint firstAttribute="trailing" secondItem="dAn-tC-XGy" secondAttribute="trailing" constant="20" id="7QJ-NV-woV"/>
                                         <constraint firstItem="dAn-tC-XGy" firstAttribute="leading" secondItem="uQv-aG-QZp" secondAttribute="leading" constant="20" id="9KK-Iv-eG4"/>
+                                        <constraint firstAttribute="trailing" secondItem="1qv-Aj-6e2" secondAttribute="trailing" id="Aht-q0-lYh"/>
+                                        <constraint firstAttribute="bottom" secondItem="1qv-Aj-6e2" secondAttribute="bottom" id="GFH-aC-vDQ"/>
+                                        <constraint firstItem="1qv-Aj-6e2" firstAttribute="top" secondItem="uQv-aG-QZp" secondAttribute="top" id="NeW-3O-xgd"/>
                                         <constraint firstAttribute="width" constant="250" id="QxX-Qe-0b8"/>
                                         <constraint firstItem="dAn-tC-XGy" firstAttribute="top" secondItem="uQv-aG-QZp" secondAttribute="top" id="cZ7-Gf-6eH"/>
                                         <constraint firstAttribute="bottom" secondItem="dAn-tC-XGy" secondAttribute="bottom" id="gkI-eZ-mXd"/>
@@ -1049,7 +1112,8 @@
                 <outlet property="messageHeightConstraint" destination="biI-gF-8pI" id="GNV-BP-VDc"/>
                 <outlet property="messageWidthConstraint" destination="tpn-a5-Bfr" id="IIx-fR-Kmz"/>
                 <outlet property="msgBackground" destination="uQv-aG-QZp" id="poE-7z-JEI"/>
-                <outlet property="openImagebutton" destination="ld8-l1-IEa" id="lGl-pq-r5p"/>
+                <outlet property="openFileButton" destination="1qv-Aj-6e2" id="8S2-ir-b6G"/>
+                <outlet property="openImagebutton" destination="ld8-l1-IEa" id="dQL-DD-ZlC"/>
                 <outlet property="statusLabel" destination="eHR-Hi-Zl2" id="TvR-nl-6eO"/>
                 <outlet property="timeBox" destination="e0e-TK-qch" id="JPW-TW-Byd"/>
                 <outlet property="timeLabel" destination="Od3-Cq-LmR" id="lja-3j-VsT"/>
