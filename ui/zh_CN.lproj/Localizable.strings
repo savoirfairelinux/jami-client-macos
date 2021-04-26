@@ -35,7 +35,7 @@
 "Remove conversation" = "移除会话";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "点击“确认”将从此设备上删除该账户！此操作无法撤销。同时，您也会失去您的已注册用户名。";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "点击“确认”将从此设备上删除该账户！此操作无法撤销。同时，您也会失去您的注册用户名。";
 
 /* File transfer canceled label */
 "Canceled" = "已取消";
@@ -122,7 +122,7 @@
 "Refuse" = "拒接";
 
 /* Text shown to the user */
-"Registered name: " = "已注册名称：";
+"Registered name: " = "注册名称：";
 
 /* Remove account alert title */
 "Remove account" = "移除账户";
