@@ -66,7 +66,7 @@
                                     <color key="fillColor" red="0.120510533452034" green="0.12050692737102509" blue="0.12050899863243103" alpha="1" colorSpace="calibratedRGB"/>
                                 </box>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-LA-yn0">
-                                    <rect key="frame" x="292" y="1294" width="142" height="305"/>
+                                    <rect key="frame" x="292" y="1738" width="142" height="305"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="s4L-Ke-9Jm">
                                             <rect key="frame" x="7" y="177" width="128" height="128"/>
@@ -358,7 +358,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </customView>
                                 <stackView distribution="equalSpacing" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Djs-L8-8Pe" userLabel="Controls">
-                                    <rect key="frame" x="186" y="20" width="354" height="44"/>
+                                    <rect key="frame" x="187" y="20" width="352" height="44"/>
                                     <subviews>
                                         <button toolTip="Hang up" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kjq-iM-NBL" userLabel="Hang Up" customClass="HoverButton">
                                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
@@ -550,19 +550,19 @@
                                             </connections>
                                         </button>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="7oc-9E-B6q">
-                                            <rect key="frame" x="264" y="42" width="4" height="2"/>
+                                            <rect key="frame" x="264" y="42" width="6" height="2"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="2" id="2MR-E5-npg"/>
-                                                <constraint firstAttribute="width" constant="4" id="naC-cq-rWg"/>
+                                                <constraint firstAttribute="width" constant="6" id="naC-cq-rWg"/>
                                             </constraints>
                                         </customView>
                                         <button toolTip="add contact to call" horizontalHuggingPriority="750" verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Te-Jx-gxA" userLabel="plugin Button" customClass="HoverButton">
-                                            <rect key="frame" x="268" y="6" width="38" height="38"/>
+                                            <rect key="frame" x="270" y="6" width="34" height="34"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="38" id="Cwk-qT-kfv"/>
-                                                <constraint firstAttribute="height" constant="38" id="gdB-Hk-Vmj"/>
+                                                <constraint firstAttribute="width" constant="34" id="Cwk-qT-kfv"/>
+                                                <constraint firstAttribute="height" constant="34" id="gdB-Hk-Vmj"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_plugin" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="o7P-h3-EGs">
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_plugin_fill" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="o7P-h3-EGs">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
                                                 <connections>
@@ -588,14 +588,14 @@
                                             </userDefinedRuntimeAttributes>
                                         </button>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="u1o-FJ-oTh">
-                                            <rect key="frame" x="306" y="42" width="4" height="2"/>
+                                            <rect key="frame" x="304" y="42" width="4" height="2"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="2" id="ONR-8E-3We"/>
                                                 <constraint firstAttribute="width" constant="4" id="g8O-h3-hQj"/>
                                             </constraints>
                                         </customView>
                                         <button toolTip="Toggle chat" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fmp-x4-Pef" userLabel="Chat" customClass="HoverButton">
-                                            <rect key="frame" x="310" y="0.0" width="44" height="44"/>
+                                            <rect key="frame" x="308" y="0.0" width="44" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="48U-1h-yAx"/>
                                                 <constraint firstAttribute="height" constant="44" id="EDO-9c-ndD"/>
@@ -626,6 +626,9 @@
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="3Te-Jx-gxA" firstAttribute="top" secondItem="Vhk-fx-6RW" secondAttribute="top" constant="4" id="g9G-du-yKD"/>
+                                    </constraints>
                                     <visibilityPriorities>
                                         <integer value="1000"/>
                                         <integer value="1000"/>
@@ -690,13 +693,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
-                                    <rect key="frame" x="20" y="145" width="351" height="2746"/>
+                                    <rect key="frame" x="20" y="145" width="351" height="3634"/>
                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H2i-4W-Gvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="351" height="2746"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="351" height="3634"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="ZOj-5b-rnp">
-                                                <rect key="frame" x="0.0" y="0.0" width="351" height="2746"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="351" height="3634"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -1008,7 +1011,7 @@
                                     </scroller>
                                 </scrollView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="mFB-6z-yC0" customClass="DraggingDestinationView">
-                                    <rect key="frame" x="0.0" y="0.0" width="391" height="2893"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="391" height="3781"/>
                                 </customView>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSk-sH-cgy">
                                     <rect key="frame" x="20" y="0.0" width="351" height="145"/>
@@ -1280,6 +1283,6 @@
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_action_video" width="72" height="72"/>
         <image name="ic_file_upload" width="72" height="72"/>
-        <image name="ic_plugin" width="32" height="32"/>
+        <image name="ic_plugin_fill" width="32" height="32"/>
     </resources>
 </document>
