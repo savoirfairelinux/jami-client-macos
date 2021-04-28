@@ -45,6 +45,7 @@
 @property (assign) IBOutlet NSLayoutConstraint* messageHeightConstraint;
 @property (nonatomic, strong) IBOutlet NSImageView* readIndicator;
 @property (nonatomic, strong) IBOutlet NSButton* openFileButton;
+@property (copy) void (^onRightClick)(NSEvent* event);
 
 - (uint64_t) interaction;
 - (void) setupForInteraction:(uint64_t)inter isFailed:(bool) failed;
