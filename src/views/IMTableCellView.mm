@@ -163,4 +163,15 @@ NSString* const TIME_BOX_HEIGHT = @"34";
     self.messageHeightConstraint.constant = 1;
 }
 
+-(void) rightMouseDown:(NSEvent *)event
+{
+    if ( self.onRightClick != nil ) {
+        self.onRightClick(event);
+    }
+}
+
+-(BOOL) acceptsFirstMouse:(NSEvent *)theEvent {
+    return true;
+}
+
 @end

@@ -31,6 +31,12 @@
 @property (retain) NSURL* fileUrl;
 @end
 
+typedef NS_ENUM(NSInteger, messageAction) {
+    OPEN = 0,
+    SHOW_IN_FINDER,
+    DELETE
+};
+
 @interface MessagesVC : NSViewController <RecordingViewDelegate, DraggingDestinationDelegate>
 
 -(void)setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel*)model;
