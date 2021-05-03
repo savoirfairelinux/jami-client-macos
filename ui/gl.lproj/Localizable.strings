@@ -251,7 +251,7 @@
 "Minimize" = "Minimizar";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Despregar";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Acalar audio";
@@ -263,14 +263,32 @@
 "Set moderator" = "Establecer moderador";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "Audio acalado";
 
 /* conference state tooltip Host */
-"Conference host" = "Conference host";
+"Conference host" = "Servidor da conferencia";
 
 /* conference state tooltip moderator */
-"Moderator" = "Moderator";
+"Moderator" = "Moderadora";
 
 /* drop files */
-"Drop files to send" = "Drop files to send";
+"Drop files to send" = "Engade os ficheiros a enviar";
+
+/* Contextual menu for message */
+"Show in Finder" = "Show in Finder";
+
+/* Contextual menu for message */
+"Open" = "Open";
+
+/* Contextual menu for message */
+"Delete for myself" = "Delete for myself";
+
+/* Contextual menu for message */
+"Quick Look" = "Quick Look";
+
+/* Contextual menu for message */
+"Add to Photos Library" = "Add to Photos Library";
+
+/* Contextual menu for message */
+"Resend" = "Resend";
 

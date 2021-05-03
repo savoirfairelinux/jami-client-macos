@@ -224,13 +224,13 @@
 "Hangup" = "Hívás befejezése";
 
 /* Conference action */
-"Mute audio" = "Hang elnémítása";
+"Mute audio" = "Mikrofon elnémítása";
 
 /* Conference action */
 "Set moderator" = "Moderátor beállítása";
 
 /* Conference action */
-"Unmute audio" = "Hang némításának feloldása";
+"Unmute audio" = "Mikrofon némítás feloldása";
 
 /* Conference action */
 "Unset moderator" = "Moderátor megszüntetése";
@@ -254,7 +254,7 @@
 "Expand" = "Kibontás";
 
 /* conference tooltip mute Mute audio */
-"Mute audio" = "Hang elnémítása";
+"Mute audio" = "Mikrofon elnémítása";
 
 /* conference tooltip mute Hangup */
 "Hangup" = "Hívás befejezése";
@@ -263,7 +263,7 @@
 "Set moderator" = "Moderátor beállítása";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Hang elnémítva";
+"Audio muted" = "Mikrofon elnémítva";
 
 /* conference state tooltip Host */
 "Conference host" = "Konferencia házigazdája";
@@ -273,4 +273,22 @@
 
 /* drop files */
 "Drop files to send" = "Húzza ide a feltölteni kívánt fájlokat";
+
+/* Contextual menu for message */
+"Show in Finder" = "Show in Finder";
+
+/* Contextual menu for message */
+"Open" = "Megnyitás";
+
+/* Contextual menu for message */
+"Delete for myself" = "Delete for myself";
+
+/* Contextual menu for message */
+"Quick Look" = "Quick Look";
+
+/* Contextual menu for message */
+"Add to Photos Library" = "Add to Photos Library";
+
+/* Contextual menu for message */
+"Resend" = "Újraküldés";
 

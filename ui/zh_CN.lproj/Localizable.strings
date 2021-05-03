@@ -263,14 +263,32 @@
 "Set moderator" = "设置管理员";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "已静音";
 
 /* conference state tooltip Host */
-"Conference host" = "Conference host";
+"Conference host" = "会议主持人";
 
 /* conference state tooltip moderator */
-"Moderator" = "Moderator";
+"Moderator" = "管理员";
 
 /* drop files */
-"Drop files to send" = "Drop files to send";
+"Drop files to send" = "释放文件以发送";
+
+/* Contextual menu for message */
+"Show in Finder" = "Show in Finder";
+
+/* Contextual menu for message */
+"Open" = "打开";
+
+/* Contextual menu for message */
+"Delete for myself" = "Delete for myself";
+
+/* Contextual menu for message */
+"Quick Look" = "Quick Look";
+
+/* Contextual menu for message */
+"Add to Photos Library" = "Add to Photos Library";
+
+/* Contextual menu for message */
+"Resend" = "Resend";
 

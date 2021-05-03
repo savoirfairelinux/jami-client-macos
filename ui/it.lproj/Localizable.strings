@@ -233,7 +233,7 @@
 "Unmute audio" = "Unmute audio";
 
 /* Conference action */
-"Unset moderator" = "Unset moderator";
+"Unset moderator" = "Rimuovi moderatore";
 
 /* Conference name */
 "Me" = "Io";
@@ -272,5 +272,23 @@
 "Moderator" = "Moderator";
 
 /* drop files */
-"Drop files to send" = "Drop files to send";
+"Drop files to send" = "Trascina qui i file da inviare";
+
+/* Contextual menu for message */
+"Show in Finder" = "Show in Finder";
+
+/* Contextual menu for message */
+"Open" = "Apri";
+
+/* Contextual menu for message */
+"Delete for myself" = "Delete for myself";
+
+/* Contextual menu for message */
+"Quick Look" = "Quick Look";
+
+/* Contextual menu for message */
+"Add to Photos Library" = "Add to Photos Library";
+
+/* Contextual menu for message */
+"Resend" = "Invia di nuovo";
 
