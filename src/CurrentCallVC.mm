@@ -744,6 +744,7 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) rendererDistantView: (const lrc::api::video::Renderer*)renderer {
+    return;
     @autoreleasepool {
         auto framePtr = renderer->currentAVFrame();
         auto frame = framePtr.get();
@@ -773,6 +774,7 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) rendererPreview: (const lrc::api::video::Renderer*)renderer {
+    return;
     @autoreleasepool {
         auto framePtr = renderer->currentAVFrame();
         auto frame = framePtr.get();
