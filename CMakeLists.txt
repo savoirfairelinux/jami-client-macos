@@ -370,6 +370,8 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_msg.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_group.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin_fill.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_reset.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_muted.png

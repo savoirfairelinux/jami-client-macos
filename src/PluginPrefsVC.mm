@@ -24,23 +24,20 @@
 
 #import <api/pluginmodel.h>
 
+#import "views/PluginCell.h"
+
 @interface PluginPrefsVC ()
 
 @property (assign) IBOutlet NSButton *enablePluginsButton;
 @property (unsafe_unretained) IBOutlet NSTableView *installedPluginsView;
+@property (unsafe_unretained) IBOutlet NSStackView *hidableView;
 
 @end
 
 @implementation PluginPrefsVC
+PluginItemDelegateVC *viewController;
 @synthesize pluginModel;
-@synthesize installedPluginsView;
-
-NS_ENUM(NSInteger, tablesViews1) {
-    PLUGIN_NAME_TAG = 1,
-    PLUGIN_LOADED_TAG,
-    PLUGIN_UNINSTALL_TAG,
-    PLUGIN_ICON_TAG
-};
+@synthesize installedPluginsView, hidableView;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil pluginModel:(lrc::api::PluginModel*) pluginModel
 {
@@ -54,8 +51,14 @@ NS_ENUM(NSInteger, tablesViews1) {
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    NSNib *cellNib = [[NSNib alloc] initWithNibNamed:@"PluginCell" bundle:nil];
+    [self.installedPluginsView registerNib:cellNib forIdentifier:@"PluginCellItem"];
     self.installedPluginsView.delegate = self;
     self.installedPluginsView.dataSource = self;
+    if (!self.pluginModel->getPluginsEnabled())
+        [hidableView setHidden:YES];
+    else
+        [hidableView setHidden:NO];
 }
 
 - (void)update {
@@ -71,9 +74,13 @@ NS_ENUM(NSInteger, tablesViews1) {
 #pragma mark - actions
 
 - (IBAction)toggleEnablePluginsButton:(NSButton *)sender {
-    bool enabled = [sender state]==NSOnState;
+    bool enabled = [sender state] == NSOnState;
     self.pluginModel->setPluginsEnabled(enabled);
     self.pluginModel->chatHandlerStatusUpdated(false);
+    if (!enabled)
+        [hidableView setHidden:YES];
+    else
+        [hidableView setHidden:NO];
     [self update];
 }
 
@@ -83,6 +90,9 @@ NS_ENUM(NSInteger, tablesViews1) {
     [panel setAllowsMultipleSelection:NO];
     [panel setCanChooseDirectories:NO];
     [panel setCanChooseFiles:YES];
+    NSMutableArray* allowedTypes = [[NSMutableArray alloc] init];
+    [allowedTypes addObject:@"jpl"];
+    [panel setAllowedFileTypes: allowedTypes];
     if ([panel runModal] != NSFileHandlingPanelOKButton) return;
     if ([[panel URLs] lastObject] == nil) return;
     NSString * path = [[[panel URLs] lastObject] path];
@@ -90,45 +100,6 @@ NS_ENUM(NSInteger, tablesViews1) {
     self.pluginModel->chatHandlerStatusUpdated(false);
     [self update];
 }
-
-- (IBAction)loadPlugin:(id)sender
-{
-    NSInteger row = [installedPluginsView rowForView:sender];
-    if(row < 0) {
-        return;
-    }
-    auto installedPlugins = self.pluginModel->getInstalledPlugins();
-    if ((installedPlugins.size()-1) < row) {
-        return;
-    }
-    auto plugin = installedPlugins[row];
-    auto details = self.pluginModel->getPluginDetails(plugin);
-    if (details.loaded) {
-        self.pluginModel->unloadPlugin(plugin);
-    } else
-        self.pluginModel->loadPlugin(plugin);
-    self.pluginModel->chatHandlerStatusUpdated(false);
-    [self update];
-}
-
-- (IBAction)uninstallPlugin:(id)sender
-{
-    NSInteger row = [installedPluginsView rowForView:sender];
-    if(row < 0) {
-        return;
-    }
-    auto installedPlugins = self.pluginModel->getInstalledPlugins();
-    if ((installedPlugins.size()-1) < row) {
-        return;
-    }
-    auto plugin = installedPlugins[row];
-    self.pluginModel->uninstallPlugin(plugin);
-    [self update];
-}
-
-#pragma mark - signals
-
-#pragma mark - dispaly
 
 #pragma mark - NSOpenSavePanelDelegate delegate methods
 
@@ -138,29 +109,37 @@ NS_ENUM(NSInteger, tablesViews1) {
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSTableCellView* installedPluginCell = [tableView makeViewWithIdentifier:@"TableCellInstalledPluginItem" owner:self];
-    NSTextField* pluginNameLabel = [installedPluginCell viewWithTag: PLUGIN_NAME_TAG];
-    NSButton* pluginLoadButton = [installedPluginCell viewWithTag: PLUGIN_LOADED_TAG];
-    NSButton* pluginUninstallButton = [installedPluginCell viewWithTag: PLUGIN_UNINSTALL_TAG];
-    NSImageView* pluginIcon = [installedPluginCell viewWithTag: PLUGIN_ICON_TAG];
+    PluginCell* installedPluginCell = [tableView makeViewWithIdentifier:@"PluginCellItem" owner:self];
+    
     auto installedPlugins = self.pluginModel->getInstalledPlugins();
     if ((installedPlugins.size() - 1) < row) {
         return nil;
     }
+
     auto plugin = installedPlugins[row];
-    auto details = self.pluginModel->getPluginDetails(plugin);
-    if (details.iconPath.endsWith(".svg")) {
-        details.iconPath.replace(".svg", ".png");
-    }
-    NSString* pathIcon = details.iconPath.toNSString();
-    NSImage *image = [[NSImage alloc] initWithContentsOfFile:pathIcon];
-    [pluginIcon setImage: image];
-    [pluginNameLabel setStringValue: details.name.toNSString()];
-    [pluginLoadButton setState: details.loaded];
-    [pluginLoadButton setAction:@selector(loadPlugin:)];
-    [pluginLoadButton setTarget:self];
-    [pluginUninstallButton setAction:@selector(uninstallPlugin:)];
-    [pluginUninstallButton setTarget:self];
+    [installedPluginCell.viewController setPluginModel:self.pluginModel];
+    PluginItemDelegateCallBacks callbacks;
+    callbacks.uninstall = ([self](CallBackInfos infos) {
+        auto installedPlugins = self.pluginModel->getInstalledPlugins();
+        self.pluginModel->uninstallPlugin(infos.name);
+        
+        int rowToDelete = 0;
+        bool match{false};
+        for (const auto& item : installedPlugins) {
+            if (item == infos.name) {
+                match = true;
+                break;
+            }
+            rowToDelete++;
+        }
+        if (!match)
+            return;
+
+        NSIndexSet* rowIndex = [NSIndexSet indexSetWithIndex:rowToDelete];
+        [self.installedPluginsView removeRowsAtIndexes:rowIndex withAnimation:NSTableViewAnimationSlideUp];
+    });
+    [installedPluginCell.viewController setup:plugin row:row callbacks:callbacks];
+
     return installedPluginCell;
 }
 

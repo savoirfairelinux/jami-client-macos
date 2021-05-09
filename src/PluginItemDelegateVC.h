@@ -17,14 +17,21 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-
 #import <Cocoa/Cocoa.h>
+#include <qstring.h>
 #import "LrcModelsProtocol.h"
-#import "PluginItemDelegateVC.h"
 
+struct CallBackInfos {
+    NSInteger row = -1;
+    QString name = "" ;
+};
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSMenuDelegate, NSTableViewDataSource, NSTableViewDelegate> {
+struct PluginItemDelegateCallBacks {
+    std::function<void(CallBackInfos)> uninstall;
+};
 
-}
+@interface PluginItemDelegateVC : NSViewController<LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {}
+
+-(void) setup:(QString)pluginName row:(NSInteger)row callbacks:(PluginItemDelegateCallBacks)callbacks;
 
 @end
