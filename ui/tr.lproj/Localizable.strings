@@ -65,7 +65,7 @@
 "Failed" = "Başarısız";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Hesabınız taşınırken hata oluştu. Tekrar tamamı tıklayabilir veya hesabınızı silebilirsiniz.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Hesabınız taşınırken hata oluştu. Tamam'a yeniden tıklayabilir veya hesabınızı silebilirsiniz.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Bakma başarısız";
@@ -77,7 +77,7 @@
 "Import from backup" = "Yedekten içe aktarın";
 
 /* link account title */
-"Import from other device" = "Diğer bir aygıttan içe aktar";
+"Import from other device" = "Diğer aygıttan içe aktar";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "%@'den gelen arama";
@@ -203,7 +203,7 @@
 "Attention! This action could not be undone!" = "Dikkat! Bu işlem geri alınamaz!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Aygıt iptali başarısız oldu. Lütfen parolanızı kontrol edip tekrar deneyin.";
+"Device revocation failed. Please check your password and try again." = "Aygıt iptali başarısız oldu. Lütfen parolanızı denetleyip yeniden deneyin.";
 
 /* Device revocation error */
 "Device revocation failed" = "Aygıt iptali başarısız oldu";
@@ -239,7 +239,7 @@
 "Me" = "Ben";
 
 /* Choose registered name for account */
-"Choose a username for your account" = "Hesabınız için bir kullanıcı adı seçin";
+"Choose a username for your account" = "Hesabınız için kullanıcı adı seçin";
 
 /* Choose registered name for rendezvous */
 "Choose a name for your rendezvous point" = "Buluşma noktanız için bir ad seçin";
