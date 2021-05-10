@@ -17,9 +17,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
+#import "PluginItemDelegateVC.h"
 
 @interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSMenuDelegate, NSTableViewDataSource, NSTableViewDelegate> {
 
