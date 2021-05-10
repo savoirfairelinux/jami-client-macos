@@ -19,28 +19,19 @@
 
 #import <Cocoa/Cocoa.h>
 #include <qstring.h>
+#import "LrcModelsProtocol.h"
 
-typedef enum {
-    FROM_CALL = 1,
-    FROM_CHAT
-} PluginPickerType;
+struct CallBackInfos {
+    NSInteger row = -1;
+    QString name = "" ;
+};
 
-namespace lrc {
-    namespace api {
-        class PluginModel;
-    }
-}
+struct PluginItemDelegateCallBacks {
+    std::function<void(CallBackInfos)> uninstall;
+};
 
-@protocol ChoosePluginHandlerDelegate <NSObject>
-@end
+@interface PluginItemDelegateVC : NSViewController<LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {}
 
-@interface ChoosePluginHandlerVC : NSViewController
-
-@property (retain, nonatomic) id <ChoosePluginHandlerDelegate> delegate;
-
-@property (nonatomic) lrc::api::PluginModel* pluginModel;
-
--(void) setupForCall:(const QString)callID;
--(void) setupForChat:(const QString)convID accountID:(const QString)accountID;
+-(void) setup:(QString)pluginName row:(NSInteger)row callbacks:(PluginItemDelegateCallBacks)callbacks;
 
 @end

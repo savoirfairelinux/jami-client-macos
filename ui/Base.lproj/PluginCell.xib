@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PluginCell"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="PluginCellItem" id="LcF-3p-gVl" customClass="PluginCell">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="W3e-rl-j3J">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="W3e-rl-j3J" firstAttribute="top" secondItem="LcF-3p-gVl" secondAttribute="top" id="LpR-iZ-K4S"/>
+                <constraint firstAttribute="trailing" secondItem="W3e-rl-j3J" secondAttribute="trailing" id="Tq9-Jn-8oc"/>
+                <constraint firstAttribute="bottom" secondItem="W3e-rl-j3J" secondAttribute="bottom" id="YaW-U7-j8X"/>
+                <constraint firstItem="W3e-rl-j3J" firstAttribute="leading" secondItem="LcF-3p-gVl" secondAttribute="leading" id="ebF-Jn-yLH"/>
+            </constraints>
+            <connections>
+                <outlet property="containerView" destination="W3e-rl-j3J" id="sTr-7v-8ym"/>
+            </connections>
+            <point key="canvasLocation" x="-911" y="92"/>
+        </customView>
+    </objects>
+</document>

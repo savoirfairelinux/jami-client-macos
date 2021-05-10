@@ -18,29 +18,15 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#include <qstring.h>
+#import "../PluginItemDelegateVC.h"
 
-typedef enum {
-    FROM_CALL = 1,
-    FROM_CHAT
-} PluginPickerType;
+NS_ASSUME_NONNULL_BEGIN
 
-namespace lrc {
-    namespace api {
-        class PluginModel;
-    }
-}
+@interface PluginCell : NSTableCellView
 
-@protocol ChoosePluginHandlerDelegate <NSObject>
-@end
-
-@interface ChoosePluginHandlerVC : NSViewController
-
-@property (retain, nonatomic) id <ChoosePluginHandlerDelegate> delegate;
-
-@property (nonatomic) lrc::api::PluginModel* pluginModel;
-
--(void) setupForCall:(const QString)callID;
--(void) setupForChat:(const QString)convID accountID:(const QString)accountID;
+@property (unsafe_unretained) IBOutlet NSView *containerView;
+@property PluginItemDelegateVC* viewController;
 
 @end
+
+NS_ASSUME_NONNULL_END
