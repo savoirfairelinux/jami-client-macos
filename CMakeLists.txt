@@ -188,6 +188,10 @@ SET(ringclient_CONTROLLERS
    src/ConnectToAccManagerVC.h
    src/AccountBackupVC.mm
    src/AccountBackupVC.h
+   src/PluginItemDelegateVC.h
+   src/PluginItemDelegateVC.mm
+   src/PreferenceTabDelegateVC.h
+   src/PreferenceTabDelegateVC.mm
 )
 
 SET(ringclient_VIEWS
@@ -246,8 +250,10 @@ SET(ringclient_VIEWS
    src/views/TextViewWithPlaceholder.mm
    src/views/FileToSendCollectionItem.h
    src/views/FileToSendCollectionItem.mm
-   src/views/DraggingDestinationView.h
-   src/views/DraggingDestinationView.mm
+   src/views/PluginCell.h
+   src/views/PluginCell.mm
+   src/views/PluginPreferenceTab.h
+   src/views/PluginPreferenceTab.mm
 )
 
 SET(ringclient_OTHERS
@@ -370,6 +376,8 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_msg.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_group.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin_fill.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_reset.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_muted.png
