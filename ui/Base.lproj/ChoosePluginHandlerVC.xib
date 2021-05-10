@@ -29,13 +29,13 @@
                     <rect key="frame" x="0.0" y="45" width="300" height="250"/>
                     <subviews>
                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="FJO-5E-GOp">
-                            <rect key="frame" x="21" y="0.0" width="258" height="250"/>
+                            <rect key="frame" x="21" y="2" width="258" height="248"/>
                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H02-5s-yVx">
-                                <rect key="frame" x="0.0" y="0.0" width="258" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="258" height="248"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="8" outlineTableColumn="Hhb-rH-L0S" id="4hh-3J-TYv" userLabel="Plugin Handler Table View" customClass="RingTableView">
-                                        <rect key="frame" x="0.0" y="0.0" width="258" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="258" height="248"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.0" colorSpace="deviceWhite"/>
