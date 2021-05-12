@@ -804,7 +804,7 @@
                     </customSpacing>
                 </stackView>
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8t-r2-zdA">
-                    <rect key="frame" x="677" y="611" width="146" height="55"/>
+                    <rect key="frame" x="683" y="611" width="140" height="55"/>
                     <subviews>
                         <button toolTip="Add contact" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="pGK-hO-X1Y" userLabel="Add Contact Button" customClass="HoverButton">
                             <rect key="frame" x="0.0" y="12" width="32" height="32"/>
@@ -902,10 +902,10 @@
                         <button toolTip="edit plugins" verticalHuggingPriority="750" tag="400" translatesAutoresizingMaskIntoConstraints="NO" id="FvO-Yj-ry0" userLabel="Plugin Button" customClass="HoverButton">
                             <rect key="frame" x="114" y="12" width="32" height="32"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="32" id="B7P-48-oIL"/>
-                                <constraint firstAttribute="height" constant="32" id="Iyk-BL-wAk"/>
+                                <constraint firstAttribute="width" constant="26" id="B7P-48-oIL"/>
+                                <constraint firstAttribute="height" constant="26" id="Iyk-BL-wAk"/>
                             </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_plugin" imagePosition="only" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="GE6-FH-XHE">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_plugin_fill" imagePosition="only" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="GE6-FH-XHE">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
@@ -1008,6 +1008,6 @@
         <image name="ic_camera" width="72" height="72"/>
         <image name="ic_file_upload" width="72" height="72"/>
         <image name="ic_person_add" width="48" height="48"/>
-        <image name="ic_plugin" width="32" height="32"/>
+        <image name="ic_plugin_fill" width="32" height="32"/>
     </resources>
 </document>
