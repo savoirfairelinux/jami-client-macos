@@ -18,10 +18,15 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "LrcModelsProtocol.h"
+#import "../PreferenceTabDelegateVC.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+NS_ASSUME_NONNULL_BEGIN
 
-}
+@interface PluginPreferenceTab : NSTabViewItem
+
+@property (unsafe_unretained) IBOutlet NSView *containerView;
+@property PreferenceTabDelegateVC* viewController;
 
 @end
+
+NS_ASSUME_NONNULL_END

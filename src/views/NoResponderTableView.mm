@@ -17,11 +17,12 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
-#import "LrcModelsProtocol.h"
+#import "NoResponderTableView.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+@implementation NoResponderTableView
 
+- (void)scrollWheel:(NSEvent *)theEvent
+{
+    [[self nextResponder] scrollWheel:theEvent];
 }
-
 @end
