@@ -17,30 +17,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
-#include <qstring.h>
+#import "PluginCell.h"
 
-typedef enum {
-    FROM_CALL = 1,
-    FROM_CHAT
-} PluginPickerType;
+@implementation PluginCell
 
-namespace lrc {
-    namespace api {
-        class PluginModel;
-    }
+@synthesize containerView;
+
+- (void)awakeFromNib{
+    self.viewController = [[PluginItemDelegateVC alloc] initWithNibName:@"PluginItemDelegate" bundle:nil];
+    [self.containerView addSubview: self.viewController.view];
+    self.viewController.view.frame = self.containerView.frame;
 }
-
-@protocol ChoosePluginHandlerDelegate <NSObject>
-@end
-
-@interface ChoosePluginHandlerVC : NSViewController
-
-@property (retain, nonatomic) id <ChoosePluginHandlerDelegate> delegate;
-
-@property (nonatomic) lrc::api::PluginModel* pluginModel;
-
--(void) setupForCall:(const QString)callID;
--(void) setupForChat:(const QString)convID accountID:(const QString)accountID;
 
 @end
