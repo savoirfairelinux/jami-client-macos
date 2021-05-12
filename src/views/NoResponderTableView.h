@@ -18,10 +18,11 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "LrcModelsProtocol.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+NS_ASSUME_NONNULL_BEGIN
 
-}
+@interface NoResponderTableView : NSScrollView
 
 @end
+
+NS_ASSUME_NONNULL_END
