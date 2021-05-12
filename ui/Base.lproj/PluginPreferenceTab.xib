@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="PluginPreferenceTabItem" id="HFK-k8-vzs" customClass="PluginPreferenceTab">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="1CO-Xc-FPp">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="1CO-Xc-FPp" secondAttribute="bottom" id="QoI-pk-8yz"/>
+                <constraint firstAttribute="trailing" secondItem="1CO-Xc-FPp" secondAttribute="trailing" id="aY0-Vk-5ji"/>
+                <constraint firstItem="1CO-Xc-FPp" firstAttribute="top" secondItem="HFK-k8-vzs" secondAttribute="top" id="e1a-gq-gRK"/>
+                <constraint firstItem="1CO-Xc-FPp" firstAttribute="leading" secondItem="HFK-k8-vzs" secondAttribute="leading" id="nAt-ko-w7g"/>
+            </constraints>
+            <connections>
+                <outlet property="containerView" destination="1CO-Xc-FPp" id="TRQ-Wc-G9f"/>
+            </connections>
+            <point key="canvasLocation" x="-911" y="92"/>
+        </customView>
+    </objects>
+</document>

@@ -18,10 +18,15 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "LrcModelsProtocol.h"
+#import "../PluginItemDelegateVC.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+NS_ASSUME_NONNULL_BEGIN
 
-}
+@interface PluginCell : NSTableCellView
+
+@property (unsafe_unretained) IBOutlet NSView *containerView;
+@property PluginItemDelegateVC* viewController;
 
 @end
+
+NS_ASSUME_NONNULL_END
