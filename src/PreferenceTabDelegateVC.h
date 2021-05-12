@@ -18,10 +18,15 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#include <qstring.h>
 #import "LrcModelsProtocol.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+NS_ASSUME_NONNULL_BEGIN
 
-}
+@interface PreferenceTabDelegateVC : NSViewController<LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {}
 
+- (void) setup:(QString)pluginName category:(QString)category;
+- (void) update;
 @end
+
+NS_ASSUME_NONNULL_END

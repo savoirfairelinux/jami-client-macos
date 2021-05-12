@@ -17,11 +17,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
-#import "LrcModelsProtocol.h"
+#import "PluginCell.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+@implementation PluginCell
 
+@synthesize containerView;
+
+- (void)awakeFromNib{
+    self.viewController = [[PluginItemDelegateVC alloc] initWithNibName:@"PluginItemDelegate" bundle:nil];
+    [self.containerView addSubview: self.viewController.view];
+    self.viewController.view.frame = self.containerView.frame;
 }
 
 @end

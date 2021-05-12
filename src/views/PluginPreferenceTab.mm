@@ -17,11 +17,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
 
-#import <Cocoa/Cocoa.h>
-#import "LrcModelsProtocol.h"
+#import "PluginPreferenceTab.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+@implementation PluginPreferenceTab
 
+@synthesize containerView;
+
+- (void)awakeFromNib{
+    self.viewController = [[PreferenceTabDelegateVC alloc] initWithNibName:@"PreferenceTabDelegateVC" bundle:nil];
+    [self.containerView addSubview: self.viewController.view];
+    self.viewController.view.frame = self.containerView.frame;
 }
 
 @end
