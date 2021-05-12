@@ -18,10 +18,20 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#include <qstring.h>
 #import "LrcModelsProtocol.h"
 
-@interface PluginPrefsVC : NSViewController <LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {
+struct CallBackInfos {
+    NSInteger row = -1;
+    QString name = "" ;
+};
 
-}
+struct PluginItemDelegateCallBacks {
+    std::function<void(CallBackInfos)> uninstall;
+};
+
+@interface PluginItemDelegateVC : NSViewController<LrcModelsProtocol, NSTableViewDataSource, NSTableViewDelegate> {}
+
+-(void) setup:(const QString&)pluginName row:(NSInteger)row callbacks:(PluginItemDelegateCallBacks)callbacks;
 
 @end
