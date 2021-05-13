@@ -971,7 +971,11 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     auto* callModel = accountInfo_->callModel.get();
-    callModel->hangUp(callUid_);
+    auto currentCall = callModel->getCall(callUid_);
+    if (currentCall.status == lrc::api::call::Status::INCOMING_RINGING)
+        callModel->refuse(callUid_);
+    else
+        callModel->hangUp(callUid_);
 }
 
 - (IBAction)accept:(id)sender {
