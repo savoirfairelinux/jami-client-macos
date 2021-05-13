@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49ae33cf_9f70a793",
+        "filename": "src/PluginPrefsVC.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-05-13T16:55:57Z",
+      "side": 1,
+      "message": "we do not need NSMenuDelegate",
+      "revId": "0c9d545e078c447bcab5222079db3ed59efddbf0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a68d583_e20acf91",
+        "filename": "src/PluginPrefsVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-05-13T16:55:57Z",
+      "side": 1,
+      "message": "unnecessary import",
+      "revId": "0c9d545e078c447bcab5222079db3ed59efddbf0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11d236f3_a5b48055",
+        "filename": "src/PluginPrefsVC.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-05-13T16:55:57Z",
+      "side": 1,
+      "message": "unnecessary",
+      "revId": "0c9d545e078c447bcab5222079db3ed59efddbf0",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
