@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fec3f9c0_40904346",
+        "filename": "src/ChoosePluginHandlerVC.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 225
+      },
+      "writtenOn": "2021-05-13T17:14:20Z",
+      "side": 1,
+      "message": "we never use ChoosePluginHandlerDelegate",
+      "revId": "83485f5f426b281deafe424607181779693749ca",
+      "serverId": "1e26b4c1-6b8c-47ff-9df7-501b633d3b5a",
+      "unresolved": true
+    }
+  ]
+}
