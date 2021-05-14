@@ -571,7 +571,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 [messageActionsMenu insertItem: menuItem atIndex: messageActionsMenu.itemArray.count];
             }
         }
-        NSMenuItem* menuItem = [self menuItemWithTitle: NSLocalizedString(@"Delete for myself", @"Contextual menu for message") action: @selector(deleteMessage:) keyEquivalent: @"" interactionId: interactionID];
+        NSMenuItem* menuItem = [self menuItemWithTitle: NSLocalizedString(@"Delete", @"Contextual menu for message") action: @selector(deleteMessage:) keyEquivalent: @"" interactionId: interactionID];
         [messageActionsMenu insertItem: menuItem atIndex: messageActionsMenu.itemArray.count];
 
         [NSMenu popUpContextMenu:messageActionsMenu withEvent: event forView: result.openFileButton];

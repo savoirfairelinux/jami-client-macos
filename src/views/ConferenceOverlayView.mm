@@ -201,7 +201,7 @@ CGFloat minWidth = 140;
     self.hostState = [self getStateView];
     NSImage* hostImage = [NSImage imageNamed: @"ic_star.png"];
     self.hostState.image = hostImage;
-    self.hostState.toolTip = NSLocalizedString(@"Conference host", @"conference state tooltip Host");
+    self.hostState.toolTip = NSLocalizedString(@"Conference Organiser", @"conference state tooltip organiser");
 
     NSArray *statesViews = [NSArray arrayWithObjects: self.hostState, self.moderatorState, self.audioState, nil];
     self.states = [NSStackView stackViewWithViews: statesViews];
