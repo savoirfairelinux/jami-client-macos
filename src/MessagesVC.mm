@@ -1236,7 +1236,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(void) resetSendMessagePanelToDefaultSize {
-    [self updatePlaceholder];
     if(messageHeight.constant != MESSAGE_VIEW_DEFAULT_HEIGHT) {
         sendPanelHeight.constant = SEND_PANEL_DEFAULT_HEIGHT;
         messageHeight.constant = MESSAGE_VIEW_DEFAULT_HEIGHT;
@@ -1320,9 +1319,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 
 -(void)textDidChange:(NSNotification *)notification {
     [self checkIfComposingMsg];
-    if (self.message.length) {
-        [self updatePlaceholder];
-    }
     self.enableSendButton = self.message.length > 0 || [(NSMutableArray*)MessagesVC. pendingFiles[convUid_.toNSString()] count] > 0;
 }
 

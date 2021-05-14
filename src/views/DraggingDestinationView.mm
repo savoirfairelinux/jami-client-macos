@@ -56,6 +56,11 @@
     [title drawInRect:rectText withAttributes: attributes];
 }
 
+//prevent view from receiving all events, they should be transfered to conversation view
+- (NSView *)hitTest:(NSPoint)point {
+    return nil;
+}
+
 #pragma mark - Destination Operations
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender

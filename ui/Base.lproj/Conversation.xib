@@ -578,7 +578,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="516" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" spellingCorrection="YES" grammarChecking="YES" smartInsertDelete="YES" id="rQj-9q-WQ6">
+                                                    <textView drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" quoteSubstitution="YES" linkDetection="YES" dashSubstitution="YES" spellingCorrection="YES" grammarChecking="YES" smartInsertDelete="YES" id="rQj-9q-WQ6" customClass="TextViewWithPlaceholder">
                                                         <rect key="frame" x="0.0" y="0.0" width="516" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -730,7 +730,7 @@
                                 <subviews>
                                     <collectionView id="mqn-8s-hQD">
                                         <rect key="frame" x="0.0" y="0.0" width="798" height="84"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="6" minimumLineSpacing="6" scrollDirection="horizontal" id="lkr-H8-IkF">
                                             <size key="itemSize" width="226" height="84"/>
                                         </collectionViewFlowLayout>
