@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "已静音";
 
-/* conference state tooltip Host */
-"Conference host" = "会议主持人";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "管理员";
@@ -275,20 +275,20 @@
 "Drop files to send" = "释放文件以发送";
 
 /* Contextual menu for message */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "在Finder中显示";
 
 /* Contextual menu for message */
 "Open" = "打开";
 
 /* Contextual menu for message */
-"Delete for myself" = "Delete for myself";
+"Delete" = "删除";
 
 /* Contextual menu for message */
-"Quick Look" = "Quick Look";
+"Quick Look" = "快速预览";
 
 /* Contextual menu for message */
-"Add to Photos Library" = "Add to Photos Library";
+"Add to Photos Library" = "加入至照片图库";
 
 /* Contextual menu for message */
-"Resend" = "Resend";
+"Resend" = "重发";
 

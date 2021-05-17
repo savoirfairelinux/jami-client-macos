@@ -56,7 +56,7 @@
 "Create a new account" = "Create a new account";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Crea un punto d'incontro";
+"Create a rendezvous point" = "Crea un punto di riunione";
 
 /* Backup enter password */
 "Enter account password" = "Enter account password";
@@ -242,7 +242,7 @@
 "Choose a username for your account" = "Choose a username for your account";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Choose a name for your rendezvous point";
+"Choose a name for your rendezvous point" = "Scegli un nome per il tuo punto di riunione";
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Search for new or existing contact";
@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "Audio muted";
 
-/* conference state tooltip Host */
-"Conference host" = "Conference host";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
@@ -281,7 +281,7 @@
 "Open" = "Apri";
 
 /* Contextual menu for message */
-"Delete for myself" = "Elimina per me";
+"Delete" = "Elimina";
 
 /* Contextual menu for message */
 "Quick Look" = "Sguardo veloce";

@@ -18,16 +18,16 @@
 "BIS-Ft-yJn.title" = "Ustawienia rozmowy";
 
 /* Class = "NSTextFieldCell"; title = "Discovery settings"; ObjectID = "Va3-Un-lCL"; */
-"Va3-Un-lCL.title" = "Discovery settings";
+"Va3-Un-lCL.title" = "Ustawienia znajdowania";
 
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
-"rdZ-JB-96s.title" = "Make this account discoverable on local network";
+"rdZ-JB-96s.title" = "Spraw, by to konto było możliwe do znalezienia w lokalnej sieci";
 
 /* Class = "NSButtonCell"; title = "Enable local moderators"; ObjectID = "BCQ-xd-1zb"; */
-"BCQ-xd-1zb.title" = "Enable local moderators";
+"BCQ-xd-1zb.title" = "Włącz lokalnych moderatorów";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
-"n3E-PI-JHj.title" = "Discover peers on local network";
+"n3E-PI-JHj.title" = "Znajduj użytkowników w lokalnej sieci";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Automatycznie odbieraj połączenia";
@@ -117,10 +117,10 @@
 "zPJ-cO-neQ.title" = "Użyj TURN";
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
-"2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";
+"2cZ-SI-nbz.title" = "Włącz punkt spotkań: zmień swoje konto w pokój konferencyjny";
 
 /* Class = "NSButtonCell"; title = "Add default moderator"; ObjectID = "RKw-pg-2N8"; */
-"RKw-pg-2N8.title" = "Add default moderator";
+"RKw-pg-2N8.title" = "Dodaj domyślnego moderatora";
 
 /* Class = "NSTextFieldCell"; title = "You do not have default moderators"; ObjectID = "g2o-3r-Dx7"; */
-"g2o-3r-Dx7.title" = "You do not have default moderators";
+"g2o-3r-Dx7.title" = "Nie masz domyślnych moderatorów";

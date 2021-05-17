@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "Ääni mykistetty";
 
-/* conference state tooltip Host */
-"Conference host" = "Kokouksen isäntä";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "Valvoja";
@@ -275,20 +275,20 @@
 "Drop files to send" = "Pudota lähetettävät tiedostot";
 
 /* Contextual menu for message */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Näytä Finderissa";
 
 /* Contextual menu for message */
 "Open" = "Avaa";
 
 /* Contextual menu for message */
-"Delete for myself" = "Delete for myself";
+"Delete" = "Poista";
 
 /* Contextual menu for message */
-"Quick Look" = "Quick Look";
+"Quick Look" = "Nopea vilkaisu";
 
 /* Contextual menu for message */
-"Add to Photos Library" = "Add to Photos Library";
+"Add to Photos Library" = "Lisää kuvia kirjastoon";
 
 /* Contextual menu for message */
-"Resend" = "Resend";
+"Resend" = "Uudelleen";
 

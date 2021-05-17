@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "Mikrofon elnémítva";
 
-/* conference state tooltip Host */
-"Conference host" = "Konferenciaszervező";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderátor";
@@ -281,7 +281,7 @@
 "Open" = "Megnyitás";
 
 /* Contextual menu for message */
-"Delete for myself" = "Törlés";
+"Delete" = "Törlés";
 
 /* Contextual menu for message */
 "Quick Look" = "Gyorsnézet";

@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "自動靜音";
 
-/* conference state tooltip Host */
-"Conference host" = "會議主持人";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "主持人";
@@ -281,7 +281,7 @@
 "Open" = "開啟";
 
 /* Contextual menu for message */
-"Delete for myself" = "自行刪除";
+"Delete" = "刪除";
 
 /* Contextual menu for message */
 "Quick Look" = "快速瀏覽";

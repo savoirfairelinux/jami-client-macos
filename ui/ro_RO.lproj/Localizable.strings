@@ -56,7 +56,7 @@
 "Create a new account" = "Creează un cont nou";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Creează un loc de întîlnire";
+"Create a rendezvous point" = "Creează un loc de conferință";
 
 /* Backup enter password */
 "Enter account password" = "Introdu parola contului";
@@ -242,7 +242,7 @@
 "Choose a username for your account" = "Alege un nume de utilizator pentru contul tău";
 
 /* Choose registered name for rendezvous */
-"Choose a name for your rendezvous point" = "Alege un nume pentru locul de întîlnire";
+"Choose a name for your rendezvous point" = "Alege un nume pentru locul de conferință";
 
 /* search bar placeholder */
 "Search for new or existing contact" = "Caută un contact nou sau existent";
@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "Mut";
 
-/* conference state tooltip Host */
-"Conference host" = "Gazda conferinței";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
@@ -281,7 +281,7 @@
 "Open" = "Deschide";
 
 /* Contextual menu for message */
-"Delete for myself" = "Șterge pentru mine";
+"Delete" = "Șterge";
 
 /* Contextual menu for message */
 "Quick Look" = "O privire rapidă";

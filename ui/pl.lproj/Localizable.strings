@@ -20,13 +20,13 @@
 "An error occured during the export" = "Wystąpił błąd podczas eksportowania.";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "wydaje się być zajęty.";
 
 /* Error audio permission */
 "Audio permission not granted" = "Audio permission not granted";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Utwórz kopię zapasową swojego konta";
 
 /* Contextual menu action */
 "Block contact" = "Blokuj kontakt";
@@ -35,7 +35,7 @@
 "Remove conversation" = "Usuń rozmowę";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Klikając \"OK\" usuniesz to konto z tego urządzenia! Tej akcji nie da się cofnąć. Również twoja zarejestrowana nazwa może zostać utracona.";
 
 /* File transfer canceled label */
 "Canceled" = "Anulowano";
@@ -50,7 +50,7 @@
 "Copy" = "Skopiuj";
 
 /* Recording view explanation label */
-"Could not record message during call" = "Could not record message during call";
+"Could not record message during call" = "Nie udało nagrać się wiadomości podczas rozmowy";
 
 /* Welcome title */
 "Create a new account" = "Utwórz nowe konto";
@@ -59,19 +59,19 @@
 "Create a rendezvous point" = "Utwórz spotkanie";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Podaj hasło do konta";
 
 /* File transfer failed label */
 "Failed" = "Nie powiodła się";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Nie udało się przenieść twojego konta. Możesz spróbować ponownie naciskając Ok albo usunąć swoje konto.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Nie udało się wykonać wyszukiwania";
 
 /* Text shown to the user */
-"ID: " = "ID: ";
+"ID: " = "ID:";
 
 /* link account title */
 "Import from backup" = "Importuj z kopii zapasowej";
@@ -83,25 +83,25 @@
 "Incoming call from %@" = "Połączenie przychodzące od %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Przychodząca wiadomość od %@";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Nieprawidłowa nazwa użytkownika";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Nieprawidłowa nazwa użytkownika.";
 
 /* Allert message when no accounts are available */
-"Navigate to preferences to create a new account" = "Navigate to preferences to create a new account";
+"Navigate to preferences to create a new account" = "Idź do preferencji by stworzyć nowe konto";
 
 /* Displayed as RingID when no accounts are available for selection */
-"No account available" = "No account available";
+"No account available" = "Brak dostępnych kont";
 
 /* Text show to the user when password didn't match */
-"Password and confirmation mismatch." = "Password and confirmation mismatch.";
+"Password and confirmation mismatch." = "Niezgodność hasła i potwierdzenia.";
 
 /* Indication for user */
-"Password is too short" = "Password is too short";
+"Password is too short" = "Hasło jest zbyt krótkie";
 
 /* Indication for user */
 "Passwords don't match" = "Hasła nie pasują";
@@ -113,22 +113,22 @@
 "Place video call" = "Rozpocznij rozmowę wideo";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Naciśnij by zacząć nagrywać";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Nagraj wiadomość";
 
 /* Button Action */
 "Refuse" = "Odmów";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Zarejestrowana nazwa:";
 
 /* Remove account alert title */
 "Remove account" = "Usuń konto";
 
 /* export account button title */
-"Select archive" = "Select archive";
+"Select archive" = "Wybierz archiwum";
 
 /* Send button title */
 "Send" = "Wyślij";
@@ -143,7 +143,7 @@
 "Share screen" = "Udostępnij ekran";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Zaloguj się";
 
 /* Record message title */
 "Stop recording" = "Wyłącz nagrywanie";
@@ -155,10 +155,10 @@
 "Text Actions" = "Operacje Tekstowe";
 
 /* Text shown to user when his username is available to be registered */
-"The entered username is available" = "The entered username is available";
+"The entered username is available" = "Podana nazwa użytkownika jest dostępna";
 
 /* Text shown to user when his username is already registered */
-"The entered username is not available" = "The entered username is not available";
+"The entered username is not available" = "Podana nazwa użytkownika jest niedostępna";
 
 /* Error shown to the user */
 "The password you entered does not unlock this account" = "Hasło, które zostało wpisane, nie odblokowuje tego konta";
@@ -167,19 +167,19 @@
 "This account needs to be migrated" = "This account needs to be migrated";
 
 /* Explanation label when user have just ID */
-"This is your ID. \nCopy and share it with your friends!" = "This is your ID. \nCopy and share it with your friends!";
+"This is your ID. \nCopy and share it with your friends!" = "To jest twoje ID.\nSkopiuj i podziel się ze swoimi znajomymi!";
 
 /* Explanation label when user have Jami username */
-"This is your Jami username. \nCopy and share it with your friends!" = "This is your Jami username. \nCopy and share it with your friends!";
+"This is your Jami username. \nCopy and share it with your friends!" = "To jest twoja nazwa użytkownika Jami.\nSkopiuj i podziel się nią z przyjaciółmi!";
 
 /* Title shown to user to concat with Pin */
-"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes.";
+"To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Aby dokończyć proces, musisz otworzyć Jami na nowym urządzeniu i wybrać opcję \"Połącz to urządzenie z kontem\". Twój PIN jest aktywny przez 10 minut.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Aby kontynuować migrację, musisz wprowadzić hasło, które zostało użytego do tego konta.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Nieosiągalny";
 
 /* Error video permission */
 "Video permission not granted" = "Video permission not granted";
@@ -188,25 +188,25 @@
 "Welcome to Jami" = "Witaj w Jami";
 
 /* Peer busy message */
-"Would you like to leave a message?" = "Would you like to leave a message?";
+"Would you like to leave a message?" = "Czy chciałbyś zostawić wiadomość?";
 
 /* Password button title */
 "Change password" = "Zmień hasło";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Utwórz hasło";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Odwołaj urządzenie";
 
 /* Device revocation message */
-"Attention! This action could not be undone!" = "Attention! This action could not be undone!";
+"Attention! This action could not be undone!" = "Uwaga! To działanie nie mogło zostać cofnięte!";
 
 /* Device revocation error */
-"Device revocation failed. Please check your password and try again." = "Device revocation failed. Please check your password and try again.";
+"Device revocation failed. Please check your password and try again." = "Unieważnienie urządzenia nie powiodło się. Sprawdź proszę swoje hasło i spróbuj ponownie.";
 
 /* Device revocation error */
-"Device revocation failed" = "Device revocation failed";
+"Device revocation failed" = "Unieważnienie urządzenia nie powiodło się";
 
 /* Edit Sip Account Action*/
 "Done" = "Gotowe";
@@ -215,10 +215,10 @@
 "Edit Account" = "Edytuj konto";
 
 /* Conference action */
-"Minimize participant" = "Minimize participant";
+"Minimize participant" = "Zminimalizuj uczestnika";
 
 /* Conference action */
-"Maximize participant" = "Maximize participant";
+"Maximize participant" = "Zmaksymalizuj uczestnika";
 
 /* Conference action */
 "Hangup" = "Odłoż słuchawkę";
@@ -230,7 +230,7 @@
 "Set moderator" = "Zaznacz moderatora";
 
 /* Conference action */
-"Unmute audio" = "Unmute audio";
+"Unmute audio" = "Wyłącz wyciszenie dźwięku";
 
 /* Conference action */
 "Unset moderator" = "Odznacz moderatora";
@@ -251,7 +251,7 @@
 "Minimize" = "Zminimalizuj";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Rozwiń";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Wyłącz dźwięk";
@@ -263,32 +263,32 @@
 "Set moderator" = "Zaznacz moderatora";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "Dźwięk wyciszony";
 
-/* conference state tooltip Host */
-"Conference host" = "Conference host";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
 
 /* drop files */
-"Drop files to send" = "Drop files to send";
+"Drop files to send" = "Upuść pliki by wysłać";
 
 /* Contextual menu for message */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Pokaż w Finderze";
 
 /* Contextual menu for message */
 "Open" = "Otwórz";
 
 /* Contextual menu for message */
-"Delete for myself" = "Delete for myself";
+"Delete" = "Usuń";
 
 /* Contextual menu for message */
-"Quick Look" = "Quick Look";
+"Quick Look" = "Szybki Podgląd";
 
 /* Contextual menu for message */
-"Add to Photos Library" = "Add to Photos Library";
+"Add to Photos Library" = "Dodaj do Biblioteki Zdjęć";
 
 /* Contextual menu for message */
-"Resend" = "Resend";
+"Resend" = "Wyślij ponownie";
 

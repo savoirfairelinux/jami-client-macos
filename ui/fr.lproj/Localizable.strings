@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "Le son est coupé";
 
-/* conference state tooltip Host */
-"Conference host" = "Organisateur de la conférence";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "Modérateur";
@@ -281,7 +281,7 @@
 "Open" = "Ouvrir";
 
 /* Contextual menu for message */
-"Delete for myself" = "Supprimer";
+"Delete" = "Supprimer";
 
 /* Contextual menu for message */
 "Quick Look" = "Vue rapide";

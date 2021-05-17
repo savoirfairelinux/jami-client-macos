@@ -265,8 +265,8 @@
 /* conference state tooltip Audio muted */
 "Audio muted" = "U mbyll zëri";
 
-/* conference state tooltip Host */
-"Conference host" = "Strehë konference";
+/* conference state tooltip organiser */
+"Conference Organiser" = "Conference Organiser";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
@@ -281,7 +281,7 @@
 "Open" = "Hape";
 
 /* Contextual menu for message */
-"Delete for myself" = "Fshije për mua";
+"Delete" = "Fshije";
 
 /* Contextual menu for message */
 "Quick Look" = "Parje e Shpejtë";
