@@ -46,7 +46,7 @@ static auto const kVideoPrefsIdentifer    = @"VideoPrefsIdentifer";
     [self.window setMovableByWindowBackground:YES];
     NSArray *items = [self.window.toolbar items];
     for(NSToolbarItem *toolbarItem in items) {
-        NSImage * image =  [NSColor image: [toolbarItem image] tintedWithColor: [NSColor secondaryLabelColor]];
+        NSImage * image =  [NSColor image: [toolbarItem image] tintedWithColor: [NSColor labelColor]];
         toolbarItem.image = image;
     }
     [self.window.toolbar setSelectedItemIdentifier:kGeneralPrefsIdentifier];
