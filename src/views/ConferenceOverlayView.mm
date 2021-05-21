@@ -409,7 +409,7 @@ CGFloat minWidth = 140;
 -(void) updateButtonsState {
     bool audioMuted = self.participant.audioModeratorMuted || self.participant.audioLocalMuted;
     self.audioState.hidden = !audioMuted;
-    self.moderatorState.hidden = !self.participant.isModerator || [self.delegate isParticipantHost: self.participant.uri];
+    self.moderatorState.hidden = !self.participant.isModerator || [self.delegate isParticipantHost: self.participant.uri] || [self.delegate isAllModerators];
     self.hostState.hidden = ![self.delegate isParticipantHost: self.participant.uri];
     auto radius = self.audioState.hidden ? cornerRadius : 0;
     if (!self.moderatorState.hidden) {
