@@ -61,8 +61,6 @@ set(SHADERS_FILE "Shader.metallib")
 add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
                     COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
                     COMMENT "Creating Shader.metallib")
-add_custom_target(shader ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib)
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -192,6 +190,10 @@ SET(ringclient_CONTROLLERS
    src/PluginItemDelegateVC.mm
    src/PreferenceTabDelegateVC.h
    src/PreferenceTabDelegateVC.mm
+   src/ChooseMediaVC.mm
+   src/ChooseMediaVC.h
+   src/ChangeAudioVolumeVC.mm
+   src/ChangeAudioVolumeVC.h
 )
 
 SET(ringclient_VIEWS
@@ -322,6 +324,8 @@ SET(ringclient_XIBS
    PluginItemDelegate
    PluginPreferenceTab
    PreferenceTabDelegateVC
+   ChooseMediaVC
+   ChangeAudioVolumeVC
 )
 
 # Icons
@@ -332,12 +336,8 @@ SET_SOURCE_FILES_PROPERTIES(${myApp_ICON} PROPERTIES
 SET(ring_ICONS
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_file.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_exit.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_stoprecord.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_audio.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_audio.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_folder.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_block.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_attachment.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/default_avatar_overlay.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_name.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background-light.png
@@ -345,55 +345,54 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/background-dark.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/symbol_blue.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/background_tile.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/logo_white.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_more.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_dialpad.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_accept.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_arrow_back.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_cancel.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hangup.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_hold.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_holdoff.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_video.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_mute_audio.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_chat.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_search.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_quality.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_record.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_received.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_missed.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_call_made.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_transfer.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_add_participant.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_merge_calls.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_send.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_persons.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_history.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin_fill.png	
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_reset.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/video.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_delete.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/qrcode.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_video.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/pending_contact_request.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_file_upload.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_record_stop.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_audio_msg.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_group.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin_fill.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_reset.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_moderator_minimize.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_moderator_hangup.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_stoprecord.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_maximize.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_file.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/done.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_action_accept.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/add_participant.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/camera_off.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/camera_on.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/message.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/micro_off.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/micro_on.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/record.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/sound_off.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/sound_on.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_action_cancel.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_picture.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_star.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/arrw_up.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/share.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_muted.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_unmuted.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_maximize.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_minimize.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_hangup.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_star.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_file.png)
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/settings.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/plugin.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin.png
+)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)

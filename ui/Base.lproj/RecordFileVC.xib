@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -108,7 +108,7 @@
                         <constraint firstAttribute="height" constant="48" id="1Z4-hU-eRS"/>
                         <constraint firstAttribute="width" constant="48" id="AZQ-Od-nVN"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_action_record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="72Z-Ir-JoX">
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="record" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="72Z-Ir-JoX">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
                     </buttonCell>
@@ -162,7 +162,7 @@
     </objects>
     <resources>
         <image name="ic_action_cancel" width="72" height="72"/>
-        <image name="ic_action_record" width="36" height="36"/>
         <image name="ic_audio_file" width="100" height="100"/>
+        <image name="record" width="70" height="70"/>
     </resources>
 </document>

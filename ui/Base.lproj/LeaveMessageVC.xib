@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -92,7 +92,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="yzl-pB-H0C"/>
                                     </constraints>
-                                    <buttonCell key="cell" type="square" title="Record a message" bezelStyle="shadowlessSquare" image="ic_action_audio" imagePosition="left" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="zTC-Gf-lAV">
+                                    <buttonCell key="cell" type="square" title="Record a message" bezelStyle="shadowlessSquare" image="micro_on" imagePosition="left" alignment="center" transparent="YES" imageScaling="proportionallyDown" id="zTC-Gf-lAV">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -314,8 +314,8 @@
     </objects>
     <resources>
         <image name="NSUser" width="32" height="32"/>
-        <image name="ic_action_audio" width="36" height="36"/>
         <image name="ic_audio_file" width="100" height="100"/>
         <image name="ic_exit" width="64" height="64"/>
+        <image name="micro_on" width="70" height="70"/>
     </resources>
 </document>
