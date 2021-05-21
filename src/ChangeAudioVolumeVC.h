@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2021 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,35 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+
 #import <Cocoa/Cocoa.h>
 #import <qstring.h>
 
-@protocol CallDelegate;
-@protocol CallDelegate
-
-@optional
-
--(void) callShouldToggleFullScreen;
--(void) mouseIsMoving:(BOOL) move;
-
-@end
-
-@interface CallView : NSView <NSDraggingDestination, NSOpenSavePanelDelegate>
-{
-    //highlight the drop zone
-    BOOL highlight;
+namespace lrc {
+    namespace api {
+        class AVModel;
+    }
 }
 
-- (id)initWithCoder:(NSCoder *)coder;
+typedef enum {
+    input = 1,
+    output
+} AudioType;
 
-/**
- * Sets weither this view allow first click interactions
- */
-@property BOOL shouldAcceptInteractions;
-
-/**
- *  Delegate to inform about desire to move
- */
-@property (nonatomic) id <CallDelegate> callDelegate;
-
+@protocol ChangeAudioVolumeDelegate <NSObject>
+-(BOOL)isAudioMuted:(AudioType)audioType;
 @end
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface ChangeAudioVolumeVC : NSViewController
+@property (copy) void (^onMuted)();
+@property (retain, nonatomic) id <ChangeAudioVolumeDelegate> delegate;
+
+-(void)setMediaDevice:(const QString&)device avModel:(lrc::api::AVModel *)avModel andType:(AudioType)type;
+@end
+
+NS_ASSUME_NONNULL_END

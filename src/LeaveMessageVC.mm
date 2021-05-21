@@ -100,7 +100,6 @@ lrc::api::ConversationModel* conversationModel;
         }
         filesToSend[conversationUid.toNSString()] = file_name.toNSString();
         isRecording = true;
-        recordButton.image = [NSImage imageNamed:@"ic_stoprecord.png"];
         recordButton.title = NSLocalizedString(@"Stop recording", @"Record message title");
         [timerBox setHidden:NO];
         if (refreshDurationTimer == nil)
@@ -112,7 +111,7 @@ lrc::api::ConversationModel* conversationModel;
     } else {
         avModel->stopLocalRecorder(QString::fromNSString(filesToSend[conversationUid.toNSString()]));
         isRecording = false;
-        recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+        recordButton.image = [NSImage imageNamed:@"micro_on.png"];
         recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
         [refreshDurationTimer invalidate];
         refreshDurationTimer = nil;
@@ -139,7 +138,7 @@ lrc::api::ConversationModel* conversationModel;
 }
 
 - (void)clearData {
-    recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+    recordButton.image = [NSImage imageNamed:@"micro_on.png"];
     recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
     recordingTime = 0;
     [timerLabel setStringValue: [NSString formattedStringTimeFromSeconds: recordingTime]];
@@ -152,7 +151,7 @@ lrc::api::ConversationModel* conversationModel;
 }
 
 - (void)viewWillHide {
-    recordButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+    recordButton.image = [NSImage imageNamed:@"micro_on.png"];
     recordButton.title = NSLocalizedString(@"Record a message", @"Record message title");
     if(filesToSend[conversationUid.toNSString()]) {
         [sendButton setHidden: NO];

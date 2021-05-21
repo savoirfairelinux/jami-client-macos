@@ -52,6 +52,8 @@ extern "C" {
 #import "views/GradientView.h"
 #import "views/MovableView.h"
 #import "views/RenderingView.h"
+#import "ChooseMediaVC.h"
+#import "ChangeAudioVolumeVC.h"
 
 @interface CurrentCallVC () <NSPopoverDelegate> {
     QString convUid_;
@@ -60,6 +62,16 @@ extern "C" {
     const lrc::api::account::Info *accountInfo_;
     NSTimer* refreshDurationTimer;
 }
+
+typedef enum {
+    audioInputDevices = 1,
+    audioOutputDevices,
+    videoDevices,
+    share,
+    changeAudioInputVolume,
+    changeAudioOutputVolume,
+    addParticipant
+} PopoverType;
 
 // Main container
 @property (unsafe_unretained) IBOutlet NSSplitView* splitView;
@@ -90,10 +102,13 @@ extern "C" {
 @property (unsafe_unretained) IBOutlet IconButton* recordOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteAudioButton;
 @property (unsafe_unretained) IBOutlet IconButton* muteVideoButton;
-@property (unsafe_unretained) IBOutlet IconButton* transferButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
-@property (unsafe_unretained) IBOutlet IconButton* qualityButton;
+@property (unsafe_unretained) IBOutlet IconButton* shareButton;
+@property (unsafe_unretained) IBOutlet IconButton* audioOutputButton;
+@property (unsafe_unretained) IBOutlet IconButton* inputAudioMenuButton;
+@property (unsafe_unretained) IBOutlet IconButton* outputAudioMenuButton;
+@property (unsafe_unretained) IBOutlet IconButton* videoMenuButton;
 
 // Video
 @property (unsafe_unretained) IBOutlet CallView *videoView;
@@ -101,6 +116,7 @@ extern "C" {
 @property (unsafe_unretained) IBOutlet MovableView *movableBaseForView;
 @property (unsafe_unretained) IBOutlet NSView* hidePreviewBackground;
 @property (unsafe_unretained) IBOutlet NSButton* hidePreviewButton;
+@property (unsafe_unretained) IBOutlet NSStackView* allModerators;
 
 @property (unsafe_unretained) IBOutlet RenderingView *distantView;
 
@@ -110,6 +126,8 @@ extern "C" {
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection profileUpdatedConnection;
 @property QMetaObject::Connection participantsChangedConnection;
+@property QMetaObject::Connection videoDeviceEvent;
+@property QMetaObject::Connection audioDeviceEvent;
 
 //conference
 @property (unsafe_unretained) IBOutlet NSStackView *callingWidgetsContainer;
@@ -130,8 +148,9 @@ NSInteger const PREVIEW_WIDTH = 185;
 NSInteger const PREVIEW_HEIGHT = 130;
 NSInteger const HIDE_PREVIEW_BUTTON_SIZE = 25;
 NSInteger const PREVIEW_MARGIN = 20;
+BOOL allModeratorsInConference = false;
 
-@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, transferButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC;
+@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC, audioOutputButton, inputAudioMenuButton, outputAudioMenuButton, videoMenuButton;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -298,10 +317,10 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) setUpButtons:(lrc::api::call::Info&)callInfo isRecording:(BOOL) isRecording {
-    muteAudioButton.image = callInfo.audioMuted ? [NSImage imageNamed:@"ic_action_mute_audio.png"] :
-    [NSImage imageNamed:@"ic_action_audio.png"];
-    muteVideoButton.image = callInfo.videoMuted ? [NSImage imageNamed:@"ic_action_mute_video.png"] :
-    [NSImage imageNamed:@"ic_action_video.png"];
+    muteAudioButton.image = callInfo.audioMuted ? [NSImage imageNamed:@"micro_off.png"] :
+    [NSImage imageNamed:@"micro_on.png"];
+    muteVideoButton.image = callInfo.videoMuted ? [NSImage imageNamed:@"camera_off.png"] :
+    [NSImage imageNamed:@"camera_on.png"];
     [muteVideoButton setHidden: callInfo.isAudioOnly ? YES: NO];
     if (isRecording) {
         [recordOnOffButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1 duration: 1.5];
@@ -383,6 +402,7 @@ CVPixelBufferRef pixelBufferPreview;
         [overlay removeFromSuperview];
     }
     participantsOverlays = [[NSMutableDictionary alloc] init];
+    movableBaseForView.hidden = false;
 }
 
 -(void)updateConference
@@ -402,6 +422,15 @@ CVPixelBufferRef pixelBufferPreview;
         return;
     }
     NSMutableArray* participantUrs = [[NSMutableArray alloc] init];
+    BOOL allModerators = true;
+    for (auto participant: participants) {
+        if (participant["isModerator"] != "true" &&
+            ![self isParticipantHost: participant["uri"].toNSString()]) {
+            allModerators = false;
+        }
+    }
+    movableBaseForView.hidden = true;
+    allModeratorsInConference = allModerators;
     for (auto participant: participants) {
         ConferenceParticipant conferenceParticipant;
         conferenceParticipant.x = participant["x"].toFloat();
@@ -447,6 +476,7 @@ CVPixelBufferRef pixelBufferPreview;
             participantsOverlays[key] = nil;
         }
     }
+    self.allModerators.hidden = !allModeratorsInConference;
 }
 
 -(void) updateCall
@@ -471,15 +501,12 @@ CVPixelBufferRef pixelBufferPreview;
     if([bestName isEqualToString:ringID]) {
         ringID = @"";
     }
+    [self updateLMediaListButtonsVisibility];
     [contactIdLabel setStringValue:ringID];
     [self setupContactInfo:contactPhoto];
     confUid_ = conversation.confId;
-    [muteAudioButton setHidden:!confUid_.isEmpty()];
-    [muteVideoButton setHidden:!confUid_.isEmpty()];
-    [recordOnOffButton setHidden:!confUid_.isEmpty()];
-    [holdOnOffButton setHidden:!confUid_.isEmpty()];
-    [movableBaseForView setHidden:!confUid_.isEmpty()];
     [self updateConference];
+    self.allModerators.hidden = !allModeratorsInConference;
 
     [timeSpentLabel setStringValue:callModel->getFormattedCallDuration(callUid_).toNSString()];
     if (refreshDurationTimer == nil)
@@ -491,11 +518,6 @@ CVPixelBufferRef pixelBufferPreview;
     [self setBackground];
 
     using Status = lrc::api::call::Status;
-    if (currentCall.status == Status::PAUSED) {
-        [holdOnOffButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1.0 duration: 1.5];
-    } else {
-        [holdOnOffButton stopBlinkAnimation];
-    }
 
     [self setUpButtons: currentCall isRecording: (callModel->isRecording([self getcallID]) || mediaModel->getAlwaysRecord())];
 
@@ -586,11 +608,11 @@ CVPixelBufferRef pixelBufferPreview;
 -(void) setUpVideoCallView {
     [previewView fillWithBlack];
     [self.distantView fillWithBlack];
+    [backgroundImage setHidden:YES];
     [previewView setHidden: NO];
     [self.distantView setHidden:NO];
     [hidePreviewBackground setHidden: !self.previewView.videoRunning];
     [bluerBackgroundEffect setHidden:YES];
-    [backgroundImage setHidden:YES];
     self.previewView.videoRunning = true;
     self.distantView.videoRunning = true;
 }
@@ -678,6 +700,18 @@ CVPixelBufferRef pixelBufferPreview;
     [self connectRenderer];
 }
 
+-(void)updateShareButtonAnimation {
+    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
+    if (type == lrc::api::video::DeviceType::DISPLAY || type == lrc::api::video::DeviceType::FILE) {
+        [self.shareButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1 duration: 1.5];
+        NSString *source = type == lrc::api::video::DeviceType::DISPLAY ? @"Screen share" : @"File streaming";
+        self.shareButton.toolTip = [@"Stop " stringByAppendingString: source];
+    } else {
+        [self.shareButton stopBlinkAnimation];
+        self.shareButton.toolTip = @"share ";
+    }
+}
+
 -(void) connectRenderer
 {
     QObject::disconnect(renderConnections.frameUpdated);
@@ -692,14 +726,15 @@ CVPixelBufferRef pixelBufferPreview;
                                  [self.previewView setHidden:NO];
                                  [hidePreviewBackground setHidden: NO];
                                  self.previewView.videoRunning = true;
+                                 [self updateShareButtonAnimation];
                              });
                          } else if ([self isCurrentCall: id]) {
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self mouseIsMoving: NO];
+                                 [backgroundImage setHidden:YES];
                                  self.distantView.videoRunning = true;
                                  [self.distantView setHidden:NO];
                                  [bluerBackgroundEffect setHidden:YES];
-                                 [backgroundImage setHidden:YES];
                              });
                          }
                      });
@@ -711,6 +746,7 @@ CVPixelBufferRef pixelBufferPreview;
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self.previewView setHidden:YES];
                                  self.previewView.videoRunning = false;
+                                 [self.shareButton stopBlinkAnimation];
                              });
                          } else if ([self isCurrentCall: id]) {
                              dispatch_async(dispatch_get_main_queue(), ^{
@@ -741,6 +777,29 @@ CVPixelBufferRef pixelBufferPreview;
                              [self rendererDistantView: renderer];
                          }
                      });
+    QObject::disconnect(self.videoDeviceEvent);
+    self.videoDeviceEvent = QObject::connect(mediaModel,
+                                        &lrc::api::AVModel::deviceEvent,
+                                        [=]() {
+        [self updateLMediaListButtonsVisibility];
+    });
+    QObject::disconnect(self.audioDeviceEvent);
+    self.audioDeviceEvent = QObject::connect(mediaModel,
+                                        &lrc::api::AVModel::audioDeviceEvent,
+                                        [=]() {
+        [self updateLMediaListButtonsVisibility];
+    });
+}
+
+-(void) updateLMediaListButtonsVisibility {
+    auto inputDevices = mediaModel->getAudioInputDevices();
+    inputAudioMenuButton.hidden = inputDevices.size() <= 1;
+    inputAudioMenuButton.enabled = inputDevices.size() > 1;
+    outputAudioMenuButton.hidden = true;
+    outputAudioMenuButton.enabled = false;
+    auto videoDevices = [self getDeviceList];
+    videoMenuButton.hidden = videoDevices.size() <= 1;
+    videoMenuButton.enabled = videoDevices.size() > 1;
 }
 
 -(void) rendererDistantView: (const lrc::api::video::Renderer*)renderer {
@@ -851,6 +910,8 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::disconnect(renderConnections.started);
     QObject::disconnect(renderConnections.stopped);
     QObject::disconnect(self.messageConnection);
+    QObject::disconnect(self.videoDeviceEvent);
+    QObject::disconnect(self.audioDeviceEvent);
 
     [self.chatButton setPressed:NO];
     [self collapseRightView];
@@ -944,11 +1005,7 @@ CVPixelBufferRef pixelBufferPreview;
 
     [CATransaction setCompletionBlock:^{
         [self.view setHidden:YES];
-        // first make sure everything is disconnected
         [self cleanUp];
-//        if (currentCall_) {
-//            [self animateIn];
-//        }
     }];
     [self.view.layer addAnimation:animation forKey:animation.keyPath];
 
@@ -1033,17 +1090,16 @@ CVPixelBufferRef pixelBufferPreview;
     [chatButton setPressed:rightViewCollapsed];
 }
 
-- (IBAction)muteAudio:(id)sender
-{
+- (IBAction)muteAudio:(id)sender {
     if (accountInfo_ == nil)
         return;
-
+    
     auto* callModel = accountInfo_->callModel.get();
     auto currentCall = callModel->getCall(callUid_);
     if (currentCall.audioMuted) {
-        muteAudioButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+        muteAudioButton.image = [NSImage imageNamed:@"micro_on.png"];
     } else {
-       muteAudioButton.image = [NSImage imageNamed:@"ic_action_mute_audio.png"];
+        muteAudioButton.image = [NSImage imageNamed:@"micro_off.png"];
     }
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::AUDIO);
 }
@@ -1056,35 +1112,36 @@ CVPixelBufferRef pixelBufferPreview;
     auto currentCall = callModel->getCall(callUid_);
     if(!currentCall.isAudioOnly) {
         if (currentCall.videoMuted) {
-            muteVideoButton.image = [NSImage imageNamed:@"ic_action_video.png"];
+            muteVideoButton.image = [NSImage imageNamed:@"camera_on.png"];
         } else {
-            muteVideoButton.image = [NSImage imageNamed:@"ic_action_mute_video.png"];
+            muteVideoButton.image = [NSImage imageNamed:@"camera_off.png"];
         }
     }
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::VIDEO);
 }
 
-- (IBAction)toggleTransferView:(id)sender {
-
+- (IBAction)toggleAddParticipantView:(id)sender {
+    [self presentPopoverVCOfType: addParticipant sender: sender];
 }
 
-- (IBAction)toggleAddParticipantView:(id)sender {
-    if (brokerPopoverVC != nullptr) {
-        [brokerPopoverVC performClose:self];
-        brokerPopoverVC = NULL;
-    } else {
-        auto* contactSelectorVC = [[ChooseContactVC alloc] initWithNibName:@"ChooseContactVC" bundle:nil];
-        auto* convModel = accountInfo_->conversationModel.get();
-        [contactSelectorVC setUpForConference:convModel andCurrentConversation:convUid_];
-        contactSelectorVC.delegate = self;
-        brokerPopoverVC = [[NSPopover alloc] init];
-        [brokerPopoverVC setContentSize:contactSelectorVC.view.frame.size];
-        [brokerPopoverVC setContentViewController:contactSelectorVC];
-        [brokerPopoverVC setAnimates:YES];
-        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
-        [brokerPopoverVC setDelegate:self];
-        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
-    }
+- (IBAction)toggleChangeAudioInput:(id)sender {
+    [self presentPopoverVCOfType: audioInputDevices sender: sender];
+}
+
+- (IBAction)toggleChangeAudioOutput:(id)sender {
+    [self presentPopoverVCOfType: audioOutputDevices sender: sender];
+}
+
+- (IBAction)toggleChangeCamera:(id)sender {
+    [self presentPopoverVCOfType: videoDevices sender: sender];
+}
+
+- (IBAction)changeAudioOutputVolume:(id)sender {
+    [self presentPopoverVCOfType: changeAudioOutputVolume sender: sender];
+}
+
+- (IBAction)changeAudioInputVolume:(id)sender {
+    [self presentPopoverVCOfType: changeAudioInputVolume sender: sender];
 }
 
 - (IBAction)hidePreview:(id)sender {
@@ -1104,6 +1161,125 @@ CVPixelBufferRef pixelBufferPreview;
         context.timingFunction = [CAMediaTimingFunction functionWithName: kCAMediaTimingFunctionEaseOut];
         previewView.animator.frame = newPreviewFrame;
     } completionHandler: nil];
+}
+
+-(NSViewController*)getControllerForType:(PopoverType)type {
+    switch (type) {
+        case audioInputDevices:
+        {
+            auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+            auto inputDevices = mediaModel->getAudioInputDevices();
+            auto currentDevice = mediaModel->getInputDevice();
+            [mediaSelectorVC setMediaDevices: inputDevices andDefaultDevice: currentDevice];
+            mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+                mediaModel->setInputDevice(QString::fromNSString(device));
+                [brokerPopoverVC performClose:self];
+                brokerPopoverVC = NULL;
+            };
+            return mediaSelectorVC;
+        }
+        case audioOutputDevices:
+        {
+            auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+            auto outputDevices = mediaModel->getAudioOutputDevices();
+            auto currentDevice = mediaModel->getOutputDevice();
+            [mediaSelectorVC setMediaDevices: outputDevices andDefaultDevice: currentDevice];
+            mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+                mediaModel->setOutputDevice(QString::fromNSString(device));
+                [brokerPopoverVC performClose:self];
+                brokerPopoverVC = NULL;
+            };
+            return mediaSelectorVC;
+        }
+        case videoDevices:
+        {
+            auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+            auto videoDevices = [self getDeviceList];
+            auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
+            auto settings = mediaModel->getDeviceSettings(device);
+            auto currentDevice = settings.name;
+            [mediaSelectorVC setMediaDevices: videoDevices andDefaultDevice: currentDevice];
+            mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+                mediaModel->switchInputTo(QString::fromNSString(device), [self getcallID]);
+                [brokerPopoverVC performClose:self];
+                brokerPopoverVC = NULL;
+            };
+            return mediaSelectorVC;
+        }
+        case share:
+        {
+            auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+            auto shareScreen = QString::fromNSString(NSLocalizedString(@"Share screen", @"Contextual menu entry"));
+            auto shareFile = QString::fromNSString(NSLocalizedString(@"Choose file", @"Contextual menu entry"));
+            QVector<QString> devices;
+            devices.append(shareScreen);
+            devices.append(shareFile);
+            [mediaSelectorVC setMediaDevices: devices andDefaultDevice: ""];
+            mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+                [brokerPopoverVC performClose:self];
+                brokerPopoverVC = NULL;
+                if (QString::fromNSString(device) == shareScreen) {
+                    [self screenShare];
+                    return;
+                }
+                [self streamFile];
+            };
+            return mediaSelectorVC;
+        }
+        case changeAudioInputVolume:
+        {
+            auto* audioVolumeVC = [[ChangeAudioVolumeVC alloc] initWithNibName:@"ChangeAudioVolumeVC" bundle:nil];
+            auto device = mediaModel->getOutputDevice();
+            [audioVolumeVC setMediaDevice:device avModel: mediaModel andType: output];
+            audioVolumeVC.onMuted = ^{
+            };
+            return audioVolumeVC;
+        }
+        case changeAudioOutputVolume:
+        {
+            auto* audioVolumeVC = [[ChangeAudioVolumeVC alloc] initWithNibName:@"ChangeAudioVolumeVC" bundle:nil];
+            auto device = mediaModel->getInputDevice();
+            [audioVolumeVC setMediaDevice:device avModel: mediaModel andType: input];
+            audioVolumeVC.onMuted = ^{};
+        }
+        case addParticipant:
+        {
+            auto* contactSelectorVC = [[ChooseContactVC alloc] initWithNibName:@"ChooseContactVC" bundle:nil];
+            auto* convModel = accountInfo_->conversationModel.get();
+            [contactSelectorVC setUpForConference:convModel andCurrentConversation:convUid_];
+            contactSelectorVC.delegate = self;
+            return contactSelectorVC;
+        }
+    }
+}
+
+-(void)presentPopoverVCOfType:(PopoverType)type sender:(id)sender  {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        brokerPopoverVC = [[NSPopover alloc] init];
+        NSViewController* contenctcontroller = [self getControllerForType: type];
+        [brokerPopoverVC setContentSize: contenctcontroller.view.frame.size];
+        [brokerPopoverVC setContentViewController: contenctcontroller];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
+}
+
+- (IBAction)toggleShare:(id)sender {
+    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
+    if (type == lrc::api::video::DeviceType::DISPLAY || type == lrc::api::video::DeviceType::FILE) {
+        [self switchToDevice:0];
+        if (brokerPopoverVC != nullptr) {
+            [brokerPopoverVC performClose:self];
+            brokerPopoverVC = NULL;
+        }
+        return;
+    }
+    [self presentPopoverVCOfType: share sender: sender];
 }
 
 #pragma mark - NSSplitViewDelegate
@@ -1162,6 +1338,28 @@ CVPixelBufferRef pixelBufferPreview;
     QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
     mediaModel->setDisplay(0, screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height, [self getcallID]);
 }
+
+-(void)streamFile {
+    NSOpenPanel *browsePanel = [[NSOpenPanel alloc] init];
+    [browsePanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+    [browsePanel setCanChooseFiles:YES];
+    [browsePanel setCanChooseDirectories:NO];
+    [browsePanel setCanCreateDirectories:NO];
+    
+    NSMutableArray* fileTypes = [[NSMutableArray alloc] initWithArray:[NSImage imageTypes]];
+    [fileTypes addObject:(__bridge NSString *)kUTTypeVideo];
+    [fileTypes addObject:(__bridge NSString *)kUTTypeMovie];
+    [fileTypes addObject:(__bridge NSString *)kUTTypeImage];
+    [browsePanel setAllowedFileTypes:fileTypes];
+    [browsePanel beginSheetModalForWindow:[self.view window] completionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
+            auto name = QString::fromNSString([@"file:///" stringByAppendingString: theDoc.path]);
+            [self switchToFile: name];
+        }
+    }];
+}
+
 -(void) switchToDevice:(int)deviceID {
     auto devices = mediaModel->getDevices();
     auto device = devices[deviceID];
@@ -1177,22 +1375,6 @@ CVPixelBufferRef pixelBufferPreview;
         } catch (...) {}
     }
     return devicesVector;
-}
-
--(NSString*) getDefaultDeviceName {
-    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
-    switch (type) {
-        case lrc::api::video::DeviceType::CAMERA:
-            try {
-                auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
-                auto settings = mediaModel->getDeviceSettings(device);
-                return settings.name.toNSString();
-            } catch (...) {}
-        case lrc::api::video::DeviceType::DISPLAY:
-            return NSLocalizedString(@"Share screen", @"Contextual menu entry");
-        default:
-            return @"";
-    }
 }
 
 -(void) switchToFile:(QString)uri {
@@ -1362,6 +1544,10 @@ CVPixelBufferRef pixelBufferPreview;
         return false;
     auto* callModel = accountInfo_->callModel.get();
     return callModel->isModerator([self getcallID]);
+}
+
+-(BOOL)isAllModerators {
+    return allModeratorsInConference;
 }
 
 -(BOOL)isParticipantHost:(NSString*)uri {

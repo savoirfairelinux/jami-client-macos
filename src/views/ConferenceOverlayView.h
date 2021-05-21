@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(int)getCurrentLayout;
 -(BOOL)isMasterCall;
 -(BOOL)isCallModerator;
+-(BOOL)isAllModerators;
 -(BOOL)isParticipantHost:(NSString*)uri;
 @end
 

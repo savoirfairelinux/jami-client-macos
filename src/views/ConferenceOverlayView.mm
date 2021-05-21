@@ -165,6 +165,7 @@ CGFloat minWidth = 140;
 - (void)viewSizeChanged {
     [self sizeChanged];
     [self updateInfoSize];
+    [self updateTrackingAreas];
 }
 
 - (void)addViews {
@@ -404,12 +405,13 @@ CGFloat minWidth = 140;
     self.usernameLabel.stringValue = self.participant.bestName;
     [self updateButtonsState];
     [self updateInfoSize];
+    [self updateTrackingAreas];
 }
 
 -(void) updateButtonsState {
     bool audioMuted = self.participant.audioModeratorMuted || self.participant.audioLocalMuted;
     self.audioState.hidden = !audioMuted;
-    self.moderatorState.hidden = !self.participant.isModerator || [self.delegate isParticipantHost: self.participant.uri];
+    self.moderatorState.hidden = !self.participant.isModerator || [self.delegate isParticipantHost: self.participant.uri] || [self.delegate isAllModerators];
     self.hostState.hidden = ![self.delegate isParticipantHost: self.participant.uri];
     auto radius = self.audioState.hidden ? cornerRadius : 0;
     if (!self.moderatorState.hidden) {
@@ -502,7 +504,8 @@ CGFloat minWidth = 140;
 
 - (void)ensureTrackingArea {
     if (trackingArea == nil) {
-        trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
+        auto rect = self.fullViewOverlay ? self.increasedBackgroundView.frame : NSZeroRect;
+        trackingArea = [[NSTrackingArea alloc] initWithRect:rect
                                                     options:NSTrackingInVisibleRect
                         | NSTrackingActiveAlways
                         | NSTrackingMouseEnteredAndExited | NSTrackingMouseMoved owner:self userInfo:nil];
