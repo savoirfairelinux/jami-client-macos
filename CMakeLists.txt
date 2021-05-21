@@ -61,8 +61,6 @@ set(SHADERS_FILE "Shader.metallib")
 add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
                     COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
                     COMMENT "Creating Shader.metallib")
-add_custom_target(shader ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib)
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -184,6 +182,10 @@ SET(ringclient_CONTROLLERS
    src/ConnectToAccManagerVC.h
    src/AccountBackupVC.mm
    src/AccountBackupVC.h
+   src/ChooseMediaVC.mm
+   src/ChooseMediaVC.h
+   src/ChangeAudioVolumeVC.mm
+   src/ChangeAudioVolumeVC.h
 )
 
 SET(ringclient_VIEWS
@@ -303,6 +305,8 @@ SET(ringclient_XIBS
    ConnectToAccManagerVC
    AccountBackupVC
    FileToSendCollectionItem
+   ChooseMediaVC
+   ChangeAudioVolumeVC
 )
 
 # Icons
@@ -371,7 +375,8 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_maximize.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_minimize.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_hangup.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_star.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_file.png)
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_file.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/done.png)
 
 SET_SOURCE_FILES_PROPERTIES(${ring_ICONS} PROPERTIES
        MACOSX_PACKAGE_LOCATION Resources)

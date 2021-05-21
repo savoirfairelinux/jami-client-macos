@@ -52,6 +52,8 @@ extern "C" {
 #import "views/GradientView.h"
 #import "views/MovableView.h"
 #import "views/RenderingView.h"
+#import "ChooseMediaVC.h"
+#import "ChangeAudioVolumeVC.h"
 
 @interface CurrentCallVC () <NSPopoverDelegate> {
     QString convUid_;
@@ -1035,17 +1037,19 @@ CVPixelBufferRef pixelBufferPreview;
 
 - (IBAction)muteAudio:(id)sender
 {
-    if (accountInfo_ == nil)
-        return;
-
-    auto* callModel = accountInfo_->callModel.get();
-    auto currentCall = callModel->getCall(callUid_);
-    if (currentCall.audioMuted) {
-        muteAudioButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
-    } else {
-       muteAudioButton.image = [NSImage imageNamed:@"ic_action_mute_audio.png"];
-    }
-    callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::AUDIO);
+    [self toggleAudioVolume: sender];
+   // [self toggleChangeAudioInput:sender];
+//    if (accountInfo_ == nil)
+//        return;
+//
+//    auto* callModel = accountInfo_->callModel.get();
+//    auto currentCall = callModel->getCall(callUid_);
+//    if (currentCall.audioMuted) {
+//        muteAudioButton.image = [NSImage imageNamed:@"ic_action_audio.png"];
+//    } else {
+//       muteAudioButton.image = [NSImage imageNamed:@"ic_action_mute_audio.png"];
+//    }
+//    callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::AUDIO);
 }
 
 - (IBAction)muteVideo:(id)sender
@@ -1080,6 +1084,173 @@ CVPixelBufferRef pixelBufferPreview;
         brokerPopoverVC = [[NSPopover alloc] init];
         [brokerPopoverVC setContentSize:contactSelectorVC.view.frame.size];
         [brokerPopoverVC setContentViewController:contactSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
+}
+
+- (IBAction)toggleChangeAudioInput:(id)sender {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+//        auto* convModel = accountInfo_->conversationModel.get();
+//        [contactSelectorVC setUpForConference:convModel andCurrentConversation:convUid_];
+//        contactSelectorVC.delegate = self;
+        auto inputDevices = mediaModel->getAudioInputDevices();
+        auto currentDevice = mediaModel->getInputDevice();
+        [mediaSelectorVC setMediaDevices: inputDevices andDefaultDevice: currentDevice];
+        mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+            mediaModel->setInputDevice(QString::fromNSString(device));
+            [brokerPopoverVC performClose:self];
+            brokerPopoverVC = NULL;
+        };
+        
+        //[mediaSelectorVC setD
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentSize: mediaSelectorVC.view.frame.size];
+        [brokerPopoverVC setContentViewController: mediaSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
+}
+
+- (IBAction)toggleChangeAudioOutput:(id)sender {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+//        auto* convModel = accountInfo_->conversationModel.get();
+//        [contactSelectorVC setUpForConference:convModel andCurrentConversation:convUid_];
+//        contactSelectorVC.delegate = self;
+        auto outputDevices = mediaModel->getAudioOutputDevices();
+        auto currentDevice = mediaModel->getOutputDevice();
+        [mediaSelectorVC setMediaDevices: outputDevices andDefaultDevice: currentDevice];
+        mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+            mediaModel->setOutputDevice(QString::fromNSString(device));
+            [brokerPopoverVC performClose:self];
+            brokerPopoverVC = NULL;
+        };
+        
+        //[mediaSelectorVC setD
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentSize: mediaSelectorVC.view.frame.size];
+        [brokerPopoverVC setContentViewController: mediaSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
+}
+
+- (IBAction)toggleChangeCamera:(id)sender {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+//        auto* convModel = accountInfo_->conversationModel.get();
+//        [contactSelectorVC setUpForConference:convModel andCurrentConversation:convUid_];
+//        contactSelectorVC.delegate = self;
+        auto videoDevices = [self getDeviceList];
+       // auto videoDevices = mediaModel->getDevices();
+                        auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
+                        auto settings = mediaModel->getDeviceSettings(device);
+                        auto currentDevice = settings.name;
+        //auto currentDevice = mediaModel->getCurrentVideoCaptureDevice();
+        [mediaSelectorVC setMediaDevices: videoDevices andDefaultDevice: currentDevice];
+        mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+            mediaModel->switchInputTo(QString::fromNSString(device), [self getcallID]);
+            
+            //mediaModel->setCurrentVideoCaptureDevice(<#const QString &currentVideoCaptureDevice#>)
+            //mediaModel->setOutputDevice(QString::fromNSString(device));
+            [brokerPopoverVC performClose:self];
+            brokerPopoverVC = NULL;
+        };
+        
+        //[mediaSelectorVC setD
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentSize: mediaSelectorVC.view.frame.size];
+        [brokerPopoverVC setContentViewController: mediaSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
+}
+
+- (IBAction)toggleShare:(id)sender {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
+        auto shareScreen = QString::fromNSString(NSLocalizedString(@"Share screen", @"Contextual menu entry"));
+        auto shareFile = QString::fromNSString(NSLocalizedString(@"Choose file", @"Contextual menu entry"));
+        QString defaultDevice = "";
+        auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
+        if (type == lrc::api::video::DeviceType::DISPLAY) {
+            defaultDevice = shareScreen;
+        } else if (type == lrc::api::video::DeviceType::FILE) {
+            defaultDevice = shareFile;
+        }
+        QVector<QString> devices;
+        devices.append(shareScreen);
+        devices.append(shareFile);
+        [mediaSelectorVC setMediaDevices: devices andDefaultDevice: defaultDevice];
+        mediaSelectorVC.onDeviceSelected = ^(NSString * _Nonnull device) {
+            [brokerPopoverVC performClose:self];
+            brokerPopoverVC = NULL;
+            if (QString::fromNSString(device) == shareScreen) {
+                [self screenShare];
+            }
+            NSOpenPanel *browsePanel = [[NSOpenPanel alloc] init];
+            [browsePanel setDirectoryURL:[NSURL URLWithString:NSHomeDirectory()]];
+            [browsePanel setCanChooseFiles:YES];
+            [browsePanel setCanChooseDirectories:NO];
+            [browsePanel setCanCreateDirectories:NO];
+
+            NSMutableArray* fileTypes = [[NSMutableArray alloc] initWithArray:[NSImage imageTypes]];
+            [fileTypes addObject:(__bridge NSString *)kUTTypeVideo];
+            [fileTypes addObject:(__bridge NSString *)kUTTypeMovie];
+            [fileTypes addObject:(__bridge NSString *)kUTTypeImage];
+            [browsePanel setAllowedFileTypes:fileTypes];
+            [browsePanel beginSheetModalForWindow:[self.view window] completionHandler:^(NSInteger result) {
+                if (result == NSFileHandlingPanelOKButton) {
+                    NSURL*  theDoc = [[browsePanel URLs] objectAtIndex:0];
+                    auto name = QString::fromNSString([@"file:///" stringByAppendingString: theDoc.path]);
+                    [self switchToFile: name];
+                }
+            }];
+        };
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentSize: mediaSelectorVC.view.frame.size];
+        [brokerPopoverVC setContentViewController: mediaSelectorVC];
+        [brokerPopoverVC setAnimates:YES];
+        [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
+        [brokerPopoverVC setDelegate:self];
+        [brokerPopoverVC showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinYEdge];
+    }
+}
+
+- (IBAction)toggleAudioVolume:(id)sender {
+    if (brokerPopoverVC != nullptr) {
+        [brokerPopoverVC performClose:self];
+        brokerPopoverVC = NULL;
+    } else {
+        auto* audioVolumeVC = [[ChangeAudioVolumeVC alloc] initWithNibName:@"ChangeAudioVolumeVC" bundle:nil];
+//        auto* convModel = accountInfo_->conversationModel.get();
+//        [contactSelectorVC setUpForConference:convModel andCurrentConversation:convUid_];
+//        contactSelectorVC.delegate = self;
+        brokerPopoverVC = [[NSPopover alloc] init];
+        [brokerPopoverVC setContentSize:audioVolumeVC.view.frame.size];
+        [brokerPopoverVC setContentViewController:audioVolumeVC];
         [brokerPopoverVC setAnimates:YES];
         [brokerPopoverVC setBehavior:NSPopoverBehaviorTransient];
         [brokerPopoverVC setDelegate:self];
@@ -1178,22 +1349,22 @@ CVPixelBufferRef pixelBufferPreview;
     }
     return devicesVector;
 }
-
--(NSString*) getDefaultDeviceName {
-    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
-    switch (type) {
-        case lrc::api::video::DeviceType::CAMERA:
-            try {
-                auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
-                auto settings = mediaModel->getDeviceSettings(device);
-                return settings.name.toNSString();
-            } catch (...) {}
-        case lrc::api::video::DeviceType::DISPLAY:
-            return NSLocalizedString(@"Share screen", @"Contextual menu entry");
-        default:
-            return @"";
-    }
-}
+//
+//-(NSString*) getDefaultDeviceName {
+//    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
+//    switch (type) {
+//        case lrc::api::video::DeviceType::CAMERA:
+//            try {
+//                auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
+//                auto settings = mediaModel->getDeviceSettings(device);
+//                return settings.name.toNSString();
+//            } catch (...) {}
+//        case lrc::api::video::DeviceType::DISPLAY:
+//            return NSLocalizedString(@"Share screen", @"Contextual menu entry");
+//        default:
+//            return @"";
+//    }
+//}
 
 -(void) switchToFile:(QString)uri {
     mediaModel->setInputFile(uri, [self getcallID]);

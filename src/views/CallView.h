@@ -26,11 +26,11 @@
 
 -(void) callShouldToggleFullScreen;
 -(void) mouseIsMoving:(BOOL) move;
--(void) screenShare;
--(void) switchToDevice:(int)deviceID;
--(void) switchToFile:(QString)uri;
--(QVector<QString>) getDeviceList;
--(NSString *) getDefaultDeviceName;
+//-(void) screenShare;
+//-(void) switchToDevice:(int)deviceID;
+//-(void) switchToFile:(QString)uri;
+//-(QVector<QString>) getDeviceList;
+//-(NSString *) getDefaultDeviceName;
 
 @end
 
