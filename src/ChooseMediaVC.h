@@ -1,6 +1,6 @@
 /*
- *  Copyright (C) 2015-2016 Savoir-faire Linux Inc.
- *  Author: Alexandre Lision <alexandre.lision@savoirfairelinux.com>
+ *  Copyright (C) 2021 Savoir-faire Linux Inc.
+ *  Author: Kateryna Kostiuk <kateryna.kostiuk@savoirfairelinux.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,35 +16,17 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.
  */
+
 #import <Cocoa/Cocoa.h>
 #import <qstring.h>
+#import <qvector.h>
 
-@protocol CallDelegate;
-@protocol CallDelegate
+NS_ASSUME_NONNULL_BEGIN
 
-@optional
+@interface ChooseMediaVC: NSViewController<NSTableViewDelegate, NSTableViewDataSource>
+@property (copy) void (^onDeviceSelected)(NSString* device, NSInteger index);
 
--(void) callShouldToggleFullScreen;
--(void) mouseIsMoving:(BOOL) move;
-
+-(void)setMediaDevices:(const QVector<QString>&)devices andDefaultDevice:(const QString&)device;
 @end
 
-@interface CallView : NSView <NSDraggingDestination, NSOpenSavePanelDelegate>
-{
-    //highlight the drop zone
-    BOOL highlight;
-}
-
-- (id)initWithCoder:(NSCoder *)coder;
-
-/**
- * Sets weither this view allow first click interactions
- */
-@property BOOL shouldAcceptInteractions;
-
-/**
- *  Delegate to inform about desire to move
- */
-@property (nonatomic) id <CallDelegate> callDelegate;
-
-@end
+NS_ASSUME_NONNULL_END

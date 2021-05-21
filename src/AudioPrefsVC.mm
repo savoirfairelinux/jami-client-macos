@@ -74,7 +74,7 @@ QMetaObject::Connection audioDeviceEvent;
 -(void)connectdDeviceEvent {
     QObject::disconnect(audioDeviceEvent);
     audioDeviceEvent = QObject::connect(avModel,
-                                   &lrc::api::AVModel::deviceEvent,
+                                   &lrc::api::AVModel::audioDeviceEvent,
                                    [=]() {
                                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
                                                                     1 * NSEC_PER_SEC),
