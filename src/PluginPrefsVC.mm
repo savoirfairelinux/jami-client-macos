@@ -43,6 +43,8 @@ PluginItemDelegateVC *viewController;
     if (self =  [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
         self.pluginModel = pluginModel;
+        printf("***PluginPrefsVC init");
+        fflush(stdout);
     }
     return self;
 }
@@ -59,6 +61,11 @@ PluginItemDelegateVC *viewController;
 }
 
 - (void)update {
+    printf("***PluginPrefsVC update");
+    fflush(stdout);
+    auto enabled = self.pluginModel->getPluginsEnabled() ? "true" : "false";
+    printf("***PluginPrefsVC update, enabled = %s", enabled);
+    fflush(stdout);
     [self.enablePluginsButton setState: self.pluginModel->getPluginsEnabled()];
     [self.installedPluginsView reloadData];
 }
@@ -71,9 +78,14 @@ PluginItemDelegateVC *viewController;
 #pragma mark - actions
 
 - (IBAction)toggleEnablePluginsButton:(NSButton *)sender {
+    printf("***PluginPrefsVC toggleEnablePluginsButton");
+    fflush(stdout);
     bool enabled = [sender state] == NSOnState;
     self.pluginModel->setPluginsEnabled(enabled);
-    self.pluginModel->chatHandlerStatusUpdated(false);
+    auto enabledString = enabled ? "true" : "false";
+    printf("***PluginPrefsVC toggleEnablePluginsButton, state = %s", enabled);
+    fflush(stdout);
+   // self.pluginModel->chatHandlerStatusUpdated(false);
     if (!enabled)
         [hidableView setHidden:YES];
     else
@@ -83,6 +95,8 @@ PluginItemDelegateVC *viewController;
 
 
 - (IBAction)installPlugin:(id)sender {
+    printf("***PluginPrefsVC installPlugin");
+    fflush(stdout);
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setAllowsMultipleSelection:NO];
     [panel setCanChooseDirectories:NO];
@@ -94,7 +108,10 @@ PluginItemDelegateVC *viewController;
     if ([[panel URLs] lastObject] == nil) return;
     NSString * path = [[[panel URLs] lastObject] path];
     bool status = self.pluginModel->installPlugin(QString::fromNSString(path), true);
-    self.pluginModel->chatHandlerStatusUpdated(false);
+    auto statusString = status ? "true" : "false";
+    printf("***PluginPrefsVC installPlugin, status = %s", statusString);
+    fflush(stdout);
+   // self.pluginModel->chatHandlerStatusUpdated(false);
     [self update];
 }
 
@@ -102,6 +119,8 @@ PluginItemDelegateVC *viewController;
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
+    printf("***PluginPrefsVC viewForTableColumn");
+    fflush(stdout);
     PluginCell* installedPluginCell = [tableView makeViewWithIdentifier:@"PluginCellItem" owner:self];
 
     auto installedPlugins = self.pluginModel->getInstalledPlugins();

@@ -49,8 +49,11 @@
 NSInteger PREFERENCE_NAME_TAG = 100;
 NSInteger PREFERENCE_VALUE_TAG = 200;
 
--(void) setup:(const QString&)pluginName row:(NSInteger)row callbacks:(PluginItemDelegateCallBacks) callbacks{
+-(void) setup:(const QString&)pluginName row:(NSInteger)row
+    callbacks:(PluginItemDelegateCallBacks) callbacks{
     self.currentPluginName = pluginName;
+    printf("***PluginItemDelegateVC setup plugin %s", pluginName.toStdString().c_str());
+    fflush(stdout);
     self.outerrow = row;
     self.callbacks = callbacks;
 
