@@ -224,13 +224,13 @@
 "Hangup" = "Riattacare";
 
 /* Conference action */
-"Mute audio" = "Dissativare il micro";
+"Mute audio" = "Dissativa microfono";
 
 /* Conference action */
-"Set moderator" = "Set moderator";
+"Set moderator" = "Metti un moderatore";
 
 /* Conference action */
-"Unmute audio" = "Unmute audio";
+"Unmute audio" = "Attiva microfono";
 
 /* Conference action */
 "Unset moderator" = "Rimuovi moderatore";
@@ -254,19 +254,19 @@
 "Expand" = "Expand";
 
 /* conference tooltip mute Mute audio */
-"Mute audio" = "Dissativare il micro";
+"Mute audio" = "Dissativa microfono";
 
 /* conference tooltip mute Hangup */
 "Hangup" = "Riattacare";
 
 /* conference tooltip mute Set moderator */
-"Set moderator" = "Set moderator";
+"Set moderator" = "Metti un moderatore";
 
 /* conference state tooltip Audio muted */
 "Audio muted" = "Audio muted";
 
 /* conference state tooltip organiser */
-"Conference Organiser" = "Conference Organiser";
+"Conference Organiser" = "Organizzatore della conferenza";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";

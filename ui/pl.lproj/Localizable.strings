@@ -23,7 +23,7 @@
 "appears to be busy." = "wydaje się być zajęty.";
 
 /* Error audio permission */
-"Audio permission not granted" = "Audio permission not granted";
+"Audio permission not granted" = "Uprawnienia dźwięku nieprzyznane";
 
 /* Backup account */
 "Backup your account" = "Utwórz kopię zapasową swojego konta";
@@ -164,7 +164,7 @@
 "The password you entered does not unlock this account" = "Hasło, które zostało wpisane, nie odblokowuje tego konta";
 
 /* Text shown to the user */
-"This account needs to be migrated" = "This account needs to be migrated";
+"This account needs to be migrated" = "To konto musi zostać przeniesione";
 
 /* Explanation label when user have just ID */
 "This is your ID. \nCopy and share it with your friends!" = "To jest twoje ID.\nSkopiuj i podziel się ze swoimi znajomymi!";
@@ -176,7 +176,7 @@
 "To complete the processs, you need to open Jami on the new device and choose the option \"Link this device to an account\". Your pin is valid for 10 minutes." = "Aby dokończyć proces, musisz otworzyć Jami na nowym urządzeniu i wybrać opcję \"Połącz to urządzenie z kontem\". Twój PIN jest aktywny przez 10 minut.";
 
 /* Text shown to the user */
-"To proceed with the migration, you need to enter a password that was used for this account." = "Aby kontynuować migrację, musisz wprowadzić hasło, które zostało użytego do tego konta.";
+"To proceed with the migration, you need to enter a password that was used for this account." = "Aby kontynuować przenoszenie, musisz wprowadzić hasło, które zostało użytego do tego konta.";
 
 /* File transfer peer unjoinable label */
 "Unjoinable" = "Nieosiągalny";
@@ -266,7 +266,7 @@
 "Audio muted" = "Dźwięk wyciszony";
 
 /* conference state tooltip organiser */
-"Conference Organiser" = "Conference Organiser";
+"Conference Organiser" = "Organizator Konferencji";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";

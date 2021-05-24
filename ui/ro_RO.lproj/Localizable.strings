@@ -107,7 +107,7 @@
 "Passwords don't match" = "Parolele nu se potrivesc";
 
 /* Contextual menu action */
-"Place audio call" = "Fă apel audio";
+"Place audio call" = "Fă apel vocal";
 
 /* Contextual menu action */
 "Place video call" = "Fă apel video";
@@ -230,7 +230,7 @@
 "Set moderator" = "Pune un moderator";
 
 /* Conference action */
-"Unmute audio" = "sonor activat";
+"Unmute audio" = "Activează";
 
 /* Conference action */
 "Unset moderator" = "Elimină moderatorul";
@@ -248,7 +248,7 @@
 "Search for new or existing contact" = "Caută un contact nou sau existent";
 
 /* conference tooltip Minimize */
-"Minimize" = "Micșorează";
+"Minimize" = "Minimizează";
 
 /* conference tooltip Expand */
 "Expand" = "Mărește";
@@ -266,7 +266,7 @@
 "Audio muted" = "Mut";
 
 /* conference state tooltip organiser */
-"Conference Organiser" = "Conference Organiser";
+"Conference Organiser" = "Organizatorul conferinței";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
