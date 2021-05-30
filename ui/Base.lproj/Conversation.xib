@@ -812,7 +812,7 @@
                                 <constraint firstAttribute="width" constant="32" id="Cxh-SD-Ozq"/>
                                 <constraint firstAttribute="height" constant="32" id="UUq-am-hL7"/>
                             </constraints>
-                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="add_participant" imagePosition="only" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1oc-i4-1bh">
+                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_person_add" imagePosition="only" alignment="center" allowsMixedState="YES" transparent="YES" imageScaling="proportionallyDown" inset="2" id="1oc-i4-1bh">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -999,7 +999,6 @@
         </viewController>
     </objects>
     <resources>
-        <image name="add_participant" width="70" height="70"/>
         <image name="camera_on" width="70" height="70"/>
         <image name="ic_action_call" width="72" height="72"/>
         <image name="ic_action_cancel" width="70" height="70"/>
@@ -1008,6 +1007,7 @@
         <image name="ic_audio_msg" width="72" height="72"/>
         <image name="ic_camera" width="72" height="72"/>
         <image name="ic_file_upload" width="72" height="72"/>
+        <image name="ic_person_add" width="128" height="128"/>
         <image name="plugin" width="80" height="80"/>
     </resources>
 </document>

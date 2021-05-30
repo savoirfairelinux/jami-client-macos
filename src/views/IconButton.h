@@ -153,4 +153,6 @@
 
 -(void) onAppearanceChanged;
 
+-(void) setParameters;
+
 @end

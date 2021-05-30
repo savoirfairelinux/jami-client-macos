@@ -33,6 +33,7 @@
 }
 
 -(void)updateParameters {
+    [super setParameters];
     if(!self.imageHoverLightColor) {
         self.imageHoverLightColor = self.imageHoverColor ? self.imageHoverColor :  self.imageLightColor;
     }
@@ -66,8 +67,8 @@
 
 -(void)mouseEntered:(NSEvent *)theEvent {
     if (self.animating) {
-        [self stopBlinkAnimation];
-        self.animating = true;
+        [super mouseEntered:theEvent];
+        return;
     }
     if(self.isEnabled) {
         self.bgColor = self.hoverColor;
@@ -88,7 +89,8 @@
 -(void)mouseExited:(NSEvent *)theEvent {
     self.bgColor = self.mouseOutsideColor;
     if (self.animating) {
-        [self startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1.0 duration: 1.5];
+        [super mouseExited:theEvent];
+        return;
     }
     if(self.imagePressedColor && self.pressed) {
         self.imageColor = self.imagePressedColor;
