@@ -61,6 +61,7 @@ set(SHADERS_FILE "Shader.metallib")
 add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
                     COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
                     COMMENT "Creating Shader.metallib")
+
 add_custom_target(shader ALL
     DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib)
 
@@ -356,8 +357,9 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_quality.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_transfer.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_merge_calls.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_send.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_person_add.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/audio.png
-${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin_fill.png	
+${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin_fill.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_reset.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/general.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_camera.png

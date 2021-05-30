@@ -27,6 +27,8 @@
 
 @interface ChoosePluginHandlerVC () {
     __unsafe_unretained IBOutlet RingTableView* pluginHandlersView;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* tableHeightConstraint;
+    __unsafe_unretained IBOutlet NSLayoutConstraint* tableWidthConstraint;
 }
 
 @end
@@ -46,10 +48,12 @@ QVector<QString> activeHandlers;
 NSInteger const ICON_TAG           = 100;
 NSInteger const HANDLER_NAME_TAG   = 200;
 NSInteger const HANDLER_STATUS_TAG = 300;
+CGFloat PLUGIN_ROW_HEIGHT = 35;
 
 - (void) reloadView
 {
     [pluginHandlersView reloadData];
+    [self updateConstrains];
 }
 
 -(void)viewDidLoad {
@@ -58,6 +62,31 @@ NSInteger const HANDLER_STATUS_TAG = 300;
         pluginHandlersView.style = NSTableViewStylePlain;
     }
     [self reloadView];
+}
+
+-(void)updateConstrains {
+    CGFloat tableHeight = PLUGIN_ROW_HEIGHT * availableHandlers.size();
+    CGFloat tableWidth = [self getTableWidth] + 120;
+    tableHeightConstraint.constant = tableHeight;
+    tableWidthConstraint.constant = tableWidth;
+}
+
+-(CGFloat)getTableWidth {
+    NSTextField* textField = [[NSTextField alloc] init];
+    CGFloat maxWidth = 0;
+    NSFont *fontName = [NSFont systemFontOfSize: 13.0 weight: NSFontWeightMedium];
+    for (auto plugin : availableHandlers) {
+        NSDictionary *attrs= [NSDictionary dictionaryWithObjectsAndKeys:
+                                   fontName, NSFontAttributeName,
+                                   nil];
+        NSAttributedString* attributed = [[NSAttributedString alloc] initWithString:plugin.toNSString() attributes: attrs];
+        textField.attributedStringValue = attributed;
+        [textField sizeToFit];
+        if (textField.frame.size.width > maxWidth) {
+            maxWidth = textField.frame.size.width;
+        }
+    }
+    return maxWidth;
 }
 
 -(void)setupForCall:(const QString&)callID {
@@ -161,6 +190,11 @@ NSInteger const HANDLER_STATUS_TAG = 300;
         [iconView setImage: image];
     [pluginHandlerName setStringValue: handlerDetails.name.toNSString()];
     return handlerCell;
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
+{
+    return PLUGIN_ROW_HEIGHT;
 }
 
 #pragma mark - NSTableDataSource methods
