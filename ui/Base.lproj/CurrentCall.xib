@@ -74,7 +74,7 @@
                                     <color key="fillColor" red="0.120510533452034" green="0.12050692737102509" blue="0.12050899863243103" alpha="1" colorSpace="calibratedRGB"/>
                                 </box>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-LA-yn0">
-                                    <rect key="frame" x="302" y="4246" width="142" height="305"/>
+                                    <rect key="frame" x="302" y="4294" width="142" height="305"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="s4L-Ke-9Jm">
                                             <rect key="frame" x="7" y="177" width="128" height="128"/>
@@ -235,7 +235,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="746" height="788"/>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="8747" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="8843" width="746" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="Xeq-Aa-f1W"/>
                                         <constraint firstAttribute="height" constant="50" id="w34-Yi-hGT"/>
@@ -312,7 +312,7 @@
                                     </subviews>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="DfH-di-xs7" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="8747" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="8843" width="746" height="50"/>
                                     <subviews>
                                         <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSN-JN-uaD">
                                             <rect key="frame" x="297" y="17" width="152" height="16"/>
@@ -652,7 +652,7 @@
                                                         <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
                                                     </connections>
                                                 </button>
-                                                <button toolTip="Chose camera" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vcv-ia-VEy" userLabel="video menu" customClass="HoverButton">
+                                                <button toolTip="Select camera" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vcv-ia-VEy" userLabel="video menu" customClass="HoverButton">
                                                     <rect key="frame" x="15" y="34" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Led-gW-IX8"/>
@@ -843,7 +843,7 @@
                                                 <action selector="toggleRecording:" target="-2" id="zVh-ci-nzl"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Plugin settings" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YtG-ob-etP" userLabel="Plugin" customClass="HoverButton">
+                                        <button toolTip="Enable plugins" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YtG-ob-etP" userLabel="Plugin" customClass="HoverButton">
                                             <rect key="frame" x="384" y="0.0" width="44" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="6mg-84-7TU"/>
@@ -944,13 +944,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
-                                    <rect key="frame" x="20" y="145" width="331" height="8650"/>
+                                    <rect key="frame" x="20" y="145" width="331" height="8746"/>
                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H2i-4W-Gvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="8650"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="8746"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="ZOj-5b-rnp">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="8650"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="8746"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -1262,7 +1262,7 @@
                                     </scroller>
                                 </scrollView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="mFB-6z-yC0" customClass="DraggingDestinationView">
-                                    <rect key="frame" x="0.0" y="0.0" width="371" height="8797"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="371" height="8893"/>
                                 </customView>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSk-sH-cgy">
                                     <rect key="frame" x="20" y="0.0" width="331" height="145"/>
