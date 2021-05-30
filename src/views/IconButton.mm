@@ -49,7 +49,7 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
         self.imageLightColor = self.imageColor ? self.imageColor : [NSColor ringDarkBlue];
     }
     if (!self.imageDarkColor) {
-        self.imageDarkColor = [NSColor whiteColor];
+        self.imageDarkColor = self.imageColor ? self.imageColor : [NSColor whiteColor];
     }
     self.imageColor = isDarkMode ? self.imageDarkColor : self.imageLightColor;
 

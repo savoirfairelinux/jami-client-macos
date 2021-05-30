@@ -47,6 +47,7 @@ extern "C" {
 #import "delegates/ImageManipulationDelegate.h"
 #import "ChatVC.h"
 #import "views/IconButton.h"
+#import "views/HoverButton.h"
 #import "utils.h"
 #import "views/CallMTKView.h"
 #import "VideoCommon.h"
@@ -102,8 +103,8 @@ typedef enum {
 @property (unsafe_unretained) IBOutlet IconButton* holdOnOffButton;
 @property (unsafe_unretained) IBOutlet IconButton* hangUpButton;
 @property (unsafe_unretained) IBOutlet IconButton* recordOnOffButton;
-@property (unsafe_unretained) IBOutlet IconButton* muteAudioButton;
-@property (unsafe_unretained) IBOutlet IconButton* muteVideoButton;
+@property (unsafe_unretained) IBOutlet HoverButton* muteAudioButton;
+@property (unsafe_unretained) IBOutlet HoverButton* muteVideoButton;
 @property (unsafe_unretained) IBOutlet IconButton* addParticipantButton;
 @property (unsafe_unretained) IBOutlet IconButton* pluginButton;
 @property (unsafe_unretained) IBOutlet IconButton* chatButton;
@@ -336,6 +337,10 @@ CVPixelBufferRef pixelBufferPreview;
 -(void) setUpButtons:(lrc::api::call::Info&)callInfo isRecording:(BOOL) isRecording {
     muteAudioButton.image = callInfo.audioMuted ? [NSImage imageNamed:@"micro_off.png"] :
     [NSImage imageNamed:@"micro_on.png"];
+    NSColor* audioImageColor = callInfo.audioMuted ? [NSColor redColor] : [NSColor whiteColor];
+    [self updateColorForButton: muteAudioButton color: audioImageColor];
+    NSColor* videoImageColor = callInfo.videoMuted ? [NSColor redColor] : [NSColor whiteColor];
+    [self updateColorForButton: muteVideoButton color: videoImageColor];
     muteVideoButton.image = callInfo.videoMuted ? [NSImage imageNamed:@"camera_off.png"] :
     [NSImage imageNamed:@"camera_on.png"];
     [shareButton setHidden: callInfo.isAudioOnly ? YES: NO];
@@ -1116,13 +1121,18 @@ CVPixelBufferRef pixelBufferPreview;
         return;
 
     auto* callModel = accountInfo_->callModel.get();
-    auto currentCall = callModel->getCall(callUid_);
-    if (currentCall.audioMuted) {
-        muteAudioButton.image = [NSImage imageNamed:@"micro_on.png"];
-    } else {
-        muteAudioButton.image = [NSImage imageNamed:@"micro_off.png"];
-    }
+    auto& currentCall = callModel->getCall(callUid_);
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::AUDIO);
+    muteAudioButton.image = currentCall.audioMuted ? [NSImage imageNamed:@"micro_off.png"] : [NSImage imageNamed:@"micro_on.png"];
+    NSColor* audioImageColor = currentCall.audioMuted ? [NSColor redColor] : [NSColor whiteColor];
+    [self updateColorForButton: muteAudioButton color: audioImageColor];
+}
+
+-(void)updateColorForButton:(HoverButton*)buton color:(NSColor*)color {
+    buton.imageColor = color;
+    buton.moiuseOutsideImageColor = color;
+    buton.imageHoverColor= color;
+    [buton setNeedsDisplay: YES];
 }
 
 - (IBAction)muteVideo:(id)sender
@@ -1130,15 +1140,14 @@ CVPixelBufferRef pixelBufferPreview;
     if (accountInfo_ == nil)
         return;
     auto* callModel = accountInfo_->callModel.get();
-    auto currentCall = callModel->getCall(callUid_);
-    if(!currentCall.isAudioOnly) {
-        if (currentCall.videoMuted) {
-            muteVideoButton.image = [NSImage imageNamed:@"camera_on.png"];
-        } else {
-            muteVideoButton.image = [NSImage imageNamed:@"camera_off.png"];
-        }
+    auto& currentCall = callModel->getCall(callUid_);
+    if (currentCall.isAudioOnly) {
+        return;
     }
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::VIDEO);
+    muteVideoButton.image = currentCall.videoMuted ? [NSImage imageNamed:@"camera_off.png"] : [NSImage imageNamed:@"camera_on.png"];
+    NSColor* videoImageColor = currentCall.videoMuted ? [NSColor redColor] : [NSColor whiteColor];
+    [self updateColorForButton: muteVideoButton color: videoImageColor];
 }
 
 - (IBAction)toggleAddParticipantView:(id)sender {

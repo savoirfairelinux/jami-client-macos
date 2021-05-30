@@ -20,12 +20,12 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView misplaced="YES" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="356"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="366"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="vertical" alignment="centerX" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y8b-Oz-KzK">
-                    <rect key="frame" x="0.0" y="10" width="250" height="336"/>
+                    <rect key="frame" x="0.0" y="15" width="250" height="336"/>
                     <subviews>
                         <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jhs-SW-hFj">
                             <rect key="frame" x="10" y="306" width="230" height="30"/>
@@ -350,9 +350,9 @@
                 </stackView>
             </subviews>
             <constraints>
-                <constraint firstItem="y8b-Oz-KzK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="bEl-1Z-3cG"/>
+                <constraint firstItem="y8b-Oz-KzK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="15" id="bEl-1Z-3cG"/>
                 <constraint firstItem="y8b-Oz-KzK" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="cJE-xf-fmv"/>
-                <constraint firstAttribute="bottom" secondItem="y8b-Oz-KzK" secondAttribute="bottom" constant="10" id="fjI-HV-gjR"/>
+                <constraint firstAttribute="bottom" secondItem="y8b-Oz-KzK" secondAttribute="bottom" constant="15" id="fjI-HV-gjR"/>
                 <constraint firstAttribute="trailing" secondItem="y8b-Oz-KzK" secondAttribute="trailing" id="wG3-Ya-T9t"/>
             </constraints>
             <point key="canvasLocation" x="-55" y="136"/>
