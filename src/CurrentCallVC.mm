@@ -545,7 +545,7 @@ CVPixelBufferRef pixelBufferPreview;
     [self setUpButtons: currentCall isRecording: (callModel->isRecording([self getcallID]) || mediaModel->getAlwaysRecord())];
 
     [videoView setShouldAcceptInteractions: currentCall.status == Status::IN_PROGRESS];
-    callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? @"wants to talk to you" : to_string(currentCall.status).toNSString();
+    callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? NSLocalizedString(@"Wants to talk to you", @"In call status info") : to_string(currentCall.status).toNSString();
     loadingIndicator.hidden = (currentCall.status == Status::SEARCHING ||
                                currentCall.status == Status::CONNECTING ||
                                currentCall.status == Status::OUTGOING_RINGING) ? NO : YES;
@@ -729,11 +729,11 @@ CVPixelBufferRef pixelBufferPreview;
     auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
     if (type == lrc::api::video::DeviceType::DISPLAY || type == lrc::api::video::DeviceType::FILE) {
         [self.shareButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1 duration: 1.5];
-        NSString *source = type == lrc::api::video::DeviceType::DISPLAY ? @"Screen share" : @"File streaming";
-        self.shareButton.toolTip = [@"Stop " stringByAppendingString: source];
+        NSString *tooltip = type == lrc::api::video::DeviceType::DISPLAY ? NSLocalizedString(@"Stop screen sharing", @"share button tooltip") : NSLocalizedString(@"Stop file streaming", @"share button tooltip");
+        self.shareButton.toolTip = tooltip;
     } else {
         [self.shareButton stopBlinkAnimation];
-        self.shareButton.toolTip = @"share ";
+        self.shareButton.toolTip = NSLocalizedString(@"Share", @"share button tooltip");;
     }
 }
 
@@ -1257,7 +1257,7 @@ CVPixelBufferRef pixelBufferPreview;
         {
             auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
             auto shareScreen = QString::fromNSString(NSLocalizedString(@"Share screen", @"Contextual menu entry"));
-            auto shareFile = QString::fromNSString(NSLocalizedString(@"Choose file", @"Contextual menu entry"));
+            auto shareFile = QString::fromNSString(NSLocalizedString(@"Stream file", @"Contextual menu entry"));
             QVector<QString> devices;
             devices.append(shareScreen);
             devices.append(shareFile);

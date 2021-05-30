@@ -634,7 +634,7 @@
                                                         <action selector="muteVideo:" target="-2" id="a6W-aB-zWX"/>
                                                     </connections>
                                                 </button>
-                                                <button toolTip="Chose camera" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vcv-ia-VEy" userLabel="video menu" customClass="HoverButton">
+                                                <button toolTip="Select camera" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vcv-ia-VEy" userLabel="video menu" customClass="HoverButton">
                                                     <rect key="frame" x="15" y="34" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Led-gW-IX8"/>
@@ -828,7 +828,7 @@
                                                 <action selector="toggleRecording:" target="-2" id="zVh-ci-nzl"/>
                                             </connections>
                                         </button>
-                                        <button toolTip="Plugin settings" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YtG-ob-etP" userLabel="Plugin" customClass="HoverButton">
+                                        <button toolTip="Enable plugins" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YtG-ob-etP" userLabel="Plugin" customClass="HoverButton">
                                             <rect key="frame" x="384" y="0.0" width="44" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="6mg-84-7TU"/>
