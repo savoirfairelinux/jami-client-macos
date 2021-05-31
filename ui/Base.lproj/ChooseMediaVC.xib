@@ -52,7 +52,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Td7-R6-qF9">
-                                                        <rect key="frame" x="10" y="-1" width="80" height="20"/>
+                                                        <rect key="frame" x="13" y="-1" width="80" height="20"/>
                                                         <subviews>
                                                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" tag="200" translatesAutoresizingMaskIntoConstraints="NO" id="AdH-xw-4sM">
                                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -86,7 +86,7 @@
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="Td7-R6-qF9" firstAttribute="leading" secondItem="OcL-cL-06E" secondAttribute="leading" constant="10" id="AfT-k2-Fio"/>
+                                                    <constraint firstItem="Td7-R6-qF9" firstAttribute="leading" secondItem="OcL-cL-06E" secondAttribute="leading" constant="13" id="AfT-k2-Fio"/>
                                                     <constraint firstItem="Td7-R6-qF9" firstAttribute="centerY" secondItem="OcL-cL-06E" secondAttribute="centerY" id="D7s-Qp-R4b"/>
                                                 </constraints>
                                             </tableCellView>
