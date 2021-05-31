@@ -113,6 +113,7 @@ typedef enum {
 @property (unsafe_unretained) IBOutlet IconButton* inputAudioMenuButton;
 @property (unsafe_unretained) IBOutlet IconButton* outputAudioMenuButton;
 @property (unsafe_unretained) IBOutlet IconButton* videoMenuButton;
+@property (unsafe_unretained) IBOutlet IconButton* mozaicLayoutButton;
 
 // Video
 @property (unsafe_unretained) IBOutlet CallView *videoView;
@@ -155,6 +156,7 @@ NSInteger const PREVIEW_HEIGHT = 130;
 NSInteger const HIDE_PREVIEW_BUTTON_SIZE = 25;
 NSInteger const PREVIEW_MARGIN = 20;
 BOOL allModeratorsInConference = false;
+BOOL displayGridLayoutButton = false;
 
 @synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC, audioOutputButton, inputAudioMenuButton, outputAudioMenuButton, videoMenuButton, pluginButton,muteVideoButtonContainer, shareButton;
 
@@ -426,6 +428,7 @@ CVPixelBufferRef pixelBufferPreview;
     participantsOverlays = [[NSMutableDictionary alloc] init];
     allModeratorsInConference = false;
     movableBaseForView.hidden = false;
+    displayGridLayoutButton = false;
 }
 
 -(void)updateConference
@@ -452,6 +455,7 @@ CVPixelBufferRef pixelBufferPreview;
             allModerators = false;
         }
     }
+    displayGridLayoutButton = call.layout != lrc::api::call::Layout::GRID;
     movableBaseForView.hidden = true;
     allModeratorsInConference = allModerators;
     for (auto participant: participants) {
@@ -499,6 +503,8 @@ CVPixelBufferRef pixelBufferPreview;
             participantsOverlays[key] = nil;
         }
     }
+    self.mozaicLayoutButton.hidden = !displayGridLayoutButton;
+    self.mozaicLayoutButton.enabled = displayGridLayoutButton;
 }
 
 -(void) updateCall
@@ -528,6 +534,8 @@ CVPixelBufferRef pixelBufferPreview;
     [self setupContactInfo:contactPhoto];
     confUid_ = conversation.confId;
     [self updateConference];
+    self.mozaicLayoutButton.hidden = !displayGridLayoutButton;
+    self.mozaicLayoutButton.enabled = displayGridLayoutButton;
 
     [timeSpentLabel setStringValue:callModel->getFormattedCallDuration(callUid_).toNSString()];
     if (refreshDurationTimer == nil)
@@ -1325,6 +1333,15 @@ CVPixelBufferRef pixelBufferPreview;
         return;
     }
     [self presentPopoverVCOfType: share sender: sender];
+}
+
+- (IBAction)setGridLayout:(id)sender {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
+    if (not callModel->hasCall([self getcallID]))
+        return;
+    callModel->setConferenceLayout([self getcallID], lrc::api::call::Layout::GRID);
 }
 
 #pragma mark - NSSplitViewDelegate
