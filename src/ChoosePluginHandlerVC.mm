@@ -75,11 +75,16 @@ CGFloat PLUGIN_ROW_HEIGHT = 35;
     NSTextField* textField = [[NSTextField alloc] init];
     CGFloat maxWidth = 0;
     NSFont *fontName = [NSFont systemFontOfSize: 13.0 weight: NSFontWeightMedium];
-    for (auto plugin : availableHandlers) {
+    for (auto handler : availableHandlers) {
+        lrc::api::plugin::PluginHandlerDetails handlerDetails;
+        if (handlerType == FROM_CALL)
+            handlerDetails = pluginModel->getCallMediaHandlerDetails(handler);
+        else
+            handlerDetails = pluginModel->getChatHandlerDetails(handler);
         NSDictionary *attrs= [NSDictionary dictionaryWithObjectsAndKeys:
                                    fontName, NSFontAttributeName,
                                    nil];
-        NSAttributedString* attributed = [[NSAttributedString alloc] initWithString:plugin.toNSString() attributes: attrs];
+        NSAttributedString* attributed = [[NSAttributedString alloc] initWithString:handlerDetails.name.toNSString() attributes: attrs];
         textField.attributedStringValue = attributed;
         [textField sizeToFit];
         if (textField.frame.size.width > maxWidth) {
