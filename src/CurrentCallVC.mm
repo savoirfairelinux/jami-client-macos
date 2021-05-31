@@ -336,9 +336,9 @@ CVPixelBufferRef pixelBufferPreview;
 -(void) setUpButtons:(lrc::api::call::Info&)callInfo isRecording:(BOOL) isRecording {
     muteAudioButton.image = callInfo.audioMuted ? [NSImage imageNamed:@"micro_off.png"] :
     [NSImage imageNamed:@"micro_on.png"];
-    NSColor* audioImageColor = callInfo.audioMuted ? [NSColor redColor] : [NSColor whiteColor];
+    NSColor* audioImageColor = callInfo.audioMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteAudioButton color: audioImageColor];
-    NSColor* videoImageColor = callInfo.videoMuted ? [NSColor redColor] : [NSColor whiteColor];
+    NSColor* videoImageColor = callInfo.videoMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteVideoButton color: videoImageColor];
     muteVideoButton.image = callInfo.videoMuted ? [NSImage imageNamed:@"camera_off.png"] :
     [NSImage imageNamed:@"camera_on.png"];
@@ -1122,7 +1122,7 @@ CVPixelBufferRef pixelBufferPreview;
     auto& currentCall = callModel->getCall(callUid_);
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::AUDIO);
     muteAudioButton.image = currentCall.audioMuted ? [NSImage imageNamed:@"micro_off.png"] : [NSImage imageNamed:@"micro_on.png"];
-    NSColor* audioImageColor = currentCall.audioMuted ? [NSColor redColor] : [NSColor whiteColor];
+    NSColor* audioImageColor = currentCall.audioMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteAudioButton color: audioImageColor];
 }
 
@@ -1144,7 +1144,7 @@ CVPixelBufferRef pixelBufferPreview;
     }
     callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::VIDEO);
     muteVideoButton.image = currentCall.videoMuted ? [NSImage imageNamed:@"camera_off.png"] : [NSImage imageNamed:@"camera_on.png"];
-    NSColor* videoImageColor = currentCall.videoMuted ? [NSColor redColor] : [NSColor whiteColor];
+    NSColor* videoImageColor = currentCall.videoMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteVideoButton color: videoImageColor];
 }
 

@@ -85,6 +85,10 @@ return [NSColor colorWithCalibratedRed:59/255.0 green:193/255.0 blue:211/255.0 a
     return [NSColor colorWithCalibratedRed:76/255.0 green:217/255.0 blue:100/255.0 alpha:1];
 }
 
++ (NSColor*) callButtonRedColor
+{
+    return [NSColor colorWithCalibratedRed:144/255.0 green:27/255.0 blue:33/255.0 alpha:1];
+}
 
 - (NSColor *)lightenColorByValue:(float)value {
     if(![self isKindOfClass:[NSCalibratedRGBColorSpace class]]) {

@@ -36,6 +36,7 @@
 + (NSColor*) presenceColor;
 + (NSColor*) unregisteredColor;
 + (NSColor*) buttonBlinkColorColor;
++ (NSColor*) callButtonRedColor;
 
 - (NSColor *)lightenColorByValue:(float)value;
 - (NSColor *)darkenColorByValue:(float)value;
