@@ -59,8 +59,6 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="aIF-RX-dpX"/>
                     <toolbarItem implicitItemIdentifier="8FE54A8C-2FC0-42B8-B234-011662AD0A28" explicitItemIdentifier="PluginPrefsIdentifier" label="Plugins" paletteLabel="Plugins" tag="-1" image="plugin" selectable="YES" id="zzE-XA-cFn">
-                        <size key="minSize" width="22" height="22"/>
-                        <size key="maxSize" width="22" height="22"/>
                         <connections>
                             <action selector="displayPlugins:" target="-2" id="pluginprefaction"/>
                         </connections>
