@@ -41,7 +41,7 @@
 "Canceled" = "キャンセルしました";
 
 /* Contextual menu entry */
-"Choose file" = "ファイルの選択";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "会話履歴を削除";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "Resend";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "共有";
 

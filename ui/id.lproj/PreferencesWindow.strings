@@ -3,16 +3,16 @@
 "C1T-wE-wxb.title" = "Jami Preferences";
 
 /* Class = "NSToolbarItem"; label = "General"; ObjectID = "GQi-nL-0Ey"; */
-"GQi-nL-0Ey.label" = "General";
+"GQi-nL-0Ey.label" = "Umum";
 
 /* Class = "NSToolbarItem"; paletteLabel = "General"; ObjectID = "GQi-nL-0Ey"; */
-"GQi-nL-0Ey.paletteLabel" = "General";
+"GQi-nL-0Ey.paletteLabel" = "Umum";
 
 /* Class = "NSToolbarItem"; label = "Advanced"; ObjectID = "Qza-fj-d45"; */
-"Qza-fj-d45.label" = "Advanced";
+"Qza-fj-d45.label" = "Lanjutan";
 
 /* Class = "NSToolbarItem"; paletteLabel = "Advanced"; ObjectID = "Qza-fj-d45"; */
-"Qza-fj-d45.paletteLabel" = "Advanced";
+"Qza-fj-d45.paletteLabel" = "Lanjutan";
 
 /* Class = "NSToolbarItem"; label = "Audio"; ObjectID = "iuJ-eu-b7f"; */
 "iuJ-eu-b7f.label" = "Suara";
@@ -25,3 +25,10 @@
 
 /* Class = "NSToolbarItem"; paletteLabel = "Video"; ObjectID = "jLi-an-TR2"; */
 "jLi-an-TR2.paletteLabel" = "Video";
+
+/* Class = "NSToolbarItem"; label = "Plugins"; ObjectID = "zzE-XA-cFn"; */
+"zzE-XA-cFn.label" = "Plugins";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Plugins"; ObjectID = "zzE-XA-cFn"; */
+"zzE-XA-cFn.paletteLabel" = "Plugins";
+

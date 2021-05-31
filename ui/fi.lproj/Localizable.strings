@@ -41,7 +41,7 @@
 "Canceled" = "Peruttu";
 
 /* Contextual menu entry */
-"Choose file" = "Valitse tiedosto";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "Tyhjennä keskustelu";
@@ -266,7 +266,7 @@
 "Audio muted" = "Ääni mykistetty";
 
 /* conference state tooltip organiser */
-"Conference Organiser" = "Conference Organiser";
+"Conference Organiser" = "Kokouksen järjestäjä";
 
 /* conference state tooltip moderator */
 "Moderator" = "Valvoja";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "Uudelleen";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "Jako";
 

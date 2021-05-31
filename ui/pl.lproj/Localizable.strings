@@ -41,7 +41,7 @@
 "Canceled" = "Anulowano";
 
 /* Contextual menu entry */
-"Choose file" = "Wybierz plik";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "Wyczyść rozmowę";
@@ -182,7 +182,7 @@
 "Unjoinable" = "Nieosiągalny";
 
 /* Error video permission */
-"Video permission not granted" = "Video permission not granted";
+"Video permission not granted" = "Uprawnienia wideo nieprzyznane";
 
 /* Welcome title */
 "Welcome to Jami" = "Witaj w Jami";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "Wyślij ponownie";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "Podziel się";
 

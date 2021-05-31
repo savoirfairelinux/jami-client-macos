@@ -20,6 +20,15 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Mute Video"; ObjectID = "LVS-yZ-98V"; */
 "LVS-yZ-98V.ibShadowedToolTip" = "Mute Video";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Select video device"; ObjectID = "Vcv-ia-VEy"; */
+"Vcv-ia-VEy.ibShadowedToolTip" = "Select video device";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Share"; ObjectID = "ZGn-Tc-sg3"; */
+"ZGn-Tc-sg3.ibShadowedToolTip" = "Share";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Enable plugins"; ObjectID = "YtG-ob-etP"; */
+"YtG-ob-etP.ibShadowedToolTip" = "Activar complementos";
+
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Send a message"; ObjectID = "NRc-5f-Ujc"; */
 "NRc-5f-Ujc.ibShadowedMultipleValuesPlaceholder" = "Send a message";
 
@@ -33,7 +42,7 @@
 "QYT-0n-4sw.ibShadowedToolTip" = "Grabar";
 
 /* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
-"Vhk-fx-6RW.ibShadowedToolTip" = "add contact to call";
+"Vhk-fx-6RW.ibShadowedToolTip" = "Add contact to call";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
 "YGj-SP-ikj.title" = "Text Cell";
@@ -65,8 +74,14 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
 "rqa-be-VIB.ibShadowedToolTip" = "Enviar";
 
-/* Class = "NSButton"; ibShadowedToolTip = "Mute Audio"; ObjectID = "tQl-cT-0Lb"; */
-"tQl-cT-0Lb.ibShadowedToolTip" = "Mute Audio";
+/* Class = "NSButton"; ibShadowedToolTip = "Select audio output device"; ObjectID = "Yma-O2-Ljp"; */
+"Yma-O2-Ljp.ibShadowedToolTip" = "Select audio output device";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Select audio input device"; ObjectID = "aMU-l3-xFT"; */
+"aMU-l3-xFT.ibShadowedToolTip" = "Select audio input device";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Mute microphone"; ObjectID = "N0A-rb-6rf"; */
+"N0A-rb-6rf.ibShadowedToolTip" = "Mute microphone";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Person name"; ObjectID = "ues-20-34k"; */
 "ues-20-34k.placeholderString" = "Person name";

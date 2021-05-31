@@ -20,6 +20,9 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Start video call"; ObjectID = "cFH-d7-Erh"; */
 "cFH-d7-Erh.ibShadowedToolTip" = "Rozpocznij rozmowę wideo";
 
+/* Class = "NSButton"; ibShadowedToolTip = "Enable plugins"; ObjectID = "FvO-Yj-ry0"; */
+"FvO-Yj-ry0.ibShadowedToolTip" = "Włącz wtyczki";
+
 /* Class = "NSBox"; title = "Box"; ObjectID = "ciI-CA-tly"; */
 "ciI-CA-tly.title" = "Blok";
 
@@ -27,7 +30,7 @@
 "fh9-Uo-8R1.title" = "Blok";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send a file"; ObjectID = "gwx-eT-PcN"; */
-"gwx-eT-PcN.ibShadowedToolTip" = "Send a file";
+"gwx-eT-PcN.ibShadowedToolTip" = "Wyślij plik";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "hrX-ac-Quk"; */
 "hrX-ac-Quk.title" = "Blok";
@@ -36,7 +39,7 @@
 "ooq-vs-Xt1.ibShadowedToolTip" = "Wstecz";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Add contact"; ObjectID = "pGK-hO-X1Y"; */
-"pGK-hO-X1Y.ibShadowedToolTip" = "Add contact";
+"pGK-hO-X1Y.ibShadowedToolTip" = "Dodaj kontakt";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "pRL-vb-me9"; */
 "pRL-vb-me9.title" = "Blok";

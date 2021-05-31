@@ -41,7 +41,7 @@
 "Canceled" = "Cancelado";
 
 /* Contextual menu entry */
-"Choose file" = "Elegir archivo";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "Limpiar conversación";
@@ -266,7 +266,7 @@
 "Audio muted" = "Audio silenciado";
 
 /* conference state tooltip organiser */
-"Conference Organiser" = "Conference Organiser";
+"Conference Organiser" = "Organizador de conferencia";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderador";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "Reenviar";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "Compartir";
 

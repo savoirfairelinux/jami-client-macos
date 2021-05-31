@@ -41,7 +41,7 @@
 "Canceled" = "Annullato";
 
 /* Contextual menu entry */
-"Choose file" = "Scegli un file";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "Pulisci conversazione";
@@ -224,13 +224,13 @@
 "Hangup" = "Aggancia";
 
 /* Conference action */
-"Mute audio" = "Silenzia audio";
+"Mute audio" = "Disattiva microfono";
 
 /* Conference action */
-"Set moderator" = "Imposta moderatore";
+"Set moderator" = "Metti un moderatore";
 
 /* Conference action */
-"Unmute audio" = "Riattiva l'audio";
+"Unmute audio" = "Attiva microfono";
 
 /* Conference action */
 "Unset moderator" = "Rimuovi moderatore";
@@ -254,16 +254,16 @@
 "Expand" = "Espandi";
 
 /* conference tooltip mute Mute audio */
-"Mute audio" = "Silenzia audio";
+"Mute audio" = "Disattiva microfono";
 
 /* conference tooltip mute Hangup */
 "Hangup" = "Aggancia";
 
 /* conference tooltip mute Set moderator */
-"Set moderator" = "Imposta moderatore";
+"Set moderator" = "Metti un moderatore";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio disattivato";
+"Audio muted" = "Microfono disattivato";
 
 /* conference state tooltip organiser */
 "Conference Organiser" = "Organizzatore della conferenza";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "Invia di nuovo";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "Condividi";
 

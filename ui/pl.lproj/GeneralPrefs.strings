@@ -1,6 +1,6 @@
 
 /* Class = "NSButtonCell"; title = "Enable notifications for incoming messages"; ObjectID = "0jV-Q4-232"; */
-"0jV-Q4-232.title" = "Enable notifications for incoming messages";
+"0jV-Q4-232.title" = "Włącz powiadomienia dla przychodzących wiadomości";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "42E-UY-qlP"; */
 "42E-UY-qlP.title" = "Miesięcznie";
@@ -21,7 +21,7 @@
 "AId-am-73Q.title" = "Tygodniowo";
 
 /* Class = "NSTextFieldCell"; title = "Quality(Kbps)"; ObjectID = "AOr-Cq-w57"; */
-"AOr-Cq-w57.title" = "Quality(Kbps)";
+"AOr-Cq-w57.title" = "Jakość(Kbps)";
 
 /* Class = "NSTextFieldCell"; title = "Notifications"; ObjectID = "I0d-mx-KhT"; */
 "I0d-mx-KhT.title" = "Powiadomienia";
@@ -30,13 +30,13 @@
 "JGj-TS-Hxl.title" = "6000";
 
 /* Class = "NSButtonCell"; title = "Enable notifications for invitations"; ObjectID = "Lww-Wb-yrf"; */
-"Lww-Wb-yrf.title" = "Enable notifications for invitations";
+"Lww-Wb-yrf.title" = "Włącz powiadomienia dla zaproszeń";
 
 /* Class = "NSButtonCell"; title = "Launch on Startup"; ObjectID = "O2C-xR-mHF"; */
 "O2C-xR-mHF.title" = "Uruchom przy Starcie";
 
 /* Class = "NSTextFieldCell"; title = "Call recording"; ObjectID = "Qb8-tb-vJd"; */
-"Qb8-tb-vJd.title" = "Call recording";
+"Qb8-tb-vJd.title" = "Nagrywanie rozmowy";
 
 /* Class = "NSButtonCell"; title = "Automatically check for updates"; ObjectID = "T3a-yx-ZaW"; */
 "T3a-yx-ZaW.title" = "Automatycznie sprawdź po aktualizacje";
@@ -48,7 +48,7 @@
 "cB6-4m-9MU.title" = "Codziennie";
 
 /* Class = "NSTextFieldCell"; title = "Record folder"; ObjectID = "ep4-QU-rGl"; */
-"ep4-QU-rGl.title" = "Record folder";
+"ep4-QU-rGl.title" = "Nagraj folder";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "mbu-TH-bs8"; */
 "mbu-TH-bs8.title" = "Co godzinę";
@@ -63,4 +63,4 @@
 "uYI-hA-JHk.title" = "Przenieś Jami na pierwszy plan przy połączeniach przychodzących";
 
 /* Class = "NSButtonCell"; title = "Record local video"; ObjectID = "y5x-4d-E26"; */
-"y5x-4d-E26.title" = "Record local video";
+"y5x-4d-E26.title" = "Nagraj lokalne wideo";

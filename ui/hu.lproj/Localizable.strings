@@ -8,7 +8,7 @@
 "Cancel" = "Mégse";
 
 /* Welcome title */
-"Add a SIP account" = "SIP fiók hozzáadása";
+"Add a SIP account" = "SIP-fiók hozzáadása";
 
 /* Contextual menu action */
 "Add to contacts" = "Hozzáadás a kapcsolatokhoz";
@@ -41,7 +41,7 @@
 "Canceled" = "Törölve";
 
 /* Contextual menu entry */
-"Choose file" = "Fájl kiválasztása";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "Beszélgetés törlése";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "Újraküldés";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "Megosztás ";
 

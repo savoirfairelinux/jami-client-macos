@@ -41,7 +41,7 @@
 "Canceled" = "已取消";
 
 /* Contextual menu entry */
-"Choose file" = "選擇檔案";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "清除對話";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "重新傳送";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "分享";
 

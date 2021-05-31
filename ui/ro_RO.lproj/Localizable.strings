@@ -41,7 +41,7 @@
 "Canceled" = "Anulat";
 
 /* Contextual menu entry */
-"Choose file" = "Alege un fișier";
+"Stream file" = "Stream file";
 
 /* Contextual menu action */
 "Clear conversation" = "Șterge conversația";
@@ -74,7 +74,7 @@
 "ID: " = "ID: ";
 
 /* link account title */
-"Import from backup" = "Importă dintr-o copie de rezervă";
+"Import from backup" = "Importă din copia de rezervă";
 
 /* link account title */
 "Import from other device" = "Importă din alt aparat";
@@ -224,13 +224,13 @@
 "Hangup" = "Închide";
 
 /* Conference action */
-"Mute audio" = "Mut";
+"Mute audio" = "Oprește microfonul";
 
 /* Conference action */
 "Set moderator" = "Pune un moderator";
 
 /* Conference action */
-"Unmute audio" = "Activează";
+"Unmute audio" = "Pornește microfonul";
 
 /* Conference action */
 "Unset moderator" = "Elimină moderatorul";
@@ -254,7 +254,7 @@
 "Expand" = "Mărește";
 
 /* conference tooltip mute Mute audio */
-"Mute audio" = "Mut";
+"Mute audio" = "Oprește microfonul";
 
 /* conference tooltip mute Hangup */
 "Hangup" = "Închide";
@@ -291,4 +291,16 @@
 
 /* Contextual menu for message */
 "Resend" = "Trimite din nou";
+
+/* In call status info */
+"Wants to talk to you" = "Wants to talk to you";
+
+/* share button tooltip */
+"Stop screen sharing" = "Stop screen sharing";
+
+/* share button tooltip */
+"Stop file streaming" = "Stop file streaming";
+
+/* share button tooltip */
+"Share" = "Distribuie";
 
