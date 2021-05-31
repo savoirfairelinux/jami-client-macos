@@ -425,6 +425,7 @@ CVPixelBufferRef pixelBufferPreview;
         [overlay removeFromSuperview];
     }
     participantsOverlays = [[NSMutableDictionary alloc] init];
+    allModeratorsInConference = false;
     movableBaseForView.hidden = false;
 }
 
