@@ -47,11 +47,11 @@ CGFloat ROW_HEIGHT = 35;
 -(CGFloat)getTableWidth {
     NSTextField* textField = [[NSTextField alloc] init];
     CGFloat maxWidth = 0;
+    NSFont *fontName = [NSFont systemFontOfSize: 13.0 weight: NSFontWeightMedium];
+    NSDictionary *attrs= [NSDictionary dictionaryWithObjectsAndKeys:
+                               fontName, NSFontAttributeName,
+                               nil];
     for (auto device : mediaDevices) {
-        NSFont *fontName = [NSFont systemFontOfSize: 13.0 weight: NSFontWeightMedium];
-        NSDictionary *attrs= [NSDictionary dictionaryWithObjectsAndKeys:
-                                   fontName, NSFontAttributeName,
-                                   nil];
         NSAttributedString* attributed = [[NSAttributedString alloc] initWithString:device.toNSString() attributes: attrs];
         textField.attributedStringValue = attributed;
         [textField sizeToFit];
@@ -64,6 +64,9 @@ CGFloat ROW_HEIGHT = 35;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (@available(macOS 11.0, *)) {
+        devicesView.style = NSTableViewStylePlain;
+    }
     CGFloat tableHeight = ROW_HEIGHT * mediaDevices.size();
     // we do not need space for check mark  for default device
     auto margins = defaultDevice.isEmpty() ? 20 : 50;
