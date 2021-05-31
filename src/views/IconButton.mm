@@ -218,6 +218,7 @@ NSString* BLINK_ANIMATION_IDENTIFIER = @"blinkAnimation";
         [style setLineBreakMode:NSLineBreakByWordWrapping];
         [style setAlignment:NSCenterTextAlignment];
         att = [[NSDictionary alloc] initWithObjectsAndKeys:
+               self.font,NSFontAttributeName,
                style, NSParagraphStyleAttributeName,
                tintColor,
                NSForegroundColorAttributeName, nil];

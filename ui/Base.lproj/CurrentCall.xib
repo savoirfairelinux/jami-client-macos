@@ -32,6 +32,8 @@
                 <outlet property="inputAudioMenuButton" destination="aMU-l3-xFT" id="TDL-Pc-CY0"/>
                 <outlet property="loadingIndicator" destination="JwW-2h-DyZ" id="D9h-wq-IQR"/>
                 <outlet property="movableBaseForView" destination="lgD-oV-ZDp" id="8H4-9m-i8p"/>
+                <outlet property="mozaicLayoutButton" destination="deo-XE-Agg" id="ynM-mt-XdY"/>
+                <outlet property="mozaicLayoutView" destination="6sW-D3-nMh" id="oPc-Gf-nk1"/>
                 <outlet property="muteAudioButton" destination="N0A-rb-6rf" id="Qgw-4d-l5c"/>
                 <outlet property="muteVideoButton" destination="LVS-yZ-98V" id="qQs-zP-wQ4"/>
                 <outlet property="muteVideoButtonContainer" destination="p1T-TM-qSp" id="8s5-ta-A2f"/>
@@ -50,12 +52,12 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView wantsLayer="YES" misplaced="YES" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="1118" height="788"/>
+        <customView wantsLayer="YES" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="1118" height="1399"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <splitView wantsLayer="YES" misplaced="YES" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIJ-gB-FZo">
-                    <rect key="frame" x="0.0" y="0.0" width="1118" height="788"/>
+                    <rect key="frame" x="0.0" y="611" width="1118" height="788"/>
                     <subviews>
                         <customView misplaced="YES" id="2wf-Py-l6B" customClass="CallView">
                             <rect key="frame" x="0.0" y="0.0" width="746" height="788"/>
@@ -73,7 +75,7 @@
                                     <color key="fillColor" red="0.120510533452034" green="0.12050692737102509" blue="0.12050899863243103" alpha="1" colorSpace="calibratedRGB"/>
                                 </box>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-LA-yn0">
-                                    <rect key="frame" x="302" y="5326" width="142" height="305"/>
+                                    <rect key="frame" x="302" y="547" width="142" height="305"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="s4L-Ke-9Jm">
                                             <rect key="frame" x="7" y="177" width="128" height="128"/>
@@ -234,7 +236,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="746" height="788"/>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="10907" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="1349" width="746" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="Xeq-Aa-f1W"/>
                                         <constraint firstAttribute="height" constant="50" id="w34-Yi-hGT"/>
@@ -311,13 +313,96 @@
                                     </subviews>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="DfH-di-xs7" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="10907" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="1349" width="746" height="50"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dl1-Gt-oz5">
-                                            <rect key="frame" x="624" y="17" width="104" height="16"/>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="6sW-D3-nMh">
+                                            <rect key="frame" x="596" y="9" width="80" height="33"/>
+                                            <subviews>
+                                                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="deo-XE-Agg" userLabel="mozaic" customClass="HoverButton">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="33"/>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="leading" alignment="right" transparent="YES" imageScaling="proportionallyUpOrDown" id="myx-oz-HGh">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="systemThin" size="13"/>
+                                                    </buttonCell>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                                            <color key="value" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                            <color key="value" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                            <integer key="value" value="0"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                            <color key="value" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                            <color key="value" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="hoverDarkColor">
+                                                            <color key="value" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                            <color key="value" red="0.1137239709" green="0.1137244478" blue="0.1137255356" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="setGridLayout:" target="-2" id="usH-8q-C9w"/>
+                                                    </connections>
+                                                </button>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="qFa-uS-AQb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="33"/>
+                                                    <subviews>
+                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ngY-xt-BTZ">
+                                                            <rect key="frame" x="8" y="8" width="17" height="17"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="17" id="7fk-Ye-xtH"/>
+                                                                <constraint firstAttribute="height" constant="17" id="W1e-CC-yR2"/>
+                                                            </constraints>
+                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="mozaic" id="chK-Vo-BGQ"/>
+                                                        </imageView>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mrp-We-aFr">
+                                                            <rect key="frame" x="28" y="9" width="46" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="42" id="i2L-uC-LXa"/>
+                                                            </constraints>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Mozaic" id="FOD-q1-g5o">
+                                                                <font key="font" metaFont="systemThin" size="12"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="ngY-xt-BTZ" secondAttribute="bottom" constant="8" id="67v-pC-oAg"/>
+                                                        <constraint firstItem="ngY-xt-BTZ" firstAttribute="leading" secondItem="qFa-uS-AQb" secondAttribute="leading" constant="8" id="NMg-Np-eCI"/>
+                                                        <constraint firstItem="mrp-We-aFr" firstAttribute="leading" secondItem="ngY-xt-BTZ" secondAttribute="trailing" constant="5" id="NfT-rD-Faz"/>
+                                                        <constraint firstItem="ngY-xt-BTZ" firstAttribute="centerY" secondItem="mrp-We-aFr" secondAttribute="centerY" id="XmC-zK-Ojg"/>
+                                                        <constraint firstAttribute="trailing" secondItem="mrp-We-aFr" secondAttribute="trailing" constant="8" id="ZrP-zg-wWe"/>
+                                                        <constraint firstItem="ngY-xt-BTZ" firstAttribute="top" secondItem="qFa-uS-AQb" secondAttribute="top" constant="8" id="t8x-gb-ujB"/>
+                                                    </constraints>
+                                                </customView>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="zSV-0S-PdC"/>
+                                                <constraint firstItem="deo-XE-Agg" firstAttribute="top" secondItem="6sW-D3-nMh" secondAttribute="top" id="26v-jI-0In"/>
+                                                <constraint firstItem="deo-XE-Agg" firstAttribute="leading" secondItem="qFa-uS-AQb" secondAttribute="leading" id="9KR-be-lZ8"/>
+                                                <constraint firstAttribute="trailing" secondItem="deo-XE-Agg" secondAttribute="trailing" id="JFC-uj-LLB"/>
+                                                <constraint firstItem="deo-XE-Agg" firstAttribute="bottom" secondItem="qFa-uS-AQb" secondAttribute="bottom" id="Sp4-Sn-LSU"/>
+                                                <constraint firstItem="deo-XE-Agg" firstAttribute="leading" secondItem="6sW-D3-nMh" secondAttribute="leading" id="cF3-Ym-Cwc"/>
+                                                <constraint firstAttribute="bottom" secondItem="deo-XE-Agg" secondAttribute="bottom" id="fic-hI-w9s"/>
+                                                <constraint firstItem="deo-XE-Agg" firstAttribute="trailing" secondItem="qFa-uS-AQb" secondAttribute="trailing" id="lrB-LL-M6H"/>
+                                                <constraint firstItem="deo-XE-Agg" firstAttribute="top" secondItem="qFa-uS-AQb" secondAttribute="top" id="u5C-If-cqA"/>
                                             </constraints>
+                                        </customView>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dl1-Gt-oz5">
+                                            <rect key="frame" x="724" y="17" width="4" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="viR-W9-vvE">
                                                 <font key="font" metaFont="systemThin" size="13"/>
                                                 <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -329,7 +414,9 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="dl1-Gt-oz5" firstAttribute="centerY" secondItem="6sW-D3-nMh" secondAttribute="centerY" id="NjG-tw-NNS"/>
                                         <constraint firstAttribute="height" constant="50" id="Vdv-Qo-Iw2"/>
+                                        <constraint firstAttribute="trailing" secondItem="6sW-D3-nMh" secondAttribute="trailing" constant="70" id="agx-EP-SPe"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="mkX-93-rYz"/>
                                         <constraint firstAttribute="centerY" secondItem="dl1-Gt-oz5" secondAttribute="centerY" id="wah-6d-tYK"/>
                                         <constraint firstAttribute="trailing" secondItem="dl1-Gt-oz5" secondAttribute="trailing" constant="20" id="y1H-9F-3NS"/>
@@ -929,14 +1016,14 @@
                             <rect key="frame" x="747" y="0.0" width="371" height="788"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
-                                    <rect key="frame" x="20" y="145" width="331" height="10810"/>
+                                <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
+                                    <rect key="frame" x="20" y="145" width="331" height="788"/>
                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H2i-4W-Gvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="10810"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="788"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="ZOj-5b-rnp">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="10810"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="788"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -1248,13 +1335,13 @@
                                     </scroller>
                                 </scrollView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="mFB-6z-yC0" customClass="DraggingDestinationView">
-                                    <rect key="frame" x="0.0" y="0.0" width="371" height="10957"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="371" height="1399"/>
                                 </customView>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSk-sH-cgy">
-                                    <rect key="frame" x="20" y="0.0" width="331" height="145"/>
+                                    <rect key="frame" x="20" y="0.0" width="331" height="585"/>
                                     <subviews>
                                         <customView verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="aw5-Hc-Bc7" customClass="SendMessagePanel">
-                                            <rect key="frame" x="0.0" y="85" width="331" height="60"/>
+                                            <rect key="frame" x="0.0" y="525" width="331" height="60"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="horizontal" alignment="bottom" spacing="2" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8X-PS-u8Y">
                                                     <rect key="frame" x="0.0" y="13" width="331" height="47"/>
@@ -1391,7 +1478,7 @@
                                             </constraints>
                                         </customView>
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="q74-l1-6bv">
-                                            <rect key="frame" x="118" y="82" width="96" height="5"/>
+                                            <rect key="frame" x="163" y="84" width="5" height="441"/>
                                         </box>
                                         <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGk-vG-Ne7">
                                             <rect key="frame" x="0.0" y="0.0" width="331" height="84"/>
@@ -1513,6 +1600,7 @@
         <image name="ic_file_upload" width="72" height="72"/>
         <image name="message" width="70" height="70"/>
         <image name="micro_on" width="70" height="70"/>
+        <image name="mozaic" width="72" height="72"/>
         <image name="plugin" width="80" height="80"/>
         <image name="record" width="70" height="70"/>
         <image name="share" width="70" height="70"/>
