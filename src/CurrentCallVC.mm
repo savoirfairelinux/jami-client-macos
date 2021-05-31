@@ -120,7 +120,6 @@ typedef enum {
 @property (unsafe_unretained) IBOutlet MovableView *movableBaseForView;
 @property (unsafe_unretained) IBOutlet NSView* hidePreviewBackground;
 @property (unsafe_unretained) IBOutlet NSButton* hidePreviewButton;
-@property (unsafe_unretained) IBOutlet NSStackView* allModerators;
 @property (unsafe_unretained) IBOutlet NSView* muteVideoButtonContainer;
 
 @property (unsafe_unretained) IBOutlet RenderingView *distantView;
@@ -425,6 +424,7 @@ CVPixelBufferRef pixelBufferPreview;
         [overlay removeFromSuperview];
     }
     participantsOverlays = [[NSMutableDictionary alloc] init];
+    allModeratorsInConference = false;
     movableBaseForView.hidden = false;
 }
 
@@ -499,7 +499,6 @@ CVPixelBufferRef pixelBufferPreview;
             participantsOverlays[key] = nil;
         }
     }
-    self.allModerators.hidden = !allModeratorsInConference;
 }
 
 -(void) updateCall
@@ -529,7 +528,6 @@ CVPixelBufferRef pixelBufferPreview;
     [self setupContactInfo:contactPhoto];
     confUid_ = conversation.confId;
     [self updateConference];
-    self.allModerators.hidden = !allModeratorsInConference;
 
     [timeSpentLabel setStringValue:callModel->getFormattedCallDuration(callUid_).toNSString()];
     if (refreshDurationTimer == nil)

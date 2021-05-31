@@ -8,7 +8,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="CurrentCallVC">
             <connections>
                 <outlet property="addParticipantButton" destination="Vhk-fx-6RW" id="j72-ot-1mi"/>
-                <outlet property="allModerators" destination="qSN-JN-uaD" id="ai1-bx-dq0"/>
                 <outlet property="audioOutputButton" destination="Yma-O2-Ljp" id="Wvk-sz-aFc"/>
                 <outlet property="backgroundImage" destination="Usy-W5-TGp" id="EMW-vz-Zuc"/>
                 <outlet property="bluerBackgroundEffect" destination="CDQ-nt-oe4" id="xjH-MC-jHw"/>
@@ -74,7 +73,7 @@
                                     <color key="fillColor" red="0.120510533452034" green="0.12050692737102509" blue="0.12050899863243103" alpha="1" colorSpace="calibratedRGB"/>
                                 </box>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-LA-yn0">
-                                    <rect key="frame" x="302" y="4426" width="142" height="305"/>
+                                    <rect key="frame" x="302" y="4462" width="142" height="305"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="s4L-Ke-9Jm">
                                             <rect key="frame" x="7" y="177" width="128" height="128"/>
@@ -235,7 +234,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="746" height="788"/>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="9107" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="9179" width="746" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="Xeq-Aa-f1W"/>
                                         <constraint firstAttribute="height" constant="50" id="w34-Yi-hGT"/>
@@ -312,37 +311,8 @@
                                     </subviews>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="DfH-di-xs7" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="9107" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="9179" width="746" height="50"/>
                                     <subviews>
-                                        <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qSN-JN-uaD">
-                                            <rect key="frame" x="297" y="17" width="152" height="16"/>
-                                            <subviews>
-                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uln-uI-d2b">
-                                                    <rect key="frame" x="0.0" y="1" width="15" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="15" id="CKg-ze-Fjj"/>
-                                                        <constraint firstAttribute="height" constant="15" id="Qw2-U9-g0i"/>
-                                                    </constraints>
-                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="ic_moderator" id="zY5-Yu-U2E"/>
-                                                </imageView>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-fS-YDg">
-                                                    <rect key="frame" x="18" y="0.0" width="136" height="16"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Everyone is moderator" id="QvG-Nd-LIt">
-                                                        <font key="font" metaFont="systemThin" size="13"/>
-                                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </subviews>
-                                            <visibilityPriorities>
-                                                <integer value="1000"/>
-                                                <integer value="1000"/>
-                                            </visibilityPriorities>
-                                            <customSpacing>
-                                                <real value="3.4028234663852886e+38"/>
-                                                <real value="3.4028234663852886e+38"/>
-                                            </customSpacing>
-                                        </stackView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dl1-Gt-oz5">
                                             <rect key="frame" x="624" y="17" width="104" height="16"/>
                                             <constraints>
@@ -360,9 +330,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="Vdv-Qo-Iw2"/>
-                                        <constraint firstItem="qSN-JN-uaD" firstAttribute="centerX" secondItem="DfH-di-xs7" secondAttribute="centerX" id="cCy-9D-r9m"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="mkX-93-rYz"/>
-                                        <constraint firstItem="qSN-JN-uaD" firstAttribute="centerY" secondItem="DfH-di-xs7" secondAttribute="centerY" id="mlZ-yw-G0r"/>
                                         <constraint firstAttribute="centerY" secondItem="dl1-Gt-oz5" secondAttribute="centerY" id="wah-6d-tYK"/>
                                         <constraint firstAttribute="trailing" secondItem="dl1-Gt-oz5" secondAttribute="trailing" constant="20" id="y1H-9F-3NS"/>
                                     </constraints>
@@ -929,13 +897,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
-                                    <rect key="frame" x="20" y="145" width="331" height="9010"/>
+                                    <rect key="frame" x="20" y="145" width="331" height="9082"/>
                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H2i-4W-Gvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="9010"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="9082"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="ZOj-5b-rnp">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="9010"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="9082"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -1247,7 +1215,7 @@
                                     </scroller>
                                 </scrollView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="mFB-6z-yC0" customClass="DraggingDestinationView">
-                                    <rect key="frame" x="0.0" y="0.0" width="371" height="9157"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="371" height="9229"/>
                                 </customView>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSk-sH-cgy">
                                     <rect key="frame" x="20" y="0.0" width="331" height="145"/>
@@ -1510,7 +1478,6 @@
         <image name="ic_action_hold" width="72" height="72"/>
         <image name="ic_action_send" width="72" height="72"/>
         <image name="ic_file_upload" width="72" height="72"/>
-        <image name="ic_moderator" width="24" height="24"/>
         <image name="message" width="70" height="70"/>
         <image name="micro_on" width="70" height="70"/>
         <image name="plugin" width="80" height="80"/>
