@@ -62,8 +62,6 @@ add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
                     COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
                     COMMENT "Creating Shader.metallib")
 
-add_custom_target(shader ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib)
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -394,6 +392,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_muted.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/ic_moderator_audio_unmuted.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/settings.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/light/plugin.png
+${CMAKE_CURRENT_SOURCE_DIR}/data/light/mozaic.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_action_call.png
 ${CMAKE_CURRENT_SOURCE_DIR}/data/dark/ic_plugin.png
 )

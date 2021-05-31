@@ -32,6 +32,7 @@
                 <outlet property="inputAudioMenuButton" destination="aMU-l3-xFT" id="TDL-Pc-CY0"/>
                 <outlet property="loadingIndicator" destination="JwW-2h-DyZ" id="D9h-wq-IQR"/>
                 <outlet property="movableBaseForView" destination="lgD-oV-ZDp" id="8H4-9m-i8p"/>
+                <outlet property="mozaicLayoutButton" destination="deo-XE-Agg" id="9I7-Ki-z3n"/>
                 <outlet property="muteAudioButton" destination="N0A-rb-6rf" id="Qgw-4d-l5c"/>
                 <outlet property="muteVideoButton" destination="LVS-yZ-98V" id="qQs-zP-wQ4"/>
                 <outlet property="muteVideoButtonContainer" destination="p1T-TM-qSp" id="8s5-ta-A2f"/>
@@ -73,7 +74,7 @@
                                     <color key="fillColor" red="0.120510533452034" green="0.12050692737102509" blue="0.12050899863243103" alpha="1" colorSpace="calibratedRGB"/>
                                 </box>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-LA-yn0">
-                                    <rect key="frame" x="302" y="5326" width="142" height="305"/>
+                                    <rect key="frame" x="302" y="6025" width="142" height="305"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="s4L-Ke-9Jm">
                                             <rect key="frame" x="7" y="177" width="128" height="128"/>
@@ -234,7 +235,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="746" height="788"/>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="d0X-cW-Xgz" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="10907" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="12305" width="746" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="Xeq-Aa-f1W"/>
                                         <constraint firstAttribute="height" constant="50" id="w34-Yi-hGT"/>
@@ -311,13 +312,52 @@
                                     </subviews>
                                 </customView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="DfH-di-xs7" customClass="GradientView">
-                                    <rect key="frame" x="0.0" y="10907" width="746" height="50"/>
+                                    <rect key="frame" x="0.0" y="12305" width="746" height="50"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dl1-Gt-oz5">
-                                            <rect key="frame" x="624" y="17" width="104" height="16"/>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="deo-XE-Agg" userLabel="mozaic" customClass="HoverButton">
+                                            <rect key="frame" x="554" y="10" width="85" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="zSV-0S-PdC"/>
+                                                <constraint firstAttribute="height" constant="30" id="bsH-tb-hOA"/>
                                             </constraints>
+                                            <buttonCell key="cell" type="square" title="Mozaic" bezelStyle="shadowlessSquare" image="mozaic" imagePosition="leading" alignment="right" transparent="YES" imageScaling="proportionallyUpOrDown" id="myx-oz-HGh">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="systemThin" size="13"/>
+                                            </buttonCell>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageInsets">
+                                                    <integer key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageHoverColor">
+                                                    <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="imageIncreaseOnHover">
+                                                    <integer key="value" value="0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverColor">
+                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverDarkColor">
+                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" red="0.1137239709" green="0.1137244478" blue="0.1137255356" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="setGreedLayout:" target="-2" id="mQX-w7-PB3"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dl1-Gt-oz5">
+                                            <rect key="frame" x="724" y="17" width="4" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="viR-W9-vvE">
                                                 <font key="font" metaFont="systemThin" size="13"/>
                                                 <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -329,6 +369,8 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="dl1-Gt-oz5" firstAttribute="centerY" secondItem="deo-XE-Agg" secondAttribute="centerY" id="BqM-b0-z3u"/>
+                                        <constraint firstAttribute="trailing" secondItem="deo-XE-Agg" secondAttribute="trailing" constant="70" id="E2O-hK-GfP"/>
                                         <constraint firstAttribute="height" constant="50" id="Vdv-Qo-Iw2"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="568" id="mkX-93-rYz"/>
                                         <constraint firstAttribute="centerY" secondItem="dl1-Gt-oz5" secondAttribute="centerY" id="wah-6d-tYK"/>
@@ -930,13 +972,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="62" horizontalPageScroll="10" verticalLineScroll="62" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="o0i-7W-5fA">
-                                    <rect key="frame" x="20" y="145" width="331" height="10810"/>
+                                    <rect key="frame" x="20" y="145" width="331" height="12208"/>
                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H2i-4W-Gvt">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="10810"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="12208"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" autosaveColumns="NO" rowHeight="60" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="ZOj-5b-rnp">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="10810"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="331" height="12208"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
@@ -1248,7 +1290,7 @@
                                     </scroller>
                                 </scrollView>
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="mFB-6z-yC0" customClass="DraggingDestinationView">
-                                    <rect key="frame" x="0.0" y="0.0" width="371" height="10957"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="371" height="12355"/>
                                 </customView>
                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSk-sH-cgy">
                                     <rect key="frame" x="20" y="0.0" width="331" height="145"/>
@@ -1513,6 +1555,7 @@
         <image name="ic_file_upload" width="72" height="72"/>
         <image name="message" width="70" height="70"/>
         <image name="micro_on" width="70" height="70"/>
+        <image name="mozaic" width="72" height="72"/>
         <image name="plugin" width="80" height="80"/>
         <image name="record" width="70" height="70"/>
         <image name="share" width="70" height="70"/>
