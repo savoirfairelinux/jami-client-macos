@@ -66,7 +66,7 @@ CGFloat PLUGIN_ROW_HEIGHT = 35;
 
 -(void)updateConstrains {
     CGFloat tableHeight = PLUGIN_ROW_HEIGHT * availableHandlers.size();
-    CGFloat tableWidth = [self getTableWidth] + 120;
+    CGFloat tableWidth = [self getTableWidth] + 180;
     tableHeightConstraint.constant = tableHeight;
     tableWidthConstraint.constant = tableWidth;
 }

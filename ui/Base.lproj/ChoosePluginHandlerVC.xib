@@ -81,7 +81,7 @@
                                                     </switch>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="lCd-yk-3JN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zS5-oB-zx4" secondAttribute="trailing" constant="10" id="0Nx-U6-IZO"/>
+                                                    <constraint firstItem="lCd-yk-3JN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zS5-oB-zx4" secondAttribute="trailing" constant="60" id="0Nx-U6-IZO"/>
                                                     <constraint firstItem="24C-KD-RH9" firstAttribute="centerY" secondItem="CCW-JE-rOQ" secondAttribute="centerY" id="BuK-L2-v0H"/>
                                                     <constraint firstAttribute="trailing" secondItem="lCd-yk-3JN" secondAttribute="trailing" constant="15" id="F9Y-85-EpT"/>
                                                     <constraint firstItem="lCd-yk-3JN" firstAttribute="centerY" secondItem="CCW-JE-rOQ" secondAttribute="centerY" id="PFp-xj-rS7"/>

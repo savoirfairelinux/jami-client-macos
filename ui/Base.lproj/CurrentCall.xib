@@ -865,9 +865,6 @@
                                                 <userDefinedRuntimeAttribute type="color" keyPath="hoverDarkColor">
                                                     <color key="value" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="imagePressedColor">
-                                                    <color key="value" name="systemRedColor" catalog="System" colorSpace="catalog"/>
-                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="toggleShare:" target="-2" id="uYz-nA-eMC"/>
@@ -941,6 +938,9 @@
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="imageDarkColor">
                                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="hoverDarkColor">
+                                                    <color key="value" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
                                                     <color key="value" red="0.1137239709" green="0.1137244478" blue="0.1137255356" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
