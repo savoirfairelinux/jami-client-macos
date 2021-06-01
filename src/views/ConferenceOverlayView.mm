@@ -114,7 +114,7 @@ CGFloat minWidth = 140;
             labelFrame.size.width = viewSize.width - margin * 2;
         }
         auto deltaH = viewSize.height - self.backgroundView.frame.size.height;
-        self.fullViewOverlay = (deltaH < 30);
+        self.fullViewOverlay = (deltaH < 30) || viewSize.width < 40;
         if (self.fullViewOverlay) {
             minWidth = viewSize.width + margin;
             minHeight = viewSize.height + margin;
@@ -127,6 +127,7 @@ CGFloat minWidth = 140;
         }
         [self.usernameLabel sizeToFit];
         self.nameLabelWidth.constant = labelFrame.size.width;
+        [self subscribeFullOverly];
         return;
     }
     auto buttonsSize = self.buttonsContainer.frame.size;
@@ -145,7 +146,7 @@ CGFloat minWidth = 140;
     }
     [self.superview layoutSubtreeIfNeeded];
     auto deltaH = viewSize.height - self.backgroundView.frame.size.height;
-    self.fullViewOverlay = (deltaH < 30);
+    self.fullViewOverlay = (deltaH < 30) || viewSize.width < 40;
     if (self.fullViewOverlay) {
         minWidth = MAX(MAX((viewSize.width + margin), (buttonsWidth + margin)), minWidthConst);
         self.nameLabelWidth.constant = minWidth - margin * 2;
@@ -160,6 +161,7 @@ CGFloat minWidth = 140;
     } else {
         self.infoLeadingConstraint.constant = -stackViewSpacing * 2;
     }
+    [self subscribeFullOverly];
 }
 
 - (void)viewSizeChanged {
@@ -167,8 +169,13 @@ CGFloat minWidth = 140;
     [self updateInfoSize];
 }
 
+- (void)subscribeFullOverly {
+    [self.increasedBackgroundView subscribeForMouceMovement: self.fullViewOverlay];
+}
+
 - (void)addViews {
-    self.increasedBackgroundView = [[NSView alloc] init];
+    self.increasedBackgroundView = [[TrackingMouseView alloc] init];
+    self.increasedBackgroundView.delegate = self;
     [self.increasedBackgroundView setWantsLayer:  YES];
     self.increasedBackgroundView.layer.backgroundColor = [[NSColor colorWithCalibratedRed: 0 green: 0 blue: 0 alpha: 0.8] CGColor];
     self.increasedBackgroundView.translatesAutoresizingMaskIntoConstraints = false;
@@ -447,9 +454,16 @@ CGFloat minWidth = 140;
 }
 
 -(void)mouseExited:(NSEvent *)theEvent {
+    if (!self.fullViewOverlay) {
+        [self hideOverlay];
+        self.mouseInside = false;
+    }
+    [super mouseExited:theEvent];
+}
+
+-(void)mouseExitedIncresedBackground {
     [self hideOverlay];
     self.mouseInside = false;
-    [super mouseExited:theEvent];
 }
 
 -(void) hideOverlay {
@@ -516,6 +530,5 @@ CGFloat minWidth = 140;
         [self addTrackingArea:trackingArea];
     }
 }
-
 
 @end

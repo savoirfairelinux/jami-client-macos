@@ -61,8 +61,6 @@ set(SHADERS_FILE "Shader.metallib")
 add_custom_command (OUTPUT ${CMAKE_SOURCE_DIR}/Shader.metallib
                     COMMAND ${CMAKE_SOURCE_DIR}/generateShaderLib.sh
                     COMMENT "Creating Shader.metallib")
-add_custom_target(shader ALL
-    DEPENDS ${CMAKE_SOURCE_DIR}/Shader.metallib)
 
 IF(NOT (${ENABLE_SPARKLE} MATCHES false))
    MESSAGE("Sparkle auto-update enabled")
@@ -262,6 +260,8 @@ SET(ringclient_VIEWS
    src/views/PluginPreferenceTab.mm
    src/views/NoResponderTableView.h
    src/views/NoResponderTableView.mm
+   src/views/TrackingMouseView.h
+   src/views/TrackingMouseView.mm
 )
 
 SET(ringclient_OTHERS

@@ -21,6 +21,7 @@
 #import "GradientView.h"
 #import "IconButton.h"
 #import "CustomBackgroundView.h"
+#import "TrackingMouseView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -52,7 +53,7 @@ struct ConferenceParticipant {
     bool videoMuted;
 };
 
-@interface ConferenceOverlayView: NSView {
+@interface ConferenceOverlayView: NSView<TrackingMouseViewDelegate> {
 @private
     NSTrackingArea *trackingArea;
 }
@@ -70,7 +71,7 @@ struct ConferenceParticipant {
 @property (nonatomic, weak) NSLayoutConstraint* backgroundBottomConstraint;
 @property (nonatomic, weak) NSLayoutConstraint* backgroundTrailingConstraint;
 @property NSView* backgroundView;
-@property NSView* increasedBackgroundView;
+@property TrackingMouseView* increasedBackgroundView;
 @property NSStackView* states;
 @property NSStackView* buttonsContainer;
 @property NSStackView* infoContainer;
