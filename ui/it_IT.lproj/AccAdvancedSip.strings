@@ -9,7 +9,7 @@
 "24s-we-pkD.title" = "Sicurezza";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "Scadenza timeout di registrazione (secondi):";
+"2rB-Bv-c9U.title" = "Ritardo massimo di registrazione (secondi)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
 "3Uq-Nb-J1A.title" = "Impostazioni di chiamata";
@@ -111,7 +111,7 @@
 "cwV-lc-jju.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Timeout negoziazione (sec)";
+"dtf-uk-n1B.title" = "Tempo di negoziazione (secondi)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "Box";

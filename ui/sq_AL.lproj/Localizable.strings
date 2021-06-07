@@ -20,7 +20,7 @@
 "An error occured during the export" = "Ndodhi një gabim gjatë eksportimit";
 
 /* Peer busy message */
-"appears to be busy." = "duket të jetë i zënë";
+"appears to be busy." = "duket të jetë i zënë.";
 
 /* Error audio permission */
 "Audio permission not granted" = "Pa leje audio të akorduara";
@@ -41,7 +41,7 @@
 "Canceled" = "U anulua";
 
 /* Contextual menu entry */
-"Stream file" = "Stream file";
+"Stream file" = "Transmetoni kartelë";
 
 /* Contextual menu action */
 "Clear conversation" = "Spastroje bisedën";
@@ -293,13 +293,13 @@
 "Resend" = "Ridërgoje";
 
 /* In call status info */
-"Wants to talk to you" = "Wants to talk to you";
+"Wants to talk to you" = "Dëshiron të bisedojë me ju";
 
 /* share button tooltip */
-"Stop screen sharing" = "Stop screen sharing";
+"Stop screen sharing" = "Resht së dhëni ekranin";
 
 /* share button tooltip */
-"Stop file streaming" = "Stop file streaming";
+"Stop file streaming" = "Resht transmetim kartele";
 
 /* share button tooltip */
 "Share" = "Ndajeni me të tjerë";
