@@ -21,7 +21,7 @@
 "LVS-yZ-98V.ibShadowedToolTip" = "Video stummschalten";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Select video device"; ObjectID = "Vcv-ia-VEy"; */
-"Vcv-ia-VEy.ibShadowedToolTip" = "Select video device";
+"Vcv-ia-VEy.ibShadowedToolTip" = "Videogerät auswählen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Share"; ObjectID = "ZGn-Tc-sg3"; */
 "ZGn-Tc-sg3.ibShadowedToolTip" = "Teilen";
@@ -42,7 +42,7 @@
 "QYT-0n-4sw.ibShadowedToolTip" = "Aufzeichnen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "add contact to call"; ObjectID = "Vhk-fx-6RW"; */
-"Vhk-fx-6RW.ibShadowedToolTip" = "Add contact to call";
+"Vhk-fx-6RW.ibShadowedToolTip" = "Kontakt zum Anruf hinzufügen";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YGj-SP-ikj"; */
 "YGj-SP-ikj.title" = "Textzelle";
@@ -69,16 +69,16 @@
 "ngO-WV-cXD.ibShadowedToolTip" = "Datei senden";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Aufheben";
+"qgD-3D-nD5.ibShadowedToolTip" = "Annehmen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
 "rqa-be-VIB.ibShadowedToolTip" = "Senden";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Select audio output device"; ObjectID = "Yma-O2-Ljp"; */
-"Yma-O2-Ljp.ibShadowedToolTip" = "Select audio output device";
+"Yma-O2-Ljp.ibShadowedToolTip" = "Audio-Ausgabegerät wählen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Select audio input device"; ObjectID = "aMU-l3-xFT"; */
-"aMU-l3-xFT.ibShadowedToolTip" = "Select audio input device";
+"aMU-l3-xFT.ibShadowedToolTip" = "Audio-Eingabegerät auswählen";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Mute microphone"; ObjectID = "N0A-rb-6rf"; */
 "N0A-rb-6rf.ibShadowedToolTip" = "Mikrofon stummschalten";
