@@ -94,6 +94,7 @@ typedef enum {
 @property (unsafe_unretained) IBOutlet NSTextField* contactIdLabel;
 @property (unsafe_unretained) IBOutlet IconButton* cancelCallButton;
 @property (unsafe_unretained) IBOutlet IconButton* pickUpButton;
+@property (unsafe_unretained) IBOutlet IconButton* pickUpButtonAudioOnly;
 @property (unsafe_unretained) IBOutlet ITProgressIndicator *loadingIndicator;
 
 // Call Controls
@@ -122,13 +123,12 @@ typedef enum {
 @property (unsafe_unretained) IBOutlet MovableView *movableBaseForView;
 @property (unsafe_unretained) IBOutlet NSView* hidePreviewBackground;
 @property (unsafe_unretained) IBOutlet NSButton* hidePreviewButton;
-@property (unsafe_unretained) IBOutlet NSView* muteVideoButtonContainer;
-
 @property (unsafe_unretained) IBOutlet RenderingView *distantView;
 
 @property RendererConnectionsHolder* renderConnections;
 @property QMetaObject::Connection videoStarted;
 @property QMetaObject::Connection callStateChanged;
+@property QMetaObject::Connection callInfosChanged;
 @property QMetaObject::Connection messageConnection;
 @property QMetaObject::Connection profileUpdatedConnection;
 @property QMetaObject::Connection participantsChangedConnection;
@@ -159,7 +159,7 @@ NSInteger const PREVIEW_MARGIN = 20;
 BOOL allModeratorsInConference = false;
 BOOL displayGridLayoutButton = false;
 
-@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, chatButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC, audioOutputButton, inputAudioMenuButton, outputAudioMenuButton, videoMenuButton, pluginButton,muteVideoButtonContainer, shareButton;
+@synthesize holdOnOffButton, hangUpButton, recordOnOffButton, pickUpButton, pickUpButtonAudioOnly, chatButton, addParticipantButton, timeSpentLabel, muteVideoButton, muteAudioButton, controlsPanel, headerContainer, videoView, previewView, splitView, loadingIndicator, backgroundImage, bluerBackgroundEffect, hidePreviewButton, hidePreviewBackground, movableBaseForView, infoContainer, contactPhoto, contactNameLabel, callStateLabel, contactIdLabel, cancelCallButton, headerGradientView, controlsStackView, callingWidgetsContainer, brokerPopoverVC, audioOutputButton, inputAudioMenuButton, outputAudioMenuButton, videoMenuButton, pluginButton, shareButton;
 
 @synthesize renderConnections;
 CVPixelBufferPoolRef pixelBufferPoolDistantView;
@@ -291,6 +291,26 @@ CVPixelBufferRef pixelBufferPreview;
             [self updateCall];
         }
     });
+    //monitor for updated call infos
+    QObject::disconnect(self.callInfosChanged);
+    self.callInfosChanged = QObject::connect(callModel,
+                                             &lrc::api::NewCallModel::callInfosChanged,
+                                             [self](const QString&, const QString& callId) {
+        if ([self isCurrentCall: callId]) {
+            if (accountInfo_ == nil)
+                return;
+
+            auto* callModel = accountInfo_->callModel.get();
+            if (not callModel->hasCall(callUid_)) {
+                return;
+            }
+
+            auto currentCall = callModel->getCall(callUid_);
+            
+            movableBaseForView.hidden = currentCall.videoMuted;
+            [self setUpButtons: currentCall isRecording: (callModel->isRecording([self getcallID]) || mediaModel->getAlwaysRecord())];
+        }
+    });
     /* monitor media for messaging text messaging */
     QObject::disconnect(self.messageConnection);
     self.messageConnection = QObject::connect(convModel,
@@ -346,7 +366,6 @@ CVPixelBufferRef pixelBufferPreview;
     muteVideoButton.image = callInfo.videoMuted ? [NSImage imageNamed:@"camera_off.png"] :
     [NSImage imageNamed:@"camera_on.png"];
     [shareButton setHidden: callInfo.isAudioOnly ? YES: NO];
-    [muteVideoButtonContainer setHidden: callInfo.isAudioOnly ? YES: NO];
     if (isRecording) {
         [recordOnOffButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1 duration: 1.5];
     } else {
@@ -552,14 +571,18 @@ CVPixelBufferRef pixelBufferPreview;
     [self setUpButtons: currentCall isRecording: (callModel->isRecording([self getcallID]) || mediaModel->getAlwaysRecord())];
 
     [videoView setShouldAcceptInteractions: currentCall.status == Status::IN_PROGRESS];
-    callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? NSLocalizedString(@"Wants to talk to you", @"In call status info") : to_string(currentCall.status).toNSString();
+    NSString* incomingString = currentCall.isAudioOnly ? @"Incoming audio call" : @"Incoming video call";
+    callStateLabel.stringValue = currentCall.status == Status::INCOMING_RINGING ? NSLocalizedString(incomingString, @"In call status info") : to_string(currentCall.status).toNSString();
     loadingIndicator.hidden = (currentCall.status == Status::SEARCHING ||
                                currentCall.status == Status::CONNECTING ||
                                currentCall.status == Status::OUTGOING_RINGING) ? NO : YES;
     pickUpButton.hidden = (currentCall.status == Status::INCOMING_RINGING) ? NO : YES;
+    pickUpButton.image = currentCall.isAudioOnly ? [NSImage imageNamed:@"ic_action_call.png"] : [NSImage imageNamed:@"camera_on.png"];
+    pickUpButtonAudioOnly.hidden = (currentCall.status == Status::INCOMING_RINGING) ? currentCall.isAudioOnly : YES;
     callStateLabel.hidden = (currentCall.status == Status::IN_PROGRESS) ? YES : NO;
     cancelCallButton.hidden = (currentCall.status == Status::IN_PROGRESS ||
                              currentCall.status == Status::PAUSED) ? YES : NO;
+    cancelCallButton.image = (currentCall.status == Status::INCOMING_RINGING) ? [NSImage imageNamed:@"ic_action_cancel.png"] : [NSImage imageNamed:@"ic_action_hangup.png"];
     callingWidgetsContainer.hidden = (currentCall.status == Status::IN_PROGRESS) ? NO : YES;
     switch (currentCall.status) {
         case Status::SEARCHING:
@@ -1086,6 +1109,33 @@ CVPixelBufferRef pixelBufferPreview;
     callModel->accept(callUid_);
 }
 
+
+
+- (IBAction)acceptAudioOnly:(id)sender {
+    if (accountInfo_ == nil)
+        return;
+
+    // If we accept a conversation with a non trusted contact, we first accept it
+    auto convOpt = getConversationFromUid(convUid_, *accountInfo_->conversationModel.get());
+    if (!convOpt.has_value()) {
+        return;
+    }
+    lrc::api::conversation::Info& conv = *convOpt;
+    if (conv.uid.isEmpty() || conv.participants.empty()) {
+        return;
+    }
+    auto& contact = accountInfo_->contactModel->getContact(conv.participants[0]);
+    if (contact.profileInfo.type == lrc::api::profile::Type::PENDING) {
+        accountInfo_->conversationModel->makePermanent(convUid_);
+    }
+
+    auto* callModel = accountInfo_->callModel.get();
+    callModel->updateCallMediaList(callUid_, false);
+    movableBaseForView.hidden = YES;
+    muteVideoButton.image = [NSImage imageNamed:@"camera_off.png"];
+    callModel->accept(callUid_);
+}
+
 - (IBAction)toggleRecording:(id)sender {
     if (accountInfo_ == nil)
         return;
@@ -1129,7 +1179,7 @@ CVPixelBufferRef pixelBufferPreview;
 
     auto* callModel = accountInfo_->callModel.get();
     auto& currentCall = callModel->getCall(callUid_);
-    callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::AUDIO);
+    callModel->requestMediaChange(callUid_, "audio_0");
     muteAudioButton.image = currentCall.audioMuted ? [NSImage imageNamed:@"micro_off.png"] : [NSImage imageNamed:@"micro_on.png"];
     NSColor* audioImageColor = currentCall.audioMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteAudioButton color: audioImageColor];
@@ -1148,10 +1198,7 @@ CVPixelBufferRef pixelBufferPreview;
         return;
     auto* callModel = accountInfo_->callModel.get();
     auto& currentCall = callModel->getCall(callUid_);
-    if (currentCall.isAudioOnly) {
-        return;
-    }
-    callModel->toggleMedia(callUid_, lrc::api::NewCallModel::Media::VIDEO);
+    callModel->requestMediaChange(callUid_, "video_0");
     muteVideoButton.image = currentCall.videoMuted ? [NSImage imageNamed:@"camera_off.png"] : [NSImage imageNamed:@"camera_on.png"];
     NSColor* videoImageColor = currentCall.videoMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteVideoButton color: videoImageColor];
