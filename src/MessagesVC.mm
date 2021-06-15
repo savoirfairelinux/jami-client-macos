@@ -367,7 +367,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         [self scrollToBottom];
     });
     interactionRemovedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionRemoved,
-                                                 [self](const QString& uid, uint64_t interactionId) {
+                                                 [self](const QString& uid, const QString& interactionId) {
         cachedConv_ = nil;
     });
 
@@ -614,8 +614,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
                 [messageActionsMenu insertItem: menuItem atIndex: messageActionsMenu.itemArray.count];
             }
         }
-        NSMenuItem* menuItem = [self menuItemWithTitle: NSLocalizedString(@"Delete", @"Contextual menu for message") action: @selector(deleteMessage:) keyEquivalent: @"" interactionId: interactionID];
-        [messageActionsMenu insertItem: menuItem atIndex: messageActionsMenu.itemArray.count];
+//        NSMenuItem* menuItem = [self menuItemWithTitle: NSLocalizedString(@"Delete", @"Contextual menu for message") action: @selector(deleteMessage:) keyEquivalent: @"" interactionId: interactionID];
+//        [messageActionsMenu insertItem: menuItem atIndex: messageActionsMenu.itemArray.count];
 
         [NSMenu popUpContextMenu:messageActionsMenu withEvent: event forView: result.openFileButton];
     };
@@ -635,7 +635,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     return result;
 }
 
--(NSMenuItem*)menuItemWithTitle:(NSString *)title action:(nullable SEL)selector keyEquivalent:(NSString *)charCode interactionId:(uint64) interactionId {
+-(NSMenuItem*)menuItemWithTitle:(NSString *)title action:(nullable SEL)selector keyEquivalent:(NSString *)charCode interactionId:(const QString&) interactionId {
     NSMenuItem* menuItem = [[NSMenuItem alloc]
                             initWithTitle: title
                             action: selector
@@ -643,11 +643,11 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSImage *image=[[NSImage alloc]initWithSize:NSMakeSize(1,30)];
     [menuItem setImage:image];
     [menuItem setTarget:self];
-    menuItem.representedObject = [NSNumber numberWithUnsignedLongLong: interactionId];
+    menuItem.representedObject = interactionId.toNSString();
     return menuItem;
 }
 
--(NSString*) getFilePath:(uint64) interId {
+-(NSString*) getFilePath:(const QString&) interId {
     auto it = [self getCurrentConversation]->interactions.find(interId);
     if (it == [self getCurrentConversation]->interactions.end()) {
         return @"";
@@ -655,12 +655,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     auto& interaction = it->second;
     NSString* name =  interaction.body.toNSString();
     if (([name rangeOfString:@"/"].location == NSNotFound)) {
-        name = [self getDataTransferPath:interId];
+        name = [self getDataTransferPath: interId];
     }
     return name;
 }
 - (void)quickLook:(id)sender {
-    NSString* name = [self getFilePath: [[sender representedObject] unsignedLongLongValue]];
+    NSString* name = [self getFilePath: QString::fromNSString([sender representedObject])];
     if (name.length <= 0) {
         return;
     }
@@ -678,7 +678,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
 }
 - (void)openFile:(id)sender {
-    NSString* name = [self getFilePath: [[sender representedObject] unsignedLongLongValue]];
+    NSString* name = [self getFilePath: QString::fromNSString([sender representedObject])];
     if (name.length <= 0) {
         return;
     }
@@ -687,7 +687,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void)showInFinder:(id)sender {
-    NSString* name = [self getFilePath: [[sender representedObject] unsignedLongLongValue]];
+    NSString* name = [self getFilePath: QString::fromNSString([sender representedObject])];
     if (name.length <= 0) {
         return;
     }
@@ -695,13 +695,13 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void)deleteMessage:(id)sender {
-    auto interId = [[sender representedObject] unsignedLongLongValue];
+    auto interId = QString::fromNSString([sender representedObject]);
     auto conv = [self getCurrentConversation];
     auto it = conv->interactions.find(interId);
     if (it == conv->interactions.end()) {
         return;
     }
-    auto itIndex = distance(conv->interactions.begin(),it);
+    auto itIndex = std::distance(conv->interactions.begin(),it);
     if (itIndex >= ([conversationView numberOfRows] - 1) || itIndex >= conv->interactions.size()) {
         return;
     }
@@ -712,7 +712,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void)resendMessage:(id)sender {
-    auto interId = [[sender representedObject] unsignedLongLongValue];
+    auto interId = QString::fromNSString([[sender representedObject] stringValue]);
     NSString* name = [self getFilePath: interId];
     if (name.length <= 0) {
         return;
@@ -1220,7 +1220,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 - (void)preview:(id)sender {
-    uint64_t interId;
+    QString interId;
     if ([[[[[[sender superview] superview] superview] superview] superview] isKindOfClass:[IMTableCellView class]]) {
         interId = [(IMTableCellView*)[[[[[sender superview] superview] superview] superview] superview] interaction];
     } else if ([[[[[sender superview] superview] superview] superview] isKindOfClass:[IMTableCellView class]]) {
