@@ -448,38 +448,53 @@ CVPixelBufferRef pixelBufferPreview;
     NSMutableArray* participantUrs = [[NSMutableArray alloc] init];
     BOOL allModerators = true;
     for (auto participant: participants) {
-        if (participant["isModerator"] != "true" &&
-            ![self isParticipantHost: participant["uri"].toNSString()]) {
+        if (!participant.isModerator &&
+            ![self isParticipantHost: participant.uri.toNSString()]) {
             allModerators = false;
         }
     }
+    QString uri;
+    QString device;
+    QString sinkId;
+    QString bestName;
+    bool active;
+    int x;
+    int y;
+    int width;
+    int height;
+    bool audioLocalMuted;
+    bool audioModeratorMuted;
+    bool videoMuted;
+    bool isModerator;
+    bool islocal;
+    bool isContact;
     displayGridLayoutButton = call.layout != lrc::api::call::Layout::GRID;
     movableBaseForView.hidden = true;
     allModeratorsInConference = allModerators;
     for (auto participant: participants) {
         ConferenceParticipant conferenceParticipant;
-        conferenceParticipant.x = participant["x"].toFloat();
-        conferenceParticipant.y = participant["y"].toFloat();
-        conferenceParticipant.width = participant["w"].toFloat();
-        conferenceParticipant.hight = participant["h"].toFloat();
-        conferenceParticipant.uri = participant["uri"].toNSString();
-        [participantUrs addObject:participant["uri"].toNSString()];
-        conferenceParticipant.active = participant["active"] == "true";
+        conferenceParticipant.x = participant.x;
+        conferenceParticipant.y = participant.y;
+        conferenceParticipant.width = participant.width;
+        conferenceParticipant.hight = participant.height;
+        conferenceParticipant.uri = participant.uri.toNSString();
+        [participantUrs addObject:participant.uri.toNSString()];
+        conferenceParticipant.active = participant.active;
         conferenceParticipant.isLocal = false;
-        conferenceParticipant.bestName = participant["uri"].toNSString();
-        if (accountInfo_->profileInfo.uri == participant["uri"]) {
+        conferenceParticipant.bestName = participant.uri.toNSString();
+        if (accountInfo_->profileInfo.uri == participant.uri) {
             conferenceParticipant.isLocal = true;
             conferenceParticipant.bestName = NSLocalizedString(@"Me", @"Conference name");
         } else {
             try {
-                auto contact = accountInfo_->contactModel->getContact(participant["uri"]);
+                auto contact = accountInfo_->contactModel->getContact(participant.uri);
                 conferenceParticipant.bestName = bestNameForContact(contact);
             } catch (...) {}
         }
-        conferenceParticipant.videoMuted = participant["videoMuted"] == "true";
-        conferenceParticipant.audioLocalMuted = participant["audioLocalMuted"] == "true";
-        conferenceParticipant.audioModeratorMuted = participant["audioModeratorMuted"] == "true";
-        conferenceParticipant.isModerator = participant["isModerator"] == "true";
+        conferenceParticipant.videoMuted = participant.videoMuted;
+        conferenceParticipant.audioLocalMuted = participant.audioLocalMuted;
+        conferenceParticipant.audioModeratorMuted = participant.audioModeratorMuted;
+        conferenceParticipant.isModerator = participant.isModerator;
         if (participantsOverlays[conferenceParticipant.uri] != nil) {
             ConferenceOverlayView* overlay = participantsOverlays[conferenceParticipant.uri];
             overlay.framesize = framesize;
