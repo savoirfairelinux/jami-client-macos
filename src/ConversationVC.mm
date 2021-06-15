@@ -111,8 +111,8 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
         leaveMessageVC.delegate = self;
         [messagesViewVC setAVModel: avModel];
         //setup the invitation view
-        invitationView.wantsLayer = true;
-        invitationView.layer.backgroundColor = [[NSColor windowBackgroundColor] CGColor];
+       // invitationView.wantsLayer = true;
+       // invitationView.layer.backgroundColor = [[NSColor windowBackgroundColor] CGColor];
         NSString *invitationText = NSLocalizedString(@"Hello, \nWould you like to join the conversation?", @"Incoming conversation request title");
         [self setInvitationText: invitationText];
         invitationBox.wantsLayer = true;
@@ -300,6 +300,10 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
     if (!showInvitationView) {
         return;
     }
+    NSString *invitationLabelString = [NSString stringWithFormat:
+                           NSLocalizedString(@"%@ has sent you a request for a conversation.",@"Invitation request from {Name}"),
+                           bestName];
+    invitationLabel.stringValue = invitationLabelString;
     if (conversation->isRequest && conversation->needsSyncing) {
         NSString *syncTitle = [NSString stringWithFormat:
                                NSLocalizedString(@"We are waiting for %@ connects to synchronize the conversation.",@"Synchronization label for conversation {Name}"),
