@@ -12,7 +12,7 @@
 "7eU-EP-4br.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
-"8mv-Ia-GM4.title" = "TURN address";
+"8mv-Ia-GM4.title" = "Alamat TURN";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "BIS-Ft-yJn"; */
 "BIS-Ft-yJn.title" = "Pengaturan telepon";
@@ -36,13 +36,13 @@
 "EyV-Io-d3f.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Name server";
+"ID3-Sv-gYY.title" = "Nama peladen";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
 "K0z-NH-3Cq.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
-"LWs-a2-E7f.title" = "User certificate";
+"LWs-a2-E7f.title" = "Sertifikat pengguna";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Q4t-zo-brK"; */
 "Q4t-zo-brK.title" = "Audio codecs";
@@ -51,7 +51,7 @@
 "Qxp-I4-A7W.title" = "Keamanan";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Enable proxy";
+"VyP-8T-aNA.title" = "Aktifkan proksi";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "Video codecs";
@@ -60,7 +60,7 @@
 "XU0-bl-lDD.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "Alamat STUN";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "Bootstrap";
@@ -81,25 +81,25 @@
 "eGX-gk-Zxp.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
-"eMG-uY-bpH.title" = "TURN username";
+"eMG-uY-bpH.title" = "Nama pengguna TURN";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "g8T-u3-MS3"; */
 "g8T-u3-MS3.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "gUl-Px-cIJ"; */
-"gUl-Px-cIJ.title" = "TURN password";
+"gUl-Px-cIJ.title" = "Kata sandi TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "k7i-pK-JXp"; */
-"k7i-pK-JXp.title" = "CA certificate";
+"k7i-pK-JXp.title" = "Sertifikat CA";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "nqX-Vu-UuA"; */
-"nqX-Vu-UuA.title" = "Use STUN";
+"nqX-Vu-UuA.title" = "Gunakan TURN";
 
 /* Class = "NSButtonCell"; title = "Custom ringtone"; ObjectID = "qFq-Yh-2JL"; */
-"qFq-Yh-2JL.title" = "Custom ringtone";
+"qFq-Yh-2JL.title" = "Nada dering kustom";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Connectivity";
+"sVe-iG-OCw.title" = "Konektivitas";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
 "soR-nF-ybe.title" = "Private key";
@@ -111,16 +111,16 @@
 "vYi-gW-MrY.title" = "Box";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
-"xJT-ij-69q.title" = "OpenDHT configuration";
+"xJT-ij-69q.title" = "Konfigurasi OpenDHT";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "zPJ-cO-neQ"; */
-"zPJ-cO-neQ.title" = "Use TURN";
+"zPJ-cO-neQ.title" = "Gunakan TURN";
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
 "2cZ-SI-nbz.title" = "Enable rendezvous point: turn your account into a conference room";
 
 /* Class = "NSButtonCell"; title = "Add default moderator"; ObjectID = "RKw-pg-2N8"; */
-"RKw-pg-2N8.title" = "Add default moderator";
+"RKw-pg-2N8.title" = "Tambah moderator default";
 
 /* Class = "NSTextFieldCell"; title = "You do not have default moderators"; ObjectID = "g2o-3r-Dx7"; */
 "g2o-3r-Dx7.title" = "You do not have default moderators";

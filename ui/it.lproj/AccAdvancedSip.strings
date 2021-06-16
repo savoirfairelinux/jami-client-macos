@@ -15,7 +15,7 @@
 "3Uq-Nb-J1A.title" = "Impostazioni di chiamata";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "Sostituire con RTP in caso di fallimento della cifratura";
+"3rM-KT-bNf.title" = "Utilizzare RTP quando la cifratura fallisce";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
 "3vs-TI-tkg.title" = "Risposta automatica alle chiamate";
@@ -144,10 +144,10 @@
 "rMN-Wf-tmp.title" = "Nome utente TURN";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
-"vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
+"vCS-s8-mZI.title" = "Cifrare i flussi multimediali (SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Negoziazione della cifratura (TLS)";
+"vZH-42-mUi.title" = "Cifrare la negoziazione (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
 "vpo-fl-9TS.title" = "Connettività";
