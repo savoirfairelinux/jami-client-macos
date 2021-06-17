@@ -7,6 +7,7 @@ SPARKLE_FILE=$2
 REPO_URL=$3
 PACKAGE=$4
 DSA_KEY=$5
+VERSION_NAME=$6
 
 if [ ! -f ${PACKAGE} -o ! -f ${DSA_KEY} ]; then
     echo "Can't find package or dsa key, aborting..."
@@ -36,7 +37,7 @@ cat << EOFILE > ${REPO_FOLDER}/${SPARKLE_FILE}
         <item>
             <title>Ring nightly $(date "+%Y/%m/%d %H:%M")</title>
             <pubDate>$DATE_RFC2822</pubDate>
-            <enclosure url="${REPO_URL}/$(basename ${PACKAGE})" sparkle:version="$(date +%Y%m%d%H)" sparkle:shortVersionString="nightly-$(date "+%Y%m%d")" length="$PACKAGE_SIZE" type="application/octet-stream" sparkle:dsaSignature="$(./sign_update.sh ${PACKAGE} ${DSA_KEY})" />
+            <enclosure url="${REPO_URL}/$(basename ${PACKAGE})" sparkle:version="$(date +%Y%m%d%H)" sparkle:shortVersionString=${VERSION_NAME} length="$PACKAGE_SIZE" type="application/octet-stream" sparkle:dsaSignature="$(./sign_update.sh ${PACKAGE} ${DSA_KEY})" />
             <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
         </item>
 $(echo -e "${ITEMS}")
