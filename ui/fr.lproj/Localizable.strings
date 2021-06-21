@@ -305,25 +305,25 @@
 "Share" = "Partager";
 
 /* Synchronization label for conversation {Name} */
-"We are waiting for %@ connects to synchronize the conversation." = "We are waiting for %@ connects to synchronize the conversation.";
+"We are waiting for %@ connects to synchronize the conversation." = "Nous attendons que %@ se connecte afin de synchroniser la conversation.";
 
 /* Incoming conversation request title */
-"Hello, \nWould you like to join the conversation?" = "Hello, \nWould you like to join the conversation?";
+"Hello, \nWould you like to join the conversation?" = "Bonjour,\nSouhaitez-vous rejoindre cette conversation ?";
 
 /* Invitation request from {Name} */
-"%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
+"%@ has sent you a request for a conversation." = "%@ vous a envoyé une invitation à rejoindre une conversation.";
 
 /* Synchronization explanation label */
 "You have accepted the conversation request." = "Vous avez accepté la demande de conversation";
 
 /* Send request to {Name} */
-"%@ is not in your contacts." = "%@ is not in your contacts.";
+"%@ is not in your contacts." = "%@ ne fait pas partie de vos contacts.";
 
 /* Send request explanation */
-"Send him/her a contact request to be able to exchange together." = "Send him/her a contact request to be able to exchange together.";
+"Send him/her a contact request to be able to exchange together." = "Envoyez lui une invitation pour être capable d'échanger ensemble.";
 
 /* Wait for request acceptance from {Name} */
-"%@ has not yet accepted your contact request." = "%@ has not yet accepted your contact request.";
+"%@ has not yet accepted your contact request." = "%@ n'a pas encore accepté votre invitation.";
 
 /* Wait for request acceptance from {Name} explanation */
-"%@ must accept your contact request to answer you." = "%@ must accept your contact request to answer you.";
+"%@ must accept your contact request to answer you." = "%@ doit accepter votre invitation pour vous répondre.";
