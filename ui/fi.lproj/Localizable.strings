@@ -305,25 +305,25 @@
 "Share" = "Jako";
 
 /* Synchronization label for conversation {Name} */
-"We are waiting for %@ connects to synchronize the conversation." = "We are waiting for %@ connects to synchronize the conversation.";
+"We are waiting for %@ connects to synchronize the conversation." = "Odotamme, että %@ tahdistaa keskustelun.";
 
 /* Incoming conversation request title */
-"Hello, \nWould you like to join the conversation?" = "Hello, \nWould you like to join the conversation?";
+"Hello, \nWould you like to join the conversation?" = "Hei,\nHaluatko liittyä keskusteluun?";
 
 /* Invitation request from {Name} */
-"%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
+"%@ has sent you a request for a conversation." = "%@ on lähettänyt sinulle keskustelupyynnön.";
 
 /* Synchronization explanation label */
 "You have accepted the conversation request." = "Olet hyväksynyt keskustelupyynnön.";
 
 /* Send request to {Name} */
-"%@ is not in your contacts." = "%@ is not in your contacts.";
+"%@ is not in your contacts." = "%@ ei ole yhteystiedoissasi.";
 
 /* Send request explanation */
-"Send him/her a contact request to be able to exchange together." = "Send him/her a contact request to be able to exchange together.";
+"Send him/her a contact request to be able to exchange together." = "Lähetä hänelle yhteydenottopyyntö, jotta hän voi vaihtaa tietoja.";
 
 /* Wait for request acceptance from {Name} */
-"%@ has not yet accepted your contact request." = "%@ has not yet accepted your contact request.";
+"%@ has not yet accepted your contact request." = "%@ ei ole vielä hyväksynyt yhteydenottopyyntöäsi.";
 
 /* Wait for request acceptance from {Name} explanation */
-"%@ must accept your contact request to answer you." = "%@ must accept your contact request to answer you.";
+"%@ must accept your contact request to answer you." = "%@ on hyväksyttävä yhteydenottopyyntösi vastatakseen sinulle.";

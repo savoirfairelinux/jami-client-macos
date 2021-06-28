@@ -24,7 +24,7 @@
 "rdZ-JB-96s.title" = "Make this account discoverable on local network";
 
 /* Class = "NSButtonCell"; title = "Enable local moderators"; ObjectID = "BCQ-xd-1zb"; */
-"BCQ-xd-1zb.title" = "Abilita moderatori locali";
+"BCQ-xd-1zb.title" = "Attiva moderatori locali";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
 "n3E-PI-JHj.title" = "Discover peers on local network";
@@ -51,7 +51,7 @@
 "Qxp-I4-A7W.title" = "Sicurezza";
 
 /* Class = "NSButtonCell"; title = "Enable proxy"; ObjectID = "VyP-8T-aNA"; */
-"VyP-8T-aNA.title" = "Abilita proxy";
+"VyP-8T-aNA.title" = "Attiva proxy";
 
 /* Class = "NSTextFieldCell"; title = "Video codecs"; ObjectID = "Wrh-zD-uh5"; */
 "Wrh-zD-uh5.title" = "Codec video";
@@ -60,7 +60,7 @@
 "XU0-bl-lDD.title" = "TURN realm";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "YE4-ry-u07"; */
-"YE4-ry-u07.title" = "STUN address";
+"YE4-ry-u07.title" = "Indirizzo STUN";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
 "YJM-iQ-0lE.title" = "Innesco";
@@ -117,7 +117,7 @@
 "zPJ-cO-neQ.title" = "Utilizza TURN";
 
 /* Class = "NSButtonCell"; title = "Enable rendezvous point: turn your account into a conference room"; ObjectID = "2cZ-SI-nbz"; */
-"2cZ-SI-nbz.title" = "Abilita come punto di riunione: trasforma il tuo account in una sala conferenze";
+"2cZ-SI-nbz.title" = "Attiva come punto di riunione: trasforma il tuo account in una sala conferenze";
 
 /* Class = "NSButtonCell"; title = "Add default moderator"; ObjectID = "RKw-pg-2N8"; */
 "RKw-pg-2N8.title" = "Aggiungi moderatore predefinito";

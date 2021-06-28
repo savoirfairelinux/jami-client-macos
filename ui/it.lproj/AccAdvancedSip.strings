@@ -48,7 +48,7 @@
 "HRM-FR-1sH.title" = "Usare STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN address";
+"HYt-sW-yd0.title" = "Indirizzo STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
 "JV8-cY-6vR.title" = "Richiedere un certificato per le connessione in arrivo";
@@ -75,7 +75,7 @@
 "Ppa-zn-w1X.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
-"Qk8-tH-a0l.title" = "Abilita SDES per il protocollo di scambio chiavi";
+"Qk8-tH-a0l.title" = "Attiva SDES per il protocollo di scambio chiavi";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
 "RIj-rT-gSd.title" = "Text Cell";
