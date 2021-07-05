@@ -56,7 +56,7 @@
 "Create a new account" = "新しいアカウントを作成";
 
 /* Create rendezvous title */
-"Create a rendezvous point" = "Create a rendezvous point";
+"Create a rendezvous point" = "待合室を作成";
 
 /* Backup enter password */
 "Enter account password" = "アカウントのパスワードを入力";
@@ -227,13 +227,13 @@
 "Mute audio" = "音声オフ";
 
 /* Conference action */
-"Set moderator" = "Set moderator";
+"Set moderator" = "調停者を設定";
 
 /* Conference action */
 "Unmute audio" = "Unmute audio";
 
 /* Conference action */
-"Unset moderator" = "Unset moderator";
+"Unset moderator" = "担当者を取り消し";
 
 /* Conference name */
 "Me" = "自分";
@@ -260,7 +260,7 @@
 "Hangup" = "受話";
 
 /* conference tooltip mute Set moderator */
-"Set moderator" = "Set moderator";
+"Set moderator" = "調停者を設定";
 
 /* conference state tooltip Audio muted */
 "Audio muted" = "Audio muted";

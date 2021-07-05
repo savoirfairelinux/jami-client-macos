@@ -9,13 +9,13 @@
 "24s-we-pkD.title" = "セキュリティ";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
-"2rB-Bv-c9U.title" = "登録期限のタイムアウト (秒)";
+"2rB-Bv-c9U.title" = "登録期限が時間切れです (秒)";
 
 /* Class = "NSTextFieldCell"; title = "Call settings"; ObjectID = "3Uq-Nb-J1A"; */
 "3Uq-Nb-J1A.title" = "通話設定";
 
 /* Class = "NSButtonCell"; title = "Fallback on RTP on encryption failure"; ObjectID = "3rM-KT-bNf"; */
-"3rM-KT-bNf.title" = "暗号化失敗時のRTP上のフォールバック";
+"3rM-KT-bNf.title" = "暗号化失敗時のRTP上の予備的措置";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "3vs-TI-tkg"; */
 "3vs-TI-tkg.title" = "自動応答";
@@ -24,13 +24,13 @@
 "6eH-la-JbF.title" = "TURNレルム";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
-"72p-GY-gu6.title" = "秘密鍵のパスワード";
+"72p-GY-gu6.title" = "秘密鍵の暗証語";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
 "8JD-11-wHZ.title" = "送信TLSサーバー名";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
-"8bw-iH-XGl.title" = "アイテム 1";
+"8bw-iH-XGl.title" = "項目 1";
 
 /* Class = "NSTextFieldCell"; title = "Port"; ObjectID = "9p9-GR-XKU"; */
 "9p9-GR-XKU.title" = "ポート番号";
@@ -105,13 +105,13 @@
 "b2y-85-ZHK.title" = "CA証明書";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
-"cN3-lC-dNM.title" = "ICEがサポートされていない場合のSDP折衝中のみ使用されます";
+"cN3-lC-dNM.title" = "ICEに対応していない場合のSDP折衝中にのみ使用されます";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
 "cwV-lc-jju.title" = "ボックス";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "折衝タイムアウト (秒)";
+"dtf-uk-n1B.title" = "折衝が時間切れです (秒)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "ボックス";
@@ -141,7 +141,7 @@
 "nuq-Wl-sfd.title" = "カスタムのアドレスとポート番号を使用";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "TURNのユーザー名";
+"rMN-Wf-tmp.title" = "TURNの利用者名";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
 "vCS-s8-mZI.title" = "メディアストリームを暗号化 (SRTP)";
@@ -162,7 +162,7 @@
 "x93-zk-hAW.title" = "UPnP";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "xjL-Wb-7VN"; */
-"xjL-Wb-7VN.title" = "TURNのパスワード";
+"xjL-Wb-7VN.title" = "TURNの暗証語";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLSプロトコル方式";
+"zBy-cW-KY3.title" = "TLS規約方式";
