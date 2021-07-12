@@ -41,7 +41,7 @@
 "Canceled" = "Abgebrochen";
 
 /* Contextual menu entry */
-"Stream file" = "Stream file";
+"Stream file" = "Datei streamen";
 
 /* Contextual menu action */
 "Clear conversation" = "Konversation löschen";
@@ -230,7 +230,7 @@
 "Set moderator" = "Moderator festlegen";
 
 /* Conference action */
-"Unmute audio" = "Unmute audio";
+"Unmute audio" = "Stummschaltung aufheben";
 
 /* Conference action */
 "Unset moderator" = "Moderator freistellen";
@@ -251,7 +251,7 @@
 "Minimize" = "Minimieren";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "Erweitern";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "Stummschalten";
@@ -263,19 +263,19 @@
 "Set moderator" = "Moderator festlegen";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "Ton stummgeschaltet";
 
 /* conference state tooltip organiser */
-"Conference Organiser" = "Conference Organiser";
+"Conference Organiser" = "Organisator der Konferenz";
 
 /* conference state tooltip moderator */
 "Moderator" = "Moderator";
 
 /* drop files */
-"Drop files to send" = "Drop files to send";
+"Drop files to send" = "Dateien zum Senden ablegen";
 
 /* Contextual menu for message */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Im Finder anzeigen";
 
 /* Contextual menu for message */
 "Open" = "Öffnen";
@@ -284,46 +284,52 @@
 "Delete" = "Löschen";
 
 /* Contextual menu for message */
-"Quick Look" = "Quick Look";
+"Quick Look" = "Schnellansicht";
 
 /* Contextual menu for message */
-"Add to Photos Library" = "Add to Photos Library";
+"Add to Photos Library" = "Zur Fotobibliothek hinzufügen";
 
 /* Contextual menu for message */
-"Resend" = "Resend";
+"Resend" = "Erneut senden";
 
 /* In call status info */
-"Wants to talk to you" = "Wants to talk to you";
+"Wants to talk to you" = "Möchte mit dir sprechen";
+
+/* In call status info */
+"Incoming audio call" = "Incoming audio call";
+
+/* In call status info */
+"Incoming video call" = "Incoming video call";
 
 /* share button tooltip */
-"Stop screen sharing" = "Stop screen sharing";
+"Stop screen sharing" = "Bildschirmfreigabe beenden";
 
 /* share button tooltip */
-"Stop file streaming" = "Stop file streaming";
+"Stop file streaming" = "Dateistreaming stoppen";
 
 /* share button tooltip */
 "Share" = "Freigeben";
 
 /* Synchronization label for conversation {Name} */
-"We are waiting for %@ connects to synchronize the conversation." = "We are waiting for %@ connects to synchronize the conversation.";
+"We are waiting for %@ connects to synchronize the conversation." = "Wir warten auf %@ andere Gerät, um das Gespräch zu synchronisieren.";
 
 /* Incoming conversation request title */
-"Hello, \nWould you like to join the conversation?" = "Hello, \nWould you like to join the conversation?";
+"Hello, \nWould you like to join the conversation?" = "Hallo,\nMöchtest du an der Unterhaltung teilnehmen?";
 
 /* Invitation request from {Name} */
-"%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
+"%@ has sent you a request for a conversation." = "%@ hat dir eine Anfrage für ein Gespräch gesendet.";
 
 /* Synchronization explanation label */
-"You have accepted the conversation request." = "You have accepted the conversation request.";
+"You have accepted the conversation request." = "Du haben die Unterhaltungsanfrage angenommen.";
 
 /* Send request to {Name} */
-"%@ is not in your contacts." = "%@ is not in your contacts.";
+"%@ is not in your contacts." = "%@ ist nicht in deinen Kontakten.";
 
 /* Send request explanation */
-"Send him/her a contact request to be able to exchange together." = "Send him/her a contact request to be able to exchange together.";
+"Send him/her a contact request to be able to exchange together." = "Senden Sie ihm/ihr eine Kontaktanfrage, um sich gemeinsam austauschen zu können";
 
 /* Wait for request acceptance from {Name} */
-"%@ has not yet accepted your contact request." = "%@ has not yet accepted your contact request.";
+"%@ has not yet accepted your contact request." = "%@ hat Ihre Kontaktanfrage noch nicht angenommen.";
 
 /* Wait for request acceptance from {Name} explanation */
-"%@ must accept your contact request to answer you." = "%@ must accept your contact request to answer you.";
+"%@ must accept your contact request to answer you." = "%@ muss Ihre Kontaktanfrage annehmen, um Ihnen zu antworten.";

@@ -69,7 +69,10 @@
 "ngO-WV-cXD.ibShadowedToolTip" = "Fájl küldése";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Felvenni";
+"qgD-3D-nD5.ibShadowedToolTip" = "Hívásfogadás";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Answer with audio only"; ObjectID = "MYC-Kz-Eq6"; */
+"MYC-Kz-Eq6.ibShadowedToolTip" = "Answer with audio only";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
 "rqa-be-VIB.ibShadowedToolTip" = "Küldés";

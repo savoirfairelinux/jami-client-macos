@@ -69,7 +69,10 @@
 "ngO-WV-cXD.ibShadowedToolTip" = "Invia un file";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Pick up"; ObjectID = "qgD-3D-nD5"; */
-"qgD-3D-nD5.ibShadowedToolTip" = "Raccogli";
+"qgD-3D-nD5.ibShadowedToolTip" = "Rispondi";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Answer with audio only"; ObjectID = "MYC-Kz-Eq6"; */
+"MYC-Kz-Eq6.ibShadowedToolTip" = "Answer with audio only";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Send"; ObjectID = "rqa-be-VIB"; */
 "rqa-be-VIB.ibShadowedToolTip" = "Invia";
