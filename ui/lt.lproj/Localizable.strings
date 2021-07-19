@@ -83,7 +83,7 @@
 "Incoming call from %@" = "Gaunamasis skambutis nuo %@";
 
 /* Incoming message from {Name} */
-"Incoming message from %@" = "Incoming message from %@";
+"Incoming message from %@" = "Gaunamoji žinutė nuo %@";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username" = "Neteisingas naudotojo vardas";
@@ -194,7 +194,7 @@
 "Change password" = "Pakeisti slaptažodį";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Sukurti slaptažodį";
 
 /* Device revocation title */
 "Revoke Device" = "Revoke Device";

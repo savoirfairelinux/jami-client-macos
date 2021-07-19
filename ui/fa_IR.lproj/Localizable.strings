@@ -41,7 +41,7 @@
 "Canceled" = "لغو شده";
 
 /* Contextual menu entry */
-"Stream file" = "Stream file";
+"Stream file" = "جاری‌سازی فایل";
 
 /* Contextual menu action */
 "Clear conversation" = "پاک کردن گفتگو";
@@ -230,7 +230,7 @@
 "Set moderator" = "تعیین مدیر";
 
 /* Conference action */
-"Unmute audio" = "خروج از حالت بی‌صدا";
+"Unmute audio" = "برقراری صدا";
 
 /* Conference action */
 "Unset moderator" = "لغو میدیریت";
@@ -251,7 +251,7 @@
 "Minimize" = "کمینه کردن";
 
 /* conference tooltip Expand */
-"Expand" = "Expand";
+"Expand" = "گسترش";
 
 /* conference tooltip mute Mute audio */
 "Mute audio" = "قطع صدا";
@@ -263,19 +263,19 @@
 "Set moderator" = "تعیین مدیر";
 
 /* conference state tooltip Audio muted */
-"Audio muted" = "Audio muted";
+"Audio muted" = "بی‌صدا شده ‌است";
 
 /* conference state tooltip organiser */
-"Conference Organiser" = "Conference Organiser";
+"Conference Organiser" = "برگزارکننده کنفرانس";
 
 /* conference state tooltip moderator */
-"Moderator" = "Moderator";
+"Moderator" = "مدیر";
 
 /* drop files */
-"Drop files to send" = "Drop files to send";
+"Drop files to send" = "فایل‌ها را برای ارسال رها کنید";
 
 /* Contextual menu for message */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "نمایش در جستجو‌گر";
 
 /* Contextual menu for message */
 "Open" = "باز کردن";
@@ -284,52 +284,52 @@
 "Delete" = "حذف";
 
 /* Contextual menu for message */
-"Quick Look" = "Quick Look";
+"Quick Look" = "نگاه سریع";
 
 /* Contextual menu for message */
-"Add to Photos Library" = "Add to Photos Library";
+"Add to Photos Library" = "به کتابخانه عکس اضافه کنید";
 
 /* Contextual menu for message */
-"Resend" = "Resend";
+"Resend" = "ارسال مجدد";
 
 /* In call status info */
-"Wants to talk to you" = "Wants to talk to you";
+"Wants to talk to you" = "میخواهد با شما حرف بزند";
 
 /* In call status info */
-"Incoming audio call" = "Incoming audio call";
+"Incoming audio call" = "تماس صوتی ورودی";
 
 /* In call status info */
-"Incoming video call" = "Incoming video call";
+"Incoming video call" = "تماس تصویری ورودی";
 
 /* share button tooltip */
-"Stop screen sharing" = "Stop screen sharing";
+"Stop screen sharing" = "توقف اشتراک‌گذاری صفحه";
 
 /* share button tooltip */
-"Stop file streaming" = "Stop file streaming";
+"Stop file streaming" = "توقف جاری‌سازی فایل";
 
 /* share button tooltip */
 "Share" = "هم‌رسانی";
 
 /* Synchronization label for conversation {Name} */
-"We are waiting for %@ connects to synchronize the conversation." = "We are waiting for %@ connects to synchronize the conversation.";
+"We are waiting for %@ connects to synchronize the conversation." = "ما منتظر ارتباط %@ هستیم تا گفتگو را همگام‌سازی کنیم.";
 
 /* Incoming conversation request title */
-"Hello, \nWould you like to join the conversation?" = "Hello, \nWould you like to join the conversation?";
+"Hello, \nWould you like to join the conversation?" = "سلام،\n آیا مایل به شرکت در این گفتگو هستید؟";
 
 /* Invitation request from {Name} */
-"%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
+"%@ has sent you a request for a conversation." = "%@ درخواستی برای گفتگو با شما ارسال کرده است.";
 
 /* Synchronization explanation label */
-"You have accepted the conversation request." = "You have accepted the conversation request.";
+"You have accepted the conversation request." = "شما درخواست مکالمه را پذیرفته‌اید.";
 
 /* Send request to {Name} */
-"%@ is not in your contacts." = "%@ is not in your contacts.";
+"%@ is not in your contacts." = "%@ در مخاطبین شما نیست.";
 
 /* Send request explanation */
-"Send him/her a contact request to be able to exchange together." = "Send him/her a contact request to be able to exchange together.";
+"Send him/her a contact request to be able to exchange together." = "برای او درخواست ارتباط بفرستید تا بتواند با هم تبادل کنید.";
 
 /* Wait for request acceptance from {Name} */
-"%@ has not yet accepted your contact request." = "%@ has not yet accepted your contact request.";
+"%@ has not yet accepted your contact request." = "%@ هنوز درخواست ارتباط شما را قبول نکرده است.";
 
 /* Wait for request acceptance from {Name} explanation */
-"%@ must accept your contact request to answer you." = "%@ must accept your contact request to answer you.";
+"%@ must accept your contact request to answer you." = "%@ باید درخواست ارتباط شما را بپذیرد تا به شما پاسخ دهد.";

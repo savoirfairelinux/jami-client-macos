@@ -35,7 +35,7 @@
 "Remove conversation" = "Șterge conversația";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Făcînd clic pe \"OK\" vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Făcînd clic pe „Bine” vei elimina acest cont din acest aparat! Această acțiune este ireversibilă și poți pierde numele pe care l-ai înscris.";
 
 /* File transfer canceled label */
 "Canceled" = "Anulat";
@@ -65,7 +65,7 @@
 "Failed" = "Eșec";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Transferul contului tău nu a reușit. Poți încerca din nou apăsînd Ok sau șterge acest cont.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Transferul contului tău nu a reușit. Poți încerca din nou apăsînd „Bine” sau șterge acest cont.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Căutarea nu a reușit";
@@ -296,10 +296,10 @@
 "Wants to talk to you" = "Vrea să vorbească cu tine";
 
 /* In call status info */
-"Incoming audio call" = "Incoming audio call";
+"Incoming audio call" = "Apel vocal primit";
 
 /* In call status info */
-"Incoming video call" = "Incoming video call";
+"Incoming video call" = "Apel video primit";
 
 /* share button tooltip */
 "Stop screen sharing" = "Oprește distribuirea ecranului";
