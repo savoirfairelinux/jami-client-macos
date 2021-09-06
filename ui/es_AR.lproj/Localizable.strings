@@ -107,7 +107,7 @@
 "Passwords don't match" = "Las contraseñas no coinciden";
 
 /* Contextual menu action */
-"Place audio call" = "Realizar adiollamada";
+"Place audio call" = "Realizar audiollamada";
 
 /* Contextual menu action */
 "Place video call" = "Iniciar video-llamada";
@@ -296,10 +296,10 @@
 "Wants to talk to you" = "Quiere hablar con vos";
 
 /* In call status info */
-"Incoming audio call" = "Incoming audio call";
+"Incoming audio call" = "Llamada entrante";
 
 /* In call status info */
-"Incoming video call" = "Incoming video call";
+"Incoming video call" = "Videollamada entrante";
 
 /* share button tooltip */
 "Stop screen sharing" = "Dejar de compartir pantalla";
@@ -311,25 +311,25 @@
 "Share" = "Compartir";
 
 /* Synchronization label for conversation {Name} */
-"We are waiting for %@ connects to synchronize the conversation." = "We are waiting for %@ connects to synchronize the conversation.";
+"We are waiting for %@ connects to synchronize the conversation." = "Esperando a que %@ se conecte para sincronizar la conversación.";
 
 /* Incoming conversation request title */
-"Hello, \nWould you like to join the conversation?" = "Hello, \nWould you like to join the conversation?";
+"Hello, \nWould you like to join the conversation?" = "Hola,\n¿Te gustaría unirte a la conversación?";
 
 /* Invitation request from {Name} */
-"%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
+"%@ has sent you a request for a conversation." = "%@ te ha enviado una solicitud de conversación.";
 
 /* Synchronization explanation label */
-"You have accepted the conversation request." = "You have accepted the conversation request.";
+"You have accepted the conversation request." = "Has aceptado la solicitud de conversación.";
 
 /* Send request to {Name} */
-"%@ is not in your contacts." = "%@ is not in your contacts.";
+"%@ is not in your contacts." = "%@ no está en tus contactos.";
 
 /* Send request explanation */
-"Send him/her a contact request to be able to exchange together." = "Send him/her a contact request to be able to exchange together.";
+"Send him/her a contact request to be able to exchange together." = "Enviarle una solicitud de contacto para poder interactuar.";
 
 /* Wait for request acceptance from {Name} */
-"%@ has not yet accepted your contact request." = "%@ has not yet accepted your contact request.";
+"%@ has not yet accepted your contact request." = "%@ aún no ha aceptado tu solicitud de contacto.";
 
 /* Wait for request acceptance from {Name} explanation */
-"%@ must accept your contact request to answer you." = "%@ must accept your contact request to answer you.";
+"%@ must accept your contact request to answer you." = "%@ debe aceptar tu solicitud de contacto para responderte.";
