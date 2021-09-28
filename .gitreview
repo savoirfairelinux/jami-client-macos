@@ -1,6 +1,6 @@
 [gerrit]
-host=gerrit-ring.savoirfairelinux.com
+host=review.jami.net
 port=29420
-project=ring-client-macosx.git
+project=jami-client-macos
 defaultremote=origin
 defaultbranch=master
