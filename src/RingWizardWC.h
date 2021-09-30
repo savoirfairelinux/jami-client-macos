@@ -25,6 +25,11 @@
 #import "AddSIPAccountVC.h"
 #import "ConnectToAccManagerVC.h"
 #import "AccountBackupVC.h"
+#include <qstring.h>
+
+@protocol AccountCreationDelegate <NSObject>
+- (void)accountCreated:(QString)accountId;
+@end
 
 @interface RingWizardWC : NSWindowController <NSWindowDelegate, NSPathControlDelegate,
     NSOpenSavePanelDelegate, RingWizardChooseDelegate, RingWizardNewDelegate,
@@ -35,4 +40,5 @@ LrcModelsProtocol>
 - (void)showLinkAccountVC;
 - (void)showSIPAccountVC;
 - (void)showConnectToAccountManager;
+@property (weak, nonatomic) id <AccountCreationDelegate> delegate;
 @end

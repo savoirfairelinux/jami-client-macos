@@ -119,11 +119,11 @@
                                            if(accountID.compare(accountToCreate) != 0) {
                                                return;
                                            }
-                                          [self.delegate didLinkAccountWithSuccess:YES];
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
                                           accountProperties.Ringtone.ringtonePath = QString::fromNSString(defaultRingtonePath());
                                           self.accountModel->setAccountConfig(accountID, accountProperties);
                                           [self registerDefaultPreferences];
+                                          [self.delegate didLinkAccountWithSuccess: YES accountId: accountToCreate];
                                           QObject::disconnect(accountCreated);
                                           QObject::disconnect(accountRemoved);
                                       });
@@ -156,7 +156,7 @@
 
 - (IBAction)dismissViewWithError:(id)sender
 {
-    [self.delegate didLinkAccountWithSuccess:NO];
+    [self.delegate didLinkAccountWithSuccess: NO accountId:""];
 }
 
 - (IBAction)pickBackupFile:(id)sender
