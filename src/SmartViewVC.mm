@@ -567,7 +567,7 @@ NSInteger const REQUEST_SEG         = 1;
             callInfo = (call.status == lrc::api::call::Status::IN_PROGRESS) ? @"Talking" :  to_string(call.status).toNSString();
         }
     }
-    
+
     if (callInfo.length > 0) {
         [lastInteractionDate setStringValue: callInfo];
         [interactionSnippet setHidden:true];
@@ -579,9 +579,6 @@ NSInteger const REQUEST_SEG         = 1;
         NSString* lastInteractionSnippetFixedString = [lastInteractionSnippet.toNSString()
                                                        stringByReplacingOccurrencesOfString:@"🕽" withString:@""];
         lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString stringByReplacingOccurrencesOfString:@"📞" withString:@""];
-        if (conversation.interactions[lastUid].type == lrc::api::interaction::Type::DATA_TRANSFER) {
-            lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString lastPathComponent];
-        }
         [interactionSnippet setStringValue:lastInteractionSnippetFixedString];
 
         // last interaction date/time

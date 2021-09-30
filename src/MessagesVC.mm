@@ -202,7 +202,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     NSUInteger lastvisibleRow = [visibleIndexes lastIndex];
     NSInteger numberOfRows = [conversationView numberOfRows];
     if ((numberOfRows > 0) &&
-        lastvisibleRow > (numberOfRows - visibleIndexes.count * 2)) {
+        lastvisibleRow > (numberOfRows - visibleIndexes.count * 0.5)) {
         [conversationView scrollToEndOfDocument: nil];
     }
 }
@@ -247,7 +247,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     }
     [conversationView reloadDataForRowIndexes: indexSet
                                 columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-    [self scrollToBottom];
 }
 
 -(void)setConversationUid:(const QString&)convUid model:(lrc::api::ConversationModel *)model
@@ -363,7 +362,10 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
         }
         cachedConv_ = nil;
         messages.at(index).second = interaction;
-        [self reloadConversationForMessage:interactionId updateSize: interaction.type == lrc::api::interaction::Type::DATA_TRANSFER];
+        [self reloadConversationForMessage:interactionId updateSize: (interaction.type == lrc::api::interaction::Type::DATA_TRANSFER && interaction.status == lrc::api::interaction::Status::TRANSFER_FINISHED)];
+        if (interaction.type != lrc::api::interaction::Type::DATA_TRANSFER || interaction.status != lrc::api::interaction::Status::TRANSFER_FINISHED) {
+            return;
+        }
         [self scrollToBottom];
     });
     interactionRemovedSignal_ = QObject::connect(convModel_, &lrc::api::ConversationModel::interactionRemoved,
@@ -559,7 +561,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [result.msgBackground setHidden:NO];
     NSString* name =  interaction.body.toNSString();
     if (name.length > 0) {
-       fileName = [name lastPathComponent];
+       fileName = name;
     }
     NSFont *nameFont = [NSFont systemFontOfSize: 12 weight: NSFontWeightLight];
     NSColor *nameColor = [NSColor textColor];
@@ -960,7 +962,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 -(NSString *) getDataTransferPath:(const QString&)interactionId {
     lrc::api::datatransfer::Info info = {};
     convModel_->getTransferInfo(convUid_, interactionId, info);
-    double convertData = static_cast<double>(info.totalSize);
     return info.path.toNSString();
 }
 
