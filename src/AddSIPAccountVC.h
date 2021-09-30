@@ -19,9 +19,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
+#include <qstring.h>
 
 @protocol AddSIPAccountDelegate <NSObject>
-- (void)completedWithSuccess:(BOOL)success;
+- (void)completedWithSuccess:(BOOL)success accountId:(const QString &)accountId;
 - (void)showView:(NSView*)view;
 @end
 

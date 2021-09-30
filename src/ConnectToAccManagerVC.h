@@ -19,9 +19,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
+#include <qstring.h>
 
 @protocol RingWizardAccManagerDelegate <NSObject>
-- (void)didSignInSuccess:(BOOL)success;
+- (void)didSignInSuccess:(BOOL)success accountId:(const QString &)accountId;
 - (void)showView:(NSView*)view;
 @end
 

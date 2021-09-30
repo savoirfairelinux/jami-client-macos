@@ -204,19 +204,37 @@
         return;
     }
     [self showBackUpAccount: accountId];
+    if (success) {
+        [self.delegate accountCreated: accountId];
+    }
+}
+
+#pragma - AddSIPAccountDelegate methods
+
+- (void)completedWithSuccess:(BOOL)success accountId:(const QString &)accountId; {
+    [self completedWithSuccess:success];
+    if (success) {
+        [self.delegate accountCreated: accountId];
+    }
 }
 
 #pragma - WizardLinkAccountDelegate methods
 
-- (void)didLinkAccountWithSuccess:(BOOL)success
+- (void)didLinkAccountWithSuccess:(BOOL)success accountId:(const QString &)accountId
 {
     [self completedWithSuccess:success];
+    if (success) {
+        [self.delegate accountCreated: accountId];
+    }
 }
 
 #pragma - RingWizardAccManagerDelegate
 
-- (void)didSignInSuccess:(BOOL)success {
+- (void)didSignInSuccess:(BOOL)success accountId:(const QString &)accountId {
     [self completedWithSuccess:success];
+    if (success) {
+        [self.delegate accountCreated: accountId];
+    }
 }
 
 - (void)showBackUpAccount:(const QString&)accountId{

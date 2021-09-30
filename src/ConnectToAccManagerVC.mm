@@ -78,7 +78,7 @@ QString accointId;
 
 - (IBAction)dismissViewWithError:(id)sender
 {
-    [self.delegate didSignInSuccess:NO];
+    [self.delegate didSignInSuccess:NO accountId:""];
 }
 
 - (IBAction)startAgain:(id)sender
@@ -97,7 +97,7 @@ QString accointId;
                                           if(accountID.compare(accointId) != 0) {
                                               return;
                                           }
-                                          [self.delegate didSignInSuccess:YES];
+                                          [self.delegate didSignInSuccess:YES accountId: accointId];
                                           lrc::api::account::ConfProperties_t accountProperties = self.accountModel->getAccountConfig(accountID);
                                           accountProperties.Ringtone.ringtonePath = QString::fromNSString(defaultRingtonePath());
                                           self.accountModel->setAccountConfig(accountID, accountProperties);

@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, ViewState) {
     LEAVE_MESSAGE,
 };
 
-@interface RingWindowController () <MigrateRingAccountsDelegate>
+@interface RingWindowController () <MigrateRingAccountsDelegate, AccountCreationDelegate>
 
 @property (retain) MigrateRingAccountsWC* migrateWC;
 @property RingWizardWC* wizard;
@@ -630,8 +630,19 @@ typedef NS_ENUM(NSInteger, ViewState) {
 - (void) createNewAccount {
     [self changeViewTo:SHOW_WELCOME_SCREEN];
     wizard = [[RingWizardWC alloc] initWithNibName:@"RingWizard" bundle: nil accountmodel: self.accountModel];
+    wizard.delegate = self;
     [wizard showChooseWithCancelButton: YES];
     [self.window beginSheet:wizard.window completionHandler:nil];
+}
+
+- (void)accountCreated:(QString)accountId {
+    [chooseAccountVC selectAccount: accountId.toNSString()];
+    [settingsVC setSelectedAccount: accountId];
+    auto& accInfo = self.accountModel->getAccountInfo(accountId);
+    [smartViewVC setConversationModel:accInfo.conversationModel.get()];
+    [smartViewVC selectConversationList];
+    [self updateRingID];
+    [self changeViewTo:SHOW_WELCOME_SCREEN];
 }
 
 - (NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet

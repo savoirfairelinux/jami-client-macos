@@ -19,9 +19,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LrcModelsProtocol.h"
+#import <qstring.h>
 
 @protocol RingWizardLinkDelegate <NSObject>
-- (void)didLinkAccountWithSuccess:(BOOL)success;
+- (void)didLinkAccountWithSuccess:(BOOL)success accountId:(const QString&)accountId;
 - (void)showView:(NSView*)view;
 @end
 
