@@ -559,7 +559,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
     [result.msgBackground setHidden:NO];
     NSString* name =  interaction.body.toNSString();
     if (name.length > 0) {
-       fileName = [name lastPathComponent];
+       fileName = name;
     }
     NSFont *nameFont = [NSFont systemFontOfSize: 12 weight: NSFontWeightLight];
     NSColor *nameColor = [NSColor textColor];
@@ -960,7 +960,6 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 -(NSString *) getDataTransferPath:(const QString&)interactionId {
     lrc::api::datatransfer::Info info = {};
     convModel_->getTransferInfo(convUid_, interactionId, info);
-    double convertData = static_cast<double>(info.totalSize);
     return info.path.toNSString();
 }
 

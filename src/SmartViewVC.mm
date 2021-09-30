@@ -579,9 +579,6 @@ NSInteger const REQUEST_SEG         = 1;
         NSString* lastInteractionSnippetFixedString = [lastInteractionSnippet.toNSString()
                                                        stringByReplacingOccurrencesOfString:@"🕽" withString:@""];
         lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString stringByReplacingOccurrencesOfString:@"📞" withString:@""];
-        if (conversation.interactions[lastUid].type == lrc::api::interaction::Type::DATA_TRANSFER) {
-            lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString lastPathComponent];
-        }
         [interactionSnippet setStringValue:lastInteractionSnippetFixedString];
 
         // last interaction date/time
