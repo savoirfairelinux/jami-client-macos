@@ -182,10 +182,15 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
         NSUserNotification* notification = [[NSUserNotification alloc] init];
         auto contactModel = lrc->getAccountModel()
         .getAccountInfo(accountId).contactModel.get();
-        NSString* name = contactModel->getContact(contactUri)
-        .registeredName.isEmpty() ?
-        contactUri.toNSString():
-        contactModel->getContact(contactUri).registeredName.toNSString();
+        NSString* name = @"";
+        try {
+            name = contactModel->getContact(contactUri).registeredName.isEmpty() ?
+                   contactUri.toNSString() :
+                   contactModel->getContact(contactUri).registeredName.toNSString();
+        } catch (std::out_of_range& e) {
+            return;
+        }
+        
         NSString* localizedMessage =
         NSLocalizedString(@"Send you a contact request",
                           @"Notification message");

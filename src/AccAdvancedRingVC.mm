@@ -198,29 +198,31 @@ const NSInteger  BOOTSTRAP_SERVER_TAG    = 300;
         NSTextField* nameLabel = [moderatorCell viewWithTag: 200];
         NSTextField* profileNameLabel = [moderatorCell viewWithTag: 300];
         NSButton* removeModerator = [moderatorCell viewWithTag: 400];
-
+        
         auto moderators = self.accountModel->getDefaultModerators(self.selectedAccountID);
         if ((moderators.size() - 1) < row) {
             return nil;
         }
         auto moderator = moderators[row];
-        auto& moderatorInfo = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getContact(moderator);
-        auto convOpt = getConversationFromURI(moderatorInfo.profileInfo.uri, *self.accountModel->getAccountInfo(self.selectedAccountID).conversationModel);
-        if (convOpt.has_value()) {
-            lrc::api::conversation::Info& conversation = *convOpt;
-            auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
-            NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, self.accountModel->getAccountInfo(self.selectedAccountID))));
-            if(image) {
-            avatar.wantsLayer = YES;
-            avatar.layer.cornerRadius = avatar.frame.size.width * 0.5;
-            [avatar setImage:image];
+        try {
+            auto& moderatorInfo = self.accountModel->getAccountInfo(self.selectedAccountID).contactModel->getContact(moderator);
+            auto convOpt = getConversationFromURI(moderatorInfo.profileInfo.uri, *self.accountModel->getAccountInfo(self.selectedAccountID).conversationModel);
+            if (convOpt.has_value()) {
+                lrc::api::conversation::Info& conversation = *convOpt;
+                auto& imageManip = reinterpret_cast<Interfaces::ImageManipulationDelegate&>(GlobalInstances::pixmapManipulator());
+                NSImage* image = QtMac::toNSImage(qvariant_cast<QPixmap>(imageManip.conversationPhoto(conversation, self.accountModel->getAccountInfo(self.selectedAccountID))));
+                if(image) {
+                    avatar.wantsLayer = YES;
+                    avatar.layer.cornerRadius = avatar.frame.size.width * 0.5;
+                    [avatar setImage:image];
+                }
             }
-        }
-        [nameLabel setStringValue: bestIDForContact(moderatorInfo)];
-        [profileNameLabel setStringValue: bestNameForContact(moderatorInfo)];
-        [removeModerator setAction:@selector(removeModerator:)];
-        [removeModerator setTarget:self];
-        return moderatorCell;
+            [nameLabel setStringValue: bestIDForContact(moderatorInfo)];
+            [profileNameLabel setStringValue: bestNameForContact(moderatorInfo)];
+            [removeModerator setAction:@selector(removeModerator:)];
+            [removeModerator setTarget:self];
+            return moderatorCell;
+        } catch (std::out_of_range& e) {}
     }
     return [super tableView:tableView viewForTableColumn:tableColumn row:row];
 }
