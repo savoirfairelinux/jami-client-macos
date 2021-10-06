@@ -703,11 +703,15 @@ typedef NS_ENUM(NSInteger, ViewState) {
         return;
     }
     lrc::api::conversation::Info& convInfo = *convOpt;
-    if (accInfo.contactModel->getContact(accInfo.conversationModel->peersForConversation(convInfo.uid)[0]).profileInfo.type == lrc::api::profile::Type::PENDING) {
-        [smartViewVC selectPendingList];
-    }
-    else {
-        [smartViewVC selectConversationList];
+    try {
+        if (accInfo.contactModel->getContact(accInfo.conversationModel->peersForConversation(convInfo.uid)[0]).profileInfo.type == lrc::api::profile::Type::PENDING) {
+            [smartViewVC selectPendingList];
+        }
+        else {
+            [smartViewVC selectConversationList];
+        }
+    } catch (std::out_of_range& e) {
+        NSLog(@"contact out of range");
     }
     [smartViewVC selectConversation: convInfo model:accInfo.conversationModel.get()];
     [currentCallVC setCurrentCall:QString::fromNSString(callId)
