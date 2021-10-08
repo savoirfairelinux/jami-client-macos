@@ -287,7 +287,7 @@ NSInteger const SEND_PANEL_MAX_HEIGHT = 120;
 - (void)updateInvitationView:(const lrc::api::conversation::Info*) conversation {
     self.isRequest = conversation->isRequest || conversation->needsSyncing;
     NSString* bestName = bestNameForConversation(*conversation, *convModel_);
-    bool showInvitationView = conversation->isRequest || (convModel_->owner.profileInfo.type == lrc::api::profile::Type::JAMI && conversation->interactions.size() == 0);
+    bool showInvitationView = conversation->isRequest || (convModel_->owner.profileInfo.type == lrc::api::profile::Type::JAMI && conversation->interactions->size() == 0);
     invitationView.hidden = !showInvitationView;
     invitationBlock.enabled = !conversation->needsSyncing && conversation->isRequest;
     invitationRefuse.enabled = !conversation->needsSyncing && conversation->isRequest;

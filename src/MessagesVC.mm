@@ -442,7 +442,7 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 -(void)reloadMessages {
     auto* conv = [self getCurrentConversation];
     messages = {};
-    for (auto& interaction : conv->interactions) {
+    for (auto& interaction : *conv->interactions) {
         bool transferForOtherDevice = interaction.second.type == lrc::api::interaction::Type::DATA_TRANSFER && interaction.second.body.isEmpty() && lrc::api::interaction::isOutgoing(interaction.second);
         if (interaction.second.type != lrc::api::interaction::Type::MERGE && !transferForOtherDevice) {
             messages.push_back(std::make_pair(interaction.first, interaction.second));
@@ -650,8 +650,8 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 }
 
 -(NSString*) getFilePath:(const QString&) interId {
-    auto it = [self getCurrentConversation]->interactions.find(interId);
-    if (it == [self getCurrentConversation]->interactions.end()) {
+    auto it = [self getCurrentConversation]->interactions->find(interId);
+    if (it == [self getCurrentConversation]->interactions->end()) {
         return @"";
     }
     auto& interaction = it->second;
@@ -699,12 +699,12 @@ typedef NS_ENUM(NSInteger, MessageSequencing) {
 - (void)deleteMessage:(id)sender {
     auto interId = QString::fromNSString([sender representedObject]);
     auto conv = [self getCurrentConversation];
-    auto it = conv->interactions.find(interId);
-    if (it == conv->interactions.end()) {
+    auto it = conv->interactions->find(interId);
+    if (it == conv->interactions->end()) {
         return;
     }
-    auto itIndex = std::distance(conv->interactions.begin(),it);
-    if (itIndex >= ([conversationView numberOfRows] - 1) || itIndex >= conv->interactions.size()) {
+    auto itIndex = std::distance(conv->interactions->begin(),it);
+    if (itIndex >= ([conversationView numberOfRows] - 1) || itIndex >= conv->interactions->size()) {
         return;
     }
     NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex: itIndex];

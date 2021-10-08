@@ -573,9 +573,9 @@ NSInteger const REQUEST_SEG         = 1;
         [interactionSnippet setHidden:true];
         return result;
     }
-    if (conversation.interactions.find(lastUid) != conversation.interactions.end()) {
+    if (conversation.interactions->find(lastUid) != conversation.interactions->end()) {
         // last interaction snippet
-        auto lastInteractionSnippet = conversation.interactions[lastUid].body.trimmed().replace("\r","").replace("\n","");
+        auto lastInteractionSnippet = (*conversation.interactions)[lastUid].body.trimmed().replace("\r","").replace("\n","");
         NSString* lastInteractionSnippetFixedString = [lastInteractionSnippet.toNSString()
                                                        stringByReplacingOccurrencesOfString:@"🕽" withString:@""];
         lastInteractionSnippetFixedString = [lastInteractionSnippetFixedString stringByReplacingOccurrencesOfString:@"📞" withString:@""];
@@ -583,7 +583,7 @@ NSInteger const REQUEST_SEG         = 1;
 
         // last interaction date/time
         NSString *timeString = @"";
-        NSDate* msgTime = [NSDate dateWithTimeIntervalSince1970:conversation.interactions[lastUid].timestamp];
+        NSDate* msgTime = [NSDate dateWithTimeIntervalSince1970:(*conversation.interactions)[lastUid].timestamp];
         NSDate *today = [NSDate date];
         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
         [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:[[NSLocale currentLocale] localeIdentifier]]];
