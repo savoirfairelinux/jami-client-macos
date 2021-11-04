@@ -1190,7 +1190,7 @@ CVPixelBufferRef pixelBufferPreview;
 
     auto* callModel = accountInfo_->callModel.get();
     auto& currentCall = callModel->getCall([self getcallID]);
-    callModel->requestMediaChange([self getcallID], "audio_0");
+    callModel->requestMediaChange([self getcallID], "audio_0", "", lrc::api::NewCallModel::MediaRequestType::CAMERA, !currentCall.audioMuted);
     muteAudioButton.image = currentCall.audioMuted ? [NSImage imageNamed:@"micro_off.png"] : [NSImage imageNamed:@"micro_on.png"];
     NSColor* audioImageColor = currentCall.audioMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteAudioButton color: audioImageColor];
@@ -1209,7 +1209,7 @@ CVPixelBufferRef pixelBufferPreview;
         return;
     auto* callModel = accountInfo_->callModel.get();
     auto& currentCall = callModel->getCall([self getcallID]);
-    callModel->requestMediaChange([self getcallID], "video_0");
+    callModel->requestMediaChange([self getcallID], "video_0", "", lrc::api::NewCallModel::MediaRequestType::CAMERA, !currentCall.videoMuted);
     muteVideoButton.image = currentCall.videoMuted ? [NSImage imageNamed:@"camera_off.png"] : [NSImage imageNamed:@"camera_on.png"];
     NSColor* videoImageColor = currentCall.videoMuted ? [NSColor callButtonRedColor] : [NSColor whiteColor];
     [self updateColorForButton: muteVideoButton color: videoImageColor];
