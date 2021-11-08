@@ -111,7 +111,7 @@
 "cwV-lc-jju.title" = "Boite";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Negotiation timeout (seconds)";
+"dtf-uk-n1B.title" = "Délai de négociation (en secondes)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "Boite";
@@ -138,7 +138,7 @@
 "nq0-Js-9Cr.title" = "Min";
 
 /* Class = "NSButtonCell"; title = "Use custom address and port"; ObjectID = "nuq-Wl-sfd"; */
-"nuq-Wl-sfd.title" = "Use custom address and port";
+"nuq-Wl-sfd.title" = "Utiliser une adresse et un port personnalisés";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
 "rMN-Wf-tmp.title" = "Nom d'utilisateur TURN";
@@ -147,7 +147,7 @@
 "vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
 
 /* Class = "NSButtonCell"; title = "Encrypt negotiation (TLS)"; ObjectID = "vZH-42-mUi"; */
-"vZH-42-mUi.title" = "Encrypt negotiation (TLS)";
+"vZH-42-mUi.title" = "Chiffrer les négociations (TLS)";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "vpo-fl-9TS"; */
 "vpo-fl-9TS.title" = "Connectivité";
@@ -165,4 +165,4 @@
 "xjL-Wb-7VN.title" = "Mot de passe TURN";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "TLS protocol method";
+"zBy-cW-KY3.title" = "Méthode du protocole TLS";

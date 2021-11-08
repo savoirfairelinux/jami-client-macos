@@ -41,7 +41,7 @@
 "Canceled" = "Cancelada";
 
 /* Contextual menu entry */
-"Stream file" = "Stream file";
+"Stream file" = "Arquivo de stream";
 
 /* Contextual menu action */
 "Clear conversation" = "Eliminar a conversa";
@@ -293,25 +293,25 @@
 "Resend" = "Reenviar";
 
 /* In call status info */
-"Wants to talk to you" = "Wants to talk to you";
+"Wants to talk to you" = "Quer conversar com você";
 
 /* In call status info */
-"Incoming audio call" = "Incoming audio call";
+"Incoming audio call" = "Recebendo chamada de áudio";
 
 /* In call status info */
-"Incoming video call" = "Incoming video call";
+"Incoming video call" = "Recebendo chamada de vídeo";
 
 /* share button tooltip */
-"Stop screen sharing" = "Stop screen sharing";
+"Stop screen sharing" = "Interromper compartilhamento de tela";
 
 /* share button tooltip */
-"Stop file streaming" = "Stop file streaming";
+"Stop file streaming" = "Interromper transferência de arquivo";
 
 /* share button tooltip */
 "Share" = "Compartilhar";
 
 /* Synchronization label for conversation {Name} */
-"We are waiting for %@ connects to synchronize the conversation." = "We are waiting for %@ connects to synchronize the conversation.";
+"We are waiting for %@ connects to synchronize the conversation." = "Estamos aguardando por %@ para sincronizar a conversa.";
 
 /* Incoming conversation request title */
 "Hello, \nWould you like to join the conversation?" = "Hello, \nWould you like to join the conversation?";
@@ -320,7 +320,7 @@
 "%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
 
 /* Synchronization explanation label */
-"You have accepted the conversation request." = "You have accepted the conversation request.";
+"You have accepted the conversation request." = "Você aceitou o pedido de conversa.";
 
 /* Send request to {Name} */
 "%@ is not in your contacts." = "%@ is not in your contacts.";
