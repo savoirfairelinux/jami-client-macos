@@ -61,6 +61,7 @@ extern "C" {
     QString convUid_;
     QString callUid_;
     QString confUid_;
+    QString currentRenderer_;
     const lrc::api::account::Info *accountInfo_;
     lrc::api::PluginModel *pluginModel_;
     NSTimer* refreshDurationTimer;
@@ -231,7 +232,7 @@ CVPixelBufferRef pixelBufferPreview;
     if (activeCalls.isEmpty()) {
         return;
     }
-    auto subcalls = [appDelegate getConferenceSubcalls: confId];
+    auto subcalls = callModel->getConferenceSubcalls(confId);
     QString callId;
     if (subcalls.isEmpty()) {
         for(auto subcall: activeCalls) {
@@ -759,7 +760,11 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void)updateShareButtonAnimation {
-    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
+    if (accountInfo_ == nil)
+        return;
+
+    auto* callModel = accountInfo_->callModel.get();
+    auto type = callModel->getCurrentRenderedDevice(callUid_).type;
     if (type == lrc::api::video::DeviceType::DISPLAY || type == lrc::api::video::DeviceType::FILE) {
         [self.shareButton startBlinkAnimationfrom:[NSColor buttonBlinkColorColor] to:[NSColor whiteColor] scaleFactor: 1 duration: 1.5];
         NSString *tooltip = type == lrc::api::video::DeviceType::DISPLAY ? NSLocalizedString(@"Stop screen sharing", @"share button tooltip") : NSLocalizedString(@"Stop file streaming", @"share button tooltip");
@@ -767,6 +772,25 @@ CVPixelBufferRef pixelBufferPreview;
     } else {
         [self.shareButton stopBlinkAnimation];
         self.shareButton.toolTip = NSLocalizedString(@"Share", @"share button tooltip");;
+    }
+}
+
+-(void)updateCurrentRendererDeivce {
+    auto* callModel = accountInfo_->callModel.get();
+    auto device = callModel->getCurrentRenderedDevice(callUid_);
+    auto deviceName = device.name;
+    switch (device.type) {
+        case lrc::api::video::DeviceType::DISPLAY:
+            currentRenderer_ = "display://" + deviceName;
+            return;
+        case lrc::api::video::DeviceType::FILE:
+            currentRenderer_ = "file://" + deviceName;
+            return;
+        case lrc::api::video::DeviceType::CAMERA:
+            currentRenderer_ = "camera://" + deviceName;
+            return;
+        default:
+            break;
     }
 }
 
@@ -779,7 +803,9 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::connect(mediaModel,
                      &lrc::api::AVModel::rendererStarted,
                      [=](const QString& id) {
-                         if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+        qDebug() << "rendererStarted***" << id;
+                         [self updateCurrentRendererDeivce];
+                         if (id == currentRenderer_) {
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self.previewView setHidden:NO];
                                  [hidePreviewBackground setHidden: NO];
@@ -800,7 +826,7 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::connect(mediaModel,
                      &lrc::api::AVModel::rendererStopped,
                      [=](const QString& id) {
-                         if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
+                         if (id == currentRenderer_) {
                              dispatch_async(dispatch_get_main_queue(), ^{
                                  [self.previewView setHidden:YES];
                                  self.previewView.videoRunning = false;
@@ -820,8 +846,8 @@ CVPixelBufferRef pixelBufferPreview;
     QObject::connect(mediaModel,
                      &lrc::api::AVModel::frameUpdated,
                      [=](const QString& id) {
-                         if (id == lrc::api::video::PREVIEW_RENDERER_ID) {
-                             auto renderer = &mediaModel->getRenderer(lrc::api::video::PREVIEW_RENDERER_ID);
+                         if (id == currentRenderer_) {
+                             auto renderer = &mediaModel->getRenderer(id);
                              if(!renderer->isRendering()) {
                                  return;
                              }
@@ -1307,7 +1333,8 @@ CVPixelBufferRef pixelBufferPreview;
         {
             auto* mediaSelectorVC = [[ChooseMediaVC alloc] initWithNibName:@"ChooseMediaVC" bundle:nil];
             auto videoDevices = [self getDeviceList];
-            auto device = mediaModel->getCurrentRenderedDevice(callUid_).name;
+            auto* callModel = accountInfo_->callModel.get();
+            auto device = callModel->getCurrentRenderedDevice(callUid_).name;
             auto settings = mediaModel->getDeviceSettings(device);
             auto currentDevice = settings.name;
             [mediaSelectorVC setMediaDevices: videoDevices andDefaultDevice: currentDevice];
@@ -1382,8 +1409,11 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 - (IBAction)toggleShare:(id)sender {
-    auto type = mediaModel->getCurrentRenderedDevice(callUid_).type;
-    if (type == lrc::api::video::DeviceType::DISPLAY || type == lrc::api::video::DeviceType::FILE) {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
+    auto device = callModel->getCurrentRenderedDevice(callUid_);
+    if (device.type == lrc::api::video::DeviceType::DISPLAY || device.type == lrc::api::video::DeviceType::FILE) {
         [self switchToDevice:0];
         if (brokerPopoverVC != nullptr) {
             [brokerPopoverVC performClose:self];
@@ -1454,10 +1484,13 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) screenShare {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
     NSScreen *mainScreen = [NSScreen mainScreen];
     NSRect screenFrame = mainScreen.frame;
     QRect captureRect = QRect(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height);
-    mediaModel->setDisplay(0, screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height, [self getcallID]);
+    callModel->setDisplay(0, screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.width, screenFrame.size.height, [self getcallID]);
 }
 
 -(void)streamFile {
@@ -1482,10 +1515,13 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) switchToDevice:(int)index {
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
     auto devices = mediaModel->getDevices();
     auto device = devices[index];
     mediaModel->setCurrentVideoCaptureDevice(device);
-    mediaModel->switchInputTo(device, [self getcallID]);
+    callModel->switchInputTo(device, [self getcallID]);
 }
 
 -(QVector<QString>) getDeviceList {
@@ -1500,7 +1536,10 @@ CVPixelBufferRef pixelBufferPreview;
 }
 
 -(void) switchToFile:(QString)uri {
-    mediaModel->setInputFile(uri, [self getcallID]);
+    if (accountInfo_ == nil)
+        return;
+    auto* callModel = accountInfo_->callModel.get();
+    callModel->setInputFile(uri, [self getcallID]);
 }
 
 -(CGRect) getVideoPreviewCollapsedSize {
@@ -1564,8 +1603,10 @@ CVPixelBufferRef pixelBufferPreview;
     if (!callView) {
         return;
     }
+    if ([self.callingWidgetsContainer.subviews containsObject: callView.view]) {
+        [self.callingWidgetsContainer removeView:callView.view];
+    }
     calls[uri.toNSString()] = nil;
-    [self.callingWidgetsContainer removeView:callView.view];
 }
 
 -(void)addPreviewForContactUri:(const QString&)uri call:(const QString&)callId {

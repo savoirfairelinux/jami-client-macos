@@ -383,10 +383,6 @@ static void ReachabilityCallback(SCNetworkReachabilityRef __unused target, SCNet
     return lrc->activeCalls();
 }
 
--(QVector<QString>)getConferenceSubcalls:(QString)confId {
-    return lrc->getConferenceSubcalls(confId);
-}
-
 -(void)setRingtonePath {
     QStringList accounts = lrc->getAccountModel().getAccountList();
     NSFileManager *fileManager = [NSFileManager defaultManager];

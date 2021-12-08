@@ -59,6 +59,7 @@ NSString *fileName;
 NSTimer* durationTimer;
 int timePassing = 0;
 bool isAudio = NO;
+QString defaultCamera;
 
 @synthesize avModel, renderConnections,
 previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, timeRightConstraint,timeTopConstraint, timeCenterX, timeCenterY;
@@ -92,7 +93,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
     QObject::connect(avModel,
                      &lrc::api::AVModel::frameUpdated,
                      [=](const QString& id) {
-                         if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
+                         if (id != defaultCamera) {
                              return;
                          }
                          auto renderer = &avModel->getRenderer(id);
@@ -215,11 +216,9 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
 
 -(void) startRecord {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!isAudio) {
-            avModel->startPreview();
-        }
         [self setRecordingState];
-        QString file_name = avModel->startLocalRecorder(isAudio);
+        auto deviceId = isAudio ? "" : defaultCamera;
+        QString file_name = avModel->startLocalMediaRecorder(deviceId);
         if (file_name.isEmpty()) {
             return;
         }
@@ -251,7 +250,7 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
 -(void) disconnectVideo {
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     if (![appDelegate getActiveCalls].size()) {
-        avModel->stopPreview();
+        avModel->stopPreview(defaultCamera);
         QObject::disconnect(renderConnections.frameUpdated);
         avModel->stopLocalRecorder(QString::fromNSString(fileName));
     }
@@ -272,8 +271,9 @@ previewView, timeLabel, recordOnOffButton, sendButton, fileImage, infoLabel, tim
 
     self.previewView.videoRunning = true;
     [self connectPreviewSignals];
-    avModel->stopPreview();
-    avModel->startPreview();
+    defaultCamera = "camera://" + avModel->getDefaultDevice();
+    avModel->stopPreview(defaultCamera);
+    avModel->startPreview(defaultCamera);
 }
 
 -(void) setInitialState {
