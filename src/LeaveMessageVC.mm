@@ -94,7 +94,7 @@ lrc::api::ConversationModel* conversationModel;
 - (IBAction)recordMessage:(NSButton *)sender {
     if (!isRecording) {
         [self clearData];
-        QString file_name = avModel->startLocalRecorder(true);
+        QString file_name = avModel->startLocalMediaRecorder("");
         if (file_name.isEmpty()) {
             return;
         }

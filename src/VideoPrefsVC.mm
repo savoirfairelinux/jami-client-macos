@@ -86,7 +86,7 @@ QString currentVideoDevice;
     AppDelegate* appDelegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     if (![appDelegate getActiveCalls].size()) {
         self.previewView.videoRunning = false;
-        avModel->stopPreview();
+        avModel->stopPreview("camera://" + currentVideoDevice);
         [previewView fillWithBlack];
     }
 }
@@ -104,6 +104,7 @@ QString currentVideoDevice;
     auto newDevice = devices.at(index);
     auto deviceString = newDevice.toNSString();
     avModel->setDefaultDevice(newDevice);
+    currentVideoDevice = newDevice;
     [self devicesChanged];
     [self startPreview];
 }
@@ -127,7 +128,7 @@ QString currentVideoDevice;
                 [ratesList addItemWithTitle: [NSString stringWithFormat:@"%f", rate]];
             }
         }
-        [self connectPreviewSignals];
+        [self startPreview];
         [sizesList selectItemWithTitle: currentSettings.size.toNSString()];
         [ratesList selectItemWithTitle:[NSString stringWithFormat:@"%f", currentSettings.rate]];
     } catch (...) {}
@@ -140,8 +141,8 @@ QString currentVideoDevice;
     try {
         auto settings = avModel->getDeviceSettings(device);
         settings.rate = rate;
-        [self connectPreviewSignals];
         avModel->setDeviceSettings(settings);
+        [self startPreview];
     } catch (...) {}
 }
 
@@ -159,7 +160,7 @@ QString currentVideoDevice;
     QObject::connect(avModel,
                      &lrc::api::AVModel::rendererStarted,
                      [=](const QString& id) {
-                         if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
+                         if (id != "camera://" + currentVideoDevice) {
                              return;
                          }
                         self.previewView.videoRunning = true;
@@ -170,7 +171,7 @@ QString currentVideoDevice;
                          QObject::connect(avModel,
                                           &lrc::api::AVModel::frameUpdated,
                                           [=](const QString& id) {
-                                              if (id != lrc::api::video::PREVIEW_RENDERER_ID) {
+                                              if (id != "camera://" + currentVideoDevice) {
                                                   return;
                                               }
                                               auto renderer = &avModel->getRenderer(id);
@@ -183,8 +184,7 @@ QString currentVideoDevice;
                          previewStopped = QObject::connect(avModel,
                                                            &lrc::api::AVModel::rendererStopped,
                                                            [=](const QString& id) {
-                                                               if (id != lrc::api::video
-                                                                   ::PREVIEW_RENDERER_ID) {
+                                                               if (id != "camera://" + currentVideoDevice) {
                                                                    return;
                                                                }
                                                                self.previewView.videoRunning = false;
@@ -276,8 +276,8 @@ QString currentVideoDevice;
     if (calls.empty()) {
         self.previewView.videoRunning = true;
         [self connectPreviewSignals];
-        avModel->stopPreview();
-        avModel->startPreview();
+        avModel->stopPreview("camera://" + currentVideoDevice);
+        avModel->startPreview("camera://" + currentVideoDevice);
     }
 }
 
