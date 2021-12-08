@@ -29,7 +29,6 @@
 - (void) showDialpad;
 - (BOOL) checkForRingAccount;
 - (QVector<QString>) getActiveCalls;
-- (QVector<QString>)getConferenceSubcalls:(QString)confId;
 - (void) disableScreenSleep;
 - (void) restoreScreenSleep;
 
