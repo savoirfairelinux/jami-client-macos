@@ -21,13 +21,13 @@
 "3vs-TI-tkg.title" = "Samodejno odgovori na klice";
 
 /* Class = "NSTextFieldCell"; title = "TURN realm"; ObjectID = "6eH-la-JbF"; */
-"6eH-la-JbF.title" = "TURN področje";
+"6eH-la-JbF.title" = "Območje TURN";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "72p-GY-gu6"; */
 "72p-GY-gu6.title" = "Geslo zasebnega ključa";
 
 /* Class = "NSTextFieldCell"; title = "Outgoing TLS server name"; ObjectID = "8JD-11-wHZ"; */
-"8JD-11-wHZ.title" = "Odhodno ime TLS strežnika";
+"8JD-11-wHZ.title" = "Odhodno ime strežnika TLS";
 
 /* Class = "NSMenuItem"; title = "Item 1"; ObjectID = "8bw-iH-XGl"; */
 "8bw-iH-XGl.title" = "Predmet 1";
@@ -48,10 +48,10 @@
 "HRM-FR-1sH.title" = "Uporabi STUN";
 
 /* Class = "NSTextFieldCell"; title = "STUN address"; ObjectID = "HYt-sW-yd0"; */
-"HYt-sW-yd0.title" = "STUN naslov";
+"HYt-sW-yd0.title" = "Naslov STUN";
 
 /* Class = "NSButtonCell"; title = "Require a certificate for incoming TLS connections"; ObjectID = "JV8-cY-6vR"; */
-"JV8-cY-6vR.title" = "Zahtevaj certifikat za dohodne TLS povezave";
+"JV8-cY-6vR.title" = "Zahtevaj certifikat za dohodne povezave TLS";
 
 /* Class = "NSTextFieldCell"; title = "SDP Session Negotiation (ICE Fallback)"; ObjectID = "Jfp-NE-ODd"; */
 "Jfp-NE-ODd.title" = "Usklajevanje SDP seje (ICE Fallback)";
@@ -99,10 +99,10 @@
 "Zuz-jy-rLn.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
-"aYs-wh-Hpr.title" = "TURN naslov";
+"aYs-wh-Hpr.title" = "Naslov TURN";
 
 /* Class = "NSTextFieldCell"; title = "CA certificate"; ObjectID = "b2y-85-ZHK"; */
-"b2y-85-ZHK.title" = "CA certifikat";
+"b2y-85-ZHK.title" = "Potrdilo CA";
 
 /* Class = "NSTextFieldCell"; title = "Only used during SDP negotiation in case ICE is not supported"; ObjectID = "cN3-lC-dNM"; */
 "cN3-lC-dNM.title" = "Se uporablja le med usklajevanjem SDP, v primeru ICE pa ni podprt.";
@@ -111,7 +111,7 @@
 "cwV-lc-jju.title" = "Škatla";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
-"dtf-uk-n1B.title" = "Čas usklajevanja (sek)";
+"dtf-uk-n1B.title" = "Čas usklajevanja (s)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
 "ekM-Cg-DEo.title" = "Škatla";
@@ -141,7 +141,7 @@
 "nuq-Wl-sfd.title" = "Uporabi naslov in vrata po meri";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "TURN uporabnik";
+"rMN-Wf-tmp.title" = "Uporabnik TURN";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
 "vCS-s8-mZI.title" = "Šifriaj pretok medijev (SRTP)";
@@ -153,7 +153,7 @@
 "vpo-fl-9TS.title" = "Povezljivost";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "wq6-KV-8X3"; */
-"wq6-KV-8X3.title" = "Max";
+"wq6-KV-8X3.title" = "Najv.";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
 "wyZ-Hb-BNf.title" = "Škatla";
@@ -162,7 +162,7 @@
 "x93-zk-hAW.title" = "UPnP";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "xjL-Wb-7VN"; */
-"xjL-Wb-7VN.title" = "TURN geslo";
+"xjL-Wb-7VN.title" = "Geslo TURN";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
-"zBy-cW-KY3.title" = "Metoda TLS protokola";
+"zBy-cW-KY3.title" = "Metoda protokola TLS";

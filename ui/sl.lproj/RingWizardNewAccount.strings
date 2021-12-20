@@ -1,21 +1,21 @@
 
 /* Class = "NSTextFieldCell"; title = "By checking this, you will register a unique username on Jami network. People can use it to contact you instead of using your D which is 40 characters long."; ObjectID = "0qE-Sz-hdc"; */
-"0qE-Sz-hdc.title" = "S to oznako boste registrirali unikatno uporabniško ime v Jami omrežju. Ljudje ga lahko uporabijo za kontaktiranje, namesto 40 znakov dolgega IDja.";
+"0qE-Sz-hdc.title" = "S to oznako boste registrirali unikatno uporabniško ime v omrežju Jami. Ljudje ga lahko uporabijo za kontaktiranje, namesto 40 znakov dolgega ID-ja.";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Password..."; ObjectID = "1TO-Ov-S8j"; */
-"1TO-Ov-S8j.placeholderString" = "Geslo...";
+"1TO-Ov-S8j.placeholderString" = "Geslo ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedIsNilPlaceholder" = "Ponovitev gesla...";
+"93I-zf-xAk.ibShadowedIsNilPlaceholder" = "Ponovitev gesla ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedMultipleValuesPlaceholder" = "Ponovitev gesla...";
+"93I-zf-xAk.ibShadowedMultipleValuesPlaceholder" = "Ponovitev gesla ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedNoSelectionPlaceholder" = "Ponovitev gesla...";
+"93I-zf-xAk.ibShadowedNoSelectionPlaceholder" = "Ponovitev gesla ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Repeat password..."; ObjectID = "93I-zf-xAk"; */
-"93I-zf-xAk.ibShadowedNotApplicablePlaceholder" = "Ponovitev gesla...";
+"93I-zf-xAk.ibShadowedNotApplicablePlaceholder" = "Ponovitev gesla ...";
 
 /* Class = "NSButtonCell"; title = "Register public username"; ObjectID = "AG5-GR-bii"; */
 "AG5-GR-bii.title" = "Registracija javnega imena";
@@ -27,34 +27,34 @@
 "Cnw-4p-3Uc.title" = "Izberite geslo za razširjeno varnost";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedIsNilPlaceholder" = "Geslo...";
+"JCg-IP-8cg.ibShadowedIsNilPlaceholder" = "Geslo ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedMultipleValuesPlaceholder" = "Geslo...";
+"JCg-IP-8cg.ibShadowedMultipleValuesPlaceholder" = "Geslo ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedNoSelectionPlaceholder" = "Geslo...";
+"JCg-IP-8cg.ibShadowedNoSelectionPlaceholder" = "Geslo ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Password..."; ObjectID = "JCg-IP-8cg"; */
-"JCg-IP-8cg.ibShadowedNotApplicablePlaceholder" = "Geslo...";
+"JCg-IP-8cg.ibShadowedNotApplicablePlaceholder" = "Geslo ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedIsNilPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
-"UgM-Zo-2Dy.ibShadowedIsNilPlaceholder" = "Uporabniško ime...";
+"UgM-Zo-2Dy.ibShadowedIsNilPlaceholder" = "Uporabniško ime ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedMultipleValuesPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
-"UgM-Zo-2Dy.ibShadowedMultipleValuesPlaceholder" = "Uporabniško ime...";
+"UgM-Zo-2Dy.ibShadowedMultipleValuesPlaceholder" = "Uporabniško ime ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNoSelectionPlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
-"UgM-Zo-2Dy.ibShadowedNoSelectionPlaceholder" = "Uporabniško ime...";
+"UgM-Zo-2Dy.ibShadowedNoSelectionPlaceholder" = "Uporabniško ime ...";
 
 /* Class = "CocoaBindingsConnection"; ibShadowedNotApplicablePlaceholder = "Username..."; ObjectID = "UgM-Zo-2Dy"; */
-"UgM-Zo-2Dy.ibShadowedNotApplicablePlaceholder" = "Uporabniško ime...";
+"UgM-Zo-2Dy.ibShadowedNotApplicablePlaceholder" = "Uporabniško ime ...";
 
 /* Class = "NSTextFieldCell"; title = "Just a moment..."; ObjectID = "YIN-YL-JBs"; */
-"YIN-YL-JBs.title" = "Samo trenutek...";
+"YIN-YL-JBs.title" = "Samo trenutek ...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Username..."; ObjectID = "bdC-Uc-Qhs"; */
-"bdC-Uc-Qhs.placeholderString" = "Uporabniško ime...";
+"bdC-Uc-Qhs.placeholderString" = "Uporabniško ime ...";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Enter name"; ObjectID = "gEy-ak-Cgq"; */
 "gEy-ak-Cgq.placeholderString" = "Vnesite ime";

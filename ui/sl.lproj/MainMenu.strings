@@ -6,7 +6,7 @@
 "19.title" = "Okno";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
-"23.title" = "Minimaliziraj";
+"23.title" = "Zmanjšaj";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Okno";
@@ -21,10 +21,10 @@
 "57.title" = "Jami";
 
 /* Class = "NSMenuItem"; title = "About Jami"; ObjectID = "58"; */
-"58.title" = "O Jami";
+"58.title" = "O programu Jami";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Nastavitve...";
+"129.title" = "Nastavitve ...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "Storitve";
@@ -60,10 +60,10 @@
 "199.title" = "Izreži";
 
 /* Class = "NSMenu"; title = "Spelling and Grammar"; ObjectID = "200"; */
-"200.title" = "Črkovanje in pravopis";
+"200.title" = "Črkovanje in slovnica";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "201"; */
-"201.title" = "Preveri dokument sedaj";
+"201.title" = "Preveri dokument zdaj";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "202"; */
 "202.title" = "Izbriši";
@@ -72,7 +72,7 @@
 "203.title" = "Prilepi";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "204"; */
-"204.title" = "Prikaži črkovanje in pravopis";
+"204.title" = "Prikaži črkovanje in slovnico";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "205"; */
 "205.title" = "Uredi";
@@ -102,7 +102,7 @@
 "215.title" = "Uveljavi";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "216"; */
-"216.title" = "Črkovanje in pravopis";
+"216.title" = "Črkovanje in slovnica";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "217"; */
 "217.title" = "Uredi";
@@ -111,7 +111,7 @@
 "218.title" = "Poišči";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "219"; */
-"219.title" = "Preveri črkovanje med pisanjem";
+"219.title" = "Preverjaj črkovanje med pisanjem";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "220"; */
 "220.title" = "Poišči";
@@ -123,19 +123,19 @@
 "239.title" = "Povečaj";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "295"; */
-"295.title" = "Prikaz";
+"295.title" = "Pogled";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "296"; */
-"296.title" = "Prikaz";
+"296.title" = "Pogled";
 
 /* Class = "NSMenuItem"; title = "Show Toolbar"; ObjectID = "297"; */
 "297.title" = "Prikaži orodno vrstico";
 
 /* Class = "NSMenuItem"; title = "Customize Toolbar…"; ObjectID = "298"; */
-"298.title" = "Prilagodi orodno vrstico...";
+"298.title" = "Prilagodi orodno vrstico ...";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "346"; */
-"346.title" = "Preveri pravopis s črkovanjem";
+"346.title" = "Slovnično preveri s črkovanjem";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "348"; */
 "348.title" = "Nadomestki";
@@ -153,10 +153,10 @@
 "354.title" = "Pametne povezave";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "450"; */
-"450.title" = "Transformacije";
+"450.title" = "Preoblikovanje";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "451"; */
-"451.title" = "Transformacije";
+"451.title" = "Preoblikovanje";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "452"; */
 "452.title" = "Pretvori v velike črke";
@@ -189,10 +189,10 @@
 "491.title" = "Pomoč";
 
 /* Class = "NSMenuItem"; title = "Jami Help"; ObjectID = "492"; */
-"492.title" = "Jami pomoč";
+"492.title" = "Pomoč Jami";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "534"; */
 "534.title" = "Poišči in zamenjaj";
 
 /* Class = "NSMenuItem"; title = "Check for Update..."; ObjectID = "593"; */
-"593.title" = "Preveri posodobitve...";
+"593.title" = "Preveri posodobitve ...";
