@@ -20,13 +20,13 @@
 "An error occured during the export" = "Ett fel inträffade vid exporten";
 
 /* Peer busy message */
-"appears to be busy." = "appears to be busy.";
+"appears to be busy." = "verkar vara upptagen.";
 
 /* Error audio permission */
 "Audio permission not granted" = "Audio permission not granted";
 
 /* Backup account */
-"Backup your account" = "Backup your account";
+"Backup your account" = "Säkerhetskopiera ditt konto";
 
 /* Contextual menu action */
 "Block contact" = "Blockera kontakt";
@@ -41,7 +41,7 @@
 "Canceled" = "Avbruten";
 
 /* Contextual menu entry */
-"Stream file" = "Stream file";
+"Stream file" = "Strömma fil";
 
 /* Contextual menu action */
 "Clear conversation" = "Rensa konversation";
@@ -59,7 +59,7 @@
 "Create a rendezvous point" = "Skapa en mötesplats";
 
 /* Backup enter password */
-"Enter account password" = "Enter account password";
+"Enter account password" = "Ange kontolösenord";
 
 /* File transfer failed label */
 "Failed" = "Misslyckades";
@@ -77,7 +77,7 @@
 "Import from backup" = "Importera från säkerhetskopia";
 
 /* link account title */
-"Import from other device" = "Import from other device";
+"Import from other device" = "Importera från annan enhet";
 
 /* Incoming call from {Name} */
 "Incoming call from %@" = "Inkommande samtal från %@";
@@ -89,7 +89,7 @@
 "Invalid username" = "Ogiltigt användarnamn";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username." = "Invalid username.";
+"Invalid username." = "Ogiltigt användarnamn";
 
 /* Allert message when no accounts are available */
 "Navigate to preferences to create a new account" = "Gå till inställningarna för att skapa ett nytt konto";
@@ -113,16 +113,16 @@
 "Place video call" = "Placera  videosamtal";
 
 /* Recording view explanation label */
-"Press to start recording" = "Press to start recording";
+"Press to start recording" = "Tryck för att starta inspelning";
 
 /* Record message title */
-"Record a message" = "Record a message";
+"Record a message" = "Spela in ett meddelande";
 
 /* Button Action */
 "Refuse" = "Neka";
 
 /* Text shown to the user */
-"Registered name: " = "Registered name: ";
+"Registered name: " = "Registrerat namn:";
 
 /* Remove account alert title */
 "Remove account" = "Ta bort konto";
@@ -143,7 +143,7 @@
 "Share screen" = "Dela skärmen";
 
 /* Sign In */
-"Sign In" = "Sign In";
+"Sign In" = "Logga in";
 
 /* Record message title */
 "Stop recording" = "Sluta spela in";
@@ -179,7 +179,7 @@
 "To proceed with the migration, you need to enter a password that was used for this account." = "To proceed with the migration, you need to enter a password that was used for this account.";
 
 /* File transfer peer unjoinable label */
-"Unjoinable" = "Unjoinable";
+"Unjoinable" = "Oanslutbar";
 
 /* Error video permission */
 "Video permission not granted" = "Video permission not granted";
@@ -194,10 +194,10 @@
 "Change password" = "Byt lösenord";
 
 /* Password button title */
-"Create password" = "Create password";
+"Create password" = "Skapa lösenord";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Återkalla enhet";
 
 /* Device revocation message */
 "Attention! This action could not be undone!" = "Attention! This action could not be undone!";
@@ -275,7 +275,7 @@
 "Drop files to send" = "Drop files to send";
 
 /* Contextual menu for message */
-"Show in Finder" = "Show in Finder";
+"Show in Finder" = "Visa i Finder";
 
 /* Contextual menu for message */
 "Open" = "Oppna";
@@ -293,13 +293,13 @@
 "Resend" = "Resend";
 
 /* In call status info */
-"Wants to talk to you" = "Wants to talk to you";
+"Wants to talk to you" = "Vill prata med dig";
 
 /* In call status info */
-"Incoming audio call" = "Incoming audio call";
+"Incoming audio call" = "Inkommande ljudsamtal";
 
 /* In call status info */
-"Incoming video call" = "Incoming video call";
+"Incoming video call" = "Inkommande videosamtal";
 
 /* share button tooltip */
 "Stop screen sharing" = "Stop screen sharing";
@@ -320,16 +320,16 @@
 "%@ has sent you a request for a conversation." = "%@ has sent you a request for a conversation.";
 
 /* Synchronization explanation label */
-"You have accepted the conversation request." = "You have accepted the conversation request.";
+"You have accepted the conversation request." = "Du har accepterat konversationsförfrågan.";
 
 /* Send request to {Name} */
-"%@ is not in your contacts." = "%@ is not in your contacts.";
+"%@ is not in your contacts." = "%@ finns inte i dina kontakter";
 
 /* Send request explanation */
 "Send him/her a contact request to be able to exchange together." = "Send him/her a contact request to be able to exchange together.";
 
 /* Wait for request acceptance from {Name} */
-"%@ has not yet accepted your contact request." = "%@ has not yet accepted your contact request.";
+"%@ has not yet accepted your contact request." = "%@ har ännu inte accepterat din kontaktförfrågan";
 
 /* Wait for request acceptance from {Name} explanation */
 "%@ must accept your contact request to answer you." = "%@ must accept your contact request to answer you.";
