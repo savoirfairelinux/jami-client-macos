@@ -36,7 +36,7 @@
 "9p9-GR-XKU.title" = "Port";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "A31-3Y-z4R"; */
-"A31-3Y-z4R.title" = "Box";
+"A31-3Y-z4R.title" = "Kutija";
 
 /* Class = "NSTextFieldCell"; title = "Published address"; ObjectID = "ELr-A7-mGE"; */
 "ELr-A7-mGE.title" = "Objavljena adresa";
@@ -57,7 +57,7 @@
 "Jfp-NE-ODd.title" = "SDP Session Negotiation (ICE Fallback)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "MBR-AC-HFq"; */
-"MBR-AC-HFq.title" = "Box";
+"MBR-AC-HFq.title" = "Kutija";
 
 /* Class = "NSMenuItem"; title = "Item 3"; ObjectID = "Mho-w1-ZPJ"; */
 "Mho-w1-ZPJ.title" = "Stavka 3";
@@ -72,13 +72,13 @@
 "Ogj-NW-fZ9.title" = "Audio RTP port Range";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ppa-zn-w1X"; */
-"Ppa-zn-w1X.title" = "Box";
+"Ppa-zn-w1X.title" = "Kutija";
 
 /* Class = "NSButtonCell"; title = "Enable SDES for key exchange protocol"; ObjectID = "Qk8-tH-a0l"; */
 "Qk8-tH-a0l.title" = "Enable SDES for key exchange protocol";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "RIj-rT-gSd"; */
-"RIj-rT-gSd.title" = "Text Cell";
+"RIj-rT-gSd.title" = "Tekstualna ćelija";
 
 /* Class = "NSTextFieldCell"; title = "Audio codecs"; ObjectID = "Vke-hs-iXz"; */
 "Vke-hs-iXz.title" = "Audio kodeci";
@@ -96,7 +96,7 @@
 "Xxr-gl-ukE.title" = "Adresa";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Zuz-jy-rLn"; */
-"Zuz-jy-rLn.title" = "Box";
+"Zuz-jy-rLn.title" = "Kutija";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "aYs-wh-Hpr"; */
 "aYs-wh-Hpr.title" = "TURN address";
@@ -108,13 +108,13 @@
 "cN3-lC-dNM.title" = "Only used during SDP negotiation in case ICE is not supported";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "cwV-lc-jju"; */
-"cwV-lc-jju.title" = "Box";
+"cwV-lc-jju.title" = "Kutija";
 
 /* Class = "NSTextFieldCell"; title = "Negotiation timeout (seconds)"; ObjectID = "dtf-uk-n1B"; */
 "dtf-uk-n1B.title" = "Negotiation timeout (seconds)";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ekM-Cg-DEo"; */
-"ekM-Cg-DEo.title" = "Box";
+"ekM-Cg-DEo.title" = "Kutija";
 
 /* Class = "NSTextFieldCell"; title = "Network interface"; ObjectID = "fjH-ej-gEr"; */
 "fjH-ej-gEr.title" = "Mrežno sučelje";
@@ -126,10 +126,10 @@
 "gJs-aX-7Ox.title" = "Video kodeci";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "jgX-tQ-dIA"; */
-"jgX-tQ-dIA.title" = "Text Cell";
+"jgX-tQ-dIA.title" = "Tekstualna ćelija";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "l86-cH-pp8"; */
-"l86-cH-pp8.title" = "Box";
+"l86-cH-pp8.title" = "Kutija";
 
 /* Class = "NSTextFieldCell"; title = "Max"; ObjectID = "nh9-3y-CEI"; */
 "nh9-3y-CEI.title" = "Maksimalno";
@@ -156,7 +156,7 @@
 "wq6-KV-8X3.title" = "Maksimalno";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "wyZ-Hb-BNf"; */
-"wyZ-Hb-BNf.title" = "Box";
+"wyZ-Hb-BNf.title" = "Kutija";
 
 /* Class = "NSButtonCell"; title = "UPnP"; ObjectID = "x93-zk-hAW"; */
 "x93-zk-hAW.title" = "UPnP";
