@@ -35,7 +35,7 @@
 "Remove conversation" = "Hiqe bisedën";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Duke klikuar \"OK\", do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Gjithashtu, mund të humbë emri juaj i regjistrimit.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Duke klikuar „Në rregull“, do ta hiqni këtë llogari nga kjo pajisje! Ky veprim s’mund të zhbëhet. Gjithashtu, mund të humbë emri juaj i regjistrimit.";
 
 /* File transfer canceled label */
 "Canceled" = "U anulua";
@@ -65,10 +65,10 @@
 "Failed" = "Dështoi";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migrimi i llogarisë tuaj dështoi. Mund të riprovoni duke shtypur OK, ose duke fshirë llogarinë tuaj.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migrimi i llogarisë tuaj dështoi. Mund të riprovoni duke shtypur „Në rregull“, ose duke fshirë llogarinë tuaj.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Kryerja e kërkimit   dështoi";
+"Failed to perform lookup" = "Kryerja e kërkimit dështoi";
 
 /* Text shown to the user */
 "ID: " = "ID: ";
@@ -140,7 +140,7 @@
 "Share" = "Ndajeni me të tjerë";
 
 /* Contextual menu entry */
-"Share screen" = "Tregojuani ekranin të tjerëve";
+"Share screen" = "Bashkëndaj ekranin";
 
 /* Sign In */
 "Sign In" = "Hyni";

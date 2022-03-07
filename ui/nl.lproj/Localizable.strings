@@ -65,7 +65,7 @@
 "Failed" = "Mislukt";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migreren van account mislukt. Je kan opnieuw proberen door op Oké te klikken of je account verwijderen.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Migreren van account mislukt. Je kan opnieuw proberen door op “In orde” te klikken of je account verwijderen.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "Opzoeken mislukt";
@@ -140,7 +140,7 @@
 "Share" = "Delen";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Scherm delen";
 
 /* Sign In */
 "Sign In" = "Sign In";
