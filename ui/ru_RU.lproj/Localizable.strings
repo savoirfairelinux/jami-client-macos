@@ -35,10 +35,10 @@
 "Remove conversation" = "Remove conversation";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "Нажатие «В порядке» удалит данный аккаунт на данном устройстве! Это действие невозможно отменить. Также вы можете потерять зарегистрированное имя!";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "Отменено";
 
 /* Contextual menu entry */
 "Stream file" = "Stream file";
@@ -65,10 +65,10 @@
 "Failed" = "Сбой";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Failed to migrate your account. You can retry by pressing Ok or delete your account.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "Не удалось перенести ваш аккаунт. Вы можете либо попробовать снова, нажав «В порядке», либо удалить ваш аккаунт.";
 
 /* Text shown to user when an error occur at registration */
-"Failed to perform lookup" = "Failed to perform lookup";
+"Failed to perform lookup" = "Не удалось осуществить поиск";
 
 /* Text shown to the user */
 "ID: " = "ID: ";
@@ -140,7 +140,7 @@
 "Share" = "Поделится";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Демонстрация экрана";
 
 /* Sign In */
 "Sign In" = "Sign In";
@@ -197,7 +197,7 @@
 "Create password" = "Create password";
 
 /* Device revocation title */
-"Revoke Device" = "Revoke Device";
+"Revoke Device" = "Отозвать устройство";
 
 /* Device revocation message */
 "Attention! This action could not be undone!" = "Attention! This action could not be undone!";
@@ -284,7 +284,7 @@
 "Delete" = "Удалить";
 
 /* Contextual menu for message */
-"Quick Look" = "Quick Look";
+"Quick Look" = "Быстрый обзор";
 
 /* Contextual menu for message */
 "Add to Photos Library" = "Add to Photos Library";
