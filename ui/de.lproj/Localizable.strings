@@ -2,7 +2,7 @@
 "A network error occured during the export" = "Ein Netzwerkfehler ist während des Exports aufgetreten";
 
 /* Button Action */
-"Accept" = "Akzeptieren";
+"Accept" = "Annehmen";
 
 /* Button Action */
 "Cancel" = "Abbrechen";
@@ -26,7 +26,7 @@
 "Audio permission not granted" = "Zugriff auf Audio nicht gewährt";
 
 /* Backup account */
-"Backup your account" = "Sichere dein Konto!";
+"Backup your account" = "Sicheren Sie Ihr Konto!";
 
 /* Contextual menu action */
 "Block contact" = "Kontakt blockieren";
@@ -119,7 +119,7 @@
 "Record a message" = "Nachricht aufzeichnen";
 
 /* Button Action */
-"Refuse" = "Verweigern";
+"Refuse" = "Ablehnen";
 
 /* Text shown to the user */
 "Registered name: " = "Registrierter Name:";
@@ -224,7 +224,7 @@
 "Hangup" = "Auflegen";
 
 /* Conference action */
-"Mute audio" = "Audio stumm schalten";
+"Mute audio" = "Audio stummschalten";
 
 /* Conference action */
 "Set moderator" = "Moderator einstellen";
@@ -254,7 +254,7 @@
 "Expand" = "Erweitern";
 
 /* conference tooltip mute Mute audio */
-"Mute audio" = "Audio stumm schalten";
+"Mute audio" = "Audio stummschalten";
 
 /* conference tooltip mute Hangup */
 "Hangup" = "Auflegen";
@@ -293,7 +293,7 @@
 "Resend" = "Erneut senden";
 
 /* In call status info */
-"Wants to talk to you" = "Will mit dir sprechen";
+"Wants to talk to you" = "Will mit Ihnen sprechen";
 
 /* In call status info */
 "Incoming audio call" = "Eingehender Audioanruf";
