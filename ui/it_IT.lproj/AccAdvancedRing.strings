@@ -6,10 +6,10 @@
 "25Q-c1-ld3.title" = "UPnP";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "538-we-FTp"; */
-"538-we-FTp.title" = "Box";
+"538-we-FTp.title" = "Casella";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "7eU-EP-4br"; */
-"7eU-EP-4br.title" = "Box";
+"7eU-EP-4br.title" = "Casella";
 
 /* Class = "NSTextFieldCell"; title = "TURN address"; ObjectID = "8mv-Ia-GM4"; */
 "8mv-Ia-GM4.title" = "Indirizzo del server TURN ";
@@ -21,13 +21,13 @@
 "Va3-Un-lCL.title" = "Impostazioni di rilevamento";
 
 /* Class = "NSButtonCell"; title = "Make this account discoverable on local network"; ObjectID = "rdZ-JB-96s"; */
-"rdZ-JB-96s.title" = "Rendi questo account rilevabile sulla rete locale";
+"rdZ-JB-96s.title" = "Rendi questo account rilevabile nella rete locale";
 
 /* Class = "NSButtonCell"; title = "Enable local moderators"; ObjectID = "BCQ-xd-1zb"; */
 "BCQ-xd-1zb.title" = "Abilita i moderatori locali";
 
 /* Class = "NSButtonCell"; title = "Discover peers on local network"; ObjectID = "n3E-PI-JHj"; */
-"n3E-PI-JHj.title" = "Scopri i peer sulla rete locale";
+"n3E-PI-JHj.title" = "Scopri utenti nella rete locale";
 
 /* Class = "NSButtonCell"; title = "Auto answer calls"; ObjectID = "DSe-Cs-oD6"; */
 "DSe-Cs-oD6.title" = "Risposta automatica alle chiamate";
@@ -36,10 +36,10 @@
 "EyV-Io-d3f.title" = "Cella di testo";
 
 /* Class = "NSTextFieldCell"; title = "Name server"; ObjectID = "ID3-Sv-gYY"; */
-"ID3-Sv-gYY.title" = "Nome server";
+"ID3-Sv-gYY.title" = "Server dei nomi";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "K0z-NH-3Cq"; */
-"K0z-NH-3Cq.title" = "Box";
+"K0z-NH-3Cq.title" = "Casella";
 
 /* Class = "NSTextFieldCell"; title = "User certificate"; ObjectID = "LWs-a2-E7f"; */
 "LWs-a2-E7f.title" = "Certificato Utente";
@@ -63,22 +63,22 @@
 "YE4-ry-u07.title" = "Indirizzo STUN";
 
 /* Class = "NSTextFieldCell"; title = "Bootstrap"; ObjectID = "YJM-iQ-0lE"; */
-"YJM-iQ-0lE.title" = "Avvio";
+"YJM-iQ-0lE.title" = "Server di avvio";
 
 /* Class = "NSTextFieldCell"; title = "Private key password"; ObjectID = "YcX-lE-8ug"; */
 "YcX-lE-8ug.title" = "Password Chiave Privata";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "Ywo-5x-8kh"; */
-"Ywo-5x-8kh.title" = "Box";
+"Ywo-5x-8kh.title" = "Casella";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "ZNe-H0-dJk"; */
-"ZNe-H0-dJk.title" = "Box";
+"ZNe-H0-dJk.title" = "Casella";
 
 /* Class = "NSTextFieldCell"; title = "Address"; ObjectID = "ZqB-gt-yFt"; */
 "ZqB-gt-yFt.title" = "Indirizzo";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "eGX-gk-Zxp"; */
-"eGX-gk-Zxp.title" = "Box";
+"eGX-gk-Zxp.title" = "Casella";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "eMG-uY-bpH"; */
 "eMG-uY-bpH.title" = "Nome utente TURN";
@@ -99,16 +99,16 @@
 "qFq-Yh-2JL.title" = "Suoneria personalizzata";
 
 /* Class = "NSTextFieldCell"; title = "Connectivity"; ObjectID = "sVe-iG-OCw"; */
-"sVe-iG-OCw.title" = "Connettività";
+"sVe-iG-OCw.title" = "Connessione";
 
 /* Class = "NSTextFieldCell"; title = "Private key"; ObjectID = "soR-nF-ybe"; */
 "soR-nF-ybe.title" = "Chiave Privata";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "sy5-OH-wyB"; */
-"sy5-OH-wyB.title" = "Box";
+"sy5-OH-wyB.title" = "Casella";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "vYi-gW-MrY"; */
-"vYi-gW-MrY.title" = "Box";
+"vYi-gW-MrY.title" = "Casella";
 
 /* Class = "NSTextFieldCell"; title = "OpenDHT configuration"; ObjectID = "xJT-ij-69q"; */
 "xJT-ij-69q.title" = "Configurazione OpenDHT";

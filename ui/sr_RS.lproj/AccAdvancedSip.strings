@@ -6,7 +6,7 @@
 "0cb-ib-oHd.title" = "Video RTP port Range";
 
 /* Class = "NSTextFieldCell"; title = "Security"; ObjectID = "24s-we-pkD"; */
-"24s-we-pkD.title" = "Security";
+"24s-we-pkD.title" = "Bezbednost";
 
 /* Class = "NSTextFieldCell"; title = "Registration expire timeout (seconds)"; ObjectID = "2rB-Bv-c9U"; */
 "2rB-Bv-c9U.title" = "Registration expire timeout (seconds)";
@@ -42,7 +42,7 @@
 "ELr-A7-mGE.title" = "Published address";
 
 /* Class = "NSButtonCell"; title = "Use TURN"; ObjectID = "Gwi-Mp-NpZ"; */
-"Gwi-Mp-NpZ.title" = "Use TURN";
+"Gwi-Mp-NpZ.title" = "Koristi TURN";
 
 /* Class = "NSButtonCell"; title = "Use STUN"; ObjectID = "HRM-FR-1sH"; */
 "HRM-FR-1sH.title" = "Use STUN";
@@ -141,7 +141,7 @@
 "nuq-Wl-sfd.title" = "Use custom address and port";
 
 /* Class = "NSTextFieldCell"; title = "TURN username"; ObjectID = "rMN-Wf-tmp"; */
-"rMN-Wf-tmp.title" = "TURN username";
+"rMN-Wf-tmp.title" = "TURN korisničko ime";
 
 /* Class = "NSButtonCell"; title = "Encrypt media streams(SRTP)"; ObjectID = "vCS-s8-mZI"; */
 "vCS-s8-mZI.title" = "Encrypt media streams(SRTP)";
@@ -162,7 +162,7 @@
 "x93-zk-hAW.title" = "UPnP";
 
 /* Class = "NSTextFieldCell"; title = "TURN password"; ObjectID = "xjL-Wb-7VN"; */
-"xjL-Wb-7VN.title" = "TURN password";
+"xjL-Wb-7VN.title" = "TURN lozinka";
 
 /* Class = "NSTextFieldCell"; title = "TLS protocol method"; ObjectID = "zBy-cW-KY3"; */
 "zBy-cW-KY3.title" = "TLS protocol method";

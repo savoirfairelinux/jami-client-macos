@@ -35,7 +35,7 @@
 "Remove conversation" = "إزالة المحادثة";
 
 /* Remove account alert message */
-"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "بالنقر فوق \"موافق\"، ستقوم بإزالة هذا الحساب على هذا الجهاز! لا يمكن التراجع عن هذا الإجراء. كما يمكن فقدان اسمك المسجل.";
+"By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "بالنقر فوق «موافق»، ستقوم بإزالة هذا الحساب على هذا الجهاز! لا يمكن التراجع عن هذا الإجراء. كما يمكن فقدان اسمك المسجل.";
 
 /* File transfer canceled label */
 "Canceled" = "تم الإلغاء";
@@ -65,7 +65,7 @@
 "Failed" = "فشل";
 
 /* Error message shown to user when it is impossible to migrate account */
-"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "فشل ترحيل حسابك. يمكنك إعادة المحاولة بالضغط على موافق أو حذف حسابك.";
+"Failed to migrate your account. You can retry by pressing Ok or delete your account." = "فشل ترحيل حسابك. يمكنك إعادة المحاولة بالضغط على «موافق» أو حذف حسابك.";
 
 /* Text shown to user when an error occur at registration */
 "Failed to perform lookup" = "فشل إجراء البحث";

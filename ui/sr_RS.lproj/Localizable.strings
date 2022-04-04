@@ -5,7 +5,7 @@
 "Accept" = "Prihvati";
 
 /* Button Action */
-"Cancel" = "Cancel";
+"Cancel" = "Otkaži";
 
 /* Welcome title */
 "Add a SIP account" = "Add a SIP account";
@@ -38,7 +38,7 @@
 "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost." = "By clicking \"OK\" you will remove this account on this device! This action can not be undone. Also, your registered name can be lost.";
 
 /* File transfer canceled label */
-"Canceled" = "Canceled";
+"Canceled" = "Otkazan";
 
 /* Contextual menu entry */
 "Stream file" = "Stream file";
@@ -86,7 +86,7 @@
 "Incoming message from %@" = "Incoming message from %@";
 
 /* Text shown to user when his username is invalid to be registered */
-"Invalid username" = "Invalid username";
+"Invalid username" = "Nepravilno korisničko ime";
 
 /* Text shown to user when his username is invalid to be registered */
 "Invalid username." = "Invalid username.";
@@ -140,7 +140,7 @@
 "Share" = "Podeli";
 
 /* Contextual menu entry */
-"Share screen" = "Share screen";
+"Share screen" = "Dijeljenje zaslona";
 
 /* Sign In */
 "Sign In" = "Sign In";
@@ -185,7 +185,7 @@
 "Video permission not granted" = "Video permission not granted";
 
 /* Welcome title */
-"Welcome to Jami" = "Welcome to Jami";
+"Welcome to Jami" = "Dobrodošli na Jami";
 
 /* Peer busy message */
 "Would you like to leave a message?" = "Would you like to leave a message?";
